@@ -1,0 +1,3588 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Figures symétriques par rapport à une droite",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Mathématiques",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "point-et-axe",
+          "kind": "geometry",
+          "description": "Une droite verticale (d), tracée en pointillés, sert d'axe de symétrie. Le point A est à gauche de l'axe et son symétrique A' est à droite, à la même distance. Le segment [AA'] coupe l'axe au point I, avec un angle droit marqué en I : (d) est la médiatrice de [AA'].",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -4,
+                "y": 2
+              },
+              {
+                "id": "Ap",
+                "x": 4,
+                "y": 2,
+                "label": "A'"
+              },
+              {
+                "id": "I",
+                "x": 0,
+                "y": 2
+              },
+              {
+                "id": "U",
+                "x": 0,
+                "y": 5,
+                "label": "(d)"
+              },
+              {
+                "id": "V",
+                "x": 0,
+                "y": -3,
+                "label": " "
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "Ap"
+              ]
+            ],
+            "lines": [
+              [
+                "U",
+                "V"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "I",
+                "from": "A",
+                "to": "U",
+                "mark": "right"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "triangle-pagne",
+          "kind": "geometry",
+          "description": "Un motif de pagne : le triangle ABC à gauche d'un axe vertical (d) tracé en pointillés, et son symétrique A'B'C' à droite. Chaque sommet est à la même distance de l'axe que son symétrique. On peut comparer les côtés [AB] et [A'B'], [BC] et [B'C'], [CA] et [C'A'].",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -5,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": -2,
+                "y": 5
+              },
+              {
+                "id": "C",
+                "x": -1,
+                "y": 2
+              },
+              {
+                "id": "Ap",
+                "x": 5,
+                "y": 1,
+                "label": "A'"
+              },
+              {
+                "id": "Bp",
+                "x": 2,
+                "y": 5,
+                "label": "B'"
+              },
+              {
+                "id": "Cp",
+                "x": 1,
+                "y": 2,
+                "label": "C'"
+              },
+              {
+                "id": "U",
+                "x": 0,
+                "y": -1,
+                "label": "(d)"
+              },
+              {
+                "id": "V",
+                "x": 0,
+                "y": 7,
+                "label": " "
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "A"
+              ],
+              [
+                "Ap",
+                "Bp"
+              ],
+              [
+                "Bp",
+                "Cp"
+              ],
+              [
+                "Cp",
+                "Ap"
+              ]
+            ],
+            "lines": [
+              [
+                "U",
+                "V"
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "axes-rectangle",
+          "kind": "geometry",
+          "description": "Un rectangle ABCD, plus long que haut, avec ses deux axes de symétrie en pointillés : la droite (MN) qui joint les milieux des côtés [AB] et [DC], et la droite (PQ) qui joint les milieux des côtés [AD] et [BC]. Les diagonales ne sont pas des axes.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -4,
+                "y": -2
+              },
+              {
+                "id": "B",
+                "x": 4,
+                "y": -2
+              },
+              {
+                "id": "C",
+                "x": 4,
+                "y": 2
+              },
+              {
+                "id": "D",
+                "x": -4,
+                "y": 2
+              },
+              {
+                "id": "M",
+                "x": 0,
+                "y": -2
+              },
+              {
+                "id": "N",
+                "x": 0,
+                "y": 2
+              },
+              {
+                "id": "P",
+                "x": -4,
+                "y": 0
+              },
+              {
+                "id": "Q",
+                "x": 4,
+                "y": 0
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "D",
+                "A"
+              ]
+            ],
+            "lines": [
+              [
+                "M",
+                "N"
+              ],
+              [
+                "P",
+                "Q"
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "axes-carre",
+          "kind": "geometry",
+          "description": "Un carré ABCD avec ses quatre axes de symétrie en pointillés : les deux droites qui joignent les milieux des côtés opposés, et les deux diagonales (AC) et (BD). Chacun des quatre pliages superpose le carré sur lui-même.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -3,
+                "y": -3
+              },
+              {
+                "id": "B",
+                "x": 3,
+                "y": -3
+              },
+              {
+                "id": "C",
+                "x": 3,
+                "y": 3
+              },
+              {
+                "id": "D",
+                "x": -3,
+                "y": 3
+              },
+              {
+                "id": "M",
+                "x": 0,
+                "y": -3
+              },
+              {
+                "id": "N",
+                "x": 0,
+                "y": 3
+              },
+              {
+                "id": "P",
+                "x": -3,
+                "y": 0
+              },
+              {
+                "id": "Q",
+                "x": 3,
+                "y": 0
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "D",
+                "A"
+              ]
+            ],
+            "lines": [
+              [
+                "M",
+                "N"
+              ],
+              [
+                "P",
+                "Q"
+              ],
+              [
+                "A",
+                "C"
+              ],
+              [
+                "B",
+                "D"
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "motif-repere",
+          "kind": "coordinate_plane",
+          "description": "Un motif dessiné sur un repère quadrillé. L'axe vertical du repère sert d'axe de symétrie. À gauche, le triangle ABC avec A(-4 ; 1), B(-4 ; 4) et C(-2 ; 1). À droite, son symétrique A'B'C'. On lit les coordonnées des sommets et leurs distances à l'axe.",
+          "params": {
+            "xmin": -6,
+            "xmax": 6,
+            "ymin": -1,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "A",
+                "x": -4,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": -4,
+                "y": 4
+              },
+              {
+                "id": "C",
+                "x": -2,
+                "y": 1
+              },
+              {
+                "id": "A'",
+                "x": 4,
+                "y": 1
+              },
+              {
+                "id": "B'",
+                "x": 4,
+                "y": 4
+              },
+              {
+                "id": "C'",
+                "x": 2,
+                "y": 1
+              }
+            ],
+            "segments": [
+              {
+                "x1": -4,
+                "y1": 1,
+                "x2": -4,
+                "y2": 4
+              },
+              {
+                "x1": -4,
+                "y1": 4,
+                "x2": -2,
+                "y2": 1
+              },
+              {
+                "x1": -2,
+                "y1": 1,
+                "x2": -4,
+                "y2": 1
+              },
+              {
+                "x1": 4,
+                "y1": 1,
+                "x2": 4,
+                "y2": 4
+              },
+              {
+                "x1": 4,
+                "y1": 4,
+                "x2": 2,
+                "y2": 1
+              },
+              {
+                "x1": 2,
+                "y1": 1,
+                "x2": 4,
+                "y2": 1
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Symétrique d'un point par rapport à une droite",
+          "remember": "Deux points M et M' sont **symétriques par rapport à une droite (d)** quand (d) est la **médiatrice** du segment [MM'] : (d) est perpendiculaire à [MM'] et passe par son milieu. La droite (d) s'appelle l'**axe de symétrie**. Un point de l'axe est son propre symétrique. Si M est à une distance MH de l'axe, M' est à la même distance de l'autre côté : MM' = 2 × MH. Dans un repère, le symétrique de M(x ; y) par rapport à l'axe vertical (axe des ordonnées) est M'(−x ; y) ; par rapport à l'axe horizontal (axe des abscisses), c'est M'(x ; −y).",
+          "method": [
+            "Tracer la perpendiculaire à l'axe (d) qui passe par le point M.",
+            "Repérer le point H où cette perpendiculaire coupe l'axe (d), et lire la distance MH.",
+            "Reporter au compas la distance MH de l'autre côté de l'axe, à partir de H.",
+            "Nommer M' le point obtenu et contrôler que (d) coupe [MM'] en son milieu."
+          ],
+          "example": {
+            "statement": "Le point M est à 3 cm de la droite (d). Construire son symétrique M' par rapport à (d) et donner la longueur MM'.",
+            "steps": [
+              "Tracer : avec l'équerre, on trace la perpendiculaire à (d) passant par M.",
+              "Repérer : cette perpendiculaire coupe (d) en H, et MH = 3 cm.",
+              "Reporter : on pique le compas en H, on l'ouvre de 3 cm et on marque un point sur la perpendiculaire, de l'autre côté de (d).",
+              "Nommer : ce point est M'. H est le milieu de [MM'], donc MM' = 3 + 3 = 6 cm."
+            ]
+          },
+          "pitfall": "Ne pas arrêter la construction trop tôt, ni doubler la distance. Si M est à 3 cm de l'axe, M' est aussi à 3 cm de l'axe (pas 6 cm), et c'est la longueur MM' qui vaut 3 + 3 = 6 cm. Pour un axe penché, on ne reporte jamais « à la même hauteur » : on passe toujours par la perpendiculaire à l'axe.",
+          "figure": "point-et-axe",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître et à construire le symétrique d'un point.",
+            "questions": [
+              {
+                "content": "Si M' est le symétrique de M par rapport à la droite (d), alors (d) est la ___ du segment [MM'].",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Nommer et contrôler : (d) coupe [MM'] en son milieu et lui est perpendiculaire. C'est exactement la définition de la médiatrice de [MM'] que tu as vue dans la leçon sur les segments.",
+                "answers": [
+                  {
+                    "content": "médiatrice",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à la droite perpendiculaire qui passe par le milieu."
+              },
+              {
+                "content": "Le point M est à 4 cm de la droite (d). M' est son symétrique par rapport à (d). Calcule MM'.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Repérer : MH = 4 cm. Étape 3 — Reporter : HM' = 4 cm de l'autre côté. Étape 4 — Nommer : H est le milieu de [MM'], donc MM' = 4 + 4 = 8 cm. On double la distance à l'axe pour obtenir MM'.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "unit": "cm",
+                "hint": "MM' est la somme de deux distances égales."
+              },
+              {
+                "content": "Le point B est placé sur l'axe (d). Où se trouve son symétrique B' par rapport à (d) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer : B est sur l'axe, donc la perpendiculaire coupe (d) en B lui-même et BH = 0 cm. Étape 3 — Reporter : on reporte 0 cm, on reste en B. Étape 4 — Nommer : B' = B. Un point de l'axe est son propre symétrique.",
+                "answers": [
+                  {
+                    "content": "B' est confondu avec B",
+                    "correct": true
+                  },
+                  {
+                    "content": "B' est à côté de B, à 1 cm de l'axe",
+                    "correct": false
+                  },
+                  {
+                    "content": "B' est de l'autre côté, à la même distance que B",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas construire B'",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quelle est la distance de B à l'axe ?"
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour construire le symétrique M' d'un point M.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Tracer la perpendiculaire. Étape 2 — Repérer H et lire MH. Étape 3 — Reporter MH au compas de l'autre côté. Étape 4 — Nommer M' et contrôler. On ne peut pas reporter une distance avant d'avoir tracé la perpendiculaire.",
+                "answers": [
+                  {
+                    "content": "Tracer la perpendiculaire à l'axe passant par M"
+                  },
+                  {
+                    "content": "Repérer le point H où elle coupe l'axe"
+                  },
+                  {
+                    "content": "Reporter la distance MH de l'autre côté de l'axe"
+                  },
+                  {
+                    "content": "Nommer M' et contrôler le milieu de [MM']"
+                  }
+                ],
+                "hint": "Commence par la droite perpendiculaire."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître des points symétriques",
+              "statement": "Dans cet exercice, tu appliques la méthode du symétrique d'un point par rapport à une droite (d).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle phrase dit que M' est le symétrique de M par rapport à la droite (d) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Nommer et contrôler : on vérifie que (d) coupe [MM'] en son milieu et à angle droit. Si (d) passe seulement par M, la distance à l'axe est nulle et M' serait confondu avec M. Si (d) est parallèle à [MM'], il n'y a pas d'angle droit.",
+                  "answers": [
+                    {
+                      "content": "(d) est perpendiculaire à [MM'] et passe par le milieu de [MM']",
+                      "correct": true
+                    },
+                    {
+                      "content": "(d) est parallèle à [MM'] et passe par M",
+                      "correct": false
+                    },
+                    {
+                      "content": "(d) passe par M et par M' sans être perpendiculaire à [MM']",
+                      "correct": false
+                    },
+                    {
+                      "content": "(d) est perpendiculaire à [MM'] et passe par M",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point M est à 5 cm de la droite (d). M' est son symétrique par rapport à (d). Calcule MM'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Repérer : MH = 5 cm. Étape 3 — Reporter : HM' = 5 cm de l'autre côté de (d). Étape 4 — Nommer : MM' = MH + HM' = 5 + 5 = 10 cm. L'erreur tentante est de répondre 5 cm, qui est seulement la distance de M à l'axe.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Les points N et N' sont symétriques par rapport à (d) et NN' = 14 cm. Calcule la distance de N à la droite (d).",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Repérer : H, point d'intersection de [NN'] et de (d), est le milieu de [NN']. Étape 3 — Reporter : NH = HN'. Étape 4 — Nommer : NH = 14 ÷ 2 = 7 cm. Répondre 14 cm ou 28 cm confond la longueur NN' avec la distance à l'axe.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le symétrique d'un point situé sur l'axe de symétrie est ce point lui-même.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer : un point E de l'axe est son propre pied H, donc EH = 0. Étape 3 — Reporter : on reporte 0 cm, donc E' = E. L'affirmation est vraie : seuls les points qui ne sont pas sur l'axe changent de place.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dessine un motif de pagne. Son point M est à 3 cm de l'axe (d). Elle dit : « M' est à 6 cm de l'axe parce qu'il faut doubler. » Quelle est la vraie distance de M' à l'axe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer : MH = 3 cm. Étape 3 — Reporter : HM' = MH = 3 cm. Étape 4 — Nommer : M' est à 3 cm de l'axe. C'est la longueur MM' qui vaut 3 + 3 = 6 cm. Awa a confondu MM' avec la distance de M' à l'axe.",
+                  "answers": [
+                    {
+                      "content": "3 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,5 cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Construire le symétrique d'un point avec la méthode",
+              "statement": "Dans cet exercice, tu utilises les quatre étapes de la méthode (tracer, repérer, reporter, nommer) pour résoudre six questions de types différents.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Reprends les quatre étapes : tracer la perpendiculaire, repérer H, reporter MH, nommer M'. MM' est le double de la distance à l'axe.",
+              "questions": [
+                {
+                  "content": "Le point P est à 6 cm de l'axe (d). Son symétrique P' est à ___ cm de l'axe.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer : PH = 6 cm. Étape 3 — Reporter : HP' = PH = 6 cm. Étape 4 — Nommer : P' est à 6 cm de l'axe, de l'autre côté. Écrire 12 serait donner PP', pas la distance à l'axe.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur deux points symétriques M et M' par rapport à (d), lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Tracer : la droite (MM') est la perpendiculaire à (d). Étape 4 — Nommer et contrôler : H, milieu de [MM'], est sur (d). Les trois autres sont fausses : M et M' sont de part et d'autre de l'axe, MM' vaut le double de la distance à l'axe, et (MM') est perpendiculaire à (d), pas parallèle.",
+                  "answers": [
+                    {
+                      "content": "La droite (d) est perpendiculaire à [MM']",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le milieu de [MM'] est sur la droite (d)",
+                      "correct": true
+                    },
+                    {
+                      "content": "M et M' sont du même côté de (d)",
+                      "correct": false
+                    },
+                    {
+                      "content": "MM' est toujours égal à la distance de M à (d)",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite (MM') est parallèle à (d)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation au résultat.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer la distance MH, puis Étape 4 — Nommer : MM' = 2 × MH. Pour 2 cm on trouve 4 cm, pour 5 cm on trouve 10 cm et pour 0 cm on trouve 0 cm, car M' est confondu avec M.",
+                  "answers": [
+                    {
+                      "content": "M est à 2 cm de l'axe",
+                      "match": "MM' = 4 cm"
+                    },
+                    {
+                      "content": "M est à 5 cm de l'axe",
+                      "match": "MM' = 10 cm"
+                    },
+                    {
+                      "content": "M est sur l'axe",
+                      "match": "MM' = 0 cm"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ces étapes de construction de M'.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Tracer. Étape 2 — Repérer H. Étape 3 — Reporter la distance MH au compas. Étape 4 — Nommer M'. On repère H avant de reporter, sinon on ne sait pas où piquer le compas.",
+                  "answers": [
+                    {
+                      "content": "Tracer la perpendiculaire à (d) passant par M"
+                    },
+                    {
+                      "content": "Repérer le point H sur l'axe"
+                    },
+                    {
+                      "content": "Reporter MH de l'autre côté de H"
+                    },
+                    {
+                      "content": "Nommer M' et contrôler"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour reporter la distance MH de l'autre côté de l'axe, on pique le compas en ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Reporter : on pique en H, pied de la perpendiculaire sur l'axe, avec l'ouverture MH. Piquer en M donnerait un cercle de centre M, qui ne dit pas où se trouve M'. Un autre point de l'axe ne donne pas la bonne distance.",
+                  "answers": [
+                    {
+                      "content": "H",
+                      "correct": true
+                    },
+                    {
+                      "content": "M",
+                      "correct": false
+                    },
+                    {
+                      "content": "M'",
+                      "correct": false
+                    },
+                    {
+                      "content": "un point quelconque de l'axe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un axe penché, le symétrique de M se trouve à la même hauteur que M, de l'autre côté de l'axe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tracer : on doit tracer la perpendiculaire à l'axe, qui n'est pas horizontale quand l'axe est penché. Étape 3 — Reporter sur cette perpendiculaire. Reporter « à la même hauteur » donnerait un point qui n'est pas sur la perpendiculaire, donc pas le symétrique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Symétrique d'une figure",
+          "remember": "Le **symétrique d'une figure** est la figure formée par les symétriques de tous ses points. Le symétrique du segment [AB] est le segment [A'B'] ; celui de la droite (AB) est la droite (A'B') ; celui d'un angle de sommet O est un angle de sommet O' ; celui d'un cercle de centre O et de rayon r est le cercle de centre O' et de même rayon r. Une droite qui coupe l'axe en I a une symétrique qui passe aussi par I.",
+          "method": [
+            "Choisir les points clés de la figure : extrémités, sommets, centre.",
+            "Construire le symétrique de chaque point clé avec la méthode du symétrique d'un point.",
+            "Relier les symétriques dans le même ordre que les points de départ.",
+            "Nommer la figure obtenue et contrôler qu'elle a la même forme, retournée."
+          ],
+          "example": {
+            "statement": "Le segment [AB] est tel que A est à 2 cm de l'axe (d) et B à 5 cm de (d), du même côté de l'axe. Construire son symétrique.",
+            "steps": [
+              "Choisir : les points clés d'un segment sont ses deux extrémités A et B.",
+              "Construire : A' est à 2 cm de (d) et B' est à 5 cm de (d), de l'autre côté de l'axe, chacun sur la perpendiculaire à (d) passant par son point de départ.",
+              "Relier : A' est relié à B', comme A l'est à B. On obtient le segment [A'B'].",
+              "Nommer : [A'B'] est le symétrique de [AB]. Contrôle : A' est plus proche de l'axe que B', comme A l'est par rapport à B."
+            ]
+          },
+          "pitfall": "Ne pas changer le rayon d'un cercle. Seul son centre est symétrisé. Si le centre O est à 4 cm de l'axe et le rayon est 2 cm, le symétrique est le cercle de centre O' à 4 cm de l'axe et de rayon 2 cm, pas de rayon 4 cm ni 8 cm. Ne pas non plus échanger les extrémités : on relie A' à B', jamais A à B'.",
+          "figure": "triangle-pagne",
+          "practice": {
+            "statement": "Tu t'entraînes à construire le symétrique d'un segment, d'un cercle ou d'un triangle.",
+            "questions": [
+              {
+                "content": "Le symétrique du segment [AB] par rapport à une droite (d) est le segment [___].",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Choisir : les extrémités de [AB] sont A et B. Étape 2 — Construire leurs symétriques A' et B'. Étape 3 — Relier A' à B'. Étape 4 — Nommer : le symétrique de [AB] est le segment [A'B'].",
+                "answers": [
+                  {
+                    "content": "A'B'",
+                    "correct": true
+                  },
+                  {
+                    "content": "B'A'",
+                    "correct": true
+                  }
+                ],
+                "hint": "Symétrise les deux extrémités."
+              },
+              {
+                "content": "Pour construire le symétrique d'un triangle ABC, combien de points clés faut-il symétriser ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : les points clés d'un triangle sont ses trois sommets A, B et C. Étape 2 — Construire A', B' et C'. Étape 3 — Relier A'B'C'. Il faut donc 3 points, pas 6 : on ne symétrise pas les côtés point par point.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte les sommets du triangle."
+              },
+              {
+                "content": "Une droite (AB) coupe l'axe de symétrie (d) au point I. Que peut-on dire de sa symétrique (A'B') ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : I est un point de (AB) situé sur l'axe. Étape 2 — Construire : le symétrique d'un point de l'axe est lui-même, donc I' = I. Étape 3 — Relier : (A'B') contient I' = I. La symétrique n'est pas parallèle : elle coupe (d) au même point I.",
+                "answers": [
+                  {
+                    "content": "Elle passe aussi par I",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est parallèle à (AB)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle ne coupe jamais (d)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle passe par I seulement si (AB) est perpendiculaire à (d)",
+                    "correct": false
+                  }
+                ],
+                "hint": "Où est le symétrique d'un point de l'axe ?"
+              },
+              {
+                "content": "Le symétrique d'un cercle de centre O et de rayon 3 cm est un cercle de rayon 3 cm.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir : le point clé d'un cercle est son centre O. Étape 2 — Construire O'. Étape 3 — Relier : on trace le cercle de centre O' avec le même rayon 3 cm, car seul le centre change de place. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Seul le centre se déplace."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Construire le symétrique d'une figure simple",
+              "statement": "Dans cet exercice, tu appliques la méthode du symétrique d'une figure à des angles, des segments et des cercles.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le symétrique de l'angle xOy par rapport à une droite (d) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : les points clés d'un angle sont son sommet O et un point sur chacun de ses côtés. Étape 2 — Construire leurs symétriques O', x' et y'. Étape 3 — Relier O'x' et O'y'. Le sommet O' est le symétrique de O : il reste en O seulement si O est sur l'axe.",
+                  "answers": [
+                    {
+                      "content": "L'angle x'O'y', où O' est le symétrique de O",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'angle xOy lui-même, qui ne change pas de place",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'angle x'Oy', de même sommet O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un angle de mesure double",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le centre O d'un cercle est à 4 cm de l'axe (d). Le cercle a pour rayon 2 cm. Le symétrique de ce cercle a pour centre O'. Calcule la distance de O' à l'axe (d).",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : le point clé est le centre O, à 4 cm de (d). Étape 2 — Construire : O' est à 4 cm de (d), de l'autre côté. Le rayon 2 cm ne change pas et ne sert pas pour cette distance. La réponse 8 cm est la longueur OO', pas la distance de O' à l'axe.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "A est à 2 cm de l'axe (d) et B est à 5 cm de (d), du même côté. Où sont A' et B' ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Construire : chaque point garde sa distance à l'axe. A' est à 2 cm et B' est à 5 cm de (d), de l'autre côté. Étape 3 — Relier A' à B'. Échanger les distances est l'erreur du piège : A' doit rester le plus proche. Doubler les distances confond AA' et BB' avec les distances à l'axe.",
+                  "answers": [
+                    {
+                      "content": "A' est à 2 cm de (d) et B' est à 5 cm de (d), de l'autre côté",
+                      "correct": true
+                    },
+                    {
+                      "content": "A' est à 5 cm de (d) et B' est à 2 cm de (d)",
+                      "correct": false
+                    },
+                    {
+                      "content": "A' et B' sont du même côté que A et B",
+                      "correct": false
+                    },
+                    {
+                      "content": "A' est à 4 cm de (d) et B' est à 10 cm de (d)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour construire le symétrique d'un segment, il suffit de symétriser ses deux extrémités puis de les relier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : les extrémités A et B. Étape 2 — Construire A' et B'. Étape 3 — Relier A' à B'. Les autres points du segment ont leurs symétriques sur [A'B'], donc il n'est pas nécessaire de les construire un par un.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cercle de centre O et de rayon 2 cm a son centre à 4 cm de l'axe. Quel est son symétrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : le centre O. Étape 2 — Construire O' à 4 cm de l'axe, de l'autre côté. Étape 3 — Relier : on trace le cercle de centre O' avec le rayon d'origine, 2 cm. Le rayon n'est pas la distance à l'axe : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre O' à 4 cm de l'axe, de rayon 2 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre O' à 4 cm de l'axe, de rayon 4 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre O' à 4 cm de l'axe, de rayon 8 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre O, de rayon 2 cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Retrouver les symétriques d'un motif de pagne",
+              "statement": "Dans cet exercice, tu utilises la méthode pour décrire le symétrique d'un motif de pagne : le triangle ABC et son symétrique A'B'C' par rapport à un axe vertical (d).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque figure, symétrise d'abord ses points clés : sommets, extrémités, centre. Seul le centre d'un cercle change de place, pas son rayon.",
+              "questions": [
+                {
+                  "content": "Relie chaque élément de la figure de départ à son symétrique par rapport à l'axe (d).",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Construire le symétrique de chaque point clé : A devient A', B devient B', C devient C'. Étape 3 — Relier dans le même ordre : [AB] devient [A'B'], (BC) devient (B'C') et le triangle ABC devient le triangle A'B'C'. Les lettres se correspondent une à une.",
+                  "answers": [
+                    {
+                      "content": "Le segment [AB]",
+                      "match": "Le segment [A'B']"
+                    },
+                    {
+                      "content": "La droite (BC)",
+                      "match": "La droite (B'C')"
+                    },
+                    {
+                      "content": "Le triangle ABC",
+                      "match": "Le triangle A'B'C'"
+                    },
+                    {
+                      "content": "Le sommet A",
+                      "match": "Le sommet A'"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour dessiner le symétrique A'B'C' du triangle ABC.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Choisir les sommets. Étape 2 — Construire leurs symétriques. Étape 3 — Relier les symétriques dans l'ordre A', B', C'. Étape 4 — Nommer et contrôler. On ne peut pas relier avant d'avoir construit les trois points.",
+                  "answers": [
+                    {
+                      "content": "Choisir les sommets A, B et C"
+                    },
+                    {
+                      "content": "Construire A', B' et C' un par un"
+                    },
+                    {
+                      "content": "Relier A', B' et C' dans le même ordre"
+                    },
+                    {
+                      "content": "Nommer le triangle A'B'C' et contrôler"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le triangle ABC a pour symétrique A'B'C'. Le symétrique du sommet B est le sommet ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Construire : chaque lettre reçoit une apostrophe. Le symétrique de B est B', celui de A est A' et celui de C est C'. L'apostrophe marque le point symétrique.",
+                  "answers": [
+                    {
+                      "content": "B'",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cercle de centre O et de rayon 3 cm a pour symétrique un cercle de centre O'. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir : le centre O. Étape 2 — Construire O', symétrique de O. Étape 3 — Relier : on trace le cercle de centre O' et de rayon 3 cm, le même qu'au départ. Doubler le rayon ou changer de forme est faux : la symétrie ne déforme pas.",
+                  "answers": [
+                    {
+                      "content": "Le centre O' est le symétrique de O",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le rayon du symétrique est 3 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le centre du symétrique est O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rayon du symétrique est 6 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le symétrique est un segment de 3 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour construire le symétrique de la droite (AB), il suffit de symétriser ___ points de cette droite.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Choisir : une droite est déterminée par deux points, par exemple A et B. Étape 2 — Construire A' et B'. Étape 3 — Relier : la droite (A'B') est le symétrique. Un seul point ne suffit pas à fixer la direction de la droite.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite (AB) coupe l'axe (d) au point I. Alors la droite (A'B') passe aussi par I.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : I est sur (AB) et sur l'axe. Étape 2 — Construire : le symétrique d'un point de l'axe est lui-même, donc I' = I. Étape 3 — Relier : (A'B') contient I' = I. La droite et sa symétrique se coupent donc sur l'axe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Conservation des longueurs, des angles et de l'alignement",
+          "remember": "La symétrie axiale **conserve** les longueurs, les mesures d'angles et l'alignement. Si A' et B' sont les symétriques de A et B, alors A'B' = AB. Si l'angle ABC mesure 40°, son symétrique A'B'C' mesure 40°. Si A, B et C sont alignés, alors A', B' et C' sont alignés. Une figure et sa symétrique ont donc la même forme et les mêmes dimensions : elles se superposent par pliage le long de l'axe.",
+          "method": [
+            "Repérer les points qui se correspondent : A et A', B et B', C et C'.",
+            "Identifier la grandeur cherchée (longueur, angle) et la grandeur de départ qui lui correspond.",
+            "Appliquer la conservation : la symétrie axiale garde les longueurs, les angles et l'alignement.",
+            "Conclure par une phrase qui cite la propriété utilisée."
+          ],
+          "example": {
+            "statement": "Le triangle A'B'C' est le symétrique du triangle ABC par rapport à (d). On sait que AB = 5 cm et que l'angle ABC mesure 40°. Donner A'B' et la mesure de l'angle A'B'C'.",
+            "steps": [
+              "Repérer : A correspond à A', B correspond à B' et C correspond à C'.",
+              "Identifier : A'B' correspond à AB, et l'angle A'B'C' correspond à l'angle ABC.",
+              "Appliquer : la symétrie conserve les longueurs, donc A'B' = AB = 5 cm. Elle conserve les angles, donc A'B'C' = ABC = 40°.",
+              "Conclure : « Comme la symétrie axiale conserve les longueurs et les angles, A'B' = 5 cm et l'angle A'B'C' mesure 40°. »"
+            ]
+          },
+          "pitfall": "Ne pas appliquer la conservation à une longueur qui mélange un point et un symétrique. Prenons A et B sur une même perpendiculaire à l'axe, du même côté de l'axe, à 3 cm et 1 cm de l'axe : AB = 2 cm et A'B' = 2 cm. Mais A'B = 4 cm, car A' et B sont de part et d'autre de l'axe. La conservation ne vaut que pour une longueur et son image : A'B' avec AB, pas A'B avec AB.",
+          "figure": "triangle-pagne",
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser la conservation des longueurs, des angles et de l'alignement.",
+            "questions": [
+              {
+                "content": "Le segment [AB] mesure 7 cm. A'B' est son symétrique par rapport à une droite (d). Calcule A'B'.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : A' correspond à A et B' correspond à B. Étape 2 — Identifier : A'B' correspond à AB. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc A'B' = AB = 7 cm. Étape 4 — Conclure avec la propriété.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ],
+                "unit": "cm",
+                "hint": "La symétrie conserve les longueurs."
+              },
+              {
+                "content": "L'angle xOy mesure 65°. L'angle x'O'y' est son symétrique par rapport à une droite (d). Donne sa mesure.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : O' correspond à O, x' à x et y' à y. Étape 2 — Identifier : x'O'y' correspond à xOy. Étape 3 — Appliquer : la symétrie conserve les angles, donc x'O'y' = xOy = 65°. Étape 4 — Conclure avec la propriété.",
+                "answers": [
+                  {
+                    "content": "65",
+                    "correct": true
+                  }
+                ],
+                "unit": "°",
+                "hint": "La symétrie conserve les angles."
+              },
+              {
+                "content": "Les points A, B et C sont alignés. Alors leurs symétriques A', B' et C' sont alignés.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : A', B' et C' correspondent à A, B et C. Étape 3 — Appliquer : la symétrie axiale conserve l'alignement, donc A', B' et C' sont sur une même droite, la symétrique de la droite qui contient A, B et C.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'alignement est conservé."
+              },
+              {
+                "content": "Un triangle ABC a un périmètre de 12 cm. Quel est le périmètre de son symétrique A'B'C' ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : chaque côté de A'B'C' correspond à un côté de ABC. Étape 3 — Appliquer : les longueurs sont conservées, donc les trois côtés ont les mêmes mesures et leur somme est 12 cm. Doubler à 24 cm confond avec la distance AA'.",
+                "answers": [
+                  {
+                    "content": "12 cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "6 cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "24 cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas le savoir",
+                    "correct": false
+                  }
+                ],
+                "hint": "Chaque côté garde sa longueur."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Utiliser la conservation dans le triangle ABC",
+              "statement": "Dans cet exercice, tu utilises la conservation des longueurs et des angles avec les étapes de la fiche : repérer, identifier, appliquer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le triangle A'B'C' est le symétrique du triangle ABC par rapport à (d). On sait que AC = 8 cm. Calcule A'C'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A' correspond à A et C' correspond à C. Étape 2 — Identifier : A'C' correspond à AC. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc A'C' = AC = 8 cm. Étape 4 — Conclure avec la propriété.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "L'angle ABC mesure 35°. A'B'C' est son symétrique par rapport à (d). Donne la mesure de l'angle A'B'C'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : B' correspond à B. Étape 2 — Identifier : A'B'C' correspond à ABC. Étape 3 — Appliquer : la symétrie conserve les angles, donc A'B'C' = 35°. Un angle ne devient ni 55° ni 145° : ce sont le complémentaire et le supplémentaire de 35°, pas son symétrique.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°"
+                },
+                {
+                  "content": "Un triangle a des côtés de 3 cm, 4 cm et 5 cm. Quel est le périmètre de son symétrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : les trois côtés du symétrique correspondent aux trois côtés de départ. Étape 3 — Appliquer : les longueurs sont conservées, donc le périmètre est 3 + 4 + 5 = 12 cm. 60 cm est le produit 3 × 4 × 5 : une erreur d'opération.",
+                  "answers": [
+                    {
+                      "content": "12 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "60 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La symétrie axiale peut transformer un angle de 40° en un angle de 50°.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer : la symétrie axiale conserve les angles, donc un angle de 40° a pour symétrique un angle de 40°. L'affirmation est fausse : seule une déformation, qui n'est pas une symétrie, changerait la mesure.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "A et B sont du même côté de l'axe (d), à 3 cm et 1 cm de (d), de sorte que AB = 2 cm. Quelle longueur est égale à AB ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : la conservation relie un segment à son propre symétrique, donc AB à A'B'. Étape 3 — Appliquer : A'B' = AB = 2 cm. A'B et AB' valent 4 cm, car A' et B sont de part et d'autre de l'axe. AA' vaut 3 + 3 = 6 cm.",
+                  "answers": [
+                    {
+                      "content": "A'B'",
+                      "correct": true
+                    },
+                    {
+                      "content": "A'B",
+                      "correct": false
+                    },
+                    {
+                      "content": "AB'",
+                      "correct": false
+                    },
+                    {
+                      "content": "AA'",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les propriétés de la symétrie axiale",
+              "statement": "Dans cet exercice, tu utilises la conservation des longueurs, des angles et de l'alignement dans des questions de six types différents.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Dans chaque question, associe d'abord chaque point à son symétrique, puis recopie la même longueur ou la même mesure d'angle.",
+              "questions": [
+                {
+                  "content": "La symétrie axiale conserve les longueurs, les mesures d'angles et l'___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Appliquer : les trois propriétés de la symétrie axiale sont la conservation des longueurs, celle des angles et celle de l'alignement. Les points alignés restent alignés après la symétrie.",
+                  "answers": [
+                    {
+                      "content": "alignement",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces propriétés, lesquelles sont conservées par la symétrie axiale ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Appliquer : la symétrie axiale garde les longueurs et les angles. Elle change la position des points, puisque chaque point passe de l'autre côté de l'axe, donc le côté de la figure change aussi.",
+                  "answers": [
+                    {
+                      "content": "Les longueurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les mesures d'angles",
+                      "correct": true
+                    },
+                    {
+                      "content": "La position des points",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le côté de l'axe où se trouve la figure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nom des points",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le triangle ABC a pour côtés AB = 6 cm, BC = 4 cm et CA = 5 cm. Son symétrique est A'B'C'. Calcule le périmètre de A'B'C'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A'B', B'C' et C'A' correspondent à AB, BC et CA. Étape 3 — Appliquer : A'B' = 6 cm, B'C' = 4 cm et C'A' = 5 cm. Étape 4 — Conclure : le périmètre est 6 + 4 + 5 = 15 cm, comme celui de ABC.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Relie chaque élément de A'B'C' à l'élément de ABC qui a la même mesure.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier : chaque lettre avec apostrophe correspond à la même lettre sans apostrophe. Étape 3 — Appliquer : [A'C'] a la longueur de [AC], l'angle A'B'C' a la mesure de l'angle ABC et [B'C'] a la longueur de [BC].",
+                  "answers": [
+                    {
+                      "content": "Le côté [A'C']",
+                      "match": "Le côté [AC]"
+                    },
+                    {
+                      "content": "L'angle A'B'C'",
+                      "match": "L'angle ABC"
+                    },
+                    {
+                      "content": "Le côté [B'C']",
+                      "match": "Le côté [BC]"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points A, B et C sont alignés. Leurs symétriques A', B' et C' ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Appliquer : la symétrie axiale conserve l'alignement. Les points A', B' et C' sont donc sur une même droite. Ils ne forment pas de triangle et ne se confondent pas, car la symétrie ne les rapproche pas.",
+                  "answers": [
+                    {
+                      "content": "sont alignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "forment un triangle",
+                      "correct": false
+                    },
+                    {
+                      "content": "sont confondus",
+                      "correct": false
+                    },
+                    {
+                      "content": "ne sont plus alignés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique d'un segment de 9 cm est un segment de 18 cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer : la symétrie conserve les longueurs, donc le symétrique de ce segment mesure 9 cm. Le nombre 18 cm est le double de 9 cm : c'est ce qu'on obtient pour la distance entre deux points symétriques quand chacun est à 9 cm de l'axe, pas pour un segment.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Axes de symétrie d'une figure",
+          "remember": "Une droite (d) est un **axe de symétrie** d'une figure quand le symétrique de la figure par rapport à (d) est la figure elle-même : en pliant le long de (d), les deux moitiés se superposent. Un segment a **2 axes** : sa médiatrice et la droite qui le porte. Un angle a **1 axe** : sa bissectrice. Un rectangle qui n'est pas un carré a **2 axes** : les médiatrices de ses côtés. Un carré a **4 axes**. En lettres capitales d'imprimerie, A et T ont 1 axe, H en a 2, N et Z n'en ont aucun.",
+          "method": [
+            "Repérer les éléments qui se répètent de part et d'autre d'une droite possible.",
+            "Tester cette droite en imaginant le pliage : chaque point doit tomber sur un point de la figure.",
+            "Chercher les autres droites possibles et compter tous les axes.",
+            "Conclure en nommant chaque axe : médiatrice, bissectrice ou autre droite."
+          ],
+          "example": {
+            "statement": "Trouver les axes de symétrie d'un rectangle ABCD avec AB = 6 cm et BC = 4 cm.",
+            "steps": [
+              "Repérer : les côtés opposés sont égaux deux à deux. On essaie la droite qui joint les milieux de [AB] et de [DC].",
+              "Tester : en pliant le long de cette droite, A tombe sur B et D tombe sur C. Le rectangle se superpose à lui-même : c'est un axe.",
+              "Chercher : la droite qui joint les milieux de [AD] et de [BC] marche aussi. Les diagonales ne marchent pas. Il y a donc 2 axes en tout.",
+              "Conclure : le rectangle ABCD a 2 axes de symétrie, les médiatrices de ses côtés."
+            ]
+          },
+          "pitfall": "Ne pas croire que la diagonale d'un rectangle est un axe de symétrie. Prenons AB = 6 cm et BC = 4 cm. Si on plie le long de (AC), le point B tombe sur un point B' tel que AB' = AB = 6 cm. Or le côté [AD] mesure seulement 4 cm : B' n'est pas sur le rectangle, donc la diagonale n'est pas un axe. La diagonale est un axe seulement pour un carré.",
+          "figure": "axes-rectangle",
+          "practice": {
+            "statement": "Tu t'entraînes à compter les axes de symétrie d'une figure.",
+            "questions": [
+              {
+                "content": "Combien un segment a-t-il d'axes de symétrie ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le segment [AB] est identique de part et d'autre de son milieu, et aussi de part et d'autre de la droite (AB). Étape 2 — Tester ces deux droites par le pliage. Étape 3 — Chercher d'autres droites : il n'y en a pas. Étape 4 — Conclure : la médiatrice de [AB] et la droite (AB), soit 2 axes.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à la médiatrice et à la droite qui porte le segment."
+              },
+              {
+                "content": "Quel est l'axe de symétrie d'un angle xOy ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les deux côtés de l'angle sont symétriques l'un de l'autre. Étape 2 — Tester : en pliant le long de la bissectrice, un côté tombe sur l'autre. Étape 4 — Conclure : l'axe est la bissectrice, la droite qui partage l'angle en deux angles égaux.",
+                "answers": [
+                  {
+                    "content": "Sa bissectrice",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa médiatrice",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'un de ses côtés",
+                    "correct": false
+                  },
+                  {
+                    "content": "La perpendiculaire à l'un de ses côtés",
+                    "correct": false
+                  }
+                ],
+                "hint": "La droite qui coupe l'angle en deux angles égaux."
+              },
+              {
+                "content": "Un carré a quatre axes de symétrie.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Chercher : les deux droites qui joignent les milieux des côtés opposés sont des axes, et les deux diagonales aussi, car le carré a ses quatre côtés égaux. Étape 4 — Conclure : 2 + 2 = 4 axes de symétrie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compte les médiatrices et les diagonales."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Compter les axes de symétrie de figures usuelles",
+              "statement": "Dans cet exercice, tu appliques la méthode des axes de symétrie : repérer, tester par le pliage, chercher les autres droites, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quand une droite (d) est-elle un axe de symétrie d'une figure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tester : on plie le long de (d) et chaque point tombe sur un point de la figure. Passer par un sommet ou être parallèle à un côté ne suffit pas à superposer les moitiés. Couper en deux morceaux de même aire ne garantit pas non plus qu'ils se superposent.",
+                  "answers": [
+                    {
+                      "content": "Quand le symétrique de la figure par rapport à (d) est la figure elle-même",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quand (d) passe par un sommet de la figure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand (d) est parallèle à un côté de la figure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand (d) coupe la figure en deux morceaux de même aire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un rectangle ABCD n'est pas un carré. Combien a-t-il d'axes de symétrie ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les côtés opposés sont égaux. Étape 2 — Tester : la droite joignant les milieux de [AB] et [DC] marche, et celle joignant les milieux de [AD] et [BC] aussi. Étape 3 — Chercher : les diagonales ne marchent pas. Étape 4 — Conclure : 2 axes.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien un carré a-t-il d'axes de symétrie ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Tester : les deux droites qui joignent les milieux des côtés opposés sont des axes. Étape 3 — Chercher : les deux diagonales sont aussi des axes, car les quatre côtés sont égaux. Étape 4 — Conclure : 4 axes, pas 2 comme pour un rectangle.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les axes de symétrie d'un segment [AB] ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tester : en pliant le long de la médiatrice, A tombe sur B. En pliant le long de (AB), chaque point du segment reste en place. Étape 3 — Chercher : aucune autre droite ne convient. Une droite oblique passant par le milieu envoie A en dehors du segment.",
+                  "answers": [
+                    {
+                      "content": "Sa médiatrice et la droite (AB)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement sa médiatrice",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement la droite (AB)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les droites qui passent par son milieu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le rectangle ABCD a pour côtés AB = 6 cm et BC = 4 cm. La diagonale (AC) est-elle un axe de symétrie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Tester : en pliant le long de (AC), B irait sur un point B' tel que AB' = AB = 6 cm. Or AD = 4 cm, donc B' n'est pas D. Étape 4 — Conclure : (AC) n'est pas un axe. Passer par deux sommets ne suffit pas : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Non, car B ne tombe pas sur D : 6 cm et 4 cm sont différents",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car une diagonale coupe le rectangle en deux triangles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car elle passe par deux sommets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car un rectangle n'a aucun axe de symétrie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Axes de symétrie : segments, angles, carrés et lettres",
+              "statement": "Dans cet exercice, tu cherches des axes de symétrie dans des situations variées, avec les quatre étapes de la méthode.",
+              "exercise_type": "fixation",
+              "figure": "axes-carre",
+              "hint": "Pour chaque figure, plie-la par la pensée le long d'une droite : si chaque point tombe sur un point de la figure, la droite est un axe.",
+              "questions": [
+                {
+                  "content": "Relie chaque figure à ses axes de symétrie.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer ce qui se répète de part et d'autre de chaque droite. Étape 4 — Conclure : un segment a 2 axes, un angle a 1 axe, un rectangle non carré a 2 axes et un carré a 4 axes, ses deux diagonales comprises.",
+                  "answers": [
+                    {
+                      "content": "Un segment",
+                      "match": "Sa médiatrice et la droite qui le porte"
+                    },
+                    {
+                      "content": "Un angle",
+                      "match": "Sa bissectrice"
+                    },
+                    {
+                      "content": "Un rectangle qui n'est pas un carré",
+                      "match": "Les médiatrices de ses côtés"
+                    },
+                    {
+                      "content": "Un carré",
+                      "match": "Les médiatrices de ses côtés et ses deux diagonales"
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces lettres capitales d'imprimerie, lesquelles ont exactement un axe de symétrie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Tester : A et T se plient le long d'un axe vertical, E le long d'un axe horizontal. Étape 3 — Chercher : il n'y en a pas d'autre. H a deux axes, vertical et horizontal. Z et N n'ont aucun axe : leurs moitiés ne se superposent pas par pliage.",
+                  "answers": [
+                    {
+                      "content": "A",
+                      "correct": true
+                    },
+                    {
+                      "content": "T",
+                      "correct": true
+                    },
+                    {
+                      "content": "E",
+                      "correct": true
+                    },
+                    {
+                      "content": "H",
+                      "correct": false
+                    },
+                    {
+                      "content": "Z",
+                      "correct": false
+                    },
+                    {
+                      "content": "N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'axe de symétrie d'un angle est sa ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Tester : en pliant l'angle le long de sa bissectrice, un côté se superpose à l'autre. Étape 4 — Conclure : la bissectrice est la droite qui partage l'angle en deux angles de même mesure, et c'est son axe de symétrie.",
+                  "answers": [
+                    {
+                      "content": "bissectrice",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver les axes de symétrie d'une figure.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer une droite possible. Étape 2 — La tester par le pliage. Étape 3 — Chercher les autres droites et compter. Étape 4 — Conclure en nommant chaque axe. On ne peut pas compter les axes avant d'avoir testé une première droite.",
+                  "answers": [
+                    {
+                      "content": "Repérer ce qui se répète de part et d'autre d'une droite possible"
+                    },
+                    {
+                      "content": "Tester cette droite par le pliage"
+                    },
+                    {
+                      "content": "Chercher les autres droites possibles"
+                    },
+                    {
+                      "content": "Conclure en nommant chaque axe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un carré a ___ axes de symétrie.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Chercher : deux médiatrices de côtés et deux diagonales, donc 2 + 2 = 4 axes. Dire 2 oublie les diagonales, qui sont des axes dans un carré (et pas dans un rectangle ordinaire). Dire 8 compte chaque axe deux fois.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "8",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite (AB) est un axe de symétrie du segment [AB].",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Tester : en pliant le long de (AB), chaque point du segment reste à sa place, donc le segment se superpose à lui-même. Étape 4 — Conclure : la droite qui porte un segment est l'un de ses deux axes, avec sa médiatrice.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un motif de pagne plié en deux",
+          "statement": "Awa, couturière, dessine un motif de pagne. Elle plie le tissu le long d'une droite (d) : ce pli sert d'axe de symétrie. Le point M du motif est à 6 cm du pli.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le point M est à 6 cm de la droite (d). M' est son symétrique par rapport à (d). Calcule la longueur MM'.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Tracer la perpendiculaire à (d) passant par M. Étape 2 — Repérer le point H, pied de cette perpendiculaire : MH = 6 cm. Étape 3 — Reporter : HM' = 6 cm de l'autre côté. Étape 4 — Nommer : H est le milieu de [MM'], donc MM' = 6 + 6 = 12 cm.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "cm"
+            },
+            {
+              "content": "Awa place un point R sur le pli (d). Où est le symétrique R' de R par rapport à (d) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Tracer : la perpendiculaire au pli (d) passant par R. Étape 2 — Repérer : elle coupe le pli en R lui-même, donc la distance RH est 0 cm. Étape 3 — Reporter : on reporte 0 cm, on reste en R. Étape 4 — Nommer : R' = R. Un point du pli est son propre symétrique ; l'erreur tentante est de croire que chaque point change de place.",
+              "answers": [
+                {
+                  "content": "R' est confondu avec R",
+                  "correct": true
+                },
+                {
+                  "content": "R' est à côté de R, à la même distance du pli",
+                  "correct": false
+                },
+                {
+                  "content": "R' est à 1 cm de R",
+                  "correct": false
+                },
+                {
+                  "content": "R' n'existe pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le segment [MN] du motif mesure 9 cm. Son symétrique est [M'N']. Calcule M'N'.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : M' correspond à M et N' correspond à N. Étape 2 — Identifier : M'N' correspond à MN. Étape 3 — Appliquer : la symétrie axiale conserve les longueurs, donc M'N' = 9 cm. Étape 4 — Conclure avec la propriété. Doubler à 18 cm confond M'N' avec une distance entre deux points symétriques.",
+              "answers": [
+                {
+                  "content": "9",
+                  "correct": true
+                }
+              ],
+              "unit": "cm"
+            },
+            {
+              "content": "Le symétrique de la droite (MN) par rapport à (d) est la droite (M'N').",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Choisir : une droite est déterminée par deux de ses points, M et N. Étape 2 — Construire leurs symétriques M' et N'. Étape 3 — Relier : la droite (M'N') est la symétrique de (MN). L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le motif contient un carré. Combien ce carré a-t-il d'axes de symétrie ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : les quatre côtés d'un carré sont égaux. Étape 2 — Tester : les deux droites qui joignent les milieux des côtés opposés sont des axes. Étape 3 — Chercher : les deux diagonales sont aussi des axes. Étape 4 — Conclure : 2 + 2 = 4 axes. Répondre 2 oublie les diagonales.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                },
+                {
+                  "content": "1",
+                  "correct": false
+                },
+                {
+                  "content": "2",
+                  "correct": false
+                },
+                {
+                  "content": "8",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le masque de l'artisan",
+          "statement": "Un artisan sculpte un masque dont les deux moitiés sont symétriques par rapport à l'axe vertical (d) qui passe au milieu du front. L'œil gauche E est à 5 cm de cet axe. Le sourcil gauche forme avec le front un angle de 25°.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "L'œil gauche E est à 5 cm de l'axe (d). E' est l'œil droit, symétrique de E. Calcule la distance EE'.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Tracer la perpendiculaire à (d) passant par E. Étape 2 — Repérer le point H où elle coupe (d) : EH = 5 cm. Étape 3 — Reporter HE' = 5 cm de l'autre côté. Étape 4 — Nommer : EE' = 5 + 5 = 10 cm. Répondre 5 cm donne seulement la distance de E à l'axe.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "cm"
+            },
+            {
+              "content": "Les yeux E et E' sont symétriques par rapport à (d). L'axe (d) est la ___ du segment [EE'].",
+              "question_type": "fill_blank",
+              "explanation": "Étape 4 — Nommer et contrôler : (d) coupe [EE'] en son milieu et lui est perpendiculaire, c'est la définition de la médiatrice. L'axe n'est pas une simple parallèle à [EE'] : il lui est perpendiculaire.",
+              "answers": [
+                {
+                  "content": "médiatrice",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'angle formé par le sourcil gauche et le front mesure 25°. Quelle est la mesure de l'angle symétrique du côté droit ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : l'angle de droite est le symétrique de l'angle de gauche. Étape 2 — Identifier : les deux angles se correspondent. Étape 3 — Appliquer : la symétrie conserve les angles, donc l'angle de droite mesure 25°. Étape 4 — Conclure avec la propriété. Le nombre 155° serait le supplémentaire, pas le symétrique.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "unit": "°"
+            },
+            {
+              "content": "L'artisan compare les deux moitiés de son masque. Quelles propriétés sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Appliquer : la symétrie conserve les longueurs et les angles, donc les deux moitiés ont les mêmes mesures. Un point et son symétrique sont de part et d'autre de l'axe, et la moitié droite est retournée, pas simplement décalée. Par construction, (d) est bien un axe du masque.",
+              "answers": [
+                {
+                  "content": "Les longueurs de la moitié gauche sont égales à celles de la moitié droite",
+                  "correct": true
+                },
+                {
+                  "content": "Les angles de la moitié gauche sont égaux à ceux de la moitié droite",
+                  "correct": true
+                },
+                {
+                  "content": "Chaque point de gauche est à gauche de l'axe, comme son symétrique",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux moitiés sont décalées l'une de l'autre sans être retournées",
+                  "correct": false
+                },
+                {
+                  "content": "L'axe n'est pas un axe de symétrie du masque",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour construire l'œil droit E' à partir de l'œil gauche E.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Tracer la perpendiculaire à (d) passant par E. Étape 2 — Repérer le point H. Étape 3 — Reporter EH au compas de l'autre côté. Étape 4 — Nommer E' et contrôler. On repère H avant de reporter, sinon on ne sait pas où piquer le compas.",
+              "answers": [
+                {
+                  "content": "Tracer la perpendiculaire à l'axe passant par E"
+                },
+                {
+                  "content": "Repérer le point H où elle coupe l'axe"
+                },
+                {
+                  "content": "Reporter la distance EH de l'autre côté de l'axe"
+                },
+                {
+                  "content": "Nommer E' et contrôler que H est le milieu de [EE']"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un motif de tissu kita",
+          "statement": "Un tisserand dessine un motif de kita : le triangle ABC et son symétrique A'B'C' par rapport à un axe vertical (d). On donne AB = 3 cm, BC = 4 cm, CA = 5 cm, l'angle ABC est droit (90°) et le sommet A est à 3 cm de l'axe (d).",
+          "exercise_type": "evaluation",
+          "figure": "triangle-pagne",
+          "questions": [
+            {
+              "content": "Calcule le périmètre du triangle A'B'C'.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : A'B', B'C' et C'A' correspondent à AB, BC et CA. Étape 2 — Identifier : les côtés de départ mesurent AB = 3 cm, BC = 4 cm et CA = 5 cm. Étape 3 — Appliquer : la symétrie axiale conserve les longueurs, donc A'B' = 3 cm, B'C' = 4 cm, C'A' = 5 cm et le périmètre vaut 3 + 4 + 5 = 12 cm. Étape 4 — Conclure : le périmètre de A'B'C' est celui de ABC.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "cm"
+            },
+            {
+              "content": "Calcule la longueur A'C'.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : A' correspond à A et C' correspond à C. Étape 2 — Identifier : A'C' correspond à AC, qui mesure 5 cm. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc A'C' = 5 cm. Étape 4 — Conclure avec la propriété. A'C' n'est pas le double de AC.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "unit": "cm"
+            },
+            {
+              "content": "Quelle est la mesure de l'angle A'B'C' ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : B' correspond à B. Étape 2 — Identifier : A'B'C' correspond à ABC, qui mesure 90°. Étape 3 — Appliquer : la symétrie conserve les angles, donc A'B'C' = 90°. Étape 4 — Conclure avec la propriété : un angle droit reste un angle droit.",
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ],
+              "unit": "°"
+            },
+            {
+              "content": "Le sommet A est à 3 cm de l'axe (d). Calcule la distance AA'.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Tracer la perpendiculaire à (d) passant par A. Étape 2 — Repérer le point H : AH = 3 cm. Étape 3 — Reporter : HA' = 3 cm. Étape 4 — Nommer : AA' = 3 + 3 = 6 cm. La longueur AA' est le double de la distance de A à l'axe.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "unit": "cm"
+            },
+            {
+              "content": "Quelle égalité est toujours vraie pour le triangle ABC et son symétrique A'B'C' ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Identifier : la conservation relie un segment à son propre symétrique, donc B'C' = BC. Étape 3 — Appliquer : cette égalité est toujours vraie. A'B mélange un point et un symétrique : il n'est pas égal à AB en général. AA' est le double d'une distance à l'axe, et B'C' = 4 cm n'est pas égal à B'A' = 3 cm.",
+              "answers": [
+                {
+                  "content": "B'C' = BC",
+                  "correct": true
+                },
+                {
+                  "content": "A'B = AB",
+                  "correct": false
+                },
+                {
+                  "content": "AA' = AB",
+                  "correct": false
+                },
+                {
+                  "content": "B'C' = B'A'",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un motif sur un repère",
+          "statement": "Dans un repère, le triangle ABC a pour sommets A(-4 ; 1), B(-4 ; 4) et C(-2 ; 1). L'axe vertical du repère est l'axe de symétrie (d). Le triangle A'B'C' est le symétrique de ABC par rapport à (d). Une unité du repère est un carreau.",
+          "exercise_type": "evaluation",
+          "figure": "motif-repere",
+          "questions": [
+            {
+              "content": "Quelles sont les coordonnées de B', symétrique de B(-4 ; 4) par rapport à l'axe vertical du repère ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Tracer : l'axe est vertical, donc la perpendiculaire à l'axe passant par B est la ligne horizontale de B. Étape 2 — Repérer : B(-4 ; 4) est à 4 carreaux à gauche de l'axe, au pied H(0 ; 4). Étape 3 — Reporter : on reporte 4 carreaux à droite de H, à la même hauteur. Étape 4 — Nommer : B'(4 ; 4). Le point (-4 ; -4) est le symétrique de B par rapport à l'axe horizontal, et (4 ; -4) change les deux signes : aucun des deux n'est le symétrique par rapport à l'axe vertical.",
+              "answers": [
+                {
+                  "content": "(4 ; 4)",
+                  "correct": true
+                },
+                {
+                  "content": "(-4 ; -4)",
+                  "correct": false
+                },
+                {
+                  "content": "(4 ; -4)",
+                  "correct": false
+                },
+                {
+                  "content": "(-4 ; 4)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule la distance AA' en carreaux.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Tracer : la perpendiculaire à l'axe vertical passant par A est la ligne horizontale de A. Étape 2 — Repérer : A(-4 ; 1) est à 4 carreaux de l'axe. Étape 3 — Reporter : A'(4 ; 1) est à 4 carreaux de l'autre côté. Étape 4 — Nommer : AA' = 4 + 4 = 8 carreaux. La réponse 4 n'est que la distance de A à l'axe.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "unit": "carreaux"
+            },
+            {
+              "content": "Calcule la longueur A'B' en carreaux. Rappel : A(-4 ; 1) et B(-4 ; 4).",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : A et B sont sur la même colonne, donc AB = 4 - 1 = 3 carreaux. Étape 2 — Identifier : A'B' correspond à AB. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc A'B' = 3 carreaux. Étape 4 — Conclure : on peut le vérifier avec A'(4 ; 1) et B'(4 ; 4) : 4 - 1 = 3.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "carreaux"
+            },
+            {
+              "content": "L'angle BAC mesure 90°. Donne la mesure de l'angle B'A'C'.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : B', A' et C' correspondent à B, A et C. Étape 2 — Identifier : B'A'C' correspond à BAC. Étape 3 — Appliquer : la symétrie conserve les angles, donc B'A'C' = 90°. Étape 4 — Conclure : l'angle droit reste un angle droit. Sur la figure, [A'B'] est vertical et [A'C'] est horizontal, ce qui confirme.",
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ],
+              "unit": "°"
+            },
+            {
+              "content": "Le dessin contient le triangle ABC et son symétrique A'B'C'. Quelle droite est un axe de symétrie de l'ensemble du dessin ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le dessin est formé du triangle et de son symétrique par rapport à l'axe vertical. Étape 2 — Tester : en pliant le long de cet axe, ABC tombe sur A'B'C' et A'B'C' tombe sur ABC. Étape 3 — Chercher : l'axe horizontal ne convient pas, car A(-4 ; 1) tomberait en (-4 ; -1), qui n'est pas dans le dessin. Étape 4 — Conclure : l'axe vertical est un axe.",
+              "answers": [
+                {
+                  "content": "L'axe vertical (d) du repère",
+                  "correct": true
+                },
+                {
+                  "content": "L'axe horizontal du repère",
+                  "correct": false
+                },
+                {
+                  "content": "La droite (AC)",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune droite",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base de la symétrie axiale",
+          "notions": "Symétrique d'un point, d'un segment, d'un angle, d'un cercle ; conservation des longueurs, des angles et de l'alignement ; axes de symétrie d'un segment, d'un angle, d'un rectangle et d'un carré.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans cet exercice, (d) est une droite qui sert d'axe de symétrie. Tu appliques la méthode du symétrique d'un point : tracer la perpendiculaire, repérer le pied H, reporter la distance, nommer le point.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Rappelle-toi que (d) est la médiatrice de [MM'] : MM' vaut le double de la distance de M à l'axe.",
+              "questions": [
+                {
+                  "content": "M' est le symétrique de M par rapport à la droite (d). Que peut-on dire du segment [MM'] et de la droite (d) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : deux points symétriques sont liés par la médiatrice. Étape 2 — Nommer : (d) coupe [MM'] en son milieu H et lui est perpendiculaire. Une droite perpendiculaire qui ne passe pas par le milieu ne conviendrait pas, car MH et HM' seraient inégaux. Une parallèle ne coupe pas [MM'] du tout.",
+                  "answers": [
+                    {
+                      "content": "(d) est perpendiculaire à [MM'] et passe par son milieu",
+                      "correct": true
+                    },
+                    {
+                      "content": "(d) est parallèle à [MM']",
+                      "correct": false
+                    },
+                    {
+                      "content": "(d) passe par M mais pas par M'",
+                      "correct": false
+                    },
+                    {
+                      "content": "(d) est perpendiculaire à [MM'] mais ne passe pas par son milieu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point M est à 7 cm de l'axe (d). Son symétrique par rapport à (d) est M'. Calcule la longueur MM'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer la perpendiculaire à (d) passant par M. Étape 2 — Repérer le point H : MH = 7 cm. Étape 3 — Reporter : HM' = 7 cm de l'autre côté. Étape 4 — Nommer : H est le milieu de [MM'], donc MM' = 7 + 7 = 14 cm. L'erreur tentante est de répondre 7 cm, qui est seulement la distance de M à l'axe.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Les points N et N' sont symétriques par rapport à (d) et NN' = 18 cm. À quelle distance de (d) se trouve N ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : (d) est perpendiculaire à [NN'] et la coupe en H. Étape 2 — Repérer : H est le milieu de [NN'], avec NN' = 18 cm. Étape 3 — Reporter : NH = HN', donc NH = 18 ÷ 2 = 9 cm. Étape 4 — Nommer : N est à 9 cm de (d), et HN' = 9 cm confirme NN' = 9 + 9 = 18 cm. L'erreur tentante est de répondre 18 cm, qui est la longueur NN' entière.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le point K est sur l'axe (d). Son symétrique K' par rapport à (d) est alors un autre point que K.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à (d) passant par K coupe (d) en K lui-même. Étape 2 — Repérer : H = K, donc KH = 0 cm. Étape 3 — Reporter : on reporte 0 cm, on reste en K. Étape 4 — Nommer : K' = K. L'affirmation est fausse : un point de l'axe est son propre symétrique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point T est à 5 cm de l'axe (d). Son symétrique T' est à ___ cm de l'axe.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à (d) passant par T. Étape 2 — Repérer : elle coupe (d) en H et TH = 5 cm. Étape 3 — Reporter : HT' = 5 cm de l'autre côté. Étape 4 — Nommer : T' est à 5 cm de l'axe. Écrire 10 serait donner TT', pas la distance de T' à l'axe.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans cet exercice, tu construis le symétrique de plusieurs figures par rapport à une droite (d) : segment, angle, cercle et droite.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque figure, symétrise d'abord ses points clés : extrémités, sommets, centre. Seul le centre d'un cercle change de place, pas son rayon.",
+              "questions": [
+                {
+                  "content": "Le segment [EF] a pour symétrique, par rapport à (d), le segment ...",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : les points clés d'un segment sont ses extrémités E et F. Étape 2 — Construire E' et F'. Étape 3 — Relier E' à F'. Étape 4 — Nommer : le symétrique est [E'F']. Relier un point à un symétrique, comme E à F', donne un segment qui n'est pas l'image de [EF].",
+                  "answers": [
+                    {
+                      "content": "[E'F'], où E' et F' sont les symétriques de E et de F",
+                      "correct": true
+                    },
+                    {
+                      "content": "[EF'], où F' est le symétrique de F",
+                      "correct": false
+                    },
+                    {
+                      "content": "[E'F], où E' est le symétrique de E",
+                      "correct": false
+                    },
+                    {
+                      "content": "[EF], qui ne change pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour construire la symétrique d'une droite, il faut symétriser au moins ___ points de cette droite.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Choisir : une droite est déterminée par deux points distincts. Étape 2 — Construire leurs symétriques. Étape 3 — Relier : la droite qui passe par les deux symétriques est la symétrique de la droite de départ. Avec un seul point, on ne connaît pas sa direction ; trois ou cinq points sont inutiles.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cercle de centre O et de rayon 4 cm a son centre à 6 cm de l'axe (d). Quelle est la description de son symétrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : le point clé est le centre O. Étape 2 — Construire : O' est à 6 cm de (d), de l'autre côté. Étape 3 — Relier : on trace le cercle de centre O' avec le même rayon, 4 cm. Échanger 4 et 6 mélange le rayon et la distance à l'axe, qui sont deux choses différentes.",
+                  "answers": [
+                    {
+                      "content": "Un cercle de centre O' à 6 cm de (d), de rayon 4 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un cercle de centre O' à 4 cm de (d), de rayon 6 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cercle de centre O' à 6 cm de (d), de rayon 12 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cercle de centre O' à 12 cm de (d), de rayon 4 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique d'un angle est un angle dont le sommet est le symétrique du sommet de départ.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : le sommet O de l'angle et un point sur chaque côté. Étape 2 — Construire leurs symétriques O', x' et y'. Étape 3 — Relier O'x' et O'y'. Le sommet de l'angle symétrique est bien O', symétrique de O.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un triangle ABC a pour symétrique A'B'C'. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Construire : chaque sommet a un symétrique, B donne B' et A donne A'. Étape 3 — Relier dans le même ordre : [AC] donne [A'C']. Si on reliait A' à B', ce serait l'image de [AB], pas de [AC]. Le symétrique d'un triangle est un triangle, car on garde trois sommets et trois côtés.",
+                  "answers": [
+                    {
+                      "content": "Le symétrique du sommet B est B'",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le symétrique du côté [AC] est [A'C']",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le symétrique du sommet B est B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le symétrique du côté [AC] est [A'B']",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le symétrique du triangle est un quadrilatère",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans cet exercice, A'B'C' est le symétrique du triangle ABC par rapport à une droite (d). On utilise les longueurs AB = 4 cm, BC = 3 cm, CA = 5 cm, et l'angle ABC est droit (90°).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La symétrie axiale conserve les longueurs et les angles : chaque mesure de la figure de départ se retrouve identique sur la figure symétrique.",
+              "questions": [
+                {
+                  "content": "Calcule la longueur B'C'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : B' correspond à B et C' correspond à C. Étape 2 — Identifier : B'C' correspond à BC, qui mesure 3 cm. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc B'C' = 3 cm. Étape 4 — Conclure avec la propriété. La longueur B'C' n'est pas le double de BC.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule, en cm, le périmètre du triangle A'B'C'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A'B', B'C' et C'A' correspondent à AB, BC et CA. Étape 2 — Identifier : AB = 4 cm, BC = 3 cm et CA = 5 cm. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc A'B' = 4 cm, B'C' = 3 cm, C'A' = 5 cm, et 4 + 3 + 5 = 12 cm. Étape 4 — Conclure : le périmètre est le même que celui de ABC. Multiplier au lieu d'additionner donnerait 60 cm, une erreur d'opération.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Donne la mesure de l'angle A'B'C'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A' correspond à A, B' à B et C' à C. Étape 2 — Identifier : A'B'C' correspond à ABC, qui mesure 90°. Étape 3 — Appliquer : la symétrie conserve les angles, donc A'B'C' = 90°. Étape 4 — Conclure : un angle droit reste droit. La réponse 45° serait la moitié, ce que la symétrie ne produit pas.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°"
+                },
+                {
+                  "content": "Les points P, Q et R sont alignés sur une droite. Alors les symétriques P', Q' et R' ne sont pas alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : P', Q' et R' correspondent à P, Q et R. Étape 3 — Appliquer : la symétrie axiale conserve l'alignement, donc P', Q' et R' sont alignés. L'affirmation est fausse : l'alignement ne se perd pas, il passe à la droite symétrique de la droite de départ.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un segment [UV] mesure 6 cm. Son symétrique est [U'V']. Quelle est la mesure de [U'V'] ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : U' correspond à U et V' correspond à V. Étape 2 — Identifier : U'V' correspond à UV. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc U'V' = 6 cm. Étape 4 — Conclure. Les réponses 3 cm et 12 cm viennent de la division ou du doublement de la distance à l'axe, qui n'intervient pas ici.",
+                  "answers": [
+                    {
+                      "content": "6 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans cet exercice, tu cherches les axes de symétrie de figures simples avec les quatre étapes de la méthode : repérer, tester par le pliage, chercher les autres axes, conclure.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Plie chaque figure par la pensée le long de chaque droite possible : si chaque point tombe sur un point de la figure, c'est un axe.",
+              "questions": [
+                {
+                  "content": "Combien un rectangle qui n'est pas un carré a-t-il d'axes de symétrie ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les côtés opposés d'un rectangle sont égaux. Étape 2 — Tester : la droite qui joint les milieux de deux côtés opposés superpose les deux moitiés. Étape 3 — Chercher : il y en a deux, une par couple de côtés opposés, et les diagonales ne marchent pas. Étape 4 — Conclure : 2 axes. Répondre 4 serait vrai pour un carré seulement.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'axe de symétrie d'un angle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les deux côtés de l'angle sont situés de part et d'autre d'une droite qui partage l'angle en deux. Étape 2 — Tester : en pliant le long de la bissectrice, un côté tombe sur l'autre. Étape 4 — Conclure : la bissectrice est l'axe. Un côté de l'angle n'est pas un axe, car l'autre côté ne tombe pas sur lui.",
+                  "answers": [
+                    {
+                      "content": "Sa bissectrice",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa médiatrice",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'un de ses côtés",
+                      "correct": false
+                    },
+                    {
+                      "content": "La perpendiculaire à l'un de ses côtés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lettre H, en capitale d'imprimerie, a deux axes de symétrie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la lettre H a deux barres verticales reliées par une barre horizontale. Étape 2 — Tester : en pliant le long de la verticale du milieu, les deux barres se superposent ; en pliant le long de l'horizontale du milieu, le haut tombe sur le bas. Étape 4 — Conclure : 2 axes, un vertical et un horizontal.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un segment [AB] a ___ axes de symétrie.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Tester : en pliant le long de la médiatrice, A tombe sur B. En pliant le long de (AB), tous les points restent en place. Étape 3 — Chercher : aucune autre droite ne convient. Étape 4 — Conclure : 2 axes, la médiatrice de [AB] et la droite (AB).",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces figures, lesquelles ont au moins deux axes de symétrie ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer chaque figure. Étape 2 — Tester par le pliage. Étape 3 — Chercher : un segment a 2 axes, un carré en a 4. Un angle n'a que sa bissectrice, la lettre T n'a qu'un axe vertical, et la lettre Z n'en a aucun. Étape 4 — Conclure : seuls le segment et le carré en ont au moins deux.",
+                  "answers": [
+                    {
+                      "content": "Un segment",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un carré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un angle",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lettre T",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lettre Z",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Motifs, masques et reflets autour de nous",
+          "notions": "Symétrique d'un point par rapport à une droite dans des situations de vie courante : pagne, masque, reflet, enseigne ; conservation des longueurs et des angles ; axes de symétrie de lettres.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Mariam, couturière à Bouaké, dessine un motif de pagne sur un tissu plié le long d'un pli droit (d). Le pli est l'axe de symétrie du motif. Le point F d'une fleur est à 8 cm du pli. Les longueurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un point du pli reste en place, et les autres sont à la même distance du pli que leur symétrique, de l'autre côté.",
+              "questions": [
+                {
+                  "content": "Le point F est à 8 cm du pli (d). F' est le symétrique de F par rapport à (d). Calcule la longueur FF'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer la perpendiculaire au pli (d) passant par F. Étape 2 — Repérer le point H, le point où elle coupe le pli : FH = 8 cm. Étape 3 — Reporter : HF' = 8 cm de l'autre côté. Étape 4 — Nommer : FF' = 8 + 8 = 16 cm. Répondre 8 cm donnerait seulement la distance de F au pli.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Mariam place un point G exactement sur le pli. Que devient G dans le motif replié ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire au pli passant par G coupe le pli en G lui-même. Étape 2 — Repérer : H = G, donc la distance GH est 0 cm. Étape 3 — Reporter : on reporte 0 cm, on reste en G. Étape 4 — Nommer : G' = G. Un point du pli ne change pas de place quand on plie. Dire qu'il passe de l'autre côté suppose une distance non nulle.",
+                  "answers": [
+                    {
+                      "content": "Il reste à la même place : G' = G",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il se déplace de 1 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il passe de l'autre côté du pli",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il disparaît",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un motif symétrique par rapport au pli, la fleur de gauche et la fleur de droite ont les mêmes dimensions.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la fleur de droite est le symétrique de la fleur de gauche. Étape 3 — Appliquer : la symétrie axiale conserve les longueurs et les angles, donc les deux fleurs ont les mêmes dimensions et la même forme. Étape 4 — Conclure : l'affirmation est vraie, la fleur de droite est seulement retournée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pli (d) est la ___ du segment qui joint un point du motif à son symétrique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : un point F et son symétrique F' sont de part et d'autre du pli. Étape 4 — Nommer et contrôler : le pli coupe [FF'] en son milieu et lui est perpendiculaire. C'est la médiatrice de [FF']. Le pli n'est pas un simple milieu, car il est aussi perpendiculaire à [FF'].",
+                  "answers": [
+                    {
+                      "content": "médiatrice",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour dessiner la fleur F' symétrique de F par rapport au pli.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Tracer la perpendiculaire au pli passant par F. Étape 2 — Repérer le point H sur le pli. Étape 3 — Reporter FH de l'autre côté. Étape 4 — Nommer F' et contrôler. On ne reporte la distance qu'après avoir repéré H, sinon on ne sait pas où piquer le compas.",
+                  "answers": [
+                    {
+                      "content": "Tracer la perpendiculaire au pli passant par F"
+                    },
+                    {
+                      "content": "Repérer le point H où elle coupe le pli"
+                    },
+                    {
+                      "content": "Reporter la distance FH de l'autre côté du pli"
+                    },
+                    {
+                      "content": "Nommer F' et contrôler que H est le milieu de [FF']"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un sculpteur ivoirien taille un masque en bois dont les deux moitiés sont symétriques par rapport à un axe vertical (d). L'angle formé par la ligne du nez et le sourcil gauche mesure 30°. La largeur de la bouche est de 12 cm. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Les deux moitiés du masque se correspondent point par point : mêmes longueurs, mêmes angles, et chaque point est à la même distance de l'axe que son symétrique.",
+              "questions": [
+                {
+                  "content": "L'angle gauche du sourcil mesure 30°. Donne la mesure de l'angle symétrique à droite.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'angle de droite est le symétrique de l'angle de gauche. Étape 2 — Identifier : les deux angles se correspondent. Étape 3 — Appliquer : la symétrie axiale conserve les angles, donc l'angle de droite mesure 30°. Étape 4 — Conclure. La réponse 60° doublerait l'angle, ce que la symétrie ne fait jamais.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°"
+                },
+                {
+                  "content": "La bouche est un segment [UV] de 12 cm, centré sur l'axe vertical (d). Quel est le milieu de [UV] ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : U et V sont symétriques par rapport à (d), puisque la bouche est symétrique. Étape 2 — Identifier : (d) est donc la médiatrice de [UV]. Étape 4 — Conclure : (d) passe par le milieu de [UV], qui est un point de l'axe, à 6 cm de U et de V. Le milieu n'est pas U, qui est une extrémité.",
+                  "answers": [
+                    {
+                      "content": "Un point de l'axe (d)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point U",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un point à 12 cm de l'axe",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas le dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La bouche [UV] mesure 12 cm et U, V sont symétriques par rapport à (d). Calcule la distance de U à l'axe (d).",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : (d) est perpendiculaire à [UV] et la coupe en H. Étape 2 — Repérer : H est le milieu de [UV], avec UV = 12 cm. Étape 3 — Reporter : UH = HV, donc UH = 12 ÷ 2 = 6 cm. Étape 4 — Nommer : U est à 6 cm de l'axe, et 6 + 6 = 12 cm confirme UV. La réponse 12 cm est la longueur entière UV, pas la distance à l'axe.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le masque est symétrique par rapport à l'axe (d). Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Appliquer : la symétrie conserve les distances à l'axe et les angles. Les yeux sont de part et d'autre de l'axe, pas du même côté. Les deux moitiés ont les mêmes dimensions. Enfin l'axe est bien la médiatrice du segment qui joint les yeux, puisqu'ils sont symétriques.",
+                  "answers": [
+                    {
+                      "content": "Les deux yeux sont à la même distance de l'axe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux sourcils forment des angles de même mesure",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'œil gauche est à gauche de l'axe et l'œil droit aussi",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moitié droite est plus grande que la moitié gauche",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'axe n'est pas la médiatrice du segment qui joint les yeux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En pliant le masque le long de l'axe (d), chaque point de la moitié gauche tombe sur un point de la moitié droite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : (d) est l'axe de symétrie du masque. Étape 2 — Tester par le pliage : chaque point de gauche tombe sur son symétrique à droite. Étape 4 — Conclure : c'est la définition d'un axe de symétrie d'une figure. Un décalage sans retournement ne superposerait pas les deux moitiés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur le bord de la lagune, un élève dessine le reflet d'un cocotier dans l'eau calme. Pour le dessin, le reflet est le symétrique du cocotier par rapport à la ligne de l'eau (d), supposée droite. Le pied P du cocotier est sur la ligne de l'eau, et son sommet S est à 9 m de cette ligne. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le reflet est le symétrique par rapport à la ligne de l'eau : même distance à la ligne, de l'autre côté, et mêmes longueurs que l'objet.",
+              "questions": [
+                {
+                  "content": "Le sommet S du cocotier est à 9 m de la ligne de l'eau (d). S' est son reflet. Calcule la distance SS'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer la perpendiculaire à (d) passant par S. Étape 2 — Repérer le point H, le pied sur la ligne de l'eau : SH = 9 m. Étape 3 — Reporter : HS' = 9 m de l'autre côté. Étape 4 — Nommer : SS' = 9 + 9 = 18 m. Répondre 9 m donnerait seulement la distance de S à l'eau.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m"
+                },
+                {
+                  "content": "Le pied P est sur la ligne de l'eau. Où se trouve P' ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à (d) passant par P coupe la ligne de l'eau en P lui-même. Étape 2 — Repérer : H = P, donc PH = 0 m. Étape 3 — Reporter : on reporte 0 m, on reste en P. Étape 4 — Nommer : P' = P. Le pied du cocotier et son reflet se touchent au même point de la ligne de l'eau.",
+                  "answers": [
+                    {
+                      "content": "P' est confondu avec P",
+                      "correct": true
+                    },
+                    {
+                      "content": "P' est à 9 m de P",
+                      "correct": false
+                    },
+                    {
+                      "content": "P' est sous la ligne de l'eau à 1 m de P",
+                      "correct": false
+                    },
+                    {
+                      "content": "P' n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le tronc [PS] du cocotier mesure 9 m. Quelle est la longueur du reflet [P'S'] ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : P' correspond à P et S' correspond à S. Étape 2 — Identifier : P'S' correspond à PS. Étape 3 — Appliquer : la symétrie axiale conserve les longueurs, donc P'S' = 9 m. Étape 4 — Conclure. La réponse 18 m est la distance SS', pas la longueur du reflet.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m"
+                },
+                {
+                  "content": "Le cocotier est droit, perpendiculaire à la ligne de l'eau. Son reflet est alors perpendiculaire à la ligne de l'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : [PS] est perpendiculaire à (d) en P, et P' = P. Étape 2 — Identifier : [P'S'] correspond à [PS]. Étape 3 — Appliquer : la symétrie conserve les angles, donc l'angle droit en P reste un angle droit. Étape 4 — Conclure : le reflet est perpendiculaire à la ligne de l'eau, dans le prolongement du tronc.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nuage N est à 20 m de la ligne de l'eau (d). Où voit-on son reflet N' sur le dessin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer la perpendiculaire à (d) passant par N. Étape 2 — Repérer le point H : NH = 20 m. Étape 3 — Reporter HN' = 20 m de l'autre côté. Étape 4 — Nommer N'. La distance NN' vaut 40 m, mais N' est à 20 m de (d). Le placer du même côté oublierait la symétrie.",
+                  "answers": [
+                    {
+                      "content": "À 20 m de (d), de l'autre côté de la ligne de l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "À 40 m de (d), de l'autre côté",
+                      "correct": false
+                    },
+                    {
+                      "content": "À 20 m de (d), du même côté",
+                      "correct": false
+                    },
+                    {
+                      "content": "À 10 m de (d), de l'autre côté",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un peintre d'enseignes écrit le nom d'une boutique en lettres capitales d'imprimerie. Il veut savoir quelles lettres ont des axes de symétrie, pour les peindre plus vite en pliant un calque. Les lettres sont dessinées sans empattement.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Plie chaque lettre par la pensée, d'abord verticalement, puis horizontalement : compte les pliages qui superposent les deux moitiés.",
+              "questions": [
+                {
+                  "content": "Combien d'axes de symétrie la lettre H a-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la lettre H se compose de deux barres verticales et d'une barre horizontale. Étape 2 — Tester : le pliage le long de la verticale du milieu superpose les deux barres ; le pliage le long de l'horizontale du milieu superpose le haut et le bas. Étape 3 — Chercher : il n'y en a pas d'autre. Étape 4 — Conclure : 2 axes.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces lettres, lesquelles ont exactement un axe de symétrie ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Tester : A et T se plient le long d'un axe vertical, et E le long d'un axe horizontal. Étape 3 — Chercher : chacune n'en a qu'un. H en a deux. Z et N n'ont aucun axe, car leurs moitiés ne se superposent pas par pliage.",
+                  "answers": [
+                    {
+                      "content": "A",
+                      "correct": true
+                    },
+                    {
+                      "content": "T",
+                      "correct": true
+                    },
+                    {
+                      "content": "E",
+                      "correct": true
+                    },
+                    {
+                      "content": "H",
+                      "correct": false
+                    },
+                    {
+                      "content": "Z",
+                      "correct": false
+                    },
+                    {
+                      "content": "N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque lettre à son nombre d'axes de symétrie.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer ce qui se répète. Étape 2 — Tester par le pliage. Étape 4 — Conclure : A a un axe vertical, H a deux axes, Z n'en a aucun et E a un axe horizontal. Le pliage vertical d'un E ne superposerait pas ses barres, qui sont toutes à gauche.",
+                  "answers": [
+                    {
+                      "content": "A",
+                      "match": "1 axe, vertical"
+                    },
+                    {
+                      "content": "H",
+                      "match": "2 axes, vertical et horizontal"
+                    },
+                    {
+                      "content": "Z",
+                      "match": "Aucun axe"
+                    },
+                    {
+                      "content": "E",
+                      "match": "1 axe, horizontal"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lettre qui a un axe de symétrie vertical a aussi forcément un axe de symétrie horizontal.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Tester : la lettre A se plie le long d'un axe vertical, mais pas le long d'un axe horizontal, car son haut pointu ne tombe pas sur son bas ouvert. Étape 4 — Conclure : l'affirmation est fausse. Certaines lettres, comme H, ont les deux axes, mais pas toutes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La lettre T a ___ axe(s) de symétrie.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : la barre du haut est répétée de part et d'autre de la barre verticale. Étape 2 — Tester : le pliage le long de la barre verticale superpose les deux moitiés. Étape 3 — Chercher : le pliage horizontal ne marche pas, car le haut et le bas sont différents. Étape 4 — Conclure : 1 axe.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier avec la symétrie axiale",
+          "notions": "Distances entre un point, son symétrique et d'autres points ; bissectrice et axe de symétrie d'un angle ; axes d'un rectangle et diagonales ; conservation des longueurs et erreur qui mélange un point et un symétrique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Les points P et Q sont sur une même perpendiculaire à l'axe (d), du même côté de (d). P est à 2 cm de (d) et Q est à 6 cm de (d). P' et Q' sont leurs symétriques par rapport à (d). Raisonne à partir de la méthode du symétrique d'un point.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Place les quatre points sur une même droite perpendiculaire à l'axe, avec leurs distances à l'axe : 2 cm et 6 cm de chaque côté.",
+              "questions": [
+                {
+                  "content": "Calcule la longueur PQ.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : P et Q sont sur la même perpendiculaire à (d), du même côté de l'axe. Étape 2 — Repérer : P est à 2 cm de l'axe et Q à 6 cm. Étape 3 — Reporter ces distances sur la perpendiculaire, à partir du pied H : la distance entre P et Q est la différence, 6 - 2 = 4 cm. Étape 4 — Nommer : PQ = 4 cm. Additionner 6 + 2 = 8 cm supposerait P et Q de part et d'autre de l'axe.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule la longueur QQ'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à (d) passant par Q contient aussi P, P' et Q'. Étape 2 — Repérer le point H : QH = 6 cm. Étape 3 — Reporter : HQ' = 6 cm de l'autre côté. Étape 4 — Nommer : QQ' = 6 + 6 = 12 cm. Répondre 6 cm donnerait seulement la distance de Q à l'axe.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule la longueur P'Q'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : P' et Q' sont les symétriques de P et Q. Étape 2 — Identifier : P'Q' correspond à PQ, qui mesure 4 cm. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc P'Q' = 4 cm. Étape 4 — Conclure : on contrôle, P' est à 2 cm et Q' à 6 cm de l'axe, du même côté, donc 6 - 2 = 4 cm.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule la longueur PQ'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : tous les points sont sur une même perpendiculaire à (d). Étape 2 — Repérer : P est à 2 cm de l'axe d'un côté, Q' est à 6 cm de l'axe de l'autre côté. Étape 3 — Reporter ces distances de part et d'autre de H : PQ' = 2 + 6 = 8 cm. Étape 4 — Nommer : PQ' n'est pas égal à PQ = 4 cm, car PQ' mélange un point et le symétrique d'un autre.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Les quatre points P, Q, P' et Q' sont alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : P', Q' et R' correspondent à P, Q et R, qui sont ici sur la perpendiculaire à (d). Étape 2 — Identifier : le symétrique d'un point de cette perpendiculaire est sur la même perpendiculaire. Étape 3 — Appliquer : la symétrie conserve l'alignement. Étape 4 — Conclure : les quatre points P, Q, P' et Q' sont sur une même droite perpendiculaire à l'axe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "L'angle ABC mesure 70°. La demi-droite [Bz) est sa bissectrice. On plie la figure le long de la droite (Bz). Le point M est sur [BA) avec BM = 5 cm. Raisonne avec les axes de symétrie et la conservation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La bissectrice partage l'angle en deux angles égaux, et c'est aussi son axe de symétrie : un côté de l'angle tombe sur l'autre quand on plie.",
+              "questions": [
+                {
+                  "content": "Quelle est la mesure de l'angle ABz ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : [Bz) est la bissectrice de l'angle ABC, c'est-à-dire son axe de symétrie. Étape 2 — Tester : en pliant le long de (Bz), les deux moitiés se superposent. Étape 3 — Chercher la mesure : elles sont égales et leur somme est 70°, donc chacune vaut 70° ÷ 2 = 35°. Étape 4 — Conclure : ABz = 35°. La réponse 70° est l'angle entier, pas la moitié.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°"
+                },
+                {
+                  "content": "Quel est le symétrique de la demi-droite [BA) par rapport à la droite (Bz) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : (Bz) est la bissectrice, donc l'axe de symétrie de l'angle ABC. Étape 2 — Tester par le pliage : [BA) tombe sur [BC). Étape 4 — Conclure : le symétrique de [BA) est [BC). [Bz) est l'axe, pas l'image d'un côté, et [BA) ne reste pas en place car il n'est pas sur l'axe.",
+                  "answers": [
+                    {
+                      "content": "La demi-droite [BC)",
+                      "correct": true
+                    },
+                    {
+                      "content": "La demi-droite [Bz)",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite (BC) entière",
+                      "correct": false
+                    },
+                    {
+                      "content": "La demi-droite [BA) elle-même",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la mesure de l'angle zBC ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le symétrique de [BA) est [BC) et celui de [Bz) est [Bz) lui-même. Étape 2 — Identifier : l'angle zBC correspond à l'angle zBA. Étape 3 — Appliquer : la symétrie conserve les angles, donc zBC = ABz = 35°. Étape 4 — Conclure. Les deux angles ont la même mesure, ce qui confirme que [Bz) est la bissectrice.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°"
+                },
+                {
+                  "content": "Le symétrique de M est le point M'. Quelle est la longueur BM' ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : B est sur l'axe (Bz), donc B' = B. Étape 2 — Identifier : BM' correspond à BM, qui mesure 5 cm. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc BM' = 5 cm. Étape 4 — Conclure : M' est sur [BC), à 5 cm de B. La réponse 10 cm doublerait la distance, ce qui n'est pas la règle ici.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "La droite (Bz) est un axe de symétrie de l'angle ABC.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : (Bz) est la bissectrice de l'angle ABC. Étape 2 — Tester : en pliant le long de (Bz), [BA) tombe sur [BC) et l'angle se superpose à lui-même. Étape 4 — Conclure : la bissectrice est l'axe de symétrie de l'angle. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le rectangle ABCD a pour côtés AB = 8 cm et BC = 4 cm. Alix affirme que la diagonale (AC) est un axe de symétrie de ce rectangle. Tu vérifies son affirmation en raisonnant avec le pliage et la conservation des longueurs.",
+              "exercise_type": "evaluation",
+              "figure": "axes-rectangle",
+              "hint": "Teste chaque droite par le pliage : un point du rectangle doit tomber sur un point du rectangle. Compare les longueurs AB et AD pour la diagonale.",
+              "questions": [
+                {
+                  "content": "Combien le rectangle ABCD, qui n'est pas un carré, a-t-il d'axes de symétrie ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les côtés opposés d'un rectangle sont égaux. Étape 2 — Tester : la droite qui joint les milieux de [AB] et [DC] et celle qui joint les milieux de [AD] et [BC] superposent les deux moitiés. Étape 3 — Chercher : aucune autre droite ne convient. Étape 4 — Conclure : 2 axes, qui ne sont pas les diagonales.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On plie le long de (AC). Le point B tombe sur un point B'. Calcule la longueur AB'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A est sur l'axe (AC), donc A' = A. Étape 2 — Identifier : AB' correspond à AB, qui mesure 8 cm. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc AB' = AB = 8 cm. Étape 4 — Conclure : B' est à 8 cm de A, sur une demi-droite issue de A.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le côté [AD] mesure 4 cm. Que peut-on dire du point B' (symétrique de B par rapport à (AC)) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : AB' = 8 cm et AD = 4 cm. Étape 2 — Comparer : 8 cm n'est pas 4 cm, donc B' ne peut pas être D. Étape 3 — Conclure : B' n'est pas sur le rectangle, donc (AC) n'est pas un axe. Dire que B' est D supposerait AB = AD, vrai seulement dans un carré.",
+                  "answers": [
+                    {
+                      "content": "B' n'est pas le sommet D, car AB' = 8 cm alors que AD = 4 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "B' est le sommet D",
+                      "correct": false
+                    },
+                    {
+                      "content": "B' est le sommet C",
+                      "correct": false
+                    },
+                    {
+                      "content": "B' est le milieu de [AD]",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Alix a raison : la diagonale (AC) est un axe de symétrie du rectangle ABCD.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la diagonale (AC) passe par deux sommets. Étape 2 — Tester : le symétrique B' de B est à 8 cm de A, tandis que le côté [AD] mesure 4 cm. Étape 3 — Chercher : B' tombe hors du rectangle. Étape 4 — Conclure : l'affirmation est fausse, car passer par deux sommets ne suffit pas pour être un axe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur le rectangle ABCD (AB = 8 cm, BC = 4 cm), lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Tester : les deux droites qui joignent les milieux de côtés opposés superposent les moitiés du rectangle. Étape 3 — Chercher : les diagonales sont écartées, car B irait à 8 cm de A hors du rectangle. La droite (AB) ne convient pas non plus : D irait en dehors du rectangle, de l'autre côté de (AB).",
+                  "answers": [
+                    {
+                      "content": "La droite qui joint les milieux de [AB] et [DC] est un axe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite qui joint les milieux de [AD] et [BC] est un axe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La diagonale (AC) est un axe",
+                      "correct": false
+                    },
+                    {
+                      "content": "La diagonale (BD) est un axe",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite (AB) est un axe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le point A est à 4 cm de l'axe (d) et le point B est à 1 cm de (d), de l'autre côté. A et B sont sur une même perpendiculaire à (d). A' et B' sont leurs symétriques par rapport à (d). Tu compares des longueurs pour éviter l'erreur du piège de la conservation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Place les quatre points sur une droite graduée dont 0 est l'axe : A en -4, B en 1, puis A' en 4 et B' en -1. Lis ensuite chaque distance.",
+              "questions": [
+                {
+                  "content": "Calcule la longueur AB.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A et B sont sur la même perpendiculaire, de part et d'autre de l'axe. Étape 2 — Calculer : AB = 4 + 1 = 5 cm. Étape 3 — Contrôler : on additionne, car l'axe est entre les deux points. Soustraire 4 - 1 = 3 cm supposerait A et B du même côté de l'axe.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule la longueur A'B'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A' est à 4 cm de l'axe, du côté de B, et B' est à 1 cm de l'axe, du côté de A. Étape 2 — Identifier : A'B' correspond à AB, qui mesure 5 cm. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc A'B' = 5 cm. Étape 4 — Conclure par la propriété.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule la longueur AB'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A est à 4 cm de l'axe d'un côté, et B' est à 1 cm de l'axe du même côté que A, puisque B est de l'autre côté. Étape 2 — Calculer : AB' = 4 - 1 = 3 cm. Étape 3 — Contrôler : AB' n'est pas égal à AB = 5 cm, car AB' mélange un point et un symétrique.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle longueur est égale à AB ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : la conservation relie un segment à son propre symétrique, donc AB à A'B'. Étape 3 — Appliquer : A'B' = AB = 5 cm. AB' et A'B valent 3 cm chacun, car ils mélangent un point et le symétrique d'un autre. AA' vaut 4 + 4 = 8 cm.",
+                  "answers": [
+                    {
+                      "content": "A'B'",
+                      "correct": true
+                    },
+                    {
+                      "content": "AB'",
+                      "correct": false
+                    },
+                    {
+                      "content": "A'B",
+                      "correct": false
+                    },
+                    {
+                      "content": "AA'",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'égalité AB' = AB est vraie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : AB = 5 cm et AB' = 3 cm. Étape 2 — Comparer : 5 cm n'est pas 3 cm, donc l'égalité est fausse. Étape 3 — Conclure : la conservation des longueurs vaut pour A'B' et AB, pas pour AB' et AB. C'est exactement l'erreur du piège de la conservation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la symétrie axiale",
+          "notions": "Toutes les notions : symétrique d'un point par rapport à un axe du repère, conservation des longueurs et des angles, carré et symétrique, ordre des étapes, axes de symétrie d'un segment, d'un angle et d'un rectangle.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un repère, le triangle ABC a pour sommets A(-5 ; 2), B(-2 ; 4) et C(-1 ; 1). L'axe vertical du repère (l'axe des ordonnées) est l'axe de symétrie (d). Une unité du repère est un carreau. Le triangle A'B'C' est le symétrique de ABC par rapport à (d).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Avec un axe vertical, l'ordonnée ne change pas et l'abscisse devient l'opposée : on garde la hauteur et on passe de l'autre côté.",
+              "questions": [
+                {
+                  "content": "Quelles sont les coordonnées de A', symétrique de A(-5 ; 2) par rapport à l'axe vertical du repère ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : l'axe est vertical, donc la perpendiculaire à l'axe passant par A est la ligne horizontale de A. Étape 2 — Repérer : A(-5 ; 2) est à 5 carreaux à gauche de l'axe. Étape 3 — Reporter : A' est à 5 carreaux à droite, à la même hauteur. Étape 4 — Nommer : A'(5 ; 2). Le point (-5 ; -2) est le symétrique de A par rapport à l'axe horizontal ; (5 ; -2) change les deux signes, ce n'est pas le symétrique cherché.",
+                  "answers": [
+                    {
+                      "content": "(5 ; 2)",
+                      "correct": true
+                    },
+                    {
+                      "content": "(-5 ; -2)",
+                      "correct": false
+                    },
+                    {
+                      "content": "(5 ; -2)",
+                      "correct": false
+                    },
+                    {
+                      "content": "(-5 ; 2)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les coordonnées de C', symétrique de C(-1 ; 1) par rapport à l'axe vertical du repère ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à l'axe vertical passant par C est la ligne horizontale de C. Étape 2 — Repérer : C(-1 ; 1) est à 1 carreau à gauche de l'axe. Étape 3 — Reporter : C' est à 1 carreau à droite, à la même hauteur. Étape 4 — Nommer : C'(1 ; 1). Garder l'abscisse -1 laisserait C' en C, ce qui n'est vrai que pour un point de l'axe.",
+                  "answers": [
+                    {
+                      "content": "(1 ; 1)",
+                      "correct": true
+                    },
+                    {
+                      "content": "(-1 ; -1)",
+                      "correct": false
+                    },
+                    {
+                      "content": "(1 ; -1)",
+                      "correct": false
+                    },
+                    {
+                      "content": "(-1 ; 1)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule, en carreaux, la distance entre A et son symétrique A'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à l'axe vertical passant par A est sa ligne horizontale. Étape 2 — Repérer : A(-5 ; 2) est à 5 carreaux de l'axe. Étape 3 — Reporter : A'(5 ; 2) est à 5 carreaux de l'autre côté. Étape 4 — Nommer : AA' = 5 + 5 = 10 carreaux. La réponse 5 n'est que la distance de A à l'axe.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "carreaux"
+                },
+                {
+                  "content": "Calcule la distance BB' en carreaux.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à l'axe vertical passant par B est sa ligne horizontale. Étape 2 — Repérer : B(-2 ; 4) est à 2 carreaux de l'axe. Étape 3 — Reporter : B'(2 ; 4) est à 2 carreaux de l'autre côté. Étape 4 — Nommer : BB' = 2 + 2 = 4 carreaux. La réponse 2 est la distance de B à l'axe, pas BB'.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "carreaux"
+                },
+                {
+                  "content": "Le point C(-1 ; 1) est le point du triangle ABC le plus proche de l'axe vertical.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tracer : pour chaque sommet, la perpendiculaire à l'axe vertical est sa ligne horizontale. Étape 2 — Repérer : les distances à l'axe sont les valeurs absolues des abscisses : A à 5 carreaux, B à 2 carreaux, C à 1 carreau. Étape 3 — Reporter : A', B' et C' sont aux mêmes distances, de l'autre côté. Étape 4 — Nommer : C est le plus proche de l'axe, et C' aussi parmi A', B', C'.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un repère, les points D(2 ; 3) et E(5 ; -1) sont donnés. L'axe horizontal du repère (l'axe des abscisses) est l'axe de symétrie (d). D' et E' sont les symétriques de D et E par rapport à (d). On donne DE = 5 carreaux. Une unité du repère est un carreau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Avec un axe horizontal, l'abscisse ne change pas et l'ordonnée devient l'opposée : on garde la position à gauche ou à droite et on passe de l'autre côté de l'axe.",
+              "questions": [
+                {
+                  "content": "Quelles sont les coordonnées de D', symétrique de D(2 ; 3) par rapport à l'axe horizontal du repère ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : l'axe est horizontal, donc la perpendiculaire à l'axe passant par D est la colonne verticale de D. Étape 2 — Repérer : D(2 ; 3) est à 3 carreaux au-dessus de l'axe. Étape 3 — Reporter : D' est à 3 carreaux au-dessous, avec la même abscisse. Étape 4 — Nommer : D'(2 ; -3). Changer l'abscisse donnerait (-2 ; 3), le symétrique par rapport à l'axe vertical.",
+                  "answers": [
+                    {
+                      "content": "(2 ; -3)",
+                      "correct": true
+                    },
+                    {
+                      "content": "(-2 ; 3)",
+                      "correct": false
+                    },
+                    {
+                      "content": "(-2 ; -3)",
+                      "correct": false
+                    },
+                    {
+                      "content": "(2 ; 3)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les coordonnées de E', symétrique de E(5 ; -1) par rapport à l'axe horizontal du repère ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à l'axe horizontal passant par E est la colonne verticale de E. Étape 2 — Repérer : E(5 ; -1) est à 1 carreau au-dessous de l'axe. Étape 3 — Reporter : E' est à 1 carreau au-dessus, avec la même abscisse. Étape 4 — Nommer : E'(5 ; 1). Garder l'ordonnée -1 laisserait E' en E, ce qui n'est vrai que pour un point de l'axe.",
+                  "answers": [
+                    {
+                      "content": "(5 ; 1)",
+                      "correct": true
+                    },
+                    {
+                      "content": "(-5 ; -1)",
+                      "correct": false
+                    },
+                    {
+                      "content": "(-5 ; 1)",
+                      "correct": false
+                    },
+                    {
+                      "content": "(5 ; -1)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la distance DD' en carreaux.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à l'axe horizontal passant par D est sa colonne verticale. Étape 2 — Repérer : D(2 ; 3) est à 3 carreaux de l'axe. Étape 3 — Reporter : D'(2 ; -3) est à 3 carreaux de l'autre côté. Étape 4 — Nommer : DD' = 3 + 3 = 6 carreaux. La réponse 3 n'est que la distance de D à l'axe.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "carreaux"
+                },
+                {
+                  "content": "Calcule la distance EE' en carreaux.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à l'axe horizontal passant par E est sa colonne verticale. Étape 2 — Repérer : E(5 ; -1) est à 1 carreau de l'axe. Étape 3 — Reporter : E'(5 ; 1) est à 1 carreau de l'autre côté. Étape 4 — Nommer : EE' = 1 + 1 = 2 carreaux. La réponse 1 n'est que la distance de E à l'axe.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "carreaux"
+                },
+                {
+                  "content": "On donne DE = 5 carreaux. Calcule la longueur D'E' en carreaux.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : D' correspond à D et E' correspond à E. Étape 2 — Identifier : D'E' correspond à DE, qui mesure 5 carreaux. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc D'E' = 5 carreaux. Étape 4 — Conclure avec la propriété. La réponse 10 doublerait DE, ce que la symétrie ne fait pas.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "carreaux"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un tisserand dessine sur un tissu kita un carré ABCD de côté 6 cm. Il trace à l'extérieur du carré une droite (d), puis dessine le symétrique A'B'C'D' du carré par rapport à (d). Le sommet A est à 3 cm de (d). Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le symétrique garde les longueurs et les angles du carré. Pour AA', double la distance de A à (d). Les axes du carré sont ses médiatrices et ses diagonales.",
+              "questions": [
+                {
+                  "content": "Calcule le périmètre du carré ABCD.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : un carré a quatre côtés égaux, ici 6 cm. Étape 2 — Identifier : le périmètre est la somme des quatre côtés. Étape 3 — Appliquer : 6 + 6 + 6 + 6 = 4 × 6 = 24 cm. Étape 4 — Conclure : le périmètre est 24 cm. Écrire 6 × 6 = 36 donnerait l'aire en cm², pas le périmètre.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule le périmètre du carré A'B'C'D'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A'B', B'C', C'D' et D'A' correspondent à AB, BC, CD et DA. Étape 2 — Identifier : chaque côté de départ mesure 6 cm. Étape 3 — Appliquer : la symétrie conserve les longueurs, donc chaque côté de A'B'C'D' mesure 6 cm et le périmètre vaut 4 × 6 = 24 cm. Étape 4 — Conclure : le symétrique a le même périmètre.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Donne la mesure de l'angle A'B'C', symétrique de l'angle ABC du carré.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A'B'C' correspond à ABC. Étape 2 — Identifier : l'angle ABC est un angle droit, car ABCD est un carré, donc il mesure 90°. Étape 3 — Appliquer : la symétrie conserve les angles, donc A'B'C' = 90°. Étape 4 — Conclure : le symétrique d'un angle droit est un angle droit.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°"
+                },
+                {
+                  "content": "Le sommet A est à 3 cm de (d). Calcule la longueur AA'.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Tracer la perpendiculaire à (d) passant par A. Étape 2 — Repérer le point H : AH = 3 cm. Étape 3 — Reporter : HA' = 3 cm de l'autre côté. Étape 4 — Nommer : AA' = 3 + 3 = 6 cm. La réponse 3 cm n'est que la distance de A à (d), pas la longueur AA'.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Combien le carré ABCD a-t-il d'axes de symétrie ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les quatre côtés sont égaux et les angles sont droits. Étape 2 — Tester : les deux droites qui joignent les milieux des côtés opposés sont des axes. Étape 3 — Chercher : les deux diagonales aussi. Étape 4 — Conclure : 2 + 2 = 4 axes. La droite (d) n'est pas un axe du carré : elle sert seulement à dessiner le symétrique.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans cet exercice, tu fais le bilan de la leçon : symétrique d'un point et d'une figure, conservation des longueurs et des angles, axes de symétrie. Réponds sans figure, avec les méthodes de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Reprends les méthodes de la leçon : la médiatrice relie un point à son symétrique, la symétrie conserve longueurs, angles et alignement, et chaque figure a ses axes.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour construire le symétrique du segment [EF].",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Choisir les extrémités E et F, qui sont les points clés d'un segment. Étape 2 — Construire E' et F' avec la méthode du symétrique d'un point. Étape 3 — Relier E' à F'. Étape 4 — Nommer [E'F'] et contrôler. On ne relie les symétriques qu'après les avoir construits tous les deux.",
+                  "answers": [
+                    {
+                      "content": "Choisir les extrémités E et F"
+                    },
+                    {
+                      "content": "Construire E' et F' un par un avec la méthode du point"
+                    },
+                    {
+                      "content": "Relier E' à F'"
+                    },
+                    {
+                      "content": "Nommer le segment [E'F'] et contrôler"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à ce qu'on peut affirmer.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque situation. Étape 2 — Appliquer la propriété : un point de l'axe est son propre symétrique ; la symétrie conserve les longueurs, les angles et l'alignement. Étape 3 — Conclure : chaque situation correspond à une seule propriété, et aucune ne dit que la symétrie double les mesures.",
+                  "answers": [
+                    {
+                      "content": "Un point de l'axe",
+                      "match": "Il est son propre symétrique"
+                    },
+                    {
+                      "content": "Une longueur de la figure",
+                      "match": "Elle est conservée par la symétrie"
+                    },
+                    {
+                      "content": "Un angle de la figure",
+                      "match": "Sa mesure est conservée par la symétrie"
+                    },
+                    {
+                      "content": "Trois points alignés",
+                      "match": "Leurs symétriques sont alignés"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le segment [MM'] est coupé en son milieu par l'___ de symétrie.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : M et M' sont symétriques par rapport à (d). Étape 2 — Conclure : (d) est la médiatrice de [MM'], donc elle coupe [MM'] en son milieu. Le mot attendu est axe : l'axe de symétrie joue le rôle de médiatrice de [MM'].",
+                  "answers": [
+                    {
+                      "content": "axe",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un rectangle qui n'est pas un carré a ___ axes de symétrie.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : les côtés opposés sont égaux. Étape 2 — Tester : la droite qui joint les milieux de deux côtés opposés superpose les moitiés. Étape 3 — Chercher : il y en a deux, mais les diagonales ne marchent pas. Étape 4 — Conclure : 2 axes. Dire 4 est vrai pour un carré seulement.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer ce que dit chaque affirmation. Étape 2 — Tester avec la leçon : un segment a 2 axes, la symétrie conserve les angles et un point de l'axe est son propre symétrique. Les trois autres sont fausses : la symétrie ne double pas les longueurs, un angle n'a qu'un axe (sa bissectrice), et le rayon d'un cercle ne change pas.",
+                  "answers": [
+                    {
+                      "content": "Les axes de symétrie d'un segment sont sa médiatrice et la droite qui le porte",
+                      "correct": true
+                    },
+                    {
+                      "content": "La symétrie axiale conserve les mesures d'angles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un point de l'axe est son propre symétrique",
+                      "correct": true
+                    },
+                    {
+                      "content": "La symétrie axiale double les longueurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un angle a deux axes de symétrie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le symétrique d'un cercle a un rayon différent",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

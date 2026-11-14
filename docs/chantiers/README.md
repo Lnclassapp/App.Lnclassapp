@@ -198,6 +198,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`lecons-2nde-4-5`](lecons-2nde-4-5/) | pas de memo | — | — | — |
 | [`lecons-3eme-comme-thales`](lecons-3eme-comme-thales/memo.md) | PR prête | feature | 2026-11-05 | Les leçons de 3ème préparées comme Thalès |
 | [`lecons-4eme`](lecons-4eme/) | pas de memo | — | — | — |
+| [`lecons-5eme`](lecons-5eme/) | pas de memo | — | — | — |
 | [`lecons-6eme`](lecons-6eme/) | pas de memo | — | — | — |
 | [`lecons-defauts-affichage`](lecons-defauts-affichage/memo.md) | décision | bugfix | 2026-11-02 | Leçons v3 en défaut d'affichage |
 | [`lecons-tle-a1-comme-thales`](lecons-tle-a1-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale A1 préparées comme Thalès |

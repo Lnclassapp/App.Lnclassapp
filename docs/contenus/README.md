@@ -8,7 +8,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 30 leçons de 6ème (les 5 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 30 leçons de 4ème (les 5 premières de la progression dans les mêmes 6 matières), les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
+| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 30 leçons de 6ème (les 5 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 30 leçons de 4ème (les 5 premières de la progression dans les mêmes 6 matières), les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), les 30 de 5ème (les 5 premières de la progression dans les mêmes 6 matières, chantier `lecons-5eme`), les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1, les 31 de Tle A2 et les 10 d'Histoire-Géographie de Tle (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
 | [`a-reprendre/`](a-reprendre/) | Les 275 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
 
 ## Le principe
@@ -28,7 +28,7 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `6eme/` (rangs 1 à 5), `4eme/`, `3eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
+Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `6eme/` (rangs 1 à 5), `4eme/`, `3eme/`, `5eme/`, `tle-c/`, `tle-d/`, `tle-a1/`, `tle-a2/` et `tle/` y sont.
 
 ## Boucle courte : corriger une leçon
 
@@ -604,6 +604,45 @@ Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le mê
 - **SVT** : les valeurs énergétiques 17 / 17 / 38 kJ par gramme, les tests de Fehling et du biuret, les noms d'enzymes et leurs conditions d'action, la fibrine, la phagocytose et la coagulation.
 - **Histoire-Géographie** : les « atouts institutionnels » (OHADA, BCEAO, code des investissements), et les dates de la leçon sur l'indépendance (loi-cadre de 1956, référendum de 1958, indépendance du 7 août 1960, présidence fin 1960). L'AOF et les traités de protectorat sont cités sans date.
 - **EDHC** : aucun article de loi, aucune date, aucun numéro d'urgence. Les noms des conventions et chartes citées (femmes, personnes handicapées, enfant, Protocole de Maputo) sont écrits de mémoire, et la ratification par la Côte d'Ivoire n'est pas affirmée. La matière EDHC n'existe pas dans le référentiel : il faut la créer avant d'importer les 3 cours.
+
+### 5ème — `lecons-traitees/5eme/` (chantier `lecons-5eme`)
+
+Les 5 premières leçons de la progression DPFC 2026-2027 de 5ème en Mathématiques, Physique-Chimie, Français, SVT, Histoire-Géographie et EDHC (30 leçons), rédigées le 2026-11-14 au format v3 complet, comme les leçons de 3ème : 4 blocs et 2 exercices par notion (le second de 6 questions de 4 types au moins), 4 problèmes, 4 sujets de devoir de 4 exercices. Langue et difficulté de 5ème : phrases courtes, petits nombres, aucune notion des leçons suivantes. Chaque leçon a eu un rédacteur puis un relecteur indépendant qui a refait chaque calcul avec sympy (Maths, Physique-Chimie) ou vérifié chaque bonne réponse dans la fiche, le texte ou un fait sûr (Français, SVT, Histoire-Géographie, EDHC) ; tous les défauts relevés sont corrigés. Un script hors dépôt passe `valider.rb` sur la leçon et sur chaque sujet, puis les règles du format complet. Les points qu'un enseignant doit valider sont dans [le journal du chantier](../chantiers/lecons-5eme/journal.md).
+
+| # | Fichier | Cours | Notions | Figures | Exercices | Questions |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `mathematiques/nombres-premiers.json` | Nombres premiers | 3 | 1 | 26 | 141 |
+| 2 | `mathematiques/segments.json` | Segments | 4 | 6 | 28 | 150 |
+| 3 | `mathematiques/angles.json` | Angles | 4 | 18 | 28 | 145 |
+| 4 | `mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 4 | 6 | 28 | 160 |
+| 5 | `mathematiques/figures-symetriques-par-rapport-a-une-droite.json` | Figures symétriques par rapport à une droite | 4 | 8 | 28 | 144 |
+| 1 | `physique-chimie/adaptation-d-un-generateur-a-un-recepteur.json` | Adaptation d'un générateur à un récepteur | 3 | 1 | 26 | 134 |
+| 2 | `physique-chimie/association-de-lampes-electriques.json` | Association de lampes électriques | 4 | 2 | 28 | 146 |
+| 3 | `physique-chimie/association-de-piles-en-serie.json` | Association de piles en série | 3 | 1 | 26 | 134 |
+| 4 | `physique-chimie/intensite-du-courant-electrique.json` | Intensité du courant électrique | 4 | 4 | 28 | 148 |
+| 5 | `physique-chimie/tension-electrique.json` | Tension électrique | 4 | 2 | 28 | 148 |
+| 1 | `francais/le-groupe-nominal.json` | Le groupe nominal | 4 | 0 | 28 | 159 |
+| 2 | `francais/l-expose-oral.json` | L'exposé oral | 4 | 0 | 28 | 171 |
+| 3 | `francais/le-portrait.json` | Le portrait | 5 | 0 | 30 | 181 |
+| 4 | `francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 4 | 0 | 28 | 156 |
+| 5 | `francais/le-groupe-adjectif.json` | Le groupe adjectif | 4 | 0 | 28 | 161 |
+| 1 | `svt/les-consequences-de-la-proliferation-du-criquet.json` | Les conséquences de la prolifération du criquet | 4 | 6 | 28 | 157 |
+| 2 | `svt/les-consequences-de-la-proliferation-du-moustique.json` | Les conséquences de la prolifération du moustique | 4 | 4 | 28 | 167 |
+| 3 | `svt/la-lutte-contre-le-criquet-et-le-moustique.json` | La lutte contre le criquet et le moustique | 4 | 4 | 28 | 160 |
+| 4 | `svt/la-reproduction-chez-les-champignons-a-chapeau.json` | La reproduction chez les champignons à chapeau | 4 | 3 | 28 | 161 |
+| 5 | `svt/la-croissance-chez-les-insectes.json` | La croissance chez les insectes | 4 | 6 | 28 | 166 |
+| 1 | `histoire-geographie/histoire-les-premiers-habitants-de-la-cote-d-ivoire.json` | Histoire — Les premiers habitants de la Côte d'Ivoire | 4 | 1 | 28 | 158 |
+| 2 | `histoire-geographie/geographie-le-milieu-physique-en-cote-d-ivoire-et-l-installation-des-populations.json` | Géographie — Le milieu physique en Côte d'Ivoire et l'installation des populations | 5 | 4 | 30 | 174 |
+| 3 | `histoire-geographie/histoire-les-premiers-mouvements-migratoires-en-cote-d-ivoire.json` | Histoire — Les premiers mouvements migratoires en Côte d'Ivoire | 4 | 2 | 28 | 156 |
+| 4 | `histoire-geographie/geographie-la-croissance-demographique-en-cote-d-ivoire.json` | Géographie — La croissance démographique en Côte d'Ivoire | 4 | 4 | 28 | 162 |
+| 5 | `histoire-geographie/histoire-l-origine-et-l-installation-des-peuples-des-regions-de-cote-d-ivoire.json` | Histoire — L'origine et l'installation des peuples des régions de Côte d'Ivoire | 3 | 2 | 26 | 144 |
+| 1 | `edhc/les-droits-au-developpement-et-les-droits-a-la-participation-de-l-enfant.json` | Les droits au développement et les droits à la participation de l'enfant | 4 | 1 | 28 | 158 |
+| 2 | `edhc/les-principes-des-droits-humains.json` | Les principes des droits humains | 4 | 1 | 28 | 156 |
+| 3 | `edhc/les-regles-de-protection-des-victimes-des-conflits-armes.json` | Les règles de protection des victimes des conflits armés | 4 | 1 | 28 | 166 |
+| 4 | `edhc/le-parlement.json` | Le Parlement | 4 | 3 | 28 | 157 |
+| 5 | `edhc/les-droits-et-les-devoirs-du-citoyen.json` | Les droits et les devoirs du citoyen | 4 | 0 | 28 | 156 |
+
+Aucune sorte de figure ne dessine un schéma électrique : les circuits de Physique-Chimie sont décrits en mots, parfois avec un `diagram`. Aucune planche ne montre un criquet, un moustique ou un champignon : la SVT passe par des `diagram`, des courbes et des descriptions. Le fond de carte de la Côte d'Ivoire ne trace ni fleuves ni relief, et aucune sorte ne dessine une flèche venue de l'extérieur du pays : les migrations de l'Histoire-Géographie sont dessinées vers une ville repère.
 
 ### 3ème au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-3eme-comme-thales`, #484)
 

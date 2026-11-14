@@ -1,0 +1,3534 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Association de lampes électriques",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Physique-Chimie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "serie-boucle",
+          "kind": "diagram",
+          "description": "Schéma fléché d'un montage en série : une pile, une lampe L1 et une lampe L2 sont reliées par des fils qui forment une seule boucle fermée. Les flèches montrent seulement le parcours du fil, de la pile à L1, puis à L2, puis retour à la pile. Il n'y a aucun point où le fil se sépare.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile"
+              },
+              {
+                "id": "l1",
+                "label": "Lampe L1"
+              },
+              {
+                "id": "l2",
+                "label": "Lampe L2"
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "l1",
+                "label": "fil"
+              },
+              {
+                "from": "l1",
+                "to": "l2",
+                "label": "fil"
+              },
+              {
+                "from": "l2",
+                "to": "pile",
+                "label": "fil"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un montage en série",
+          "remember": "Un **dipôle** est un élément du circuit qui a deux **bornes** : une pile, une lampe, un interrupteur. Dans un **montage en série**, les dipôles sont placés les uns à la suite des autres : le fil forme **une seule boucle** et ne se sépare nulle part. À connaître : (1) quand on ajoute des lampes en série, chaque lampe brille **moins** (son éclat est plus faible) ; (2) si on dévisse une lampe, la boucle est coupée et **toutes** les lampes s'éteignent ; (3) l'interrupteur, où qu'on le place dans la boucle, commande tout le circuit.",
+          "method": [
+            "Repérer les dipôles du circuit (pile, interrupteur, lampes) et la borne + de la pile.",
+            "Suivre le fil depuis la borne + jusqu'à la borne − de la pile, en notant les dipôles rencontrés et tout point où le fil se sépare.",
+            "Conclure : un seul chemin et aucun point de séparation, donc montage en série ; en déduire l'éclat des lampes et l'effet d'une lampe dévissée."
+          ],
+          "example": {
+            "statement": "Un circuit comprend une pile, un interrupteur et deux lampes L1 et L2. En partant de la borne + de la pile, le fil passe par l'interrupteur, puis par L1, puis par L2, et revient à la borne − de la pile. Le fil ne se sépare nulle part. Quel est le montage ? Que se passe-t-il si on dévisse L1 ?",
+            "steps": [
+              "Repérer : les dipôles sont la pile, l'interrupteur, L1 et L2 ; on part de la borne + de la pile.",
+              "Suivre : le fil rencontre l'interrupteur, L1, L2, puis arrive à la borne − ; il n'y a aucun point où le fil se sépare.",
+              "Conclure : il n'y a qu'un seul chemin, donc c'est un montage en série. Si on dévisse L1, la boucle est coupée : L1 et L2 s'éteignent."
+            ]
+          },
+          "pitfall": "Ne conclus pas « série » ou « dérivation » d'après la place des lampes sur le dessin. Seul compte le chemin du fil. Contre-exemple : deux lampes côte à côte peuvent être en dérivation, et deux lampes éloignées peuvent être en série. Une lampe qui brille faiblement n'est pas forcément grillée : en série, c'est normal. Suis toujours le fil de la borne + à la borne − et cherche un point où il se sépare.",
+          "figure": "serie-boucle",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un montage en série et à prévoir ce qui s'y passe.",
+            "questions": [
+              {
+                "content": "Une pile, un interrupteur et trois lampes sont reliés par un seul fil qui forme une boucle, sans point de séparation. Quel est le montage ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la pile, l'interrupteur et les trois lampes sont les dipôles du circuit. Étape 2 — Suivre : le fil forme une seule boucle et ne se sépare nulle part. Étape 3 — Conclure : il n'y a qu'un seul chemin : c'est un montage en série. Ce n'est pas une dérivation, car il n'y a aucun point où le fil se sépare.",
+                "answers": [
+                  {
+                    "content": "Un montage en série",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un montage en dérivation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un circuit ouvert",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas savoir",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche un point où le fil se sépare : s'il n'y en a pas, il n'y a qu'un chemin."
+              },
+              {
+                "content": "Dans un montage en série, si on dévisse une lampe, les autres lampes restent allumées.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : les lampes sont placées les unes à la suite des autres dans une seule boucle. Étape 2 — Suivre : dévisser une lampe coupe cette boucle unique. Étape 3 — Conclure : toutes les lampes s'éteignent : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à la boucle unique : si elle est coupée, que se passe-t-il ?"
+              },
+              {
+                "content": "Dans un montage en série, le fil forme une seule ___ qui passe par tous les dipôles.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on veut le nom du chemin fermé que suit le fil. Étape 2 — Suivre : en série, le fil ne se sépare nulle part et revient à la pile. Étape 3 — Conclure : ce chemin fermé s'appelle une boucle : il n'y en a qu'une en série.",
+                "answers": [
+                  {
+                    "content": "boucle",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est un chemin fermé qui revient à la pile."
+              },
+              {
+                "content": "Si on ajoute une lampe identique dans un montage en série, l'éclat de chaque lampe devient ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : on ajoute une lampe à une boucle unique. Étape 2 — Suivre : en série, chaque lampe reçoit moins quand on en ajoute. Étape 3 — Conclure : l'éclat de chaque lampe devient plus faible. Il ne devient pas nul : les lampes brillent encore, mais moins.",
+                "answers": [
+                  {
+                    "content": "plus faible",
+                    "correct": true
+                  },
+                  {
+                    "content": "plus fort",
+                    "correct": false
+                  },
+                  {
+                    "content": "inchangé",
+                    "correct": false
+                  },
+                  {
+                    "content": "nul pour toutes les lampes",
+                    "correct": false
+                  }
+                ],
+                "hint": "Plus il y a de lampes à la suite, moins chacune brille."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un montage en série",
+              "statement": "Dans cet exercice, tu appliques la méthode pour reconnaître un montage en série et dire ce qui s'y passe.",
+              "exercise_type": "fixation",
+              "figure": "serie-boucle",
+              "questions": [
+                {
+                  "content": "La guirlande de Mariam a plusieurs lampes. Quelle que soit la lampe qu'on dévisse, toute la guirlande s'éteint. Que peux-tu dire du montage des lampes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la guirlande a plusieurs lampes et une lampe dévissée l'éteint entièrement. Étape 2 — Suivre : si une lampe coupe tout, c'est que le fil n'a qu'un seul chemin. Étape 3 — Conclure : les lampes sont en série. En dérivation, une lampe dévissée n'éteindrait pas les autres.",
+                  "answers": [
+                    {
+                      "content": "Les lampes sont montées en série",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les lampes sont montées en dérivation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile est vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lampes sont toutes grillées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes sont en série lorsque le fil forme une seule boucle qui passe par les deux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on lit la définition du montage en série. Étape 2 — Suivre : un seul chemin passe par les deux lampes, sans séparation. Étape 3 — Conclure : l'affirmation est vraie : c'est exactement la définition d'un montage en série.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouassi branche une lampe sur une pile : elle brille normalement. Il ajoute en série une deuxième lampe identique. Que constate-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Kouassi a une boucle avec la pile et une lampe, puis il ajoute une lampe à la suite. Étape 2 — Suivre : le montage devient un montage en série de deux lampes. Étape 3 — Conclure : l'éclat de chaque lampe est plus faible. Croire que l'éclat reste le même est faux : en série, plus on ajoute de lampes, moins chacune brille.",
+                  "answers": [
+                    {
+                      "content": "Les deux lampes brillent moins qu'avant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux lampes brillent plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux lampes brillent comme avant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seule la première lampe brille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un montage en série.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on suit la méthode dans l'ordre. Étape 2 — Suivre : d'abord on repère les dipôles, ensuite on suit le fil. Étape 3 — Conclure : enfin on conclut : si le fil ne se sépare nulle part, c'est une série.",
+                  "answers": [
+                    {
+                      "content": "Repérer les dipôles et la borne + de la pile"
+                    },
+                    {
+                      "content": "Suivre le fil jusqu'à la borne − en cherchant un point de séparation"
+                    },
+                    {
+                      "content": "Conclure : un seul chemin, donc montage en série"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes sont dessinées côte à côte, mais le fil passe par la première lampe, puis par la seconde, puis revient à la pile, sans se séparer. Quel est leur montage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : deux lampes et une pile sont reliées par du fil. Étape 2 — Suivre : le fil passe d'une lampe à l'autre et revient à la pile, sans point de séparation. Étape 3 — Conclure : c'est un montage en série. La place des lampes sur le dessin ne compte pas : seul le chemin du fil compte.",
+                  "answers": [
+                    {
+                      "content": "En série",
+                      "correct": true
+                    },
+                    {
+                      "content": "En dérivation, parce qu'elles sont côte à côte",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni en série ni en dérivation",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Prévoir ce qui se passe dans un circuit en série",
+              "statement": "Dans cet exercice, tu prévois l'éclat des lampes et l'effet d'une lampe dévissée dans un circuit en série.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense à la boucle unique : tout ce qui coupe la boucle éteint tout, et plus on ajoute de lampes, moins elles brillent.",
+              "questions": [
+                {
+                  "content": "Un circuit en série comprend une pile et trois lampes identiques. Choisis les deux phrases vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on a une pile et trois lampes identiques à la suite. Étape 2 — Suivre : en série, l'éclat diminue quand on ajoute des lampes et la boucle unique est coupée par une lampe dévissée. Étape 3 — Conclure : les deux phrases vraies sont celles de l'éclat plus faible et de l'extinction générale. La phrase sur les lampes qui continuent de briller décrit une dérivation, et celle d'un éclat plus fort qu'une lampe seule est fausse dans tous les montages.",
+                  "answers": [
+                    {
+                      "content": "Les trois lampes brillent moins qu'une lampe seule sur la même pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si on dévisse une lampe, les deux autres s'éteignent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si on dévisse une lampe, les deux autres continuent de briller",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chaque lampe brille plus fort qu'une lampe seule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un circuit en série comporte une pile, un interrupteur et quatre lampes. Combien de boucles le fil forme-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le circuit contient une pile, un interrupteur et quatre lampes. Étape 2 — Suivre : en série, tous les dipôles sont sur le même chemin. Étape 3 — Conclure : le fil forme une seule boucle : 1. Le nombre de lampes ne change pas le nombre de boucles.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque action dans un circuit en série à son effet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on connaît trois actions possibles sur un circuit en série. Étape 2 — Suivre : la boucle unique explique chaque effet : plus de lampes, moins d'éclat ; boucle coupée, tout s'éteint. Étape 3 — Conclure : chaque action est reliée à son effet. L'interrupteur fermé ferme la boucle.",
+                  "answers": [
+                    {
+                      "content": "On ajoute une lampe à la suite",
+                      "match": "Toutes les lampes brillent moins"
+                    },
+                    {
+                      "content": "On dévisse une lampe",
+                      "match": "Toutes les lampes s'éteignent"
+                    },
+                    {
+                      "content": "On ferme l'interrupteur",
+                      "match": "Le circuit est fermé et les lampes brillent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en série, une lampe dévissée ___ la boucle : plus aucune lampe ne brille.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche l'effet d'une lampe dévissée sur le fil. Étape 2 — Suivre : une lampe dévissée n'assure plus le passage dans la boucle. Étape 3 — Conclure : elle coupe la boucle. Ce n'est pas la pile qui s'arrête : c'est le chemin du fil qui est interrompu.",
+                  "answers": [
+                    {
+                      "content": "coupe",
+                      "correct": true
+                    },
+                    {
+                      "content": "ouvre",
+                      "correct": true
+                    },
+                    {
+                      "content": "interrompt",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en série, un interrupteur placé ___ de la boucle commande toutes les lampes.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : l'interrupteur est un dipôle de la boucle unique. Étape 2 — Suivre : tous les dipôles sont sur le même chemin. Étape 3 — Conclure : où qu'il soit placé, l'ouvrir coupe la boucle. Croire qu'il faut le placer au début est faux.",
+                  "answers": [
+                    {
+                      "content": "n'importe où",
+                      "correct": true
+                    },
+                    {
+                      "content": "seulement avant la première lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "seulement après la dernière lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "seulement entre deux lampes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en série, une lampe qui brille faiblement est forcément grillée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : une lampe grillée est une lampe qui ne brille plus du tout. Étape 2 — Suivre : en série, ajouter des lampes diminue l'éclat de chacune. Étape 3 — Conclure : l'affirmation est fausse. Une lampe faible peut être normale en série ; une lampe grillée éteint tout.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître un montage en dérivation",
+          "remember": "Dans un **montage en dérivation** (on dit aussi en parallèle), le fil se sépare en plusieurs chemins. Un **nœud** est un point où au moins trois fils se rejoignent. Une **branche** est le chemin entre deux nœuds. La branche qui contient la pile est la **branche principale** ; les autres sont des **branches dérivées**. Chaque lampe est sur sa propre branche. À connaître : (1) avec une pile adaptée aux lampes, chaque lampe brille normalement, comme si elle était seule ; (2) si on dévisse une lampe, les autres restent allumées ; (3) si on coupe la branche principale, tout s'éteint.",
+          "method": [
+            "Repérer les nœuds : les points où au moins trois fils se rejoignent.",
+            "Compter les branches entre les deux nœuds et noter le dipôle placé sur chacune.",
+            "Conclure : si les lampes sont sur des branches différentes, c'est une dérivation ; en déduire l'éclat des lampes et l'effet d'une lampe dévissée."
+          ],
+          "example": {
+            "statement": "Une pile est reliée à deux points A et B par des fils. Entre A et B, il y a aussi un chemin qui passe par la lampe L1 et un autre qui passe par la lampe L2. Quel est le montage ? Que se passe-t-il si on dévisse L1 ?",
+            "steps": [
+              "Repérer : A et B sont des nœuds, car au moins trois fils s'y rejoignent.",
+              "Compter : entre A et B, il y a trois branches : celle de la pile, celle de L1 et celle de L2 ; chaque lampe est sur sa propre branche.",
+              "Conclure : les lampes sont sur des branches différentes, c'est une dérivation. Si on dévisse L1, seule sa branche est coupée : L2 reste allumée et brille normalement."
+            ]
+          },
+          "pitfall": "Ne conclus pas « dérivation » parce qu'il y a plusieurs lampes : deux lampes à la suite sur un même chemin restent en série. Ne prends pas non plus un simple coude du fil pour un nœud : un nœud a au moins trois fils. Contre-exemple : si le fil passe par L1 puis par L2 sans se séparer, c'est une série, même si le dessin a plusieurs angles. Cherche toujours les nœuds avant de conclure.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à repérer les nœuds et les branches d'un montage en dérivation.",
+            "questions": [
+              {
+                "content": "Au point A, trois fils se rejoignent. Comment s'appelle ce point ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on regarde le point A du circuit. Étape 2 — Compter : trois fils s'y rejoignent. Étape 3 — Conclure : un point où au moins trois fils se rejoignent est un nœud. Une branche, elle, est un chemin entre deux nœuds.",
+                "answers": [
+                  {
+                    "content": "Un nœud",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une borne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une branche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un dipôle",
+                    "correct": false
+                  }
+                ],
+                "hint": "Combien de fils arrivent en A ? Au moins trois, c'est la définition."
+              },
+              {
+                "content": "Dans un montage en dérivation, chaque lampe est placée sur une branche différente.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on rappelle ce qui définit une dérivation. Étape 2 — Compter : le fil se sépare en plusieurs chemins, un par lampe. Étape 3 — Conclure : l'affirmation est vraie : chaque lampe a sa propre branche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au fil qui se sépare au nœud."
+              },
+              {
+                "content": "Dans un montage en dérivation, si on dévisse une lampe, les autres lampes restent ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : une lampe dévissée coupe seulement sa propre branche. Étape 2 — Compter : les autres branches ne sont pas coupées. Étape 3 — Conclure : les autres lampes restent allumées. Elles ne s'éteignent pas, contrairement à ce qui se passe en série.",
+                "answers": [
+                  {
+                    "content": "allumées",
+                    "correct": true
+                  },
+                  {
+                    "content": "allumés",
+                    "correct": true
+                  }
+                ],
+                "hint": "Chaque lampe a son propre chemin."
+              },
+              {
+                "content": "Une pile alimente trois lampes, chacune sur sa propre branche entre deux points A et B. Combien de nœuds le circuit comporte-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : les trois lampes sont entre les points A et B. Étape 2 — Compter : les points où le fil se sépare ou se rejoint sont A et B. Étape 3 — Conclure : il y a 2 nœuds : A et B. Ajouter des lampes sur de nouvelles branches ne crée pas de nouveau nœud.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Cherche les deux points où toutes les branches se rejoignent."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un montage en dérivation",
+              "statement": "Dans cet exercice, tu appliques la méthode pour reconnaître un montage en dérivation et prévoir ce qui s'y passe.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans la maison de Yao, quand l'ampoule du salon grille, l'ampoule de la cuisine reste allumée. Que peux-tu dire du montage des ampoules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : deux ampoules sont dans la maison et l'une grille. Étape 2 — Compter : l'autre reste allumée : sa branche n'est pas coupée. Étape 3 — Conclure : les ampoules sont en dérivation. En série, une ampoule grillée éteindrait l'autre.",
+                  "answers": [
+                    {
+                      "content": "Elles sont montées en dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont montées en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont toutes grillées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de générateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile est reliée aux points A et B. Entre A et B passent deux chemins, chacun avec une lampe. En comptant la branche de la pile, combien y a-t-il de branches entre A et B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : A et B sont des nœuds. Étape 2 — Compter : il y a la branche de la pile, la branche d'une lampe et celle de l'autre lampe. Étape 3 — Conclure : il y a trois branches. Oublier la branche de la pile donnerait deux, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "Trois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux phrases qui décrivent un montage en dérivation.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on compare quatre phrases à la définition de la dérivation. Étape 2 — Compter : en dérivation, il y a des nœuds et plusieurs branches, une par lampe. Étape 3 — Conclure : les deux bonnes phrases parlent de plusieurs chemins et d'une branche par lampe. Les deux autres décrivent une série.",
+                  "answers": [
+                    {
+                      "content": "Le fil se sépare en plusieurs chemins",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque lampe a sa propre branche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le fil forme une seule boucle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les lampes sont sur un même chemin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec une pile adaptée, dans une dérivation de deux lampes identiques, chaque lampe brille normalement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : deux lampes identiques sont sur deux branches. Étape 2 — Compter : chaque lampe est reliée directement à la pile par sa branche. Étape 3 — Conclure : l'affirmation est vraie : chacune brille comme si elle était seule.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur un même chemin du circuit, le fil passe par la lampe L1 puis par la lampe L2, sans point de séparation entre elles. Comment sont L1 et L2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : L1 et L2 sont sur un même chemin. Étape 2 — Compter : aucun nœud ne se trouve entre elles. Étape 3 — Conclure : elles sont en série. Avoir plusieurs lampes ne suffit pas à faire une dérivation : il faut des branches différentes.",
+                  "answers": [
+                    {
+                      "content": "En série",
+                      "correct": true
+                    },
+                    {
+                      "content": "En dérivation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur deux branches différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas le dire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Compter les nœuds et les branches",
+              "statement": "Dans cet exercice, tu comptes les nœuds et les branches d'un montage en dérivation et tu en retiens le vocabulaire.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Compte d'abord les nœuds, puis les branches : une branche par lampe, plus celle de la pile.",
+              "questions": [
+                {
+                  "content": "Une pile alimente quatre lampes, chacune sur sa propre branche entre deux points A et B. Combien y a-t-il de nœuds ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les quatre lampes sont entre A et B. Étape 2 — Compter : le fil se sépare en A et se rejoint en B. Étape 3 — Conclure : il y a 2 nœuds. Le nombre de lampes ne change pas le nombre de nœuds.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile alimente quatre lampes, chacune sur sa propre branche entre deux points A et B. Combien y a-t-il de branches entre A et B, en comptant celle de la pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : quatre lampes sont sur quatre branches entre A et B. Étape 2 — Compter : on compte aussi la branche de la pile : 4 + 1 = 5. Étape 3 — Conclure : il y a cinq branches. Oublier la branche de la pile donnerait quatre.",
+                  "answers": [
+                    {
+                      "content": "Cinq",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quatre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on rappelle quatre mots du vocabulaire. Étape 2 — Compter : chaque mot a une définition précise. Étape 3 — Conclure : chaque mot est relié à sa définition. Le nœud est un point, la branche est un chemin.",
+                  "answers": [
+                    {
+                      "content": "Nœud",
+                      "match": "Point où au moins trois fils se rejoignent"
+                    },
+                    {
+                      "content": "Branche",
+                      "match": "Chemin entre deux nœuds"
+                    },
+                    {
+                      "content": "Branche principale",
+                      "match": "Branche qui contient la pile"
+                    },
+                    {
+                      "content": "Dérivation",
+                      "match": "Montage où les lampes sont sur des branches différentes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nœud est un point où au moins ___ fils se rejoignent.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche le nombre minimal de fils d'un nœud. Étape 2 — Compter : deux fils qui se rejoignent forment un simple coude. Étape 3 — Conclure : il en faut au moins trois pour qu'il y ait un nœud : trois.",
+                  "answers": [
+                    {
+                      "content": "trois",
+                      "correct": true
+                    },
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un montage en dérivation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on suit la méthode dans l'ordre. Étape 2 — Compter : d'abord on repère les nœuds, ensuite on compte les branches. Étape 3 — Conclure : enfin on conclut d'après la place des lampes sur les branches.",
+                  "answers": [
+                    {
+                      "content": "Repérer les nœuds, points où trois fils au moins se rejoignent"
+                    },
+                    {
+                      "content": "Compter les branches et noter le dipôle de chacune"
+                    },
+                    {
+                      "content": "Conclure : lampes sur des branches différentes, donc dérivation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une dérivation, ajouter une troisième lampe identique fait briller moins fort les deux lampes déjà présentes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on ajoute une lampe sur une nouvelle branche. Étape 2 — Compter : chaque lampe est reliée à la pile par sa propre branche. Étape 3 — Conclure : l'affirmation est fausse : les deux lampes déjà présentes gardent leur éclat. C'est en série que l'éclat diminue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Prévoir ce qui se passe quand on dévisse une lampe",
+          "remember": "Une lampe dévissée (ou grillée) **coupe** le chemin du fil où elle se trouve. Une lampe ne brille que si elle appartient à une boucle **fermée** qui contient aussi la pile. En **série**, il n'y a qu'une boucle : dévisser une lampe éteint tout. En **dérivation**, chaque lampe a sa branche : dévisser une lampe n'éteint que celle-ci. Mais si l'on coupe la **branche principale** (la pile, un interrupteur ou une lampe placés sur elle), toutes les lampes s'éteignent. Dans un montage mixte, on regarde chaque lampe séparément.",
+          "method": [
+            "Identifier le montage (série, dérivation ou mélange) et le chemin qui relie chaque lampe à la pile.",
+            "Localiser la lampe dévissée : dire quelle boucle ou quelle branche elle coupe.",
+            "Conclure pour chaque lampe : elle reste allumée si un chemin fermé la relie encore à la pile, sinon elle s'éteint."
+          ],
+          "example": {
+            "statement": "Une pile alimente une lampe L1 placée sur la branche principale. Ensuite le fil se sépare en deux branches : L2 est sur l'une, L3 sur l'autre. On dévisse L2. Quelles lampes restent allumées ?",
+            "steps": [
+              "Identifier : L1 est seule sur la branche principale, avec la pile ; L2 et L3 sont chacune sur leur branche dérivée, en dérivation l'une de l'autre.",
+              "Localiser : dévisser L2 coupe seulement la branche de L2 ; la branche principale et la branche de L3 ne sont pas coupées.",
+              "Conclure : L1 et L3 sont encore reliées à la pile par un chemin fermé, donc elles restent allumées ; L2 est dévissée, donc éteinte."
+            ]
+          },
+          "pitfall": "Ne pense pas qu'une lampe dévissée éteint toujours tout, ni qu'elle n'éteint jamais rien. Tout dépend de l'endroit qu'elle coupe. Contre-exemple : dans l'installation de l'exemple, dévisser L2 laisse L1 et L3 allumées, mais dévisser L1 (sur la branche principale) éteint L1, L2 et L3. Demande-toi toujours : quel chemin cette lampe coupe-t-elle ?",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à prévoir quelles lampes s'éteignent quand on en dévisse une.",
+            "questions": [
+              {
+                "content": "Deux lampes sont en série. On dévisse la première. Que devient la seconde ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : deux lampes sont en série : il n'y a qu'une boucle. Étape 2 — Localiser : la lampe dévissée coupe cette boucle unique. Étape 3 — Conclure : la seconde lampe s'éteint aussi, car plus aucun chemin fermé ne la relie à la pile.",
+                "answers": [
+                  {
+                    "content": "Elle s'éteint",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle reste allumée comme avant",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle brille plus fort",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle brille moins sans s'éteindre",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une seule boucle : si elle est coupée, que reste-t-il ?"
+              },
+              {
+                "content": "Deux lampes sont en dérivation, chacune sur sa branche. On dévisse la première. Que devient la seconde ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : les deux lampes sont sur deux branches différentes. Étape 2 — Localiser : dévisser la première coupe seulement sa branche. Étape 3 — Conclure : la seconde est encore reliée à la pile par sa branche fermée : elle reste allumée.",
+                "answers": [
+                  {
+                    "content": "Elle reste allumée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle s'éteint",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle brille moins",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle brille plus fort",
+                    "correct": false
+                  }
+                ],
+                "hint": "La branche de la seconde lampe est-elle coupée ?"
+              },
+              {
+                "content": "Dans une dérivation, couper la branche principale éteint toutes les lampes.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la branche principale contient la pile. Étape 2 — Localiser : si elle est coupée, aucune lampe n'est plus reliée à la pile par un chemin fermé. Étape 3 — Conclure : l'affirmation est vraie : tout s'éteint.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Toutes les branches dérivées passent par la branche principale."
+              },
+              {
+                "content": "Une lampe ne brille que si elle est dans une boucle ___ qui contient aussi la pile.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : on cherche l'état de la boucle pour qu'une lampe brille. Étape 2 — Localiser : un chemin coupé ne laisse rien passer. Étape 3 — Conclure : la boucle doit être fermée.",
+                "answers": [
+                  {
+                    "content": "fermée",
+                    "correct": true
+                  },
+                  {
+                    "content": "fermé",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le contraire d'ouverte ou de coupée."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Dévisser une lampe : quel effet ?",
+              "statement": "Dans cet exercice, tu prévois l'effet d'une lampe dévissée selon le montage.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une guirlande de trois lampes est montée en série. Aya dévisse la deuxième lampe. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la guirlande est montée en série : une seule boucle. Étape 2 — Localiser : la deuxième lampe dévissée coupe cette boucle. Étape 3 — Conclure : aucune lampe n'est plus dans un chemin fermé avec la pile : les trois s'éteignent.",
+                  "answers": [
+                    {
+                      "content": "Les trois lampes s'éteignent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seule la deuxième lampe s'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux autres brillent plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une guirlande de trois lampes est montée en dérivation, une lampe par branche. Fanta dévisse la deuxième lampe. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la guirlande est en dérivation : une lampe par branche. Étape 2 — Localiser : dévisser la deuxième lampe coupe seulement sa branche. Étape 3 — Conclure : les deux autres sont encore dans un chemin fermé avec la pile : elles restent allumées.",
+                  "answers": [
+                    {
+                      "content": "Les deux autres lampes restent allumées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les trois lampes s'éteignent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux autres lampes brillent moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une seule des deux autres reste allumée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe grillée coupe le chemin du fil où elle se trouve.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : une lampe grillée est une lampe dont le fil intérieur est cassé. Étape 2 — Localiser : elle ne laisse plus rien passer, comme si elle était dévissée. Étape 3 — Conclure : l'affirmation est vraie : elle coupe son chemin.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile alimente L1 sur la branche principale, puis L2 et L3 sur deux branches dérivées. On dévisse L1. Que devient L3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : L1 est sur la branche principale, L2 et L3 sur des branches dérivées. Étape 2 — Localiser : dévisser L1 coupe la branche principale, commune aux chemins de toutes les lampes. Étape 3 — Conclure : L3 s'éteint. Penser qu'elle reste allumée parce qu'elle a sa branche oublie que la branche principale est coupée.",
+                  "answers": [
+                    {
+                      "content": "Elle s'éteint, car la branche principale est coupée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste allumée, car elle a sa propre branche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas le savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel cas dévisser une lampe éteint-il aussi les autres lampes d'une installation qui a une branche principale et des branches dérivées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on cherche l'endroit où une lampe coupe le chemin de toutes les autres. Étape 2 — Localiser : seule la branche principale est commune aux chemins de toutes les lampes. Étape 3 — Conclure : une lampe sur la branche principale éteint tout. Une lampe sur une branche dérivée n'éteint qu'elle-même.",
+                  "answers": [
+                    {
+                      "content": "Quand la lampe est sur la branche principale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quand la lampe est la plus éloignée de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand la lampe est sur une branche dérivée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jamais, dans aucune installation",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Prévoir les lampes qui restent allumées",
+              "statement": "Dans cet exercice, tu prévois les lampes allumées dans un circuit où la lampe L1 est sur la branche principale et les lampes L2 et L3 sur deux branches dérivées.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Demande-toi pour chaque lampe : y a-t-il encore un chemin fermé qui la relie à la pile ?",
+              "questions": [
+                {
+                  "content": "Dans un circuit où L1 est sur la branche principale, L2 et L3 sur deux branches dérivées, on dévisse L3. Choisis les deux lampes qui restent allumées.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : L1 est sur la branche principale ; L2 et L3 sont en dérivation. Étape 2 — Localiser : dévisser L3 coupe seulement sa branche. Étape 3 — Conclure : L1 et L2 restent dans un chemin fermé avec la pile. L3, dévissée, est éteinte.",
+                  "answers": [
+                    {
+                      "content": "L1",
+                      "correct": true
+                    },
+                    {
+                      "content": "L2",
+                      "correct": true
+                    },
+                    {
+                      "content": "L3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune lampe ne reste allumée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une guirlande de cinq lampes est en dérivation, une lampe par branche. Une lampe grille. Choisis les trois affirmations vraies.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : cinq lampes sont sur cinq branches. Étape 2 — Localiser : la lampe grillée coupe sa branche seulement. Étape 3 — Conclure : les trois bonnes phrases décrivent une lampe éteinte, quatre allumées et le remplacement possible. S'éteindre toutes les cinq serait vrai en série seulement.",
+                  "answers": [
+                    {
+                      "content": "La lampe grillée est éteinte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les quatre autres lampes restent allumées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il suffit de remplacer la lampe grillée pour retrouver cinq lampes allumées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les cinq lampes s'éteignent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les quatre autres lampes brillent plus fort qu'avant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une installation, une lampe L1 est sur la branche principale et quatre lampes sont sur quatre branches dérivées. On dévisse L1. Combien de lampes s'éteignent, L1 comprise ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : L1 est sur la branche principale, quatre lampes sont sur des branches dérivées. Étape 2 — Localiser : dévisser L1 coupe la branche principale. Étape 3 — Conclure : les cinq lampes s'éteignent : 1 + 4 = 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit où L1 est sur la branche principale, L2 et L3 sur deux branches dérivées, relie chaque action à son effet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : L1 est sur la branche principale, L2 et L3 sur des branches dérivées. Étape 2 — Localiser : L1 coupe tout, L2 ou L3 coupent seulement leur branche. Étape 3 — Conclure : chaque action est reliée à l'effet correspondant.",
+                  "answers": [
+                    {
+                      "content": "On dévisse L1",
+                      "match": "Les trois lampes s'éteignent"
+                    },
+                    {
+                      "content": "On dévisse L2",
+                      "match": "L1 et L3 restent allumées"
+                    },
+                    {
+                      "content": "On dévisse L3",
+                      "match": "L1 et L2 restent allumées"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en série, dévisser une lampe ___ toutes les lampes.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : en série, il n'y a qu'une boucle. Étape 2 — Localiser : dévisser une lampe coupe cette boucle. Étape 3 — Conclure : la lampe dévissée éteint toutes les lampes.",
+                  "answers": [
+                    {
+                      "content": "éteint",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une dérivation, une lampe dévissée sur une branche dérivée éteint ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la lampe est sur une branche dérivée. Étape 2 — Localiser : dévisser la lampe coupe seulement sa branche. Étape 3 — Conclure : elle n'éteint qu'elle-même. Les autres lampes gardent leur chemin vers la pile.",
+                  "answers": [
+                    {
+                      "content": "seulement cette lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "toutes les lampes",
+                      "correct": false
+                    },
+                    {
+                      "content": "la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucune lampe, pas même elle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Choisir le montage d'une installation",
+          "remember": "Pour choisir un montage, on compare ce qu'on veut avec les propriétés de chaque montage. **Série** : une seule boucle, éclat plus faible quand on ajoute des lampes, une lampe dévissée éteint tout. **Dérivation** : chaque lampe brille normalement, une lampe dévissée n'éteint pas les autres, et un interrupteur placé sur la branche d'une lampe l'allume ou l'éteint seule. Dans une maison, les lampes et les prises sont montées en dérivation : chaque appareil fonctionne normalement et indépendamment des autres. Une guirlande dont toutes les lampes sont en série s'éteint dès qu'une lampe est grillée.",
+          "method": [
+            "Lister ce que l'installation doit assurer (éclat normal, lampes indépendantes, tout éteindre d'un coup).",
+            "Comparer ces besoins avec les propriétés du montage en série et du montage en dérivation.",
+            "Choisir le montage qui répond à tous les besoins et le justifier en une phrase."
+          ],
+          "example": {
+            "statement": "Aya veut éclairer les trois pièces de sa maison. Chaque lampe doit briller normalement, et elle doit pouvoir éteindre une pièce sans éteindre les autres. Quel montage doit-elle choisir ?",
+            "steps": [
+              "Lister : il y a deux besoins : un éclat normal pour chaque lampe et des pièces qui s'éteignent séparément.",
+              "Comparer : en série, les lampes brilleraient moins et un seul interrupteur éteindrait tout ; en dérivation, chaque lampe brille normalement et ne dépend pas des autres.",
+              "Choisir : Aya choisit le montage en dérivation, avec un interrupteur sur la branche de chaque pièce, car chaque lampe brille normalement et s'éteint seule."
+            ]
+          },
+          "pitfall": "Ne choisis pas la série parce que le dessin est plus simple, avec une seule boucle. Contre-exemple : dans une maison montée en série, une seule ampoule grillée éteindrait toutes les pièces, et chaque ampoule brillerait moins. La dérivation est le bon choix dès que les appareils doivent marcher indépendamment les uns des autres.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à choisir le montage qui convient à une installation.",
+            "questions": [
+              {
+                "content": "Dans une maison, comment sont montées les lampes des différentes pièces ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : une maison a plusieurs pièces à éclairer. Étape 2 — Comparer : les lampes doivent briller normalement et séparément. Étape 3 — Choisir : les lampes sont montées en dérivation. En série, une ampoule grillée éteindrait toute la maison.",
+                "answers": [
+                  {
+                    "content": "En dérivation",
+                    "correct": true
+                  },
+                  {
+                    "content": "En série",
+                    "correct": false
+                  },
+                  {
+                    "content": "Toutes dans une seule boucle sans nœud",
+                    "correct": false
+                  },
+                  {
+                    "content": "Chaque lampe a sa propre pile",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les pièces doivent s'éclairer séparément."
+              },
+              {
+                "content": "Pour que chaque lampe brille normalement et ne dépende pas des autres, on choisit le montage en série.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lister : les besoins sont un éclat normal et des lampes indépendantes. Étape 2 — Comparer : la série affaiblit l'éclat et éteint tout si une lampe est dévissée. Étape 3 — Choisir : l'affirmation est fausse : il faut choisir la dérivation.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Quel montage laisse les autres lampes allumées ?"
+              },
+              {
+                "content": "Une guirlande de fête doit continuer à briller quand une lampe grille. Quel montage faut-il choisir ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : le besoin est que les autres lampes restent allumées. Étape 2 — Comparer : seule la dérivation garde les autres lampes allumées. Étape 3 — Choisir : on choisit la dérivation. La série éteindrait toute la guirlande.",
+                "answers": [
+                  {
+                    "content": "Le montage en dérivation",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le montage en série",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les deux conviennent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun des deux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la lampe grillée qui coupe seulement sa branche."
+              },
+              {
+                "content": "Pour éteindre une seule lampe sans éteindre les autres, on place un interrupteur sur la ___ de cette lampe.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lister : on veut commander une seule lampe. Étape 2 — Comparer : elle est sur sa propre branche en dérivation. Étape 3 — Choisir : l'interrupteur est placé sur la branche de cette lampe.",
+                "answers": [
+                  {
+                    "content": "branche",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est le chemin de la lampe entre deux nœuds."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Choisir le montage pour la maison et la fête",
+              "statement": "Dans cet exercice, tu choisis le montage d'une installation en appliquant la méthode.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le comité du quartier décore le marché avec vingt lampes. Il veut que, si une lampe grille, les autres restent allumées. Quel montage doit-il choisir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : le besoin est que les lampes ne dépendent pas les unes des autres. Étape 2 — Comparer : la série éteint tout, la dérivation garde les autres allumées. Étape 3 — Choisir : le comité choisit la dérivation.",
+                  "answers": [
+                    {
+                      "content": "Le montage en dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le montage en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un montage où les vingt lampes sont à la suite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun montage ne convient",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une maison, si les ampoules étaient montées en série, une ampoule grillée éteindrait toutes les autres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lister : on imagine une maison montée en série. Étape 2 — Comparer : la boucle est unique, une ampoule grillée la coupe. Étape 3 — Choisir : l'affirmation est vraie. C'est pourquoi on monte les ampoules en dérivation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux avantages du montage en dérivation pour une maison.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lister : on compare quatre propriétés. Étape 2 — Comparer : la dérivation garde l'éclat normal et l'indépendance. Étape 3 — Choisir : les deux avantages sont l'éclat normal et l'extinction séparée. Les deux autres sont des défauts de la série.",
+                  "answers": [
+                    {
+                      "content": "Chaque lampe brille normalement",
+                      "correct": true
+                    },
+                    {
+                      "content": "On peut éteindre une lampe sans éteindre les autres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe grillée éteint toutes les autres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chaque lampe brille moins quand on en ajoute",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour choisir un montage.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lister : on suit la méthode dans l'ordre. Étape 2 — Comparer : on liste d'abord les besoins, puis on compare. Étape 3 — Choisir : on choisit en dernier, avec une justification.",
+                  "answers": [
+                    {
+                      "content": "Lister ce que l'installation doit assurer"
+                    },
+                    {
+                      "content": "Comparer avec les propriétés de la série et de la dérivation"
+                    },
+                    {
+                      "content": "Choisir le montage et le justifier en une phrase"
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta dit : « Je monte les lampes de la maison en série, car il n'y a qu'une seule boucle, c'est plus simple. » Que peux-tu lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : Fanta veut une maison dont les lampes sont à la suite. Étape 2 — Comparer : elle ne compare pas avec les besoins de la maison. Étape 3 — Choisir : en série, les lampes brillent moins et une ampoule grillée éteint tout : la dérivation est préférable.",
+                  "answers": [
+                    {
+                      "content": "Ce n'est pas un bon choix : une ampoule grillée éteindrait toute la maison",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un bon choix : les lampes brilleraient plus fort en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un bon choix : la série est toujours le meilleur montage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ça ne change rien : série et dérivation ont les mêmes propriétés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Justifier le choix d'un montage",
+              "statement": "Dans cet exercice, tu relies des besoins aux propriétés des montages pour justifier un choix.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Compare ce que l'installation doit assurer avec ce que fait chaque montage : éclat, lampe grillée, interrupteur.",
+              "questions": [
+                {
+                  "content": "Relie chaque situation à ce qu'on observe dans une maison.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lister : on décrit quatre situations dans une maison. Étape 2 — Comparer : chaque montage a ses propriétés d'éclat et de dévissage. Étape 3 — Choisir : chaque situation est reliée à ce qu'on observe.",
+                  "answers": [
+                    {
+                      "content": "Maison en série, une ampoule grille",
+                      "match": "Toutes les ampoules s'éteignent"
+                    },
+                    {
+                      "content": "Maison en dérivation, une ampoule grille",
+                      "match": "Les autres ampoules restent allumées"
+                    },
+                    {
+                      "content": "Maison en série, on ajoute une ampoule",
+                      "match": "Chaque ampoule brille moins"
+                    },
+                    {
+                      "content": "Maison en dérivation, on ajoute une ampoule",
+                      "match": "Les ampoules gardent leur éclat normal"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une maison compte six pièces, chacune éclairée par une lampe en dérivation. Kouadio éteint une seule lampe avec son interrupteur. Combien de lampes restent allumées ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lister : six lampes sont en dérivation, une par pièce. Étape 2 — Comparer : l'interrupteur éteint seulement sa branche. Étape 3 — Choisir : cinq lampes restent allumées : 6 − 1 = 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ibrahim achète une guirlande de fin d'année dont les douze lampes sont toutes en série. Une lampe grille. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : la guirlande a douze lampes en série. Étape 2 — Comparer : la lampe grillée coupe la boucle unique. Étape 3 — Choisir : toute la guirlande s'éteint. Les onze autres ne peuvent pas rester allumées, car elles sont sur le même chemin.",
+                  "answers": [
+                    {
+                      "content": "Toute la guirlande s'éteint",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seule la lampe grillée s'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les onze autres lampes brillent plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une maison, les lampes sont montées en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lister : on cherche le montage d'une maison. Étape 2 — Comparer : les lampes doivent être indépendantes. Étape 3 — Choisir : les lampes sont montées en dérivation.",
+                  "answers": [
+                    {
+                      "content": "dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une maison, un interrupteur placé sur la branche d'une lampe éteint ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lister : l'interrupteur est sur la branche d'une lampe. Étape 2 — Comparer : l'ouvrir coupe seulement cette branche. Étape 3 — Choisir : il éteint seulement cette lampe. Les autres branches ne sont pas touchées.",
+                  "answers": [
+                    {
+                      "content": "seulement cette lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "toutes les lampes de la maison",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'interrupteur général",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucune lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une maison, une seule boucle pour toutes les lampes est le choix le plus pratique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lister : une seule boucle signifie un montage en série. Étape 2 — Comparer : en série, tout s'éteint si une ampoule grille. Étape 3 — Choisir : l'affirmation est fausse : on choisit la dérivation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La guirlande de fin d'année de Mariam",
+          "statement": "Pour la fin d'année, Mariam accroche une guirlande de 8 petites lampes identiques, alimentée par un générateur adapté. Le fil forme une seule boucle qui passe par les 8 lampes, l'une après l'autre. Un soir, une lampe est dévissée par erreur.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le montage des lampes de la guirlande de Mariam ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : les dipôles sont le générateur et les 8 lampes. Étape 2 — Suivre : le fil les traverse l'une après l'autre en une seule boucle, sans point de séparation. Étape 3 — Conclure : un seul chemin signifie un montage en série. Erreur tentante : parler de dérivation parce qu'il y a beaucoup de lampes oublie que seul le chemin du fil compte.",
+              "answers": [
+                {
+                  "content": "Un montage en série",
+                  "correct": true
+                },
+                {
+                  "content": "Un montage en dérivation",
+                  "correct": false
+                },
+                {
+                  "content": "Un montage avec huit nœuds",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas le savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que se passe-t-il quand une lampe est dévissée ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : la guirlande est en série : une seule boucle. Étape 2 — Localiser : la lampe dévissée coupe cette boucle. Étape 3 — Conclure : plus aucun chemin fermé ne relie une lampe au générateur : les 8 s'éteignent. Erreur tentante : croire que les 7 autres restent allumées ne serait vrai que pour une dérivation.",
+              "answers": [
+                {
+                  "content": "Les 8 lampes s'éteignent",
+                  "correct": true
+                },
+                {
+                  "content": "Seule la lampe dévissée s'éteint",
+                  "correct": false
+                },
+                {
+                  "content": "Les 7 autres brillent plus fort",
+                  "correct": false
+                },
+                {
+                  "content": "Rien ne change",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de boucles le fil de la guirlande forme-t-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : la guirlande est un montage en série. Étape 2 — Suivre : le fil passe par toutes les lampes en un seul tour. Étape 3 — Conclure : il y a 1 boucle. Erreur tentante : compter une boucle par lampe, soit 8, serait faux.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si Mariam ajoute deux lampes identiques à la guirlande, chaque lampe brille moins fort.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : la guirlande est en série et on ajoute deux lampes à la suite. Étape 2 — Suivre : la boucle reste unique, avec 10 lampes. Étape 3 — Conclure : en série, plus il y a de lampes, plus l'éclat de chacune est faible : l'affirmation est vraie. Erreur tentante : croire que l'éclat reste le même est faux pour une série.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam veut que la guirlande reste allumée quand une lampe est dévissée. Que doit-elle changer ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lister : le besoin est que les autres lampes ne dépendent pas de la lampe dévissée. Étape 2 — Comparer : la série éteint tout, la dérivation garde les autres lampes allumées. Étape 3 — Choisir : Mariam doit monter les lampes en dérivation, chacune sur sa branche. Erreur tentante : allonger le fil ne change pas le montage.",
+              "answers": [
+                {
+                  "content": "Monter les lampes en dérivation",
+                  "correct": true
+                },
+                {
+                  "content": "Ajouter encore des lampes en série",
+                  "correct": false
+                },
+                {
+                  "content": "Dévisser une autre lampe",
+                  "correct": false
+                },
+                {
+                  "content": "Allonger le fil",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les lampes de la maison de Yao",
+          "statement": "Yao construit une maquette de maison : trois lampes éclairent le salon, la chambre et la cuisine. Elles sont montées en dérivation entre deux points A et B, chacune sur sa propre branche. Une pile alimente la maquette par la branche principale, qui porte aussi un interrupteur général.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien de nœuds le montage comporte-t-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : les nœuds sont les points où au moins trois fils se rejoignent : A et B. Étape 2 — Compter : les trois lampes sont entre A et B, il n'y a pas d'autre point de séparation. Étape 3 — Conclure : il y a 2 nœuds. Erreur tentante : compter un nœud par lampe donnerait 3, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien y a-t-il de branches entre A et B, en comptant la branche principale ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : A et B sont les deux nœuds. Étape 2 — Compter : il y a une branche par lampe, soit 3, plus la branche principale : 3 + 1 = 4. Étape 3 — Conclure : il y a quatre branches. Erreur tentante : oublier la branche principale donne trois.",
+              "answers": [
+                {
+                  "content": "Quatre",
+                  "correct": true
+                },
+                {
+                  "content": "Trois",
+                  "correct": false
+                },
+                {
+                  "content": "Deux",
+                  "correct": false
+                },
+                {
+                  "content": "Cinq",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao dévisse la lampe du salon. Que deviennent les lampes de la chambre et de la cuisine ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : le montage est en dérivation, une lampe par branche. Étape 2 — Localiser : la lampe du salon dévissée coupe seulement la branche du salon. Étape 3 — Conclure : les deux autres branches sont fermées avec la pile : elles restent allumées. Erreur tentante : penser qu'elles s'éteignent confond avec le montage en série.",
+              "answers": [
+                {
+                  "content": "Elles restent allumées",
+                  "correct": true
+                },
+                {
+                  "content": "Elles s'éteignent",
+                  "correct": false
+                },
+                {
+                  "content": "Elles brillent moins",
+                  "correct": false
+                },
+                {
+                  "content": "Elles brillent plus fort",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao ouvre l'interrupteur général de la branche principale. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : l'interrupteur général est sur la branche principale, qui contient la pile. Étape 2 — Localiser : l'ouvrir coupe la branche principale, commune à toutes les lampes. Étape 3 — Conclure : aucune lampe n'est plus reliée à la pile : les trois s'éteignent. Erreur tentante : croire qu'une lampe reste allumée parce qu'elle a sa branche oublie la branche principale.",
+              "answers": [
+                {
+                  "content": "Les trois lampes s'éteignent",
+                  "correct": true
+                },
+                {
+                  "content": "Seule la lampe du salon s'éteint",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois lampes restent allumées",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois lampes brillent plus fort",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi monte-t-on les lampes d'une maison en dérivation ? Pour qu'elles fonctionnent ___ les unes des autres.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Lister : les pièces doivent s'allumer et s'éteindre séparément. Étape 2 — Comparer : seule la dérivation garde les autres lampes allumées. Étape 3 — Choisir : la dérivation donne des lampes qui marchent indépendamment les unes des autres. Erreur tentante : la série lierait toutes les lampes entre elles.",
+              "answers": [
+                {
+                  "content": "indépendamment",
+                  "correct": true
+                },
+                {
+                  "content": "séparément",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'atelier de Koffi : un circuit mixte",
+          "statement": "Dans l'atelier de Koffi, une pile alimente une lampe L1 placée sur la branche principale. Le fil se sépare ensuite en deux branches dérivées : L2 est sur l'une et L3 sur l'autre. Un interrupteur K est placé sur la branche de L3 seulement. Toutes les lampes sont identiques.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Pour chaque lampe dévissée, cherche si elle coupe la branche principale ou seulement sa propre branche.",
+          "questions": [
+            {
+              "content": "Comment sont montées L2 et L3 l'une par rapport à l'autre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le fil se sépare à un nœud en deux branches : L2 et L3 sont sur deux branches différentes. Étape 2 — Compter : chacune des deux lampes a sa propre branche. Étape 3 — Conclure : L2 et L3 sont en dérivation. Erreur tentante : L1 est sur la branche principale : elle n'est pas en dérivation avec L2 et L3.",
+              "answers": [
+                {
+                  "content": "En dérivation",
+                  "correct": true
+                },
+                {
+                  "content": "En série",
+                  "correct": false
+                },
+                {
+                  "content": "Sur la même branche",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas le dire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi dévisse L2. Quelles lampes restent allumées ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : L1 est sur la branche principale, L2 et L3 sur des branches dérivées. Étape 2 — Localiser : dévisser L2 coupe seulement la branche de L2. Étape 3 — Conclure : L1 et L3 gardent un chemin fermé avec la pile : elles restent allumées. Erreur tentante : croire que tout s'éteint oublie que L2 n'est pas sur la branche principale.",
+              "answers": [
+                {
+                  "content": "L1 et L3",
+                  "correct": true
+                },
+                {
+                  "content": "Aucune lampe",
+                  "correct": false
+                },
+                {
+                  "content": "L2 seulement",
+                  "correct": false
+                },
+                {
+                  "content": "L3 seulement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi dévisse L1. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : L1 est la seule lampe de la branche principale. Étape 2 — Localiser : la dévisser coupe la branche principale, commune aux chemins de toutes les lampes. Étape 3 — Conclure : L2 et L3 s'éteignent aussi. Erreur tentante : penser que L2 et L3 restent allumées parce qu'elles ont chacune une branche est faux ici.",
+              "answers": [
+                {
+                  "content": "Les trois lampes s'éteignent",
+                  "correct": true
+                },
+                {
+                  "content": "Seule L1 s'éteint",
+                  "correct": false
+                },
+                {
+                  "content": "L2 et L3 restent allumées",
+                  "correct": false
+                },
+                {
+                  "content": "L2 et L3 brillent plus fort",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi ouvre l'interrupteur K. Seule la lampe L3 s'éteint.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : K est sur la branche de L3, une branche dérivée. Étape 2 — Localiser : l'ouvrir coupe seulement cette branche. Étape 3 — Conclure : L3 s'éteint, L1 et L2 restent allumées : l'affirmation est vraie. Erreur tentante : croire que K éteint tout serait vrai s'il était sur la branche principale.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi veut qu'aucune lampe dévissée n'éteigne les autres. Que doit-il changer ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lister : le besoin est qu'aucune lampe ne coupe l'alimentation des autres. Étape 2 — Comparer : une lampe sur la branche principale éteint tout quand on la dévisse. Étape 3 — Choisir : chaque lampe doit être sur sa propre branche dérivée. Erreur tentante : ajouter une lampe en série ne règle pas le problème de la branche principale.",
+              "answers": [
+                {
+                  "content": "Placer L1 sur une branche dérivée, avec L2 et L3",
+                  "correct": true
+                },
+                {
+                  "content": "Placer L2 et L3 en série avec L1",
+                  "correct": false
+                },
+                {
+                  "content": "Ajouter une lampe en série",
+                  "correct": false
+                },
+                {
+                  "content": "Ne rien changer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi dévisser L1 éteint les trois lampes alors que dévisser L2 n'en éteint qu'une seule.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Dire que L1 est sur la branche principale",
+                "Dire que dévisser L1 coupe le chemin de toutes les lampes",
+                "Dire que L2 est sur une branche dérivée",
+                "Conclure que L2 ne coupe que sa propre branche"
+              ],
+              "explanation": "Corrigé modèle : L1 est sur la branche principale, commune aux chemins de toutes les lampes vers la pile. La dévisser coupe cette branche : aucune lampe n'est plus dans un chemin fermé avec la pile, donc les trois s'éteignent. L2 est sur une branche dérivée : la dévisser ne coupe que cette branche, donc L1 et L3 restent allumées. Points : 1 pour la branche principale, 1 pour la coupure de tout, 1 pour la branche dérivée, 1 pour la conclusion sur L2.",
+              "answers": [],
+              "starter": "L1 est sur la branche principale, donc ..."
+            }
+          ]
+        },
+        {
+          "title": "Devoir : les deux guirlandes du quartier",
+          "statement": "Pour la fête de fin d'année, le comité du quartier a reçu deux guirlandes de 10 lampes identiques chacune, branchées sur la même source adaptée ; leurs montages sont différents. Sur la guirlande A, quand on dévisse une lampe quelconque, toute la guirlande s'éteint. Sur la guirlande B, quand on dévisse une lampe, les 9 autres restent allumées. Quand on ajoute des lampes à la guirlande A, toutes ses lampes brillent moins.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Associe chaque observation à une propriété : boucle unique ou branches séparées.",
+          "questions": [
+            {
+              "content": "Relie chaque observation à son explication.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Identifier : chaque observation correspond à une propriété d'un montage. Étape 2 — Localiser : une lampe qui coupe tout révèle une boucle unique ; des lampes qui restent allumées révèlent des branches séparées ; des points à trois fils sont des nœuds. Étape 3 — Conclure : chaque observation est reliée à son explication. Erreur tentante : un nœud n'existe jamais dans une série : il faut qu'au moins trois fils s'y rejoignent.",
+              "answers": [
+                {
+                  "content": "Une lampe dévissée éteint toute la guirlande",
+                  "match": "La lampe coupe une boucle unique : série"
+                },
+                {
+                  "content": "Une lampe dévissée laisse les autres allumées",
+                  "match": "La lampe coupe seulement sa branche : dérivation"
+                },
+                {
+                  "content": "Deux points où au moins trois fils se rejoignent",
+                  "match": "Des nœuds : dérivation"
+                }
+              ]
+            },
+            {
+              "content": "Quel est le montage des lampes de la guirlande B ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : la guirlande B garde 9 lampes allumées quand on en dévisse une. Étape 2 — Localiser : la lampe dévissée ne coupe que sa propre branche. Étape 3 — Conclure : les lampes sont sur des branches séparées : c'est une dérivation. Erreur tentante : en série, la lampe dévissée aurait éteint toute la guirlande.",
+              "answers": [
+                {
+                  "content": "Un montage en dérivation",
+                  "correct": true
+                },
+                {
+                  "content": "Un montage en série",
+                  "correct": false
+                },
+                {
+                  "content": "Un montage sans pile",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas le savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si la guirlande B a 10 lampes, chacune sur sa propre branche entre deux points, combien de nœuds a-t-elle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : les nœuds sont les points où au moins trois fils se rejoignent. Étape 2 — Compter : les 10 branches partent d'un même point et se rejoignent en un autre point. Étape 3 — Conclure : il y a 2 nœuds. Erreur tentante : compter 10 nœuds, un par lampe, serait faux.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Choisis les trois affirmations vraies sur ces deux guirlandes.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Identifier : A est une série et B une dérivation. Étape 2 — Localiser : en série, la boucle unique est coupée par une lampe grillée et l'éclat est plus faible ; en dérivation, seule la branche de la lampe grillée est coupée. Étape 3 — Conclure : les trois affirmations vraies décrivent ces propriétés ; les deux autres échangent les propriétés des montages. Erreur tentante : mélanger série et dérivation est l'erreur la plus fréquente.",
+              "answers": [
+                {
+                  "content": "Dans la guirlande A, une lampe grillée éteint les 9 autres",
+                  "correct": true
+                },
+                {
+                  "content": "Dans la guirlande B, une lampe grillée n'éteint pas les 9 autres",
+                  "correct": true
+                },
+                {
+                  "content": "Dans la guirlande A, chaque lampe brille moins que si elle était seule",
+                  "correct": true
+                },
+                {
+                  "content": "Dans la guirlande B, les lampes brillent moins quand on en ajoute",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la guirlande A, les lampes sont sur des branches différentes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le comité veut décorer le marché sans qu'une lampe grillée éteigne les autres. Quelle guirlande doit-il choisir ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lister : le besoin est qu'une lampe grillée n'éteigne pas les autres. Étape 2 — Comparer : la guirlande A éteint tout, la guirlande B garde les autres allumées. Étape 3 — Choisir : le comité choisit la guirlande B. Erreur tentante : choisir A parce qu'elle a une seule boucle ne répond pas au besoin.",
+              "answers": [
+                {
+                  "content": "La guirlande B, montée en dérivation",
+                  "correct": true
+                },
+                {
+                  "content": "La guirlande A, montée en série",
+                  "correct": false
+                },
+                {
+                  "content": "N'importe laquelle",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune des deux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige en deux ou trois phrases le conseil que tu donnes au comité pour choisir une guirlande, en justifiant avec ce qui se passe quand une lampe grille.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Choisir la guirlande B",
+                "Justifier par le montage en dérivation",
+                "Dire qu'une lampe grillée n'éteint que sa branche",
+                "Comparer avec la série où tout s'éteint"
+              ],
+              "explanation": "Corrigé modèle : Je conseille la guirlande B. Ses lampes sont montées en dérivation : une lampe grillée ne coupe que sa branche, donc les autres restent allumées et brillent normalement. Avec la guirlande A, montée en série, une seule lampe grillée éteindrait toute la guirlande et on perdrait du temps à chercher la lampe. Points : 2 pour le choix, 2 pour la justification par la dérivation, 2 pour la comparaison avec la série.",
+              "answers": [],
+              "starter": "Je conseille la guirlande ..."
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Vocabulaire des montages (dipôle, nœud, branche) ; reconnaître le montage en série et le montage en dérivation ; prévoir l'éclat et l'effet d'une lampe dévissée.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un dipôle est un élément du circuit qui a deux bornes : une pile, une lampe, un interrupteur. Un nœud est un point où au moins trois fils se rejoignent. Une branche est le chemin entre deux nœuds.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un dipôle a deux bornes ; un nœud rassemble au moins trois fils ; une branche relie deux nœuds.",
+              "questions": [
+                {
+                  "content": "Parmi ces éléments, lequel est un dipôle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : un dipôle est un élément à deux bornes, comme une lampe, une pile ou un interrupteur. Étape 2 — Compter : une lampe a bien deux bornes ; un nœud est un point, une branche un chemin, une boucle un tour du fil. Étape 3 — Conclure : la lampe est le seul dipôle de la liste. Erreur tentante : confondre un dipôle avec un chemin du fil ; une branche est un chemin entre deux nœuds, pas un élément.",
+                  "answers": [
+                    {
+                      "content": "Une lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un nœud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une branche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une boucle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une branche est un chemin du fil situé entre deux nœuds.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on rappelle la définition d'une branche. Étape 2 — Compter : une branche commence à un nœud et finit à un autre nœud. Étape 3 — Conclure : l'affirmation est vraie. Erreur tentante : confondre branche et nœud : le nœud est un point, la branche est le chemin qui relie deux nœuds.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en série, le circuit n'a qu'une seule ___ fermée.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche le nom du chemin fermé que suit le fil. Étape 2 — Suivre : en série, le fil traverse tous les dipôles sans se séparer et revient à la pile. Étape 3 — Conclure : ce chemin fermé unique est une boucle. Erreur tentante : écrire branche serait faux : une branche est un chemin entre deux nœuds, et il n'y a aucun nœud en série.",
+                  "answers": [
+                    {
+                      "content": "boucle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot du vocabulaire à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on a trois mots du vocabulaire des montages. Étape 2 — Compter : chaque mot a une définition précise : élément à deux bornes, point à trois fils, branche de la pile. Étape 3 — Conclure : chaque mot est relié à sa définition. Erreur tentante : prendre le nœud pour un élément du circuit : c'est un point de rencontre des fils, pas un dipôle.",
+                  "answers": [
+                    {
+                      "content": "Dipôle",
+                      "match": "Élément du circuit à deux bornes"
+                    },
+                    {
+                      "content": "Nœud",
+                      "match": "Point où au moins trois fils se rejoignent"
+                    },
+                    {
+                      "content": "Branche principale",
+                      "match": "Branche qui contient la pile"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un circuit en dérivation a une pile et deux lampes, chacune sur sa branche entre deux points A et B. Combien de nœuds a-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les nœuds sont les points où au moins trois fils se rejoignent. Étape 2 — Compter : ce sont les points A et B, où le fil se sépare puis se rejoint. Étape 3 — Conclure : il y a 2 nœuds. Erreur tentante : compter les lampes au lieu des points où trois fils se rejoignent est une erreur : on compte les nœuds, pas les lampes.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un circuit comprend une pile, un interrupteur et trois lampes identiques L1, L2 et L3, toutes montées en série.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une seule boucle : si elle est coupée, tout s'éteint ; si on ajoute des lampes, l'éclat diminue.",
+              "questions": [
+                {
+                  "content": "Combien de boucles le fil forme-t-il dans ce circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le circuit est un montage en série de trois lampes. Étape 2 — Suivre : le fil passe par chaque dipôle sans se séparer. Étape 3 — Conclure : il forme une seule boucle. Erreur tentante : compter une boucle par lampe confond la série avec trois circuits séparés.",
+                  "answers": [
+                    {
+                      "content": "Une seule",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on ouvre l'interrupteur, les trois lampes s'éteignent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'interrupteur est un dipôle de la boucle unique. Étape 2 — Suivre : l'ouvrir coupe la boucle. Étape 3 — Conclure : les trois lampes s'éteignent : l'affirmation est vraie. Erreur tentante : penser qu'une lampe reste allumée serait vrai en dérivation, pas dans une boucle unique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On dévisse L2. Que deviennent L1 et L3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le montage est en série. Étape 2 — Localiser : L2 dévissée coupe la boucle unique. Étape 3 — Conclure : L1 et L3 ne sont plus dans un chemin fermé avec la pile : elles s'éteignent. Erreur tentante : croire que les autres lampes restent allumées confond avec une dérivation.",
+                  "answers": [
+                    {
+                      "content": "Elles s'éteignent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles restent allumées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brillent plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brillent moins mais restent allumées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On ajoute une quatrième lampe identique en série : chaque lampe brille ___ qu'avant.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on ajoute une lampe à la suite des trois autres. Étape 2 — Suivre : la boucle unique compte maintenant quatre lampes. Étape 3 — Conclure : chaque lampe brille moins qu'avant. Erreur tentante : penser que l'éclat reste le même est faux en série ; il diminue à chaque lampe ajoutée.",
+                  "answers": [
+                    {
+                      "content": "moins",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "plus du tout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux phrases vraies sur ce circuit.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : le circuit est un montage en série. Étape 2 — Suivre : il n'y a pas de point où le fil se sépare, donc pas de nœud, et les lampes se partagent la boucle. Étape 3 — Conclure : les deux phrases vraies sont l'absence de nœud et l'éclat plus faible. Erreur tentante : parler de branches pour chaque lampe décrit une dérivation, pas une série.",
+                  "answers": [
+                    {
+                      "content": "Il n'y a aucun nœud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les trois lampes brillent moins qu'une lampe seule sur la même pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque lampe est sur sa propre branche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dévisser L1 laisse L2 et L3 allumées",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une pile alimente deux lampes identiques L1 et L2, adaptées à la pile. Chaque lampe est sur sa propre branche, entre deux points A et B. Un fil relie aussi la pile à A et à B.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une dérivation a deux nœuds et une branche par lampe, plus la branche de la pile.",
+              "questions": [
+                {
+                  "content": "Combien de branches y a-t-il entre A et B, en comptant celle de la pile ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : A et B sont les nœuds. Étape 2 — Compter : il y a la branche de L1, celle de L2 et celle de la pile : 1 + 1 + 1 = 3. Étape 3 — Conclure : il y a 3 branches. Erreur tentante : oublier la branche de la pile donne 2.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On dévisse L1. Que devient L2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le montage est en dérivation. Étape 2 — Localiser : dévisser L1 coupe seulement la branche de L1. Étape 3 — Conclure : L2 reste dans un chemin fermé avec la pile : elle reste allumée. Erreur tentante : croire qu'elle s'éteint confond avec la série.",
+                  "answers": [
+                    {
+                      "content": "Elle reste allumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle s'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille beaucoup plus fort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce montage, chaque lampe brille normalement, comme si elle était seule.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les lampes sont adaptées à la pile et sont sur deux branches. Étape 2 — Compter : chacune a sa branche reliée à la pile. Étape 3 — Conclure : chacune brille normalement : l'affirmation est vraie. Erreur tentante : penser que l'éclat diminue est une propriété de la série, pas de la dérivation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points A et B où les trois fils se rejoignent s'appellent des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : A et B sont des points où au moins trois fils se rejoignent. Étape 2 — Compter : en A, trois fils se rejoignent ; en B aussi. Étape 3 — Conclure : ces points s'appellent des nœuds. Erreur tentante : les appeler branches serait faux : une branche est un chemin entre deux nœuds.",
+                  "answers": [
+                    {
+                      "content": "nœuds",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître une dérivation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on suit la méthode de la fiche. Étape 2 — Compter : d'abord les nœuds, ensuite les branches, enfin la conclusion. Étape 3 — Conclure : l'ordre est repérer, compter, conclure. Erreur tentante : conclure avant d'avoir cherché les nœuds conduit à confondre série et dérivation.",
+                  "answers": [
+                    {
+                      "content": "Repérer les nœuds"
+                    },
+                    {
+                      "content": "Compter les branches et noter le dipôle de chacune"
+                    },
+                    {
+                      "content": "Conclure : lampes sur des branches différentes, donc dérivation"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On compare deux montages de trois lampes identiques et adaptées : le montage M1 est en série, le montage M2 est en dérivation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "M1 : une seule boucle. M2 : des branches séparées.",
+              "questions": [
+                {
+                  "content": "Relie chaque action à son effet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : M1 est une série, M2 une dérivation. Étape 2 — Localiser : en série la boucle unique est coupée ; en dérivation seule la branche de la lampe est coupée. Étape 3 — Conclure : chaque action est reliée à son effet. Erreur tentante : mélanger les effets de M1 et de M2 est l'erreur la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "Dans M1, on dévisse une lampe",
+                      "match": "Toutes les lampes s'éteignent"
+                    },
+                    {
+                      "content": "Dans M2, on dévisse une lampe",
+                      "match": "Les deux autres restent allumées"
+                    },
+                    {
+                      "content": "Dans M1, on ajoute une lampe",
+                      "match": "Toutes les lampes brillent moins"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel montage les lampes brillent-elles normalement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : M1 est en série et M2 en dérivation. Étape 2 — Comparer : en série l'éclat est plus faible ; en dérivation chaque lampe est reliée à la pile par sa branche. Étape 3 — Conclure : les lampes brillent normalement dans M2. Erreur tentante : croire que M1 donne un éclat normal oublie que les lampes se partagent la boucle.",
+                  "answers": [
+                    {
+                      "content": "Dans M2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans M1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans M2, dévisser une lampe éteint les deux autres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : M2 est en dérivation. Étape 2 — Localiser : dévisser une lampe coupe seulement sa branche. Étape 3 — Conclure : les deux autres restent allumées : l'affirmation est fausse. Erreur tentante : c'est dans M1, en série, que dévisser une lampe éteint toutes les autres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux phrases vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : M1 est en série et M2 en dérivation. Étape 2 — Compter : la série n'a qu'une boucle et aucun nœud ; la dérivation a des nœuds et plusieurs branches. Étape 3 — Conclure : les deux phrases vraies sont celles de la boucle unique de M1 et des nœuds de M2. Erreur tentante : les deux autres phrases inversent les montages.",
+                  "answers": [
+                    {
+                      "content": "M1 a une seule boucle",
+                      "correct": true
+                    },
+                    {
+                      "content": "M2 a des nœuds",
+                      "correct": true
+                    },
+                    {
+                      "content": "M1 a des nœuds",
+                      "correct": false
+                    },
+                    {
+                      "content": "M2 a une seule boucle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans M1, ajouter des lampes rend l'éclat de chaque lampe ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : M1 est un montage en série. Étape 2 — Suivre : ajouter des lampes allonge la boucle unique. Étape 3 — Conclure : l'éclat de chaque lampe devient plus faible. Erreur tentante : penser qu'il reste inchangé est la propriété de la dérivation.",
+                  "answers": [
+                    {
+                      "content": "plus faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "inchangé",
+                      "correct": false
+                    },
+                    {
+                      "content": "impossible à prévoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Dans la vie courante",
+          "notions": "La maison, la guirlande de fête et la salle de classe : lire un montage, prévoir ce qui se passe quand une ampoule grille et choisir le montage d'une installation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans la maison de Kouadio, trois ampoules identiques éclairent le salon, la chambre et la cuisine. Elles sont montées en dérivation entre deux points A et B, chacune sur sa branche avec son propre interrupteur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une ampoule = une branche. Un interrupteur sur une branche n'éteint que cette branche.",
+              "questions": [
+                {
+                  "content": "Kouadio éteint l'ampoule de la chambre avec son interrupteur. Que deviennent les ampoules du salon et de la cuisine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les ampoules sont en dérivation, chacune sur sa branche. Étape 2 — Localiser : l'interrupteur de la chambre coupe seulement la branche de la chambre. Étape 3 — Conclure : les ampoules du salon et de la cuisine restent allumées. Erreur tentante : penser que tout s'éteint serait vrai si l'interrupteur était sur la branche principale ou si le montage était en série.",
+                  "answers": [
+                    {
+                      "content": "Elles restent allumées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles s'éteignent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brillent moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brillent plus fort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'ampoule du salon grille, les deux autres ampoules restent allumées.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le montage est en dérivation. Étape 2 — Localiser : l'ampoule grillée coupe sa branche seulement. Étape 3 — Conclure : les deux autres restent allumées : l'affirmation est vraie. Erreur tentante : en série, l'ampoule grillée aurait éteint les deux autres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de nœuds le montage de la maison de Kouadio comporte-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les trois ampoules sont sur trois branches entre deux points où le fil se sépare puis se rejoint. Étape 2 — Compter : ces points sont deux : un point de départ et un point d'arrivée. Étape 3 — Conclure : il y a 2 nœuds. Erreur tentante : compter trois nœuds, un par ampoule, serait faux : on compte les points de rencontre, pas les ampoules.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour éteindre toute la maison d'un seul geste, l'interrupteur général doit être placé sur la branche ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la branche principale contient la pile ou la source. Étape 2 — Localiser : tous les chemins vers les ampoules passent par elle. Étape 3 — Conclure : l'interrupteur général est sur la branche principale. Erreur tentante : un interrupteur sur la branche de la cuisine n'éteint que la cuisine.",
+                  "answers": [
+                    {
+                      "content": "principale",
+                      "correct": true
+                    },
+                    {
+                      "content": "de la cuisine",
+                      "correct": false
+                    },
+                    {
+                      "content": "du salon",
+                      "correct": false
+                    },
+                    {
+                      "content": "de la chambre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une maison, les ampoules fonctionnent ___ les unes des autres.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lister : les pièces doivent s'allumer et s'éteindre séparément. Étape 2 — Comparer : la dérivation donne cette indépendance, la série lie les ampoules. Étape 3 — Choisir : les ampoules fonctionnent indépendamment les unes des autres. Erreur tentante : l'écrire pour une série serait faux, car elles dépendraient toutes les unes des autres.",
+                  "answers": [
+                    {
+                      "content": "indépendamment",
+                      "correct": true
+                    },
+                    {
+                      "content": "séparément",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Pour la fête de fin d'année, le quartier accroche une guirlande de 15 petites lampes identiques. Toutes les lampes sont montées en série.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En série, une lampe grillée coupe l'unique boucle et toute la guirlande s'éteint.",
+              "questions": [
+                {
+                  "content": "Une lampe de la guirlande est grillée. Que voit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les 15 lampes sont en série. Étape 2 — Localiser : la lampe grillée coupe la boucle unique. Étape 3 — Conclure : toute la guirlande est éteinte. Erreur tentante : croire que seule la lampe grillée s'éteint décrit une dérivation.",
+                  "answers": [
+                    {
+                      "content": "Toute la guirlande est éteinte",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seule la lampe grillée est éteinte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les 14 autres lampes brillent plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "La guirlande clignote normalement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour trouver la lampe grillée, on doit pouvoir regarder laquelle est éteinte, car les autres restent allumées.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la guirlande est en série. Étape 2 — Localiser : toutes les lampes sont éteintes quand l'une est grillée. Étape 3 — Conclure : on ne voit pas laquelle est grillée : l'affirmation est fausse. Erreur tentante : dans une dérivation, la seule lampe éteinte serait la lampe grillée, mais ici le montage est en série.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quartier ajoute 5 lampes identiques à la fin de la guirlande, en série. Que constate-t-on sur l'éclat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les lampes ajoutées sont en série avec les anciennes. Étape 2 — Localiser : la boucle unique compte maintenant 20 lampes. Étape 3 — Conclure : chaque lampe brille moins qu'avant. Erreur tentante : croire que l'éclat ne change pas est vrai seulement pour une dérivation.",
+                  "answers": [
+                    {
+                      "content": "Chaque lampe brille moins qu'avant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque lampe brille plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'éclat ne change pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seules les nouvelles lampes brillent moins",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour que la guirlande reste allumée quand une lampe grille, choisis les deux changements qui conviennent.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lister : le besoin est que les autres lampes restent allumées. Étape 2 — Comparer : seule la dérivation, avec une branche par lampe, garde les autres allumées. Étape 3 — Choisir : les deux bonnes réponses sont la dérivation et une branche par lampe. Erreur tentante : ajouter des lampes en série ou allonger le fil ne change pas le montage.",
+                  "answers": [
+                    {
+                      "content": "Monter les lampes en dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mettre chaque lampe sur sa propre branche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ajouter des lampes en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Allonger le fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une guirlande montée en série, une lampe grillée ___ toutes les lampes.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la guirlande est en série. Étape 2 — Localiser : la lampe grillée coupe la boucle. Étape 3 — Conclure : elle éteint toutes les lampes. Erreur tentante : penser qu'elle n'éteint qu'elle-même décrit une dérivation.",
+                  "answers": [
+                    {
+                      "content": "éteint",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans la salle de classe de l'école du village, quatre ampoules identiques sont montées en dérivation entre deux points, une ampoule par branche, avec un interrupteur général sur la branche principale. Un matin, l'ampoule du fond est grillée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Branche d'une ampoule : une ampoule. Branche principale : tout.",
+              "questions": [
+                {
+                  "content": "Que peut-on dire des trois autres ampoules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les quatre ampoules sont en dérivation. Étape 2 — Localiser : l'ampoule grillée coupe seulement sa branche. Étape 3 — Conclure : les trois autres ampoules restent allumées. Erreur tentante : croire qu'elles s'éteignent oublie qu'elles ont chacune leur branche.",
+                  "answers": [
+                    {
+                      "content": "Elles restent allumées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles s'éteignent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brillent moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brillent plus fort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de branches y a-t-il entre les deux nœuds, en comptant la branche principale ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : il y a deux nœuds entre lesquels se trouvent les quatre ampoules. Étape 2 — Compter : quatre branches d'ampoules plus la branche principale : 4 + 1 = 5. Étape 3 — Conclure : il y a 5 branches. Erreur tentante : oublier la branche principale donne 4.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le maître coupe l'interrupteur général, les quatre ampoules s'éteignent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'interrupteur général est sur la branche principale. Étape 2 — Localiser : l'ouvrir coupe le chemin de toutes les ampoules vers la source. Étape 3 — Conclure : les quatre ampoules s'éteignent : l'affirmation est vraie. Erreur tentante : penser qu'une ampoule reste allumée parce qu'elle a sa branche oublie la branche principale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le directeur veut pouvoir éteindre seulement les deux ampoules du fond. Où peut-on placer des interrupteurs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : le besoin est d'éteindre deux ampoules précises. Étape 2 — Comparer : un interrupteur sur la branche principale éteindrait toutes les ampoules ; un interrupteur sur une branche n'éteint que cette ampoule. Étape 3 — Choisir : on place un interrupteur sur la branche de chacune des deux ampoules du fond. Erreur tentante : placer l'interrupteur sur la branche principale éteindrait aussi les ampoules du devant.",
+                  "answers": [
+                    {
+                      "content": "Sur chaque branche des deux ampoules du fond",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur la branche principale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la branche d'une ampoule du devant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est impossible de le faire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation de la classe à ce qu'on observe.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : l'installation de la classe est en dérivation. Étape 2 — Localiser : une ampoule grillée coupe sa branche, l'interrupteur général coupe la branche principale, une nouvelle branche ne change pas les autres. Étape 3 — Conclure : chaque situation est reliée à son effet. Erreur tentante : mélanger l'interrupteur général et l'interrupteur d'une branche.",
+                  "answers": [
+                    {
+                      "content": "L'ampoule du fond grille",
+                      "match": "Les trois autres restent allumées"
+                    },
+                    {
+                      "content": "On ouvre l'interrupteur général",
+                      "match": "Les quatre ampoules s'éteignent"
+                    },
+                    {
+                      "content": "On ajoute une cinquième ampoule en dérivation",
+                      "match": "Les autres gardent leur éclat normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Fatou doit choisir le montage d'une installation. Elle liste ses besoins et propose un montage.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris les besoins avant de choisir le montage.",
+              "questions": [
+                {
+                  "content": "Besoin : cinq lampes qui brillent normalement et qui s'éteignent séparément. Quel montage choisir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : deux besoins : éclat normal et lampes indépendantes. Étape 2 — Comparer : la série affaiblit l'éclat et lie les lampes ; la dérivation donne l'éclat normal et l'indépendance. Étape 3 — Choisir : Fatou choisit la dérivation. Erreur tentante : choisir la série à cause d'une seule boucle ne répond à aucun des deux besoins.",
+                  "answers": [
+                    {
+                      "content": "Le montage en dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le montage en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un montage avec une seule boucle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun ne convient",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou veut qu'une seule commande éteigne toutes les lampes d'une série : un interrupteur dans la boucle suffit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lister : le besoin est une commande unique. Étape 2 — Comparer : en série, l'interrupteur est sur l'unique boucle. Étape 3 — Choisir : un interrupteur dans la boucle éteint toutes les lampes : l'affirmation est vraie. Erreur tentante : en dérivation, il faudrait l'interrupteur sur la branche principale pour obtenir le même résultat.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range dans le bon ordre les trois étapes de la méthode pour choisir un montage.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lister : on commence par les besoins. Étape 2 — Comparer : puis on compare avec les deux montages. Étape 3 — Choisir : on choisit en dernier et on justifie. Erreur tentante : choisir avant de lister les besoins conduit à de mauvais choix.",
+                  "answers": [
+                    {
+                      "content": "Lister ce que l'installation doit assurer"
+                    },
+                    {
+                      "content": "Comparer avec les propriétés de la série et de la dérivation"
+                    },
+                    {
+                      "content": "Choisir le montage et le justifier"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une maison, un interrupteur sur la branche d'une lampe éteint ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'interrupteur est sur une branche dérivée. Étape 2 — Localiser : l'ouvrir coupe cette branche. Étape 3 — Conclure : il éteint seulement cette lampe. Erreur tentante : il n'éteindrait toutes les lampes que s'il était sur la branche principale.",
+                  "answers": [
+                    {
+                      "content": "seulement cette lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "toutes les lampes",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'interrupteur général",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucune lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou pense : « La série est meilleure, car elle a moins de fils. » Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : le besoin d'une maison est des lampes indépendantes. Étape 2 — Comparer : la série éteint tout si une lampe grille et diminue l'éclat. Étape 3 — Choisir : la dérivation reste préférable : Fatou se trompe. Erreur tentante : le nombre de fils n'est pas le critère de choix.",
+                  "answers": [
+                    {
+                      "content": "Elle se trompe : en série, une lampe grillée éteint tout",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a raison : la série est meilleure dans tous les cas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a raison : la série éclaire mieux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Série et dérivation sont identiques",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Déduire le montage d'après des observations ; circuits où la branche principale et les branches dérivées jouent chacune un rôle ; repérer les raisonnements faux ; justifier.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Aya a deux montages de deux lampes identiques sur une pile adaptée : le montage P et le montage Q. Elle les teste et note ses observations, sans voir le fil.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une observation en révèle une propriété : lampe qui coupe tout, éclat qui diminue, lampe qui reste allumée.",
+              "questions": [
+                {
+                  "content": "Dans le montage P, quand on dévisse une lampe, l'autre s'éteint. Que peut-on en déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'observation est : une lampe dévissée éteint l'autre. Étape 2 — Localiser : une lampe qui coupe tout coupe un chemin commun à toutes les lampes. Étape 3 — Conclure : les lampes de P sont dans une boucle unique : elles sont en série. Erreur tentante : en dérivation, la lampe dévissée n'éteindrait que sa branche.",
+                  "answers": [
+                    {
+                      "content": "Les lampes de P sont en série",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les lampes de P sont en dérivation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile de P est vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lampes de P sont toutes grillées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le montage Q, quand on dévisse une lampe, l'autre reste allumée et brille comme avant. Que peut-on en déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'observation est : une lampe dévissée n'éteint pas l'autre. Étape 2 — Localiser : la lampe dévissée ne coupe que sa branche. Étape 3 — Conclure : les lampes de Q sont sur des branches différentes : elles sont en dérivation. Erreur tentante : en série, la lampe dévissée aurait éteint l'autre.",
+                  "answers": [
+                    {
+                      "content": "Les lampes de Q sont en dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les lampes de Q sont en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Q n'a pas de pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lampes de Q sont survoltées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand Aya ajoute une lampe identique dans le montage P, les lampes brillent moins qu'avant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : P est en série. Étape 2 — Localiser : la lampe ajoutée s'ajoute à la boucle unique. Étape 3 — Conclure : l'éclat de chaque lampe diminue : l'affirmation est vraie. Erreur tentante : l'éclat resterait normal seulement dans une dérivation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces observations, choisis les deux qui annoncent une dérivation.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on compare quatre observations aux propriétés des montages. Étape 2 — Localiser : les lampes qui restent allumées et l'éclat conservé annoncent des branches séparées. Étape 3 — Conclure : les deux bonnes observations annoncent une dérivation. Erreur tentante : les deux autres sont celles d'une série.",
+                  "answers": [
+                    {
+                      "content": "Une lampe dévissée n'éteint pas les autres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les lampes gardent leur éclat quand on en ajoute",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe dévissée éteint toutes les autres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lampes brillent moins quand on en ajoute",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya dit : « La lampe de P brille moins que celle de Q, donc P est en série. » Explique si son raisonnement est complet.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Dire que l'éclat seul ne suffit pas",
+                    "Citer l'observation de la lampe dévissée",
+                    "Conclure que P est en série si les deux observations concordent"
+                  ],
+                  "explanation": "Corrigé modèle : Son raisonnement est incomplet. Un éclat plus faible est un indice de série, mais il faut aussi vérifier ce qui se passe quand on dévisse une lampe : dans P, l'autre lampe s'éteint, ce qui confirme la boucle unique. Il faut donc croiser plusieurs observations avant de conclure. Points : 1 pour dire que l'éclat seul ne suffit pas, 1 pour la deuxième observation, 1 pour la conclusion.",
+                  "answers": [],
+                  "starter": "L'éclat plus faible est un indice, mais ..."
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un circuit, une pile alimente une lampe L1 sur la branche principale. Le fil se sépare ensuite en deux branches dérivées : sur la première se trouve la lampe L2 en série avec un interrupteur K ; sur la seconde se trouve la lampe L3. Les lampes sont identiques. Au départ, K est fermé et toutes les lampes brillent.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Identifie la branche coupée : principale ou dérivée ?",
+              "questions": [
+                {
+                  "content": "On ouvre l'interrupteur K. Quelles lampes restent allumées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : K est sur la branche de L2, une branche dérivée. Étape 2 — Localiser : l'ouvrir coupe cette branche seulement. Étape 3 — Conclure : L1 sur la branche principale et L3 sur sa branche restent allumées. Erreur tentante : penser que tout s'éteint oublie que K n'est pas sur la branche principale.",
+                  "answers": [
+                    {
+                      "content": "L1 et L3",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "L2 seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "L1 seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On dévisse L1. Que devient L3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : L1 est la seule lampe de la branche principale. Étape 2 — Localiser : la dévisser coupe la branche principale. Étape 3 — Conclure : L3 s'éteint, comme L2. Erreur tentante : croire que L3 reste allumée parce qu'elle a sa branche oublie la branche principale.",
+                  "answers": [
+                    {
+                      "content": "Elle s'éteint",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste allumée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille moins sans s'éteindre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On dévisse L3. Que devient L1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : L3 est sur une branche dérivée. Étape 2 — Localiser : la dévisser coupe seulement sa branche. Étape 3 — Conclure : L1 et L2 restent allumées. Erreur tentante : penser que L1 s'éteint serait vrai si L3 était sur la branche principale.",
+                  "answers": [
+                    {
+                      "content": "Elle reste allumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle s'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle clignote",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de lampes restent allumées si on dévisse L3 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : il y a trois lampes : L1, L2 et L3. Étape 2 — Localiser : dévisser L3 éteint seulement L3. Étape 3 — Conclure : il reste 3 − 1 = 2 lampes allumées. Erreur tentante : répondre 0 oublie que L3 est sur une branche dérivée.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque action à l'ensemble des lampes qui restent allumées.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : L1 est sur la branche principale ; K est sur la branche de L2 ; L3 est sur la sienne. Étape 2 — Localiser : L1 coupe tout, K coupe L2, L3 coupe L3. Étape 3 — Conclure : chaque action est reliée à l'ensemble des lampes allumées. Erreur tentante : mélanger la branche de K et la branche principale donne un mauvais résultat.",
+                  "answers": [
+                    {
+                      "content": "On dévisse L1",
+                      "match": "Aucune lampe"
+                    },
+                    {
+                      "content": "On ouvre K",
+                      "match": "L1 et L3"
+                    },
+                    {
+                      "content": "On dévisse L3",
+                      "match": "L1 et L2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Trois élèves, Kofi, Awa et Serge, expliquent ce qui se passe dans un circuit en série de trois lampes identiques. Certaines phrases sont fausses.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Vérifie chaque phrase avec la boucle unique.",
+              "questions": [
+                {
+                  "content": "Kofi dit : « Si je dévisse une lampe, les deux autres brillent plus fort. » Que penses-tu de sa phrase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le circuit est en série : une seule boucle. Étape 2 — Localiser : dévisser une lampe coupe la boucle. Étape 3 — Conclure : les deux autres s'éteignent : la phrase de Kofi est fausse. Erreur tentante : les lampes ne brillent jamais plus fort quand la boucle est coupée.",
+                  "answers": [
+                    {
+                      "content": "Elle est fausse : les deux autres s'éteignent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est vraie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse : les deux autres restent normales",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa dit : « Une lampe dévissée n'éteint que les lampes qui sont après elle. » Que penses-tu de sa phrase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : en série, il n'y a qu'une boucle. Étape 2 — Localiser : la boucle est coupée à l'endroit de la lampe dévissée. Étape 3 — Conclure : toutes les lampes s'éteignent, quelle que soit leur place. Erreur tentante : la place de la lampe dans la boucle ne compte pas.",
+                  "answers": [
+                    {
+                      "content": "Elle est fausse : toutes les lampes s'éteignent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est vraie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est vraie pour la première lampe seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Serge dit : « Si j'ajoute une lampe, les trois premières brillent moins. » Sa phrase est vraie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le circuit est en série. Étape 2 — Localiser : la lampe ajoutée allonge la boucle unique. Étape 3 — Conclure : l'éclat de chaque lampe diminue : la phrase de Serge est vraie. Erreur tentante : penser que seules les nouvelles lampes brillent moins est faux : toutes brillent moins.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces phrases d'élèves, laquelle est vraie pour un circuit en série ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : en série, l'interrupteur est un dipôle de la boucle unique. Étape 2 — Localiser : l'ouvrir coupe la boucle où qu'il soit. Étape 3 — Conclure : la phrase vraie est celle de la place libre. Erreur tentante : croire qu'il faut le placer avant la première lampe est faux.",
+                  "answers": [
+                    {
+                      "content": "L'interrupteur peut être placé n'importe où dans la boucle",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'interrupteur doit être placé avant la première lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lampe dévissée n'éteint que l'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a plusieurs boucles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux phrases vraies sur un circuit en série.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on décrit un circuit en série. Étape 2 — Localiser : la série n'a pas de nœud, pas de branche, une seule boucle. Étape 3 — Conclure : les deux phrases vraies sont la boucle unique et l'extinction générale. Erreur tentante : parler de nœuds ou de branches décrit une dérivation.",
+                  "answers": [
+                    {
+                      "content": "Il n'y a qu'une seule boucle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe grillée éteint toutes les autres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque lampe est sur sa branche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a deux nœuds",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Pour la fête, le comité accroche deux guirlandes identiques G1 et G2 de 5 lampes chacune. Les 5 lampes de chaque guirlande sont montées en série. Les deux guirlandes sont reliées en dérivation à la même source adaptée : chacune est sur sa branche, et il y a une branche principale avec la source.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une guirlande est en série en elle-même, mais les guirlandes sont en dérivation entre elles.",
+              "questions": [
+                {
+                  "content": "Combien de nœuds le montage de ces deux guirlandes comporte-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les deux guirlandes sont sur deux branches entre deux points. Étape 2 — Compter : ces deux points sont les nœuds. Étape 3 — Conclure : il y a 2 nœuds. Erreur tentante : compter les lampes au lieu des nœuds donne 10.",
+                  "answers": [
+                    {
+                      "content": "Deux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cinq",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dix",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de G1 grille. Que voit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : G1 est en série en elle-même ; G1 et G2 sont en dérivation entre elles. Étape 2 — Localiser : la lampe grillée coupe la boucle de G1, donc la branche de G1. Étape 3 — Conclure : G1 est éteinte, G2 reste allumée. Erreur tentante : penser que G2 s'éteint oublie qu'elle a sa propre branche.",
+                  "answers": [
+                    {
+                      "content": "G1 est éteinte et G2 reste allumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "G1 et G2 sont éteintes",
+                      "correct": false
+                    },
+                    {
+                      "content": "G1 reste allumée et G2 est éteinte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les deux guirlandes sont allumées et qu'une lampe de G1 grille, combien de lampes restent allumées ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : G1 s'éteint entièrement, G2 reste allumée. Étape 2 — Localiser : G2 compte 5 lampes. Étape 3 — Conclure : 5 lampes restent allumées. Erreur tentante : répondre 9 suppose que seule la lampe grillée s'éteint, ce qui est faux pour G1.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les lampes d'une même guirlande brillent moins que si elles étaient seules.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : les 5 lampes d'une guirlande sont en série. Étape 2 — Localiser : la boucle compte 5 lampes. Étape 3 — Conclure : chaque lampe brille moins que seule : l'affirmation est vraie. Erreur tentante : ce n'est pas le montage des deux guirlandes entre elles qui fait baisser l'éclat, mais la série à l'intérieur de chaque guirlande.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi une lampe grillée dans G1 n'éteint pas G2, mais éteint les quatre autres lampes de G1.",
+                  "question_type": "written",
+                  "points": 6,
+                  "criteria": [
+                    "Dire que les lampes de G1 sont en série",
+                    "Dire que la lampe grillée coupe la boucle de G1",
+                    "Dire que G1 et G2 sont sur des branches différentes",
+                    "Conclure que G2 reste allumée"
+                  ],
+                  "explanation": "Corrigé modèle : Les 5 lampes de G1 sont en série : elles forment une seule boucle, donc la lampe grillée la coupe et les 4 autres s'éteignent. G1 et G2 sont chacune sur leur branche en dérivation : couper la branche de G1 ne coupe pas la branche de G2, qui reste allumée. Points : 2 pour la série dans G1, 2 pour la dérivation entre G1 et G2, 2 pour la conclusion.",
+                  "answers": [],
+                  "starter": "Les lampes de G1 sont en série, donc ..."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan",
+          "notions": "Reconnaître trois circuits ; compter nœuds et branches ; prévoir ce qui se passe quand on dévisse une lampe ; choisir et justifier le montage d'une installation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On décrit trois circuits alimentés par une pile adaptée. Circuit A : en partant de la borne +, le fil passe par trois lampes l'une après l'autre et revient à la borne −. Circuit B : le fil se sépare en un point M en deux chemins qui passent chacun par une lampe, puis les deux chemins se rejoignent en un point N. Circuit C : en partant de la borne +, le fil passe par un interrupteur, puis par deux lampes l'une après l'autre, et revient à la borne −.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Série : un seul chemin ; dérivation : des nœuds et des branches.",
+              "questions": [
+                {
+                  "content": "Quel est le montage du circuit A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le circuit A comprend la pile et trois lampes. Étape 2 — Suivre : le fil passe par chaque lampe l'une après l'autre, sans point de séparation. Étape 3 — Conclure : un seul chemin : montage en série. Erreur tentante : parler de dérivation parce qu'il y a trois lampes oublie qu'il n'y a pas de nœud.",
+                  "answers": [
+                    {
+                      "content": "En série",
+                      "correct": true
+                    },
+                    {
+                      "content": "En dérivation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mixte",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas le savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le montage des deux lampes du circuit B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : M et N sont des points où au moins trois fils se rejoignent : ce sont des nœuds. Étape 2 — Compter : chaque lampe est sur un chemin différent entre M et N. Étape 3 — Conclure : les lampes sont sur des branches différentes : montage en dérivation. Erreur tentante : les croire en série, parce qu'elles sont entre les mêmes points, oublie qu'elles sont sur deux chemins.",
+                  "answers": [
+                    {
+                      "content": "En dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "En série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur une même branche",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas le savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de nœuds comporte le circuit B ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les nœuds sont les points où au moins trois fils se rejoignent. Étape 2 — Compter : ce sont M et N. Étape 3 — Conclure : il y a 2 nœuds. Erreur tentante : compter les lampes à la place des nœuds est une erreur.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le circuit C, l'interrupteur et les deux lampes forment une seule boucle avec la pile.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le circuit C comprend la pile, un interrupteur et deux lampes. Étape 2 — Suivre : le fil passe par tous ces dipôles à la suite, sans point de séparation. Étape 3 — Conclure : c'est une boucle unique : un montage en série, l'affirmation est vraie. Erreur tentante : croire que l'interrupteur crée une dérivation est faux : un interrupteur est un dipôle comme les autres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux circuits dans lesquels une lampe dévissée éteint toutes les autres.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : A et C sont en série, B est en dérivation. Étape 2 — Localiser : en série, une lampe dévissée coupe la boucle unique. Étape 3 — Conclure : les circuits A et C répondent à la question. Erreur tentante : dans le circuit B, la lampe dévissée ne coupe que sa branche.",
+                  "answers": [
+                    {
+                      "content": "Le circuit A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le circuit C",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le circuit B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des trois",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la cuisine de Mariam, trois lampes identiques L1, L2 et L3 sont montées en dérivation. L1 est sur la branche de la table, L2 sur la branche de l'évier et L3 sur la branche du fourneau. Un interrupteur général G est placé sur la branche principale.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Branche principale : tout ; branche d'une lampe : cette lampe.",
+              "questions": [
+                {
+                  "content": "Mariam dévisse L2. Quelles lampes restent allumées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les trois lampes sont en dérivation, une par branche. Étape 2 — Localiser : dévisser L2 coupe sa branche. Étape 3 — Conclure : L1 et L3 restent allumées. Erreur tentante : penser que toutes s'éteignent est vrai seulement en série ou si on coupe la branche principale.",
+                  "answers": [
+                    {
+                      "content": "L1 et L3",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les trois",
+                      "correct": false
+                    },
+                    {
+                      "content": "L2 seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam ouvre G. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : G est sur la branche principale. Étape 2 — Localiser : l'ouvrir coupe le chemin vers toutes les lampes. Étape 3 — Conclure : les trois lampes s'éteignent. Erreur tentante : penser qu'une lampe reste allumée parce qu'elle a sa branche oublie la branche principale.",
+                  "answers": [
+                    {
+                      "content": "Les trois lampes s'éteignent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seule L1 s'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois restent allumées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seules L2 et L3 s'éteignent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la cuisine de Mariam, combien y a-t-il de branches entre les deux nœuds, branche principale comprise ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : il y a deux nœuds. Étape 2 — Compter : trois branches de lampes plus la branche principale : 3 + 1 = 4. Étape 3 — Conclure : il y a 4 branches. Erreur tentante : oublier la branche principale donne 3.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on ajoute une quatrième lampe identique sur une nouvelle branche, L1, L2 et L3 brillent moins.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la nouvelle lampe est sur sa propre branche. Étape 2 — Localiser : les trois autres branches ne changent pas. Étape 3 — Conclure : l'éclat reste normal : l'affirmation est fausse. Erreur tentante : c'est en série que l'éclat diminue quand on ajoute une lampe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour allumer et éteindre la lampe de l'évier seule, on place un interrupteur sur sa ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lister : le besoin est de commander une seule lampe. Étape 2 — Comparer : un interrupteur sur sa branche coupe seulement cette branche. Étape 3 — Choisir : l'interrupteur est placé sur la branche de la lampe. Erreur tentante : sur la branche principale, il éteindrait aussi les autres lampes.",
+                  "answers": [
+                    {
+                      "content": "branche",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le comité doit décorer le marché pour la fête. Il hésite entre une guirlande de 30 lampes toutes en série et une guirlande de 30 lampes en dérivation. Les lampes sont identiques et adaptées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare éclat et lampe grillée pour chaque montage.",
+              "questions": [
+                {
+                  "content": "Quel est le principal défaut de la guirlande en série ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : le besoin est une guirlande fiable pour la fête. Étape 2 — Comparer : en série, une lampe grillée coupe la boucle unique. Étape 3 — Choisir : le défaut principal est l'extinction de toute la guirlande. Erreur tentante : la guirlande en série brille moins, pas plus fort.",
+                  "answers": [
+                    {
+                      "content": "Une seule lampe grillée éteint toute la guirlande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle ne s'allume jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille plus fort que l'autre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas de boucle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle guirlande le comité doit-il choisir pour que les lampes brillent normalement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lister : le besoin est un éclat normal. Étape 2 — Comparer : en série, 30 lampes brillent moins ; en dérivation, chacune brille normalement. Étape 3 — Choisir : la guirlande en dérivation convient. Erreur tentante : la série ne donne pas un éclat normal.",
+                  "answers": [
+                    {
+                      "content": "La guirlande en dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "La guirlande en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux, c'est pareil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la guirlande en dérivation, il y a une branche par lampe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lister : on rappelle la définition de la dérivation. Étape 2 — Comparer : chaque lampe a sa propre branche entre deux nœuds. Étape 3 — Choisir : l'affirmation est vraie. Erreur tentante : en série, il n'y a aucune branche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour choisir une guirlande.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lister : on commence par les besoins du comité. Étape 2 — Comparer : puis on compare les deux montages. Étape 3 — Choisir : on choisit en dernier. Erreur tentante : choisir d'abord sans lister les besoins conduit à la mauvaise guirlande.",
+                  "answers": [
+                    {
+                      "content": "Lister les besoins : éclat normal, lampes indépendantes"
+                    },
+                    {
+                      "content": "Comparer avec les propriétés de la série et de la dérivation"
+                    },
+                    {
+                      "content": "Choisir la guirlande en dérivation et justifier"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la guirlande en dérivation, une lampe grillée éteint ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la guirlande est en dérivation. Étape 2 — Localiser : la lampe grillée coupe sa branche. Étape 3 — Conclure : elle n'éteint que cette lampe. Erreur tentante : dire toutes les lampes décrit la série.",
+                  "answers": [
+                    {
+                      "content": "seulement cette lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "toutes les lampes",
+                      "correct": false
+                    },
+                    {
+                      "content": "la source",
+                      "correct": false
+                    },
+                    {
+                      "content": "la moitié des lampes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "La maison de Yao a un salon éclairé par deux lampes L1 et L2 et une cuisine éclairée par une lampe L3. Les trois lampes sont en dérivation, chacune sur sa branche. Une guirlande de fête de 6 lampes en série est branchée sur une prise de la maison : elle forme une quatrième branche. Les lampes sont adaptées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Branche de la guirlande : indépendante des lampes de la maison.",
+              "questions": [
+                {
+                  "content": "Combien de branches y a-t-il entre les deux nœuds, branche principale comprise ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : il y a deux nœuds. Étape 2 — Compter : les branches sont L1, L2, L3, la guirlande et la branche principale : 4 + 1 = 5. Étape 3 — Conclure : il y a 5 branches. Erreur tentante : oublier la branche principale donne 4.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de la guirlande grille. Que deviennent L1, L2 et L3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la guirlande est sur sa propre branche en dérivation avec les lampes de la maison. Étape 2 — Localiser : la lampe grillée coupe la boucle de la guirlande, donc sa branche. Étape 3 — Conclure : L1, L2 et L3 restent allumées ; seule la guirlande est éteinte. Erreur tentante : les croire éteintes confond la série à l'intérieur de la guirlande avec le montage de la maison.",
+                  "answers": [
+                    {
+                      "content": "Elles restent allumées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles s'éteignent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brillent moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brillent plus fort",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que devient la guirlande si L1 grille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : L1 est sur sa propre branche. Étape 2 — Localiser : L1 grillée coupe sa branche seulement. Étape 3 — Conclure : la guirlande, sur sa branche, reste allumée. Erreur tentante : penser que la guirlande s'éteint oublie que les branches sont indépendantes.",
+                  "answers": [
+                    {
+                      "content": "Elle reste allumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle s'éteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle clignote",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les trois affirmations vraies sur cette installation.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : la guirlande est en série en elle-même, mais est en dérivation avec L1, L2 et L3. Étape 2 — Localiser : chaque branche est indépendante des autres. Étape 3 — Conclure : les trois bonnes affirmations décrivent ces deux niveaux de montage. Erreur tentante : croire qu'une lampe de la guirlande agit sur L1 mélange le montage interne de la guirlande et celui de la maison.",
+                  "answers": [
+                    {
+                      "content": "Les lampes de la guirlande sont en série entre elles",
+                      "correct": true
+                    },
+                    {
+                      "content": "La guirlande et L1 sont en dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un interrupteur sur la branche de L3 n'éteint que L3",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lampe grillée de la guirlande éteint L1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les lampes de la guirlande brillent plus fort que L1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique en trois phrases pourquoi, dans une maison, on branche les lampes et la guirlande en dérivation plutôt qu'en série.",
+                  "question_type": "written",
+                  "points": 6,
+                  "criteria": [
+                    "Dire que chaque lampe a sa branche",
+                    "Dire qu'une lampe grillée n'éteint pas les autres",
+                    "Dire que l'éclat reste normal",
+                    "Comparer avec la série où tout s'éteint"
+                  ],
+                  "explanation": "Corrigé modèle : En dérivation, chaque lampe est sur sa propre branche. Une lampe grillée ou un interrupteur ouvert n'éteint donc que cette branche, et les autres lampes de la maison restent allumées. De plus, chaque lampe brille normalement, alors qu'en série, toutes les lampes brilleraient moins et une seule lampe grillée éteindrait toute la maison. Points : 2 pour l'indépendance des lampes, 2 pour l'éclat normal, 2 pour la comparaison avec la série.",
+                  "answers": [],
+                  "starter": "En dérivation, chaque lampe est sur sa branche, donc ..."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

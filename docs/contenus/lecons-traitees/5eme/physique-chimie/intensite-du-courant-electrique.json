@@ -1,0 +1,3278 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Intensité du courant électrique",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Physique-Chimie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "mesure-intensite-etapes",
+          "kind": "diagram",
+          "description": "Schéma fléché en quatre étapes pour mesurer une intensité : régler le multimètre sur la position A au plus grand calibre, brancher le multimètre en série dans le circuit ouvert, ajuster en fermant le circuit puis en diminuant le calibre sans dépasser, puis lire le nombre avec l'unité du calibre.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Régler : position A, plus grand calibre"
+              },
+              {
+                "id": "b",
+                "label": "Brancher : circuit ouvert, multimètre en série"
+              },
+              {
+                "id": "c",
+                "label": "Ajuster : fermer, diminuer le calibre"
+              },
+              {
+                "id": "d",
+                "label": "Lire : nombre et unité du calibre"
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b"
+              },
+              {
+                "from": "b",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "d"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "loi-des-noeuds",
+          "kind": "diagram",
+          "description": "Schéma en arbre d'un circuit en dérivation : la branche principale, parcourue par l'intensité I, se sépare en deux branches dérivées, parcourues par les intensités I1 et I2. L'intensité de la branche principale est égale à la somme des intensités des deux branches dérivées : I = I1 + I2.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "p",
+                "label": "Branche principale : I"
+              },
+              {
+                "id": "b1",
+                "label": "Branche dérivée 1 : I1",
+                "category": 1
+              },
+              {
+                "id": "b2",
+                "label": "Branche dérivée 2 : I2",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "p",
+                "to": "b1",
+                "label": "se sépare"
+              },
+              {
+                "from": "p",
+                "to": "b2",
+                "label": "se sépare"
+              }
+            ],
+            "legend": [
+              "Branches dérivées"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître l'intensité du courant et convertir ses unités",
+          "remember": "Dans un circuit fermé, le courant électrique circule. L'**intensité du courant** dit si ce courant est faible ou fort : plus l'intensité est grande, plus le courant est intense. Son symbole est la lettre **I**. Son unité est l'**ampère**, de symbole **A**. Pour les petites intensités, on utilise le **milliampère**, de symbole **mA**. On a : 1 A = 1000 mA, donc 1 mA = 0,001 A. Pour passer des A aux mA, on **multiplie par 1000** ; pour passer des mA aux A, on **divise par 1000**. Exemple : la lampe d'une lampe torche porte « 0,3 A », soit 300 mA.",
+          "method": [
+            "Repérer l'unité dans laquelle l'intensité est donnée : l'ampère (A) ou le milliampère (mA).",
+            "Choisir le sens de la conversion : des A vers les mA, on multiplie par 1000 ; des mA vers les A, on divise par 1000.",
+            "Calculer, puis écrire le résultat avec son unité."
+          ],
+          "example": {
+            "statement": "Le chargeur d'un téléphone indique une intensité de 0,25 A. Écrire cette intensité en milliampères.",
+            "steps": [
+              "Repérer : l'intensité est donnée en ampères, 0,25 A, et on veut des milliampères.",
+              "Choisir : on passe de la grande unité (A) à la petite (mA), donc le nombre grandit : on multiplie par 1000.",
+              "Calculer : 0,25 × 1000 = 250, donc 0,25 A = 250 mA."
+            ]
+          },
+          "pitfall": "Ne mélange pas les unités et ne te trompe pas de sens. Contre-exemple : 0,3 A = 300 mA, mais pas 0,3 mA (qui serait mille fois plus petit) ni 0,0003 mA. Autre piège : comparer sans convertir. Ainsi 400 mA est plus petit que 0,5 A, alors que 400 est plus grand que 0,5. Pour comparer ou additionner, mets d'abord toutes les valeurs dans la même unité.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à passer des ampères aux milliampères, et inversement.",
+            "questions": [
+              {
+                "content": "Une lampe de poche porte l'inscription « 0,3 A ». Écris cette intensité en milliampères.",
+                "question_type": "numeric",
+                "unit": "mA",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : l'intensité est donnée en ampères : 0,3 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 0,3 × 1000 = 300, donc 0,3 A = 300 mA.",
+                "answers": [
+                  {
+                    "content": "300",
+                    "correct": true
+                  }
+                ],
+                "hint": "Des A vers les mA : le nombre grandit, on multiplie par 1000."
+              },
+              {
+                "content": "Un ampère est égal à ___ milliampères.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la relation entre l'ampère (A) et le milliampère (mA) est celle de la fiche. Étape 2 — Choisir : l'ampère est la grande unité, le milliampère la petite : il en faut 1000 pour faire un ampère. Étape 3 — Calculer : 1 A = 1000 mA, donc la réponse est 1000.",
+                "answers": [
+                  {
+                    "content": "1000",
+                    "correct": true
+                  },
+                  {
+                    "content": "1 000",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au préfixe « milli » : un millième."
+              },
+              {
+                "content": "Un petit ventilateur est traversé par une intensité de 450 mA. Quelle est cette intensité en ampères ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'intensité est donnée en milliampères : 450 mA, et on veut des ampères. Étape 2 — Choisir : on passe de la petite unité (mA) à la grande (A) : le nombre devient plus petit, donc on divise par 1000. Étape 3 — Calculer : 450 ÷ 1000 = 0,45, donc 450 mA = 0,45 A. Les valeurs 450 A et 4,5 A oublient de diviser par 1000, ou divisent mal.",
+                "answers": [
+                  {
+                    "content": "0,45 A",
+                    "correct": true
+                  },
+                  {
+                    "content": "450 A",
+                    "correct": false
+                  },
+                  {
+                    "content": "4,5 A",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,045 A",
+                    "correct": false
+                  }
+                ],
+                "hint": "Des mA vers les A : le nombre devient plus petit, on divise par 1000."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître l'intensité et convertir une intensité",
+              "statement": "Dans cet exercice, tu reconnais l'intensité du courant et tu fais des conversions simples entre ampères et milliampères.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le symbole de l'intensité du courant électrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche la lettre qui désigne la grandeur « intensité du courant ». Étape 2 — Choisir : A et mA sont des symboles d'unités, alors que la grandeur intensité s'écrit avec la lettre I. Étape 3 — Calculer : le symbole de l'intensité est I. La lettre A, elle, est le symbole de son unité, l'ampère.",
+                  "answers": [
+                    {
+                      "content": "I",
+                      "correct": true
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'unité de l'intensité du courant est l'ampère, de symbole A.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on lit l'affirmation : l'unité de l'intensité est l'ampère. Étape 2 — Choisir : les inscriptions des lampes (0,3 A, 0,2 A) utilisent bien l'ampère pour l'intensité. Étape 3 — Calculer : l'affirmation est vraie. Dire que l'unité est le gramme serait une erreur : le gramme est l'unité d'une masse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un petit ventilateur d'atelier est traversé par un courant de 0,15 A. Écris cette intensité en milliampères.",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'intensité est donnée en ampères : 0,15 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 0,15 × 1000 = 150, donc 0,15 A = 150 mA.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la plus grande intensité : 0,5 A ou 400 mA ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les deux intensités sont données dans deux unités différentes : 0,5 A et 400 mA. Étape 2 — Choisir : pour comparer, on met tout en mA : on multiplie 0,5 A par 1000. Étape 3 — Calculer : 0,5 × 1000 = 500, donc 0,5 A = 500 mA. Or 500 mA est plus grand que 400 mA : la plus grande intensité est 0,5 A. L'erreur est de comparer 400 et 0,5 sans convertir.",
+                  "answers": [
+                    {
+                      "content": "0,5 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "400 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont égales",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas les comparer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un électricien lit « 0,3 A » sur une lampe. Un apprenti dit que la lampe supporte 0,3 mA. Que peut-on répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la lampe porte 0,3 A, en ampères. Étape 2 — Choisir : on veut les mA : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 0,3 × 1000 = 300, donc 0,3 A = 300 mA. L'apprenti garde le nombre 0,3 en changeant d'unité : c'est le piège de la fiche, et l'erreur vaut un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "Il se trompe : 0,3 A = 300 mA, ce qui est mille fois plus que 0,3 mA",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, car A et mA sont la même unité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se trompe : 0,3 A = 3 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison, car on ne change pas le nombre quand on change d'unité",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Convertir des intensités à l'atelier de réparation",
+              "statement": "Dans cet exercice, tu convertis des intensités lues sur des appareils d'un atelier de réparation de téléphones.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Des ampères aux milliampères, multiplie par 1000 ; des milliampères aux ampères, divise par 1000.",
+              "questions": [
+                {
+                  "content": "Relie chaque intensité en ampères à la même intensité en milliampères.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : les quatre valeurs de gauche sont en ampères et on veut des milliampères. Étape 2 — Choisir : des A vers les mA, le nombre grandit : on multiplie par 1000. Étape 3 — Calculer : 0,5 × 1000 = 500 ; 1,2 × 1000 = 1200 ; 0,02 × 1000 = 20 ; 0,075 × 1000 = 75. Chaque valeur trouvée est reliée à sa valeur de départ.",
+                  "answers": [
+                    {
+                      "content": "0,5 A",
+                      "match": "500 mA"
+                    },
+                    {
+                      "content": "1,2 A",
+                      "match": "1200 mA"
+                    },
+                    {
+                      "content": "0,02 A",
+                      "match": "20 mA"
+                    },
+                    {
+                      "content": "0,075 A",
+                      "match": "75 mA"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chargeur d'un téléphone débite 2 A. Cette intensité vaut ___ mA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'intensité est donnée en ampères : 2 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 2 × 1000 = 2000, donc 2 A = 2000 mA.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le testeur de l'atelier de réparation affiche 800 mA pour un petit chargeur. Écris cette intensité en ampères.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'intensité est donnée en milliampères : 800 mA, et on veut des ampères. Étape 2 — Choisir : on passe de la petite unité (mA) à la grande (A) : le nombre devient plus petit, donc on divise par 1000. Étape 3 — Calculer : 800 ÷ 1000 = 0,8, donc 800 mA = 0,8 A.",
+                  "answers": [
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour convertir 0,4 A en milliampères.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on lit que 0,4 est en ampères. Étape 2 — Choisir : de A vers mA, on multiplie par 1000. Étape 3 — Calculer : 0,4 × 1000 = 400, puis on écrit 400 mA. Écrire le résultat sans unité serait incomplet.",
+                  "answers": [
+                    {
+                      "content": "Repérer que l'intensité est donnée en ampères."
+                    },
+                    {
+                      "content": "Choisir de multiplier par 1000, car on va d'une grande unité à une petite."
+                    },
+                    {
+                      "content": "Calculer 0,4 × 1000 = 400."
+                    },
+                    {
+                      "content": "Écrire le résultat avec son unité : 400 mA."
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux conversions exactes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on examine quatre conversions, chacune avec son unité de départ. Étape 2 — Choisir : pour chacune, on regarde si on multiplie ou si on divise par 1000. Étape 3 — Calculer : 0,6 × 1000 = 600 et 250 ÷ 1000 = 0,25 sont exacts. 0,4 A vaut 400 mA et non 4 mA ; 30 mA vaut 0,03 A et non 30 A : on a gardé le nombre ou décalé de mauvais rang.",
+                  "answers": [
+                    {
+                      "content": "0,6 A = 600 mA",
+                      "correct": true
+                    },
+                    {
+                      "content": "250 mA = 0,25 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,4 A = 4 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 mA = 30 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour passer de 0,06 A à des milliampères, on divise 0,06 par 1000.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la valeur de départ 0,06 est en ampères, et on veut des milliampères. Étape 2 — Choisir : de A vers mA, le nombre grandit : on multiplie par 1000 (et non on divise). Étape 3 — Calculer : 0,06 × 1000 = 60, donc 0,06 A = 60 mA. Diviser donnerait 0,00006, un nombre minuscule : c'est le mauvais sens.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mesurer l'intensité avec un ampèremètre",
+          "remember": "L'**ampèremètre** mesure l'intensité du courant. On utilise un **multimètre** placé en position **A** (ampèremètre), qui a plusieurs **calibres** : un calibre est l'intensité maximale qu'on peut mesurer (par exemple 10 A, 200 mA ou 20 mA). On le branche **en série** : on ouvre le circuit et on l'intercale, pour que le courant le traverse. On relie la borne **COM** du côté de la borne − du générateur et la borne A (ou mA, selon le calibre) du côté de la borne +. On commence toujours par le **plus grand calibre**, puis on le diminue pour lire plus précisément, sans que l'afficheur indique un dépassement. L'afficheur donne un nombre ; **l'unité est celle du calibre** (A ou mA).",
+          "method": [
+            "Régler le multimètre sur la position A, au plus grand calibre.",
+            "Brancher : ouvrir le circuit, puis intercaler le multimètre en série, avec la borne COM côté borne − du générateur.",
+            "Ajuster : fermer le circuit, puis diminuer le calibre tant que l'afficheur n'indique pas de dépassement.",
+            "Lire le nombre affiché et écrire la valeur avec l'unité du calibre."
+          ],
+          "example": {
+            "statement": "Un électricien du quartier mesure l'intensité du courant dans un circuit simple (pile, interrupteur, lampe). Sur le calibre 10 A, l'afficheur indique 0,12. Il passe au calibre 200 mA : l'afficheur indique 120. Quelle est l'intensité ?",
+            "steps": [
+              "Régler : il met le multimètre en position A, au calibre 10 A, le plus grand, car il ne connaît pas encore l'intensité.",
+              "Brancher : il ouvre le circuit, intercale le multimètre en série avec la lampe, borne COM du côté de la borne − de la pile.",
+              "Ajuster : il ferme le circuit ; 0,12 A est inférieur à 200 mA, il diminue donc le calibre à 200 mA sans dépassement.",
+              "Lire : l'afficheur indique 120 au calibre 200 mA, donc l'intensité est 120 mA, soit 0,12 A."
+            ]
+          },
+          "pitfall": "Ne branche jamais l'ampèremètre aux bornes de la lampe (en dérivation) : il laisse passer presque tout le courant, la lampe s'éteint et l'appareil peut être détruit. Il se met toujours en série. Autre piège : oublier l'unité du calibre. Au calibre 200 mA, l'afficheur « 85 » veut dire 85 mA, c'est-à-dire 0,085 A, et pas 85 A (mille fois trop).",
+          "figure": "mesure-intensite-etapes",
+          "practice": {
+            "statement": "Tu t'entraînes à brancher l'ampèremètre et à lire sa mesure.",
+            "questions": [
+              {
+                "content": "On veut mesurer l'intensité du courant qui traverse une lampe. Comment branche-t-on l'ampèremètre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Régler : on veut l'intensité du courant dans la lampe, donc il faut que ce courant traverse l'appareil. Étape 2 — Brancher : on ouvre le circuit et on intercale l'ampèremètre en série avec la lampe. Étape 3 — Ajuster : on ferme le circuit : le courant traverse la lampe et l'ampèremètre. Étape 4 — Lire : on lit la mesure. Brancher aux bornes de la lampe serait un branchement en dérivation : c'est l'erreur à éviter.",
+                "answers": [
+                  {
+                    "content": "En série avec la lampe, dans le circuit ouvert",
+                    "correct": true
+                  },
+                  {
+                    "content": "Aux bornes de la lampe, en dérivation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aux bornes de la pile, sans ouvrir le circuit",
+                    "correct": false
+                  },
+                  {
+                    "content": "N'importe où, à côté du circuit",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le courant doit passer dans l'ampèremètre."
+              },
+              {
+                "content": "Pour la première mesure d'une intensité inconnue, on choisit ___ du multimètre.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Régler : on ne connaît pas encore l'intensité à mesurer. Étape 2 — Brancher : le multimètre est placé en position A. Étape 3 — Ajuster : on choisit le plus grand calibre : si l'intensité est forte, l'appareil ne risque rien. Étape 4 — Lire : on diminuera le calibre ensuite pour lire plus précisément. Commencer par le plus petit calibre risquerait de dépasser la mesure.",
+                "answers": [
+                  {
+                    "content": "le calibre le plus grand",
+                    "correct": true
+                  },
+                  {
+                    "content": "le calibre le plus petit",
+                    "correct": false
+                  },
+                  {
+                    "content": "le calibre le plus proche de zéro",
+                    "correct": false
+                  },
+                  {
+                    "content": "le calibre le plus léger",
+                    "correct": false
+                  }
+                ],
+                "hint": "Au début, on ne sait pas si l'intensité est grande ou petite."
+              },
+              {
+                "content": "Au calibre 200 mA, l'afficheur du multimètre indique 45. Quelle est l'intensité, en mA ?",
+                "question_type": "numeric",
+                "unit": "mA",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Régler : le multimètre est en position A, au calibre 200 mA. Étape 2 — Brancher : il est branché en série dans le circuit. Étape 3 — Ajuster : le calibre est correct, car 45 est inférieur à 200 et il n'y a pas de dépassement. Étape 4 — Lire : on lit 45 avec l'unité du calibre : 45 mA. Écrire 45 A serait mille fois trop grand.",
+                "answers": [
+                  {
+                    "content": "45",
+                    "correct": true
+                  }
+                ],
+                "hint": "L'unité est celle du calibre choisi."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Brancher l'ampèremètre et lire sa mesure",
+              "statement": "Dans cet exercice, tu choisis le branchement et le calibre d'un ampèremètre, puis tu lis sa mesure.",
+              "exercise_type": "fixation",
+              "figure": "mesure-intensite-etapes",
+              "questions": [
+                {
+                  "content": "Quel appareil mesure l'intensité du courant électrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Régler : on cherche un appareil qui mesure l'intensité du courant. Étape 2 — Brancher : dans un multimètre, la position A est celle de l'ampèremètre. Étape 3 — Ajuster : on retient l'ampèremètre, qui se branche en série. Étape 4 — Lire : la balance mesure une masse et le thermomètre une température : ils ne mesurent pas l'intensité d'un courant.",
+                  "answers": [
+                    {
+                      "content": "L'ampèremètre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La balance",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le thermomètre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ampèremètre se branche en série dans le circuit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Régler : on lit l'affirmation : branchement de l'ampèremètre. Étape 2 — Brancher : pour que le courant le traverse, on ouvre le circuit et on l'intercale en série. Étape 3 — Ajuster : on referme le circuit et on règle le calibre. Étape 4 — Lire : l'affirmation est vraie. Un branchement en dérivation, aux bornes d'un appareil, serait faux et dangereux pour l'appareil.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le multimètre est en position A, calibre 10 A. L'afficheur indique 0,35. Quelle est l'intensité, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Régler : le multimètre est en position A, au calibre 10 A. Étape 2 — Brancher : il est branché en série. Étape 3 — Ajuster : 0,35 est inférieur à 10 : le calibre convient, sans dépassement. Étape 4 — Lire : l'unité est celle du calibre, l'ampère : 0,35 A. On ne lit pas 0,35 mA.",
+                  "answers": [
+                    {
+                      "content": "0,35",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une première mesure d'une intensité inconnue, quel calibre choisit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Régler : l'intensité à mesurer est inconnue. Étape 2 — Brancher : on branche le multimètre en position A. Étape 3 — Ajuster : on veut éviter un dépassement : on met le plus grand calibre. Étape 4 — Lire : on diminuera ensuite le calibre pour lire plus précisément. Un petit calibre au départ risquerait de dépasser la mesure.",
+                  "answers": [
+                    {
+                      "content": "Le plus grand calibre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plus petit calibre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un calibre en milliampères au hasard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le calibre qui affiche zéro",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un apprenti branche l'ampèremètre aux bornes d'une lampe, sans ouvrir le circuit. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Régler : l'apprenti a branché l'appareil en dérivation, aux bornes de la lampe. Étape 2 — Brancher : un ampèremètre doit être en série, et non en dérivation. Étape 3 — Ajuster : un ampèremètre laisse passer presque tout le courant : la lampe n'est plus parcourue. Étape 4 — Lire : la lampe s'éteint, la mesure est fausse et l'appareil peut être abîmé. Il fallait ouvrir le circuit et l'intercaler en série.",
+                  "answers": [
+                    {
+                      "content": "Il laisse passer presque tout le courant : la lampe s'éteint et l'appareil risque d'être détruit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il mesure correctement l'intensité de la lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lampe brille plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change, car les deux montages sont équivalents",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Mesurer l'intensité dans l'atelier de l'électricien",
+              "statement": "Dans cet exercice, tu suis les étapes d'une mesure d'intensité dans l'atelier d'un électricien du quartier.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Mets d'abord l'appareil en position A, au plus grand calibre ; branche-le toujours en série.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour mesurer l'intensité dans un circuit.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Régler : position A, plus grand calibre. Étape 2 — Brancher : on ouvre le circuit et on intercale le multimètre en série. Étape 3 — Ajuster : on ferme le circuit et on diminue le calibre. Étape 4 — Lire : nombre et unité du calibre. Brancher avant de régler exposerait l'appareil à une intensité trop forte.",
+                  "answers": [
+                    {
+                      "content": "Régler le multimètre en position A, au plus grand calibre."
+                    },
+                    {
+                      "content": "Ouvrir le circuit et intercaler le multimètre en série."
+                    },
+                    {
+                      "content": "Fermer le circuit et diminuer le calibre sans dépassement."
+                    },
+                    {
+                      "content": "Lire le nombre et écrire l'unité du calibre."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément du multimètre à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Régler : quatre éléments du multimètre sont à relier à un rôle. Étape 2 — Brancher : la position A sert à mesurer une intensité ; le calibre fixe le maximum mesurable. Étape 3 — Ajuster : la borne COM est la borne commune, du côté de la borne − du générateur ; l'afficheur montre le nombre. Étape 4 — Lire : chaque élément a un seul rôle, ce qui donne les quatre liaisons. Le nombre affiché prend l'unité du calibre.",
+                  "answers": [
+                    {
+                      "content": "Position A",
+                      "match": "Mesurer une intensité"
+                    },
+                    {
+                      "content": "Calibre",
+                      "match": "Intensité maximale qu'on peut mesurer"
+                    },
+                    {
+                      "content": "Borne COM",
+                      "match": "Borne commune, côté − du générateur"
+                    },
+                    {
+                      "content": "Afficheur",
+                      "match": "Montre le nombre de la mesure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux gestes corrects pour une première mesure d'intensité.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Régler : on cherche les deux gestes corrects d'une première mesure d'intensité. Étape 2 — Brancher : le multimètre doit être en position A, car on mesure une intensité. Étape 3 — Ajuster : on commence par le plus grand calibre pour éviter un dépassement. Étape 4 — Lire : brancher aux bornes de la lampe est un branchement en dérivation, faux pour un ampèremètre ; commencer par le plus petit calibre risque un dépassement.",
+                  "answers": [
+                    {
+                      "content": "Placer le multimètre en position A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Commencer par le plus grand calibre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brancher le multimètre aux bornes de la lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Commencer par le plus petit calibre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer l'intensité qui traverse un appareil, on branche l'ampèremètre en ___ avec cet appareil.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Régler : on veut l'intensité qui traverse l'appareil. Étape 2 — Brancher : il faut que le courant passe dans l'ampèremètre : on ouvre le circuit et on l'intercale. Étape 3 — Ajuster : le branchement est donc en série. Étape 4 — Lire : un branchement en dérivation (aux bornes de l'appareil) est l'erreur tentante : il fausse la mesure.",
+                  "answers": [
+                    {
+                      "content": "série",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au calibre 200 mA, l'afficheur indique 85. L'unité de la mesure est le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Régler : le multimètre est en position A, au calibre 200 mA. Étape 2 — Brancher : il est branché en série. Étape 3 — Ajuster : 85 est inférieur à 200 : pas de dépassement. Étape 4 — Lire : l'unité est celle du calibre, le milliampère : 85 mA, soit 0,085 A. Lire 85 A serait mille fois trop grand.",
+                  "answers": [
+                    {
+                      "content": "milliampère",
+                      "correct": true
+                    },
+                    {
+                      "content": "ampère",
+                      "correct": false
+                    },
+                    {
+                      "content": "kiloampère",
+                      "correct": false
+                    },
+                    {
+                      "content": "gramme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le multimètre est en position A, au calibre 10 A. L'afficheur indique 0,12. Écris cette intensité en milliampères.",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Régler : le multimètre est en position A, calibre 10 A. Étape 2 — Brancher : il est branché en série. Étape 3 — Ajuster : le calibre convient (0,12 est inférieur à 10) ; pour lire plus précisément, on peut descendre au calibre 200 mA, où l'afficheur donnerait 120. Étape 4 — Lire : on lit 0,12 A ; on convertit en mA en multipliant par 1000 : 0,12 × 1000 = 120, donc 120 mA. L'unité du calibre est l'ampère, pas le milliampère.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "L'intensité dans un circuit en série",
+          "remember": "Dans un **circuit en série**, tous les dipôles (pile, interrupteur, lampes) sont dans **une seule boucle** : le courant ne se partage nulle part. **L'intensité du courant est la même en tout point du circuit** : avant ou après une lampe, entre deux lampes, près de la pile. C'est la **loi d'unicité de l'intensité** : I = I1 = I2. Changer l'ordre des dipôles ne change pas l'intensité. Une lampe utilise l'énergie du courant, mais elle ne le fait pas diminuer.",
+          "method": [
+            "Repérer que le circuit est en série : une seule boucle, aucun point où le courant se partage.",
+            "Appliquer la loi d'unicité : l'intensité est la même en tout point du circuit.",
+            "Conclure : écrire l'intensité cherchée avec son unité, sans la changer de valeur."
+          ],
+          "example": {
+            "statement": "Dans un circuit en série (pile, interrupteur, lampe L1, lampe L2), un ampèremètre placé entre la pile et L1 indique 0,2 A. Quelle est l'intensité du courant qui traverse L2 ?",
+            "steps": [
+              "Repérer : les deux lampes sont dans une seule boucle avec la pile, c'est donc un circuit en série.",
+              "Appliquer : dans un circuit en série, l'intensité est la même en tout point.",
+              "Conclure : l'intensité dans L2 est la même que celle mesurée près de la pile, soit 0,2 A."
+            ]
+          },
+          "pitfall": "Ne crois pas que l'intensité diminue en traversant une lampe, comme si la lampe « mangeait » du courant. Contre-exemple : un ampèremètre placé avant la lampe indique 0,2 A, un autre placé après indique aussi 0,2 A. Si le courant s'usait, le second indiquerait moins. La lampe reçoit de l'énergie, mais le courant garde la même intensité.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser la loi d'unicité dans un circuit en série.",
+            "questions": [
+              {
+                "content": "Dans un circuit en série, un ampèremètre placé près de la pile indique 0,4 A. Quelle intensité indique un ampèremètre placé après la dernière lampe ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le circuit est en série : une seule boucle, le courant ne se partage pas. Étape 2 — Appliquer : dans un circuit en série, l'intensité est la même en tout point. Étape 3 — Conclure : l'ampèremètre placé après la dernière lampe indique aussi 0,4 A. Penser que l'intensité diminue serait confondre énergie et courant.",
+                "answers": [
+                  {
+                    "content": "0,4 A",
+                    "correct": true
+                  },
+                  {
+                    "content": "Moins de 0,4 A",
+                    "correct": false
+                  },
+                  {
+                    "content": "Plus de 0,4 A",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 A",
+                    "correct": false
+                  }
+                ],
+                "hint": "Y a-t-il un endroit où le courant se partage ?"
+              },
+              {
+                "content": "Dans un circuit en série, on peut changer l'ordre des lampes sans changer l'intensité du courant.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : les lampes sont l'une derrière l'autre dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point, donc elle ne dépend pas de l'ordre des dipôles. Étape 3 — Conclure : l'affirmation est vraie : on échange L1 et L2, l'intensité reste la même.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'intensité est la même partout dans la boucle."
+              },
+              {
+                "content": "Dans un circuit en série, l'ampèremètre entre l'interrupteur et la lampe L1 indique 250 mA. Quelle intensité indique l'ampèremètre entre L1 et L2, en mA ?",
+                "question_type": "numeric",
+                "unit": "mA",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le circuit est en série avec les lampes L1 et L2 dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point, avec la même valeur et la même unité. Étape 3 — Conclure : l'ampèremètre entre L1 et L2 indique donc 250 mA, comme le premier.",
+                "answers": [
+                  {
+                    "content": "250",
+                    "correct": true
+                  }
+                ],
+                "hint": "Même valeur, même unité."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Appliquer la loi d'unicité de l'intensité",
+              "statement": "Dans cet exercice, tu utilises la loi d'unicité pour trouver l'intensité en un point d'un circuit en série.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans quel circuit l'intensité est-elle la même en tout point ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche le montage sans partage du courant. Étape 2 — Appliquer : dans un circuit en série, il n'y a qu'une boucle : l'intensité est la même en tout point. Étape 3 — Conclure : c'est le circuit en série. Dans un circuit en dérivation, le courant se partage et les intensités ne sont pas les mêmes partout.",
+                  "answers": [
+                    {
+                      "content": "Dans un circuit en série",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans un circuit en dérivation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans tous les circuits sans exception",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement dans un circuit sans lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, l'intensité est plus petite après la lampe qu'avant la lampe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on compare l'intensité avant la lampe et après la lampe, dans un circuit en série. Étape 2 — Appliquer : la loi d'unicité dit que l'intensité est la même en tout point. Étape 3 — Conclure : l'affirmation est fausse. Une lampe n'use pas le courant : l'intensité est la même avant et après.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, un ampèremètre placé près de la pile indique 0,3 A. Quelle intensité indique un ampèremètre placé entre L1 et L2, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le circuit est en série (L1 et L2 dans une seule boucle). Étape 2 — Appliquer : l'intensité est la même en tout point. Étape 3 — Conclure : l'ampèremètre entre L1 et L2 indique 0,3 A.",
+                  "answers": [
+                    {
+                      "content": "0,3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, l'intensité est ___ en tout point.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on cherche le comportement de l'intensité dans une seule boucle. Étape 2 — Appliquer : la loi d'unicité dit que l'intensité est la même en tout point. Étape 3 — Conclure : on choisit « la même ». Dire qu'elle diminue après chaque lampe serait croire que la lampe mange du courant.",
+                  "answers": [
+                    {
+                      "content": "la même",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus grande près de la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "plus petite après chaque lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "nulle dans les fils",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Dans mon circuit en série, la lampe L1 use le courant, donc L2 est traversée par un courant plus faible. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les lampes L1 et L2 sont l'une derrière l'autre dans un circuit en série. Étape 2 — Appliquer : la loi d'unicité dit que l'intensité est la même en tout point. Étape 3 — Conclure : le courant qui traverse L2 a la même intensité que celui qui traverse L1. L'élève confond énergie utilisée et courant qui disparaît : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "L'intensité est la même dans L1 et dans L2, car une lampe n'use pas le courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, car L2 est la deuxième lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison, car le courant diminue de moitié à chaque lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a tort, car L2 n'est traversée par aucun courant",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Mesures dans un circuit en série à l'atelier",
+              "statement": "Dans cet exercice, tu exploites des mesures faites dans des circuits en série à l'atelier de l'électricien.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "En série, l'intensité garde la même valeur en tout point : ne change que l'unité, si besoin.",
+              "questions": [
+                {
+                  "content": "Dans un circuit en série, choisis les trois affirmations vraies.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on examine six affirmations sur un circuit en série (une seule boucle). Étape 2 — Appliquer : la loi d'unicité dit que l'intensité est la même en tout point, donc l'ordre des dipôles n'a pas d'effet et le courant ne se partage pas. Étape 3 — Conclure : les trois affirmations vraies sont : l'intensité est la même près de la pile et après la dernière lampe, l'ordre des lampes ne change rien, et le courant ne se partage nulle part. Les trois autres supposent que le courant diminue ou change de valeur : c'est faux en série.",
+                  "answers": [
+                    {
+                      "content": "L'intensité est la même près de la pile et après la dernière lampe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Changer l'ordre des lampes ne change pas l'intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le courant ne se partage nulle part",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité diminue après chaque lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité est plus grande dans la première lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité dans les fils est nulle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, relie chaque mesure connue à l'intensité demandée.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on a quatre mesures dans des circuits en série. Étape 2 — Appliquer : l'intensité est la même en tout point : on garde la valeur, en changeant au besoin l'unité (A ou mA). Étape 3 — Conclure : 0,1 A reste 0,1 A ; 0,3 A reste 0,3 A ; 250 mA = 0,25 A ; 0,4 A = 400 mA. Chaque mesure est reliée à la valeur égale.",
+                  "answers": [
+                    {
+                      "content": "Près de la pile : 0,1 A",
+                      "match": "Après la dernière lampe : 0,1 A"
+                    },
+                    {
+                      "content": "Près de la pile : 0,3 A",
+                      "match": "Entre deux lampes : 0,3 A"
+                    },
+                    {
+                      "content": "Après L1 : 250 mA",
+                      "match": "Près de la pile : 0,25 A"
+                    },
+                    {
+                      "content": "Entre L1 et L2 : 0,4 A",
+                      "match": "Après L2 : 400 mA"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, l'ampèremètre placé avant L1 indique 120 mA. Placé après L3, il indique ___ mA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le circuit en série comporte L1, L2 et L3 dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point du circuit. Étape 3 — Conclure : après L3, l'ampèremètre indique 120 mA aussi. La valeur ne diminue pas lampe après lampe.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une guirlande de fête a trois lampes en série. Un ampèremètre entre la 1re et la 2e lampe indique 0,15 A. Quelle intensité, en mA, passe dans la 3e lampe ?",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les trois lampes sont en série (une seule boucle) et l'ampèremètre indique 0,15 A. Étape 2 — Appliquer : l'intensité est la même en tout point : elle vaut 0,15 A dans la 3e lampe. Étape 3 — Conclure : pour l'écrire en milliampères, on multiplie par 1000 : 0,15 × 1000 = 150, donc 150 mA. L'intensité n'a pas changé, seule l'unité est différente.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On branche un ampèremètre entre L1 et L2 dans un circuit en série, puis on l'enlève et on le place avant L1 : la mesure change.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on compare deux positions de l'ampèremètre dans le même circuit en série. Étape 2 — Appliquer : la loi d'unicité dit que l'intensité est la même en tout point. Étape 3 — Conclure : la mesure ne change pas. Croire le contraire, c'est penser que le courant se transforme au passage d'une lampe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un électricien a un circuit en série avec deux lampes. Il échange L1 et L2 de place. L'intensité mesurée près de la pile est ...",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le circuit reste en série, avec les mêmes dipôles dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point et ne dépend pas de l'ordre des lampes. Étape 3 — Conclure : l'intensité est inchangée. Elle ne double pas et ne diminue pas, car on n'a rien ajouté ni enlevé.",
+                  "answers": [
+                    {
+                      "content": "Inchangée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Doublée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Divisée par deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nulle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "L'intensité dans un circuit en dérivation",
+          "remember": "Dans un **circuit en dérivation**, le courant part de la pile par la **branche principale**, puis se partage en **branches dérivées** à un **nœud** (un point où se rejoignent au moins trois fils). C'est la **loi des nœuds** (ou loi d'additivité des intensités) : **l'intensité dans la branche principale est égale à la somme des intensités dans les branches dérivées**. Avec deux branches : I = I1 + I2, donc I1 = I − I2. On additionne des intensités exprimées dans la **même unité**. Chaque branche dérivée est traversée par une intensité plus petite que celle de la branche principale.",
+          "method": [
+            "Repérer la branche principale et les branches dérivées, avec leurs intensités connues et celle qui est cherchée.",
+            "Écrire la loi des nœuds : intensité de la branche principale = somme des intensités des branches dérivées.",
+            "Calculer en mettant d'abord toutes les intensités dans la même unité : une addition pour la branche principale, une soustraction pour une branche dérivée.",
+            "Conclure avec l'unité et vérifier que chaque branche dérivée a une intensité plus petite que la branche principale."
+          ],
+          "example": {
+            "statement": "Deux lampes L1 et L2 sont montées en dérivation. L'ampèremètre de la branche principale indique 0,5 A, celui de la branche de L1 indique 0,3 A. Quelle est l'intensité dans la branche de L2 ?",
+            "steps": [
+              "Repérer : la branche principale a I = 0,5 A, la branche de L1 a I1 = 0,3 A, on cherche I2 dans la branche de L2.",
+              "Écrire : la loi des nœuds donne I = I1 + I2, donc I2 = I − I1.",
+              "Calculer : les deux valeurs sont en ampères ; I2 = 0,5 − 0,3 = 0,2 A.",
+              "Conclure : l'intensité dans la branche de L2 est 0,2 A, plus petite que 0,5 A, donc le résultat est cohérent."
+            ]
+          },
+          "pitfall": "Ne confonds pas avec le circuit en série : en dérivation, l'intensité n'est pas la même partout. Contre-exemple : avec I = 0,5 A dans la branche principale, croire que chaque branche a aussi 0,5 A donnerait 0,5 + 0,5 = 1 A au nœud, ce qui dépasse la valeur de la branche principale. Autre piège : additionner sans convertir. 0,3 A + 200 mA ne vaut pas 200,3 : il faut écrire 0,3 A + 0,2 A = 0,5 A.",
+          "figure": "loi-des-noeuds",
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser la loi des nœuds avec deux branches dérivées.",
+            "questions": [
+              {
+                "content": "Deux lampes sont en dérivation. Les branches dérivées ont pour intensités 0,2 A et 0,3 A. Quelle est l'intensité dans la branche principale, en ampères ?",
+                "question_type": "numeric",
+                "unit": "A",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : les branches dérivées ont I1 = 0,2 A et I2 = 0,3 A, on cherche I dans la branche principale. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : les deux valeurs sont en ampères : I = 0,2 + 0,3 = 0,5 A. Étape 4 — Conclure : l'intensité dans la branche principale est 0,5 A, plus grande que chacune des deux autres, donc cohérente.",
+                "answers": [
+                  {
+                    "content": "0,5",
+                    "correct": true
+                  }
+                ],
+                "hint": "La branche principale a l'intensité la plus grande."
+              },
+              {
+                "content": "Dans un circuit en dérivation, la branche principale est traversée par 0,6 A et une branche dérivée par 0,4 A. Quelle est l'intensité dans l'autre branche dérivée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la branche principale a I = 0,6 A, une branche dérivée a I1 = 0,4 A, on cherche I2. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : les deux valeurs sont en ampères : I2 = 0,6 − 0,4 = 0,2 A. Étape 4 — Conclure : l'intensité cherchée est 0,2 A. Les valeurs 1 A (somme) et 0,6 A ou 0,4 A (même intensité partout) viennent d'erreurs : somme au lieu de différence, ou confusion avec le montage en série.",
+                "answers": [
+                  {
+                    "content": "0,2 A",
+                    "correct": true
+                  },
+                  {
+                    "content": "1 A",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,6 A",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,4 A",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pour une branche dérivée, on soustrait."
+              },
+              {
+                "content": "Dans un circuit en dérivation à deux lampes, l'intensité dans la branche principale est plus petite que dans chacune des branches dérivées.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on compare la branche principale aux branches dérivées. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : comme I1 et I2 sont positives, I est plus grande que chacune d'elles. Étape 4 — Conclure : l'affirmation est fausse : la branche principale a l'intensité la plus grande.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "La branche principale est la somme des deux autres."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Appliquer la loi des nœuds",
+              "statement": "Dans cet exercice, tu appliques la loi des nœuds pour trouver l'intensité d'une branche.",
+              "exercise_type": "fixation",
+              "figure": "loi-des-noeuds",
+              "questions": [
+                {
+                  "content": "Que dit la loi des nœuds pour un circuit en dérivation à deux branches dérivées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : I est l'intensité de la branche principale, I1 et I2 celles des branches dérivées. Étape 2 — Écrire : la loi des nœuds dit que la branche principale a l'intensité égale à la somme des branches dérivées. Étape 3 — Calculer : on retient I = I1 + I2. La formule I = I1 = I2 est celle du circuit en série. Étape 4 — Conclure : une différence ou un produit ne décrivent pas un partage du courant.",
+                  "answers": [
+                    {
+                      "content": "I = I1 + I2",
+                      "correct": true
+                    },
+                    {
+                      "content": "I = I1 − I2",
+                      "correct": false
+                    },
+                    {
+                      "content": "I = I1 = I2",
+                      "correct": false
+                    },
+                    {
+                      "content": "I = I1 × I2",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, I1 = 0,1 A et I2 = 0,4 A. Quelle est l'intensité I de la branche principale, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les branches dérivées ont I1 = 0,1 A et I2 = 0,4 A. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : les deux valeurs sont en ampères : I = 0,1 + 0,4 = 0,5 A. Étape 4 — Conclure : la branche principale a une intensité de 0,5 A, plus grande que 0,4 A : c'est cohérent.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, la branche principale a I = 0,9 A et une branche dérivée a I1 = 0,5 A. Quelle est I2, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on connaît I = 0,9 A et I1 = 0,5 A, on cherche I2. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : les valeurs sont en ampères : I2 = 0,9 − 0,5 = 0,4 A. Étape 4 — Conclure : l'intensité de l'autre branche est 0,4 A, plus petite que 0,9 A : c'est cohérent.",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, l'intensité est la même dans la branche principale et dans chaque branche dérivée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on compare les intensités de la branche principale et des branches dérivées. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2 : l'intensité de la branche principale est une somme. Étape 3 — Calculer : si I = I1 = I2, on aurait I = I + I = 2I : c'est impossible, sauf si I = 0. Étape 4 — Conclure : l'affirmation est fausse. Elle décrit le circuit en série et non le circuit en dérivation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une branche principale a I = 0,5 A. Un élève trouve I1 = 0,4 A et I2 = 0,4 A dans les deux branches dérivées. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la branche principale a I = 0,5 A, les branches dérivées 0,4 A chacune. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : 0,4 + 0,4 = 0,8 A, qui n'est pas égal à 0,5 A. Étape 4 — Conclure : les mesures ne respectent pas la loi des nœuds : au moins une est fausse. Il ne suffit pas que chaque valeur soit inférieure à 0,5 A.",
+                  "answers": [
+                    {
+                      "content": "Il y a une erreur, car 0,4 + 0,4 = 0,8 A est différent de 0,5 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tout est correct, car 0,4 est inférieur à 0,5",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a une erreur, car I1 et I2 devraient être égales à 0,5 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout est correct, car on ne peut pas vérifier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Intensités du banc de charge de la boutique",
+              "statement": "Dans cet exercice, tu traites des intensités en dérivation sur le banc de charge d'une boutique de réparation de téléphones.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Mets toutes les intensités dans la même unité, puis additionne pour la branche principale ou soustrais pour une branche dérivée.",
+              "questions": [
+                {
+                  "content": "Au banc de charge de la boutique de réparation, deux téléphones sont en dérivation. Les branches dérivées ont pour intensités 500 mA et 0,8 A. Quelle est l'intensité de la branche principale, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les branches dérivées ont I1 = 500 mA et I2 = 0,8 A, on cherche I. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : il faut la même unité : 500 mA = 0,5 A, puis I = 0,5 + 0,8 = 1,3 A. Étape 4 — Conclure : la branche principale a 1,3 A. Additionner 500 et 0,8 sans convertir donnerait 500,8 : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "1,3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, la branche principale a 450 mA et une branche dérivée 150 mA. L'autre branche dérivée a ___ mA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on connaît I = 450 mA et I1 = 150 mA, on cherche I2. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : les deux valeurs sont en mA : I2 = 450 − 150 = 300 mA. Étape 4 — Conclure : l'autre branche a 300 mA, plus petite que 450 mA : c'est cohérent. Additionner 450 et 150 serait l'erreur.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque couple d'intensités des branches dérivées à l'intensité de la branche principale.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on a quatre couples d'intensités de branches dérivées. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : 0,1 + 0,2 = 0,3 ; 0,3 + 0,4 = 0,7 ; 0,2 + 0,6 = 0,8 ; 0,5 + 0,5 = 1, tout en ampères. Étape 4 — Conclure : chaque couple est relié à sa somme, qui est l'intensité de la branche principale.",
+                  "answers": [
+                    {
+                      "content": "0,1 A et 0,2 A",
+                      "match": "0,3 A"
+                    },
+                    {
+                      "content": "0,3 A et 0,4 A",
+                      "match": "0,7 A"
+                    },
+                    {
+                      "content": "0,2 A et 0,6 A",
+                      "match": "0,8 A"
+                    },
+                    {
+                      "content": "0,5 A et 0,5 A",
+                      "match": "1 A"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on examine quatre affirmations sur un circuit en dérivation. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : si I est une somme de nombres positifs, elle est plus grande que chaque terme. Étape 4 — Conclure : la somme des intensités pour la branche principale et la comparaison de chaque branche à cette somme sont vraies. Les deux autres supposent un partage impossible : l'une décrit un circuit en série, l'autre inverse la comparaison.",
+                  "answers": [
+                    {
+                      "content": "L'intensité de la branche principale est la somme des intensités des branches dérivées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque branche dérivée a une intensité plus petite que la branche principale",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité est la même dans toutes les branches",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité de la branche principale est la plus petite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver I2 quand on connaît I et I1.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on identifie I, I1 et I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : la soustraction, dans une seule unité. Étape 4 — Conclure : unité écrite et résultat vérifié. Calculer avant d'écrire la loi mène à additionner à tort.",
+                  "answers": [
+                    {
+                      "content": "Repérer I, I1 et l'intensité cherchée I2."
+                    },
+                    {
+                      "content": "Écrire la loi des nœuds : I = I1 + I2, donc I2 = I − I1."
+                    },
+                    {
+                      "content": "Calculer la soustraction, avec toutes les valeurs dans la même unité."
+                    },
+                    {
+                      "content": "Conclure avec l'unité et vérifier que I2 est plus petite que I."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour deux branches dérivées de 0,3 A et de 200 mA, l'intensité de la branche principale est 200,3 A.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les branches dérivées ont 0,3 A et 200 mA, deux unités différentes. Étape 2 — Écrire : la loi des nœuds demande I = I1 + I2, avec la même unité. Étape 3 — Calculer : 200 mA = 0,2 A, donc I = 0,3 + 0,2 = 0,5 A. Étape 4 — Conclure : l'intensité vaut 0,5 A. Le résultat 200,3 A vient d'une addition sans conversion et il est absurde.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Interrogation : le circuit en série de l'atelier",
+          "statement": "Dans l'atelier d'un électricien du quartier, un circuit en série comprend une pile, un interrupteur et deux lampes L1 et L2. Un multimètre sert d'ampèremètre.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pour mesurer l'intensité du courant qui traverse la lampe L1, comment branche-t-on le multimètre en position A ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Régler : le multimètre est en position A, au plus grand calibre. Étape 2 — Brancher : on veut l'intensité qui traverse L1 : on ouvre le circuit et on intercale le multimètre en série avec L1, borne COM côté borne − de la pile. Étape 3 — Ajuster : on ferme le circuit et on diminue le calibre. Étape 4 — Lire : on lit la mesure. Brancher aux bornes de L1 (en dérivation) est l'erreur tentante : l'appareil laisse passer presque tout le courant, la lampe s'éteint et la mesure est fausse.",
+              "answers": [
+                {
+                  "content": "En série avec L1, dans le circuit ouvert",
+                  "correct": true
+                },
+                {
+                  "content": "Aux bornes de L1, en dérivation",
+                  "correct": false
+                },
+                {
+                  "content": "Aux bornes de la pile, sans ouvrir le circuit",
+                  "correct": false
+                },
+                {
+                  "content": "Entre L1 et L2 sans le relier à la borne COM",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avant la première mesure d'une intensité inconnue, quel calibre choisit-on ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Régler : la position est A et l'intensité est inconnue. Étape 2 — Brancher : le multimètre est en série. Étape 3 — Ajuster : on part du plus grand calibre, puis on le diminue tant qu'il n'y a pas de dépassement. Étape 4 — Lire : la lecture se fait avec le calibre le plus précis sans dépassement. Commencer par le plus petit calibre est l'erreur tentante : si l'intensité est plus grande que le calibre, l'afficheur indique un dépassement et on risque d'abîmer l'appareil.",
+              "answers": [
+                {
+                  "content": "Le plus grand calibre",
+                  "correct": true
+                },
+                {
+                  "content": "Le plus petit calibre",
+                  "correct": false
+                },
+                {
+                  "content": "Le calibre 200 mA toujours",
+                  "correct": false
+                },
+                {
+                  "content": "Un calibre en grammes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au calibre 200 mA, l'afficheur du multimètre en série avec L1 indique 60. Quelle est l'intensité, en mA ?",
+              "question_type": "numeric",
+              "unit": "mA",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Régler : position A, calibre 200 mA. Étape 2 — Brancher : multimètre en série avec L1. Étape 3 — Ajuster : 60 est inférieur à 200 : le calibre convient. Étape 4 — Lire : on lit 60 avec l'unité du calibre : 60 mA. Écrire 60 A serait l'erreur tentante : cela ferait mille fois trop grand, l'unité de la lecture est celle du calibre.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'intensité dans L1 est 60 mA. Écris-la en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : l'intensité est en milliampères, 60 mA. Étape 2 — Choisir : de mA vers A, le nombre devient plus petit : on divise par 1000. Étape 3 — Calculer : 60 ÷ 1000 = 0,06, donc 60 mA = 0,06 A. Multiplier par 1000 donnerait 60 000 A, valeur absurde.",
+              "answers": [
+                {
+                  "content": "0,06",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le circuit est en série. Le multimètre près de la pile indique 60 mA. Quelle intensité traverse L2, en mA ?",
+              "question_type": "numeric",
+              "unit": "mA",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : L1 et L2 sont dans une seule boucle : c'est un circuit en série. Étape 2 — Appliquer : l'intensité est la même en tout point. Étape 3 — Conclure : l'intensité dans L2 est la même que près de la pile : 60 mA. Penser que L2 reçoit moins de courant que L1 est faux : une lampe n'use pas le courant.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce circuit en série, la lampe L2, placée après L1, est traversée par un courant d'intensité plus faible que L1.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Repérer : le circuit est en série, avec L1 puis L2. Étape 2 — Appliquer : la loi d'unicité donne la même intensité en tout point. Étape 3 — Conclure : L2 est traversée par la même intensité que L1. L'affirmation est fausse : croire que L1 « mange » du courant confond énergie et courant.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Interrogation : le banc de charge de la boutique",
+          "statement": "Dans une boutique de réparation de téléphones, un banc de charge alimente deux téléphones montés en dérivation. Des multimètres en position A mesurent les intensités dans chaque branche.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un banc de charge alimente deux téléphones en dérivation. Quelle relation lie l'intensité I de la branche principale aux intensités I1 et I2 des deux branches ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : la branche principale a I, les deux branches des téléphones ont I1 et I2. Étape 2 — Écrire : la loi des nœuds : I = I1 + I2. Étape 3 — Calculer : aucun calcul numérique n'est demandé ici. Étape 4 — Conclure : la bonne relation est I = I1 + I2. I = I1 = I2 est l'erreur tentante : c'est la loi du circuit en série, pas celle du circuit en dérivation.",
+              "answers": [
+                {
+                  "content": "I = I1 + I2",
+                  "correct": true
+                },
+                {
+                  "content": "I = I1 = I2",
+                  "correct": false
+                },
+                {
+                  "content": "I = I1 − I2",
+                  "correct": false
+                },
+                {
+                  "content": "I = I1 × I2",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au banc de charge, le téléphone 1 prend 0,7 A et le téléphone 2 prend 0,4 A. Quelle est l'intensité de la branche principale, en ampères ?",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : I1 = 0,7 A, I2 = 0,4 A, on cherche I. Étape 2 — Écrire : I = I1 + I2. Étape 3 — Calculer : 0,7 + 0,4 = 1,1 A, les deux valeurs étant en ampères. Étape 4 — Conclure : la branche principale a 1,1 A, plus que chaque branche. Prendre 0,7 A (la plus grande valeur) est l'erreur tentante : en dérivation, les intensités s'additionnent.",
+              "answers": [
+                {
+                  "content": "1,1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Lors d'un second essai du banc de charge, la branche principale a 1,2 A et le téléphone 1 prend 0,7 A. Quelle est l'intensité du téléphone 2, en ampères ?",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : I = 1,2 A, I1 = 0,7 A, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 1,2 − 0,7 = 0,5 A. Étape 4 — Conclure : I2 = 0,5 A, plus petite que 1,2 A : c'est cohérent. Additionner 1,2 et 0,7 est l'erreur tentante : cela donnerait plus que la branche principale.",
+              "answers": [
+                {
+                  "content": "0,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Lors du second essai, la branche principale du banc de charge a 1,2 A. Cette intensité vaut ___ mA.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer : l'intensité est donnée en ampères : 1,2 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 1,2 × 1000 = 1200, donc 1,2 A = 1200 mA. Garder 1,2 en changeant d'unité serait l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "1200",
+                  "correct": true
+                },
+                {
+                  "content": "1 200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève mesure I = 0,8 A sur la branche principale, I1 = 0,5 A et I2 = 0,5 A sur les deux branches. Que peut-on dire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : I = 0,8 A, I1 = 0,5 A, I2 = 0,5 A. Étape 2 — Écrire : la loi des nœuds exige I = I1 + I2. Étape 3 — Calculer : 0,5 + 0,5 = 1 A. Étape 4 — Conclure : 1 A est différent de 0,8 A : au moins une mesure est fausse. Dire que I1 et I2 devraient valoir 0,8 A, c'est appliquer la loi du circuit en série, ce qui est faux en dérivation.",
+              "answers": [
+                {
+                  "content": "La mesure est incohérente, car 0,5 + 0,5 = 1 A est différent de 0,8 A",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est cohérente, car chaque valeur est inférieure à 0,8 A",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est cohérente, car I1 = I2",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est incohérente, car I1 et I2 devraient être égales à 0,8 A",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un circuit en dérivation à deux téléphones, la branche d'un téléphone peut avoir une intensité plus grande que la branche principale.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Repérer : la branche principale a I, un téléphone a I1. Étape 2 — Écrire : I = I1 + I2, avec I2 positive. Étape 3 — Calculer : on a donc I supérieure ou égale à I1. Étape 4 — Conclure : I1 ne peut pas dépasser I. L'affirmation est fausse : une branche dérivée ne peut pas recevoir plus de courant que la branche principale.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Devoir : deux lampes en dérivation à l'atelier",
+          "statement": "Un électricien monte deux lampes L1 et L2 en dérivation avec une pile. Un multimètre en position A mesure l'intensité dans chaque branche, comme à l'atelier du quartier.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un électricien monte deux lampes L1 et L2 en dérivation. L'ampèremètre de la branche principale indique 0,45 A et celui de la branche de L1 indique 150 mA. Écris l'intensité I1 de la branche de L1 en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : l'intensité est donnée en milliampères : 150 mA, et on veut des ampères. Étape 2 — Choisir : on passe de la petite unité (mA) à la grande (A) : le nombre devient plus petit, donc on divise par 1000. Étape 3 — Calculer : 150 ÷ 1000 = 0,15, donc 150 mA = 0,15 A.",
+              "answers": [
+                {
+                  "content": "0,15",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec I = 0,45 A dans la branche principale et I1 = 0,15 A dans la branche de L1, quelle est l'intensité I2 dans la branche de L2, en ampères ?",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : I = 0,45 A, I1 = 0,15 A, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 0,45 − 0,15 = 0,3 A. Étape 4 — Conclure : I2 = 0,3 A, plus petite que 0,45 A. Écrire 0,45 A serait l'erreur tentante, par confusion avec le circuit en série.",
+              "answers": [
+                {
+                  "content": "0,3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'intensité dans la branche de L2 est 0,3 A. Quelle est-elle en milliampères ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'intensité est donnée en ampères : 0,3 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 0,3 × 1000 = 300, donc 0,3 A = 300 mA. Les autres valeurs décalent la virgule du mauvais nombre de rangs.",
+              "answers": [
+                {
+                  "content": "300 mA",
+                  "correct": true
+                },
+                {
+                  "content": "0,3 mA",
+                  "correct": false
+                },
+                {
+                  "content": "3 mA",
+                  "correct": false
+                },
+                {
+                  "content": "30 mA",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour mesurer l'intensité dans la branche de L2 seulement, où place-t-on le multimètre en position A ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Régler : position A, plus grand calibre. Étape 2 — Brancher : on veut l'intensité de la branche de L2 : on ouvre cette branche et on intercale le multimètre en série avec L2. Étape 3 — Ajuster : on ferme et on diminue le calibre. Étape 4 — Lire : la mesure est l'intensité de cette branche. Dans la branche principale, on mesurerait l'intensité totale I et non I2 : c'est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "En série avec L2, dans la branche de L2",
+                  "correct": true
+                },
+                {
+                  "content": "Aux bornes de L2",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la branche principale",
+                  "correct": false
+                },
+                {
+                  "content": "Aux bornes de la pile",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'intensité de la branche de L2 vaut 300 mA. Le multimètre est au calibre 10 A, puis on essaie le calibre 200 mA. Que faut-il faire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Régler : position A, calibre 10 A. Étape 2 — Brancher : le multimètre est en série dans la branche de L2. Étape 3 — Ajuster : 300 mA est supérieur à 200 mA : le calibre 200 mA indiquerait un dépassement ; on garde 10 A. Étape 4 — Lire : au calibre 10 A, on lit 0,3 environ, soit 0,3 A. On diminue le calibre seulement tant qu'il n'y a pas de dépassement.",
+              "answers": [
+                {
+                  "content": "Garder le calibre 10 A, car 300 mA dépasse le calibre 200 mA",
+                  "correct": true
+                },
+                {
+                  "content": "Choisir le calibre 200 mA, plus précis",
+                  "correct": false
+                },
+                {
+                  "content": "Choisir 200 mA, car 300 est proche de 200",
+                  "correct": false
+                },
+                {
+                  "content": "Choisir le plus petit calibre possible quelle que soit l'intensité",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un montage en dérivation, la branche principale a I = 0,45 A et la branche de L1 a I1 = 150 mA. Un élève affirme : « L'intensité dans la branche de L2 est 0,45 A, la même que dans la branche principale. » Explique pourquoi il se trompe et donne la bonne valeur.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Reconnaît un circuit en dérivation et cite la loi des nœuds I = I1 + I2",
+                "Calcule I2 = 0,45 − 0,15 = 0,3 A avec la bonne unité",
+                "Explique que la même intensité partout est la loi du circuit en série"
+              ],
+              "explanation": "Corrigé modèle. Le circuit est en dérivation, donc l'intensité n'est pas la même partout : la loi des nœuds dit I = I1 + I2. Ici I = 0,45 A et I1 = 0,15 A, donc I2 = 0,45 − 0,15 = 0,3 A. L'élève applique la loi du circuit en série (même intensité en tout point), qui ne s'applique pas ici. Barème : 1 point pour la loi et le montage, 1 point pour le calcul avec l'unité, 1 point pour l'explication de l'erreur.",
+              "answers": [],
+              "starter": "Le circuit est en dérivation, donc ..."
+            }
+          ]
+        },
+        {
+          "title": "Devoir de fin de trimestre : le montage mixte de l'atelier",
+          "statement": "Un électricien monte une pile, un interrupteur et une lampe L dans la branche principale. Cette branche se sépare ensuite en deux branches dérivées, avec une lampe L1 dans l'une et une lampe L2 dans l'autre. Les multimètres sont en position A.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans un montage, une lampe L est en série dans la branche principale, puis L1 et L2 sont en dérivation. Le multimètre près de la pile indique 0,6 A. Quelle intensité traverse L ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : L est dans la branche principale, sans partage du courant avant elle : on est dans une portion en série. Étape 2 — Appliquer : l'intensité est la même en tout point de cette branche. Étape 3 — Conclure : L est traversée par 0,6 A, comme le multimètre près de la pile. Diviser par deux serait l'erreur tentante, mais le partage n'a lieu qu'après le nœud.",
+              "answers": [
+                {
+                  "content": "0,6 A",
+                  "correct": true
+                },
+                {
+                  "content": "0,3 A",
+                  "correct": false
+                },
+                {
+                  "content": "1,2 A",
+                  "correct": false
+                },
+                {
+                  "content": "0 A",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans ce montage, I = 0,6 A dans la branche principale et la branche de L1 indique 250 mA. Quelle est l'intensité I2 dans la branche de L2, en ampères ?",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : I = 0,6 A, I1 = 250 mA, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 250 mA = 0,25 A, puis 0,6 − 0,25 = 0,35 A. Étape 4 — Conclure : I2 = 0,35 A, plus petite que 0,6 A. Soustraire 250 de 0,6 sans convertir est l'erreur tentante : on n'a le droit de soustraire que des valeurs de même unité.",
+              "answers": [
+                {
+                  "content": "0,35",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour trouver I2 quand I = 0,6 A et I1 = 250 mA.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer les données. Étape 2 — Écrire la loi des nœuds. Étape 3 — Calculer, après conversion en une seule unité : 0,6 − 0,25 = 0,35 A. Étape 4 — Conclure avec l'unité et la vérification. Calculer avant d'avoir écrit la loi risquerait de faire additionner au lieu de soustraire.",
+              "answers": [
+                {
+                  "content": "Repérer I = 0,6 A, I1 = 250 mA et I2 cherchée."
+                },
+                {
+                  "content": "Écrire la loi des nœuds : I = I1 + I2, donc I2 = I − I1."
+                },
+                {
+                  "content": "Calculer : convertir 250 mA en 0,25 A, puis 0,6 − 0,25 = 0,35."
+                },
+                {
+                  "content": "Conclure : I2 = 0,35 A, plus petite que 0,6 A."
+                }
+              ]
+            },
+            {
+              "content": "Dans le montage où I = 0,6 A et I1 = 250 mA, un élève propose quatre mesures pour I2. Choisis les deux affirmations vraies.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Repérer : I = 0,6 A, I1 = 0,25 A. Étape 2 — Écrire : I2 = I − I1. Étape 3 — Calculer : 0,6 − 0,25 = 0,35 A. Étape 4 — Conclure : 0,35 A est cohérente ; une valeur plus grande que 0,6 A est impossible. Les valeurs 0,6 A et 0,85 A viennent de la loi du circuit en série ou d'une addition à la place de la soustraction.",
+              "answers": [
+                {
+                  "content": "I2 = 0,35 A est cohérente avec la loi des nœuds",
+                  "correct": true
+                },
+                {
+                  "content": "I2 = 0,95 A est impossible, car elle dépasse I = 0,6 A",
+                  "correct": true
+                },
+                {
+                  "content": "I2 = 0,6 A est cohérente, car I2 = I",
+                  "correct": false
+                },
+                {
+                  "content": "I2 = 0,85 A est cohérente, car 0,6 + 0,25 = 0,85",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un montage en dérivation où la branche principale indique 0,6 A, un élève lit 0,95 A sur le multimètre de la branche de L2. Explique pourquoi cette mesure est impossible et propose une cause d'erreur de lecture.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Applique la loi des nœuds : l'intensité d'une branche dérivée est inférieure ou égale à celle de la branche principale",
+                "Compare 0,95 A à 0,6 A et conclut que la mesure est impossible",
+                "Propose une cause d'erreur de lecture : unité du calibre, mauvais calibre ou branchement"
+              ],
+              "explanation": "Corrigé modèle. La loi des nœuds donne I = I1 + I2, donc I2 ne peut pas dépasser I. Or 0,95 A est plus grand que 0,6 A : la mesure est impossible. L'élève a pu placer le multimètre dans une autre branche, mal régler le calibre ou mal lire l'afficheur. Barème : 1 point pour la loi des nœuds, 1 point pour la comparaison, 1 point pour la cause d'erreur de lecture.",
+              "answers": [],
+              "starter": "La loi des nœuds donne ..."
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Intensité du courant, ampère et milliampère, conversions, branchement et lecture de l'ampèremètre, lois de l'intensité en série et en dérivation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Cet exercice vérifie le vocabulaire et les unités de l'intensité du courant électrique.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le symbole de la grandeur est I ; son unité est l'ampère (A) et son sous-multiple le milliampère (mA).",
+              "questions": [
+                {
+                  "content": "Quelle grandeur électrique se note avec la lettre I ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : on cherche la grandeur dont le symbole est I. Étape 2 — Choisir : l'intensité du courant a pour symbole I et pour unité l'ampère (A). Étape 3 — Calculer : aucun calcul n'est demandé. Étape 4 — Conclure : la réponse est l'intensité du courant. La masse, la température et la longueur ont d'autres symboles et d'autres unités : on ne les confond pas avec I.",
+                  "answers": [
+                    {
+                      "content": "L'intensité du courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "La masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La température",
+                      "correct": false
+                    },
+                    {
+                      "content": "La longueur du fil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'unité de l'intensité du courant est l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : on cherche le nom de l'unité de l'intensité. Étape 2 — Choisir : son symbole est A : c'est l'ampère. Étape 3 — Conclure : la réponse est ampère. Le milliampère (mA) est un sous-multiple de l'ampère, pas son unité principale : on ne répond pas milliampère.",
+                  "answers": [
+                    {
+                      "content": "ampère",
+                      "correct": true
+                    },
+                    {
+                      "content": "ampères",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un milliampère est égal à ___ ampère.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : on a 1 A = 1000 mA. Étape 2 — Choisir : pour passer des mA aux A, on divise par 1000. Étape 3 — Calculer : 1 ÷ 1000 = 0,001. Étape 4 — Conclure : 1 mA = 0,001 A. Écrire 1000 serait l'erreur tentante : on multiplierait au lieu de diviser, et le milliampère deviendrait plus grand que l'ampère.",
+                  "answers": [
+                    {
+                      "content": "0,001",
+                      "correct": true
+                    },
+                    {
+                      "content": "0.001",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le milliampère est une unité plus grande que l'ampère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on compare le milliampère (mA) et l'ampère (A). Étape 2 — Choisir : 1 A = 1000 mA, donc il faut 1000 mA pour faire 1 A. Étape 3 — Conclure : le milliampère est plus petit que l'ampère. L'affirmation est fausse : « milli » veut dire un millième, donc l'unité est plus petite, pas plus grande.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque symbole à ce qu'il désigne.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre symboles sont à relier à leur signification. Étape 2 — Choisir : I est la lettre de l'intensité ; A et mA sont les symboles des unités ; COM est une borne du multimètre. Étape 3 — Conclure : chaque symbole est relié à sa signification. La lettre A n'est pas le symbole de l'intensité : c'est celui de son unité, et il ne faut pas confondre grandeur et unité.",
+                  "answers": [
+                    {
+                      "content": "I",
+                      "match": "Symbole de l'intensité"
+                    },
+                    {
+                      "content": "A",
+                      "match": "Symbole de l'ampère"
+                    },
+                    {
+                      "content": "mA",
+                      "match": "Symbole du milliampère"
+                    },
+                    {
+                      "content": "COM",
+                      "match": "Borne commune du multimètre"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe porte l'inscription « 0,2 A ». Cette intensité nominale est exprimée en ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'inscription est « 0,2 A ». Étape 2 — Choisir : le symbole A est celui de l'ampère. Étape 3 — Conclure : l'intensité nominale est en ampères, soit 200 mA. Choisir milliampères serait l'erreur tentante : le symbole serait mA, pas A.",
+                  "answers": [
+                    {
+                      "content": "ampères",
+                      "correct": true
+                    },
+                    {
+                      "content": "milliampères",
+                      "correct": false
+                    },
+                    {
+                      "content": "mètres",
+                      "correct": false
+                    },
+                    {
+                      "content": "secondes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Cet exercice porte sur les conversions entre ampères et milliampères.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Des ampères aux milliampères, multiplie par 1000 ; dans l'autre sens, divise par 1000.",
+              "questions": [
+                {
+                  "content": "Une lampe de lampe torche est traversée par 0,8 A. Écris cette intensité en milliampères.",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : l'intensité est donnée en ampères : 0,8 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 0,8 × 1000 = 800, donc 0,8 A = 800 mA. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "800",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un petit ventilateur est traversé par 35 mA. Écris cette intensité en ampères.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : l'intensité est donnée en milliampères : 35 mA, et on veut des ampères. Étape 2 — Choisir : on passe de la petite unité (mA) à la grande (A) : le nombre devient plus petit, donc on divise par 1000. Étape 3 — Calculer : 35 ÷ 1000 = 0,035, donc 35 mA = 0,035 A. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "0,035",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la plus grande intensité : 0,2 A ou 150 mA ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les deux intensités sont en unités différentes : 0,2 A et 150 mA. Étape 2 — Choisir : on les met en milliampères : 0,2 A × 1000. Étape 3 — Calculer : 0,2 × 1000 = 200 mA, qui est plus grand que 150 mA. Étape 4 — Conclure : la plus grande intensité est 0,2 A. Comparer 0,2 et 150 sans convertir est l'erreur tentante : elle ferait croire que 150 est le plus grand.",
+                  "answers": [
+                    {
+                      "content": "0,2 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "150 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont égales",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une intensité de 3 A est égale à ___ mA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'intensité est donnée en ampères : 3 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 3 × 1000 = 3000, donc 3 A = 3000 mA. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "3000",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'intensité 50 mA est égale à 0,5 A.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'intensité est donnée en milliampères, 50 mA. Étape 2 — Choisir : de mA vers A, on divise par 1000. Étape 3 — Calculer : 50 ÷ 1000 = 0,05, donc 50 mA = 0,05 A. Étape 4 — Conclure : l'affirmation est fausse. Écrire 0,5 A serait l'erreur tentante : on décalerait la virgule de deux rangs au lieu de trois.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Cet exercice porte sur l'emploi du multimètre en ampèremètre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le multimètre est en position A et se branche en série ; le nombre affiché prend l'unité du calibre.",
+              "questions": [
+                {
+                  "content": "Utilisé en ampèremètre, où relie-t-on la borne COM du multimètre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Régler : le multimètre est en position A. Étape 2 — Brancher : on intercale le multimètre en série et on relie la borne COM côté borne − du générateur. Étape 3 — Ajuster : l'autre borne (A ou mA) va côté borne +. Étape 4 — Lire : si l'afficheur donne un signe moins, on a inversé les bornes. Relier la borne COM aux bornes de la lampe est l'erreur tentante : ce serait un branchement en dérivation.",
+                  "answers": [
+                    {
+                      "content": "Du côté de la borne − du générateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du côté de la borne + du générateur, obligatoirement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aux bornes de la lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne l'utilise pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un multimètre en position A se branche aux bornes du récepteur, en dérivation.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Régler : le multimètre est en position A. Étape 2 — Brancher : il doit être traversé par le courant : on l'intercale en série. Étape 3 — Ajuster : le branchement en dérivation fausserait la mesure. Étape 4 — Lire : aucune lecture fiable n'est possible en dérivation. L'affirmation est fausse : aux bornes d'un récepteur, l'appareil laisserait passer presque tout le courant et risquerait d'être détruit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au calibre 20 mA, l'afficheur indique un dépassement. Que fait-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Régler : le multimètre est en position A, calibre 20 mA. Étape 2 — Brancher : il est déjà en série. Étape 3 — Ajuster : un dépassement signifie que l'intensité est plus grande que le calibre : on choisit un calibre plus grand. Étape 4 — Lire : on lit la mesure après le changement de calibre. Passer à un calibre plus petit aggraverait le dépassement : c'est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "On passe à un calibre plus grand",
+                      "correct": true
+                    },
+                    {
+                      "content": "On garde le même calibre",
+                      "correct": false
+                    },
+                    {
+                      "content": "On passe à un calibre plus petit",
+                      "correct": false
+                    },
+                    {
+                      "content": "On enlève la pile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au calibre 20 mA, l'afficheur du multimètre indique 12,5. Quelle est l'intensité, en mA ?",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Régler : position A, calibre 20 mA. Étape 2 — Brancher : multimètre en série. Étape 3 — Ajuster : 12,5 est inférieur à 20 : pas de dépassement. Étape 4 — Lire : on lit 12,5 avec l'unité du calibre : 12,5 mA. Écrire 12,5 A serait l'erreur tentante : ce serait mille fois trop grand.",
+                  "answers": [
+                    {
+                      "content": "12,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes d'une mesure d'intensité sur le circuit d'une lampe.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Régler : position A, plus grand calibre. Étape 2 — Brancher : on ouvre le circuit et on intercale le multimètre en série. Étape 3 — Ajuster : on ferme le circuit et on diminue le calibre. Étape 4 — Lire : nombre et unité du calibre. Brancher avant de régler exposerait l'appareil à une intensité trop forte.",
+                  "answers": [
+                    {
+                      "content": "Placer le multimètre en position A au plus grand calibre."
+                    },
+                    {
+                      "content": "Ouvrir le circuit et intercaler le multimètre en série."
+                    },
+                    {
+                      "content": "Fermer le circuit puis diminuer le calibre sans dépassement."
+                    },
+                    {
+                      "content": "Lire le nombre et lui donner l'unité du calibre."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Cet exercice porte sur l'intensité dans les circuits en série et en dérivation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En série, l'intensité est la même partout ; en dérivation, la branche principale a la somme des branches dérivées.",
+              "questions": [
+                {
+                  "content": "Dans un circuit en série à deux lampes, l'ampèremètre placé entre la pile et la première lampe indique 0,25 A. Que doit indiquer un ampèremètre placé après la deuxième lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les deux lampes sont dans une seule boucle : circuit en série. Étape 2 — Appliquer : l'intensité est la même en tout point. Étape 3 — Conclure : l'ampèremètre après la deuxième lampe indique 0,25 A. 0,125 A, ou la moitié, serait l'erreur tentante : elle suppose que chaque lampe use la moitié du courant, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "0,25 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,125 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,5 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation à deux branches, I = I1 + I2.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : I est l'intensité de la branche principale, I1 et I2 celles des branches dérivées. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Conclure : l'affirmation est vraie. Dire que I = I1 = I2 est l'erreur tentante : c'est la loi du circuit en série, pas du circuit en dérivation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lampes sont en dérivation. Les branches dérivées ont pour intensités 0,15 A et 0,35 A. Quelle est l'intensité de la branche principale, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I1 = 0,15 A, I2 = 0,35 A, on cherche I dans la branche principale. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : 0,15 + 0,35 = 0,5 A (même unité). Étape 4 — Conclure : la branche principale a 0,5 A, plus que chaque branche dérivée. Garder la plus grande valeur seule est l'erreur tentante : en dérivation, les intensités s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, la branche principale a 0,8 A et une branche dérivée a 0,3 A. Quelle est l'intensité de l'autre branche dérivée, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I = 0,8 A, I1 = 0,3 A, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 0,8 − 0,3 = 0,5 A (même unité). Étape 4 — Conclure : I2 = 0,5 A, plus petite que 0,8 A. Additionner les deux valeurs est l'erreur tentante : on obtiendrait plus que la branche principale.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, un ampèremètre placé près de la pile indique 90 mA. Quelle intensité indique un ampèremètre placé entre les deux lampes, en mA ?",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : le circuit est en série : les dipôles sont dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point, avec la même unité. Étape 3 — Conclure : entre les deux lampes, l'intensité vaut 90 mA. Croire que l'intensité diminue après une lampe est faux : une lampe n'use pas le courant.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante : l'atelier et la boutique",
+          "notions": "Intensité dans les circuits en série et en dérivation, mesures au multimètre, conversions de milliampères et d'ampères, en contexte d'atelier et de boutique de réparation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans l'atelier d'un électricien du quartier, une guirlande de fête a quatre lampes montées en série avec une pile et un interrupteur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "En série, l'intensité garde la même valeur en tout point ; seule l'unité peut changer.",
+              "questions": [
+                {
+                  "content": "Un ampèremètre placé entre la pile et la première lampe de la guirlande indique 0,12 A. Quelle intensité indique un ampèremètre placé entre la 2e et la 3e lampe, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : le circuit est en série : les dipôles sont dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point, avec la même unité. Étape 3 — Conclure : entre la 2e et la 3e lampe, l'intensité vaut 0,12 A. Croire que l'intensité diminue après une lampe est faux : une lampe n'use pas le courant.",
+                  "answers": [
+                    {
+                      "content": "0,12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ampèremètre placé après la 4e lampe de la guirlande indique 80 mA. Quelle intensité traverse la 1re lampe, en mA ?",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : le circuit est en série : les dipôles sont dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point, avec la même unité. Étape 3 — Conclure : dans la 1re lampe, l'intensité vaut 80 mA. Croire que l'intensité diminue après une lampe est faux : une lampe n'use pas le courant.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'électricien déplace la 3e lampe en première position, l'intensité mesurée change.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les lampes restent dans une seule boucle : le circuit reste en série. Étape 2 — Appliquer : l'intensité est la même en tout point et ne dépend pas de l'ordre des lampes. Étape 3 — Conclure : l'intensité mesurée ne change pas. L'affirmation est fausse : changer l'ordre ne modifie ni le circuit ni la valeur du courant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer l'intensité du courant dans la guirlande, l'électricien utilise un multimètre. Que doit-il faire en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Régler : le multimètre est placé en position A, au plus grand calibre. Étape 2 — Brancher : il est ensuite intercalé en série dans le circuit ouvert. Étape 3 — Ajuster : on ferme puis on diminue le calibre. Étape 4 — Lire : on lit le nombre avec l'unité du calibre. Brancher d'abord aux bornes de la 1re lampe serait l'erreur tentante : ce serait un branchement en dérivation.",
+                  "answers": [
+                    {
+                      "content": "Le placer en position A, au plus grand calibre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le brancher aux bornes de la 1re lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le placer au plus petit calibre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Retirer toutes les lampes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour la guirlande en série, choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : la guirlande est un circuit en série. Étape 2 — Appliquer : le courant ne se partage pas et l'intensité est la même en tout point. Étape 3 — Conclure : l'absence de partage et la même valeur partout dans la boucle sont les deux affirmations vraies. Les deux autres supposent que le courant s'use ou disparaît : c'est faux, c'est l'erreur tentante des élèves en série.",
+                  "answers": [
+                    {
+                      "content": "Le courant ne se partage nulle part",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un ampèremètre donne la même valeur partout dans la boucle",
+                      "correct": true
+                    },
+                    {
+                      "content": "La 4e lampe reçoit un courant plus faible que la 1re",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité est nulle dans les fils entre deux lampes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans une boutique de réparation de téléphones, un banc de charge alimente deux téléphones en dérivation. Un multimètre en position A est placé dans chaque branche.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Mets toutes les intensités dans la même unité avant d'additionner ou de soustraire.",
+              "questions": [
+                {
+                  "content": "Le téléphone 1 prend 0,35 A et le téléphone 2 prend 0,45 A. Quelle est l'intensité de la branche principale, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I1 = 0,35 A, I2 = 0,45 A, on cherche I dans la branche principale. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : 0,35 + 0,45 = 0,8 A (même unité). Étape 4 — Conclure : la branche principale a 0,8 A, plus que chaque branche dérivée. Garder la plus grande valeur seule est l'erreur tentante : en dérivation, les intensités s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La branche principale du banc a 0,95 A et le téléphone 1 prend 0,6 A. Quelle est l'intensité du téléphone 2, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I = 0,95 A, I1 = 0,6 A, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 0,95 − 0,6 = 0,35 A (même unité). Étape 4 — Conclure : I2 = 0,35 A, plus petite que 0,95 A. Additionner les deux valeurs est l'erreur tentante : on obtiendrait plus que la branche principale.",
+                  "answers": [
+                    {
+                      "content": "0,35",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La branche du téléphone 1 indique 400 mA et celle du téléphone 2 indique 0,3 A. Quelle est l'intensité de la branche principale, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I1 = 400 mA, I2 = 0,3 A, on cherche I. Étape 2 — Écrire : I = I1 + I2. Étape 3 — Calculer : 400 mA = 0,4 A, puis 0,4 + 0,3 = 0,7 A. Étape 4 — Conclure : la branche principale a 0,7 A. Additionner 400 et 0,3 sans convertir est l'erreur tentante : on obtiendrait 400,3, valeur absurde.",
+                  "answers": [
+                    {
+                      "content": "0,7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le téléphone 1 prend 0,5 A et le téléphone 2 prend 0,5 A. Que peut-on dire de la branche principale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : I1 = 0,5 A et I2 = 0,5 A. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : 0,5 + 0,5 = 1 A. Étape 4 — Conclure : la branche principale a 1 A. Répondre 0,5 A serait l'erreur tentante : ce serait croire que l'intensité est la même partout, comme en série.",
+                  "answers": [
+                    {
+                      "content": "Elle a 1 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a 0,5 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a 0,25 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a 0 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on débranche le téléphone 2, la branche principale garde la même intensité que lorsque les deux téléphones sont branchés.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : la branche principale a I = I1 + I2. Étape 2 — Écrire : sans le téléphone 2, il ne reste que la branche du téléphone 1 : I = I1. Étape 3 — Calculer : I1 est plus petite que I1 + I2. Étape 4 — Conclure : l'intensité de la branche principale diminue. L'affirmation est fausse : la branche principale transporte le courant de toutes les branches, elle diminue quand une branche est retirée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "L'électricien de la boutique lit un multimètre en position A, branché en série dans un circuit.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le nombre affiché prend l'unité du calibre ; convertis ensuite si on te le demande.",
+              "questions": [
+                {
+                  "content": "Au calibre 10 A, l'afficheur indique 0,45. Quelle est l'intensité, en mA ?",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Régler : position A, calibre 10 A. Étape 2 — Brancher : multimètre en série. Étape 3 — Ajuster : 0,45 est inférieur à 10 : pas de dépassement. Étape 4 — Lire : on lit 0,45 A ; en mA : 0,45 × 1000 = 450, donc 450 mA. Lire 0,45 mA serait l'erreur tentante : l'unité est celle du calibre, l'ampère.",
+                  "answers": [
+                    {
+                      "content": "450",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au calibre 200 mA, l'afficheur indique 150. Quelle est l'intensité, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Régler : position A, calibre 200 mA. Étape 2 — Brancher : multimètre en série. Étape 3 — Ajuster : 150 est inférieur à 200 : pas de dépassement. Étape 4 — Lire : on lit 150 mA ; en ampères : 150 ÷ 1000 = 0,15, donc 0,15 A. Lire 150 A serait l'erreur tentante : l'unité du calibre est le milliampère.",
+                  "answers": [
+                    {
+                      "content": "0,15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le multimètre est en position A, au calibre 200 mA. L'intensité à mesurer est d'environ 0,3 A. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Régler : position A, calibre 200 mA. Étape 2 — Brancher : multimètre en série. Étape 3 — Ajuster : 0,3 A = 300 mA, supérieur à 200 mA : dépassement, on prend le calibre 10 A. Étape 4 — Lire : la lecture se fait au calibre 10 A. Garder le calibre 200 mA serait l'erreur tentante : 300 mA dépasse 200 mA.",
+                  "answers": [
+                    {
+                      "content": "L'afficheur indique un dépassement : il faut choisir le calibre 10 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "La mesure est exacte",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'appareil affiche 0,3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le calibre 200 mA est le meilleur choix",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour lire une intensité de 0,3 A, un électricien branche le multimètre en dérivation aux bornes de la lampe.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Régler : le multimètre est en position A. Étape 2 — Brancher : il doit être en série dans le circuit ouvert. Étape 3 — Ajuster : aux bornes de la lampe, il laisserait passer presque tout le courant. Étape 4 — Lire : la lecture serait fausse et la lampe s'éteindrait. L'affirmation est fausse : seul le branchement en série convient pour un ampèremètre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un multimètre branché en série dans le circuit d'une lampe sert d'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Régler : le multimètre est en position A. Étape 2 — Brancher : il est en série dans le circuit. Étape 3 — Ajuster : il mesure l'intensité du courant. Étape 4 — Lire : on le nomme ampèremètre. Un autre nom ne convient pas : seul l'ampèremètre mesure l'intensité, et il se branche en série.",
+                  "answers": [
+                    {
+                      "content": "ampèremètre",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans la boutique de réparation, on compare des chargeurs et des petits appareils selon leur intensité.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis toujours dans la même unité avant de comparer.",
+              "questions": [
+                {
+                  "content": "Le chargeur d'une montre connectée débite 0,6 A. Écris cette intensité en milliampères.",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : l'intensité est donnée en ampères : 0,6 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 0,6 × 1000 = 600, donc 0,6 A = 600 mA. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le testeur de la boutique affiche 250 mA pour un petit ventilateur. Écris cette intensité en ampères.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : l'intensité est donnée en milliampères : 250 mA, et on veut des ampères. Étape 2 — Choisir : on passe de la petite unité (mA) à la grande (A) : le nombre devient plus petit, donc on divise par 1000. Étape 3 — Calculer : 250 ÷ 1000 = 0,25, donc 250 mA = 0,25 A. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "0,25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la plus petite intensité : 1,2 A, 800 mA ou 0,9 A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les trois intensités sont en A ou en mA. Étape 2 — Choisir : on les met en mA : 1,2 A = 1200 mA et 0,9 A = 900 mA. Étape 3 — Calculer : on compare 1200, 800 et 900. Étape 4 — Conclure : la plus petite est 800 mA. Comparer 1,2, 800 et 0,9 sans convertir est l'erreur tentante : elle ferait croire que 0,9 est la plus petite.",
+                  "answers": [
+                    {
+                      "content": "800 mA",
+                      "correct": true
+                    },
+                    {
+                      "content": "1,2 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,9 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont égales",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux égalités exactes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre égalités avec des A et des mA. Étape 2 — Choisir : de A vers mA, on multiplie par 1000 ; de mA vers A, on divise par 1000. Étape 3 — Calculer : 0,75 × 1000 = 750 et 90 ÷ 1000 = 0,09 sont exacts ; 0,02 A vaut 20 mA et 600 mA vaut 0,6 A. Étape 4 — Conclure : les deux égalités exactes sont les deux premières. Les deux autres décalent la virgule du mauvais nombre de rangs : c'est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "0,75 A = 750 mA",
+                      "correct": true
+                    },
+                    {
+                      "content": "90 mA = 0,09 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,02 A = 2 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "600 mA = 6 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une intensité de 1,5 A est égale à ___ mA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'intensité est donnée en ampères : 1,5 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 1,5 × 1000 = 1500, donc 1,5 A = 1500 mA. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "1500",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 500",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Vérifier la cohérence de mesures en série et en dérivation, comparer les deux lois, justifier le choix du calibre et du branchement de l'ampèremètre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans l'atelier, des élèves stagiaires ont noté des mesures. Tu dois repérer celles qui sont possibles et celles qui sont fausses.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une mesure est fausse si elle ne respecte pas la loi de son circuit : unicité en série, additivité en dérivation.",
+              "questions": [
+                {
+                  "content": "Dans un circuit en série à deux lampes, un stagiaire note 0,3 A avant la lampe L1 et 0,2 A après la lampe L2. Que penser de ces mesures ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : le circuit est en série avec deux lampes dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point. Étape 3 — Conclure : 0,3 A et 0,2 A sont différentes : au moins une mesure est fausse. Croire que la lampe use le courant est l'erreur tentante : elle ne repose sur aucune loi du circuit en série.",
+                  "answers": [
+                    {
+                      "content": "Elles sont incohérentes, car l'intensité devrait être la même",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont cohérentes, car la lampe use le courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont cohérentes, car 0,3 est plus grand que 0,2",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, un stagiaire note I = 0,6 A, I1 = 0,2 A et I2 = 0,3 A. Que penser de ces mesures ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : I = 0,6 A, I1 = 0,2 A, I2 = 0,3 A. Étape 2 — Écrire : la loi des nœuds exige I = I1 + I2. Étape 3 — Calculer : 0,2 + 0,3 = 0,5 A. Étape 4 — Conclure : 0,5 A est différent de 0,6 A : au moins une mesure est fausse. Se contenter de voir que chaque valeur est inférieure à I est l'erreur tentante : la somme doit être exacte.",
+                  "answers": [
+                    {
+                      "content": "Elles sont incohérentes, car 0,2 + 0,3 = 0,5 A est différent de 0,6 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont cohérentes, car chaque valeur est inférieure à 0,6 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont cohérentes, car I1 et I2 sont différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont incohérentes, car I1 et I2 devraient valoir 0,6 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un stagiaire note I1 = 0,7 A dans une branche dérivée et I = 0,5 A dans la branche principale. Ces mesures sont possibles.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : I = 0,5 A et I1 = 0,7 A. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2, donc I est plus grand que I1. Étape 3 — Calculer : 0,7 est plus grand que 0,5. Étape 4 — Conclure : les mesures sont impossibles. L'affirmation est fausse : une branche dérivée ne peut pas avoir plus d'intensité que la branche principale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le stagiaire a lu 85 sur un multimètre réglé au calibre 200 mA et il a écrit 85 A. Quelle est la vraie intensité, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Régler : position A, calibre 200 mA. Étape 2 — Brancher : multimètre en série. Étape 3 — Ajuster : 85 est inférieur à 200 : le calibre convient. Étape 4 — Lire : l'unité est le milliampère : 85 mA, soit 85 ÷ 1000 = 0,085 A. Écrire 85 A est l'erreur tentante : ce serait mille fois trop grand, car l'unité est celle du calibre.",
+                  "answers": [
+                    {
+                      "content": "0,085",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un stagiaire note, pour deux lampes en série : 0,3 A près de la pile et 0,2 A entre les lampes. Explique pourquoi ces mesures ne peuvent pas être toutes deux justes.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Reconnaît un circuit en série et cite la loi d'unicité",
+                    "Compare 0,3 A et 0,2 A et conclut qu'une mesure est fausse"
+                  ],
+                  "explanation": "Corrigé modèle. Le circuit est en série : dans une seule boucle, l'intensité est la même en tout point. Or 0,3 A et 0,2 A sont différentes, donc au moins une des deux mesures est fausse. Barème : 1 point pour la loi d'unicité, 1 point pour la comparaison et la conclusion.",
+                  "answers": [],
+                  "starter": "Dans un circuit en série, ..."
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un électricien veut comprendre deux montages : l'un en série, l'autre en dérivation, avec les mêmes deux lampes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour comparer deux montages, écris pour chacun la loi qui s'applique.",
+              "questions": [
+                {
+                  "content": "Relie chaque mesure connue à la valeur qu'on en déduit.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre mesures, deux en série et deux en dérivation. Étape 2 — Appliquer : en série, l'intensité est la même en tout point ; en dérivation, I = I1 + I2. Étape 3 — Calculer : 0,2 A reste 0,2 A ; 0,2 + 0,1 = 0,3 A ; 0,5 − 0,2 = 0,3 A ; 150 mA = 0,15 A. Étape 4 — Conclure : chaque mesure est reliée à la valeur déduite. Mélanger les deux lois est l'erreur tentante : l'unicité ne vaut qu'en série, l'additivité qu'en dérivation.",
+                  "answers": [
+                    {
+                      "content": "Circuit en série : 0,2 A près de la pile",
+                      "match": "0,2 A après la dernière lampe"
+                    },
+                    {
+                      "content": "Dérivation : I1 = 0,2 A et I2 = 0,1 A",
+                      "match": "I = 0,3 A dans la branche principale"
+                    },
+                    {
+                      "content": "Dérivation : I = 0,5 A et I1 = 0,2 A",
+                      "match": "I2 = 0,3 A dans l'autre branche"
+                    },
+                    {
+                      "content": "Circuit en série : 150 mA entre deux lampes",
+                      "match": "0,15 A près de la pile"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un circuit en série à deux lampes et un circuit en dérivation à deux lampes sont alimentés par la même pile. Quelle affirmation est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : un circuit en série et un circuit en dérivation, avec deux lampes chacun. Étape 2 — Appliquer : en série, l'unicité de l'intensité ; en dérivation, la loi des nœuds I = I1 + I2. Étape 3 — Conclure : les deux circuits suivent des lois différentes, ce qui donne la bonne affirmation. Appliquer l'unicité aux deux circuits est l'erreur tentante : en dérivation, le courant se partage à un nœud.",
+                  "answers": [
+                    {
+                      "content": "En série, l'intensité est la même partout ; en dérivation, la branche principale a la somme des intensités des branches",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans les deux circuits, l'intensité est la même en tout point",
+                      "correct": false
+                    },
+                    {
+                      "content": "En dérivation, la branche principale a la plus petite intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "En série, l'intensité diminue après chaque lampe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le montage en dérivation, la branche principale a 0,9 A et la branche de L1 a 0,4 A. Quelle est l'intensité de la branche de L2, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I = 0,9 A, I1 = 0,4 A, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 0,9 − 0,4 = 0,5 A. Étape 4 — Conclure : I2 = 0,5 A, plus petite que 0,9 A. Répondre 0,9 A est l'erreur tentante : ce serait appliquer l'unicité à un circuit en dérivation.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le montage en dérivation, on peut avoir I1 = 0,4 A, I2 = 0,5 A et I = 0,9 A.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : I1 = 0,4 A, I2 = 0,5 A, I = 0,9 A. Étape 2 — Écrire : la loi des nœuds exige I = I1 + I2. Étape 3 — Calculer : 0,4 + 0,5 = 0,9 A. Étape 4 — Conclure : les mesures respectent la loi : l'affirmation est vraie. Rejeter ces mesures parce que I1 et I2 sont différentes serait l'erreur tentante : en dérivation, les branches peuvent avoir des intensités différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique, avec tes mots, la différence entre la façon dont l'intensité se comporte dans un circuit en série et dans un circuit en dérivation.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Énonce l'unicité : même intensité en tout point en série",
+                    "Énonce la loi des nœuds : I = I1 + I2 en dérivation",
+                    "Relie chaque loi à la présence ou à l'absence de partage du courant"
+                  ],
+                  "explanation": "Corrigé modèle. Dans un circuit en série, il n'y a qu'une boucle : le courant ne se partage pas et l'intensité est la même en tout point. Dans un circuit en dérivation, le courant se partage à un nœud : l'intensité de la branche principale est égale à la somme des intensités des branches dérivées, I = I1 + I2. Barème : 1 point pour chaque loi correctement énoncée et 1 point pour le lien avec le partage du courant.",
+                  "answers": [],
+                  "starter": "En série, ..."
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À la boutique de réparation, une élève justifie le choix d'un calibre et d'un branchement du multimètre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un calibre convient s'il est plus grand que l'intensité mesurée.",
+              "questions": [
+                {
+                  "content": "L'intensité à mesurer est d'environ 120 mA. Parmi les calibres 10 A, 200 mA et 20 mA, lequel est le plus précis sans dépassement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Régler : position A ; on vise un calibre plus grand que 120 mA. Étape 2 — Brancher : multimètre en série. Étape 3 — Ajuster : 20 mA est trop petit (dépassement), 200 mA convient, 10 A convient mais est moins précis. Étape 4 — Lire : le plus précis sans dépassement est 200 mA. Choisir 20 mA serait l'erreur tentante : 120 mA dépasse ce calibre.",
+                  "answers": [
+                    {
+                      "content": "200 mA",
+                      "correct": true
+                    },
+                    {
+                      "content": "10 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun calibre ne convient",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève veut mesurer l'intensité du courant dans la lampe d'un circuit en série. Elle place le multimètre aux bornes de la lampe. Quelle conséquence est la plus probable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Régler : position A, plus grand calibre. Étape 2 — Brancher : un ampèremètre doit être en série, et non aux bornes de la lampe. Étape 3 — Ajuster : aux bornes de la lampe, il laisse passer presque tout le courant. Étape 4 — Lire : la lampe s'éteint, la lecture n'est pas celle de la lampe. Penser que la lampe brille plus fort est l'erreur tentante : elle ne reçoit presque plus de courant.",
+                  "answers": [
+                    {
+                      "content": "La lampe s'éteint et la mesure est fausse",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lampe brille plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mesure est exacte",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile est rechargée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au calibre 10 A, l'afficheur indique 0,06. L'intensité vaut ___ mA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Régler : position A, calibre 10 A. Étape 2 — Brancher : multimètre en série. Étape 3 — Ajuster : 0,06 est inférieur à 10 : pas de dépassement. Étape 4 — Lire : on lit 0,06 A ; 0,06 × 1000 = 60, donc 60 mA. Écrire 0,06 mA serait l'erreur tentante : l'unité du calibre est l'ampère.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement pour justifier qu'on prend d'abord le plus grand calibre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : l'intensité est inconnue. Étape 2 — Raisonner : un calibre trop petit donnerait un dépassement et pourrait abîmer l'appareil. Étape 3 — Choisir : on prend le plus grand calibre. Étape 4 — Ajuster : on diminue ensuite le calibre. Inverser ces étapes ferait commencer par un calibre risqué.",
+                  "answers": [
+                    {
+                      "content": "L'intensité du circuit est inconnue."
+                    },
+                    {
+                      "content": "Un calibre trop petit donnerait un dépassement."
+                    },
+                    {
+                      "content": "On choisit donc le plus grand calibre au départ."
+                    },
+                    {
+                      "content": "On diminue ensuite le calibre pour lire plus précisément."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Je commence toujours par le plus petit calibre pour être plus précis. » Explique pourquoi cette méthode est mauvaise.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Explique le risque de dépassement si le calibre est trop petit",
+                    "Indique qu'on part du plus grand calibre puis qu'on le diminue"
+                  ],
+                  "explanation": "Corrigé modèle. Avec le plus petit calibre, l'intensité peut dépasser le calibre : l'afficheur indique un dépassement et l'appareil peut être abîmé. Il faut commencer par le plus grand calibre, puis le diminuer pour lire plus précisément sans dépassement. Barème : 1 point pour le risque de dépassement, 1 point pour la bonne méthode.",
+                  "answers": [],
+                  "starter": "Avec le plus petit calibre, ..."
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un électricien dispose de deux lampes. Il veut vérifier des mesures dans un montage à lampes en dérivation, puis dans un montage à lampes en série.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dans chaque cas, écris d'abord la loi à appliquer.",
+              "questions": [
+                {
+                  "content": "Dans un montage en dérivation, la branche principale a 1,5 A et une branche dérivée a 0,9 A. Quelle est l'intensité de l'autre branche dérivée, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I = 1,5 A, I1 = 0,9 A, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 1,5 − 0,9 = 0,6 A (même unité). Étape 4 — Conclure : I2 = 0,6 A, plus petite que 1,5 A. Additionner les deux valeurs est l'erreur tentante : on obtiendrait plus que la branche principale.",
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en dérivation, deux branches dérivées ont 0,25 A et 0,65 A. Quelle est l'intensité de la branche principale, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I1 = 0,25 A, I2 = 0,65 A, on cherche I dans la branche principale. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : 0,25 + 0,65 = 0,9 A (même unité). Étape 4 — Conclure : la branche principale a 0,9 A, plus que chaque branche dérivée. Garder la plus grande valeur seule est l'erreur tentante : en dérivation, les intensités s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "0,9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en série, l'ampèremètre indique 0,18 A avant la première lampe. Quelle intensité indique-t-il après la deuxième lampe, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : le circuit est en série : les dipôles sont dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point, avec la même unité. Étape 3 — Conclure : après la deuxième lampe, l'intensité vaut 0,18 A. Croire que l'intensité diminue après une lampe est faux : une lampe n'use pas le courant.",
+                  "answers": [
+                    {
+                      "content": "0,18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces mesures, laquelle est possible dans un circuit en dérivation à deux branches (I, I1, I2) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre ensembles de mesures (I, I1, I2). Étape 2 — Écrire : la loi des nœuds exige I = I1 + I2. Étape 3 — Calculer : 0,6 + 0,3 = 0,9 convient ; avec 0,9 A partout, 0,9 + 0,9 = 1,8 est différent de 0,9 ; avec I1 = 0,6 A et I = 0,3 A, I1 dépasse I ; avec 0,3 + 0,3 = 0,6, on n'obtient pas 0,5. Étape 4 — Conclure : seul l'ensemble I = 0,9 A, I1 = 0,6 A, I2 = 0,3 A respecte I = I1 + I2. L'ensemble avec 0,9 A partout est l'erreur tentante : c'est la loi d'unicité de la série appliquée à tort.",
+                  "answers": [
+                    {
+                      "content": "I = 0,9 A, I1 = 0,6 A, I2 = 0,3 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "I = 0,9 A, I1 = 0,9 A, I2 = 0,9 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "I = 0,3 A, I1 = 0,6 A, I2 = 0,3 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "I = 0,5 A, I1 = 0,3 A, I2 = 0,3 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, les mesures 0,18 A avant la 1re lampe et 180 mA après la 2e lampe sont compatibles.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : le circuit est en série. Étape 2 — Appliquer : l'intensité est la même en tout point, quelle que soit l'unité utilisée. Étape 3 — Calculer : 180 mA ÷ 1000 = 0,18 A. Étape 4 — Conclure : les deux mesures sont compatibles. Les juger incompatibles parce que les nombres 0,18 et 180 sont différents serait l'erreur tentante : il faut comparer dans la même unité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toute la leçon",
+          "notions": "Bilan : unités et conversions, mesure au multimètre, intensité en série, loi des nœuds en dérivation, montages mixtes de l'atelier et de la boutique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Bilan sur les unités et les conversions de l'intensité du courant, avec des appareils de l'atelier et de la boutique.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Utilise 1 A = 1000 mA dans les deux sens.",
+              "questions": [
+                {
+                  "content": "Le moteur d'une perceuse d'atelier est traversé par 1,4 A. Écris cette intensité en milliampères.",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : l'intensité est donnée en ampères : 1,4 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 1,4 × 1000 = 1400, donc 1,4 A = 1400 mA. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "1400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chargeur de téléphone débite 500 mA. Écris cette intensité en ampères.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : l'intensité est donnée en milliampères : 500 mA, et on veut des ampères. Étape 2 — Choisir : on passe de la petite unité (mA) à la grande (A) : le nombre devient plus petit, donc on divise par 1000. Étape 3 — Calculer : 500 ÷ 1000 = 0,5, donc 500 mA = 0,5 A. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de 0,3 A et un petit ventilateur de 250 mA sont dans l'atelier. Lequel est traversé par la plus grande intensité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : 0,3 A et 250 mA sont en unités différentes. Étape 2 — Choisir : on convertit 0,3 A en mA : on multiplie par 1000. Étape 3 — Calculer : 0,3 × 1000 = 300 mA, qui est plus grand que 250 mA. Étape 4 — Conclure : la lampe a la plus grande intensité. Comparer 0,3 et 250 sans convertir est l'erreur tentante : elle ferait croire que le ventilateur est plus fort.",
+                  "answers": [
+                    {
+                      "content": "La lampe de 0,3 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le ventilateur de 250 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une intensité de 0,04 A est égale à ___ mA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'intensité est donnée en ampères : 0,04 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 0,04 × 1000 = 40, donc 0,04 A = 40 mA. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ampère et le milliampère servent tous deux à exprimer une intensité.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on compare deux unités, A et mA. Étape 2 — Choisir : 1 mA = 0,001 A : ce sont deux unités de la même grandeur. Étape 3 — Conclure : l'affirmation est vraie. Croire que le milliampère mesure une autre grandeur serait l'erreur tentante : il s'agit seulement d'un sous-multiple de l'ampère.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Bilan sur la mesure de l'intensité avec un multimètre en position A, dans l'atelier de l'électricien du quartier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Position A, branchement en série, plus grand calibre d'abord.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les gestes d'une mesure d'intensité dans le circuit d'une lampe.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Régler : position A, plus grand calibre. Étape 2 — Brancher : on ouvre le circuit et on intercale le multimètre en série. Étape 3 — Ajuster : on ferme le circuit et on diminue le calibre. Étape 4 — Lire : on écrit le nombre et l'unité du calibre. Lire sans unité donnerait une mesure incomplète.",
+                  "answers": [
+                    {
+                      "content": "Mettre le multimètre en position A au plus grand calibre."
+                    },
+                    {
+                      "content": "Ouvrir le circuit et intercaler le multimètre en série."
+                    },
+                    {
+                      "content": "Fermer le circuit puis diminuer le calibre sans dépassement."
+                    },
+                    {
+                      "content": "Lire le nombre et écrire l'unité du calibre."
+                    }
+                  ]
+                },
+                {
+                  "content": "Au calibre 200 mA, l'afficheur indique 175. Quelle est l'intensité, en mA ?",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Régler : position A, calibre 200 mA. Étape 2 — Brancher : multimètre en série. Étape 3 — Ajuster : 175 est inférieur à 200 : le calibre convient. Étape 4 — Lire : on lit 175 avec l'unité du calibre : 175 mA. Écrire 175 A serait l'erreur tentante : l'unité est celle du calibre.",
+                  "answers": [
+                    {
+                      "content": "175",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'afficheur indique un dépassement au calibre 200 mA. L'intensité attendue est de l'ordre de 0,5 A. Quel calibre choisit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Régler : position A, calibre 200 mA : dépassement. Étape 2 — Brancher : multimètre toujours en série. Étape 3 — Ajuster : 0,5 A = 500 mA est plus grand que 200 mA : on choisit un calibre plus grand, 10 A. Étape 4 — Lire : la lecture se fait au calibre 10 A. Choisir 20 mA serait l'erreur tentante : ce calibre est encore plus petit.",
+                  "answers": [
+                    {
+                      "content": "10 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "20 mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "200 mA encore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun, on débranche l'ampèremètre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un multimètre en position A est branché en série avec la lampe : la lampe reste allumée et on lit l'intensité.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Régler : le multimètre est en position A. Étape 2 — Brancher : il est en série avec la lampe, donc le courant passe à travers lui. Étape 3 — Ajuster : la lampe reste parcourue par le courant. Étape 4 — Lire : on lit son intensité. Penser qu'un branchement en série éteint la lampe est l'erreur tentante : c'est le branchement en dérivation qui éteint la lampe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle borne du multimètre est commune à toutes les mesures d'intensité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Régler : position A. Étape 2 — Brancher : la borne COM est commune : on la relie du côté de la borne − du générateur. Étape 3 — Ajuster : l'autre borne dépend du calibre (A ou mA). Étape 4 — Lire : la mesure s'affiche ensuite. Les bornes 10 A et mA changent avec le calibre : c'est l'erreur tentante de les prendre pour la borne commune.",
+                  "answers": [
+                    {
+                      "content": "COM",
+                      "correct": true
+                    },
+                    {
+                      "content": "10 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "mA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Bilan sur les lois de l'intensité dans un circuit en série puis dans un circuit en dérivation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Série : même intensité partout. Dérivation : I = I1 + I2.",
+              "questions": [
+                {
+                  "content": "Dans un circuit en série à trois lampes, l'ampèremètre indique 0,22 A près de la pile. Quelle intensité indique-t-il après la 3e lampe, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : le circuit est en série : les dipôles sont dans une seule boucle. Étape 2 — Appliquer : l'intensité est la même en tout point, avec la même unité. Étape 3 — Conclure : après la 3e lampe, l'intensité vaut 0,22 A. Croire que l'intensité diminue après une lampe est faux : une lampe n'use pas le courant.",
+                  "answers": [
+                    {
+                      "content": "0,22",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, les branches dérivées ont 0,1 A et 0,55 A. Quelle est l'intensité de la branche principale, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I1 = 0,1 A, I2 = 0,55 A, on cherche I dans la branche principale. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2. Étape 3 — Calculer : 0,1 + 0,55 = 0,65 A (même unité). Étape 4 — Conclure : la branche principale a 0,65 A, plus que chaque branche dérivée. Garder la plus grande valeur seule est l'erreur tentante : en dérivation, les intensités s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "0,65",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en dérivation, la branche principale a 1 A et une branche dérivée a 0,35 A. Quelle est l'intensité de l'autre branche, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I = 1 A, I1 = 0,35 A, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 1 − 0,35 = 0,65 A (même unité). Étape 4 — Conclure : I2 = 0,65 A, plus petite que 1 A. Additionner les deux valeurs est l'erreur tentante : on obtiendrait plus que la branche principale.",
+                  "answers": [
+                    {
+                      "content": "0,65",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, choisis les trois vraies.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Repérer : on examine six affirmations sur les deux types de circuits. Étape 2 — Écrire : en série : unicité ; en dérivation : loi des nœuds I = I1 + I2. Étape 3 — Calculer : si I est une somme de nombres positifs, elle est plus grande que chacun. Étape 4 — Conclure : les trois vraies sont : en série, l'intensité est la même partout ; en dérivation, I = I1 + I2 ; en dérivation, la branche principale a la plus grande intensité. Les trois autres mélangent les lois des deux circuits : c'est l'erreur tentante, qui consiste à appliquer l'unicité à la dérivation ou la soustraction à la loi des nœuds.",
+                  "answers": [
+                    {
+                      "content": "En série, l'intensité est la même en tout point",
+                      "correct": true
+                    },
+                    {
+                      "content": "En dérivation, I = I1 + I2",
+                      "correct": true
+                    },
+                    {
+                      "content": "En dérivation, la branche principale a la plus grande intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "En série, l'intensité diminue après chaque lampe",
+                      "correct": false
+                    },
+                    {
+                      "content": "En dérivation, l'intensité est la même dans toutes les branches",
+                      "correct": false
+                    },
+                    {
+                      "content": "En dérivation, I = I1 − I2",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, un électricien place trois ampèremètres A1, A2 et A3 les uns derrière les autres. A1 indique 0,3 A. Que peut-il lire sur A3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les trois ampèremètres sont en série dans la même boucle. Étape 2 — Appliquer : l'intensité est la même en tout point. Étape 3 — Conclure : A3 indique aussi 0,3 A. Diviser 0,3 A par trois est l'erreur tentante : ce serait partager le courant, ce qui n'existe qu'en dérivation.",
+                  "answers": [
+                    {
+                      "content": "0,3 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,1 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,9 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 A",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan sur un banc de charge de la boutique de réparation : un chargeur, une lampe témoin en série dans la branche principale, puis deux téléphones en dérivation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris d'abord la loi, puis convertis, puis calcule.",
+              "questions": [
+                {
+                  "content": "La lampe témoin est en série dans la branche principale du banc de charge. Le multimètre près du chargeur indique 1,1 A. Quelle est l'intensité qui traverse la lampe, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : la lampe est dans la branche principale, avant le partage du courant : portion en série. Étape 2 — Appliquer : l'intensité est la même en tout point de cette branche. Étape 3 — Conclure : la lampe est traversée par 1,1 A. Répondre 0,55 A en partageant le courant serait l'erreur tentante : le partage n'a lieu qu'au nœud, après la lampe.",
+                  "answers": [
+                    {
+                      "content": "1,1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La branche principale du banc de charge a 1,1 A et le téléphone 1 prend 600 mA. Quelle est l'intensité du téléphone 2, en ampères ?",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : I = 1,1 A, I1 = 600 mA, on cherche I2. Étape 2 — Écrire : I = I1 + I2, donc I2 = I − I1. Étape 3 — Calculer : 600 mA = 0,6 A, puis 1,1 − 0,6 = 0,5 A. Étape 4 — Conclure : I2 = 0,5 A. Soustraire 600 de 1,1 sans convertir est l'erreur tentante : il faut mettre les deux valeurs dans la même unité.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le téléphone 2 est traversé par 0,5 A dans ce montage. Écris cette intensité en milliampères.",
+                  "question_type": "numeric",
+                  "unit": "mA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : l'intensité est donnée en ampères : 0,5 A, et on veut des milliampères. Étape 2 — Choisir : on passe de la grande unité (A) à la petite (mA) : le nombre grandit, donc on multiplie par 1000. Étape 3 — Calculer : 0,5 × 1000 = 500, donc 0,5 A = 500 mA. L'erreur tentante est de garder le même nombre ou de se tromper de sens : le résultat serait faux d'un facteur 1000.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le téléphone 1 est débranché et si le téléphone 2 garde 0,5 A, alors la branche principale indique 0,5 A.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : il ne reste que la branche du téléphone 2 : I2 = 0,5 A. Étape 2 — Écrire : la loi des nœuds donne I = I1 + I2 avec I1 = 0. Étape 3 — Calculer : 0 + 0,5 = 0,5 A. Étape 4 — Conclure : la branche principale indique 0,5 A. Penser que la branche principale reste à 1,1 A serait l'erreur tentante : elle ne transporte plus que le courant de la branche restante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Décris les étapes pour trouver l'intensité du téléphone 2 quand on connaît celle de la branche principale et celle du téléphone 1 en milliampères.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "Écrit la loi des nœuds I = I1 + I2",
+                    "Convertit les milliampères en ampères avant de calculer",
+                    "Calcule la soustraction I2 = I − I1 et conclut avec l'unité"
+                  ],
+                  "explanation": "Corrigé modèle. Étape 1 : repérer I (branche principale), I1 (téléphone 1) et I2 (cherchée). Étape 2 : écrire la loi des nœuds I = I1 + I2, donc I2 = I − I1. Étape 3 : convertir I1 en ampères en divisant par 1000, puis soustraire. Étape 4 : conclure avec l'unité et vérifier que I2 est plus petite que I. Barème : 1 point pour la loi, 1 point pour la conversion, 1 point pour le calcul et la conclusion.",
+                  "answers": [],
+                  "starter": "Je commence par repérer ..."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
