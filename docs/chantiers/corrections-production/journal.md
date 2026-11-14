@@ -15,11 +15,28 @@
 
 101 modifications de champ dans 32 leçons : 30 de notions, 67 d'exercices, **4 hors périmètre** (aucun use case ne les écrit) : l'entraînement « Je m'entraîne » de deux notions (`2nde-a/calcul-numerique`, `tle/…problemes-de-developpement-economique-de-la-cote-d-ivoire` : question 5, explication et proposition 3) et l'unité d'une question du sujet 1 de cette dernière. Le script les liste « hors périmètre » ; voir `## À trancher`.
 
+## Exécution en production (2026-11-14)
+
+Lancée par le porteur, compte équipe, sur main fe58a1ee.
+
+| Passage | à appliquer | déjà à jour | introuvable | hors périmètre | échec |
+|---|---:|---:|---:|---:|---:|
+| Essai | 18 | 0 | 82 | 1 | 0 |
+| `APPLIQUER=1` | — | — | — | — | 0 |
+| Essai final | 0 | 18 | 82 | 1 | 0 |
+
+- 76 introuvables « leçon absente de la base » : fiches jamais importées en production ; elles arriveront corrigées par `/publier-prod`.
+- 3 introuvables connus : 2nde histoire-géographie, « les méthodes d'étude de l'histoire », sujet 4 › exercice 4 › question 3 (à la main).
+- 6 « exercice absent » : tle-a2 mathématiques « statistique à deux variables » (sujet 3 › exercice 2 › question 5, 5 champs) et tle histoire « de la fin de la guerre froide… » (sujet 3 › exercice 1, énoncé) : version en ligne plus ancienne que la copie figée.
+- 1 hors périmètre : 2nde-a mathématiques « calcul numérique », entraînement de la notion 3.
+
 ## À trancher
 
 - [ ] 2026-11-14 · corrections-production · Revue sécurité : une cible (notion ou exercice) s'écrit en entier ou pas du tout. Cas réel : `2nde/histoire-geographie/histoire-les-methodes-d-etude-de-l-histoire`, sujet 4 › exercice 4 › question 3, dont la nouvelle explication annonce une réponse « Antiquité » à ajouter ; aucun use case n'ajoute une proposition, donc tout l'exercice reste tel quel et sort en « introuvable ». — appliqué : à reporter à la main ; autres : étendre le use case ; recommandé : à la main.
 - [ ] 2026-11-14 · corrections-production · 4 corrections touchent l'entraînement d'une notion (3) ou l'unité d'une question (1), que la modale « Modifier le texte » ne sait pas écrire. — appliqué : listées, à reporter à la main (ou au prochain import de la leçon, qui les porte déjà) ; autres : étendre `CorrectNotionText` à l'entraînement ; recommandé : le prochain import.
-- [ ] 2026-11-14 · corrections-production · Accès à la production : la variable `RAILWAY_API_TOKEN` (et `LNCLASS_TEAM_CONTACT`, contact du membre équipe qui agit) n'existe pas dans l'environnement de cette session, et la commande `railway` n'y est pas installée. — appliqué : script et PR livrés, exécution en production non faite ; autres : lancer `bin/rails contenus:corriger` depuis une session qui a la variable ; recommandé : ajouter `RAILWAY_API_TOKEN` à l'environnement Claude Code, puis relancer l'étape 5.
+- [x] 2026-11-14 · corrections-production · Accès à la production : la variable `RAILWAY_API_TOKEN` (et `LNCLASS_TEAM_CONTACT`, contact du membre équipe qui agit) n'existe pas dans l'environnement de cette session, et la commande `railway` n'y est pas installée. — appliqué : script et PR livrés, exécution en production non faite ; autres : lancer `bin/rails contenus:corriger` depuis une session qui a la variable ; recommandé : ajouter `RAILWAY_API_TOKEN` à l'environnement Claude Code, puis relancer l'étape 5. · résolu le 2026-11-14 : exécuté par le porteur depuis son poste (`railway ssh`), les sessions cloud n'atteignant pas le port 22.
+- [ ] 2026-11-14 · corrections-production · Exécution en production non faite (session dédiée) : `RAILWAY_API_TOKEN` et `LNCLASS_TEAM_CONTACT` absentes de l'environnement de la session, `railway` non installée, et les outils MCP Railway ne permettent pas d'exécuter une commande dans le conteneur. Totaux des trois passages : aucun (rien lancé). — appliqué : arrêt, aucune écriture ; autres : lancer `contenus:corriger` depuis une session qui a les deux variables ; recommandé : ajouter les deux variables à l'environnement Claude Code, puis relancer.
+- [ ] 2026-11-14 · corrections-production · 2 fiches en ligne sont dans une version plus ancienne que la copie figée (tle-a2 « statistique à deux variables », tle « de la fin de la guerre froide ») : 6 champs sans cible. — appliqué : rien ; autres : supprimer puis réimporter ces fiches si elles n'ont pas d'activité ; recommandé : supprimer et réimporter.
 
 ## Ce qui a dérapé
 
