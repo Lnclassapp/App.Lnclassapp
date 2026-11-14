@@ -25,7 +25,10 @@ Chaque leçon : un rédacteur, puis un relecteur indépendant qui refait chaque 
 ## Ce qui a dérapé
 
 - Lot A : la relecture indépendante a trouvé de 11 à 27 défauts par leçon, dont 0 à 7 « faux » : corrections qui parlaient d'un autre appareil (PC 1), triangles impossibles et symétrique faux (Maths 5), données qui contredisaient l'énoncé (Maths 3), voltmètre en série « qui ne donne pas la tension » (PC 5), pile retournée présentée comme solution (PC 3). Tous corrigés, contrôle relancé jusqu'à ✓.
-- La limite de quota a coupé tous les rédacteurs une fois ; ils ont repris là où ils étaient.
+- Lot B : 0 à 4 « faux » par leçon, surtout des corrections qui réfutaient une proposition retirée pour tenir sous 230 000 octets (SVT 3 : 46 cas), et des conclusions contraires aux données (SVT 4 : humidité « favorable » alors que le lot sans eau est à zéro). Tous corrigés, contrôle relancé jusqu'à ✓.
+- La limite de quota a coupé les rédacteurs deux fois ; ils ont repris là où ils étaient.
+- Le script de contrôle supprimait « œ » dans le nom attendu du fichier ; corrigé en « oe », comme la 3ème.
+- Develop a reçu la 4ème (#591) pendant le chantier : intégrée par merge, les deux blocs gardés dans `jeu.yml`, `PRD_COUPLES` recalculé.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -51,5 +54,21 @@ Choix prudents appliqués, à valider par un enseignant de la matière.
 - Intensité : multimètre numérique seulement (pas d'aiguille) ; calibres 10 A, 200 mA, 20 mA ; borne COM côté − ; loi des nœuds sur deux branches ; montage mixte du problème 4 et du sujet 4.
 - Tension : calibres 200 mV à 200 V et règle du plus petit calibre supérieur ; interrupteur ouvert à la tension du générateur et lampe éteinte à 0 V, posé en notion 3 avant l'additivité ; additivité à 3 dipôles.
 - Toutes les valeurs d'appareils, de piles et de lignes sont illustratives.
+
+**Français**
+- Groupe nominal : articles contractés, numéraux et indéfinis mentionnés sans être testés ; critère « qui suivi du verbe, que suivi d'un sujet » ; adjectif épithète seulement.
+- Exposé oral : « répondre aux questions » regroupé avec « présenter » ; règle « trois ou quatre idées pour cinq minutes » posée par la leçon, pas par le programme.
+- Portrait : comparaison sans « comparé / comparant » ; portrait « neutre » nommé ; point de vue par comptage des mots positifs et négatifs ; « belle », « fine », « musclé » rangés en physique.
+- Œuvre intégrale n°1 : œuvres réelles citées par titre, auteur et genre seulement (*Le Pagne noir*, *Les Contes d'Amadou Koumba*, *L'Enfant noir*, *Trois prétendants… un mari*) ; les autres sont inventées et annoncées comme telles ; « allié / adversaire » sans schéma actantiel ; l'œuvre étudiée en classe reste au choix de l'enseignant.
+- Groupe adjectif : « apposé » aussi appelé « épithète détachée » ; superlatif relatif d'infériorité ; « pire » et « plus mauvais » acceptés ; « trop » adverbe d'intensité.
+
+**SVT**
+- Aucune planche ne montre l'animal ou le champignon : identification décrite en mots ou en `diagram`.
+- Criquet : criquet puant non traité ; criquet et sauterelle distingués par les antennes ; phases solitaire et grégaire par leurs couleurs.
+- Moustique : critères anophèle / culex / aedes ; « une à deux semaines » de l'œuf à l'adulte ; filariose non traitée.
+- Lutte : larvicide, champignon contre les larves de criquet (une à deux semaines, sans danger pour l'homme et les animaux), poules et pintades en lutte biologique, résistance aux insecticides, conseils sur la moustiquaire imprégnée ; « larve » plutôt que « sauteriau ».
+- Champignons : « carpophore » et « bouton » ; matière organique citée seulement comme condition favorable (la nutrition est une leçon suivante) ; spores qui « tombent » (simplification) ; aucune comestibilité affirmée.
+- Croissance : « métamorphose incomplète » pour le criquet, la blatte, la sauterelle et le termite ; « larve » plutôt que « nymphe » pour leurs jeunes ; nymphe du moustique, asticot, abeille à métamorphose complète.
+- Toutes les données d'élevage, de comptage et d'expérience sont des exemples écrits pour Lnclass.
 
 ## Clôture
