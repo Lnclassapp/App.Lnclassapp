@@ -61,10 +61,13 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "#student_registration_join_code_hint", text: I18n.t("#{STEPS}.code_hint")
     assert_select "#signup-code-checking[hidden]", text: I18n.t("#{STEPS}.checking")
     assert_select "turbo-frame#classroom_code_preview[aria-live=polite]"
-    assert_select "input#signup-no-code[type=checkbox]:not([checked])"
-    assert_select "label[for=signup-no-code]", text: I18n.t("#{STEPS}.no_code")
-    # The cascade is the fallback: it stays in the page, shown by the checkbox.
+    # UDR-0135 §3.2: the cascade comes first and open; « J'ai le code de ma classe » is under the DRENA, « Je n'ai pas de code » under the code.
+    assert_select "main[data-classroom--signup-steps-code-open-value=false]"
     assert_select "#signup-cascade select[name='student_registration[drena_public_id]']"
+    assert_select "#signup-cascade a#signup-have-code[href='#signup-code-field']", text: /#{Regexp.escape(I18n.t("#{STEPS}.have_code"))}/
+    assert_select "#signup-code-field a#signup-no-code[href='#signup-cascade']", text: /#{Regexp.escape(I18n.t("#{STEPS}.no_code"))}/
+    assert_select "input[type=checkbox]#signup-no-code", 0
+    assert_operator response.body.index("signup-cascade"), :<, response.body.index("signup-code-field")
     visible_buttons = css_select("form button").reject { it.ancestors("noscript").any? }
     assert_empty visible_buttons.select { it.text.squish == I18n.t("#{PICKER}.continue") }
     assert_equal 1, visible_buttons.count { it["type"] == "submit" }
@@ -210,6 +213,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_equal 1, start_step
     assert_select "input[name='student_registration[last_name]'][value='KOUASSI']"
     assert_select "input#student_registration_join_code[aria-invalid=true][value='zzzzzz']"
+    assert_select "main[data-classroom--signup-steps-code-open-value=true]"
   end
 
   test "CA-B3: the code of an archived classroom is refused like an unknown code, no account" do
@@ -244,13 +248,14 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "#signup-classroom-recap", text: /3e 2.*Lycée Moderne de Cocody/m
     assert_select "#signup-classroom-recap a#other-classroom[data-action='click->classroom--signup-steps#restart']"
     assert_select "input#student_registration_join_code[value='#{code}']"
+    assert_select "main[data-classroom--signup-steps-code-open-value=true]"
     assert_select "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.invalid")
   end
 
-  test "UDR §3.2: after a cascade choice and an error, the checkbox is ticked so the cascade stays open" do
+  test "UDR §3.2: after a cascade choice and an error elsewhere, the cascade stays the open way" do
     register(pin_confirmation: "1357")
 
-    assert_select "input#signup-no-code[checked]"
+    assert_select "main[data-classroom--signup-steps-code-open-value=false]"
     assert_select "turbo-frame#picker_classrooms input[type=radio][checked][value='#{@classroom.public_id}']"
   end
 

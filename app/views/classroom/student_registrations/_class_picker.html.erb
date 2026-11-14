@@ -1,11 +1,12 @@
 <%# 🌐 UI · classroom/student_registrations/_class_picker — la cascade en trois étapes numérotées : établissement, niveau, classe %>
-<%# Rôle : établissement connu replié en une ligne avec « Changer » (DRENA et établissement en listes derrière) ; niveaux en pastilles, classes en cases ; repli GET %>
-<%# ADR  : 0062, 0085, 0095 · UDR : 0024, 0081 (§3.3), 0091, 0102 (§3.1) %>
-<%# locals: (form:, drenas:, schools:, levels:, classrooms:, scope:, framed: false, current_classroom_public_id: nil) -%>
+<%# Rôle : établissement connu replié en une ligne avec « Changer » (DRENA et établissement en listes derrière) ; niveaux en pastilles, classes en cases ; lien optionnel sous la DRENA ; repli GET %>
+<%# ADR  : 0062, 0085, 0095 · UDR : 0024, 0081 (§3.3), 0091, 0102 (§3.1), 0135 (§3.2) %>
+<%# locals: (form:, drenas:, schools:, levels:, classrooms:, scope:, framed: false, current_classroom_public_id: nil, after_drena: nil) -%>
 <%# Partagé par l'inscription et par « Choisis ta classe » (UDR-0081 §3.5, UDR-0091 §3.4) : schools, levels, classrooms valent nil tant que
     leur parent n'est pas choisi. Le formulaire hôte porte le contrôleur, ses trois adresses et la cible submit. framed : chaque étape
     dans sa carte (« Choisis ta classe ») ; sans, les étapes se suivent dans la carte de l'inscription. current_classroom_public_id :
-    « Changer de classe » (UDR-0102 §3.1) marque la classe actuelle ; l'hôte l'ajoute aussi (current=) à l'adresse du cadre des classes. %>
+    « Changer de classe » (UDR-0102 §3.1) marque la classe actuelle ; l'hôte l'ajoute aussi (current=) à l'adresse du cadre des classes.
+    after_drena : du HTML posé juste sous la liste des DRENA (le lien « J'ai le code de ma classe » de l'inscription), sous la ligne repliée si l'établissement est connu. %>
 <% registration = form.object %>
 <%# Des niveaux listés : l'établissement envoyé appartient à sa DRENA (ClassPicker), la ligne repliée peut les nommer. Sans
     l'un des deux (DRENA absente ou discordante), pas de ligne repliée : les deux listes restent ouvertes. %>
@@ -45,6 +46,7 @@
         <%= ui_button t(".change"), variant: :ghost, size: :sm, href: url_for(action: :new, scope => { drena_public_id: drena.public_id }),
                                     "aria-label": t(".change_label"), data: { action: "classroom--class-picker#change" } %>
       </div>
+      <%= after_drena %>
     <% end %>
     <%# Repliées, les deux listes restent dans le formulaire : leurs choix partent avec lui. %>
     <%= tag.div id: "class-picker-school-fields", class: "space-y-4", hidden: school.present?,
@@ -55,6 +57,7 @@
                      data: { action: "change->classroom--class-picker#loadSchools" } %>
         <%# Repli sans JavaScript : la page revient en GET avec les choix faits, et le serveur rend la liste suivante. %>
         <%= continue_button.call %>
+        <%= after_drena unless school %>
       </div>
       <%= render template: "school/drena_schools/index",
                  locals: { schools:, drena_public_id: registration.drena_public_id, registration:, scope:, picker: true } %>
