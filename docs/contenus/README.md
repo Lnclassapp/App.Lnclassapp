@@ -90,6 +90,30 @@ Même vérification hors dépôt que pour la 1ère (format, `valider.rb` sur la 
 | `2nde/histoire-geographie/histoire-les-methodes-d-etude-de-l-histoire.json` | Histoire — Les méthodes d'étude de l'histoire | 3 | 26 | 137 |
 | **Total** | | | | **3769** |
 
+### 1ère, leçons 4 et 5 de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
+
+Depuis le 2026-11-13, les leçons 4 et 5 de la progression DPFC 2026-2027 de 1ère reviennent de `a-reprendre/` au format complet, avec la même méthode et la même vérification que les 3 premières (section suivante) : un second exercice en `fixation` par notion, 4 sujets de devoir, et un « Je m'entraîne » ajouté là où il manquait (Philosophie, Histoire-Géographie). Points à faire valider : [journal du chantier](../chantiers/lecons-1ere-2nde-debut/journal.md).
+
+| Fichier | Titre | Notions | Exercices | Questions |
+|---|---|---:|---:|---:|
+| `1ere-a1/mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 28 | 166 |
+| `1ere-a1/mathematiques/suites-numeriques.json` | Suites numériques | 4 | 28 | 165 |
+| `1ere-a1/physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 28 | 179 |
+| `1ere-a1/physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 28 | 173 |
+| `1ere-a2/mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 28 | 166 |
+| `1ere-a2/mathematiques/suites-numeriques.json` | Suites numériques | 4 | 28 | 165 |
+| `1ere-a2/physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 28 | 179 |
+| `1ere-a2/physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 28 | 173 |
+| `1ere-c/mathematiques/barycentre.json` | Barycentre | 5 | 30 | 183 |
+| `1ere-c/mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 28 | 170 |
+| `1ere-c/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 28 | 175 |
+| `1ere-c/physique-chimie/hydrocarbures-satures-les-alcanes.json` | Hydrocarbures saturés : les alcanes | 7 | 34 | 213 |
+| `1ere-d/mathematiques/denombrement.json` | Dénombrement | 4 | 28 | 167 |
+| `1ere-d/mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 28 | 166 |
+| `1ere-d/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 28 | 175 |
+| `1ere-d/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | Hydrocarbures insaturés : les alcènes et les alcynes | 5 | 30 | 186 |
+| **Total** | | | | **2801** |
+
 ### 1ère, 3 premières leçons de chaque série et matière, comme Thalès (chantier `lecons-1ere-2nde-debut`)
 
 Depuis le 2026-11-12, les 3 premières leçons de la progression DPFC 2026-2027 de chaque série (A1, A2, C, D) et matière (Français, Mathématiques, Physique-Chimie, SVT, Philosophie, Histoire-Géographie) de 1ère sont revenues de `a-reprendre/` au format complet : 63 fichiers, 36 fiches distinctes (une fiche commune à plusieurs séries est écrite une fois et recopiée avec le `series_name` et le `theme` de chaque série). Chaque notion a reçu un second exercice en `fixation` de 6 questions d'au moins 4 types, et chaque leçon 4 sujets de devoir de 4 exercices de 5 ou 6 questions. Le cours, les fiches, le premier exercice, le `practice` et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement.
