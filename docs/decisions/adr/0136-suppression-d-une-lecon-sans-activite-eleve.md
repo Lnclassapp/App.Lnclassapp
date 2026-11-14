@@ -1,4 +1,4 @@
-# ADR-XXXX : Une leçon sans aucune activité d'élève se supprime physiquement, quel que soit son statut, sous verrou
+# ADR-0136 : Une leçon sans aucune activité d'élève se supprime physiquement, quel que soit son statut, sous verrou
 <!-- index
 titre: Suppression d'une leçon sans activité d'élève
 statut: Accepté
@@ -51,7 +51,7 @@ La protection voulue par ADR-0036 n'est pas le statut du contenu mais la product
 5. **Ce qui reste** — le journal d'audit (`content.deleted`, nom, slug, statut et nombre de lignes supprimées), les rapports d'import et les autres leçons. Les fichiers d'images et les pièces du texte de cours sont détruits par Active Storage / Action Text (purge après validation).
 6. **L'import ne change pas** — une leçon supprimée n'est plus dans `existing_keys` ni `ids_by_key` : son fichier se réimporte comme une leçon neuve (nouvel id, slug recalculé, tout en brouillon).
 
-ADR-0036 §4, ligne « Cours, fiche, exercice, question, réponse », se lit désormais : *archiver dès qu'ils ont été publiés ; suppression physique d'une leçon entière, quel que soit son statut, tant qu'aucune activité d'élève ne s'y rattache (ADR-XXXX) ; jamais d'une notion, d'un exercice ou d'une question seuls*. ADR-0035 : le cycle `draft → published → archived` reste ; la suppression n'est pas une transition mais une sortie du cycle, réservée à une leçon jamais utilisée.
+ADR-0036 §4, ligne « Cours, fiche, exercice, question, réponse », se lit désormais : *archiver dès qu'ils ont été publiés ; suppression physique d'une leçon entière, quel que soit son statut, tant qu'aucune activité d'élève ne s'y rattache (ADR-0136) ; jamais d'une notion, d'un exercice ou d'une question seuls*. ADR-0035 : le cycle `draft → published → archived` reste ; la suppression n'est pas une transition mais une sortie du cycle, réservée à une leçon jamais utilisée.
 
 ## 5. Conséquences
 

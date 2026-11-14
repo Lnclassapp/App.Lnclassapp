@@ -145,6 +145,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0133](./0133-hors-connexion-pages-ouvertes-et-copies-synchronisees.md) | Hors connexion : pages ouvertes gardées, copies synchronisées | Accepté | 2026-11-12 | L'élève sans réseau ne peut ni relire une leçon déjà lue ni rendre une copie ; il faut garder des pages de compte et un corrigé sur le téléphone sans exposer un autre compte ni laisser falsifier une note. |
 | [0134](./0134-contenus-dans-un-depot-dedie-copie-figee.md) | Leçons dans un dépôt dédié, copie figée dans l'application | Accepté | 2026-11-14 | Comment sortir les leçons du dépôt applicatif sans priver Develop, Staging, le jeu standard et la CI des leçons qu'ils lisent |
 | [0135](./0135-validateur-pedagogique-agent.md) | Validateur pédagogique des leçons | Accepté | 2026-11-14 | Les points de fond des leçons (faits, programme, niveau, barème, figures) étaient renvoyés « à faire valider par un enseignant », et aucun enseignant ne les relisait : des centaines de points restaient ouverts et les leçons en brouillon. Un agent Opus, jamais auteur ni relecteur de la leçon, tranche chaque point dans le processus, avant la PR. |
+| [0136](./0136-suppression-d-une-lecon-sans-activite-eleve.md) | Suppression d'une leçon sans activité d'élève | Accepté | 2026-11-14 | une leçon publiée ou archivée à refaire ne peut ni être supprimée ni réimportée ; on permet sa suppression physique tant qu'aucun élève ne s'en est servi. |
 <!-- index:end -->
 
 ---

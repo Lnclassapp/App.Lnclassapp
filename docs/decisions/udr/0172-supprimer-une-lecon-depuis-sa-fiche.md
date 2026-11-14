@@ -1,4 +1,4 @@
-# UDR-XXXX : Supprimer une leçon depuis sa page — entrée du menu ⋮, confirmation et refus en modale
+# UDR-0172 : Supprimer une leçon depuis sa page — entrée du menu ⋮, confirmation et refus en modale
 <!-- index
 titre: Supprimer une leçon depuis sa page
 statut: Accepté
@@ -11,7 +11,7 @@ problematique: l'équipe doit pouvoir supprimer une leçon sans activité d'él�
 | **Statut** | Accepté |
 | **Date** | 2026-11-14 |
 | **Chantier** | `docs/chantiers/suppression-lecon` |
-| **ADR lié** | ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve |
+| **ADR lié** | ADR-0136 |
 | **Remplacé par** | — |
 
 ---

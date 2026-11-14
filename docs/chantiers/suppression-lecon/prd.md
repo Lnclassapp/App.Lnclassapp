@@ -98,8 +98,8 @@ Alors l'envoi est refusé et aucun devoir orphelin n'est écrit
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve — amende ADR-0036 §4 (ligne « Cours… ») et ADR-0035.
-- UDR-XXXX-supprimer-une-lecon-depuis-sa-fiche — l'entrée du menu, la modale de confirmation et son état de refus.
+- ADR-0136 — amende ADR-0036 §4 (ligne « Cours… ») et ADR-0035.
+- UDR-0172 — l'entrée du menu, la modale de confirmation et son état de refus.
 
 ## 7. Mesures
 

@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Catalog
-    # ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve, CA-01, CA-02 (domaine) : l'équipe supprime une leçon sans activité d'élève,
+    # ADR-0136, CA-01, CA-02 (domaine) : l'équipe supprime une leçon sans activité d'élève,
     # la vérification se fait sous le verrou pris dans la transaction, et tout refus laisse la leçon intacte.
     class DeleteCourseTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 11, 14, 12)

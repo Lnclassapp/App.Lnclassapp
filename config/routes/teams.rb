@@ -70,7 +70,7 @@ scope "teams/blog", as: :teams do
 end
 
 namespace :teams do
-  # ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve, UDR-XXXX-supprimer-une-lecon-depuis-sa-fiche : la confirmation de suppression,
+  # ADR-0136, UDR-0172 : la confirmation de suppression,
   # lue à la demande dans le frame « modal », et la suppression d'une leçon sans activité d'élève.
   resources :courses, only: %i[new create edit update destroy], param: :slug do
     member { patch :publish; patch :archive; patch :publish_all, path: "publish-all"; get :deletion }

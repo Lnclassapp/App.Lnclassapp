@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# CA-06, CA-07 (chantier suppression-lecon), UDR-XXXX-supprimer-une-lecon-depuis-sa-fiche : depuis la page d'une leçon, le menu ⋮ ouvre
+# CA-06, CA-07 (chantier suppression-lecon), UDR-0172 : depuis la page d'une leçon, le menu ⋮ ouvre
 # la confirmation ; confirmer renvoie au catalogue. Une leçon dont un élève s'est servi refuse dès l'ouverture et propose de la modifier.
 class Teams::CourseDeletionTest < ApplicationSystemTestCase
   setup do

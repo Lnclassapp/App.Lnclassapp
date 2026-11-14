@@ -232,7 +232,7 @@ module Repositories
         assert_not @repository.resolve_assignable(type: "Exercise", key: wide.public_id).parents_published
       end
 
-      # CA-08 (ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve §4.4) : le lien polymorphe n'a pas de clé étrangère ; l'envoi
+      # CA-08 (ADR-0136 §4.4) : le lien polymorphe n'a pas de clé étrangère ; l'envoi
       # verrouille l'exercice et refuse un exercice disparu (leçon supprimée), sans écrire de devoir orphelin.
       test "un exercice disparu entre la lecture et l'envoi refuse le devoir (not_found) ; dans un envoi groupé, tout l'envoi (unknown_exercise)" do
         gone = exercise_assignable

@@ -50,7 +50,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #status_for_update"
       end
 
-      # ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve : les traces d'élèves de la leçon, sans verrou (la modale de confirmation).
+      # ADR-0136 : les traces d'élèves de la leçon, sans verrou (la modale de confirmation).
       # → Entities::Catalog::StudentActivity
       def student_activity(id:)
         raise NotImplementedError, "#{self.class} doit implémenter #student_activity"

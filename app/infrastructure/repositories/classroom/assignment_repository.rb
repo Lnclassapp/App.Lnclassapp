@@ -33,7 +33,7 @@ module Repositories
         )
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case. Le lien polymorphe n'a
         # pas de clé étrangère : l'exercice est verrouillé comme le ferait la base (FOR KEY SHARE), pour qu'une suppression de sa leçon
-        # en cours attende ou soit attendue, jamais un devoir vers un exercice disparu (ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve).
+        # en cours attende ou soit attendue, jamais un devoir vers un exercice disparu (ADR-0136).
         written = Orm::ClassroomAssignment.transaction(requires_new: true) do
           next false unless lock_assignable(assignment.assignable)
 

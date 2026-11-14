@@ -43,6 +43,6 @@
 | | |
 |---|---|
 | **Livré le** | 2026-11-14 |
-| **PR** | (à poser) |
-| **ADR produits** | ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve ; amendements ADR-0035, ADR-0036 |
-| **UDR produits** | UDR-XXXX-supprimer-une-lecon-depuis-sa-fiche |
+| **PR** | #600 |
+| **ADR produits** | ADR-0136 ; amendements ADR-0035, ADR-0036 |
+| **UDR produits** | UDR-0172 |

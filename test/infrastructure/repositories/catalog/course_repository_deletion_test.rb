@@ -2,7 +2,7 @@ require "test_helper"
 
 module Repositories
   module Catalog
-    # ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve : l'activité d'élève se lit source par source (CA-02), sous verrou, et la
+    # ADR-0136 : l'activité d'élève se lit source par source (CA-02), sous verrou, et la
     # suppression emporte tout le contenu de la leçon, rien d'autre (CA-03, CA-04).
     class CourseRepositoryDeletionTest < ActiveSupport::TestCase
       setup do

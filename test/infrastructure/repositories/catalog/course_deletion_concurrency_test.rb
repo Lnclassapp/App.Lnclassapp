@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-suppression-d-une-lecon-sans-activite-eleve §4.3-4.4 : un élève qui commence un exercice, ou un enseignant qui l'envoie à
+# ADR-0136 §4.3-4.4 : un élève qui commence un exercice, ou un enseignant qui l'envoie à
 # sa classe, pendant la suppression de la leçon attend la fin de la suppression puis échoue ; aucune trace orpheline. Hors transaction
 # de test : chaque fil a la sienne.
 class CourseDeletionConcurrencyTest < ActiveSupport::TestCase

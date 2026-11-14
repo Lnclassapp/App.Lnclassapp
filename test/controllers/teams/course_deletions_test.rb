@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-01, CA-06, CA-07 (chantier suppression-lecon), UDR-XXXX-supprimer-une-lecon-depuis-sa-fiche : l'entrée « Supprimer » du menu ⋮,
+# CA-01, CA-06, CA-07 (chantier suppression-lecon), UDR-0172 : l'entrée « Supprimer » du menu ⋮,
 # la confirmation lue dans le frame « modal », son état de refus, la suppression qui renvoie au catalogue et son refus en 422.
 class Teams::CourseDeletionsTest < ActionDispatch::IntegrationTest
   setup do

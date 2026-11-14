@@ -11,7 +11,7 @@
       <%= content_transition_items(record: status_record) %>
       <%= ui_dropdown_item t("catalog.content_status.actions.publish_all"), href: publish_all_teams_course_path(course.slug),
                            method: :patch, icon: "check-badge" %>
-      <%# UDR-XXXX-supprimer-une-lecon-depuis-sa-fiche : la seule entrée destructive, toujours la dernière, jamais sans modale. %>
+      <%# UDR-0172 : la seule entrée destructive, toujours la dernière, jamais sans modale. %>
       <%= ui_dropdown_item t(".delete"), href: deletion_teams_course_path(course.slug), icon: "trash", tone: :danger, frame: "modal" %>
     <% end %>
   </div>
