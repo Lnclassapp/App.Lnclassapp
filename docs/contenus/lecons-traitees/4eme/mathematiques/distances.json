@@ -1,0 +1,3445 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Distances",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Mathématiques",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "trajet-alignes",
+          "kind": "geometry",
+          "description": "Un chemin droit sur lequel sont placés trois points alignés : A à gauche, M au milieu du dessin, B à droite. M est entre A et B. La longueur de [AM] est écrite sur la figure (4 cm) ainsi que celle de [MB] (6 cm). La distance AB n'est pas écrite : c'est elle qu'on calcule avec les deux autres.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "M",
+                "x": 4,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 10,
+                "y": 0
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "M"
+              ],
+              [
+                "M",
+                "B"
+              ]
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "M",
+                "text": "4 cm"
+              },
+              {
+                "from": "M",
+                "to": "B",
+                "text": "6 cm"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "triangle-trois-pistes",
+          "kind": "geometry",
+          "description": "Un triangle ABC : trois villages A, B et C reliés par trois pistes droites. Sur la figure, [AB] mesure 4 cm, [AC] mesure 3 cm et [BC] mesure 5 cm. Aucun angle n'est marqué. On compare la longueur de chaque piste à la somme des longueurs des deux autres.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 4,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": 0,
+                "y": 3
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "A"
+              ]
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "B",
+                "text": "4 cm"
+              },
+              {
+                "from": "A",
+                "to": "C",
+                "text": "3 cm"
+              },
+              {
+                "from": "B",
+                "to": "C",
+                "text": "5 cm"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "point-et-droite",
+          "kind": "geometry",
+          "description": "Une droite (d) horizontale passant par E et F. Le point A est au-dessus de la droite. H est le pied de la perpendiculaire à (d) passant par A : un carré marque l'angle droit en H. M et N sont deux autres points de (d), de part et d'autre de H. On lit AH = 3 cm, AM = 5 cm et AN = 5 cm.",
+          "params": {
+            "points": [
+              {
+                "id": "E",
+                "x": -7,
+                "y": 0
+              },
+              {
+                "id": "F",
+                "x": 7,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 0,
+                "y": 3
+              },
+              {
+                "id": "H",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "M",
+                "x": 4,
+                "y": 0
+              },
+              {
+                "id": "N",
+                "x": -4,
+                "y": 0
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "H"
+              ],
+              [
+                "A",
+                "M"
+              ],
+              [
+                "A",
+                "N"
+              ]
+            ],
+            "lines": [
+              [
+                "E",
+                "F"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "H",
+                "from": "A",
+                "to": "M",
+                "mark": "right"
+              }
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "H",
+                "text": "3 cm"
+              },
+              {
+                "from": "A",
+                "to": "M",
+                "text": "5 cm"
+              },
+              {
+                "from": "A",
+                "to": "N",
+                "text": "5 cm"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "mediatrice-ab",
+          "kind": "geometry",
+          "description": "Un segment [AB] de 6 cm, de milieu I. La droite (IM) est perpendiculaire à [AB] en I (carré en I) : c'est la médiatrice de [AB]. Le point M est sur elle, avec MA = 5 cm et MB = 5 cm. Le point P est sur la perpendiculaire à (AB) passant par B, sous le segment : PB = 8 cm et PA = 10 cm.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -3,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 3,
+                "y": 0
+              },
+              {
+                "id": "I",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "M",
+                "x": 0,
+                "y": 4
+              },
+              {
+                "id": "P",
+                "x": 3,
+                "y": -8
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "M",
+                "A"
+              ],
+              [
+                "M",
+                "B"
+              ],
+              [
+                "P",
+                "A"
+              ],
+              [
+                "P",
+                "B"
+              ]
+            ],
+            "lines": [
+              [
+                "I",
+                "M"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "I",
+                "from": "A",
+                "to": "M",
+                "mark": "right"
+              },
+              {
+                "vertex": "B",
+                "from": "A",
+                "to": "P",
+                "mark": "right"
+              }
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "B",
+                "text": "6 cm"
+              },
+              {
+                "from": "M",
+                "to": "A",
+                "text": "5 cm"
+              },
+              {
+                "from": "M",
+                "to": "B",
+                "text": "5 cm"
+              },
+              {
+                "from": "P",
+                "to": "A",
+                "text": "10 cm"
+              },
+              {
+                "from": "P",
+                "to": "B",
+                "text": "8 cm"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Distance de deux points",
+          "remember": "La **distance** de deux points $A$ et $B$ est la longueur du segment $[AB]$. On la note $AB$. C'est un nombre positif ou nul, avec une unité (cm, m, km). Elle ne dépend pas du sens : $AB = BA$. Et $AB = 0$ seulement si $A$ et $B$ sont le même point. Si $M$ est **sur le segment** $[AB]$ (entre $A$ et $B$), alors $AM + MB = AB$.",
+          "method": [
+            "Repérer les trois points alignés et celui qui est entre les deux autres.",
+            "Écrire l'égalité : distance totale = somme des deux morceaux.",
+            "Calculer la distance cherchée (addition ou soustraction).",
+            "Vérifier le résultat : unité écrite, distance positive, le total est la plus grande longueur."
+          ],
+          "example": {
+            "statement": "Sur un chemin droit, $M$ est entre $A$ et $B$. On a $AM = 4$ cm et $MB = 6$ cm. Calculer $AB$.",
+            "steps": [
+              "Repérer : $A$, $M$, $B$ sont alignés et $M$ est entre $A$ et $B$.",
+              "Écrire : $AB = AM + MB$.",
+              "Calculer : $AB = 4 + 6 = 10$ cm.",
+              "Vérifier : $10$ cm est la plus grande des trois longueurs, l'unité est écrite."
+            ]
+          },
+          "pitfall": "L'égalité $AM + MB = AB$ n'est vraie que si $M$ est **sur le segment** $[AB]$. Contre-exemple : si $AM = 3$ cm et $MB = 4$ cm mais que $A$, $M$, $B$ ne sont pas alignés, on ne peut pas écrire $AB = 7$ cm. Avant d'additionner, demande-toi : le point est-il bien entre les deux autres ?",
+          "figure": "trajet-alignes",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer une distance avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "$M$ est sur le segment $[AB]$, avec $AM = 6$ cm et $MB = 9$ cm. Quelle est la distance $AB$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $M$ est sur $[AB]$. Étape 2 — Écrire : $AB = AM + MB$. Étape 3 — Calculer : $AB = 6 + 9 = 15$ cm. Étape 4 — Vérifier : 15 cm est plus grand que 6 cm et 9 cm. Soustraire donnerait 3 cm, ce qui est trop petit.",
+                "answers": [
+                  {
+                    "content": "$15$ cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$54$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$9$ cm",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les deux morceaux s'additionnent."
+              },
+              {
+                "content": "$M$ est sur le segment $[AB]$, avec $AB = 20$ cm et $AM = 13$ cm. Calcule $MB$, en cm.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : $M$ est sur $[AB]$. Étape 2 — Écrire : $AB = AM + MB$, donc $20 = 13 + MB$. Étape 3 — Calculer : $MB = 20 - 13 = 7$ cm. Étape 4 — Vérifier : $13 + 7 = 20$, le total est bon.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "cm",
+                "hint": "Le total moins le morceau connu."
+              },
+              {
+                "content": "Si $M$ est sur le segment $[AB]$, avec $AB = 11$ cm et $AM = 4$ cm, alors $MB = 7$ cm.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : $M$ est sur $[AB]$. Étape 2 — Écrire : $AB = AM + MB$. Étape 3 — Calculer : $MB = 11 - 4 = 7$ cm. Étape 4 — Vérifier : $4 + 7 = 11$, c'est bon : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Retranche $AM$ de $AB$."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Calculer des distances sur un segment",
+              "statement": "Dans cet exercice, tu calcules des distances de points alignés avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "$M$ est entre $A$ et $B$ sur un chemin droit, avec $AM = 7$ cm et $MB = 5$ cm. Quelle est la distance $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $M$ est entre $A$ et $B$. Étape 2 — Écrire : $AB = AM + MB$. Étape 3 — Calculer : $AB = 7 + 5 = 12$ cm. Étape 4 — Vérifier : 12 cm est la plus grande longueur. Écrire 2 cm serait soustraire, alors que les morceaux s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "$12$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$35$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$M$ est sur le segment $[AB]$, avec $AB = 15$ cm et $AM = 9$ cm. Calcule $MB$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $M$ est sur $[AB]$. Étape 2 — Écrire : $AB = AM + MB$, donc $15 = 9 + MB$. Étape 3 — Calculer : $MB = 15 - 9 = 6$ cm. Étape 4 — Vérifier : $9 + 6 = 15$, le total est bon.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Si $AB = 8$ cm, alors $BA = 8$ cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on parle des deux mêmes points $A$ et $B$. Étape 2 — Écrire : la distance est la longueur du segment, donc $AB = BA$. Étape 3 — Calculer : $BA = 8$ cm. Étape 4 — Vérifier : la distance ne dépend pas du sens du trajet. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $M$, $B$ sont alignés dans cet ordre, avec $AM = 3,5$ cm et $MB = 4,5$ cm. Calcule $AB$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $M$ est entre $A$ et $B$. Étape 2 — Écrire : $AB = AM + MB$. Étape 3 — Calculer : $AB = 3,5 + 4,5 = 8$ cm. Étape 4 — Vérifier : 8 cm est plus grand que 3,5 cm et que 4,5 cm.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Les points $A$, $M$, $B$ ne sont pas alignés, avec $AM = 3$ cm et $MB = 4$ cm. Peut-on affirmer que $AB = 7$ cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les points ne sont pas alignés, donc $M$ n'est pas entre $A$ et $B$. Étape 2 — Écrire : l'égalité $AB = AM + MB$ n'est alors pas permise. Étape 3 — Calculer : on ne peut pas additionner. Étape 4 — Vérifier : additionner sans vérifier l'alignement est l'erreur du piège ; on ne peut pas conclure $AB = 7$ cm.",
+                  "answers": [
+                    {
+                      "content": "Non : l'égalité $AM + MB = AB$ n'est vraie que si $M$ est sur le segment $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : on additionne toujours les deux morceaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $3 + 4 = 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $AB$ vaut forcément $1$ cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le chemin de l'école",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la distance de deux points. Tu utilises la méthode de la fiche à chaque calcul.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Avant chaque calcul, demande-toi quel point est entre les deux autres.",
+              "questions": [
+                {
+                  "content": "Sur un chemin droit, $M$ est entre $A$ et $B$, avec $AM = 120$ m et $MB = 85$ m. Calcule $AB$, en m.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $M$ est entre $A$ et $B$. Étape 2 — Écrire : $AB = AM + MB$. Étape 3 — Calculer : $AB = 120 + 85 = 205$ m. Étape 4 — Vérifier : 205 m est plus grand que 120 m et 85 m.",
+                  "answers": [
+                    {
+                      "content": "205",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "$M$ est sur le segment $[AB]$, avec $AB = 9,5$ cm et $MB = 4$ cm. Alors $AM =$ ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : $M$ est sur $[AB]$. Étape 2 — Écrire : $9,5 = AM + 4$. Étape 3 — Calculer : $AM = 9,5 - 4 = 5,5$ cm. Étape 4 — Vérifier : $5,5 + 4 = 9,5$, le total est bon.",
+                  "answers": [
+                    {
+                      "content": "5,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $M$ est le milieu de $[AB]$ et $AB = 10$ cm, alors $AM = 5$ cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $M$ est le milieu, donc il est sur $[AB]$ et $AM = MB$. Étape 2 — Écrire : $AB = AM + MB = 2 \\times AM$. Étape 3 — Calculer : $AM = 10 \\div 2 = 5$ cm. Étape 4 — Vérifier : $5 + 5 = 10$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $M$ est sur le segment $[AB]$, alors ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : $M$ est sur $[AB]$. Étape 2 — Écrire : la distance totale est la somme des deux morceaux, $AM + MB = AB$. Étape 3 — Calculer : par exemple $2 + 3 = 5$. Étape 4 — Vérifier : $AM = MB$ n'est vrai que pour un milieu ; la différence ou le produit ne donnent pas la longueur totale.",
+                  "answers": [
+                    {
+                      "content": "$AM + MB = AB$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AM = MB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AM - MB = AB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AM \\times MB = AB$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour calculer une distance sur un segment.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer d'abord le point entre les deux autres. Étape 2 — Écrire ensuite l'égalité. Étape 3 — Calculer. Étape 4 — Vérifier à la fin. On ne calcule jamais avant d'avoir écrit l'égalité.",
+                  "answers": [
+                    {
+                      "content": "Repérer le point entre les deux autres."
+                    },
+                    {
+                      "content": "Écrire l'égalité distance totale = somme des morceaux."
+                    },
+                    {
+                      "content": "Calculer la distance cherchée."
+                    },
+                    {
+                      "content": "Vérifier l'unité et le résultat."
+                    }
+                  ]
+                },
+                {
+                  "content": "$AB = 12$ cm et $M$ est entre $A$ et $B$. Quelles paires de longueurs peuvent être $AM$ et $MB$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : $M$ est entre $A$ et $B$. Étape 2 — Écrire : il faut $AM + MB = 12$. Étape 3 — Calculer : $5 + 7 = 12$ et $8 + 4 = 12$ conviennent ; $6 + 8 = 14$, $12 + 12 = 24$ et $3 + 10 = 13$ ne conviennent pas. Étape 4 — Vérifier : seules deux paires donnent 12.",
+                  "answers": [
+                    {
+                      "content": "$AM = 5$ cm et $MB = 7$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AM = 8$ cm et $MB = 4$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AM = 6$ cm et $MB = 8$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AM = 12$ cm et $MB = 12$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AM = 3$ cm et $MB = 10$ cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Inégalité triangulaire",
+          "remember": "Pour trois points quelconques $A$, $B$, $C$ : $AB \\leq AC + CB$. Aller directement de $A$ à $B$ n'est jamais plus long que passer par $C$. Il y a **égalité** seulement si $C$ est sur le segment $[AB]$ (les trois points sont alignés). Trois longueurs sont celles des côtés d'un triangle si la plus grande est **strictement plus petite** que la somme des deux autres.",
+          "method": [
+            "Repérer le plus grand des trois nombres (le plus long côté).",
+            "Calculer la somme des deux autres nombres.",
+            "Comparer le plus grand nombre à cette somme.",
+            "Conclure : plus petit, le triangle existe ; égal, les points sont alignés ; plus grand, il n'existe pas."
+          ],
+          "example": {
+            "statement": "Peut-on construire un triangle dont les côtés mesurent $7$ cm, $4$ cm et $5$ cm ?",
+            "steps": [
+              "Repérer : le plus grand nombre est $7$.",
+              "Calculer : la somme des deux autres est $4 + 5 = 9$.",
+              "Comparer : $7 < 9$.",
+              "Conclure : $7$ est plus petit que $9$, donc le triangle existe."
+            ]
+          },
+          "pitfall": "Il ne suffit pas de comparer deux côtés au hasard. Contre-exemple : pour $3$, $4$ et $8$, on a bien $3 + 8 > 4$ et $4 + 8 > 3$, mais $3 + 4 = 7$ est plus petit que $8$ : le triangle n'existe pas. Il faut comparer le **plus grand** côté à la somme des deux autres. Et si on trouve l'égalité, on obtient un triangle plat (points alignés), pas un vrai triangle.",
+          "figure": "triangle-trois-pistes",
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser l'inégalité triangulaire avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Peut-on construire un triangle de côtés $5$ cm, $6$ cm et $10$ cm ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le plus grand nombre est 10. Étape 2 — Calculer : $5 + 6 = 11$. Étape 3 — Comparer : $10 < 11$. Étape 4 — Conclure : le triangle existe. Comparer 10 à 6 seul ne prouve rien.",
+                "answers": [
+                  {
+                    "content": "Oui, car $10 < 5 + 6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Non, car $10 > 6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, car $5 + 6 = 10$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, car $5 < 6$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare 10 à $5 + 6$."
+              },
+              {
+                "content": "Un triangle ne peut pas avoir pour côtés $2$ cm, $3$ cm et $7$ cm.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le plus grand nombre est 7. Étape 2 — Calculer : $2 + 3 = 5$. Étape 3 — Comparer : $7 > 5$. Étape 4 — Conclure : le triangle n'existe pas : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Additionne les deux petits."
+              },
+              {
+                "content": "Pour des côtés de $6$ cm, $8$ cm et $13$ cm, calcule la somme des deux plus petits, en cm.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : le plus grand nombre est 13. Étape 2 — Calculer : la somme des deux autres est $6 + 8 = 14$. Étape 3 — Comparer : $13 < 14$. Étape 4 — Conclure : le triangle existe.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "cm",
+                "hint": "Ne prends pas le plus grand."
+              },
+              {
+                "content": "Les nombres $4$, $6$ et $10$ sont-ils les côtés d'un triangle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le plus grand nombre est 10. Étape 2 — Calculer : $4 + 6 = 10$. Étape 3 — Comparer : $10 = 10$ : égalité. Étape 4 — Conclure : les trois points sont alignés, c'est un triangle plat, donc pas un vrai triangle.",
+                "answers": [
+                  {
+                    "content": "Non : $4 + 6 = 10$, les points seraient alignés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui, car $4 + 6 > 6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, car $10 > 6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, car $10$ est pair",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche l'égalité."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Trois longueurs, un triangle ?",
+              "statement": "Dans cet exercice, tu décides si trois longueurs peuvent être les côtés d'un triangle, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Peut-on construire un triangle de côtés $6$ cm, $4$ cm et $5$ cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le plus grand nombre est 6. Étape 2 — Calculer : $4 + 5 = 9$. Étape 3 — Comparer : $6 < 9$. Étape 4 — Conclure : le triangle existe. La somme 9 n'est pas « trop grande » : elle doit seulement dépasser 6.",
+                  "answers": [
+                    {
+                      "content": "Oui, car $6 < 4 + 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car $6 > 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $4 + 5 = 9$ est trop grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $4 < 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Peut-on construire un triangle de côtés $3$ cm, $4$ cm et $8$ cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le plus grand nombre est 8. Étape 2 — Calculer : $3 + 4 = 7$. Étape 3 — Comparer : $8 > 7$. Étape 4 — Conclure : le triangle n'existe pas. Les comparaisons $3 + 8 > 4$ et $4 + 8 > 3$ sont vraies mais insuffisantes.",
+                  "answers": [
+                    {
+                      "content": "Non, car $8 > 3 + 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $3 + 8 > 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $4 + 8 > 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $3 < 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $AC = 5$ cm, $CB = 5$ cm et $AB = 10$ cm, alors $A$, $C$, $B$ sont alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le plus grand nombre est 10. Étape 2 — Calculer : $5 + 5 = 10$. Étape 3 — Comparer : $10 = 10$ : égalité. Étape 4 — Conclure : $C$ est sur le segment $[AB]$ : les points sont alignés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels triplets de longueurs (en cm) peuvent être ceux des côtés d'un triangle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on prend le plus grand de chaque triplet. Étape 2 — Calculer : $4 + 5 = 9$ ; $6 + 7 = 13$ ; $2 + 3 = 5$ ; $5 + 5 = 10$ ; $3 + 5 = 8$. Étape 3 — Comparer : $8 < 9$ et $12 < 13$ convient ; $6 > 5$ et $9 > 8$ ne convient pas ; $10 = 10$ donne des points alignés. Étape 4 — Conclure : seuls $(4, 5, 8)$ et $(6, 7, 12)$ sont des triangles.",
+                  "answers": [
+                    {
+                      "content": "$4$, $5$ et $8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$, $7$ et $12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$, $3$ et $6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$, $5$ et $10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$, $5$ et $9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On veut savoir si $3$, $4$ et $8$ cm sont les côtés d'un triangle. Zoé dit : « Oui, car $3 + 8 > 4$ ». Que penses-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le plus grand nombre est 8, c'est lui qu'il faut comparer. Étape 2 — Calculer : $3 + 4 = 7$. Étape 3 — Comparer : $8 > 7$. Étape 4 — Conclure : le triangle n'existe pas. Zoé a comparé un petit côté, ce qui est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Elle a tort : il faut comparer $8$ à $3 + 4 = 7$, et $8 > 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a raison : une seule comparaison suffit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a tort : il faut comparer $4$ à $3 + 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a raison, car $8$ est pair",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer des trajets",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur l'inégalité triangulaire. Tu utilises la méthode de la fiche à chaque question.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Compare toujours le plus grand nombre à la somme des deux autres.",
+              "questions": [
+                {
+                  "content": "Les côtés mesurent $8$ cm, $11$ cm et $15$ cm. Calcule la somme des deux plus petits, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le plus grand nombre est 15. Étape 2 — Calculer : $8 + 11 = 19$. Étape 3 — Comparer : $15 < 19$. Étape 4 — Conclure : le triangle existe.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Pour les côtés $8$, $11$ et $15$ cm, ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le plus grand nombre est 15. Étape 2 — Calculer : $8 + 11 = 19$. Étape 3 — Comparer : $15 < 19$. Étape 4 — Conclure : le triangle existe. Les autres propositions comparent 15 à un seul nombre ou lisent mal 19.",
+                  "answers": [
+                    {
+                      "content": "le triangle existe car $15 < 19$",
+                      "correct": true
+                    },
+                    {
+                      "content": "le triangle n'existe pas car $15 > 11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "les points sont alignés car $15 > 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "le triangle n'existe pas car $8 + 11 = 19$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour trois points quelconques $A$, $B$, $C$, on a toujours $AB \\leq AC + CB$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : trois points quelconques. Étape 2 — Calculer : comparer $AB$ à $AC + CB$. Étape 3 — Comparer : aller de $A$ à $B$ tout droit n'est jamais plus long que passer par $C$. Étape 4 — Conclure : c'est l'inégalité triangulaire, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $AB = AC + CB$, alors le point $C$ est sur le ___ $[AB]$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on a l'égalité $AB = AC + CB$. Étape 2 — Calculer : rien à calculer. Étape 3 — Comparer : c'est le cas d'égalité. Étape 4 — Conclure : $C$ est sur le segment $[AB]$.",
+                  "answers": [
+                    {
+                      "content": "segment",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque triplet de côtés (en cm) à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : le plus grand nombre de chaque triplet. Étape 2 — Calculer : $2 + 5 = 7$ ; $4 + 5 = 9$ ; $2 + 3 = 5$. Étape 3 — Comparer : $7 = 7$ ; $8 < 9$ ; $6 > 5$. Étape 4 — Conclure : alignés, existe, n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "$2$, $5$, $7$",
+                      "match": "Points alignés"
+                    },
+                    {
+                      "content": "$4$, $5$, $8$",
+                      "match": "Le triangle existe"
+                    },
+                    {
+                      "content": "$2$, $3$, $6$",
+                      "match": "Le triangle n'existe pas"
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $AC = 5$ cm et $CB = 7$ cm. Quelle est la plus grande valeur possible de $AB$, en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on cherche le maximum de $AB$. Étape 2 — Calculer : $AC + CB = 5 + 7 = 12$. Étape 3 — Comparer : $AB \\leq 12$. Étape 4 — Conclure : $AB$ vaut au plus $12$ cm, valeur atteinte quand $C$ est sur $[AB]$.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Distance d'un point à une droite",
+          "remember": "Soit $(d)$ une droite et $A$ un point. Soit $H$ le point où la perpendiculaire à $(d)$ passant par $A$ coupe $(d)$ : on l'appelle le **pied** de la perpendiculaire. La **distance de $A$ à $(d)$** est la longueur $AH$. Pour tout point $M$ de $(d)$, on a $AM \\geq AH$ : $AH$ est la plus petite de toutes les distances de $A$ à un point de $(d)$. Si $A$ est sur $(d)$, la distance est $0$.",
+          "method": [
+            "Tracer la perpendiculaire à la droite passant par le point.",
+            "Nommer $H$ le point où elle coupe la droite (le pied).",
+            "Lire ou mesurer la longueur $AH$.",
+            "Conclure : la distance du point à la droite est $AH$, la plus courte de toutes."
+          ],
+          "example": {
+            "statement": "Sur la figure, $H$ est le pied de la perpendiculaire à $(d)$ passant par $A$. On lit $AH = 3$ cm et $AM = 5$ cm, avec $M$ sur $(d)$. Quelle est la distance de $A$ à $(d)$ ?",
+            "steps": [
+              "Tracer : la perpendiculaire à $(d)$ passant par $A$ est la droite $(AH)$.",
+              "Nommer : $H$ est son point d'intersection avec $(d)$, le pied.",
+              "Lire : $AH = 3$ cm.",
+              "Conclure : la distance de $A$ à $(d)$ est $3$ cm ; $AM = 5$ cm est plus long, comme prévu."
+            ]
+          },
+          "pitfall": "Ne prends pas la longueur d'un segment oblique pour la distance. Contre-exemple : si $AH = 3$ cm et $AM = 5$ cm, la distance de $A$ à $(d)$ est $3$ cm, pas $5$ cm. La distance se mesure toujours sur la **perpendiculaire** à la droite. Le chemin oblique $AM$ est plus long que $AH$.",
+          "figure": "point-et-droite",
+          "practice": {
+            "statement": "Tu t'entraînes à trouver la distance d'un point à une droite avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "$H$ est le pied de la perpendiculaire à $(d)$ passant par $A$, avec $AH = 4$ cm. Un point $M$ de $(d)$ est tel que $AM = 6,5$ cm. Quelle est la distance de $A$ à $(d)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ passant par $A$ est $(AH)$. Étape 2 — Nommer : $H$ est le pied. Étape 3 — Lire : $AH = 4$ cm. Étape 4 — Conclure : la distance est 4 cm, la plus courte. 6,5 cm est la longueur d'un chemin oblique.",
+                "answers": [
+                  {
+                    "content": "$4$ cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "$6,5$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10,5$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2,5$ cm",
+                    "correct": false
+                  }
+                ],
+                "hint": "La distance est mesurée sur la perpendiculaire."
+              },
+              {
+                "content": "Le point $B$ est sur la droite $(d)$. Quelle est la distance de $B$ à $(d)$, en cm ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Tracer : pour un point de la droite, la perpendiculaire passe par $B$ lui-même. Étape 2 — Nommer : le pied $H$ est $B$. Étape 3 — Lire : $BH = BB = 0$. Étape 4 — Conclure : la distance est 0 cm.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "cm",
+                "hint": "Le point est sur la droite."
+              },
+              {
+                "content": "Si $M$ est un point de $(d)$ avec $AM = 9$ cm, alors la distance de $A$ à $(d)$ est $9$ cm.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Tracer : on n'a pas tracé la perpendiculaire à $(d)$ passant par $A$. Étape 2 — Nommer : on ne connaît pas le pied $H$. Étape 3 — Lire : $AM$ est un segment quelconque. Étape 4 — Conclure : la distance vaut $AH$, qui est au plus 9 cm : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "AM est-il sur la perpendiculaire ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire la distance d'un point à une droite",
+              "statement": "Dans cet exercice, tu trouves la distance d'un point à une droite avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "$H$ est le pied de la perpendiculaire à $(d)$ passant par $A$. On a $AH = 3$ cm, $AM = 5$ cm et $AN = 5$ cm, avec $M$ et $N$ sur $(d)$. Quelle est la distance de $A$ à $(d)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ passant par $A$ est $(AH)$. Étape 2 — Nommer : $H$ est le pied. Étape 3 — Lire : $AH = 3$ cm. Étape 4 — Conclure : la distance est 3 cm. Les 5 cm sont ceux de chemins obliques, 8 cm n'a aucun sens ici.",
+                  "answers": [
+                    {
+                      "content": "$3$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La distance de $A$ à la droite $(d)$ est la longueur de n'importe quel segment $[AM]$, avec $M$ sur $(d)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ issue de $A$. Étape 2 — Nommer : son pied $H$. Étape 3 — Lire : $AH$ est la plus petite longueur ; $AM$ est en général plus grand. Étape 4 — Conclure : seule la longueur $AH$ est la distance. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$H$ est le pied de la perpendiculaire à $(d)$ passant par $B$, avec $BH = 4,5$ cm. Quelle est la distance de $B$ à $(d)$, en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ issue de $B$. Étape 2 — Nommer : $H$ est son pied. Étape 3 — Lire : $BH = 4,5$ cm. Étape 4 — Conclure : la distance est 4,5 cm.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le point $C$ appartient à la droite $(d)$. Quelle est la distance de $C$ à $(d)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ passant par $C$. Étape 2 — Nommer : son pied est $C$ lui-même. Étape 3 — Lire : $CC = 0$. Étape 4 — Conclure : la distance est 0 cm.",
+                  "answers": [
+                    {
+                      "content": "$0$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas la calculer",
+                      "correct": false
+                    },
+                    {
+                      "content": "La même que $C$ à un autre point de $(d)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$H$ est le pied de la perpendiculaire à $(d)$ passant par $A$. Avec $AH = 5$ cm, $AK = 8$ cm et $AM = 13$ cm, où $K$ et $M$ sont sur $(d)$, quelle est la distance de $A$ à $(d)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ issue de $A$. Étape 2 — Nommer : son pied est $H$. Étape 3 — Lire : $AH = 5$ cm. Étape 4 — Conclure : la distance est 5 cm, la plus petite des trois longueurs. Prendre $AM$ ou $AK$ est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "$5$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$13$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$26$ cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le puits et la route",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la distance d'un point à une droite. Tu utilises la méthode de la fiche à chaque question.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "La distance d'un point à une droite est toujours la plus courte longueur.",
+              "questions": [
+                {
+                  "content": "Awa marche de sa maison $A$ vers la route $(d)$ en suivant la perpendiculaire à la route. Elle arrive en $H$ après $24$ m. Un chemin oblique $AM$ mesure $30$ m. Quelle est la distance de la maison à la route, en m ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à la route issue de $A$. Étape 2 — Nommer : $H$ est son pied. Étape 3 — Lire : $AH = 24$ m. Étape 4 — Conclure : la distance est 24 m. Le chemin oblique de 30 m est plus long.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Pour tout point $M$ de la droite $(d)$, on a $AM \\geq AH$, où $H$ est le pied de la perpendiculaire à $(d)$ passant par $A$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ issue de $A$. Étape 2 — Nommer : son pied $H$. Étape 3 — Lire : $AH$ est la distance de $A$ à $(d)$. Étape 4 — Conclure : c'est la plus petite des longueurs $AM$, donc $AM \\geq AH$ : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La distance d'un point à une droite se mesure sur la ___ à la droite passant par ce point.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Tracer : la droite qui passe par le point. Étape 2 — Nommer : le pied. Étape 3 — Lire : la longueur jusqu'au pied. Étape 4 — Conclure : cette droite est la perpendiculaire à la droite donnée.",
+                  "answers": [
+                    {
+                      "content": "perpendiculaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$H$ est le pied de la perpendiculaire à $(d)$ issue de $A$, avec $AH = 6$, $AM = 10$, $AN = 7$ et $AK = 6,5$ (cm, $M$, $N$, $K$ sur $(d)$). La distance de $A$ à $(d)$ est ___ cm.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ issue de $A$. Étape 2 — Nommer : $H$ est le pied. Étape 3 — Lire : $AH = 6$. Étape 4 — Conclure : la distance est 6 cm, la plus petite. 6,5 est un chemin oblique proche mais plus long.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6,5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour trouver la distance d'un point à une droite.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Tracer la perpendiculaire. Étape 2 — Nommer le pied $H$. Étape 3 — Lire $AH$. Étape 4 — Conclure. On ne peut pas lire $AH$ avant d'avoir nommé $H$.",
+                  "answers": [
+                    {
+                      "content": "Tracer la perpendiculaire à la droite passant par le point."
+                    },
+                    {
+                      "content": "Nommer H le point où elle coupe la droite."
+                    },
+                    {
+                      "content": "Lire ou mesurer la longueur AH."
+                    },
+                    {
+                      "content": "Conclure : la distance est AH, la plus courte."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Tracer : on imagine la perpendiculaire issue de $A$. Étape 2 — Nommer : son pied $H$. Étape 3 — Lire : $AH$ est la plus petite longueur ; si $A$ est sur $(d)$, $H = A$ et $AH = 0$. Étape 4 — Conclure : les deux premières affirmations sont vraies. Les autres confondent la distance avec un chemin oblique.",
+                  "answers": [
+                    {
+                      "content": "La distance de $A$ à $(d)$ est la plus petite des distances de $A$ aux points de $(d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $A$ est sur $(d)$, sa distance à $(d)$ est $0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La distance de $A$ à $(d)$ est toujours la longueur $AM$ pour un point $M$ quelconque de $(d)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pied $H$ est toujours le milieu de $[AM]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La distance se mesure avec un chemin oblique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Médiatrice d'un segment",
+          "remember": "La **médiatrice** d'un segment $[AB]$ est la droite perpendiculaire à $[AB]$ qui passe par son milieu. **Propriété** : un point $M$ est sur la médiatrice de $[AB]$ si et seulement si $MA = MB$ (il est à égale distance, ou **équidistant**, de $A$ et de $B$). Donc : si $MA = MB$, alors $M$ est sur la médiatrice ; et si $M$ est sur la médiatrice, alors $MA = MB$.",
+          "method": [
+            "Repérer le segment $[AB]$ et le point $M$ dont on connaît les distances à $A$ et à $B$.",
+            "Comparer $MA$ et $MB$.",
+            "Appliquer la propriété : $MA = MB$ signifie que $M$ est sur la médiatrice ; $MA \\neq MB$ signifie qu'il n'y est pas.",
+            "Conclure par une phrase qui cite la propriété."
+          ],
+          "example": {
+            "statement": "Sur la figure, $MA = 5$ cm et $MB = 5$ cm. Le point $M$ est-il sur la médiatrice de $[AB]$ ?",
+            "steps": [
+              "Repérer : le segment est $[AB]$ et on connaît $MA = 5$ cm et $MB = 5$ cm.",
+              "Comparer : $MA = MB$.",
+              "Appliquer : un point équidistant de $A$ et $B$ est sur la médiatrice de $[AB]$.",
+              "Conclure : $M$ est à égale distance de $A$ et $B$, donc $M$ est sur la médiatrice de $[AB]$."
+            ]
+          },
+          "pitfall": "Une perpendiculaire à $[AB]$ n'est pas toujours la médiatrice : elle doit passer par le **milieu**. Contre-exemple : si $AB = 6$ cm et que $P$ est sur la perpendiculaire à $(AB)$ passant par $B$, avec $PB = 8$ cm et $PA = 10$ cm, alors $PA \\neq PB$ : $P$ n'est pas sur la médiatrice. Vérifie toujours avec les distances.",
+          "figure": "mediatrice-ab",
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser la médiatrice et l'équidistance avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le point $K$ est tel que $KA = 6$ cm et $KB = 6$ cm. Que peut-on dire de $K$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le segment est $[AB]$, avec $KA = 6$ et $KB = 6$. Étape 2 — Comparer : $KA = KB$. Étape 3 — Appliquer : un point équidistant est sur la médiatrice. Étape 4 — Conclure : $K$ est sur la médiatrice. Ce n'est pas forcément le milieu de $[AB]$.",
+                "answers": [
+                  {
+                    "content": "$K$ est sur la médiatrice de $[AB]$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$K$ est le milieu de $[AB]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$K$ est sur la droite $(AB)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut rien dire",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare $KA$ et $KB$."
+              },
+              {
+                "content": "Le point $M$ est sur la médiatrice de $[AB]$ et $MB = 8,5$ cm. Calcule $MA$, en cm.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : $M$ est sur la médiatrice de $[AB]$, avec $MB = 8,5$ cm. Étape 2 — Comparer : un point de la médiatrice est équidistant de $A$ et $B$. Étape 3 — Appliquer : $MA = MB$. Étape 4 — Conclure : $MA = 8,5$ cm.",
+                "answers": [
+                  {
+                    "content": "8,5",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "cm",
+                "hint": "Un point de la médiatrice est équidistant."
+              },
+              {
+                "content": "Un point $P$ tel que $PA = 4$ cm et $PB = 5$ cm est sur la médiatrice de $[AB]$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le segment $[AB]$, avec $PA = 4$ et $PB = 5$. Étape 2 — Comparer : $4 \\neq 5$ donc $PA \\neq PB$. Étape 3 — Appliquer : $P$ n'est pas équidistant. Étape 4 — Conclure : $P$ n'est pas sur la médiatrice : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Les deux distances sont-elles égales ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Médiatrice et équidistance",
+              "statement": "Dans cet exercice, tu utilises la médiatrice d'un segment avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "mediatrice-ab",
+              "questions": [
+                {
+                  "content": "Le point $I$ est le milieu de $[AB]$. La droite $(d)$ est perpendiculaire à $(AB)$ en $I$. Alors $(d)$ est la médiatrice de $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $I$ est le milieu et $(d)$ est perpendiculaire à $(AB)$ en $I$. Étape 2 — Comparer : il n'y a pas de distances à comparer, on lit la définition. Étape 3 — Appliquer : la médiatrice est la perpendiculaire passant par le milieu. Étape 4 — Conclure : $(d)$ est la médiatrice : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $MA = 5$ cm et $MB = 5$ cm. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $MA = 5$ cm et $MB = 5$ cm. Étape 2 — Comparer : $MA = MB$. Étape 3 — Appliquer : un point équidistant est sur la médiatrice. Étape 4 — Conclure : $M$ est sur la médiatrice. On ne sait rien de plus : $M$ peut être loin du segment.",
+                  "answers": [
+                    {
+                      "content": "$M$ est sur la médiatrice de $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M$ est sur le segment $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M$ est le milieu de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB = 10$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $P$ est tel que $PA = 10$ cm et $PB = 8$ cm. Que peut-on dire de $P$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $PA = 10$ cm et $PB = 8$ cm. Étape 2 — Comparer : $10 \\neq 8$. Étape 3 — Appliquer : un point de la médiatrice a $PA = PB$. Étape 4 — Conclure : $P$ n'est pas sur la médiatrice.",
+                  "answers": [
+                    {
+                      "content": "$P$ n'est pas sur la médiatrice de $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P$ est sur la médiatrice de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P$ est le milieu de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P$ est sur le segment $[AB]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $M$ est sur la médiatrice de $[AB]$ et $MA = 7$ cm. Combien mesure $MB$, en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $M$ est sur la médiatrice de $[AB]$, avec $MA = 7$ cm. Étape 2 — Comparer : les deux distances sont égales. Étape 3 — Appliquer : $MB = MA$. Étape 4 — Conclure : $MB = 7$ cm.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "$P$ est sur la perpendiculaire à $(AB)$ passant par $B$, avec $PA = 10$ cm et $PB = 8$ cm. Cette perpendiculaire est-elle la médiatrice de $[AB]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $PA = 10$ cm et $PB = 8$ cm. Étape 2 — Comparer : $PA \\neq PB$. Étape 3 — Appliquer : un point de la médiatrice a $PA = PB$. Étape 4 — Conclure : $P$ n'est pas sur la médiatrice, donc cette perpendiculaire n'en est pas une.",
+                  "answers": [
+                    {
+                      "content": "Non : elle ne passe pas par le milieu de $[AB]$, car $PA \\neq PB$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : elle est perpendiculaire à $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : elle passe par $B$, une extrémité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $PB$ est un nombre pair",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Atelier de construction",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la médiatrice. Tu utilises la méthode de la fiche à chaque question.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour la médiatrice, pense toujours à comparer MA et MB.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la construction de la médiatrice de $[AB]$ au compas.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer le segment et ouvrir le compas à plus de la moitié de $AB$. Étape 2 — Comparer : même ouverture en $A$ puis en $B$ pour que les points d'intersection soient équidistants de $A$ et $B$. Étape 3 — Appliquer la propriété : ces points sont sur la médiatrice. Étape 4 — Conclure : on les relie à la règle.",
+                  "answers": [
+                    {
+                      "content": "Ouvrir le compas à plus de la moitié de AB."
+                    },
+                    {
+                      "content": "Piquer en A et tracer deux arcs, de part et d'autre de AB."
+                    },
+                    {
+                      "content": "Garder la même ouverture, piquer en B et tracer deux arcs qui coupent les premiers."
+                    },
+                    {
+                      "content": "Relier à la règle les deux points d'intersection des arcs."
+                    }
+                  ]
+                },
+                {
+                  "content": "La médiatrice d'un segment passe par son ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la médiatrice de $[AB]$. Étape 2 — Comparer : elle est perpendiculaire à $[AB]$. Étape 3 — Appliquer la définition : elle passe par le milieu. Étape 4 — Conclure : le mot attendu est milieu.",
+                  "answers": [
+                    {
+                      "content": "milieu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le segment $[AB]$ mesure $12$ cm et $I$ est son milieu. La médiatrice de $[AB]$ coupe $[AB]$ en $I$. Calcule $AI$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $I$ est le milieu de $[AB]$, donc sur $[AB]$. Étape 2 — Comparer : $AI = IB$. Étape 3 — Appliquer : $AB = AI + IB = 2 \\times AI$. Étape 4 — Conclure : $AI = 12 \\div 2 = 6$ cm.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Tout point équidistant de $A$ et de $B$ est sur la médiatrice de $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : un point $M$ avec $MA = MB$. Étape 2 — Comparer : les deux distances sont égales. Étape 3 — Appliquer : c'est la propriété de la médiatrice. Étape 4 — Conclure : $M$ est sur la médiatrice : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $M$ est sur la médiatrice de $[AB]$ et $MA = 9$ cm. Alors $MB =$ ___ cm.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : $M$ est sur la médiatrice, avec $MA = 9$ cm. Étape 2 — Comparer : un point de la médiatrice est équidistant de $A$ et $B$. Étape 3 — Appliquer : $MB = MA$. Étape 4 — Conclure : $MB = 9$ cm. Doubler ou diviser par deux est une erreur.",
+                  "answers": [
+                    {
+                      "content": "$9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4,5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à sa conclusion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer chaque situation. Étape 2 — Comparer les distances quand il y en a. Étape 3 — Appliquer la propriété ou la définition. Étape 4 — Conclure : égalité, donc sur la médiatrice ; inégalité, donc hors de la médiatrice ; perpendiculaire par le milieu, donc médiatrice.",
+                  "answers": [
+                    {
+                      "content": "$MA = MB$",
+                      "match": "$M$ est sur la médiatrice de $[AB]$"
+                    },
+                    {
+                      "content": "$PA \\neq PB$",
+                      "match": "$P$ n'est pas sur la médiatrice"
+                    },
+                    {
+                      "content": "$I$ milieu et $(d)$ perpendiculaire en $I$",
+                      "match": "$(d)$ est la médiatrice de $[AB]$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le chemin de l'école",
+          "statement": "Awa va de sa maison $A$ à l'école $E$ par un chemin droit qui passe devant le marché $M$, entre $A$ et $E$. Sur ce chemin, $AM = 450$ m et $ME = 350$ m. Un camarade affirme qu'une boutique $B$, hors de ce chemin, est à $300$ m de la maison et à $400$ m de l'école ($AB = 300$ m et $BE = 400$ m) : on vérifie si c'est possible.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule la distance $AE$, en m.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : $M$ est entre $A$ et $E$ sur un chemin droit. Étape 2 — Écrire : $AE = AM + ME$. Étape 3 — Calculer : $AE = 450 + 350 = 800$ m. Étape 4 — Vérifier : 800 m est plus grand que 450 m et 350 m, l'unité est écrite.",
+              "answers": [
+                {
+                  "content": "800",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "m"
+            },
+            {
+              "content": "Exprime $AE$ en kilomètres (1 km = 1 000 m).",
+              "question_type": "numeric",
+              "explanation": "Méthode : on divise par 1 000 pour passer des mètres aux kilomètres. $800 \\div 1000 = 0,8$ km. Vérification : $0,8 \\times 1000 = 800$ m.",
+              "answers": [
+                {
+                  "content": "0,8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km"
+            },
+            {
+              "content": "Awa passe par le marché $M$ : son trajet est plus long que le trajet direct de $A$ à $E$.",
+              "question_type": "true_false",
+              "explanation": "Méthode : $M$ est sur le segment $[AE]$, donc $AM + ME = AE$. Le trajet par $M$ mesure $450 + 350 = 800$ m, comme le trajet direct. Il n'est pas plus long : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un camarade affirme : « $AE = 800$ m et la boutique $B$ est telle que $AB = 300$ m et $BE = 400$ m. » Est-ce possible ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : pour trois points quelconques, $AE \\leq AB + BE$. Ici $AB + BE = 300 + 400 = 700$ m. Comme $800 > 700$, c'est impossible. Dire « oui » parce que les nombres sont positifs ne prouve rien ; et $B$ n'a pas à être sur le chemin.",
+              "answers": [
+                {
+                  "content": "Non : $AB + BE = 700$ m et $AE$ ne peut pas dépasser $700$ m",
+                  "correct": true
+                },
+                {
+                  "content": "Oui : les trois distances sont positives",
+                  "correct": false
+                },
+                {
+                  "content": "Oui : $800 = 300 + 400 + 100$",
+                  "correct": false
+                },
+                {
+                  "content": "Non, car $B$ doit être sur le chemin",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après l'inégalité triangulaire, quelle est la plus grande valeur possible de $AE$ si $AB = 300$ m et $BE = 400$ m, en m ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : $AE \\leq AB + BE$. On calcule $300 + 400 = 700$. Donc $AE \\leq 700$ m, avec égalité seulement si $B$ est sur le segment $[AE]$.",
+              "answers": [
+                {
+                  "content": "700",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "m"
+            }
+          ]
+        },
+        {
+          "title": "Le puits du village",
+          "statement": "Sur un plan, 1 cm représente 100 m. Une route droite est la droite $(d)$. Le village $A$ est au-dessus de la route. Le point $H$ est le pied de la perpendiculaire à $(d)$ passant par $A$. Sur le plan, $AH = 3$ cm, $AM = 5$ cm et $AN = 5$ cm, où $M$ et $N$ sont sur la route. De plus $MH = 4$ cm et $H$ est le milieu de $[MN]$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Sur le plan, quelle est la distance de $A$ à la route $(d)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Tracer : la perpendiculaire à $(d)$ issue de $A$ est $(AH)$. Étape 2 — Nommer : $H$ est le pied. Étape 3 — Lire : $AH = 3$ cm. Étape 4 — Conclure : la distance est 3 cm ; les 5 cm sont des chemins obliques.",
+              "answers": [
+                {
+                  "content": "$3$ cm",
+                  "correct": true
+                },
+                {
+                  "content": "$5$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$4$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$8$ cm",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la distance réelle de $A$ à la route, en m ? (1 cm représente 100 m)",
+              "question_type": "numeric",
+              "explanation": "Méthode : la distance sur le plan est 3 cm. Chaque cm représente 100 m, donc $3 \\times 100 = 300$ m. Vérification : $300 \\div 100 = 3$ cm.",
+              "answers": [
+                {
+                  "content": "300",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "m"
+            },
+            {
+              "content": "Le chemin oblique $AM$ est le plus court pour aller de $A$ à la route.",
+              "question_type": "true_false",
+              "explanation": "Méthode : la distance de $A$ à $(d)$ est $AH = 3$ cm, la plus petite longueur. Le chemin $AM = 5$ cm est plus long. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On a $AM = AN = 5$ cm. Que peut-on dire du point $A$ par rapport au segment $[MN]$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le segment est $[MN]$ avec $AM = 5$ et $AN = 5$. Étape 2 — Comparer : $AM = AN$. Étape 3 — Appliquer : un point équidistant de $M$ et $N$ est sur la médiatrice de $[MN]$. Étape 4 — Conclure : $A$ est sur cette médiatrice. Il n'est pas sur le segment, puisqu'il est à 3 cm de la route.",
+              "answers": [
+                {
+                  "content": "$A$ est sur la médiatrice de $[MN]$",
+                  "correct": true
+                },
+                {
+                  "content": "$A$ est le milieu de $[MN]$",
+                  "correct": false
+                },
+                {
+                  "content": "$A$ est sur le segment $[MN]$",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut rien dire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sachant que $H$ est le milieu de $[MN]$ et que $MH = 4$ cm, calcule $MN$ sur le plan, en cm.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : $H$ est entre $M$ et $N$. Étape 2 — Écrire : $MN = MH + HN$ et $HN = MH = 4$ cm. Étape 3 — Calculer : $MN = 4 + 4 = 8$ cm. Étape 4 — Vérifier : 8 cm est plus grand que 4 cm.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            }
+          ]
+        },
+        {
+          "title": "Les trois villages",
+          "statement": "Trois villages $A$, $B$ et $C$ sont reliés par des pistes droites. Sur un plan où 1 cm représente 1 km, on lit $AB = 4$ cm, $AC = 3$ cm et $BC = 5$ cm.",
+          "exercise_type": "evaluation",
+          "figure": "triangle-trois-pistes",
+          "questions": [
+            {
+              "content": "Quelle est la longueur, en km, du trajet de $A$ à $B$ en passant par $C$ ($AC + CB$) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : on additionne les deux pistes, $AC + CB = 3 + 5 = 8$ km. Le trajet par $C$ mesure 8 km.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km"
+            },
+            {
+              "content": "Comparé au trajet direct de $A$ à $B$ (4 km), le trajet par $C$ est ___.",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on compare $AB = 4$ à $AC + CB = 8$. Étape 2 — Calculer : $AC + CB = 8$. Étape 3 — Comparer : $4 < 8$. Étape 4 — Conclure : le trajet par $C$ est plus long. Il ne serait égal que si $C$ était sur $[AB]$.",
+              "answers": [
+                {
+                  "content": "plus long, car $AB < AC + CB$",
+                  "correct": true
+                },
+                {
+                  "content": "égal, car $C$ est sur $[AB]$",
+                  "correct": false
+                },
+                {
+                  "content": "plus court, car il passe par $C$",
+                  "correct": false
+                },
+                {
+                  "content": "impossible à comparer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les villages $A$, $B$ et $C$ sont alignés.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : le plus grand nombre est $BC = 5$. Étape 2 — Calculer : $AB + AC = 4 + 3 = 7$. Étape 3 — Comparer : $5 \\neq 7$, il n'y a pas égalité. Étape 4 — Conclure : les villages ne sont pas alignés.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On veut creuser un puits à égale distance de $B$ et de $C$. Sur quelle droite doit-il se trouver ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le segment est $[BC]$. Étape 2 — Comparer : on veut $WB = WC$. Étape 3 — Appliquer : les points équidistants de $B$ et $C$ forment la médiatrice de $[BC]$. Étape 4 — Conclure : le puits est sur cette médiatrice. La perpendiculaire en $B$ ne passe pas par le milieu.",
+              "answers": [
+                {
+                  "content": "Sur la médiatrice de $[BC]$",
+                  "correct": true
+                },
+                {
+                  "content": "Sur la droite $(BC)$",
+                  "correct": false
+                },
+                {
+                  "content": "Sur la perpendiculaire à $(BC)$ passant par $B$",
+                  "correct": false
+                },
+                {
+                  "content": "Sur la médiatrice de $[AB]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le puits est sur la médiatrice de $[BC]$, à $2,5$ km de $B$. À quelle distance de $C$ est-il, en km ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : le puits $W$ est sur la médiatrice de $[BC]$. Étape 2 — Comparer : donc $WB = WC$. Étape 3 — Appliquer : $WC = WB = 2,5$ km. Étape 4 — Conclure : il est à 2,5 km de $C$.",
+              "answers": [
+                {
+                  "content": "2,5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km"
+            },
+            {
+              "content": "Explique pourquoi on ne peut pas construire un triangle dont les côtés mesurent $3$ km, $4$ km et $8$ km.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : le plus grand côté est $8$ km. La somme des deux autres est $3 + 4 = 7$ km. Comme $8 > 7$, l'inégalité triangulaire n'est pas respectée : on ne peut pas aller de la base au sommet en passant par un chemin plus court que la ligne droite. Le triangle n'existe pas. Barème : 1 point pour le plus grand côté, 1 point pour la somme, 1 point pour la comparaison et la conclusion.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Il repère le plus grand côté (8 km)",
+                "Il calcule la somme des deux autres (7 km)",
+                "Il compare 8 à 7 et conclut que le triangle n'existe pas"
+              ],
+              "starter": "Le plus grand côté mesure 8 km, et…"
+            }
+          ]
+        },
+        {
+          "title": "Le centre de santé et le marché",
+          "statement": "Deux villages $A$ et $B$ sont distants de $6$ km ($1$ cm représente $1$ km sur le plan). Le point $I$ est le milieu de $[AB]$. Le centre de santé $M$ est sur la médiatrice de $[AB]$, avec $MA = MB = 5$ km. Le marché $P$ est sur la perpendiculaire à $(AB)$ passant par $B$, avec $PB = 8$ km et $PA = 10$ km. La droite $(IM)$ est perpendiculaire à $(AB)$ en $I$.",
+          "exercise_type": "evaluation",
+          "figure": "mediatrice-ab",
+          "questions": [
+            {
+              "content": "Le centre de santé $M$ est à égale distance de $A$ et de $B$. Sur quelle droite se trouve-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le segment est $[AB]$ avec $MA = MB = 5$. Étape 2 — Comparer : $MA = MB$. Étape 3 — Appliquer : un point équidistant est sur la médiatrice. Étape 4 — Conclure : $M$ est sur la médiatrice de $[AB]$.",
+              "answers": [
+                {
+                  "content": "Sur la médiatrice de $[AB]$",
+                  "correct": true
+                },
+                {
+                  "content": "Sur la droite $(AB)$",
+                  "correct": false
+                },
+                {
+                  "content": "Sur la perpendiculaire à $(AB)$ passant par $B$",
+                  "correct": false
+                },
+                {
+                  "content": "Sur la médiatrice de $[MB]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un facteur va de $A$ à $B$ en passant par $M$. Quelle distance parcourt-il, en km ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : le trajet est $AM + MB = 5 + 5 = 10$ km.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km"
+            },
+            {
+              "content": "Compare le trajet par $M$ et le trajet direct $AB$.",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on compare $AB = 6$ à $AM + MB = 10$. Étape 2 — Calculer : $AM + MB = 10$. Étape 3 — Comparer : $6 < 10$, pas d'égalité. Étape 4 — Conclure : $M$ n'est pas sur $[AB]$, les trois points ne sont pas alignés.",
+              "answers": [
+                {
+                  "content": "$AB = 6 < AM + MB = 10$, donc $A$, $M$, $B$ ne sont pas alignés",
+                  "correct": true
+                },
+                {
+                  "content": "$AB = AM + MB$, donc $M$ est sur $[AB]$",
+                  "correct": false
+                },
+                {
+                  "content": "$AB > AM + MB$, ce qui est impossible",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas comparer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la distance de $B$ à la droite $(IM)$, en km ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Tracer : $(IM)$ est perpendiculaire à $(AB)$ en $I$, donc la perpendiculaire à $(IM)$ passant par $B$ est $(AB)$. Étape 2 — Nommer : le pied est $I$. Étape 3 — Lire : $I$ est le milieu de $[AB]$, donc $BI = 6 \\div 2 = 3$ km. Étape 4 — Conclure : la distance de $B$ à $(IM)$ est 3 km.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km"
+            },
+            {
+              "content": "Le marché $P$ est-il sur la médiatrice de $[AB]$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : segment $[AB]$, $PA = 10$ et $PB = 8$. Étape 2 — Comparer : $10 \\neq 8$. Étape 3 — Appliquer : un point de la médiatrice a $PA = PB$. Étape 4 — Conclure : $P$ n'est pas sur la médiatrice.",
+              "answers": [
+                {
+                  "content": "Non, car $PA = 10$ km et $PB = 8$ km sont différents",
+                  "correct": true
+                },
+                {
+                  "content": "Oui, car $P$ est sur une perpendiculaire à $(AB)$",
+                  "correct": false
+                },
+                {
+                  "content": "Oui, car $PB$ est la plus petite distance",
+                  "correct": false
+                },
+                {
+                  "content": "Non, car $P$ est sous le segment $[AB]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Marie dit : « $P$ est sur la perpendiculaire à $(AB)$, donc $P$ est sur la médiatrice de $[AB]$. » A-t-elle raison ? Justifie avec les distances.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Marie a tort. La médiatrice de $[AB]$ est la perpendiculaire à $[AB]$ qui passe par le milieu $I$. La perpendiculaire à $(AB)$ passant par $B$ ne passe pas par $I$. Pour le vérifier, on compare les distances : $PA = 10$ km et $PB = 8$ km, donc $PA \\neq PB$ et $P$ n'est pas équidistant de $A$ et $B$. Barème : 1 point pour la définition, 2 points pour la comparaison $PA \\neq PB$, 1 point pour la conclusion.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Il rappelle que la médiatrice passe par le milieu",
+                "Il compare PA = 10 et PB = 8",
+                "Il conclut que P n'est pas sur la médiatrice"
+              ],
+              "starter": "Marie a tort, car…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Distance de deux points, inégalité triangulaire et cas d'égalité, distance d'un point à une droite, médiatrice et équidistance : définitions, propriétés et calculs directs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Distance de deux points : savoirs de base.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "$M$ est sur le segment $[AB]$, avec $AM = 9$ cm et $MB = 6$ cm. Quelle est la distance $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) $M$ est sur $[AB]$. 2) $AB = AM + MB$. 3) $AB = 9 + 6 = 15$ cm. Soustraire donnerait 3 cm, erreur de signe.",
+                  "answers": [
+                    {
+                      "content": "$15$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$54$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$M$ est sur le segment $[AB]$, avec $AB = 14$ cm et $AM = 8$ cm. Calcule $MB$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) $M$ est sur $[AB]$. 2) $AB = AM + MB$. 3) $MB = 14 - 8 = 6$ cm. 4) $8 + 6 = 14$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Pour deux points $A$ et $B$, on a $AB = BA$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : la distance est la longueur du segment, elle ne dépend pas du sens. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La distance entre deux points confondus vaut ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : deux points confondus n'ont aucun écart entre eux, la distance est 0.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    },
+                    {
+                      "content": "zéro",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $M$, $B$ ne sont pas alignés, avec $AM = 2$ cm et $MB = 3$ cm. Peut-on affirmer que $AB = 5$ cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) les points ne sont pas alignés. 2) $M$ n'est donc pas entre $A$ et $B$. 3) on ne peut pas écrire $AB = AM + MB$. Additionner sans vérifier est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "Non : l'égalité n'est vraie que si $M$ est sur $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : on additionne toujours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $2 + 3 = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $AB = 1$ cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Inégalité triangulaire : savoirs de base.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Peut-on construire un triangle de côtés $4$ cm, $6$ cm et $9$ cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) le plus grand est 9. 2) $4 + 6 = 10$. 3) $9 < 10$. 4) le triangle existe.",
+                  "answers": [
+                    {
+                      "content": "Oui, car $9 < 4 + 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car $9 > 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $4 + 6 = 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $4 < 6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Peut-on construire un triangle de côtés $2$ cm, $5$ cm et $9$ cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) le plus grand est 9. 2) $2 + 5 = 7$. 3) $9 > 7$. 4) le triangle n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "Non, car $9 > 2 + 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $9 < 2 \\times 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $5 > 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $2$ est trop petit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $AC = 3$ cm, $CB = 5$ cm et $AB = 8$ cm, alors $C$ est sur le segment $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) le plus grand est 8. 2) $3 + 5 = 8$. 3) égalité. 4) $C$ est sur $[AB]$ : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour les côtés $7$ cm, $9$ cm et $12$ cm, calcule la somme des deux plus petits, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) le plus grand est 12. 2) $7 + 9 = 16$. 3) $12 < 16$ : le triangle existe.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : l'inégalité triangulaire donne $AB \\leq AC + CB$, avec égalité seulement pour un point $C$ de $[AB]$. Les trois autres propositions sont fausses : l'égalité n'est pas générale, et un côté ne dépasse jamais la somme des deux autres.",
+                  "answers": [
+                    {
+                      "content": "Pour trois points quelconques, $AB \\leq AC + CB$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $AB = AC + CB$, alors $C$ est sur le segment $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "On a toujours $AB = AC + CB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On a toujours $AB > AC + CB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un côté d'un triangle peut dépasser la somme des deux autres",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Distance d'un point à une droite : savoirs de base.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "$H$ est le pied de la perpendiculaire à $(d)$ passant par $A$, avec $AH = 2$ cm. Un point $M$ de $(d)$ est tel que $AM = 4$ cm. Quelle est la distance de $A$ à $(d)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) la perpendiculaire à $(d)$ issue de $A$ est $(AH)$. 2) $H$ est le pied. 3) $AH = 2$ cm. 4) la distance est 2 cm, pas 4 cm qui est un chemin oblique.",
+                  "answers": [
+                    {
+                      "content": "$2$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un point appartient à la droite $(d)$, sa distance à $(d)$ est $0$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le pied de la perpendiculaire est le point lui-même, donc la distance est 0. Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La distance d'un point à une droite se mesure sur la ___ à cette droite.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : on trace la perpendiculaire à la droite passant par le point, puis on mesure jusqu'au pied.",
+                  "answers": [
+                    {
+                      "content": "perpendiculaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces chemins de $A$ vers la droite $(d)$, lequel donne la distance de $A$ à $(d)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la distance est la longueur de la perpendiculaire, qui est la plus courte. Un segment oblique est plus long.",
+                  "answers": [
+                    {
+                      "content": "Le segment perpendiculaire à $(d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le segment le plus long",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un segment oblique quelconque",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le segment qui touche la droite en son milieu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $AM = 8$ cm, $AH = 5$ cm et $AN = 7$ cm, où $H$ est le pied de la perpendiculaire à $(d)$ issue de $A$ et $M$, $N$ sont sur $(d)$, donne la distance de $A$ à $(d)$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) la perpendiculaire issue de $A$. 2) son pied est $H$. 3) $AH = 5$ cm. 4) c'est la plus petite des trois longueurs.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Médiatrice d'un segment : savoirs de base.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "La médiatrice d'un segment est perpendiculaire à ce segment et passe par son ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : c'est la définition de la médiatrice : perpendiculaire au segment, en son milieu.",
+                  "answers": [
+                    {
+                      "content": "milieu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $MA = MB$, alors $M$ est sur la médiatrice de $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) on compare $MA$ et $MB$. 2) ils sont égaux. 3) un point équidistant est sur la médiatrice. 4) vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $M$ est sur la médiatrice de $[AB]$ et $MA = 6,5$ cm. Calcule $MB$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : un point de la médiatrice est équidistant des deux extrémités : $MB = MA = 6,5$ cm.",
+                  "answers": [
+                    {
+                      "content": "6,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Un point $P$ est tel que $PA = 3$ cm et $PB = 5$ cm. Où est $P$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) on compare $PA = 3$ et $PB = 5$. 2) $3 \\neq 5$. 3) ils sont différents, donc $P$ n'est pas sur la médiatrice.",
+                  "answers": [
+                    {
+                      "content": "Pas sur la médiatrice de $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur la médiatrice de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur le segment $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au milieu de $[AB]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la construction de la médiatrice de $[AB]$ au compas.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : d'abord l'ouverture, puis les arcs depuis $A$, puis depuis $B$ avec la même ouverture, enfin on relie. Les points d'intersection sont équidistants de $A$ et $B$.",
+                  "answers": [
+                    {
+                      "content": "Ouvrir le compas à plus de la moitié de AB."
+                    },
+                    {
+                      "content": "Piquer en A et tracer deux arcs de part et d'autre."
+                    },
+                    {
+                      "content": "Piquer en B, même ouverture, et tracer deux arcs qui coupent les premiers."
+                    },
+                    {
+                      "content": "Relier les deux points d'intersection."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante",
+          "notions": "Distance sur un chemin, pistes entre villages, tuyau le plus court jusqu'à une conduite, poteau équidistant de deux maisons : situations du quotidien.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Koffi marche de chez lui $K$ au marché $M$ puis à l'école $E$, sur une route droite, avec $M$ entre $K$ et $E$. On a $KM = 1,2$ km et $ME = 0,8$ km.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Calcule la distance $KE$, en km.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) $M$ est entre $K$ et $E$. 2) $KE = KM + ME$. 3) $KE = 1,2 + 0,8 = 2$ km.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "km"
+                },
+                {
+                  "content": "Exprime $KE$ en mètres.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $2$ km $= 2 \\times 1000 = 2000$ m.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Koffi rentre de l'école par le même chemin droit. Quelle distance parcourt-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : $EK = KE$ : la distance ne dépend pas du sens. Il parcourt 2 km.",
+                  "answers": [
+                    {
+                      "content": "$2$ km",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$ km",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$ km",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0,8$ km",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trajet de Koffi par le marché est plus long que le trajet direct de $K$ à $E$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : $M$ est sur $[KE]$ : $KM + ME = KE$. Les deux trajets sont égaux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le marché est à $1,2$ km de chez Koffi. Il fait l'aller-retour $K$ vers $M$ puis $M$ vers $K$. Quelle distance parcourt-il, en km ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $KM = MK = 1,2$ km, donc le trajet complet est $1,2 + 1,2 = 2,4$ km.",
+                  "answers": [
+                    {
+                      "content": "2,4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "km"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Trois villages $A$, $B$ et $C$ doivent être reliés par trois pistes droites. Le chef du village propose des longueurs.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Peut-on tracer trois pistes droites de $6$ km, $9$ km et $16$ km entre trois villages ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) le plus grand est 16. 2) $6 + 9 = 15$. 3) $16 > 15$. 4) impossible.",
+                  "answers": [
+                    {
+                      "content": "Non, car $16 > 6 + 9 = 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $16 < 6 \\times 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $9 > 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $16$ est pair",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Peut-on tracer trois pistes droites de $5$ km, $7$ km et $9$ km ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) le plus grand est 9. 2) $5 + 7 = 12$. 3) $9 < 12$. 4) possible.",
+                  "answers": [
+                    {
+                      "content": "Oui, car $9 < 5 + 7 = 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car $9 > 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $5 + 7 = 12$ est trop grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $5 < 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec des pistes de $4$ km, $6$ km et $10$ km, les trois villages sont alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) le plus grand est 10. 2) $4 + 6 = 10$. 3) égalité, donc les villages sont alignés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les villages $A$ et $C$ sont à $5$ km, $C$ et $B$ à $7$ km. Quelle est la plus grande distance possible entre $A$ et $B$, en km ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $AB \\leq AC + CB = 5 + 7 = 12$ km.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "km"
+                },
+                {
+                  "content": "Un élève dit : « Les pistes de $3$, $4$ et $8$ km sont possibles car $3 + 8 > 4$. » Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : on compare toujours le plus grand côté (8) à la somme des deux autres (7). Comme $8 > 7$, c'est impossible.",
+                  "answers": [
+                    {
+                      "content": "Il faut comparer $8$ à $3 + 4 = 7$ : c'est impossible",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut comparer $3$ à $4 + 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison, car $8$ est pair",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une conduite d'eau passe en ligne droite, c'est la droite $(d)$. La maison d'Aya est au point $A$. Le plombier veut la raccorder avec le tuyau le plus court. Le pied de la perpendiculaire à $(d)$ passant par $A$ est $H$, avec $AH = 15$ m.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle longueur de tuyau minimale faut-il, en m ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) la perpendiculaire issue de $A$. 2) son pied est $H$. 3) $AH = 15$ m. 4) c'est la distance de $A$ à $(d)$, donc la longueur minimale.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Un tuyau oblique $AM$ de $25$ m rejoint la conduite en $M$. Est-il le plus court ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : $AH$ est la plus petite longueur. $25 > 15$, donc $AM$ n'est pas le plus court.",
+                  "answers": [
+                    {
+                      "content": "Non, car $AM = 25 > AH = 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car il est plus long donc plus solide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car il touche la conduite",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la maison $A$ était sur la conduite, il n'y aurait pas besoin de tuyau supplémentaire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : si $A$ est sur $(d)$, sa distance à $(d)$ est 0. Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le tuyau coûte $2000$ F le mètre. Combien coûte le tuyau le plus court, en F ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : longueur minimale : 15 m. Coût : $15 \\times 2000 = 30000$ F.",
+                  "answers": [
+                    {
+                      "content": "30000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "F"
+                },
+                {
+                  "content": "Le tuyau le plus court est placé sur la ___ à la conduite passant par la maison.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : la plus courte distance d'un point à une droite se mesure sur la perpendiculaire.",
+                  "answers": [
+                    {
+                      "content": "perpendiculaire",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Deux maisons $A$ et $B$ sont distantes de $20$ m. Un poteau électrique $M$ doit être à égale distance des deux maisons. Le point $I$ est le milieu de $[AB]$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Sur quelle droite doit se trouver le poteau $M$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) le segment est $[AB]$. 2) on veut $MA = MB$. 3) les points équidistants sont sur la médiatrice. 4) conclusion.",
+                  "answers": [
+                    {
+                      "content": "Sur la médiatrice de $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur la droite $(AB)$ entre les deux maisons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la médiatrice d'un autre segment",
+                      "correct": false
+                    },
+                    {
+                      "content": "N'importe où",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poteau est sur la médiatrice, à $13$ m de la maison $A$. À quelle distance est-il de $B$, en m ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $MB = MA = 13$ m.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Calcule $AI$, en m.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $I$ est le milieu de $[AB]$ : $AI = 20 \\div 2 = 10$ m.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Un poteau placé à $12$ m de $A$ et à $15$ m de $B$ est sur la médiatrice de $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : $12 \\neq 15$ : le poteau n'est pas équidistant, donc pas sur la médiatrice.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poteau est à égale distance des deux maisons : on dit qu'il est ___ de $A$ et de $B$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : un point à égale distance de deux points est équidistant de ces deux points.",
+                  "answers": [
+                    {
+                      "content": "équidistant",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Raisonner avec plusieurs points alignés, valeurs possibles d'un côté, plus courte distance à une droite, médiatrice : justifier avec la propriété.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur un chemin droit, les points $A$, $M$, $N$ et $B$ sont alignés dans cet ordre. On a $AB = 30$ cm, $AM = 12$ cm et $NB = 9$ cm.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Calcule $MB$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) $M$ est sur $[AB]$. 2) $AB = AM + MB$. 3) $MB = 30 - 12 = 18$ cm.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule $AN$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) $N$ est sur $[AB]$. 2) $AB = AN + NB$. 3) $AN = 30 - 9 = 21$ cm.",
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Calcule $MN$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) $M$ est sur $[AN]$. 2) $AN = AM + MN$. 3) $MN = 21 - 12 = 9$ cm. On vérifie : $12 + 9 + 9 = 30$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le point $N$ est le milieu de $[MB]$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : $MN = 9$ cm et $NB = 9$ cm, avec $N$ entre $M$ et $B$ : $N$ est à égale distance de $M$ et $B$, donc c'est le milieu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi $MB = 18$ cm, en citant la propriété utilisée.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : les points $A$, $M$, $B$ sont alignés et $M$ est entre $A$ et $B$, donc $M$ est sur le segment $[AB]$ et $AM + MB = AB$. On en déduit $MB = AB - AM = 30 - 12 = 18$ cm. Barème : 1 point pour l'alignement, 1 point pour l'égalité, 1 point pour le calcul.",
+                  "answers": [],
+                  "points": 3,
+                  "criteria": [
+                    "Il dit que M est entre A et B",
+                    "Il écrit AB = AM + MB",
+                    "Il calcule 30 - 12 = 18"
+                  ],
+                  "starter": "Comme M est sur le segment [AB]…"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un triangle $ABC$, on connaît deux côtés : $AB = 5$ cm et $AC = 9$ cm. On cherche les valeurs possibles de $BC$, qui est un nombre entier de cm.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle est la plus grande valeur entière possible de $BC$, en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $BC < AB + AC = 14$ (pas d'égalité, sinon le triangle est plat). Le plus grand entier strictement inférieur à 14 est 13.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la plus petite valeur entière possible de $BC$, en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : le plus grand côté peut être $AC$ : il faut $9 < 5 + BC$, donc $BC > 4$. Le plus petit entier est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le côté $BC = 4$ cm est-il possible ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) le plus grand côté est 9. 2) $5 + 4 = 9$. 3) égalité. 4) les points sont alignés, ce n'est pas un vrai triangle.",
+                  "answers": [
+                    {
+                      "content": "Non, car $9 = 5 + 4$ : les points seraient alignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $4 < 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $4 < 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $4$ est pair",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le côté $BC = 14$ cm est possible.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) le plus grand est 14. 2) $5 + 9 = 14$. 3) égalité. 4) triangle plat : pas un vrai triangle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $BC = 20$ cm, explique pourquoi le triangle $ABC$ n'existe pas.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : le plus grand côté est $BC = 20$ cm. La somme des deux autres est $AB + AC = 5 + 9 = 14$ cm. Comme $20 > 14$, l'inégalité triangulaire n'est pas respectée, donc le triangle n'existe pas. Barème : 1 point pour le plus grand côté, 1 point pour la somme, 1 point pour la comparaison.",
+                  "answers": [],
+                  "points": 3,
+                  "criteria": [
+                    "Il repère le plus grand côté",
+                    "Il calcule 5 + 9 = 14",
+                    "Il compare 20 à 14 et conclut"
+                  ],
+                  "starter": "Le plus grand côté est BC = 20 cm, et…"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le point $H$ est le pied de la perpendiculaire à la droite $(d)$ passant par $A$. Les points $M$, $N$, $K$ sont sur $(d)$. On a $AH = 6$, $AM = 6,5$, $AN = 7,2$ et $AK = 10$ (en cm).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle est la distance de $A$ à $(d)$, en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) perpendiculaire issue de $A$. 2) pied $H$. 3) $AH = 6$ cm. 4) la plus petite des longueurs.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Parmi $M$, $N$ et $K$, lequel est le plus proche de $A$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : on compare $6,5$, $7,2$ et $10$ : le plus petit est $6,5$, donc $M$.",
+                  "answers": [
+                    {
+                      "content": "$M$, car $AM = 6,5$ est la plus petite des trois",
+                      "correct": true
+                    },
+                    {
+                      "content": "$K$, car $AK = 10$ est le plus grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "$N$, car il est au milieu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont à la même distance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il existe un point de $(d)$ plus proche de $A$ que $H$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : $AH$ est la distance de $A$ à $(d)$, la plus petite de toutes les distances $AX$ avec $X$ sur $(d)$. Aucun point n'est plus proche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $AM = AH$ avec $M$ sur $(d)$, alors $M$ est le point ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : $AH$ est la seule longueur minimale : l'égalité $AM = AH$ n'arrive que pour $M = H$.",
+                  "answers": [
+                    {
+                      "content": "H",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi la distance de $A$ à $(d)$ n'est pas $AK = 10$ cm.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : la distance de $A$ à $(d)$ est la longueur de la perpendiculaire à $(d)$ passant par $A$, c'est-à-dire $AH = 6$ cm. Le segment $[AK]$ est oblique : il est plus long ($10 > 6$). La distance est la plus petite des longueurs $AX$, avec $X$ sur $(d)$. Barème : 1 point pour la perpendiculaire, 1 point pour $AH = 6$, 1 point pour la comparaison $10 > 6$.",
+                  "answers": [],
+                  "points": 3,
+                  "criteria": [
+                    "Il dit que la distance se mesure sur la perpendiculaire",
+                    "Il donne AH = 6",
+                    "Il compare 10 à 6"
+                  ],
+                  "starter": "La distance se mesure sur…"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Les points $M$ et $N$ sont tous deux à égale distance de $A$ et de $B$. On a $MA = MB = 5$ cm et $NA = NB = 13$ cm. Le segment $[AB]$ mesure $6$ cm et $I$ est son milieu.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Que peut-on dire de la droite $(MN)$ par rapport à $[AB]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : $M$ et $N$ sont équidistants de $A$ et $B$ : ils sont sur la médiatrice. Deux points distincts déterminent une droite : $(MN)$ est la médiatrice.",
+                  "answers": [
+                    {
+                      "content": "C'est la médiatrice de $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est la droite $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est parallèle à $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $AI$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $I$ est le milieu de $[AB]$ : $AI = 6 \\div 2 = 3$ cm.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le point $I$ est sur la droite $(MN)$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : $(MN)$ est la médiatrice de $[AB]$, qui passe par le milieu $I$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point $T$ de la médiatrice est tel que $TA = 7$ cm. Calcule $TB$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $T$ est équidistant de $A$ et $B$ : $TB = TA = 7$ cm.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Un élève dit : « La perpendiculaire à $(AB)$ passant par $B$ est la médiatrice de $[AB]$. » Explique pourquoi c'est faux.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : la médiatrice de $[AB]$ est la perpendiculaire à $[AB]$ qui passe par le milieu $I$. La perpendiculaire passant par $B$ ne passe pas par $I$. Par exemple, un point $P$ de cette droite avec $PB = 8$ et $PA = 10$ n'est pas équidistant de $A$ et $B$. Barème : 1 point pour la définition, 1 point pour le milieu, 1 point pour le contre-exemple.",
+                  "answers": [],
+                  "points": 3,
+                  "criteria": [
+                    "Il rappelle que la médiatrice passe par le milieu",
+                    "Il dit que B n'est pas le milieu",
+                    "Il donne un contre-exemple chiffré"
+                  ],
+                  "starter": "La médiatrice passe par…"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan",
+          "notions": "Bilan de toutes les notions : distance de deux points, inégalité triangulaire, distance d'un point à une droite, médiatrice d'un segment.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois villages $A$, $B$ et $C$ forment un triangle : $AB = 4$ km, $AC = 3$ km et $BC = 5$ km.",
+              "exercise_type": "evaluation",
+              "figure": "triangle-trois-pistes",
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Calcule la longueur du trajet $A \\to C \\to B$, en km.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $AC + CB = 3 + 5 = 8$ km.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "km"
+                },
+                {
+                  "content": "Les trois villages sont alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) le plus grand est 5. 2) $3 + 4 = 7$. 3) $5 \\neq 7$. 4) pas alignés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trajet $A \\to C \\to B$ est ___ le trajet direct $A \\to B$.",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : $AB = 4 < AC + CB = 8$ : le trajet par $C$ est plus long.",
+                  "answers": [
+                    {
+                      "content": "plus long que",
+                      "correct": true
+                    },
+                    {
+                      "content": "égal à",
+                      "correct": false
+                    },
+                    {
+                      "content": "plus court que",
+                      "correct": false
+                    },
+                    {
+                      "content": "impossible à comparer avec",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La somme $AB + AC$ vaut ___ km.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $4 + 3 = 7$ km.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "km"
+                },
+                {
+                  "content": "Un puits $W$ est à égale distance de $B$ et de $C$. Où est-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : on veut $WB = WC$ : les points équidistants sont sur la médiatrice de $[BC]$.",
+                  "answers": [
+                    {
+                      "content": "Sur la médiatrice de $[BC]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur la droite $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur le segment $[BC]$ obligatoirement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la médiatrice de $[AB]$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "$H$ est le pied de la perpendiculaire à $(d)$ passant par $A$. On a $AH = 3$ cm, $AM = AN = 5$ cm, avec $M$ et $N$ sur $(d)$. Le point $H$ est le milieu de $[MN]$, avec $MH = 4$ cm.",
+              "exercise_type": "evaluation",
+              "figure": "point-et-droite",
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle est la distance de $A$ à $(d)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la perpendiculaire est $(AH)$, le pied est $H$, $AH = 3$ cm.",
+                  "answers": [
+                    {
+                      "content": "$3$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $MN$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $H$ est entre $M$ et $N$ et $HN = MH = 4$ cm, donc $MN = 4 + 4 = 8$ cm.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Que peut-on dire de $A$ par rapport à $[MN]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : $AM = AN = 5$ cm : $A$ est équidistant de $M$ et $N$.",
+                  "answers": [
+                    {
+                      "content": "$A$ est sur la médiatrice de $[MN]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$ est sur le segment $[MN]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$ est le milieu de $[MN]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chemin $AM$ est plus court que le chemin $AH$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : $AM = 5 > AH = 3$. Le plus court est $AH$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un marcheur va de $M$ à $N$ en passant par $A$. Quelle distance parcourt-il, en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $MA + AN = 5 + 5 = 10$ cm, plus que $MN = 8$ cm.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "$A$ et $B$ sont deux points tels que $AB = 6$ cm et $I$ est le milieu de $[AB]$. Le point $M$ est tel que $MA = MB = 5$ cm. Le point $P$ est tel que $PA = 10$ cm et $PB = 8$ cm.",
+              "exercise_type": "evaluation",
+              "figure": "mediatrice-ab",
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Calcule $AI$, en cm.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : $I$ est le milieu de $[AB]$ : $AI = 6 \\div 2 = 3$ cm.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Où est $M$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : $MA = MB$ : $M$ est sur la médiatrice.",
+                  "answers": [
+                    {
+                      "content": "Sur la médiatrice de $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur le segment $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au milieu de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la droite $(AB)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$P$ est sur la médiatrice de $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : $PA = 10 \\neq PB = 8$ : $P$ n'est pas équidistant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $M$, $B$ sont-ils alignés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) le plus grand est 10, la somme $AM + MB$. 2) on compare $AB = 6$ à 10. 3) pas d'égalité, donc pas alignés.",
+                  "answers": [
+                    {
+                      "content": "Non, car $AB = 6 < AM + MB = 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $AM = MB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $AB = AM + MB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $M$ est le milieu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : l'inégalité triangulaire donne $6 \\leq 18$ ; la médiatrice est l'ensemble des points équidistants. Les autres sont fausses : $PA \\neq PB$, $AM + MB = 10 \\neq 6$, et $M$ n'est pas sur $[AB]$.",
+                  "answers": [
+                    {
+                      "content": "$AB \\leq AP + PB$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un point de la médiatrice de $[AB]$ est équidistant de $A$ et $B$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$PA = PB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AM + MB = AB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M$ est le milieu de $[AB]$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan : cinq questions variées qui reprennent les quatre notions de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la méthode de la fiche avant de répondre.",
+              "questions": [
+                {
+                  "content": "Sur un sentier droit, $M$ est entre $A$ et $B$ avec $AM = 2,5$ km et $MB = 3,5$ km. Calcule $AB$, en km.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) $M$ entre $A$ et $B$. 2) $AB = AM + MB$. 3) $2,5 + 3,5 = 6$ km.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "km"
+                },
+                {
+                  "content": "Peut-on construire un triangle de côtés $5$, $8$ et $14$ cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) le plus grand est 14. 2) $5 + 8 = 13$. 3) $14 > 13$. 4) impossible.",
+                  "answers": [
+                    {
+                      "content": "Non, car $14 > 5 + 8 = 13$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $14 < 5 \\times 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $8 > 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $14$ est trop petit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pied de la perpendiculaire à un chemin $(d)$ passant par un arbre $A$ est $H$, avec $AH = 12$ m. Quelle est la distance de l'arbre au chemin, en m ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : c'est la longueur $AH$ de la perpendiculaire : 12 m.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Un point $K$ avec $KA = KB$ est sur la médiatrice de $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un point équidistant de $A$ et $B$ est sur la médiatrice de $[AB]$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $M$ est sur la médiatrice de $[AB]$ avec $MA = 4$ cm, alors $MB =$ ___ cm.",
+                  "question_type": "select",
+                  "explanation": "Méthode : un point de la médiatrice est équidistant de $A$ et $B$ : $MB = MA = 4$ cm.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

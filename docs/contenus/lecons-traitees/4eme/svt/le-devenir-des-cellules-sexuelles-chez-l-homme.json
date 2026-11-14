@@ -1,0 +1,3865 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le devenir des cellules sexuelles chez l'Homme",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "SVT",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "deux-cellules",
+          "kind": "diagram",
+          "description": "Arbre de comparaison des deux cellules sexuelles. En haut, les cellules sexuelles. En dessous, deux branches : chez l'homme, les testicules, qui produisent les spermatozoïdes ; chez la femme, les ovaires, qui produisent les ovules. Chaque cellule est décrite : le spermatozoïde est petit, mobile et très nombreux ; l'ovule est gros, immobile et libéré un à la fois.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "c",
+                "label": "Les cellules sexuelles"
+              },
+              {
+                "id": "h",
+                "label": "Chez l'homme : les testicules"
+              },
+              {
+                "id": "f",
+                "label": "Chez la femme : les ovaires"
+              },
+              {
+                "id": "s",
+                "label": "Spermatozoïde : petit, mobile, très nombreux"
+              },
+              {
+                "id": "o",
+                "label": "Ovule : gros, immobile, libéré un à la fois"
+              }
+            ],
+            "edges": [
+              {
+                "from": "c",
+                "to": "h"
+              },
+              {
+                "from": "c",
+                "to": "f"
+              },
+              {
+                "from": "h",
+                "to": "s",
+                "label": "produisent"
+              },
+              {
+                "from": "f",
+                "to": "o",
+                "label": "produisent"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "appareil-feminin",
+          "kind": "plate",
+          "description": "Planche de l'appareil génital féminin. On y voit l'ovaire, le pavillon, la trompe, l'utérus avec sa muqueuse, le col de l'utérus et le vagin, chacun avec son nom. La trompe relie le pavillon, placé près de l'ovaire, à l'utérus.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "numbering": "names",
+            "labels": [
+              {
+                "part": "ovary"
+              },
+              {
+                "part": "infundibulum"
+              },
+              {
+                "part": "oviduct"
+              },
+              {
+                "part": "uterus"
+              },
+              {
+                "part": "endometrium"
+              },
+              {
+                "part": "cervix"
+              },
+              {
+                "part": "vagina"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "trajet-de-fecondation",
+          "kind": "plate",
+          "description": "Planche de l'appareil génital féminin avec la trompe mise en valeur. Le vagin, le col de l'utérus, l'utérus et la trompe forment le trajet des spermatozoïdes. L'ovaire libère l'ovule, recueilli par le pavillon. La trompe est le lieu de la rencontre des deux cellules sexuelles.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "numbering": "names",
+            "highlight": [
+              "oviduct"
+            ],
+            "labels": [
+              {
+                "part": "ovary"
+              },
+              {
+                "part": "infundibulum"
+              },
+              {
+                "part": "oviduct"
+              },
+              {
+                "part": "uterus"
+              },
+              {
+                "part": "cervix"
+              },
+              {
+                "part": "vagina"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "appareil-numerote",
+          "kind": "plate",
+          "description": "Planche de l'appareil génital féminin dont les parties sont repérées par des numéros, sans leur nom : 1 l'ovaire, 2 le pavillon, 3 la trompe, 4 l'utérus, 5 la muqueuse de l'utérus, 6 le col de l'utérus. La correction donne les noms dans cet ordre.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "numbering": "numbers",
+            "labels": [
+              {
+                "part": "ovary"
+              },
+              {
+                "part": "infundibulum"
+              },
+              {
+                "part": "oviduct"
+              },
+              {
+                "part": "uterus"
+              },
+              {
+                "part": "endometrium"
+              },
+              {
+                "part": "cervix"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "etapes-du-devenir",
+          "kind": "diagram",
+          "description": "Schéma fléché des étapes du devenir des cellules sexuelles, de haut en bas : le spermatozoïde et l'ovule se rencontrent, la fécondation a lieu dans la trompe et forme la cellule-œuf, qui se divise en un embryon, la nidation fixe l'embryon dans l'utérus, l'embryon devient un fœtus, puis l'accouchement a lieu après environ neuf mois.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Spermatozoïde et ovule se rencontrent"
+              },
+              {
+                "id": "b",
+                "label": "Fécondation dans la trompe : cellule-œuf"
+              },
+              {
+                "id": "c",
+                "label": "Divisions de la cellule-œuf : embryon"
+              },
+              {
+                "id": "d",
+                "label": "Nidation dans la muqueuse de l'utérus"
+              },
+              {
+                "id": "e",
+                "label": "Développement : fœtus"
+              },
+              {
+                "id": "f",
+                "label": "Accouchement après environ 9 mois"
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b"
+              },
+              {
+                "from": "b",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "d"
+              },
+              {
+                "from": "d",
+                "to": "e"
+              },
+              {
+                "from": "e",
+                "to": "f"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître les cellules sexuelles et leur lieu de production",
+          "remember": "Les **cellules sexuelles** (ou gamètes) servent à la reproduction. Chez l'homme, les **testicules** produisent les **spermatozoïdes** à partir de la puberté, en très grand nombre. Le spermatozoïde est une petite cellule mobile : il possède une tête et une queue, le **flagelle**, qui lui permet de nager. Le **sperme** est le liquide qui contient les spermatozoïdes. Chez la femme, les **ovaires** produisent les **ovules** à partir de la puberté. L'ovule est une grosse cellule ronde, sans mouvement propre. En général, un seul ovule est libéré à la fois, environ une fois par mois.",
+          "method": [
+            "Repérer les indices donnés : taille, forme et mobilité de la cellule, ou organe cité.",
+            "Nommer la cellule sexuelle : spermatozoïde ou ovule.",
+            "Associer l'organe qui la produit : les testicules ou les ovaires.",
+            "Conclure en donnant le rôle de la cellule et sa production : en très grand nombre, ou une seule à la fois."
+          ],
+          "example": {
+            "statement": "Au microscope, un élève observe une cellule très petite, avec une tête et une longue queue, qui se déplace dans un liquide. Quelle cellule est-ce, et quel organe la produit ?",
+            "steps": [
+              "Repérer : la cellule est très petite, elle a une tête et une queue, et elle se déplace.",
+              "Nommer : une cellule petite et mobile, avec un flagelle, est un spermatozoïde.",
+              "Associer : le spermatozoïde est produit par les testicules.",
+              "Conclure : les testicules fabriquent des spermatozoïdes en très grand nombre ; ils servent à rencontrer l'ovule."
+            ]
+          },
+          "pitfall": "Ne confonds pas l'**ovule** et l'**ovaire**, ni le **sperme** et le **spermatozoïde**. L'ovaire est un organe ; l'ovule est une cellule produite par l'ovaire. Le sperme est un liquide qui contient des millions de cellules ; chaque cellule est un spermatozoïde. Retiens : un organe produit une cellule, et un liquide contient des cellules.",
+          "figure": "deux-cellules",
+          "exercise": [
+            {
+              "title": "Reconnaître les deux cellules sexuelles",
+              "statement": "Au centre de santé, l'infirmier explique à un groupe d'élèves de 4ème comment sont produites les cellules sexuelles de l'homme et de la femme.",
+              "exercise_type": "fixation",
+              "figure": "deux-cellules",
+              "questions": [
+                {
+                  "content": "Que sont les cellules sexuelles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche la définition. Étape 2 — Nommer : les cellules sexuelles sont le spermatozoïde et l'ovule. Étape 3 — Associer : elles sont produites par les organes génitaux. Étape 4 — Conclure : elles servent à la reproduction. Ce ne sont ni des organes ni des liquides.",
+                  "answers": [
+                    {
+                      "content": "Des cellules de la peau qui apparaissent à la puberté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des organes situés dans le ventre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des cellules produites par les organes génitaux, qui servent à la reproduction",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des liquides produits par les testicules",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à ce qu'il désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Nommer : spermatozoïde et ovule sont les deux cellules sexuelles. Étape 3 — Associer : le spermatozoïde vient des testicules, l'ovule des ovaires. Le sperme n'est pas une cellule : c'est le liquide qui contient les spermatozoïdes.",
+                  "answers": [
+                    {
+                      "content": "Spermatozoïde",
+                      "match": "Cellule sexuelle produite par les testicules"
+                    },
+                    {
+                      "content": "Ovule",
+                      "match": "Cellule sexuelle produite par les ovaires"
+                    },
+                    {
+                      "content": "Sperme",
+                      "match": "Liquide qui contient les spermatozoïdes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une cellule sexuelle est grosse, ronde et sans mouvement propre. Quelle est-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la cellule est grosse, ronde et immobile par elle-même. Étape 2 — Nommer : c'est un ovule. Étape 3 — Associer : il est produit par les ovaires. Le spermatozoïde est petit et mobile ; le testicule est un organe ; le sperme est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Un spermatozoïde",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un testicule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sperme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un ovule",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seul ovule est libéré à la fois, environ une fois par mois, alors que les spermatozoïdes sont produits en très grand nombre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Associer : les ovaires libèrent en général un ovule à la fois ; les testicules produisent beaucoup de spermatozoïdes. Étape 4 — Conclure : cette différence de nombre est exacte, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève écrit : « Les spermatozoïdes sont produits par le sperme. » Quelle correction est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Nommer : le spermatozoïde est la cellule. Étape 3 — Associer : l'organe producteur est le testicule. Étape 4 — Conclure : le sperme est le liquide. C'est le piège de la fiche : un organe produit une cellule, et un liquide contient des cellules.",
+                  "answers": [
+                    {
+                      "content": "Les spermatozoïdes sont des cellules produites par les testicules ; le sperme est le liquide qui les contient",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sperme est une cellule produite par les testicules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les spermatozoïdes sont produits par les ovaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sperme et les spermatozoïdes sont la même chose",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer le spermatozoïde et l'ovule",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour comparer les deux cellules sexuelles et retrouver l'organe qui les produit.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque proposition, demande-toi si elle décrit le spermatozoïde ou l'ovule.",
+              "questions": [
+                {
+                  "content": "Quelles propositions décrivent le spermatozoïde ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche les indices du spermatozoïde. Étape 2 — Nommer : petit, avec un flagelle. Étape 3 — Associer : produit par les testicules. Étape 4 — Conclure : mobile et très nombreux. Les trois autres propositions décrivent l'ovule ou un mauvais organe.",
+                  "answers": [
+                    {
+                      "content": "Il est immobile et de grande taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est mobile grâce à son flagelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est libéré un seul à la fois, environ une fois par mois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est produit en très grand nombre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est produit par les ovaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un spermatozoïde se déplace grâce à son ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche ce qui permet de nager. Étape 2 — Nommer : le spermatozoïde a une tête et une queue, appelée flagelle. Étape 4 — Conclure : le flagelle lui permet de se déplacer.",
+                  "answers": [
+                    {
+                      "content": "flagelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "queue",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ovule est produit par les ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Nommer : l'ovule est la cellule sexuelle de la femme. Étape 3 — Associer : il est produit par les ovaires. Les testicules produisent les spermatozoïdes ; la trompe conduit l'ovule mais ne le produit pas.",
+                  "answers": [
+                    {
+                      "content": "testicules",
+                      "correct": false
+                    },
+                    {
+                      "content": "trompes",
+                      "correct": false
+                    },
+                    {
+                      "content": "reins",
+                      "correct": false
+                    },
+                    {
+                      "content": "ovaires",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître une cellule sexuelle.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer les indices. Étape 2 — Nommer la cellule. Étape 3 — Associer l'organe producteur. Étape 4 — Conclure. On ne peut pas associer l'organe avant d'avoir nommé la cellule.",
+                  "answers": [
+                    {
+                      "content": "Repérer la taille, la forme et la mobilité de la cellule."
+                    },
+                    {
+                      "content": "Nommer la cellule : spermatozoïde ou ovule."
+                    },
+                    {
+                      "content": "Associer l'organe qui la produit."
+                    },
+                    {
+                      "content": "Conclure en donnant son rôle et sa production."
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ovule est plus petit que le spermatozoïde.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on compare les tailles. Étape 2 — Nommer : l'ovule est une grosse cellule ronde ; le spermatozoïde est une très petite cellule. L'ovule est donc plus gros : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En général, combien d'ovules sont libérés à la fois par les ovaires d'une femme ?",
+                  "question_type": "numeric",
+                  "unit": "",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Associer : les ovaires produisent des ovules. Étape 4 — Conclure : en général, un seul ovule est libéré à la fois, environ une fois par mois. Les spermatozoïdes, eux, sont produits en très grand nombre.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître une cellule sexuelle et son organe producteur avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une cellule sexuelle est très petite, possède une queue (un flagelle) et se déplace seule. Quelle est-elle ?",
+                "question_type": "single_choice",
+                "hint": "Pense à la cellule qui possède un flagelle.",
+                "explanation": "Étape 1 — Repérer : la cellule est petite, avec une queue, et mobile. Étape 2 — Nommer : c'est un spermatozoïde. Étape 3 — Associer : il est produit par les testicules. Étape 4 — Conclure : il sert à rencontrer l'ovule. Le sperme est un liquide, l'ovule est une grosse cellule sans mouvement propre, l'ovaire est un organe.",
+                "answers": [
+                  {
+                    "content": "Un spermatozoïde",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un ovule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sperme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un ovaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les spermatozoïdes sont produits par les ___.",
+                "question_type": "select",
+                "hint": "Le spermatozoïde est la cellule sexuelle de l'homme.",
+                "explanation": "Étape 1 — Repérer : on cherche l'organe qui produit les spermatozoïdes. Étape 2 — Nommer : c'est le spermatozoïde. Étape 3 — Associer : l'organe est le testicule (au pluriel, les testicules). Les ovaires produisent les ovules ; les trompes conduisent l'ovule.",
+                "answers": [
+                  {
+                    "content": "ovaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "testicules",
+                    "correct": true
+                  },
+                  {
+                    "content": "trompes",
+                    "correct": false
+                  },
+                  {
+                    "content": "poumons",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La cellule sexuelle de la femme s'appelle l'___.",
+                "question_type": "fill_blank",
+                "hint": "C'est une grosse cellule ronde, produite par les ovaires.",
+                "explanation": "Étape 1 — Repérer : on cherche la cellule sexuelle de la femme. Étape 2 — Nommer : c'est l'ovule. Étape 3 — Associer : elle est produite par les ovaires. Ne l'écris pas « ovaire » : l'ovaire est l'organe.",
+                "answers": [
+                  {
+                    "content": "ovule",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un ovule se déplace seul grâce à une queue, comme un spermatozoïde.",
+                "question_type": "true_false",
+                "hint": "Quelle cellule a un flagelle ?",
+                "explanation": "Étape 1 — Repérer : on compare les deux cellules. Étape 2 — Nommer : seul le spermatozoïde a un flagelle. Étape 4 — Conclure : l'ovule est une grosse cellule, sans mouvement propre. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer la rencontre des cellules sexuelles et la fécondation",
+          "remember": "Lors d'un rapport sexuel, les spermatozoïdes sont déposés dans le **vagin**. Ils nagent grâce à leur flagelle : vagin, **col de l'utérus**, **utérus**, puis **trompe**. De son côté, l'ovule est libéré par l'**ovaire**, recueilli par le **pavillon**, puis il avance dans la trompe. Si les deux cellules se rencontrent dans la trompe, **un seul** spermatozoïde entre dans l'ovule : c'est la **fécondation**. Elle forme la **cellule-œuf**, première cellule du futur bébé. Sans rencontre, il n'y a pas de fécondation.",
+          "method": [
+            "Situer le point de départ de chaque cellule : l'ovaire pour l'ovule, le vagin pour les spermatozoïdes.",
+            "Suivre le trajet de chaque cellule jusqu'à la trompe.",
+            "Repérer le lieu de la rencontre et le nombre de spermatozoïdes qui entrent dans l'ovule.",
+            "Nommer le résultat : la fécondation et la cellule-œuf."
+          ],
+          "example": {
+            "statement": "Un ovule vient d'être libéré par l'ovaire d'une femme. Des spermatozoïdes ont été déposés dans son vagin quelques heures plus tôt. Où l'ovule peut-il être fécondé, et que se forme-t-il ?",
+            "steps": [
+              "Situer : l'ovule part de l'ovaire et est recueilli par le pavillon ; les spermatozoïdes partent du vagin.",
+              "Suivre : l'ovule avance dans la trompe ; les spermatozoïdes nagent du vagin vers le col, l'utérus, puis la trompe.",
+              "Repérer : les deux cellules se rencontrent dans la trompe ; un seul spermatozoïde entre dans l'ovule.",
+              "Nommer : c'est la fécondation ; elle forme la cellule-œuf."
+            ]
+          },
+          "pitfall": "Ne confonds pas **la présence de spermatozoïdes** et **la fécondation**. Des millions de spermatozoïdes peuvent être dans l'utérus sans qu'il y ait fécondation : il faut qu'un spermatozoïde **entre dans un ovule**, et cela se passe dans la **trompe**, pas dans l'utérus. De plus, un seul spermatozoïde entre dans l'ovule, jamais plusieurs.",
+          "figure": "trajet-de-fecondation",
+          "exercise": [
+            {
+              "title": "Suivre les cellules jusqu'à la fécondation",
+              "statement": "Au centre de santé, la sage-femme montre à un groupe de jeunes un schéma de l'appareil génital féminin et explique où se rencontrent les cellules sexuelles.",
+              "exercise_type": "fixation",
+              "figure": "trajet-de-fecondation",
+              "questions": [
+                {
+                  "content": "Qu'appelle-t-on la fécondation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer : la fécondation est le moment où un spermatozoïde entre dans l'ovule. Étape 4 — Nommer : elle forme la cellule-œuf. La fixation dans l'utérus est la nidation ; la libération de l'ovule vient avant ; la sortie du bébé est l'accouchement.",
+                  "answers": [
+                    {
+                      "content": "La fixation de l'embryon dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "La libération de l'ovule par l'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'entrée d'un spermatozoïde dans un ovule",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sortie du bébé de l'utérus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se rencontrent l'ovule et les spermatozoïdes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : l'ovule part de l'ovaire, les spermatozoïdes du vagin. Étape 2 — Suivre : les deux cellules arrivent dans la trompe. Étape 3 — Repérer : la rencontre a lieu dans la trompe.",
+                  "answers": [
+                    {
+                      "content": "Dans le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la trompe",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet de l'ovule.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : l'ovule part de l'ovaire. Étape 2 — Suivre : le pavillon le recueille, puis il avance dans la trompe. Étape 3 — Repérer : il y rencontre un spermatozoïde. On ne peut pas être recueilli avant d'être libéré.",
+                  "answers": [
+                    {
+                      "content": "L'ovaire libère l'ovule"
+                    },
+                    {
+                      "content": "Le pavillon recueille l'ovule"
+                    },
+                    {
+                      "content": "L'ovule avance dans la trompe"
+                    },
+                    {
+                      "content": "L'ovule rencontre un spermatozoïde"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de spermatozoïdes entrent dans un ovule lors de la fécondation ?",
+                  "question_type": "numeric",
+                  "unit": "",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Repérer : on compte les spermatozoïdes qui entrent dans l'ovule. Étape 4 — Nommer : un seul spermatozoïde entre, et la cellule-œuf se forme. Plusieurs spermatozoïdes ne peuvent pas entrer dans le même ovule.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Des spermatozoïdes sont présents dans l'utérus d'une femme. Peut-on dire qu'il y a fécondation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Suivre : les spermatozoïdes traversent l'utérus pour atteindre la trompe. Étape 3 — Repérer : la fécondation demande l'entrée d'un spermatozoïde dans l'ovule, dans la trompe. C'est le piège de la fiche : la présence de spermatozoïdes n'est pas la fécondation.",
+                  "answers": [
+                    {
+                      "content": "Non : il faut qu'un spermatozoïde entre dans un ovule, ce qui se passe dans la trompe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : la fécondation a lieu dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : dès que les spermatozoïdes sont déposés dans le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : la fécondation a lieu dans le vagin",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le trajet des cellules et la fécondation",
+              "statement": "Dans cet exercice, tu retrouves le rôle de chaque partie de l'appareil génital féminin et les conditions de la fécondation, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Suis le trajet de chaque cellule, de son point de départ jusqu'à la trompe.",
+              "questions": [
+                {
+                  "content": "Relie chaque partie de l'appareil génital féminin à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Situer : l'ovule part de l'ovaire. Étape 2 — Suivre : le pavillon le recueille, la trompe le conduit. Étape 3 — Repérer : la rencontre avec le spermatozoïde a lieu dans la trompe.",
+                  "answers": [
+                    {
+                      "content": "L'ovaire",
+                      "match": "Produit et libère l'ovule"
+                    },
+                    {
+                      "content": "Le pavillon",
+                      "match": "Recueille l'ovule libéré"
+                    },
+                    {
+                      "content": "La trompe",
+                      "match": "Lieu de la rencontre et de la fécondation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont vraies pour la fécondation ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Repérer : la fécondation se passe dans la trompe, avec un seul spermatozoïde. Étape 4 — Nommer : elle forme la cellule-œuf. Les propositions « utérus » et « vagin » confondent la fécondation avec d'autres lieux ; « plusieurs spermatozoïdes » est faux.",
+                  "answers": [
+                    {
+                      "content": "Elle a lieu dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a lieu dans la trompe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle forme la cellule-œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plusieurs spermatozoïdes entrent dans l'ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se produit dans le vagin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lors du rapport sexuel, les spermatozoïdes sont déposés dans le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer : le point de départ des spermatozoïdes est le vagin. Étape 2 — Suivre : ils passent ensuite par le col de l'utérus, l'utérus et la trompe.",
+                  "answers": [
+                    {
+                      "content": "vagin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ovule possède un flagelle et nage vers les spermatozoïdes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Suivre : l'ovule est recueilli par le pavillon et avance dans la trompe. C'est le spermatozoïde qui possède un flagelle et nage. L'ovule est une grosse cellule sans mouvement propre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que se passe-t-il si l'ovule ne rencontre aucun spermatozoïde ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer : sans entrée d'un spermatozoïde dans l'ovule, il n'y a pas de fécondation. Étape 4 — Nommer : sans fécondation, la cellule-œuf ne se forme pas. Un ovule seul ne devient pas un embryon.",
+                  "answers": [
+                    {
+                      "content": "Il y a fécondation, mais sans cellule-œuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ovule devient un embryon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les spermatozoïdes forment une cellule-œuf à eux seuls",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de fécondation, donc pas de cellule-œuf",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La cellule formée par la fécondation s'appelle la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Nommer : la fécondation réunit un ovule et un spermatozoïde. Le résultat est la cellule-œuf, première cellule du futur bébé. Les autres cellules citées n'ont aucun lien avec la reproduction.",
+                  "answers": [
+                    {
+                      "content": "cellule-œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "cellule de la peau",
+                      "correct": false
+                    },
+                    {
+                      "content": "cellule sanguine",
+                      "correct": false
+                    },
+                    {
+                      "content": "cellule nerveuse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à suivre le trajet des cellules sexuelles jusqu'à la fécondation.",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre le trajet d'un spermatozoïde après le rapport sexuel.",
+                "question_type": "ordering",
+                "hint": "Le trajet part du vagin et se termine dans la trompe.",
+                "explanation": "Étape 1 — Situer : les spermatozoïdes sont déposés dans le vagin. Étape 2 — Suivre : ils passent par le col de l'utérus, traversent l'utérus et arrivent dans la trompe. Étape 3 — Repérer : c'est dans la trompe qu'ils peuvent rencontrer l'ovule.",
+                "answers": [
+                  {
+                    "content": "Le vagin"
+                  },
+                  {
+                    "content": "Le col de l'utérus"
+                  },
+                  {
+                    "content": "L'utérus"
+                  },
+                  {
+                    "content": "La trompe"
+                  }
+                ]
+              },
+              {
+                "content": "Où a lieu la fécondation ?",
+                "question_type": "single_choice",
+                "hint": "C'est le tube qui relie l'ovaire à l'utérus.",
+                "explanation": "Étape 2 — Suivre : l'ovule et les spermatozoïdes arrivent dans la trompe. Étape 3 — Repérer : la rencontre et la fécondation ont lieu dans la trompe. L'utérus est le lieu de la nidation, plus tard ; le vagin est le point de départ des spermatozoïdes.",
+                "answers": [
+                  {
+                    "content": "Dans la trompe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans le vagin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans l'utérus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans l'ovaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La fécondation forme la ___.",
+                "question_type": "select",
+                "hint": "Elle est formée par la réunion de l'ovule et d'un spermatozoïde.",
+                "explanation": "Étape 3 — Repérer : un spermatozoïde entre dans l'ovule. Étape 4 — Nommer : c'est la fécondation, qui forme la cellule-œuf, première cellule du futur bébé.",
+                "answers": [
+                  {
+                    "content": "nidation",
+                    "correct": false
+                  },
+                  {
+                    "content": "cellule-œuf",
+                    "correct": true
+                  },
+                  {
+                    "content": "règle",
+                    "correct": false
+                  },
+                  {
+                    "content": "tête du spermatozoïde",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Plusieurs spermatozoïdes entrent dans l'ovule pour le féconder.",
+                "question_type": "true_false",
+                "hint": "Combien de spermatozoïdes entrent dans l'ovule ?",
+                "explanation": "Étape 3 — Repérer : on regarde le nombre de spermatozoïdes qui entrent dans l'ovule. Un seul y entre ; les autres ne peuvent pas féconder cet ovule. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Suivre la nidation et le développement de l'embryon et du fœtus",
+          "remember": "La cellule-œuf se divise : 1 cellule, puis 2, 4, 8… Elle descend dans la trompe pendant quelques jours et forme un amas de cellules, l'**embryon**. Il arrive dans l'utérus et s'enfonce dans sa muqueuse : c'est la **nidation**. La grossesse se poursuit : l'embryon grandit et ses organes se mettent en place. On l'appelle ensuite **fœtus** : il ressemble à un petit bébé et grandit jusqu'à la naissance. Il baigne dans le **liquide amniotique** et reçoit de sa mère le dioxygène et les aliments par le **placenta** et le **cordon ombilical**. Une grossesse dure environ **9 mois**.",
+          "method": [
+            "Repérer l'étape décrite dans le texte ou sur le schéma.",
+            "Situer le lieu où elle se passe : la trompe ou l'utérus.",
+            "Nommer le stade : cellule-œuf, embryon ou fœtus.",
+            "Conclure en donnant l'étape qui vient juste avant ou juste après."
+          ],
+          "example": {
+            "statement": "Une cellule-œuf se divise en descendant la trompe. L'amas de cellules obtenu arrive dans l'utérus et s'enfonce dans la muqueuse utérine. Quelle est cette étape, et quel stade est atteint ?",
+            "steps": [
+              "Repérer : l'amas de cellules s'enfonce dans la muqueuse de l'utérus.",
+              "Situer : cela se passe dans l'utérus, et non dans la trompe.",
+              "Nommer : l'étape est la nidation ; le stade est l'embryon, issu des divisions de la cellule-œuf.",
+              "Conclure : juste avant, il y a eu la fécondation et les divisions ; juste après, l'embryon se développe et devient un fœtus."
+            ]
+          },
+          "pitfall": "Ne confonds pas la **fécondation** et la **nidation**. La fécondation a lieu **dans la trompe** : un spermatozoïde entre dans l'ovule et forme la cellule-œuf. La nidation a lieu **dans l'utérus**, quelques jours plus tard : l'embryon se fixe dans la muqueuse. L'une forme la première cellule, l'autre fixe l'embryon.",
+          "figure": "etapes-du-devenir",
+          "exercise": [
+            {
+              "title": "De la cellule-œuf au fœtus",
+              "statement": "Lors d'une consultation prénatale, la sage-femme du centre de santé explique à une future maman comment se développe son bébé, étape par étape.",
+              "exercise_type": "fixation",
+              "figure": "etapes-du-devenir",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes, de la fécondation à l'accouchement.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on classe cinq étapes. Étape 2 — Situer : la fécondation a lieu dans la trompe, la nidation dans l'utérus. Étape 3 — Nommer : cellule-œuf, embryon puis fœtus. Étape 4 — Conclure : l'accouchement vient en dernier.",
+                  "answers": [
+                    {
+                      "content": "La fécondation dans la trompe"
+                    },
+                    {
+                      "content": "Les divisions de la cellule-œuf"
+                    },
+                    {
+                      "content": "La nidation dans l'utérus"
+                    },
+                    {
+                      "content": "Le développement du fœtus"
+                    },
+                    {
+                      "content": "L'accouchement"
+                    }
+                  ]
+                },
+                {
+                  "content": "Où a lieu la nidation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'embryon se fixe. Étape 2 — Situer : il s'enfonce dans la muqueuse de l'utérus. Étape 3 — Nommer : c'est la nidation.",
+                  "answers": [
+                    {
+                      "content": "Dans la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la muqueuse de l'utérus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque stade à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Nommer : la cellule-œuf est la première cellule ; elle se divise et donne l'embryon ; l'embryon devient ensuite un fœtus. Étape 4 — Conclure : chaque stade vient après le précédent.",
+                  "answers": [
+                    {
+                      "content": "Cellule-œuf",
+                      "match": "Première cellule, formée par la fécondation"
+                    },
+                    {
+                      "content": "Embryon",
+                      "match": "Amas de cellules issu des divisions de la cellule-œuf"
+                    },
+                    {
+                      "content": "Fœtus",
+                      "match": "Stade où les organes sont en place et grandissent jusqu'à la naissance"
+                    }
+                  ]
+                },
+                {
+                  "content": "À quoi sert le cordon ombilical ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le cordon relie le fœtus au placenta. Étape 3 — Nommer : c'est par ce cordon que passent dioxygène et aliments venus de la mère. Les autres propositions donnent des rôles des organes génitaux.",
+                  "answers": [
+                    {
+                      "content": "Il relie le fœtus au placenta et lui apporte dioxygène et aliments",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il fabrique les spermatozoïdes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ouvre le col de l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il produit l'ovule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève dit : « La nidation, c'est quand le spermatozoïde entre dans l'ovule. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Situer : l'entrée du spermatozoïde se passe dans la trompe. Étape 3 — Nommer : c'est la fécondation. La nidation a lieu plus tard, dans l'utérus. C'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Elle a raison, c'est la nidation",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est la fécondation ; la nidation est la fixation de l'embryon dans l'utérus",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est la nidation, qui a lieu dans la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est l'accouchement",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "La grossesse en six questions",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à la nidation, à l'embryon et au fœtus.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense à l'ordre des étapes et au lieu où chacune se passe.",
+              "questions": [
+                {
+                  "content": "Après la nidation, l'embryon se développe dans l'utérus et devient un fœtus.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on décrit ce qui suit la nidation. Étape 3 — Nommer : l'embryon grandit, ses organes se mettent en place, puis on parle de fœtus. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont vraies pour la nidation ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Situer : la nidation a lieu dans l'utérus. Étape 3 — Nommer : elle fixe l'embryon. Étape 4 — Conclure : elle vient après la fécondation, qui forme la cellule-œuf dans la trompe.",
+                  "answers": [
+                    {
+                      "content": "Elle concerne un embryon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a lieu dans la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle forme la cellule-œuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a lieu dans l'utérus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a lieu après la fécondation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a lieu avant la fécondation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fœtus baigne dans un liquide qui le protège : le liquide ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Nommer : le fœtus est entouré du liquide amniotique, qui le protège des chocs. Étape 4 — Conclure : ce liquide reste autour de lui jusqu'à l'accouchement.",
+                  "answers": [
+                    {
+                      "content": "amniotique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grossesse dure environ ___ mois.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : de la fécondation à l'accouchement, la grossesse dure environ 9 mois. Trois ou six mois sont trop courts ; douze mois sont trop longs.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les stades.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Nommer : la cellule-œuf se divise et donne l'embryon ; l'embryon devient un fœtus ; le fœtus naît. Étape 4 — Conclure : chaque stade vient juste après le précédent.",
+                  "answers": [
+                    {
+                      "content": "Cellule-œuf"
+                    },
+                    {
+                      "content": "Embryon"
+                    },
+                    {
+                      "content": "Fœtus"
+                    },
+                    {
+                      "content": "Bébé à la naissance"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le rôle du placenta ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le placenta est relié au fœtus par le cordon. Étape 3 — Nommer : il permet les échanges entre la mère et le fœtus. Les autres rôles sont ceux des testicules et des ovaires.",
+                  "answers": [
+                    {
+                      "content": "Produire les spermatozoïdes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Libérer l'ovule chaque mois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Permettre à la mère d'apporter dioxygène et aliments au fœtus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fermer le col de l'utérus après la naissance",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à nommer et situer les étapes qui suivent la fécondation.",
+            "questions": [
+              {
+                "content": "Comment s'appelle la fixation de l'embryon dans la muqueuse de l'utérus ?",
+                "question_type": "single_choice",
+                "hint": "Le mot fait penser à un nid.",
+                "explanation": "Étape 1 — Repérer : l'embryon se fixe dans la muqueuse. Étape 2 — Situer : cela se passe dans l'utérus. Étape 3 — Nommer : c'est la nidation. La fécondation a lieu dans la trompe et l'accouchement est la naissance.",
+                "answers": [
+                  {
+                    "content": "La fécondation",
+                    "correct": false
+                  },
+                  {
+                    "content": "La nidation",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ovulation",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'accouchement",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une cellule-œuf se divise en 2 cellules. Après trois divisions successives, où toutes les cellules se divisent en 2, combien de cellules obtient-on ?",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "hint": "Double le nombre de cellules à chaque division : 1, 2, 4…",
+                "explanation": "Étape 1 — Repérer : à chaque division, le nombre de cellules double. Étape 3 — Nommer : on obtient un embryon formé de cellules. Calcul : 1 → 2 → 4 → 8. Après trois divisions, il y a 8 cellules.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'embryon se fixe dans la trompe.",
+                "question_type": "true_false",
+                "hint": "Où a lieu la nidation : trompe ou utérus ?",
+                "explanation": "Étape 2 — Situer : l'embryon descend la trompe, puis arrive dans l'utérus. Étape 3 — Nommer : la nidation a lieu dans la muqueuse de l'utérus, pas dans la trompe. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le petit être qui ressemble à un bébé et grandit jusqu'à la naissance s'appelle le ___.",
+                "question_type": "select",
+                "hint": "C'est le stade qui suit l'embryon.",
+                "explanation": "Étape 1 — Repérer : on décrit un être qui ressemble à un bébé et qui grandit. Étape 3 — Nommer : c'est le fœtus, stade qui suit l'embryon. Étape 4 — Conclure : il est suivi par la naissance.",
+                "answers": [
+                  {
+                    "content": "spermatozoïde",
+                    "correct": false
+                  },
+                  {
+                    "content": "ovule",
+                    "correct": false
+                  },
+                  {
+                    "content": "fœtus",
+                    "correct": true
+                  },
+                  {
+                    "content": "col de l'utérus",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Décrire l'accouchement et le suivi de la grossesse",
+          "remember": "Pendant la grossesse, la future maman va au centre de santé pour des **consultations prénatales** : une sage-femme ou un médecin la pèse, mesure sa tension, examine son ventre, peut faire une échographie et donne des conseils (alimentation variée, dormir sous moustiquaire, éviter l'alcool, le tabac et les médicaments pris sans avis). Au bout d'environ 9 mois a lieu l'**accouchement** : les muscles de l'utérus se contractent (**contractions**), le col de l'utérus s'ouvre, le bébé est expulsé par le vagin, puis le cordon est coupé. Enfin, le placenta est expulsé : c'est la **délivrance**. Parfois, une **césarienne** (opération) est nécessaire.",
+          "method": [
+            "Situer le moment : pendant la grossesse, pendant l'accouchement ou après la naissance.",
+            "Nommer l'organe ou la structure en jeu : utérus, col de l'utérus, vagin, cordon ou placenta.",
+            "Décrire dans l'ordre ce qui se passe ou ce que fait le personnel de santé.",
+            "Conclure en donnant le but : protéger la santé de la mère et du bébé."
+          ],
+          "example": {
+            "statement": "Au centre de santé, Mme Yao ressent des contractions régulières. La sage-femme constate que le col de l'utérus s'ouvre. À quel moment est-elle, et que va-t-il se passer ?",
+            "steps": [
+              "Situer : Mme Yao est au moment de l'accouchement, après environ 9 mois de grossesse.",
+              "Nommer : l'utérus se contracte et le col de l'utérus s'ouvre.",
+              "Décrire : le bébé va être expulsé par le vagin, puis le cordon sera coupé, et enfin le placenta sera expulsé (délivrance).",
+              "Conclure : la sage-femme surveille pour protéger la santé de la mère et du bébé."
+            ]
+          },
+          "pitfall": "Ne crois pas que l'accouchement se termine dès que le bébé est sorti. Après la naissance, il reste à couper le cordon et à expulser le placenta : c'est la **délivrance**, qui fait partie de l'accouchement. Ne crois pas non plus que les consultations prénatales servent seulement le jour de la naissance : elles ont lieu **pendant** la grossesse, pour surveiller la mère et le bébé.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "L'accouchement au centre de santé",
+              "statement": "Mme Yao attend son deuxième enfant. Elle va régulièrement au centre de santé de son quartier, où une sage-femme suit sa grossesse puis l'aide à accoucher.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que fait la sage-femme lors d'une consultation prénatale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : la consultation a lieu pendant la grossesse. Étape 3 — Décrire : pesée, tension, examen du ventre, conseils. Étape 4 — Conclure : le but est de protéger la mère et le bébé. Le bébé naît à l'accouchement, pas en consultation.",
+                  "answers": [
+                    {
+                      "content": "Elle fait naître le bébé à chaque consultation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle remplace le placenta",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fabrique les cellules sexuelles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle surveille la santé de la mère et du bébé et donne des conseils",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel organe se contracte pendant l'accouchement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : on est au moment de l'accouchement. Étape 2 — Nommer : les muscles de l'utérus se contractent, ce sont les contractions. Elles aident à ouvrir le col et à expulser le bébé.",
+                  "answers": [
+                    {
+                      "content": "L'utérus",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pavillon",
+                      "correct": false
+                    },
+                    {
+                      "content": "La trompe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les moments de l'accouchement.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Nommer : l'utérus se contracte, puis le col s'ouvre. Étape 3 — Décrire dans l'ordre : le bébé sort par le vagin, le cordon est coupé, puis le placenta est expulsé. Le placenta sort après le bébé.",
+                  "answers": [
+                    {
+                      "content": "Contractions de l'utérus"
+                    },
+                    {
+                      "content": "Ouverture du col de l'utérus"
+                    },
+                    {
+                      "content": "Sortie du bébé par le vagin"
+                    },
+                    {
+                      "content": "Coupure du cordon"
+                    },
+                    {
+                      "content": "Expulsion du placenta"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à ce qu'il désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Nommer : les contractions sont les mouvements de l'utérus. Étape 3 — Décrire : la délivrance est l'expulsion du placenta ; la césarienne est une opération qui fait naître le bébé quand l'accouchement par le vagin est dangereux.",
+                  "answers": [
+                    {
+                      "content": "Contractions",
+                      "match": "Mouvements des muscles de l'utérus"
+                    },
+                    {
+                      "content": "Délivrance",
+                      "match": "Expulsion du placenta"
+                    },
+                    {
+                      "content": "Césarienne",
+                      "match": "Naissance du bébé par une opération"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Dès que le bébé est sorti, l'accouchement est terminé. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Décrire : après la sortie du bébé, le cordon est coupé puis le placenta est expulsé. Étape 4 — Conclure : l'accouchement se termine avec la délivrance. C'est le piège de la fiche. La nidation a lieu au tout début de la grossesse.",
+                  "answers": [
+                    {
+                      "content": "Vrai : le placenta reste dans l'utérus toute la vie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : il reste à expulser le placenta, c'est la délivrance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai : le placenta est expulsé avant le bébé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : il reste à faire la nidation",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Suivre une grossesse jusqu'à la naissance",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des situations vécues au centre de santé, avant et pendant l'accouchement.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Place d'abord la situation : avant la naissance, pendant l'accouchement ou après.",
+              "questions": [
+                {
+                  "content": "Quelles propositions sont des conseils donnés pendant les consultations prénatales ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer : on est pendant la grossesse. Étape 3 — Décrire : la sage-femme conseille une alimentation variée et le sommeil sous moustiquaire. Étape 4 — Conclure : le but est de protéger la mère et le bébé. Médicaments sans avis, tabac et refus des consultations les mettent en danger.",
+                  "answers": [
+                    {
+                      "content": "Prendre des médicaments sans avis médical",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fumer pour se détendre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avoir une alimentation variée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dormir sous moustiquaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Éviter d'aller au centre de santé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La césarienne est une opération qui permet de faire naître le bébé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Nommer : la césarienne est une opération. Étape 3 — Décrire : elle est utilisée quand l'accouchement par le vagin serait dangereux. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mouvements des muscles de l'utérus qui aident à faire sortir le bébé s'appellent les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Nommer : ce sont les muscles de l'utérus qui agissent. Étape 3 — Décrire : leurs mouvements sont les contractions. Elles ouvrent le col et poussent le bébé.",
+                  "answers": [
+                    {
+                      "content": "contractions",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bébé est expulsé par le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Nommer : le bébé sort de l'utérus par le col, puis par le vagin. Le pavillon et l'ovaire servent à la libération de l'ovule, et l'estomac à la digestion : aucun ne sert à la naissance.",
+                  "answers": [
+                    {
+                      "content": "vagin",
+                      "correct": true
+                    },
+                    {
+                      "content": "pavillon",
+                      "correct": false
+                    },
+                    {
+                      "content": "ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "estomac",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand a lieu la délivrance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : la délivrance fait partie de l'accouchement. Étape 3 — Décrire : le bébé naît, le cordon est coupé, puis le placenta est expulsé. Elle a donc lieu après la naissance du bébé.",
+                  "answers": [
+                    {
+                      "content": "Avant la fécondation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Après la naissance du bébé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pendant la nidation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avant les contractions",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En moyenne, environ combien de mois dure une grossesse, de la fécondation à l'accouchement ?",
+                  "question_type": "numeric",
+                  "unit": "mois",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Situer : on cherche la durée entre la fécondation et l'accouchement. Étape 4 — Conclure : une grossesse dure environ 9 mois.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à décrire l'accouchement et le suivi de la grossesse.",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les moments de l'accouchement.",
+                "question_type": "ordering",
+                "hint": "Le placenta sort en dernier.",
+                "explanation": "Étape 1 — Situer : on est au moment de l'accouchement. Étape 2 — Nommer : l'utérus se contracte et le col s'ouvre. Étape 3 — Décrire dans l'ordre : le bébé sort, le cordon est coupé, le placenta est expulsé (délivrance).",
+                "answers": [
+                  {
+                    "content": "Les contractions de l'utérus et l'ouverture du col"
+                  },
+                  {
+                    "content": "L'expulsion du bébé par le vagin"
+                  },
+                  {
+                    "content": "La coupure du cordon"
+                  },
+                  {
+                    "content": "L'expulsion du placenta"
+                  }
+                ]
+              },
+              {
+                "content": "L'expulsion du placenta après la naissance du bébé s'appelle la ___.",
+                "question_type": "fill_blank",
+                "hint": "Le mot commence par « dé ».",
+                "explanation": "Étape 2 — Nommer : le placenta est la structure expulsée en dernier. Étape 3 — Décrire : cette expulsion s'appelle la délivrance. Elle termine l'accouchement.",
+                "answers": [
+                  {
+                    "content": "délivrance",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les consultations prénatales ont lieu pendant la grossesse.",
+                "question_type": "true_false",
+                "hint": "« Prénatal » veut dire avant la naissance.",
+                "explanation": "Étape 1 — Situer : « prénatal » veut dire avant la naissance. Étape 4 — Conclure : ces consultations ont lieu pendant la grossesse pour surveiller la santé de la mère et du bébé. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une visite au centre de santé",
+          "statement": "Awa, élève de 4ème, accompagne sa tante au centre de santé. L'infirmier profite de la visite pour répondre à ses questions sur les cellules sexuelles. Tu réponds comme à une interrogation.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque cellule ou liquide à ce qui le décrit.",
+              "question_type": "matching",
+              "explanation": "Méthode. 1) Repérer : on distingue deux cellules et un liquide. 2) Nommer : le spermatozoïde est petit et mobile (testicules) ; l'ovule est gros et immobile (ovaires). 3) Conclure : le sperme n'est pas une cellule, c'est le liquide qui contient les spermatozoïdes.",
+              "answers": [
+                {
+                  "content": "Spermatozoïde",
+                  "match": "Petite cellule mobile, produite par les testicules"
+                },
+                {
+                  "content": "Ovule",
+                  "match": "Grosse cellule sans mouvement propre, produite par les ovaires"
+                },
+                {
+                  "content": "Sperme",
+                  "match": "Liquide qui contient les spermatozoïdes"
+                }
+              ]
+            },
+            {
+              "content": "Combien d'ovules sont en général libérés à la fois, et combien de spermatozoïdes sont produits ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : on compare les productions. 2) Associer : les ovaires libèrent en général un ovule à la fois, environ une fois par mois ; les testicules produisent beaucoup de spermatozoïdes. 3) Conclure : un seul ovule, des spermatozoïdes en très grand nombre.",
+              "answers": [
+                {
+                  "content": "Des ovules en très grand nombre, mais un seul spermatozoïde",
+                  "correct": false
+                },
+                {
+                  "content": "Un seul ovule et un seul spermatozoïde",
+                  "correct": false
+                },
+                {
+                  "content": "Un seul ovule, mais des spermatozoïdes en très grand nombre",
+                  "correct": true
+                },
+                {
+                  "content": "Des ovules et des spermatozoïdes en très grand nombre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Où se rencontrent les cellules sexuelles et où se forme la cellule-œuf ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Situer : l'ovule part de l'ovaire, les spermatozoïdes du vagin. 2) Suivre : les spermatozoïdes passent par le col et l'utérus jusqu'à la trompe. 3) Repérer : la rencontre et la fécondation ont lieu dans la trompe. 4) Nommer : la fécondation forme la cellule-œuf.",
+              "answers": [
+                {
+                  "content": "Dans l'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "Dans le vagin",
+                  "correct": false
+                },
+                {
+                  "content": "Dans l'ovaire",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la trompe",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles propositions sont vraies pour la fécondation ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Situer : l'ovule est dans la trompe. 2) Repérer : un seul spermatozoïde entre dans l'ovule. 3) Nommer : la fécondation forme la cellule-œuf, dans la trompe. Les propositions sur l'utérus et l'ovaire donnent un mauvais lieu ; plusieurs spermatozoïdes ne peuvent pas entrer dans le même ovule.",
+              "answers": [
+                {
+                  "content": "Un seul spermatozoïde entre dans l'ovule",
+                  "correct": true
+                },
+                {
+                  "content": "Plusieurs spermatozoïdes entrent dans l'ovule",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a lieu dans l'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "Elle se produit dans l'ovaire",
+                  "correct": false
+                },
+                {
+                  "content": "Elle forme la cellule-œuf",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La fixation de l'embryon dans la muqueuse de l'utérus s'appelle la ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. 1) Repérer : l'embryon se fixe dans la muqueuse. 2) Situer : cela se passe dans l'utérus. 3) Nommer : c'est la nidation. Ne la confonds pas avec la fécondation, qui a lieu dans la trompe.",
+              "answers": [
+                {
+                  "content": "nidation",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Lire le schéma de l'appareil génital féminin",
+          "statement": "Pour réviser avant l'interrogation, Kofi observe la planche numérotée de l'appareil génital féminin. Les numéros désignent : 1 l'ovaire, 2 le pavillon, 3 la trompe, 4 l'utérus, 5 la muqueuse de l'utérus, 6 le col de l'utérus. Tu retrouves les noms et les rôles de chaque partie.",
+          "exercise_type": "fixation",
+          "figure": "appareil-numerote",
+          "questions": [
+            {
+              "content": "Sur la planche de l'appareil génital féminin, le numéro 1 désigne l'organe qui produit les ovules. Comment s'appelle-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : l'organe produit les ovules. 2) Nommer : les ovules sont produits par les ovaires. 3) Conclure : le numéro 1 est l'ovaire. L'utérus accueille l'embryon, la trompe conduit l'ovule, le col est l'entrée de l'utérus.",
+              "answers": [
+                {
+                  "content": "L'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "La trompe",
+                  "correct": false
+                },
+                {
+                  "content": "L'ovaire",
+                  "correct": true
+                },
+                {
+                  "content": "Le col de l'utérus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le numéro 2 est la partie en forme de frange qui recueille l'ovule libéré par l'ovaire. Comment s'appelle-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : la partie recueille l'ovule à la sortie de l'ovaire. 2) Nommer : c'est le pavillon de la trompe. 3) Conclure : le numéro 2 est le pavillon. Le vagin et le col ne sont pas près de l'ovaire.",
+              "answers": [
+                {
+                  "content": "Le vagin",
+                  "correct": false
+                },
+                {
+                  "content": "La muqueuse",
+                  "correct": false
+                },
+                {
+                  "content": "Le col de l'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "Le pavillon",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La fécondation a lieu dans la partie numéro ___, c'est-à-dire la trompe.",
+              "question_type": "select",
+              "explanation": "Méthode. 1) Situer : l'ovule et les spermatozoïdes arrivent dans la trompe. 2) Repérer : la rencontre a lieu dans la trompe. 3) Conclure : c'est le numéro 3. Le numéro 4 est l'utérus, lieu de la nidation, le numéro 1 est l'ovaire, le numéro 6 le col.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                },
+                {
+                  "content": "1",
+                  "correct": false
+                },
+                {
+                  "content": "4",
+                  "correct": false
+                },
+                {
+                  "content": "6",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet d'un spermatozoïde jusqu'à l'ovule.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 1) Situer : les spermatozoïdes partent du vagin. 2) Suivre : ils passent par le col de l'utérus, puis traversent l'utérus. 3) Repérer : ils arrivent dans la trompe, où ils peuvent rencontrer l'ovule.",
+              "answers": [
+                {
+                  "content": "Le vagin"
+                },
+                {
+                  "content": "Le col de l'utérus"
+                },
+                {
+                  "content": "L'utérus"
+                },
+                {
+                  "content": "La trompe"
+                }
+              ]
+            },
+            {
+              "content": "Un embryon se fixe dans la muqueuse de l'utérus (numéros 5 et 4). Comment s'appelle cette étape ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : l'embryon se fixe dans la muqueuse. 2) Situer : c'est dans l'utérus. 3) Nommer : c'est la nidation. La fécondation a lieu dans la trompe, l'ovulation est la libération de l'ovule, la délivrance est l'expulsion du placenta.",
+              "answers": [
+                {
+                  "content": "La fécondation",
+                  "correct": false
+                },
+                {
+                  "content": "La nidation",
+                  "correct": true
+                },
+                {
+                  "content": "L'ovulation",
+                  "correct": false
+                },
+                {
+                  "content": "La délivrance",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Des trompes bouchées",
+          "statement": "Au centre de santé, un médecin explique à une femme que ses deux trompes sont bouchées. Ses ovaires produisent des ovules normalement et son utérus est en bonne santé. Elle se demande pourquoi elle n'arrive pas à avoir d'enfant. Tu raisonnes comme à un devoir.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Cette femme produit-elle des ovules ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : l'énoncé dit que les ovaires produisent des ovules normalement. 2) Associer : les ovules sont produits par les ovaires, pas par les trompes. 3) Conclure : elle produit des ovules. Les trompes bouchées ne changent pas la production.",
+              "answers": [
+                {
+                  "content": "Non : sans trompes ouvertes, les ovaires ne produisent plus d'ovules",
+                  "correct": false
+                },
+                {
+                  "content": "Non : seuls les testicules produisent des cellules sexuelles",
+                  "correct": false
+                },
+                {
+                  "content": "Oui : ses ovaires fonctionnent, donc des ovules sont produits",
+                  "correct": true
+                },
+                {
+                  "content": "Oui, mais ils sont produits par l'utérus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la fécondation ne peut-elle pas avoir lieu ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Situer : l'ovule part de l'ovaire, les spermatozoïdes du vagin. 2) Suivre : les deux cellules doivent arriver dans la trompe. 3) Repérer : la trompe est bouchée, elles ne peuvent pas s'y rencontrer. 4) Conclure : pas de rencontre, donc pas de fécondation.",
+              "answers": [
+                {
+                  "content": "Il n'y a plus d'ovule dans les ovaires",
+                  "correct": false
+                },
+                {
+                  "content": "Les spermatozoïdes ne peuvent pas quitter le vagin",
+                  "correct": false
+                },
+                {
+                  "content": "L'utérus produit trop de liquide",
+                  "correct": false
+                },
+                {
+                  "content": "L'ovule et les spermatozoïdes ne peuvent pas se rencontrer dans la trompe",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles conclusions sont justifiées par cette situation ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Repérer les données : ovaires et utérus normaux, trompes bouchées. 2) Raisonner : la fécondation a lieu dans la trompe, donc elle est empêchée. 3) Conclure : les ovules existent mais ne rencontrent pas de spermatozoïde. Sans fécondation, il n'y a ni cellule-œuf ni nidation.",
+              "answers": [
+                {
+                  "content": "Les ovules sont produits mais ne rencontrent pas de spermatozoïde",
+                  "correct": true
+                },
+                {
+                  "content": "La fécondation a lieu dans l'utérus, donc les trompes ne servent à rien",
+                  "correct": false
+                },
+                {
+                  "content": "La fécondation a lieu dans la trompe",
+                  "correct": true
+                },
+                {
+                  "content": "Les ovaires ne produisent plus d'ovules",
+                  "correct": false
+                },
+                {
+                  "content": "La nidation peut se faire sans fécondation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si la trompe est bouchée, la cellule-œuf ne se forme pas, donc il n'y a pas de nidation.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Repérer : la fécondation forme la cellule-œuf, puis la nidation fixe l'embryon. 2) Raisonner : sans fécondation, il n'y a pas de cellule-œuf, donc pas d'embryon à fixer. 3) Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle phrase résume le mieux le rôle de la trompe ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : la trompe relie l'ovaire à l'utérus. 2) Associer : elle conduit l'ovule et accueille la fécondation. 3) Conclure : elle ne produit pas l'ovule (ovaire), ne protège pas le fœtus (utérus) et n'expulse pas le bébé (utérus et vagin).",
+              "answers": [
+                {
+                  "content": "Elle produit les ovules",
+                  "correct": false
+                },
+                {
+                  "content": "Elle protège le fœtus pendant neuf mois",
+                  "correct": false
+                },
+                {
+                  "content": "Elle conduit l'ovule et est le lieu de la rencontre avec les spermatozoïdes",
+                  "correct": true
+                },
+                {
+                  "content": "Elle expulse le bébé à l'accouchement",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le suivi de la grossesse de Mme Bamba",
+          "statement": "Mme Bamba est enceinte de quelques mois. Au centre de santé, la sage-femme lui montre une échographie : le fœtus baigne dans le liquide amniotique et il est relié au placenta par le cordon ombilical. Mme Bamba pose des questions sur la formation de son bébé et sur l'accouchement. Tu réponds comme à un devoir de fin de trimestre.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les étapes qui ont mené au fœtus de Mme Bamba.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 1) Repérer : on classe cinq étapes. 2) Situer : la fécondation a lieu dans la trompe, la nidation dans l'utérus. 3) Nommer : cellule-œuf, embryon, puis fœtus. 4) Conclure : l'ovule est libéré en premier, le développement du fœtus vient en dernier.",
+              "answers": [
+                {
+                  "content": "Libération de l'ovule par l'ovaire"
+                },
+                {
+                  "content": "Rencontre dans la trompe et fécondation"
+                },
+                {
+                  "content": "Divisions de la cellule-œuf : embryon"
+                },
+                {
+                  "content": "Nidation dans l'utérus"
+                },
+                {
+                  "content": "Développement du fœtus"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément de l'échographie à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode. 1) Repérer : trois éléments entourent ou relient le fœtus. 2) Nommer : le fœtus baigne dans le liquide amniotique, qui le protège. 3) Associer : le cordon relie le fœtus au placenta, par où passent dioxygène et aliments venus de la mère.",
+              "answers": [
+                {
+                  "content": "Le liquide amniotique",
+                  "match": "Protège le fœtus"
+                },
+                {
+                  "content": "Le placenta",
+                  "match": "Permet les échanges entre la mère et le fœtus"
+                },
+                {
+                  "content": "Le cordon ombilical",
+                  "match": "Relie le fœtus au placenta"
+                }
+              ]
+            },
+            {
+              "content": "Mme Bamba demande : « Le bébé s'est formé dans l'utérus quand le spermatozoïde est entré dans l'ovule ? » Que lui répondre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Situer : l'ovule est dans la trompe quand un spermatozoïde y entre. 2) Nommer : c'est la fécondation. 3) Suivre : la cellule-œuf se divise, descend dans l'utérus et s'y fixe (nidation). 4) Conclure : fécondation dans la trompe, nidation dans l'utérus.",
+              "answers": [
+                {
+                  "content": "Oui : la fécondation a lieu dans l'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "Non : elle a lieu dans le vagin",
+                  "correct": false
+                },
+                {
+                  "content": "Oui : l'ovule est fécondé dans l'ovaire",
+                  "correct": false
+                },
+                {
+                  "content": "Non : cette entrée a lieu dans la trompe ; c'est ensuite que l'embryon se fixe dans l'utérus",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels conseils la sage-femme peut-elle donner à Mme Bamba ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. 1) Situer : on est pendant la grossesse. 2) Décrire : la sage-femme conseille une alimentation variée, la moustiquaire et l'avis médical avant tout médicament. 3) Conclure : le but est de protéger la mère et le bébé. L'alcool, le tabac et l'absence de suivi sont dangereux.",
+              "answers": [
+                {
+                  "content": "Ne pas prendre de médicaments sans avis médical",
+                  "correct": true
+                },
+                {
+                  "content": "Dormir sous moustiquaire",
+                  "correct": true
+                },
+                {
+                  "content": "Avoir une alimentation variée",
+                  "correct": true
+                },
+                {
+                  "content": "Boire de l'alcool pour être détendue",
+                  "correct": false
+                },
+                {
+                  "content": "Éviter les consultations jusqu'à l'accouchement",
+                  "correct": false
+                },
+                {
+                  "content": "Fumer un peu pour l'appétit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est l'ordre juste des événements à la fin de l'accouchement ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Situer : on est à l'accouchement. 2) Nommer : le bébé est expulsé par le vagin. 3) Décrire dans l'ordre : le cordon est coupé, puis le placenta est expulsé (délivrance). 4) Conclure : l'ordre est bébé, cordon, placenta.",
+              "answers": [
+                {
+                  "content": "Expulsion du placenta, sortie du bébé, coupure du cordon",
+                  "correct": false
+                },
+                {
+                  "content": "Coupure du cordon, expulsion du placenta, sortie du bébé",
+                  "correct": false
+                },
+                {
+                  "content": "Sortie du bébé, expulsion du placenta, coupure du cordon",
+                  "correct": false
+                },
+                {
+                  "content": "Sortie du bébé, coupure du cordon, expulsion du placenta",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques phrases comment s'est formé le bébé de Mme Bamba, depuis les cellules sexuelles jusqu'à la nidation.",
+              "question_type": "written",
+              "points": 4,
+              "starter": "L'ovaire libère un ovule qui…",
+              "criteria": [
+                "Cite l'ovule, produit par l'ovaire, et les spermatozoïdes",
+                "Place la fécondation dans la trompe, avec un seul spermatozoïde",
+                "Nomme la cellule-œuf et ses divisions",
+                "Place la nidation dans la muqueuse de l'utérus"
+              ],
+              "explanation": "Corrigé modèle : l'ovaire libère un ovule, recueilli par le pavillon, qui avance dans la trompe. Les spermatozoïdes, déposés dans le vagin, passent par le col de l'utérus et l'utérus, puis arrivent dans la trompe. Un seul spermatozoïde entre dans l'ovule : c'est la fécondation, qui forme la cellule-œuf. Celle-ci se divise en descendant vers l'utérus et forme l'embryon, qui se fixe dans la muqueuse de l'utérus : c'est la nidation. Barème : 1 point par critère.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Les cellules sexuelles et leur lieu de production, l'appareil génital féminin, la rencontre des cellules et la fécondation, la nidation, le développement et la durée de la grossesse.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur de SVT interroge la classe sur les deux cellules sexuelles.",
+              "exercise_type": "evaluation",
+              "figure": "deux-cellules",
+              "hint": "Pour chaque mot, demande-toi s'il désigne une cellule, un organe ou un liquide.",
+              "questions": [
+                {
+                  "content": "Relie chaque mot à ce qu'il désigne.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer : trois mots proches. 2) Nommer : spermatozoïde et ovule sont des cellules. 3) Associer : le spermatozoïde vient des testicules, l'ovule des ovaires. 4) Conclure : le sperme est un liquide, pas une cellule.",
+                  "answers": [
+                    {
+                      "content": "Spermatozoïde",
+                      "match": "Cellule sexuelle produite par les testicules"
+                    },
+                    {
+                      "content": "Ovule",
+                      "match": "Cellule sexuelle produite par les ovaires"
+                    },
+                    {
+                      "content": "Sperme",
+                      "match": "Liquide qui contient les spermatozoïdes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle cellule possède un flagelle qui lui permet de nager ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : l'indice est le flagelle, une queue. 2) Nommer : seul le spermatozoïde en possède un. 3) Conclure : c'est le spermatozoïde. L'ovule est une grosse cellule sans mouvement propre.",
+                  "answers": [
+                    {
+                      "content": "Le spermatozoïde",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "La cellule-œuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'embryon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les ovules sont produits par les ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Repérer : on cherche l'organe producteur de l'ovule. 2) Nommer : l'ovule est la cellule sexuelle de la femme. 3) Associer : les ovaires le produisent. Les testicules produisent les spermatozoïdes.",
+                  "answers": [
+                    {
+                      "content": "testicules",
+                      "correct": false
+                    },
+                    {
+                      "content": "ovaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "trompes",
+                      "correct": false
+                    },
+                    {
+                      "content": "poumons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les ovaires libèrent en général un seul ovule à la fois, environ une fois par mois.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : on compare ovules et spermatozoïdes. 2) Associer : les ovaires libèrent un ovule à la fois, environ chaque mois ; les testicules produisent des spermatozoïdes en très grand nombre. 3) Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les testicules produisent les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer : on cherche la cellule produite par les testicules. 2) Nommer : c'est le spermatozoïde. 3) Conclure : les testicules produisent des spermatozoïdes, au pluriel.",
+                  "answers": [
+                    {
+                      "content": "spermatozoïdes",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Pour réviser, Awa regarde la planche de l'appareil génital féminin.",
+              "exercise_type": "evaluation",
+              "figure": "appareil-feminin",
+              "hint": "Suis le trajet de l'ovule et celui des spermatozoïdes sur la planche.",
+              "questions": [
+                {
+                  "content": "Quel organe de l'appareil génital féminin produit les ovules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : on cherche l'organe producteur. 2) Nommer : la cellule est l'ovule. 3) Associer : il est produit par l'ovaire. L'utérus accueille l'embryon, le vagin et le col sont des voies de passage.",
+                  "answers": [
+                    {
+                      "content": "L'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ovaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le col de l'utérus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle partie recueille l'ovule libéré par l'ovaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Situer : l'ovule quitte l'ovaire. 2) Suivre : le pavillon, placé près de l'ovaire, le recueille. 3) Conclure : c'est le pavillon de la trompe.",
+                  "answers": [
+                    {
+                      "content": "Le col de l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "La muqueuse de l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pavillon de la trompe",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque partie à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Situer : l'ovule part de l'ovaire. 2) Suivre : il avance dans la trompe, où a lieu la fécondation. 3) Conclure : l'embryon se fixe dans l'utérus, qui accueille ensuite le fœtus.",
+                  "answers": [
+                    {
+                      "content": "L'ovaire",
+                      "match": "Produit et libère l'ovule"
+                    },
+                    {
+                      "content": "La trompe",
+                      "match": "Lieu de la fécondation"
+                    },
+                    {
+                      "content": "L'utérus",
+                      "match": "Accueille et protège l'embryon puis le fœtus"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet d'un spermatozoïde.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Situer : les spermatozoïdes sont déposés dans le vagin. 2) Suivre : ils passent par le col, l'utérus, puis arrivent dans la trompe.",
+                  "answers": [
+                    {
+                      "content": "Le vagin"
+                    },
+                    {
+                      "content": "Le col de l'utérus"
+                    },
+                    {
+                      "content": "L'utérus"
+                    },
+                    {
+                      "content": "La trompe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le vagin est le lieu de la fécondation.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Situer : le vagin est le point de départ des spermatozoïdes. 2) Repérer : la fécondation a lieu dans la trompe. 3) Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le professeur demande de décrire la fécondation.",
+              "exercise_type": "evaluation",
+              "figure": "trajet-de-fecondation",
+              "hint": "Retiens où, comment et avec combien de spermatozoïdes se fait la fécondation.",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que la fécondation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : le mot à définir. 2) Nommer : c'est l'entrée d'un spermatozoïde dans un ovule. 3) Conclure : elle forme la cellule-œuf. La fixation de l'embryon est la nidation.",
+                  "answers": [
+                    {
+                      "content": "L'entrée d'un spermatozoïde dans un ovule",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fixation de l'embryon dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "La libération de l'ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'expulsion du placenta",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de spermatozoïdes entrent dans l'ovule lors de la fécondation ?",
+                  "question_type": "numeric",
+                  "unit": "",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Repérer : on compte les spermatozoïdes qui entrent dans l'ovule. 2) Conclure : un seul entre dans l'ovule. Les autres ne peuvent pas entrer dans cet ovule.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Situer : l'ovule et les spermatozoïdes se rejoignent dans la trompe. 2) Repérer : un seul spermatozoïde entre. 3) Nommer : la cellule-œuf est formée. Les autres propositions donnent un mauvais lieu ou un mauvais nombre.",
+                  "answers": [
+                    {
+                      "content": "La fécondation forme la cellule-œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fécondation a lieu dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fécondation a lieu dans la trompe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plusieurs spermatozoïdes entrent dans l'ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fécondation a lieu dans le vagin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'entrée d'un spermatozoïde dans un ovule s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer : on décrit l'entrée d'un spermatozoïde dans un ovule. 2) Nommer : c'est la fécondation. 3) Conclure : elle donne la cellule-œuf.",
+                  "answers": [
+                    {
+                      "content": "fécondation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Des spermatozoïdes dans l'utérus suffisent pour qu'il y ait fécondation.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : la présence de spermatozoïdes ne suffit pas. 2) Situer : la fécondation demande qu'un spermatozoïde entre dans un ovule, dans la trompe. 3) Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le professeur termine par la nidation et la grossesse.",
+              "exercise_type": "evaluation",
+              "figure": "etapes-du-devenir",
+              "hint": "Place chaque étape : trompe ou utérus, avant ou après.",
+              "questions": [
+                {
+                  "content": "Où a lieu la nidation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : l'embryon se fixe. 2) Situer : il s'enfonce dans la muqueuse de l'utérus. 3) Conclure : c'est la nidation.",
+                  "answers": [
+                    {
+                      "content": "Dans la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans l'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la muqueuse de l'utérus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Repérer : cinq étapes. 2) Situer : fécondation dans la trompe, nidation dans l'utérus. 3) Nommer : cellule-œuf, embryon, fœtus. 4) Conclure : l'accouchement vient en dernier.",
+                  "answers": [
+                    {
+                      "content": "Fécondation"
+                    },
+                    {
+                      "content": "Divisions de la cellule-œuf"
+                    },
+                    {
+                      "content": "Nidation"
+                    },
+                    {
+                      "content": "Développement du fœtus"
+                    },
+                    {
+                      "content": "Accouchement"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grossesse dure environ ___ mois.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Repérer : on cherche la durée de la grossesse. 2) Conclure : de la fécondation à l'accouchement, environ 9 mois.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'embryon devient un fœtus qui ressemble à un petit bébé.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : le stade qui suit l'embryon. 2) Nommer : le fœtus, dont les organes grandissent jusqu'à la naissance. 3) Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer : on décrit l'environnement du fœtus. 2) Nommer : liquide amniotique et cordon ombilical. 3) Conclure : le liquide protège, le cordon relie au placenta. Les autres propositions donnent de mauvais organes.",
+                  "answers": [
+                    {
+                      "content": "Le fœtus est produit par les testicules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fœtus baigne dans le liquide amniotique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le placenta produit les ovules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cordon ombilical se trouve dans le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cordon ombilical relie le fœtus au placenta",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Les cellules sexuelles et la fécondation dans des situations du centre de santé, le suivi de la grossesse, les conseils de santé, l'accouchement et la délivrance.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À la sortie de la classe, Yao et Aya vont au centre de santé de leur quartier. Une affiche explique comment on devient parents. Ils la lisent ensemble.",
+              "exercise_type": "evaluation",
+              "figure": "etapes-du-devenir",
+              "hint": "Retrouve l'ordre des étapes et le lieu de chacune.",
+              "questions": [
+                {
+                  "content": "Sur l'affiche, on lit : « Le sperme contient des millions de spermatozoïdes ». Que sont les spermatozoïdes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : le mot « spermatozoïdes ». 2) Nommer : ce sont des cellules sexuelles. 3) Associer : elles sont produites par les testicules. 4) Conclure : le sperme est le liquide qui les contient.",
+                  "answers": [
+                    {
+                      "content": "Des liquides produits par les ovaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des organes de l'appareil génital",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des cellules produites par l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des cellules sexuelles produites par les testicules",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'affiche dit : « Un ovule est libéré environ une fois par mois ». Par quel organe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : la libération de l'ovule. 2) Associer : l'organe producteur est l'ovaire. 3) Conclure : un ovaire libère l'ovule.",
+                  "answers": [
+                    {
+                      "content": "Un ovaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cordon ombilical",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le placenta",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao dit : « La fécondation a lieu dans l'utérus de la femme. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Situer : l'ovule et les spermatozoïdes se rejoignent dans la trompe. 2) Repérer : la fécondation a lieu dans la trompe. 3) Conclure : l'affirmation de Yao est fausse. Dans l'utérus a lieu la nidation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya explique que la cellule formée par la fécondation est la cellule-œuf, qui se divise pour former un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer : la cellule-œuf se divise. 2) Nommer : l'amas de cellules obtenu est l'embryon. 3) Conclure : l'embryon se fixe ensuite dans l'utérus.",
+                  "answers": [
+                    {
+                      "content": "embryon",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao lit : « La nidation arrive avant la fécondation ». Que penses-tu de cette phrase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : on compare deux étapes. 2) Situer : la fécondation forme la cellule-œuf dans la trompe. 3) Suivre : l'embryon se fixe ensuite dans l'utérus. 4) Conclure : la nidation vient après la fécondation.",
+                  "answers": [
+                    {
+                      "content": "Elle est vraie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse : la nidation arrive après la fécondation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est fausse : la nidation arrive avant l'ovulation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est vraie, si la femme est jeune",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mme Koné est enceinte. Elle va au centre de santé pour ses consultations prénatales. La sage-femme lui explique le suivi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à ce qui protège la santé de la mère et du bébé.",
+              "questions": [
+                {
+                  "content": "Que veut dire « prénatal » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : le préfixe « pré » veut dire « avant ». 2) Conclure : prénatal veut dire avant la naissance, donc pendant la grossesse.",
+                  "answers": [
+                    {
+                      "content": "Après la naissance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pendant l'accouchement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avant la naissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pendant la puberté",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que fait la sage-femme pendant une consultation prénatale ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Situer : on est pendant la grossesse. 2) Décrire : pesée, tension, examen du ventre. 3) Conclure : le but est de surveiller la santé de la mère et du bébé.",
+                  "answers": [
+                    {
+                      "content": "Elle examine son ventre et mesure sa tension",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle remplace l'accouchement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle donne n'importe quel médicament sans examen",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fait naître le bébé à chaque visite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle pèse la future maman",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels conseils la sage-femme peut-elle donner ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. 1) Situer : pendant la grossesse. 2) Décrire : moustiquaire, alimentation variée, avis médical avant tout médicament. 3) Conclure : l'alcool, le tabac et l'absence de suivi mettent la mère et le bébé en danger.",
+                  "answers": [
+                    {
+                      "content": "Boire de l'alcool",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dormir sous moustiquaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avoir une alimentation variée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne prendre aucun médicament sans avis médical",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fumer pour se détendre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne jamais revenir au centre de santé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À quoi sert l'échographie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : l'échographie est un examen pendant la grossesse. 2) Décrire : elle donne une image du fœtus dans l'utérus. 3) Conclure : elle aide à surveiller son développement.",
+                  "answers": [
+                    {
+                      "content": "À voir le fœtus dans l'utérus",
+                      "correct": true
+                    },
+                    {
+                      "content": "À produire des ovules",
+                      "correct": false
+                    },
+                    {
+                      "content": "À ouvrir le col de l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "À couper le cordon ombilical",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les consultations prénatales ont lieu ___ l'accouchement.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Situer : « prénatal » signifie avant la naissance. 2) Conclure : ces consultations ont lieu avant l'accouchement.",
+                  "answers": [
+                    {
+                      "content": "après",
+                      "correct": false
+                    },
+                    {
+                      "content": "avant",
+                      "correct": true
+                    },
+                    {
+                      "content": "pendant",
+                      "correct": false
+                    },
+                    {
+                      "content": "à la place de",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Mme Koné ressent des contractions régulières. Son mari l'accompagne au centre de santé, où la sage-femme l'aide à accoucher.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Place chaque événement avant ou après la sortie du bébé.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les moments de l'accouchement.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Situer : on est à l'accouchement. 2) Nommer : l'utérus se contracte, le col s'ouvre. 3) Décrire dans l'ordre : le bébé sort, le cordon est coupé, le placenta est expulsé.",
+                  "answers": [
+                    {
+                      "content": "Contractions de l'utérus et ouverture du col"
+                    },
+                    {
+                      "content": "Sortie du bébé par le vagin"
+                    },
+                    {
+                      "content": "Coupure du cordon"
+                    },
+                    {
+                      "content": "Expulsion du placenta"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'expulsion du placenta s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Nommer : le placenta est expulsé après le bébé. 2) Conclure : cette expulsion s'appelle la délivrance.",
+                  "answers": [
+                    {
+                      "content": "délivrance",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel organe se contracte pour aider à faire sortir le bébé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Situer : on est à l'accouchement. 2) Nommer : les muscles de l'utérus se contractent. 3) Conclure : l'utérus aide à expulser le bébé.",
+                  "answers": [
+                    {
+                      "content": "Les ovaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le placenta",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'utérus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pavillon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une césarienne est une naissance par opération, utilisée quand l'accouchement par le vagin est dangereux.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Nommer : la césarienne est une opération. 2) Décrire : le bébé naît sans passer par le vagin. 3) Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Koné demande : « Le travail est-il fini quand le bébé est sorti ? » Que répond la sage-femme ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Situer : la naissance du bébé. 2) Décrire : le cordon est coupé, puis le placenta est expulsé (délivrance). 3) Conclure : l'accouchement se termine avec la délivrance.",
+                  "answers": [
+                    {
+                      "content": "Oui : le placenta est sorti avant le bébé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : plus rien ne se passe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : il reste à refaire la fécondation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : il reste à expulser le placenta",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Environ combien de mois dure la grossesse de Mme Koné avant l'accouchement ?",
+                  "question_type": "numeric",
+                  "unit": "mois",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Repérer : on cherche la durée de la grossesse. 2) Conclure : une grossesse dure environ 9 mois.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au collège, le club santé prépare un exposé sur la naissance. Les élèves rédigent des affirmations à vérifier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque affirmation, retrouve l'organe ou l'étape concernée.",
+              "questions": [
+                {
+                  "content": "Le fœtus reçoit le dioxygène et les aliments de sa mère par le placenta et le cordon ombilical.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : les échanges entre la mère et le fœtus. 2) Nommer : placenta et cordon ombilical. 3) Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le placenta se forme dans le vagin.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Situer : le fœtus se développe dans l'utérus. 2) Repérer : le placenta est dans l'utérus, relié au fœtus par le cordon. 3) Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le rôle du liquide amniotique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : le fœtus baigne dans ce liquide. 2) Décrire : il le protège des chocs. 3) Conclure : le liquide amniotique protège le fœtus.",
+                  "answers": [
+                    {
+                      "content": "Protéger le fœtus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Produire les spermatozoïdes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Libérer l'ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fermer le col de l'utérus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque stade à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer : trois stades qui se suivent. 2) Nommer : cellule-œuf, puis embryon, puis fœtus. 3) Conclure : chaque description correspond à un stade.",
+                  "answers": [
+                    {
+                      "content": "Cellule-œuf",
+                      "match": "Première cellule du futur bébé"
+                    },
+                    {
+                      "content": "Embryon",
+                      "match": "Amas de cellules issu des divisions"
+                    },
+                    {
+                      "content": "Fœtus",
+                      "match": "Stade où les organes grandissent jusqu'à la naissance"
+                    }
+                  ]
+                },
+                {
+                  "content": "La fécondation a lieu dans la ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Situer : l'ovule avance dans la trompe. 2) Repérer : les spermatozoïdes y arrivent aussi. 3) Conclure : la fécondation a lieu dans la trompe.",
+                  "answers": [
+                    {
+                      "content": "vessie",
+                      "correct": false
+                    },
+                    {
+                      "content": "trompe",
+                      "correct": true
+                    },
+                    {
+                      "content": "bouche",
+                      "correct": false
+                    },
+                    {
+                      "content": "poitrine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Raisonner sur la fécondation et la nidation à partir de situations, corriger des affirmations fausses, lire un schéma des étapes, justifier le rôle des organes et des conseils de santé.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Deux amies, Fanta et Mariam, comparent leurs cours. Elles ne sont pas d'accord sur plusieurs points. Pour chaque affirmation, tu dois juger et justifier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque affirmation, retrouve la cellule ou l'organe dont on parle.",
+              "questions": [
+                {
+                  "content": "Fanta dit : « Les spermatozoïdes sont plus gros que l'ovule. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : on compare les tailles. 2) Nommer : le spermatozoïde est une très petite cellule, l'ovule une grosse cellule. 3) Conclure : l'ovule est plus gros, l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam dit : « Les spermatozoïdes sont produits en plus grand nombre que les ovules. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : on compare les productions. 2) Associer : les testicules produisent beaucoup de spermatozoïdes, les ovaires libèrent en général un ovule à la fois. 3) Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta dit : « Les ovules sont produits par le sperme. » Quelle correction est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : trois mots proches, ovule, ovaire et sperme. 2) Nommer : l'ovule est une cellule. 3) Associer : l'ovaire le produit. 4) Conclure : le sperme est un liquide qui contient des spermatozoïdes.",
+                  "answers": [
+                    {
+                      "content": "Les ovules sont produits par les testicules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les ovules sont produits par la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les ovules sont produits par les ovaires ; le sperme contient des spermatozoïdes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les ovules sont produits par l'utérus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam dit : « Si un spermatozoïde arrive dans l'utérus, il y a fécondation. » Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Situer : l'utérus est un lieu de passage pour les spermatozoïdes. 2) Repérer : la fécondation demande l'entrée d'un spermatozoïde dans un ovule. 3) Conclure : cela se passe dans la trompe, pas dans l'utérus.",
+                  "answers": [
+                    {
+                      "content": "Parce que l'utérus ne produit pas d'ovule, et la fécondation a lieu dans l'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les spermatozoïdes ne peuvent pas aller dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la fécondation se fait toujours dans le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut qu'il entre dans un ovule, ce qui se passe dans la trompe",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles corrections sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Situer : fécondation dans la trompe, nidation dans l'utérus. 2) Raisonner : la nidation suit la fécondation. 3) Conclure : seules « La fécondation a lieu dans la trompe » et « La nidation a lieu dans l'utérus » sont justes.",
+                  "answers": [
+                    {
+                      "content": "La fécondation a lieu dans la trompe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fécondation a lieu dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nidation a lieu dans la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nidation a lieu dans l'utérus",
+                      "correct": true
+                    },
+                    {
+                      "content": "La nidation a lieu avant la fécondation",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une femme a ses deux ovaires et ses deux trompes en bon état, mais son utérus ne peut pas accueillir d'embryon. Le médecin explique ce qui peut se passer ou non. Tu raisonnes à partir du cours.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Distingue les étapes qui se passent avant l'utérus et celles qui s'y passent.",
+              "questions": [
+                {
+                  "content": "Cette femme produit-elle des ovules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : les ovaires sont en bon état. 2) Associer : les ovaires produisent les ovules. 3) Conclure : elle produit des ovules.",
+                  "answers": [
+                    {
+                      "content": "Non : sans utérus sain, il n'y a pas d'ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : les ovules sont produits par l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : ses ovaires fonctionnent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non : les ovules sont produits par les trompes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fécondation peut-elle avoir lieu chez cette femme ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Situer : la fécondation a lieu dans la trompe. 2) Repérer : ses trompes sont en bon état. 3) Conclure : la fécondation est possible.",
+                  "answers": [
+                    {
+                      "content": "Non : elle a lieu dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : elle a lieu dans le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : elle a lieu dans l'ovaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : elle a lieu dans la trompe, qui est en bon état",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Chez cette femme, la nidation ne peut pas se faire normalement.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Situer : la nidation est la fixation de l'embryon dans la muqueuse de l'utérus. 2) Repérer : son utérus ne peut pas accueillir d'embryon. 3) Conclure : la nidation ne peut pas se faire normalement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce qui peut se passer chez elle, jusqu'à l'étape qui est impossible.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Repérer : cinq étapes. 2) Situer : les premières se passent dans l'ovaire et dans la trompe, qui fonctionnent. 3) Conclure : la dernière, la nidation, demande un utérus capable d'accueillir l'embryon.",
+                  "answers": [
+                    {
+                      "content": "Libération de l'ovule par l'ovaire"
+                    },
+                    {
+                      "content": "Rencontre dans la trompe"
+                    },
+                    {
+                      "content": "Fécondation et cellule-œuf"
+                    },
+                    {
+                      "content": "Divisions de la cellule-œuf"
+                    },
+                    {
+                      "content": "Nidation dans l'utérus (impossible)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conclusions sont justifiées ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer les données : ovaires et trompes en bon état, utérus qui n'accueille pas. 2) Raisonner : fécondation et divisions ont lieu avant l'utérus. 3) Conclure : sans nidation, pas de développement du fœtus dans l'utérus.",
+                  "answers": [
+                    {
+                      "content": "Un embryon peut se former dans la trompe",
+                      "correct": true
+                    },
+                    {
+                      "content": "La femme ne produit plus d'ovules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sans nidation, l'embryon ne peut pas se développer en fœtus dans l'utérus",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fécondation a lieu dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'embryon peut se développer sans être fixé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un schéma des étapes montre, de haut en bas : la rencontre du spermatozoïde et de l'ovule, la fécondation dans la trompe, les divisions de la cellule-œuf, la nidation dans l'utérus, le développement du fœtus, puis l'accouchement après environ 9 mois.",
+              "exercise_type": "evaluation",
+              "figure": "etapes-du-devenir",
+              "hint": "Lis le schéma de haut en bas, étape par étape.",
+              "questions": [
+                {
+                  "content": "Quelle étape vient juste avant la nidation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : on cherche l'étape juste avant la nidation. 2) Suivre : la cellule-œuf se divise et forme l'embryon. 3) Conclure : c'est cette étape. Le fœtus et l'accouchement viennent après.",
+                  "answers": [
+                    {
+                      "content": "Le développement du fœtus",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accouchement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les divisions de la cellule-œuf qui forment l'embryon",
+                      "correct": true
+                    },
+                    {
+                      "content": "La rencontre du spermatozoïde et de l'ovule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle étape vient juste après la nidation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : l'étape qui suit la nidation. 2) Suivre : l'embryon se développe et devient un fœtus. 3) Conclure : c'est le développement du fœtus.",
+                  "answers": [
+                    {
+                      "content": "La fécondation dans la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les divisions de la cellule-œuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "La rencontre du spermatozoïde et de l'ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le développement du fœtus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur ce schéma, l'accouchement se passe avant la fécondation.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer : l'accouchement est en bas du schéma, donc à la fin. 2) Raisonner : on ne peut pas accoucher avant d'avoir un bébé. 3) Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La cellule formée à la deuxième étape du schéma s'appelle la ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Repérer : la deuxième étape est la fécondation. 2) Nommer : elle forme la cellule-œuf. 3) Conclure : c'est la cellule-œuf.",
+                  "answers": [
+                    {
+                      "content": "cellule-œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "cellule nerveuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "cellule sanguine",
+                      "correct": false
+                    },
+                    {
+                      "content": "cellule de la peau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque étape du schéma au lieu où elle se passe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer : trois étapes du schéma. 2) Situer : fécondation dans la trompe, nidation dans l'utérus. 3) Conclure : à l'accouchement, le bébé sort par le vagin.",
+                  "answers": [
+                    {
+                      "content": "Fécondation",
+                      "match": "Dans la trompe"
+                    },
+                    {
+                      "content": "Nidation",
+                      "match": "Dans la muqueuse de l'utérus"
+                    },
+                    {
+                      "content": "Accouchement",
+                      "match": "Par le vagin, à la sortie de l'utérus"
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après le schéma, après environ combien de mois a lieu l'accouchement ?",
+                  "question_type": "numeric",
+                  "unit": "mois",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Repérer : la dernière étape du schéma. 2) Lire : l'accouchement a lieu après environ 9 mois. 3) Conclure : 9 mois.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le professeur ramasse la copie d'un élève, Serge. Elle contient des erreurs. Tu dois les corriger en justifiant.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche l'erreur de vocabulaire ou de lieu dans chaque phrase.",
+              "questions": [
+                {
+                  "content": "Serge a écrit : « Le spermatozoïde est produit par les ovaires. » Quelle est la correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : la cellule est le spermatozoïde. 2) Associer : il est produit par les testicules. 3) Conclure : les ovaires produisent les ovules.",
+                  "answers": [
+                    {
+                      "content": "Il est produit par l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est produit par les testicules",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est produit par la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est produit par le placenta",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Serge a écrit : « Plusieurs spermatozoïdes entrent dans l'ovule. » Quelle est la correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : le nombre de spermatozoïdes. 2) Raisonner : à la fécondation, un seul entre. 3) Conclure : la correction est un seul spermatozoïde.",
+                  "answers": [
+                    {
+                      "content": "Aucun spermatozoïde n'entre dans l'ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les spermatozoïdes y entrent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un seul spermatozoïde entre dans l'ovule",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovule entre dans le spermatozoïde",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Serge a écrit : « La nidation forme la cellule-œuf. » Quelle est la correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Nommer : la cellule-œuf vient de la fécondation, dans la trompe. 2) Situer : la nidation a lieu plus tard, dans l'utérus. 3) Conclure : la nidation fixe l'embryon.",
+                  "answers": [
+                    {
+                      "content": "C'est l'accouchement qui forme la cellule-œuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est la nidation qui forme le placenta",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune erreur",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est la fécondation qui forme la cellule-œuf ; la nidation fixe l'embryon",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Serge a écrit : « L'expulsion du placenta s'appelle la nidation. » Le mot juste est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer : le placenta est expulsé après le bébé. 2) Nommer : cette expulsion s'appelle la délivrance. 3) Conclure : la nidation est la fixation de l'embryon.",
+                  "answers": [
+                    {
+                      "content": "délivrance",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Serge a écrit : « L'accouchement se termine quand le bébé est sorti. » Cette phrase est exacte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Décrire : après la sortie du bébé, le cordon est coupé et le placenta est expulsé. 2) Conclure : l'accouchement se termine avec la délivrance, donc la phrase est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : cellules sexuelles et lieu de production, rencontre et fécondation, nidation, développement de l'embryon et du fœtus, accouchement et suivi de la grossesse.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le centre de santé de la ville affiche une planche de l'appareil génital féminin. Les numéros désignent : 1 l'ovaire, 2 le pavillon, 3 la trompe, 4 l'utérus, 5 la muqueuse de l'utérus, 6 le col de l'utérus.",
+              "exercise_type": "evaluation",
+              "figure": "appareil-numerote",
+              "hint": "Rappelle-toi le rôle de chaque numéro.",
+              "questions": [
+                {
+                  "content": "Sur la planche, le numéro 1 désigne l'organe qui produit les ovules. Comment s'appelle-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : l'organe produit les ovules. 2) Nommer : c'est l'ovaire. 3) Conclure : le numéro 1 est l'ovaire.",
+                  "answers": [
+                    {
+                      "content": "L'ovaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "La trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le col de l'utérus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fécondation a lieu dans la partie numéro ___ (la trompe).",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Situer : l'ovule et les spermatozoïdes se rejoignent dans la trompe. 2) Conclure : la fécondation a lieu au numéro 3.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'embryon se fixe dans la muqueuse, numéro 5, de l'utérus. Comment s'appelle cette étape ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : l'embryon se fixe dans la muqueuse de l'utérus. 2) Nommer : c'est la nidation.",
+                  "answers": [
+                    {
+                      "content": "La fécondation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La délivrance",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nidation",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovulation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet d'un spermatozoïde jusqu'à l'ovule.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Situer : départ dans le vagin. 2) Suivre : col de l'utérus, puis utérus. 3) Repérer : arrivée dans la trompe, lieu de la rencontre.",
+                  "answers": [
+                    {
+                      "content": "Le vagin"
+                    },
+                    {
+                      "content": "Le col de l'utérus (numéro 6)"
+                    },
+                    {
+                      "content": "L'utérus (numéro 4)"
+                    },
+                    {
+                      "content": "La trompe (numéro 3)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le numéro 2, le pavillon, produit les ovules.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Associer : les ovules sont produits par l'ovaire (numéro 1). 2) Nommer : le pavillon recueille l'ovule libéré. 3) Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Chez Yao et sa famille, on parle de la naissance d'un petit frère. Yao veut comprendre comment se forme un bébé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Suis les étapes de la cellule-œuf au fœtus.",
+              "questions": [
+                {
+                  "content": "Relie chaque cellule ou chaque stade à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer : trois cellules. 2) Nommer et associer : spermatozoïde (testicules), ovule (ovaires). 3) Conclure : la cellule-œuf résulte de la fécondation.",
+                  "answers": [
+                    {
+                      "content": "Spermatozoïde",
+                      "match": "Petite cellule mobile produite par les testicules"
+                    },
+                    {
+                      "content": "Ovule",
+                      "match": "Grosse cellule produite par les ovaires"
+                    },
+                    {
+                      "content": "Cellule-œuf",
+                      "match": "Première cellule formée par la fécondation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se rencontrent le spermatozoïde et l'ovule ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Situer : départ de l'ovaire et du vagin. 2) Suivre : les cellules arrivent dans la trompe. 3) Conclure : la rencontre a lieu dans la trompe.",
+                  "answers": [
+                    {
+                      "content": "Dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le placenta",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la trompe",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de spermatozoïdes entrent dans l'ovule ?",
+                  "question_type": "numeric",
+                  "unit": "",
+                  "tolerance": 0,
+                  "explanation": "Méthode. 1) Repérer : on compte les spermatozoïdes qui entrent. 2) Conclure : un seul.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fixation de l'embryon dans l'utérus s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer : fixation de l'embryon. 2) Situer : dans l'utérus. 3) Nommer : la nidation.",
+                  "answers": [
+                    {
+                      "content": "nidation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Nommer : cellule-œuf, embryon, fœtus. 2) Suivre : chaque stade vient après le précédent. 3) Conclure : seules « La cellule-œuf se divise et forme un embryon » et « L'embryon devient ensuite un fœtus » sont justes. La cellule-œuf vient de la fécondation, pas des ovaires.",
+                  "answers": [
+                    {
+                      "content": "La cellule-œuf se divise et forme un embryon",
+                      "correct": true
+                    },
+                    {
+                      "content": "La cellule-œuf est produite par les ovaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fœtus devient ensuite un ovule",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fécondation a lieu dans l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'embryon devient ensuite un fœtus",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Aya visite le centre de santé avec sa tante enceinte. Une infirmière lui montre une échographie et lui explique ce qui entoure le fœtus.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Retrouve le rôle de chaque structure autour du fœtus.",
+              "questions": [
+                {
+                  "content": "Par où le fœtus reçoit-il dioxygène et aliments ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer : le fœtus est relié au placenta par le cordon. 2) Nommer : c'est par ces structures que passent dioxygène et aliments. 3) Conclure : placenta et cordon ombilical.",
+                  "answers": [
+                    {
+                      "content": "Par le col de l'utérus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par le vagin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par le placenta et le cordon ombilical",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par les trompes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fœtus baigne dans le liquide ___, qui le protège.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer : le liquide autour du fœtus. 2) Nommer : le liquide amniotique. 3) Conclure : il protège le fœtus.",
+                  "answers": [
+                    {
+                      "content": "amniotique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grossesse dure environ ___ mois.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Repérer : durée de la grossesse. 2) Conclure : environ 9 mois.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le fœtus se développe dans le vagin.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Situer : le fœtus se développe dans l'utérus. 2) Conclure : l'affirmation est fausse. Le vagin est la voie de passage à la naissance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont vraies pour un fœtus ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer : le stade fœtus. 2) Nommer : il suit l'embryon. 3) Conclure : il ressemble à un petit bébé et grandit dans l'utérus jusqu'à la naissance.",
+                  "answers": [
+                    {
+                      "content": "Il ressemble à un petit bébé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est produit par les testicules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se trouve dans la trompe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il grandit jusqu'à la naissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est une cellule sexuelle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Awa, âgée de 14 ans, a questionné sa tante après l'accouchement. Elle veut comprendre le déroulement de la naissance et le suivi de la grossesse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Place chaque événement avant, pendant ou après la naissance.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les moments de l'accouchement.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Situer : on est à l'accouchement. 2) Nommer : l'utérus se contracte, puis le col s'ouvre. 3) Décrire : le bébé sort, le cordon est coupé, le placenta est expulsé.",
+                  "answers": [
+                    {
+                      "content": "Contractions de l'utérus"
+                    },
+                    {
+                      "content": "Ouverture du col de l'utérus"
+                    },
+                    {
+                      "content": "Sortie du bébé par le vagin"
+                    },
+                    {
+                      "content": "Coupure du cordon"
+                    },
+                    {
+                      "content": "Expulsion du placenta"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'expulsion du placenta s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Nommer : le placenta est expulsé en dernier. 2) Conclure : c'est la délivrance.",
+                  "answers": [
+                    {
+                      "content": "délivrance",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les consultations prénatales ont lieu après l'accouchement.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Situer : « prénatal » veut dire avant la naissance. 2) Conclure : elles ont lieu pendant la grossesse, l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels conseils sont donnés pendant la grossesse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Situer : pendant la grossesse. 2) Décrire : moustiquaire et avis médical. 3) Conclure : l'alcool, le tabac et l'absence de suivi sont dangereux.",
+                  "answers": [
+                    {
+                      "content": "Ne pas prendre de médicament sans avis médical",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fumer pour se détendre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Boire de l'alcool",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dormir sous moustiquaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Éviter le centre de santé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la sage-femme dit « délivrance », de quoi parle-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Nommer : la délivrance. 2) Situer : après la naissance du bébé. 3) Conclure : c'est l'expulsion du placenta.",
+                  "answers": [
+                    {
+                      "content": "De l'expulsion du placenta après la naissance du bébé",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la fixation de l'embryon",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la rencontre des cellules sexuelles",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la libération de l'ovule",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

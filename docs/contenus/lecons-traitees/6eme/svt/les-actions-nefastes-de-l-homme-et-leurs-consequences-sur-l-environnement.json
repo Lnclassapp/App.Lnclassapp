@@ -1,0 +1,3861 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les actions néfastes de l'Homme et leurs conséquences sur l'environnement",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "SVT",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "actions-et-consequences",
+          "kind": "diagram",
+          "description": "Schéma fléché de gauche à droite, en trois colonnes. À gauche, quatre actions de l'Homme : feux de brousse, déforestation, déchets jetés, eaux sales. Au centre, les éléments touchés : sol, eau, air, êtres vivants. À droite, les conséquences : sol nu, eau polluée, air pollué, moins d'animaux. Chaque flèche relie une action à ce qu'elle touche.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Actions de l'Homme",
+              "Éléments touchés",
+              "Conséquences"
+            ],
+            "nodes": [
+              {
+                "id": "feux",
+                "label": "Feux de brousse",
+                "category": 1
+              },
+              {
+                "id": "defo",
+                "label": "Déforestation",
+                "category": 1
+              },
+              {
+                "id": "dech",
+                "label": "Déchets jetés",
+                "category": 1
+              },
+              {
+                "id": "eaux",
+                "label": "Eaux sales",
+                "category": 1
+              },
+              {
+                "id": "sol",
+                "label": "Sol",
+                "category": 2
+              },
+              {
+                "id": "eau",
+                "label": "Eau",
+                "category": 2
+              },
+              {
+                "id": "air",
+                "label": "Air",
+                "category": 2
+              },
+              {
+                "id": "viv",
+                "label": "Êtres vivants",
+                "category": 2
+              },
+              {
+                "id": "c1",
+                "label": "Sol nu",
+                "category": 3
+              },
+              {
+                "id": "c2",
+                "label": "Eau polluée",
+                "category": 3
+              },
+              {
+                "id": "c4",
+                "label": "Air pollué",
+                "category": 3
+              },
+              {
+                "id": "c3",
+                "label": "Moins d'animaux",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "feux",
+                "to": "sol"
+              },
+              {
+                "from": "feux",
+                "to": "air",
+                "label": "fumée"
+              },
+              {
+                "from": "defo",
+                "to": "sol"
+              },
+              {
+                "from": "defo",
+                "to": "viv"
+              },
+              {
+                "from": "dech",
+                "to": "eau"
+              },
+              {
+                "from": "dech",
+                "to": "air",
+                "label": "brûlés"
+              },
+              {
+                "from": "eaux",
+                "to": "eau"
+              },
+              {
+                "from": "sol",
+                "to": "c1"
+              },
+              {
+                "from": "eau",
+                "to": "c2"
+              },
+              {
+                "from": "air",
+                "to": "c4"
+              },
+              {
+                "from": "viv",
+                "to": "c3"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "arbres-sur-la-parcelle",
+          "kind": "stat_chart",
+          "description": "Courbe fictive, inventée pour la leçon, du nombre d'arbres d'une parcelle de forêt où l'on coupe du bois chaque année sans replanter, de l'année 1 à l'année 5 : 120 arbres, puis 90, 60, 35 et 20. La courbe descend chaque année : la forêt se vide peu à peu.",
+          "params": {
+            "chart": "line",
+            "series": [
+              120,
+              90,
+              60,
+              35,
+              20
+            ],
+            "labels": [
+              "Année 1",
+              "Année 2",
+              "Année 3",
+              "Année 4",
+              "Année 5"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lagune-polluee",
+          "kind": "diagram",
+          "description": "Schéma fléché de gauche à droite. À gauche, trois origines de la pollution : déchets jetés, eaux sales, huiles et carburants. Elles mènent toutes à la lagune polluée, au centre. De là, des flèches mènent à droite vers les conséquences : moins de poissons et baignade dangereuse, puis la pêche en baisse.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Origines",
+              "Pollution",
+              "Conséquences"
+            ],
+            "nodes": [
+              {
+                "id": "dech",
+                "label": "Déchets jetés",
+                "category": 1
+              },
+              {
+                "id": "eaux",
+                "label": "Eaux sales",
+                "category": 1
+              },
+              {
+                "id": "huile",
+                "label": "Huiles et carburants",
+                "category": 1
+              },
+              {
+                "id": "lag",
+                "label": "Lagune polluée",
+                "category": 2
+              },
+              {
+                "id": "poi",
+                "label": "Moins de poissons",
+                "category": 3
+              },
+              {
+                "id": "bai",
+                "label": "Baignade dangereuse",
+                "category": 3
+              },
+              {
+                "id": "pec",
+                "label": "Pêche en baisse",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "dech",
+                "to": "lag"
+              },
+              {
+                "from": "eaux",
+                "to": "lag"
+              },
+              {
+                "from": "huile",
+                "to": "lag"
+              },
+              {
+                "from": "lag",
+                "to": "poi"
+              },
+              {
+                "from": "lag",
+                "to": "bai"
+              },
+              {
+                "from": "poi",
+                "to": "pec"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "caniveau-bouche",
+          "kind": "diagram",
+          "description": "Schéma fléché de haut en bas qui suit un sachet jeté dans un caniveau. Les sachets jetés bouchent le caniveau. L'eau de pluie stagne alors, ce qui provoque deux conséquences : la rue est inondée et des moustiques se développent dans l'eau qui stagne.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "sac",
+                "label": "Sachets jetés"
+              },
+              {
+                "id": "can",
+                "label": "Caniveau bouché"
+              },
+              {
+                "id": "eau",
+                "label": "Eau qui stagne"
+              },
+              {
+                "id": "rue",
+                "label": "Rue inondée"
+              },
+              {
+                "id": "mou",
+                "label": "Moustiques"
+              }
+            ],
+            "edges": [
+              {
+                "from": "sac",
+                "to": "can",
+                "label": "bouchent"
+              },
+              {
+                "from": "can",
+                "to": "eau",
+                "label": "après la pluie"
+              },
+              {
+                "from": "eau",
+                "to": "rue"
+              },
+              {
+                "from": "eau",
+                "to": "mou"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "dechets-sur-la-berge",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres, aux valeurs fictives inventées pour la leçon, des déchets comptés sur un bout de berge de la lagune : 14 sachets, 9 bouteilles, 5 papiers et 8 restes de nourriture. La barre des sachets est la plus haute, celle des papiers la plus basse.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              14,
+              9,
+              5,
+              8
+            ],
+            "labels": [
+              "Sachets",
+              "Bouteilles",
+              "Papiers",
+              "Restes de nourriture"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître une action néfaste de l'Homme",
+          "remember": "L'**environnement** est tout ce qui nous entoure : l'air, l'eau, le sol, les plantes, les animaux et les hommes. Une **action néfaste** est une action de l'Homme qui abîme l'environnement. Une **cause** est ce qui provoque un effet ; la **conséquence** est cet effet. Couper tous les arbres, brûler la brousse, jeter des déchets ou rejeter des eaux sales sont des actions néfastes. Une tempête ou une sécheresse est une cause naturelle : l'Homme n'y est pour rien. Comment protéger l'environnement est l'objet de la leçon suivante.",
+          "method": [
+            "Observer la situation : noter ce que l'on voit, sent ou entend.",
+            "Relever l'action de l'Homme qui est à l'origine de ce que l'on observe.",
+            "Nommer l'élément de l'environnement qui est touché : l'air, l'eau, le sol, les plantes ou les animaux.",
+            "Conclure : dire que l'action est néfaste et écrire une phrase « cause, donc conséquence »."
+          ],
+          "example": {
+            "statement": "Aya se promène au bord de la lagune Ébrié, à Abidjan. Elle voit des sachets et des bouteilles qui flottent près de la berge. L'eau est sombre et sent mauvais. Des pêcheurs disent qu'ils attrapent moins de poissons qu'avant. Trouver l'action néfaste en suivant la méthode.",
+            "steps": [
+              "Observer : des sachets et des bouteilles flottent ; l'eau est sombre et sent mauvais ; les pêcheurs prennent moins de poissons.",
+              "Relever : des personnes jettent leurs déchets dans la lagune. C'est une action de l'Homme.",
+              "Nommer : l'élément touché est l'eau de la lagune, et avec elle les poissons qui y vivent.",
+              "Conclure : jeter des déchets dans la lagune est une action néfaste. Les déchets salissent l'eau (cause), donc il y a moins de poissons (conséquence)."
+            ]
+          },
+          "pitfall": "Ne pas croire que tout ce qui abîme l'environnement vient de l'Homme, ni qu'une action utile à l'Homme est sans danger. Contre-exemple : une pluie violente qui emporte un peu de terre est une cause naturelle. Mais couper tous les arbres d'une forêt pour vendre du bois rapporte de l'argent aujourd'hui et abîme pourtant la forêt. Pour décider, demande-toi toujours : qui agit, et quel effet son action a-t-elle sur l'environnement ?",
+          "figure": "actions-et-consequences",
+          "exercise": [
+            {
+              "title": "Reconnaître une action néfaste de l'Homme",
+              "statement": "Dans cet exercice, tu repères les actions de l'Homme qui abîment l'environnement, avec les étapes de la fiche.",
+              "hint": "Cherche toujours qui agit : si c'est l'Homme et que son action abîme l'air, l'eau, le sol ou les êtres vivants, elle est néfaste.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce que l'environnement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : on regarde tout ce qui nous entoure. Étape 3 — Nommer les éléments : l'air, l'eau, le sol et les êtres vivants, hommes compris. L'environnement ne se limite donc pas aux forêts, à la maison ou aux champs : ces réponses ne citent qu'une petite partie de ce qui nous entoure.",
+                  "answers": [
+                    {
+                      "content": "Tout ce qui nous entoure : l'air, l'eau, le sol, les plantes, les animaux et les hommes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement les forêts et les animaux sauvages",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement la maison et l'école où l'on vit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les plantes que l'on cultive",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une action néfaste est une action de l'Homme qui abîme l'environnement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever : l'action vient de l'Homme. Étape 4 — Conclure : si elle abîme l'air, l'eau, le sol ou les êtres vivants, elle est néfaste. L'affirmation est donc vraie. Répondre faux, c'est oublier que le mot néfaste veut dire qui fait du mal.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux actions de l'Homme qui sont néfastes pour l'environnement ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Relever l'action de l'Homme. Étape 4 — Conclure si elle est néfaste. Jeter des sachets salit le caniveau et l'eau ; couper tous les arbres détruit la forêt. Arroser un jardin et ramasser des papiers ne font pas de mal à l'environnement. Une pluie violente est une cause naturelle, pas une action de l'Homme.",
+                  "answers": [
+                    {
+                      "content": "Jeter des sachets plastiques dans un caniveau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Couper tous les arbres d'une forêt sans en replanter",
+                      "correct": true
+                    },
+                    {
+                      "content": "Arroser un petit jardin avec un arrosoir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ramasser les papiers dans la cour de l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pluie violente qui tombe sur un champ",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à l'élément de l'environnement qui est touché.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer chaque situation. Étape 3 — Nommer l'élément touché : les sachets salissent l'eau de la lagune ; le feu de brousse laisse un sol nu ; la fumée pollue l'air ; les oiseaux, qui perdent leur forêt, sont des animaux. Chaque situation touche d'abord un seul élément.",
+                  "answers": [
+                    {
+                      "content": "Des sachets flottent sur la lagune",
+                      "match": "L'eau"
+                    },
+                    {
+                      "content": "Un feu de brousse laisse un sol noir et nu",
+                      "match": "Le sol"
+                    },
+                    {
+                      "content": "Une fumée noire monte d'un tas de déchets brûlés",
+                      "match": "L'air"
+                    },
+                    {
+                      "content": "Des oiseaux quittent une forêt coupée",
+                      "match": "Les animaux"
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces situations n'est pas une action néfaste de l'Homme ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : qui agit ? Dans la tempête, personne n'agit : c'est une cause naturelle. Étape 4 — Conclure : les trois autres situations sont des actions de l'Homme qui salissent ou détruisent. Se tromper ici, c'est croire que toute dégradation vient de l'Homme.",
+                  "answers": [
+                    {
+                      "content": "Une tempête qui casse des branches d'arbres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des habitants qui jettent leurs ordures dans un caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un feu de brousse allumé pour chasser des rats",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une usine qui rejette des eaux sales dans une rivière",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Cause, conséquence et élément touché",
+              "statement": "Dans cet exercice, tu relies une action à sa conséquence et à l'élément touché, avec les étapes de la fiche.",
+              "hint": "Pour chaque question, suis les quatre étapes : observer, relever l'action, nommer l'élément touché, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Ce qui provoque un effet s'appelle la ___ ; ce qui en résulte s'appelle la conséquence.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure par une phrase « cause, donc conséquence ». La cause est ce qui provoque l'effet. Exemple : des déchets jetés dans la lagune (cause), donc de l'eau sale (conséquence). Écrire conséquence dans le trou serait inverser les deux mots.",
+                  "answers": [
+                    {
+                      "content": "cause",
+                      "correct": true
+                    },
+                    {
+                      "content": "la cause",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour étudier une situation.",
+                  "question_type": "ordering",
+                  "explanation": "On commence par Observer (étape 1), car on ne peut rien dire sans avoir regardé. On Relève ensuite l'action de l'Homme (étape 2), on Nomme l'élément touché (étape 3), et on termine par Conclure (étape 4). Conclure avant d'observer conduit à des erreurs.",
+                  "answers": [
+                    {
+                      "content": "Observer la situation"
+                    },
+                    {
+                      "content": "Relever l'action de l'Homme"
+                    },
+                    {
+                      "content": "Nommer l'élément de l'environnement touché"
+                    },
+                    {
+                      "content": "Conclure par une phrase « cause, donc conséquence »"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une usine laisse monter une épaisse fumée noire. L'élément de l'environnement touché est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Observer : une fumée noire monte dans le ciel. Étape 3 — Nommer l'élément touché : la fumée se mélange à l'air que l'on respire. C'est donc l'air. Le sol et l'eau peuvent être touchés plus tard, mais ce n'est pas le premier élément concerné.",
+                  "answers": [
+                    {
+                      "content": "l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "le sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'eau d'un puits",
+                      "correct": false
+                    },
+                    {
+                      "content": "les roches",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une action est néfaste seulement si la personne veut faire du mal à l'environnement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure sur l'effet de l'action. Une action est néfaste à cause de ce qu'elle fait à l'environnement, pas à cause de l'intention. Un habitant qui jette un sachet par habitude salit quand même la rue. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois actions de l'Homme qui sont néfastes pour l'environnement ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Relever l'action de l'Homme. Étape 4 — Conclure : couper massivement les arbres, brûler la brousse et rejeter des eaux sales abîment l'environnement. Planter des arbres et mettre ses déchets à la poubelle ne l'abîment pas : elles l'aident.",
+                  "answers": [
+                    {
+                      "content": "Couper massivement les arbres d'une forêt",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brûler la brousse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rejeter des eaux sales dans une rivière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Planter des arbres autour d'une école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mettre ses déchets dans une poubelle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À Abidjan, des habitants jettent des sachets dans un caniveau. Après la pluie, la rue est inondée. Quelle phrase « cause, donc conséquence » est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : une rue inondée et un caniveau plein de sachets. Étape 2 — Relever : les habitants jettent des sachets. Étape 4 — Conclure : la cause est l'action (jeter des sachets), la conséquence est l'inondation. Les autres phrases inversent la cause et la conséquence ou inventent un caniveau propre.",
+                  "answers": [
+                    {
+                      "content": "Des sachets jetés bouchent le caniveau, donc l'eau de pluie ne s'écoule plus et la rue est inondée",
+                      "correct": true
+                    },
+                    {
+                      "content": "La rue est inondée, donc les habitants jettent des sachets",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pluie bouche le caniveau, donc les habitants jettent des sachets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caniveau est propre, donc la rue est inondée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître une action néfaste de l'Homme, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un feu de brousse allumé par un chasseur est une action de l'Homme.",
+                "question_type": "true_false",
+                "hint": "Demande-toi qui a allumé le feu.",
+                "explanation": "Étape 2 — Relever : c'est le chasseur qui allume le feu, donc l'action vient de l'Homme. Étape 4 — Conclure : comme le feu brûle les herbes et les animaux, c'est une action néfaste. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Au bord d'une rivière, tu vois de la mousse blanche et des bouteilles. Que fais-tu en premier selon la méthode ?",
+                "question_type": "single_choice",
+                "hint": "La méthode commence par un verbe : lequel ?",
+                "explanation": "Étape 1 — Observer : c'est toujours la première étape. On note la mousse, les bouteilles, la couleur de l'eau. Conclure ou nommer l'élément touché avant d'avoir observé fait dire des choses non vérifiées.",
+                "answers": [
+                  {
+                    "content": "J'observe la situation et je note ce que je vois",
+                    "correct": true
+                  },
+                  {
+                    "content": "Je conclus tout de suite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Je cherche qui punir",
+                    "correct": false
+                  },
+                  {
+                    "content": "Je nomme l'élément touché sans regarder",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une pluie violente est une cause ___ : l'Homme n'y est pour rien.",
+                "question_type": "fill_blank",
+                "hint": "Le contraire d'une cause humaine.",
+                "explanation": "Étape 2 — Relever : qui agit ? Personne, c'est la pluie. Étape 4 — Conclure : ce n'est pas une action de l'Homme, c'est donc une cause naturelle.",
+                "answers": [
+                  {
+                    "content": "naturelle",
+                    "correct": true
+                  },
+                  {
+                    "content": "naturel",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les feux de brousse et la déforestation",
+          "remember": "Un **feu de brousse** est un incendie qui traverse la savane ou la forêt. Il est souvent allumé par l'Homme pour chasser, défricher un champ ou nettoyer un terrain. Il brûle les herbes, les arbustes, les graines et les petits animaux, il laisse un sol nu et sa fumée pollue l'air. La **déforestation** est la coupe massive des arbres d'une forêt, pour faire des champs, du bois ou du charbon de bois, sans les remplacer. Sans arbres, le sol est nu : la pluie emporte plus facilement la terre. Les animaux perdent leur abri et leur nourriture.",
+          "method": [
+            "Observer le paysage : la végétation, le sol, les animaux, la fumée ou les cendres.",
+            "Relever la cause : un feu de brousse ou une coupe d'arbres, et pourquoi l'Homme l'a faite.",
+            "Décrire les conséquences sur le sol, les plantes, les animaux et l'air.",
+            "Conclure par une phrase : « Le feu de brousse (ou la déforestation) provoque… »."
+          ],
+          "example": {
+            "statement": "Kouamé traverse une colline en fin de saison sèche. Les herbes sont noires, couvertes de cendres. Les petits arbres sont brûlés, le sol est nu et on n'entend plus d'oiseaux. Un voisin lui dit qu'un chasseur a allumé un feu pour faire sortir des rats. Étudier cette situation avec la méthode.",
+            "steps": [
+              "Observer : les herbes sont noires, il y a des cendres, le sol est nu et il n'y a plus d'oiseaux.",
+              "Relever : la cause est un feu de brousse, allumé par un chasseur pour faire sortir des rats.",
+              "Décrire : le feu a brûlé les herbes, les graines et les petits animaux ; le sol nu n'est plus protégé de la pluie ; la fumée a pollué l'air.",
+              "Conclure : le feu de brousse provoque la destruction de la végétation et des animaux et laisse un sol nu."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un feu de brousse ne détruit que l'herbe, parce que l'herbe repousse vite. Contre-exemple : sous l'herbe, il y a des graines, des insectes, des petits animaux et des feuilles mortes qui protègent le sol. Tout cela brûle. L'herbe revient, mais les animaux morts ne reviennent pas tout de suite et les jeunes arbres brûlés sont perdus. Même chose pour la déforestation : un arbre coupé ne repousse pas en une saison.",
+          "figure": "arbres-sur-la-parcelle",
+          "exercise": [
+            {
+              "title": "Feux de brousse et déforestation : causes et conséquences",
+              "statement": "Dans cet exercice, tu reconnais les causes et les conséquences des feux de brousse et de la déforestation, avec les étapes de la fiche.",
+              "hint": "Regarde ce que le feu ou la coupe détruit : végétation, animaux, sol, air.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce que la déforestation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever la cause : ici, la coupe des arbres par l'Homme. Étape 4 — Conclure : la déforestation est la coupe massive des arbres sans remplacement. Planter des arbres est le contraire ; le feu de l'herbe est un feu de brousse ; la chute des feuilles est un phénomène naturel.",
+                  "answers": [
+                    {
+                      "content": "La coupe massive des arbres d'une forêt, sans qu'ils soient remplacés",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plantation de nouveaux arbres sur un terrain nu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le feu qui brûle seulement l'herbe d'une savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chute des feuilles en saison sèche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un feu de brousse brûle les herbes, mais aussi les graines et les petits animaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : après un feu, on voit des cendres et des troncs noirs. Étape 3 — Décrire les conséquences : le feu détruit aussi ce qui se cache dans l'herbe, comme les graines et les petits animaux. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences de la déforestation ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Décrire les conséquences : sans arbres, les animaux n'ont plus d'abri ni de nourriture, et le sol nu n'est plus retenu par les racines, donc la pluie emporte la terre. Les autres réponses disent le contraire : sans arbres, il y a moins d'ombre et le sol est moins protégé.",
+                  "answers": [
+                    {
+                      "content": "Les animaux de la forêt perdent leur abri et leur nourriture",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie emporte plus facilement la terre du sol nu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sol est mieux protégé du soleil et de la pluie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les grands arbres repoussent en quelques jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "La forêt devient plus ombragée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La coupe massive des arbres d'une forêt s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever la cause : couper massivement les arbres d'une forêt sans les remplacer s'appelle la déforestation. Étape 4 — Conclure avec ce mot. Écrire feu de brousse serait confondre deux causes : l'une coupe, l'autre brûle.",
+                  "answers": [
+                    {
+                      "content": "déforestation",
+                      "correct": true
+                    },
+                    {
+                      "content": "la déforestation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Après un feu de brousse, l'herbe repousse vite. Que peut-on en conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : l'herbe repousse. Étape 3 — Décrire toutes les conséquences : le feu a aussi brûlé les graines, les petits animaux et les feuilles mortes qui protègent le sol. L'herbe qui revient cache ces pertes. Dire que le feu est sans danger est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Le feu a quand même détruit des graines, des animaux et la protection du sol : l'herbe qui repousse ne répare pas tout",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le feu de brousse est sans danger pour l'environnement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les petits animaux brûlés reviennent tout de suite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sol est devenu plus riche pour toujours",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire un paysage brûlé ou déboisé",
+              "statement": "Dans cet exercice, tu lis des paysages et tu relies chaque cause à ses conséquences, avec les étapes de la fiche.",
+              "hint": "Pense à ce qui arrive au sol nu, aux animaux et à l'air.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre ce qui se passe après la coupe de tous les arbres d'une pente.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Relever la cause : les arbres sont coupés. Étape 3 — Décrire les conséquences dans l'ordre : le sol reste nu, la pluie emporte la terre, puis il reste peu de terre pour les plantes. Chaque événement provoque le suivant : on ne peut pas inverser.",
+                  "answers": [
+                    {
+                      "content": "Les arbres de la pente sont coupés"
+                    },
+                    {
+                      "content": "Le sol de la pente reste nu"
+                    },
+                    {
+                      "content": "La pluie emporte la terre"
+                    },
+                    {
+                      "content": "Il reste peu de terre pour les plantes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque cause à une de ses conséquences.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever la cause, Étape 3 — Décrire sa conséquence. Le feu brûle les herbes et les petits animaux ; couper les arbres supprime l'abri des animaux ; la fumée pollue l'air ; la pluie emporte la terre d'un sol nu.",
+                  "answers": [
+                    {
+                      "content": "Un feu de brousse dans les herbes sèches",
+                      "match": "Les herbes et les petits animaux sont brûlés"
+                    },
+                    {
+                      "content": "La coupe des arbres pour le charbon de bois",
+                      "match": "Les animaux perdent leur abri"
+                    },
+                    {
+                      "content": "La fumée du feu",
+                      "match": "L'air est pollué"
+                    },
+                    {
+                      "content": "Un sol nu sous la pluie",
+                      "match": "La terre est emportée"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une parcelle de forêt comptait 150 arbres. Des bûcherons en ont coupé 45 sans en replanter. Combien d'arbres restent-ils ?",
+                  "question_type": "numeric",
+                  "unit": "arbres",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 150 arbres au départ. Étape 2 — Relever la cause : 45 arbres coupés. Étape 3 — Décrire la conséquence en calculant : 150 − 45 = 105. Étape 4 — Conclure : il reste 105 arbres, la forêt est plus claire.",
+                  "answers": [
+                    {
+                      "content": "105",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un feu de brousse ne pollue que le sol, jamais l'air.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Décrire les conséquences : le feu fait une grande fumée qui monte dans le ciel et se mélange à l'air. Il pollue donc aussi l'air. L'affirmation est fausse. Oublier la fumée est le piège habituel.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une forêt coupée, des animaux s'en vont parce qu'ils perdent ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Décrire les conséquences sur les animaux : les arbres leur servent d'abri et de nourriture. Quand ils sont coupés, les animaux partent ou meurent. Dire qu'ils perdent seulement l'ombre ou l'eau oublie l'essentiel.",
+                  "answers": [
+                    {
+                      "content": "leur abri et leur nourriture",
+                      "correct": true
+                    },
+                    {
+                      "content": "seulement leur eau de boisson",
+                      "correct": false
+                    },
+                    {
+                      "content": "seulement leur ombre",
+                      "correct": false
+                    },
+                    {
+                      "content": "leurs petits",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois conséquences d'un feu de brousse sur l'environnement ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Décrire les conséquences sur la végétation, les animaux, le sol et l'air : tout brûle, le sol reste nu et la fumée salit l'air. Un sol nu est moins protégé, pas plus. Un grand arbre brûlé ne repousse pas aussitôt.",
+                  "answers": [
+                    {
+                      "content": "Les herbes et les petits animaux sont brûlés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sol reste nu et moins protégé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air est pollué par la fumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sol est mieux protégé contre la pluie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les arbres adultes repoussent aussitôt",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à étudier un feu de brousse ou une coupe d'arbres, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une savane est noire et couverte de cendres. Quelle est la cause ?",
+                "question_type": "single_choice",
+                "hint": "Les cendres sont la trace d'un feu.",
+                "explanation": "Étape 1 — Observer : des cendres et des herbes noires. Étape 2 — Relever la cause : c'est la trace d'un feu de brousse. La déforestation laisse des souches et des troncs coupés, pas des cendres sur toute la savane.",
+                "answers": [
+                  {
+                    "content": "Un feu de brousse",
+                    "correct": true
+                  },
+                  {
+                    "content": "La déforestation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une pollution de l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des déchets plastiques",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La déforestation consiste à planter des arbres.",
+                "question_type": "true_false",
+                "hint": "Le préfixe dé- indique qu'on enlève.",
+                "explanation": "Étape 2 — Relever la cause : la déforestation est la coupe massive des arbres, pas leur plantation. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La fumée d'un feu de brousse pollue l'___.",
+                "question_type": "fill_blank",
+                "hint": "Ce que l'on respire.",
+                "explanation": "Étape 3 — Décrire les conséquences : la fumée monte et se mélange à l'air. Le feu pollue donc l'air.",
+                "answers": [
+                  {
+                    "content": "air",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'air",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une forêt où l'on coupe du bois sans replanter, on compte 120 arbres la première année et 20 arbres la cinquième année. Combien d'arbres ont disparu en 5 ans ?",
+                "question_type": "numeric",
+                "hint": "Soustrais le dernier nombre du premier.",
+                "unit": "arbres",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Observer la courbe : 120 arbres au début, 20 à la fin. Étape 3 — Décrire la conséquence en calculant : 120 − 20 = 100. Étape 4 — Conclure : la déforestation a fait disparaître 100 arbres.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La pollution de l'eau : la lagune Ébrié",
+          "remember": "Une **pollution** est la présence dans un milieu de substances qui le salissent et le rendent dangereux pour les êtres vivants. Ces substances sont des **polluants**. Les polluants de l'eau sont les déchets jetés, les eaux sales rejetées sans traitement par les maisons et les usines, et les huiles ou les carburants des bateaux et des garages. La lagune Ébrié borde Abidjan : elle reçoit beaucoup de ces polluants. Une eau polluée devient trouble et sent mauvais, les poissons meurent ou s'en vont, la pêche diminue et se baigner ou boire cette eau fait courir un risque de maladies.",
+          "method": [
+            "Observer l'eau : sa couleur, son odeur, les objets qui flottent, l'état des poissons.",
+            "Chercher l'origine de la pollution : déchets, eaux sales, huiles ou produits rejetés, et qui les rejette.",
+            "Décrire les conséquences sur les poissons, sur les pêcheurs et sur la santé des habitants.",
+            "Conclure par une phrase : « L'eau est polluée par… ; cela provoque… »."
+          ],
+          "example": {
+            "statement": "Adjoua visite un village de pêcheurs au bord de la lagune Ébrié. Près du quai, l'eau est grise et une pellicule brillante la recouvre. Une forte odeur d'huile monte. Les pêcheurs disent que le garage des bateaux vide ses huiles usagées dans la lagune, qu'ils prennent moins de poissons et que les enfants ne se baignent plus. Étudier cette pollution avec la méthode.",
+            "steps": [
+              "Observer : l'eau est grise, une pellicule brillante la recouvre et une forte odeur d'huile monte.",
+              "Chercher l'origine : le garage des bateaux vide ses huiles usagées dans la lagune. Ces huiles sont le polluant.",
+              "Décrire : les poissons meurent ou s'en vont, les pêcheurs en prennent moins, et les enfants ne se baignent plus car l'eau est dangereuse.",
+              "Conclure : l'eau est polluée par des huiles usagées ; cela provoque une baisse de la pêche et un risque pour la santé."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une eau claire est forcément propre, ni qu'un déchet jeté dans l'eau disparaît. Contre-exemple : l'eau d'un puits peut être claire et pourtant contenir des microbes venus d'eaux sales proches ; la boire rend malade. Un sachet jeté dans un caniveau ne disparaît pas : il est emporté plus loin, vers la lagune. Une pollution n'est pas toujours visible, et elle ne disparaît pas parce qu'on ne la voit plus.",
+          "figure": "lagune-polluee",
+          "exercise": [
+            {
+              "title": "Reconnaître une pollution de l'eau",
+              "statement": "Dans cet exercice, tu reconnais une pollution de l'eau, ses origines et ses conséquences, avec les étapes de la fiche.",
+              "hint": "Cherche d'abord ce qui salit l'eau, puis ce que cela change pour les poissons et les habitants.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce que la pollution de l'eau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher l'origine : des polluants (déchets, eaux sales, huiles) arrivent dans l'eau. Étape 4 — Conclure : c'est cela, la pollution. Le manque de pluie, la couleur des arbres et l'évaporation sont des phénomènes naturels qui ne salissent pas l'eau.",
+                  "answers": [
+                    {
+                      "content": "La présence de déchets ou de produits dangereux dans l'eau, qui la salissent et la rendent dangereuse pour les êtres vivants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le manque de pluie pendant la saison sèche",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur verte des arbres au bord de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau qui s'évapore sous le soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois sources de pollution de la lagune ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Chercher l'origine de la pollution : déchets, eaux sales, huiles et carburants sont des polluants rejetés par l'Homme. La pluie et les poissons font partie du milieu naturel : ce ne sont pas des polluants.",
+                  "answers": [
+                    {
+                      "content": "Les déchets jetés dans les caniveaux et sur les berges",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les eaux sales rejetées sans traitement par les maisons et les usines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les huiles et les carburants des bateaux et des garages",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie qui tombe sur l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les poissons qui nagent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une eau claire est toujours une eau propre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer ne suffit pas : une eau peut être claire et contenir des microbes ou des produits dangereux. L'eau d'un puits proche d'eaux sales en est un exemple. L'affirmation est fausse : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque pollution à ce que l'on observe.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer, Étape 2 — Chercher l'origine. Les huiles font une pellicule brillante ; les sachets flottent ; les eaux sales rendent l'eau trouble et malodorante ; les produits chimiques font mourir les poissons.",
+                  "answers": [
+                    {
+                      "content": "Des huiles usagées versées dans l'eau",
+                      "match": "Une pellicule brillante couvre l'eau"
+                    },
+                    {
+                      "content": "Des sachets plastiques jetés",
+                      "match": "Des objets flottent et salissent la berge"
+                    },
+                    {
+                      "content": "Des eaux sales des maisons rejetées sans traitement",
+                      "match": "L'eau devient trouble et sent mauvais"
+                    },
+                    {
+                      "content": "Des produits chimiques déversés",
+                      "match": "Des poissons meurent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Des pêcheurs de la lagune attrapent de moins en moins de poissons depuis que l'eau est sale. Quelle phrase « cause, donc conséquence » est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Décrire les conséquences sur les poissons et sur les pêcheurs. Étape 4 — Conclure : la cause est la pollution, la conséquence est la baisse de la pêche. Les autres phrases inversent la cause et la conséquence ou inventent des poissons qui grossissent.",
+                  "answers": [
+                    {
+                      "content": "L'eau polluée fait mourir ou fuir les poissons, donc la pêche diminue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les pêcheurs attrapent moins de poissons, donc l'eau devient polluée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pêche diminue, donc l'eau est plus propre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau polluée fait grossir les poissons, donc la pêche diminue",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "La lagune Ébrié polluée : causes et conséquences",
+              "statement": "Dans cet exercice, tu étudies la pollution d'une lagune et ses conséquences, avec les étapes de la fiche.",
+              "hint": "Pense aux polluants, puis à ce qui arrive aux poissons, aux pêcheurs et à la santé.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'eau de la lagune est polluée par des déchets et par des eaux ___ rejetées sans traitement.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher l'origine de la pollution : les maisons et les usines rejettent des eaux sales, aussi appelées eaux usées, sans les traiter. Ce sont des polluants. Étape 4 — Conclure : l'eau devient sale et dangereuse.",
+                  "answers": [
+                    {
+                      "content": "sales",
+                      "correct": true
+                    },
+                    {
+                      "content": "usées",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier une eau polluée.",
+                  "question_type": "ordering",
+                  "explanation": "La méthode a quatre étapes : Observer (1), Chercher l'origine (2), Décrire les conséquences (3), Conclure (4). On ne peut pas chercher l'origine avant d'avoir observé, ni conclure avant d'avoir décrit les conséquences.",
+                  "answers": [
+                    {
+                      "content": "Observer l'eau : couleur, odeur, objets flottants"
+                    },
+                    {
+                      "content": "Chercher l'origine de la pollution"
+                    },
+                    {
+                      "content": "Décrire les conséquences sur les poissons, les pêcheurs et la santé"
+                    },
+                    {
+                      "content": "Conclure par une phrase « l'eau est polluée par… »"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pellicule brillante couvre l'eau près d'un garage de bateaux. Elle vient le plus probablement ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Observer : une pellicule brillante, près d'un garage. Étape 2 — Chercher l'origine : les garages utilisent des huiles et des carburants, qui flottent sur l'eau et brillent. Les feuilles, le sable et la pluie ne font pas de pellicule brillante.",
+                  "answers": [
+                    {
+                      "content": "d'huiles ou de carburants versés dans l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "de feuilles mortes tombées dans l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "de sable remué par les vagues",
+                      "correct": false
+                    },
+                    {
+                      "content": "de la pluie tombée la veille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les déchets jetés dans un caniveau d'Abidjan peuvent finir dans la lagune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher l'origine : les caniveaux emportent l'eau de pluie et ce qu'elle charrie vers la lagune. Étape 4 — Conclure : les déchets des rues peuvent donc polluer la lagune. L'affirmation est vraie. Un déchet ne disparaît pas quand on ne le voit plus.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences d'une eau polluée pour les habitants ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Décrire les conséquences sur les pêcheurs et sur la santé. Les poissons meurent ou s'en vont, donc la pêche diminue ; l'eau sale est dangereuse pour la baignade et la boisson. Les autres réponses disent le contraire de ce qui se passe.",
+                  "answers": [
+                    {
+                      "content": "Se baigner ou boire cette eau est dangereux et fait courir un risque de maladies",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les pêcheurs attrapent moins de poissons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les pêcheurs ont plus de poissons à vendre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau devient plus propre avec le temps",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les maladies disparaissent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pêcheur attrapait 40 poissons par jour. Depuis que l'eau est polluée, il en attrape 15. Combien de poissons de moins attrape-t-il chaque jour ?",
+                  "question_type": "numeric",
+                  "unit": "poissons",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 40 poissons avant, 15 après. Étape 3 — Décrire la conséquence en calculant la baisse : 40 − 15 = 25. Étape 4 — Conclure : à cause de la pollution, il attrape 25 poissons de moins chaque jour.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à étudier une pollution de l'eau, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel signe montre qu'une eau est peut-être polluée ?",
+                "question_type": "single_choice",
+                "hint": "Pense à la couleur, à l'odeur et aux objets.",
+                "explanation": "Étape 1 — Observer l'eau : couleur, odeur, objets qui flottent. Une eau trouble, malodorante et pleine de déchets est probablement polluée. Être fraîche, couler ou refléter le ciel ne prouve rien.",
+                "answers": [
+                  {
+                    "content": "Elle est trouble, sent mauvais et porte des déchets",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est fraîche le matin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle coule vers la mer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle reflète le ciel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Verser des huiles usagées dans l'eau est une action néfaste de l'Homme.",
+                "question_type": "true_false",
+                "hint": "Qui verse l'huile dans l'eau ?",
+                "explanation": "Étape 2 — Chercher l'origine : les huiles usagées sont versées par l'Homme. Étape 4 — Conclure : elles forment une pellicule qui salit l'eau et gêne les êtres vivants. C'est une action néfaste.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les déchets, les eaux sales et les huiles sont des ___ de l'eau.",
+                "question_type": "fill_blank",
+                "hint": "Un mot de la famille de pollution.",
+                "explanation": "Étape 2 — Chercher l'origine de la pollution : une substance qui salit un milieu s'appelle un polluant. Les déchets, les eaux sales et les huiles sont donc des polluants.",
+                "answers": [
+                  {
+                    "content": "polluants",
+                    "correct": true
+                  },
+                  {
+                    "content": "polluant",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les déchets plastiques en ville",
+          "remember": "Un **déchet** est ce qu'on jette parce qu'on n'en veut plus. Les épluchures et les feuilles **pourrissent** : elles se transforment en terre avec le temps. Les plastiques (sachets, bouteilles, emballages) ne pourrissent pas : ils restent très longtemps dans la nature. Jetés dans la rue, ils sont emportés par la pluie et bouchent les caniveaux. L'eau de pluie ne s'écoule plus : la rue est inondée et l'eau qui stagne attire les moustiques. Des animaux avalent des sachets. Brûler les plastiques fait une fumée noire qui pollue l'air.",
+          "method": [
+            "Observer le lieu : les déchets présents, leur quantité et l'endroit où ils se trouvent.",
+            "Distinguer les déchets qui pourrissent de ceux qui restent, comme le plastique.",
+            "Suivre le chemin du déchet : où il va (caniveau, lagune, feu) et ce qu'il bouche ou pollue.",
+            "Conclure : écrire la conséquence pour l'environnement et pour la santé."
+          ],
+          "example": {
+            "statement": "Après une forte pluie, la rue qui longe un marché de Treichville est inondée. Dans le caniveau, Awa voit des sachets, des bouteilles en plastique et quelques épluchures. L'eau ne s'écoule pas. Des moustiques volent au-dessus de la flaque. Étudier cette situation avec la méthode.",
+            "steps": [
+              "Observer : le caniveau est plein de sachets, de bouteilles et d'épluchures ; la rue est inondée ; des moustiques volent.",
+              "Distinguer : les épluchures pourrissent, mais les sachets et les bouteilles en plastique ne pourrissent pas.",
+              "Suivre le chemin : les déchets jetés dans la rue ont été emportés dans le caniveau par la pluie et l'ont bouché ; l'eau ne s'écoule plus.",
+              "Conclure : les déchets plastiques bouchent le caniveau, donc la rue est inondée et les moustiques se développent dans l'eau qui stagne, ce qui menace la santé."
+            ]
+          },
+          "pitfall": "Ne pas croire que brûler les déchets plastiques règle le problème, ni qu'un seul sachet jeté n'est pas grave. Contre-exemple : un tas de plastiques brûlé disparaît à la vue, mais il produit une fumée noire qui pollue l'air et irrite la gorge, et des restes noirs demeurent. Un sachet jeté par un seul habitant ne pèse pas lourd, mais si des milliers d'habitants font la même chose chaque jour, les caniveaux se bouchent.",
+          "figure": "caniveau-bouche",
+          "exercise": [
+            {
+              "title": "Les déchets plastiques en ville",
+              "statement": "Dans cet exercice, tu étudies ce que deviennent les déchets plastiques en ville et leurs conséquences, avec les étapes de la fiche.",
+              "hint": "Demande-toi si le déchet pourrit, où il va et ce qu'il bouche ou pollue.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi les sachets plastiques restent-ils très longtemps dans la nature ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Distinguer les déchets qui pourrissent de ceux qui restent. Les épluchures pourrissent et se transforment en terre. Les sachets plastiques ne pourrissent pas : ils restent très longtemps. Ils sont légers, pas lourds, et la pluie ne les grossit pas.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'ils ne pourrissent pas comme les épluchures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'ils sont très lourds",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la pluie les rend plus gros",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les animaux les mangent toujours entièrement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque déchet ou chaque action à sa conséquence.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Distinguer, Étape 3 — Suivre le chemin du déchet. Le sachet bouche le caniveau ; les plastiques brûlés polluent l'air ; les épluchures pourrissent ; la pluie emporte les plastiques vers la lagune.",
+                  "answers": [
+                    {
+                      "content": "Un sachet plastique jeté dans un caniveau",
+                      "match": "Il bouche le passage de l'eau"
+                    },
+                    {
+                      "content": "Des plastiques brûlés",
+                      "match": "Ils produisent une fumée noire qui pollue l'air"
+                    },
+                    {
+                      "content": "Des épluchures de légumes",
+                      "match": "Elles pourrissent et se transforment en terre"
+                    },
+                    {
+                      "content": "Des plastiques emportés par le caniveau jusqu'à la mer",
+                      "match": "Ils polluent l'eau loin de la ville"
+                    }
+                  ]
+                },
+                {
+                  "content": "Après une forte pluie, des caniveaux bouchés par des sachets peuvent provoquer des inondations.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre le chemin du déchet : le sachet bouche le caniveau, l'eau de pluie ne s'écoule plus et la rue est inondée. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences de caniveaux bouchés par des déchets ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Suivre le chemin du déchet. Un caniveau bouché ne laisse plus passer l'eau : elle stagne, la rue est inondée et les moustiques s'y développent. Les déchets plastiques ne disparaissent pas seuls et ne rendent pas l'air plus pur.",
+                  "answers": [
+                    {
+                      "content": "L'eau de pluie stagne et la rue peut être inondée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des moustiques se développent dans l'eau qui stagne",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau de pluie s'évacue plus vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les déchets disparaissent tout seuls",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air devient plus pur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un habitant brûle un tas de sachets plastiques devant sa maison. Que faut-il en penser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Suivre le chemin du déchet : il part en fumée dans l'air. Étape 4 — Conclure : la pollution change de forme, elle ne disparaît pas. C'est le piège de la fiche. Les autres réponses oublient la fumée noire.",
+                  "answers": [
+                    {
+                      "content": "C'est néfaste : le tas disparaît, mais la fumée noire pollue l'air et fait tousser",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est utile : le problème des déchets est réglé",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est sans effet sur l'air, car le plastique brûle vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est utile : la fumée ne pollue pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Du sachet jeté à la rue inondée",
+              "statement": "Dans cet exercice, tu suis le chemin d'un déchet plastique et tu en trouves les conséquences, avec les étapes de la fiche.",
+              "hint": "Suis le déchet : où va-t-il, que bouche-t-il, qu'est-ce que cela provoque ?",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre ce qui arrive à partir d'un sachet jeté dans un caniveau.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Suivre le chemin du déchet, dans l'ordre : le sachet est jeté, les sachets s'accumulent et bouchent, l'eau stagne après la pluie, puis les moustiques se développent. Chaque événement est la conséquence du précédent.",
+                  "answers": [
+                    {
+                      "content": "Un habitant jette un sachet dans le caniveau"
+                    },
+                    {
+                      "content": "Les sachets s'accumulent et bouchent le caniveau"
+                    },
+                    {
+                      "content": "Après la pluie, l'eau stagne dans la rue"
+                    },
+                    {
+                      "content": "Des moustiques se développent dans l'eau qui stagne"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un déchet qui ne pourrit pas, comme le sachet, reste très longtemps dans la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Distinguer les déchets qui pourrissent de ceux qui restent. Un plastique ne pourrit pas : il reste très longtemps dans la nature. Ce n'est pas le cas des épluchures.",
+                  "answers": [
+                    {
+                      "content": "nature",
+                      "correct": true
+                    },
+                    {
+                      "content": "la nature",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Des épluchures de mangue jetées sur un tas de terre ___ avec le temps.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Distinguer : les épluchures sont des déchets qui pourrissent et se transforment en terre. Seuls les plastiques restent très longtemps sans changer. Aucun déchet ne se transforme en plastique.",
+                  "answers": [
+                    {
+                      "content": "pourrissent",
+                      "correct": true
+                    },
+                    {
+                      "content": "restent intactes pendant très longtemps",
+                      "correct": false
+                    },
+                    {
+                      "content": "se transforment en plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les moutons et les chèvres qui cherchent à manger dans les rues peuvent avaler des sachets plastiques.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre le chemin du déchet : un sachet jeté dans la rue peut finir dans la bouche d'un animal qui cherche à manger. Il ne se digère pas et peut le rendre malade. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois façons dont les déchets plastiques abîment l'environnement en ville ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Distinguer : le plastique ne pourrit pas. Étape 3 — Suivre le chemin : il bouche les caniveaux et, brûlé, il pollue l'air. Il ne rend pas le sol plus fertile et ne nettoie pas l'eau.",
+                  "answers": [
+                    {
+                      "content": "Ils bouchent les caniveaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils polluent l'air quand on les brûle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils restent très longtemps dans la nature sans pourrir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils rendent le sol plus fertile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils nettoient l'eau des caniveaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur un marché, un vendeur jette 12 sachets plastiques en une matinée. Il y a 5 vendeurs qui font la même chose. Combien de sachets sont jetés en une matinée ?",
+                  "question_type": "numeric",
+                  "unit": "sachets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 12 sachets par vendeur, 5 vendeurs. Étape 3 — Suivre la quantité en calculant : 12 × 5 = 60. Étape 4 — Conclure : 60 sachets sont jetés en une matinée, ce qui peut vite boucher un caniveau.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu t'entraînes à étudier les déchets plastiques en ville, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Les sachets plastiques pourrissent aussi vite que les épluchures.",
+                "question_type": "true_false",
+                "hint": "Pense à ce qu'on trouve encore dans la rue des mois plus tard.",
+                "explanation": "Étape 2 — Distinguer les déchets qui pourrissent de ceux qui restent. Les épluchures pourrissent vite ; les sachets plastiques ne pourrissent pas et restent très longtemps. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Où vont souvent les déchets plastiques jetés dans la rue après une forte pluie ?",
+                "question_type": "single_choice",
+                "hint": "Regarde où coule l'eau de pluie.",
+                "explanation": "Étape 3 — Suivre le chemin du déchet : la pluie les emporte dans les caniveaux, qui mènent vers la lagune. Ils ne disparaissent pas dans le sol et ne pourrissent pas, car ce sont des plastiques.",
+                "answers": [
+                  {
+                    "content": "Dans les caniveaux, puis vers la lagune",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils disparaissent dans le sol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils retournent à l'usine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils pourrissent sur place",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Brûler des plastiques pollue l'___ avec une fumée noire.",
+                "question_type": "fill_blank",
+                "hint": "Ce que respirent les habitants.",
+                "explanation": "Étape 3 — Suivre le chemin du déchet : il part en fumée noire dans l'air, que l'on respire. Brûler des plastiques pollue donc l'air.",
+                "answers": [
+                  {
+                    "content": "air",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'air",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une sortie scolaire au bord de la lagune Ébrié",
+          "statement": "Pendant une sortie scolaire à Abidjan, ta classe longe la lagune Ébrié. Tu vois des sachets plastiques sur la berge, une eau sombre qui sent mauvais et une fumée noire qui monte d'un tas d'ordures brûlées. Un pêcheur dit qu'il attrape moins de poissons qu'avant. Dans cet exercice, tu analyses ce que tu as observé, avec les étapes des fiches.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelles sont les trois actions de l'Homme qui expliquent cette scène ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Observer : sachets sur la berge, eau sombre et malodorante, fumée noire, moins de poissons. Étape 2 — Relever les actions de l'Homme : jeter des sachets, brûler des ordures, rejeter des déchets et des eaux sales dans l'eau. Replanter une forêt et laisser un champ au repos sont des actions utiles qui n'apparaissent pas dans la scène.",
+              "answers": [
+                {
+                  "content": "Des sachets plastiques ont été jetés près de l'eau",
+                  "correct": true
+                },
+                {
+                  "content": "Des ordures ont été brûlées",
+                  "correct": true
+                },
+                {
+                  "content": "Des déchets et des eaux sales ont été rejetés dans la lagune",
+                  "correct": true
+                },
+                {
+                  "content": "Une forêt a été replantée",
+                  "correct": false
+                },
+                {
+                  "content": "Un champ a été laissé au repos",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque observation à l'élément de l'environnement touché.",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Nommer l'élément touché pour chaque observation : les sachets salissent la berge, c'est-à-dire le sol ; l'eau sombre et malodorante est de l'eau polluée ; la fumée noire se mélange à l'air ; la baisse des poissons touche les animaux. Chaque observation concerne un élément différent.",
+              "answers": [
+                {
+                  "content": "Des sachets sur la berge",
+                  "match": "Le sol de la berge"
+                },
+                {
+                  "content": "Une eau sombre et malodorante",
+                  "match": "L'eau"
+                },
+                {
+                  "content": "Une fumée noire",
+                  "match": "L'air"
+                },
+                {
+                  "content": "Moins de poissons dans les filets",
+                  "match": "Les animaux"
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi le pêcheur attrape-t-il moins de poissons ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Décrire les conséquences d'une pollution de l'eau sur les poissons : une eau sale fait mourir ou fuir les poissons, donc la pêche diminue. Étape 4 — Conclure : cause = eau polluée, conséquence = moins de poissons. Les autres réponses inventent des effets sans lien avec la pollution.",
+              "answers": [
+                {
+                  "content": "L'eau polluée fait mourir ou fuir les poissons",
+                  "correct": true
+                },
+                {
+                  "content": "Les poissons sont attirés par les sachets et grossissent",
+                  "correct": false
+                },
+                {
+                  "content": "La fumée noire donne de la force aux poissons",
+                  "correct": false
+                },
+                {
+                  "content": "Les poissons sont plus nombreux, mais plus rusés",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avant, le pêcheur attrapait 30 poissons par jour. Il n'en attrape plus que 12. Combien de poissons de moins attrape-t-il chaque jour ?",
+              "question_type": "numeric",
+              "unit": "poissons",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Observer les données : 30 poissons avant, 12 maintenant. Étape 3 — Décrire en calculant la baisse : 30 − 12 = 18. Étape 4 — Conclure : à cause de la pollution, il attrape 18 poissons de moins chaque jour.",
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour conclure, on écrit une phrase « ___, donc conséquence ».",
+              "question_type": "select",
+              "explanation": "Étape 4 — Conclure : la méthode demande une phrase « cause, donc conséquence ». Exemple : l'eau est polluée (cause), donc il y a moins de poissons (conséquence). Date, lieu et nom ne servent pas à relier une action à son effet.",
+              "answers": [
+                {
+                  "content": "cause",
+                  "correct": true
+                },
+                {
+                  "content": "date",
+                  "correct": false
+                },
+                {
+                  "content": "lieu",
+                  "correct": false
+                },
+                {
+                  "content": "nom",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un village, une pente et une forêt",
+          "statement": "Dans un village voisin d'une forêt, les habitants coupent chaque saison de grands arbres pour fabriquer du charbon de bois. Sur la pente, il ne reste presque plus d'arbres. En saison sèche, un jeune allume un feu pour chasser des rats et le feu s'étend à la savane. Après une forte pluie, l'eau qui descend de la pente est boueuse. Dans cet exercice, tu analyses cette situation avec les étapes des fiches.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelles sont les deux actions de l'Homme à l'origine des problèmes du village ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Observer : pente sans arbres, savane brûlée, eau boueuse. Étape 2 — Relever les actions de l'Homme : couper les arbres (déforestation) et allumer un feu (feu de brousse). La pluie, le soleil et le vent sont des causes naturelles : l'Homme n'agit pas.",
+              "answers": [
+                {
+                  "content": "La coupe de grands arbres pour fabriquer du charbon de bois",
+                  "correct": true
+                },
+                {
+                  "content": "Le feu allumé pour chasser des rats",
+                  "correct": true
+                },
+                {
+                  "content": "La forte pluie",
+                  "correct": false
+                },
+                {
+                  "content": "Le soleil de la saison sèche",
+                  "correct": false
+                },
+                {
+                  "content": "Le vent du matin",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi l'eau qui descend de la pente est-elle boueuse ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Décrire les conséquences sur le sol : sans arbres ni herbes, la terre n'est plus retenue par les racines. La pluie l'emporte et l'eau devient boueuse. Sur un sol couvert de végétation, la terre reste en place. Les cendres ne rendent pas l'eau plus claire.",
+              "answers": [
+                {
+                  "content": "La pluie emporte la terre de la pente, où il n'y a presque plus d'arbres ni d'herbes",
+                  "correct": true
+                },
+                {
+                  "content": "Les arbres coupés fabriquent de la boue",
+                  "correct": false
+                },
+                {
+                  "content": "La pluie salit toujours l'eau, même sur un sol protégé",
+                  "correct": false
+                },
+                {
+                  "content": "Les cendres du feu rendent l'eau plus claire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le feu allumé dans la savane ne touche que les herbes.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Décrire les conséquences du feu : il brûle aussi les graines, les petits animaux et les jeunes arbres, il laisse un sol nu et sa fumée pollue l'air. L'affirmation est fausse : c'est le piège de la fiche sur les feux de brousse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre ce qui arrive sur la pente.",
+              "question_type": "ordering",
+              "explanation": "Étape 2 — Relever la cause : la coupe des arbres. Étape 3 — Décrire les conséquences dans l'ordre : le sol reste nu, la pluie emporte la terre, l'eau devient boueuse. Chaque événement provoque le suivant.",
+              "answers": [
+                {
+                  "content": "Des arbres sont coupés sur la pente"
+                },
+                {
+                  "content": "Le sol de la pente reste nu"
+                },
+                {
+                  "content": "La pluie emporte la terre"
+                },
+                {
+                  "content": "L'eau devient boueuse"
+                }
+              ]
+            },
+            {
+              "content": "Il y avait 200 arbres sur la pente. Les habitants en ont coupé 80 cette année. Combien d'arbres restent-ils ?",
+              "question_type": "numeric",
+              "unit": "arbres",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Observer les données : 200 arbres au départ, 80 coupés. Étape 3 — Décrire en calculant : 200 − 80 = 120. Étape 4 — Conclure : il reste 120 arbres, soit moins qu'avant, et le sol est moins protégé.",
+              "answers": [
+                {
+                  "content": "120",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Des sachets, une rue inondée et la lagune",
+          "statement": "Dans un quartier d'Abidjan, la rue principale est inondée après chaque forte pluie. Les habitants jettent leurs sachets plastiques dans le caniveau, et brûlent parfois leurs ordures le soir. Le caniveau se vide dans la lagune. Les habitants se plaignent aussi des moustiques. Dans cet exercice, tu expliques ces problèmes avec les étapes des fiches.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets dans l'ordre le chemin qui mène des sachets jetés aux moustiques.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Observer : caniveau plein, rue inondée, moustiques. Étape 3 — Suivre le chemin du déchet, dans l'ordre : les sachets sont jetés, ils bouchent le caniveau, l'eau ne s'écoule plus, puis les moustiques se développent dans l'eau stagnante.",
+              "answers": [
+                {
+                  "content": "Les habitants jettent des sachets dans le caniveau"
+                },
+                {
+                  "content": "Les sachets bouchent le caniveau"
+                },
+                {
+                  "content": "L'eau de pluie ne s'écoule plus et la rue est inondée"
+                },
+                {
+                  "content": "Des moustiques se développent dans l'eau qui stagne"
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois conséquences des sachets plastiques jetés dans le quartier ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 3 — Décrire les conséquences : les sachets bouchent le caniveau, l'eau de pluie ne s'écoule plus, la rue est inondée et l'eau stagnante attire les moustiques. Les sachets n'améliorent ni la lagune ni l'air.",
+              "answers": [
+                {
+                  "content": "Le caniveau est bouché",
+                  "correct": true
+                },
+                {
+                  "content": "La rue est inondée après la pluie",
+                  "correct": true
+                },
+                {
+                  "content": "Des moustiques se développent dans l'eau qui stagne",
+                  "correct": true
+                },
+                {
+                  "content": "La lagune devient plus propre",
+                  "correct": false
+                },
+                {
+                  "content": "L'air devient plus pur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un habitant propose de brûler les sachets au lieu de les jeter dans le caniveau. Quelle est la bonne analyse ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Suivre le chemin du déchet : brûlé, il part en fumée noire dans l'air. Étape 4 — Conclure : un problème est évité (le caniveau), un autre apparaît (l'air pollué). Le plastique brûlé ne se transforme pas en terre fertile.",
+              "answers": [
+                {
+                  "content": "Le caniveau ne sera plus bouché par ces sachets, mais la fumée noire pollue l'air : la pollution change de forme, elle ne disparaît pas",
+                  "correct": true
+                },
+                {
+                  "content": "C'est une solution parfaite : il n'y a plus aucune pollution",
+                  "correct": false
+                },
+                {
+                  "content": "Brûler les sachets ne pollue pas l'air, car le plastique disparaît",
+                  "correct": false
+                },
+                {
+                  "content": "Le plastique brûlé se transforme en terre fertile",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les sachets jetés dans le caniveau peuvent finir dans la lagune et en polluer l'eau.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Distinguer : les sachets ne pourrissent pas. Étape 3 — Suivre le chemin du déchet : emportés par l'eau du caniveau, ils peuvent arriver dans la lagune et la polluer. L'affirmation est vraie : un déchet qui n'est plus vu n'a pas disparu.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque action à l'élément de l'environnement ou au groupe touché.",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Nommer l'élément touché : brûler des plastiques pollue l'air ; des sachets dans la lagune salissent l'eau et menacent les poissons ; l'eau stagnante attire les moustiques et menace la santé ; des sachets avalés rendent les animaux malades.",
+              "answers": [
+                {
+                  "content": "Brûler des plastiques",
+                  "match": "L'air"
+                },
+                {
+                  "content": "Des sachets emportés jusqu'à la lagune",
+                  "match": "L'eau et les poissons"
+                },
+                {
+                  "content": "Une eau qui stagne dans la rue",
+                  "match": "La santé des habitants"
+                },
+                {
+                  "content": "Des sachets avalés dans la rue",
+                  "match": "Les animaux"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le carnet de sciences d'Awa",
+          "statement": "Awa écrit dans son carnet de sciences : « Samedi, j'ai accompagné mon oncle au village. Sur la route, la savane était noire de cendres. Dans la forêt voisine, des camions chargeaient de gros troncs et beaucoup d'arbres avaient disparu. Dimanche, à Abidjan, des sachets et des bouteilles flottaient au bord de la lagune Ébrié. J'ai compté les déchets sur un bout de berge : 14 sachets, 9 bouteilles, 5 papiers et 8 restes de nourriture. » Dans cet exercice, tu fais le bilan de ce que raconte Awa avec les étapes des fiches.",
+          "exercise_type": "evaluation",
+          "figure": "dechets-sur-la-berge",
+          "questions": [
+            {
+              "content": "Relie chaque observation d'Awa à sa cause.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Observer chaque scène. Étape 2 — Relever la cause : des cendres sur la savane indiquent un feu de brousse ; des arbres disparus dans la forêt indiquent la déforestation ; des sachets flottants indiquent des déchets jetés ; une fumée noire indique des déchets brûlés.",
+              "answers": [
+                {
+                  "content": "La savane noire de cendres",
+                  "match": "Un feu de brousse"
+                },
+                {
+                  "content": "La forêt aux arbres disparus",
+                  "match": "La déforestation"
+                },
+                {
+                  "content": "Des sachets et des bouteilles au bord de la lagune",
+                  "match": "Des déchets jetés dans l'eau ou près de l'eau"
+                },
+                {
+                  "content": "Des camions chargent de gros troncs",
+                  "match": "La coupe des arbres pour le bois"
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois conséquences que l'on peut tirer des observations d'Awa ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 3 — Décrire les conséquences : le feu laisse un sol nu ; la déforestation prive les animaux d'abri ; les déchets salissent l'eau. Moins d'arbres signifie moins d'ombre, pas plus. Des déchets flottants ne rendent pas la lagune plus propre.",
+              "answers": [
+                {
+                  "content": "Le sol de la savane brûlée reste nu et moins protégé",
+                  "correct": true
+                },
+                {
+                  "content": "Les animaux de la forêt coupée perdent leur abri",
+                  "correct": true
+                },
+                {
+                  "content": "Les déchets salissent la lagune et menacent les poissons",
+                  "correct": true
+                },
+                {
+                  "content": "La forêt est plus ombragée qu'avant",
+                  "correct": false
+                },
+                {
+                  "content": "La lagune est plus propre qu'avant",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa a compté 14 sachets et 9 bouteilles en plastique. Combien de déchets en plastique a-t-elle comptés en tout ?",
+              "question_type": "numeric",
+              "unit": "déchets",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Observer les données : 14 sachets et 9 bouteilles, tous en plastique. Étape 2 — Distinguer ceux qui ne pourrissent pas : les sachets et les bouteilles. Étape 3 — Décrire en calculant : 14 + 9 = 23. Les papiers et les restes de nourriture pourrissent. Étape 4 — Conclure : il y a 23 déchets en plastique.",
+              "answers": [
+                {
+                  "content": "23",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Sur un bout de berge, Awa a compté 14 sachets, 9 bouteilles, 5 papiers et 8 restes de nourriture. Quel type de déchet est le plus nombreux ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer les nombres : 14 sachets, 9 bouteilles, 8 restes de nourriture, 5 papiers. Étape 3 — Décrire en comparant : 14 est le plus grand nombre. Les sachets sont donc les déchets les plus nombreux, et ils ne pourrissent pas.",
+              "answers": [
+                {
+                  "content": "Les sachets, avec 14",
+                  "correct": true
+                },
+                {
+                  "content": "Les bouteilles, avec 9",
+                  "correct": false
+                },
+                {
+                  "content": "Les restes de nourriture, avec 8",
+                  "correct": false
+                },
+                {
+                  "content": "Les papiers, avec 5",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans cette histoire, les trois situations sont des conséquences d'actions de l'Homme.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Relever l'action de l'Homme dans chaque situation : un feu de brousse allumé, des arbres coupés, des déchets jetés. Étape 4 — Conclure : ce sont trois actions néfastes qui abîment le sol, les forêts et l'eau. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la meilleure phrase de conclusion pour le carnet d'Awa ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Conclure par une phrase « cause, donc conséquence » qui regroupe les trois cas. Ce sont des actions de l'Homme, pas des phénomènes naturels. Dire que seuls les feux abîment l'environnement, ou que les déchets n'ont pas d'effet, oublie des conséquences vues dans le carnet.",
+              "answers": [
+                {
+                  "content": "Les feux de brousse, la déforestation et les déchets sont des actions néfastes de l'Homme : elles abîment le sol, l'eau, l'air et les êtres vivants",
+                  "correct": true
+                },
+                {
+                  "content": "Ces trois situations sont des phénomènes naturels que l'Homme ne peut pas changer",
+                  "correct": false
+                },
+                {
+                  "content": "Seuls les feux de brousse abîment l'environnement",
+                  "correct": false
+                },
+                {
+                  "content": "Les déchets jetés près de la lagune n'ont aucun effet sur l'eau",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Définitions : environnement, action néfaste, cause et conséquence ; feux de brousse et déforestation ; pollution de l'eau et polluants ; déchets plastiques en ville.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le cahier de sciences de ta classe rappelle ce qu'est l'environnement et ce qu'est une action néfaste. Réponds avec ce que tu as appris.",
+              "hint": "Pense à tout ce qui nous entoure, puis à qui agit : l'Homme ou la nature.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Lequel de ces éléments est un élément naturel de l'environnement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : l'environnement est tout ce qui nous entoure : l'air, l'eau, le sol, les plantes, les animaux. Parmi les éléments naturels, l'eau d'une rivière en fait partie. Un cahier, un ballon et un téléphone sont des objets fabriqués, pas des éléments naturels.",
+                  "answers": [
+                    {
+                      "content": "L'eau d'une rivière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un cahier neuf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un ballon de football",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un téléphone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une action néfaste est une action de l'Homme qui abîme l'environnement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : néfaste veut dire qui fait du mal. Étape 4 — Conclure : une action de l'Homme qui abîme l'air, l'eau, le sol ou les êtres vivants est néfaste. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce qui provoque un effet s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Observer : la cause est ce qui provoque un effet ; l'effet s'appelle la conséquence. Écrire conséquence inverserait les deux mots.",
+                  "answers": [
+                    {
+                      "content": "cause",
+                      "correct": true
+                    },
+                    {
+                      "content": "la cause",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à l'élément touché.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer chaque situation. Étape 3 — Nommer l'élément touché : les sachets salissent l'eau ; la fumée pollue l'air ; le feu laisse un sol nu.",
+                  "answers": [
+                    {
+                      "content": "Des sachets flottent sur la lagune",
+                      "match": "L'eau"
+                    },
+                    {
+                      "content": "Une fumée noire monte d'un tas d'ordures",
+                      "match": "L'air"
+                    },
+                    {
+                      "content": "Un feu de brousse laisse un sol nu",
+                      "match": "Le sol"
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces causes est naturelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever qui agit. Dans une tempête, personne n'agit : c'est une cause naturelle. Étape 4 — Conclure : les trois autres sont des actions de l'Homme.",
+                  "answers": [
+                    {
+                      "content": "Une tempête",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un feu de brousse allumé par un chasseur",
+                      "correct": false
+                    },
+                    {
+                      "content": "La coupe d'arbres pour faire du charbon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des eaux sales rejetées par une usine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une affiche de l'école présente les feux de brousse et la déforestation. Complète-la avec ce que tu as appris.",
+              "hint": "Un feu de brousse brûle, la déforestation coupe. Pense au sol nu et aux animaux.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un feu de brousse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : un feu de brousse est un incendie qui traverse la savane ou la forêt. Étape 2 — Distinguer : la coupe des arbres est la déforestation ; la pluie est un phénomène naturel ; un feu de cuisine est maîtrisé.",
+                  "answers": [
+                    {
+                      "content": "Un incendie qui traverse la savane ou la forêt",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pluie très forte sur la savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "La coupe de tous les arbres d'une forêt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un feu allumé pour cuire les aliments",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'est-ce que la déforestation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : la déforestation est la coupe massive des arbres d'une forêt sans les remplacer. Étape 2 — Distinguer : planter est le contraire ; le feu est un autre problème ; la chute des feuilles est naturelle.",
+                  "answers": [
+                    {
+                      "content": "La coupe massive des arbres d'une forêt sans les remplacer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le feu qui brûle l'herbe de la savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "La plantation d'une forêt",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chute des feuilles en saison sèche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences d'un feu de brousse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Observer : cendres et fumée. Étape 2 — Décrire : le feu brûle herbes et petits animaux, et sa fumée pollue l'air. Il laisse un sol moins protégé et ne fait pas repousser un grand arbre aussitôt.",
+                  "answers": [
+                    {
+                      "content": "Les herbes et les petits animaux sont brûlés",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air est pollué par la fumée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sol est mieux protégé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les grands arbres repoussent aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau devient plus propre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un feu de brousse brûle aussi les graines et les petits animaux qui se cachent dans l'herbe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : après un feu, il ne reste que des cendres. Étape 2 — Décrire : tout ce qui se trouvait dans l'herbe est atteint, graines et petits animaux compris. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sans arbres, le sol est ___ et la pluie emporte plus facilement la terre.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Observer : une pente sans arbres. Étape 2 — Décrire : sans arbres ni herbes, le sol est nu. Les racines ne retiennent plus la terre, donc la pluie l'emporte.",
+                  "answers": [
+                    {
+                      "content": "nu",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un affichage du club de sciences parle de la pollution de l'eau et de la lagune Ébrié. Réponds avec ce que tu as appris.",
+              "hint": "Pense aux polluants de l'eau et à ce qu'ils changent pour les poissons et les habitants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un polluant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : un polluant est une substance qui salit un milieu et le rend dangereux pour les êtres vivants. Étape 3 — Décrire des exemples : les déchets, les eaux sales, les huiles. Une eau claire, un animal ou une pluie légère n'en sont pas.",
+                  "answers": [
+                    {
+                      "content": "Une substance qui salit un milieu et le rend dangereux pour les êtres vivants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une eau très claire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un animal qui vit dans l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pluie légère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois sources de pollution de la lagune ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Chercher l'origine : déchets, eaux sales, huiles et carburants sont rejetés par l'Homme. Étape 2 — Distinguer : les poissons et la pluie font partie du milieu naturel.",
+                  "answers": [
+                    {
+                      "content": "Les déchets jetés dans l'eau et sur les berges",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les eaux sales rejetées sans traitement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les huiles et les carburants des bateaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les poissons de la lagune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pluie qui tombe sur l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une eau claire est toujours une eau propre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer ne suffit pas : une eau claire peut contenir des microbes ou des produits dangereux, comme l'eau d'un puits proche d'eaux sales. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque cause à une conséquence sur la lagune.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer. Étape 3 — Décrire en reliant : les huiles forment une pellicule brillante, les sachets flottent, les produits chimiques font mourir les poissons.",
+                  "answers": [
+                    {
+                      "content": "Des huiles usagées versées",
+                      "match": "Une pellicule brillante couvre l'eau"
+                    },
+                    {
+                      "content": "Des sachets jetés",
+                      "match": "Des objets flottent sur l'eau"
+                    },
+                    {
+                      "content": "Des produits chimiques déversés",
+                      "match": "Des poissons meurent"
+                    }
+                  ]
+                },
+                {
+                  "content": "La lagune Ébrié borde quelle ville ivoirienne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : la lagune Ébrié borde Abidjan, grande ville de Côte d'Ivoire. Korhogo, Man et Bondoukou sont d'autres villes, loin de cette lagune.",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Man",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bondoukou",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le journal de l'école rappelle ce que deviennent les déchets plastiques en ville. Réponds avec ce que tu as appris.",
+              "hint": "Un plastique ne pourrit pas. Suis son chemin : caniveau, rue, lagune, feu.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel déchet pourrit avec le temps ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Distinguer : les épluchures pourrissent et se transforment en terre. Étape 4 — Conclure : les sachets, les bouteilles et les emballages en plastique ne pourrissent pas.",
+                  "answers": [
+                    {
+                      "content": "Une épluchure de banane",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un sachet plastique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une bouteille en plastique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un emballage en plastique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les sachets plastiques ne pourrissent pas et restent très longtemps dans la nature.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Distinguer les déchets qui pourrissent de ceux qui restent. Étape 4 — Conclure : le plastique reste très longtemps. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences de caniveaux bouchés par des sachets ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Suivre le chemin du déchet : il bouche le caniveau. Étape 2 — Décrire : l'eau stagne, la rue est inondée et les moustiques se développent. Un caniveau bouché ne laisse pas mieux passer l'eau.",
+                  "answers": [
+                    {
+                      "content": "L'eau de pluie ne s'écoule plus et la rue peut être inondée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des moustiques se développent dans l'eau qui stagne",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie s'écoule mieux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sachets pourrissent vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air devient plus pur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Brûler des plastiques fait une fumée noire qui pollue l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Suivre le chemin du déchet : il part en fumée. Étape 4 — Conclure : la fumée noire se mélange à l'air et le pollue.",
+                  "answers": [
+                    {
+                      "content": "air",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'air",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce qui arrive après un sachet jeté dans un caniveau.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer le point de départ : un sachet jeté. Étape 2 — Suivre le chemin : les sachets bouchent, l'eau stagne, puis les moustiques se développent. Chaque événement est la conséquence du précédent.",
+                  "answers": [
+                    {
+                      "content": "Un sachet est jeté dans le caniveau"
+                    },
+                    {
+                      "content": "Les sachets s'accumulent et bouchent le caniveau"
+                    },
+                    {
+                      "content": "L'eau de pluie stagne dans la rue"
+                    },
+                    {
+                      "content": "Des moustiques se développent"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Marché de quartier et sachets ; pêcheurs de la lagune Ébrié ; feu de brousse au village ; caniveaux bouchés à Abidjan.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de son quartier, Mariam voit des vendeuses emballer le poisson et les légumes dans des sachets plastiques. À la fin de la journée, des dizaines de sachets traînent par terre et dans le caniveau voisin. Réponds aux questions.",
+              "hint": "Observe les déchets, demande-toi s'ils pourrissent, puis suis leur chemin jusqu'au caniveau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que devient le sachet plastique jeté par terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : des sachets par terre. Étape 2 — Distinguer : le plastique ne pourrit pas. Il reste très longtemps, ou il est emporté par la pluie sans disparaître.",
+                  "answers": [
+                    {
+                      "content": "Il reste très longtemps sans pourrir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il pourrit en quelques jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se transforme en terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il disparaît dès la première pluie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par où la pluie peut-elle emporter les sachets du marché ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Suivre le chemin du déchet : l'eau de pluie coule vers le caniveau et emporte les sachets légers. Le ciel, les toits et les racines ne sont pas des chemins pour les déchets.",
+                  "answers": [
+                    {
+                      "content": "Par le caniveau voisin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par le ciel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par le toit des maisons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par les racines des arbres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Des sachets qui bouchent le caniveau peuvent faire déborder l'eau dans la rue.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre le chemin : le caniveau bouché ne laisse plus passer l'eau, qui déborde dans la rue. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque jour, une vendeuse donne 25 sachets à ses clients. Combien de sachets donne-t-elle en 4 jours ?",
+                  "question_type": "numeric",
+                  "unit": "sachets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 25 sachets par jour pendant 4 jours. Étape 3 — Décrire en calculant : 25 × 4 = 100. Étape 4 — Conclure : 100 sachets en 4 jours, qui peuvent vite boucher un caniveau.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Après la pluie, les sachets qui traînent près du caniveau voisin ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Observer : des sachets près du caniveau. Étape 2 — Distinguer : le plastique ne pourrit pas. Étape 3 — Suivre le chemin du déchet : la pluie l'emporte dans le caniveau, qui se bouche, et la rue peut être inondée. Étape 4 — Conclure : les sachets bouchent le caniveau.",
+                  "answers": [
+                    {
+                      "content": "peuvent le boucher et inonder la rue",
+                      "correct": true
+                    },
+                    {
+                      "content": "pourrissent et deviennent de la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "nettoient l'eau du caniveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "disparaissent sans laisser de trace",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Des pêcheurs de la lagune Ébrié racontent : « Il y a des années, on remplissait nos pirogues. Maintenant, l'eau près du quai est sombre et couverte d'une pellicule brillante. Les enfants ne s'y baignent plus. » Réponds aux questions.",
+              "hint": "Observe l'eau, cherche l'origine de la pollution, puis pense aux poissons, aux pêcheurs et à la santé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que montre la pellicule brillante sur l'eau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : une pellicule brillante. Étape 2 — Chercher l'origine : les huiles et les carburants flottent sur l'eau et brillent. Elle ne signifie pas que l'eau est propre.",
+                  "answers": [
+                    {
+                      "content": "La présence d'huiles ou de carburants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Que l'eau est très propre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que les poissons sont nombreux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Qu'il va pleuvoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois conséquences de cette pollution pour les habitants ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Décrire les conséquences : moins de poissons, baignade dangereuse, eau dangereuse à boire. Les poissons ne deviennent pas plus nombreux et l'eau ne se nettoie pas toute seule.",
+                  "answers": [
+                    {
+                      "content": "Les pêcheurs attrapent moins de poissons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les enfants ne peuvent plus se baigner sans risque",
+                      "correct": true
+                    },
+                    {
+                      "content": "Boire cette eau est dangereux pour la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les poissons deviennent plus nombreux",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau devient plus propre toute seule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les pêcheurs ont raison de dire que la pollution réduit leurs prises.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Décrire : une eau polluée fait mourir ou fuir les poissons. Les pêcheurs en attrapent donc moins. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pêcheur remplissait 6 paniers de poissons par jour. Il n'en remplit plus que 2. Combien de paniers de moins remplit-il chaque jour ?",
+                  "question_type": "numeric",
+                  "unit": "paniers",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 6 paniers avant, 2 maintenant. Étape 3 — Décrire en calculant : 6 − 2 = 4. Étape 4 — Conclure : 4 paniers de moins chaque jour à cause de la pollution.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier cette pollution.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer l'eau. Étape 2 — Chercher l'origine. Étape 3 — Décrire les conséquences. Étape 4 — Conclure. On suit toujours cet ordre.",
+                  "answers": [
+                    {
+                      "content": "Observer l'eau près du quai"
+                    },
+                    {
+                      "content": "Chercher l'origine de la pollution"
+                    },
+                    {
+                      "content": "Décrire les conséquences sur les poissons et la santé"
+                    },
+                    {
+                      "content": "Conclure par une phrase « l'eau est polluée par… »"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un village, un jeune allume un feu à la fin de la saison sèche pour chasser des rats. Le feu s'étend à la colline où la famille de Yao cultive des légumes. Le lendemain, la colline est noire de cendres. Réponds aux questions.",
+              "hint": "Relève la cause, puis décris ce que le feu a brûlé et ce qu'il a laissé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la cause de la colline noire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : la colline est noire de cendres. Étape 2 — Relever la cause : un feu de brousse allumé par l'Homme.",
+                  "answers": [
+                    {
+                      "content": "Un feu de brousse allumé par un jeune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La déforestation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pollution de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des sachets plastiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois conséquences du feu sur la colline ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Décrire les conséquences : herbes et petits animaux brûlés, sol nu, fumée dans l'air. Un sol nu est moins protégé et un grand arbre ne repousse pas en un jour.",
+                  "answers": [
+                    {
+                      "content": "Les herbes et les petits animaux sont brûlés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sol reste nu",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fumée pollue l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sol est mieux protégé qu'avant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les grands arbres repoussent le lendemain",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comme l'herbe repousse vite, le feu n'a fait aucun mal à la colline.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Décrire toutes les conséquences : le feu a aussi brûlé les graines, les petits animaux et les jeunes arbres. L'herbe qui revient cache ces pertes. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un feu allumé par un chasseur est une action de l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever l'action : c'est la personne qui allume le feu, pas la nature. C'est une action de l'Homme.",
+                  "answers": [
+                    {
+                      "content": "homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'homme",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur un sol nu, la pluie ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Décrire la conséquence sur le sol : sans herbes ni arbres, rien ne retient la terre. La pluie l'emporte facilement.",
+                  "answers": [
+                    {
+                      "content": "emporte facilement la terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "retient mieux la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "fabrique de nouveaux arbres",
+                      "correct": false
+                    },
+                    {
+                      "content": "enrichit toujours le sol",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un quartier d'Abidjan, un caniveau est plein de sachets et de bouteilles en plastique. Après une grosse pluie, la rue est inondée et des moustiques volent dans l'eau qui stagne. Réponds aux questions.",
+              "hint": "Suis le chemin du déchet : de la rue au caniveau, puis jusqu'à l'eau qui stagne.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre ce qui arrive dans le quartier.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer le point de départ : des sachets jetés. Étape 2 — Suivre le chemin : le caniveau se bouche, la rue est inondée, les moustiques se développent.",
+                  "answers": [
+                    {
+                      "content": "Des sachets sont jetés dans le caniveau"
+                    },
+                    {
+                      "content": "Le caniveau est bouché"
+                    },
+                    {
+                      "content": "La rue est inondée après la pluie"
+                    },
+                    {
+                      "content": "Des moustiques se développent dans l'eau qui stagne"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel déchet du caniveau ne pourrit pas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Distinguer : le plastique ne pourrit pas. Les épluchures, les feuilles et le pain pourrissent.",
+                  "answers": [
+                    {
+                      "content": "Une bouteille en plastique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une épluchure de manioc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une feuille de bananier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un reste de pain",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les moustiques sont un risque pour la santé des habitants.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Décrire : l'eau qui stagne attire les moustiques, qui peuvent transmettre des maladies. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences de ces déchets plastiques ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Suivre le chemin : les déchets bouchent le caniveau, donc l'eau déborde dans la rue. Les plastiques ne rendent ni l'air plus pur ni le sol plus fertile.",
+                  "answers": [
+                    {
+                      "content": "Le caniveau est bouché",
+                      "correct": true
+                    },
+                    {
+                      "content": "La rue est inondée après la pluie",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'air est plus pur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sol devient plus fertile",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau coule plus vite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caniveau reçoit 18 sachets le lundi et 22 sachets le mardi. Combien de sachets reçoit-il en deux jours ?",
+                  "question_type": "numeric",
+                  "unit": "sachets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 18 sachets, puis 22 sachets. Étape 3 — Décrire en calculant : 18 + 22 = 40. Étape 4 — Conclure : 40 sachets en deux jours.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Juger des avis sur les actions néfastes ; calculer des pertes d'arbres ; suivre le chemin d'un déchet ; relier une cause à sa conséquence.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois élèves donnent leur avis sur les actions néfastes. Kofi dit : « Tout ce qui abîme la nature vient de l'Homme. » Ama dit : « Une action est néfaste seulement si elle est volontaire. » Salif dit : « On ne voit pas toujours une pollution. » Juge ces avis.",
+              "hint": "Cherche un contre-exemple pour chaque avis : une cause naturelle, un geste fait par habitude, une eau claire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Kofi a raison : tout ce qui abîme la nature vient de l'Homme.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer. Étape 3 — Une tempête ou une sécheresse abîment la nature sans que l'Homme agisse : ce sont des causes naturelles. L'avis de Kofi est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ama a raison : une action est néfaste seulement si elle est volontaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer. Étape 2 — Un habitant qui jette un sachet par habitude salit la rue sans le vouloir. Ce qui compte est l'effet sur l'environnement. L'avis d'Ama est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Salif a raison : on ne voit pas toujours une pollution.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer. Étape 3 — Une eau de puits claire peut contenir des microbes. Une pollution n'est pas toujours visible. L'avis de Salif est vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase de conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Nommer ce qui compte : l'action est de l'Homme et elle abîme l'environnement. Étape 4 — Conclure : voulue ou non, elle est néfaste. Les autres phrases contredisent la définition.",
+                  "answers": [
+                    {
+                      "content": "Une action néfaste est une action de l'Homme qui abîme l'environnement, qu'elle soit voulue ou non",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une action néfaste est toujours voulue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une action néfaste est toujours causée par la nature",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une action néfaste ne touche jamais les êtres vivants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à sa cause.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever qui agit : l'Homme coupe les arbres, l'Homme allume un feu, mais personne ne provoque la tempête. Étape 4 — Conclure : deux causes humaines et une cause naturelle.",
+                  "answers": [
+                    {
+                      "content": "Une pente sans arbres emportée par la pluie",
+                      "match": "Une cause humaine : la déforestation"
+                    },
+                    {
+                      "content": "Une savane noire de cendres",
+                      "match": "Une cause humaine : un feu de brousse"
+                    },
+                    {
+                      "content": "Des branches cassées après une tempête",
+                      "match": "Une cause naturelle"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans le carnet d'un élève, on lit : « Avant le feu : 90 petits arbres sur la colline. Après le feu : 30 petits arbres. Avant la coupe de la forêt voisine : 150 grands arbres. Après la coupe : 60 grands arbres. » Utilise ces nombres.",
+              "hint": "Calcule les pertes avec des soustractions, puis compare-les.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de petits arbres le feu a-t-il détruits sur la colline ?",
+                  "question_type": "numeric",
+                  "unit": "arbres",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 90 avant, 30 après. Étape 3 — Décrire en calculant : 90 − 30 = 60. Étape 4 — Conclure : le feu a détruit 60 petits arbres.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de grands arbres la coupe a-t-elle fait disparaître de la forêt voisine ?",
+                  "question_type": "numeric",
+                  "unit": "arbres",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 150 avant, 60 après. Étape 3 — Décrire en calculant : 150 − 60 = 90. Étape 4 — Conclure : 90 grands arbres ont disparu.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle action a fait disparaître le plus d'arbres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : 60 arbres pour le feu, 90 pour la coupe. Étape 3 — Décrire en comparant : 90 est plus grand que 60. La coupe a fait disparaître le plus d'arbres.",
+                  "answers": [
+                    {
+                      "content": "La coupe de la forêt, avec 90 arbres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le feu, avec 60 arbres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux ont fait disparaître autant d'arbres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après la coupe, la forêt compte plus de la moitié des grands arbres qu'elle avait au départ.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : il reste 60 arbres sur 150. Étape 3 — Décrire en calculant la moitié : 150 ÷ 2 = 75. Étape 3 — Comparer : 60 est plus petit que 75, donc il reste moins de la moitié. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences possibles de cette perte d'arbres ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Décrire les conséquences : moins d'arbres signifie moins d'abri et moins de racines pour retenir la terre. Les autres propositions disent le contraire.",
+                  "answers": [
+                    {
+                      "content": "Les animaux perdent leur abri",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie emporte plus facilement la terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sol est mieux retenu par les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a plus d'ombre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les animaux trouvent plus de nourriture",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un habitant de la lagune dit : « Je jette mes déchets dans la lagune, l'eau les emporte, ils disparaissent. » Un voisin répond : « L'eau les emporte, mais ils ne disparaissent pas. » Réponds aux questions.",
+              "hint": "Souviens-toi que le plastique ne pourrit pas et que l'eau emporte les déchets sans les détruire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un déchet jeté dans la lagune disparaît vraiment.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : le déchet est emporté. Étape 2 — Distinguer : les épluchures pourrissent, mais les plastiques ne pourrissent pas. Un déchet emporté n'est pas détruit. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel déchet restera très longtemps dans la lagune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Distinguer : les feuilles, les épluchures et les restes de manioc pourrissent. La bouteille en plastique ne pourrit pas.",
+                  "answers": [
+                    {
+                      "content": "Une bouteille en plastique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une feuille de bananier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une épluchure de mangue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un reste de manioc",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences possibles de ces déchets pour la lagune ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Décrire les conséquences sur l'eau et sur les poissons : l'eau devient sale, les poissons meurent ou s'en vont. Les autres propositions ne sont pas des effets des déchets.",
+                  "answers": [
+                    {
+                      "content": "L'eau devient sale et dangereuse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les poissons meurent ou s'en vont",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lagune devient plus profonde",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau devient plus claire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les pêcheurs attrapent plus de poissons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement du voisin.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer : un déchet est jeté. Étape 3 — Suivre son chemin : l'eau l'emporte, s'il est en plastique il ne pourrit pas. Étape 4 — Conclure : il pollue encore.",
+                  "answers": [
+                    {
+                      "content": "Un déchet est jeté dans la lagune"
+                    },
+                    {
+                      "content": "L'eau l'emporte plus loin"
+                    },
+                    {
+                      "content": "S'il est en plastique, il ne pourrit pas"
+                    },
+                    {
+                      "content": "Il continue à polluer l'eau"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la meilleure phrase de conclusion ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure par une phrase « cause, donc conséquence » : les déchets jetés dans l'eau la polluent. Les autres phrases nient l'effet des déchets.",
+                  "answers": [
+                    {
+                      "content": "Jeter ses déchets dans la lagune la pollue, même si on ne les voit plus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jeter ses déchets dans la lagune ne change rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jeter ses déchets dans la lagune la rend plus propre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jeter ses déchets dans la lagune fait pousser les plantes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un maire veut comprendre pourquoi la rue du marché est inondée. On lui répond : « Des sachets plastiques bouchent les caniveaux. L'eau de pluie ne s'écoule plus. L'eau qui stagne attire les moustiques. » Réponds aux questions.",
+              "hint": "Retrouve l'ordre cause puis conséquence, puis cherche d'autres effets des déchets en ville.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la cause première du problème ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : rue inondée, caniveaux pleins de sachets. Étape 2 — Relever la cause : les sachets jetés. La pluie est naturelle et n'inonde pas si l'eau s'écoule.",
+                  "answers": [
+                    {
+                      "content": "Des sachets plastiques jetés dans les caniveaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les moustiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pluie seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chaleur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les événements.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Relever la cause, Étape 3 — Suivre le chemin : sachets jetés, caniveaux bouchés, eau qui ne s'écoule plus, moustiques.",
+                  "answers": [
+                    {
+                      "content": "Des sachets sont jetés dans les caniveaux"
+                    },
+                    {
+                      "content": "Les caniveaux sont bouchés"
+                    },
+                    {
+                      "content": "L'eau de pluie ne s'écoule plus"
+                    },
+                    {
+                      "content": "Les moustiques se développent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Brûler tous les sachets règle entièrement le problème.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Suivre le chemin du déchet : brûlés, les sachets font une fumée noire qui pollue l'air. Le problème change de forme mais ne disparaît pas. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois conséquences des déchets plastiques en ville ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Décrire les conséquences : caniveaux bouchés, rues inondées, animaux qui avalent des sachets. Les plastiques ne pourrissent pas vite et ne rendent pas l'air plus pur.",
+                  "answers": [
+                    {
+                      "content": "Les caniveaux sont bouchés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les rues sont inondées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des animaux peuvent avaler des sachets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les déchets pourrissent vite",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air devient plus pur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour conclure, le maire écrit : les sachets jetés bouchent les caniveaux, ___ la rue est inondée.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : on relie la cause (sachets) à la conséquence (inondation) avec « donc ». Les autres expressions inversent ou nient le lien.",
+                  "answers": [
+                    {
+                      "content": "donc",
+                      "correct": true
+                    },
+                    {
+                      "content": "parce que",
+                      "correct": false
+                    },
+                    {
+                      "content": "malgré le fait que",
+                      "correct": false
+                    },
+                    {
+                      "content": "même si",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan des quatre notions : actions néfastes, feux de brousse et déforestation, pollution de l'eau, déchets plastiques en ville.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un village près d'Abidjan, tu observes quatre situations : une colline noire de cendres, une forêt dont beaucoup d'arbres ont été coupés, une eau de lagune sombre avec des sachets, et des caniveaux bouchés par des plastiques. Fais le bilan.",
+              "hint": "Pour chaque situation, relève la cause, puis nomme l'élément touché.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à sa cause.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer chaque situation. Étape 2 — Relever la cause : les cendres viennent d'un feu de brousse, les arbres coupés de la déforestation, les sachets sur l'eau d'une pollution, les caniveaux bouchés de déchets plastiques.",
+                  "answers": [
+                    {
+                      "content": "La colline noire de cendres",
+                      "match": "Un feu de brousse"
+                    },
+                    {
+                      "content": "La forêt aux arbres coupés",
+                      "match": "La déforestation"
+                    },
+                    {
+                      "content": "La lagune sombre avec des sachets",
+                      "match": "Des déchets et des eaux sales rejetés dans la lagune"
+                    },
+                    {
+                      "content": "Les caniveaux bouchés",
+                      "match": "Des sachets jetés dans la rue"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est touché en premier par le feu de brousse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Nommer l'élément touché : le feu brûle la végétation et laisse un sol nu.",
+                  "answers": [
+                    {
+                      "content": "Le sol et la végétation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les océans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les montagnes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ciel étoilé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois situations qui viennent d'actions de l'Homme ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Relever qui agit : l'Homme allume le feu, coupe les arbres et jette les sachets. Une tempête et une pluie légère sont naturelles.",
+                  "answers": [
+                    {
+                      "content": "Le feu de brousse allumé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les arbres coupés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sachets jetés dans la lagune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une tempête qui casse des branches",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pluie légère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ces quatre situations ont des conséquences sur les êtres vivants.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Décrire : le feu et la coupe détruisent des habitats, l'eau polluée tue des poissons, les caniveaux bouchés attirent des moustiques. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un déchet en plastique ne ___ pas : il reste très longtemps dans la nature.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Distinguer : les épluchures pourrissent, les plastiques ne pourrissent pas.",
+                  "answers": [
+                    {
+                      "content": "pourrit",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève fait un diagramme des déchets trouvés sur un bout de berge de la lagune : 12 sachets, 7 bouteilles, 4 papiers et 9 restes de nourriture. Utilise ces nombres.",
+              "hint": "Additionne seulement les déchets qui ne pourrissent pas pour trouver les plastiques.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de déchets en plastique (sachets et bouteilles) l'élève a-t-il comptés ?",
+                  "question_type": "numeric",
+                  "unit": "déchets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les données : 12 sachets et 7 bouteilles. Étape 2 — Distinguer ceux qui ne pourrissent pas : sachets et bouteilles. Étape 3 — Calculer : 12 + 7 = 19.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de déchets l'élève a-t-il comptés en tout ?",
+                  "question_type": "numeric",
+                  "unit": "déchets",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer : 12, 7, 4 et 9. Étape 3 — Calculer : 12 + 7 = 19, puis 19 + 4 = 23, puis 23 + 9 = 32.",
+                  "answers": [
+                    {
+                      "content": "32",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels déchets sont les plus nombreux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer les nombres. Étape 3 — Décrire en comparant : 12 est le plus grand. Les sachets sont les plus nombreux.",
+                  "answers": [
+                    {
+                      "content": "Les sachets, avec 12",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les bouteilles, avec 7",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les papiers, avec 4",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les restes de nourriture, avec 9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les restes de nourriture ne pourrissent pas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Distinguer : les restes de nourriture pourrissent. Seuls les plastiques ne pourrissent pas. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences des plastiques sur la berge ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Décrire les conséquences : les plastiques salissent l'eau et restent très longtemps. Les autres propositions disent le contraire.",
+                  "answers": [
+                    {
+                      "content": "Ils salissent l'eau de la lagune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils restent très longtemps sans pourrir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils nettoient la lagune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils pourrissent en une nuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils enrichissent l'eau",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un journaliste écrit : « Dans cette région, la forêt a été coupée pour faire du charbon et des champs. Des feux ont brûlé la savane voisine. Les pluies emportent la terre et les rivières sont boueuses. » Analyse ce texte.",
+              "hint": "Cherche d'abord les actions de l'Homme, puis les conséquences sur le sol, l'eau et les animaux.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles sont les deux actions de l'Homme citées dans le texte ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Relever les actions de l'Homme : couper la forêt, allumer des feux. La pluie, le vent et la sécheresse sont naturels.",
+                  "answers": [
+                    {
+                      "content": "Couper la forêt",
+                      "correct": true
+                    },
+                    {
+                      "content": "Allumer des feux",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pluie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vent",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sécheresse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les rivières sont-elles boueuses ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Décrire la conséquence : sans arbres, le sol est nu. La pluie emporte la terre vers les rivières, qui deviennent boueuses.",
+                  "answers": [
+                    {
+                      "content": "Parce que la pluie emporte la terre d'un sol nu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que les poissons salissent l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les arbres fabriquent de la boue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le feu rend l'eau trouble en la chauffant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La coupe de la forêt peut priver les animaux de leur abri et de leur nourriture.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Décrire : les arbres servent d'abri et de nourriture. Quand ils sont coupés, les animaux partent ou meurent. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce qui se passe.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Relever la cause : la coupe. Étape 3 — Décrire dans l'ordre : sol nu, terre emportée, rivières boueuses.",
+                  "answers": [
+                    {
+                      "content": "La forêt est coupée"
+                    },
+                    {
+                      "content": "Le sol reste nu"
+                    },
+                    {
+                      "content": "La pluie emporte la terre"
+                    },
+                    {
+                      "content": "Les rivières deviennent boueuses"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour conclure, le journaliste peut écrire : la déforestation et les feux de brousse sont des ___ de l'Homme.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : couper la forêt et allumer des feux sont des actions de l'Homme qui abîment l'environnement, donc des actions néfastes.",
+                  "answers": [
+                    {
+                      "content": "actions néfastes",
+                      "correct": true
+                    },
+                    {
+                      "content": "causes naturelles",
+                      "correct": false
+                    },
+                    {
+                      "content": "protections",
+                      "correct": false
+                    },
+                    {
+                      "content": "bienfaits",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une classe d'Abidjan fait le bilan de la sortie à la lagune : eau sombre, sachets sur la berge, fumée noire d'un tas d'ordures, caniveau bouché, poissons moins nombreux. Réponds aux questions.",
+              "hint": "Associe chaque observation à l'air, à l'eau, au sol ou aux êtres vivants, puis conclus.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque observation à l'élément touché.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Nommer l'élément touché : l'eau sombre touche l'eau ; la fumée noire touche l'air ; les sachets sur la berge touchent le sol ; les poissons moins nombreux touchent les animaux.",
+                  "answers": [
+                    {
+                      "content": "L'eau sombre",
+                      "match": "L'eau"
+                    },
+                    {
+                      "content": "La fumée noire",
+                      "match": "L'air"
+                    },
+                    {
+                      "content": "Les sachets sur la berge",
+                      "match": "Le sol"
+                    },
+                    {
+                      "content": "Les poissons moins nombreux",
+                      "match": "Les animaux"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois actions de l'Homme qui expliquent ces observations ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Relever les actions de l'Homme : jeter des déchets, brûler des ordures, rejeter des eaux sales. Replanter et nettoyer sont des gestes utiles.",
+                  "answers": [
+                    {
+                      "content": "Jeter des déchets",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brûler des ordures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rejeter des eaux sales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Replanter des arbres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nettoyer la berge",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les poissons sont-ils moins nombreux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Décrire : une eau polluée fait mourir ou fuir les poissons. Les autres causes sont inventées.",
+                  "answers": [
+                    {
+                      "content": "L'eau polluée les fait mourir ou fuir",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fumée les attire hors de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sachets leur donnent à manger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fait trop froid dans la lagune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ces observations montrent des actions néfastes qui touchent plusieurs éléments : l'eau, l'air, le sol et les animaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : l'eau, l'air, le sol et les animaux sont touchés. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La classe a compté 15 sachets et 10 bouteilles en plastique sur la berge. Combien de plastiques en tout ?",
+                  "question_type": "numeric",
+                  "unit": "plastiques",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer : 15 sachets et 10 bouteilles. Étape 3 — Calculer : 15 + 10 = 25. Étape 4 — Conclure : 25 plastiques, qui ne pourrissent pas.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

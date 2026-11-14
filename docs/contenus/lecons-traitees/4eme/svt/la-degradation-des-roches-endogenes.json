@@ -1,0 +1,3811 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La dégradation des roches endogènes",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "SVT",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "granite-arene",
+          "kind": "diagram",
+          "description": "Schéma fléché qui montre comment un granite sain devient une arène granitique. Le granite sain est une roche dure aux cristaux collés. Il se fissure, puis les fissures s'élargissent et la roche se réduit en blocs. Enfin les blocs s'effritent et donnent l'arène, un sable grossier avec des grains de quartz, des paillettes de mica, des feldspaths altérés et de l'argile.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "sain",
+                "label": "Granite sain : roche dure, cristaux collés",
+                "category": 1
+              },
+              {
+                "id": "fiss",
+                "label": "Granite fissuré",
+                "category": 2
+              },
+              {
+                "id": "blocs",
+                "label": "Blocs de granite altéré, friables",
+                "category": 2
+              },
+              {
+                "id": "arene",
+                "label": "Arène : sable grossier, quartz, mica, argile",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "sain",
+                "to": "fiss",
+                "label": "temps"
+              },
+              {
+                "from": "fiss",
+                "to": "blocs",
+                "label": "eau, racines"
+              },
+              {
+                "from": "blocs",
+                "to": "arene",
+                "label": "s'effritent"
+              }
+            ],
+            "legend": [
+              "Roche saine",
+              "Roche en cours de dégradation",
+              "Produit de la dégradation"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "agents-degradation",
+          "kind": "diagram",
+          "description": "Arbre des agents de la dégradation du granite. En haut, les agents de la dégradation. En dessous, trois agents : l'eau, les variations de température et les êtres vivants. Chaque agent est relié à son action : l'eau s'infiltre dans les fissures et attaque les feldspaths ; la température dilate puis contracte la roche ; les racines élargissent les fissures.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "ag",
+                "label": "Agents de la dégradation",
+                "category": 1
+              },
+              {
+                "id": "eau",
+                "label": "L'eau (pluie)",
+                "category": 2
+              },
+              {
+                "id": "temp",
+                "label": "Les variations de température",
+                "category": 2
+              },
+              {
+                "id": "viv",
+                "label": "Les êtres vivants",
+                "category": 2
+              },
+              {
+                "id": "a1",
+                "label": "S'infiltre dans les fissures et attaque les feldspaths",
+                "category": 3
+              },
+              {
+                "id": "a2",
+                "label": "Dilate puis contracte la roche : elle se fissure",
+                "category": 3
+              },
+              {
+                "id": "a3",
+                "label": "Les racines élargissent les fissures",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "ag",
+                "to": "eau"
+              },
+              {
+                "from": "ag",
+                "to": "temp"
+              },
+              {
+                "from": "ag",
+                "to": "viv"
+              },
+              {
+                "from": "eau",
+                "to": "a1"
+              },
+              {
+                "from": "temp",
+                "to": "a2"
+              },
+              {
+                "from": "viv",
+                "to": "a3"
+              }
+            ],
+            "legend": [
+              "Titre",
+              "Agent",
+              "Action sur la roche"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "desagregation",
+          "kind": "diagram",
+          "description": "Schéma fléché de la désagrégation physique d'un granite. Le jour, la roche chauffe et se dilate. La nuit, elle refroidit et se contracte. De petites fissures apparaissent. L'eau et les racines s'installent dans les fissures et les élargissent. Des blocs se détachent, puis se réduisent en grains qui sont encore du quartz, du feldspath et du mica.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "j",
+                "label": "Le jour : la roche chauffe et se dilate",
+                "category": 1
+              },
+              {
+                "id": "n",
+                "label": "La nuit : la roche refroidit et se contracte",
+                "category": 1
+              },
+              {
+                "id": "f",
+                "label": "De petites fissures apparaissent",
+                "category": 2
+              },
+              {
+                "id": "e",
+                "label": "L'eau et les racines élargissent les fissures",
+                "category": 2
+              },
+              {
+                "id": "g",
+                "label": "Blocs puis grains : les minéraux n'ont pas changé",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "j",
+                "to": "n",
+                "label": "chaque jour"
+              },
+              {
+                "from": "n",
+                "to": "f"
+              },
+              {
+                "from": "f",
+                "to": "e"
+              },
+              {
+                "from": "e",
+                "to": "g"
+              }
+            ],
+            "legend": [
+              "Variation de température",
+              "Fragmentation",
+              "Résultat"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "devenir-mineraux",
+          "kind": "diagram",
+          "description": "Arbre du devenir des minéraux d'un granite qui s'altère. Du granite partent trois branches. Le quartz résiste et reste en grains. Le feldspath est attaqué par l'eau : il se transforme en argile et des éléments sont dissous et emportés par l'eau. Le mica reste visible sous forme de paillettes dans l'arène.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "g",
+                "label": "Granite qui s'altère",
+                "category": 1
+              },
+              {
+                "id": "q",
+                "label": "Quartz",
+                "category": 2
+              },
+              {
+                "id": "f",
+                "label": "Feldspath",
+                "category": 2
+              },
+              {
+                "id": "m",
+                "label": "Mica",
+                "category": 2
+              },
+              {
+                "id": "q2",
+                "label": "Résiste : reste en grains",
+                "category": 3
+              },
+              {
+                "id": "f2",
+                "label": "Attaqué par l'eau : devient de l'argile",
+                "category": 3
+              },
+              {
+                "id": "m2",
+                "label": "Paillettes visibles dans l'arène",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "g",
+                "to": "q"
+              },
+              {
+                "from": "g",
+                "to": "f"
+              },
+              {
+                "from": "g",
+                "to": "m"
+              },
+              {
+                "from": "q",
+                "to": "q2"
+              },
+              {
+                "from": "f",
+                "to": "f2"
+              },
+              {
+                "from": "m",
+                "to": "m2"
+              }
+            ],
+            "legend": [
+              "Roche",
+              "Minéral",
+              "Devenir"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "composition-arene",
+          "kind": "stat_chart",
+          "description": "Diagramme circulaire de la composition d'un échantillon d'arène granitique de la carrière d'un village. Les quatre parts, en pourcentage de la masse, sont : grains de quartz 45, argile 30, feldspaths en cours d'altération 15 et paillettes de mica 10. Le total fait 100.",
+          "params": {
+            "chart": "pie",
+            "series": [
+              45,
+              30,
+              15,
+              10
+            ],
+            "labels": [
+              "Quartz",
+              "Argile",
+              "Feldspaths en cours d'altération",
+              "Mica"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Comparer un granite sain et un granite altéré",
+          "remember": "La **dégradation** (ou altération) d'une roche est l'ensemble des transformations qu'elle subit à la surface de la Terre, sous l'action d'agents. Un **granite sain** est dur et compact. Il est fait de trois minéraux aux cristaux collés : le **quartz** (transparent et brillant), le **feldspath** (blanc ou rose) et le **mica** (paillettes noires). Un **granite altéré** est moins dur : il s'effrite et ses cristaux se séparent. Quand il est réduit à du sable grossier, on l'appelle **arène granitique**. On y trouve des grains de quartz, des paillettes de mica et des feldspaths ternes, parfois avec de l'argile.",
+          "method": [
+            "Observer l'échantillon : couleur, dureté, cohésion des grains (se casse-t-il ou s'effrite-t-il ?).",
+            "Repérer les minéraux (quartz, feldspath, mica) et leur état : brillants et durs, ou ternes et friables.",
+            "Comparer avec le granite sain, qui est dur, compact, aux cristaux collés et brillants.",
+            "Conclure : granite sain, granite altéré ou arène granitique."
+          ],
+          "example": {
+            "statement": "Awa ramasse au pied d'une colline un échantillon de roche. Il est gris-blanc et s'effrite sous le doigt en laissant du sable grossier. On y voit des grains transparents brillants, des paillettes noires et des morceaux blanchâtres et terreux. Quelle est cette roche ?",
+            "steps": [
+              "Observer : l'échantillon s'effrite sous le doigt. Il n'est ni dur ni compact.",
+              "Repérer les minéraux : les grains transparents brillants sont du quartz, les paillettes noires du mica, les morceaux blanchâtres et terreux des feldspaths altérés.",
+              "Comparer : un granite sain est dur et ses cristaux sont collés et brillants. Ici les grains se séparent et les feldspaths sont ternes.",
+              "Conclure : c'est une arène granitique, un granite très altéré réduit à du sable grossier."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'arène est une autre roche, ni un sable apporté d'ailleurs. L'arène vient du granite lui-même : ce sont les mêmes minéraux, mais séparés et en partie transformés. Contre-exemple : les paillettes noires que tu vois dans l'arène sont les mêmes que celles du granite sain de la colline voisine.",
+          "figure": "granite-arene",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un granite sain ou altéré, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un échantillon s'effrite sous le doigt et laisse du sable grossier. Comment l'appelle-t-on ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : l'échantillon s'effrite. Étape 4 — Conclure : un granite qui s'effrite en sable grossier est une arène granitique.",
+                "answers": [
+                  {
+                    "content": "Une arène granitique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un granite sain",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un basalte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un magma",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde si la roche reste dure ou si elle s'effrite."
+              },
+              {
+                "content": "Les grains transparents et brillants d'une arène sont du ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer les minéraux : un grain transparent et brillant est du quartz. Le mica est en paillettes noires.",
+                "answers": [
+                  {
+                    "content": "quartz",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au minéral gris, brillant et translucide."
+              },
+              {
+                "content": "Un granite sain s'effrite facilement sous le doigt.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer avec le granite sain : il est dur et compact. C'est l'arène qui s'effrite.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le granite sain est dur."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un granite sain et une arène granitique",
+              "statement": "Dans cet exercice, tu observes des échantillons de roche et tu les compares avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Commence par regarder si la roche est dure ou si elle s'effrite.",
+              "questions": [
+                {
+                  "content": "Un échantillon est dur, gris et rose. Ses cristaux sont collés et brillants. De quel échantillon s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : l'échantillon est dur. Étape 2 — Repérer les minéraux : les cristaux sont collés et brillants. Étape 3 — Comparer avec le granite sain : tout correspond. Étape 4 — Conclure : c'est un granite sain. Une arène s'effrite et ses grains se séparent, ce qui n'est pas le cas ici.",
+                  "answers": [
+                    {
+                      "content": "Un granite sain",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une arène granitique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une argile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un sable apporté par une rivière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'arène granitique, on retrouve du quartz et des paillettes de mica, comme dans le granite sain.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer les minéraux : l'arène vient du granite lui-même. Ses grains brillants sont du quartz et ses paillettes noires du mica. Étape 4 — Conclure : l'affirmation est vraie, l'arène est faite des minéraux du granite, séparés et en partie transformés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à ce qu'elle montre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer les minéraux : on associe l'aspect à chaque minéral. Le quartz est transparent et brillant, le mica en paillettes noires. Un feldspath altéré devient blanchâtre et terreux. Étape 3 — Comparer : la roche dure aux cristaux collés est le granite sain.",
+                  "answers": [
+                    {
+                      "content": "Grains transparents et brillants",
+                      "match": "Quartz"
+                    },
+                    {
+                      "content": "Paillettes noires brillantes",
+                      "match": "Mica"
+                    },
+                    {
+                      "content": "Morceaux blanchâtres et terreux",
+                      "match": "Feldspath altéré"
+                    },
+                    {
+                      "content": "Roche dure aux cristaux collés",
+                      "match": "Granite sain"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la méthode pour identifier un échantillon de roche.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode de la fiche : Étape 1 — Observer l'échantillon. Étape 2 — Repérer les minéraux et leur état. Étape 3 — Comparer avec le granite sain. Étape 4 — Conclure. On ne conclut qu'après avoir observé et comparé.",
+                  "answers": [
+                    {
+                      "content": "Observer l'échantillon"
+                    },
+                    {
+                      "content": "Repérer les minéraux et leur état"
+                    },
+                    {
+                      "content": "Comparer avec le granite sain"
+                    },
+                    {
+                      "content": "Conclure sur la nature de l'échantillon"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux signes montrent qu'un granite est altéré ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Observer : un granite altéré s'effrite. Étape 2 — Repérer les minéraux : ses feldspaths sont ternes et terreux. Le quartz se trouve aussi dans le granite sain, donc ce n'est pas un signe d'altération.",
+                  "answers": [
+                    {
+                      "content": "Il s'effrite sous le doigt",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ses feldspaths sont ternes et terreux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ses cristaux sont collés et brillants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il contient du quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il résiste au marteau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arène granitique est un sable apporté par le vent, sans lien avec le granite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer les minéraux : l'arène contient quartz, mica et feldspath, comme le granite. Étape 4 — Conclure : elle vient du granite lui-même, qui s'est effrité sur place. Penser qu'elle est apportée d'ailleurs est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Décrire l'arène d'une colline de granite",
+              "statement": "Dans cet exercice, tu décris l'arène d'une colline de granite et tu la compares avec le granite sain.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense aux trois minéraux du granite et à leur aspect.",
+              "questions": [
+                {
+                  "content": "Un granite réduit à du sable grossier s'appelle une ___ granitique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : un granite très altéré, réduit à du sable grossier, est une arène granitique. Étape 1 — Observer : le sable grossier montre que les grains se sont séparés.",
+                  "answers": [
+                    {
+                      "content": "arène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un échantillon de 200 g d'arène, Koffi isole 120 g de grains de quartz. Quelle masse de l'échantillon n'est pas du quartz ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Repérer les minéraux : le quartz pèse 120 g. Le reste (feldspaths altérés, mica, argile) pèse 200 − 120 = 80 g. Le reste n'est pas rien : il contient les minéraux autres que le quartz.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un morceau de granite sain est ___ qu'un morceau d'arène.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Comparer : le granite sain est dur et compact, ses cristaux sont collés. L'arène s'effrite : elle est donc moins dure. Dire que le granite sain est plus friable inverse la comparaison.",
+                  "answers": [
+                    {
+                      "content": "plus dur",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus friable",
+                      "correct": false
+                    },
+                    {
+                      "content": "aussi friable",
+                      "correct": false
+                    },
+                    {
+                      "content": "plus sableux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois minéraux voit-on dans un granite sain ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Repérer les minéraux : le granite est fait de quartz, de feldspath et de mica. Le basalte est une roche et la lave est du magma arrivé à la surface : ce ne sont pas des minéraux du granite.",
+                  "answers": [
+                    {
+                      "content": "Le quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le feldspath",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le basalte",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un granite altéré a gardé la même dureté qu'un granite sain.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : un granite altéré s'effrite sous le doigt. Étape 3 — Comparer : il est moins dur que le granite sain. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa trouve au pied d'un rocher de granite un tas de sable grossier avec des paillettes noires brillantes. Que contient ce sable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer les minéraux : les paillettes noires brillantes sont du mica. Étape 4 — Conclure : ce tas est de l'arène, venue du granite. Le magma est une roche fondue en profondeur, il n'est pas dans ce sable.",
+                  "answers": [
+                    {
+                      "content": "Du mica provenant du granite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du basalte frais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du sel de cuisine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître les agents de la dégradation du granite",
+          "remember": "Les **agents de la dégradation** sont ce qui agit sur une roche à la surface de la Terre. Il y en a trois. **L'eau** de pluie s'infiltre dans les fissures du granite et attaque certains minéraux. Les **variations de température** (chaleur du jour, fraîcheur de la nuit) dilatent puis contractent la roche. Les **êtres vivants** agissent aussi : les racines des arbres s'enfoncent dans les fissures et les élargissent, et les lichens s'installent sur la roche. Ces agents agissent ensemble, très lentement.",
+          "method": [
+            "Lire la situation : relever ce qui touche la roche (pluie, soleil et nuit, racine, lichen).",
+            "Associer chaque élément à son agent : l'eau, les variations de température ou les êtres vivants.",
+            "Décrire l'action de l'agent sur la roche : s'infiltrer et attaquer, dilater et contracter, élargir les fissures."
+          ],
+          "example": {
+            "statement": "Sur une colline de granite, une fissure abrite un jeune arbre dont la racine s'enfonce. La roche est chauffée par le soleil le jour et fraîche la nuit. De l'eau de pluie reste dans la fissure. Quels agents agissent sur la roche ?",
+            "steps": [
+              "Lire la situation : trois éléments touchent la roche. Une racine dans la fissure, le soleil le jour et la fraîcheur la nuit, l'eau de pluie dans la fissure.",
+              "Associer : la racine est un être vivant, le soleil et la nuit sont des variations de température, la pluie est l'eau.",
+              "Décrire l'action : la racine élargit la fissure, la température dilate puis contracte la roche, l'eau s'infiltre et attaque les feldspaths."
+            ]
+          },
+          "pitfall": "Ne pas confondre l'agent et son effet. La température, l'eau et la racine sont des agents ; la fissure et l'arène sont des effets. Contre-exemple : « la fissure élargit la roche » est faux ; c'est la racine, un agent, qui élargit la fissure, un effet.",
+          "figure": "agents-degradation",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître l'agent de la dégradation dans une situation.",
+            "questions": [
+              {
+                "content": "Le soleil chauffe fort la roche le jour, et la nuit elle refroidit. Quel agent agit ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire la situation : le jour chaud puis la nuit fraîche. Étape 2 — Associer : ce sont des variations de température.",
+                "answers": [
+                  {
+                    "content": "Les variations de température",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les êtres vivants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le magma",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde ce qui change entre le jour et la nuit."
+              },
+              {
+                "content": "Les racines d'un arbre appartiennent à un ___ vivant.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Associer : une racine appartient à un arbre, qui est un être vivant. Les êtres vivants sont le troisième agent de la fiche.",
+                "answers": [
+                  {
+                    "content": "être",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au mot qui désigne un arbre, un animal, un lichen."
+              },
+              {
+                "content": "La fissure est un agent de la dégradation.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Associer : la fissure est un effet. Les agents sont l'eau, la température et les êtres vivants.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un agent agit, un effet est ce qui change."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Associer des situations à leurs agents",
+              "statement": "Dans cet exercice, tu retrouves l'agent de la dégradation dans chaque situation, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Demande-toi : qui agit sur la roche ? Et qu'est-ce qui change dans la roche ?",
+              "questions": [
+                {
+                  "content": "Une racine s'enfonce dans une fissure d'un rocher de granite. Quel agent agit ici ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire la situation : une racine touche la roche. Étape 2 — Associer : une racine appartient à un arbre, donc à un être vivant. Étape 3 — Décrire l'action : en grossissant, elle élargit la fissure. L'eau et la température ne sont pas citées dans la situation.",
+                  "answers": [
+                    {
+                      "content": "Un être vivant",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les variations de température",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à l'agent qui agit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire la situation : on relève ce qui touche la roche. Étape 2 — Associer : la pluie est de l'eau, l'écart entre midi et minuit est une variation de température, un lichen est un être vivant.",
+                  "answers": [
+                    {
+                      "content": "La pluie s'infiltre dans une fissure",
+                      "match": "L'eau"
+                    },
+                    {
+                      "content": "La roche est brûlante à midi et fraîche à minuit",
+                      "match": "Les variations de température"
+                    },
+                    {
+                      "content": "Un lichen couvre la roche",
+                      "match": "Un être vivant"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments sont des agents de la dégradation d'un granite ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Associer : la pluie est de l'eau et les racines sont des êtres vivants, ce sont deux agents. L'arène et les fissures sont des effets, pas des agents. Le magma se trouve en profondeur, il n'attaque pas le granite en surface.",
+                  "answers": [
+                    {
+                      "content": "La pluie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'arène granitique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fissures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les variations de température sont un agent de la dégradation des roches.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Associer : la chaleur du jour et la fraîcheur de la nuit forment les variations de température. Étape 3 — Décrire l'action : elles dilatent puis contractent la roche et la fissurent. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la méthode pour trouver les agents dans une situation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire la situation. Étape 2 — Associer chaque élément à son agent. Étape 3 — Décrire l'action. On ne décrit une action qu'après avoir trouvé l'agent.",
+                  "answers": [
+                    {
+                      "content": "Lire la situation"
+                    },
+                    {
+                      "content": "Associer chaque élément à son agent"
+                    },
+                    {
+                      "content": "Décrire l'action de l'agent sur la roche"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel mot désigne un effet de la dégradation, et non un agent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Associer : l'eau, la racine et la température sont des agents, ils agissent sur la roche. Étape 3 — Décrire l'action : la fissure est ce qui apparaît ou s'élargit à cause d'eux. C'est un effet.",
+                  "answers": [
+                    {
+                      "content": "Une fissure",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une racine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les variations de température",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Trouver les agents sur une colline de granite",
+              "statement": "Dans cet exercice, tu cherches les agents qui agissent sur un rocher de granite de la colline.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense aux trois familles d'agents : l'eau, la température, les êtres vivants.",
+              "questions": [
+                {
+                  "content": "La chaleur du jour et la fraîcheur de la nuit sont des variations de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Associer : le jour chaud et la nuit fraîche font varier la température de la roche. C'est le deuxième agent de la fiche, avec l'eau et les êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "température",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la pluie s'infiltre dans une fissure du granite, l'agent en cause est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire la situation : la pluie entre dans la fissure. Étape 2 — Associer : la pluie est de l'eau. Étape 3 — Décrire l'action : l'eau s'infiltre et attaque les feldspaths.",
+                  "answers": [
+                    {
+                      "content": "l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "la température",
+                      "correct": false
+                    },
+                    {
+                      "content": "un être vivant",
+                      "correct": false
+                    },
+                    {
+                      "content": "le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois éléments sont des agents de la dégradation d'un granite ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Associer : l'eau, la température et les êtres vivants sont les trois agents de la fiche. Le magma est en profondeur et l'arène est un produit de la dégradation : ce ne sont pas des agents.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les variations de température",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les êtres vivants (racines, lichens)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'arène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les agents agissent très vite : en une nuit, un granite devient de l'arène.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Décrire l'action : chaque agent agit très lentement, pendant de très longues périodes. Une nuit ne suffit pas à fissurer et à effriter un granite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque agent à son action sur la roche.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Associer : on part de l'agent. Étape 3 — Décrire l'action : l'eau s'infiltre et attaque, la température dilate puis contracte, la racine élargit la fissure.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "match": "S'infiltre dans les fissures et attaque les feldspaths"
+                    },
+                    {
+                      "content": "Les variations de température",
+                      "match": "Dilatent puis contractent la roche"
+                    },
+                    {
+                      "content": "Les racines",
+                      "match": "Élargissent les fissures"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lichen couvre un rocher de granite. À quel groupe d'agents appartient-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire la situation : un lichen est installé sur la roche. Étape 2 — Associer : c'est un être vivant. Sa petite taille n'empêche pas son action sur la roche.",
+                  "answers": [
+                    {
+                      "content": "Aux êtres vivants",
+                      "correct": true
+                    },
+                    {
+                      "content": "À l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aux variations de température",
+                      "correct": false
+                    },
+                    {
+                      "content": "À aucun agent, car il est trop petit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Expliquer la désagrégation physique du granite",
+          "remember": "La **désagrégation** est une altération **physique** : la roche se casse en blocs, puis en grains, **sans que ses minéraux changent de nature**. Elle a plusieurs causes. Le jour la roche chauffe et se **dilate** ; la nuit elle refroidit et se **contracte**. Les minéraux ne se dilatent pas tous de la même façon, donc de petites fissures apparaissent. L'eau de pluie s'infiltre dans ces fissures. Les racines s'y enfoncent et, en grossissant, les élargissent. Peu à peu, des blocs se détachent, puis des grains se séparent.",
+          "method": [
+            "Repérer l'agent qui agit : variation de température, eau ou racine.",
+            "Décrire son mécanisme : dilatation puis contraction, infiltration, élargissement de la fissure.",
+            "Constater l'effet sur la roche : des fissures apparaissent ou s'élargissent.",
+            "Suivre la fragmentation : des blocs se détachent, puis se réduisent en grains séparés.",
+            "Conclure : les minéraux n'ont pas changé de nature, c'est une désagrégation physique."
+          ],
+          "example": {
+            "statement": "Une dalle de granite est chaude le jour et fraîche la nuit. Une racine s'est glissée dans une de ses fissures. Après plusieurs années, des morceaux de roche se sont détachés. Explique ce qui s'est passé.",
+            "steps": [
+              "Repérer l'agent : la roche est chaude le jour et fraîche la nuit, et une racine s'est glissée dans une fissure.",
+              "Décrire le mécanisme : le jour la roche se dilate, la nuit elle se contracte, et la racine, en grossissant, pousse sur les bords de la fissure.",
+              "Constater l'effet : de petites fissures apparaissent, puis la fissure de la racine s'élargit.",
+              "Suivre la fragmentation : au bout de plusieurs années, des morceaux se détachent, puis se réduisent en grains.",
+              "Conclure : les grains sont encore du quartz, du feldspath et du mica. Les minéraux n'ont pas changé : c'est une désagrégation physique."
+            ]
+          },
+          "pitfall": "Ne pas confondre fragmenter et transformer. En se désagrégeant, un bloc de granite cassé en dix morceaux contient toujours du quartz, du feldspath et du mica. Contre-exemple : si tu casses un morceau de sucre en poudre, c'est encore du sucre. L'argile, elle, vient d'une transformation chimique du feldspath, pas d'une simple casse.",
+          "figure": "desagregation",
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer la désagrégation physique d'un granite.",
+            "questions": [
+              {
+                "content": "Quel agent élargit une fissure en y grossissant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer l'agent : une racine qui grossit dans la fissure. Étape 2 — Décrire le mécanisme : elle pousse sur les bords et élargit la fissure.",
+                "answers": [
+                  {
+                    "content": "Une racine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une éruption",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le magma",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une argile",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à un arbre qui pousse sur un rocher."
+              },
+              {
+                "content": "Dans une désagrégation, les grains obtenus sont encore du quartz, du feldspath et du mica.",
+                "question_type": "true_false",
+                "explanation": "Étape 5 — Conclure : la désagrégation ne change pas la nature des minéraux. Les grains obtenus sont ceux du granite.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les minéraux gardent-ils leur nature ?"
+              },
+              {
+                "content": "La roche qui chauffe se ___ ; la roche qui refroidit se contracte.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Décrire le mécanisme : la chaleur dilate la roche, le froid la contracte. La répétition cause des fissures.",
+                "answers": [
+                  {
+                    "content": "dilate",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le contraire de contracter."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Suivre la désagrégation d'un granite",
+              "statement": "Dans cet exercice, tu suis pas à pas la désagrégation physique d'un granite, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense à la roche chaude le jour, froide la nuit.",
+              "questions": [
+                {
+                  "content": "Le jour, au soleil, la roche de granite chauffe. Que fait-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'agent : la chaleur du jour. Étape 2 — Décrire le mécanisme : la roche chauffée se dilate. Elle se contracte la nuit, quand elle refroidit. Elle ne fond pas, car la chaleur du soleil est très loin de celle du magma.",
+                  "answers": [
+                    {
+                      "content": "Elle se dilate",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle se contracte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fond",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se transforme en argile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La nuit, la roche refroidit et se contracte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Décrire le mécanisme : à la fraîcheur de la nuit, la roche se contracte. La répétition de la dilatation et de la contraction fait apparaître de petites fissures.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la désagrégation d'un granite.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Décrire le mécanisme : d'abord la dilatation du jour, puis la contraction de la nuit. Étape 3 — Constater l'effet : des fissures apparaissent. Étape 4 — Suivre la fragmentation : l'eau et les racines les élargissent, des blocs se détachent, puis des grains se séparent.",
+                  "answers": [
+                    {
+                      "content": "La roche chauffe le jour et se dilate"
+                    },
+                    {
+                      "content": "La roche refroidit la nuit et se contracte"
+                    },
+                    {
+                      "content": "De petites fissures apparaissent"
+                    },
+                    {
+                      "content": "Des racines et l'eau élargissent les fissures"
+                    },
+                    {
+                      "content": "Des blocs se détachent puis se réduisent en grains"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux effets une racine a-t-elle dans une fissure du granite ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer l'agent : la racine est un être vivant. Étape 2 — Décrire le mécanisme : elle grossit et pousse sur les bords de la fissure. Étape 3 — Constater l'effet : la fissure s'élargit et des morceaux se détachent. Elle ne fait pas fondre la roche.",
+                  "answers": [
+                    {
+                      "content": "Elle élargit la fissure en grossissant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle aide des morceaux de roche à se détacher",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fait fondre le granite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle rend le granite plus dur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la désagrégation, les minéraux ne changent pas de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 5 — Conclure : dans une désagrégation physique, le quartz reste du quartz et le feldspath reste du feldspath. Seule la taille des morceaux change.",
+                  "answers": [
+                    {
+                      "content": "nature",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une désagrégation physique transforme le feldspath en argile.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : la désagrégation ne change pas la nature des minéraux, elle les sépare seulement. Transformer le feldspath en argile est le piège de la fiche : cela relève d'une autre altération, celle de l'eau, étudiée plus loin dans la leçon.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Expliquer des fissures sur un rocher",
+              "statement": "Dans cet exercice, tu expliques comment les fissures apparaissent sur un grand rocher de granite.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense à la dilatation le jour, à la contraction la nuit, et à l'écart entre les deux.",
+              "questions": [
+                {
+                  "content": "Sur un rocher de granite, on mesure 52 °C à 14 h et 24 °C à 4 h du matin. De combien de degrés la température du rocher a-t-elle varié ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer l'agent : la température varie entre le jour et la nuit. Étape 2 — Décrire le mécanisme : la variation se calcule par une soustraction, 52 − 24 = 28 degrés. Plus l'écart est grand, plus la roche se dilate puis se contracte.",
+                  "answers": [
+                    {
+                      "content": "28",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°C",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quand la roche refroidit la nuit, elle se ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Décrire le mécanisme : la roche chauffée se dilate, la roche refroidie se contracte. La nuit, c'est la contraction.",
+                  "answers": [
+                    {
+                      "content": "contracte",
+                      "correct": true
+                    },
+                    {
+                      "content": "dilate",
+                      "correct": false
+                    },
+                    {
+                      "content": "fond",
+                      "correct": false
+                    },
+                    {
+                      "content": "gonfle d'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois éléments participent à la désagrégation physique d'un granite ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer l'agent : la température, l'eau et les racines fragmentent la roche. Étape 5 — Conclure : la transformation du feldspath en argile change la nature du minéral, ce n'est pas une désagrégation physique. Une éruption de lave n'agit pas ici.",
+                  "answers": [
+                    {
+                      "content": "Les variations de température",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau qui s'infiltre dans les fissures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines qui s'enfoncent dans les fissures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une réaction qui transforme le feldspath en argile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une éruption de lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son rôle dans la désagrégation.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer l'agent. Étape 2 — Décrire le mécanisme : la température dilate puis contracte, la racine élargit, l'eau s'infiltre. Étape 4 — Suivre la fragmentation : elle donne des blocs, puis des grains.",
+                  "answers": [
+                    {
+                      "content": "Variation de température",
+                      "match": "Dilatation puis contraction de la roche"
+                    },
+                    {
+                      "content": "Racine",
+                      "match": "Élargit une fissure"
+                    },
+                    {
+                      "content": "Eau de pluie",
+                      "match": "S'infiltre dans les fissures"
+                    },
+                    {
+                      "content": "Fragmentation",
+                      "match": "Des blocs, puis des grains"
+                    }
+                  ]
+                },
+                {
+                  "content": "Après une désagrégation, un grain de quartz n'est plus du quartz.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : la désagrégation ne change pas la nature du minéral. Le grain de quartz est encore du quartz, il est seulement séparé des autres cristaux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi un rocher de granite se fissure-t-il davantage dans un lieu où il fait très chaud le jour et frais la nuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer l'agent : la variation de température. Étape 2 — Décrire le mécanisme : plus l'écart est grand, plus la roche se dilate puis se contracte. Étape 3 — Constater l'effet : les fissures apparaissent plus vite. Le rocher ne fond pas et les minéraux ne disparaissent pas.",
+                  "answers": [
+                    {
+                      "content": "Parce que sa dilatation puis sa contraction sont plus fortes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le rocher fond la nuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le rocher se transforme en argile le jour",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les minéraux disparaissent",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Expliquer l'altération chimique du granite et ses produits",
+          "remember": "L'**altération chimique** change la **nature** de certains minéraux. Dans le granite, l'**eau** de pluie attaque les **feldspaths** : ils se transforment en **argile**, une matière très fine, et une partie de leurs éléments est **dissoute** (ce sont des sels minéraux) et emportée par l'eau. Le **quartz** résiste : il reste en grains. Les paillettes de mica restent visibles. Un climat chaud et humide, comme celui de la forêt ivoirienne, accélère cette altération. Le produit est l'**arène granitique** : des grains de quartz, des paillettes de mica et de l'argile.",
+          "method": [
+            "Repérer les minéraux du granite : quartz, feldspath et mica.",
+            "Identifier l'agent chimique : l'eau, surtout abondante et chaude.",
+            "Décrire la transformation : le feldspath devient de l'argile, et des éléments sont dissous et emportés par l'eau.",
+            "Nommer ce qui résiste : le quartz reste en grains, et les paillettes de mica restent visibles.",
+            "Conclure sur les produits : une arène (grains de quartz, paillettes) mêlée d'argile."
+          ],
+          "example": {
+            "statement": "Dans une arène, Awa trouve des grains transparents, des paillettes noires et une pâte blanche très fine, collante quand elle est mouillée. D'où vient la pâte blanche ?",
+            "steps": [
+              "Repérer les minéraux : le granite d'origine contient du quartz, du feldspath et du mica.",
+              "Identifier l'agent : l'eau de pluie s'infiltre dans la roche et attaque les minéraux.",
+              "Décrire la transformation : les feldspaths attaqués par l'eau se transforment en argile. C'est la pâte blanche fine et collante.",
+              "Nommer ce qui résiste : les grains transparents sont du quartz, qui n'a pas été attaqué, et les paillettes noires sont du mica.",
+              "Conclure : la pâte blanche est de l'argile venue des feldspaths. L'arène est faite de grains de quartz, de paillettes de mica et d'argile."
+            ]
+          },
+          "pitfall": "Ne pas croire que tous les minéraux se transforment en argile. Contre-exemple : dans 50 g d'arène, les grains de quartz brillants (par exemple 30 g) sont exactement ceux du granite d'origine. Seul le feldspath, attaqué par l'eau, donne l'argile. Le quartz résiste.",
+          "figure": "devenir-mineraux",
+          "practice": {
+            "statement": "Tu t'entraînes à dire ce que devient chaque minéral du granite attaqué par l'eau.",
+            "questions": [
+              {
+                "content": "Quel minéral du granite reste en grains après l'attaque de l'eau ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Nommer ce qui résiste : le quartz n'est pas attaqué par l'eau. Le feldspath, lui, devient de l'argile.",
+                "answers": [
+                  {
+                    "content": "Le quartz",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le feldspath",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'argile",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le magma",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au minéral transparent et brillant."
+              },
+              {
+                "content": "L'argile se forme à partir des ___ du granite.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Décrire la transformation : l'argile vient de la transformation des feldspaths attaqués par l'eau.",
+                "answers": [
+                  {
+                    "content": "feldspaths",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est le minéral blanc ou rose du granite."
+              },
+              {
+                "content": "L'eau de pluie est l'agent de l'altération chimique du granite.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier l'agent : c'est l'eau qui attaque les feldspaths, surtout quand elle est abondante et chaude.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel agent transforme le feldspath ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Trouver ce que devient chaque minéral du granite",
+              "statement": "Dans cet exercice, tu suis le devenir des minéraux d'un granite attaqué par l'eau, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense au minéral qui résiste et à celui qui est attaqué.",
+              "questions": [
+                {
+                  "content": "Quel minéral du granite se transforme en argile sous l'action de l'eau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les minéraux : le granite contient quartz, feldspath et mica. Étape 3 — Décrire la transformation : c'est le feldspath qui est attaqué par l'eau et devient de l'argile. Le quartz résiste. Le magma et la lave ne sont pas des minéraux du granite.",
+                  "answers": [
+                    {
+                      "content": "Le feldspath",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quartz résiste à l'altération chimique et reste en grains.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Nommer ce qui résiste : le quartz n'est pas attaqué par l'eau. On le retrouve en grains brillants dans l'arène. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux produits trouve-t-on dans une arène granitique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 5 — Conclure sur les produits : l'arène contient des grains de quartz, qui ont résisté, et de l'argile, venue des feldspaths. Le magma et la lave sont des matières volcaniques, qui ne se trouvent pas dans l'arène.",
+                  "answers": [
+                    {
+                      "content": "Des grains de quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'argile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du basalte frais",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les feldspaths attaqués par l'eau se transforment en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Décrire la transformation : le feldspath n'est pas seulement cassé, il change de nature. Il devient de l'argile.",
+                  "answers": [
+                    {
+                      "content": "argile",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la méthode pour expliquer l'altération chimique d'un granite.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer les minéraux. Étape 2 — Identifier l'agent : l'eau. Étape 3 — Décrire la transformation du feldspath en argile. Étape 4 — Nommer ce qui résiste, le quartz. Étape 5 — Conclure sur les produits : arène et argile.",
+                  "answers": [
+                    {
+                      "content": "Repérer les minéraux du granite"
+                    },
+                    {
+                      "content": "Identifier l'agent chimique : l'eau"
+                    },
+                    {
+                      "content": "Décrire la transformation du feldspath"
+                    },
+                    {
+                      "content": "Nommer ce qui résiste"
+                    },
+                    {
+                      "content": "Conclure sur les produits"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quartz se transforme en argile sous l'action de l'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Nommer ce qui résiste : le quartz n'est pas attaqué par l'eau, il reste en grains. Ce sont les feldspaths qui donnent l'argile. Confondre les deux est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Expliquer l'origine des produits d'une arène",
+              "statement": "Dans cet exercice, tu expliques d'où viennent les produits qu'on trouve dans une arène granitique.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense à ce qui résiste (quartz) et à ce qui est transformé (feldspath).",
+              "questions": [
+                {
+                  "content": "Relie chaque élément à son devenir dans le granite altéré.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Décrire la transformation : le feldspath devient de l'argile et des éléments sont dissous, puis emportés par l'eau. Étape 4 — Nommer ce qui résiste : le quartz reste en grains et on voit encore des paillettes de mica.",
+                  "answers": [
+                    {
+                      "content": "Le quartz",
+                      "match": "Reste en grains résistants"
+                    },
+                    {
+                      "content": "Le feldspath",
+                      "match": "Se transforme en argile"
+                    },
+                    {
+                      "content": "Les éléments dissous",
+                      "match": "Sont emportés par l'eau"
+                    },
+                    {
+                      "content": "Le mica",
+                      "match": "Reste visible en paillettes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois éléments trouve-t-on dans une arène granitique ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 5 — Conclure sur les produits : l'arène contient des grains de quartz, des paillettes de mica et de l'argile. La lave et le magma sont des matières volcaniques.",
+                  "answers": [
+                    {
+                      "content": "Des grains de quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des paillettes de mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'argile",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un climat chaud et humide ___ l'altération chimique du granite.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Identifier l'agent : l'eau est l'agent chimique, et elle agit mieux quand elle est abondante et chaude. Un climat chaud et humide accélère donc l'altération chimique. Il ne l'arrête pas.",
+                  "answers": [
+                    {
+                      "content": "accélère",
+                      "correct": true
+                    },
+                    {
+                      "content": "arrête",
+                      "correct": false
+                    },
+                    {
+                      "content": "ralentit",
+                      "correct": false
+                    },
+                    {
+                      "content": "n'a aucun effet sur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'altération chimique est-elle plus intense en forêt dense de Côte d'Ivoire que dans un climat très sec ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier l'agent : l'altération chimique dépend de l'eau. En forêt dense, la pluie est abondante et la chaleur forte, l'altération y est donc plus intense. Le quartz reste résistant dans tous les climats.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il y a beaucoup d'eau et de chaleur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il n'y a pas d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le quartz y est plus fragile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le granite y est plus dur qu'ailleurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un échantillon d'arène de 50 g contient 30 g de quartz. Quel pourcentage de la masse est du quartz ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Nommer ce qui résiste : on cherche la part du quartz. Étape 5 — Conclure : 30 sur 50 vaut 3 sur 5, soit 60 sur 100. Le quartz représente donc 60 % de l'échantillon.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les éléments dissous par l'eau restent tous dans l'arène sous forme de grains.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Décrire la transformation : une partie du feldspath devient de l'argile, mais des éléments sont dissous dans l'eau et emportés avec elle. Ils ne restent pas tous dans l'arène.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Au pied de la colline de granite",
+          "statement": "Koffi explore le pied d'une colline de granite, près de son village. Il observe un gros rocher gris et rose, dur, fissuré, avec un arbuste dont la racine s'enfonce dans une fissure. Au sol, il ramasse du sable grossier qui contient des grains transparents brillants, des paillettes noires et des morceaux blanchâtres et terreux.",
+          "exercise_type": "fixation",
+          "figure": "granite-arene",
+          "questions": [
+            {
+              "content": "Comment s'appelle le sable grossier que Koffi ramasse au sol ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer : le sable est grossier et ses grains se séparent. 2) Repérer les minéraux : grains brillants (quartz), paillettes noires (mica), morceaux terreux (feldspaths altérés). 3) Comparer avec le granite sain, dur et compact : ce sable est un granite effrité. 4) Conclure : c'est une arène granitique. Ce n'est pas une argile pure, car il contient des grains de quartz et du mica.",
+              "answers": [
+                {
+                  "content": "Une arène granitique",
+                  "correct": true
+                },
+                {
+                  "content": "Un granite sain",
+                  "correct": false
+                },
+                {
+                  "content": "Du magma refroidi",
+                  "correct": false
+                },
+                {
+                  "content": "Une argile pure",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels trois minéraux Koffi retrouve-t-il dans ce sable, comme dans le granite sain ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. 1) Observer l'échantillon. 2) Repérer les minéraux par leur aspect : grains transparents brillants, quartz ; paillettes noires, mica ; morceaux blanchâtres et terreux, feldspaths altérés. 3) Conclure : on retrouve les trois minéraux du granite. Le basalte est une roche volcanique et la lave est du magma sorti du volcan : ils n'ont rien à voir avec ce sable.",
+              "answers": [
+                {
+                  "content": "Le quartz (grains transparents brillants)",
+                  "correct": true
+                },
+                {
+                  "content": "Le mica (paillettes noires)",
+                  "correct": true
+                },
+                {
+                  "content": "Le feldspath (morceaux blanchâtres, terreux)",
+                  "correct": true
+                },
+                {
+                  "content": "Le basalte",
+                  "correct": false
+                },
+                {
+                  "content": "La lave",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel agent de la dégradation la racine de l'arbuste représente-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Lire la situation : une racine s'enfonce dans la fissure. 2) Associer : une racine appartient à un arbuste, donc à un être vivant. 3) Décrire l'action : en grossissant, elle élargit la fissure. L'eau et la température sont d'autres agents, non cités ici.",
+              "answers": [
+                {
+                  "content": "Un être vivant",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau",
+                  "correct": false
+                },
+                {
+                  "content": "Les variations de température",
+                  "correct": false
+                },
+                {
+                  "content": "Le magma",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les fissures du rocher sont un agent de la dégradation.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Lire la situation : le rocher porte des fissures. 2) Associer : les agents sont l'eau, la température et les êtres vivants. 3) Conclure : la fissure est un effet de ces agents, pas un agent. Confondre l'agent et son effet est le piège à éviter.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre l'explication de la formation de cette arène.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 1) Les agents (température, eau, êtres vivants) fissurent le granite sain. 2) L'eau et les racines élargissent les fissures. 3) Le granite se brise en blocs friables. 4) Les blocs s'effritent et donnent l'arène. On suit l'ordre : roche saine, fissures, blocs, grains.",
+              "answers": [
+                {
+                  "content": "Le granite sain se fissure sous l'effet des agents"
+                },
+                {
+                  "content": "Les fissures sont élargies par l'eau et les racines"
+                },
+                {
+                  "content": "Le granite se brise en blocs friables"
+                },
+                {
+                  "content": "Les blocs s'effritent et donnent l'arène"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une journée sur un rocher de granite",
+          "statement": "Le professeur de SVT mesure la température de la surface d'un rocher de granite exposé au soleil, pendant une journée de saison sèche. Les valeurs sont fictives mais plausibles. À 6 h : 26 °C. À 12 h : 48 °C. À 15 h : 54 °C. À 20 h : 35 °C. À 4 h du matin : 24 °C. Un jeune arbre a poussé dans une fissure du rocher.",
+          "exercise_type": "fixation",
+          "figure": "desagregation",
+          "questions": [
+            {
+              "content": "À quelle heure de la mesure la température du rocher est-elle la plus basse, en heures (nombre entre 0 et 24) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Lire les données : 26 à 6 h, 48 à 12 h, 54 à 15 h, 35 à 20 h et 24 à 4 h. 2) Comparer : la plus petite valeur est 24 °C. 3) Conclure : elle est mesurée à 4 h du matin. Le piège est de choisir 6 h, alors que 24 est plus petit que 26.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "unit": "h",
+              "tolerance": 0
+            },
+            {
+              "content": "Quelle est la variation de température du rocher entre sa valeur la plus haute et sa valeur la plus basse ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Lire les données : la valeur la plus haute est 54 °C (15 h), la plus basse 24 °C (4 h). 2) Calculer la variation : 54 − 24 = 30 degrés. 3) Conclure : le rocher varie de 30 °C en une journée. Le piège est de calculer 54 − 26 = 28, en oubliant la mesure de 4 h.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "°C",
+              "tolerance": 0
+            },
+            {
+              "content": "Quand la température du rocher passe de 24 °C à 54 °C, la roche se ___.",
+              "question_type": "select",
+              "explanation": "Méthode. 1) Repérer l'agent : la variation de température. 2) Décrire le mécanisme : quand la température monte, la roche se dilate ; elle se contracte quand elle baisse. 3) Conclure : à 54 °C la roche est dilatée. À 54 °C la roche ne fond pas : le granite fond à très haute température, en profondeur.",
+              "answers": [
+                {
+                  "content": "dilate",
+                  "correct": true
+                },
+                {
+                  "content": "contracte",
+                  "correct": false
+                },
+                {
+                  "content": "fond",
+                  "correct": false
+                },
+                {
+                  "content": "transforme en argile",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles deux actions, répétées de nombreuses fois, fissurent le rocher ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Repérer les agents : la température et la racine. 2) Décrire les mécanismes : la dilatation puis la contraction fissurent la roche, la racine élargit les fissures. 3) Conclure : ce sont deux actions physiques. Le quartz ne se transforme pas en argile, et il n'y a ni fusion ni lave ici.",
+              "answers": [
+                {
+                  "content": "La dilatation puis la contraction de la roche",
+                  "correct": true
+                },
+                {
+                  "content": "L'élargissement des fissures par la racine de l'arbre",
+                  "correct": true
+                },
+                {
+                  "content": "La fusion du granite chaque nuit",
+                  "correct": false
+                },
+                {
+                  "content": "L'arrivée de lave en surface",
+                  "correct": false
+                },
+                {
+                  "content": "La transformation du quartz en argile",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après des années, les grains qui se détachent du rocher ne sont plus du quartz, du feldspath ni du mica.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Repérer l'agent : ici, la température et la racine, des agents physiques. 2) Suivre la fragmentation : blocs, puis grains. 3) Conclure : dans une désagrégation physique, les minéraux n'ont pas changé de nature. Les grains sont donc toujours du quartz, du feldspath et du mica.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'expérience de l'arène dans l'eau",
+          "statement": "Pour comprendre ce que contient une arène, Awa met 100 g d'arène dans une grande bouteille remplie d'eau. Elle ferme la bouteille, l'agite longtemps, puis la laisse reposer une heure. Elle observe : au fond, des grains brillants durs forment un dépôt de sable ; l'eau au-dessus reste trouble et blanchâtre.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Qu'est-ce que le dépôt de grains brillants durs au fond de la bouteille ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Observer : les grains au fond sont brillants et durs. 2) Repérer les minéraux : un grain brillant et dur est du quartz. 3) Nommer ce qui résiste : le quartz n'a pas été transformé par l'eau. L'argile reste en suspension dans l'eau, elle ne tombe pas vite.",
+              "answers": [
+                {
+                  "content": "Du quartz, qui a résisté à l'altération",
+                  "correct": true
+                },
+                {
+                  "content": "De l'argile",
+                  "correct": false
+                },
+                {
+                  "content": "Du magma",
+                  "correct": false
+                },
+                {
+                  "content": "Des feldspaths dissous dans l'eau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'eau qui reste trouble contient surtout ___.",
+              "question_type": "select",
+              "explanation": "Méthode. 1) Observer : l'eau est trouble et blanchâtre, elle contient des particules très fines. 2) Raisonner : de très fines particules mettent longtemps à tomber. 3) Conclure : ce sont des particules d'argile, venues des feldspaths. Le quartz, en gros grains, est déjà tombé au fond.",
+              "answers": [
+                {
+                  "content": "de l'argile",
+                  "correct": true
+                },
+                {
+                  "content": "de la lave",
+                  "correct": false
+                },
+                {
+                  "content": "du quartz",
+                  "correct": false
+                },
+                {
+                  "content": "du magma",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après tri, Awa pèse 60 g de sable de quartz au fond de la bouteille. Quel pourcentage des 100 g d'arène cela représente-t-il ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Lire les données : 60 g de quartz pour 100 g d'arène. 2) Calculer la part : 60 sur 100 vaut 60 pour cent. 3) Conclure : le quartz représente 60 % de cette arène. Le calcul est direct car la masse totale est de 100 g.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "unit": "%",
+              "tolerance": 0
+            },
+            {
+              "content": "Cette expérience montre que l'arène contient une matière très fine qui reste longtemps en suspension dans l'eau.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Observer : l'eau reste trouble après une heure de repos. 2) Raisonner : une matière très fine reste en suspension. 3) Conclure : cette matière est l'argile, que l'altération chimique a formée à partir des feldspaths. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige une conclusion de 3 à 4 phrases : que contient l'arène d'après cette expérience, et d'où viennent ses produits ?",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Cite les grains de quartz qui tombent au fond",
+                "Cite l'argile qui reste en suspension et trouble l'eau",
+                "Relie l'argile à la transformation du feldspath par l'eau",
+                "Relie le quartz à sa résistance à l'altération"
+              ],
+              "explanation": "Corrigé modèle : « D'après l'expérience, l'arène contient des gros grains de quartz, qui tombent vite au fond de la bouteille, et de l'argile, une matière très fine qui reste en suspension et rend l'eau trouble. Le quartz a résisté à l'altération. L'argile vient de la transformation des feldspaths du granite par l'eau. » Barème : 1 point pour le quartz, 1 point pour l'argile en suspension, 1 point pour l'origine de l'argile, 1 point pour la résistance du quartz.",
+              "answers": [],
+              "starter": "D'après l'expérience, l'arène contient..."
+            }
+          ]
+        },
+        {
+          "title": "Bilan de l'altération d'un granite de carrière",
+          "statement": "Dans une carrière de granite d'un village, le professeur prélève un échantillon d'arène. Le diagramme donne sa composition, en pourcentage de la masse (données fictives mais plausibles) : quartz 45, argile 30, feldspaths en cours d'altération 15, mica 10. La région est chaude et très arrosée.",
+          "exercise_type": "evaluation",
+          "figure": "composition-arene",
+          "questions": [
+            {
+              "content": "Quel pourcentage de la masse de l'échantillon est de l'argile ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Lire le diagramme : la part de chaque élément. 2) Repérer la part demandée : argile, 30 pour cent. 3) Conclure : l'argile représente 30 % de la masse. Le piège est de lire 45, la part du quartz.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "%",
+              "tolerance": 0
+            },
+            {
+              "content": "Quel pourcentage de la masse est formé par le quartz et le mica réunis ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Lire le diagramme : quartz 45, mica 10. 2) Additionner : 45 + 10 = 55. 3) Conclure : le quartz et le mica représentent 55 % de la masse. Ce sont les deux éléments qui n'ont pas été transformés.",
+              "answers": [
+                {
+                  "content": "55",
+                  "correct": true
+                }
+              ],
+              "unit": "%",
+              "tolerance": 0
+            },
+            {
+              "content": "De quel minéral du granite l'argile de cet échantillon provient-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer les minéraux : quartz, feldspath, mica. 2) Identifier l'agent : l'eau. 3) Décrire la transformation : le feldspath attaqué par l'eau devient de l'argile. 4) Nommer ce qui résiste : le quartz. Le quartz ne donne pas d'argile, et le magma n'est pas un minéral du granite. La racine fragmente la roche, elle ne fabrique pas d'argile.",
+              "answers": [
+                {
+                  "content": "Du feldspath attaqué par l'eau",
+                  "correct": true
+                },
+                {
+                  "content": "Du quartz",
+                  "correct": false
+                },
+                {
+                  "content": "Du magma",
+                  "correct": false
+                },
+                {
+                  "content": "Du mica brisé par les racines",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles deux conditions du climat accélèrent l'altération chimique de ce granite ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Identifier l'agent : l'eau est l'agent de l'altération chimique. 2) Raisonner : plus l'eau est abondante et chaude, plus l'altération est rapide. 3) Conclure : la chaleur et la pluie abondante l'accélèrent. Sans eau, il n'y a pas d'altération chimique.",
+              "answers": [
+                {
+                  "content": "Une forte chaleur",
+                  "correct": true
+                },
+                {
+                  "content": "Une pluie abondante",
+                  "correct": true
+                },
+                {
+                  "content": "Un climat très sec",
+                  "correct": false
+                },
+                {
+                  "content": "Un froid intense toute l'année",
+                  "correct": false
+                },
+                {
+                  "content": "L'absence totale d'eau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre l'explication de la formation de l'argile de cette arène.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 1) Repérer les minéraux : le granite contient des feldspaths. 2) Identifier l'agent : l'eau de pluie s'infiltre. 3) Décrire la transformation : les feldspaths sont attaqués, puis se transforment en argile. 4) Conclure : l'argile se mêle à l'arène.",
+              "answers": [
+                {
+                  "content": "Le granite contient des feldspaths"
+                },
+                {
+                  "content": "L'eau de pluie s'infiltre dans la roche"
+                },
+                {
+                  "content": "Les feldspaths sont attaqués par l'eau"
+                },
+                {
+                  "content": "Les feldspaths se transforment en argile"
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe de 4 à 5 phrases pour expliquer comment le granite de la carrière a donné cette arène. Utilise les mots désagrégation, altération chimique, quartz et argile.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Cite les agents : température, eau, racines",
+                "Explique la désagrégation : fissures, blocs, grains",
+                "Explique l'altération chimique : feldspath devenu argile",
+                "Dit que le quartz résiste et reste en grains",
+                "Conclut sur la composition de l'arène"
+              ],
+              "explanation": "Corrigé modèle : « Le granite de la carrière a été fissuré par les variations de température, l'eau et les racines : c'est la désagrégation, qui le casse en blocs puis en grains sans changer ses minéraux. En même temps, l'eau de pluie, abondante et chaude, a attaqué les feldspaths : c'est l'altération chimique, qui les transforme en argile. Le quartz a résisté et reste en grains. L'arène est donc faite de grains de quartz, de paillettes de mica, de feldspaths en cours d'altération et d'argile. » Barème : 1 point pour les agents, 1 pour la désagrégation, 2 pour l'altération chimique, 1 pour la résistance du quartz, 1 pour la conclusion.",
+              "answers": [],
+              "starter": "Le granite de la carrière a été fissuré par..."
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Granite sain et granite altéré ; arène granitique ; agents de la dégradation ; désagrégation physique ; altération chimique du feldspath en argile ; résistance du quartz.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur de SVT interroge la classe sur le vocabulaire de la dégradation du granite.",
+              "exercise_type": "evaluation",
+              "figure": "granite-arene",
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Lire chaque mot. 2) Se rappeler la fiche : l'arène est un sable grossier de granite, l'argile vient des feldspaths, la désagrégation fragmente sans changer les minéraux, l'altération chimique transforme des minéraux sous l'action de l'eau. 3) Relier chaque mot à sa définition.",
+                  "answers": [
+                    {
+                      "content": "Arène granitique",
+                      "match": "Sable grossier issu du granite altéré"
+                    },
+                    {
+                      "content": "Argile",
+                      "match": "Matière très fine qui vient des feldspaths"
+                    },
+                    {
+                      "content": "Désagrégation",
+                      "match": "Fragmentation de la roche sans changement des minéraux"
+                    },
+                    {
+                      "content": "Altération chimique",
+                      "match": "Transformation de minéraux par l'eau"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois minéraux composent un granite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Se rappeler la structure grenue du granite. 2) Nommer ses minéraux : quartz, feldspath, mica. 3) Éliminer les propositions fausses : l'argile est un produit de l'altération, le basalte est une autre roche, magma et lave sont des matières fondues.",
+                  "answers": [
+                    {
+                      "content": "Le quartz, le feldspath et le mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le quartz, l'argile et le mica",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le basalte, le quartz et le feldspath",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma, la lave et le quartz",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un granite sain s'effrite facilement sous le doigt.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Observer un granite sain. 2) Constater qu'il est dur et compact, aux cristaux collés. 3) Conclure : c'est l'arène qui s'effrite, pas le granite sain.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les agents de la dégradation d'un granite sont l'eau, les variations de température et les êtres ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Lister les agents de la fiche. 2) Nommer le troisième : les êtres vivants, comme les racines et les lichens. 3) Compléter : vivants.",
+                  "answers": [
+                    {
+                      "content": "vivants",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le devenir d'un granite sain.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Partir de la roche saine. 2) Les agents la fissurent. 3) Des blocs friables se détachent. 4) Ils s'effritent en arène. On suit l'ordre : sain, fissuré, blocs, arène.",
+                  "answers": [
+                    {
+                      "content": "Granite sain"
+                    },
+                    {
+                      "content": "Granite fissuré"
+                    },
+                    {
+                      "content": "Blocs de granite altéré"
+                    },
+                    {
+                      "content": "Arène granitique"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Awa observe de près un échantillon d'arène granitique et nomme chaque élément.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Awa voit des grains transparents et brillants. De quel minéral s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer l'aspect : transparent et brillant. 2) Repérer le minéral : c'est le quartz. 3) Éliminer : le mica est en paillettes noires, l'argile est très fine et ne se voit pas en grains.",
+                  "answers": [
+                    {
+                      "content": "Du quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du mica",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'argile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du feldspath altéré",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa voit des paillettes noires brillantes. De quel minéral s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer l'aspect : des paillettes noires brillantes. 2) Repérer le minéral : c'est le mica. 3) Éliminer : le quartz est transparent, le feldspath est blanc ou rose.",
+                  "answers": [
+                    {
+                      "content": "Du mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du feldspath",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'argile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux signes montrent que des feldspaths sont altérés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Observer les feldspaths. 2) Les comparer au feldspath sain. 3) Conclure : un feldspath altéré est terne, blanchâtre et terreux. Le noir brillant correspond au mica, le transparent dur au quartz.",
+                  "answers": [
+                    {
+                      "content": "Ils sont ternes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont blanchâtres et terreux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont noirs et brillants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont transparents et durs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont fondus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arène granitique contient des minéraux du granite, comme le quartz et le mica.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer les minéraux de l'arène : quartz, mica, feldspaths altérés. 2) Les comparer à ceux du granite : le quartz et le mica sont les mêmes. 3) Conclure : l'affirmation est vraie, l'arène vient du granite. Elle contient en plus de l'argile, formée à partir des feldspaths.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un granite réduit à du sable grossier s'appelle une ___ granitique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Observer : un sable grossier. 2) Se rappeler la fiche. 3) Nommer : arène granitique.",
+                  "answers": [
+                    {
+                      "content": "arène",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur une colline, le professeur demande de trouver les agents de la dégradation.",
+              "exercise_type": "evaluation",
+              "figure": "agents-degradation",
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Une racine pousse dans une fissure de la roche. Quel agent est en cause ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire la situation : une racine. 2) Associer : une racine est un être vivant. 3) Décrire : elle élargit la fissure.",
+                  "answers": [
+                    {
+                      "content": "Un être vivant",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les variations de température",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roche est brûlante à midi et fraîche à minuit. Quel agent est en cause ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire la situation : chaud à midi, frais à minuit. 2) Associer : ce sont des variations de température. 3) Décrire : la roche se dilate puis se contracte.",
+                  "answers": [
+                    {
+                      "content": "Les variations de température",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les êtres vivants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pluie qui s'infiltre dans les fissures est ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Lire la situation : la pluie. 2) Associer : la pluie est de l'eau. 3) Décrire : elle s'infiltre et attaque les feldspaths.",
+                  "answers": [
+                    {
+                      "content": "de l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "de l'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "de la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "de l'argile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments sont des agents de la dégradation ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Lire la liste. 2) Associer : l'eau et les racines agissent sur la roche, ce sont des agents. 3) Éliminer : arène et fissures sont des effets, et le quartz est un minéral.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'arène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fissures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quartz",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les agents de la dégradation agissent très rapidement.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Lire l'affirmation. 2) Se rappeler la fiche : les agents agissent très lentement. 3) Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le professeur demande de classer des phénomènes en désagrégation physique ou en altération chimique.",
+              "exercise_type": "evaluation",
+              "figure": "devenir-mineraux",
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Relie chaque phénomène à ce qu'il montre.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Lire chaque phénomène. 2) Se demander si les minéraux gardent leur nature. 3) Relier : élargir une fissure et casser en grains sont des désagrégations ; le feldspath qui devient argile est une altération chimique par l'eau ; le quartz résiste.",
+                  "answers": [
+                    {
+                      "content": "Une racine élargit une fissure",
+                      "match": "Désagrégation : action d'un être vivant"
+                    },
+                    {
+                      "content": "Le feldspath devient de l'argile",
+                      "match": "Altération chimique : action de l'eau"
+                    },
+                    {
+                      "content": "Un bloc se casse en grains",
+                      "match": "Désagrégation : minéraux inchangés"
+                    },
+                    {
+                      "content": "Le quartz reste en grains brillants",
+                      "match": "Minéral qui résiste à l'eau"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une désagrégation physique, les minéraux ne changent pas de nature.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Se rappeler la définition. 2) Constater que la roche est seulement fragmentée. 3) Conclure : les minéraux gardent leur nature, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel minéral du granite se transforme en argile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer les minéraux : quartz, feldspath, mica. 2) Identifier l'agent : l'eau. 3) Conclure : le feldspath attaqué par l'eau devient de l'argile. Le quartz résiste.",
+                  "answers": [
+                    {
+                      "content": "Le feldspath",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roche qui chauffe le jour se ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer l'agent : la chaleur. 2) Décrire le mécanisme : la roche chauffée se dilate. 3) Compléter : dilate.",
+                  "answers": [
+                    {
+                      "content": "dilate",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux produits trouve-t-on dans l'arène ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer les produits de l'altération du granite. 2) Nommer ce qui résiste (quartz) et ce qui est transformé (argile). 3) Éliminer : magma et lave sont volcaniques, le granite sain n'est pas un produit de l'altération.",
+                  "answers": [
+                    {
+                      "content": "Des grains de quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'argile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du granite sain",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Colline de granite et arène ; argile et feldspath ; climat chaud et humide de la forêt ivoirienne ; racines et lichens ; désagrégation physique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Les élèves d'un village visitent une colline de granite avec leur professeur de SVT. Ils observent un rocher dur et, à son pied, un tas de sable grossier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Le sable grossier au pied du rocher contient des grains brillants, des paillettes noires et des morceaux terreux. Comment s'appelle-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : un sable grossier. 2) Repérer les minéraux : quartz, mica, feldspaths altérés. 3) Comparer avec le granite sain, dur et compact. 4) Conclure : arène granitique.",
+                  "answers": [
+                    {
+                      "content": "Une arène granitique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un granite sain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le rocher dur, aux cristaux collés et brillants, est un granite sain.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Observer : dur et compact. 2) Repérer : cristaux collés et brillants. 3) Conclure : granite sain, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux indices montrent que le tas de sable vient du granite ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer les minéraux du sable. 2) Les comparer à ceux du granite : quartz et mica. 3) Conclure : ce sont ceux du granite. La lave et la fusion ne concernent pas ce sable.",
+                  "answers": [
+                    {
+                      "content": "Il contient du quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il contient des paillettes de mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il contient de la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est fondu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est noir et lisse comme du verre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la démarche des élèves.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. On suit les 4 étapes de la fiche : observer, repérer les minéraux, comparer, conclure. On ne conclut qu'à la fin.",
+                  "answers": [
+                    {
+                      "content": "Observer le sable"
+                    },
+                    {
+                      "content": "Repérer les minéraux"
+                    },
+                    {
+                      "content": "Comparer avec le granite sain"
+                    },
+                    {
+                      "content": "Conclure sur la nature du sable"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sable grossier du granite altéré s'appelle l'___ granitique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Observer le sable grossier. 2) Se rappeler la fiche. 3) Nommer : arène.",
+                  "answers": [
+                    {
+                      "content": "arène",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un atelier du village, des potières modèlent une matière très fine, collante quand elle est mouillée : l'argile. Awa demande d'où elle vient.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "De quel minéral du granite vient l'argile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer les minéraux : quartz, feldspath, mica. 2) Identifier l'agent : l'eau. 3) Conclure : le feldspath attaqué par l'eau devient de l'argile.",
+                  "answers": [
+                    {
+                      "content": "Du feldspath",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel agent transforme le feldspath en argile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Identifier l'agent chimique. 2) Se rappeler la fiche : c'est l'eau qui attaque les feldspaths. 3) Éliminer : la température et les racines fragmentent la roche, elles ne la transforment pas en argile.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les variations de température seules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines seules",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'argile est formée de gros grains brillants.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Observer l'argile : une matière très fine. 2) Comparer au quartz : lui forme des grains brillants. 3) Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'argile est très ___ : on ne distingue pas ses grains.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Observer l'argile mouillée. 2) Constater que ses particules sont minuscules. 3) Compléter : fine.",
+                  "answers": [
+                    {
+                      "content": "fine",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque matière à son aspect.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer les minéraux. 2) Se rappeler leur aspect. 3) Relier : argile fine et collante, quartz en grains brillants, mica en paillettes noires.",
+                  "answers": [
+                    {
+                      "content": "Argile",
+                      "match": "Très fine et collante quand elle est mouillée"
+                    },
+                    {
+                      "content": "Quartz",
+                      "match": "Grains transparents et brillants"
+                    },
+                    {
+                      "content": "Mica",
+                      "match": "Paillettes noires brillantes"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans la forêt dense du sud de la Côte d'Ivoire, il pleut beaucoup et il fait chaud toute l'année.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Dans ce climat chaud et humide, l'altération chimique du granite est ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Identifier l'agent : l'eau. 2) Raisonner : plus l'eau est abondante et chaude, plus elle attaque les feldspaths. 3) Conclure : l'altération est plus rapide.",
+                  "answers": [
+                    {
+                      "content": "plus rapide",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus lente",
+                      "correct": false
+                    },
+                    {
+                      "content": "impossible",
+                      "correct": false
+                    },
+                    {
+                      "content": "arrêtée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sans eau, l'altération chimique du granite n'a pas lieu.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Identifier l'agent chimique : l'eau. 2) Raisonner : sans elle, les feldspaths ne sont pas attaqués. 3) Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments du climat de la forêt dense favorisent l'altération ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Identifier l'agent : l'eau. 2) Raisonner : l'eau abondante et la chaleur accélèrent l'altération. 3) Éliminer : il n'y a ni gel ni manque de pluie en forêt dense.",
+                  "answers": [
+                    {
+                      "content": "Une pluie abondante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une forte chaleur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un gel permanent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un manque total de pluie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un vent très froid",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel produit de l'altération reste en grains brillants malgré la pluie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer les minéraux. 2) Nommer ce qui résiste : le quartz. 3) Éliminer : le feldspath se transforme, l'argile est un produit fin, les éléments dissous partent avec l'eau.",
+                  "answers": [
+                    {
+                      "content": "Le quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le feldspath",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'argile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les éléments dissous",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre l'altération chimique d'un feldspath.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Repérer les minéraux. 2) Identifier l'agent. 3) Décrire la transformation. 4) Conclure : l'argile.",
+                  "answers": [
+                    {
+                      "content": "Le granite contient des feldspaths"
+                    },
+                    {
+                      "content": "La pluie s'infiltre dans la roche"
+                    },
+                    {
+                      "content": "L'eau attaque les feldspaths"
+                    },
+                    {
+                      "content": "Les feldspaths deviennent de l'argile"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Sur un grand rocher de granite, un fromager a poussé dans une fissure et un lichen couvre la surface.",
+              "exercise_type": "evaluation",
+              "figure": "desagregation",
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quel agent représente le fromager qui a poussé dans la fissure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire la situation. 2) Associer : un arbre est un être vivant. 3) Décrire : sa racine élargit la fissure.",
+                  "answers": [
+                    {
+                      "content": "Un être vivant",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une variation de température",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lichen qui couvre le rocher fait partie des êtres vivants agissant sur la roche.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Lire la situation. 2) Associer : le lichen est un être vivant. 3) Conclure : vrai, il fait partie des agents.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux effets sont visibles sur ce rocher après des années ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer l'agent : la racine. 2) Décrire : elle élargit la fissure. 3) Suivre la fragmentation : des morceaux se détachent. Il n'y a ni magma ni fusion.",
+                  "answers": [
+                    {
+                      "content": "Des fissures élargies",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des morceaux détachés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du magma qui sort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fusion de la roche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une transformation en lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les racines élargissent les ___ de la roche.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer l'agent. 2) Décrire le mécanisme : la racine grossit dans les fissures. 3) Compléter : fissures.",
+                  "answers": [
+                    {
+                      "content": "fissures",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ces fissures élargies sont une désagrégation :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Constater l'effet : fissures. 2) Suivre la fragmentation : blocs. 3) Conclure : les minéraux ne changent pas, c'est physique.",
+                  "answers": [
+                    {
+                      "content": "physique",
+                      "correct": true
+                    },
+                    {
+                      "content": "chimique",
+                      "correct": false
+                    },
+                    {
+                      "content": "volcanique",
+                      "correct": false
+                    },
+                    {
+                      "content": "magmatique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Expérience de chauffage et de refroidissement ; tri d'une arène dans l'eau ; comparaison de deux climats ; formulation d'une hypothèse ; critique d'affirmations.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour comprendre la dilatation, le professeur chauffe un caillou de granite sur une flamme, puis le plonge dans l'eau froide. Des fissures apparaissent. Il refait l'essai avec un caillou resté froid : aucune fissure.",
+              "exercise_type": "evaluation",
+              "figure": "desagregation",
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle condition est comparée dans cette expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer les deux essais. 2) Comparer : même roche, une seule condition change, le chauffage. 3) Conclure : on compare chauffé ou non.",
+                  "answers": [
+                    {
+                      "content": "Le caillou a été chauffé ou non",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le type de roche",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille de la flamme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La couleur de l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les fissures apparaissent parce que la roche chauffée puis refroidie se dilate puis se contracte.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Observer les résultats. 2) Raisonner : le chaud dilate, le froid contracte. 3) Conclure : vrai, c'est la cause des fissures.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'intérêt du caillou resté froid ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer. 2) Comparer. 3) Conclure : le caillou froid est le témoin, il montre que sans chauffage il n'y a pas de fissure.",
+                  "answers": [
+                    {
+                      "content": "Servir de témoin pour comparer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Donner de la chaleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer le caillou chauffé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fabriquer de l'argile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la roche, les variations de ___ provoquent des fissures.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer l'agent. 2) Décrire le mécanisme. 3) Compléter : température.",
+                  "answers": [
+                    {
+                      "content": "température",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette expérience reproduit ce qui se passe dans la nature :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer l'agent : la température. 2) Raisonner : le jour chaud et la nuit fraîche répètent chauffage et refroidissement. 3) Conclure : chaque jour et chaque nuit.",
+                  "answers": [
+                    {
+                      "content": "chaque jour et chaque nuit",
+                      "correct": true
+                    },
+                    {
+                      "content": "lors d'une éruption",
+                      "correct": false
+                    },
+                    {
+                      "content": "en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "dans le magma",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Awa agite 100 g d'arène dans une bouteille d'eau et laisse reposer une heure. Les gros grains brillants tombent au fond en quelques secondes. L'eau reste trouble très longtemps.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Pourquoi les gros grains tombent-ils vite au fond ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : les gros grains tombent vite. 2) Raisonner : de gros grains tombent plus vite que de fines particules. 3) Conclure : ce sont des grains de quartz.",
+                  "answers": [
+                    {
+                      "content": "Ce sont des grains de quartz, lourds et gros",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ce sont des particules d'argile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce sont des gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils se dissolvent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que contient l'eau qui reste trouble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Observer : l'eau reste trouble. 2) Raisonner : de fines particules restent longtemps en suspension. 3) Conclure : c'est de l'argile.",
+                  "answers": [
+                    {
+                      "content": "Des particules très fines d'argile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des grains de quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette expérience permet de séparer le quartz et l'argile de l'arène.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Observer : deux dépôts différents. 2) Raisonner : chaque matière tombe à sa vitesse. 3) Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur 100 g d'arène, on récupère 45 g de quartz au fond. Combien de grammes ne sont pas du quartz ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 100 g, dont 45 g de quartz. 2) Calculer : 100 − 45 = 55. 3) Conclure : 55 g ne sont pas du quartz.",
+                  "answers": [
+                    {
+                      "content": "55",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Remets dans l'ordre le protocole de l'expérience.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Préparer l'échantillon. 2) L'immerger. 3) Agiter. 4) Observer après repos.",
+                  "answers": [
+                    {
+                      "content": "Peser l'arène"
+                    },
+                    {
+                      "content": "La mettre dans une bouteille d'eau"
+                    },
+                    {
+                      "content": "Agiter la bouteille"
+                    },
+                    {
+                      "content": "Laisser reposer et observer"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Awa compare deux collines de granite. La colline A est en forêt dense, très arrosée. La colline B est en région très sèche. Sur A, l'arène est épaisse et riche en argile. Sur B, l'arène est mince et pauvre en argile.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle hypothèse explique la différence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Comparer les deux collines. 2) Identifier l'agent : l'eau. 3) Conclure : plus d'eau, plus d'altération chimique, donc plus d'argile. Le quartz ne devient pas d'argile.",
+                  "answers": [
+                    {
+                      "content": "Il y a plus d'eau en A, donc plus d'altération chimique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a plus de magma en A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le granite de B est du basalte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quartz de A se transforme en argile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'argile plus abondante en A vient des feldspaths altérés.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Comparer. 2) Repérer le minéral : le feldspath. 3) Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments distinguent la colline A de la colline B ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Lire le texte. 2) Comparer. 3) Conclure : A a une arène plus épaisse et plus d'argile. Rien n'indique de la lave ni une autre composition.",
+                  "answers": [
+                    {
+                      "content": "Une arène plus épaisse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plus d'argile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plus de lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un granite fondu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Moins de quartz dans le granite d'origine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En région sèche, l'altération chimique est ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Identifier l'agent : l'eau. 2) Raisonner : peu d'eau, peu d'attaque. 3) Conclure : plus lente.",
+                  "answers": [
+                    {
+                      "content": "plus lente",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "identique",
+                      "correct": false
+                    },
+                    {
+                      "content": "plus violente",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle mesure permettrait de tester l'hypothèse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Formuler la prédiction : plus d'argile en A. 2) Choisir la mesure qui la teste. 3) Conclure : comparer l'argile.",
+                  "answers": [
+                    {
+                      "content": "Comparer la quantité d'argile des deux arènes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Compter les arbres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Peser les nuages",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mesurer la hauteur de la colline",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Des élèves ont écrit des affirmations. Tu dois dire si elles sont justes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "La désagrégation transforme le feldspath en argile.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Se rappeler la définition. 2) Constater : la désagrégation ne change pas les minéraux. 3) Conclure : faux, c'est l'altération chimique qui forme l'argile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quartz résiste à l'altération chimique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer les minéraux. 2) Nommer ce qui résiste : le quartz. 3) Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arène est un sable apporté d'ailleurs, sans lien avec le granite.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer les minéraux de l'arène. 2) Les comparer au granite. 3) Conclure : faux, l'arène vient du granite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle affirmation est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer l'agent. 2) Décrire le mécanisme : la racine grossit et élargit la fissure. 3) Éliminer les autres propositions.",
+                  "answers": [
+                    {
+                      "content": "Les racines élargissent les fissures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines fabriquent de la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines transforment le quartz en argile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines refroidissent le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roche qui refroidit la nuit se ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer l'agent. 2) Décrire le mécanisme : le froid contracte. 3) Compléter : contracte.",
+                  "answers": [
+                    {
+                      "content": "contracte",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la dégradation des roches endogènes",
+          "notions": "Granite sain et arène ; agents ; désagrégation physique ; altération chimique ; devenir du quartz, du feldspath et du mica ; composition d'une arène.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur demande le bilan de la dégradation d'un granite, de la roche saine à l'arène.",
+              "exercise_type": "evaluation",
+              "figure": "granite-arene",
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre le bilan de la dégradation d'un granite.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. 1) Agents sur la roche saine. 2) Élargissement des fissures. 3) Blocs puis grains. 4) Transformation du feldspath : arène avec argile.",
+                  "answers": [
+                    {
+                      "content": "Les agents fissurent le granite sain"
+                    },
+                    {
+                      "content": "Les fissures sont élargies par l'eau et les racines"
+                    },
+                    {
+                      "content": "Des blocs se détachent et s'effritent"
+                    },
+                    {
+                      "content": "Le feldspath se transforme en argile et l'arène se forme"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le produit final de la dégradation du granite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Suivre la dégradation. 2) Nommer les produits. 3) Conclure : l'arène et l'argile. Magma et lave sont volcaniques.",
+                  "answers": [
+                    {
+                      "content": "Une arène avec de l'argile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un granite plus dur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois agents agissent sur le granite ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. 1) Lister les agents. 2) Éliminer les matières fondues. 3) Conclure : eau, température, êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les variations de température",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les êtres vivants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quartz est entièrement transformé en argile dans l'arène.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer le minéral. 2) Nommer ce qui résiste : le quartz. 3) Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le granite fissuré, puis effrité, donne une ___ granitique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Suivre la fragmentation. 2) Nommer le produit. 3) Compléter : arène.",
+                  "answers": [
+                    {
+                      "content": "arène",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le professeur remet un tableau à compléter sur le devenir des minéraux du granite.",
+              "exercise_type": "evaluation",
+              "figure": "devenir-mineraux",
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Relie chaque minéral à son devenir.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Repérer les minéraux. 2) Décrire la transformation. 3) Relier : quartz en grains, feldspath en argile, mica en paillettes.",
+                  "answers": [
+                    {
+                      "content": "Quartz",
+                      "match": "Reste en grains"
+                    },
+                    {
+                      "content": "Feldspath",
+                      "match": "Devient de l'argile"
+                    },
+                    {
+                      "content": "Mica",
+                      "match": "Reste visible en paillettes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel minéral est transformé par l'eau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Repérer les minéraux. 2) Identifier l'agent. 3) Conclure : le feldspath. Le quartz résiste.",
+                  "answers": [
+                    {
+                      "content": "Le feldspath",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le quartz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mica brillant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le granite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Des éléments dissous sont emportés par l'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Décrire la transformation du feldspath. 2) Noter les éléments dissous. 3) Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La roche qui se casse sans que ses minéraux changent subit une désagrégation ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. 1) Constater la fragmentation. 2) Vérifier que les minéraux gardent leur nature. 3) Conclure : physique.",
+                  "answers": [
+                    {
+                      "content": "physique",
+                      "correct": true
+                    },
+                    {
+                      "content": "chimique",
+                      "correct": false
+                    },
+                    {
+                      "content": "volcanique",
+                      "correct": false
+                    },
+                    {
+                      "content": "magmatique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments résistent à l'altération ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Repérer les minéraux. 2) Nommer ce qui résiste : quartz, mica visible. 3) Éliminer : le feldspath est transformé les éléments dissous partent, et les cristaux du granite sain ne restent pas collés.",
+                  "answers": [
+                    {
+                      "content": "Le quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les paillettes de mica",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le feldspath",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cristaux collés du granite sain",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les éléments dissous",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un échantillon d'arène de 200 g est trié. Il contient 90 g de quartz, 60 g d'argile, 30 g de feldspaths en cours d'altération et 20 g de mica.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle masse de quartz et de mica ensemble ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 90 g de quartz, 20 g de mica. 2) Additionner : 90 + 20 = 110. 3) Conclure : 110 g.",
+                  "answers": [
+                    {
+                      "content": "110",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel pourcentage de la masse est de l'argile ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire les données : 60 g sur 200 g. 2) Calculer : 60 sur 200 vaut 30 sur 100. 3) Conclure : 30 %.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle masse de l'échantillon n'est pas du quartz ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode. 1) Lire : 200 g au total, 90 g de quartz. 2) Calculer : 200 − 90 = 110. 3) Conclure : 110 g.",
+                  "answers": [
+                    {
+                      "content": "110",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "g",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel est le minéral le plus abondant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Lire les masses. 2) Comparer : 90 est la plus grande. 3) Conclure : le quartz.",
+                  "answers": [
+                    {
+                      "content": "Le quartz",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'argile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mica",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les feldspaths",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'argile de l'échantillon vient des feldspaths.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Repérer le minéral. 2) Décrire la transformation. 3) Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan général sur la dégradation du granite.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relis la fiche de révision de la notion avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle est la définition de la dégradation d'une roche ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Se rappeler la fiche. 2) Retenir : action d'agents à la surface. 3) Éliminer les propositions liées au volcan.",
+                  "answers": [
+                    {
+                      "content": "Les transformations d'une roche à la surface de la Terre sous l'action d'agents",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fusion d'une roche en profondeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sortie du magma",
+                      "correct": false
+                    },
+                    {
+                      "content": "La formation d'un volcan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux causes fissurent le granite ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. 1) Lister les causes. 2) Éliminer les matières fondues. 3) Conclure : température et racines.",
+                  "answers": [
+                    {
+                      "content": "Les variations de température",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le magma",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'altération chimique est plus rapide en climat chaud et humide.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. 1) Identifier l'agent : l'eau. 2) Raisonner. 3) Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le feldspath attaqué par l'eau devient de l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. 1) Repérer le minéral. 2) Décrire la transformation. 3) Compléter : argile.",
+                  "answers": [
+                    {
+                      "content": "argile",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque agent à son action.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. 1) Lister les agents. 2) Se rappeler leur action. 3) Relier.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "match": "S'infiltre et attaque les feldspaths"
+                    },
+                    {
+                      "content": "La température",
+                      "match": "Dilate puis contracte la roche"
+                    },
+                    {
+                      "content": "Les racines",
+                      "match": "Élargissent les fissures"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les produits de la désagrégation physique sont :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. 1) Suivre la fragmentation. 2) Vérifier la nature des minéraux. 3) Conclure : minéraux inchangés.",
+                  "answers": [
+                    {
+                      "content": "des blocs puis des grains aux minéraux inchangés",
+                      "correct": true
+                    },
+                    {
+                      "content": "de l'argile uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "de la lave",
+                      "correct": false
+                    },
+                    {
+                      "content": "du magma",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

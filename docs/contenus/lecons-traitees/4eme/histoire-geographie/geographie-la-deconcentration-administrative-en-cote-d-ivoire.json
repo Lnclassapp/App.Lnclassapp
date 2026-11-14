@@ -1,0 +1,3721 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — La déconcentration administrative en Côte d'Ivoire",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "carte-districts",
+          "kind": "map",
+          "description": "Carte de la Côte d'Ivoire découpée en 14 districts, tous dans une même teinte. Abidjan et Yamoussoukro sont marquées. Quatre autres villes sont marquées : Korhogo, chef-lieu de la région du Poro, Bouaké, chef-lieu du Gbêkê, Man, chef-lieu du Tonkpi, et Daloa, chef-lieu du Haut-Sassandra.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "bas_sassandra",
+                "category": 1
+              },
+              {
+                "id": "comoe",
+                "category": 1
+              },
+              {
+                "id": "denguele",
+                "category": 1
+              },
+              {
+                "id": "goh_djiboua",
+                "category": 1
+              },
+              {
+                "id": "lacs",
+                "category": 1
+              },
+              {
+                "id": "lagunes",
+                "category": 1
+              },
+              {
+                "id": "montagnes",
+                "category": 1
+              },
+              {
+                "id": "sassandra_marahoue",
+                "category": 1
+              },
+              {
+                "id": "savanes",
+                "category": 1
+              },
+              {
+                "id": "vallee_du_bandama",
+                "category": 1
+              },
+              {
+                "id": "woroba",
+                "category": 1
+              },
+              {
+                "id": "zanzan",
+                "category": 1
+              },
+              {
+                "id": "abidjan",
+                "category": 1
+              },
+              {
+                "id": "yamoussoukro",
+                "category": 1
+              }
+            ],
+            "places": [
+              {
+                "id": "abidjan",
+                "label": "Abidjan"
+              },
+              {
+                "id": "yamoussoukro",
+                "label": "Yamoussoukro"
+              },
+              {
+                "id": "korhogo",
+                "label": "Korhogo (chef-lieu du Poro)"
+              },
+              {
+                "id": "bouake",
+                "label": "Bouaké (chef-lieu du Gbêkê)"
+              },
+              {
+                "id": "man",
+                "label": "Man (chef-lieu du Tonkpi)"
+              },
+              {
+                "id": "daloa",
+                "label": "Daloa (chef-lieu du Haut-Sassandra)"
+              }
+            ],
+            "legend": [
+              "District"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "arbre-circonscriptions",
+          "kind": "diagram",
+          "description": "Schéma en arbre, de haut en bas. L'État, au sommet, se divise en districts dirigés par un gouverneur. Chaque district regroupe des régions, dirigées par un préfet de région. Une région regroupe des départements dirigés par un préfet, un département des sous-préfectures dirigées par un sous-préfet, et une sous-préfecture des villages dirigés par un chef de village.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "etat",
+                "label": "État (pouvoir central)",
+                "category": 1
+              },
+              {
+                "id": "district",
+                "label": "District : gouverneur",
+                "category": 2
+              },
+              {
+                "id": "region",
+                "label": "Région : préfet de région",
+                "category": 2
+              },
+              {
+                "id": "dept",
+                "label": "Département : préfet",
+                "category": 2
+              },
+              {
+                "id": "sp",
+                "label": "Sous-préfecture : sous-préfet",
+                "category": 2
+              },
+              {
+                "id": "village",
+                "label": "Village : chef de village",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "etat",
+                "to": "district",
+                "label": "se divise en"
+              },
+              {
+                "from": "district",
+                "to": "region",
+                "label": "regroupe"
+              },
+              {
+                "from": "region",
+                "to": "dept",
+                "label": "regroupe"
+              },
+              {
+                "from": "dept",
+                "to": "sp",
+                "label": "regroupe"
+              },
+              {
+                "from": "sp",
+                "to": "village",
+                "label": "regroupe"
+              }
+            ],
+            "legend": [
+              "Pouvoir central",
+              "Circonscription et son autorité"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir la déconcentration",
+          "remember": "La **déconcentration** est une manière d'organiser l'État : le pouvoir de décider reste au **pouvoir central** (Président, gouvernement, ministères), mais il est exercé près des habitants par des **agents que l'État nomme** et qui lui obéissent. Ces agents travaillent dans des **circonscriptions administratives**, c'est-à-dire des territoires que l'État découpe pour administrer le pays. Les ordres descendent du sommet vers la base.",
+          "method": [
+            "Repérer qui agit dans la situation et au nom de qui.",
+            "Vérifier comment cet acteur est désigné : nommé par l'État ou choisi par d'autres personnes.",
+            "Relever de qui il reçoit ses ordres.",
+            "Conclure : un agent nommé qui obéit au pouvoir central relève de la déconcentration."
+          ],
+          "example": {
+            "statement": "Le ministre de l'Éducation nationale décide la date de la rentrée des classes. Le préfet d'un département fait appliquer cette décision dans son département. Montrer que c'est de la déconcentration.",
+            "steps": [
+              "Repérer : le préfet agit dans son département, au nom de l'État et du ministre.",
+              "Vérifier : le préfet est nommé par l'État, les habitants ne l'ont pas élu.",
+              "Relever : il reçoit ses ordres du pouvoir central, ici le ministre.",
+              "Conclure : c'est de la déconcentration, car un agent nommé applique sur place la décision de l'État."
+            ]
+          },
+          "pitfall": "Ne crois pas que déconcentrer, c'est donner le pouvoir aux habitants ou à des élus. Contre-exemple : le sous-préfet est nommé par l'État et obéit au pouvoir central ; il ne décide pas seul de la politique du pays. Seule l'action est rapprochée des habitants, la décision reste à l'État. (La façon de partager le pouvoir avec des élus est une autre notion, étudiée plus tard.)",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître la déconcentration avec la méthode : repérer, vérifier, relever, conclure.",
+            "questions": [
+              {
+                "content": "Dans un département, le préfet, nommé par l'État, fait appliquer sur place une décision du ministre. Comment appelle-t-on cette organisation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le préfet agit dans son département au nom de l'État. Étape 2 — Vérifier : il est nommé par l'État. Étape 3 — Relever : il obéit au ministre. Étape 4 — Conclure : c'est de la déconcentration.  Dire que l'État abandonne son pouvoir est faux : il garde le pouvoir de décider.",
+                "answers": [
+                  {
+                    "content": "La déconcentration",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un vote des habitants du département",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un abandon du pouvoir par l'État",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une décision prise par le chef du village",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qui a nommé le préfet, et à qui obéit-il ?"
+              },
+              {
+                "content": "Dans la déconcentration, les agents installés sur le territoire reçoivent leurs ordres du pouvoir central.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Relever : on relève de qui l'agent reçoit ses ordres : ici, du pouvoir central (Président, gouvernement, ministres). Étape 4 — Conclure : c'est bien la déconcentration.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Relis l'étape 3 de la méthode."
+              },
+              {
+                "content": "Un agent de l'État est ___ par le pouvoir central : les habitants ne l'élisent pas.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Vérifier : on vérifie comment l'agent est désigné. Dans la déconcentration, il est nommé par l'État. Étape 4 — Conclure : un agent nommé relève de la déconcentration.",
+                "answers": [
+                  {
+                    "content": "nommé",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le contraire d'élu par les habitants."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la déconcentration",
+              "statement": "Tu reconnais la déconcentration avec la méthode de la fiche : repérer, vérifier, relever, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle phrase définit le mieux la déconcentration ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on repère les agents qui agissent au nom de l'État. Étape 2 — Vérifier : ils sont nommés par l'État. Étape 3 — Relever : ils reçoivent leurs ordres du pouvoir central. Étape 4 — Conclure : c'est la déconcentration : le pouvoir de décider reste à l'État. Dire que les agents décident sans rendre compte est faux, car ils obéissent à une hiérarchie.",
+                  "answers": [
+                    {
+                      "content": "L'État garde le pouvoir de décider et l'exerce près des habitants par des agents qu'il nomme",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'État donne son pouvoir aux habitants d'un village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chaque région fait ses propres lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les agents locaux décident sans rendre compte à personne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sous-préfet est choisi par les habitants de sa sous-préfecture.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on repère le sous-préfet, un agent de l'État. Étape 2 — Vérifier : il est nommé par l'État, il n'est pas choisi par les habitants. Étape 3 — Relever : il reçoit ses ordres de l'État. Étape 4 — Conclure : c'est un agent déconcentré. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un territoire que l'État découpe pour l'administrer s'appelle une ___ administrative.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on repère le mot défini : un territoire découpé par l'État. Étape 4 — Conclure : ce territoire s'appelle une circonscription administrative (district, région, département, sous-préfecture, village).",
+                  "answers": [
+                    {
+                      "content": "circonscription",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases décrivent la déconcentration ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Vérifier : un agent déconcentré est nommé par l'État. Étape 3 — Relever : il reçoit ses ordres du pouvoir central et les applique. Étape 4 — Conclure : ce sont les deux bonnes phrases. Des agents élus ou qui décident seuls ne relèvent pas de la déconcentration, et le pouvoir central ne disparaît pas.",
+                  "answers": [
+                    {
+                      "content": "Les agents sont nommés par l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les agents appliquent les décisions du pouvoir central",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les agents sont élus par les habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les agents décident seuls de la politique du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pouvoir central disparaît du territoire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'État envoie un préfet dans un département pour se rapprocher des habitants. Que garde l'État ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on repère le préfet, qui agit au nom de l'État. Étape 2 — Vérifier : il est nommé par l'État. Étape 3 — Relever : il reçoit ses ordres du pouvoir central. Étape 4 — Conclure : l'État garde donc le pouvoir de décider. Croire que le préfet décide seul est le piège de la fiche : il applique, il ne décide pas à la place de l'État.",
+                  "answers": [
+                    {
+                      "content": "Le pouvoir de décider",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rien, car le préfet décide désormais seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement le pouvoir d'élire le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pouvoir de décider passe aux chefs de village",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Distinguer ce qui relève de la déconcentration",
+              "statement": "Dans cet exercice, tu utilises des questions de types variés pour reconnaître la déconcentration et l'expliquer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans la déconcentration, le préfet est ___ par l'État.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Vérifier : on vérifie comment il est désigné : il est nommé par l'État. Étape 4 — Conclure : c'est un agent déconcentré. Élu ou choisi par le village décrirait un représentant des habitants, pas un agent de l'État.",
+                  "answers": [
+                    {
+                      "content": "nommé",
+                      "correct": true
+                    },
+                    {
+                      "content": "élu",
+                      "correct": false
+                    },
+                    {
+                      "content": "tiré au sort",
+                      "correct": false
+                    },
+                    {
+                      "content": "choisi par le village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à son sens.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on repère le sens de chaque mot. Étape 3 — Relever : l'agent déconcentré reçoit ses ordres du pouvoir central, qui décide. Étape 4 — Conclure : la circonscription est le territoire où l'agent travaille.",
+                  "answers": [
+                    {
+                      "content": "Pouvoir central",
+                      "match": "Prend les décisions"
+                    },
+                    {
+                      "content": "Agent déconcentré",
+                      "match": "Applique les décisions sur place"
+                    },
+                    {
+                      "content": "Circonscription administrative",
+                      "match": "Territoire découpé par l'État"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître la déconcentration.",
+                  "question_type": "ordering",
+                  "explanation": "La méthode va toujours du plus simple au plus précis. Étape 1 — Repérer qui agit. Étape 2 — Vérifier comment il est désigné. Étape 3 — Relever de qui il reçoit ses ordres. Étape 4 — Conclure. On ne peut pas conclure avant d'avoir vérifié la désignation et l'origine des ordres.",
+                  "answers": [
+                    {
+                      "content": "Repérer qui agit et au nom de qui"
+                    },
+                    {
+                      "content": "Vérifier comment il est désigné"
+                    },
+                    {
+                      "content": "Relever de qui il reçoit ses ordres"
+                    },
+                    {
+                      "content": "Conclure que c'est de la déconcentration"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ministre de la Santé demande de vacciner les enfants. Le directeur régional de la santé organise la campagne dans sa région. Qui reçoit les ordres du pouvoir central ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on repère l'acteur qui agit dans la région : le directeur régional. Étape 2 — Vérifier : il représente le ministère de la Santé. Étape 3 — Relever : il reçoit ses ordres du ministre. Étape 4 — Conclure : c'est un agent déconcentré. Le ministre donne les ordres, il ne les reçoit pas de ses propres agents.",
+                  "answers": [
+                    {
+                      "content": "Le directeur régional de la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les enfants vaccinés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les parents d'élèves",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ministre lui-même",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Déconcentrer, c'est rapprocher l'administration des habitants sans que l'État perde son autorité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on repère l'objectif : être près des habitants. Étape 3 — Relever : les agents obéissent au pouvoir central. Étape 4 — Conclure : l'État garde donc son autorité. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels acteurs agissent au nom de l'État sur le terrain ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on repère ceux qui agissent au nom de l'État. Étape 2 — Vérifier : le préfet, le sous-préfet et le directeur régional sont nommés par l'État. Étape 4 — Conclure : ce sont des agents déconcentrés. Un commerçant ou un délégué de classe n'agissent pas au nom de l'État.",
+                  "answers": [
+                    {
+                      "content": "Un préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un directeur régional de l'éducation nationale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un commerçant du marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un élève délégué de classe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque question, demande-toi : cet acteur est-il nommé par l'État et obéit-il au pouvoir central ?"
+            }
+          ]
+        },
+        {
+          "name": "Situer les circonscriptions administratives",
+          "remember": "Pour administrer le pays, l'État le découpe en **circonscriptions administratives** emboîtées comme des poupées russes. Du plus grand au plus petit : le **district**, la **région**, le **département**, la **sous-préfecture** et le **village**. Un district regroupe en général plusieurs régions, une région plusieurs départements, un département plusieurs sous-préfectures, une sous-préfecture plusieurs villages. Le **chef-lieu** est la ville où siège l'autorité. La Côte d'Ivoire compte 14 districts ; chacun est dirigé par un gouverneur nommé par l'État.",
+          "method": [
+            "Lire le nom du territoire proposé.",
+            "Chercher à quel niveau il appartient : district, région, département, sous-préfecture ou village.",
+            "Placer ce niveau dans l'emboîtement : ce qui le contient au-dessus, ce qu'il contient en dessous.",
+            "Vérifier avec un exemple ou avec le schéma."
+          ],
+          "example": {
+            "statement": "Placer la sous-préfecture dans l'emboîtement des circonscriptions.",
+            "steps": [
+              "Lire : le territoire proposé est la « sous-préfecture ».",
+              "Chercher : c'est le quatrième niveau, après le district, la région et le département.",
+              "Placer : elle est contenue dans un département et elle contient plusieurs villages.",
+              "Vérifier : tout village appartient à une sous-préfecture, qui appartient à un département."
+            ]
+          },
+          "pitfall": "Ne confonds pas le sens de l'emboîtement. Contre-exemple : un département n'est pas plus grand que la région ; plusieurs départements forment une région. Pour éviter l'erreur, pars toujours du plus grand (le district) vers le plus petit (le village), comme sur le schéma.",
+          "figure": "arbre-circonscriptions",
+          "practice": {
+            "statement": "Tu t'entraînes à placer les circonscriptions administratives avec la méthode : lire, chercher, placer, vérifier.",
+            "questions": [
+              {
+                "content": "Range les circonscriptions du plus grand au plus petit.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Chercher : on cherche le niveau de chacune. Étape 3 — Placer : on les place dans l'emboîtement : le district contient les régions, la région contient les départements, le département contient les sous-préfectures, la sous-préfecture contient les villages.",
+                "answers": [
+                  {
+                    "content": "District"
+                  },
+                  {
+                    "content": "Région"
+                  },
+                  {
+                    "content": "Département"
+                  },
+                  {
+                    "content": "Sous-préfecture"
+                  },
+                  {
+                    "content": "Village"
+                  }
+                ],
+                "hint": "Commence par la circonscription qui contient toutes les autres."
+              },
+              {
+                "content": "Quelle circonscription regroupe plusieurs départements ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : on lit la question : on cherche ce qui contient des départements. Étape 2 — Chercher : on cherche le niveau juste au-dessus du département. Étape 3 — Placer : c'est la région, qui regroupe plusieurs départements. Le district est encore plus grand : il regroupe plusieurs régions.",
+                "answers": [
+                  {
+                    "content": "La région",
+                    "correct": true
+                  },
+                  {
+                    "content": "La sous-préfecture",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le village",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le district",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel niveau est juste au-dessus du département ?"
+              },
+              {
+                "content": "Un département est divisé en plusieurs sous-___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Chercher : le niveau juste en dessous du département est la sous-préfecture. Étape 3 — Placer : un département contient donc plusieurs sous-préfectures.",
+                "answers": [
+                  {
+                    "content": "préfectures",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le niveau juste en dessous du département."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Placer chaque circonscription dans l'emboîtement",
+              "statement": "Tu places les circonscriptions administratives du plus grand au plus petit, avec la méthode : lire, chercher, placer, vérifier.",
+              "exercise_type": "fixation",
+              "figure": "arbre-circonscriptions",
+              "questions": [
+                {
+                  "content": "Quelle est la plus grande des circonscriptions administratives étudiées dans la fiche ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit les cinq noms. Étape 2 — Chercher : on cherche le niveau de chacun. Étape 3 — Placer : on les place : le district est tout en haut de l'emboîtement. Étape 4 — Vérifier : il contient les régions, qui contiennent les départements.",
+                  "answers": [
+                    {
+                      "content": "Le district",
+                      "correct": true
+                    },
+                    {
+                      "content": "La région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le département",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village contient plusieurs régions.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Chercher : le village est le niveau le plus petit. Étape 3 — Placer : c'est lui qui est contenu dans une sous-préfecture, et non l'inverse. Étape 4 — Vérifier : l'affirmation est fausse : c'est un district qui regroupe plusieurs régions.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le niveau situé juste au-dessus du département est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on lit le niveau donné : le département. Étape 2 — Chercher : on rappelle l'ordre : district, région, département, sous-préfecture, village. Étape 3 — Placer : juste au-dessus du département se trouve la région. Étape 4 — Vérifier : une région regroupe plusieurs départements.",
+                  "answers": [
+                    {
+                      "content": "région",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles circonscriptions sont plus petites qu'un département ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Chercher : on cherche le niveau de chacune. Étape 3 — Placer : sous le département se placent la sous-préfecture, puis le village. Le district et la région sont au-dessus du département, donc plus grands.",
+                  "answers": [
+                    {
+                      "content": "La sous-préfecture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le district",
+                      "correct": false
+                    },
+                    {
+                      "content": "La région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays tout entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région est-elle plus grande ou plus petite qu'un département ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher : la région et le département sont deux niveaux différents. Étape 3 — Placer : la région est au-dessus et regroupe plusieurs départements. Étape 4 — Vérifier : un exemple suffit : plusieurs départements forment une région. Inverser l'ordre est l'erreur de la fiche : c'est le département qui est contenu dans la région.",
+                  "answers": [
+                    {
+                      "content": "Plus grande, car elle regroupe plusieurs départements",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plus petite, car elle est contenue dans un département",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la même taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus petite, car elle est contenue dans un village",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Retrouver l'ordre et le contenu de chaque niveau",
+              "statement": "Dans cet exercice, tu retrouves la place de chaque circonscription dans l'emboîtement avec des questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La plus petite des circonscriptions administratives est le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Chercher : on cherche le niveau de chacune. Étape 3 — Placer : le village est tout en bas de l'emboîtement. Les trois autres circonscriptions contiennent des territoires plus petits.",
+                  "answers": [
+                    {
+                      "content": "village",
+                      "correct": true
+                    },
+                    {
+                      "content": "district",
+                      "correct": false
+                    },
+                    {
+                      "content": "département",
+                      "correct": false
+                    },
+                    {
+                      "content": "région",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque circonscription à ce qu'elle regroupe en général.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Chercher : on cherche le niveau de chaque circonscription. Étape 3 — Placer : chaque niveau regroupe en général plusieurs territoires du niveau juste en dessous. Étape 4 — Vérifier : on vérifie avec le schéma de la fiche.",
+                  "answers": [
+                    {
+                      "content": "District",
+                      "match": "Plusieurs régions"
+                    },
+                    {
+                      "content": "Région",
+                      "match": "Plusieurs départements"
+                    },
+                    {
+                      "content": "Département",
+                      "match": "Plusieurs sous-préfectures"
+                    },
+                    {
+                      "content": "Sous-préfecture",
+                      "match": "Plusieurs villages"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de niveaux de circonscriptions la fiche compte-t-elle, du district au village ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : on lit la liste : district, région, département, sous-préfecture, village. Étape 3 — Placer : on les place l'un sous l'autre. Étape 4 — Vérifier : on compte : cinq niveaux.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Range les circonscriptions du plus petit au plus grand.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Chercher : on cherche le niveau de chacune. Étape 3 — Placer : on les place en partant du bas : le village est contenu dans la sous-préfecture, elle-même dans le département, puis la région, puis le district. Attention : on demande ici l'ordre inverse de celui de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Village"
+                    },
+                    {
+                      "content": "Sous-préfecture"
+                    },
+                    {
+                      "content": "Département"
+                    },
+                    {
+                      "content": "Région"
+                    },
+                    {
+                      "content": "District"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une sous-préfecture est plus grande qu'un département.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit les deux noms : sous-préfecture et département. Étape 2 — Chercher : le département est au troisième niveau, la sous-préfecture au quatrième. Étape 3 — Placer : la sous-préfecture est contenue dans le département. Étape 4 — Vérifier : l'affirmation est fausse, car un département regroupe plusieurs sous-préfectures.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'appelle-t-on le chef-lieu d'une circonscription ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit le mot : chef-lieu. Étape 2 — Chercher : c'est un lieu, donc une ville. Étape 4 — Vérifier : on vérifie avec la fiche : c'est la ville où siège l'autorité. Le chef-lieu est une ville, pas la personne qui commande.",
+                  "answers": [
+                    {
+                      "content": "La ville où siège l'autorité de cette circonscription",
+                      "correct": true
+                    },
+                    {
+                      "content": "La plus grande forêt de la circonscription",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de la circonscription",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fleuve qui la traverse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense à des poupées russes : chaque circonscription contient celle du niveau juste en dessous."
+            }
+          ]
+        },
+        {
+          "name": "Associer chaque circonscription à son autorité",
+          "remember": "Chaque circonscription a son autorité : le **gouverneur** dirige le **district**, le **préfet de région** dirige la **région**, le **préfet** dirige le **département**, le **sous-préfet** dirige la **sous-préfecture**. Ces autorités sont **nommées par l'État**. Dans le **village**, l'autorité est le **chef de village** : il est choisi selon la tradition du village, puis reconnu par l'administration, et il fait le lien entre les habitants et le sous-préfet.",
+          "method": [
+            "Lire le nom de la circonscription demandée.",
+            "Repérer son niveau dans l'emboîtement.",
+            "Associer l'autorité qui dirige ce niveau.",
+            "Justifier en disant comment cette autorité est désignée et ce qu'elle fait."
+          ],
+          "example": {
+            "statement": "Trouver l'autorité qui dirige un département.",
+            "steps": [
+              "Lire : la circonscription demandée est le « département ».",
+              "Repérer : c'est le troisième niveau, sous la région et au-dessus de la sous-préfecture.",
+              "Associer : l'autorité du département est le préfet.",
+              "Justifier : le préfet est nommé par l'État et il fait appliquer les décisions du pouvoir central dans son département."
+            ]
+          },
+          "pitfall": "Ne confonds pas le préfet et le sous-préfet. Contre-exemple : le préfet dirige un département, mais le sous-préfet dirige une sous-préfecture, qui est plus petite et située dans le département. Pour éviter l'erreur, pense que « sous » veut dire « en dessous » : le sous-préfet est placé sous le préfet.",
+          "figure": "arbre-circonscriptions",
+          "practice": {
+            "statement": "Tu t'entraînes à associer chaque circonscription à son autorité avec la méthode : lire, repérer, associer, justifier.",
+            "questions": [
+              {
+                "content": "Relie chaque circonscription à son autorité.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Repérer : on repère le niveau de chaque circonscription. Étape 3 — Associer : on associe l'autorité : préfet pour le département, préfet de région pour la région, chef de village pour le village.",
+                "answers": [
+                  {
+                    "content": "Département",
+                    "match": "Préfet"
+                  },
+                  {
+                    "content": "Région",
+                    "match": "Préfet de région"
+                  },
+                  {
+                    "content": "Village",
+                    "match": "Chef de village"
+                  }
+                ],
+                "hint": "Le mot « région » se retrouve dans le nom de l'autorité."
+              },
+              {
+                "content": "Qui dirige un district ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : on lit : district. Étape 2 — Repérer : c'est le plus grand niveau. Étape 3 — Associer : l'autorité du district est le gouverneur. Le préfet dirige un département, le sous-préfet une sous-préfecture.",
+                "answers": [
+                  {
+                    "content": "Le gouverneur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sous-préfet",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le préfet",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le chef de village",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le plus grand niveau a l'autorité au titre le plus élevé."
+              },
+              {
+                "content": "Le ___ dirige la sous-préfecture.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : on lit : sous-préfecture. Étape 2 — Repérer : c'est le quatrième niveau. Étape 3 — Associer : son autorité est le sous-préfet.",
+                "answers": [
+                  {
+                    "content": "sous-préfet",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le nom de l'autorité ressemble au nom de la circonscription."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Associer chaque circonscription à son autorité",
+              "statement": "Tu associes chaque circonscription à son autorité avec la méthode : lire, repérer, associer, justifier.",
+              "exercise_type": "fixation",
+              "figure": "arbre-circonscriptions",
+              "questions": [
+                {
+                  "content": "Quelle autorité dirige une région ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit : région. Étape 2 — Repérer : c'est le deuxième niveau, sous le district. Étape 3 — Associer : son autorité est le préfet de région. Étape 4 — Justifier : il est nommé par l'État. Le gouverneur dirige le district, qui est plus grand que la région.",
+                  "answers": [
+                    {
+                      "content": "Le préfet de région",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gouverneur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chef de village dirige une région.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit : chef de village. Étape 2 — Repérer : il dirige le plus petit niveau, le village. Étape 3 — Associer : l'affirmation est fausse : une région est dirigée par un préfet de région.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque circonscription à son autorité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer : on repère le niveau de chaque circonscription. Étape 3 — Associer : on associe l'autorité de chaque niveau. Étape 4 — Justifier : on vérifie l'ordre du plus grand au plus petit.",
+                  "answers": [
+                    {
+                      "content": "District",
+                      "match": "Gouverneur"
+                    },
+                    {
+                      "content": "Région",
+                      "match": "Préfet de région"
+                    },
+                    {
+                      "content": "Département",
+                      "match": "Préfet"
+                    },
+                    {
+                      "content": "Sous-préfecture",
+                      "match": "Sous-préfet"
+                    },
+                    {
+                      "content": "Village",
+                      "match": "Chef de village"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ___ de région dirige la région.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on lit : région. Étape 3 — Associer : l'autorité de la région est le préfet de région. Étape 4 — Justifier : elle est nommée par l'État.",
+                  "answers": [
+                    {
+                      "content": "préfet",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui dirige un département ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit : département. Étape 2 — Repérer : c'est le troisième niveau. Étape 3 — Associer : son autorité est le préfet. Confondre préfet et sous-préfet est le piège de la fiche : le sous-préfet dirige une circonscription plus petite, la sous-préfecture.",
+                  "answers": [
+                    {
+                      "content": "Le préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le préfet de région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Retrouver l'autorité d'une circonscription",
+              "statement": "Dans cet exercice, tu retrouves les autorités des circonscriptions dans des situations variées.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le sous-préfet dirige la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Repérer : on repère le niveau du sous-préfet. Étape 3 — Associer : il dirige la sous-préfecture. La région est dirigée par le préfet de région, le district par le gouverneur.",
+                  "answers": [
+                    {
+                      "content": "sous-préfecture",
+                      "correct": true
+                    },
+                    {
+                      "content": "région",
+                      "correct": false
+                    },
+                    {
+                      "content": "district",
+                      "correct": false
+                    },
+                    {
+                      "content": "commune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range les autorités de la plus grande circonscription à la plus petite.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Repérer : on repère le niveau de chaque autorité. Étape 3 — Associer : on les associe dans l'ordre des circonscriptions : district, région, département, sous-préfecture, village.",
+                  "answers": [
+                    {
+                      "content": "Gouverneur"
+                    },
+                    {
+                      "content": "Préfet de région"
+                    },
+                    {
+                      "content": "Préfet"
+                    },
+                    {
+                      "content": "Sous-préfet"
+                    },
+                    {
+                      "content": "Chef de village"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet et le sous-préfet dirigent le même niveau de circonscription.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit les deux titres. Étape 2 — Repérer : le préfet dirige un département, le sous-préfet une sous-préfecture. Étape 3 — Associer : ce sont deux niveaux différents, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un village, les habitants veulent transmettre une demande au sous-préfet. Qui joue le rôle de relais entre eux et l'administration ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit : village. Étape 2 — Repérer : c'est le plus petit niveau. Étape 3 — Associer : son autorité est le chef de village. Étape 4 — Justifier : il est choisi selon la tradition du village, puis reconnu par l'administration, et il fait le lien avec le sous-préfet. Le gouverneur et le préfet de région dirigent des circonscriptions bien plus grandes.",
+                  "answers": [
+                    {
+                      "content": "Le chef de village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gouverneur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le préfet de région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ministre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles autorités sont des fonctionnaires que l'État place à la tête d'une circonscription ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer : on repère les niveaux. Étape 3 — Associer : le préfet et le sous-préfet sont des agents de l'État. Étape 4 — Justifier : le chef de village est choisi selon la tradition du village, puis reconnu par l'administration : ce n'est pas un fonctionnaire affecté par l'État. Un délégué ou un chef de marché ne sont pas des autorités administratives.",
+                  "answers": [
+                    {
+                      "content": "Le préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un élève délégué",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un chef de quartier de marché",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'autorité qui dirige un district porte le titre de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on lit : district. Étape 2 — Repérer : c'est le plus grand niveau. Étape 3 — Associer : son autorité est le gouverneur.",
+                  "answers": [
+                    {
+                      "content": "gouverneur",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Plus la circonscription est petite, plus le titre de l'autorité commence par « sous » ou devient proche des habitants."
+            }
+          ]
+        },
+        {
+          "name": "Expliquer le rôle de la déconcentration",
+          "remember": "La déconcentration a deux rôles. **1. Représenter l'État** : le préfet, le sous-préfet et les autres autorités représentent le pouvoir central dans leur circonscription. Elles font appliquer les lois et les décisions, et veillent à l'ordre et à la sécurité. **2. Faire fonctionner les services déconcentrés** : ce sont des bureaux locaux des ministères (éducation, santé, agriculture…) installés dans les régions et les départements. Ainsi, l'administration est plus **proche des habitants**, tout en restant sous l'autorité de l'État.",
+          "method": [
+            "Situer l'autorité ou le service dans sa circonscription.",
+            "Identifier qui il représente : l'État ou un ministère.",
+            "Décrire sa mission sur le terrain.",
+            "Expliquer ce que cela apporte aux habitants."
+          ],
+          "example": {
+            "statement": "Expliquer le rôle d'une direction régionale de la santé installée dans une région.",
+            "steps": [
+              "Situer : la direction est installée dans la région, près des habitants.",
+              "Identifier : elle représente le ministère de la Santé.",
+              "Décrire : elle fait appliquer la politique nationale de santé, par exemple en organisant des campagnes de vaccination.",
+              "Expliquer : les habitants de la région n'ont pas à aller loin pour recevoir ces services."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'un service déconcentré agit seul. Contre-exemple : une direction régionale de l'éducation ne crée pas les programmes scolaires ; elle applique ceux que fixe le ministère. Pour éviter l'erreur, rappelle-toi que le service est proche des habitants, mais qu'il dépend toujours du ministère.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer le rôle de la déconcentration avec la méthode : situer, identifier, décrire, expliquer.",
+            "questions": [
+              {
+                "content": "Qui représente l'État dans un département ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : on situe l'autorité : le département. Étape 2 — Identifier : on identifie qui représente l'État : le préfet. Étape 3 — Décrire : il fait appliquer les lois et veille à l'ordre.",
+                "answers": [
+                  {
+                    "content": "Le préfet",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le chef de village",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un élève délégué",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un commerçant",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quelle autorité dirige le département ?"
+              },
+              {
+                "content": "Une direction régionale d'un ministère est un service déconcentré.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : on situe le service : dans une région. Étape 2 — Identifier : on identifie qui il représente : un ministère. Étape 4 — Expliquer : c'est donc un service déconcentré, qui rapproche le ministère des habitants.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Ce service est installé dans la région mais dépend d'un ministère."
+              },
+              {
+                "content": "Un service déconcentré est un bureau local d'un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : on situe le service dans une région ou un département. Étape 2 — Identifier : on identifie qui il représente : un ministère.",
+                "answers": [
+                  {
+                    "content": "ministère",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le ministre est à sa tête."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Comprendre le rôle de l'État sur le terrain",
+              "statement": "Tu expliques le rôle de la déconcentration avec la méthode : situer, identifier, décrire, expliquer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le premier rôle des autorités déconcentrées comme le préfet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : on situe le préfet dans son département. Étape 2 — Identifier : on identifie qui il représente : l'État. Étape 3 — Décrire : sa mission : faire appliquer les lois et les décisions. Étape 4 — Expliquer : les habitants ont ainsi un représentant de l'État près d'eux. Voter les lois ou décider seul de la politique du pays n'est pas le rôle d'un agent déconcentré.",
+                  "answers": [
+                    {
+                      "content": "Représenter l'État et faire appliquer ses décisions dans leur circonscription",
+                      "correct": true
+                    },
+                    {
+                      "content": "Voter les lois à la place des députés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décider seules de la politique du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer les ministres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les services déconcentrés dépendent d'un ministère.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : on situe les services : dans les régions et les départements. Étape 2 — Identifier : on identifie qui ils représentent : un ministère. Étape 4 — Expliquer : l'affirmation est vraie. Ils agissent sur place pour le compte du ministère.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles missions relèvent d'un préfet ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer : on situe le préfet dans son département. Étape 2 — Identifier : on identifie qui il représente : l'État. Étape 3 — Décrire : on décrit sa mission : appliquer les lois et veiller à l'ordre. Voter le budget ou élire les députés se fait au niveau national.",
+                  "answers": [
+                    {
+                      "content": "Faire appliquer les lois dans son département",
+                      "correct": true
+                    },
+                    {
+                      "content": "Veiller à l'ordre et à la sécurité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Voter le budget de l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Élire les députés du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir le chef de village du pays entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque service déconcentré à son domaine d'action.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Situer : on situe chaque service dans la région. Étape 2 — Identifier : on identifie le ministère qu'il représente : éducation, santé, agriculture. Étape 3 — Décrire : on décrit son domaine d'action sur le terrain.",
+                  "answers": [
+                    {
+                      "content": "Direction régionale de l'éducation nationale",
+                      "match": "Les écoles de la région"
+                    },
+                    {
+                      "content": "Direction régionale de la santé",
+                      "match": "Les centres de santé de la région"
+                    },
+                    {
+                      "content": "Direction régionale de l'agriculture",
+                      "match": "L'aide aux planteurs de la région"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une direction régionale de l'éducation décide-t-elle seule du programme des écoles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : on situe le service dans sa région. Étape 2 — Identifier : on identifie qui il représente : le ministère de l'Éducation nationale. Étape 3 — Décrire : sa mission : faire appliquer le programme national. Croire qu'un service déconcentré agit seul est le piège de la fiche : il applique les décisions du ministère.",
+                  "answers": [
+                    {
+                      "content": "Non, elle applique le programme fixé par le ministère",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, elle invente les programmes de sa région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car elle est loin du ministère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car elle ne travaille qu'avec les parents",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Expliquer l'utilité des services déconcentrés",
+              "statement": "Dans cet exercice, tu expliques à quoi servent l'autorité et les services déconcentrés avec des questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une direction régionale est installée près des habitants mais dépend d'un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer : on situe la direction dans la région. Étape 2 — Identifier : on identifie qui elle représente : un ministère. Étape 4 — Expliquer : cela rapproche l'administration des habitants.",
+                  "answers": [
+                    {
+                      "content": "ministère",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet représente ___ dans son département.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Situer : on situe le préfet dans son département. Étape 2 — Identifier : on identifie qui il représente : l'État. Il n'est pas élu par les habitants : il est nommé par l'État.",
+                  "answers": [
+                    {
+                      "content": "l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "les habitants élus",
+                      "correct": false
+                    },
+                    {
+                      "content": "un village",
+                      "correct": false
+                    },
+                    {
+                      "content": "une entreprise",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour expliquer le rôle d'un service déconcentré.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer le service dans sa région. Étape 2 — Identifier le ministère qu'il représente. Étape 3 — Décrire sa mission. Étape 4 — Expliquer l'avantage pour les habitants. On ne peut pas décrire la mission avant d'avoir identifié le ministère.",
+                  "answers": [
+                    {
+                      "content": "Situer le service dans sa région"
+                    },
+                    {
+                      "content": "Identifier le ministère qu'il représente"
+                    },
+                    {
+                      "content": "Décrire sa mission sur le terrain"
+                    },
+                    {
+                      "content": "Expliquer ce que cela apporte aux habitants"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une famille d'un village éloigné veut une information de l'administration. Grâce à la déconcentration, que peut-elle faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : on situe la famille dans sa sous-préfecture. Étape 2 — Identifier : on identifie le représentant de l'État proche : le sous-préfet. Étape 3 — Décrire : sa mission : relayer les demandes. Étape 4 — Expliquer : l'administration est ainsi plus proche des habitants. Aller voir le ministre loin du village est justement ce que la déconcentration évite.",
+                  "answers": [
+                    {
+                      "content": "S'adresser à un représentant de l'État proche, sans aller jusqu'à la capitale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Attendre que le Président vienne au village",
+                      "correct": false
+                    },
+                    {
+                      "content": "S'adresser uniquement au ministre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décider elle-même de la loi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Grâce à la déconcentration, les habitants doivent toujours aller dans la capitale pour s'adresser à l'administration.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : on situe les services : dans les régions et les départements. Étape 4 — Expliquer : ils sont près des habitants, qui n'ont donc pas à aller dans la capitale. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont des rôles de la déconcentration ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Identifier : on identifie qui représente l'État : les autorités déconcentrées. Étape 3 — Décrire : on décrit leur mission : représenter, appliquer, rapprocher. Remplacer le gouvernement ou voter les lois n'est pas leur rôle.",
+                  "answers": [
+                    {
+                      "content": "Représenter l'État près des habitants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire appliquer les décisions du pouvoir central",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rapprocher les services des ministères de la population",
+                      "correct": true
+                    },
+                    {
+                      "content": "Remplacer le gouvernement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Voter les lois dans chaque village",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour chaque question, demande-toi : qui est représenté (l'État ou un ministère) et en quoi les habitants y gagnent ?"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une campagne de vaccination dans un village",
+          "statement": "Document : récit écrit pour Lnclass. Le ministre de la Santé décide une campagne de vaccination des enfants. Le directeur régional de la santé l'organise dans la région. Le sous-préfet informe le chef du village de Bokakro, un village imaginaire, et le chef de village prévient les familles. Tu réponds aux questions sur l'organisation de cette campagne.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une campagne de vaccination est décidée par le ministre de la Santé, puis organisée dans une région par le directeur régional de la santé. Qui a pris la décision ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer qui décide : le ministre, au sommet. Étape 2 — Vérifier comment sont désignés les autres acteurs : le directeur régional reçoit ses ordres du ministre. Étape 3 — Conclure : la décision vient du pouvoir central. Le directeur régional applique la décision, il ne la prend pas. Le chef du village la relaie auprès des familles.",
+              "answers": [
+                {
+                  "content": "Le ministre de la Santé, qui est le pouvoir central",
+                  "correct": true
+                },
+                {
+                  "content": "Le directeur régional de la santé",
+                  "correct": false
+                },
+                {
+                  "content": "Le chef du village",
+                  "correct": false
+                },
+                {
+                  "content": "Les familles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque acteur de la campagne à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Situer chaque acteur : ministère, région, sous-préfecture, village. Étape 2 — Identifier qui il représente : l'État ou les habitants. Étape 3 — Décrire sa mission dans la campagne.",
+              "answers": [
+                {
+                  "content": "Ministre de la Santé",
+                  "match": "Prend la décision"
+                },
+                {
+                  "content": "Directeur régional de la santé",
+                  "match": "Organise la campagne dans la région"
+                },
+                {
+                  "content": "Sous-préfet",
+                  "match": "Représente l'État et informe le chef de village"
+                },
+                {
+                  "content": "Chef de village",
+                  "match": "Prévient les familles du village"
+                }
+              ]
+            },
+            {
+              "content": "Dans ce récit, le sous-préfet est élu par les habitants de Bokakro.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Repérer le sous-préfet. Étape 2 — Vérifier comment il est désigné : un sous-préfet est nommé par l'État. Étape 3 — Conclure : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet de la décision, du sommet jusqu'aux familles.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Le ministre décide au sommet. Étape 2 — Le directeur régional organise dans la région. Étape 3 — Le sous-préfet relaie dans sa sous-préfecture. Étape 4 — Le chef de village informe les familles. Les ordres descendent toujours du pouvoir central vers la base.",
+              "answers": [
+                {
+                  "content": "Le ministre de la Santé décide la campagne"
+                },
+                {
+                  "content": "Le directeur régional de la santé l'organise dans la région"
+                },
+                {
+                  "content": "Le sous-préfet informe le chef de village"
+                },
+                {
+                  "content": "Le chef de village prévient les familles"
+                }
+              ]
+            },
+            {
+              "content": "Grâce à cette organisation, l'administration se rapproche des ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Situer les agents : près de la population. Étape 2 — Décrire leur mission : appliquer la décision. Étape 3 — Expliquer l'avantage : l'administration se rapproche des habitants.",
+              "answers": [
+                {
+                  "content": "habitants",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Cherche d'abord qui décide, puis qui transmet."
+        },
+        {
+          "title": "Les cinq niveaux de l'emboîtement",
+          "statement": "Document : une feuille d'exercice écrite pour Lnclass présente une chaîne de territoires : le village A est dans la sous-préfecture B, qui est dans le département C, lui-même dans la région D, qui appartient au district E. Les lettres sont imaginaires. Tu retrouves les niveaux et les autorités.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Range ces territoires du plus petit au plus grand : village A, sous-préfecture B, département C, région D, district E. Écris leur niveau.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Lire les niveaux donnés. Étape 2 — Chercher la place de chacun dans l'emboîtement. Étape 3 — Placer du plus petit au plus grand. Le village est contenu dans la sous-préfecture, puis le département, la région, le district.",
+              "answers": [
+                {
+                  "content": "Village"
+                },
+                {
+                  "content": "Sous-préfecture"
+                },
+                {
+                  "content": "Département"
+                },
+                {
+                  "content": "Région"
+                },
+                {
+                  "content": "District"
+                }
+              ]
+            },
+            {
+              "content": "Quelle circonscription contient la sous-préfecture B ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : on cherche ce qui contient la sous-préfecture. Étape 2 — Chercher le niveau juste au-dessus : le département. Étape 3 — Placer : la sous-préfecture B est dans le département C. La région et le district la contiennent aussi, mais de façon plus lointaine. Le village A est plus petit.",
+              "answers": [
+                {
+                  "content": "Le département C",
+                  "correct": true
+                },
+                {
+                  "content": "La région D seulement",
+                  "correct": false
+                },
+                {
+                  "content": "Le village A",
+                  "correct": false
+                },
+                {
+                  "content": "Le district E seulement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque territoire à son autorité.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Lire le niveau de chaque territoire. Étape 2 — Repérer l'autorité de chaque niveau. Étape 3 — Associer et vérifier l'ordre.",
+              "answers": [
+                {
+                  "content": "Village A",
+                  "match": "Chef de village"
+                },
+                {
+                  "content": "Sous-préfecture B",
+                  "match": "Sous-préfet"
+                },
+                {
+                  "content": "Département C",
+                  "match": "Préfet"
+                },
+                {
+                  "content": "Région D",
+                  "match": "Préfet de région"
+                },
+                {
+                  "content": "District E",
+                  "match": "Gouverneur"
+                }
+              ]
+            },
+            {
+              "content": "Quelles autorités sont des fonctionnaires que l'État place à la tête d'une circonscription ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Lire les titres. Étape 2 — Vérifier la désignation : préfets et sous-préfets sont nommés par l'État. Étape 3 — Conclure : ce sont deux agents déconcentrés. Le chef de village est choisi selon la tradition du village, puis reconnu par l'administration : ce n'est pas un fonctionnaire affecté par l'État.",
+              "answers": [
+                {
+                  "content": "Le préfet du département C",
+                  "correct": true
+                },
+                {
+                  "content": "Le sous-préfet de la sous-préfecture B",
+                  "correct": true
+                },
+                {
+                  "content": "Le chef du village A",
+                  "correct": false
+                },
+                {
+                  "content": "Un élève de la classe",
+                  "correct": false
+                },
+                {
+                  "content": "Un commerçant du village A",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le préfet et le sous-préfet dirigent le même niveau.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Lire : préfet et sous-préfet. Étape 2 — Repérer les niveaux : département et sous-préfecture. Étape 3 — Conclure : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux phrases la différence entre un préfet et un sous-préfet.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le préfet dirige un département",
+                "Le sous-préfet dirige une sous-préfecture, plus petite",
+                "Les deux sont nommés par l'État"
+              ],
+              "explanation": "Corrigé modèle : Le préfet dirige un département. Le sous-préfet dirige une sous-préfecture, qui est un territoire plus petit situé dans le département. Tous deux sont nommés par l'État. Barème : 1 point pour le préfet et son département, 1 point pour le sous-préfet et sa sous-préfecture, 1 point pour la nomination par l'État.",
+              "answers": [],
+              "starter": "Le préfet dirige…"
+            }
+          ],
+          "hint": "Pense à l'emboîtement : le sous-préfet est placé sous le préfet."
+        },
+        {
+          "title": "Lire une carte des districts de Côte d'Ivoire",
+          "statement": "Document : carte de la Côte d'Ivoire découpée en 14 districts, tous dans la même teinte. Korhogo, Bouaké, Man et Daloa sont marquées comme chefs-lieux de région. Tu lis la carte puis tu réponds.",
+          "exercise_type": "evaluation",
+          "figure": "carte-districts",
+          "questions": [
+            {
+              "content": "Combien de districts compte la Côte d'Ivoire ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Lire la légende : une seule teinte, celle des districts. Étape 2 — Compter les territoires délimités sur la carte. Étape 3 — Conclure : la Côte d'Ivoire compte 14 districts.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque ville à la région dont elle est le chef-lieu.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Lire le nom de chaque ville. Étape 2 — Se rappeler qu'un chef-lieu est la ville où siège l'autorité. Étape 3 — Associer chaque ville à sa région.",
+              "answers": [
+                {
+                  "content": "Korhogo",
+                  "match": "Poro"
+                },
+                {
+                  "content": "Bouaké",
+                  "match": "Gbêkê"
+                },
+                {
+                  "content": "Man",
+                  "match": "Tonkpi"
+                },
+                {
+                  "content": "Daloa",
+                  "match": "Haut-Sassandra"
+                }
+              ]
+            },
+            {
+              "content": "La région du Poro est plus grande que le district qui la contient.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Lire : le Poro est une région, dont Korhogo est le chef-lieu. Étape 2 — Repérer les niveaux : le district est au-dessus de la région. Étape 3 — Conclure : l'affirmation est fausse, car un district regroupe en général plusieurs régions.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels noms désignent des régions ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Lire la carte : Korhogo est le chef-lieu du Poro, Bouaké celui du Gbêkê. Étape 2 — Repérer le niveau de chaque nom : le Poro et le Gbêkê sont des régions. Étape 3 — Conclure : Savanes, Montagnes et Woroba sont des districts, un niveau plus grand.",
+              "answers": [
+                {
+                  "content": "Poro",
+                  "correct": true
+                },
+                {
+                  "content": "Gbêkê",
+                  "correct": true
+                },
+                {
+                  "content": "Savanes",
+                  "correct": false
+                },
+                {
+                  "content": "Montagnes",
+                  "correct": false
+                },
+                {
+                  "content": "Woroba",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Qui dirige un district ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire : district. Étape 2 — Repérer le niveau le plus grand. Étape 3 — Associer l'autorité : le gouverneur. Le préfet dirige un département, le sous-préfet une sous-préfecture.",
+              "answers": [
+                {
+                  "content": "Le gouverneur",
+                  "correct": true
+                },
+                {
+                  "content": "Le préfet",
+                  "correct": false
+                },
+                {
+                  "content": "Le sous-préfet",
+                  "correct": false
+                },
+                {
+                  "content": "Le chef de village",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Cite deux autorités déconcentrées et dis pour chacune quelle circonscription elle dirige.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Deux autorités exactes",
+                "Une circonscription exacte pour la première",
+                "Une circonscription exacte pour la seconde"
+              ],
+              "explanation": "Corrigé modèle : Le préfet dirige un département. Le sous-préfet dirige une sous-préfecture. On peut aussi citer le gouverneur du district ou le préfet de région. Barème : 1 point par autorité exacte et 1 point par circonscription exacte.",
+              "answers": [],
+              "starter": "Le préfet dirige…"
+            }
+          ],
+          "hint": "La légende et les noms marqués sur la carte t'aident à répondre."
+        },
+        {
+          "title": "Bilan : la déconcentration en action",
+          "statement": "Document 1, texte écrit pour Lnclass : le ministre de l'Éducation nationale décide une campagne pour inciter les élèves à venir à l'heure. La direction régionale de l'éducation nationale l'organise dans la région. Le préfet du département veille à l'ordre pendant les réunions. Le sous-préfet rassemble les chefs de village. Document 2 : « La déconcentration est l'exercice du pouvoir de l'État près des habitants par des agents qu'il nomme. » Tu analyses ces documents.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le sujet du document 1 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Présenter le document : un texte écrit pour Lnclass. Étape 2 — Dégager l'idée : une décision du ministre arrive jusqu'aux écoles. Étape 3 — Conclure : le sujet est l'organisation d'une décision sur le terrain. Il n'y a ni élection ni vote d'une loi dans le texte.",
+              "answers": [
+                {
+                  "content": "L'organisation d'une décision du ministre sur le terrain",
+                  "correct": true
+                },
+                {
+                  "content": "Une élection dans un village",
+                  "correct": false
+                },
+                {
+                  "content": "Le vote d'une loi par les habitants",
+                  "correct": false
+                },
+                {
+                  "content": "L'indépendance d'une région",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels acteurs du document 1 sont des agents de l'État ? (3 réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 1 — Relever les acteurs du texte. Étape 2 — Vérifier ceux qui sont nommés par l'État. Étape 3 — Conclure : la direction régionale, le préfet et le sous-préfet. Les élèves ne sont pas des agents ; le chef de village est choisi selon la tradition du village.",
+              "answers": [
+                {
+                  "content": "La direction régionale de l'éducation nationale",
+                  "correct": true
+                },
+                {
+                  "content": "Le préfet du département",
+                  "correct": true
+                },
+                {
+                  "content": "Le sous-préfet",
+                  "correct": true
+                },
+                {
+                  "content": "Les élèves",
+                  "correct": false
+                },
+                {
+                  "content": "Les chefs de village",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la campagne décrite dans le document 1.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Relever les acteurs dans l'ordre du texte. Étape 2 — Placer la décision au sommet. Étape 3 — Descendre vers les niveaux locaux. Le ministre décide d'abord, les autres appliquent ensuite.",
+              "answers": [
+                {
+                  "content": "Le ministre décide la campagne"
+                },
+                {
+                  "content": "La direction régionale l'organise dans la région"
+                },
+                {
+                  "content": "Le préfet veille à l'ordre pendant les réunions"
+                },
+                {
+                  "content": "Le sous-préfet rassemble les chefs de village"
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi le document 1 montre-t-il de la déconcentration ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer qui agit : direction régionale, préfet, sous-préfet. Étape 2 — Vérifier leur désignation : nommés par l'État. Étape 3 — Relever leurs ordres : ils viennent du ministre. Étape 4 — Conclure : c'est de la déconcentration. Dire que les habitants décident ou que le ministre ne contrôle plus rien est faux.",
+              "answers": [
+                {
+                  "content": "Des agents nommés par l'État appliquent sur place la décision du ministre",
+                  "correct": true
+                },
+                {
+                  "content": "Les habitants décident eux-mêmes de la campagne",
+                  "correct": false
+                },
+                {
+                  "content": "Le ministre ne contrôle plus rien",
+                  "correct": false
+                },
+                {
+                  "content": "Les chefs de village donnent des ordres au ministre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le document 2, l'État nomme ses ___ pour exercer son pouvoir près des habitants.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Lire la définition du document 2. Étape 2 — Relever le mot qui désigne ceux que l'État nomme. Étape 3 — Conclure : ce sont des agents.",
+              "answers": [
+                {
+                  "content": "agents",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En un paragraphe d'au moins quatre phrases, explique ce qu'est la déconcentration et montre son utilité pour les habitants. Utilise les mots circonscription, préfet et ministère.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Définition correcte : l'État exerce son pouvoir près des habitants par des agents nommés",
+                "Emploie correctement le mot circonscription",
+                "Cite le préfet comme représentant de l'État",
+                "Cite le ministère comme pouvoir central",
+                "Explique l'utilité pour les habitants",
+                "Paragraphe d'au moins quatre phrases"
+              ],
+              "explanation": "Corrigé modèle : La déconcentration est une organisation où l'État garde le pouvoir de décider mais l'exerce près des habitants. Il le fait grâce à des agents qu'il nomme dans des circonscriptions administratives. Le préfet, par exemple, représente l'État dans son département et applique les décisions du ministère. Ainsi, les habitants n'ont pas à aller loin pour trouver l'administration. Barème : 2 points pour la définition, 1 point pour la circonscription, 1 point pour le préfet, 1 point pour le ministère, 1 point pour l'utilité pour les habitants.",
+              "answers": [],
+              "starter": "La déconcentration est…"
+            }
+          ],
+          "hint": "Relis le document 2 : il donne la définition à reformuler."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur la déconcentration",
+          "notions": "définition de la déconcentration, circonscriptions administratives et leur emboîtement, autorités de chaque circonscription, rôle de représentation de l'État et services déconcentrés.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : définition copiée dans un cahier de 4ème. « La déconcentration est une organisation où l'État garde le pouvoir de décider, mais l'exerce près des habitants par des agents qu'il nomme. » Tu réponds sur la définition.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "D'après le document, que garde l'État dans la déconcentration ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire la définition du document. Étape 2 — Relever ce que l'État garde : le pouvoir de décider. Étape 3 — Conclure : c'est la bonne réponse. Dire que l'État ne garde rien est faux : il décide toujours.",
+                  "answers": [
+                    {
+                      "content": "Le pouvoir de décider",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rien du tout",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les écoles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le choix du chef de village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après le document, les agents sont ___ par l'État.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire la définition. Étape 2 — Relever le mot qui dit comment les agents sont désignés. Étape 3 — Conclure : ils sont nommés.",
+                  "answers": [
+                    {
+                      "content": "nommés",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la déconcentration, les agents sont élus par les habitants.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire la définition du document. Étape 2 — Vérifier la désignation des agents : ils sont nommés. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La déconcentration rapproche l'administration des ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire la définition. Étape 2 — Relever que l'État agit près des habitants. Étape 3 — Conclure : c'est le bon mot.",
+                  "answers": [
+                    {
+                      "content": "habitants",
+                      "correct": true
+                    },
+                    {
+                      "content": "ministres",
+                      "correct": false
+                    },
+                    {
+                      "content": "pays voisins",
+                      "correct": false
+                    },
+                    {
+                      "content": "touristes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments décrivent la déconcentration ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire la définition. Étape 2 — Relever les deux idées : agents nommés, ordres du pouvoir central. Étape 3 — Conclure : ce sont les deux bonnes réponses. Les autres propositions contredisent la définition.",
+                  "answers": [
+                    {
+                      "content": "Des agents nommés par l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des ordres qui viennent du pouvoir central",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des agents élus par les habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pouvoir central qui disparaît",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des lois votées dans chaque village",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la définition du document phrase par phrase."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : un schéma de cahier range les circonscriptions administratives : district, région, département, sous-préfecture, village. Tu retrouves leur place.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Range les circonscriptions du plus grand au plus petit.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Lire les cinq noms. Étape 2 — Chercher leur niveau. Étape 3 — Placer du plus grand au plus petit.",
+                  "answers": [
+                    {
+                      "content": "District"
+                    },
+                    {
+                      "content": "Région"
+                    },
+                    {
+                      "content": "Département"
+                    },
+                    {
+                      "content": "Sous-préfecture"
+                    },
+                    {
+                      "content": "Village"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque circonscription à ce qu'elle regroupe en général.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Lire chaque nom. Étape 2 — Chercher son niveau. Étape 3 — Placer ce qu'elle regroupe : le niveau juste en dessous.",
+                  "answers": [
+                    {
+                      "content": "District",
+                      "match": "Plusieurs régions"
+                    },
+                    {
+                      "content": "Région",
+                      "match": "Plusieurs départements"
+                    },
+                    {
+                      "content": "Département",
+                      "match": "Plusieurs sous-préfectures"
+                    },
+                    {
+                      "content": "Sous-préfecture",
+                      "match": "Plusieurs villages"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle circonscription est la plus petite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire les noms. Étape 2 — Chercher les niveaux. Étape 3 — Placer : le village est tout en bas.",
+                  "answers": [
+                    {
+                      "content": "Le village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le district",
+                      "correct": false
+                    },
+                    {
+                      "content": "La région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le département",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de niveaux de circonscriptions y a-t-il du district au village ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Lire la liste. Étape 2 — Les compter : district, région, département, sous-préfecture, village. Étape 3 — Conclure : $5$ niveaux.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un département regroupe en général plusieurs sous-préfectures.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire : département. Étape 2 — Chercher le niveau juste en dessous : la sous-préfecture. Étape 3 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense à des poupées russes : chaque niveau contient le suivant."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : un tableau de cahier à compléter. Dans chaque ligne, une circonscription a son autorité. Tu retrouves chaque autorité.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque circonscription à son autorité.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Lire chaque circonscription. Étape 2 — Repérer son niveau. Étape 3 — Associer l'autorité de ce niveau.",
+                  "answers": [
+                    {
+                      "content": "District",
+                      "match": "Gouverneur"
+                    },
+                    {
+                      "content": "Région",
+                      "match": "Préfet de région"
+                    },
+                    {
+                      "content": "Département",
+                      "match": "Préfet"
+                    },
+                    {
+                      "content": "Sous-préfecture",
+                      "match": "Sous-préfet"
+                    },
+                    {
+                      "content": "Village",
+                      "match": "Chef de village"
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui dirige une sous-préfecture ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire : sous-préfecture. Étape 2 — Repérer le niveau : quatrième. Étape 3 — Associer : le sous-préfet. Le préfet dirige un département, plus grand.",
+                  "answers": [
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gouverneur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ___ dirige le district.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire : district. Étape 2 — Repérer le niveau : le plus grand. Étape 3 — Associer : le gouverneur.",
+                  "answers": [
+                    {
+                      "content": "gouverneur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet de région dirige une région.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire : préfet de région. Étape 2 — Repérer son niveau : la région. Étape 3 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chef de village dirige le ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire : chef de village. Étape 2 — Repérer son niveau. Étape 3 — Associer : le village.",
+                  "answers": [
+                    {
+                      "content": "village",
+                      "correct": true
+                    },
+                    {
+                      "content": "département",
+                      "correct": false
+                    },
+                    {
+                      "content": "district",
+                      "correct": false
+                    },
+                    {
+                      "content": "pays",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Plus la circonscription est petite, plus l'autorité est proche des habitants."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : une affiche explique le rôle des autorités et des services de l'État sur le terrain. Tu retrouves les rôles de la déconcentration.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le rôle d'un préfet dans son département ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Situer le préfet dans son département. Étape 2 — Identifier qui il représente : l'État. Étape 3 — Décrire sa mission : faire appliquer les décisions.",
+                  "answers": [
+                    {
+                      "content": "Représenter l'État et faire appliquer ses décisions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Voter les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir les ministres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Remplacer le gouvernement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un service déconcentré est un bureau local d'un ministère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Situer le service dans une région. Étape 2 — Identifier le ministère qu'il représente. Étape 3 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels services sont des services déconcentrés ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Situer chaque service. Étape 2 — Vérifier qu'il représente un ministère. Étape 3 — Conclure : éducation et santé. Un marché, un club ou une boutique ne représentent pas l'État.",
+                  "answers": [
+                    {
+                      "content": "Une direction régionale de l'éducation nationale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une direction régionale de la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un marché de quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un club de football",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une boutique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les services déconcentrés rapprochent l'administration des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Situer les services dans les régions. Étape 2 — Décrire leur mission. Étape 3 — Expliquer : ils servent les habitants.",
+                  "answers": [
+                    {
+                      "content": "habitants",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque service à son domaine.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Situer chaque service dans la région. Étape 2 — Identifier son ministère. Étape 3 — Décrire son domaine d'action.",
+                  "answers": [
+                    {
+                      "content": "Direction régionale de l'éducation nationale",
+                      "match": "Les écoles"
+                    },
+                    {
+                      "content": "Direction régionale de la santé",
+                      "match": "Les centres de santé"
+                    },
+                    {
+                      "content": "Direction régionale de l'agriculture",
+                      "match": "Les planteurs"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un service déconcentré dépend toujours d'un ministère."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La déconcentration dans la vie courante",
+          "notions": "trajet d'une décision de l'État jusqu'aux habitants, rôle du sous-préfet et du chef de village, services déconcentrés, autorités de la région et du district.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation : à la rentrée, le ministre de l'Éducation nationale décide une consigne. La direction régionale de l'éducation nationale la transmet dans la région. Le préfet du département la fait connaître, et le sous-préfet prévient les chefs de village.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui décide la consigne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer le sommet de la chaîne : le ministre. Étape 2 — Vérifier : les autres acteurs transmettent. Étape 3 — Conclure : le ministre décide. Le sous-préfet et le chef de village relaient la consigne.",
+                  "answers": [
+                    {
+                      "content": "Le ministre de l'Éducation nationale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les élèves",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet de la consigne.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Placer le ministre en premier. Étape 2 — Descendre vers la région. Étape 3 — Descendre vers le département puis la sous-préfecture.",
+                  "answers": [
+                    {
+                      "content": "Le ministre décide"
+                    },
+                    {
+                      "content": "La direction régionale la transmet dans la région"
+                    },
+                    {
+                      "content": "Le préfet la fait connaître"
+                    },
+                    {
+                      "content": "Le sous-préfet prévient les chefs de village"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette situation, les chefs de village donnent des ordres au ministre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer le sens des ordres. Étape 2 — Vérifier : ils descendent du ministre. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet est nommé par l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer le préfet. Étape 2 — Vérifier sa désignation. Étape 3 — Conclure : il est nommé par l'État.",
+                  "answers": [
+                    {
+                      "content": "État",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que prouve cette situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer les agents. Étape 2 — Vérifier leur désignation. Étape 3 — Conclure : l'État est présent près des habitants. Les villages restent liés à l'État.",
+                  "answers": [
+                    {
+                      "content": "Que l'État agit près des habitants par ses agents",
+                      "correct": true
+                    },
+                    {
+                      "content": "Que les habitants décident seuls",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que le ministre a disparu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que les villages sont indépendants",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Suis le chemin de la consigne, du haut vers le bas."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation : Awa habite dans le village de Bokakro, un village imaginaire. Pour une démarche, elle doit s'adresser à l'autorité de sa sous-préfecture. Le chef de village l'aide.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "À quelle autorité Awa doit-elle s'adresser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire : l'autorité de sa sous-préfecture. Étape 2 — Repérer le niveau : la sous-préfecture. Étape 3 — Associer : le sous-préfet. Le gouverneur et le préfet de région dirigent de plus grands territoires.",
+                  "answers": [
+                    {
+                      "content": "Au sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au gouverneur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au ministre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au préfet de région",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chef de village fait le lien entre les habitants et le sous-préfet.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire : chef de village. Étape 2 — Repérer son rôle de relais. Étape 3 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque personne à ce qu'elle dirige ou fait.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on lit chaque titre (sous-préfet, chef de village, préfet). Étape 2 — Repérer le niveau : le sous-préfet est à la sous-préfecture, le préfet au département, le chef de village au village. Étape 3 — Associer : le sous-préfet dirige la sous-préfecture, le préfet dirige le département, le chef de village fait le lien avec les habitants. Erreur tentante : donner le département au sous-préfet ; « sous » indique qu'il est placé sous le préfet, dans un territoire plus petit.",
+                  "answers": [
+                    {
+                      "content": "Sous-préfet",
+                      "match": "Dirige la sous-préfecture"
+                    },
+                    {
+                      "content": "Chef de village",
+                      "match": "Fait le lien avec les habitants"
+                    },
+                    {
+                      "content": "Préfet",
+                      "match": "Dirige le département"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux circonscriptions les plus proches qui contiennent le village de Bokakro ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire : Bokakro est un village. Étape 2 — Chercher les niveaux au-dessus. Étape 3 — Placer : sous-préfecture puis département. Un village voisin n'est pas une circonscription plus grande.",
+                  "answers": [
+                    {
+                      "content": "La sous-préfecture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le département",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le village voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une autre sous-préfecture",
+                      "correct": false
+                    },
+                    {
+                      "content": "La commune d'un autre pays",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sous-préfet est un agent de l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire : sous-préfet. Étape 2 — Vérifier sa désignation. Étape 3 — Conclure : agent de l'État.",
+                  "answers": [
+                    {
+                      "content": "État",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pars du village et monte vers les circonscriptions plus grandes."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation : la santé. Le ministre de la Santé lance une campagne de vaccination. Un directeur régional de la santé l'organise. Le préfet veille à l'ordre pendant les rassemblements.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la mission du directeur régional de la santé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Situer le directeur dans la région. Étape 2 — Identifier : il représente le ministère de la Santé. Étape 3 — Décrire : il organise la campagne.",
+                  "answers": [
+                    {
+                      "content": "Organiser la campagne dans la région",
+                      "correct": true
+                    },
+                    {
+                      "content": "Voter la loi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir le ministre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Construire un département",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le directeur régional de la santé est un agent d'un service déconcentré.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Situer le service dans la région. Étape 2 — Identifier le ministère. Étape 3 — Conclure : service déconcentré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels acteurs agissent au nom de l'État ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Relever les acteurs. Étape 2 — Vérifier qui agit pour l'État. Étape 3 — Conclure : ministre, directeur régional, préfet. Un parent ou un vendeur n'agissent pas au nom de l'État.",
+                  "answers": [
+                    {
+                      "content": "Le ministre de la Santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le directeur régional de la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un parent d'élève",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un vendeur du marché",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet veille à l'___ pendant les rassemblements.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Situer le préfet. Étape 2 — Décrire sa mission : veiller à l'ordre. Étape 3 — Conclure : le mot est « ordre ».",
+                  "answers": [
+                    {
+                      "content": "ordre",
+                      "correct": true
+                    },
+                    {
+                      "content": "électricité",
+                      "correct": false
+                    },
+                    {
+                      "content": "impôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "examen",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le directeur régional dépend du ___ de la Santé.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Situer le directeur dans la région. Étape 2 — Identifier le ministère qu'il représente. Étape 3 — Conclure : il dépend du ministère.",
+                  "answers": [
+                    {
+                      "content": "ministère",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour expliquer le rôle d'un service déconcentré.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : on place d'abord le service dans sa région. Étape 2 — Identifier : on dit de quel ministère il dépend. Étape 3 — Décrire : on dit ce qu'il fait sur le terrain. Étape 4 — Expliquer : on termine par ce que cela apporte aux habitants. Erreur tentante : commencer par l'utilité ; on ne peut l'expliquer qu'après avoir dit où est le service et ce qu'il fait.",
+                  "answers": [
+                    {
+                      "content": "Situer le service"
+                    },
+                    {
+                      "content": "Identifier le ministère"
+                    },
+                    {
+                      "content": "Décrire sa mission"
+                    },
+                    {
+                      "content": "Expliquer ce que cela apporte aux habitants"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un service déconcentré est local, mais il dépend d'un ministère."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation : Mariam habite à Korhogo, chef-lieu de la région du Poro. Elle veut savoir quelle autorité dirige sa région, et quelle autorité dirige le district.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle autorité dirige la région du Poro ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire : région. Étape 2 — Repérer son niveau. Étape 3 — Associer : le préfet de région. Le gouverneur dirige le district.",
+                  "answers": [
+                    {
+                      "content": "Le préfet de région",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gouverneur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle autorité dirige un district ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire : district. Étape 2 — Repérer le plus grand niveau. Étape 3 — Associer : le gouverneur.",
+                  "answers": [
+                    {
+                      "content": "Le gouverneur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chef-lieu est la ville où siège l'autorité de la circonscription.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire : chef-lieu. Étape 2 — Rappeler la définition. Étape 3 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Korhogo est le chef-lieu de la région du ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : la ville citée est Korhogo. Étape 2 — Se rappeler : Korhogo est le chef-lieu de la région du Poro, dans le district des Savanes. Étape 3 — Conclure : la réponse est Poro. Erreur tentante : écrire « Savanes » ; c'est le nom du district, pas celui de la région.",
+                  "answers": [
+                    {
+                      "content": "Poro",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles autorités sont plus proches d'un village que le gouverneur ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire les titres. Étape 2 — Comparer les niveaux. Étape 3 — Conclure : sous-préfet et chef de village. Le gouverneur dirige un district, plus grand.",
+                  "answers": [
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Président",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gouverneur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le chef-lieu est une ville, pas une personne."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier sur la déconcentration",
+          "notions": "juger des affirmations sur la déconcentration, corriger des erreurs sur l'emboîtement et les autorités, distinguer les acteurs de l'État, raisonner sur le but de la déconcentration.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : trois affirmations d'élèves sur la déconcentration. Tu juges chacune et tu justifies.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève écrit : « Le préfet est élu par les habitants. » Que faut-il répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire l'affirmation. Étape 2 — Vérifier la désignation du préfet : l'État le nomme. Étape 3 — Conclure : l'affirmation est fausse. Les autres propositions donnent une mauvaise origine au préfet.",
+                  "answers": [
+                    {
+                      "content": "C'est faux : le préfet est nommé par l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai : les habitants votent pour lui",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai : il est tiré au sort",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : il est choisi par le chef de village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la déconcentration, l'État abandonne son pouvoir de décider.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire. Étape 2 — Vérifier : l'État garde le pouvoir de décider. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : « Le sous-préfet dirige un département. » Quelle correction est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire l'affirmation. Étape 2 — Repérer le niveau du sous-préfet. Étape 3 — Corriger : il dirige une sous-préfecture. Le département est dirigé par le préfet.",
+                  "answers": [
+                    {
+                      "content": "Le sous-préfet dirige une sous-préfecture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet dirige un district",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet dirige une région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet dirige un village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un agent déconcentré obéit au pouvoir ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire. Étape 2 — Repérer de qui l'agent reçoit ses ordres. Étape 3 — Conclure : du pouvoir central.",
+                  "answers": [
+                    {
+                      "content": "central",
+                      "correct": true
+                    },
+                    {
+                      "content": "local",
+                      "correct": false
+                    },
+                    {
+                      "content": "étranger",
+                      "correct": false
+                    },
+                    {
+                      "content": "villageois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles justifications montrent qu'un préfet relève de la déconcentration ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire les justifications. Étape 2 — Vérifier la désignation et l'origine des ordres. Étape 3 — Conclure : nommé, obéit au pouvoir central. Les autres justifications décrivent autre chose.",
+                  "answers": [
+                    {
+                      "content": "Il est nommé par l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il applique les décisions du pouvoir central",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est élu par les habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il décide seul de la politique du pays",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour juger une affirmation, vérifie la désignation et l'origine des ordres."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : un élève a recopié le schéma de la leçon et a fait des erreurs. Tu retrouves l'ordre exact.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Range les circonscriptions du plus petit au plus grand.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Lire les noms. Étape 2 — Chercher les niveaux. Étape 3 — Placer du plus petit au plus grand.",
+                  "answers": [
+                    {
+                      "content": "Village"
+                    },
+                    {
+                      "content": "Sous-préfecture"
+                    },
+                    {
+                      "content": "Département"
+                    },
+                    {
+                      "content": "Région"
+                    },
+                    {
+                      "content": "District"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève écrit : « Le département est plus grand que la région. » Quelle phrase est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire. Étape 2 — Chercher les niveaux. Étape 3 — Placer : la région contient les départements. Une région est formée de plusieurs départements.",
+                  "answers": [
+                    {
+                      "content": "La région est plus grande car elle regroupe plusieurs départements",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le département est plus grand car il regroupe plusieurs régions",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont de même taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "La région est contenue dans le village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un village peut contenir une sous-préfecture.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire. Étape 2 — Chercher les niveaux. Étape 3 — Conclure : c'est l'inverse, la sous-préfecture contient des villages.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région regroupe en général plusieurs ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire : région. Étape 2 — Chercher le niveau en dessous. Étape 3 — Conclure : les départements.",
+                  "answers": [
+                    {
+                      "content": "départements",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque autorité à la circonscription qu'elle dirige.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on lit chaque titre (préfet, sous-préfet, gouverneur). Étape 2 — Repérer le niveau : gouverneur au sommet, préfet au troisième niveau, sous-préfet au quatrième. Étape 3 — Associer : le gouverneur dirige le district, le préfet le département, le sous-préfet la sous-préfecture. Erreur tentante : confondre préfet et sous-préfet ; le sous-préfet dirige le territoire plus petit, situé dans le département.",
+                  "answers": [
+                    {
+                      "content": "Préfet",
+                      "match": "Département"
+                    },
+                    {
+                      "content": "Sous-préfet",
+                      "match": "Sous-préfecture"
+                    },
+                    {
+                      "content": "Gouverneur",
+                      "match": "District"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Corrige l'erreur en repartant de l'ordre : district, région, département, sous-préfecture, village."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : cinq acteurs. Tu repères ceux qui relèvent de la déconcentration, ceux qui n'en relèvent pas, et tu expliques pourquoi.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels acteurs relèvent de la déconcentration ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Repérer les acteurs. Étape 2 — Vérifier ceux qui sont nommés par l'État et obéissent au pouvoir central. Étape 3 — Conclure : préfet, sous-préfet, directeur régional. Un commerçant ou un chauffeur n'agissent pas au nom de l'État.",
+                  "answers": [
+                    {
+                      "content": "Un préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un directeur régional de la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un commerçant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un chauffeur de car",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un service déconcentré peut changer seul les décisions du ministère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer le service. Étape 2 — Relever de qui il reçoit ses ordres : du ministère. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi dit-on que le préfet représente l'État ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Situer le préfet. Étape 2 — Identifier qui il représente. Étape 3 — Expliquer : il agit au nom de l'État.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il agit au nom de l'État dans son département",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il est élu par les habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il est le plus riche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il décide des lois du pays",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet reçoit ses ordres du pouvoir ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le préfet agit au nom de l'État dans son département. Étape 2 — Relever : il reçoit ses ordres du Président, du gouvernement et des ministres, c'est-à-dire du pouvoir central. Étape 3 — Conclure : la réponse est « central ». Erreur tentante : « local » ; le préfet agit sur place, mais ses ordres viennent du sommet de l'État.",
+                  "answers": [
+                    {
+                      "content": "central",
+                      "correct": true
+                    },
+                    {
+                      "content": "villageois",
+                      "correct": false
+                    },
+                    {
+                      "content": "local",
+                      "correct": false
+                    },
+                    {
+                      "content": "électoral",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les agents déconcentrés sont ___ par l'État.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on parle des agents déconcentrés (préfet, sous-préfet, directeur régional). Étape 2 — Vérifier : ils sont désignés par l'État, les habitants ne votent pas pour eux. Étape 3 — Conclure : ils sont « nommés ». Erreur tentante : « élus » ; un agent élu par les habitants ne relève pas de la déconcentration.",
+                  "answers": [
+                    {
+                      "content": "nommés",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un agent déconcentré est nommé par l'État et obéit au pouvoir central."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : un enchaînement logique écrit pour Lnclass. Parce que l'État veut être près des habitants, il nomme des agents dans les circonscriptions. Ces agents appliquent ses décisions. Tu raisonnes sur cet enchaînement.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi l'État nomme-t-il des agents dans les circonscriptions ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire l'enchaînement. Étape 2 — Relever le but : être près des habitants. Étape 3 — Conclure : faire appliquer ses décisions. Les autres propositions contredisent la déconcentration.",
+                  "answers": [
+                    {
+                      "content": "Pour se rapprocher des habitants et faire appliquer ses décisions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour se débarrasser de son pouvoir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour que les habitants votent à sa place",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour supprimer les ministères",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre l'enchaînement.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Placer le but. Étape 2 — Placer le moyen. Étape 3 — Placer l'action puis le résultat.",
+                  "answers": [
+                    {
+                      "content": "L'État veut être près des habitants"
+                    },
+                    {
+                      "content": "Il nomme des agents dans les circonscriptions"
+                    },
+                    {
+                      "content": "Ces agents appliquent ses décisions"
+                    },
+                    {
+                      "content": "Les habitants ont une administration plus proche"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les agents déconcentrés appliquent les décisions de l'État.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : le document dit que les agents « appliquent ses décisions ». Étape 2 — Relever leur rôle : ils ne décident pas, ils font appliquer ce que l'État a décidé. Étape 3 — Conclure : l'affirmation est vraie. Erreur tentante : croire que les agents décident seuls ; la décision reste au pouvoir central.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus l'administration est près des habitants, plus elle est ___ d'accès.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : l'administration est installée près des habitants. Étape 2 — Relever l'avantage : les habitants n'ont plus à aller loin, jusqu'à la capitale, pour leurs démarches. Étape 3 — Conclure : elle est plus « facile » d'accès. Erreur tentante : « coûteuse » ; c'est au contraire le long trajet vers la capitale qui coûterait cher.",
+                  "answers": [
+                    {
+                      "content": "facile",
+                      "correct": true
+                    },
+                    {
+                      "content": "difficile",
+                      "correct": false
+                    },
+                    {
+                      "content": "interdite",
+                      "correct": false
+                    },
+                    {
+                      "content": "coûteuse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'État garde le pouvoir de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : le document dit que l'État nomme des agents qui appliquent ses décisions. Étape 2 — Relever ce que l'État garde : c'est lui qui prend les décisions. Étape 3 — Conclure : l'État garde le pouvoir de « décider ». Erreur tentante : croire que l'État confie la décision à ses agents ; il ne leur confie que l'application.",
+                  "answers": [
+                    {
+                      "content": "décider",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Suis le raisonnement : but, moyen, action, résultat."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur la déconcentration administrative",
+          "notions": "toutes les notions de la leçon : définition, circonscriptions et emboîtement, autorités, rôle de représentation de l'État et services déconcentrés, lecture d'une carte et d'un schéma.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : carte de la Côte d'Ivoire découpée en 14 districts, tous dans la même teinte. Korhogo, Bouaké, Man et Daloa sont marquées comme chefs-lieux de région.",
+              "exercise_type": "evaluation",
+              "figure": "carte-districts",
+              "questions": [
+                {
+                  "content": "Combien de districts compte la Côte d'Ivoire ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Lire la légende : une seule teinte, celle des districts. Étape 2 — Compter les districts délimités sur la carte. Étape 3 — Conclure : 14 districts.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque ville à sa région.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire les noms : Korhogo, Bouaké, Man, Daloa. Étape 2 — Se rappeler les chefs-lieux : Korhogo pour le Poro, Bouaké pour le Gbêkê, Man pour le Tonkpi, Daloa pour le Haut-Sassandra. Étape 3 — Associer chaque ville à sa région. Erreur tentante : associer une ville à son district (Savanes, Vallée du Bandama, Montagnes, Sassandra-Marahoué) ; la question demande la région.",
+                  "answers": [
+                    {
+                      "content": "Korhogo",
+                      "match": "Poro"
+                    },
+                    {
+                      "content": "Bouaké",
+                      "match": "Gbêkê"
+                    },
+                    {
+                      "content": "Man",
+                      "match": "Tonkpi"
+                    },
+                    {
+                      "content": "Daloa",
+                      "match": "Haut-Sassandra"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un district regroupe en général plusieurs régions.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit les deux niveaux : district et région. Étape 2 — Repérer le niveau : le district est le plus grand, la région vient juste en dessous. Étape 3 — Conclure : c'est vrai ; par exemple, le Poro est une des régions d'un district. Erreur tentante : croire que la région contient le district ; c'est l'inverse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le niveau situé juste au-dessous de la sous-préfecture est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire : le niveau donné est la sous-préfecture. Étape 2 — Rappeler l'ordre : district, région, département, sous-préfecture, village. Étape 3 — Conclure : juste au-dessous vient le village.",
+                  "answers": [
+                    {
+                      "content": "village",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui dirige un district ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la circonscription demandée est le district. Étape 2 — Repérer le niveau : c'est le plus grand, au sommet de l'emboîtement. Étape 3 — Associer : l'autorité du district est le gouverneur. Erreur tentante : le préfet ; il dirige le département, un niveau bien plus petit.",
+                  "answers": [
+                    {
+                      "content": "Le gouverneur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "La légende et les noms marqués sur la carte t'aident à répondre."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : schéma en arbre. L'État se divise en districts, qui regroupent des régions, puis des départements, des sous-préfectures et des villages. Chaque niveau a son autorité.",
+              "exercise_type": "evaluation",
+              "figure": "arbre-circonscriptions",
+              "questions": [
+                {
+                  "content": "Range les autorités de la plus grande circonscription à la plus petite.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Lire le schéma. Étape 2 — Repérer l'autorité de chaque niveau. Étape 3 — Placer dans l'ordre.",
+                  "answers": [
+                    {
+                      "content": "Gouverneur"
+                    },
+                    {
+                      "content": "Préfet de région"
+                    },
+                    {
+                      "content": "Préfet"
+                    },
+                    {
+                      "content": "Sous-préfet"
+                    },
+                    {
+                      "content": "Chef de village"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle circonscription est juste au-dessus du département sur le schéma ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire le schéma. Étape 2 — Chercher le niveau au-dessus. Étape 3 — Placer : la région. Le district est plus haut encore.",
+                  "answers": [
+                    {
+                      "content": "La région",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le district",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sous-préfecture",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le schéma, le chef de village est l'autorité du plus petit niveau.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire le bas du schéma. Étape 2 — Repérer le village. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le schéma, le préfet dirige le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le schéma. Étape 2 — Repérer le préfet. Étape 3 — Conclure : département.",
+                  "answers": [
+                    {
+                      "content": "département",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels niveaux sont dirigés par des fonctionnaires que l'État y affecte ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire le schéma. Étape 2 — Vérifier la désignation. Étape 3 — Conclure : préfet et sous-préfet. Le chef de village est choisi selon la tradition du village : ce n'est pas un fonctionnaire affecté par l'État.",
+                  "answers": [
+                    {
+                      "content": "Le département",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sous-préfecture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le village",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État tout entier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Lis le schéma de haut en bas."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : texte écrit pour Lnclass. Le ministre de l'Éducation décide une consigne. La direction régionale l'organise dans la région. Le sous-préfet rassemble les chefs de village. Les écoles l'appliquent.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui décide la consigne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Présenter le texte. Étape 2 — Dégager l'idée : le ministre décide. Étape 3 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Le ministre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chef de village",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels acteurs du texte sont des agents de l'État ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Relever les acteurs. Étape 2 — Vérifier ceux qui sont nommés par l'État. Étape 3 — Conclure. Les chefs de village sont choisis selon la tradition du village.",
+                  "answers": [
+                    {
+                      "content": "La direction régionale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les chefs de village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les écoles seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du texte.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Placer la décision. Étape 2 — Descendre vers la région. Étape 3 — Descendre vers les écoles.",
+                  "answers": [
+                    {
+                      "content": "Le ministre décide"
+                    },
+                    {
+                      "content": "La direction régionale organise"
+                    },
+                    {
+                      "content": "Le sous-préfet rassemble les chefs de village"
+                    },
+                    {
+                      "content": "Les écoles appliquent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le texte montre un exemple de déconcentration.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer les agents. Étape 2 — Vérifier leur désignation. Étape 3 — Conclure : déconcentration.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le texte, la direction régionale dépend du ___ de l'Éducation.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer : la direction régionale est installée dans la région. Étape 2 — Identifier : elle représente le ministère de l'Éducation, dont elle applique les décisions. Étape 3 — Conclure : elle dépend du « ministère ». Erreur tentante : croire qu'elle dépend du sous-préfet ou des chefs de village ; ses ordres viennent du ministère.",
+                  "answers": [
+                    {
+                      "content": "ministère",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La consigne est appliquée près des ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : la consigne part du ministre et arrive dans les écoles. Étape 2 — Relever où elle est appliquée : dans les écoles, auprès des élèves. Étape 3 — Conclure : elle est appliquée près des « élèves ». Erreur tentante : « ministres » ; le ministre décide de loin, la consigne est appliquée sur le terrain.",
+                  "answers": [
+                    {
+                      "content": "élèves",
+                      "correct": true
+                    },
+                    {
+                      "content": "ministres",
+                      "correct": false
+                    },
+                    {
+                      "content": "étrangers",
+                      "correct": false
+                    },
+                    {
+                      "content": "touristes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche d'abord qui décide, puis qui transmet, puis qui applique."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan de la leçon : les définitions, les circonscriptions, les autorités et les rôles de la déconcentration administrative.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la meilleure définition de la déconcentration ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer qui agit. Étape 2 — Vérifier la désignation. Étape 3 — Relever l'origine des ordres. Étape 4 — Conclure. Les autres définitions sont fausses.",
+                  "answers": [
+                    {
+                      "content": "L'État exerce son pouvoir près des habitants par des agents qu'il nomme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les habitants gouvernent seuls leur village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ministre disparaît",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chaque village fait ses lois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque circonscription à son autorité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire chaque circonscription : district, région, département, sous-préfecture, village. Étape 2 — Repérer son niveau, du plus grand au plus petit. Étape 3 — Associer : gouverneur, préfet de région, préfet, sous-préfet, chef de village. Erreur tentante : inverser préfet et préfet de région ; le préfet de région dirige la région, qui regroupe plusieurs départements.",
+                  "answers": [
+                    {
+                      "content": "District",
+                      "match": "Gouverneur"
+                    },
+                    {
+                      "content": "Région",
+                      "match": "Préfet de région"
+                    },
+                    {
+                      "content": "Département",
+                      "match": "Préfet"
+                    },
+                    {
+                      "content": "Sous-préfecture",
+                      "match": "Sous-préfet"
+                    },
+                    {
+                      "content": "Village",
+                      "match": "Chef de village"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les services déconcentrés rapprochent les ministères des habitants.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Situer les services. Étape 2 — Identifier les ministères. Étape 3 — Expliquer : près des habitants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont des rôles de la déconcentration ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Situer les agents. Étape 2 — Identifier qui ils représentent. Étape 3 — Décrire leur mission. Voter les lois ou élire le Président ne relève pas de la déconcentration.",
+                  "answers": [
+                    {
+                      "content": "Représenter l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire appliquer ses décisions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rapprocher l'administration des habitants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Voter les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Élire le Président",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range les circonscriptions du plus grand au plus petit.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire les cinq circonscriptions. Étape 2 — Chercher laquelle contient les autres : le district contient des régions, qui contiennent des départements, puis des sous-préfectures, puis des villages. Étape 3 — Placer : district, région, département, sous-préfecture, village. Erreur tentante : placer le département avant la région ; plusieurs départements forment une région.",
+                  "answers": [
+                    {
+                      "content": "District"
+                    },
+                    {
+                      "content": "Région"
+                    },
+                    {
+                      "content": "Département"
+                    },
+                    {
+                      "content": "Sous-préfecture"
+                    },
+                    {
+                      "content": "Village"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet est un agent de l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on parle du préfet. Étape 2 — Vérifier : il est nommé par l'État et applique les décisions du pouvoir central. Étape 3 — Conclure : c'est un agent de l'« État ». Erreur tentante : croire qu'il représente les habitants qui l'auraient élu ; il n'est pas élu.",
+                  "answers": [
+                    {
+                      "content": "État",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Reprends les quatre notions de la leçon, une par une."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

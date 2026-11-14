@@ -1,0 +1,3707 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les institutions consultatives : Le CESEC, le Médiateur de la République et la CNRCTCI",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "EDHC",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "institutions-consultatives",
+          "kind": "diagram",
+          "description": "Un arbre qui part des institutions consultatives et se divise en trois branches : le CESEC, qui donne un avis sur l'économie, le social, l'environnement et la culture ; le Médiateur de la République, qui recommande des solutions à l'amiable pour les difficultés avec l'administration ; la CNRCTCI, qui réunit les rois et chefs traditionnels pour la tradition et la paix.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "cons",
+                "label": "Institutions consultatives"
+              },
+              {
+                "id": "cesec",
+                "label": "CESEC : avis sur économie, social, nature, culture",
+                "category": 1
+              },
+              {
+                "id": "med",
+                "label": "Médiateur de la République : recommandations à l'amiable",
+                "category": 2
+              },
+              {
+                "id": "cnr",
+                "label": "CNRCTCI : traditions et paix",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "cons",
+                "to": "cesec"
+              },
+              {
+                "from": "cons",
+                "to": "med"
+              },
+              {
+                "from": "cons",
+                "to": "cnr"
+              }
+            ],
+            "legend": [
+              "Donner un avis",
+              "Recommander",
+              "Préserver et apaiser"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "avis-et-decision",
+          "kind": "diagram",
+          "description": "Un schéma en quatre étapes : une autorité a une décision à prendre, elle demande l'avis d'une institution consultative, l'institution étudie la question et rend son avis, puis l'autorité décide en tenant compte de l'avis. L'avis vient avant la décision et ne la remplace pas.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "L'autorité a une décision à prendre"
+              },
+              {
+                "id": "b",
+                "label": "Elle demande un avis",
+                "category": 1
+              },
+              {
+                "id": "c",
+                "label": "L'institution consultative étudie et rend son avis",
+                "category": 1
+              },
+              {
+                "id": "d",
+                "label": "L'autorité décide",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b"
+              },
+              {
+                "from": "b",
+                "to": "c",
+                "label": "consulte"
+              },
+              {
+                "from": "c",
+                "to": "d",
+                "label": "éclaire"
+              }
+            ],
+            "legend": [
+              "Conseiller",
+              "Décider"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "saisir-le-mediateur",
+          "kind": "diagram",
+          "description": "Un schéma en quatre étapes pour saisir le Médiateur de la République : un service public ne répond pas, la personne écrit une réclamation qui expose les faits, le Médiateur étudie et contacte le service, puis il fait une recommandation à l'amiable, sans rendre de jugement.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "p",
+                "label": "Un service public ne répond pas"
+              },
+              {
+                "id": "r",
+                "label": "Réclamation écrite avec les faits",
+                "category": 1
+              },
+              {
+                "id": "e",
+                "label": "Le Médiateur étudie et contacte le service",
+                "category": 1
+              },
+              {
+                "id": "rec",
+                "label": "Recommandation à l'amiable",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "p",
+                "to": "r",
+                "label": "saisine"
+              },
+              {
+                "from": "r",
+                "to": "e"
+              },
+              {
+                "from": "e",
+                "to": "rec"
+              }
+            ],
+            "legend": [
+              "Démarche",
+              "Réponse"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Une institution consultative : donner un avis sans décider",
+          "remember": "Une institution **consultative** est une institution que l'on **consulte** : elle étudie une question et donne un **avis** (une opinion argumentée) à l'autorité qui doit décider. Elle ne fait pas la loi (pouvoir législatif), ne gouverne pas (pouvoir exécutif) et ne juge pas (pouvoir judiciaire). Son avis **éclaire** la décision, mais ne la remplace pas. En Côte d'Ivoire, trois institutions de ce type sont au programme : le **CESEC** (Conseil économique, social, environnemental et culturel), le **Médiateur de la République** et la **CNRCTCI** (Chambre nationale des rois et chefs traditionnels de Côte d'Ivoire).",
+          "method": [
+            "Identifier la question posée : on demande un conseil, une solution à l'amiable ou une décision.",
+            "Repérer le rôle de chaque acteur : qui décide, qui juge, qui conseille.",
+            "Reconnaître l'institution consultative : celle qui donne un avis sans décider.",
+            "Conclure sur la portée de l'avis : il éclaire la décision, mais c'est l'autorité qui décide."
+          ],
+          "example": {
+            "statement": "Le Gouvernement prépare un projet de texte pour protéger l'environnement. Avant de le présenter, il demande l'avis du CESEC, qui propose deux changements. Qui décide au final ? Analyser la situation.",
+            "steps": [
+              "Identifier : la question est de savoir si le projet est bon avant de le présenter ; le Gouvernement demande un conseil.",
+              "Repérer : le Gouvernement décide et présente le texte ; le CESEC conseille ; aucun juge n'intervient.",
+              "Reconnaître : le CESEC est une institution consultative ; il étudie le projet et rend un avis, sans décider.",
+              "Conclure : l'avis du CESEC éclaire le Gouvernement, mais c'est le Gouvernement qui décide."
+            ]
+          },
+          "pitfall": "Ne confonds pas **conseiller** et **décider**. Contre-exemple : le CESEC rend un avis sur un projet, mais ce n'est pas lui qui adopte le texte. À l'inverse, ne dis pas qu'un avis ne sert à rien : il aide l'autorité à mieux décider. Une institution consultative est utile parce qu'elle éclaire, pas parce qu'elle commande.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître une institution consultative : identifier la question, repérer les rôles, reconnaître l'institution, conclure sur la portée de l'avis.",
+            "questions": [
+              {
+                "content": "Une institution consultative est une institution qui…",
+                "question_type": "single_choice",
+                "hint": "Consultative vient du verbe consulter : on la consulte pour avoir son avis.",
+                "explanation": "Étape 1 — Identifier la question : on cherche ce que fait une institution consultative. Étape 2 — Repérer les rôles : le Parlement vote la loi, le juge tranche les litiges, le Gouvernement gouverne. Étape 3 — Reconnaître l'institution consultative : elle donne un avis, un conseil. Étape 4 — Conclure : l'avis éclaire, l'autorité décide. Voter la loi, juger ou gouverner sont des rôles d'autres pouvoirs : les choisir confond conseiller et décider.",
+                "answers": [
+                  {
+                    "content": "gouverne le pays à la place du Gouvernement",
+                    "correct": false
+                  },
+                  {
+                    "content": "vote les lois à la place du Parlement",
+                    "correct": false
+                  },
+                  {
+                    "content": "donne un avis à l'autorité qui doit décider",
+                    "correct": true
+                  },
+                  {
+                    "content": "juge les litiges entre les personnes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quand une institution consultative rend son avis, c'est elle qui prend la décision finale.",
+                "question_type": "true_false",
+                "hint": "Conseiller et décider sont deux rôles différents.",
+                "explanation": "Étape 2 — Repérer le rôle de chaque acteur : l'autorité (Gouvernement, Parlement ou juge) décide. Étape 3 — Reconnaître l'institution consultative : elle conseille. Étape 4 — Conclure : l'avis éclaire la décision mais ne la remplace pas. La réponse est Faux ; croire le contraire, c'est confondre conseiller et décider.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque acteur à son rôle.",
+                "question_type": "matching",
+                "hint": "Trois pouvoirs, plus une institution qui conseille.",
+                "explanation": "Étape 2 — Repérer le rôle de chaque acteur : le pouvoir législatif fait la loi, le pouvoir exécutif la fait appliquer, le pouvoir judiciaire juge. Étape 3 — Reconnaître l'institution consultative : elle donne un avis. Aucun de ces rôles ne se confond avec un autre.",
+                "answers": [
+                  {
+                    "content": "Le pouvoir législatif",
+                    "match": "Il fait la loi"
+                  },
+                  {
+                    "content": "Le pouvoir exécutif",
+                    "match": "Il fait appliquer la loi"
+                  },
+                  {
+                    "content": "Le pouvoir judiciaire",
+                    "match": "Il juge les litiges"
+                  },
+                  {
+                    "content": "Une institution consultative",
+                    "match": "Elle donne un avis"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître une institution consultative",
+              "statement": "Dans cet exercice, tu reconnais le rôle d'une institution consultative avec la méthode de la fiche : identifier la question, repérer les rôles, reconnaître l'institution, conclure sur la portée de l'avis.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces institutions, laquelle est une institution consultative ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la question : on cherche l'institution qui conseille. Étape 2 — Repérer les rôles : la Cour de cassation juge, l'Assemblée nationale vote la loi, le Président de la République dirige l'exécutif. Étape 3 — Reconnaître l'institution consultative : le Médiateur de la République fait des recommandations sans juger. Les trois autres décident, jugent ou votent : ce n'est pas le rôle d'une institution consultative.",
+                  "answers": [
+                    {
+                      "content": "La Cour de cassation",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Assemblée nationale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Président de la République",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un avis rendu par une institution consultative est une décision que l'autorité doit obligatoirement appliquer.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Reconnaître l'institution consultative : elle donne un avis, pas un ordre. Étape 4 — Conclure sur la portée de l'avis : il éclaire la décision, et c'est l'autorité qui décide. La réponse est Faux. L'erreur est de croire qu'un avis a la force d'une décision de justice ou d'une loi.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une institution consultative donne un ___ à l'autorité qui doit décider.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Reconnaître l'institution consultative : elle donne un avis, c'est-à-dire une opinion argumentée qui aide à décider. Étape 4 — Conclure : l'autorité garde la décision. Écrire « ordre » ou « jugement » serait faux, car ces mots désignent une décision.",
+                  "answers": [
+                    {
+                      "content": "avis",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Gouvernement prépare un projet de texte et demande l'avis d'une institution consultative. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer le rôle de chaque acteur : le Gouvernement décide, l'institution conseille. Étape 3 — Reconnaître l'institution consultative : elle étudie et donne un avis. Étape 4 — Conclure : l'avis éclaire, le Gouvernement décide. Dire que l'institution signe le texte lui donne un pouvoir de décision ; dire qu'elle juge le Gouvernement lui donne un pouvoir de juge : ces deux rôles ne sont pas les siens.",
+                  "answers": [
+                    {
+                      "content": "Le Gouvernement reste libre de sa décision finale",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'institution étudie la question et donne son avis",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'institution juge le Gouvernement et le condamne",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'institution signe le texte à la place du Gouvernement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le directeur d'un collège demande l'avis de l'équipe des enseignants avant de choisir l'horaire des cours. Dans cette situation, l'équipe est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier la question : le directeur cherche un conseil avant de choisir. Étape 2 — Repérer les rôles : le directeur décide, l'équipe donne son avis. Étape 3 — Reconnaître : l'équipe joue un rôle consultatif. Étape 4 — Conclure : l'avis aide le directeur, qui reste le décideur. Les trois autres réponses donnent à l'équipe un pouvoir qu'elle n'a pas.",
+                  "answers": [
+                    {
+                      "content": "législative : elle vote une loi",
+                      "correct": false
+                    },
+                    {
+                      "content": "judiciaire : elle juge le directeur",
+                      "correct": false
+                    },
+                    {
+                      "content": "consultative : elle conseille",
+                      "correct": true
+                    },
+                    {
+                      "content": "décisionnaire : elle décide à la place du directeur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Retiens : une institution consultative conseille, elle ne décide pas."
+            },
+            {
+              "title": "Distinguer conseiller, décider et juger",
+              "statement": "Dans cet exercice, tu distingues ceux qui conseillent, ceux qui décident et ceux qui jugent, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Pose-toi la question : cette institution décide-t-elle, juge-t-elle, ou conseille-t-elle ?",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à l'acteur qui agit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la question : on cherche qui agit dans chaque cas. Étape 2 — Repérer le rôle de chaque acteur : voter la loi relève du pouvoir législatif, condamner relève du juge. Étape 3 — Reconnaître l'institution consultative : rendre un avis est son rôle. Chaque acteur garde son rôle sans empiéter sur un autre.",
+                  "answers": [
+                    {
+                      "content": "Un texte est voté par les députés",
+                      "match": "Le pouvoir législatif"
+                    },
+                    {
+                      "content": "Un juge condamne l'auteur d'un vol",
+                      "match": "Le pouvoir judiciaire"
+                    },
+                    {
+                      "content": "Un avis est rendu avant une décision",
+                      "match": "Une institution consultative"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le parcours d'un avis.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier la question : l'autorité doit décider. Étape 2 — Repérer les rôles : elle demande un conseil à l'institution. Étape 3 — Reconnaître l'institution consultative : elle étudie et rend son avis. Étape 4 — Conclure : l'autorité décide en connaissant l'avis. L'avis vient avant la décision, jamais après.",
+                  "answers": [
+                    {
+                      "content": "L'autorité a une décision à prendre"
+                    },
+                    {
+                      "content": "L'autorité demande l'avis d'une institution consultative"
+                    },
+                    {
+                      "content": "L'institution étudie la question et rend son avis"
+                    },
+                    {
+                      "content": "L'autorité prend sa décision en tenant compte de l'avis"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un député propose qu'une institution consultative vote à sa place une loi sur l'école. Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer le rôle de chaque acteur : voter la loi appartient au pouvoir législatif. Étape 3 — Reconnaître l'institution consultative : elle donne un avis. Étape 4 — Conclure : elle éclaire la décision. Croire qu'elle peut voter, juger ou remplacer le Gouvernement est l'erreur du piège : confondre conseiller et décider.",
+                  "answers": [
+                    {
+                      "content": "Elle peut juger les enseignants qui désobéissent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne vote pas la loi : elle peut seulement donner son avis",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle peut voter la loi, car elle connaît bien l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle peut remplacer le Gouvernement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'institution qui donne un avis est dite ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Reconnaître l'institution consultative : le mot vient de « consulter », demander un avis. Étape 4 — Conclure : cette institution conseille et ne décide pas.",
+                  "answers": [
+                    {
+                      "content": "consultative",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une institution consultative n'a aucune utilité, puisqu'elle ne décide pas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Reconnaître l'institution consultative : son avis étudie la question et aide à mieux décider. Étape 4 — Conclure sur la portée de l'avis : il ne s'impose pas, mais il éclaire la décision. La réponse est Faux. L'erreur est de croire que seul celui qui décide est utile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles institutions de la leçon sont des institutions consultatives ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Repérer le rôle de chaque acteur : la Cour de cassation juge, l'Assemblée nationale vote la loi. Étape 3 — Reconnaître l'institution consultative : le CESEC, le Médiateur de la République et la CNRCTCI donnent des avis ou des recommandations. Étape 4 — Conclure : ces trois institutions éclairent, elles ne décident pas.",
+                  "answers": [
+                    {
+                      "content": "La Cour de cassation",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Assemblée nationale",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CNRCTCI",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le CESEC : donner un avis sur l'économie, le social, l'environnement et la culture",
+          "remember": "Le **CESEC** est le **Conseil économique, social, environnemental et culturel**, une institution **consultative** prévue par la Constitution de 2016. Il réunit des représentants de différents secteurs de la société (monde du travail, entreprises, associations, culture). Il étudie des questions **économiques** (travail, commerce), **sociales** (santé, école, emploi), **environnementales** (nature, pollution) et **culturelles** (traditions, arts, langues) et donne son **avis** aux autorités. Il conseille ; il ne vote pas la loi et ne juge pas.",
+          "method": [
+            "Identifier le domaine de la question : économique, social, environnemental ou culturel.",
+            "Repérer qui demande l'avis et sur quel projet ou quelle question.",
+            "Reconnaître le CESEC : il réunit des représentants de la société et rend un avis.",
+            "Conclure : le CESEC conseille, ce sont les autorités qui décident."
+          ],
+          "example": {
+            "statement": "Un projet veut réduire les sacs plastiques dans les marchés. Les commerçants craignent des pertes, des associations défendent la nature. Les autorités veulent un avis avant de décider. Analyser la situation.",
+            "steps": [
+              "Identifier : le projet touche l'environnement (la pollution) et l'économie (le commerce).",
+              "Repérer : les autorités demandent un avis avant de décider ; elles sont celles qui décideront.",
+              "Reconnaître : le CESEC réunit des représentants de la société, étudie ces domaines et peut rendre un avis.",
+              "Conclure : le CESEC conseille ; les autorités décident."
+            ]
+          },
+          "pitfall": "Ne confonds pas le CESEC avec l'Assemblée nationale, qui vote les lois, ou avec un ministère, qui gère l'économie. Contre-exemple : le CESEC étudie un projet sur l'emploi des jeunes et rend un avis ; il ne vote pas la loi, ne crée pas d'emplois lui-même et ne verse aucun salaire. Retiens aussi les quatre domaines : économique, social, environnemental, culturel.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à situer le CESEC : identifier le domaine, repérer qui demande l'avis, reconnaître le CESEC, conclure.",
+            "questions": [
+              {
+                "content": "Que signifie le sigle CESEC ?",
+                "question_type": "single_choice",
+                "hint": "Lis le sigle lettre par lettre : C, E, S, E, C.",
+                "explanation": "Étape 1 — Identifier le domaine : le sigle a quatre lettres de domaine. Étape 3 — Reconnaître le CESEC : C pour Conseil, E pour économique, S pour social, E pour environnemental, C pour culturel. Les autres propositions inventent des noms qui ne désignent pas cette institution.",
+                "answers": [
+                  {
+                    "content": "Conseil d'État, de la société et de l'éducation civique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Chambre économique et sociale des enseignants et des chefs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Comité des élus, des syndicats et des entreprises de Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Conseil économique, social, environnemental et culturel",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un projet touche la pollution d'une lagune et la pêche. Quel domaine du CESEC est surtout concerné ?",
+                "question_type": "single_choice",
+                "hint": "La pollution touche la nature.",
+                "explanation": "Étape 1 — Identifier le domaine : la pollution d'une lagune touche la nature, donc l'environnement (la pêche touche aussi l'économie). Étape 3 — Reconnaître le CESEC : il traite des questions environnementales. Le domaine culturel concerne les traditions et les arts ; judiciaire et militaire ne sont pas des domaines du CESEC.",
+                "answers": [
+                  {
+                    "content": "Le domaine militaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le domaine environnemental",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le domaine judiciaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le domaine culturel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le CESEC vote les lois économiques à la place de l'Assemblée nationale.",
+                "question_type": "true_false",
+                "hint": "Le CESEC conseille.",
+                "explanation": "Étape 3 — Reconnaître le CESEC : il donne un avis, il ne vote pas. Étape 4 — Conclure : le CESEC conseille, ce sont les autorités qui décident. La réponse est Faux ; voter la loi est le rôle du pouvoir législatif.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque question au domaine du CESEC.",
+                "question_type": "matching",
+                "hint": "Un domaine par question.",
+                "explanation": "Étape 1 — Identifier le domaine : l'emploi relève de l'économie, les soins relèvent du social, la forêt relève de l'environnement, la langue relève de la culture. Étape 3 — Reconnaître le CESEC : il s'occupe de ces quatre domaines.",
+                "answers": [
+                  {
+                    "content": "L'ouverture de nouveaux emplois pour les jeunes",
+                    "match": "Économique"
+                  },
+                  {
+                    "content": "L'accès aux soins dans les villages",
+                    "match": "Social"
+                  },
+                  {
+                    "content": "La protection d'une forêt classée",
+                    "match": "Environnemental"
+                  },
+                  {
+                    "content": "La sauvegarde d'une langue du pays",
+                    "match": "Culturel"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Situer le CESEC",
+              "statement": "Dans cet exercice, tu situes le CESEC avec la méthode de la fiche : identifier le domaine, repérer qui demande l'avis, reconnaître le CESEC, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la mission du CESEC ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le domaine : les quatre domaines sont dans le nom de l'institution. Étape 3 — Reconnaître le CESEC : il étudie et donne un avis. Juger, voter ou faire appliquer les lois sont des rôles d'autres pouvoirs, ce qui est l'erreur de confondre conseiller et décider.",
+                  "answers": [
+                    {
+                      "content": "Juger les litiges entre les citoyens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Voter le budget de l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Étudier des questions économiques, sociales, environnementales et culturelles et donner un avis",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire appliquer les lois dans les régions",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le E du milieu dans le sigle CESEC correspond au mot ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier le domaine : Conseil économique, social, environnemental et culturel. Le premier E vient de « économique », le second de « environnemental ». Écrire « économique » serait faux : ce mot est déjà le premier domaine.",
+                  "answers": [
+                    {
+                      "content": "environnemental",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le CESEC peut être consulté sur un projet qui touche la culture.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le domaine : la culture est l'un des quatre domaines du CESEC. Étape 3 — Reconnaître le CESEC : il peut donc étudier un tel projet et rendre un avis. Étape 4 — Conclure : l'avis conseille. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels domaines font partie du nom du CESEC ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier le domaine : le nom donne économique, social, environnemental et culturel. Étape 3 — Reconnaître le CESEC : le social et le culturel y figurent. Militaire et judiciaire n'y figurent pas : ce sont d'autres univers, celui de l'armée et celui de la justice.",
+                  "answers": [
+                    {
+                      "content": "Le domaine culturel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le domaine judiciaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le domaine militaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le domaine social",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Gouvernement demande au CESEC d'étudier un projet national de marchés modernes. Le CESEC ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Repérer qui demande l'avis : le Gouvernement, une autorité, veut comprendre le projet avant de décider. Étape 3 — Reconnaître le CESEC : il étudie et rend un avis. Étape 4 — Conclure : ce sont les autorités qui décident. Décider, juger ou gérer un budget ne sont pas ses missions.",
+                  "answers": [
+                    {
+                      "content": "gère le budget du marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "rend un avis aux autorités",
+                      "correct": true
+                    },
+                    {
+                      "content": "décide si le marché se construit",
+                      "correct": false
+                    },
+                    {
+                      "content": "juge les commerçants",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire une situation avec le CESEC",
+              "statement": "Dans cet exercice, tu analyses des situations où le CESEC peut donner un avis, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Retiens : économique, social, environnemental, culturel, et toujours un avis, jamais une décision.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque projet au domaine principal sur lequel le CESEC peut donner son avis.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le domaine : le commerce relève de l'économie, la vaccination du social, les déchets de l'environnement, les danses de la culture. Étape 3 — Reconnaître le CESEC : il peut donner son avis dans ces quatre domaines.",
+                  "answers": [
+                    {
+                      "content": "Un plan pour aider les petits commerçants",
+                      "match": "Économique"
+                    },
+                    {
+                      "content": "Une campagne pour la vaccination des enfants",
+                      "match": "Social"
+                    },
+                    {
+                      "content": "La lutte contre les déchets plastiques",
+                      "match": "Environnemental"
+                    },
+                    {
+                      "content": "La protection des danses traditionnelles",
+                      "match": "Culturel"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la façon dont le CESEC intervient.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier le domaine : le projet touche l'un des quatre domaines. Étape 2 — Repérer qui demande l'avis : l'autorité. Étape 3 — Reconnaître le CESEC : il étudie et rend son avis. Étape 4 — Conclure : l'autorité décide en dernier.",
+                  "answers": [
+                    {
+                      "content": "Une autorité a un projet à décider"
+                    },
+                    {
+                      "content": "Elle demande l'avis du CESEC"
+                    },
+                    {
+                      "content": "Le CESEC étudie le projet et rend son avis"
+                    },
+                    {
+                      "content": "L'autorité décide en tenant compte de l'avis"
+                    }
+                  ]
+                },
+                {
+                  "content": "Après l'avis du CESEC, un projet est modifié. Qui reste libre de sa décision finale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : le CESEC conseille, ce sont les autorités qui décident. Le CESEC ne tranche pas, le juge n'a pas de rôle dans un simple projet, et les représentants du CESEC votent leur avis, pas la décision finale.",
+                  "answers": [
+                    {
+                      "content": "Les représentants du CESEC par un vote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC, qui a rendu l'avis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le juge le plus proche",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'autorité qui a demandé l'avis",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le CESEC ___ les autorités, il ne décide pas à leur place.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Reconnaître le CESEC : il rend un avis. Étape 4 — Conclure : conseiller n'est pas décider. Écrire « décide » serait faux, car la phrase dit justement que le CESEC ne décide pas.",
+                  "answers": [
+                    {
+                      "content": "conseille",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le CESEC réunit uniquement des juges.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Reconnaître le CESEC : il réunit des représentants de différents secteurs de la société (monde du travail, entreprises, associations, culture), pas seulement des juges. La réponse est Faux. L'erreur est de confondre le CESEC avec une juridiction.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Le CESEC fabrique les lois sur l'environnement. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le domaine : l'environnement. Étape 3 — Reconnaître le CESEC : il rend un avis. Étape 4 — Conclure : les lois sont faites par le pouvoir législatif. Dire que le CESEC juge ou s'occupe de la police est tout aussi faux.",
+                  "answers": [
+                    {
+                      "content": "Il se trompe, le CESEC s'occupe de la police",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se trompe, le CESEC juge les pollueurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC donne un avis sur l'environnement, il ne fabrique pas les lois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, c'est le rôle du CESEC",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le Médiateur de la République : régler à l'amiable une difficulté avec l'administration",
+          "remember": "Le **Médiateur de la République** est une institution **indépendante** qui sert d'intermédiaire entre les citoyens et l'administration. Une personne qui estime qu'un service public l'a mal traitée peut le **saisir** : elle lui adresse une demande écrite, la **réclamation**. Le Médiateur étudie l'affaire, prend contact avec le service et cherche une solution **à l'amiable**. Il fait des **recommandations**. Il n'est **pas un juge** : il ne condamne personne, ne règle pas les disputes entre particuliers et ne remet pas en cause une décision de justice.",
+          "method": [
+            "Identifier le problème : un service public ou une administration est-il en cause ?",
+            "Vérifier que l'affaire peut être portée devant le Médiateur : ni conflit entre particuliers, ni affaire déjà jugée.",
+            "Saisir le Médiateur par une réclamation écrite qui expose les faits et rappelle les démarches déjà faites.",
+            "Comprendre sa réponse : une recommandation à l'amiable, pas un jugement."
+          ],
+          "example": {
+            "statement": "M. Koffi a déposé un dossier de retraite il y a un an dans un service public. Malgré plusieurs visites, il n'a reçu aucune réponse. Analyser la situation et dire ce qu'il peut faire.",
+            "steps": [
+              "Identifier : un service public ne répond pas à M. Koffi ; le problème vient de l'administration.",
+              "Vérifier : ce n'est pas un conflit entre deux particuliers, et l'affaire n'a pas été jugée.",
+              "Saisir : M. Koffi écrit une réclamation au Médiateur avec les faits (date du dépôt, visites déjà faites au service).",
+              "Comprendre : le Médiateur contacte le service et cherche une solution à l'amiable ; il fait une recommandation, pas un jugement."
+            ]
+          },
+          "pitfall": "Ne prends pas le Médiateur pour un juge ni pour quelqu'un qui règle toutes les disputes. Contre-exemple : deux voisins se disputent un mur. Ce n'est pas l'administration qui est en cause : ils s'adressent à la famille, au chef de quartier ou au tribunal. Le Médiateur n'intervient que pour une difficulté avec un service public, et il recommande plutôt qu'il ne condamne.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à saisir le Médiateur : identifier le problème, vérifier l'affaire, saisir, comprendre sa réponse.",
+            "questions": [
+              {
+                "content": "Quand peut-on saisir le Médiateur de la République ?",
+                "question_type": "single_choice",
+                "hint": "Le Médiateur est un intermédiaire entre l'administration et les citoyens.",
+                "explanation": "Étape 1 — Identifier le problème : le Médiateur s'occupe des difficultés avec l'administration. Étape 2 — Vérifier : un conflit entre voisins, une loi à changer ou un jugement déjà rendu ne relèvent pas de lui. Étape 3 — Saisir : on lui écrit une réclamation. Étape 4 — Comprendre : il recommande, il ne condamne pas.",
+                "answers": [
+                  {
+                    "content": "Quand on veut faire condamner son voisin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Quand on veut annuler un jugement déjà rendu",
+                    "correct": false
+                  },
+                  {
+                    "content": "Quand on estime qu'un service public nous a mal traité",
+                    "correct": true
+                  },
+                  {
+                    "content": "Quand on veut changer une loi",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le Médiateur de la République rend des jugements que l'administration doit exécuter.",
+                "question_type": "true_false",
+                "hint": "Médiateur n'est pas juge.",
+                "explanation": "Étape 4 — Comprendre sa réponse : il cherche une solution à l'amiable et fait une recommandation. Ce n'est pas un jugement : seul le juge juge. La réponse est Faux ; le croire revient à confondre médiateur et juge.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre la démarche d'un citoyen.",
+                "question_type": "ordering",
+                "hint": "On constate d'abord, on réclame ensuite.",
+                "explanation": "Étape 1 — Identifier le problème : le service public ne répond pas. Étape 2 — Vérifier : l'affaire concerne bien l'administration. Étape 3 — Saisir le Médiateur : on écrit une réclamation. Étape 4 — Comprendre sa réponse : on reçoit une recommandation.",
+                "answers": [
+                  {
+                    "content": "Constater que le service public ne répond pas"
+                  },
+                  {
+                    "content": "Vérifier que ce n'est pas un conflit entre particuliers"
+                  },
+                  {
+                    "content": "Écrire une réclamation au Médiateur en exposant les faits"
+                  },
+                  {
+                    "content": "Recevoir sa recommandation"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Saisir le Médiateur de la République",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour décider si l'on peut saisir le Médiateur : identifier le problème, vérifier l'affaire, saisir, comprendre sa réponse.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui est le Médiateur de la République ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le problème : une difficulté avec l'administration. Étape 3 — Saisir : on s'adresse au Médiateur, qui écoute et intervient auprès du service. Étape 4 — Comprendre : il recommande, il ne juge pas. Un juge, un député ou un chef de village ont d'autres rôles.",
+                  "answers": [
+                    {
+                      "content": "Un juge qui condamne les fonctionnaires fautifs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un chef de village qui règle les querelles de famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un député qui vote les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une institution indépendante qui aide à régler à l'amiable les difficultés avec l'administration",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne peut saisir le Médiateur elle-même, par une demande écrite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Saisir le Médiateur : la personne écrit elle-même une réclamation qui expose les faits. Étape 4 — Comprendre : il lui répondra par une recommandation. La réponse est Vrai ; il n'est pas nécessaire de passer par un tribunal.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on demande au Médiateur d'examiner son affaire, on dit qu'on le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Saisir le Médiateur : « saisir » signifie lui adresser une demande pour qu'il examine l'affaire. Écrire « juge » serait faux : le Médiateur ne juge pas.",
+                  "answers": [
+                    {
+                      "content": "saisit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux voisins se disputent la limite de leur parcelle. Peuvent-ils saisir le Médiateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le problème : c'est un conflit entre deux particuliers, pas une difficulté avec un service public. Étape 2 — Vérifier : cette affaire ne peut pas être portée devant le Médiateur. Il faut s'adresser à la famille, au chef de quartier ou au tribunal. Les trois autres réponses lui donnent des pouvoirs de juge qu'il n'a pas.",
+                  "answers": [
+                    {
+                      "content": "Non, car ce n'est pas une difficulté avec l'administration",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car il règle toutes les disputes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car il peut condamner l'un des deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car il remplace le tribunal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur le Médiateur sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Saisir : il est saisi par une réclamation. Étape 4 — Comprendre : il cherche un arrangement et recommande. Condamner ou annuler un jugement sont des actes de juge : ils sont faux pour le Médiateur.",
+                  "answers": [
+                    {
+                      "content": "Il cherche une solution à l'amiable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il annule les décisions des tribunaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fait des recommandations à l'administration",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il condamne l'administration à une peine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Retiens : le Médiateur écoute, intervient, recommande ; il ne juge pas."
+            },
+            {
+              "title": "Réagir face à un service public",
+              "statement": "Dans cet exercice, tu choisis la bonne réaction face à un problème avec un service public, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Pose-toi la question : est-ce l'administration qui est en cause ? Si oui, le Médiateur peut aider.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Mme Ouattara attend depuis un an une réponse d'un service public pour un dossier. Que peut-elle faire pour saisir le Médiateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le problème : un service public ne répond pas. Étape 3 — Saisir le Médiateur : on écrit une réclamation qui expose les faits (dates, démarches déjà faites). Insulter l'agent ne résout rien ; attendre sans agir non plus ; le CESEC ne juge pas, il donne des avis.",
+                  "answers": [
+                    {
+                      "content": "Demander au CESEC de juger le service",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lui écrire une réclamation en exposant les faits et les démarches déjà faites",
+                      "correct": true
+                    },
+                    {
+                      "content": "Insulter l'agent du guichet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Attendre sans rien faire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à la bonne réaction.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le problème : un dossier bloqué relève de l'administration, un vol est une infraction, un héritage est un conflit entre particuliers. Étape 2 — Vérifier : seul le premier cas relève du Médiateur.",
+                  "answers": [
+                    {
+                      "content": "Un service public ne répond pas à un dossier",
+                      "match": "Saisir le Médiateur"
+                    },
+                    {
+                      "content": "Une personne a subi un vol",
+                      "match": "Porter plainte"
+                    },
+                    {
+                      "content": "Deux frères se disputent un héritage",
+                      "match": "S'adresser à la famille ou au juge"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Médiateur peut annuler un jugement rendu par un tribunal.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Vérifier : une affaire déjà jugée ne relève pas du Médiateur. Étape 4 — Comprendre sa réponse : il recommande à l'amiable et ne remplace pas le juge. La réponse est Faux ; seul un recours devant les juridictions peut modifier un jugement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Médiateur rend une ___ à l'administration, et non un jugement.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Comprendre sa réponse : le Médiateur recommande une solution. Écrire « sanction » serait faux, car il ne sanctionne pas.",
+                  "answers": [
+                    {
+                      "content": "recommandation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre ce qui se passe après la saisine du Médiateur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Saisir le Médiateur : la réclamation ouvre l'affaire. Étape 4 — Comprendre sa réponse : après étude et contact avec le service, il fait une recommandation. L'ordre va de la saisine à la recommandation.",
+                  "answers": [
+                    {
+                      "content": "La personne écrit sa réclamation"
+                    },
+                    {
+                      "content": "Le Médiateur étudie le dossier"
+                    },
+                    {
+                      "content": "Le Médiateur contacte le service public concerné"
+                    },
+                    {
+                      "content": "Le Médiateur fait une recommandation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Le Médiateur, c'est comme un juge. » Quelles réponses sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Comprendre sa réponse : un juge tranche, le Médiateur recommande. Emprisonner un fonctionnaire ou remplacer une cour sont des pouvoirs de juge qu'il n'a pas.",
+                  "answers": [
+                    {
+                      "content": "Il remplace la Cour de cassation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne condamne personne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il peut emprisonner un fonctionnaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il cherche une solution à l'amiable",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La CNRCTCI : préserver les traditions et aider à la paix",
+          "remember": "La **CNRCTCI** est la **Chambre nationale des rois et chefs traditionnels de Côte d'Ivoire**, une institution **consultative** prévue par la Constitution de 2016. Elle réunit des **rois** et des **chefs traditionnels**, autorités de la coutume (les règles transmises par les anciens). Elle donne des avis sur la chefferie traditionnelle et la culture, aide à **préserver les traditions** et contribue à la **paix** entre les communautés, notamment par la **médiation** (aider deux parties à dialoguer). Elle ne fait pas la loi et ne rend pas la justice de l'État.",
+          "method": [
+            "Identifier la situation : une question de tradition ou de coutume, ou un conflit entre communautés.",
+            "Repérer les acteurs concernés : les rois et chefs traditionnels et la chambre qui les réunit.",
+            "Reconnaître le rôle de la CNRCTCI : conseiller, préserver les traditions et aider à la paix par la médiation.",
+            "Conclure en distinguant ce qui relève de l'État : la loi et la justice ne sont pas de son ressort."
+          ],
+          "example": {
+            "statement": "Deux villages se disputent l'accès à un point d'eau. Des jeunes s'énervent et menacent de se battre. Les chefs veulent éviter la violence. Analyser la situation et dire quel rôle peut jouer la CNRCTCI.",
+            "steps": [
+              "Identifier : c'est un conflit entre deux communautés à propos d'un point d'eau, avec un risque de violence.",
+              "Repérer : les acteurs sont les chefs traditionnels des deux villages et la chambre qui les réunit.",
+              "Reconnaître : la CNRCTCI peut conseiller et aider à la paix par la médiation entre les deux villages.",
+              "Conclure : la chambre apaise et conseille, mais elle ne remplace ni la loi ni le juge ; si une infraction est commise, c'est la justice qui intervient."
+            ]
+          },
+          "pitfall": "Ne crois pas que les rois et chefs de la chambre gouvernent le pays ou jugent à la place de l'État. Contre-exemple : un chef décide de punir un voleur d'une peine de prison. Il n'en a pas le pouvoir : seul un juge condamne. La chambre conseille, apaise et protège les traditions ; la loi et la justice restent à l'État.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à situer la CNRCTCI : identifier la situation, repérer les acteurs, reconnaître son rôle, distinguer ce qui relève de l'État.",
+            "questions": [
+              {
+                "content": "Que signifie le sigle CNRCTCI ?",
+                "question_type": "single_choice",
+                "hint": "Lis le sigle : CN, RCT, CI.",
+                "explanation": "Étape 2 — Repérer les acteurs : la chambre réunit des rois et des chefs traditionnels. Étape 3 — Reconnaître la CNRCTCI : Chambre nationale des rois et chefs traditionnels de Côte d'Ivoire. Les autres sigles inventent des routes, des riverains ou des tribunaux qui n'existent pas dans son nom.",
+                "answers": [
+                  {
+                    "content": "Chambre nationale des rois et chefs de tribunaux de Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Commission nationale des routes et des chemins de Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Conseil national des riverains et chefs de territoire de Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Chambre nationale des rois et chefs traditionnels de Côte d'Ivoire",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La CNRCTCI réunit des rois et des chefs traditionnels.",
+                "question_type": "true_false",
+                "hint": "Relis le nom de l'institution.",
+                "explanation": "Étape 2 — Repérer les acteurs : son nom l'indique, la chambre réunit des rois et des chefs traditionnels. Étape 3 — Reconnaître la CNRCTCI : c'est une institution consultative. La réponse est Vrai.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux villages se disputent l'accès à un point d'eau et les jeunes s'énervent. Quel rôle peut jouer la CNRCTCI ?",
+                "question_type": "single_choice",
+                "hint": "La chambre aide à la paix.",
+                "explanation": "Étape 1 — Identifier la situation : un conflit entre communautés. Étape 3 — Reconnaître le rôle de la CNRCTCI : conseiller et aider à la paix par la médiation. Étape 4 — Conclure : condamner relève du juge, voter une loi du Parlement, gouverner du pouvoir exécutif.",
+                "answers": [
+                  {
+                    "content": "Aider à calmer le conflit par la médiation",
+                    "correct": true
+                  },
+                  {
+                    "content": "Voter une loi sur l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Condamner les jeunes à une peine de prison",
+                    "correct": false
+                  },
+                  {
+                    "content": "Gouverner la région à la place du préfet",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Situer la CNRCTCI",
+              "statement": "Dans cet exercice, tu situes la CNRCTCI avec la méthode de la fiche : identifier la situation, repérer les acteurs, reconnaître son rôle, distinguer ce qui relève de l'État.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le rôle de la CNRCTCI ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : la tradition et la paix entre communautés. Étape 3 — Reconnaître le rôle de la CNRCTCI : préserver les traditions, conseiller, aider à la paix. Étape 4 — Conclure : rendre la justice, faire les lois et diriger le Gouvernement relèvent de l'État.",
+                  "answers": [
+                    {
+                      "content": "Rendre la justice à la place des tribunaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Conserver les traditions, conseiller et aider à la paix entre les communautés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Diriger le Gouvernement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire les lois de la République",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La CNRCTCI est une institution consultative.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Reconnaître le rôle de la CNRCTCI : elle donne des avis et conseille, notamment sur la chefferie traditionnelle et la culture. Étape 4 — Conclure : elle ne décide pas à la place de l'État. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les rois et chefs de la chambre sont des chefs ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer les acteurs : le nom complet est « Chambre nationale des rois et chefs traditionnels de Côte d'Ivoire ». Écrire « administratifs » serait faux : les chefs de la chambre sont des autorités de la tradition.",
+                  "answers": [
+                    {
+                      "content": "traditionnels",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles missions relèvent de la CNRCTCI ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Reconnaître le rôle de la CNRCTCI : préserver les traditions, conseiller et aider à la paix. Étape 4 — Conclure : condamner relève du juge et voter les impôts du Parlement ; la chambre n'a pas ces pouvoirs.",
+                  "answers": [
+                    {
+                      "content": "Voter les impôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aider à calmer les conflits entre communautés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Condamner les auteurs d'infractions",
+                      "correct": false
+                    },
+                    {
+                      "content": "Préserver les traditions et les coutumes",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chef traditionnel veut punir un voleur d'une peine de prison. La CNRCTCI ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Repérer les acteurs : un chef traditionnel et la chambre qui les réunit. Étape 4 — Conclure : la justice et la loi sont du ressort de l'État ; seul un juge peut condamner à une peine de prison. Les autres propositions donnent aux chefs un pouvoir de justice qu'ils n'ont pas.",
+                  "answers": [
+                    {
+                      "content": "peut le faire, car elle fait la loi",
+                      "correct": false
+                    },
+                    {
+                      "content": "n'a pas ce pouvoir : seul le juge condamne",
+                      "correct": true
+                    },
+                    {
+                      "content": "peut le faire avec l'accord du village",
+                      "correct": false
+                    },
+                    {
+                      "content": "peut le faire, car les chefs jugent le pays",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire des situations avec la CNRCTCI",
+              "statement": "Dans cet exercice, tu analyses des situations où la CNRCTCI peut intervenir, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "hint": "Retiens : la CNRCTCI préserve la tradition et aide à la paix ; elle ne fait ni la loi ni la justice.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à celui qui agit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la situation : apaiser, condamner, voter. Étape 3 — Reconnaître le rôle de la CNRCTCI : la médiation et la paix. Étape 4 — Conclure : condamner relève du juge et voter une loi du Parlement.",
+                  "answers": [
+                    {
+                      "content": "Une querelle entre deux communautés à apaiser",
+                      "match": "La CNRCTCI, par la médiation"
+                    },
+                    {
+                      "content": "Un voleur à condamner",
+                      "match": "Le juge"
+                    },
+                    {
+                      "content": "Une loi à voter",
+                      "match": "Le Parlement"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre une médiation entre deux villages.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier la situation : un conflit. Étape 2 — Repérer les acteurs : les chefs. Étape 3 — Reconnaître le rôle de la CNRCTCI : elle aide à la médiation. Étape 4 — Conclure : la paix revient par le dialogue, sans punir à la place du juge.",
+                  "answers": [
+                    {
+                      "content": "Un conflit éclate entre deux villages"
+                    },
+                    {
+                      "content": "Les chefs traditionnels se rencontrent"
+                    },
+                    {
+                      "content": "La chambre aide à la médiation"
+                    },
+                    {
+                      "content": "Les villages retrouvent la paix par le dialogue"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un notable déclare : « La CNRCTCI est un parti politique. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer les acteurs : la chambre réunit des rois et chefs traditionnels. Étape 3 — Reconnaître son rôle : elle conseille et préserve les traditions. Un parti politique présente des candidats ; un tribunal juge ; la chambre ne fait ni l'un ni l'autre.",
+                  "answers": [
+                    {
+                      "content": "C'est faux, elle est un tribunal",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : c'est une institution consultative qui réunit des rois et chefs traditionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai, elle présente des candidats aux élections",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai, elle dirige le Gouvernement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La CNRCTCI aide à régler les conflits par la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Reconnaître le rôle de la CNRCTCI : elle aide à la paix par la médiation, c'est-à-dire en facilitant le dialogue entre les parties. Écrire « sanction » serait faux, car la chambre ne punit pas.",
+                  "answers": [
+                    {
+                      "content": "médiation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La CNRCTCI peut remplacer le Parlement pour voter une loi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : la loi n'est pas de son ressort. Elle donne des avis sur la chefferie traditionnelle et la culture. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur la CNRCTCI sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Repérer les acteurs : des rois et chefs traditionnels. Étape 3 — Reconnaître son rôle : préserver les traditions et aider à la paix. Étape 4 — Conclure : juger les crimes est le rôle du juge, fixer les impôts celui du Parlement.",
+                  "answers": [
+                    {
+                      "content": "Elle fixe les impôts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle juge les crimes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle aide à préserver les traditions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle peut aider à apaiser les conflits",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle réunit des rois et des chefs traditionnels",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le club EDHC prépare un exposé sur les institutions qui conseillent",
+          "statement": "Au collège de Yaokro, le club EDHC prépare un exposé pour les classes de 4ème. Trois groupes présentent chacun une institution consultative : le CESEC, le Médiateur de la République et la CNRCTCI. Le professeur demande aux élèves de montrer ce que ces trois institutions ont en commun et ce qui les distingue.",
+          "exercise_type": "fixation",
+          "figure": "institutions-consultatives",
+          "questions": [
+            {
+              "content": "Relie chaque institution à sa mission principale.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Identifier la question posée : chaque institution conseille dans son domaine. 2. Repérer le rôle de chacune : le CESEC étudie des questions de société et rend un avis ; le Médiateur reçoit les réclamations des citoyens contre l'administration ; la CNRCTCI réunit des rois et chefs traditionnels. 3. Les relier : chaque mission découle de son nom. Les mélanger donnerait au CESEC la mission du Médiateur ou à la chambre celle du CESEC.",
+              "answers": [
+                {
+                  "content": "Le CESEC",
+                  "match": "Donner un avis sur des questions économiques, sociales, environnementales et culturelles"
+                },
+                {
+                  "content": "Le Médiateur de la République",
+                  "match": "Recommander des solutions à l'amiable aux difficultés avec l'administration"
+                },
+                {
+                  "content": "La CNRCTCI",
+                  "match": "Préserver les traditions et aider à la paix entre communautés"
+                }
+              ]
+            },
+            {
+              "content": "Quelle phrase résume ce que ces trois institutions ont en commun ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier ce qu'elles font : elles étudient, conseillent, recommandent. 2. Repérer les rôles des autres acteurs : voter la loi relève du Parlement, juger du juge, diriger du Gouvernement. 3. Reconnaître le point commun : un rôle consultatif. 4. Conclure : elles éclairent, l'autorité décide. Les trois autres phrases décrivent des pouvoirs qu'elles n'ont pas.",
+              "answers": [
+                {
+                  "content": "Elles donnent des avis ou des recommandations, mais ne décident pas à la place des autorités",
+                  "correct": true
+                },
+                {
+                  "content": "Elles votent les lois",
+                  "correct": false
+                },
+                {
+                  "content": "Elles jugent les litiges entre les personnes",
+                  "correct": false
+                },
+                {
+                  "content": "Elles dirigent le Gouvernement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le Médiateur n'est pas un juge : il fait des ___ à l'administration.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Identifier le rôle du Médiateur : il ne juge pas. 2. Chercher ce qu'il fait : il étudie l'affaire et propose une solution à l'amiable. 3. Nommer son acte : une recommandation. Écrire « jugements » ou « sanctions » serait faux, car il ne peut ni juger ni sanctionner.",
+              "answers": [
+                {
+                  "content": "recommandations",
+                  "correct": true
+                },
+                {
+                  "content": "recommandation",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces affirmations, lesquelles sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Vérifier chaque affirmation avec la mission de l'institution. 2. La CNRCTCI est la Chambre nationale des rois et chefs traditionnels : vrai. Le CESEC donne des avis : vrai. 3. Le Médiateur recommande, il ne condamne pas ; la CNRCTCI conseille et ne vote pas les lois : ces deux affirmations donnent un pouvoir de juge ou de législateur qu'elles n'ont pas.",
+              "answers": [
+                {
+                  "content": "Le Médiateur condamne les fonctionnaires fautifs",
+                  "correct": false
+                },
+                {
+                  "content": "Le CESEC rend des avis sur des questions de société",
+                  "correct": true
+                },
+                {
+                  "content": "La CNRCTCI vote les lois de la République",
+                  "correct": false
+                },
+                {
+                  "content": "La CNRCTCI réunit des rois et des chefs traditionnels",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On peut saisir le CESEC pour obtenir la condamnation d'un voisin.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier le problème : un conflit avec un voisin. 2. Repérer qui traite quoi : un conflit entre particuliers relève de la famille, du chef de quartier ou du juge. 3. Reconnaître le CESEC : il donne des avis sur des questions de société, il ne juge pas. La réponse est Faux ; l'erreur est de confondre conseil et justice.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux phrases pourquoi on dit que le CESEC, le Médiateur et la CNRCTCI sont des institutions « consultatives ».",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que ces institutions donnent un avis ou une recommandation",
+                "Dit qu'elles ne prennent pas la décision à la place de l'autorité",
+                "Écrit des phrases claires et complètes"
+              ],
+              "starter": "Ces institutions sont consultatives parce que…",
+              "explanation": "Corrigé modèle : « Ces trois institutions sont consultatives parce qu'elles donnent un avis ou une recommandation. Elles éclairent l'autorité, mais c'est l'autorité qui décide. » Le point sur l'avis ou la recommandation vaut 1 point, le point sur la décision laissée à l'autorité 0,5 point, la clarté des phrases 0,5 point.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le dossier bloqué d'Awa",
+          "statement": "Awa a déposé il y a huit mois un dossier pour obtenir un document dans un service public de Bouaké. Elle s'y est rendue trois fois sans recevoir de réponse. Son voisin lui conseille de saisir le Médiateur de la République, un autre lui propose d'aller voir le CESEC, un troisième de s'adresser au chef de quartier.",
+          "exercise_type": "fixation",
+          "figure": "saisir-le-mediateur",
+          "questions": [
+            {
+              "content": "Quelle institution Awa peut-elle saisir pour son dossier bloqué ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier le problème : un service public ne répond pas, donc l'administration est en cause. 2. Vérifier : ce n'est pas un conflit entre particuliers ni une affaire déjà jugée. 3. Choisir : le Médiateur reçoit les réclamations contre l'administration. Le CESEC donne des avis sur des projets, la CNRCTCI s'occupe des traditions et de la paix, la Cour de cassation juge des affaires déjà jugées.",
+              "answers": [
+                {
+                  "content": "Le CESEC",
+                  "correct": false
+                },
+                {
+                  "content": "Le Médiateur de la République",
+                  "correct": true
+                },
+                {
+                  "content": "La CNRCTCI",
+                  "correct": false
+                },
+                {
+                  "content": "La Cour de cassation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la démarche d'Awa.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Identifier le problème : le service ne répond pas. 2. Vérifier que l'affaire peut être portée devant le Médiateur. 3. Saisir le Médiateur par une réclamation écrite qui expose les faits. 4. Comprendre sa réponse : une recommandation à l'amiable. On saisit après avoir constaté et vérifié, et la recommandation arrive à la fin.",
+              "answers": [
+                {
+                  "content": "Constater que le service public ne répond pas"
+                },
+                {
+                  "content": "Vérifier que le problème vient bien de l'administration"
+                },
+                {
+                  "content": "Écrire une réclamation au Médiateur en exposant les faits"
+                },
+                {
+                  "content": "Recevoir la recommandation du Médiateur"
+                }
+              ]
+            },
+            {
+              "content": "Que doit contenir la réclamation d'Awa ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Identifier ce que le Médiateur doit comprendre : les faits. 2. Écrire les faits utiles : la date du dépôt, les démarches déjà faites. 3. Éviter ce qui sort de son rôle : il ne condamne pas et ne juge pas la Constitution. Une demande de peine de prison et une critique de la Constitution ne l'aident pas à chercher une solution à l'amiable.",
+              "answers": [
+                {
+                  "content": "Une critique de la Constitution",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois visites déjà faites au service",
+                  "correct": true
+                },
+                {
+                  "content": "Une demande de condamnation de l'agent à une peine de prison",
+                  "correct": false
+                },
+                {
+                  "content": "La date du dépôt de son dossier",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le Médiateur va condamner le service public à payer une amende.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier le rôle du Médiateur : il est un intermédiaire. 2. Chercher ce qu'il peut faire : étudier, contacter le service, recommander. 3. Conclure : il ne condamne pas ; seul un juge prononce une amende. La réponse est Faux ; l'erreur est de confondre médiateur et juge.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le voisin d'Awa a un désaccord avec elle sur un mur mitoyen. Que doit-il faire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier le problème : un désaccord entre deux particuliers. 2. Vérifier : le Médiateur ne traite que les difficultés avec l'administration. 3. Choisir : famille, chef de quartier ou juge. Le CESEC ne juge pas et la CNRCTCI ne prend pas de décret.",
+              "answers": [
+                {
+                  "content": "S'adresser à la famille, au chef de quartier ou au juge, car ce n'est pas l'administration",
+                  "correct": true
+                },
+                {
+                  "content": "Saisir le CESEC, qui juge les voisins",
+                  "correct": false
+                },
+                {
+                  "content": "Saisir le Médiateur, car il règle toutes les disputes",
+                  "correct": false
+                },
+                {
+                  "content": "Demander à la CNRCTCI de lui donner raison par décret",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa écrit au Médiateur. Rédige en deux ou trois phrases la présentation des faits de sa réclamation.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Présente le problème : dossier déposé à Bouaké, sans réponse",
+                "Indique la date ou la durée et les démarches déjà faites",
+                "Écrit des phrases claires, à la première personne ou à la troisième"
+              ],
+              "starter": "J'ai déposé un dossier…",
+              "explanation": "Corrigé modèle : « J'ai déposé il y a huit mois un dossier dans un service public de Bouaké pour obtenir un document. Je m'y suis rendue trois fois sans recevoir de réponse. Je vous demande d'intervenir pour que mon dossier soit traité. » Le problème présenté vaut 1 point, la durée et les démarches 1 point, la clarté 1 point.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le projet de carrière de sable de Yaokro",
+          "statement": "Une entreprise veut ouvrir une carrière de sable près de la rivière de Yaokro. Les pêcheurs craignent pour la rivière, la commune espère des emplois, et des familles du village sont en désaccord. Le chef du village, qui siège à la CNRCTCI, veut éviter une dispute entre les familles. Par ailleurs, un cultivateur dont le champ est concerné attend depuis longtemps la réponse d'un service public à sa demande d'indemnisation. Le Gouvernement, qui prépare des règles nationales sur les carrières de sable, demande l'avis du CESEC.",
+          "exercise_type": "evaluation",
+          "figure": "avis-et-decision",
+          "questions": [
+            {
+              "content": "Relie chaque acteur ou institution à son rôle dans cette affaire.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Identifier chaque difficulté : l'effet du projet, la dispute entre familles, le dossier bloqué, la décision à prendre. 2. Repérer le rôle de chaque institution : le CESEC conseille sur l'économie et l'environnement, la CNRCTCI aide à la paix, le Médiateur traite les difficultés avec un service public, l'autorité décide. 3. Les relier une à une. Mélanger les rôles donnerait au CESEC le pouvoir de décider.",
+              "answers": [
+                {
+                  "content": "Le CESEC",
+                  "match": "Donner un avis sur les effets du projet pour l'économie et l'environnement"
+                },
+                {
+                  "content": "La CNRCTCI",
+                  "match": "Aider à calmer le désaccord entre les familles"
+                },
+                {
+                  "content": "Le Médiateur de la République",
+                  "match": "Aider le cultivateur dont le dossier est bloqué"
+                },
+                {
+                  "content": "L'autorité qui décide",
+                  "match": "Décider d'autoriser ou non la carrière"
+                }
+              ]
+            },
+            {
+              "content": "Dans ce projet, quels domaines du CESEC sont surtout concernés ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier le domaine : la rivière touche l'environnement, les emplois touchent l'économie. 2. Repérer le CESEC : ses domaines sont économique, social, environnemental et culturel. 3. Conclure : ces deux domaines sont concernés. Judiciaire et militaire ne sont pas des domaines du CESEC, et dire « aucun » oublie le lien avec la rivière et les emplois.",
+              "answers": [
+                {
+                  "content": "Aucun domaine",
+                  "correct": false
+                },
+                {
+                  "content": "Le domaine judiciaire et le domaine militaire",
+                  "correct": false
+                },
+                {
+                  "content": "L'environnement (la rivière) et l'économie (les emplois)",
+                  "correct": true
+                },
+                {
+                  "content": "Le domaine culturel seulement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après l'avis du CESEC, qui décide d'autoriser ou non la carrière ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier la question : qui décide. 2. Repérer le rôle de chacun : le CESEC, la CNRCTCI et le Médiateur éclairent ou apaisent. 3. Conclure : l'avis éclaire, c'est l'autorité compétente qui décide. Chacune des trois autres institutions est consultative : elle ne décide pas.",
+              "answers": [
+                {
+                  "content": "Le CESEC, car il a rendu l'avis",
+                  "correct": false
+                },
+                {
+                  "content": "Le Médiateur, car il recommande",
+                  "correct": false
+                },
+                {
+                  "content": "L'autorité compétente, qui reste libre de sa décision",
+                  "correct": true
+                },
+                {
+                  "content": "La CNRCTCI, car elle réunit des chefs",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont vraies dans cette affaire ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Vérifier chaque affirmation avec le rôle de l'institution. 2. La médiation, la saisine du Médiateur et l'avis qui éclaire sont des rôles réels. 3. Condamner relève du juge et ordonner la fermeture d'une carrière est une décision de l'autorité : la CNRCTCI et le CESEC ne les prennent pas.",
+              "answers": [
+                {
+                  "content": "L'avis du CESEC éclaire la décision sans la prendre",
+                  "correct": true
+                },
+                {
+                  "content": "Le cultivateur peut saisir le Médiateur pour son dossier bloqué",
+                  "correct": true
+                },
+                {
+                  "content": "Le CESEC peut ordonner la fermeture de la carrière",
+                  "correct": false
+                },
+                {
+                  "content": "Le chef peut aider à apaiser les familles par la médiation",
+                  "correct": true
+                },
+                {
+                  "content": "La CNRCTCI peut condamner les pêcheurs",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le cultivateur doit saisir la CNRCTCI, car son champ est situé dans le village.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier le problème : une demande d'indemnisation bloquée dans un service public. 2. Vérifier : l'administration est en cause. 3. Choisir : le Médiateur, et non la chambre, qui s'occupe des traditions et de la paix. La réponse est Faux ; le lieu du champ ne change pas la nature du problème.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi l'avis du CESEC ne suffit pas à lui seul à autoriser ou refuser la carrière.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que le CESEC donne un avis et ne décide pas",
+                "Dit que l'autorité compétente décide",
+                "Écrit une réponse claire en deux ou trois phrases"
+              ],
+              "starter": "Le CESEC est une institution consultative…",
+              "explanation": "Corrigé modèle : « Le CESEC est une institution consultative : il étudie le projet et donne un avis. Cet avis éclaire l'autorité compétente, mais c'est elle qui décide d'autoriser ou de refuser la carrière. » Le rôle du CESEC vaut 1,5 point, la décision de l'autorité 1 point, la clarté 0,5 point.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Débat au collège : qui fait quoi ?",
+          "statement": "Le collège de Yaokro organise un débat « Qui fait quoi ? ». Un élève affirme : « Le CESEC vote les lois sur l'environnement. » Une élève dit : « Les rois et chefs de la CNRCTCI gouvernent le pays. » Un parent, M. Gnagne, explique que son dossier de bourse est bloqué depuis des mois dans un service public. Un autre élève déclare : « Les institutions consultatives ne servent à rien, puisqu'elles ne décident pas. »",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Que répondre à l'élève qui affirme que le CESEC vote les lois ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier la question : qui vote la loi. 2. Repérer le rôle de chaque acteur : le pouvoir législatif vote, le pouvoir exécutif applique, le juge juge. 3. Reconnaître le CESEC : il étudie et rend un avis. 4. Conclure : l'avis éclaire la décision. Dire qu'il juge ou applique les lois lui donne un rôle d'autres pouvoirs.",
+              "answers": [
+                {
+                  "content": "Le CESEC applique les lois à la place du Gouvernement",
+                  "correct": false
+                },
+                {
+                  "content": "Le CESEC donne un avis ; les lois sont votées par le pouvoir législatif",
+                  "correct": true
+                },
+                {
+                  "content": "Le CESEC juge les lois avant qu'elles soient votées",
+                  "correct": false
+                },
+                {
+                  "content": "Il a raison, c'est la mission du CESEC",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les rois et chefs de la CNRCTCI gouvernent le pays à la place du Gouvernement.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier la question : qui gouverne. 2. Repérer les acteurs : le Gouvernement, qui relève du pouvoir exécutif. 3. Reconnaître le rôle de la CNRCTCI : conseiller, préserver les traditions, aider à la paix. 4. Conclure : la loi et la justice sont du ressort de l'État. La réponse est Faux.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle institution M. Gnagne peut-il saisir pour son dossier de bourse bloqué ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier le problème : un service public ne répond pas. 2. Vérifier : ce n'est pas un conflit entre particuliers. 3. Saisir : le Médiateur reçoit la réclamation. 4. Comprendre : il recommande une solution à l'amiable. Le CESEC donne des avis sur des projets ; la CNRCTCI s'occupe des traditions ; un chef ne rend pas la justice à la place du juge.",
+              "answers": [
+                {
+                  "content": "Le Médiateur de la République",
+                  "correct": true
+                },
+                {
+                  "content": "Le CESEC",
+                  "correct": false
+                },
+                {
+                  "content": "La CNRCTCI",
+                  "correct": false
+                },
+                {
+                  "content": "Le chef de son quartier à la place du juge",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces éléments, lesquels peuvent figurer dans la réclamation de M. Gnagne ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Identifier ce qu'il faut exposer : les faits. 2. Écrire la date du dépôt et les démarches déjà faites. 3. Ne pas demander ce que le Médiateur ne peut pas faire : condamner ou faire une loi. Il ne juge pas et ne vote pas la loi.",
+              "answers": [
+                {
+                  "content": "Une demande de condamnation de l'agent à la prison",
+                  "correct": false
+                },
+                {
+                  "content": "Les démarches déjà faites auprès du service",
+                  "correct": true
+                },
+                {
+                  "content": "Un nouveau texte de loi sur les bourses",
+                  "correct": false
+                },
+                {
+                  "content": "La date du dépôt du dossier de bourse",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève dit : « Les institutions consultatives ne servent à rien, puisqu'elles ne décident pas. » Es-tu d'accord ? Réponds en quatre à six lignes en donnant un exemple.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Prend position clairement (d'accord ou pas d'accord)",
+                "Explique que l'avis éclaire la décision sans la prendre",
+                "Donne un exemple précis (CESEC, Médiateur ou CNRCTCI)",
+                "Écrit des phrases claires et correctes"
+              ],
+              "starter": "Je ne suis pas d'accord, car…",
+              "explanation": "Corrigé modèle : « Je ne suis pas d'accord. Une institution consultative ne décide pas, mais son avis éclaire l'autorité et l'aide à mieux décider. Par exemple, avant de présenter un texte sur l'environnement, le Gouvernement peut demander l'avis du CESEC, qui étudie les effets du projet. Conseiller n'est pas inutile : c'est une aide à la décision. » La prise de position vaut 1 point, l'explication 1 point, l'exemple 1 point, la clarté 1 point.",
+              "answers": []
+            },
+            {
+              "content": "Rédige en trois phrases la demande que M. Gnagne adresse au Médiateur de la République.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Présente son problème : dossier de bourse bloqué",
+                "Indique le service concerné et les démarches déjà faites",
+                "Demande l'intervention du Médiateur",
+                "Écrit des phrases claires et polies"
+              ],
+              "starter": "J'ai déposé un dossier de bourse…",
+              "explanation": "Corrigé modèle : « J'ai déposé un dossier de bourse dans un service public, et il est bloqué depuis des mois. Je me suis déjà rendu plusieurs fois au service sans obtenir de réponse. Je vous demande d'intervenir pour que mon dossier soit examiné. » Chaque critère vaut 1 point.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Les sigles et le rôle des trois institutions consultatives (CESEC, Médiateur de la République, CNRCTCI) ; la différence entre conseiller, décider et juger ; la saisine du Médiateur ; la mission de la CNRCTCI.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur d'EDHC écrit trois noms au tableau : CESEC, Médiateur de la République, CNRCTCI. Il demande aux élèves de retrouver les sigles et les missions.",
+              "exercise_type": "evaluation",
+              "hint": "Relis le sigle lettre par lettre.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que signifie le sigle CESEC ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire le sigle lettre par lettre : C, E, S, E, C. 2. Associer chaque lettre à un mot : Conseil, économique, social, environnemental, culturel. 3. Conclure. Les autres propositions inventent des noms qui ne correspondent pas aux lettres du sigle.",
+                  "answers": [
+                    {
+                      "content": "Conseil économique, social, environnemental et culturel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Conseil d'État des services et des écoles civiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Comité des élus, des syndicats et des entreprises",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chambre économique des services de l'État et des chefs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que signifie le sigle CNRCTCI ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire le sigle : CN, RCT, CI. 2. Associer : Chambre nationale, rois et chefs traditionnels, Côte d'Ivoire. 3. Conclure. Les autres propositions changent le sens des lettres et ne désignent pas cette institution.",
+                  "answers": [
+                    {
+                      "content": "Chambre nationale des rois et chefs traditionnels de Côte d'Ivoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chambre nationale des rois et chefs de tribunaux de Côte d'Ivoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Commission nationale des radios et télévisions de Côte d'Ivoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Conseil national des routes et des chemins de Côte d'Ivoire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans CESEC, les quatre domaines sont économique, social, ___ et culturel.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Rappeler le nom : Conseil économique, social, environnemental et culturel. 2. Chercher le mot manquant entre « social » et « culturel ». 3. Écrire « environnemental ». Écrire « économique » répéterait le premier domaine.",
+                  "answers": [
+                    {
+                      "content": "environnemental",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Médiateur de la République est une institution indépendante qui ne rend pas de jugement.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le rôle du Médiateur : intermédiaire entre l'administration et les citoyens. 2. Repérer ce qu'il fait : il recommande à l'amiable. 3. Conclure : il ne juge pas. La réponse est Vrai ; dire le contraire serait confondre médiateur et juge.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels mots figurent dans le nom complet de la CNRCTCI ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Rappeler le nom : Chambre nationale des rois et chefs traditionnels de Côte d'Ivoire. 2. Repérer les mots qui y figurent : rois et traditionnels. 3. Écarter les intrus : « tribunaux » n'y figure pas et « économique » appartient au nom du CESEC.",
+                  "answers": [
+                    {
+                      "content": "rois",
+                      "correct": true
+                    },
+                    {
+                      "content": "tribunaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "traditionnels",
+                      "correct": true
+                    },
+                    {
+                      "content": "économique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève demande ce qui distingue une institution qui conseille d'une institution qui décide ou qui juge.",
+              "exercise_type": "evaluation",
+              "hint": "Pose-toi la question : qui décide, qui juge, qui conseille ?",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à l'acteur qui agit.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier l'acte : voter, juger, conseiller. 2. Repérer qui le fait : voter la loi appartient au pouvoir législatif, condamner au pouvoir judiciaire, rendre un avis à une institution consultative. 3. Relier chaque acte à son acteur sans les mélanger.",
+                  "answers": [
+                    {
+                      "content": "Un texte de loi est voté",
+                      "match": "Le pouvoir législatif"
+                    },
+                    {
+                      "content": "Un tribunal condamne un voleur",
+                      "match": "Le pouvoir judiciaire"
+                    },
+                    {
+                      "content": "Un avis est rendu avant une décision",
+                      "match": "Une institution consultative"
+                    }
+                  ]
+                },
+                {
+                  "content": "Que fait une institution consultative ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le sens du mot : consulter, demander un avis. 2. Repérer ce que ne font pas ces institutions : appliquer la loi, condamner, décider. 3. Conclure : elles donnent un avis. Les trois autres réponses décrivent des pouvoirs d'autres acteurs.",
+                  "answers": [
+                    {
+                      "content": "Elle prend la décision finale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle condamne les auteurs d'infractions",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle donne un avis à l'autorité qui décide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fait appliquer la loi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'avis d'une institution consultative a la même force qu'une décision de justice.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier la nature d'un avis : une opinion qui éclaire. 2. Comparer avec une décision de justice : elle s'impose. 3. Conclure : un avis ne s'impose pas comme un jugement. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le parcours d'un avis.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Identifier le point de départ : une décision à prendre. 2. Demander l'avis. 3. L'institution étudie et rend son avis. 4. L'autorité décide. L'avis précède toujours la décision.",
+                  "answers": [
+                    {
+                      "content": "L'autorité a une décision à prendre"
+                    },
+                    {
+                      "content": "L'autorité demande un avis"
+                    },
+                    {
+                      "content": "L'institution consultative étudie et rend son avis"
+                    },
+                    {
+                      "content": "L'autorité décide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une institution qui donne un avis est dite ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Partir du verbe « consulter ». 2. Former l'adjectif : consultative. 3. Conclure. Écrire « décisionnaire » serait faux, car cette institution ne décide pas.",
+                  "answers": [
+                    {
+                      "content": "consultative",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chef d'établissement demande l'avis du conseil des professeurs avant de choisir un emploi du temps. Dans cette situation, le conseil des professeurs est ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Identifier la question : un avis avant de choisir. 2. Repérer qui décide : le chef d'établissement. 3. Reconnaître le conseil : il conseille. 4. Conclure : consultatif. Les trois autres mots désignent des pouvoirs qu'il n'a pas.",
+                  "answers": [
+                    {
+                      "content": "législatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "judiciaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "consultatif",
+                      "correct": true
+                    },
+                    {
+                      "content": "décisionnaire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le club de lecture du collège étudie le rôle du Médiateur de la République. Les élèves doivent savoir quand et comment le saisir.",
+              "exercise_type": "evaluation",
+              "hint": "Le Médiateur s'occupe des difficultés avec l'administration, jamais des disputes entre particuliers.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans quel cas peut-on saisir le Médiateur de la République ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le problème : une difficulté avec un service public. 2. Vérifier : ni dispute entre particuliers ni affaire déjà jugée. 3. Conclure : le Médiateur peut être saisi. Un jeu, un jugement ou la Constitution ne relèvent pas de lui.",
+                  "answers": [
+                    {
+                      "content": "Quand on veut annuler un jugement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand on veut changer la Constitution",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand un service public ne répond pas à une demande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quand deux amis se disputent un jeu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le texte que l'on envoie au Médiateur pour exposer son problème s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier la démarche : exposer un problème par écrit. 2. Nommer ce texte : une réclamation. 3. Conclure. Écrire « loi » ou « plainte au juge » serait faux, car il ne s'agit pas d'un texte de loi ni d'un recours devant un tribunal.",
+                  "answers": [
+                    {
+                      "content": "réclamation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Médiateur peut ordonner à un service public de payer une amende.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le rôle du Médiateur : intermédiaire. 2. Repérer ce qu'il fait : étudier, contacter le service, recommander. 3. Conclure : il ne sanctionne pas. La réponse est Faux ; seul un juge peut prononcer une amende.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la saisine.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Identifier le problème. 2. Vérifier l'affaire. 3. Saisir le Médiateur par écrit. 4. Comprendre sa réponse. La recommandation arrive en dernier.",
+                  "answers": [
+                    {
+                      "content": "Constater le problème avec le service public"
+                    },
+                    {
+                      "content": "Vérifier que l'affaire concerne l'administration"
+                    },
+                    {
+                      "content": "Écrire une réclamation avec les faits"
+                    },
+                    {
+                      "content": "Recevoir la recommandation du Médiateur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Vérifier chaque affirmation avec le rôle du Médiateur. 2. Il recherche l'amiable et ne remplace pas un tribunal : vrai. 3. Condamner relève du juge, et les disputes entre voisins ne concernent pas l'administration : faux.",
+                  "answers": [
+                    {
+                      "content": "Le Médiateur cherche une solution à l'amiable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Médiateur condamne l'administration",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur règle toutes les disputes entre voisins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur ne remplace pas un tribunal",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un village, les anciens parlent de la Chambre nationale des rois et chefs traditionnels. Des élèves veulent comprendre ce qu'elle fait.",
+              "exercise_type": "evaluation",
+              "hint": "Retiens : tradition et paix, jamais la loi ni la justice.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le rôle de la CNRCTCI ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la situation : tradition et paix entre communautés. 2. Reconnaître le rôle de la CNRCTCI : conseiller, préserver les traditions, aider à la paix. 3. Conclure. Voter, condamner ou gouverner sont des rôles d'autres pouvoirs.",
+                  "answers": [
+                    {
+                      "content": "Condamner les voleurs à des peines de prison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Voter les lois de la République",
+                      "correct": false
+                    },
+                    {
+                      "content": "Gouverner le pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Préserver les traditions, conseiller et aider à la paix entre les communautés",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La CNRCTCI est une institution consultative.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler la nature de la chambre : elle donne des avis sur la chefferie traditionnelle et la culture. 2. Constater qu'elle ne décide pas à la place de l'État. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La CNRCTCI aide à régler les conflits entre communautés par la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier le moyen : aider deux parties à dialoguer. 2. Le nommer : la médiation. 3. Conclure. Écrire « sanction » serait faux, car la chambre ne punit pas.",
+                  "answers": [
+                    {
+                      "content": "médiation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à celui qui agit.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier chaque situation. 2. Repérer qui agit : la chambre aide à la paix, le juge juge, le Parlement vote la loi. 3. Relier chaque situation sans mélanger les rôles.",
+                  "answers": [
+                    {
+                      "content": "Une querelle entre deux villages à apaiser",
+                      "match": "La CNRCTCI, par la médiation"
+                    },
+                    {
+                      "content": "Un crime à juger",
+                      "match": "Le juge"
+                    },
+                    {
+                      "content": "Une loi à voter",
+                      "match": "Le Parlement"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Vérifier chaque affirmation avec le rôle de la CNRCTCI. 2. Autorités traditionnelles et contribution à la paix : vrai. 3. Fixer les impôts relève du Parlement et rendre la justice de l'État relève des juges : faux.",
+                  "answers": [
+                    {
+                      "content": "Les chefs de la chambre sont des autorités traditionnelles",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chambre contribue à la paix entre les communautés",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chambre rend la justice de l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chambre fixe les impôts",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Des situations de la vie courante à Man, Daloa, Bouaké et San-Pédro : choisir l'institution adaptée, distinguer ce qui relève de l'avis, de la recommandation et de la médiation, et ne pas confondre les rôles. Les noms et chiffres sont fictifs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Man, M. Diomandé a demandé un acte à un service public il y a dix mois. Il y est allé quatre fois sans réponse. Il hésite entre le Médiateur de la République, le CESEC et le chef de quartier.",
+              "exercise_type": "evaluation",
+              "hint": "Un service public qui ne répond pas, c'est l'affaire du Médiateur.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle institution peut l'aider à débloquer son dossier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le problème : un service public ne répond pas. 2. Vérifier : c'est l'administration qui est en cause. 3. Choisir le Médiateur. Le CESEC donne des avis sur des projets, la CNRCTCI s'occupe des traditions, l'Assemblée nationale vote les lois.",
+                  "answers": [
+                    {
+                      "content": "L'Assemblée nationale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": true
+                    },
+                    {
+                      "content": "La CNRCTCI",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre sa démarche.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Constater. 2. Vérifier. 3. Saisir par écrit. 4. Comprendre la réponse. La recommandation vient à la fin.",
+                  "answers": [
+                    {
+                      "content": "Constater que le service ne répond pas"
+                    },
+                    {
+                      "content": "Vérifier que l'administration est en cause"
+                    },
+                    {
+                      "content": "Écrire une réclamation avec les dates et les visites"
+                    },
+                    {
+                      "content": "Recevoir la recommandation du Médiateur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Médiateur va condamner l'agent du service à une peine de prison.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le rôle du Médiateur : intermédiaire. 2. Chercher ce qu'il fait : recommander. 3. Conclure : il ne condamne pas. Seul un juge condamne. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-il écrire dans sa réclamation ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Exposer les faits. 2. Donner les dates et les démarches. 3. Éviter ce que le Médiateur ne peut faire : une loi ou une peine ne relèvent pas de lui.",
+                  "answers": [
+                    {
+                      "content": "La date de dépôt de sa demande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les quatre visites déjà faites",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une demande de nouvelle loi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une demande de peine contre l'agent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "M. Diomandé écrit au Médiateur : on dit qu'il le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier l'acte : adresser une demande au Médiateur. 2. Le nommer : saisir. 3. Conclure. « Juge » serait faux, car le Médiateur ne juge pas.",
+                  "answers": [
+                    {
+                      "content": "saisit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si son dossier avait déjà été jugé par un tribunal, que ferait le Médiateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Vérifier si l'affaire est déjà jugée. 2. Rappeler la règle : le Médiateur n'est pas un juge. 3. Conclure : il ne remet pas en cause une décision de justice. Annuler ou condamner un juge sont des pouvoirs qu'il n'a pas.",
+                  "answers": [
+                    {
+                      "content": "Il ne pourrait pas remettre en cause la décision de justice",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il condamnerait le juge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il l'annulerait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il refuserait toujours les dossiers",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Près de Daloa, deux villages se disputent un bas-fond cultivable. Des jeunes menacent de se battre. Le chef d'un village, membre de la chambre des rois et chefs traditionnels, propose de réunir les anciens.",
+              "exercise_type": "evaluation",
+              "hint": "Pour un conflit entre communautés, pense médiation, pas jugement.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel rôle peut jouer la CNRCTCI dans cette situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la situation : un conflit entre communautés. 2. Repérer les acteurs : les chefs traditionnels. 3. Reconnaître le rôle de la chambre : médiation et paix. 4. Conclure. Condamner, voter ou gouverner ne sont pas de son ressort.",
+                  "answers": [
+                    {
+                      "content": "Gouverner la région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Voter une loi sur les terres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Condamner les jeunes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Conseiller et aider à la paix par la médiation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un jeune blesse quelqu'un, c'est la CNRCTCI qui le juge.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier l'acte : une infraction. 2. Repérer qui juge : un juge de l'État. 3. Conclure : la chambre aide à la paix mais ne juge pas. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles actions vont dans le sens de la paix ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier le but : éviter la violence. 2. Choisir le dialogue et l'écoute. 3. Écarter la violence et la partialité, qui aggravent le conflit.",
+                  "answers": [
+                    {
+                      "content": "Écouter les arguments des deux communautés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Laisser les jeunes se battre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir un camp avant d'avoir écouté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réunir les anciens des deux villages pour dialoguer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aider deux parties à dialoguer pour résoudre un conflit s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier l'action : aider au dialogue. 2. La nommer : médiation. 3. Conclure. « Sanction » serait faux.",
+                  "answers": [
+                    {
+                      "content": "médiation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque acteur à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier chaque acteur. 2. Repérer son rôle : dialoguer, juger, voter. 3. Relier sans mélanger.",
+                  "answers": [
+                    {
+                      "content": "Les chefs traditionnels",
+                      "match": "Dialoguer pour apaiser"
+                    },
+                    {
+                      "content": "Le juge",
+                      "match": "Juger si une infraction est commise"
+                    },
+                    {
+                      "content": "Le Parlement",
+                      "match": "Voter la loi"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le Gouvernement prépare un programme national de marchés modernes, dont un à Bouaké. Des commerçants craignent de perdre leur place, des associations parlent de propreté, et des jeunes espèrent des emplois. Les autorités souhaitent un avis avant de décider.",
+              "exercise_type": "evaluation",
+              "hint": "Pour un avis sur l'économie, le social, l'environnement ou la culture : le CESEC.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle institution peut donner un avis sur ce projet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le domaine : économie (commerce), social (emplois), environnement (propreté). 2. Repérer qui demande l'avis : les autorités. 3. Reconnaître le CESEC : il donne des avis sur ces domaines. Le Médiateur traite les réclamations, la chambre s'occupe des traditions, la Cour de cassation juge.",
+                  "answers": [
+                    {
+                      "content": "La CNRCTCI",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Cour de cassation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels domaines du CESEC sont concernés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Chercher les domaines : commerce et emplois (économique), propreté (environnemental). 2. Repérer ceux du CESEC : économique, social, environnemental, culturel. 3. Écarter judiciaire et militaire, qui n'en font pas partie.",
+                  "answers": [
+                    {
+                      "content": "Judiciaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Militaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Environnemental",
+                      "correct": true
+                    },
+                    {
+                      "content": "Économique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Après l'avis du CESEC, ce sont les autorités qui décident.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le rôle du CESEC : avis. 2. Repérer qui décide : les autorités. 3. Conclure. La réponse est Vrai ; croire que le CESEC décide serait confondre conseiller et décider.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le parcours du projet.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Un projet existe. 2. L'avis est demandé. 3. Le CESEC étudie. 4. Les autorités décident. L'avis précède la décision.",
+                  "answers": [
+                    {
+                      "content": "Les autorités étudient un projet de marché"
+                    },
+                    {
+                      "content": "Elles demandent l'avis du CESEC"
+                    },
+                    {
+                      "content": "Le CESEC étudie et rend son avis"
+                    },
+                    {
+                      "content": "Les autorités décident"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le CESEC rend un ___ aux autorités.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier le rôle du CESEC. 2. Le nommer : un avis. 3. Conclure. « Jugement » serait faux, car il ne juge pas.",
+                  "answers": [
+                    {
+                      "content": "avis",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant veut que le CESEC interdise le marché. Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la demande : une interdiction. 2. Repérer le rôle du CESEC : avis. 3. Conclure : seules les autorités décident. Les trois autres réponses donnent au CESEC un pouvoir de décision, de justice ou de loi.",
+                  "answers": [
+                    {
+                      "content": "Le CESEC peut interdire, c'est sa mission",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC peut condamner le Gouvernement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC doit voter une loi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC n'interdit rien : il donne un avis, et les autorités décident",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À San-Pédro, des élèves de 4ème préparent un jeu-concours « Qui fait quoi ? ». Chaque équipe reçoit une situation et doit choisir l'institution qui convient.",
+              "exercise_type": "evaluation",
+              "hint": "Associe le problème à l'institution qui conseille dans ce domaine.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à la bonne institution.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier le problème de chaque situation. 2. Repérer l'institution : avis sur un projet, CESEC ; difficulté avec l'administration, Médiateur ; conflit entre communautés, CNRCTCI. 3. Relier.",
+                  "answers": [
+                    {
+                      "content": "Un avis sur un projet de protection de la mer",
+                      "match": "Le CESEC"
+                    },
+                    {
+                      "content": "Un dossier bloqué dans un service public",
+                      "match": "Le Médiateur de la République"
+                    },
+                    {
+                      "content": "Un conflit à apaiser entre deux villages",
+                      "match": "La CNRCTCI"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une équipe dit : « Le Médiateur rend la justice. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le rôle du Médiateur. 2. Le comparer à celui du juge. 3. Conclure : il recommande à l'amiable. Les autres réponses lui attribuent un rôle de juge ou de législateur.",
+                  "answers": [
+                    {
+                      "content": "C'est faux, il fait les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai, mais seulement pour les voisins",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai, c'est son rôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : le Médiateur recommande, le juge rend la justice",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le CESEC peut être consulté sur un projet qui touche l'environnement.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier le domaine : l'environnement. 2. Constater qu'il fait partie des quatre domaines du CESEC. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sigle CNRCTCI commence par « Chambre ___ des rois et chefs traditionnels ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Rappeler le nom complet. 2. Chercher le mot manquant : nationale. 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "nationale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles institutions sont consultatives ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Identifier le rôle de chaque institution. 2. Le CESEC et la CNRCTCI donnent des avis. 3. La Cour de cassation juge et l'Assemblée nationale vote la loi : elles ne sont pas consultatives.",
+                  "answers": [
+                    {
+                      "content": "La Cour de cassation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CNRCTCI",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'Assemblée nationale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Juger des affirmations vraies ou fausses en justifiant ; ne pas confondre conseiller, décider et juger ; choisir l'institution selon la nature du problème ; ordonner une démarche ; reconnaître les limites des trois institutions.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Quatre élèves donnent leur avis sur les institutions consultatives.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque affirmation, demande-toi quel est le vrai rôle de l'institution.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève dit : « Le CESEC vote les lois sur le travail. » Quelle réponse est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'affirmation : le CESEC vote. 2. Rappeler son rôle : il rend un avis. 3. Rappeler qui vote : le pouvoir législatif. 4. Conclure : l'affirmation est fausse. Dire que le CESEC juge les lois est une autre erreur : il ne juge pas.",
+                  "answers": [
+                    {
+                      "content": "Il se trompe : le CESEC donne un avis, le pouvoir législatif vote les lois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, mais seulement pour le travail",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se trompe : le CESEC juge les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison : le CESEC est un deuxième Parlement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève dit : « Le Médiateur peut remplacer un tribunal. » Quelle réponse est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier l'affirmation. 2. Rappeler le rôle du Médiateur : intermédiaire qui recommande. 3. Comparer avec le tribunal : lui seul juge. 4. Conclure. Dire qu'il fait les lois est une autre erreur.",
+                  "answers": [
+                    {
+                      "content": "Elle se trompe : il recommande à l'amiable et ne juge pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a raison : il rend des jugements",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se trompe : il fait les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a raison pour les voisins",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une institution qui ne décide pas est forcément inutile.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier l'idée reçue. 2. Rappeler le rôle d'un avis : éclairer la décision. 3. Conclure : conseiller aide à mieux décider. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La CNRCTCI peut condamner un voleur à une peine de prison.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier l'acte : condamner. 2. Repérer qui le fait : un juge de l'État. 3. Rappeler le rôle de la chambre : tradition et paix. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Rappeler la portée d'un avis. 2. Il éclaire, et l'autorité décide. 3. Il ne remplace pas la décision et l'institution ne juge pas l'autorité.",
+                  "answers": [
+                    {
+                      "content": "L'autorité reste libre de décider",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un avis remplace la décision",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un avis éclaire la décision",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'institution consultative juge l'autorité",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une classe sépare des situations de la vie courante : certaines relèvent d'un avis, d'autres d'une médiation, d'autres d'un juge.",
+              "exercise_type": "evaluation",
+              "hint": "L'administration est-elle en cause ? Si oui, Médiateur.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque situation à la réponse qui convient.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier la nature du problème. 2. Choisir : avis sur un projet, CESEC ; administration en cause, Médiateur ; conflit entre communautés, CNRCTCI ; infraction, juge. 3. Relier.",
+                  "answers": [
+                    {
+                      "content": "Avis sur un projet qui touche la nature",
+                      "match": "Le CESEC"
+                    },
+                    {
+                      "content": "Dossier bloqué dans un service public",
+                      "match": "Le Médiateur de la République"
+                    },
+                    {
+                      "content": "Querelle entre deux communautés",
+                      "match": "La CNRCTCI"
+                    },
+                    {
+                      "content": "Vol de téléphone",
+                      "match": "Le juge"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un habitant veut faire condamner son voisin. Que doit-il faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la demande : une condamnation. 2. Rappeler qui condamne : le juge. 3. Conclure. Les institutions consultatives ne condamnent pas.",
+                  "answers": [
+                    {
+                      "content": "S'adresser au juge, car ce n'est pas le rôle d'une institution consultative",
+                      "correct": true
+                    },
+                    {
+                      "content": "Saisir le Médiateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Saisir le CESEC",
+                      "correct": false
+                    },
+                    {
+                      "content": "Demander à la CNRCTCI de condamner",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on demande au Médiateur d'étudier son problème, on le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Identifier l'acte. 2. Le nommer : saisir. 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "saisit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un conflit entre deux voisins relève du Médiateur de la République.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Identifier les personnes en cause : deux particuliers. 2. Rappeler que le Médiateur traite les difficultés avec l'administration. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles situations relèvent du Médiateur ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Identifier si l'administration est en cause. 2. Les trois premières situations mettent en cause un service public. 3. Une dispute entre frères est un conflit entre particuliers et un vol relève du juge.",
+                  "answers": [
+                    {
+                      "content": "Un dossier de retraite bloqué",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un vol dans un marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un service public qui ne répond pas à une demande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une administration qui oublie de traiter une réclamation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une dispute entre deux frères",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève range dans le désordre les étapes de trois démarches. Aide-le à les remettre en ordre.",
+              "exercise_type": "evaluation",
+              "hint": "Pense à l'ordre logique : constater, vérifier, agir, recevoir la réponse.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre la démarche pour obtenir un avis.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Un projet existe. 2. L'avis est demandé. 3. Le CESEC étudie. 4. L'autorité décide. Chaque étape suppose la précédente : l'avis est demandé et rendu avant que l'autorité décide.",
+                  "answers": [
+                    {
+                      "content": "Un projet est préparé"
+                    },
+                    {
+                      "content": "L'avis du CESEC est demandé"
+                    },
+                    {
+                      "content": "Le CESEC étudie et rend son avis"
+                    },
+                    {
+                      "content": "L'autorité décide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la saisine du Médiateur.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Constater. 2. Vérifier. 3. Saisir. 4. Recevoir la recommandation.",
+                  "answers": [
+                    {
+                      "content": "Un service public ne répond pas"
+                    },
+                    {
+                      "content": "On vérifie que l'administration est en cause"
+                    },
+                    {
+                      "content": "On écrit une réclamation"
+                    },
+                    {
+                      "content": "Le Médiateur fait une recommandation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre une médiation entre villages.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Le conflit éclate. 2. Les chefs se rencontrent. 3. La chambre aide. 4. La paix revient.",
+                  "answers": [
+                    {
+                      "content": "Un conflit éclate"
+                    },
+                    {
+                      "content": "Les chefs se rencontrent"
+                    },
+                    {
+                      "content": "La chambre aide à la médiation"
+                    },
+                    {
+                      "content": "La paix revient par le dialogue"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'avis vient-il avant la décision ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Rappeler le rôle d'un avis. 2. Constater qu'un avis éclaire. 3. Conclure : il vient avant. Un avis ne remplace pas la décision et ne la juge pas.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il doit être caché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il remplace la décision",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il juge la décision",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il sert à éclairer celui qui va décider",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Médiateur ne peut pas remettre en cause un jugement déjà rendu par un tribunal.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler le rôle du Médiateur : un intermédiaire qui recommande une solution à l'amiable. 2. Rappeler qu'il n'est pas un juge : une affaire déjà jugée ne relève plus de lui. 3. Conclure : seul un recours devant les juridictions peut modifier un jugement. La réponse est Vrai ; croire qu'il peut annuler un jugement, c'est confondre médiateur et juge.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un village, une carrière menace la rivière. Le Gouvernement prépare des règles nationales sur les carrières et demande l'avis du CESEC. Le CESEC, le Médiateur et la CNRCTCI peuvent chacun jouer un rôle, mais pas le même.",
+              "exercise_type": "evaluation",
+              "hint": "Un rôle, une institution : avis, recommandation, médiation.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui donne un avis sur les effets du projet sur la rivière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le domaine : l'environnement. 2. Choisir l'institution qui donne un avis : le CESEC. 3. Écarter les autres rôles : recommander à l'administration, aider à la paix, juger.",
+                  "answers": [
+                    {
+                      "content": "Le juge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CNRCTCI",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui aide à calmer les familles divisées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier la situation : un désaccord dans le village. 2. Choisir : la chambre des rois et chefs aide à la paix. 3. Écarter : le CESEC ne vote pas, le Médiateur ne juge pas.",
+                  "answers": [
+                    {
+                      "content": "Le Médiateur, par un jugement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC, par un vote",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Assemblée nationale, par un avis",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CNRCTCI, par la médiation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui peut aider un cultivateur dont le dossier d'indemnisation est bloqué ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le problème : l'administration ne répond pas. 2. Choisir : le Médiateur. 3. Écarter les autres rôles.",
+                  "answers": [
+                    {
+                      "content": "Un tribunal de commerce",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": true
+                    },
+                    {
+                      "content": "La CNRCTCI",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le CESEC peut décider seul d'ouvrir ou de fermer la carrière.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler le rôle du CESEC : avis. 2. Constater que l'autorité décide. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Rappeler leur nature consultative. 2. Constater qu'aucune ne décide ni ne juge. 3. Écarter juger et voter la loi.",
+                  "answers": [
+                    {
+                      "content": "Aucune ne remplace l'autorité qui décide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chacune des trois institutions conseille ou recommande",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'une d'elles vote la loi",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'une d'elles juge l'affaire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : institution consultative, CESEC, Médiateur de la République, CNRCTCI. Sigles, rôles, saisine, limites, choix de l'institution dans des situations mêlées.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève résume le cours avec une carte des idées. Complète-la.",
+              "exercise_type": "evaluation",
+              "hint": "Un avis, une recommandation, un conseil : jamais une décision.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une institution qui donne un avis est dite ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Partir de « consulter ». 2. Former l'adjectif. 3. Conclure : consultative.",
+                  "answers": [
+                    {
+                      "content": "consultative",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque sigle ou nom à sa signification.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Lire chaque nom. 2. Associer la signification. 3. Relier. Chaque signification correspond à un seul nom.",
+                  "answers": [
+                    {
+                      "content": "CESEC",
+                      "match": "Conseil économique, social, environnemental et culturel"
+                    },
+                    {
+                      "content": "CNRCTCI",
+                      "match": "Chambre nationale des rois et chefs traditionnels de Côte d'Ivoire"
+                    },
+                    {
+                      "content": "Médiateur de la République",
+                      "match": "Intermédiaire entre le citoyen et l'administration"
+                    }
+                  ]
+                },
+                {
+                  "content": "Que ne fait pas une institution consultative ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Rappeler ce qu'elle fait : étudier, avis, éclairer. 2. Chercher ce qu'elle ne fait pas : décider. 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "Prendre la décision à la place de l'autorité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Étudier une question",
+                      "correct": false
+                    },
+                    {
+                      "content": "Éclairer une décision",
+                      "correct": false
+                    },
+                    {
+                      "content": "Donner un avis",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les trois institutions de la leçon sont consultatives.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler que le CESEC donne des avis. 2. Que le Médiateur recommande. 3. Que la CNRCTCI conseille. La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles institutions sont au programme de cette leçon ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1. Rappeler les trois institutions de la leçon. 2. Écarter celles qui jugent ou votent la loi.",
+                  "answers": [
+                    {
+                      "content": "La Cour de cassation",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Assemblée nationale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": true
+                    },
+                    {
+                      "content": "La CNRCTCI",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un quartier d'Abidjan, trois voisins ont chacun un problème différent. Aide-les à choisir.",
+              "exercise_type": "evaluation",
+              "hint": "Identifie d'abord qui est en cause : l'administration, un projet, ou des communautés.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Mme Bamba attend depuis longtemps une réponse d'un service public. Que choisit-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le problème : l'administration. 2. Choisir le Médiateur. 3. Écarter les autres rôles.",
+                  "answers": [
+                    {
+                      "content": "Le juge pénal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": true
+                    },
+                    {
+                      "content": "La CNRCTCI",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "M. Yao apprend que le Gouvernement prépare un plan national de décharges. Quelle institution les autorités peuvent-elles consulter sur l'effet de ce plan sur la nature ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier le domaine : l'environnement. 2. Choisir l'institution qui donne un avis : le CESEC. 3. Écarter les rôles inventés.",
+                  "answers": [
+                    {
+                      "content": "La CNRCTCI, qui vote les lois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC, qui peut donner un avis sur l'environnement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucun, car personne ne peut donner d'avis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur, qui juge les pollueurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux familles du quartier se disputent depuis des mois. Qui peut aider à la paix ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Identifier un conflit entre particuliers ou communautés. 2. Choisir la médiation des chefs. 3. Écarter les autres institutions.",
+                  "answers": [
+                    {
+                      "content": "Le chef de quartier ou les chefs traditionnels, par la médiation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Parlement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur de la République",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Médiateur règle les disputes entre voisins.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler son domaine : l'administration. 2. Constater que des voisins sont des particuliers. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Médiateur fait des ___ à l'administration.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Rappeler son acte : recommander. 2. Le nommer. 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "recommandations",
+                      "correct": true
+                    },
+                    {
+                      "content": "recommandation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève confond les trois institutions. Aide-le à corriger ses erreurs.",
+              "exercise_type": "evaluation",
+              "hint": "Corrige en remplaçant le verbe décider par conseiller ou recommander.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "« Le Médiateur condamne les fonctionnaires. » Quelle est la bonne version ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer l'erreur : condamner. 2. Rappeler le vrai rôle : recommander. 3. Écrire la bonne version.",
+                  "answers": [
+                    {
+                      "content": "Le Médiateur condamne les citoyens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur recommande une solution à l'administration",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Médiateur gouverne l'administration",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur vote une loi sur les fonctionnaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« La CNRCTCI fait les lois traditionnelles. » Quelle est la bonne version ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer l'erreur : faire les lois. 2. Rappeler son rôle : conseiller, préserver. 3. Corriger.",
+                  "answers": [
+                    {
+                      "content": "La CNRCTCI vote le budget",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CNRCTCI dirige le Gouvernement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CNRCTCI juge les crimes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CNRCTCI conseille et préserve les traditions",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "« Le CESEC gère les écoles. » Quelle est la bonne version ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Repérer l'erreur : gérer. 2. Rappeler son rôle : avis. 3. Corriger.",
+                  "answers": [
+                    {
+                      "content": "Le CESEC construit les écoles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC juge les enseignants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le CESEC donne un avis sur des questions sociales comme l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le CESEC paie les salaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bonne réponse consiste à dire que ces trois institutions décident.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler leur nature : consultatives. 2. Conclure : elles ne décident pas. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles corrections sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Vérifier chaque correction avec le rôle réel. 2. Les deux premières sont justes. 3. Les deux autres inversent les rôles.",
+                  "answers": [
+                    {
+                      "content": "Le CESEC conseille, il ne vote pas la loi",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Médiateur recommande, il ne juge pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "La CNRCTCI gouverne, elle ne conseille pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Médiateur vote, il ne conseille pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un journal scolaire publie un dossier sur les institutions qui conseillent. Voici ses cinq dernières questions.",
+              "exercise_type": "evaluation",
+              "hint": "Garde en tête : avis, recommandation, médiation.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre le parcours d'un avis du CESEC.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Un projet existe. 2. L'avis est demandé. 3. Le CESEC étudie. 4. L'autorité décide.",
+                  "answers": [
+                    {
+                      "content": "Un projet doit être décidé"
+                    },
+                    {
+                      "content": "L'avis est demandé"
+                    },
+                    {
+                      "content": "Le CESEC étudie le projet"
+                    },
+                    {
+                      "content": "L'autorité décide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque institution à son action.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Identifier l'institution. 2. Repérer son action. 3. Relier.",
+                  "answers": [
+                    {
+                      "content": "CESEC",
+                      "match": "Rend un avis"
+                    },
+                    {
+                      "content": "Médiateur",
+                      "match": "Recommande une solution à l'amiable"
+                    },
+                    {
+                      "content": "CNRCTCI",
+                      "match": "Aide à la paix par la médiation"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'avis du CESEC oblige l'autorité à décider comme lui.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Rappeler qu'un avis éclaire. 2. L'autorité reste libre. La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne qui s'estime lésée par un service public peut ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Identifier le problème. 2. Choisir le Médiateur. 3. Saisir par écrit. Les autres réponses attribuent des pouvoirs à d'autres institutions.",
+                  "answers": [
+                    {
+                      "content": "demander au CESEC de la juger",
+                      "correct": false
+                    },
+                    {
+                      "content": "attendre sans rien faire",
+                      "correct": false
+                    },
+                    {
+                      "content": "écrire une réclamation au Médiateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "demander à la CNRCTCI de voter une loi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La CNRCTCI aide à la paix par la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Rappeler son moyen. 2. Le nommer. 3. Conclure.",
+                  "answers": [
+                    {
+                      "content": "médiation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

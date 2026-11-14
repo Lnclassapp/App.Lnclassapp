@@ -1,0 +1,3254 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Solides et liquides",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Physique-Chimie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "classification-solides-liquides",
+          "kind": "diagram",
+          "description": "Un arbre de classement. Le point de départ « Corps » se divise en « Solide » et « Liquide ». Le solide se divise en solide compact (un caillou, un morceau de sucre, un glaçon) et en solide divisé (sable, sucre en poudre, farine). Le liquide donne l'eau et l'huile comme exemples.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "corps",
+                "label": "Corps"
+              },
+              {
+                "id": "solide",
+                "label": "Solide",
+                "category": 1
+              },
+              {
+                "id": "liquide",
+                "label": "Liquide",
+                "category": 2
+              },
+              {
+                "id": "compact",
+                "label": "Solide compact",
+                "category": 1
+              },
+              {
+                "id": "divise",
+                "label": "Solide divisé (grains)",
+                "category": 1
+              },
+              {
+                "id": "exc",
+                "label": "Caillou, morceau de sucre, glaçon",
+                "category": 1
+              },
+              {
+                "id": "exd",
+                "label": "Sable, sucre en poudre, farine",
+                "category": 1
+              },
+              {
+                "id": "exl",
+                "label": "Eau, huile",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "corps",
+                "to": "solide"
+              },
+              {
+                "from": "corps",
+                "to": "liquide"
+              },
+              {
+                "from": "solide",
+                "to": "compact"
+              },
+              {
+                "from": "solide",
+                "to": "divise"
+              },
+              {
+                "from": "compact",
+                "to": "exc"
+              },
+              {
+                "from": "divise",
+                "to": "exd"
+              },
+              {
+                "from": "liquide",
+                "to": "exl"
+              }
+            ],
+            "legend": [
+              "Solides",
+              "Liquides"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "deplacement-eau",
+          "kind": "diagram",
+          "description": "Les quatre étapes du déplacement d'eau, de gauche à droite. On lit d'abord le volume V1 de l'eau seule, puis on plonge le solide sous l'eau, puis on lit le volume V2 de l'eau et du solide. On calcule enfin le volume du solide par la différence V2 moins V1.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "v1",
+                "label": "Lire V1 (eau seule)",
+                "category": 1
+              },
+              {
+                "id": "plonger",
+                "label": "Plonger le solide sous l'eau",
+                "category": 1
+              },
+              {
+                "id": "v2",
+                "label": "Lire V2 (eau et solide)",
+                "category": 1
+              },
+              {
+                "id": "calcul",
+                "label": "Calculer V = V2 - V1",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "v1",
+                "to": "plonger"
+              },
+              {
+                "from": "plonger",
+                "to": "v2"
+              },
+              {
+                "from": "v2",
+                "to": "calcul"
+              }
+            ],
+            "legend": [
+              "Mesure",
+              "Calcul"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un solide et un liquide",
+          "remember": "Un **solide** a une **forme propre** : il garde sa forme quand on le change de place (un galet, une pièce de monnaie, une cuillère en bois). On peut le tenir dans la main. Un **liquide** n'a **pas de forme propre** : il prend la forme du récipient qui le contient (l'eau, l'huile, le lait, le jus de bissap). Il coule et on peut le verser d'un récipient dans un autre.",
+          "method": [
+            "Observer la forme du corps seul, avant de le déplacer.",
+            "Transvaser le corps dans un récipient de forme différente (ou l'imaginer).",
+            "Comparer la forme du corps avant et après le transvasement.",
+            "Conclure : forme inchangée = solide ; forme qui suit le récipient = liquide."
+          ],
+          "example": {
+            "statement": "Yao a une bille de verre et de l'huile dans une bouteille. Il verse l'huile dans une assiette creuse et pose la bille dans l'assiette. Quel corps est un solide ? Lequel est un liquide ?",
+            "steps": [
+              "Observer : la bille est ronde et dure ; l'huile épouse la forme de la bouteille.",
+              "Transvaser : Yao verse l'huile dans l'assiette creuse et y pose la bille.",
+              "Comparer : la bille reste ronde ; l'huile s'étale et prend la forme de l'assiette.",
+              "Conclure : la bille garde sa forme, c'est un solide. L'huile suit le récipient, c'est un liquide."
+            ]
+          },
+          "pitfall": "Ne pas prendre la forme d'un liquide dans un récipient pour sa forme propre. Contre-exemple : l'eau a la forme d'un cylindre dans un verre droit. Versée dans une assiette, elle s'étale et n'est plus un cylindre. Une forme qui change avec le récipient n'est pas une forme propre. Une pièce de monnaie, elle, garde la même forme dans le verre et dans l'assiette.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un solide et un liquide en comparant leur forme avant et après le transvasement.",
+            "questions": [
+              {
+                "content": "Une règle en plastique garde sa forme quand on la change de place : c'est un ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Observer : la règle a une forme précise. Étape 3 — Comparer : elle garde la même forme sur la table ou dans le cartable. Étape 4 — Conclure : forme inchangée, c'est un solide.",
+                "answers": [
+                  {
+                    "content": "solide",
+                    "correct": true
+                  },
+                  {
+                    "content": "liquide",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le corps change-t-il de forme quand on le déplace ?"
+              },
+              {
+                "content": "L'huile versée dans une bouteille prend la forme de la bouteille.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Transvaser : on verse l'huile dans la bouteille. Étape 3 — Comparer : l'huile suit la forme de la bouteille. Étape 4 — Conclure : forme qui suit le récipient, c'est un liquide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare la forme de l'huile avant et après."
+              },
+              {
+                "content": "Relie chaque corps à son comportement quand on le transvase.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Comparer avant et après. La pièce garde sa forme et le savon se tient dans la main : ce sont des solides. Le jus de bissap suit la forme du verre : c'est un liquide (Étape 4 — Conclure).",
+                "answers": [
+                  {
+                    "content": "Une pièce de monnaie",
+                    "match": "Reste ronde et plate dans un verre comme dans une assiette"
+                  },
+                  {
+                    "content": "Le jus de bissap",
+                    "match": "Prend la forme du verre où on le verse"
+                  },
+                  {
+                    "content": "Un morceau de savon",
+                    "match": "Se tient dans la main sans couler"
+                  }
+                ],
+                "hint": "Un solide garde sa forme, un liquide prend celle du récipient."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Solide ou liquide ?",
+              "statement": "Dans cet exercice, tu reconnais des solides et des liquides avec la méthode de la fiche : observer, transvaser, comparer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces corps, lequel est un solide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : le galet a une forme précise. Étape 3 — Comparer : il garde cette forme dans la main comme dans un seau. Étape 4 — Conclure : c'est un solide. L'huile, le lait et l'eau suivent le récipient : ce sont des liquides.",
+                  "answers": [
+                    {
+                      "content": "Un galet",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'huile de palme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lait",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau de pluie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lait versé dans un bol prend la forme du bol.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Transvaser : on verse le lait dans le bol. Étape 3 — Comparer : il suit la forme du bol. Étape 4 — Conclure : forme qui suit le récipient, c'est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi dit-on que l'eau est un liquide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer : l'eau change de forme quand on change de récipient. Étape 4 — Conclure : le critère est la forme propre, pas la couleur, le poids ou le fait d'être dans un récipient. Un galet est lui aussi parfois dans un seau, et il reste un solide.",
+                  "answers": [
+                    {
+                      "content": "Elle n'a pas de forme propre : elle prend la forme du récipient",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'elle est transparente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle est toujours dans un récipient",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle est lourde",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces corps, lesquels sont des solides ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Observer chaque corps. Étape 3 — Comparer : la cuillère et le savon gardent leur forme quand on les déplace. Étape 4 — Conclure : ce sont des solides. L'huile, le jus et le sirop prennent la forme du récipient : ce sont des liquides.",
+                  "answers": [
+                    {
+                      "content": "Une cuillère en bois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un morceau de savon",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'huile de palme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le jus d'orange",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sirop",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau a la forme d'un cylindre dans un verre droit, donc le cylindre est sa forme propre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : versée dans une assiette, l'eau s'étale et n'est plus un cylindre. Une forme qui change avec le récipient n'est pas une forme propre. Étape 4 — Conclure : l'eau est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Change le corps de récipient (en pensée) et regarde si sa forme change."
+            },
+            {
+              "title": "Comparer des corps du marché",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les solides et les liquides, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour reconnaître un solide ou un liquide.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Observer la forme du corps seul. Étape 2 — Transvaser dans un récipient différent. Étape 3 — Comparer la forme avant et après. Étape 4 — Conclure. On ne peut pas conclure avant d'avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Observer la forme du corps seul, avant de le déplacer."
+                    },
+                    {
+                      "content": "Transvaser le corps dans un récipient de forme différente (ou l'imaginer)."
+                    },
+                    {
+                      "content": "Comparer la forme du corps avant et après le transvasement."
+                    },
+                    {
+                      "content": "Conclure : forme inchangée = solide ; forme qui suit le récipient = liquide."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps qui garde sa forme quand on le change de récipient est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer : la forme n'a pas changé après le transvasement. Étape 4 — Conclure : un corps qui a une forme propre est un solide. Un liquide, lui, change de forme.",
+                  "answers": [
+                    {
+                      "content": "solide",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque corps à ce qu'on observe quand on le met dans une assiette.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Comparer : la bille et le bois gardent leur forme, ce sont des solides. L'huile s'étale et suit l'assiette, c'est un liquide (Étape 4 — Conclure).",
+                  "answers": [
+                    {
+                      "content": "Une bille de verre",
+                      "match": "Reste ronde dans l'assiette"
+                    },
+                    {
+                      "content": "L'huile",
+                      "match": "S'étale et prend la forme de l'assiette"
+                    },
+                    {
+                      "content": "Un morceau de bois",
+                      "match": "Garde sa forme de planche"
+                    }
+                  ]
+                },
+                {
+                  "content": "On verse du jus de bissap d'un verre dans une bouteille : sa forme ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Transvaser : le jus passe du verre à la bouteille. Étape 3 — Comparer : il prend la forme de la bouteille. Il ne garde pas celle du verre, car un liquide n'a pas de forme propre.",
+                  "answers": [
+                    {
+                      "content": "suit celle de la bouteille",
+                      "correct": true
+                    },
+                    {
+                      "content": "reste celle du verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "devient toujours ronde",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une table, il y a 5 corps : l'huile, un galet, le jus d'orange, un savon et l'eau. Combien sont des liquides ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Observer les 5 corps. Étape 3 — Comparer : l'huile, le jus d'orange et l'eau prennent la forme du récipient, soit 3 liquides. Le galet et le savon gardent leur forme : ce sont des solides. Étape 4 — Conclure : 3 liquides.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide prend la forme du récipient dans lequel on le met.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : un solide garde sa forme propre dans tous les récipients. C'est le liquide qui prend la forme du récipient. Étape 4 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un solide garde sa forme, un liquide prend celle du récipient."
+            }
+          ]
+        },
+        {
+          "name": "Distinguer solide compact, solide divisé et liquide",
+          "remember": "Un **solide compact** est d'un seul bloc : un caillou, un morceau de sucre, un glaçon. Un **solide divisé** est formé de petits **grains** séparés : le sable, le sucre en poudre, la farine, le riz, l'attiéké. Chaque grain est un solide qui a sa forme propre. Un solide divisé peut couler, mais il forme un **tas**. Un liquide au repos a une **surface libre plane et horizontale**, même si on incline le récipient.",
+          "method": [
+            "Regarder le corps de près : est-il d'un seul bloc ou formé de petits grains ?",
+            "Observer sa surface libre au repos dans le récipient.",
+            "Comparer cette surface avec celle d'un liquide : est-elle plane et horizontale ?",
+            "Conclure : solide compact, solide divisé ou liquide."
+          ],
+          "example": {
+            "statement": "Aya verse du sucre en poudre dans un bol. Le sucre forme un petit tas pointu au centre. Est-ce un solide compact, un solide divisé ou un liquide ?",
+            "steps": [
+              "Regarder de près : le sucre en poudre est formé de tout petits grains, pas d'un seul bloc.",
+              "Observer la surface : elle forme un petit tas pointu au centre du bol.",
+              "Comparer : un liquide au repos a une surface plane et horizontale. Ici la surface est en tas, ce n'est donc pas un liquide.",
+              "Conclure : des grains en tas, c'est un solide divisé. Chaque grain est un solide."
+            ]
+          },
+          "pitfall": "Ne pas classer un corps parmi les liquides seulement parce qu'il s'écoule. Contre-exemple : le sable versé dans un seau forme un tas et chaque grain garde sa forme. L'eau versée dans le même seau a une surface plane et horizontale, sans grains. Pour décider, regarde les grains et la surface libre, pas seulement l'écoulement.",
+          "figure": "classification-solides-liquides",
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer un solide compact, un solide divisé et un liquide.",
+            "questions": [
+              {
+                "content": "Le sable fin est formé de petits grains qui forment un tas. C'est un ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Regarder de près : le sable est formé de petits grains. Étape 2 — Observer la surface : elle forme un tas. Étape 4 — Conclure : c'est un solide divisé.",
+                "answers": [
+                  {
+                    "content": "solide divisé",
+                    "correct": true
+                  },
+                  {
+                    "content": "solide compact",
+                    "correct": false
+                  },
+                  {
+                    "content": "liquide",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde s'il y a des grains et si la surface est en tas."
+              },
+              {
+                "content": "Un liquide au repos a une surface libre plane et horizontale.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : au repos, la surface libre d'un liquide est plane et horizontale, même dans un récipient incliné. C'est ce qui le distingue d'un solide divisé, dont la surface est en tas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à l'eau d'un seau posé sur le sol."
+              },
+              {
+                "content": "Relie chaque corps à sa catégorie.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Regarder de près. Le morceau de sucre est d'un seul bloc : solide compact. La farine est faite de grains : solide divisé. L'huile a une surface plane et horizontale : liquide (Étape 4 — Conclure).",
+                "answers": [
+                  {
+                    "content": "Un morceau de sucre",
+                    "match": "Solide compact"
+                  },
+                  {
+                    "content": "La farine",
+                    "match": "Solide divisé"
+                  },
+                  {
+                    "content": "L'huile",
+                    "match": "Liquide"
+                  }
+                ],
+                "hint": "Un bloc, des grains ou une surface plane ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Classer des corps",
+              "statement": "Dans cet exercice, tu classes des corps en solide compact, solide divisé ou liquide avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces corps, lequel est un solide compact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Regarder de près : le glaçon est d'un seul bloc. Étape 4 — Conclure : c'est un solide compact. Le riz et le sucre en poudre sont des grains, l'huile est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Un glaçon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le riz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sucre en poudre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'huile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces corps, lesquels sont des solides divisés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Regarder de près : le sable et la farine sont formés de petits grains. Étape 4 — Conclure : ce sont des solides divisés. Le caillou et la règle sont d'un seul bloc ; l'eau est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Le sable",
+                      "correct": true
+                    },
+                    {
+                      "content": "La farine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un caillou",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une règle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque grain de sucre en poudre est un solide.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Regarder de près : un grain est un tout petit morceau qui a sa forme propre. Étape 4 — Conclure : chaque grain est un solide, et le sucre en poudre est un solide divisé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau d'un seau est au repos. Comment est sa surface libre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Observer la surface : au repos, la surface libre d'un liquide est plane et horizontale. Étape 3 — Comparer : un tas ou des bosses sont typiques d'un solide divisé.",
+                  "answers": [
+                    {
+                      "content": "Plane et horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "En forme de tas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bosselée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Inclinée comme le seau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sable s'écoule, donc c'est un liquide.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Regarder de près : le sable est fait de grains. Étape 2 — Observer la surface : il forme un tas. Étape 4 — Conclure : c'est un solide divisé. S'écouler ne suffit pas à faire un liquide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche d'abord s'il y a des grains, puis regarde la surface."
+            },
+            {
+              "title": "Observer la surface d'un corps",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur les solides compacts, les solides divisés et les liquides.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque corps à sa catégorie.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Regarder de près. Le galet est d'un seul bloc : solide compact. Le riz est fait de grains : solide divisé. Le jus de mangue a une surface plane et horizontale : liquide (Étape 4 — Conclure).",
+                  "answers": [
+                    {
+                      "content": "Un galet",
+                      "match": "Solide compact"
+                    },
+                    {
+                      "content": "Le riz",
+                      "match": "Solide divisé"
+                    },
+                    {
+                      "content": "Le jus de mangue",
+                      "match": "Liquide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour classer un corps.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Regarder de près. Étape 2 — Observer la surface libre. Étape 3 — Comparer avec celle d'un liquide. Étape 4 — Conclure. On observe avant de comparer.",
+                  "answers": [
+                    {
+                      "content": "Regarder le corps de près : est-il d'un seul bloc ou formé de petits grains ?"
+                    },
+                    {
+                      "content": "Observer sa surface libre au repos dans le récipient."
+                    },
+                    {
+                      "content": "Comparer cette surface avec celle d'un liquide : est-elle plane et horizontale ?"
+                    },
+                    {
+                      "content": "Conclure : solide compact, solide divisé ou liquide."
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sucre en poudre est formé de petits ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Regarder de près : un solide divisé est formé de petits grains séparés. C'est ce qui le distingue d'un solide compact, qui est d'un seul bloc.",
+                  "answers": [
+                    {
+                      "content": "grains",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au repos, la surface libre d'un liquide est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Observer la surface : un liquide au repos a une surface libre plane et horizontale. Étape 3 — Comparer : la forme en tas est celle d'un solide divisé.",
+                  "answers": [
+                    {
+                      "content": "plane et horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "en forme de tas",
+                      "correct": false
+                    },
+                    {
+                      "content": "inclinée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché, Awa vend : un morceau de savon, du riz, du sable, de l'huile, un galet et de l'attiéké. Combien de ces corps sont des solides divisés ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Regarder de près chaque corps. Le riz, le sable et l'attiéké sont faits de grains : 3 solides divisés. Le savon et le galet sont d'un seul bloc ; l'huile est un liquide. Étape 4 — Conclure : 3.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps qui forme un tas quand on le verse est un liquide.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Observer la surface : un liquide au repos a une surface plane et horizontale, pas en tas. Étape 4 — Conclure : un corps qui forme un tas est un solide divisé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un bloc, des grains en tas ou une surface plane et horizontale ?"
+            }
+          ]
+        },
+        {
+          "name": "Mesurer le volume d'un liquide",
+          "remember": "Le **volume** d'un liquide est la place qu'il occupe. On le mesure avec une **éprouvette graduée**. Les unités sont le **litre** (L), le **millilitre** (mL) et le **centimètre cube** (cm³). On a 1 L = 1000 mL et 1 mL = 1 cm³. Dans l'éprouvette, la surface de l'eau est incurvée : c'est le **ménisque**. On lit le volume de l'eau au **bas du ménisque**, l'œil au niveau de la surface.",
+          "method": [
+            "Poser l'éprouvette sur une table plane et y verser le liquide.",
+            "Placer l'œil au niveau de la surface du liquide.",
+            "Repérer la valeur d'une graduation, puis lire le bas du ménisque.",
+            "Écrire le volume avec son unité et le convertir si besoin."
+          ],
+          "example": {
+            "statement": "Kofi verse de l'eau dans une éprouvette de 100 mL. Entre le repère 40 mL et le repère 50 mL, il y a 5 intervalles. Le bas du ménisque est à 3 graduations au-dessus de 40 mL. Quel est le volume d'eau en mL, puis en cm³ ?",
+            "steps": [
+              "Poser : l'éprouvette est posée sur la table plane et contient l'eau.",
+              "Placer l'œil : Kofi se met à la hauteur de la surface de l'eau.",
+              "Repérer : entre 40 et 50 mL il y a 5 intervalles, donc une graduation vaut 10 ÷ 5 = 2 mL. Le bas du ménisque est à 3 graduations au-dessus de 40 mL : 40 + 3 × 2 = 46 mL.",
+              "Écrire : le volume est 46 mL. Comme 1 mL = 1 cm³, c'est aussi 46 cm³."
+            ]
+          },
+          "pitfall": "Ne pas lire le volume sans calculer la valeur d'une graduation. Contre-exemple : si tu crois qu'un trait vaut 1 mL, tu lis 40 + 3 = 43 mL, alors que le bon volume est 46 mL. Ne lis pas non plus le haut du ménisque : tu trouverais un volume trop grand. Lis toujours le bas du ménisque.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à lire un volume dans une éprouvette et à le convertir.",
+            "questions": [
+              {
+                "content": "On lit le volume de l'eau au ___ du ménisque.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Placer l'œil au niveau de la surface. Étape 3 — Repérer et lire le bas du ménisque. Lire le haut donnerait un volume trop grand.",
+                "answers": [
+                  {
+                    "content": "bas",
+                    "correct": true
+                  },
+                  {
+                    "content": "haut",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pour l'eau, on lit en bas de la surface incurvée."
+              },
+              {
+                "content": "Entre 20 mL et 30 mL il y a 5 intervalles. Le bas du ménisque est à 2 graduations au-dessus de 20 mL. Quel est le volume, en mL ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Repérer : une graduation vaut 10 ÷ 5 = 2 mL. Le bas du ménisque est à 2 graduations au-dessus de 20 mL : 20 + 2 × 2 = 24 mL. Étape 4 — Écrire : 24 mL.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ],
+                "unit": "mL",
+                "hint": "Calcule d'abord la valeur d'une graduation."
+              },
+              {
+                "content": "Une éprouvette indique 35 mL. Combien de cm³ cela fait-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Écrire et convertir : 1 mL = 1 cm³. Donc 35 mL = 35 cm³. Le nombre ne change pas.",
+                "answers": [
+                  {
+                    "content": "35",
+                    "correct": true
+                  }
+                ],
+                "unit": "cm³",
+                "hint": "1 mL est égal à 1 cm³."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire un volume dans une éprouvette",
+              "statement": "Dans cet exercice, tu lis et tu convertis des volumes de liquides avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel instrument permet de mesurer le volume d'un liquide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser l'éprouvette graduée sur la table et y verser le liquide. Une règle mesure une longueur, une balance une masse et un chronomètre une durée.",
+                  "answers": [
+                    {
+                      "content": "Une éprouvette graduée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une règle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une balance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un chronomètre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où doit être l'œil pour lire le volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Placer l'œil au niveau de la surface du liquide. Si l'œil est trop haut ou trop bas, la lecture est fausse.",
+                  "answers": [
+                    {
+                      "content": "Au niveau de la surface du liquide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au-dessus de l'éprouvette",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au niveau du pied de l'éprouvette",
+                      "correct": false
+                    },
+                    {
+                      "content": "Peu importe l'endroit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre 60 mL et 70 mL il y a 5 intervalles. Le bas du ménisque est à 3 graduations au-dessus de 60 mL. Quel est le volume, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Repérer : une graduation vaut 10 ÷ 5 = 2 mL. Le bas du ménisque est à 3 graduations au-dessus de 60 mL : 60 + 3 × 2 = 66 mL. Étape 4 — Écrire : 66 mL.",
+                  "answers": [
+                    {
+                      "content": "66",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Un bidon contient 3 L d'eau. Combien de mL cela fait-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Convertir : 1 L = 1000 mL. Donc 3 L = 3 × 1000 = 3000 mL.",
+                  "answers": [
+                    {
+                      "content": "3000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "On lit le volume d'un liquide au haut du ménisque.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Lire le bas du ménisque, jamais le haut. Lire le haut donne un volume trop grand.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Calcule la valeur d'une graduation, puis compte les graduations."
+            },
+            {
+              "title": "Unités et lecture du volume",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la mesure du volume d'un liquide.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque volume à son équivalent.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Convertir : 1 L = 1000 mL, donc 2 L = 2000 mL et 500 mL = 0,5 L. Et 1 mL = 1 cm³.",
+                  "answers": [
+                    {
+                      "content": "1 L",
+                      "match": "1000 mL"
+                    },
+                    {
+                      "content": "1 mL",
+                      "match": "1 cm³"
+                    },
+                    {
+                      "content": "2 L",
+                      "match": "2000 mL"
+                    },
+                    {
+                      "content": "500 mL",
+                      "match": "0,5 L"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour mesurer un volume de liquide.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Poser l'éprouvette et verser le liquide. Étape 2 — Placer l'œil au niveau de la surface. Étape 3 — Repérer la graduation et lire le bas du ménisque. Étape 4 — Écrire le volume avec son unité.",
+                  "answers": [
+                    {
+                      "content": "Poser l'éprouvette sur une table plane et y verser le liquide."
+                    },
+                    {
+                      "content": "Placer l'œil au niveau de la surface du liquide."
+                    },
+                    {
+                      "content": "Repérer la valeur d'une graduation, puis lire le bas du ménisque."
+                    },
+                    {
+                      "content": "Écrire le volume avec son unité et le convertir si besoin."
+                    }
+                  ]
+                },
+                {
+                  "content": "La surface incurvée de l'eau dans l'éprouvette s'appelle le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Lire le bas du ménisque : c'est le nom de la surface incurvée du liquide le long de la paroi.",
+                  "answers": [
+                    {
+                      "content": "ménisque",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bouteille d'huile contient 1500 mL. Combien de L cela fait-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 4 — Convertir : 1 L = 1000 mL, donc 1500 mL = 1500 ÷ 1000 = 1,5 L.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "Quelles sont des unités de volume ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Écrire le volume avec son unité : le litre, le millilitre et le centimètre cube mesurent un volume. Le mètre mesure une longueur et le gramme une masse.",
+                  "answers": [
+                    {
+                      "content": "Le litre (L)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le millilitre (mL)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le centimètre cube (cm³)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mètre (m)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gramme (g)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "1 mL est égal à 1 cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Convertir : 1 mL = 1 cm³. Donc 250 mL = 250 cm³.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Retiens : 1 L = 1000 mL et 1 mL = 1 cm³."
+            }
+          ]
+        },
+        {
+          "name": "Mesurer le volume d'un solide par déplacement d'eau",
+          "remember": "Pour un solide de forme irrégulière (un caillou, une bille), on mesure son volume par **déplacement d'eau**. Quand on plonge le solide dans l'eau, le niveau monte, car le solide prend de la place. Le solide doit couler, rester entier (ni sucre ni éponge) et être **entièrement sous l'eau**. Si $V_1$ est le volume de l'eau seule et $V_2$ celui de l'eau avec le solide, le volume du solide est $V = V_2 - V_1$.",
+          "method": [
+            "Verser de l'eau dans l'éprouvette et lire le volume $V_1$.",
+            "Plonger doucement le solide, complètement sous l'eau.",
+            "Lire le nouveau volume $V_2$.",
+            "Calculer $V = V_2 - V_1$ et écrire l'unité."
+          ],
+          "example": {
+            "statement": "Mariam verse de l'eau dans une éprouvette : elle lit 50 mL. Elle plonge un caillou et le niveau monte à 68 mL. Quel est le volume du caillou ?",
+            "steps": [
+              "Verser et lire : l'éprouvette contient de l'eau seule et $V_1 = 50$ mL.",
+              "Plonger : Mariam plonge doucement le caillou, qui est entièrement sous l'eau.",
+              "Lire : le niveau monte et $V_2 = 68$ mL.",
+              "Calculer : $V = V_2 - V_1 = 68 - 50 = 18$ mL. Le volume du caillou est 18 mL, soit 18 cm³."
+            ]
+          },
+          "pitfall": "Ne pas prendre $V_2$ pour le volume du solide. Contre-exemple : avec $V_1 = 50$ mL et $V_2 = 68$ mL, le caillou n'a pas un volume de 68 mL. Les 68 mL contiennent l'eau et le caillou. Le volume du caillou est la différence : 68 − 50 = 18 mL.",
+          "figure": "deplacement-eau",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer le volume d'un solide par déplacement d'eau.",
+            "questions": [
+              {
+                "content": "Une éprouvette contient 40 mL d'eau. Après avoir plongé une bille, elle indique 55 mL. Quel est le volume de la bille, en mL ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Verser et lire : $V_1 = 40$ mL. Étape 3 — Lire : $V_2 = 55$ mL. Étape 4 — Calculer : $V = 55 - 40 = 15$ mL.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ],
+                "unit": "mL",
+                "hint": "Soustrais le volume de l'eau seule."
+              },
+              {
+                "content": "On peut mesurer le volume d'un caillou en le plongeant dans de l'eau.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Plonger : le caillou prend de la place sous l'eau et fait monter le niveau. Étape 4 — Calculer : la montée du niveau donne son volume.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le niveau de l'eau monte quand on plonge le caillou."
+              },
+              {
+                "content": "Le volume du solide est égal à ___.",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Calculer $V = V_2 - V_1$. Prendre $V_2$ seul oublie d'enlever l'eau, et additionner $V_1$ et $V_2$ compte l'eau deux fois.",
+                "answers": [
+                  {
+                    "content": "$V_2 - V_1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$V_2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$V_1 + V_2$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Il faut enlever le volume de l'eau seule."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Calculer le volume d'un solide",
+              "statement": "Dans cet exercice, tu calcules des volumes de solides par déplacement d'eau avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une éprouvette contient 30 mL d'eau. Après avoir plongé un galet, elle indique 47 mL. Quel est le volume du galet, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Verser et lire : $V_1 = 30$ mL. Étape 3 — Lire : $V_2 = 47$ mL. Étape 4 — Calculer : $V = 47 - 30 = 17$ mL.",
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Pourquoi le niveau de l'eau monte-t-il quand on plonge un caillou ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Plonger : le solide occupe un volume dans l'éprouvette. L'eau est repoussée vers le haut et le niveau monte. Le solide n'ajoute pas d'eau.",
+                  "answers": [
+                    {
+                      "content": "Le caillou prend de la place sous l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le caillou ajoute de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau est lourde",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'éprouvette est trop petite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le solide doit être entièrement sous l'eau pour que la mesure soit juste.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Plonger complètement le solide sous l'eau. S'il dépasse, le niveau monte moins que son vrai volume.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec un galet, le niveau passe de 60 mL à 85 mL. Quel est le volume du galet, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — $V_1 = 60$ mL. Étape 3 — $V_2 = 85$ mL. Étape 4 — Calculer : $V = 85 - 60 = 25$ mL, soit 25 cm³ car 1 mL = 1 cm³.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Une bille plongée dans 50 mL d'eau fait monter le niveau à 58 mL, donc son volume est 58 mL.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Calculer $V = V_2 - V_1 = 58 - 50 = 8$ mL. Les 58 mL contiennent l'eau et la bille ; le volume de la bille est 8 mL.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Volume du solide = niveau final moins niveau de l'eau seule."
+            },
+            {
+              "title": "La méthode du déplacement d'eau",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur le volume d'un solide.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour mesurer le volume d'un solide.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Verser l'eau et lire $V_1$. Étape 2 — Plonger le solide. Étape 3 — Lire $V_2$. Étape 4 — Calculer $V = V_2 - V_1$. On ne peut pas calculer avant d'avoir lu les deux volumes.",
+                  "answers": [
+                    {
+                      "content": "Verser de l'eau dans l'éprouvette et lire le volume $V_1$."
+                    },
+                    {
+                      "content": "Plonger doucement le solide, complètement sous l'eau."
+                    },
+                    {
+                      "content": "Lire le nouveau volume $V_2$."
+                    },
+                    {
+                      "content": "Calculer $V = V_2 - V_1$ et écrire l'unité."
+                    }
+                  ]
+                },
+                {
+                  "content": "On plonge le solide dans une ___ graduée contenant de l'eau.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Verser l'eau dans l'éprouvette graduée et lire $V_1$. C'est l'instrument qui mesure les volumes de liquides.",
+                  "answers": [
+                    {
+                      "content": "éprouvette",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un galet fait passer l'eau de 45 mL à 70 mL. Quel est son volume, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — $V_1 = 45$ mL. Étape 3 — $V_2 = 70$ mL. Étape 4 — Calculer : $V = 70 - 45 = 25$ mL.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Relie chaque grandeur à ce qu'elle représente.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — $V_1$ est lu avant de plonger le solide. Étape 3 — $V_2$ est lu après. Étape 4 — La différence $V_2 - V_1$ est le volume du solide.",
+                  "answers": [
+                    {
+                      "content": "$V_1$",
+                      "match": "Volume de l'eau seule"
+                    },
+                    {
+                      "content": "$V_2$",
+                      "match": "Volume de l'eau et du solide"
+                    },
+                    {
+                      "content": "$V_2 - V_1$",
+                      "match": "Volume du solide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conditions faut-il respecter pour mesurer le volume d'un solide ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire $V_1$ avant de plonger. Étape 2 — Plonger complètement le solide. Étape 3 — Lire $V_2$. Lire seulement $V_2$ ne permet pas de calculer la différence. Si l'eau déborde ou si le solide dépasse, la mesure est fausse.",
+                  "answers": [
+                    {
+                      "content": "Le solide est entièrement sous l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "On lit $V_1$ avant de plonger le solide",
+                      "correct": true
+                    },
+                    {
+                      "content": "On lit seulement $V_2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau doit déborder de l'éprouvette",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le solide reste à moitié sorti de l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide qui fait monter l'eau de 12 mL a un volume de 12 cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Calculer : la montée du niveau est le volume du solide, 12 mL. Comme 1 mL = 1 cm³, c'est 12 cm³.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Lis deux volumes, puis soustrais."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le stand de Mariam au marché de Treichville",
+          "statement": "Mariam aide sa tante au marché de Treichville. Sur la table du stand, il y a : un bidon d'huile, du sucre en poudre, un morceau de savon, du riz, une bouteille d'eau à moitié pleine et un galet qui sert de poids. Tu aides Mariam à classer ces corps.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque corps du stand à sa catégorie.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Regarder de près : le savon est d'un seul bloc, le sucre est fait de grains. 2. Observer la surface et la forme : l'huile suit la forme du bidon, le sucre forme un tas. 3. Conclure : savon = solide compact, sucre = solide divisé, huile = liquide.",
+              "answers": [
+                {
+                  "content": "L'huile du bidon",
+                  "match": "Liquide qui prend la forme du bidon"
+                },
+                {
+                  "content": "Le sucre en poudre",
+                  "match": "Solide divisé : de petits grains qui forment un tas"
+                },
+                {
+                  "content": "Le morceau de savon",
+                  "match": "Solide compact : un seul bloc qui garde sa forme"
+                }
+              ]
+            },
+            {
+              "content": "Parmi les six corps du stand, lesquels sont des liquides ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Transvaser en pensée : l'huile et l'eau prennent la forme du récipient où on les verse. 2. Conclure : ce sont des liquides. Le riz est fait de grains, le savon et le galet gardent leur forme : ce sont des solides.",
+              "answers": [
+                {
+                  "content": "L'huile",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau de la bouteille",
+                  "correct": true
+                },
+                {
+                  "content": "Le riz",
+                  "correct": false
+                },
+                {
+                  "content": "Le morceau de savon",
+                  "correct": false
+                },
+                {
+                  "content": "Le galet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi les six corps du stand, combien sont des solides divisés ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Regarder de près chaque corps : le sucre en poudre et le riz sont faits de petits grains. 2. Les autres sont d'un seul bloc (savon, galet) ou liquides (huile, eau). 3. Conclure : 2 solides divisés.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Mariam verse du riz dans un bol. Comment est la surface du riz au repos ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Regarder de près : le riz est fait de grains. 2. Observer la surface : les grains forment un tas bosselé. 3. Comparer : seule la surface d'un liquide est plane et horizontale.",
+              "answers": [
+                {
+                  "content": "En tas, avec des bosses",
+                  "correct": true
+                },
+                {
+                  "content": "Plane et horizontale comme celle de l'eau",
+                  "correct": false
+                },
+                {
+                  "content": "Toujours parfaitement lisse",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'existe pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'eau de la bouteille posée à moitié pleine sur la table a une surface libre plane et horizontale.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 2. Observer la surface libre d'un liquide au repos. 3. Comparer : elle est plane et horizontale. C'est le cas de l'eau de la bouteille posée sur la table.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi le riz n'est-il pas un liquide, même s'il s'écoule quand on le verse ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Regarder de près : chaque grain de riz garde sa forme, c'est un solide. 2. Observer la surface : le riz forme un tas. 3. Conclure : c'est un solide divisé. Le riz s'écoule, donc l'écoulement seul ne suffit pas pour dire qu'un corps est un liquide.",
+              "answers": [
+                {
+                  "content": "Chaque grain a sa forme propre et le riz forme un tas",
+                  "correct": true
+                },
+                {
+                  "content": "Parce qu'il est blanc",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il ne s'écoule jamais",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il est vendu au marché",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La cuisine de Mamie Adjoua",
+          "statement": "Mamie Adjoua prépare une sauce à Bouaké. Elle mesure l'eau avec une éprouvette graduée de 100 mL. Entre le repère 60 mL et le repère 70 mL, il y a 5 intervalles. Sa bouteille d'huile contient 1,5 L et chaque sauce demande 250 mL d'huile.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le bas du ménisque de l'eau est à 3 graduations au-dessus de 60 mL. Quel est le volume d'eau, en mL ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Poser l'éprouvette sur la table. 2. Placer l'œil au niveau de la surface. 3. Repérer : une graduation vaut 10 ÷ 5 = 2 mL, donc 60 + 3 × 2 = 66 mL. 4. Écrire : 66 mL.",
+              "answers": [
+                {
+                  "content": "66",
+                  "correct": true
+                }
+              ],
+              "unit": "mL"
+            },
+            {
+              "content": "Où Mamie Adjoua doit-elle lire le volume ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 2. Placer l'œil au niveau de la surface. 3. Lire le bas du ménisque. Lire le haut donnerait un volume trop grand.",
+              "answers": [
+                {
+                  "content": "Au bas du ménisque, l'œil au niveau de la surface",
+                  "correct": true
+                },
+                {
+                  "content": "Au haut du ménisque, l'œil au-dessus",
+                  "correct": false
+                },
+                {
+                  "content": "Au pied de l'éprouvette",
+                  "correct": false
+                },
+                {
+                  "content": "Sur le bord de la table",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un volume de 250 mL est égal à un volume de 250 cm³.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 4. Convertir : 1 mL = 1 cm³, donc 250 mL = 250 cm³.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La bouteille d'huile contient 1,5 L. Combien de mL cela fait-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 4. Convertir : 1 L = 1000 mL, donc 1,5 L = 1,5 × 1000 = 1500 mL.",
+              "answers": [
+                {
+                  "content": "1500",
+                  "correct": true
+                }
+              ],
+              "unit": "mL"
+            },
+            {
+              "content": "Chaque sauce demande 250 mL d'huile. Combien de sauces Mamie Adjoua peut-elle préparer avec 1500 mL d'huile ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Données : 1500 mL d'huile en tout, 250 mL par sauce. 2. Diviser : 1500 ÷ 250 = 6. 3. Conclure : 6 sauces.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le galet de Kofi",
+          "statement": "Kofi, élève de 6ème à Abidjan, veut connaître le volume du galet qui sert à écraser les épices de sa mère. Il verse 100 mL d'eau dans une éprouvette graduée, puis il plonge doucement le galet. Le niveau monte à 140 mL. Ensuite, il vide l'éprouvette, remet 100 mL d'eau, puis plonge une petite bille : le niveau monte à 112 mL.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les étapes de Kofi pour mesurer le volume du galet.",
+              "question_type": "ordering",
+              "explanation": "Méthode du déplacement d'eau : 1. Verser l'eau et lire $V_1$. 2. Plonger le solide entièrement sous l'eau. 3. Lire $V_2$. 4. Calculer $V = V_2 - V_1$. On lit les deux volumes avant de soustraire.",
+              "answers": [
+                {
+                  "content": "Verser de l'eau dans l'éprouvette et lire le volume $V_1$."
+                },
+                {
+                  "content": "Plonger doucement le solide, complètement sous l'eau."
+                },
+                {
+                  "content": "Lire le nouveau volume $V_2$."
+                },
+                {
+                  "content": "Calculer $V = V_2 - V_1$ et écrire l'unité."
+                }
+              ]
+            },
+            {
+              "content": "Quel est le volume du galet, en mL ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. $V_1 = 100$ mL. 3. $V_2 = 140$ mL. 4. Calculer : $V = 140 - 100 = 40$ mL. Le galet a un volume de 40 mL.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "unit": "mL"
+            },
+            {
+              "content": "Le volume du galet est 140 mL.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 4. $V_2 = 140$ mL est le volume de l'eau et du galet ensemble. Le volume du galet est $V_2 - V_1 = 140 - 100 = 40$ mL. Prendre $V_2$ oublie d'enlever l'eau.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le volume de la petite bille, en cm³ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. $V_1 = 100$ mL. 3. $V_2 = 112$ mL. 4. Calculer : $V = 112 - 100 = 12$ mL, soit 12 cm³ car 1 mL = 1 cm³.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "cm³"
+            },
+            {
+              "content": "Quel solide a le plus grand volume ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 4. Calculer pour chaque solide : galet 140 − 100 = 40 mL ; bille 112 − 100 = 12 mL. Comme 40 > 12, le galet est le plus grand. Le niveau final ne compte pas : il faut la montée du niveau.",
+              "answers": [
+                {
+                  "content": "Le galet, car il fait monter l'eau de 40 mL contre 12 mL pour la bille",
+                  "correct": true
+                },
+                {
+                  "content": "La bille, car elle fait monter l'eau jusqu'à 112 mL",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux ont le même volume",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas comparer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi le niveau de l'eau monte quand Kofi plonge le galet dans l'éprouvette.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le galet prend de la place dans l'éprouvette",
+                "L'eau est repoussée vers le haut, le niveau monte",
+                "La montée du niveau est égale au volume du galet"
+              ],
+              "explanation": "Corrigé modèle : le galet est un solide qui occupe une place sous l'eau. L'eau ne peut pas passer à travers lui, elle est repoussée vers le haut et le niveau monte. La montée du niveau est égale au volume du galet : 140 − 100 = 40 mL. Points : 1 point par critère.",
+              "answers": [],
+              "starter": "Le galet prend de la place, donc…"
+            }
+          ]
+        },
+        {
+          "title": "L'exposé de Mariam au collège de Daloa",
+          "statement": "Pour le club de sciences de son collège à Daloa, Mariam prépare un exposé avec un morceau de sucre, un seau de sable fin, une bouteille de 2 L d'huile et un caillou. Elle utilise une éprouvette graduée : entre 20 mL et 40 mL, il y a 10 intervalles. Elle verse de l'eau jusqu'à 6 graduations au-dessus de 20 mL (bas du ménisque), puis elle plonge le caillou : le niveau monte à 48 mL.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque corps de Mariam à sa catégorie.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Regarder de près : le morceau de sucre est d'un seul bloc, le sable est fait de grains. 2. Observer la surface et la forme : l'huile suit la bouteille. 3. Conclure : sucre = solide compact, sable = solide divisé, huile = liquide.",
+              "answers": [
+                {
+                  "content": "Le morceau de sucre",
+                  "match": "Solide compact"
+                },
+                {
+                  "content": "Le sable fin",
+                  "match": "Solide divisé"
+                },
+                {
+                  "content": "L'huile",
+                  "match": "Liquide"
+                }
+              ]
+            },
+            {
+              "content": "Mariam verse du sable dans un seau, puis de l'eau dans un autre seau identique. Que voit-elle sur chaque surface libre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 2. Observer la surface libre. 3. Comparer : un liquide au repos a une surface plane et horizontale ; un solide divisé forme un tas. Le sable est donc en tas et l'eau est plane. L'inverse est faux.",
+              "answers": [
+                {
+                  "content": "Sable : un tas bosselé ; eau : une surface plane et horizontale",
+                  "correct": true
+                },
+                {
+                  "content": "Sable : plane et horizontale ; eau : un tas",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux surfaces sont planes et horizontales",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux surfaces forment un tas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel volume d'eau Mariam a-t-elle versé dans l'éprouvette, en mL ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 3. Repérer : entre 20 et 40 mL, il y a 20 mL pour 10 intervalles, donc une graduation vaut 20 ÷ 10 = 2 mL. Le bas du ménisque est à 6 graduations au-dessus de 20 mL : 20 + 6 × 2 = 32 mL. 4. Écrire : 32 mL.",
+              "answers": [
+                {
+                  "content": "32",
+                  "correct": true
+                }
+              ],
+              "unit": "mL"
+            },
+            {
+              "content": "Quel est le volume du caillou, en cm³ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode du déplacement d'eau : 1. $V_1 = 32$ mL. 3. $V_2 = 48$ mL. 4. Calculer : $V = 48 - 32 = 16$ mL, soit 16 cm³ car 1 mL = 1 cm³.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ],
+              "unit": "cm³"
+            },
+            {
+              "content": "La bouteille d'huile contient 2 L. Combien de mL cela fait-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 4. Convertir : 1 L = 1000 mL, donc 2 L = 2 × 1000 = 2000 mL.",
+              "answers": [
+                {
+                  "content": "2000",
+                  "correct": true
+                }
+              ],
+              "unit": "mL"
+            },
+            {
+              "content": "Mariam dit : « Le sable s'écoule, donc c'est un liquide. » Explique pourquoi c'est faux.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le sable est formé de petits grains",
+                "Chaque grain a sa forme propre : c'est un solide",
+                "La surface du sable forme un tas, pas une surface plane et horizontale"
+              ],
+              "explanation": "Corrigé modèle : le sable est formé de petits grains. Chaque grain garde sa forme propre, c'est donc un solide. Quand on verse du sable, sa surface forme un tas, alors que la surface d'un liquide au repos est plane et horizontale. Le sable est un solide divisé : s'écouler ne suffit pas pour être un liquide. Points : 1 point pour les grains, 1 point pour la forme propre de chaque grain, 1 point pour la surface en tas.",
+              "answers": [],
+              "starter": "Le sable est formé de…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Reconnaître un solide et un liquide, solide compact et solide divisé, surface libre d'un liquide, lecture du volume dans une éprouvette, unités L, mL et cm³, volume d'un solide par déplacement d'eau.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans la cuisine de sa grand-mère à Bouaké, Fanta range une cuillère en bois, de l'huile de palme, du lait, une assiette en métal et du sirop.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces corps, lequel est un solide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Observer la forme de chaque corps. 2. Transvaser en pensée dans un autre récipient. 3. Comparer : la cuillère garde sa forme, l'huile, le lait et le sirop prennent celle du récipient. 4. Conclure : la cuillère est le solide.",
+                  "answers": [
+                    {
+                      "content": "La cuillère en bois",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'huile de palme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sirop",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels sont des liquides ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 2. Transvaser : l'huile, le lait et le sirop prennent la forme du récipient où on les verse. 4. Conclure : ce sont des liquides. La cuillère et l'assiette gardent leur forme : ce sont des solides.",
+                  "answers": [
+                    {
+                      "content": "L'huile de palme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lait",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sirop",
+                      "correct": true
+                    },
+                    {
+                      "content": "La cuillère en bois",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'assiette en métal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta verse du lait de la casserole dans un verre haut : le lait garde la forme de la casserole.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Transvaser le lait dans le verre. 3. Comparer : il prend la forme du verre. Un liquide n'a pas de forme propre, il ne garde donc pas la forme de la casserole.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un liquide n'a pas de forme ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : un solide a une forme propre ; un liquide n'en a pas, il prend la forme du récipient.",
+                  "answers": [
+                    {
+                      "content": "propre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle observation montre qu'un corps est un solide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Comparer la forme avant et après le transvasement. 4. Conclure : une forme inchangée montre un solide. Être sur une table, avoir une couleur ou être dans un verre ne dit rien sur la forme propre.",
+                  "answers": [
+                    {
+                      "content": "Il garde sa forme quand on le change de récipient",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est posé sur une table",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est de couleur claire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est mis dans un verre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un solide garde sa forme ; un liquide prend celle du récipient."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au marché de Man, un vendeur propose du sucre en morceaux, de la farine, de l'eau minérale et des glaçons dans une glacière.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque corps à sa catégorie.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Regarder de près : les morceaux de sucre sont d'un seul bloc, la farine est faite de grains. 2. Observer la surface : l'eau a une surface plane et horizontale. 4. Conclure : solide compact, solide divisé, liquide.",
+                  "answers": [
+                    {
+                      "content": "Le sucre en morceaux",
+                      "match": "Solide compact"
+                    },
+                    {
+                      "content": "La farine",
+                      "match": "Solide divisé"
+                    },
+                    {
+                      "content": "L'eau minérale",
+                      "match": "Liquide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'est-ce qui distingue un solide divisé d'un solide compact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Regarder de près : un solide compact est d'un seul bloc, un solide divisé est formé de petits grains. Chaque grain est un solide qui a sa forme propre.",
+                  "answers": [
+                    {
+                      "content": "Il est formé de petits grains séparés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est toujours blanc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas de forme propre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est toujours liquide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La surface libre de l'eau d'un verre posé sur une table est plane et horizontale.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Observer la surface libre au repos. 3. Comparer : celle d'un liquide est plane et horizontale. C'est le cas de l'eau du verre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide divisé que l'on verse forme un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 2. Observer la surface libre : les grains d'un solide divisé forment un tas, contrairement à un liquide dont la surface est plane.",
+                  "answers": [
+                    {
+                      "content": "tas",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les glaçons dans un verre sont des solides ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Regarder de près : chaque glaçon est d'un seul bloc. 4. Conclure : ce sont des solides compacts. Un solide divisé est formé de grains.",
+                  "answers": [
+                    {
+                      "content": "compacts",
+                      "correct": true
+                    },
+                    {
+                      "content": "divisés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche des grains, puis regarde la surface libre."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au laboratoire du collège, Moussa utilise une éprouvette graduée. Entre le repère 100 mL et le repère 150 mL, il y a 5 intervalles. Le bas du ménisque de l'eau est à 4 graduations au-dessus de 100 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la valeur d'une graduation, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Repérer la valeur d'une graduation : entre 100 mL et 150 mL, il y a 50 mL répartis en 5 intervalles, soit 50 ÷ 5 = 10 mL par graduation.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quel est le volume d'eau dans l'éprouvette, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Repérer : une graduation vaut 10 mL. Le bas du ménisque est à 4 graduations au-dessus de 100 mL : 100 + 4 × 10 = 140 mL. 4. Écrire : 140 mL.",
+                  "answers": [
+                    {
+                      "content": "140",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Un récipient contient 2500 mL d'eau. Combien de L cela fait-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Convertir : 1 L = 1000 mL, donc 2500 mL = 2500 ÷ 1000 = 2,5 L.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "Le centimètre cube est une unité de volume.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Écrire le volume avec son unité : le litre, le millilitre et le centimètre cube sont des unités de volume. De plus, 1 mL = 1 cm³.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment doit être l'éprouvette pour lire correctement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Poser l'éprouvette sur une table plane. Si elle est penchée, la surface du liquide reste horizontale mais les graduations sont inclinées : la lecture est fausse.",
+                  "answers": [
+                    {
+                      "content": "Posée sur une table plane",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tenue à bout de bras",
+                      "correct": false
+                    },
+                    {
+                      "content": "Penchée sur le côté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Posée sur le côté",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Calcule d'abord la valeur d'une graduation."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Aya mesure le volume d'une pierre avec une éprouvette contenant de l'eau. Elle lit 80 mL avant de plonger la pierre, puis 95 mL après.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le volume de la pierre, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. $V_1 = 80$ mL. 3. $V_2 = 95$ mL. 4. Calculer : $V = 95 - 80 = 15$ mL.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Il faut lire $V_1$ avant de plonger le solide.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Verser l'eau et lire $V_1$ avant de plonger. Sans $V_1$, on ne peut pas calculer la différence $V_2 - V_1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bille de volume 22 cm³ est plongée dans 50 mL d'eau. Quel volume lit-on ensuite, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. On a $V = V_2 - V_1$, donc $V_2 = V + V_1 = 22 + 50 = 72$ mL. Le niveau monte de 22 mL à partir de 50 mL.",
+                  "answers": [
+                    {
+                      "content": "72",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quelle formule donne le volume du solide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Calculer $V = V_2 - V_1$. $V_2$ seul compte l'eau, $V_1 + V_2$ la compte deux fois, et $V_1 - V_2$ serait négatif.",
+                  "answers": [
+                    {
+                      "content": "$V = V_2 - V_1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$V = V_2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V = V_1 + V_2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V = V_1 - V_2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour trouver le volume d'un galet, on peut lire seulement $V_2$.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. $V_2$ est le volume de l'eau et du galet ensemble. Il faut aussi $V_1$ pour calculer $V = V_2 - V_1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le volume du solide est la montée du niveau de l'eau."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · À la cuisine et au marché",
+          "notions": "Classer les corps d'un stand de marché, mesurer et convertir des volumes de jus et d'huile, observer la surface d'un solide divisé et d'un liquide, mesurer le volume d'un pilon par déplacement d'eau.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de Yopougon, Tantie Affoué vend de l'huile, du lait, du sucre en poudre, du riz, un pilon en bois et de l'eau en sachet.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Lesquels sont des liquides ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 2. Transvaser : l'huile, le lait et l'eau prennent la forme du récipient. 4. Conclure : ce sont des liquides. Le riz est fait de grains, le pilon garde sa forme.",
+                  "answers": [
+                    {
+                      "content": "L'huile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lait",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau en sachet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le riz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pilon en bois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pilon en bois est…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Regarder de près : le pilon est d'un seul bloc. 4. Conclure : c'est un solide compact. Il garde sa forme, il a donc une forme propre.",
+                  "answers": [
+                    {
+                      "content": "un solide compact",
+                      "correct": true
+                    },
+                    {
+                      "content": "un solide divisé",
+                      "correct": false
+                    },
+                    {
+                      "content": "un liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "un corps sans forme propre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les six corps de Tantie Affoué, combien sont des solides (compacts ou divisés) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Regarder de près chaque corps. 4. Conclure : le sucre en poudre et le riz sont des solides divisés, le pilon un solide compact, soit 3 solides. L'huile, le lait et l'eau sont des liquides.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Tantie verse l'eau d'un sachet dans une bassine : l'eau prend la forme de la bassine.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Transvaser l'eau dans la bassine. 3. Comparer : elle suit la forme de la bassine. 4. Conclure : c'est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sucre en poudre est un solide ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1. Regarder de près : le sucre en poudre est fait de petits grains. 4. Conclure : c'est un solide divisé, pas un solide compact.",
+                  "answers": [
+                    {
+                      "content": "divisé",
+                      "correct": true
+                    },
+                    {
+                      "content": "compact",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un liquide prend la forme du récipient ; un solide divisé forme un tas."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tantie Affoué prépare 1,5 L de jus de bissap et le sert dans des verres de 250 mL. Elle contrôle une dose avec une éprouvette où 5 intervalles séparent 80 mL et 90 mL. Le bas du ménisque est à 4 graduations au-dessus de 80 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel volume de jus lit-elle dans l'éprouvette, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Repérer : une graduation vaut 10 ÷ 5 = 2 mL. Le bas du ménisque est à 4 graduations au-dessus de 80 mL : 80 + 4 × 2 = 88 mL. 4. Écrire : 88 mL.",
+                  "answers": [
+                    {
+                      "content": "88",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Combien de mL y a-t-il dans 1,5 L de jus ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Convertir : 1 L = 1000 mL, donc 1,5 L = 1,5 × 1000 = 1500 mL.",
+                  "answers": [
+                    {
+                      "content": "1500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Combien de verres de 250 mL peut-elle remplir avec 1500 mL de jus ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Données : 1500 mL en tout, 250 mL par verre. 2. Diviser : 1500 ÷ 250 = 6. 3. Conclure : 6 verres.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre de 250 mL contient moins d'un litre de jus.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. Convertir : 1 L = 1000 mL. Comme 250 mL est plus petit que 1000 mL, un verre contient moins d'un litre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tantie sert 4 verres de 250 mL. Quel volume de jus cela représente-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. 4 × 250 = 1000 mL. 4. Convertir : 1000 mL = 1 L. Les autres propositions viennent d'une erreur de conversion ou d'un oubli de la multiplication.",
+                  "answers": [
+                    {
+                      "content": "1 L",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 L",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,25 L",
+                      "correct": false
+                    },
+                    {
+                      "content": "100 mL",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Retiens : 1 L = 1000 mL."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Awa prépare le repas. Elle verse de l'attiéké dans une assiette creuse et de l'eau dans une bouteille posée sur la table.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Comment est la surface libre de l'attiéké au repos dans l'assiette ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Regarder de près : l'attiéké est fait de petits grains. 2. Observer la surface : elle forme un tas bosselé. 3. Comparer : seule la surface d'un liquide au repos est plane et horizontale.",
+                  "answers": [
+                    {
+                      "content": "En petit tas bosselé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plane et horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toujours lisse comme un miroir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est inclinée comme l'assiette",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire de l'eau de la bouteille posée, à moitié pleine ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Observer : l'eau suit la forme de la bouteille et sa surface libre est plane et horizontale. 4. Conclure : c'est un liquide. Un tas, des grains ou une forme propre sont des caractères d'un solide.",
+                  "answers": [
+                    {
+                      "content": "Elle prend la forme de la bouteille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa surface libre est plane et horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle forme un tas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a une forme propre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est formée de grains",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa incline la bouteille d'eau : une fois l'eau immobile, sa surface libre est horizontale.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : au repos, la surface libre d'un liquide est toujours plane et horizontale, même si on incline le récipient.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'attiéké est un solide ___ car il est formé de grains.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. Regarder de près : l'attiéké est fait de petits grains. 4. Conclure : c'est un solide divisé.",
+                  "answers": [
+                    {
+                      "content": "divisé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à la catégorie qui convient.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 2. Observer la surface libre. 3. Comparer : un tas indique un solide divisé, une surface plane et horizontale un liquide, un bloc qui garde sa forme un solide compact.",
+                  "answers": [
+                    {
+                      "content": "Forme un tas quand on le verse",
+                      "match": "Solide divisé"
+                    },
+                    {
+                      "content": "Surface plane et horizontale au repos",
+                      "match": "Liquide"
+                    },
+                    {
+                      "content": "Un seul bloc qui garde sa forme",
+                      "match": "Solide compact"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Regarde les grains et la surface libre."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Moussa veut connaître le volume du petit pilon de pierre de sa mère. Il verse 150 mL d'eau dans une éprouvette de 250 mL, puis il plonge le pilon : le niveau monte à 210 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le volume du pilon, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. $V_1 = 150$ mL. 3. $V_2 = 210$ mL. 4. Calculer : $V = 210 - 150 = 60$ mL.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Moussa retire le pilon et plonge à la place un galet de 35 cm³ dans les 150 mL d'eau. Quel volume lit-il, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. $V = V_2 - V_1$ donc $V_2 = V + V_1 = 35 + 150 = 185$ mL, car 35 cm³ = 35 mL.",
+                  "answers": [
+                    {
+                      "content": "185",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Le niveau de l'eau monte parce que le pilon prend de la place sous l'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Plonger le solide : il occupe un volume et repousse l'eau vers le haut. Le niveau monte donc d'un volume égal à celui du pilon.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que représente la valeur 210 mL ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Lire $V_2$ : c'est le volume de l'eau et du solide ensemble. Le volume du pilon seul est $V_2 - V_1 = 60$ mL.",
+                  "answers": [
+                    {
+                      "content": "Le volume de l'eau et du pilon ensemble",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le volume du pilon seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le volume de l'eau seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le volume de l'éprouvette",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de Moussa.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Verser l'eau et lire $V_1$. 2. Plonger le solide. 3. Lire $V_2$. 4. Calculer $V = V_2 - V_1$. L'ordre est celui de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Verser de l'eau dans l'éprouvette et lire le volume $V_1$."
+                    },
+                    {
+                      "content": "Plonger doucement le solide, complètement sous l'eau."
+                    },
+                    {
+                      "content": "Lire le nouveau volume $V_2$."
+                    },
+                    {
+                      "content": "Calculer $V = V_2 - V_1$ et écrire l'unité."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Volume du solide = niveau final moins niveau de l'eau seule."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier qu'un corps est un solide divisé, comparer la forme d'un corps dans deux récipients, repérer une erreur de lecture du ménisque, comparer des volumes de solides par déplacement d'eau.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Yao dit : « Le sucre en poudre coule comme l'eau, donc c'est un liquide. » Awa répond : « Non, c'est un solide. » Ils veulent savoir qui a raison.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui a raison et pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Regarder de près : le sucre en poudre est fait de grains. 2. Observer la surface : il forme un tas. 3. Comparer : un liquide a une surface plane et horizontale. 4. Conclure : Awa a raison. Couler ne suffit pas pour être un liquide, et le sucre en poudre n'est pas d'un seul bloc.",
+                  "answers": [
+                    {
+                      "content": "Awa : le sucre est formé de grains qui forment un tas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Yao : tout ce qui coule est un liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Yao : le sucre est blanc comme le lait",
+                      "correct": false
+                    },
+                    {
+                      "content": "Awa : le sucre est un solide compact",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque grain de sucre en poudre a une forme propre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1. Regarder de près : un grain est un tout petit morceau qui garde sa forme. Il est donc un solide, et le sucre en poudre un solide divisé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles observations montrent que le sucre en poudre n'est pas un liquide ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1. Regarder de près : des grains. 2. Observer la surface : un tas. Ce sont deux preuves. La couleur et le lieu de vente ne disent rien sur l'état ; couler n'est pas une preuve, car le sable coule aussi.",
+                  "answers": [
+                    {
+                      "content": "Il forme un tas quand on le verse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est formé de petits grains",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est blanc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se vend au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il coule dans le bol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement pour classer le sucre en poudre.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Regarder de près. 2. Observer la surface libre. 3. Comparer avec celle d'un liquide. 4. Conclure. Le raisonnement va de l'observation à la conclusion.",
+                  "answers": [
+                    {
+                      "content": "Regarder le corps de près : est-il d'un seul bloc ou formé de petits grains ?"
+                    },
+                    {
+                      "content": "Observer sa surface libre au repos dans le récipient."
+                    },
+                    {
+                      "content": "Comparer cette surface avec celle d'un liquide : est-elle plane et horizontale ?"
+                    },
+                    {
+                      "content": "Conclure : solide compact, solide divisé ou liquide."
+                    }
+                  ]
+                },
+                {
+                  "content": "Écris deux observations qui permettent de dire que le sucre en poudre est un solide divisé.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Le sucre est formé de petits grains",
+                    "Il forme un tas quand on le verse, sans surface plane et horizontale"
+                  ],
+                  "explanation": "Corrigé modèle : le sucre en poudre est formé de petits grains. De plus, quand on le verse dans un bol, il forme un tas et non une surface plane et horizontale. C'est donc un solide divisé. Points : 1 point pour les grains, 1 point pour le tas.",
+                  "answers": [],
+                  "starter": "Le sucre est formé de…"
+                }
+              ],
+              "hint": "Cherche des grains, puis regarde la surface libre."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Fatou fait un test. Elle place un corps A dans un verre, puis dans une assiette : il reste ovale dans les deux. Un corps B est haut dans le verre, puis il s'étale en une couche plate dans l'assiette.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que peut-on dire du corps A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Comparer la forme de A avant et après : elle reste ovale. 4. Conclure : A garde sa forme, c'est un solide.",
+                  "answers": [
+                    {
+                      "content": "C'est un solide",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un liquide",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un corps sans forme propre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire du corps B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Comparer : B change de forme selon le récipient. 4. Conclure : B n'a pas de forme propre, c'est un liquide.",
+                  "answers": [
+                    {
+                      "content": "C'est un liquide",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un solide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a une forme propre en haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un solide divisé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le corps B a une forme propre, car il est haut dans le verre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : une forme qui change avec le récipient n'est pas une forme propre. Dans l'assiette, B s'étale et n'est plus haut.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces corps peuvent être le corps A ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 4. Conclure : le corps A garde sa forme, c'est un solide. Le galet et l'œuf gardent leur forme. L'huile, le lait et l'eau suivent le récipient.",
+                  "answers": [
+                    {
+                      "content": "Un galet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un œuf",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'huile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du lait",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le corps B prend la forme du ___ où on le verse.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 4. Conclure : un liquide n'a pas de forme propre, il prend la forme du récipient dans lequel on le verse.",
+                  "answers": [
+                    {
+                      "content": "récipient",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare la forme de chaque corps dans les deux récipients."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une éprouvette, 5 intervalles séparent 30 mL et 40 mL. Le bas du ménisque est à 4 graduations au-dessus de 30 mL. Aya lit 34 mL et Kofi lit 38 mL. Ils veulent savoir qui a bien lu.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la valeur d'une graduation, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Repérer : entre 30 mL et 40 mL, il y a 10 mL pour 5 intervalles, soit 10 ÷ 5 = 2 mL.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quel est le volume lu correctement, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Repérer : une graduation vaut 2 mL. Le bas du ménisque est à 4 graduations au-dessus de 30 mL : 30 + 4 × 2 = 38 mL. 4. Écrire : 38 mL.",
+                  "answers": [
+                    {
+                      "content": "38",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quelle erreur Aya a-t-elle faite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 3. Repérer la valeur d'une graduation. Aya a trouvé 30 + 4 = 34 mL : elle a compté 1 mL par graduation, alors qu'une graduation vaut 2 mL. Lire le haut du ménisque donnerait un volume trop grand.",
+                  "answers": [
+                    {
+                      "content": "Elle a compté 1 mL par graduation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a lu le haut du ménisque",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a oublié l'unité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a posé l'éprouvette sur le côté",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si Aya lisait le haut du ménisque, sa valeur serait trop petite.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Le volume se lit au bas du ménisque. Le haut est plus élevé que le bas : lire le haut donne une valeur trop grande, pas trop petite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya ajoute 62 mL d'eau aux 38 mL. Combien de L d'eau y a-t-il alors ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Additionner : 38 + 62 = 100 mL. 4. Convertir : 1 L = 1000 mL, donc 100 mL = 100 ÷ 1000 = 0,1 L.",
+                  "answers": [
+                    {
+                      "content": "0,1",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                }
+              ],
+              "hint": "Une graduation ne vaut pas toujours 1 mL : calcule-la."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Kofi compare deux pierres, A et B. Il met 80 mL d'eau dans une éprouvette de 250 mL. Avec la pierre A, le niveau monte à 100 mL. Avec la pierre B seule, il monte à 96 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le volume de la pierre A, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. $V_1 = 80$ mL. 3. $V_2 = 100$ mL. 4. Calculer : $V = 100 - 80 = 20$ mL.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quel est le volume de la pierre B, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. $V_1 = 80$ mL. 3. $V_2 = 96$ mL. 4. Calculer : $V = 96 - 80 = 16$ mL.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quelle pierre a le plus grand volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 4. Comparer les volumes calculés : A fait monter l'eau de 20 mL, B de 16 mL. Comme 20 > 16, A est la plus grande.",
+                  "answers": [
+                    {
+                      "content": "La pierre A",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pierre B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles ont le même volume",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi plonge les deux pierres ensemble dans les 80 mL d'eau. Quel volume lit-il, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Les deux pierres prennent 20 + 16 = 36 mL de place. $V_2 = V_1 + 36 = 80 + 36 = 116$ mL, ce qui reste dans l'éprouvette de 250 mL.",
+                  "answers": [
+                    {
+                      "content": "116",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Explique pourquoi le volume de la pierre A n'est pas 100 mL.",
+                  "question_type": "written",
+                  "points": 3,
+                  "criteria": [
+                    "100 mL est le volume de l'eau et de la pierre ensemble",
+                    "Il faut enlever le volume de l'eau seule, 80 mL",
+                    "Le calcul $100 - 80 = 20$ donne 20 mL"
+                  ],
+                  "explanation": "Corrigé modèle : la valeur 100 mL est le volume de l'eau et de la pierre ensemble, c'est $V_2$. Pour avoir le volume de la pierre, il faut enlever le volume de l'eau seule : $V = V_2 - V_1 = 100 - 80 = 20$ mL. Points : 1 point pour dire que 100 mL contient l'eau et la pierre, 1 point pour enlever 80 mL, 1 point pour le résultat 20 mL.",
+                  "answers": [],
+                  "starter": "100 mL est le volume de…"
+                }
+              ],
+              "hint": "Le niveau final contient l'eau et le solide."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan des quatre notions : solide ou liquide, solide compact ou divisé, volume d'un liquide et conversions, volume d'un solide par déplacement d'eau.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Tantie Affoué tient une boutique à San-Pédro. Elle vend de l'huile, du sucre en morceaux, de la farine, du lait et des galets pour caler les portes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque corps à sa catégorie.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1. Regarder de près : les morceaux de sucre sont d'un seul bloc, la farine est faite de grains. 2. Observer : le lait suit le récipient. 4. Conclure : solide compact, solide divisé, liquide.",
+                  "answers": [
+                    {
+                      "content": "Le sucre en morceaux",
+                      "match": "Solide compact"
+                    },
+                    {
+                      "content": "La farine",
+                      "match": "Solide divisé"
+                    },
+                    {
+                      "content": "Le lait",
+                      "match": "Liquide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels ont une surface libre plane et horizontale au repos ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 2. Observer la surface libre. 3. Comparer : l'huile et le lait sont des liquides, leur surface est plane et horizontale. La farine forme un tas ; les galets et le sucre en morceaux sont des solides compacts.",
+                  "answers": [
+                    {
+                      "content": "L'huile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lait",
+                      "correct": true
+                    },
+                    {
+                      "content": "La farine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les galets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sucre en morceaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un galet prend la forme de la boîte où on le range.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 3. Comparer : un solide garde sa forme propre dans tous les récipients. Seul un liquide prend la forme du récipient.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les cinq corps (huile, sucre en morceaux, farine, lait, galets), combien sont des solides ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Conclure : le sucre en morceaux et les galets sont des solides compacts, la farine un solide divisé, soit 3 solides. L'huile et le lait sont des liquides.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la farine est-elle un solide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Regarder de près : la farine est faite de très petits grains. 4. Conclure : chaque grain a sa forme propre, c'est un solide divisé. La couleur et le sac ne disent rien, et la farine peut couler.",
+                  "answers": [
+                    {
+                      "content": "Elle est formée de grains qui ont chacun une forme propre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'elle est blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle est dans un sac",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle ne coule jamais",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un bloc, des grains en tas ou une surface plane et horizontale ?"
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Au club de sciences, Aya mesure du lait dans une éprouvette de 500 mL. Entre 200 mL et 300 mL, il y a 10 intervalles. Le bas du ménisque est à 7 graduations au-dessus de 200 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le volume de lait, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Repérer : entre 200 et 300 mL, il y a 100 mL pour 10 intervalles, soit 10 mL par graduation. Le bas du ménisque est à 7 graduations au-dessus de 200 mL : 200 + 7 × 10 = 270 mL. 4. Écrire : 270 mL.",
+                  "answers": [
+                    {
+                      "content": "270",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quel est ce volume en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Convertir : 1 mL = 1 cm³, donc 270 mL = 270 cm³.",
+                  "answers": [
+                    {
+                      "content": "270",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Combien de mL manque-t-il pour atteindre 0,5 L ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Convertir : 0,5 L = 0,5 × 1000 = 500 mL. Il manque 500 − 270 = 230 mL.",
+                  "answers": [
+                    {
+                      "content": "230",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Le lait prend la forme de l'éprouvette dans laquelle on le verse.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Transvaser le lait dans l'éprouvette. 3. Comparer : il en prend la forme. 4. Conclure : c'est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes d'Aya pour mesurer le volume de lait.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1. Poser l'éprouvette et verser. 2. Placer l'œil au niveau de la surface. 3. Repérer la graduation et lire le bas du ménisque. 4. Écrire le volume avec son unité.",
+                  "answers": [
+                    {
+                      "content": "Poser l'éprouvette sur une table plane et y verser le liquide."
+                    },
+                    {
+                      "content": "Placer l'œil au niveau de la surface du liquide."
+                    },
+                    {
+                      "content": "Repérer la valeur d'une graduation, puis lire le bas du ménisque."
+                    },
+                    {
+                      "content": "Écrire le volume avec son unité et le convertir si besoin."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une graduation vaut ici 10 mL."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Papa Kofi a un bidon de 5 L d'huile. Il veut remplir des bouteilles de 500 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de mL y a-t-il dans 5 L d'huile ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Convertir : 1 L = 1000 mL, donc 5 L = 5 × 1000 = 5000 mL.",
+                  "answers": [
+                    {
+                      "content": "5000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Combien de bouteilles de 500 mL peut-il remplir avec tout le bidon ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Données : 5000 mL en tout, 500 mL par bouteille. 2. Diviser : 5000 ÷ 500 = 10. 3. Conclure : 10 bouteilles.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Il remplit 3 bouteilles. Combien de L d'huile reste-t-il dans le bidon ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Trois bouteilles font 3 × 500 = 1500 mL, soit 1,5 L. 2. Il reste 5 − 1,5 = 3,5 L.",
+                  "answers": [
+                    {
+                      "content": "3,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "L'huile prend la forme de la bouteille dans laquelle on la verse.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 2. Transvaser l'huile dans la bouteille. 3. Comparer : elle en prend la forme. 4. Conclure : l'huile est un liquide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une bouteille posée droite, comment est la surface libre de l'huile au repos ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 2. Observer la surface libre. 3. Comparer : celle d'un liquide au repos est plane et horizontale, jamais en tas comme celle d'un solide divisé.",
+                  "answers": [
+                    {
+                      "content": "Plane et horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "En forme de tas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bosselée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Inclinée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Convertis d'abord les litres en mL."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Moussa mesure le volume d'un galet avec une éprouvette graduée de 2 mL en 2 mL. Avant de plonger le galet, le bas du ménisque est à 5 graduations au-dessus de 40 mL. Après, il est à 3 graduations au-dessus de 60 mL.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le volume de l'eau seule, $V_1$, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1. Lire $V_1$ : 40 + 5 × 2 = 50 mL.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quel est le volume lu après avoir plongé le galet, $V_2$, en mL ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 3. Lire $V_2$ : 60 + 3 × 2 = 66 mL.",
+                  "answers": [
+                    {
+                      "content": "66",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "mL"
+                },
+                {
+                  "content": "Quel est le volume du galet, en cm³ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 4. Calculer : $V = V_2 - V_1 = 66 - 50 = 16$ mL, soit 16 cm³ car 1 mL = 1 cm³.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Le volume du galet est 66 mL.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 4. 66 mL est le volume de l'eau et du galet ensemble. Le volume du galet est $66 - 50 = 16$ mL.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment s'appelle la méthode utilisée par Moussa ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : on plonge le solide dans l'eau et on mesure la montée du niveau : c'est le déplacement d'eau. La pesée mesure une masse, le transvasement change un liquide de récipient.",
+                  "answers": [
+                    {
+                      "content": "Le déplacement d'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pesée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lecture du ménisque seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le transvasement",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Calcule $V_1$ et $V_2$, puis soustrais."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
