@@ -5,7 +5,7 @@ require Rails.root.join("script/contenus/valider")
 # les figures sont connues passent le script de contrôle sans erreur ni avertissement, et chacune s'importe en brouillon sur une base vide, par la vraie chaîne d'import.
 class Catalog::PcLessonsTest < ActiveSupport::TestCase
   DIRECTORY = Rails.root.join("docs/contenus/lecons-traitees/3eme/physique-chimie")
-  PROGRESSION = Rails.root.join("docs/contenus/progressions-2026-2027/progressions-2026-2027-physique-chimie.json")
+  PROGRESSION = Rails.root.join("test/fixtures/files/contenus/progressions-2026-2027-physique-chimie.json")
   # Dans l'ordre de la progression : [fichier, nombre de figures]. L'intitulé vient du JSON de progression (3ème, Physique-Chimie).
   LESSONS = [
     [ "masse-et-poids-d-un-corps", 4 ],
