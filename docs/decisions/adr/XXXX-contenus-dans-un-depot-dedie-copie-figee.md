@@ -1,4 +1,4 @@
-# ADR-XXXX : Les leçons vivent dans le dépôt `Kamkara007/App.Lnclassapp-contenus` ; l'application en garde une copie figée versionnée
+# ADR-XXXX : Les leçons vivent dans le dépôt public `App.Lnclassapp-contenus` ; l'application en garde une copie figée versionnée
 <!-- index
 titre: Leçons dans un dépôt dédié, copie figée dans l'application
 statut: Accepté
@@ -45,7 +45,7 @@ Le contrôle `script/contenus/valider.rb` charge des entités du domaine (`app/d
 
 ## 4. Décision
 
-> **Nous déplaçons les leçons, les progressions, les leçons à reprendre, les prompts et le mode d'emploi dans `Kamkara007/App.Lnclassapp-contenus`, historique conservé. L'application garde une copie figée des seules leçons relues, au même chemin, avec un fichier `docs/contenus/VERSION` qui nomme la version copiée ; cette copie ne s'écrit que par `script/contenus/synchroniser`, dans une PR. Le contrôle `valider.rb` reste dans l'application.**
+> **Nous déplaçons les leçons, les progressions, les leçons à reprendre, les prompts et le mode d'emploi dans `<propriétaire>/App.Lnclassapp-contenus`, historique conservé. L'application garde une copie figée des seules leçons relues, au même chemin, avec un fichier `docs/contenus/VERSION` qui nomme la version copiée ; cette copie ne s'écrit que par `script/contenus/synchroniser`, dans une PR. Le contrôle `valider.rb` reste dans l'application.**
 
 ### 4.1 Ce qui part, ce qui reste
 
@@ -57,7 +57,7 @@ Le contrôle `script/contenus/valider.rb` charge des entités du domaine (`app/d
 | `script/contenus/valider.rb`, `fonds_de_carte.rb`, `bin/apercu-lecon` | Application |
 | `docs/contenus/README.md` | Remplacé par une page courte : d'où vient la copie, comment synchroniser |
 
-### 4.2 Arborescence de `Kamkara007/App.Lnclassapp-contenus`
+### 4.2 Arborescence de `<propriétaire>/App.Lnclassapp-contenus`
 
 ```
 lecons/<niveau>-<série>/<matière>/*.json   ← ce que l'application copie
@@ -76,7 +76,18 @@ Une version = un SHA de `main` du dépôt de contenus (une étiquette `AAAA.MM.J
 | Develop puis Staging | Chargement automatique (ADR-0122, ADR-0123) ; Staging par le train | Règles en place, inchangées |
 | Production | `/publier-prod` prépare ; un membre de l'équipe importe dans Imports | Création seule ; toute leçon de même titre déjà présente, brouillon compris, est écartée sauf confirmation écrite du porteur ; jamais de suppression |
 
-### 4.4 Lecture seule
+### 4.4 Dépôt public
+
+Décision du porteur (2026-11-14) : le dépôt de contenus est **public**. Tout ce qu'il contient est donc lisible par tous, y compris par les élèves :
+
+- les leçons, leurs exercices **et leurs corrigés** (réponses attendues, explications, barèmes), les sujets de devoir et leurs corrections ;
+- les leçons à reprendre, les progressions, les prompts de rédaction et leur historique git.
+
+Il n'y entre **jamais** : de secret (jeton, clé, PIN, mot de passe), de donnée d'élève, d'enseignant ou d'établissement réel (nom, contact, résultat), ni de nom de personne réelle hors auteurs. Un secret poussé par erreur est révoqué, pas seulement effacé : l'historique public l'a déjà exposé.
+
+Nom : `App.Lnclassapp-contenus`, propriétaire en cours de transfert de `Kamkara007` vers l'organisation `Lnclassapp` ; aucun outil ne fige le propriétaire (le script lit le `remote origin` du clone), et une session le vérifie (`list_repos`) avant de pousser.
+
+### 4.5 Lecture seule
 
 Après migration, une leçon de `docs/contenus/lecons-traitees/` modifiée sans que `docs/contenus/VERSION` change dans le même commit est refusée par la CI (empreinte de l'arbre écrite dans `VERSION`).
 
@@ -93,7 +104,8 @@ Après migration, une leçon de `docs/contenus/lecons-traitees/` modifiée sans 
 - Les leçons relues restent dupliquées (environ 95 Mo) dans l'application, et l'historique passé de l'application garde tout : le clone n'allège que pour l'avenir.
 - Une correction de leçon fait deux PR (contenus, puis synchronisation).
 - La CI du dépôt de contenus dépend de l'application (à Develop) pour le contrôle : un changement de règle côté application peut rendre rouge une PR de contenu.
-- Si le dépôt de contenus est privé, sa CI a besoin d'un jeton de lecture sur l'application.
+- Dépôt public : les corrigés sont lisibles par les élèves avant un devoir ; c'est accepté par le porteur (les leçons sont faites pour réviser).
+- La CI du dépôt de contenus, s'il récupère l'application privée pour lancer `valider.rb`, a besoin d'un jeton de lecture sur l'application (secret du dépôt de contenus).
 
 ## 6. Notes d'implémentation
 

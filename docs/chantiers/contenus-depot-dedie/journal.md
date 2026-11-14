@@ -15,7 +15,8 @@
 > Décisions laissées ouvertes ou tranchées par défaut par un agent, en attente du porteur. Relevées chaque jour à 12 h par la boîte de décisions (`docs/workflows/contrat-de-session.md`). Le porteur coche `[x]` et écrit sa réponse à la suite.
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
 
-- [ ] 2026-11-14 · contenus-depot-dedie · Le dépôt `Kamkara007/App.Lnclassapp-contenus` doit-il être privé ? — appliqué : aucun changement (réglage GitHub du porteur) ; autres : public ; recommandé : privé. S'il est privé, sa CI a besoin d'un jeton de lecture sur l'application (secret `APP_READ_TOKEN` du dépôt de contenus, posé par le porteur) pour lancer `valider.rb`.
+- [x] 2026-11-14 · contenus-depot-dedie · Le dépôt de contenus doit-il être privé ? — réponse du porteur (via l'orchestrateur) : **public**, tel quel. Écrit dans l'ADR §4.4 (corrigés visibles, jamais de secret ni de donnée d'élève). Si sa CI récupère l'application (privée), il lui faut un jeton de lecture : `APP_READ_TOKEN`, secret du dépôt de contenus, posé par le porteur.
+- Info : propriétaire du dépôt en cours de transfert (`Kamkara007` → `Lnclassapp`) ; aucun nom de propriétaire figé dans les outils, vérification `list_repos` avant la migration.
 - [ ] 2026-11-14 · contenus-depot-dedie · Ne pas lancer soi-même les commandes d'initialisation du dépôt (README « first commit ») — appliqué : dépôt laissé vide, la migration (Lot B) y pose l'historique des leçons puis le README ; autres : initialiser maintenant et poser la migration par-dessus ; recommandé : laisser vide.
 - [ ] 2026-11-14 · contenus-depot-dedie · La PR de synchronisation des contenus vers l'application est-elle ouverte à la demande ou automatiquement à chaque fusion sur `main` des contenus ? — appliqué : à la demande ; autres : automatique (jeton d'écriture croisé) ; recommandé : à la demande.
 - [ ] 2026-11-14 · contenus-depot-dedie · Migration (Lot B) en attente de la fusion de la PR de validation pédagogique (session validation-pedagogique-agent) : au 2026-11-14 elle n'est pas ouverte et l'agent `validateur-pedagogique` n'est pas sur `Develop`. — appliqué : attendre ; autres : migrer sans attendre (conflits sur ~460 fichiers) ; recommandé : attendre.
@@ -31,7 +32,8 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Première version du script : `git` en échec rendu `nil` et lu comme « plus récente » ou « arbre propre », fichiers ignorés par git copiés, `--verifier` vert sans `VERSION`, échange de dossiers sans retour arrière, dossier à l'intérieur de l'application pris pour un dépôt. Trouvé par les revues (pannes silencieuses, tests), corrigé avant fusion avec un test par cas. Leçon : un outil qui lit git distingue les codes de sortie, il ne rabat pas tout sur `nil`.
+- Le nom du dépôt a changé trois fois dans la journée (`Lnclassapp/contenus`, `Kamkara007/App.Lnclassapp-contenus`, transfert vers `Lnclassapp`) : aucun propriétaire n'est figé dans les outils, le script lit le `remote origin`.
 
 ## Ce qu'on a appris sur la codebase
 

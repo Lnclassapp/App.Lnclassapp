@@ -8,7 +8,7 @@
 ```
 Lot A — outil de synchronisation + skills (cette PR, sans attendre)
   ↓ attend : PR de validation pédagogique fusionnée dans Develop (agent validateur-pedagogique présent)
-Lot B — migration vers Kamkara007/App.Lnclassapp-contenus (historique filtré, CI du dépôt de contenus)
+Lot B — migration vers <propriétaire>/App.Lnclassapp-contenus (historique filtré, CI du dépôt de contenus)
   ↓
 Lot C — branchement de l'application (VERSION, --verifier en CI, fixtures de progressions, docs/contenus allégé)
 ```
@@ -32,7 +32,7 @@ Séquentiel : B et C touchent les mêmes fichiers de contenu.
 ## Lot B — Migrer les contenus
 
 - **Couche**       : dépôt de contenus
-- **Fichiers**     : dépôt `Kamkara007/App.Lnclassapp-contenus` : `lecons/`, `a-reprendre/`, `progressions/`, `prompts/`, `README.md`, `CLAUDE.md`, `.github/workflows/valider.yml`
+- **Fichiers**     : dépôt `<propriétaire>/App.Lnclassapp-contenus` : `lecons/`, `a-reprendre/`, `progressions/`, `prompts/`, `README.md`, `CLAUDE.md`, `.github/workflows/valider.yml`
 - **Dépend de**    : Lot A ; PR de validation pédagogique fusionnée (vérifier `git ls-tree origin/Develop .claude/agents/validateur-pedagogique.md`)
 - **Test associé** : `git log --follow` sur 3 leçons garde leurs commits d'origine ; `diff -r` entre `lecons/` et `docs/contenus/lecons-traitees/` d'origine/Develop vide ; `valider.yml` vert sur une PR d'essai
 - **Done quand**   : `main` du dépôt de contenus contient tout `docs/contenus/` avec son historique, réorganisé (`git filter-repo --path docs/contenus --path-rename docs/contenus/lecons-traitees/:lecons/ …`)
@@ -47,7 +47,7 @@ git filter-repo --path docs/contenus/ \
   --path-rename docs/contenus/prompt-redaction.md:prompts/prompt-redaction.md \
   --path-rename docs/contenus/prompt-redaction-lot.md:prompts/prompt-redaction-lot.md \
   --path-rename docs/contenus/:
-git remote add origin https://github.com/Kamkara007/App.Lnclassapp-contenus && git push -u origin HEAD:main
+git remote add origin https://github.com/<propriétaire>/App.Lnclassapp-contenus && git push -u origin HEAD:main   # propriétaire vérifié avec list_repos avant
 ```
 
 ---
@@ -60,13 +60,13 @@ git remote add origin https://github.com/Kamkara007/App.Lnclassapp-contenus && g
                      `.github/workflows/ci.yml` (étape `--verifier`) · `script/contenus/valider.rb` (commentaire d'en-tête) · liens dans `CLAUDE.md` et `docs/` qui pointent vers `docs/contenus/prompt-*`
 - **Dépend de**    : Lot B
 - **Test associé** : `ruby script/contenus/synchroniser.rb --verifier` ; `test/db/seeds/standard_manifest_test.rb`, `test/integration/contenus/`, `test/integration/catalog/` verts sans assouplissement ; `bin/ci-quiet`
-- **Done quand**   : la copie est identique à l'avant-migration (CA-6), `VERSION` présent, la CI refuse une leçon modifiée à la main, PR prête
+- **Done quand**   : la copie est identique à l'avant-migration (CA-6), `VERSION` présent et écrit dans le même commit que l'étape CI `--verifier` (sans `VERSION`, `--verifier` refuse la copie actuelle), la CI refuse une leçon modifiée à la main, PR prête
 
 ---
 
 ## Décisions ouvertes
 
-- [ ] Dépôt de contenus privé ou public — options : privé, public ; recommandé : privé (la CI des contenus aura besoin d'un jeton de lecture sur l'application, secret `APP_READ_TOKEN` du dépôt de contenus)
+- [x] Dépôt de contenus privé ou public — tranché par le porteur le 2026-11-14 : public (ADR §4.4)
 - [ ] Qui ouvre la PR de synchronisation — options : à la demande d'une session, automatique à chaque fusion sur `main` des contenus ; recommandé : à la demande (pas de jeton d'écriture croisé)
 
 ## Vérification de collision

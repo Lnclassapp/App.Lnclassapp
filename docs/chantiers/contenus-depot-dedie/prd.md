@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-Les leçons, progressions, leçons à reprendre et prompts quittent le dépôt de l'application pour `Kamkara007/App.Lnclassapp-contenus`, historique conservé. L'application garde une copie figée des seules leçons relues, au même chemin, écrite par un outil de synchronisation dans une PR ; Develop, Staging, le jeu standard et la CI continuent de lire cette copie. Rédaction (`/lecon`), publication en production (`/publier-prod`, création seule) et annonces audio (`/annonce`) deviennent des skills de projet.
+Les leçons, progressions, leçons à reprendre et prompts quittent le dépôt de l'application pour `<propriétaire>/App.Lnclassapp-contenus`, historique conservé. L'application garde une copie figée des seules leçons relues, au même chemin, écrite par un outil de synchronisation dans une PR ; Develop, Staging, le jeu standard et la CI continuent de lire cette copie. Rédaction (`/lecon`), publication en production (`/publier-prod`, création seule) et annonces audio (`/annonce`) deviennent des skills de projet.
 
 ## 2. Acteurs et permissions
 
@@ -33,7 +33,10 @@ Les leçons, progressions, leçons à reprendre et prompts quittent le dépôt d
 | Clone du dépôt de contenus avec des changements non commités | Refusé : la copie nomme une version exacte |
 | Version plus ancienne que la copie en place | Refusé sauf `--forcer` |
 | Leçon de la copie modifiée à la main dans l'application | La CI refuse (`--verifier`) et dit de corriger dans le dépôt de contenus |
-| Aucune version encore synchronisée | `--verifier` ne refuse rien (avant migration) |
+| Aucune version encore synchronisée | `--verifier` passe sur une copie vide, refuse une copie sans `VERSION` (supprimer `VERSION` ne désactive pas le contrôle) |
+| Fichier ignoré par git, ou rangé hors de `<niveau-série>/<matière>/<leçon>.json` | Le premier n'est pas copié (seuls les fichiers de la version comptent) ; le second refuse la synchronisation en le nommant |
+| Version copiée inconnue du clone (clone superficiel), ou git en erreur | Refusé sauf `--forcer` |
+| Échange de dossiers interrompu | L'ancienne copie est remise en place ; une copie orpheline d'un échange précédent bloque la synchronisation suivante |
 | Leçon de même titre déjà en production (publiée ou brouillon) | `/publier-prod` l'écarte et la liste ; elle ne part qu'avec la confirmation écrite du porteur |
 | Clé de synthèse vocale absente | `/annonce` nomme `GOOGLE_TTS_API_KEY` et s'arrête à l'étape audio ; le texte de l'annonce reste livré |
 
@@ -41,7 +44,7 @@ Les leçons, progressions, leçons à reprendre et prompts quittent le dépôt d
 
 ```gherkin
 Scénario: CA-1 synchroniser une version valide
-  Étant donné un clone du dépôt de contenus propre, dont toutes les leçons passent valider.rb
+  Étant donné la racine d'un clone du dépôt de contenus propre, dont toutes les leçons passent valider.rb
   Quand on lance la synchronisation
   Alors les leçons sont copiées au chemin lu par l'application
   Et les leçons absentes de la version sont retirées de la copie
@@ -54,20 +57,20 @@ Scénario: CA-2 une leçon invalide bloque tout
   Et la copie en place et VERSION ne changent pas
 
 Scénario: CA-3 source douteuse refusée
-  Étant donné une source qui n'est pas un dépôt git, ou qui a des changements non commités
+  Étant donné une source qui n'est pas la racine d'un dépôt git, ou qui a des changements non commités, ou un fichier mal rangé
   Quand on lance la synchronisation
   Alors elle est refusée
 
 Scénario: CA-4 pas de retour en arrière silencieux
   Étant donné une copie à la version v2
-  Quand on synchronise la version v1, ancêtre de v2
+  Quand on synchronise la version v1, ancêtre de v2, ou depuis un clone qui ne connaît pas v2
   Alors c'est refusé, sauf avec --forcer
 
 Scénario: CA-5 la copie est en lecture seule
   Étant donné une copie synchronisée
   Quand une leçon y est modifiée, ajoutée ou retirée à la main
   Alors la vérification échoue et renvoie vers la synchronisation
-  Et sans VERSION, la vérification passe
+  Et sans VERSION, la vérification ne passe que si la copie est vide
 
 Scénario: CA-6 l'application ne perd aucune leçon à la migration
   Étant donné la migration faite

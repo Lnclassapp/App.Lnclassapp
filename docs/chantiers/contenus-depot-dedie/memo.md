@@ -57,10 +57,10 @@ Le rythme de rédaction monte (30 leçons de 5ème, 30 de 6ème en une semaine, 
 - Leçon supprimée dans le dépôt de contenus : elle disparaît de la copie à la synchronisation suivante ; Develop et Staging ne suppriment jamais de leçon chargée (règles en place).
 - Leçon renommée : vue comme une suppression plus une création ; en production, la nouvelle est une création, l'ancienne reste.
 - Synchronisation à une version plus ancienne que la copie en place : refusée sauf demande explicite.
-- Dépôt de contenus privé : sa CI a besoin d'un accès en lecture à l'application pour emprunter le contrôle.
+- Dépôt de contenus public : leçons et corrigés lisibles par tous, jamais de secret ni de donnée d'élève ; sa CI a besoin d'un accès en lecture à l'application (privée) pour emprunter le contrôle.
 - Leçon déjà en brouillon en production : écartée de la publication, listée, confirmation du porteur requise.
 
 ## Questions encore ouvertes
 
-- Dépôt privé ou public ? Recommandé : privé (leçons = actif de l'entreprise). Dans `journal.md` § À trancher.
+- Dépôt privé ou public : tranché, **public** (porteur, 2026-11-14) ; corrigés lisibles par tous, jamais de secret ni de donnée d'élève.
 - Clé de synthèse vocale pour les annonces audio : variable `GOOGLE_TTS_API_KEY`, absente ; n'empêche rien d'autre.

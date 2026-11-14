@@ -13,7 +13,7 @@ Argument : `<niveau> <matière> <intitulé exact de la progression>` (ex. `3ème
 
 | Situation | Dépôt de travail | Leçons | Prompts |
 |---|---|---|---|
-| `docs/contenus/VERSION` existe dans l'application (migration faite) | `Kamkara007/App.Lnclassapp-contenus` (l'ajouter à la session avec `add_repo` s'il manque) | `lecons/<niveau-série>/<matière>/` | `prompts/` |
+| `docs/contenus/VERSION` existe dans l'application (migration faite) | `<propriétaire>/App.Lnclassapp-contenus` (l'ajouter à la session avec `add_repo` s'il manque) | `lecons/<niveau-série>/<matière>/` | `prompts/` |
 | Sinon (avant migration) | l'application | `docs/contenus/lecons-traitees/<niveau-série>/<matière>/` | `docs/contenus/` |
 
 **Jamais** de leçon écrite à la main dans `docs/contenus/lecons-traitees/` après migration : la CI le refuse. Le contrôle `script/contenus/valider.rb` se lance **toujours depuis l'application** (il lit les règles du domaine).
