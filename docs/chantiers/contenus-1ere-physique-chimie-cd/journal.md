@@ -9,9 +9,11 @@
 | 2026-11-01 | 12 contenus pour 13 intitulés : C1 et D1 sont la même notion ; « Énergie potentielle » (C) et « de pesanteur » (D) restent deux leçons. | Contenus différents (élastique en C) | Non |
 | 2026-11-01 | Aucune sorte nouvelle de figure. | Les situations s'y ramènent | Non |
 
-## À faire valider par un enseignant
+## Points pédagogiques tranchés
 
-Les points sont dans la section « À faire valider par un enseignant » du [journal du programme](../contenus-v3-tous-niveaux/journal.md) (lignes P3), pour ne pas les tenir en double.
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+
+Les points sont dans la section « Points pédagogiques tranchés » du [journal du programme](../contenus-v3-tous-niveaux/journal.md#points-pédagogiques-tranchés), tranchés le 2026-11-14 par le validateur pédagogique (lignes P3), pour ne pas les tenir en double.
 
 ## Relecture indépendante (une par leçon, Opus, calculs refaits)
 

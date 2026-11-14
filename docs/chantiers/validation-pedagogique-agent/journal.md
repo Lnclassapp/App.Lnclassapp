@@ -13,7 +13,20 @@
 
 ## Décisions du validateur
 
-Une table par part, une ligne par point (point, décision, justification) :
+Une table par part, une ligne par point (point, décision, justification). Bilan du 2026-11-14 : **569 points tranchés**, aucun laissé « à valider ».
+
+| Part | Confirmé | Corrigé | Retiré ou reformulé | Hors base | Leçons corrigées |
+|---|---:|---:|---:|---:|---:|
+| Mathématiques, collège | 52 | 9 | 1 | 0 | 9 |
+| Mathématiques, lycée | 134 | 7 | 0 | 10 | 9 |
+| Physique-Chimie | 90 | 8 | 0 | 2 | 9 |
+| SVT | 56 | 13 | 0 | 12 | 13 |
+| Français | 49 | 12 | 0 | 6 | 12 |
+| Histoire-Géographie | 45 | 9 | 1 | 1 | 8 |
+| EDHC et Philosophie | 43 | 7 | 1 | 1 | 13 |
+| **Total** | **469** | **65** | **3** | **32** | **73** |
+
+Aucun calcul n'était faux (chaque calcul refait avec sympy) ; les corrections portent sur des faits, des dates, des formulations trop absolues, une règle mal énoncée ou un barème. Les 73 fichiers passent `valider.rb` sans erreur ; tests de contenu inchangés et verts (727 runs). « Hors base » : la leçon n'est que dans `a-reprendre/`, le validateur passera à son retour.
 
 - [Mathématiques, collège](decisions/mathematiques-college.md)
 - [Mathématiques, lycée](decisions/mathematiques-lycee.md)
@@ -33,14 +46,16 @@ Corrections à reporter à la main dans l'application : [`a-reporter-en-producti
 
 ## Ce qui a dérapé
 
-- …
+- Beaucoup de points relevés en v1 décrivaient des fichiers réécrits depuis en v3 : le validateur les a tranchés sur le fichier actuel (souvent « Confirmé : le défaut a disparu »). Un point « à faire valider » vieillit plus vite que la leçon.
 
 ## Ce qu'on a appris sur la codebase
 
-- …
+- Aucun test de `test/` ne vérifie mot pour mot le texte d'une leçon : les tests de contenu portent sur la structure et « Je m'entraîne ». Corriger un fait ne casse donc aucun test, et n'en assouplit aucun.
 
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Points des leçons de `a-reprendre/` | Leçons hors base, réécrites avant leur retour | `base-de-lecons` |
+| Points des leçons de `a-reprendre/` (32 lignes « Hors base ») | Leçons hors base, réécrites avant leur retour | `base-de-lecons` |
+| Figures : bandeau de longueurs des figures `geometry`, sortes « schéma électrique » et « lignes de champ » absentes | Code, pas contenu (relevé par la part Physique-Chimie) | à ouvrir |
+| « Mouvement du centre d'inertie » (Tle C/D) ne traite pas le mouvement circulaire | Ajouter une notion relève de la rédaction ; rien n'y est faux | vague de rédaction suivante |

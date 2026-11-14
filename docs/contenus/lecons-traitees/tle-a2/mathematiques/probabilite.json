@@ -703,7 +703,7 @@
         },
         {
           "name": "Dénombrer les cas possibles",
-          "remember": "Pour compter les cas sans en oublier, on utilise trois outils. L'**arbre** : chaque niveau est un choix, chaque branche une possibilité, chaque chemin un résultat. Le **tableau à double entrée** : les lignes donnent le premier choix, les colonnes le second, chaque case est un résultat. Quand on fait $n_1$ choix, puis $n_2$ choix, il y a $n_1 \\times n_2$ résultats. Une **combinaison simple** est un groupe de $2$ éléments choisis parmi $n$, **sans tenir compte de l'ordre** et sans répétition : leur nombre est $\\dfrac{n \\times (n-1)}{2}$. Exemple : $5$ équipes qui se rencontrent toutes une fois donnent $\\dfrac{5 \\times 4}{2} = 10$ matchs.",
+          "remember": "Pour compter les cas sans en oublier, on utilise trois outils. L'**arbre** : chaque niveau est un choix, chaque branche une possibilité, chaque chemin un résultat. Le **tableau à double entrée** : les lignes donnent le premier choix, les colonnes le second, chaque case est un résultat. Quand on fait $n_1$ choix, puis $n_2$ choix, il y a $n_1 \\times n_2$ résultats. Un **groupe de $2$ éléments** choisis parmi $n$, **sans tenir compte de l'ordre** et sans répétition (une combinaison de $2$ éléments), se compte ainsi : le nombre de ces groupes est $\\dfrac{n \\times (n-1)}{2}$. Exemple : $5$ équipes qui se rencontrent toutes une fois donnent $\\dfrac{5 \\times 4}{2} = 10$ matchs.",
           "method": [
             "Repérer le type de choix : des choix qui se suivent (l'ordre compte), ou un groupe de 2 éléments pris sans ordre.",
             "Représenter la situation : dessiner l'arbre ou le tableau pour des choix successifs ; pour un groupe sans ordre, retenir « 2 parmi $n$ ».",

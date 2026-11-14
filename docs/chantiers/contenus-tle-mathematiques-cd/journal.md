@@ -26,7 +26,9 @@
 - `valider.rb` normalise déjà « −4 » et « -4 » : les donner tous deux est refusé (`duplicate_accepted`).
 - `script/contenus/valider.rb` ne contrôle pas `practice` : les règles de « Je m'entraîne » sont dans `Entities::Catalog::NotionPractice` et le test d'intégration des mathématiques de 3e.
 
-## À faire valider par un enseignant
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 | Leçon | Point à valider |
 |---|---|

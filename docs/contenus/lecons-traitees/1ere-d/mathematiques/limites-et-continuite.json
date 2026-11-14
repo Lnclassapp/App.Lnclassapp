@@ -302,15 +302,27 @@
               },
               {
                 "content": "Calcule $\\lim_{x\\to9}(\\sqrt x+1)$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : $a=9$, $\\sqrt x$ est définie en $9$. Étape 2 — Substituer : $\\sqrt9+1=3+1$. Étape 3 — Vérifier : le radicande $9$ est positif. Étape 4 — Conclure : la limite vaut $4$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $a=9$, $\\sqrt x$ est définie en $9$. Étape 2 — Substituer : $\\sqrt9+1=3+1$. Étape 3 — Vérifier : le radicande $9$ est positif. Étape 4 — Conclure : la limite vaut $4$. Les leurres : $10$ oublie la racine carrée ($9+1$) ; $\\sqrt{10}$ prend la racine de toute la somme ; $3$ oublie d'ajouter $1$.",
                 "answers": [
                   {
-                    "content": "4",
+                    "content": "$4$",
                     "correct": true
+                  },
+                  {
+                    "content": "$10$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sqrt{10}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3$",
+                    "correct": false
                   }
-                ]
+                ],
+                "hint": "Remplace $x$ par $9$, puis calcule $\\sqrt9$ avant d'ajouter $1$."
               }
             ]
           }
@@ -912,13 +924,24 @@
               },
               {
                 "content": "Pour $D(x)=\\left(4+\\dfrac3x\\right)\\left(5-\\dfrac2x\\right)$, calcule $\\lim_{x\\to+\\infty}D(x)$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; produit de deux facteurs. Étape 2 — Donner : $4+\\frac3x\\to4$ et $5-\\frac2x\\to5$. Étape 3 — Opérer : $4\\times5=20$. Étape 4 — Conclure : la limite vaut $20$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on vise $+\\infty$ ; produit de deux facteurs. Étape 2 — Donner : $4+\\frac3x\\to4$ et $5-\\frac2x\\to5$. Étape 3 — Opérer : $4\\times5=20$. Étape 4 — Conclure : la limite vaut $20$. Les leurres : $9$ additionne les limites au lieu de les multiplier ; $-6$ multiplie les numérateurs $3$ et $-2$ des termes qui tendent vers $0$ ; $0$ croit que tout le produit tend vers $0$.",
                 "answers": [
                   {
-                    "content": "20",
+                    "content": "$20$",
                     "correct": true
+                  },
+                  {
+                    "content": "$9$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
                   }
                 ],
                 "hint": "La limite d'un produit est le produit des limites."

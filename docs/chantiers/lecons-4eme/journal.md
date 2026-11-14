@@ -40,6 +40,8 @@ Lots (une PR, un commit par lot) : A = rang 1 ; B = rang 2 ; C = rangs 3 à 5 et
 
 ## À trancher
 
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+
 Options prudentes appliquées ; un enseignant de la matière relit avant publication. Données chiffrées des énoncés fictives sauf mention.
 
 - **Manifeste du jeu standard** : la 4ème y est ajoutée (leçon 1 de chaque matière) et la constante du test passe à 61. Option prudente : sans cela la CI est rouge. À confirmer par l'orchestrateur, qui peut préférer un autre rang par matière.

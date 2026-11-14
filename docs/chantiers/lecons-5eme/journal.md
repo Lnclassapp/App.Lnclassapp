@@ -38,6 +38,8 @@ Chaque leçon : un rédacteur, puis un relecteur indépendant qui refait chaque 
 
 ## À trancher
 
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+
 Choix prudents appliqués, à valider par un enseignant de la matière.
 
 **Mathématiques**

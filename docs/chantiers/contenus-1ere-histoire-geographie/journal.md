@@ -6,7 +6,9 @@
 - 2026-11-02 — 10 leçons rédigées (Sonnet, une par sous-agent) puis relues par Opus (un relecteur distinct de l'auteur) : faits, dates, chiffres, cartes, calculs. Corrections : intitulés exacts (leçons 7 et 8), « BEPC » remplacé par « de type bac » (2nd cycle), nuances factuelles (Léopold II, Drake, câble 1866, Verdier, indigénat, Brazzaville/PDCI sur la frise…). Un sous-agent a écrasé le script d'un autre dans le scratchpad ; la leçon 9 a été régénérée et revérifiée.
 - 2026-11-02 — Les 10 fichiers passent `valider.rb` sans erreur ni avertissement. Aucun code touché.
 
-## À faire valider par un enseignant
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 | Leçon | Point |
 |---|---|

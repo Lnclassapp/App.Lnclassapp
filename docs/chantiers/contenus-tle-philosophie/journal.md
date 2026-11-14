@@ -15,7 +15,9 @@
 - **Vocabulaire de méthode divergent entre leçons** (problème ou problématique, ordre de l'introduction) : L1 a servi de référence, L2 et L10 ont été réalignées.
 - **Corrections qui désignent une proposition par son rang** (« la première proposition ») : la relecture de la leçon 6 a montré que l'application mélange les propositions, ce qui rend ces renvois faux (et 4 étaient faux même dans l'ordre du fichier). 8 cas trouvés dans L4 et L6, corrigés ; règle ajoutée à `prompt-redaction.md` et au brief des rédacteurs. Le contrôle ne le détecte pas.
 
-## À faire valider par un enseignant de philosophie
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 | Leçon | Point à valider |
 |---|---|
@@ -35,7 +37,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Relecture par un enseignant de philosophie (table ci-dessus) | Aucun enseignant dans le chantier ; les leçons restent en brouillon | Programme `contenus-v3-tous-niveaux` |
+| Relecture par un enseignant de philosophie (table ci-dessus) — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Aucun enseignant dans le chantier ; les leçons restent en brouillon | Programme `contenus-v3-tous-niveaux` |
 | `valider.rb` ne détecte pas une correction qui désigne une proposition par son rang | Hors périmètre (aucun code dans cette vague) | À ouvrir avec la dette « astérisques » de `contenus-3e-francais` |
 | Challenger empirique (import en brouillon, captures 390 px et ordinateur) | Pas de base ni de navigateur sur la session de rédaction ; aucune vue modifiée | Avant publication, par l'équipe |
 

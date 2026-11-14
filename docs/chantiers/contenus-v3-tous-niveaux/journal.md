@@ -24,7 +24,9 @@
 | 2026-11-01 | P3 | 1ère C, D | Physique-Chimie | 12 distinctes pour 13 intitulés (20 fichiers) ; C1 et D1 sont la même notion | #432 |
 | 2026-11-02 | P6 | 1ère (A1, A2) | SVT | 9 leçons (18 fichiers) | #440 |
 
-## À faire valider par un enseignant
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-XXXX-validateur-pedagogique-agent). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant de fermer sa PR. Aucune leçon ne sort du brouillon avant cette relecture.
 

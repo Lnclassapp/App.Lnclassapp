@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | refactoring (processus des contenus) |
-| **Statut** | en cours |
+| **Statut** | livré (PR) |
 | **Ouvert le** | 2026-11-14 |
 | **Branche** | `validation-pedagogique-agent` |
 | **Programme** | — |
