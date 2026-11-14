@@ -11,16 +11,18 @@ const PHONE = /^\d{10}$/
 export default class extends Controller {
   static targets = [
     "step", "segment", "counter", "live", "back", "welcome",
-    "code", "codeField", "codeFrame", "checking", "checkFailed", "noCode", "cascade", "recap", "recapName", "recapSchool",
+    "code", "codeField", "codeFrame", "checking", "checkFailed", "cascade", "recap", "recapName", "recapSchool",
     "panelStep", "panelRecap", "panelRecapName", "panelRecapSchool"
   ]
   static values = {
-    start: Number, counter: String, announce: String, codeUrl: String,
+    start: Number, counter: String, announce: String, codeUrl: String, codeOpen: Boolean,
+    announceCode: String, announceCascade: String,
     delay: { type: Number, default: 1000 }
   }
 
   connect() {
     this.current = this.startValue
+    this.codeMode = this.codeOpenValue
     this.render()
     this.syncCode()
     document.addEventListener("turbo:morph", this.refresh)
@@ -36,6 +38,7 @@ export default class extends Controller {
   refresh = () => {
     clearTimeout(this.timer)
     this.current = this.startValue
+    this.codeMode = this.codeOpenValue
     this.render()
     this.syncCode()
   }
@@ -96,14 +99,24 @@ export default class extends Controller {
     this.describeCode(true)
   }
 
-  // « Je n'ai pas de code » : la cascade s'ouvre (CSS), le champ code se vide et ne part plus avec le formulaire.
-  toggleCascade() {
-    if (this.noCodeTarget.checked) {
-      this.codeTarget.value = ""
-      this.resetCodeState()
-    }
+  // « J'ai le code de ma classe › » : la cascade se cache, le champ code se montre et reçoit le focus.
+  showCode(event) {
+    event.preventDefault()
+    this.codeMode = true
     this.syncCode()
-    if (!this.noCodeTarget.checked) this.codeTarget.focus()
+    this.codeTarget.focus()
+    this.say(this.announceCodeValue)
+  }
+
+  // « ‹ Je n'ai pas de code » : la cascade se rouvre, le champ code se vide et ne part plus avec le formulaire.
+  showCascade(event) {
+    event.preventDefault()
+    this.codeMode = false
+    this.codeTarget.value = ""
+    this.resetCodeState()
+    this.syncCode()
+    this.focusCascade()
+    this.say(this.announceCascadeValue)
   }
 
   // Une classe disponible touchée dans la cascade fait passer à l'étape 2 (une classe complète est désactivée).
@@ -114,10 +127,10 @@ export default class extends Controller {
     this.goTo(2)
   }
 
-  // « Ce n'est pas ta classe ? » : code vidé, case décochée, retour à l'étape 1.
+  // « Ce n'est pas ta classe ? » : code vidé, cascade rouverte, retour à l'étape 1.
   restart(event) {
     event.preventDefault()
-    this.noCodeTarget.checked = false
+    this.codeMode = false
     this.codeTarget.value = ""
     this.resetCodeState()
     this.syncCode()
@@ -204,8 +217,18 @@ export default class extends Controller {
   announce() {
     const legend = this.stepTargets.find((step) => Number(step.dataset.step) === this.current)?.querySelector("legend")
     const text = this.announceValue.replace("%{n}", this.current).replace("%{title}", legend?.textContent.trim() || "")
+    this.say(text)
+  }
+
+  say(text) {
     this.liveTarget.textContent = ""
     requestAnimationFrame(() => { this.liveTarget.textContent = text })
+  }
+
+  // Le premier champ visible de la cascade : la DRENA, ou « Changer » si l'établissement est déjà connu.
+  focusCascade() {
+    const visible = (element) => element.getClientRects().length > 0
+    ;[...this.cascadeTarget.querySelectorAll("select, a[href], button")].find(visible)?.focus()
   }
 
   // Le rappel de classe : au-dessus du champ de l'étape 2 sur téléphone, dans le panneau sous l'étape 1 sur ordinateur (CA-C9).
@@ -227,15 +250,14 @@ export default class extends Controller {
     if (this.hasPanelRecapTarget) this.panelRecapTarget.hidden = true
   }
 
-  // Sans JavaScript le code et la cascade sont tous deux dans la page ; ici, la case en choisit un : l'autre est caché, et le
+  // Sans JavaScript le code et la cascade sont tous deux dans la page ; ici, le mode en choisit une : l'autre est cachée, et le
   // code, désactivé, ne part plus avec le formulaire.
   syncCode() {
-    if (!this.hasCodeTarget || !this.hasNoCodeTarget) return
+    if (!this.hasCodeTarget) return
 
-    const cascade = this.noCodeTarget.checked
-    this.codeTarget.disabled = cascade
-    this.codeFieldTarget.hidden = cascade
-    this.cascadeTarget.hidden = !cascade
+    this.codeTarget.disabled = !this.codeMode
+    this.codeFieldTarget.hidden = !this.codeMode
+    this.cascadeTarget.hidden = this.codeMode
   }
 
   resetCodeState() {
