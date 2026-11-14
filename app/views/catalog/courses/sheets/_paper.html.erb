@@ -28,8 +28,9 @@
       <h2 id="<%= dom_id %>-title" class="ps-paper-exercise-title">
         <span class="ps-paper-exercise-number"><%= t("catalog.courses.sheets.exercise", number: exercise.number) %></span>
         <% if exercise.questions.any? %><%= t("#{scope}.points", count: sum, points: format_points.(sum)) %><% end %>
+        <% if mode == :team && exercise.status == "draft" %><span class="ps-status"><%= t("catalog.content_status.draft") %></span><% end %>
       </h2>
-      <%# edition-lecon-equipe : l'exercice se lit dans la feuille (ADR-0121) ; son statut et ses transitions y sont, pour l'équipe. %>
+      <%# edition-lecon-equipe : le badge « Brouillon » reste dans le titre ; les transitions de l'exercice sont dans son menu ⋮, pour l'équipe (ADR-0121). %>
       <% if mode == :team && exercise.status.present? %>
         <%= content_status_menu(type: :exercise, key: exercise.public_id, status: exercise.status,
                                 label: t("catalog.content_status.menu.exercise", number: exercise.number, name: exercise.title)) %>

@@ -15,6 +15,7 @@
 ## Ce qui a dérapé
 
 - Premier jet du test : j'attendais « Archiver » sur un brouillon ; `ContentStatus::TRANSITIONS` ne le permet pas (brouillon → publié seulement). Test corrigé.
+- 2026-11-14 : #598 a cassé `Develop` (train #596). Le menu ⋮ de l'exercice avait remplacé le badge `.ps-status` « Brouillon » du titre `.ps-paper-exercise-title` ; trois tests d'intégration le décrivent (`team_assigns_from_sheet`, `sheet_paper`, `prepare_interros`). `bin/ci-quiet` niveau pr ne les a pas joués : il suit les tests des fichiers touchés, et la vue partielle `sheets/_paper` n'y mène pas. Correctif `fix/badge-statut-feuille` : badge rétabli dans le titre, menu gardé sous le titre. Leçon : pour une vue partagée, jouer `test/integration/catalog` et `test/integration/classroom` avant la PR.
 
 ## Ce qu'on a appris sur la codebase
 
