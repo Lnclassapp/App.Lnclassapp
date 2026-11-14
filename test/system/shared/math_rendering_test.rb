@@ -39,7 +39,7 @@ class MathRenderingTest < ApplicationSystemTestCase
     page.execute_script(<<~JS)
       window.mutations = 0
       new MutationObserver((records) => { window.mutations += records.length }).observe(document.body, { childList: true, subtree: true, characterData: true })
-      document.body.insertAdjacentHTML("beforeend", '<div id="sheet" data-controller="math"><p>Feuille $a$</p><section data-controller="math"><span id="cut" data-controller="math">Loi : $I = \\dfrac{E}{ </span><span data-controller="math">Aire $\\pi r^2$</span></section></div>')
+      document.body.insertAdjacentHTML("beforeend", '<div id="sheet" data-controller="math"><p>Feuille $a$</p><section data-controller="math"><span id="cut" data-controller="math">Loi : $I = \\\\dfrac{E}{ </span><span data-controller="math">Aire $\\\\pi r^2$</span></section></div>')
     JS
     assert_selector "#sheet .katex", count: 2
 
