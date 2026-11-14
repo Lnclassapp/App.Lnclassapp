@@ -193,6 +193,13 @@ jobs:
           key: rubocop-${{ hashFiles('.rubocop.yml', 'Gemfile.lock') }}-${{ github.sha }}
           restore-keys: rubocop-${{ hashFiles('.rubocop.yml', 'Gemfile.lock') }}-
 
+      # The DRENA and school files live in the public Lnclassapp/App.Lnclassapp-contenus (referentiel/): test/db/import_data_files_test.rb
+      # reads them through CONTENUS_DIR instead of skipping.
+      - name: Contents repository (referentiel)
+        run: |
+          git clone --depth 1 https://github.com/Lnclassapp/App.Lnclassapp-contenus "$RUNNER_TEMP/contenus"
+          echo "CONTENUS_DIR=$RUNNER_TEMP/contenus" >> "$GITHUB_ENV"
+
       - name: Run bin/ci
         env:
           CI_GROUP: ${{ matrix.groups }}
