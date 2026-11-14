@@ -1,0 +1,3658 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le devenir des substances absorbées par la plante verte",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "SVT",
+      "series_name": "C",
+      "figures": [
+        {
+          "key": "circuit-seves",
+          "kind": "diagram",
+          "description": "Schéma fléché du trajet des substances dans une plante verte. L'eau et les sels minéraux du sol sont absorbés par les racines, montent sous forme de sève brute dans le xylème jusqu'aux feuilles. Les feuilles fabriquent de la matière organique par photosynthèse. La sève élaborée descend dans le liber vers les racines, les fruits et les tubercules.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "sol",
+                "label": "Sol : eau et sels minéraux",
+                "category": 1
+              },
+              {
+                "id": "rac",
+                "label": "Racines : absorption",
+                "category": 1
+              },
+              {
+                "id": "xyl",
+                "label": "Xylème : sève brute vers le haut",
+                "category": 1
+              },
+              {
+                "id": "feu",
+                "label": "Feuilles : photosynthèse"
+              },
+              {
+                "id": "lib",
+                "label": "Liber : sève élaborée",
+                "category": 2
+              },
+              {
+                "id": "org",
+                "label": "Racines, fruits, tubercules",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "sol",
+                "to": "rac"
+              },
+              {
+                "from": "rac",
+                "to": "xyl",
+                "label": "monte"
+              },
+              {
+                "from": "xyl",
+                "to": "feu"
+              },
+              {
+                "from": "feu",
+                "to": "lib",
+                "label": "matière organique"
+              },
+              {
+                "from": "lib",
+                "to": "org",
+                "label": "distribue"
+              }
+            ],
+            "legend": [
+              "Sève brute : eau et sels minéraux",
+              "Sève élaborée : matière organique"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "volume-potometre-feuille",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres, résultats d'exercice : volume d'eau absorbé en 6 heures par deux rameaux de manguier de même taille placés dans un potomètre. Le rameau gardant ses feuilles absorbe 18 mL ; le rameau dont toutes les feuilles ont été coupées n'absorbe que 2 mL.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              18,
+              2
+            ],
+            "labels": [
+              "Rameau feuillé",
+              "Rameau sans feuilles"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "stomates-par-face",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres, résultats d'exercice : nombre de stomates comptés au microscope sur une surface de 1 mm² d'une feuille de laitue. La face supérieure en porte 20 et la face inférieure en porte 180.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              20,
+              180
+            ],
+            "labels": [
+              "Face supérieure",
+              "Face inférieure"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "transpiration-selon-conditions",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres, résultats d'exercice : masse d'eau, en grammes, perdue en 3 heures par un même rameau feuillé selon les conditions. Ombre et air calme : 4 g. Plein soleil et air calme : 9 g. Plein soleil et vent : 14 g. Nuit et air humide : 1 g.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              4,
+              9,
+              14,
+              1
+            ],
+            "labels": [
+              "Ombre, air calme",
+              "Soleil, air calme",
+              "Soleil et vent",
+              "Nuit, air humide"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "exsudation-selon-moment",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres, résultats d'exercice : volume de sève, en millilitres, recueilli pendant 2 heures à la section d'une tige de gombo coupée au ras du sol, selon le moment de la journée. Matin : 3 mL. Midi : 1 mL. Soir : 2 mL. Nuit : 6 mL.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              3,
+              1,
+              2,
+              6
+            ],
+            "labels": [
+              "Matin",
+              "Midi",
+              "Soir",
+              "Nuit"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "masse-du-tubercule",
+          "kind": "stat_chart",
+          "description": "Courbe, résultats d'exercice : masse, en grammes, d'un tubercule d'igname au cours de la croissance. 300 g au mois 2, 600 g au mois 4, 1 500 g au mois 6, 2 500 g au mois 8 et 2 800 g au mois 10. La masse augmente surtout entre les mois 4 et 8.",
+          "params": {
+            "chart": "line",
+            "series": [
+              300,
+              600,
+              1500,
+              2500,
+              2800
+            ],
+            "labels": [
+              "Mois 2",
+              "Mois 4",
+              "Mois 6",
+              "Mois 8",
+              "Mois 10"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "La sève brute et sa montée dans le xylème",
+          "remember": "La **sève brute** est le liquide formé de l'**eau** et des **sels minéraux** dissous que les racines ont absorbés. Elle monte des racines vers les feuilles dans des vaisseaux conducteurs situés dans le bois : le **xylème**. On le prouve avec un colorant, l'**éosine** : on plonge la base d'une tige coupée dans de l'eau éosinée, on attend quelques heures, puis on fait une coupe transversale. Seuls les vaisseaux du bois sont rouges ; l'écorce et la moelle restent incolores. Le colorant suit la sève brute : il montre son trajet.",
+          "method": [
+            "Identifier le montage : la plante, le colorant utilisé et la durée.",
+            "Observer la coupe : repérer les parties colorées et celles qui restent incolores.",
+            "Relier la partie colorée au tissu conducteur (le xylème) et au trajet du colorant.",
+            "Conclure : dire ce qui circule, dans quel sens et par quels vaisseaux."
+          ],
+          "example": {
+            "statement": "Au jardin scolaire, un élève coupe une tige de balsamine et plonge sa base dans de l'eau éosinée pendant 2 heures. Sur une coupe transversale, il voit de petits points rouges dans le bois ; l'écorce et la moelle sont incolores. Les nervures des feuilles sont rouges. Que montre cette expérience ?",
+            "steps": [
+              "Identifier : la plante est une balsamine, le colorant est l'éosine et la durée est de 2 heures.",
+              "Observer : seuls de petits points du bois sont rouges ; l'écorce et la moelle sont incolores.",
+              "Relier : les points rouges sont les vaisseaux du bois, le xylème ; le colorant a suivi le trajet de l'eau jusqu'aux nervures des feuilles.",
+              "Conclure : la sève brute (eau et sels minéraux) monte des racines vers les feuilles dans le xylème, et pas dans l'écorce."
+            ]
+          },
+          "pitfall": "Ne pas croire que la sève brute monte dans toute la tige. Contre-exemple : sur la coupe de l'exemple, seuls quelques petits points du bois sont rouges ; l'écorce et la moelle, qui occupent la plus grande partie de la coupe, restent incolores. Ne confonds pas non plus l'éosine, qui est un colorant, avec la sève : le colorant sert seulement à voir par où la sève brute passe.",
+          "practice": {
+            "statement": "Tu t'entraînes à lire une expérience à l'éosine et à en tirer le trajet de la sève brute.",
+            "questions": [
+              {
+                "content": "Après deux heures dans l'eau éosinée, la coupe d'une tige de gombo montre de petits points rouges dans le bois ; l'écorce et la moelle restent incolores. Que montre cette observation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : un gombo, de l'éosine, deux heures. Étape 2 — Observer : seuls de petits points du bois sont rouges. Étape 3 — Relier : ces points sont le xylème, qui a conduit le colorant. Étape 4 — Conclure : la sève brute monte dans le xylème. L'erreur tentante est de croire que toute la tige conduit la sève brute, alors que l'écorce reste incolore.",
+                "answers": [
+                  {
+                    "content": "La sève brute monte dans les vaisseaux du bois, les seuls colorés",
+                    "correct": true
+                  },
+                  {
+                    "content": "La sève brute monte dans toute la tige, écorce comprise",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'éosine a été absorbée par l'écorce et non par le bois",
+                    "correct": false
+                  },
+                  {
+                    "content": "La sève brute descend dans les vaisseaux du bois",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde quelles parties de la coupe sont rouges."
+              },
+              {
+                "content": "La sève brute est formée d'eau et de sels minéraux dissous.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la sève brute est celle qui vient des racines. Étape 2 — Observer : les racines absorbent l'eau et les sels minéraux du sol. Étape 3 — Relier : ces substances montent ensemble, les sels étant dissous dans l'eau. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce que les racines absorbent."
+              },
+              {
+                "content": "Les vaisseaux du bois, où monte la sève brute, forment le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : on cherche le tissu conducteur du bois. Étape 2 — Observer : c'est lui qui est coloré en rouge par l'éosine. Étape 3 — Relier : ce tissu conduit la sève brute. Étape 4 — Conclure : il s'appelle le xylème.",
+                "answers": [
+                  {
+                    "content": "xylème",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot commence par la lettre x."
+              },
+              {
+                "content": "Relie chaque terme à ce qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : quatre termes de l'expérience à l'éosine. Étape 2 — Observer : le colorant rouge apparaît dans le bois. Étape 3 — Relier : il suit la sève brute (eau et sels minéraux) dans le xylème. Étape 4 — Conclure : la sève brute monte des racines vers les feuilles.",
+                "answers": [
+                  {
+                    "content": "Sève brute",
+                    "match": "Eau et sels minéraux dissous"
+                  },
+                  {
+                    "content": "Xylème",
+                    "match": "Vaisseaux du bois"
+                  },
+                  {
+                    "content": "Éosine",
+                    "match": "Colorant qui suit le trajet de la sève"
+                  },
+                  {
+                    "content": "Sens de la montée",
+                    "match": "Des racines vers les feuilles"
+                  }
+                ],
+                "hint": "Une sève brute, c'est de l'eau avec quelque chose de dissous."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la sève brute et son trajet",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des expériences à l'éosine faites au jardin de l'école.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De quoi la sève brute est-elle formée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la sève brute est le liquide qui vient des racines. Étape 2 — Observer : les racines absorbent l'eau et les sels minéraux. Étape 3 — Relier : ces deux substances montent dissoutes ensemble. Étape 4 — Conclure : la sève brute est formée d'eau et de sels minéraux dissous. Les sucres sont fabriqués par les feuilles : ils ne font pas partie de la sève brute.",
+                  "answers": [
+                    {
+                      "content": "D'eau et de sels minéraux dissous",
+                      "correct": true
+                    },
+                    {
+                      "content": "De sucres fabriqués par les feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'eau pure, sans aucune autre substance",
+                      "correct": false
+                    },
+                    {
+                      "content": "De dioxygène et d'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel sens circule la sève brute ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le colorant est placé à la base de la tige. Étape 2 — Observer : les nervures des feuilles, en haut, deviennent rouges. Étape 3 — Relier : le colorant suit la sève brute. Étape 4 — Conclure : elle monte des racines vers les feuilles. Elle ne descend pas dans ces vaisseaux.",
+                  "answers": [
+                    {
+                      "content": "Des racines vers les feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des feuilles vers les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne circule pas, elle reste dans les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans les deux sens dans les mêmes vaisseaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au bout de 3 heures dans l'eau éosinée, les nervures des feuilles d'une tige de balsamine sont rouges, et la coupe de la tige montre des points rouges dans le bois. Pourquoi les nervures sont-elles rouges ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la base de la tige trempe dans l'éosine pendant 3 heures. Étape 2 — Observer : le bois et les nervures sont rouges. Étape 3 — Relier : le colorant a suivi la sève brute dans le xylème. Étape 4 — Conclure : la sève brute est montée jusqu'aux feuilles. L'éosine n'est ni fabriquée par les feuilles ni absorbée par l'air.",
+                  "answers": [
+                    {
+                      "content": "Le colorant est monté avec la sève brute dans les vaisseaux du bois jusqu'aux feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les feuilles ont absorbé l'éosine par l'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'éosine est descendue des feuilles vers la tige",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les feuilles fabriquent elles-mêmes de l'éosine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une tige de balsamine, le colorant atteint 6 cm de hauteur en 2 heures. Quelle est sa vitesse de montée, en centimètres par heure ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : la distance est de 6 cm et la durée de 2 heures. Étape 2 — Observer : le colorant monte régulièrement. Étape 3 — Relier : la vitesse est la distance divisée par la durée, soit $6 \\div 2 = 3$. Étape 4 — Conclure : la sève brute monte à 3 cm par heure dans cette tige.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm/h"
+                },
+                {
+                  "content": "L'écorce d'une tige reste incolore après l'expérience à l'éosine : cela prouve que la sève brute y monte aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'expérience colore la sève brute. Étape 2 — Observer : l'écorce reste incolore. Étape 3 — Relier : une partie incolore n'a pas conduit le colorant, donc pas la sève brute. Étape 4 — Conclure : l'affirmation est fausse ; la sève brute monte dans le xylème seulement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le xylème et la sève brute",
+              "statement": "Dans cet exercice, tu associes vocabulaire, protocole et calcul pour décrire la montée de la sève brute dans le xylème.",
+              "hint": "Le colorant rouge te montre le chemin : suis-le de la base de la tige vers les feuilles.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles propositions sont exactes à propos du xylème ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : le xylème est le tissu coloré en rouge par l'éosine. Étape 2 — Observer : ce sont les points rouges du bois. Étape 3 — Relier : il conduit la sève brute vers le haut. Étape 4 — Conclure : les deux bonnes propositions sont celles du bois et de la montée vers les feuilles. Les sucres circulent dans un autre tissu, et le xylème est rouge, pas incolore.",
+                  "answers": [
+                    {
+                      "content": "Ce sont les vaisseaux du bois",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sève brute y monte des racines vers les feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il transporte une sève riche en sucres fabriqués par les feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se trouve uniquement dans les feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reste toujours incolore après l'expérience à l'éosine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la mise en évidence de la sève brute.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier le montage : on prépare la tige, puis on la trempe dans l'éosine. Étape 2 — Observer la coupe : il faut attendre pour que le colorant monte, couper la tige, puis regarder la coupe. Étape 3 — Relier et Étape 4 — Conclure : cela se fait après l'observation des parties rouges. On ne coupe pas la tige avant d'avoir laissé le colorant monter.",
+                  "answers": [
+                    {
+                      "content": "Couper la tige d'un plant"
+                    },
+                    {
+                      "content": "Plonger la base de la tige dans l'eau éosinée"
+                    },
+                    {
+                      "content": "Attendre plusieurs heures"
+                    },
+                    {
+                      "content": "Faire une coupe transversale de la tige"
+                    },
+                    {
+                      "content": "Repérer les parties rouges et les parties incolores"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à son interprétation.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : trois observations d'un même montage. Étape 2 — Observer : le bois est rouge, l'écorce incolore, les nervures rouges. Étape 3 — Relier : un tissu rouge a conduit le colorant, un tissu incolore non. Étape 4 — Conclure : les trois liens sont ceux indiqués ; la sève brute monte dans le xylème jusqu'aux feuilles.",
+                  "answers": [
+                    {
+                      "content": "Points rouges dans le bois",
+                      "match": "Trajet de la sève brute"
+                    },
+                    {
+                      "content": "Écorce incolore",
+                      "match": "L'écorce ne conduit pas la sève brute"
+                    },
+                    {
+                      "content": "Nervures des feuilles rouges",
+                      "match": "Le colorant est arrivé jusqu'aux feuilles"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une tige de haricot, le colorant monte de 40 cm en 5 heures. En gardant la même vitesse, quelle hauteur atteint-il au bout de 8 heures, en centimètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : 40 cm en 5 heures. Étape 2 — Observer : la montée est régulière. Étape 3 — Relier : la vitesse est $40 \\div 5 = 8$ cm par heure, donc en 8 heures : $8 \\times 8 = 64$. Étape 4 — Conclure : le colorant atteint 64 cm.",
+                  "answers": [
+                    {
+                      "content": "64",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm"
+                },
+                {
+                  "content": "La sève brute circule dans le ___ de la tige.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : on cherche le tissu de la sève brute. Étape 2 — Observer : seul le bois est rouge après l'expérience à l'éosine. Étape 3 — Relier : ce tissu du bois est le xylème. Étape 4 — Conclure : la sève brute circule dans le xylème. Le liber conduit une autre sève, qu'on étudie plus loin.",
+                  "answers": [
+                    {
+                      "content": "xylème",
+                      "correct": true
+                    },
+                    {
+                      "content": "liber",
+                      "correct": false
+                    },
+                    {
+                      "content": "tissu de l'écorce",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la sève brute, les sels minéraux sont ___ dans l'eau.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la sève brute est un mélange d'eau et de sels minéraux. Étape 2 — Observer : on ne voit pas les sels dans le liquide. Étape 3 — Relier : ils sont mélangés à l'eau, invisibles. Étape 4 — Conclure : les sels minéraux sont dissous dans l'eau.",
+                  "answers": [
+                    {
+                      "content": "dissous",
+                      "correct": true
+                    },
+                    {
+                      "content": "dissouts",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les forces de la montée : poussée racinaire et aspiration foliaire",
+          "remember": "Deux forces font monter la sève brute. La **poussée racinaire** : les racines poussent la sève vers le haut. On la voit quand on coupe une tige au ras du sol sur un plant bien arrosé : la sève sort par la section, c'est l'**exsudation**. Elle est faible. L'**aspiration foliaire** est la force principale. Les feuilles perdent de l'eau sous forme de vapeur, c'est la **transpiration**, surtout par les **stomates**, petites ouvertures de l'épiderme entourées de deux cellules de garde. Cette perte appelle l'eau vers le haut et aspire la sève brute. On la montre avec un sac plastique (buée), un papier au chlorure de cobalt (bleu sec, rose au contact de l'eau) ou un potomètre. La chaleur, le vent et l'air sec l'augmentent.",
+          "method": [
+            "Identifier l'expérience : l'organe étudié (racine ou feuille) et ce que l'on mesure.",
+            "Comparer le lot d'essai au témoin : repérer la seule différence.",
+            "Interpréter le résultat : le relier à une cause (poussée des racines ou perte d'eau des feuilles).",
+            "Conclure : nommer la force en jeu et son effet sur la montée de la sève brute."
+          ],
+          "example": {
+            "statement": "Au potomètre, on place deux rameaux d'hévéa de même taille, pendant 4 heures. Le rameau A garde ses feuilles ; le rameau B a toutes ses feuilles coupées. A absorbe 12 mL d'eau et B seulement 1 mL (valeurs d'exercice). Quelle force fait monter la sève brute ?",
+            "steps": [
+              "Identifier : l'organe étudié est la feuille ; on mesure le volume d'eau absorbé en 4 heures.",
+              "Comparer : A, intact et feuillé, est le témoin ; B, aux feuilles coupées, est le lot d'essai ; la seule différence est la présence des feuilles.",
+              "Interpréter : A absorbe 12 fois plus que B ($12 \\div 1 = 12$) ; les feuilles perdent de l'eau par transpiration, ce qui appelle l'eau vers le haut.",
+              "Conclure : l'aspiration foliaire, due à la transpiration, est la force qui fait monter la sève brute."
+            ]
+          },
+          "pitfall": "Ne pas confondre les deux forces ni croire que les stomates absorbent l'eau. Les stomates sont sur les feuilles et laissent sortir la vapeur d'eau ; l'eau du sol est absorbée par les poils absorbants des racines. Contre-exemple : dans l'exemple, le rameau sans feuilles n'absorbe presque plus rien (1 mL contre 12 mL) alors que ses tissus sont intacts : sans feuilles, il n'y a presque plus d'aspiration. La poussée racinaire, elle, existe mais reste faible.",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître la force qui fait monter la sève brute d'après une expérience.",
+            "questions": [
+              {
+                "content": "On coupe la tige d'un plant de tomate bien arrosé au ras du sol. Quelques heures après, un liquide sort de la section, côté racines. Quel phénomène est mis en évidence ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : la tige est coupée, on observe la section côté racines. Étape 2 — Comparer : il n'y a plus de feuilles au-dessus de la section. Étape 3 — Interpréter : la sève sort sans feuilles, elle est donc poussée par les racines. Étape 4 — Conclure : c'est la poussée racinaire. L'aspiration foliaire est impossible sans feuilles.",
+                "answers": [
+                  {
+                    "content": "La poussée racinaire (exsudation de la sève brute)",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'aspiration foliaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "La photosynthèse",
+                    "correct": false
+                  },
+                  {
+                    "content": "La transpiration des feuilles",
+                    "correct": false
+                  }
+                ],
+                "hint": "Il n'y a plus de feuilles au-dessus de la coupe."
+              },
+              {
+                "content": "Un papier au chlorure de cobalt, bleu quand il est sec, devient rose au contact de l'eau.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : on utilise le papier au chlorure de cobalt pour détecter l'eau. Étape 2 — Comparer : il est bleu sec et rose mouillé. Étape 3 — Interpréter : le rose signale la présence d'eau, par exemple de la vapeur d'une feuille. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la couleur du papier sec."
+              },
+              {
+                "content": "L'eau quitte la feuille sous forme de vapeur par de petites ouvertures appelées ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : on cherche l'organe de sortie de la vapeur d'eau. Étape 2 — Comparer : ce ne sont pas les racines, qui absorbent. Étape 3 — Interpréter : ce sont de petites ouvertures de l'épiderme des feuilles. Étape 4 — Conclure : ce sont les stomates.",
+                "answers": [
+                  {
+                    "content": "stomates",
+                    "correct": true
+                  },
+                  {
+                    "content": "stomate",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot commence par « sto »."
+              },
+              {
+                "content": "Quels facteurs augmentent la transpiration d'une feuille ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : on cherche ce qui accélère la perte d'eau. Étape 2 — Comparer : le vent emporte la vapeur et l'air sec en reprend facilement. Étape 3 — Interpréter : la feuille transpire alors davantage. Étape 4 — Conclure : le vent et l'air chaud et sec sont les bonnes réponses. Un air déjà saturé de vapeur freine la transpiration.",
+                "answers": [
+                  {
+                    "content": "Le vent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un air chaud et sec",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un air saturé de vapeur d'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une nuit sans vent et humide",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au linge qui sèche plus vite."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Transpiration et poussée racinaire",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des expériences sur la poussée racinaire et sur la transpiration.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel organe est le siège principal de la transpiration d'une plante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on cherche l'organe qui rejette la vapeur d'eau. Étape 2 — Comparer : la feuille est couverte de stomates, la racine absorbe. Étape 3 — Interpréter : la vapeur sort surtout par les stomates des feuilles. Étape 4 — Conclure : la feuille est le siège principal de la transpiration.",
+                  "answers": [
+                    {
+                      "content": "La feuille",
+                      "correct": true
+                    },
+                    {
+                      "content": "La zone pilifère de la racine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le collet",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'écorce de la tige",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un rameau feuillé de manguier est enfermé dans un sac plastique transparent bien fermé, au soleil. Des gouttelettes apparaissent sur la paroi du sac. Que montrent-elles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'organe étudié est la feuille enfermée dans un sac fermé. Étape 2 — Comparer : un sac vide, lui, reste sec. Étape 3 — Interpréter : la buée vient de la vapeur d'eau rejetée par les feuilles. Étape 4 — Conclure : c'est la transpiration. Un sac fermé ne fabrique pas d'eau.",
+                  "answers": [
+                    {
+                      "content": "Les feuilles rejettent de la vapeur d'eau : c'est la transpiration",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sac plastique fabrique de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La plante a absorbé l'eau contenue dans le sac",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines ont poussé de l'eau jusque dans le sac",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aspiration foliaire est liée à la transpiration des feuilles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'aspiration est exercée par les feuilles. Étape 2 — Comparer : un rameau sans feuilles absorbe très peu. Étape 3 — Interpréter : la perte d'eau des feuilles appelle l'eau vers le haut. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un papier au chlorure de cobalt, bleu, est collé sur la face inférieure d'une feuille : il devient rose en 2 minutes. Sur la face supérieure, il devient rose en 10 minutes. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'organe étudié est la feuille, on mesure le temps de virage du papier. Étape 2 — Comparer : la face inférieure vire 5 fois plus vite que la face supérieure ($10 \\div 2 = 5$). Étape 3 — Interpréter : plus de vapeur y sort, donc plus de stomates. Étape 4 — Conclure : la face inférieure transpire davantage. Le papier rose signale de l'eau qui sort, pas de l'eau qui entre.",
+                  "answers": [
+                    {
+                      "content": "La face inférieure transpire davantage que la face supérieure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux faces transpirent à la même vitesse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La face supérieure transpire davantage",
+                      "correct": false
+                    },
+                    {
+                      "content": "La feuille absorbe de l'eau par sa face inférieure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « les stomates absorbent l'eau du sol ». Quelle phrase corrige son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'organe en cause est la feuille. Étape 2 — Comparer : l'absorption se fait à la racine, la perte d'eau à la feuille. Étape 3 — Interpréter : les stomates sont des ouvertures de la feuille qui laissent sortir la vapeur. Étape 4 — Conclure : la phrase juste distingue les stomates (sortie) et les poils absorbants (entrée).",
+                  "answers": [
+                    {
+                      "content": "Les stomates sont sur les feuilles et laissent sortir la vapeur d'eau ; l'eau du sol est absorbée par les poils absorbants des racines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les stomates laissent entrer l'eau du sol dans la tige",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les stomates sont des poils absorbants des racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les stomates fabriquent l'eau de la sève",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les forces de la montée de la sève brute",
+              "statement": "Dans cet exercice, tu mélanges calcul, classement et vocabulaire pour distinguer la poussée racinaire et l'aspiration foliaire.",
+              "hint": "Demande-toi toujours : cette expérience concerne-t-elle les racines ou les feuilles ?",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un rameau feuillé perd 9 g d'eau en 3 heures par transpiration. Quelle est sa perte par heure, en grammes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : l'organe étudié est la feuille ; on mesure la masse d'eau perdue : 9 g en 3 heures. Étape 2 — Comparer : la perte est supposée régulière. Étape 3 — Interpréter : la perte par heure est $9 \\div 3 = 3$. Étape 4 — Conclure : le rameau perd 3 g d'eau par heure.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "g/h"
+                },
+                {
+                  "content": "Quelles expériences montrent la transpiration des feuilles ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : on cherche les expériences où la feuille rejette de l'eau. Étape 2 — Comparer : le sac, le papier rose et le potomètre comparent des feuilles qui transpirent. Étape 3 — Interpréter : buée, papier rose et forte absorption traduisent une perte de vapeur par les feuilles. Étape 4 — Conclure : ce sont les trois premières. L'éosine montre le trajet de la sève ; l'eau iodée détecte l'amidon.",
+                  "answers": [
+                    {
+                      "content": "Un rameau feuillé dans un sac plastique fermé, qui se couvre de buée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un papier au chlorure de cobalt qui devient rose sur une feuille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un potomètre où un rameau feuillé absorbe bien plus qu'un rameau sans feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une tige plongée dans l'eau éosinée dont le bois devient rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une feuille plongée dans l'eau iodée qui devient bleu-noir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour lire une expérience sur la montée de la sève.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on commence par savoir quel organe et quelle mesure. Étape 2 — Comparer le lot d'essai au témoin pour isoler la seule différence. Étape 3 — Interpréter le résultat en le reliant à une cause. Étape 4 — Conclure en nommant la force. On ne conclut jamais avant d'avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Identifier l'expérience"
+                    },
+                    {
+                      "content": "Comparer le lot d'essai au témoin"
+                    },
+                    {
+                      "content": "Interpréter le résultat"
+                    },
+                    {
+                      "content": "Conclure en nommant la force"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : quatre termes de la fiche. Étape 2 — Comparer : deux sont des forces, deux sont des repères d'expérience ou d'organe. Étape 3 — Interpréter : la poussée vient des racines, l'aspiration de la transpiration, l'exsudation se voit à la coupe, le stomate est la porte de sortie de la vapeur. Étape 4 — Conclure : les quatre liens sont ceux indiqués.",
+                  "answers": [
+                    {
+                      "content": "Poussée racinaire",
+                      "match": "Pression des racines qui pousse la sève vers le haut"
+                    },
+                    {
+                      "content": "Aspiration foliaire",
+                      "match": "Appel d'eau créé par la transpiration des feuilles"
+                    },
+                    {
+                      "content": "Exsudation",
+                      "match": "Sortie de sève par la section d'une tige coupée"
+                    },
+                    {
+                      "content": "Stomate",
+                      "match": "Ouverture de l'épiderme entre deux cellules de garde"
+                    }
+                  ]
+                },
+                {
+                  "content": "Chez un bananier en plein soleil, la force principale de la montée de la sève brute est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : un bananier a de grandes feuilles qui transpirent beaucoup au soleil. Étape 2 — Comparer : la poussée racinaire est faible. Étape 3 — Interpréter : la forte transpiration crée un grand appel d'eau. Étape 4 — Conclure : la force principale est l'aspiration foliaire. La pesanteur s'oppose à la montée.",
+                  "answers": [
+                    {
+                      "content": "l'aspiration foliaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "la poussée racinaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "la pesanteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La nuit, quand l'air est humide, la transpiration est plus forte que le jour en plein soleil.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on compare deux situations. Étape 2 — Comparer : la nuit, l'air est humide et il n'y a ni soleil ni vent. Étape 3 — Interpréter : un air humide freine la perte de vapeur d'eau. Étape 4 — Conclure : l'affirmation est fausse ; la transpiration est plus faible la nuit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "L'utilisation des substances absorbées : la photosynthèse",
+          "remember": "Dans les feuilles vertes éclairées, les cellules qui contiennent de la **chlorophylle** fabriquent de la **matière organique** (sucres, puis **amidon**) à partir de l'eau et des sels minéraux de la sève brute et du **dioxyde de carbone** de l'air, qui entre par les stomates. Elles rejettent du dioxygène. Ce phénomène est la **photosynthèse** : il exige de la **lumière** et de la chlorophylle. L'amidon se reconnaît à l'**eau iodée**, qui le colore en bleu-noir. Pour tester une feuille, on la décolore d'abord dans l'alcool chaud, puis on la plonge dans l'eau iodée : bleu-noir = amidon présent ; jaune-brun = amidon absent.",
+          "method": [
+            "Identifier les conditions de l'expérience : la lumière et la chlorophylle dont dispose chaque zone ou chaque lot.",
+            "Appliquer le test : décolorer la feuille à l'alcool chaud, puis la plonger dans l'eau iodée.",
+            "Lire le résultat : bleu-noir si l'amidon est présent, jaune-brun s'il est absent.",
+            "Conclure : relier la présence ou l'absence d'amidon aux conditions, et dire si la photosynthèse a eu lieu."
+          ],
+          "example": {
+            "statement": "Au jardin scolaire, une bande de papier aluminium opaque est collée sur une feuille de piment pendant une journée ensoleillée. Le soir, la feuille est testée. La bande couverte est jaune-brun ; le reste de la feuille est bleu-noir. Que montre cette expérience ?",
+            "steps": [
+              "Identifier : la bande couverte n'a pas de lumière ; le reste de la feuille est éclairé ; toute la feuille est verte, donc a de la chlorophylle.",
+              "Appliquer : la feuille est décolorée à l'alcool chaud, puis plongée dans l'eau iodée.",
+              "Lire : la bande couverte est jaune-brun (pas d'amidon) ; le reste est bleu-noir (amidon présent).",
+              "Conclure : la photosynthèse, qui fabrique l'amidon, n'a eu lieu que dans la partie éclairée : la lumière est nécessaire."
+            ]
+          },
+          "pitfall": "Ne pas croire que la matière organique des plantes vient de la terre. Contre-exemple : un plant cultivé sur une solution nutritive, qui ne contient que de l'eau et des sels minéraux, fabrique de l'amidon dans ses feuilles éclairées : la matière organique est fabriquée par la plante à partir de substances minérales. Ne teste pas non plus une feuille verte non décolorée : la chlorophylle cacherait la couleur de l'eau iodée.",
+          "practice": {
+            "statement": "Tu t'entraînes à lire le test à l'eau iodée et à en conclure sur la photosynthèse.",
+            "questions": [
+              {
+                "content": "Une feuille de piment est décolorée à l'alcool chaud puis plongée dans l'eau iodée : elle devient bleu-noir. Que montre ce test ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : une feuille éclairée. Étape 2 — Appliquer le test : décoloration à l'alcool chaud, puis eau iodée. Étape 3 — Lire : le bleu-noir signale l'amidon. Étape 4 — Conclure : la feuille contient de l'amidon, donc elle a fait de la photosynthèse. Le jaune-brun, lui, signalerait l'absence d'amidon.",
+                "answers": [
+                  {
+                    "content": "La feuille contient de l'amidon",
+                    "correct": true
+                  },
+                  {
+                    "content": "La feuille ne contient pas d'amidon",
+                    "correct": false
+                  },
+                  {
+                    "content": "La feuille contient de la chlorophylle",
+                    "correct": false
+                  },
+                  {
+                    "content": "La feuille contient de l'eau",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quelle couleur l'amidon prend-il ?"
+              },
+              {
+                "content": "L'eau iodée colore l'amidon en bleu-___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : on cherche la couleur de l'amidon. Étape 2 — Appliquer : on utilise l'eau iodée sur la feuille décolorée. Étape 3 — Lire : la couleur obtenue est bleu-noir. Étape 4 — Conclure : l'amidon devient bleu-noir.",
+                "answers": [
+                  {
+                    "content": "noir",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est une couleur foncée."
+              },
+              {
+                "content": "La photosynthèse se fait dans les parties vertes de la plante, à la lumière.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : il faut de la chlorophylle (partie verte) et de la lumière. Étape 2 — Appliquer : les tests le montrent. Étape 3 — Lire : l'amidon n'apparaît que dans les parties vertes éclairées. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quelles deux conditions la photosynthèse exige-t-elle ?"
+              },
+              {
+                "content": "Remets dans l'ordre les étapes du test de l'amidon sur une feuille.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : la feuille a été éclairée, on la prélève. Étape 2 — Appliquer le test : décolorer, rincer, plonger dans l'eau iodée. Étape 3 — Lire la couleur à la fin. La décoloration vient avant l'eau iodée, sinon la chlorophylle cacherait la couleur.",
+                "answers": [
+                  {
+                    "content": "Prélever la feuille éclairée"
+                  },
+                  {
+                    "content": "La décolorer dans l'alcool chaud"
+                  },
+                  {
+                    "content": "La rincer à l'eau"
+                  },
+                  {
+                    "content": "La plonger dans l'eau iodée"
+                  },
+                  {
+                    "content": "Lire la couleur obtenue"
+                  }
+                ],
+                "hint": "On décolore avant de plonger dans l'eau iodée."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire un test à l'eau iodée",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des tests de l'amidon et à la photosynthèse.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles substances une feuille utilise-t-elle pour fabriquer de la matière organique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la feuille reçoit la sève brute par le xylème et l'air par les stomates. Étape 2 — Appliquer : la photosynthèse combine ces substances. Étape 3 — Lire : eau, sels minéraux et dioxyde de carbone sont utilisés. Étape 4 — Conclure : la plante fabrique elle-même sa matière organique ; elle n'absorbe pas de sucres dans le sol.",
+                  "answers": [
+                    {
+                      "content": "L'eau et les sels minéraux de la sève brute, et le dioxyde de carbone de l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement de l'eau et de la terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les sucres absorbés par les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du dioxygène et de l'amidon venus du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par où le dioxyde de carbone de l'air entre-t-il dans la feuille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le dioxyde de carbone est un gaz de l'air. Étape 2 — Appliquer : il traverse l'épiderme de la feuille. Étape 3 — Lire : les ouvertures de la feuille sont les stomates. Étape 4 — Conclure : il entre par les stomates, les poils absorbants étant sur la racine.",
+                  "answers": [
+                    {
+                      "content": "Par les stomates",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par les poils absorbants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par le xylème",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par la coiffe de la racine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bande opaque couvre une partie d'une feuille de piment pendant une journée ensoleillée. Après décoloration et eau iodée, la bande est jaune-brun et le reste est bleu-noir. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la bande n'a pas de lumière, le reste est éclairé. Étape 2 — Appliquer : décoloration puis eau iodée. Étape 3 — Lire : jaune-brun sous la bande (pas d'amidon), bleu-noir ailleurs. Étape 4 — Conclure : sans lumière, pas de photosynthèse donc pas d'amidon.",
+                  "answers": [
+                    {
+                      "content": "La lumière est nécessaire à la fabrication de l'amidon",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lumière détruit l'amidon",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'amidon ne se fabrique que dans l'obscurité",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'amidon vient uniquement du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une feuille panachée a des parties vertes et des parties blanches. Après exposition au soleil, décoloration et eau iodée, les parties vertes sont bleu-noir et les parties blanches jaune-brun. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : toute la feuille est éclairée ; seules les parties vertes ont de la chlorophylle. Étape 2 — Appliquer : décoloration puis eau iodée. Étape 3 — Lire : amidon dans le vert, pas dans le blanc. Étape 4 — Conclure : la chlorophylle est nécessaire.",
+                  "answers": [
+                    {
+                      "content": "La chlorophylle des parties vertes est nécessaire à la photosynthèse",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chlorophylle est inutile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les parties blanches fabriquent plus d'amidon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les parties blanches n'ont pas reçu de lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plante cultivée sur solution nutritive, sans aucune matière organique, ne peut pas fabriquer d'amidon.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la solution ne contient que de l'eau et des sels minéraux. Étape 2 — Appliquer : la plante éclairée fait la photosynthèse avec le dioxyde de carbone de l'air. Étape 3 — Lire : ses feuilles se colorent en bleu-noir. Étape 4 — Conclure : l'affirmation est fausse ; la plante fabrique elle-même sa matière organique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Photosynthèse : conditions et produits",
+              "statement": "Dans cet exercice, tu mélanges conditions, vocabulaire et classement pour décrire la photosynthèse.",
+              "hint": "Le bleu-noir signale l'amidon ; sans lumière, la photosynthèse s'arrête.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles conditions ou substances la photosynthèse exige-t-elle ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : on cherche ce qu'il faut réunir. Étape 2 — Appliquer : les expériences avec bande opaque et feuille panachée montrent lumière et chlorophylle. Étape 3 — Lire : la matière organique est fabriquée à partir de dioxyde de carbone et d'eau. Étape 4 — Conclure : ce sont les trois premières. Le sol ne fournit pas de sucre, et l'obscurité empêche la photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "De la lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la chlorophylle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du dioxyde de carbone et de l'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du sucre apporté par le sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'obscurité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : quatre termes de la fiche. Étape 2 — Appliquer : l'eau iodée sert au test. Étape 3 — Lire : la chlorophylle est verte, les stomates laissent entrer le gaz, le dioxygène est rejeté. Étape 4 — Conclure : les quatre liens sont ceux indiqués.",
+                  "answers": [
+                    {
+                      "content": "Eau iodée",
+                      "match": "Test de l'amidon"
+                    },
+                    {
+                      "content": "Chlorophylle",
+                      "match": "Pigment vert de la feuille"
+                    },
+                    {
+                      "content": "Stomate",
+                      "match": "Entrée du dioxyde de carbone"
+                    },
+                    {
+                      "content": "Dioxygène",
+                      "match": "Gaz rejeté par la photosynthèse"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le jardin de l'école, 10 feuilles de bananier prélevées après une journée ensoleillée sont testées : 9 deviennent bleu-noir. Quel est ce pourcentage ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : 10 feuilles éclairées. Étape 2 — Appliquer : on teste chacune. Étape 3 — Lire : 9 feuilles sur 10 contiennent de l'amidon, soit $9 \\div 10 \\times 100 = 90$ %. Étape 4 — Conclure : 90 % des feuilles ont fait de la photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "%"
+                },
+                {
+                  "content": "La matière fabriquée par les feuilles à partir de substances minérales est de la matière ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : l'amidon et les sucres sont fabriqués par la plante. Étape 2 — Appliquer : ils viennent de l'eau, des sels et du dioxyde de carbone. Étape 3 — Lire : on les appelle matière organique. Étape 4 — Conclure : la matière est organique.",
+                  "answers": [
+                    {
+                      "content": "organique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet des substances.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on part du sol. Étape 2 — Appliquer : les racines absorbent, puis la sève brute monte. Étape 3 — Lire : elle arrive aux feuilles où la photosynthèse se déroule. Étape 4 — Conclure : la matière organique est fabriquée en dernier.",
+                  "answers": [
+                    {
+                      "content": "Les racines absorbent l'eau et les sels minéraux"
+                    },
+                    {
+                      "content": "La sève brute monte dans le xylème"
+                    },
+                    {
+                      "content": "Dans les feuilles éclairées, la photosynthèse a lieu"
+                    },
+                    {
+                      "content": "De la matière organique est fabriquée"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une feuille d'un plant gardé deux jours à l'obscurité, testée à l'eau iodée après décoloration, donne une couleur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : le plant est resté sans lumière. Étape 2 — Appliquer : décoloration puis eau iodée. Étape 3 — Lire : sans photosynthèse, l'amidon a disparu, la couleur est jaune-brun. Étape 4 — Conclure : jaune-brun. Bleu-noir signalerait de l'amidon, et la feuille décolorée n'est plus verte.",
+                  "answers": [
+                    {
+                      "content": "jaune-brun",
+                      "correct": true
+                    },
+                    {
+                      "content": "bleu-noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "verte",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La sève élaborée, sa circulation et la mise en réserve",
+          "remember": "Les feuilles fabriquent de la matière organique. Dissoute dans l'eau, elle forme la **sève élaborée**, riche en sucres. Elle circule dans le **liber**, un tissu conducteur distinct du bois, des feuilles vers tous les organes : racines, fruits, bourgeons. On le montre par l'**incision annulaire** : on enlève un anneau d'écorce jusqu'au bois ; la sève élaborée, arrêtée, s'accumule au-dessus de l'anneau, où un bourrelet se forme, alors que le bois intact laisse monter la sève brute. Une partie de la matière organique est mise en **réserve**, sous forme d'amidon, dans les **tubercules** (igname, pomme de terre) et les graines (maïs, riz) : on la reconnaît à l'eau iodée.",
+          "method": [
+            "Situer l'expérience : l'organe observé et la partie des tissus touchée ou testée.",
+            "Observer le résultat : repérer où la matière s'accumule ou apparaît.",
+            "Relier ce résultat à la circulation de la sève élaborée dans le liber et à son sens.",
+            "Conclure : dire où va la matière organique et à quoi elle sert (croissance ou réserve)."
+          ],
+          "example": {
+            "statement": "Sur une jeune tige d'hévéa de pépinière, on enlève un anneau d'écorce jusqu'au bois. Trois semaines plus tard, un renflement apparaît au-dessus de l'anneau, pas en dessous. Les feuilles au-dessus restent vertes. Que montre cette expérience ?",
+            "steps": [
+              "Situer : l'anneau d'écorce est enlevé jusqu'au bois ; le liber est coupé, le bois est intact.",
+              "Observer : un renflement apparaît au-dessus de l'anneau, pas en dessous ; les feuilles restent vertes.",
+              "Relier : la matière organique, arrêtée par l'anneau, s'accumule au-dessus ; le bois intact laisse monter la sève brute, d'où les feuilles vertes.",
+              "Conclure : la sève élaborée, fabriquée par les feuilles, descend dans le liber vers les autres organes, où elle sert à la croissance ou à la réserve."
+            ]
+          },
+          "pitfall": "Ne pas confondre sève brute et sève élaborée. La sève brute (eau et sels minéraux) monte dans le xylème, des racines vers les feuilles ; la sève élaborée (matière organique) circule dans le liber, des feuilles vers les autres organes. Contre-exemple : dans l'exemple, après l'incision annulaire, les feuilles restent vertes pendant des semaines parce que le bois, intact, continue de conduire la sève brute ; seul le renflement montre l'arrêt de la sève élaborée.",
+          "practice": {
+            "statement": "Tu t'entraînes à lire une incision annulaire et à situer les réserves.",
+            "questions": [
+              {
+                "content": "Sur une branche de jeune hévéa de pépinière, on enlève un anneau d'écorce jusqu'au bois. Trois semaines plus tard, un renflement apparaît au-dessus de l'anneau. Que montre-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : l'anneau enlève le liber, le bois est intact. Étape 2 — Observer : un renflement au-dessus de l'anneau. Étape 3 — Relier : la matière organique descendante est arrêtée. Étape 4 — Conclure : la sève élaborée descend dans le liber. Le bois laisse monter la sève brute, pas elle.",
+                "answers": [
+                  {
+                    "content": "La sève élaborée descend dans le liber et s'accumule au-dessus de l'anneau qui l'arrête",
+                    "correct": true
+                  },
+                  {
+                    "content": "La sève brute monte dans le liber et s'accumule",
+                    "correct": false
+                  },
+                  {
+                    "content": "La sève élaborée monte dans le bois",
+                    "correct": false
+                  },
+                  {
+                    "content": "La sève brute descend dans le liber",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le renflement se forme du côté d'où arrive la sève."
+              },
+              {
+                "content": "La sève élaborée circule dans le liber.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : on cherche le tissu de la sève élaborée. Étape 2 — Observer : l'incision annulaire coupe le liber et provoque un renflement. Étape 3 — Relier : la sève élaborée y circule. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le xylème conduit l'autre sève."
+              },
+              {
+                "content": "La sève riche en matière organique, fabriquée par les feuilles, s'appelle la sève ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : on cherche le nom de la sève des feuilles. Étape 2 — Observer : elle contient les sucres fabriqués. Étape 3 — Relier : elle est « élaborée » par la plante. Étape 4 — Conclure : c'est la sève élaborée.",
+                "answers": [
+                  {
+                    "content": "élaborée",
+                    "correct": true
+                  }
+                ],
+                "hint": "Elle est travaillée par la plante."
+              },
+              {
+                "content": "Relie chaque terme à ce qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer : quatre termes de la fiche. Étape 2 — Observer : le xylème monte, le liber distribue. Étape 3 — Relier : le tubercule stocke de l'amidon que l'eau iodée révèle. Étape 4 — Conclure : les quatre liens sont ceux indiqués.",
+                "answers": [
+                  {
+                    "content": "Sève brute",
+                    "match": "Monte dans le xylème"
+                  },
+                  {
+                    "content": "Sève élaborée",
+                    "match": "Circule dans le liber"
+                  },
+                  {
+                    "content": "Tubercule",
+                    "match": "Organe de réserve"
+                  },
+                  {
+                    "content": "Eau iodée",
+                    "match": "Colore l'amidon en bleu-noir"
+                  }
+                ],
+                "hint": "Un tubercule met de la matière de côté."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Où va la matière organique ?",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à la sève élaborée, à l'incision annulaire et aux réserves.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "D'où vient la matière organique de la sève élaborée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : la matière organique est fabriquée dans les feuilles. Étape 2 — Observer : les feuilles éclairées contiennent de l'amidon. Étape 3 — Relier : cette matière est dissoute dans la sève élaborée. Étape 4 — Conclure : elle vient de la photosynthèse. Le sol ne fournit que de l'eau et des sels minéraux.",
+                  "answers": [
+                    {
+                      "content": "De la photosynthèse des feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des poils absorbants qui l'absorbent dans le sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du bois qui la fabrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'éosine absorbée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vers où circule principalement la sève élaborée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : la sève élaborée part des feuilles. Étape 2 — Observer : l'incision annulaire gonfle au-dessus de l'anneau. Étape 3 — Relier : la matière descend dans le liber. Étape 4 — Conclure : elle est distribuée de la feuille vers les autres organes.",
+                  "answers": [
+                    {
+                      "content": "Des feuilles vers les racines, les fruits, les tubercules et les autres organes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des racines vers les feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement vers les fleurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle reste dans les feuilles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché, une tranche d'igname devient bleu-noir dans l'eau iodée. Que contient-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : l'igname est un tubercule, organe de réserve. Étape 2 — Observer : la tranche devient bleu-noir. Étape 3 — Relier : le bleu-noir signale l'amidon, formé dans le tubercule à partir des sucres apportés par la sève élaborée. Étape 4 — Conclure : le tubercule contient une réserve d'amidon.",
+                  "answers": [
+                    {
+                      "content": "Une réserve d'amidon, formée à partir des sucres de la sève élaborée",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la chlorophylle",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la sève brute seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'éosine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après l'incision annulaire, les feuilles au-dessus de l'anneau restent vertes plusieurs semaines. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : seule l'écorce, donc le liber, est enlevée. Étape 2 — Observer : les feuilles restent vertes. Étape 3 — Relier : le xylème intact conduit la sève brute. Étape 4 — Conclure : les feuilles reçoivent toujours de l'eau et des sels.",
+                  "answers": [
+                    {
+                      "content": "Le bois n'est pas touché : la sève brute continue de monter par le xylème",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sève élaborée remonte par l'anneau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les feuilles n'ont plus besoin d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'anneau fabrique de la sève brute",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La sève brute et la sève élaborée circulent dans les mêmes vaisseaux et dans le même sens.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : deux sèves, deux tissus. Étape 2 — Observer : l'éosine colore le xylème, la matière organique s'accumule au-dessus de l'anneau. Étape 3 — Relier : la sève brute monte dans le xylème, la sève élaborée circule dans le liber. Étape 4 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Sève élaborée et réserves",
+              "statement": "Dans cet exercice, tu mélanges vocabulaire, calcul et classement pour décrire le devenir de la matière organique.",
+              "hint": "Pense au trajet : sol, xylème, feuilles, liber, organes de réserve.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles propositions sont exactes pour la sève élaborée ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer : la sève élaborée vient des feuilles. Étape 2 — Observer : la matière organique s'accumule au-dessus d'un anneau. Étape 3 — Relier : elle circule dans le liber. Étape 4 — Conclure : les deux bonnes réponses sont les sucres et le liber. Le xylème, l'eau et les sels minéraux et l'éosine concernent la sève brute.",
+                  "answers": [
+                    {
+                      "content": "Elle contient des sucres fabriqués dans les feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle circule dans le liber",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle monte seulement dans le xylème",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est formée uniquement d'eau et de sels minéraux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est colorée en rouge par l'éosine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tubercule d'igname passe de 400 g à 2 800 g au cours de la croissance. Quel est son gain de masse, en grammes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Situer : l'organe est un tubercule de réserve. Étape 2 — Observer : la masse passe de 400 g à 2 800 g. Étape 3 — Relier : le gain vient de l'amidon mis en réserve à partir des sucres apportés par la sève élaborée, soit $2800 - 400 = 2400$. Étape 4 — Conclure : le tubercule a gagné 2 400 g.",
+                  "answers": [
+                    {
+                      "content": "2400",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "g"
+                },
+                {
+                  "content": "Relie chaque organe à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Situer : quatre éléments de la plante. Étape 2 — Observer : la feuille fait la photosynthèse. Étape 3 — Relier : le liber distribue, le tubercule stocke, le xylème fait monter la sève brute. Étape 4 — Conclure : les quatre liens sont ceux indiqués.",
+                  "answers": [
+                    {
+                      "content": "Feuille",
+                      "match": "Fabrique la matière organique"
+                    },
+                    {
+                      "content": "Liber",
+                      "match": "Distribue la sève élaborée"
+                    },
+                    {
+                      "content": "Tubercule",
+                      "match": "Stocke des réserves"
+                    },
+                    {
+                      "content": "Xylème",
+                      "match": "Conduit la sève brute"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le devenir des substances absorbées.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : le trajet part du sol. Étape 2 — Observer : la sève brute monte dans le xylème. Étape 3 — Relier : les feuilles fabriquent la matière organique, le liber la distribue. Étape 4 — Conclure : le stockage dans les tubercules vient en dernier.",
+                  "answers": [
+                    {
+                      "content": "Les racines absorbent l'eau et les sels minéraux"
+                    },
+                    {
+                      "content": "Le xylème conduit la sève brute jusqu'aux feuilles"
+                    },
+                    {
+                      "content": "Les feuilles fabriquent la matière organique"
+                    },
+                    {
+                      "content": "Le liber distribue la sève élaborée"
+                    },
+                    {
+                      "content": "Les tubercules stockent de l'amidon"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tubercule d'igname est un organe de ___ de la plante.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Situer : l'igname est un tubercule. Étape 2 — Observer : il contient de l'amidon. Étape 3 — Relier : cet amidon est formé à partir des sucres apportés par la sève élaborée. Étape 4 — Conclure : c'est un organe de réserve ; il n'a pas de chlorophylle exposée pour faire la photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "réserve",
+                      "correct": true
+                    },
+                    {
+                      "content": "photosynthèse",
+                      "correct": false
+                    },
+                    {
+                      "content": "transpiration",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une incision qui enlève un anneau d'écorce s'appelle une incision ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer : on enlève un anneau d'écorce. Étape 2 — Observer : un renflement se forme. Étape 3 — Relier : la sève élaborée est arrêtée. Étape 4 — Conclure : cette technique s'appelle l'incision annulaire.",
+                  "answers": [
+                    {
+                      "content": "annulaire",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Deux rameaux de manguier au potomètre",
+          "statement": "Dans le verger de l'école, deux rameaux de manguier de même taille sont placés dans un potomètre, au soleil, pendant 6 heures. Le rameau A garde ses feuilles ; sur le rameau B, toutes les feuilles ont été coupées. Les volumes d'eau absorbés sont donnés par la figure (valeurs d'exercice).",
+          "hint": "Compare A et B : un seul facteur change.",
+          "exercise_type": "fixation",
+          "figure": "volume-potometre-feuille",
+          "questions": [
+            {
+              "content": "Quel volume d'eau le rameau feuillé absorbe-t-il en moyenne par heure, en millilitres ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : le rameau feuillé absorbe 18 mL en 6 heures. Étape 2 — Calculer : $18 \\div 6 = 3$. Étape 3 — Conclure : il absorbe 3 mL par heure.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mL/h"
+            },
+            {
+              "content": "Quel est le rôle du rameau sans feuilles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : deux rameaux de même taille. Étape 2 — Comparer : A, intact, est le témoin ; B, dont on a coupé les feuilles, est le lot d'essai ; la seule différence est la présence des feuilles. Étape 3 — Conclure : B est le lot d'essai que l'on compare au témoin A. Sans témoin, on ne saurait pas si l'absorption vient des feuilles.",
+              "answers": [
+                {
+                  "content": "Servir de lot d'essai comparé au rameau A, le témoin : la seule différence avec le rameau A est l'absence de feuilles",
+                  "correct": true
+                },
+                {
+                  "content": "Absorber plus d'eau que le rameau A",
+                  "correct": false
+                },
+                {
+                  "content": "Fabriquer de l'amidon",
+                  "correct": false
+                },
+                {
+                  "content": "Montrer la poussée racinaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que conclure de ces résultats ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : l'organe étudié est la feuille. Étape 2 — Comparer : A absorbe 18 mL contre 2 mL pour B. Étape 3 — Interpréter : la perte d'eau des feuilles appelle l'eau vers le haut. Étape 4 — Conclure : c'est l'aspiration foliaire. Ici il n'y a pas de racines, la poussée racinaire est donc exclue.",
+              "answers": [
+                {
+                  "content": "Les feuilles, par leur transpiration, aspirent la sève brute : c'est l'aspiration foliaire",
+                  "correct": true
+                },
+                {
+                  "content": "Les racines poussent l'eau avec une grande force",
+                  "correct": false
+                },
+                {
+                  "content": "Les feuilles absorbent l'eau du sol",
+                  "correct": false
+                },
+                {
+                  "content": "Le rameau sans feuilles absorbe autant que l'autre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels changements augmenteraient l'absorption du rameau feuillé ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : l'absorption suit la transpiration. Étape 2 — Comparer : le vent et l'air chaud et sec augmentent la perte de vapeur. Étape 3 — Conclure : ce sont les deux bonnes réponses. L'air saturé et l'obscurité humide freinent la transpiration.",
+              "answers": [
+                {
+                  "content": "Un vent plus fort",
+                  "correct": true
+                },
+                {
+                  "content": "Un air plus chaud et plus sec",
+                  "correct": true
+                },
+                {
+                  "content": "Un air saturé de vapeur d'eau",
+                  "correct": false
+                },
+                {
+                  "content": "L'obscurité totale et un air humide",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La vapeur d'eau quitte les feuilles par de petites ouvertures appelées ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : on cherche l'organe de sortie de la vapeur. Étape 2 — Conclure : ce sont les stomates de l'épiderme des feuilles.",
+              "answers": [
+                {
+                  "content": "stomates",
+                  "correct": true
+                },
+                {
+                  "content": "stomate",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les pleurs d'un plant de gombo",
+          "statement": "Au jardin de l'école, des élèves coupent au ras du sol les tiges de plants de gombo bien arrosés et recueillent la sève qui sort de la section pendant 2 heures, à quatre moments de la journée. Les volumes sont donnés par la figure (valeurs d'exercice).",
+          "hint": "Pas de feuilles au-dessus de la coupe : quelle force reste-t-il ?",
+          "exercise_type": "fixation",
+          "figure": "exsudation-selon-moment",
+          "questions": [
+            {
+              "content": "Quel volume total de sève a été recueilli sur les quatre moments, en millilitres ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. Étape 1 — Lire la figure : 3, 1, 2 et 6 mL. Étape 2 — Calculer : $3 + 1 + 2 + 6 = 12$. Étape 3 — Conclure : 12 mL.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mL"
+            },
+            {
+              "content": "À quel moment le volume recueilli est-il le plus grand ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Lire la figure : matin 3, midi 1, soir 2, nuit 6. Étape 2 — Comparer : 6 est la plus grande valeur. Étape 3 — Conclure : c'est la nuit.",
+              "answers": [
+                {
+                  "content": "La nuit",
+                  "correct": true
+                },
+                {
+                  "content": "Le matin",
+                  "correct": false
+                },
+                {
+                  "content": "À midi",
+                  "correct": false
+                },
+                {
+                  "content": "Le soir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel phénomène cette expérience met-elle en évidence ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : la tige est coupée, il n'y a plus de feuilles au-dessus de la section. Étape 2 — Interpréter : la sève sort sans feuilles, donc elle est poussée par les racines. Étape 3 — Conclure : c'est la poussée racinaire (exsudation).",
+              "answers": [
+                {
+                  "content": "La poussée racinaire, qui pousse la sève brute vers le haut",
+                  "correct": true
+                },
+                {
+                  "content": "L'aspiration foliaire",
+                  "correct": false
+                },
+                {
+                  "content": "La photosynthèse",
+                  "correct": false
+                },
+                {
+                  "content": "La mise en réserve",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La poussée racinaire suffit à elle seule à expliquer la montée de la sève brute dans un grand arbre.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : la poussée racinaire est une force faible. Étape 2 — Comparer : l'aspiration foliaire, due à la transpiration, est la force principale. Étape 3 — Conclure : l'affirmation est fausse. Les volumes recueillis, de 1 à 6 mL en 2 heures, restent d'ailleurs modestes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle expérience montrerait le trajet de cette sève dans la tige ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : on cherche le trajet de la sève brute. Étape 2 — Comparer : l'éosine colore le trajet ; l'eau iodée détecte l'amidon, le papier cobalt détecte l'eau qui sort, l'anneau d'écorce concerne la sève élaborée. Étape 3 — Conclure : l'expérience à l'éosine convient.",
+              "answers": [
+                {
+                  "content": "Plonger la base d'un plant dans l'eau éosinée et observer une coupe : les vaisseaux du bois, le xylème, seront rouges",
+                  "correct": true
+                },
+                {
+                  "content": "Plonger une feuille dans l'eau iodée",
+                  "correct": false
+                },
+                {
+                  "content": "Poser un papier au chlorure de cobalt sur la tige",
+                  "correct": false
+                },
+                {
+                  "content": "Enlever un anneau d'écorce",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Du feuillage au marché d'ignames",
+          "statement": "Un agriculteur suit la croissance d'un tubercule d'igname. La masse du tubercule est donnée par la figure (valeurs d'exercice). À la récolte, au marché, une tranche du tubercule devient bleu-noir dans l'eau iodée, alors que la tige ne contient plus d'amidon visible. Les feuilles, elles, en contenaient en pleine croissance.",
+          "hint": "Suis la matière organique : feuilles, liber, tubercule.",
+          "exercise_type": "evaluation",
+          "figure": "masse-du-tubercule",
+          "questions": [
+            {
+              "content": "Quel est le gain de masse du tubercule entre le mois 2 et le mois 10, en grammes ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. Étape 1 — Lire la figure : 300 g au mois 2, 2 800 g au mois 10. Étape 2 — Calculer : $2800 - 300 = 2500$. Étape 3 — Conclure : 2 500 g.",
+              "answers": [
+                {
+                  "content": "2500",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "g"
+            },
+            {
+              "content": "Entre quels mois le tubercule grossit-il le plus ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Lire la figure : gains de 300, 900, 1 000 et 300 g. Étape 2 — Comparer : 1 000 g est le plus grand. Étape 3 — Conclure : entre les mois 6 et 8.",
+              "answers": [
+                {
+                  "content": "Entre les mois 6 et 8",
+                  "correct": true
+                },
+                {
+                  "content": "Entre les mois 2 et 4",
+                  "correct": false
+                },
+                {
+                  "content": "Entre les mois 4 et 6",
+                  "correct": false
+                },
+                {
+                  "content": "Entre les mois 8 et 10",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'où vient l'amidon du tubercule ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Situer : l'amidon est de la matière organique. Étape 2 — Relier : elle est fabriquée dans les feuilles éclairées à partir de l'eau, des sels minéraux et du dioxyde de carbone. Étape 3 — Conclure : la sève élaborée la transporte sous forme de sucres, par le liber, jusqu'au tubercule, où elle est mise en réserve sous forme d'amidon. La sève brute ne contient que de l'eau et des sels minéraux.",
+              "answers": [
+                {
+                  "content": "Il est formé à partir des sucres fabriqués par photosynthèse dans les feuilles et amenés par la sève élaborée dans le liber",
+                  "correct": true
+                },
+                {
+                  "content": "Il est absorbé tel quel par les poils absorbants",
+                  "correct": false
+                },
+                {
+                  "content": "Il est fabriqué par le tubercule à partir de la terre",
+                  "correct": false
+                },
+                {
+                  "content": "Il monte avec la sève brute dans le xylème",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels tests ou observations permettent de repérer l'amidon d'une plante ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : le test de l'amidon est l'eau iodée. Étape 2 — Appliquer : sur la tranche de tubercule ou sur la feuille décolorée. Étape 3 — Lire : le bleu-noir indique l'amidon. Le papier cobalt détecte l'eau et l'éosine colore le trajet de la sève brute.",
+              "answers": [
+                {
+                  "content": "L'eau iodée sur une tranche de tubercule",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau iodée sur une feuille décolorée à l'alcool chaud",
+                  "correct": true
+                },
+                {
+                  "content": "Le bleu-noir obtenu avec l'eau iodée",
+                  "correct": true
+                },
+                {
+                  "content": "Le papier au chlorure de cobalt devenu rose",
+                  "correct": false
+                },
+                {
+                  "content": "L'éosine qui rougit le bois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Comment expliquer que la tige ne contienne plus d'amidon visible alors que le tubercule en est plein ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Situer : la tige est un lieu de passage. Étape 2 — Observer : le tubercule est riche en amidon. Étape 3 — Relier : la sève élaborée y a apporté la matière organique sous forme de sucres. Étape 4 — Conclure : ces sucres sont mis en réserve sous forme d'amidon dans le tubercule.",
+              "answers": [
+                {
+                  "content": "Les sucres ont été transportés par la sève élaborée puis mis en réserve sous forme d'amidon dans le tubercule",
+                  "correct": true
+                },
+                {
+                  "content": "L'amidon est détruit dans la tige",
+                  "correct": false
+                },
+                {
+                  "content": "La tige fabrique de l'eau iodée",
+                  "correct": false
+                },
+                {
+                  "content": "L'amidon reste toujours dans les feuilles",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'hévéa de la pépinière : un bilan complet",
+          "statement": "Dans la pépinière d'hévéas, un technicien enlève un anneau d'écorce jusqu'au bois sur la tige de jeunes plants A, et ne touche pas aux plants B. Trois semaines plus tard, les plants A ont un renflement au-dessus de l'anneau, leurs feuilles sont vertes ; les racines sont encore vivantes mais sans amidon, alors que celles des plants B en contiennent. Le schéma donne le trajet des substances.",
+          "hint": "Deux sèves, deux tissus : demande-toi laquelle l'anneau arrête.",
+          "exercise_type": "evaluation",
+          "figure": "circuit-seves",
+          "questions": [
+            {
+              "content": "Relie chaque tissu ou organe à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. Étape 1 — Situer chaque organe. Étape 2 — Relier : le xylème fait monter la sève brute ; le liber distribue la sève élaborée ; les racines absorbent ; les feuilles font la photosynthèse. Étape 3 — Conclure : les quatre liens sont ceux indiqués.",
+              "answers": [
+                {
+                  "content": "Xylème",
+                  "match": "Sève brute vers le haut"
+                },
+                {
+                  "content": "Liber",
+                  "match": "Sève élaborée depuis les feuilles"
+                },
+                {
+                  "content": "Racines",
+                  "match": "Absorbent l'eau et les sels minéraux"
+                },
+                {
+                  "content": "Feuilles",
+                  "match": "Fabriquent la matière organique"
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet d'une molécule de sucre fabriquée, de sa fabrication à sa mise en réserve.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. Étape 1 — Situer : la matière organique naît dans la feuille. Étape 2 — Relier : elle passe dans la sève élaborée, circule dans le liber. Étape 3 — Conclure : elle arrive dans l'organe de réserve.",
+              "answers": [
+                {
+                  "content": "Photosynthèse dans une feuille éclairée"
+                },
+                {
+                  "content": "Passage dans la sève élaborée"
+                },
+                {
+                  "content": "Circulation dans le liber"
+                },
+                {
+                  "content": "Arrivée dans un organe de réserve"
+                }
+              ]
+            },
+            {
+              "content": "Quelles observations montrent que le liber a été coupé et que le bois est intact ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode détaillée. Étape 1 — Situer : l'écorce est enlevée, pas le bois. Étape 2 — Observer : renflement en haut, feuilles vertes, racines de A privées d'amidon. Étape 3 — Relier : la sève élaborée est arrêtée, la sève brute continue. Étape 4 — Conclure : les trois premières. Les racines de B ont de l'amidon, et le renflement est au-dessus.",
+              "answers": [
+                {
+                  "content": "Un renflement apparaît au-dessus de l'anneau",
+                  "correct": true
+                },
+                {
+                  "content": "Les feuilles restent vertes pendant des semaines",
+                  "correct": true
+                },
+                {
+                  "content": "Les racines de A ne contiennent plus d'amidon",
+                  "correct": true
+                },
+                {
+                  "content": "Les racines de B n'ont pas d'amidon",
+                  "correct": false
+                },
+                {
+                  "content": "Le renflement apparaît sous l'anneau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si les racines de A perdent toute leur réserve d'amidon pendant des mois, que va-t-il se passer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Situer : les racines ne fabriquent pas de matière organique, elles la reçoivent. Étape 2 — Relier : l'anneau arrête la sève élaborée. Étape 3 — Conclure : privées de matière organique, elles s'affaiblissent et le plant dépérit à la longue. Le bois ne conduit pas la sève élaborée.",
+              "answers": [
+                {
+                  "content": "Le plant dépérira, faute de matière organique qui arrive aux racines",
+                  "correct": true
+                },
+                {
+                  "content": "Il vivra normalement car le bois conduit la sève élaborée",
+                  "correct": false
+                },
+                {
+                  "content": "Les racines fabriqueront l'amidon par photosynthèse",
+                  "correct": false
+                },
+                {
+                  "content": "Les feuilles s'arrêteront immédiatement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes pourquoi les feuilles de A restent vertes alors que les racines de A manquent d'amidon.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dire que l'anneau coupe le liber et arrête la sève élaborée",
+                "Dire que le xylème intact conduit encore la sève brute",
+                "Relier les deux faits aux feuilles vertes et aux racines sans amidon"
+              ],
+              "explanation": "Corrigé modèle : l'anneau d'écorce enlève le liber, qui conduit la sève élaborée des feuilles vers les racines. La sève élaborée est donc arrêtée et s'accumule au-dessus de l'anneau, d'où le renflement. En revanche le bois, donc le xylème, est intact : la sève brute (eau et sels minéraux) continue de monter jusqu'aux feuilles, qui restent vertes et font la photosynthèse. Les racines, privées de matière organique, n'ont plus d'amidon. Barème sur 3 : liber coupé et sève élaborée arrêtée (1) ; xylème intact et sève brute qui monte (1) ; conclusion reliant les deux observations (1).",
+              "answers": [],
+              "starter": "L'anneau enlève le liber, donc…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Sève brute et xylème, transpiration et stomates, photosynthèse et test de l'amidon, sève élaborée et réserves.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au jardin de l'école, un professeur plonge la base d'une tige de balsamine dans de l'eau éosinée pendant trois heures, puis montre aux élèves une coupe transversale de la tige.",
+              "hint": "Le colorant rouge suit le trajet de la sève brute.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que contient la sève brute ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la sève brute vient des racines. Étape 2 — Relier : les racines absorbent l'eau et les sels minéraux. Étape 3 — Conclure : la sève brute contient de l'eau et des sels minéraux dissous. Les sucres sont dans la sève élaborée.",
+                  "answers": [
+                    {
+                      "content": "De l'eau et des sels minéraux dissous",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des sucres fabriqués par les feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement du dioxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'amidon en grains",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle partie de la coupe est rouge ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer la coupe : le colorant a suivi la sève brute. Étape 2 — Relier : elle passe dans les vaisseaux du bois. Étape 3 — Conclure : seuls ces vaisseaux sont rouges ; l'écorce et la moelle restent incolores.",
+                  "answers": [
+                    {
+                      "content": "Les petits vaisseaux du bois",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toute la tige",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'écorce",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moelle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vaisseaux du bois forment le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : le tissu conducteur du bois. Étape 2 — Conclure : il s'appelle le xylème.",
+                  "answers": [
+                    {
+                      "content": "xylème",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La sève brute descend des feuilles vers les racines dans le xylème.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : le colorant, placé à la base, monte vers les feuilles. Étape 2 — Conclure : la sève brute monte des racines vers les feuilles ; l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le colorant monte de 12 cm en 4 heures. Quelle est sa vitesse, en centimètres par heure ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : 12 cm en 4 heures. Étape 2 — Calculer : $12 \\div 4 = 3$. Étape 3 — Conclure : 3 cm par heure.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "cm/h"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève de seconde veut montrer que les feuilles d'un plant de bananier rejettent de l'eau. Il utilise un sac plastique, un papier au chlorure de cobalt et un potomètre.",
+              "hint": "Pense à l'eau qui sort des feuilles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que prouve la buée apparue dans le sac plastique fermé autour d'un rameau feuillé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : une feuille dans un sac fermé. Étape 2 — Relier : l'eau qui se condense vient de la feuille. Étape 3 — Conclure : c'est la transpiration.",
+                  "answers": [
+                    {
+                      "content": "Les feuilles rejettent de la vapeur d'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sac fabrique de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines ont rejeté de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "La feuille a absorbé de l'eau du sac",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le papier au chlorure de cobalt est rose quand il est sec.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le papier est bleu sec. Étape 2 — Conclure : il devient rose au contact de l'eau ; l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La perte d'eau des feuilles par évaporation s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : l'eau quitte les feuilles sous forme de vapeur. Étape 2 — Conclure : c'est la transpiration.",
+                  "answers": [
+                    {
+                      "content": "transpiration",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les facteurs qui augmentent la transpiration ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on cherche ce qui accélère la perte de vapeur. Étape 2 — Relier : vent et chaleur l'accélèrent. Étape 3 — Conclure : ce sont les bonnes réponses ; un air humide la freine.",
+                  "answers": [
+                    {
+                      "content": "Le vent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une forte chaleur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un air saturé de vapeur d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'obscurité et un air froid et humide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle force est la force principale de la montée de la sève brute ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : deux forces existent. Étape 2 — Comparer : la poussée racinaire est faible. Étape 3 — Conclure : l'aspiration foliaire, due à la transpiration, est la principale.",
+                  "answers": [
+                    {
+                      "content": "L'aspiration foliaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "La poussée racinaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pesanteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "La photosynthèse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le club de SVT du lycée teste des feuilles d'un plant de piment après une journée ensoleillée : décoloration à l'alcool chaud, puis eau iodée.",
+              "hint": "L'amidon est bleu-noir avec l'eau iodée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que prouve la couleur bleu-noir obtenue ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Appliquer le test : décoloration puis eau iodée. Étape 2 — Lire : le bleu-noir. Étape 3 — Conclure : la feuille contient de l'amidon.",
+                  "answers": [
+                    {
+                      "content": "La feuille contient de l'amidon",
+                      "correct": true
+                    },
+                    {
+                      "content": "La feuille contient de la sève brute",
+                      "correct": false
+                    },
+                    {
+                      "content": "La feuille est morte",
+                      "correct": false
+                    },
+                    {
+                      "content": "La feuille ne contient pas d'amidon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles substances sont utilisées par la photosynthèse ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : la feuille reçoit la sève brute et l'air. Étape 2 — Conclure : eau, sels minéraux et dioxyde de carbone sont les trois substances utilisées.",
+                  "answers": [
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sels minéraux de la sève brute",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dioxyde de carbone de l'air",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'amidon du sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxygène du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La photosynthèse se fait à l'obscurité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier les conditions : lumière et chlorophylle. Étape 2 — Conclure : sans lumière il n'y a pas de photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gaz rejeté par la photosynthèse est le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la feuille absorbe du dioxyde de carbone. Étape 2 — Conclure : elle rejette du dioxygène.",
+                  "answers": [
+                    {
+                      "content": "dioxygène",
+                      "correct": true
+                    },
+                    {
+                      "content": "dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "diazote",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du test de l'amidon.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Prélever. Étape 2 — Décolorer. Étape 3 — Plonger dans l'eau iodée. Étape 4 — Lire la couleur.",
+                  "answers": [
+                    {
+                      "content": "Prélever la feuille"
+                    },
+                    {
+                      "content": "La décolorer à l'alcool chaud"
+                    },
+                    {
+                      "content": "La plonger dans l'eau iodée"
+                    },
+                    {
+                      "content": "Lire la couleur"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au marché de tubercules, une vendeuse présente des ignames. Un élève teste une tranche à l'eau iodée : elle devient bleu-noir. Il apprend que les feuilles de la plante ont fabriqué cette matière.",
+              "hint": "Pense au trajet : feuille, liber, tubercule.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Par quel tissu la matière organique arrive-t-elle au tubercule ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : la matière organique est fabriquée dans les feuilles. Étape 2 — Relier : la sève élaborée circule dans le liber. Étape 3 — Conclure : elle arrive par le liber.",
+                  "answers": [
+                    {
+                      "content": "Le liber",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le xylème",
+                      "correct": false
+                    },
+                    {
+                      "content": "La coiffe",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'épiderme de la racine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le tubercule d'igname est un organe de réserve.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : la tranche contient de l'amidon. Étape 2 — Conclure : le tubercule met en réserve cet amidon ; l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à ce qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Situer : deux sèves. Étape 2 — Relier : la sève brute monte dans le xylème, la sève élaborée circule dans le liber. Étape 3 — Conclure : le tubercule stocke l'amidon ; les trois liens sont ceux indiqués.",
+                  "answers": [
+                    {
+                      "content": "Sève brute",
+                      "match": "Xylème"
+                    },
+                    {
+                      "content": "Sève élaborée",
+                      "match": "Liber"
+                    },
+                    {
+                      "content": "Tubercule",
+                      "match": "Réserve d'amidon"
+                    }
+                  ]
+                },
+                {
+                  "content": "Que contient la sève élaborée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : elle vient des feuilles. Étape 2 — Relier : les feuilles fabriquent des sucres. Étape 3 — Conclure : elle contient de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "De la matière organique, surtout des sucres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'eau et des sels minéraux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du dioxyde de carbone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une igname est un ___ qui stocke de l'amidon.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer : organe de réserve souterrain. Étape 2 — Conclure : c'est un tubercule.",
+                  "answers": [
+                    {
+                      "content": "tubercule",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Au jardin, à la plantation et au marché",
+          "notions": "Transpiration d'un manguier, incision annulaire sur un hévéa, tubercule d'igname, photosynthèse au jardin.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au verger, un agriculteur compare la perte d'eau d'un même rameau feuillé de manguier, pesé avant et après 3 heures, dans quatre conditions. Les résultats sont donnés par la figure (valeurs d'exercice).",
+              "hint": "Lis chaque barre de la figure.",
+              "exercise_type": "evaluation",
+              "figure": "transpiration-selon-conditions",
+              "questions": [
+                {
+                  "content": "Quelle masse d'eau le rameau perd-il en 3 heures en plein soleil avec du vent, en grammes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire la figure : plein soleil et vent. Étape 2 — Repérer la barre : 14 g. Étape 3 — Conclure : 14 g.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "g"
+                },
+                {
+                  "content": "Dans quelle condition la transpiration est-elle la plus faible ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 4, 9, 14 et 1 g. Étape 2 — Comparer : 1 g est la plus petite valeur. Étape 3 — Conclure : la nuit, air humide.",
+                  "answers": [
+                    {
+                      "content": "La nuit, dans un air humide",
+                      "correct": true
+                    },
+                    {
+                      "content": "À l'ombre, air calme",
+                      "correct": false
+                    },
+                    {
+                      "content": "En plein soleil, air calme",
+                      "correct": false
+                    },
+                    {
+                      "content": "En plein soleil, avec du vent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'effet du vent, en comparant plein soleil sans vent et plein soleil avec vent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 9 g sans vent, 14 g avec vent. Étape 2 — Comparer : 14 est plus grand que 9. Étape 3 — Conclure : le vent augmente la transpiration.",
+                  "answers": [
+                    {
+                      "content": "Il augmente la transpiration",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il la diminue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne la change pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il arrête la photosynthèse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par combien de grammes la perte en plein soleil avec vent dépasse-t-elle la perte à l'ombre en air calme ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 14 g et 4 g. Étape 2 — Calculer : $14 - 4 = 10$. Étape 3 — Conclure : 10 g de plus.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "g"
+                },
+                {
+                  "content": "La transpiration est une perte d'eau sous forme de vapeur par les stomates des feuilles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : les feuilles rejettent de l'eau. Étape 2 — Conclure : c'est de la vapeur qui sort par les stomates ; l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la pépinière d'hévéas, un technicien enlève un anneau d'écorce jusqu'au bois sur une tige de jeune hévéa. Trois semaines plus tard, il observe un renflement au-dessus de l'anneau ; les feuilles sont toujours vertes.",
+              "hint": "Qu'est-ce qui est coupé : le bois ou le liber ?",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que montre le renflement au-dessus de l'anneau ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : l'écorce, donc le liber, est enlevée. Étape 2 — Observer : un renflement en haut. Étape 3 — Relier : la sève élaborée descendante est arrêtée. Étape 4 — Conclure : elle s'accumule au-dessus.",
+                  "answers": [
+                    {
+                      "content": "La sève élaborée, arrêtée, s'accumule au-dessus de l'anneau",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sève brute s'y accumule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le bois y fabrique de l'amidon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines y ont poussé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les feuilles restent-elles vertes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le bois est intact. Étape 2 — Relier : le xylème conduit la sève brute. Étape 3 — Conclure : les feuilles reçoivent eau et sels.",
+                  "answers": [
+                    {
+                      "content": "Le bois intact conduit toujours la sève brute",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sève élaborée remonte dans l'anneau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les feuilles n'ont plus besoin d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les feuilles absorbent l'eau de l'air",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Enlever un anneau d'écorce s'appelle une incision ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer : on enlève un anneau. Étape 2 — Conclure : c'est une incision annulaire.",
+                  "answers": [
+                    {
+                      "content": "annulaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les racines situées sous l'anneau continuent de recevoir la même quantité de matière organique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : le liber est coupé. Étape 2 — Relier : la sève élaborée est arrêtée au-dessus. Étape 3 — Conclure : les racines en reçoivent beaucoup moins ; l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer : deux sèves, deux tissus. Étape 2 — Conclure : le liber conduit la sève élaborée, le xylème la sève brute.",
+                  "answers": [
+                    {
+                      "content": "Le liber conduit la sève élaborée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le xylème conduit la sève brute",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le liber conduit la sève brute",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le xylème conduit la matière organique fabriquée par les feuilles",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au marché, des ignames de différentes tailles sont vendues. La masse d'un tubercule au cours de la croissance est donnée par la figure (valeurs d'exercice).",
+              "hint": "Le gain de masse est la différence entre deux valeurs lues.",
+              "exercise_type": "evaluation",
+              "figure": "masse-du-tubercule",
+              "questions": [
+                {
+                  "content": "Quelle est la masse du tubercule au mois 8, en grammes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire la figure. Étape 2 — Repérer le mois 8 : 2 500 g. Étape 3 — Conclure : 2 500 g.",
+                  "answers": [
+                    {
+                      "content": "2500",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "g"
+                },
+                {
+                  "content": "De combien de grammes la masse augmente-t-elle entre les mois 4 et 8 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 600 g au mois 4, 2 500 g au mois 8. Étape 2 — Calculer : $2500 - 600 = 1900$. Étape 3 — Conclure : 1 900 g.",
+                  "answers": [
+                    {
+                      "content": "1900",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "g"
+                },
+                {
+                  "content": "Que représente cette augmentation de masse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le tubercule est un organe de réserve. Étape 2 — Observer : sa masse augmente. Étape 3 — Conclure : il stocke de la matière organique.",
+                  "answers": [
+                    {
+                      "content": "Une mise en réserve de matière organique, surtout de l'amidon",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une absorption de sève brute seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une perte d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une production de chlorophylle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'amidon du tubercule est fabriqué dans le tubercule à partir de la terre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : l'amidon est une matière organique. Étape 2 — Relier : elle est fabriquée dans les feuilles, amenée sous forme de sucres par la sève élaborée, puis stockée en amidon dans le tubercule ; elle ne vient pas de la terre. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau iodée colore en bleu-noir l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : l'eau iodée est le test d'une substance. Étape 2 — Conclure : c'est l'amidon.",
+                  "answers": [
+                    {
+                      "content": "amidon",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans la serre du jardin, un élève place un plant de piment dans le noir pendant deux jours, puis le sort au soleil une journée entière. Il teste une feuille avant l'exposition et une autre après, par décoloration et eau iodée.",
+              "hint": "Sans lumière, la photosynthèse s'arrête.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la couleur de la feuille testée avant l'exposition au soleil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : deux jours sans lumière. Étape 2 — Appliquer : décoloration et eau iodée. Étape 3 — Lire : sans photosynthèse il n'y a plus d'amidon. Étape 4 — Conclure : jaune-brun.",
+                  "answers": [
+                    {
+                      "content": "Jaune-brun",
+                      "correct": true
+                    },
+                    {
+                      "content": "Bleu-noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rouge",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la couleur de la feuille testée après une journée au soleil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la feuille a reçu de la lumière. Étape 2 — Appliquer le test. Étape 3 — Lire : la photosynthèse a fabriqué de l'amidon. Étape 4 — Conclure : bleu-noir.",
+                  "answers": [
+                    {
+                      "content": "Bleu-noir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jaune-brun",
+                      "correct": false
+                    },
+                    {
+                      "content": "Blanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conditions sont nécessaires à la photosynthèse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier les conditions. Étape 2 — Conclure : lumière et chlorophylle sont nécessaires.",
+                  "answers": [
+                    {
+                      "content": "La lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chlorophylle",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'obscurité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un sol riche en sucre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier trois termes. Étape 2 — Relier chacun à sa définition. Étape 3 — Conclure : les trois liens sont ceux indiqués.",
+                  "answers": [
+                    {
+                      "content": "Photosynthèse",
+                      "match": "Fabrication de matière organique à la lumière"
+                    },
+                    {
+                      "content": "Stomate",
+                      "match": "Ouverture de la feuille"
+                    },
+                    {
+                      "content": "Chlorophylle",
+                      "match": "Pigment vert"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tester l'amidon, on utilise l'eau ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : le réactif de l'amidon. Étape 2 — Conclure : l'eau iodée.",
+                  "answers": [
+                    {
+                      "content": "iodée",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Potomètre et témoin, stomates par face, lots à la lumière et à l'obscurité, incision annulaire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au potomètre, deux rameaux de manguier de même taille restent 6 heures au soleil. Le rameau feuillé absorbe 18 mL d'eau, le rameau sans feuilles 2 mL (figure, valeurs d'exercice).",
+              "hint": "Compare les deux barres de la figure.",
+              "exercise_type": "evaluation",
+              "figure": "volume-potometre-feuille",
+              "questions": [
+                {
+                  "content": "Combien de fois le rameau feuillé absorbe-t-il plus d'eau que le rameau sans feuilles ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 18 mL et 2 mL. Étape 2 — Calculer : $18 \\div 2 = 9$. Étape 3 — Conclure : 9 fois plus.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "fois"
+                },
+                {
+                  "content": "Pourquoi faut-il utiliser un rameau sans feuilles pour comparer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les rameaux ont la même taille. Étape 2 — Comparer : seule la présence des feuilles diffère. Étape 3 — Conclure : on peut attribuer la différence aux feuilles.",
+                  "answers": [
+                    {
+                      "content": "Pour ne changer qu'un seul facteur : la présence des feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour avoir deux rameaux différents en taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour mesurer la poussée racinaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour fabriquer plus d'amidon",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève propose : « c'est la poussée racinaire qui explique ces résultats ». Pourquoi a-t-il tort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on utilise des rameaux, sans racines. Étape 2 — Comparer : seule la présence des feuilles change. Étape 3 — Conclure : la poussée racinaire est exclue ; c'est l'aspiration foliaire.",
+                  "answers": [
+                    {
+                      "content": "Les rameaux n'ont pas de racines, et la différence vient des feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la poussée racinaire n'existe pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les rameaux ont plus de racines que de feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le potomètre mesure la photosynthèse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on enduisait de vaseline la face inférieure des feuilles, qui porte les stomates, l'absorption du rameau feuillé baisserait.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : les stomates sont surtout à la face inférieure. Étape 2 — Relier : la vaseline les bouche, la vapeur ne sort plus. Étape 3 — Conclure : la transpiration baisse, donc l'aspiration et l'absorption aussi.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions résument les résultats ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : 18 mL contre 2 mL. Étape 2 — Interpréter : les feuilles transpirent et appellent l'eau. Étape 3 — Conclure : les deux premières propositions sont exactes.",
+                  "answers": [
+                    {
+                      "content": "Les feuilles transpirent",
+                      "correct": true
+                    },
+                    {
+                      "content": "La transpiration entraîne la montée de la sève brute",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les feuilles absorbent l'eau du sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les rameaux sans feuilles absorbent plus d'eau",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève compte les stomates sur une feuille de laitue : 20 stomates par mm² sur la face supérieure et 180 sur la face inférieure (figure, valeurs d'exercice). Il colle un papier au chlorure de cobalt sur chaque face.",
+              "hint": "Plus de stomates veut dire plus de vapeur qui sort.",
+              "exercise_type": "evaluation",
+              "figure": "stomates-par-face",
+              "questions": [
+                {
+                  "content": "Combien de stomates la face inférieure compte-t-elle de plus que la face supérieure, par mm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 180 et 20. Étape 2 — Calculer : $180 - 20 = 160$. Étape 3 — Conclure : 160 de plus.",
+                  "answers": [
+                    {
+                      "content": "160",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "stomates"
+                },
+                {
+                  "content": "Sur quelle face le papier au cobalt virera-t-il rose le plus vite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : plus de stomates en bas. Étape 2 — Relier : plus de vapeur y sort. Étape 3 — Conclure : le papier y vire plus vite.",
+                  "answers": [
+                    {
+                      "content": "La face inférieure",
+                      "correct": true
+                    },
+                    {
+                      "content": "La face supérieure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux en même temps",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un papier rose prouve que la feuille absorbe de l'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le papier détecte l'eau. Étape 2 — Relier : l'eau détectée sort de la feuille. Étape 3 — Conclure : il prouve une perte d'eau, pas une absorption.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi ce placement des stomates est-il avantageux dans un climat chaud ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : peu de stomates en haut, face exposée au soleil. Étape 2 — Relier : moins de vapeur y sort. Étape 3 — Conclure : la plante perd moins d'eau.",
+                  "answers": [
+                    {
+                      "content": "Il limite la perte d'eau au soleil direct",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il augmente la photosynthèse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il permet d'absorber l'eau du sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fabrique de la sève brute",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les stomates laissent sortir la vapeur d'eau et laissent entrer le ___ de l'air.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : un gaz de l'air est utilisé. Étape 2 — Relier : il sert à la photosynthèse. Étape 3 — Conclure : c'est le dioxyde de carbone.",
+                  "answers": [
+                    {
+                      "content": "dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "co2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève prépare trois plants de haricot identiques. Lot A : à la lumière. Lot B : à l'obscurité. Lot C : à la lumière avec un sac noir sur une feuille. Après deux jours, il teste des feuilles à l'eau iodée.",
+              "hint": "Compare chaque lot au lot A.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que prévoir pour les feuilles du lot A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : lumière et chlorophylle. Étape 2 — Appliquer : décoloration et eau iodée. Étape 3 — Lire : de l'amidon est fabriqué. Étape 4 — Conclure : bleu-noir.",
+                  "answers": [
+                    {
+                      "content": "Bleu-noir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jaune-brun",
+                      "correct": false
+                    },
+                    {
+                      "content": "Blanc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rose",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que prévoir pour les feuilles du lot B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : pas de lumière. Étape 2 — Appliquer le test. Étape 3 — Lire : pas de photosynthèse donc pas d'amidon. Étape 4 — Conclure : jaune-brun.",
+                  "answers": [
+                    {
+                      "content": "Jaune-brun",
+                      "correct": true
+                    },
+                    {
+                      "content": "Bleu-noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rouge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vert",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le lot A sert-il de lot de comparaison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : A est éclairé et vert. Étape 2 — Comparer : B et C diffèrent par la lumière. Étape 3 — Conclure : A est la référence.",
+                  "answers": [
+                    {
+                      "content": "Il réunit toutes les conditions de la photosynthèse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'a pas de feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est dans le noir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est cultivé sans eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La feuille couverte du lot C contient autant d'amidon que les feuilles non couvertes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la feuille couverte n'a pas de lumière. Étape 2 — Relier : pas de photosynthèse. Étape 3 — Conclure : elle contient moins d'amidon ; l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier. Étape 2 — Appliquer. Étape 3 — Lire. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Identifier les conditions"
+                    },
+                    {
+                      "content": "Appliquer le test à l'eau iodée"
+                    },
+                    {
+                      "content": "Lire la couleur"
+                    },
+                    {
+                      "content": "Conclure"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un technicien enlève un anneau d'écorce sur un jeune hévéa. Après trois semaines, il mesure le diamètre de la tige : 4,0 cm au-dessus de l'anneau et 3,2 cm en dessous (valeurs d'exercice).",
+              "hint": "L'anneau coupe un seul des deux tissus.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De combien de centimètres la tige est-elle plus large au-dessus qu'en dessous ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 4,0 et 3,2. Étape 2 — Calculer : $4{,}0 - 3{,}2 = 0{,}8$. Étape 3 — Conclure : 0,8 cm.",
+                  "answers": [
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0.01,
+                  "unit": "cm"
+                },
+                {
+                  "content": "Comment expliquer ce renflement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : l'anneau enlève le liber. Étape 2 — Observer : le renflement est au-dessus. Étape 3 — Relier : la sève élaborée descend. Étape 4 — Conclure : elle s'accumule.",
+                  "answers": [
+                    {
+                      "content": "La sève élaborée, arrêtée par l'anneau, s'accumule au-dessus",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sève brute s'accumule sous l'anneau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines fabriquent de l'amidon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le bois a grossi car il n'y a plus de liber",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on avait enlevé le bois et gardé l'écorce, les feuilles auraient manqué d'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : le bois contient le xylème. Étape 2 — Relier : sans lui, la sève brute ne monte plus. Étape 3 — Conclure : les feuilles manqueraient d'eau.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que prévoit-on pour les racines sous l'anneau à la longue ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : les racines ne font pas la photosynthèse. Étape 2 — Relier : la sève élaborée est arrêtée. Étape 3 — Conclure : elles manquent de matière organique.",
+                  "answers": [
+                    {
+                      "content": "Elles manquent de matière organique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles manquent d'oxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles produisent plus de sucre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles ne changent pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer : bois intact, liber coupé. Étape 2 — Conclure : les deux premières propositions sont exactes.",
+                  "answers": [
+                    {
+                      "content": "Le bois intact laisse monter la sève brute",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le liber coupé arrête la sève élaborée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le liber intact conduit la sève brute",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sève élaborée monte dans le bois",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Trajet des substances, poussée racinaire, transpiration et amidon, matière organique d'une plante.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le schéma fléché donne le trajet des substances dans une plante verte, du sol aux organes de réserve.",
+              "hint": "Suis les flèches du schéma.",
+              "exercise_type": "evaluation",
+              "figure": "circuit-seves",
+              "questions": [
+                {
+                  "content": "Dans quel tissu monte la sève brute ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le schéma : sol, racines, xylème. Étape 2 — Relier : le xylème conduit la sève brute. Étape 3 — Conclure : le xylème.",
+                  "answers": [
+                    {
+                      "content": "Le xylème",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le liber",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'écorce",
+                      "correct": false
+                    },
+                    {
+                      "content": "La coiffe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se fait la photosynthèse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le schéma : le nœud feuilles. Étape 2 — Conclure : dans les feuilles éclairées.",
+                  "answers": [
+                    {
+                      "content": "Dans les feuilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans les racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le xylème",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans le sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet des substances.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Suivre les flèches. Étape 3 — Conclure : absorption, montée, photosynthèse, distribution, mise en réserve.",
+                  "answers": [
+                    {
+                      "content": "Absorption par les racines"
+                    },
+                    {
+                      "content": "Montée dans le xylème"
+                    },
+                    {
+                      "content": "Photosynthèse dans les feuilles"
+                    },
+                    {
+                      "content": "Distribution par le liber"
+                    },
+                    {
+                      "content": "Mise en réserve"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles associations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Relier. Étape 3 — Conclure : les trois premières sont exactes.",
+                  "answers": [
+                    {
+                      "content": "Xylème et sève brute",
+                      "correct": true
+                    },
+                    {
+                      "content": "Liber et sève élaborée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Feuilles et photosynthèse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Xylème et sève élaborée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Racines et photosynthèse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La sève élaborée circule dans le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire le schéma. Étape 2 — Conclure : dans le liber.",
+                  "answers": [
+                    {
+                      "content": "liber",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Des élèves recueillent la sève qui sort d'une tige de gombo coupée au ras du sol, pendant 2 heures, à quatre moments de la journée (figure, valeurs d'exercice).",
+              "hint": "Pense à ce qui reste après la coupe.",
+              "exercise_type": "evaluation",
+              "figure": "exsudation-selon-moment",
+              "questions": [
+                {
+                  "content": "Quel volume est recueilli le soir et la nuit réunis, en millilitres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : soir 2 mL, nuit 6 mL. Étape 2 — Calculer : $2 + 6 = 8$. Étape 3 — Conclure : 8 mL.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mL"
+                },
+                {
+                  "content": "Que montre l'écoulement de sève par la section ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : plus de feuilles. Étape 2 — Interpréter : la sève est poussée. Étape 3 — Conclure : poussée racinaire.",
+                  "answers": [
+                    {
+                      "content": "La poussée racinaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aspiration foliaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "La photosynthèse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mise en réserve",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on coupe la tige au ras du sol, l'aspiration foliaire peut encore s'exercer sur la partie restée dans le sol.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : plus de feuilles. Étape 2 — Relier : pas de transpiration. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le phénomène de sortie de sève par une tige coupée s'appelle l'___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier. Étape 2 — Conclure : exsudation.",
+                  "answers": [
+                    {
+                      "content": "exsudation",
+                      "correct": true
+                    },
+                    {
+                      "content": "absorption",
+                      "correct": false
+                    },
+                    {
+                      "content": "photosynthèse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Comparer les forces. Étape 2 — Conclure : les deux premières sont exactes.",
+                  "answers": [
+                    {
+                      "content": "La poussée racinaire est faible",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aspiration foliaire est la force principale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La poussée racinaire est la force principale",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aspiration foliaire s'exerce sans feuilles",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au verger, un élève étudie un rameau feuillé de manguier : il perd 12 g d'eau en 4 heures. L'agriculteur note que les feuilles contiennent de l'amidon le soir.",
+              "hint": "Sépare ce qui concerne l'eau et ce qui concerne l'amidon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle masse d'eau le rameau perd-il en moyenne par heure, en grammes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 12 g en 4 heures. Étape 2 — Calculer : $12 \\div 4 = 3$. Étape 3 — Conclure : 3 g par heure.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "g/h"
+                },
+                {
+                  "content": "Quelles expériences montrent que les feuilles contiennent de l'amidon ou transpirent ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier. Étape 2 — Relier. Étape 3 — Conclure : les trois premières.",
+                  "answers": [
+                    {
+                      "content": "Le sac plastique et la buée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le papier au cobalt rose",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau iodée bleu-noir",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'éosine dans le bois",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'anneau d'écorce",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les feuilles transpirent par ___ et fabriquent l'amidon par ___.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier. Étape 2 — Conclure : stomates et photosynthèse.",
+                  "answers": [
+                    {
+                      "content": "les stomates ; la photosynthèse",
+                      "correct": true
+                    },
+                    {
+                      "content": "les poils absorbants ; la transpiration",
+                      "correct": false
+                    },
+                    {
+                      "content": "le liber ; l'exsudation",
+                      "correct": false
+                    },
+                    {
+                      "content": "le xylème ; l'absorption",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La matière organique fabriquée le jour par les feuilles est ensuite distribuée par la sève élaborée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : les feuilles fabriquent de la matière organique, stockée provisoirement en amidon. Étape 2 — Relier : elle passe sous forme de sucres dans la sève élaborée, qui circule dans le liber. Étape 3 — Conclure : vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'eau perdue par les feuilles est rejetée sous forme de ___ d'eau.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier. Étape 2 — Conclure : vapeur.",
+                  "answers": [
+                    {
+                      "content": "vapeur",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan : une plante est cultivée sur solution nutritive, éclairée, avec de l'air. Elle croît, ses feuilles contiennent de l'amidon et ses tubercules se gonflent.",
+              "hint": "La plante fabrique sa matière organique.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "D'où vient la matière organique de cette plante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier. Étape 2 — Relier. Étape 3 — Conclure : elle la fabrique elle-même.",
+                  "answers": [
+                    {
+                      "content": "De sa photosynthèse, à partir d'eau, de sels minéraux et de dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la solution nutritive qui la contient",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'air uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des racines seules",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer. Étape 2 — Conclure : les deux premières.",
+                  "answers": [
+                    {
+                      "content": "La sève brute monte dans le xylème",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sève élaborée circule dans le liber",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sève brute circule dans le liber",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sève élaborée vient du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque organe à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Situer. Étape 2 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Racine",
+                      "match": "Absorbe eau et sels minéraux"
+                    },
+                    {
+                      "content": "Feuille",
+                      "match": "Fabrique la matière organique"
+                    },
+                    {
+                      "content": "Tubercule",
+                      "match": "Stocke des réserves"
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on supprime la lumière, la plante continue de fabriquer de l'amidon.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : lumière nécessaire. Étape 2 — Conclure : fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le tubercule passe de 500 g à 1 800 g. Quel est son gain de masse, en grammes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire. Étape 2 — Calculer : $1800 - 500 = 1300$. Étape 3 — Conclure : 1 300 g.",
+                  "answers": [
+                    {
+                      "content": "1300",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "g"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3629 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — La méthodologie de la dissertation, du commentaire de document et de la situation d'évaluation",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Histoire-Géographie",
+      "figures": [
+        {
+          "key": "structure-de-la-dissertation",
+          "kind": "diagram",
+          "description": "Un arbre à une racine, « La dissertation », et trois branches : l'introduction (amorce, sujet, problématique, plan), le développement (deux ou trois parties, faites de paragraphes argumentés : idée, explication, exemple) et la conclusion (bilan et ouverture).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "racine",
+                "label": "La dissertation"
+              },
+              {
+                "id": "intro",
+                "label": "Introduction : amorce, sujet, problématique, plan"
+              },
+              {
+                "id": "dev",
+                "label": "Développement : deux ou trois parties"
+              },
+              {
+                "id": "para",
+                "label": "Paragraphe : idée, explication, exemple"
+              },
+              {
+                "id": "concl",
+                "label": "Conclusion : bilan et ouverture"
+              }
+            ],
+            "edges": [
+              {
+                "from": "racine",
+                "to": "intro"
+              },
+              {
+                "from": "racine",
+                "to": "dev"
+              },
+              {
+                "from": "racine",
+                "to": "concl"
+              },
+              {
+                "from": "dev",
+                "to": "para"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "etapes-du-commentaire",
+          "kind": "diagram",
+          "description": "Un schéma en cinq étapes, de haut en bas : présenter le document (nature, auteur, date, source, thème), le situer dans son contexte, dégager ses idées principales, les expliquer avec ses connaissances sans recopier, puis apprécier sa portée et ses limites.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "p",
+                "label": "1. Présenter le document"
+              },
+              {
+                "id": "s",
+                "label": "2. Situer dans le contexte"
+              },
+              {
+                "id": "d",
+                "label": "3. Dégager les idées"
+              },
+              {
+                "id": "e",
+                "label": "4. Expliquer sans recopier"
+              },
+              {
+                "id": "a",
+                "label": "5. Apprécier portée et limites"
+              }
+            ],
+            "edges": [
+              {
+                "from": "p",
+                "to": "s"
+              },
+              {
+                "from": "s",
+                "to": "d"
+              },
+              {
+                "from": "d",
+                "to": "e"
+              },
+              {
+                "from": "e",
+                "to": "a"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "demarche-situation-evaluation",
+          "kind": "diagram",
+          "description": "Un schéma en cinq étapes, de haut en bas : lire la situation et repérer le contexte, identifier la tâche et chaque consigne, mobiliser les connaissances du cours, rédiger une réponse par consigne, puis relire pour vérifier que chaque consigne a reçu sa réponse.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "l",
+                "label": "1. Lire la situation"
+              },
+              {
+                "id": "i",
+                "label": "2. Identifier les consignes"
+              },
+              {
+                "id": "m",
+                "label": "3. Mobiliser ses connaissances"
+              },
+              {
+                "id": "r",
+                "label": "4. Rédiger consigne par consigne"
+              },
+              {
+                "id": "v",
+                "label": "5. Relire et vérifier"
+              }
+            ],
+            "edges": [
+              {
+                "from": "l",
+                "to": "i"
+              },
+              {
+                "from": "i",
+                "to": "m"
+              },
+              {
+                "from": "m",
+                "to": "r"
+              },
+              {
+                "from": "r",
+                "to": "v"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Analyser le sujet d'une dissertation",
+          "remember": "La **dissertation** est un exercice qui répond à une question d'histoire par un texte rédigé et organisé : une introduction, un développement et une conclusion. Tout commence par l'**analyse du sujet**.\n\n**Les termes du sujet** : le terme clé est le mot important qu'il faut définir. **Le cadre spatial** dit *où* (un pays, une ville), **le cadre chronologique** dit *quand* (une date, une période). **La consigne** dit ce qu'on attend de toi (*expliquer*, *montrer*, *décrire*, *présenter*).\n\nDe cette analyse naît la **problématique** : la question centrale à laquelle toute la dissertation répond. Elle demande une explication (*pourquoi ? comment ?*), pas un simple oui ou non.",
+          "method": [
+            "Souligner les termes du sujet et définir chaque terme clé.",
+            "Délimiter le cadre spatial (où ?) et le cadre chronologique (quand ?).",
+            "Repérer la consigne : ce que le sujet demande de faire.",
+            "Formuler la problématique sous la forme d'une question qui demande une explication."
+          ],
+          "example": {
+            "statement": "Analyser le sujet : « Expliquez l'importance du cacao dans l'économie de la Côte d'Ivoire. »",
+            "steps": [
+              "Souligner : les termes clés sont « cacao » (la plante dont on tire le chocolat) et « économie » (la production, la vente et les revenus d'un pays). On définit les deux.",
+              "Délimiter : le cadre spatial est la Côte d'Ivoire. Le sujet ne donne pas de date : on étudie surtout l'époque actuelle, en rappelant comment le cacao a pris cette place.",
+              "Repérer : la consigne est « Expliquez ». Il faut dire pourquoi et comment le cacao compte, pas seulement le décrire.",
+              "Formuler : « Pourquoi et comment le cacao est-il devenu une ressource essentielle de l'économie ivoirienne ? »"
+            ]
+          },
+          "pitfall": "Ne récite pas tout ce que tu sais sur le thème : c'est le **hors-sujet**. Contre-exemple : au sujet « Le cacao dans l'économie de la Côte d'Ivoire », parler de toutes les cultures du monde ou de l'histoire de toute l'Afrique ne répond pas à la question. Ne remplace pas non plus la problématique par une question à réponse « oui » ou « non », ni par le sujet recopié. Demande-toi : « Où ? Quand ? Que me demande-t-on ? »",
+          "practice": {
+            "statement": "Tu t'entraînes à analyser un sujet avec la méthode : souligner, délimiter, repérer, formuler.",
+            "questions": [
+              {
+                "content": "Dans le sujet « Expliquez le rôle du port d'Abidjan dans le commerce ivoirien. », quelle est la consigne ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Repérer la consigne : c'est le verbe qui dit ce qu'on attend de toi. Ici « Expliquez ». « Le port d'Abidjan » est le cadre spatial, « commerce » est un terme clé.",
+                "answers": [
+                  {
+                    "content": "Expliquez",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le port d'Abidjan",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le commerce ivoirien",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le rôle",
+                    "correct": false
+                  }
+                ],
+                "hint": "La consigne est un verbe à l'impératif en début de sujet."
+              },
+              {
+                "content": "Le cadre chronologique d'un sujet répond à la question « Quand ? ».",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Délimiter : le cadre spatial répond à « Où ? » et le cadre chronologique à « Quand ? ». L'affirmation est donc vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense aux deux questions : où ? et quand ?"
+              },
+              {
+                "content": "La question centrale à laquelle répond toute la dissertation s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Formuler la problématique : c'est la question centrale, qui demande une explication (pourquoi ? comment ?). Elle naît des étapes 1 à 3.",
+                "answers": [
+                  {
+                    "content": "problématique",
+                    "correct": true
+                  },
+                  {
+                    "content": "la problématique",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est un mot de 13 lettres qui commence par « p »."
+              }
+            ]
+          },
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Les étapes de l'analyse d'un sujet",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (souligner, délimiter, repérer, formuler) à des sujets de dissertation imaginés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de l'analyse d'un sujet de dissertation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Souligner, Étape 2 — Délimiter, Étape 3 — Repérer, Étape 4 — Formuler. On ne peut pas poser la problématique avant d'avoir compris les termes, les cadres et la consigne.",
+                  "answers": [
+                    {
+                      "content": "Souligner les termes et définir les termes clés"
+                    },
+                    {
+                      "content": "Délimiter le cadre spatial et le cadre chronologique"
+                    },
+                    {
+                      "content": "Repérer la consigne"
+                    },
+                    {
+                      "content": "Formuler la problématique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Sujet : « Expliquez l'importance du cacao dans l'économie de la Côte d'Ivoire. » Quel est le cadre spatial de ce sujet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Délimiter : le cadre spatial répond à « Où ? ». Le sujet nomme la Côte d'Ivoire, pas l'Afrique de l'Ouest, ni le monde, ni une seule ville.",
+                  "answers": [
+                    {
+                      "content": "La Côte d'Ivoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toute l'Afrique de l'Ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le monde entier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sujet : « Expliquez l'urbanisation d'Abidjan après l'indépendance. » Relie chaque élément du sujet à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Souligner : « urbanisation » est le terme clé. Étape 2 — Délimiter : Abidjan donne le lieu, « après l'indépendance » donne l'époque. Étape 3 — Repérer : « Expliquez » est la consigne.",
+                  "answers": [
+                    {
+                      "content": "urbanisation",
+                      "match": "Terme clé à définir"
+                    },
+                    {
+                      "content": "Abidjan",
+                      "match": "Cadre spatial"
+                    },
+                    {
+                      "content": "après l'indépendance",
+                      "match": "Cadre chronologique"
+                    },
+                    {
+                      "content": "Expliquez",
+                      "match": "Consigne"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mot « urbanisation » désigne le développement des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Souligner et définir : l'urbanisation est la croissance des villes (leur population et leur étendue). Définir le terme clé évite de parler d'autre chose.",
+                  "answers": [
+                    {
+                      "content": "villes",
+                      "correct": true
+                    },
+                    {
+                      "content": "ville",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sujet : « Le cacao dans l'économie de la Côte d'Ivoire. » Quelle formulation est une bonne problématique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Formuler : la problématique est une question qui demande une explication. « Est-il cultivé ? » appelle un simple oui. Le sujet recopié n'est pas une question. « Tout ce que l'on sait » mène au hors-sujet.",
+                  "answers": [
+                    {
+                      "content": "Pourquoi et comment le cacao est-il devenu une ressource essentielle de l'économie ivoirienne ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cacao est-il cultivé en Côte d'Ivoire ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao dans l'économie de la Côte d'Ivoire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout ce que l'on sait sur le cacao.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Analyser trois sujets de dissertation",
+              "statement": "Dans cet exercice, tu analyses des sujets de dissertation imaginés avec les quatre étapes de la fiche : souligner, délimiter, repérer, formuler.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque sujet, demande-toi : quels mots définir ? où ? quand ? quelle consigne ?",
+              "questions": [
+                {
+                  "content": "Dans le sujet « Expliquez l'importance du port d'Abidjan dans l'économie ivoirienne. », quels sont les deux termes clés à définir ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Souligner : les termes clés sont les noms importants qu'il faut définir, ici « port » et « économie ». « Expliquez » est la consigne (étape 3) et « Abidjan » est le cadre spatial (étape 2).",
+                  "answers": [
+                    {
+                      "content": "port",
+                      "correct": true
+                    },
+                    {
+                      "content": "économie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Expliquez",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le sujet « Décrivez l'évolution du cacao en Côte d'Ivoire. », le mot « Décrivez » est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Repérer la consigne : le verbe d'action en début de sujet dit ce qu'on attend. « Décrivez » est donc la consigne, pas un cadre ni la problématique.",
+                  "answers": [
+                    {
+                      "content": "la consigne",
+                      "correct": true
+                    },
+                    {
+                      "content": "le cadre spatial",
+                      "correct": false
+                    },
+                    {
+                      "content": "le cadre chronologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "la problématique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bonne problématique est une question à laquelle on peut répondre simplement par « oui » ou par « non ».",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Formuler : la problématique demande une explication (pourquoi ? comment ?). Une question fermée se règle en un mot et ne permet pas de construire une dissertation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cadre ___ d'un sujet répond à la question « Où ? ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Délimiter : le cadre spatial (ou géographique) dit où se passe le sujet, le cadre chronologique dit quand.",
+                  "answers": [
+                    {
+                      "content": "spatial",
+                      "correct": true
+                    },
+                    {
+                      "content": "géographique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'analyse d'un sujet comporte quatre étapes, la dernière étant la formulation de la problématique. Combien d'étapes faut-il accomplir avant de formuler la problématique ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Souligner, Étape 2 — Délimiter, Étape 3 — Repérer : trois étapes précèdent l'Étape 4 — Formuler, car la problématique s'appuie sur elles.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "étapes"
+                },
+                {
+                  "content": "Sujet : « Le cacao en Côte d'Ivoire. » Quel élève fait un hors-sujet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Délimiter : le cadre est la Côte d'Ivoire et le thème est le cacao. Raconter toutes les cultures d'Afrique sort du cadre : c'est le hors-sujet décrit dans le piège. Les trois autres élèves restent dans le sujet.",
+                  "answers": [
+                    {
+                      "content": "Celui qui raconte l'histoire de toutes les cultures d'Afrique sans parler du cacao ivoirien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celui qui explique le rôle du cacao pour les planteurs ivoiriens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui qui définit le mot « cacao » avant de commencer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui qui pose une problématique sur le cacao ivoirien",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Construire le plan et rédiger la dissertation",
+          "remember": "Une dissertation se rédige en trois temps.\n\n**L'introduction** : une *amorce* (une phrase qui amène le sujet), la *présentation du sujet* (termes définis, cadres), la *problématique* et l'*annonce du plan*.\n\n**Le développement** : deux ou trois **parties**, chacune faite de **paragraphes argumentés**. Un paragraphe argumenté contient une **idée** (l'argument), son **explication** et un **exemple**. Le plan peut être *chronologique* (on suit le temps) ou *thématique* (on traite des thèmes). On passe d'une partie à l'autre par une phrase de transition.\n\n**La conclusion** : un *bilan* qui répond à la problématique, puis une *ouverture* sur une question voisine. Elle n'apporte pas d'information nouvelle.",
+          "method": [
+            "Rassembler les connaissances utiles et ne garder que celles qui répondent au sujet.",
+            "Regrouper les idées en deux ou trois parties qui répondent à la problématique.",
+            "Rédiger l'introduction : amorce, présentation du sujet, problématique, annonce du plan.",
+            "Rédiger chaque paragraphe du développement : une idée, son explication, un exemple.",
+            "Rédiger la conclusion : un bilan qui répond à la problématique, puis une ouverture."
+          ],
+          "example": {
+            "statement": "Construire et rédiger la dissertation sur le sujet : « Expliquez l'urbanisation d'Abidjan. »",
+            "steps": [
+              "Rassembler : le port, les emplois, l'arrivée de nouveaux habitants, les quartiers qui s'étendent, la circulation, le logement. On écarte l'histoire du cacao dans les campagnes, qui est hors sujet.",
+              "Regrouper : partie I, les causes de la croissance (port, emplois, arrivée d'habitants). Partie II, ses conséquences (extension des quartiers, circulation, logement).",
+              "Rédiger l'introduction : amorce (de nouveaux habitants s'installent chaque année), sujet défini, problématique « Pourquoi Abidjan s'étend-elle et avec quelles conséquences ? », annonce des deux parties.",
+              "Rédiger un paragraphe : idée, le port attire des activités ; explication, il facilite l'entrée et la sortie des marchandises, donc des entreprises s'installent et créent des emplois ; exemple, des entrepôts s'installent près du port.",
+              "Rédiger la conclusion : bilan, le port et l'emploi attirent, et la ville s'étend en créant des besoins ; ouverture, comment mieux organiser la circulation et le logement ?"
+            ]
+          },
+          "pitfall": "Ne raconte pas une suite de faits sans les relier à la problématique. Contre-exemple : « Abidjan a un port. Abidjan a des quartiers. Abidjan a de la circulation. » Il n'y a ni idée, ni explication, ni exemple : c'est une liste, pas un paragraphe argumenté. Ajoute « en effet », « donc », « par exemple » pour expliquer. N'ajoute pas non plus d'information nouvelle dans la conclusion. Demande-toi : « Ce paragraphe répond-il à la problématique ? »",
+          "practice": {
+            "statement": "Tu t'entraînes à construire et à rédiger une dissertation avec la méthode : rassembler, regrouper, rédiger l'introduction, les paragraphes, la conclusion.",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les trois grandes parties d'une dissertation.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Rédiger l'introduction, Étape 4 — Rédiger les paragraphes du développement, Étape 5 — Rédiger la conclusion : on rédige dans l'ordre où le lecteur lit.",
+                "answers": [
+                  {
+                    "content": "Introduction"
+                  },
+                  {
+                    "content": "Développement"
+                  },
+                  {
+                    "content": "Conclusion"
+                  }
+                ],
+                "hint": "On commence par présenter, on finit par conclure."
+              },
+              {
+                "content": "L'introduction annonce le plan de la dissertation.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Rédiger l'introduction : elle comprend l'amorce, la présentation du sujet, la problématique et l'annonce du plan. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Relis les quatre éléments de l'introduction."
+              },
+              {
+                "content": "Quel groupe de mots introduit naturellement un exemple dans un paragraphe argumenté ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Rédiger chaque paragraphe : idée, explication, exemple. « Par exemple » annonce l'exemple. « En conclusion » annonce le bilan et « Mon avis » donne une opinion sans exemple.",
+                "answers": [
+                  {
+                    "content": "Par exemple",
+                    "correct": true
+                  },
+                  {
+                    "content": "En conclusion",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il était une fois",
+                    "correct": false
+                  },
+                  {
+                    "content": "Mon avis est que",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel mot annonce une illustration ?"
+              }
+            ]
+          },
+          "figure": "structure-de-la-dissertation",
+          "exercise": [
+            {
+              "title": "Les étapes de la dissertation",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche (rassembler, regrouper, rédiger l'introduction, les paragraphes, la conclusion).",
+              "exercise_type": "fixation",
+              "figure": "structure-de-la-dissertation",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les cinq étapes de la méthode pour construire et rédiger une dissertation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Rassembler, Étape 2 — Regrouper, Étape 3 — Introduction, Étape 4 — Paragraphes, Étape 5 — Conclusion. On ne peut pas annoncer un plan qu'on n'a pas construit.",
+                  "answers": [
+                    {
+                      "content": "Rassembler les connaissances utiles"
+                    },
+                    {
+                      "content": "Regrouper les idées en parties"
+                    },
+                    {
+                      "content": "Rédiger l'introduction"
+                    },
+                    {
+                      "content": "Rédiger les paragraphes du développement"
+                    },
+                    {
+                      "content": "Rédiger la conclusion"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque partie de la dissertation à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Rédiger l'introduction : elle pose la problématique. Étape 4 — Rédiger le développement : il y répond. Étape 5 — Rédiger la conclusion : bilan, puis ouverture.",
+                  "answers": [
+                    {
+                      "content": "Introduction",
+                      "match": "Présente le sujet et pose la problématique"
+                    },
+                    {
+                      "content": "Développement",
+                      "match": "Répond à la problématique en deux ou trois parties"
+                    },
+                    {
+                      "content": "Conclusion",
+                      "match": "Fait le bilan et ouvre sur une question voisine"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois éléments d'un paragraphe argumenté ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 4 — Rédiger chaque paragraphe : une idée, son explication, un exemple. Un avis sans justification n'explique rien et une liste de dates ne construit pas d'argument.",
+                  "answers": [
+                    {
+                      "content": "Une idée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une explication",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un exemple",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un avis personnel sans justification",
+                      "correct": false
+                    },
+                    {
+                      "content": "La liste de toutes les dates du cours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se place la problématique dans une dissertation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Rédiger l'introduction : la problématique y est posée, puis le plan est annoncé. La conclusion, elle, y répond (Étape 5).",
+                  "answers": [
+                    {
+                      "content": "Dans l'introduction, juste avant l'annonce du plan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans la conclusion seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au milieu du développement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nulle part : on la devine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une conclusion doit apporter de nouvelles informations qui n'ont pas été données dans le développement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Rédiger la conclusion : c'est un bilan qui répond à la problématique, puis une ouverture. Une information nouvelle appartient au développement, pas à la conclusion.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Rédiger une dissertation sur le cacao",
+              "statement": "Dans cet exercice, tu construis et tu rédiges, étape par étape, une dissertation sur le sujet imaginé : « Expliquez l'importance du cacao dans l'économie de la Côte d'Ivoire. »",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Suis les cinq étapes dans l'ordre : rassembler, regrouper, introduction, paragraphes, conclusion.",
+              "questions": [
+                {
+                  "content": "Pour ce sujet, quelle connaissance faut-il écarter lors du tri des connaissances ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rassembler : on ne garde que les connaissances qui répondent au sujet. Les sports des lycées n'ont aucun lien avec le cacao. Les trois autres idées touchent à la production, à la vente et aux revenus.",
+                  "answers": [
+                    {
+                      "content": "L'histoire des sports pratiqués dans les lycées",
+                      "correct": true
+                    },
+                    {
+                      "content": "La culture du cacao dans les plantations",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vente du cacao à l'étranger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les revenus des planteurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre éléments d'une introduction.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Rédiger l'introduction : amorce, présentation du sujet, problématique, annonce du plan, dans cet ordre. On annonce le plan seulement après avoir posé la question à laquelle il répond.",
+                  "answers": [
+                    {
+                      "content": "L'amorce"
+                    },
+                    {
+                      "content": "La présentation du sujet"
+                    },
+                    {
+                      "content": "La problématique"
+                    },
+                    {
+                      "content": "L'annonce du plan"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel plan en deux parties répond au mieux au sujet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Regrouper les idées en parties qui répondent à la problématique. Le premier plan regroupe des idées qui expliquent l'importance du cacao. Les autres plans sont des listes ou des définitions qui ne répondent pas à la question.",
+                  "answers": [
+                    {
+                      "content": "I. Le cacao procure des revenus aux planteurs et aux exportateurs ; II. Le cacao fait vivre des activités liées : transport, port, commerce",
+                      "correct": true
+                    },
+                    {
+                      "content": "I. Le cacao ; II. Le café",
+                      "correct": false
+                    },
+                    {
+                      "content": "I. Tout ce que je sais ; II. Mon avis",
+                      "correct": false
+                    },
+                    {
+                      "content": "I. Définition du mot « économie » ; II. Définition du mot « cacao »",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paragraphe argumenté contient une idée, une explication et un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Rédiger chaque paragraphe : une idée, son explication, un exemple. L'exemple rend l'argument concret.",
+                  "answers": [
+                    {
+                      "content": "exemple",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La conclusion répond à la problématique posée dans l'introduction.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Rédiger la conclusion : le bilan répond à la problématique. C'est ce qui boucle la dissertation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque phrase d'un paragraphe sur le cacao à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Rédiger chaque paragraphe : la première phrase donne l'idée, « En effet » introduit l'explication, « Par exemple » introduit l'exemple.",
+                  "answers": [
+                    {
+                      "content": "Le cacao procure des revenus aux planteurs.",
+                      "match": "Idée"
+                    },
+                    {
+                      "content": "En effet, la vente des fèves leur apporte l'argent nécessaire pour vivre.",
+                      "match": "Explication"
+                    },
+                    {
+                      "content": "Par exemple, un planteur peut payer l'école de ses enfants avec le produit de sa vente.",
+                      "match": "Exemple"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le commentaire de document",
+          "remember": "Le **commentaire de document** consiste à **présenter** un document, puis à l'**expliquer** en s'appuyant sur ses connaissances. Le document peut être un texte, une image, un tableau de chiffres ou une carte.\n\n**La présentation** donne la *nature* du document (lettre, affiche, photographie…), son *auteur*, sa *date*, sa *source* et son *thème*. **Le contexte** le replace dans son époque.\n\n**L'analyse** dégage les *idées principales*, puis les *explique* avec les connaissances du cours : on dit ce que le document *révèle*, on ne le recopie pas.\n\n**La portée et les limites** disent ce que le document apprend et ce qu'il laisse dans l'ombre : l'auteur donne un point de vue, il n'est jamais le seul témoin.",
+          "method": [
+            "Présenter le document : nature, auteur, date, source et thème.",
+            "Situer le document dans son contexte historique.",
+            "Dégager les idées principales du document.",
+            "Expliquer ces idées avec ses connaissances, sans recopier le document.",
+            "Apprécier la portée et les limites du document."
+          ],
+          "example": {
+            "statement": "Commenter ce document imaginé, écrit pour Lnclass : une affiche de 1960, signée d'un comité de quartier d'Abidjan, invite les habitants à fêter l'indépendance du 7 août 1960 et à pavoiser leurs maisons.",
+            "steps": [
+              "Présenter : la nature est une affiche, l'auteur un comité de quartier d'Abidjan (imaginaire), la date 1960, la source une affiche de quartier, le thème l'invitation à fêter l'indépendance.",
+              "Situer : l'affiche est faite au moment où la Côte d'Ivoire devient indépendante, le 7 août 1960. C'est le contexte de l'événement qu'elle annonce.",
+              "Dégager : première idée, l'indépendance est un événement à célébrer ; deuxième idée, le comité invite chaque habitant à y participer en décorant sa maison.",
+              "Expliquer : l'indépendance signifie que le pays décide lui-même de ses affaires. Inviter à pavoiser montre que le comité veut faire de ce jour un moment partagé, et non une simple fête de quelques personnes.",
+              "Apprécier : l'affiche montre l'élan d'un quartier, mais elle n'est que celle d'un comité et ne dit rien de ceux qui pensaient autrement. Il faut la croiser avec d'autres sources."
+            ]
+          },
+          "pitfall": "Ne **paraphrase** pas le document : le commenter n'est pas le répéter avec d'autres mots. Contre-exemple : si l'affiche dit « Pavoisez vos maisons », écrire « Le comité demande de mettre des drapeaux sur les maisons » est une paraphrase. Un commentaire écrit : « Inviter à pavoiser montre que la fête de l'indépendance veut associer tous les habitants. » Ne prends pas non plus le document pour la vérité complète : il donne un point de vue. Demande-toi : « Qu'est-ce que ce document me *révèle* ? »",
+          "practice": {
+            "statement": "Tu t'entraînes à commenter un document avec la méthode : présenter, situer, dégager, expliquer, apprécier.",
+            "questions": [
+              {
+                "content": "Quelle est la première étape du commentaire d'un document ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter le document : nature, auteur, date, source, thème. On apprécie les limites à la dernière étape et on ne recopie jamais.",
+                "answers": [
+                  {
+                    "content": "Présenter le document",
+                    "correct": true
+                  },
+                  {
+                    "content": "Apprécier ses limites",
+                    "correct": false
+                  },
+                  {
+                    "content": "Recopier le document",
+                    "correct": false
+                  },
+                  {
+                    "content": "Donner son avis sur la fête",
+                    "correct": false
+                  }
+                ],
+                "hint": "Avant d'expliquer, il faut savoir de quoi on parle."
+              },
+              {
+                "content": "L'auteur et la date du document font partie de sa présentation.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Présenter : la présentation donne la nature, l'auteur, la date, la source et le thème. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Relis les cinq éléments de la présentation."
+              },
+              {
+                "content": "À la dernière étape, on apprécie la portée et les ___ du document.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 5 — Apprécier la portée et les limites : on dit ce que le document apprend et ce qu'il laisse dans l'ombre.",
+                "answers": [
+                  {
+                    "content": "limites",
+                    "correct": true
+                  },
+                  {
+                    "content": "limite",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce que le document ne permet pas de savoir."
+              }
+            ]
+          },
+          "figure": "etapes-du-commentaire",
+          "exercise": [
+            {
+              "title": "Présenter et expliquer un document",
+              "statement": "Dans cet exercice, tu appliques les cinq étapes de la fiche (présenter, situer, dégager, expliquer, apprécier). Document imaginé, écrit pour Lnclass : une affiche de 1960 d'un comité de quartier d'Abidjan invite les habitants à pavoiser leurs maisons pour l'indépendance.",
+              "exercise_type": "fixation",
+              "figure": "etapes-du-commentaire",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les cinq étapes du commentaire de document.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Présenter, Étape 2 — Situer, Étape 3 — Dégager, Étape 4 — Expliquer, Étape 5 — Apprécier. On ne peut pas expliquer un document que l'on n'a pas encore présenté.",
+                  "answers": [
+                    {
+                      "content": "Présenter le document"
+                    },
+                    {
+                      "content": "Situer le document dans son contexte"
+                    },
+                    {
+                      "content": "Dégager les idées principales"
+                    },
+                    {
+                      "content": "Expliquer les idées avec ses connaissances"
+                    },
+                    {
+                      "content": "Apprécier la portée et les limites"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois éléments de la présentation d'un document ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Présenter : nature, auteur, date, source et thème. Un avis personnel ou une copie complète n'appartiennent pas à la présentation.",
+                  "answers": [
+                    {
+                      "content": "La nature du document",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'auteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La date",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ton avis personnel sur l'événement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La copie complète du document",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un document est une lettre écrite en 1960 par un instituteur à sa sœur. Quelle est sa nature ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Présenter : la nature dit ce qu'est le document. Une lettre est un texte écrit : c'est une source écrite.",
+                  "answers": [
+                    {
+                      "content": "Une lettre, c'est-à-dire une source écrite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une photographie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un objet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un témoignage oral",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Commenter un document, c'est le recopier avec d'autres mots.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Expliquer ses idées avec ses connaissances, sans recopier le document. Répéter avec d'autres mots est une paraphrase, c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'affiche dit : « Pavoisez vos maisons ». Quelle phrase explique le document au lieu de le paraphraser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Expliquer sans recopier : seule la première phrase dit ce que l'affiche révèle. Les deux suivantes répètent le document (paraphrase) et la dernière est une opinion sans rapport.",
+                  "answers": [
+                    {
+                      "content": "Inviter à pavoiser montre que la fête de l'indépendance veut associer tous les habitants.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le comité demande de mettre des drapeaux sur les maisons.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'affiche dit qu'il faut décorer les maisons.",
+                      "correct": false
+                    },
+                    {
+                      "content": "J'aime beaucoup les fêtes.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Commenter une lettre de 1960",
+              "statement": "Dans cet exercice, tu commentes un document imaginé, écrit pour Lnclass : une lettre de 1960 d'un instituteur (personnage imaginaire) à sa sœur. Il écrit : « Hier, à l'école, nous avons parlé de l'indépendance du pays. Les élèves ont dessiné le drapeau et chanté. Beaucoup d'enfants étaient heureux, mais certains parents s'inquiétaient de l'avenir. »",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Suis les cinq étapes : présenter, situer, dégager, expliquer, apprécier.",
+              "questions": [
+                {
+                  "content": "Pour présenter ce document, on écrit que sa nature est une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Présenter : la nature est la forme du document. Le texte est écrit par un instituteur à sa sœur : c'est une lettre.",
+                  "answers": [
+                    {
+                      "content": "lettre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux idées principales de la lettre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Dégager les idées principales : la joie des enfants et l'inquiétude de certains parents. Les deux autres propositions ne sont pas dans le texte.",
+                  "answers": [
+                    {
+                      "content": "Les enfants fêtent l'indépendance à l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Certains parents s'inquiètent de l'avenir",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'école est fermée pendant un mois",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'instituteur critique le directeur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque phrase de commentaire à l'étape qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Présenter : nature, auteur, date. Étape 2 — Situer : l'époque. Étape 3 — Dégager : les idées. Étape 5 — Apprécier : les limites, ici un seul point de vue.",
+                  "answers": [
+                    {
+                      "content": "Lettre écrite en 1960 par un instituteur",
+                      "match": "Présenter"
+                    },
+                    {
+                      "content": "Le document date de l'époque de l'indépendance",
+                      "match": "Situer"
+                    },
+                    {
+                      "content": "Les enfants sont heureux, des parents s'inquiètent",
+                      "match": "Dégager"
+                    },
+                    {
+                      "content": "Cette lettre ne donne que le point de vue d'une personne",
+                      "match": "Apprécier"
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette lettre suffit à connaître l'opinion de tous les Ivoiriens en 1960.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Apprécier les limites : la lettre n'exprime que le point de vue d'un instituteur. Pour connaître l'opinion de tous, il faut croiser plusieurs sources.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une limite de ce document ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 5 — Apprécier : un document ancien reste utile, un écrit n'est pas vrai par principe (méthode de la critique des sources) et l'auteur est connu. La vraie limite est le point de vue unique.",
+                  "answers": [
+                    {
+                      "content": "Il ne donne que le point de vue d'un seul instituteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est trop ancien pour servir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est écrit, donc il est forcément vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas d'auteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Étape 2 — Situer : la lettre est datée de 1960, année où la Côte d'Ivoire devient ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Situer dans le contexte : en 1960, la Côte d'Ivoire devient indépendante, le 7 août 1960. Les autres propositions décrivent une situation qui n'est pas celle de cette année-là.",
+                  "answers": [
+                    {
+                      "content": "indépendante",
+                      "correct": true
+                    },
+                    {
+                      "content": "une colonie",
+                      "correct": false
+                    },
+                    {
+                      "content": "un empire",
+                      "correct": false
+                    },
+                    {
+                      "content": "une région d'un autre pays",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Traiter une situation d'évaluation",
+          "remember": "Dans l'enseignement ivoirien, une **situation d'évaluation** présente une **situation de vie** (le *contexte*), parfois un *support* (texte, document), puis une **tâche** précisée par des **consignes**. L'élève doit **mobiliser ses connaissances** pour y répondre par un texte structuré.\n\nChaque consigne commence par un **verbe** qui dit ce qu'on attend :\n**Citer** : donner sans développer. **Définir** : dire ce que c'est. **Décrire** : dire comment c'est. **Expliquer** : dire pourquoi ou comment. **Montrer** : prouver avec des arguments et des exemples.\n\nOn répond **consigne par consigne**, en phrases complètes, avec les connaissances du cours.",
+          "method": [
+            "Lire la situation et repérer le contexte : qui, où, quel problème est posé.",
+            "Identifier la tâche et chaque consigne : le verbe et ce qu'il demande.",
+            "Mobiliser les connaissances du cours qui répondent à chaque consigne.",
+            "Rédiger une réponse structurée, consigne par consigne, en phrases complètes.",
+            "Relire pour vérifier que chaque consigne a reçu une réponse complète."
+          ],
+          "example": {
+            "statement": "Situation imaginée : le club d'histoire d'un lycée d'Abidjan prépare une exposition sur l'indépendance du 7 août 1960. Consigne 1 : cite deux familles de sources que le club peut exposer. Consigne 2 : explique pourquoi le club doit croiser ses sources.",
+            "steps": [
+              "Lire : le contexte est un club d'histoire d'un lycée d'Abidjan qui prépare une exposition sur l'indépendance. Le problème est de choisir des sources et de justifier ce choix.",
+              "Identifier : la tâche est d'aider à préparer l'exposition. Consigne 1, « cite » : donner sans développer. Consigne 2, « explique » : dire pourquoi.",
+              "Mobiliser : les quatre familles de sources (écrites, orales, matérielles, iconographiques), et l'idée qu'une source seule peut être incomplète ou partiale.",
+              "Rédiger : 1. Le club peut exposer des sources écrites (journaux) et des sources iconographiques (photographies). 2. Il faut croiser les sources, car chacune est partielle ; quand elles concordent, la conclusion est plus solide.",
+              "Relire : les deux consignes ont chacune leur réponse ; la consigne 2 donne bien une raison."
+            ]
+          },
+          "pitfall": "Ne confonds pas les verbes des consignes et ne réponds pas à côté. Contre-exemple : à la consigne « Cite deux familles de sources », écrire dix lignes de cours est inutile ; à la consigne « Explique pourquoi croiser les sources », répondre seulement « les sources écrites » ne donne aucune raison. N'oublie pas non plus une consigne : si la situation en pose trois, il faut trois réponses. Demande-toi : « Que me demande ce verbe ? »",
+          "practice": {
+            "statement": "Tu t'entraînes à traiter une situation d'évaluation avec la méthode : lire, identifier, mobiliser, rédiger, relire.",
+            "questions": [
+              {
+                "content": "Que fait-on en premier devant une situation d'évaluation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire la situation et repérer le contexte : qui, où, quel problème est posé. On rédige seulement après avoir identifié les consignes.",
+                "answers": [
+                  {
+                    "content": "Lire la situation et repérer le contexte",
+                    "correct": true
+                  },
+                  {
+                    "content": "Rédiger tout de suite la réponse",
+                    "correct": false
+                  },
+                  {
+                    "content": "Recopier le cours",
+                    "correct": false
+                  },
+                  {
+                    "content": "Relire sa copie",
+                    "correct": false
+                  }
+                ],
+                "hint": "Avant d'écrire, on comprend."
+              },
+              {
+                "content": "Expliquer, c'est dire pourquoi ou comment.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier chaque consigne : « expliquer » demande de dire pourquoi ou comment, alors que « citer » demande seulement de donner. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare « citer » et « expliquer »."
+              },
+              {
+                "content": "Remets dans l'ordre ces trois étapes.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire, Étape 2 — Identifier, Étape 4 — Rédiger consigne par consigne : on lit, on repère ce qui est demandé, puis on rédige.",
+                "answers": [
+                  {
+                    "content": "Lire la situation"
+                  },
+                  {
+                    "content": "Identifier les consignes"
+                  },
+                  {
+                    "content": "Rédiger une réponse par consigne"
+                  }
+                ],
+                "hint": "On rédige en dernier."
+              }
+            ]
+          },
+          "figure": "demarche-situation-evaluation",
+          "exercise": [
+            {
+              "title": "Lire une situation d'évaluation",
+              "statement": "Dans cet exercice, tu appliques les cinq étapes de la fiche (lire, identifier, mobiliser, rédiger, relire). Situation imaginée : un journal de quartier d'Abidjan prépare un numéro sur l'indépendance du 7 août 1960. Le rédacteur te demande : « 1. Dis quel événement on célèbre le 7 août 1960. 2. Explique pourquoi il faut vérifier un témoignage avant de le publier. »",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les cinq étapes de la méthode pour traiter une situation d'évaluation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire, Étape 2 — Identifier, Étape 3 — Mobiliser, Étape 4 — Rédiger, Étape 5 — Relire. On ne mobilise pas ses connaissances avant de savoir ce qui est demandé.",
+                  "answers": [
+                    {
+                      "content": "Lire la situation et repérer le contexte"
+                    },
+                    {
+                      "content": "Identifier la tâche et les consignes"
+                    },
+                    {
+                      "content": "Mobiliser les connaissances du cours"
+                    },
+                    {
+                      "content": "Rédiger une réponse par consigne"
+                    },
+                    {
+                      "content": "Relire la copie"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque verbe de consigne à ce qu'il demande.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier chaque consigne : le verbe dit ce qu'il faut faire. Citer est court, définir donne le sens, expliquer donne la raison, décrire donne l'aspect.",
+                  "answers": [
+                    {
+                      "content": "Citer",
+                      "match": "Donner sans développer"
+                    },
+                    {
+                      "content": "Définir",
+                      "match": "Dire ce que c'est"
+                    },
+                    {
+                      "content": "Expliquer",
+                      "match": "Dire pourquoi ou comment"
+                    },
+                    {
+                      "content": "Décrire",
+                      "match": "Dire comment c'est"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la situation du journal de quartier, quel est le contexte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire la situation : le contexte dit qui, où et quel problème. Ici, un journal de quartier d'Abidjan prépare un numéro sur l'indépendance. Les autres propositions ne sont pas dans la situation.",
+                  "answers": [
+                    {
+                      "content": "Un journal de quartier prépare un numéro sur l'indépendance du 7 août 1960",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un lycée organise un match de football",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une coopérative vend du cacao",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un musée ferme ses portes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux consignes de cette situation ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Identifier chaque consigne : il y en a deux, introduites par « Dis » et « Explique ». Imprimer ou choisir une couleur ne sont pas demandés.",
+                  "answers": [
+                    {
+                      "content": "Dire quel événement on célèbre le 7 août 1960",
+                      "correct": true
+                    },
+                    {
+                      "content": "Expliquer pourquoi il faut vérifier un témoignage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Imprimer le journal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir la couleur de la couverture",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la consigne « Explique », citer un mot suffit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier : « Explique » demande une raison. Citer un mot ne dit ni pourquoi ni comment, c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Traiter une situation sur le cacao",
+              "statement": "Dans cet exercice, tu traites, étape par étape, une situation imaginée : le maire d'un village de planteurs de cacao veut écrire l'histoire de la culture du cacao dans son village. Consigne 1 : cite deux sources que le village peut utiliser. Consigne 2 : explique pourquoi le témoignage d'un ancien ne suffit pas.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Lis la situation, repère chaque verbe de consigne, puis réponds consigne par consigne.",
+              "questions": [
+                {
+                  "content": "Quelle est la tâche demandée dans cette situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier la tâche : la situation demande d'aider le village à écrire l'histoire de la culture du cacao, pas de récolter ni de vendre.",
+                  "answers": [
+                    {
+                      "content": "Aider le village à préparer l'histoire de la culture du cacao",
+                      "correct": true
+                    },
+                    {
+                      "content": "Récolter le cacao du village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vendre le cacao à l'étranger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Construire une école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la consigne « Cite deux sources », le verbe de la consigne est « ___ ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Identifier chaque consigne : le verbe est « cite » (citer). Il demande de donner sans développer.",
+                  "answers": [
+                    {
+                      "content": "cite",
+                      "correct": true
+                    },
+                    {
+                      "content": "citer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont trois sources que le village peut utiliser ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Mobiliser : un registre est une source écrite, un récit une source orale, des photographies une source iconographique. Une fiction étrangère ou une rumeur sans auteur ne renseignent pas sur le village.",
+                  "answers": [
+                    {
+                      "content": "Le registre de la coopérative des planteurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le récit d'anciens planteurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des photographies anciennes du village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un film de fiction sur un autre pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une rumeur sans auteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le témoignage d'un ancien suffit à établir tous les faits.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Mobiliser : un témoignage seul est partiel, car l'ancien peut oublier ou déformer un détail. Il faut croiser les sources.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois phrases d'une bonne réponse à la consigne 2.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 4 — Rédiger une réponse structurée : d'abord l'idée, puis l'explication, puis la conclusion avec « donc ». La consigne « explique » appelle une raison.",
+                  "answers": [
+                    {
+                      "content": "Un témoignage seul est partiel."
+                    },
+                    {
+                      "content": "Un ancien peut oublier ou déformer un détail."
+                    },
+                    {
+                      "content": "Il faut donc le croiser avec le registre et les photographies."
+                    }
+                  ]
+                },
+                {
+                  "content": "La situation compte deux consignes. Combien de réponses faut-il rédiger au minimum ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 5 — Relire : chaque consigne doit recevoir sa réponse. Avec deux consignes, il faut rédiger deux réponses.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "réponses"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Analyser un sujet sur l'indépendance",
+          "statement": "Sujet de dissertation imaginé : « Expliquez la signification de l'indépendance de la Côte d'Ivoire proclamée le 7 août 1960. » Tu analyses ce sujet avec les quatre étapes de la méthode.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Analyse d'abord les termes, les cadres et la consigne, puis formule la question centrale.",
+          "questions": [
+            {
+              "content": "Relie chaque élément du sujet « Expliquez la signification de l'indépendance de la Côte d'Ivoire proclamée le 7 août 1960. » à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Souligner les termes : « indépendance » est le terme clé. 2) Délimiter : la Côte d'Ivoire donne le lieu et le 7 août 1960 la date. 3) Repérer la consigne : « Expliquez ». On lit le sujet mot par mot avant d'écrire.",
+              "answers": [
+                {
+                  "content": "indépendance",
+                  "match": "Terme clé à définir"
+                },
+                {
+                  "content": "Côte d'Ivoire",
+                  "match": "Cadre spatial"
+                },
+                {
+                  "content": "7 août 1960",
+                  "match": "Cadre chronologique"
+                },
+                {
+                  "content": "Expliquez",
+                  "match": "Consigne"
+                }
+              ]
+            },
+            {
+              "content": "Le mot « indépendance » désigne la situation d'un pays qui décide lui-même de ses ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1) Souligner et définir le terme clé. 2) L'indépendance est la situation d'un pays qui décide lui-même de ses affaires, sans dépendre d'un autre. Une définition courte, juste et claire ouvre l'introduction.",
+              "answers": [
+                {
+                  "content": "affaires",
+                  "correct": true
+                },
+                {
+                  "content": "destinées",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En quelle année l'indépendance de la Côte d'Ivoire a-t-elle été proclamée ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Délimiter le cadre chronologique du sujet. 2) Le sujet donne la date du 7 août 1960, donc l'année 1960.",
+              "answers": [
+                {
+                  "content": "1960",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Quelle formulation est une bonne problématique pour ce sujet ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Une problématique est une question qui demande une explication. 2) « Est-elle indépendante ? » appelle un simple oui, le sujet recopié n'est pas une question et « Tout ce que l'on sait » est un hors-sujet.",
+              "answers": [
+                {
+                  "content": "Que signifie pour la Côte d'Ivoire le fait de décider elle-même de ses affaires à partir du 7 août 1960 ?",
+                  "correct": true
+                },
+                {
+                  "content": "La Côte d'Ivoire est-elle indépendante ?",
+                  "correct": false
+                },
+                {
+                  "content": "L'indépendance de la Côte d'Ivoire.",
+                  "correct": false
+                },
+                {
+                  "content": "Tout ce que l'on sait sur l'histoire de l'Afrique.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un élève qui raconte l'histoire de toute l'Afrique sans parler de l'indépendance ivoirienne fait un hors-sujet.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Délimiter le cadre spatial : la Côte d'Ivoire. 2) Sortir de ce cadre sans lien avec le sujet est un hors-sujet, comme dans le piège de la fiche.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige une problématique pour ce sujet, puis annonce un plan en deux parties.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Problématique : « Que signifie l'indépendance pour la Côte d'Ivoire et comment le pays a-t-il commencé à décider lui-même de ses affaires à partir du 7 août 1960 ? » Plan : I. Le sens de l'indépendance. II. Les premiers choix du pays indépendant. Barème : question (1) ; explication demandée (1) ; plan en deux parties cohérent (1).",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Une problématique formulée sous forme de question",
+                "Une question qui demande une explication, pas un oui ou un non",
+                "Un plan en deux parties qui répond à la problématique"
+              ],
+              "starter": "La problématique de ce sujet est : …"
+            }
+          ]
+        },
+        {
+          "title": "Rédiger une dissertation sur Abidjan",
+          "statement": "Sujet de dissertation imaginé : « Expliquez l'urbanisation d'Abidjan. » Tu construis le plan puis tu rédiges l'introduction et un paragraphe argumenté.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Suis les étapes : rassembler, regrouper, introduction, paragraphes, conclusion.",
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les quatre éléments de l'introduction de cette dissertation.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1) Rédiger l'introduction dans l'ordre : amorce, présentation du sujet, problématique, annonce du plan. 2) On annonce le plan après avoir posé la question à laquelle il répond.",
+              "answers": [
+                {
+                  "content": "L'amorce"
+                },
+                {
+                  "content": "La présentation du sujet"
+                },
+                {
+                  "content": "La problématique"
+                },
+                {
+                  "content": "L'annonce du plan"
+                }
+              ]
+            },
+            {
+              "content": "Quel plan en deux parties répond au mieux à la problématique « Pourquoi Abidjan s'étend-elle et avec quelles conséquences ? »",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Regrouper les idées en parties qui répondent à la problématique. 2) Les causes puis les conséquences répondent à « pourquoi » et « avec quelles conséquences ». Les autres plans sont des listes, du hors-sujet ou des opinions.",
+              "answers": [
+                {
+                  "content": "I. Les causes de la croissance d'Abidjan ; II. Ses conséquences : quartiers, circulation, logement",
+                  "correct": true
+                },
+                {
+                  "content": "I. Abidjan ; II. La Côte d'Ivoire",
+                  "correct": false
+                },
+                {
+                  "content": "I. Le cacao ; II. Le café",
+                  "correct": false
+                },
+                {
+                  "content": "I. Ce que j'aime à Abidjan ; II. Ce que je n'aime pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les trois éléments d'un paragraphe argumenté sur le port d'Abidjan ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1) Un paragraphe argumenté se compose d'une idée, de son explication et d'un exemple. 2) Une opinion sans justification et une liste de dates ne forment pas un argument.",
+              "answers": [
+                {
+                  "content": "Une idée",
+                  "correct": true
+                },
+                {
+                  "content": "Une explication",
+                  "correct": true
+                },
+                {
+                  "content": "Un exemple",
+                  "correct": true
+                },
+                {
+                  "content": "Une opinion sans justification",
+                  "correct": false
+                },
+                {
+                  "content": "Une liste de dates sans lien",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour relier une idée à son explication, on peut écrire « en ___ ».",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1) Dans un paragraphe, « en effet » introduit l'explication, « par exemple » l'exemple et « donc » la conclusion. 2) Ces mots relient les phrases.",
+              "answers": [
+                {
+                  "content": "effet",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La conclusion de cette dissertation peut ajouter une cause nouvelle de l'urbanisation d'Abidjan, jamais citée avant.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) La conclusion fait le bilan et ouvre sur une question voisine. 2) Une cause nouvelle doit être dans le développement, pas dans la conclusion.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe argumenté : idée, explication, exemple, pour montrer que le port attire des habitants à Abidjan.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Le port attire des habitants à Abidjan. En effet, il crée des emplois dans le transport, le commerce et le stockage des marchandises, donc des familles viennent s'y installer. Par exemple, des ouvriers viennent travailler dans les entrepôts près du port. Barème : idée (1) ; explication (1) ; exemple (1) ; rédaction (1).",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Une idée claire en une phrase",
+                "Une explication introduite par un mot de liaison",
+                "Un exemple concret",
+                "Phrases complètes et correctes"
+              ],
+              "starter": "Le port attire des habitants à Abidjan. En effet, …"
+            }
+          ]
+        },
+        {
+          "title": "Commenter une affiche de quartier",
+          "statement": "Document imaginé, écrit pour Lnclass : une affiche de 1960, signée d'un comité de quartier d'Abidjan, invite les habitants à une fête d'indépendance, le 7 août 1960, et leur demande de pavoiser leurs maisons.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Présente d'abord, explique ensuite, puis donne les limites.",
+          "questions": [
+            {
+              "content": "Relie chaque élément du document à la rubrique de la présentation qui lui correspond.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Présenter : nature, auteur, date, source, thème. 2) L'affiche est la nature, le comité l'auteur, 1960 la date, l'invitation le thème.",
+              "answers": [
+                {
+                  "content": "Une affiche",
+                  "match": "Nature"
+                },
+                {
+                  "content": "Un comité de quartier d'Abidjan",
+                  "match": "Auteur"
+                },
+                {
+                  "content": "1960",
+                  "match": "Date"
+                },
+                {
+                  "content": "Une invitation à fêter l'indépendance",
+                  "match": "Thème"
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les cinq étapes du commentaire de ce document.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1) Présenter le document. 2) Le situer dans son contexte. 3) Dégager les idées. 4) Les expliquer avec ses connaissances. 5) Apprécier la portée et les limites.",
+              "answers": [
+                {
+                  "content": "Présenter"
+                },
+                {
+                  "content": "Situer"
+                },
+                {
+                  "content": "Dégager"
+                },
+                {
+                  "content": "Expliquer"
+                },
+                {
+                  "content": "Apprécier"
+                }
+              ]
+            },
+            {
+              "content": "Quelle phrase est une explication et non une paraphrase ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Expliquer les idées sans recopier le document. 2) La première phrase dit ce que l'affiche révèle ; les deux suivantes répètent le texte et la dernière est un avis personnel.",
+              "answers": [
+                {
+                  "content": "Inviter à pavoiser les maisons montre que le comité veut associer chaque habitant à la fête de l'indépendance.",
+                  "correct": true
+                },
+                {
+                  "content": "Le comité demande de mettre des drapeaux aux maisons.",
+                  "correct": false
+                },
+                {
+                  "content": "L'affiche dit de décorer les maisons.",
+                  "correct": false
+                },
+                {
+                  "content": "Je pense que les fêtes sont importantes.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux limites de ce document ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Apprécier la portée et les limites. 2) L'affiche donne un seul point de vue et laisse dans l'ombre les autres avis. Être ancien ne rend pas faux, et l'auteur est connu.",
+              "answers": [
+                {
+                  "content": "Il exprime le point de vue d'un seul comité",
+                  "correct": true
+                },
+                {
+                  "content": "Il ne dit rien de ceux qui pensaient autrement",
+                  "correct": true
+                },
+                {
+                  "content": "Il est faux puisqu'il est ancien",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'a aucun auteur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Cette affiche suffit à décrire toute la fête de l'indépendance dans la Côte d'Ivoire entière.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Apprécier les limites. 2) L'affiche est celle d'un quartier d'Abidjan. Pour décrire la Côte d'Ivoire entière, on croise plusieurs sources.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige, en quelques lignes, la présentation puis l'explication de l'idée principale de cette affiche.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Ce document est une affiche de 1960, publiée par un comité de quartier d'Abidjan, qui invite les habitants à fêter l'indépendance. Elle date du moment où le pays décide lui-même de ses affaires. Son idée principale est l'invitation à participer. En demandant de pavoiser les maisons, le comité veut faire de ce jour une fête partagée. Barème : présentation (1) ; contexte (1) ; idée (1) ; explication (1).",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Nature, auteur et date de l'affiche",
+                "Contexte de l'indépendance",
+                "Idée principale dégagée",
+                "Explication sans paraphrase"
+              ],
+              "starter": "Ce document est une affiche de 1960 …"
+            }
+          ]
+        },
+        {
+          "title": "Une situation d'évaluation sur l'indépendance et Abidjan",
+          "statement": "Situation imaginée : le club d'histoire d'un lycée d'Abidjan prépare une exposition sur l'indépendance du 7 août 1960. Consigne 1 : cite deux familles de sources à exposer. Consigne 2 : explique pourquoi il faut croiser ces sources. Consigne 3 : définis le mot « indépendance ».",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Lis la situation, repère chaque verbe de consigne, puis réponds consigne par consigne.",
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les cinq étapes de traitement de cette situation.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1) Lire la situation. 2) Identifier la tâche et les consignes. 3) Mobiliser les connaissances. 4) Rédiger consigne par consigne. 5) Relire. On ne rédige qu'après avoir identifié les consignes.",
+              "answers": [
+                {
+                  "content": "Lire la situation et repérer le contexte"
+                },
+                {
+                  "content": "Identifier la tâche et les consignes"
+                },
+                {
+                  "content": "Mobiliser les connaissances du cours"
+                },
+                {
+                  "content": "Rédiger une réponse par consigne"
+                },
+                {
+                  "content": "Relire pour vérifier chaque consigne"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque consigne de la situation à ce qu'elle demande.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Identifier chaque consigne par son verbe. 2) Citer donne sans développer, expliquer dit pourquoi, définir dit ce que c'est.",
+              "answers": [
+                {
+                  "content": "Cite deux familles de sources",
+                  "match": "Donner sans développer"
+                },
+                {
+                  "content": "Explique pourquoi croiser les sources",
+                  "match": "Dire pourquoi"
+                },
+                {
+                  "content": "Définis le mot « indépendance »",
+                  "match": "Dire ce que c'est"
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux familles de sources que le club peut exposer ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Mobiliser le cours sur les méthodes de l'histoire. 2) Journaux et photographies sont des sources écrites et iconographiques. Des sources inventées ou sans auteur ne sont pas fiables.",
+              "answers": [
+                {
+                  "content": "Des sources écrites, comme des journaux",
+                  "correct": true
+                },
+                {
+                  "content": "Des sources iconographiques, comme des photographies",
+                  "correct": true
+                },
+                {
+                  "content": "Des sources inventées par le club",
+                  "correct": false
+                },
+                {
+                  "content": "Des sources sans auteur ni date",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une source seule peut être incomplète : l'historien doit donc les ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1) Mobiliser : croiser les sources permet de comparer. 2) Quand elles concordent, la conclusion est plus solide.",
+              "answers": [
+                {
+                  "content": "croiser",
+                  "correct": true
+                },
+                {
+                  "content": "comparer",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La situation compte trois consignes. Combien de réponses faut-il rédiger au minimum ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Identifier les trois consignes. 2) Rédiger une réponse par consigne. 3) Relire : chaque consigne doit avoir sa réponse, donc trois.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "réponses"
+            },
+            {
+              "content": "Rédige tes réponses aux trois consignes de la situation, consigne par consigne.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : 1. Le club peut exposer des sources écrites (journaux) et des sources iconographiques (photographies). 2. Il faut croiser les sources car chacune est partielle ; si elles concordent, la conclusion est plus solide. 3. L'indépendance est la situation d'un pays qui décide lui-même de ses affaires. Barème : consigne 1 (1,5) ; consigne 2 (2) ; consigne 3 (1,5) ; présentation et rédaction (1).",
+              "answers": [],
+              "points": 6,
+              "criteria": [
+                "Deux familles de sources citées",
+                "Une raison de croiser les sources",
+                "Une définition juste de l'indépendance",
+                "Une réponse par consigne, numérotée",
+                "Phrases complètes et correctes"
+              ],
+              "starter": "1. Le club peut exposer …"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base : sujet, plan, document et situation",
+          "notions": "Termes, cadres, consigne et problématique d'un sujet ; introduction, développement, conclusion et paragraphe argumenté ; présentation d'un document ; verbes de consigne et étapes d'une situation d'évaluation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sujet de dissertation imaginé : « Montrez le rôle du port d'Abidjan dans le commerce de la Côte d'Ivoire. » Analyse ce sujet.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Souligne les termes, délimite les cadres, repère la consigne.",
+              "questions": [
+                {
+                  "content": "Quels sont les deux termes clés à définir dans ce sujet ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Souligner les termes et définir les termes clés : « port » et « commerce ». 2) « Montrez » est la consigne et « Abidjan » le cadre spatial.",
+                  "answers": [
+                    {
+                      "content": "port",
+                      "correct": true
+                    },
+                    {
+                      "content": "commerce",
+                      "correct": true
+                    },
+                    {
+                      "content": "Montrez",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la consigne de ce sujet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Repérer la consigne : c'est le verbe d'action en début de sujet, ici « Montrez ». 2) Les autres mots sont des termes ou un lieu.",
+                  "answers": [
+                    {
+                      "content": "Montrez",
+                      "correct": true
+                    },
+                    {
+                      "content": "port",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan",
+                      "correct": false
+                    },
+                    {
+                      "content": "commerce",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le cadre spatial de ce sujet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Délimiter le cadre spatial : le sujet nomme Abidjan et la Côte d'Ivoire. 2) Le monde ou l'Europe sortiraient du sujet.",
+                  "answers": [
+                    {
+                      "content": "La Côte d'Ivoire, avec Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le monde entier",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Europe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun cadre n'est donné",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La problématique est la question centrale à laquelle répond toute la dissertation.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Formuler la problématique : c'est la question centrale. 2) Elle demande une explication et guide le plan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cadre ___ d'un sujet répond à la question « Quand ? ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Délimiter les cadres. 2) Le cadre spatial répond à « Où ? » et le cadre chronologique à « Quand ? ».",
+                  "answers": [
+                    {
+                      "content": "chronologique",
+                      "correct": true
+                    },
+                    {
+                      "content": "temporel",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu rédiges une dissertation. Tu te demandes comment organiser l'introduction, le développement et la conclusion.",
+              "exercise_type": "evaluation",
+              "figure": "structure-de-la-dissertation",
+              "hint": "Pense à la structure : introduction, développement, conclusion.",
+              "questions": [
+                {
+                  "content": "Relie chaque partie de la dissertation à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) L'introduction présente et pose la question. 2) Le développement y répond en parties. 3) La conclusion fait le bilan.",
+                  "answers": [
+                    {
+                      "content": "Introduction",
+                      "match": "Pose la problématique"
+                    },
+                    {
+                      "content": "Développement",
+                      "match": "Répond à la problématique"
+                    },
+                    {
+                      "content": "Conclusion",
+                      "match": "Fait le bilan"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois éléments d'un paragraphe argumenté ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1) Un paragraphe argumenté associe une idée, son explication et un exemple. 2) L'avis sans preuve et la copie du cours n'argumentent pas.",
+                  "answers": [
+                    {
+                      "content": "Une idée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une explication",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un exemple",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un avis sans preuve",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une copie du cours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le développement comprend deux ou trois parties.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Le développement se structure en deux ou trois parties. 2) Chaque partie contient des paragraphes argumentés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre éléments de l'introduction.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Amorce. 2) Présentation du sujet. 3) Problématique. 4) Annonce du plan : dans cet ordre, car le plan répond à la question posée.",
+                  "answers": [
+                    {
+                      "content": "Amorce"
+                    },
+                    {
+                      "content": "Présentation du sujet"
+                    },
+                    {
+                      "content": "Problématique"
+                    },
+                    {
+                      "content": "Annonce du plan"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase de conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) La conclusion fait un bilan qui répond à la problématique. 2) Elle n'apporte pas d'information nouvelle et ne recopie pas.",
+                  "answers": [
+                    {
+                      "content": "Pour conclure, le port attire des activités et des habitants, ce qui répond à notre question.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour conclure, voici une nouvelle cause jamais citée.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour conclure, je ne sais pas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour conclure, recopions le premier paragraphe.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document imaginé, écrit pour Lnclass : une photographie datée de 1960 montre des habitants d'un quartier d'Abidjan qui accrochent des drapeaux à leurs maisons pour l'indépendance.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Présente avant d'expliquer.",
+              "questions": [
+                {
+                  "content": "Relie chaque information à ce qu'elle indique pour présenter le document.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Présenter : nature, auteur, date, source, thème. 2) La photographie est la nature, 1960 la date, l'indépendance le thème ; les habitants d'un quartier d'Abidjan sont ce que montre l'image.",
+                  "answers": [
+                    {
+                      "content": "Une photographie",
+                      "match": "Nature"
+                    },
+                    {
+                      "content": "1960",
+                      "match": "Date"
+                    },
+                    {
+                      "content": "Des habitants d'un quartier d'Abidjan",
+                      "match": "Personnes ou lieu montrés"
+                    },
+                    {
+                      "content": "L'indépendance",
+                      "match": "Thème"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la première étape du commentaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Présenter le document avant de l'expliquer. 2) Apprécier les limites vient en dernier.",
+                  "answers": [
+                    {
+                      "content": "Présenter le document",
+                      "correct": true
+                    },
+                    {
+                      "content": "Apprécier ses limites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Expliquer sans connaître la date",
+                      "correct": false
+                    },
+                    {
+                      "content": "Donner son avis",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Commenter un document, c'est le décrire mot pour mot.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Expliquer les idées avec ses connaissances. 2) Décrire mot pour mot est de la paraphrase.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commentaire apprécie la portée et les ___ du document.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Apprécier à la dernière étape. 2) On dit ce que le document apprend et ce qu'il laisse dans l'ombre.",
+                  "answers": [
+                    {
+                      "content": "limites",
+                      "correct": true
+                    },
+                    {
+                      "content": "limite",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle limite de cette photographie est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Apprécier les limites. 2) Un seul quartier ne représente pas tout le pays. Ancienne n'est pas fausse, et la date est donnée.",
+                  "answers": [
+                    {
+                      "content": "Elle montre un seul quartier et ne dit rien du reste du pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle prouve ce que pensent tous les Ivoiriens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse car ancienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas de date",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation imaginée : un lycée d'Abidjan organise une exposition sur le cacao. Consigne 1 : cite deux sources sur le cacao. Consigne 2 : explique pourquoi il faut vérifier un document avant de l'exposer.",
+              "exercise_type": "evaluation",
+              "figure": "demarche-situation-evaluation",
+              "hint": "Lis le contexte puis repère chaque verbe.",
+              "questions": [
+                {
+                  "content": "Relie chaque verbe de consigne à ce qu'il demande.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Identifier le verbe de chaque consigne. 2) Citer donne, définir dit ce que c'est, expliquer dit pourquoi.",
+                  "answers": [
+                    {
+                      "content": "Citer",
+                      "match": "Donner sans développer"
+                    },
+                    {
+                      "content": "Définir",
+                      "match": "Dire ce que c'est"
+                    },
+                    {
+                      "content": "Expliquer",
+                      "match": "Dire pourquoi ou comment"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre premières étapes de traitement d'une situation.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Lire. 2) Identifier. 3) Mobiliser. 4) Rédiger consigne par consigne.",
+                  "answers": [
+                    {
+                      "content": "Lire la situation"
+                    },
+                    {
+                      "content": "Identifier les consignes"
+                    },
+                    {
+                      "content": "Mobiliser ses connaissances"
+                    },
+                    {
+                      "content": "Rédiger consigne par consigne"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le contexte de cette situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Lire la situation pour repérer le contexte. 2) Ici, une exposition sur le cacao dans un lycée d'Abidjan.",
+                  "answers": [
+                    {
+                      "content": "Un lycée d'Abidjan organise une exposition sur le cacao",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un match de football",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un voyage à l'étranger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une réunion de parents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une consigne « Explique », il faut donner une raison.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Identifier le verbe. 2) « Explique » demande une raison : pourquoi ou comment.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de consignes compte la situation ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) Identifier les consignes : « cite » et « explique ». 2) Il y en a deux.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "consignes"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La méthodologie dans la vie courante en Côte d'Ivoire",
+          "notions": "Situations d'exposé et d'exposition en Côte d'Ivoire : urbanisation d'Abidjan, cacao, affiche de quartier, club d'histoire ; analyse de sujet, plan, paragraphe, commentaire et situation d'évaluation.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève de 2nde d'Abidjan doit traiter le sujet imaginé : « Expliquez l'urbanisation d'Abidjan après l'indépendance. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Analyse le sujet avec les quatre étapes.",
+              "questions": [
+                {
+                  "content": "Relie chaque élément du sujet à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Souligner : « urbanisation ». 2) Délimiter : Abidjan et après l'indépendance. 3) Repérer la consigne : « Expliquez ».",
+                  "answers": [
+                    {
+                      "content": "urbanisation",
+                      "match": "Terme clé à définir"
+                    },
+                    {
+                      "content": "Abidjan",
+                      "match": "Cadre spatial"
+                    },
+                    {
+                      "content": "après l'indépendance",
+                      "match": "Cadre chronologique"
+                    },
+                    {
+                      "content": "Expliquez",
+                      "match": "Consigne"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'urbanisation est la croissance des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Définir le terme clé. 2) L'urbanisation est la croissance des villes.",
+                  "answers": [
+                    {
+                      "content": "villes",
+                      "correct": true
+                    },
+                    {
+                      "content": "ville",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la meilleure problématique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Formuler une question qui demande une explication. 2) Les autres propositions se répondent par oui, répètent le thème ou sortent du sujet.",
+                  "answers": [
+                    {
+                      "content": "Pourquoi et comment Abidjan s'est-elle fortement étendue après l'indépendance ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Abidjan est-elle une ville ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout sur les villes d'Afrique.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parler de la culture du coton au nord du pays est le sujet attendu.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Délimiter les cadres. 2) Le sujet traite d'Abidjan, pas du coton au nord : ce serait un hors-sujet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le cadre chronologique du sujet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Délimiter le cadre chronologique. 2) Le sujet dit « après l'indépendance ».",
+                  "answers": [
+                    {
+                      "content": "La période qui suit l'indépendance",
+                      "correct": true
+                    },
+                    {
+                      "content": "La préhistoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le XIXe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune période",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une coopérative de planteurs (imaginaire) demande à un élève de rédiger un paragraphe sur l'importance du cacao.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche l'ordre idée, explication, exemple.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les trois phrases du paragraphe.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Idée. 2) Explication, introduite par « en effet ». 3) Exemple, introduit par « par exemple ».",
+                  "answers": [
+                    {
+                      "content": "Le cacao procure des revenus aux planteurs."
+                    },
+                    {
+                      "content": "En effet, la vente des fèves leur apporte de l'argent."
+                    },
+                    {
+                      "content": "Par exemple, un planteur peut payer l'école de ses enfants."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot de liaison à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Dans un paragraphe argumenté, ces mots relient l'idée, l'explication et l'exemple. 2) Chacun a un rôle précis.",
+                  "answers": [
+                    {
+                      "content": "En effet",
+                      "match": "Introduit l'explication"
+                    },
+                    {
+                      "content": "Par exemple",
+                      "match": "Introduit l'exemple"
+                    },
+                    {
+                      "content": "Donc",
+                      "match": "Introduit la conséquence"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paragraphe sans exemple est un paragraphe argumenté complet.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Un paragraphe argumenté a une idée, une explication et un exemple. 2) Sans exemple, il est incomplet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paragraphe argumenté contient une idée, une explication et un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Les trois éléments sont idée, explication, exemple.",
+                  "answers": [
+                    {
+                      "content": "exemple",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase est une bonne idée de paragraphe sur le cacao ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Une idée est une phrase complète qui défend un argument. 2) Les autres propositions sont un mot, un goût ou un fait sans lien.",
+                  "answers": [
+                    {
+                      "content": "Le cacao fait vivre des familles de planteurs.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cacao.",
+                      "correct": false
+                    },
+                    {
+                      "content": "J'aime le chocolat.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fait chaud.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document imaginé, écrit pour Lnclass : une lettre de 1960 d'une habitante d'Abidjan à son frère : « Hier, au marché, tout le monde parlait de l'indépendance. Certains riaient, d'autres demandaient ce qui allait changer. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Présente, situe, dégage, explique, apprécie.",
+              "questions": [
+                {
+                  "content": "Quelle est la nature du document ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Présenter : la nature est la forme du document. 2) Le texte écrit d'une personne à son frère est une lettre.",
+                  "answers": [
+                    {
+                      "content": "Une lettre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une affiche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une carte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un objet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux idées principales de la lettre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Dégager les idées principales. 2) La lettre dit que tout le monde en parle et que certains s'interrogent. Les autres propositions n'y sont pas.",
+                  "answers": [
+                    {
+                      "content": "Beaucoup parlent de l'indépendance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Certains se demandent ce qui va changer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le marché est fermé",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lettre critique un maire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lettre montre que tous les habitants étaient certains du changement à venir.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Dégager les idées. 2) Certains demandent ce qui va changer : tous n'étaient donc pas certains.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La lettre date de 1960, année où la Côte d'Ivoire devient ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1) Situer dans son contexte. 2) En 1960, la Côte d'Ivoire devient indépendante (7 août 1960).",
+                  "answers": [
+                    {
+                      "content": "indépendante",
+                      "correct": true
+                    },
+                    {
+                      "content": "une colonie",
+                      "correct": false
+                    },
+                    {
+                      "content": "un empire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une limite de cette lettre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Apprécier les limites. 2) La lettre donne un point de vue. Elle n'est ni fausse parce qu'ancienne, ni l'avis de tout un pays.",
+                  "answers": [
+                    {
+                      "content": "Elle ne raconte que ce qu'une habitante a vu et entendu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est fausse car elle est ancienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle donne l'avis de tout le pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a pas de date",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation imaginée : le club d'histoire d'un lycée d'Abidjan prépare une exposition sur l'indépendance du 7 août 1960. Consigne 1 : cite deux familles de sources. Consigne 2 : explique pourquoi il faut les croiser.",
+              "exercise_type": "evaluation",
+              "figure": "demarche-situation-evaluation",
+              "hint": "Lis les verbes puis mobilise le cours sur les sources.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de traitement de la situation.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Lire. 2) Identifier. 3) Mobiliser. 4) Rédiger. 5) Relire.",
+                  "answers": [
+                    {
+                      "content": "Lire la situation et repérer le contexte"
+                    },
+                    {
+                      "content": "Identifier les consignes"
+                    },
+                    {
+                      "content": "Mobiliser les connaissances du cours"
+                    },
+                    {
+                      "content": "Rédiger consigne par consigne"
+                    },
+                    {
+                      "content": "Relire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux familles de sources à citer ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Mobiliser les connaissances du cours. 2) Les sources écrites et orales sont deux des quatre familles.",
+                  "answers": [
+                    {
+                      "content": "Les sources écrites",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sources orales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sources inventées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sources sans date",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle réponse convient à la consigne 2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) « Explique » demande une raison. 2) Seule la première proposition donne une raison.",
+                  "answers": [
+                    {
+                      "content": "Chaque source est partielle ; en les croisant, on obtient une conclusion plus solide.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sources écrites.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le professeur l'a dit.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne faut pas les croiser.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La consigne 1 demande de développer longuement chaque famille.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) « Cite » demande de donner sans développer. 2) Développer longuement est inutile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de familles de sources existe-t-il (écrites, orales, matérielles, iconographiques) ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) Mobiliser le cours : il y a quatre familles de sources.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "familles"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier : repérer les défauts d'une copie",
+          "notions": "Distinguer une bonne et une mauvaise problématique, repérer le hors-sujet, la paraphrase et la copie sans réponse à la consigne ; justifier la portée et les limites d'un document.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sujet imaginé : « Expliquez comment le cacao fait vivre des familles en Côte d'Ivoire. » Quatre élèves proposent une problématique.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une bonne problématique demande une explication.",
+              "questions": [
+                {
+                  "content": "Quelle problématique est la meilleure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Formuler une question qui demande une explication. 2) Les autres propositions se règlent par oui, répètent le sujet ou sortent du cadre.",
+                  "answers": [
+                    {
+                      "content": "Comment le cacao fait-il vivre des familles ivoiriennes ?",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cacao fait-il vivre des familles ?",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao en Côte d'Ivoire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'histoire de toutes les cultures du monde.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La problématique « Le cacao fait-il vivre des familles ? » est une bonne problématique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Une question fermée appelle oui ou non. 2) Elle ne permet pas de construire un plan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux défauts d'une problématique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Une bonne problématique est une question qui demande une explication, dans le cadre du sujet. 2) Les deux premiers sont des défauts.",
+                  "answers": [
+                    {
+                      "content": "Elle se répond par oui ou par non",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle recopie le sujet sans question",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle demande une explication",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle porte sur le cadre du sujet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une problématique commence souvent par « Pourquoi » ou « ___ ».",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Formuler la problématique avec « pourquoi » ou « comment ». 2) Ces mots appellent une explication.",
+                  "answers": [
+                    {
+                      "content": "comment",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève parle de l'histoire de toute l'Afrique alors que le sujet porte sur le cacao ivoirien. Quel est ce défaut ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Délimiter le cadre. 2) Sortir du cadre est un hors-sujet. La paraphrase concerne le commentaire.",
+                  "answers": [
+                    {
+                      "content": "Le hors-sujet",
+                      "correct": true
+                    },
+                    {
+                      "content": "La paraphrase",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ouverture",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'amorce",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève rédige une dissertation sur « L'urbanisation d'Abidjan ». Son professeur relève plusieurs défauts.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche les défauts de la copie.",
+              "questions": [
+                {
+                  "content": "Il écrit : « Abidjan a un port. Abidjan a des quartiers. » Quel défaut est relevé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Un paragraphe argumenté a idée, explication, exemple. 2) Des faits sans lien forment une liste.",
+                  "answers": [
+                    {
+                      "content": "Une liste de faits sans idée, ni explication, ni exemple",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une conclusion trop longue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une problématique trop précise",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un plan trop court",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ajouter une cause nouvelle dans la conclusion est une bonne pratique.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) La conclusion fait le bilan. 2) Une cause nouvelle appartient au développement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces propositions, lesquelles appartiennent à l'introduction ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) L'introduction contient amorce, sujet, problématique, plan. 2) L'exemple détaillé est dans le développement.",
+                  "answers": [
+                    {
+                      "content": "La problématique",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'annonce du plan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un exemple détaillé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une conclusion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois parties.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Introduction. 2) Développement. 3) Conclusion.",
+                  "answers": [
+                    {
+                      "content": "Introduction"
+                    },
+                    {
+                      "content": "Développement"
+                    },
+                    {
+                      "content": "Conclusion"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour donner une raison, il écrit : « ___, le port crée des emplois. »",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1) « En effet » introduit l'explication. 2) « Par exemple » annonce l'exemple et « En conclusion » le bilan.",
+                  "answers": [
+                    {
+                      "content": "En effet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Par exemple",
+                      "correct": false
+                    },
+                    {
+                      "content": "En conclusion",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il était une fois",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document imaginé, écrit pour Lnclass : un article de journal de 1960, signé par un journaliste (personnage imaginaire), décrit une fête d'indépendance dans un quartier d'Abidjan et affirme que « tous les habitants étaient ravis ».",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Distingue expliquer et paraphraser.",
+              "questions": [
+                {
+                  "content": "Quelle phrase est une explication et non une paraphrase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Expliquer sans recopier. 2) La première phrase dit ce que l'article révèle. Les autres répètent ou donnent un avis.",
+                  "answers": [
+                    {
+                      "content": "Cet article montre la volonté de présenter l'indépendance comme un moment de joie partagée.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'article dit que tous les habitants étaient ravis.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le journaliste écrit que la fête était belle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "J'aime ce journal.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'affirmation « tous les habitants étaient ravis » prouve que personne n'était inquiet.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Apprécier les limites. 2) Un journaliste donne son point de vue ; il peut généraliser.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux raisons de croiser cet article avec d'autres sources ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Apprécier la portée et les limites. 2) Un point de vue unique et une généralisation demandent de croiser. Le support ou l'ancienneté ne comptent pas.",
+                  "answers": [
+                    {
+                      "content": "Il donne le point de vue d'un seul journaliste",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il généralise à tous les habitants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est écrit sur du papier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est ancien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un article de journal est une source ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Présenter la nature. 2) Un journal est un texte : une source écrite.",
+                  "answers": [
+                    {
+                      "content": "écrite",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le contexte de cet article ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Situer le document. 2) L'article est daté de 1960 et parle de l'indépendance.",
+                  "answers": [
+                    {
+                      "content": "L'indépendance de la Côte d'Ivoire en 1960",
+                      "correct": true
+                    },
+                    {
+                      "content": "La préhistoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un match de football",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une élection",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation imaginée : une classe de 2nde d'Abidjan prépare un exposé sur le cacao. Consigne 1 : définis le mot « source ». Consigne 2 : explique pourquoi il faut vérifier un document avant de s'en servir.",
+              "exercise_type": "evaluation",
+              "figure": "demarche-situation-evaluation",
+              "hint": "Distingue définir, expliquer et citer.",
+              "questions": [
+                {
+                  "content": "Quelle réponse convient à la consigne 1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) « Définis » demande de dire ce que c'est. 2) Seule la première proposition définit une source en histoire.",
+                  "answers": [
+                    {
+                      "content": "Une source est une trace laissée par le passé que l'historien utilise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une source est un fleuve",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source est un avis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une source est une copie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la consigne 2, répondre « Les sources écrites » suffit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) « Explique » demande une raison. 2) Citer une famille ne donne aucune raison.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux réponses correctes à la consigne 2 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Mobiliser le cours sur la critique des sources. 2) Un document n'est pas vrai par principe.",
+                  "answers": [
+                    {
+                      "content": "Un document peut déformer les faits",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'auteur peut avoir un intérêt",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un document ancien est toujours exact",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un texte officiel est toujours vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les trois phrases d'une bonne réponse.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Idée. 2) Explication. 3) Conséquence avec « donc ».",
+                  "answers": [
+                    {
+                      "content": "Un document n'est pas vrai par principe."
+                    },
+                    {
+                      "content": "L'auteur peut déformer les faits pour servir son intérêt."
+                    },
+                    {
+                      "content": "Il faut donc le vérifier avant de s'en servir."
+                    }
+                  ]
+                },
+                {
+                  "content": "La situation compte deux consignes. Combien de réponses faut-il rédiger ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) Identifier les consignes. 2) Rédiger une réponse par consigne.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "réponses"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : dissertation, commentaire de document et situation d'évaluation",
+          "notions": "Bilan des quatre notions : analyse d'un sujet, plan et rédaction de la dissertation, commentaire de document, situation d'évaluation, en lien avec les acquis sur les sources et sur l'indépendance de la Côte d'Ivoire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sujet imaginé : « Montrez l'importance du cacao pour la Côte d'Ivoire. » Tu l'analyses.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Reprends les quatre étapes de l'analyse.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de l'analyse du sujet.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Souligner. 2) Délimiter. 3) Repérer. 4) Formuler.",
+                  "answers": [
+                    {
+                      "content": "Souligner les termes et définir les termes clés"
+                    },
+                    {
+                      "content": "Délimiter le cadre spatial et le cadre chronologique"
+                    },
+                    {
+                      "content": "Repérer la consigne"
+                    },
+                    {
+                      "content": "Formuler la problématique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la consigne du sujet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Repérer la consigne : le verbe « Montrez ».",
+                  "answers": [
+                    {
+                      "content": "Montrez",
+                      "correct": true
+                    },
+                    {
+                      "content": "cacao",
+                      "correct": false
+                    },
+                    {
+                      "content": "importance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Côte d'Ivoire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément du sujet à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Souligner « cacao ». 2) Délimiter « Côte d'Ivoire ». 3) Repérer « Montrez ».",
+                  "answers": [
+                    {
+                      "content": "cacao",
+                      "match": "Terme clé"
+                    },
+                    {
+                      "content": "Côte d'Ivoire",
+                      "match": "Cadre spatial"
+                    },
+                    {
+                      "content": "Montrez",
+                      "match": "Consigne"
+                    }
+                  ]
+                },
+                {
+                  "content": "La problématique doit demander une explication.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Formuler la problématique : une question qui appelle pourquoi ou comment.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour montrer l'importance du cacao, on étudie la production, la vente et les revenus du pays, c'est-à-dire son ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Définir les termes utiles au sujet. 2) La production, la vente et les revenus d'un pays forment son économie : c'est là que se mesure l'importance du cacao.",
+                  "answers": [
+                    {
+                      "content": "économie",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Tu construis le plan de cette dissertation sur le cacao et tu prépares son introduction, ses paragraphes et sa conclusion.",
+              "exercise_type": "evaluation",
+              "figure": "structure-de-la-dissertation",
+              "hint": "Suis les cinq étapes de la dissertation.",
+              "questions": [
+                {
+                  "content": "Quel plan convient le mieux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Regrouper les idées en parties qui répondent à la problématique. 2) Seul le premier plan le fait.",
+                  "answers": [
+                    {
+                      "content": "I. Le cacao procure des revenus ; II. Il fait vivre des activités liées",
+                      "correct": true
+                    },
+                    {
+                      "content": "I. Le cacao ; II. Le café",
+                      "correct": false
+                    },
+                    {
+                      "content": "I. Mon avis ; II. Mon avis encore",
+                      "correct": false
+                    },
+                    {
+                      "content": "I. Les sports ; II. Les arts",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre éléments de l'introduction.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Amorce. 2) Sujet. 3) Problématique. 4) Plan.",
+                  "answers": [
+                    {
+                      "content": "Amorce"
+                    },
+                    {
+                      "content": "Présentation du sujet"
+                    },
+                    {
+                      "content": "Problématique"
+                    },
+                    {
+                      "content": "Annonce du plan"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux éléments de la conclusion ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) La conclusion contient bilan et ouverture. 2) Pas d'information nouvelle.",
+                  "answers": [
+                    {
+                      "content": "Un bilan qui répond à la problématique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une ouverture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une nouvelle cause",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un exemple détaillé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les paragraphes du développement sont argumentés.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Chaque paragraphe a idée, explication, exemple.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque phrase à son rôle dans un paragraphe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Idée. 2) Explication avec « en effet ». 3) Exemple avec « par exemple ».",
+                  "answers": [
+                    {
+                      "content": "Le cacao procure des revenus.",
+                      "match": "Idée"
+                    },
+                    {
+                      "content": "En effet, la vente apporte de l'argent.",
+                      "match": "Explication"
+                    },
+                    {
+                      "content": "Par exemple, on paie l'école.",
+                      "match": "Exemple"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document imaginé, écrit pour Lnclass : une affiche de 1960 d'un comité de quartier d'Abidjan invite à fêter l'indépendance du 7 août 1960.",
+              "exercise_type": "evaluation",
+              "figure": "etapes-du-commentaire",
+              "hint": "Présente, situe, dégage, explique, apprécie.",
+              "questions": [
+                {
+                  "content": "Relie chaque information à la rubrique de la présentation.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Présenter : nature, auteur, date.",
+                  "answers": [
+                    {
+                      "content": "Une affiche",
+                      "match": "Nature"
+                    },
+                    {
+                      "content": "Un comité de quartier",
+                      "match": "Auteur"
+                    },
+                    {
+                      "content": "1960",
+                      "match": "Date"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les cinq étapes du commentaire.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Présenter. 2) Situer. 3) Dégager. 4) Expliquer. 5) Apprécier.",
+                  "answers": [
+                    {
+                      "content": "Présenter"
+                    },
+                    {
+                      "content": "Situer"
+                    },
+                    {
+                      "content": "Dégager"
+                    },
+                    {
+                      "content": "Expliquer"
+                    },
+                    {
+                      "content": "Apprécier"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la date réelle de l'indépendance de la Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Situer dans le contexte. 2) L'indépendance est du 7 août 1960.",
+                  "answers": [
+                    {
+                      "content": "Le 7 août 1960",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le 7 août 1950",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 7 août 1970",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 1er janvier 1960",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette affiche donne l'opinion de tous les Ivoiriens.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Apprécier les limites. 2) Elle n'exprime que le point de vue d'un comité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux bonnes manières de dépasser les limites de l'affiche ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Apprécier la portée et les limites. 2) Croiser évite de dépendre d'un seul point de vue.",
+                  "answers": [
+                    {
+                      "content": "La croiser avec d'autres sources",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chercher le point de vue d'autres auteurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "La recopier",
+                      "correct": false
+                    },
+                    {
+                      "content": "La croire sans vérifier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation imaginée : le club d'histoire d'un lycée d'Abidjan prépare une exposition sur l'indépendance. Consigne 1 : cite deux familles de sources. Consigne 2 : explique pourquoi il faut les croiser. Consigne 3 : définis le mot « indépendance ».",
+              "exercise_type": "evaluation",
+              "figure": "demarche-situation-evaluation",
+              "hint": "Lis chaque verbe de consigne.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les cinq étapes de traitement d'une situation.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Lire. 2) Identifier. 3) Mobiliser. 4) Rédiger. 5) Relire.",
+                  "answers": [
+                    {
+                      "content": "Lire la situation"
+                    },
+                    {
+                      "content": "Identifier les consignes"
+                    },
+                    {
+                      "content": "Mobiliser les connaissances"
+                    },
+                    {
+                      "content": "Rédiger consigne par consigne"
+                    },
+                    {
+                      "content": "Relire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque consigne à ce qu'elle demande.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Identifier chaque verbe. 2) Citer donne, expliquer dit pourquoi, définir dit ce que c'est.",
+                  "answers": [
+                    {
+                      "content": "Cite deux familles de sources",
+                      "match": "Donner sans développer"
+                    },
+                    {
+                      "content": "Explique pourquoi croiser",
+                      "match": "Dire pourquoi"
+                    },
+                    {
+                      "content": "Définis le mot indépendance",
+                      "match": "Dire ce que c'est"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle réponse convient à la consigne 3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) « Définis » demande de dire ce que c'est. 2) Seule la première proposition définit le mot.",
+                  "answers": [
+                    {
+                      "content": "L'indépendance est la situation d'un pays qui décide lui-même de ses affaires.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'indépendance est un fleuve.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'indépendance est une saison.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'indépendance est un objet.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque consigne doit avoir sa propre réponse.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Relire. 2) Une réponse par consigne.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de réponses faut-il rédiger pour cette situation ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1) Identifier les trois consignes. 2) Rédiger une réponse par consigne.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "réponses"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

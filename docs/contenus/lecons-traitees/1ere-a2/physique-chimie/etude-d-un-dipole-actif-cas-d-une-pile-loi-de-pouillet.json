@@ -1,0 +1,3438 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "A2",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "caracteristique-pile-a",
+          "kind": "coordinate_plane",
+          "description": "Caractéristique d'une pile dans un repère : l'axe horizontal donne l'intensité I en ampères, l'axe vertical la tension U en volts. Le segment descendant relie le point A (0 A ; 4,5 V), qui donne la f.é.m., au point B (3 A ; 1,5 V), puis continue jusqu'à l'axe horizontal en 4,5 A. La tension diminue quand l'intensité augmente.",
+          "params": {
+            "xmin": -1,
+            "xmax": 6,
+            "ymin": -1,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 4.5
+              },
+              {
+                "id": "B",
+                "x": 3,
+                "y": 1.5
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 4.5,
+                "x2": 4.5,
+                "y2": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "caracteristique-pile-b",
+          "kind": "coordinate_plane",
+          "description": "Caractéristique d'une autre pile : l'axe horizontal donne l'intensité I en ampères, l'axe vertical la tension U en volts. Le segment descendant passe par le point A (0 A ; 6 V), le point B (1 A ; 4 V) et le point C (2 A ; 2 V), puis atteint l'axe horizontal en 3 A. Chaque ampère de plus fait baisser la tension de 2 volts.",
+          "params": {
+            "xmin": -1,
+            "xmax": 5,
+            "ymin": -1,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "B",
+                "x": 1,
+                "y": 4
+              },
+              {
+                "id": "C",
+                "x": 2,
+                "y": 2
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 6,
+                "x2": 3,
+                "y2": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "circuit-pouillet",
+          "kind": "diagram",
+          "description": "Circuit en série dessiné en boucle fermée : la pile, caractérisée par sa f.é.m. E et sa résistance interne r, envoie le même courant d'intensité I dans le résistor R1, puis dans le résistor R2, avant de revenir à la pile. L'intensité est la même en tout point de cette boucle.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "pile",
+                "label": "Pile (E ; r)",
+                "category": 1
+              },
+              {
+                "id": "r1",
+                "label": "Résistor R1",
+                "category": 2
+              },
+              {
+                "id": "r2",
+                "label": "Résistor R2",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "pile",
+                "to": "r1",
+                "label": "I"
+              },
+              {
+                "from": "r1",
+                "to": "r2",
+                "label": "I"
+              },
+              {
+                "from": "r2",
+                "to": "pile",
+                "label": "I"
+              }
+            ],
+            "legend": [
+              "Dipôle actif",
+              "Dipôles passifs"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "caracteristique-pile-lampe",
+          "kind": "coordinate_plane",
+          "description": "Caractéristique de la pile d'une lampe de pêcheur : l'axe horizontal donne l'intensité I en ampères, l'axe vertical la tension U en volts. Le segment descendant part du point A (0 A ; 3,6 V), passe par le point B (0,3 A ; 3 V) et le point C (0,6 A ; 2,4 V), puis atteint l'axe horizontal en 1,8 A.",
+          "params": {
+            "xmin": -0.5,
+            "xmax": 2.5,
+            "ymin": -0.5,
+            "ymax": 4.5,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 3.6
+              },
+              {
+                "id": "B",
+                "x": 0.3,
+                "y": 3
+              },
+              {
+                "id": "C",
+                "x": 0.6,
+                "y": 2.4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 3.6,
+                "x2": 1.8,
+                "y2": 0
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "La f.é.m. d'une pile",
+          "remember": "Une **pile** est un **dipôle actif** : grâce à une réaction chimique, elle fournit une tension au circuit, ce que ne fait pas un dipôle passif comme le résistor. Elle a une borne **positive** (+) et une borne **négative** (−) ; le courant sort de la pile par la borne +. Sa **force électromotrice** (f.é.m.) $E$ s'exprime en **volts** (V). C'est la tension entre ses bornes quand elle ne débite aucun courant ($I = 0$, circuit ouvert). On la mesure avec un **voltmètre** branché en dérivation. Exemples : pile ronde 1,5 V, pile plate 4,5 V.",
+          "method": [
+            "Repérer les bornes + et − de la pile et vérifier que le circuit extérieur est ouvert ($I = 0$).",
+            "Brancher le voltmètre en dérivation aux bornes de la pile : borne V du côté +, borne COM du côté −.",
+            "Lire la tension affichée par le voltmètre, avec son unité.",
+            "Conclure : à vide, la f.é.m. de la pile est égale à la tension lue, $E = U$."
+          ],
+          "example": {
+            "statement": "À Bouaké, un élève veut connaître la f.é.m. de la pile plate d'une lampe-torche. L'interrupteur est ouvert et le voltmètre branché aux bornes de la pile affiche 4,5 V. Donner la f.é.m. de la pile.",
+            "steps": [
+              "Repérer : la pile a une borne + et une borne − ; l'interrupteur est ouvert, donc $I = 0$.",
+              "Brancher : le voltmètre est en dérivation sur la pile, sa borne V est reliée au + et sa borne COM au −.",
+              "Lire : le voltmètre affiche 4,5 V.",
+              "Conclure : à vide, $E = U = 4{,}5$ V."
+            ]
+          },
+          "pitfall": "Ne pas croire que la tension aux bornes d'une pile vaut toujours sa f.é.m. Elle ne vaut $E$ que si la pile ne débite aucun courant. Contre-exemple : une pile de $E = 4{,}5$ V alimente une lampe allumée ; le voltmètre branché sur la pile affiche 4,2 V, et non 4,5 V. Mesure toujours $E$ avec le circuit extérieur ouvert.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Mesurer la f.é.m. d'une pile",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : repérer les bornes, brancher le voltmètre, lire la tension, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Comment branche-t-on un voltmètre pour mesurer la tension aux bornes d'une pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Brancher le voltmètre en dérivation : on le relie directement aux deux bornes de la pile, borne V du côté + et borne COM du côté −. Le monter en série est l'erreur de l'ampèremètre : ce serait mesurer une intensité, pas une tension.",
+                  "answers": [
+                    {
+                      "content": "en dérivation, directement sur les deux bornes de la pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "en série avec la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "en série avec la lampe, après l'interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "en dérivation, mais seulement sur le fil de connexion",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La f.é.m. d'une pile s'exprime en ampères.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Lire la tension avec son unité : la f.é.m. est une tension, donc elle s'exprime en volts (V). L'ampère (A) est l'unité de l'intensité du courant. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À Bouaké, un élève branche un voltmètre aux bornes d'une pile ronde de poste radio, interrupteur ouvert. Le voltmètre affiche 1,5 V. Quelle est la f.é.m. de la pile, en volts ?",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : l'interrupteur est ouvert, donc $I = 0$. Étape 2 — Brancher : le voltmètre est en dérivation sur la pile. Étape 3 — Lire : 1,5 V. Étape 4 — Conclure : à vide, $E = U = 1{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile ne débite aucun courant (circuit ouvert). Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : circuit ouvert signifie $I = 0$. Étape 4 — Conclure : à vide, $E = U$. La tension n'est pas nulle (une pile non utilisée garde sa tension) et la f.é.m. non plus : c'est une propriété de la pile.",
+                  "answers": [
+                    {
+                      "content": "L'intensité du courant dans la pile est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension entre les bornes de la pile est égale à sa f.é.m.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension entre les bornes de la pile est nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La f.é.m. de la pile est nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre doit être monté en série avec la pile.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la mesure de la f.é.m. d'une pile.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode dans l'ordre : Étape 1 — Repérer, Étape 2 — Brancher, Étape 3 — Lire, Étape 4 — Conclure. Il faut d'abord ouvrir le circuit : sinon la tension lue n'est plus la f.é.m.",
+                  "answers": [
+                    {
+                      "content": "Repérer les bornes + et − de la pile et vérifier que le circuit extérieur est ouvert."
+                    },
+                    {
+                      "content": "Brancher le voltmètre en dérivation aux bornes de la pile."
+                    },
+                    {
+                      "content": "Lire la tension affichée par le voltmètre."
+                    },
+                    {
+                      "content": "Conclure que la f.é.m. est égale à la tension lue."
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : une pile est un dipôle ___ , car elle fournit elle-même une tension au circuit.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la pile a une borne + et une borne − et elle impose une tension. C'est un dipôle actif. Un résistor, au contraire, ne fournit aucune tension : c'est un dipôle passif.",
+                  "answers": [
+                    {
+                      "content": "actif",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de f.é.m. 6 V alimente une lampe. Un voltmètre branché en dérivation sur la pile affiche 5,7 V. Que peut-on en conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la lampe est allumée, le circuit est fermé et $I \\neq 0$. Étape 4 — Conclure : la tension lue (5,7 V) n'est plus la f.é.m. ($E = 6$ V). Croire que $U$ vaut toujours $E$ est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "La pile débite un courant : la tension à ses bornes est inférieure à sa f.é.m.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La f.é.m. de la pile a baissé et vaut maintenant 5,7 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre est défectueux, il devrait afficher 6 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile est en circuit ouvert.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Mesurer la f.é.m. de piles différentes",
+              "statement": "Dans cet exercice, tu mesures la f.é.m. de piles variées avec la méthode de la fiche : repérer les bornes, brancher le voltmètre, lire la tension, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Une f.é.m. se mesure toujours à vide : interrupteur ouvert, voltmètre en dérivation. Ne confonds pas la tension lue lampe allumée avec la f.é.m.",
+              "questions": [
+                {
+                  "content": "À Korhogo, un élève branche un voltmètre en dérivation aux bornes d'une pile plate de poste radio, interrupteur ouvert. Le voltmètre affiche 9 V. Quelle est la f.é.m. de la pile, en volts ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la pile a une borne + et une borne − ; l'interrupteur est ouvert, donc $I = 0$. Étape 2 — Brancher : le voltmètre est en dérivation sur la pile. Étape 3 — Lire : le voltmètre affiche 9 V. Étape 4 — Conclure : à vide, $E = U = 9$ V.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Un voltmètre branché aux bornes d'une pile de lampe indique 1,5 V, interrupteur ouvert. Lampe allumée, il indique 1,3 V. Quelle est la f.é.m. de la pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la mesure interrupteur ouvert correspond à $I = 0$. Étape 3 — Lire : 1,5 V. Étape 4 — Conclure : à vide, $E = U = 1{,}5$ V. Répondre 1,3 V confond la tension lampe allumée, plus petite car la pile débite, avec la f.é.m. ; répondre 2,8 V additionne deux mesures qui ne s'additionnent pas ; répondre 0 V oublie que la pile fournit une tension même sans courant.",
+                  "answers": [
+                    {
+                      "content": "1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "1,3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "2,8 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer la f.é.m. d'une pile, on branche le voltmètre en série avec la pile.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Brancher : le voltmètre se branche toujours en dérivation, directement sur les deux bornes de la pile. Monté en série, il serait traversé par tout le courant du circuit et ne mesurerait pas $E$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : à l'extérieur d'une pile, le courant sort par la borne ___ (positive ou négative).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer les bornes : le courant sort de la pile par la borne positive (+), traverse le circuit extérieur et revient par la borne négative (−). Étape 2 — Brancher : la borne V du voltmètre se relie donc au côté +.",
+                  "answers": [
+                    {
+                      "content": "positive",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque grandeur de la pile à son unité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Lire avec son unité : la f.é.m. et la tension se lisent en volts (V) ; l'intensité s'exprime en ampères (A) ; la résistance interne s'exprime en ohms (Ω).",
+                  "answers": [
+                    {
+                      "content": "F.é.m. $E$",
+                      "match": "Volt (V)"
+                    },
+                    {
+                      "content": "Intensité $I$ du courant débité",
+                      "match": "Ampère (A)"
+                    },
+                    {
+                      "content": "Résistance interne $r$",
+                      "match": "Ohm (Ω)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève mesure la f.é.m. d'une pile. Quelles sont les deux précautions correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on vérifie que le circuit extérieur est ouvert ($I = 0$). Étape 2 — Brancher : borne V côté +, borne COM côté −, en dérivation. Les autres propositions sont fausses : la série et la lampe allumée donnent une mesure qui n'est pas $E$, et la borne COM va au côté −.",
+                  "answers": [
+                    {
+                      "content": "Vérifier que l'interrupteur du circuit est ouvert",
+                      "correct": true
+                    },
+                    {
+                      "content": "Relier la borne V du voltmètre à la borne + de la pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Brancher le voltmètre en série avec la pile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire la mesure lampe allumée pour que la pile travaille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Relier la borne COM du voltmètre à la borne + de la pile",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu mesures la f.é.m. d'une pile de lampe-torche avec un voltmètre.",
+            "questions": [
+              {
+                "content": "Pour mesurer la tension aux bornes d'une pile, on branche le voltmètre ___ .",
+                "question_type": "select",
+                "explanation": "Étape 2 — Brancher le voltmètre en dérivation : directement sur les deux bornes de la pile.",
+                "answers": [
+                  {
+                    "content": "en dérivation",
+                    "correct": true
+                  },
+                  {
+                    "content": "en série",
+                    "correct": false
+                  },
+                  {
+                    "content": "après l'interrupteur",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le voltmètre se branche comme pour mesurer la tension d'un dipôle."
+              },
+              {
+                "content": "Le circuit est ouvert et le voltmètre branché sur une pile plate affiche 4,5 V. Quelle est la f.é.m. de la pile ?",
+                "question_type": "numeric",
+                "unit": "V",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : circuit ouvert, $I = 0$. Étape 3 — Lire : 4,5 V. Étape 4 — Conclure : à vide, $E = U = 4{,}5$ V.",
+                "answers": [
+                  {
+                    "content": "4,5",
+                    "correct": true
+                  }
+                ],
+                "hint": "À vide, la tension lue est égale à la f.é.m."
+              },
+              {
+                "content": "Quand la pile alimente une lampe allumée, la tension à ses bornes est toujours exactement égale à sa f.é.m.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : $U = E$ seulement si $I = 0$. Quand la lampe est allumée, la pile débite un courant, et la tension à ses bornes est plus petite que $E$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à la pile qui débite un courant."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La tension aux bornes d'une pile qui débite",
+          "remember": "Quand une pile de f.é.m. $E$ débite un courant d'intensité $I$, la tension entre ses bornes est $U = E - rI$. Ici $r$ est la **résistance interne** de la pile, en **ohms** (Ω) ; $I$ est en **ampères** (A) ; $U$ et $E$ sont en **volts** (V). Le terme $rI$ est la **chute de tension** à l'intérieur de la pile : plus l'intensité est grande, plus $U$ est petite. Si $I = 0$, alors $U = E$. Pour passer des mA aux A, on divise par 1 000 : $200$ mA $= 0{,}2$ A.",
+          "method": [
+            "Relever $E$, $r$ et $I$ en unités SI (V, Ω, A), en convertissant les mA en A.",
+            "Écrire la loi de la pile : $U = E - rI$.",
+            "Remplacer $E$, $r$ et $I$ par leurs valeurs, en calculant d'abord la chute de tension $rI$.",
+            "Calculer $U = E - rI$ et donner le résultat en volts."
+          ],
+          "example": {
+            "statement": "La pile d'une lampe-torche a pour f.é.m. $E = 4{,}5$ V et pour résistance interne $r = 1{,}5$ Ω. Elle débite un courant de 200 mA. Calculer la tension entre ses bornes.",
+            "steps": [
+              "Relever : $E = 4{,}5$ V, $r = 1{,}5$ Ω et $I = 200$ mA $= 0{,}2$ A.",
+              "Écrire : $U = E - rI$.",
+              "Remplacer : la chute de tension est $rI = 1{,}5 \\times 0{,}2 = 0{,}3$ V, donc $U = 4{,}5 - 0{,}3$.",
+              "Calculer : $U = 4{,}2$ V."
+            ]
+          },
+          "pitfall": "Ne pas oublier de convertir les mA en A, ni de soustraire $rI$ au lieu de l'ajouter. Contre-exemple : $E = 4{,}5$ V, $r = 1{,}5$ Ω, $I = 200$ mA. Avec 200 au lieu de 0,2, on trouve $rI = 300$ et $U = -295{,}5$ V, absurde. Avec une addition, on trouve $4{,}5 + 0{,}3 = 4{,}8$ V, plus que $E$ : impossible, car une pile qui débite a toujours $U < E$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer la tension aux bornes d'une pile",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever les données en unités SI, écrire $U = E - rI$, remplacer, calculer en volts.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle relation donne la tension $U$ aux bornes d'une pile de f.é.m. $E$ et de résistance interne $r$ qui débite un courant $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire la loi de la pile : $U = E - rI$. La chute de tension $rI$ se retranche de $E$. $U = rI$ est la loi d'Ohm d'un résistor, pas celle d'une pile ; $E + rI$ donnerait une tension supérieure à $E$, ce qui est impossible.",
+                  "answers": [
+                    {
+                      "content": "$U = E - rI$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$U = E + rI$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = rI$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = E \\times r \\times I$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 1{,}5$ V et de $r = 0{,}5$ Ω débite un courant de 0,4 A. Calcule la tension entre ses bornes.",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $E = 1{,}5$ V, $r = 0{,}5$ Ω, $I = 0{,}4$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 0{,}5 \\times 0{,}4 = 0{,}2$ V. Étape 4 — Calculer : $U = 1{,}5 - 0{,}2 = 1{,}3$ V.",
+                  "answers": [
+                    {
+                      "content": "1,3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile plate de $E = 4{,}5$ V et de $r = 1$ Ω alimente une radio en débitant 300 mA. Calcule la tension entre ses bornes, en volts.",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever en unités SI : $I = 300$ mA $= 0{,}3$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 1 \\times 0{,}3 = 0{,}3$ V. Étape 4 — Calculer : $U = 4{,}5 - 0{,}3 = 4{,}2$ V. Garder 300 sans conversion donnerait un résultat absurde.",
+                  "answers": [
+                    {
+                      "content": "4,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 6$ V et de $r = 2$ Ω débite 1,5 A. Calcule la tension entre ses bornes.",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $E = 6$ V, $r = 2$ Ω, $I = 1{,}5$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 2 \\times 1{,}5 = 3$ V. Étape 4 — Calculer : $U = 6 - 3 = 3$ V.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 6$ V débite 0,3 A ; la tension entre ses bornes vaut alors 5,4 V. Calcule sa résistance interne $r$.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "On refait la méthode à l'envers. Étape 1 — Relever : $E = 6$ V, $U = 5{,}4$ V, $I = 0{,}3$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $5{,}4 = 6 - r \\times 0{,}3$, donc $rI = 0{,}6$ V. Étape 4 — Calculer : $r = \\dfrac{0{,}6}{0{,}3} = 2$ Ω.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'intensité du courant débité par une pile augmente, la tension entre ses bornes diminue.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $E$ et $r$ ne changent pas, donc si $I$ augmente, la chute $rI$ augmente et $U$ diminue. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : la résistance interne d'une pile s'exprime en ___ (nom de l'unité).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever en unités SI : la résistance interne $r$ s'exprime en ohms (Ω), comme la résistance d'un résistor, car $rI$ doit donner des volts quand $I$ est en ampères.",
+                  "answers": [
+                    {
+                      "content": "ohm",
+                      "correct": true
+                    },
+                    {
+                      "content": "ohms",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ω",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $E = 4{,}5$ V, $r = 1$ Ω et $I = 300$ mA, un élève trouve $U = 4{,}8$ V. Quelle erreur a-t-il faite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Remplacer : avec $I = 0{,}3$ A, $rI = 0{,}3$ V. Étape 4 — Calculer : $U = 4{,}5 - 0{,}3 = 4{,}2$ V. L'élève a calculé $4{,}5 + 0{,}3 = 4{,}8$ V : c'est l'addition du piège. Sa valeur est même plus grande que $E$, ce qui est impossible pour une pile qui débite.",
+                  "answers": [
+                    {
+                      "content": "Il a ajouté $rI$ à $E$ au lieu de le retrancher.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a oublié de convertir 300 mA en ampères.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a confondu $E$ et $U$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a fait aucune erreur.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer la tension aux bornes d'une pile qui débite",
+              "statement": "Dans cet exercice, tu calcules la tension d'une pile qui débite avec la méthode de la fiche : relever les données en unités SI, écrire $U = E - rI$, remplacer, calculer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis d'abord les mA en A, calcule la chute de tension $rI$, puis retranche-la de $E$. La tension d'une pile qui débite est toujours plus petite que $E$.",
+              "questions": [
+                {
+                  "content": "Une pile de lampe-torche de $E = 9$ V et de $r = 3$ Ω débite 0,5 A. Calcule la tension entre ses bornes, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 9$ V, $r = 3$ Ω, $I = 0{,}5$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 3 \\times 0{,}5 = 1{,}5$ V. Étape 4 — Calculer : $U = 9 - 1{,}5 = 7{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Une pile de poste radio de $E = 6$ V et de $r = 1{,}5$ Ω débite 200 mA. Calcule la tension entre ses bornes, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 6$ V, $r = 1{,}5$ Ω et $I = 200$ mA $= 0{,}2$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 1{,}5 \\times 0{,}2 = 0{,}3$ V. Étape 4 — Calculer : $U = 6 - 0{,}3 = 5{,}7$ V. Sans la conversion, on trouverait $rI = 300$ V et $U = -294$ V, absurde.",
+                  "answers": [
+                    {
+                      "content": "5,7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Une pile débite 250 mA. Quelle valeur de $I$ faut-il écrire dans $U = E - rI$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever en unités SI : on divise par 1 000 pour passer des mA aux A, donc $250$ mA $= 250 / 1000 = 0{,}25$ A. Garder 250 oublie la conversion ; 2,5 A et 0,025 A décalent la virgule de deux rangs au lieu de trois.",
+                  "answers": [
+                    {
+                      "content": "0,25 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "250 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "2,5 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,025 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 4{,}5$ V et de $r = 1$ Ω débite 0,3 A. Un élève trouve $U = 4{,}8$ V : son résultat est possible.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : $E = 4{,}5$ V, $r = 1$ Ω, $I = 0{,}3$ A. Étape 3 — Remplacer : $rI = 1 \\times 0{,}3 = 0{,}3$ V. Étape 4 — Calculer : $U = 4{,}5 - 0{,}3 = 4{,}2$ V. L'élève a ajouté $rI$ au lieu de le retrancher : une pile qui débite a toujours $U < E$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du calcul de la tension aux bornes d'une pile qui débite.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever les données en unités SI. Étape 2 — Écrire $U = E - rI$. Étape 3 — Remplacer, en calculant d'abord $rI$. Étape 4 — Calculer et donner $U$ en volts. On ne peut pas remplacer avant d'avoir relevé les données, ni calculer avant d'avoir remplacé.",
+                  "answers": [
+                    {
+                      "content": "Relever $E$, $r$ et $I$ en unités SI, en convertissant les mA en A."
+                    },
+                    {
+                      "content": "Écrire la loi de la pile : $U = E - rI$."
+                    },
+                    {
+                      "content": "Remplacer $E$, $r$ et $I$ par leurs valeurs, en calculant d'abord $rI$."
+                    },
+                    {
+                      "content": "Calculer $U = E - rI$ et donner le résultat en volts."
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le produit $rI$ s'appelle la chute de ___ à l'intérieur de la pile.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Remplacer : dans $U = E - rI$, le terme $rI$ est une tension en volts (ohms fois ampères). C'est la chute de tension à l'intérieur de la pile : elle diminue la tension disponible aux bornes.",
+                  "answers": [
+                    {
+                      "content": "tension",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Une pile de radio débite un courant et tu calcules la tension à ses bornes.",
+            "questions": [
+              {
+                "content": "Une pile de $E = 3$ V et de $r = 1$ Ω débite 0,5 A. Complète : $rI$ = ___ V et $U$ = ___ V.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $E = 3$ V, $r = 1$ Ω, $I = 0{,}5$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 1 \\times 0{,}5 = 0{,}5$ V. Étape 4 — Calculer : $U = 3 - 0{,}5 = 2{,}5$ V.",
+                "answers": [
+                  {
+                    "content": "0,5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2,5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "On calcule d'abord la chute de tension $rI$, puis on la retranche de $E$."
+              },
+              {
+                "content": "Une pile de résistance interne non nulle qui débite un courant a une tension $U$ égale à sa f.é.m. $E$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Remplacer : si $I \\neq 0$ et $r \\neq 0$, alors $rI > 0$. Étape 4 — Calculer : $U = E - rI < E$. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde le signe de la chute de tension $rI$."
+              },
+              {
+                "content": "Pour un courant de 250 mA, on remplace $I$ par ___ A dans la formule.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Relever en unités SI : $250$ mA $= 0{,}25$ A, car on divise les mA par 1 000.",
+                "answers": [
+                  {
+                    "content": "0,25",
+                    "correct": true
+                  },
+                  {
+                    "content": "250",
+                    "correct": false
+                  },
+                  {
+                    "content": "2,5",
+                    "correct": false
+                  }
+                ],
+                "hint": "1 A = 1 000 mA."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La caractéristique d'une pile",
+          "remember": "La **caractéristique** d'une pile est la courbe qui donne la tension $U$ en fonction de l'intensité $I$ qu'elle débite. C'est un segment de **droite décroissante** qui ne passe pas par l'origine : $U = E - rI$. Elle coupe l'axe des tensions en $U = E$ (point où $I = 0$) : on y lit la f.é.m. Sa pente vaut $-r$. Pour un point $(I ; U)$ de la droite, la résistance interne est $r = \\dfrac{E - U}{I}$. Au point où $U = 0$, la pile est en court-circuit : $I = \\dfrac{E}{r}$.",
+          "method": [
+            "Lire la f.é.m. $E$ : c'est la tension du point de la droite où $I = 0$.",
+            "Choisir sur la droite un point $(I ; U)$ facile à lire, différent du point où $I = 0$.",
+            "Calculer la chute de tension $E - U$ en ce point.",
+            "Calculer $r = \\dfrac{E - U}{I}$ en ohms, puis écrire la loi $U = E - rI$ de la pile."
+          ],
+          "example": {
+            "statement": "La caractéristique d'une pile est un segment de droite qui passe par les points A (0 A ; 4,5 V) et B (3 A ; 1,5 V). Déterminer $E$, $r$ et la loi de la pile.",
+            "steps": [
+              "Lire : au point A, $I = 0$ et $U = 4{,}5$ V, donc $E = 4{,}5$ V.",
+              "Choisir : le point B (3 A ; 1,5 V) est facile à lire.",
+              "Calculer : la chute de tension est $E - U = 4{,}5 - 1{,}5 = 3$ V.",
+              "Calculer : $r = \\dfrac{3}{3} = 1$ Ω, donc $U = 4{,}5 - 1 \\times I$, soit $U = 4{,}5 - I$."
+            ]
+          },
+          "pitfall": "Ne pas calculer $r$ avec le rapport $\\dfrac{U}{I}$ d'un point. Contre-exemple : au point B (3 A ; 1,5 V), $\\dfrac{U}{I} = \\dfrac{1{,}5}{3} = 0{,}5$ Ω, mais la résistance interne vaut $\\dfrac{4{,}5 - 1{,}5}{3} = 1$ Ω. Le rapport $\\dfrac{U}{I}$ est la résistance du circuit extérieur (loi d'Ohm), pas celle de la pile. Pour $r$, utilise la chute de tension $E - U$.",
+          "figure": "caracteristique-pile-a",
+          "exercise": [
+            {
+              "title": "Lire la caractéristique d'une pile",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : lire $E$ à $I = 0$, choisir un point, calculer la chute de tension, calculer $r$.",
+              "exercise_type": "fixation",
+              "figure": "caracteristique-pile-b",
+              "questions": [
+                {
+                  "content": "Quelle est l'allure de la caractéristique d'une pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : à $I = 0$, la tension vaut $E$ et non 0, donc la droite ne passe pas par l'origine (celle d'un résistor, $U = RI$, y passe). Étape 4 — Écrire $U = E - rI$ : la pente $-r$ est négative, donc la droite est décroissante.",
+                  "answers": [
+                    {
+                      "content": "un segment de droite décroissante qui ne passe pas par l'origine",
+                      "correct": true
+                    },
+                    {
+                      "content": "un segment de droite qui passe par l'origine",
+                      "correct": false
+                    },
+                    {
+                      "content": "un segment de droite croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "une droite horizontale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par les points (0 A ; 6 V) et (2 A ; 2 V). Quelle est sa f.é.m., en volts ?",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire la f.é.m. : le point où $I = 0$ est (0 A ; 6 V), donc $E = 6$ V. L'autre point (2 A ; 2 V) sert à calculer $r$, pas $E$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par les points (0 A ; 6 V) et (2 A ; 2 V). Calcule sa résistance interne, en ohms.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $E = 6$ V. Étape 2 — Choisir : le point (2 A ; 2 V). Étape 3 — Calculer la chute de tension : $E - U = 6 - 2 = 4$ V. Étape 4 — Calculer : $r = \\dfrac{4}{2} = 2$ Ω.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'une pile de jouet passe par les points (0 A ; 3 V) et (0,5 A ; 2,5 V). Calcule sa résistance interne, en ohms.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $E = 3$ V. Étape 2 — Choisir : le point (0,5 A ; 2,5 V). Étape 3 — Calculer la chute de tension : $E - U = 3 - 2{,}5 = 0{,}5$ V. Étape 4 — Calculer : $r = \\dfrac{0{,}5}{0{,}5} = 1$ Ω.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par les points (0 A ; 9 V) et (1,5 A ; 6 V). Calcule sa résistance interne, en ohms.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $E = 9$ V. Étape 2 — Choisir : le point (1,5 A ; 6 V). Étape 3 — Calculer la chute de tension : $E - U = 9 - 6 = 3$ V. Étape 4 — Calculer : $r = \\dfrac{3}{1{,}5} = 2$ Ω.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pente de la droite $U = E - rI$ vaut ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Écrire la loi de la pile : $U = E - rI$ a la forme $U = b + aI$ avec $b = E$ et $a = -r$. La pente est donc $-r$ : négative, la droite descend. Ce n'est pas $E$, qui est l'ordonnée à l'origine.",
+                  "answers": [
+                    {
+                      "content": "$-r$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$r$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-E$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque repère de la caractéristique d'une pile à ce qu'il donne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : à $I = 0$, $U = E$. Étape 4 — La pente de $U = E - rI$ est $-r$. Quand $U = 0$, la pile est en court-circuit et $I = \\dfrac{E}{r}$.",
+                  "answers": [
+                    {
+                      "content": "Point de la droite où $I = 0$",
+                      "match": "La f.é.m. $E$"
+                    },
+                    {
+                      "content": "Pente de la droite",
+                      "match": "$-r$"
+                    },
+                    {
+                      "content": "Point de la droite où $U = 0$",
+                      "match": "Le courant de court-circuit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une pile, la résistance interne se calcule avec le rapport $\\dfrac{U}{I}$ d'un point de la caractéristique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer la chute de tension : c'est $E - U$, pas $U$. Étape 4 — $r = \\dfrac{E - U}{I}$. Avec les points (0 A ; 6 V) et (2 A ; 2 V), $\\dfrac{U}{I} = 1$ Ω, alors que $r = \\dfrac{6 - 2}{2} = 2$ Ω. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Déterminer la loi d'une pile à partir de sa caractéristique",
+              "statement": "Dans cet exercice, tu lis la caractéristique d'une pile avec la méthode de la fiche : lire $E$ à $I = 0$, choisir un point, calculer la chute de tension, calculer $r$.",
+              "exercise_type": "fixation",
+              "figure": "caracteristique-pile-lampe",
+              "hint": "Lis $E$ au point où $I = 0$. Pour $r$, utilise la chute de tension $E - U$ divisée par $I$, jamais le rapport $U / I$.",
+              "questions": [
+                {
+                  "content": "La caractéristique de la pile d'une lampe de pêcheur passe par les points (0 A ; 3,6 V) et (0,3 A ; 3 V). Calcule sa résistance interne, en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : au point où $I = 0$, $U = 3{,}6$ V, donc $E = 3{,}6$ V. Étape 2 — Choisir le point (0,3 A ; 3 V). Étape 3 — Calculer la chute de tension : $E - U = 3{,}6 - 3 = 0{,}6$ V. Étape 4 — Calculer $r = 0{,}6 / 0{,}3 = 2$ Ω, d'où $U = 3{,}6 - 2I$. Le rapport $U / I = 10$ Ω serait la résistance du circuit extérieur, pas celle de la pile.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par les points (0 A ; 4,5 V) et (1,5 A ; 3 V). Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : à $I = 0$, $U = 4{,}5$ V, donc $E = 4{,}5$ V. Étape 3 — Calculer la chute de tension en (1,5 A ; 3 V) : $4{,}5 - 3 = 1{,}5$ V. Étape 4 — Calculer $r = 1{,}5 / 1{,}5 = 1$ Ω. Les 2 Ω viennent du rapport $U / I = 3 / 1{,}5$, les 3 Ω du rapport $E / I$ : deux erreurs de méthode.",
+                  "answers": [
+                    {
+                      "content": "Sa f.é.m. vaut 4,5 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa résistance interne vaut 1 Ω.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa résistance interne vaut 2 Ω.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa f.é.m. vaut 3 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa résistance interne vaut 3 Ω.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par les points (0 A ; 5 V) et (1 A ; 3 V). Quelle est la loi de cette pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $E = 5$ V. Étape 3 — Chute de tension en (1 A ; 3 V) : $5 - 3 = 2$ V. Étape 4 — $r = 2 / 1 = 2$ Ω, donc $U = 5 - 2I$ ; on vérifie : pour $I = 1$ A, $U = 3$ V. Les autres lois donnent 7 V, −3 V ou 1 V pour $I = 1$ A, ce qui ne correspond pas au point.",
+                  "answers": [
+                    {
+                      "content": "$U = 5 - 2I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$U = 5 + 2I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 2 - 5I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 3 - 2I$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'une pile est une droite qui passe par l'origine du repère.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : au point où $I = 0$, la tension vaut $E$, qui n'est pas nulle. La droite $U = E - rI$ coupe donc l'axe des tensions en $E$ et ne passe pas par l'origine. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La loi d'une pile est $U = 6 - 1{,}5I$. Sa résistance interne vaut ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Écrire la loi $U = E - rI$ et la comparer à $U = 6 - 1{,}5I$ : $E = 6$ V et $r = 1{,}5$ Ω. Le nombre −1,5 est la pente de la droite, c'est $-r$ ; une résistance interne n'est pas négative.",
+                  "answers": [
+                    {
+                      "content": "1,5 Ω",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 Ω",
+                      "correct": false
+                    },
+                    {
+                      "content": "−1,5 Ω",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 6$ V et de $r = 4$ Ω est mise en court-circuit, c'est-à-dire $U = 0$. Calcule l'intensité du courant, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : $E = 6$ V. Étape 4 — Écrire la loi $U = E - rI$ avec $U = 0$ : $0 = 6 - 4I$, donc $I = E / r = 6 / 4 = 1{,}5$ A. C'est le point de la droite où elle coupe l'axe des intensités.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Tu lis la caractéristique d'une pile de poste radio.",
+            "questions": [
+              {
+                "content": "La caractéristique d'une pile passe par les points (0 A ; 4,5 V) et (1 A ; 3 V). Complète : $E$ = ___ V et $r$ = ___ Ω.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : à $I = 0$, $U = 4{,}5$ V, donc $E = 4{,}5$ V. Étape 2 — Choisir : le point (1 A ; 3 V). Étape 3 — Calculer la chute de tension : $4{,}5 - 3 = 1{,}5$ V. Étape 4 — Calculer : $r = \\dfrac{1{,}5}{1} = 1{,}5$ Ω.",
+                "answers": [
+                  {
+                    "content": "4,5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1,5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La chute de tension est $E - U$."
+              },
+              {
+                "content": "La caractéristique d'une pile est une droite qui passe par l'origine.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : à $I = 0$, la tension d'une pile vaut $E$, qui n'est pas nulle. La droite coupe l'axe des tensions en $E$ et ne passe pas par l'origine. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde la tension quand $I = 0$."
+              },
+              {
+                "content": "Pour un point $(I ; U)$ de la caractéristique, $r = \\dfrac{E - U}{ ___ }$.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Calculer : la chute de tension $E - U$ est égale à $rI$, donc $r = \\dfrac{E - U}{I}$.",
+                "answers": [
+                  {
+                    "content": "$I$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$U$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$E$",
+                    "correct": false
+                  }
+                ],
+                "hint": "$E - U = rI$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La loi de Pouillet",
+          "remember": "Dans un circuit en série formé d'une pile (f.é.m. $E$, résistance interne $r$) et de résistors de résistance totale $R$, l'intensité du courant est donnée par la **loi de Pouillet** : $I = \\dfrac{E}{R + r}$, avec $I$ en A, $E$ en V, $R$ et $r$ en Ω. Pour des résistors en série, $R = R_1 + R_2 + \\dots$ On la retrouve avec $U = E - rI$ et $U = RI$ : $E - rI = RI$, donc $E = (R + r) I$. La tension aux bornes de la pile est $U = E - rI = RI$. Si $R$ est négligeable (fil entre les bornes), c'est un **court-circuit** : $I = \\dfrac{E}{r}$, intensité très grande, à éviter.",
+          "method": [
+            "Relever $E$, $r$ et les résistances du circuit extérieur.",
+            "Calculer la résistance totale $R$ du circuit extérieur (somme des résistances pour des résistors en série).",
+            "Écrire la loi de Pouillet : $I = \\dfrac{E}{R + r}$.",
+            "Remplacer $E$, $R$ et $r$ par leurs valeurs et calculer $I$ en ampères.",
+            "Calculer la tension aux bornes de la pile avec $U = E - rI$ (elle est égale à $U = RI$)."
+          ],
+          "example": {
+            "statement": "Une pile de f.é.m. $E = 4{,}5$ V et de résistance interne $r = 1$ Ω alimente, en série, deux résistors de $R_1 = 2$ Ω et $R_2 = 6$ Ω. Calculer l'intensité du courant et la tension aux bornes de la pile.",
+            "steps": [
+              "Relever : $E = 4{,}5$ V, $r = 1$ Ω, $R_1 = 2$ Ω et $R_2 = 6$ Ω.",
+              "Calculer la résistance totale : $R = R_1 + R_2 = 2 + 6 = 8$ Ω.",
+              "Écrire : $I = \\dfrac{E}{R + r}$.",
+              "Remplacer : $I = \\dfrac{4{,}5}{8 + 1} = \\dfrac{4{,}5}{9} = 0{,}5$ A.",
+              "Calculer : $U = E - rI = 4{,}5 - 1 \\times 0{,}5 = 4$ V ; on vérifie $RI = 8 \\times 0{,}5 = 4$ V."
+            ]
+          },
+          "pitfall": "Ne pas oublier la résistance interne $r$ au dénominateur. Contre-exemple : $E = 6$ V, $r = 2$ Ω, $R = 10$ Ω. La bonne valeur est $I = \\dfrac{6}{10 + 2} = 0{,}5$ A. En oubliant $r$, on trouve $\\dfrac{6}{10} = 0{,}6$ A, trop grand : la pile freine elle-même le courant. L'intensité est toujours plus petite que $\\dfrac{E}{R}$.",
+          "figure": "circuit-pouillet",
+          "exercise": [
+            {
+              "title": "Appliquer la loi de Pouillet",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever les données, calculer $R$, écrire la loi de Pouillet, calculer $I$, puis la tension aux bornes de la pile.",
+              "exercise_type": "fixation",
+              "figure": "circuit-pouillet",
+              "questions": [
+                {
+                  "content": "Quelle est l'expression de l'intensité dans un circuit en série formé d'une pile ($E$, $r$) et d'un résistor de résistance $R$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Écrire la loi de Pouillet : $I = \\dfrac{E}{R + r}$. Elle vient de $E - rI = RI$. $\\dfrac{E}{R}$ oublie la résistance interne (c'est le piège) ; $R - r$ n'a aucun sens, les résistances d'un circuit en série s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "$I = \\dfrac{E}{R + r}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$I = \\dfrac{E}{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$I = \\dfrac{E}{R - r}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$I = E \\times (R + r)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 6$ V et de $r = 1$ Ω alimente un résistor de $R = 5$ Ω. Calcule l'intensité du courant.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $E = 6$ V, $r = 1$ Ω, $R = 5$ Ω. Étape 2 — Calculer $R$ : il n'y a qu'un résistor, $R = 5$ Ω. Étape 3 — Écrire : $I = \\dfrac{E}{R + r}$. Étape 4 — Remplacer et calculer : $I = \\dfrac{6}{5 + 1} = 1$ A.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 6$ V et de $r = 0{,}5$ Ω alimente, en série, deux résistors de 1 Ω et de 2,5 Ω. Calcule l'intensité du courant.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $E = 6$ V, $r = 0{,}5$ Ω, résistors de 1 Ω et 2,5 Ω. Étape 2 — Calculer la résistance totale : $R = 1 + 2{,}5 = 3{,}5$ Ω. Étape 3 — Écrire : $I = \\dfrac{E}{R + r}$. Étape 4 — Remplacer : $I = \\dfrac{6}{3{,}5 + 0{,}5} = \\dfrac{6}{4} = 1{,}5$ A.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 4{,}5$ V et de $r = 1$ Ω alimente un résistor de $R = 8$ Ω. Calcule la tension aux bornes de la pile, en volts.",
+                  "question_type": "numeric",
+                  "unit": "V",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $E = 4{,}5$ V, $r = 1$ Ω, $R = 8$ Ω. Étape 3 — Écrire : $I = \\dfrac{E}{R + r}$. Étape 4 — Remplacer : $I = \\dfrac{4{,}5}{9} = 0{,}5$ A. Étape 5 — Calculer : $U = E - rI = 4{,}5 - 0{,}5 = 4$ V (et $RI = 8 \\times 0{,}5 = 4$ V).",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile de $E = 12$ V et de $r = 2$ Ω débite 1 A dans un résistor. Calcule la résistance $R$ de ce résistor, en ohms.",
+                  "question_type": "numeric",
+                  "unit": "Ω",
+                  "tolerance": 0,
+                  "explanation": "On refait la méthode à l'envers. Étape 1 — Relever : $E = 12$ V, $r = 2$ Ω, $I = 1$ A. Étape 3 — Écrire : $I = \\dfrac{E}{R + r}$. Étape 4 — Remplacer : $1 = \\dfrac{12}{R + 2}$, donc $R + 2 = 12$. Calcul : $R = 12 - 2 = 10$ Ω.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux bornes d'une pile de $E = 4{,}5$ V et de $r = 1{,}5$ Ω sont reliées par un fil de résistance négligeable ($R = 0$). Calcule l'intensité du courant, en ampères.",
+                  "question_type": "numeric",
+                  "unit": "A",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $E = 4{,}5$ V, $r = 1{,}5$ Ω, $R = 0$. Étape 3 — Écrire : $I = \\dfrac{E}{R + r}$. Étape 4 — Remplacer : $I = \\dfrac{4{,}5}{0 + 1{,}5} = 3$ A. C'est le court-circuit : l'intensité est très grande, c'est dangereux pour la pile.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on ajoute un résistor en série dans un circuit alimenté par une pile, l'intensité du courant diminue.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer la résistance totale : un résistor de plus en série augmente $R$. Étape 3 — Écrire : $I = \\dfrac{E}{R + r}$, avec $E$ et $r$ constants. Le dénominateur augmente, donc $I$ diminue. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $E = 6$ V, $r = 2$ Ω et $R = 10$ Ω, un élève calcule $I = \\dfrac{6}{10} = 0{,}6$ A. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Écrire la loi de Pouillet : $I = \\dfrac{E}{R + r}$. Étape 4 — Remplacer : $I = \\dfrac{6}{10 + 2} = \\dfrac{6}{12} = 0{,}5$ A. L'élève a calculé $\\dfrac{E}{R}$ : il a oublié $r$. Aucune conversion n'était à faire.",
+                  "answers": [
+                    {
+                      "content": "Il a oublié la résistance interne $r$ au dénominateur.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bonne intensité est 0,5 A.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bonne intensité est 0,6 A.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a oublié de convertir une valeur en ampères.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a ajouté $r$ au numérateur.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer la loi de Pouillet à un circuit en série",
+              "statement": "Dans cet exercice, tu appliques la loi de Pouillet avec la méthode de la fiche : relever, calculer $R$, écrire la loi, calculer $I$, puis la tension de la pile.",
+              "exercise_type": "fixation",
+              "figure": "circuit-pouillet",
+              "hint": "Additionne d'abord les résistances en série, puis ajoute $r$ au dénominateur : $I = E / (R + r)$. Vérifie avec $U = E - rI = RI$.",
+              "questions": [
+                {
+                  "content": "Une pile de $E = 9$ V et de $r = 1$ Ω alimente en série deux résistors de 5 Ω et de 6 Ω. Calcule l'intensité du courant, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 9$ V, $r = 1$ Ω, 5 Ω et 6 Ω. Étape 2 — Calculer la résistance totale : $R = 5 + 6 = 11$ Ω. Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer et calculer : $I = 9 / (11 + 1) = 9 / 12 = 0{,}75$ A. Étape 5 — On pourrait en déduire $U = E - rI = 9 - 0{,}75 = 8{,}25$ V.",
+                  "answers": [
+                    {
+                      "content": "0,75",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Une pile de $E = 9$ V et de $r = 1$ Ω débite 0,75 A dans un circuit de résistance totale $R = 11$ Ω. Calcule la tension entre les bornes de la pile, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 9$ V, $r = 1$ Ω, $I = 0{,}75$ A, $R = 11$ Ω. Étape 5 — Calculer la tension aux bornes de la pile : $U$ $= E - rI$ $= 9 - 1 \\times 0{,}75$ $= 8{,}25$ V. Vérification : $U = RI = 11 \\times 0{,}75 = 8{,}25$ V.",
+                  "answers": [
+                    {
+                      "content": "8,25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Une pile de $E = 6$ V et de $r = 2$ Ω alimente un résistor de $R = 4$ Ω. Quelle est l'intensité du courant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Résistance totale du circuit extérieur : $R = 4$ Ω. Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I = 6 / (4 + 2) = 1$ A. Le résultat 1,5 A oublie $r$ ($6 / 4$), 3 A oublie $R$ ($6 / 2$), 0,75 A multiplie $R$ et $r$ au lieu de les additionner.",
+                  "answers": [
+                    {
+                      "content": "1 A",
+                      "correct": true
+                    },
+                    {
+                      "content": "1,5 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 A",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,75 A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile alimente un résistor. On le remplace par un résistor de plus grande résistance. La tension entre les bornes de la pile augmente.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Écrire $I = E / (R + r)$ : si $R$ augmente, $I$ diminue. Étape 5 — $U = E - rI$ : si $I$ diminue, la chute $rI$ diminue et $U$ augmente. Exemple avec $E = 6$ V et $r = 2$ Ω : pour $R = 4$ Ω, $I = 1$ A et $U = 4$ V ; pour $R = 10$ Ω, $I = 0{,}5$ A et $U = 5$ V. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la loi de Pouillet.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever les données. Étape 2 — Calculer $R$. Étape 3 — Écrire $I = E / (R + r)$. Étape 4 — Remplacer et calculer $I$. Étape 5 — Calculer $U = E - rI$. Chaque étape utilise le résultat de la précédente.",
+                  "answers": [
+                    {
+                      "content": "Relever $E$, $r$ et les résistances du circuit extérieur."
+                    },
+                    {
+                      "content": "Calculer la résistance totale $R$ du circuit extérieur."
+                    },
+                    {
+                      "content": "Écrire la loi de Pouillet : $I = E / (R + r)$."
+                    },
+                    {
+                      "content": "Remplacer par les valeurs et calculer $I$ en ampères."
+                    },
+                    {
+                      "content": "Calculer la tension aux bornes de la pile avec $U = E - rI$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $E = 12$ V, $r = 2$ Ω et $R = 4$ Ω, un élève calcule $I = 12 / 4 = 3$ A. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I = 12 / (4 + 2) = 12 / 6 = 2$ A. L'élève a calculé $E / R = 3$ A : il a oublié $r$. La valeur 6 A serait $E / r$, qui oublie $R$. Aucune conversion n'était à faire.",
+                  "answers": [
+                    {
+                      "content": "Il a oublié la résistance interne $r$ au dénominateur.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bonne intensité est 2 A.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La bonne intensité est 3 A.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bonne intensité est 6 A.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a mal converti une valeur en ampères.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Une pile alimente des résistors en série et tu appliques la loi de Pouillet.",
+            "questions": [
+              {
+                "content": "Une pile de $E = 6$ V et de $r = 1$ Ω alimente un résistor de $R = 5$ Ω. Complète : $R + r$ = ___ Ω et $I$ = ___ A.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $E = 6$ V, $r = 1$ Ω, $R = 5$ Ω. Étape 3 — Écrire : $I = \\dfrac{E}{R + r}$. Étape 4 — Remplacer : $R + r = 5 + 1 = 6$ Ω, donc $I = \\dfrac{6}{6} = 1$ A.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Additionne $R$ et $r$ avant de diviser."
+              },
+              {
+                "content": "Dans la loi de Pouillet, $I = \\dfrac{E}{ ___ }$.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Écrire la loi de Pouillet : $I = \\dfrac{E}{R + r}$. La résistance interne $r$ s'ajoute à celle du circuit extérieur.",
+                "answers": [
+                  {
+                    "content": "$R + r$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$R$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$R - r$",
+                    "correct": false
+                  }
+                ],
+                "hint": "La pile a elle aussi une résistance."
+              },
+              {
+                "content": "La loi de Pouillet s'applique à un circuit en série contenant une pile et des résistors.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Écrire : $I = \\dfrac{E}{R + r}$ est la loi de Pouillet pour un circuit en série avec une pile et des résistors, où $R$ est la somme des résistances (étape 2). L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense aux conditions de la fiche."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une lampe-torche dans une boutique de Treichville",
+          "statement": "Dans une boutique de Treichville, un commerçant utilise une lampe-torche alimentée par une pile plate de f.é.m. $E = 4{,}5$ V et de résistance interne $r = 1{,}5$ Ω. L'ampoule se comporte comme un résistor de résistance $R = 13{,}5$ Ω. Les fils de connexion ont une résistance négligeable. Les justifications reprennent les méthodes de la fiche.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La pile de la lampe-torche, interrupteur ouvert, est branchée sur un voltmètre. Quelle tension le voltmètre indique-t-il, en volts ? ($E = 4{,}5$ V, $r = 1{,}5$ Ω.)",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode de la f.é.m. — Étape 1 : repérer que le circuit est ouvert, donc $I = 0$. Étape 2 : le voltmètre est en dérivation sur la pile. Étape 3 : lire la tension. Étape 4 : conclure qu'à vide $U = E = 4{,}5$ V. La résistance interne ne joue aucun rôle quand $I = 0$.",
+              "answers": [
+                {
+                  "content": "4,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'interrupteur est fermé. La pile ($E = 4{,}5$ V, $r = 1{,}5$ Ω) alimente l'ampoule ($R = 13{,}5$ Ω). Calcule l'intensité du courant, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la loi de Pouillet. Étape 1 : $E = 4{,}5$ V, $r = 1{,}5$ Ω, $R = 13{,}5$ Ω. Étape 2 : un seul résistor, donc $R = 13{,}5$ Ω. Étape 3 : $I = \\dfrac{E}{R + r}$. Étape 4 : $I = \\dfrac{4{,}5}{13{,}5 + 1{,}5} = \\dfrac{4{,}5}{15} = 0{,}3$ A.",
+              "answers": [
+                {
+                  "content": "0,3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La lampe-torche fonctionne avec un courant de 0,3 A ($E = 4{,}5$ V, $r = 1{,}5$ Ω). Calcule la tension entre les bornes de la pile, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode de la pile qui débite. Étape 1 : $E = 4{,}5$ V, $r = 1{,}5$ Ω, $I = 0{,}3$ A. Étape 2 : $U = E - rI$. Étape 3 : la chute de tension est $rI = 1{,}5 \\times 0{,}3 = 0{,}45$ V. Étape 4 : $U = 4{,}5 - 0{,}45 = 4{,}05$ V. Vérification avec la loi d'Ohm : $RI = 13{,}5 \\times 0{,}3 = 4{,}05$ V.",
+              "answers": [
+                {
+                  "content": "4,05",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quand la lampe-torche est allumée, la tension entre les bornes de la pile est inférieure à sa f.é.m.",
+              "question_type": "true_false",
+              "explanation": "Quand la lampe est allumée, $I = 0{,}3$ A. D'après $U = E - rI$, la tension $U = 4{,}05$ V est inférieure à $E = 4{,}5$ V, car la chute de tension $rI$ n'est pas nulle. L'affirmation est vraie : $U = E$ seulement à vide.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec le temps, la pile s'use : sa f.é.m. reste 4,5 V mais sa résistance interne passe à 4,5 Ω. Calcule la nouvelle intensité dans l'ampoule de 13,5 Ω, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la loi de Pouillet. Étape 1 : $E = 4{,}5$ V, $r = 4{,}5$ Ω, $R = 13{,}5$ Ω. Étape 3 : $I = \\dfrac{E}{R + r}$. Étape 4 : $I = \\dfrac{4{,}5}{13{,}5 + 4{,}5} = \\dfrac{4{,}5}{18} = 0{,}25$ A. L'intensité est plus faible qu'avant (0,3 A) : la lampe éclaire moins.",
+              "answers": [
+                {
+                  "content": "0,25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la lampe éclaire-t-elle moins quand la pile est usée ?",
+              "question_type": "single_choice",
+              "explanation": "D'après la loi de Pouillet $I = \\dfrac{E}{R + r}$, quand $r$ augmente de 1,5 Ω à 4,5 Ω, le dénominateur passe de 15 Ω à 18 Ω et l'intensité baisse de 0,3 A à 0,25 A. La f.é.m. ne s'annule pas, et l'ampoule n'a pas changé.",
+              "answers": [
+                {
+                  "content": "Parce que la résistance interne augmente, donc $R + r$ augmente et l'intensité diminue.",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que la f.é.m. devient nulle.",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que la résistance de l'ampoule diminue.",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que la loi de Pouillet ne s'applique plus.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Étudier la pile d'un poste radio à Bouaké",
+          "statement": "À Bouaké, un élève étudie la pile d'un poste radio. Il relève que la caractéristique de cette pile est un segment de droite qui passe par les points (0 A ; 6 V) et (1 A ; 4 V). Il la compare à la figure, qui montre aussi le point (2 A ; 2 V).",
+          "exercise_type": "fixation",
+          "figure": "caracteristique-pile-b",
+          "questions": [
+            {
+              "content": "La caractéristique d'une pile passe par les points (0 A ; 6 V) et (1 A ; 4 V). Quelle est sa f.é.m., en volts ?",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode de la caractéristique — Étape 1 : lire $E$ au point où $I = 0$. Ce point est (0 A ; 6 V), donc $E = 6$ V.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La caractéristique d'une pile passe par les points (0 A ; 6 V) et (1 A ; 4 V). Calcule sa résistance interne, en ohms.",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode de la caractéristique. Étape 1 : $E = 6$ V. Étape 2 : on choisit le point (1 A ; 4 V). Étape 3 : la chute de tension est $E - U = 6 - 4 = 2$ V. Étape 4 : $r = \\dfrac{2}{1} = 2$ Ω.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour une pile de $E = 6$ V et de $r = 2$ Ω, quelle est la loi de la pile ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 de la caractéristique : on écrit $U = E - rI$ avec $E = 6$ V et $r = 2$ Ω, soit $U = 6 - 2I$. L'expression $6 + 2I$ croît avec $I$, ce qui est faux pour une pile ; $2 - 6I$ inverse $E$ et $r$ ; $2I$ est la loi d'Ohm d'un résistor de 2 Ω.",
+              "answers": [
+                {
+                  "content": "$U = 6 - 2I$",
+                  "correct": true
+                },
+                {
+                  "content": "$U = 6 + 2I$",
+                  "correct": false
+                },
+                {
+                  "content": "$U = 2 - 6I$",
+                  "correct": false
+                },
+                {
+                  "content": "$U = 2I$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une pile de $E = 6$ V et de $r = 2$ Ω débite 1,5 A. Calcule la tension entre ses bornes, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode de la pile qui débite. Étape 1 : $E = 6$ V, $r = 2$ Ω, $I = 1{,}5$ A. Étape 2 : $U = E - rI$. Étape 3 : $rI = 2 \\times 1{,}5 = 3$ V. Étape 4 : $U = 6 - 3 = 3$ V.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On relie les deux bornes de la pile ($E = 6$ V, $r = 2$ Ω) par un fil de résistance négligeable. Calcule l'intensité du courant de court-circuit, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la loi de Pouillet avec $R = 0$. Étape 1 : $E = 6$ V, $r = 2$ Ω, $R = 0$. Étape 3 : $I = \\dfrac{E}{R + r}$. Étape 4 : $I = \\dfrac{6}{0 + 2} = 3$ A. C'est le point où la droite coupe l'axe des intensités.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque grandeur de la pile étudiée à sa valeur.",
+              "question_type": "matching",
+              "explanation": "$E = 6$ V se lit à $I = 0$. $r = \\dfrac{6 - 4}{1} = 2$ Ω. Pour $I = 2$ A : $U = E - rI = 6 - 2 \\times 2 = 2$ V, c'est le point (2 A ; 2 V) de la figure.",
+              "answers": [
+                {
+                  "content": "f.é.m. $E$",
+                  "match": "6 V"
+                },
+                {
+                  "content": "Résistance interne $r$",
+                  "match": "2 Ω"
+                },
+                {
+                  "content": "Tension pour $I = 2$ A",
+                  "match": "2 V"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux ampoules sur un stand du marché de Cocody",
+          "statement": "Sur un stand du marché de Cocody, une pile de f.é.m. $E = 9$ V et de résistance interne $r = 1$ Ω alimente, en série, deux petites ampoules assimilées à des résistors : $R_1 = 5$ Ω et $R_2 = 12$ Ω. Les fils ont une résistance négligeable. Les justifications reprennent les méthodes de la fiche.",
+          "exercise_type": "evaluation",
+          "figure": "circuit-pouillet",
+          "questions": [
+            {
+              "content": "Calcule la résistance totale $R$ du circuit extérieur, en ohms ($R_1 = 5$ Ω et $R_2 = 12$ Ω en série).",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode de la loi de Pouillet — Étape 2 : pour des résistors en série, les résistances s'additionnent : $R = R_1 + R_2 = 5 + 12 = 17$ Ω.",
+              "answers": [
+                {
+                  "content": "17",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'intensité du courant dans le circuit, en ampères ($E = 9$ V, $r = 1$ Ω, $R = 17$ Ω).",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la loi de Pouillet. Étape 1 : $E = 9$ V, $r = 1$ Ω, $R = 17$ Ω. Étape 3 : $I = \\dfrac{E}{R + r}$. Étape 4 : $I = \\dfrac{9}{17 + 1} = \\dfrac{9}{18} = 0{,}5$ A. L'oubli de $r$ donnerait $\\dfrac{9}{17} \\approx 0{,}53$ A, faux.",
+              "answers": [
+                {
+                  "content": "0,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la tension entre les bornes de la pile, en volts ($E = 9$ V, $r = 1$ Ω, $I = 0{,}5$ A).",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode de la pile qui débite. Étape 2 : $U = E - rI$. Étape 3 : $rI = 1 \\times 0{,}5 = 0{,}5$ V. Étape 4 : $U = 9 - 0{,}5 = 8{,}5$ V. Vérification : $RI = 17 \\times 0{,}5 = 8{,}5$ V.",
+              "answers": [
+                {
+                  "content": "8,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la tension aux bornes de l'ampoule $R_2 = 12$ Ω, traversée par 0,5 A, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Loi d'Ohm pour un résistor : $U_2 = R_2 \\, I = 12 \\times 0{,}5 = 6$ V. Pour contrôle, $U_1 = R_1 I = 5 \\times 0{,}5 = 2{,}5$ V et $U_1 + U_2 = 8{,}5$ V, égale à la tension aux bornes de la pile.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On retire l'ampoule $R_2$ : il reste la pile ($E = 9$ V, $r = 1$ Ω) et l'ampoule $R_1 = 5$ Ω. Calcule la nouvelle intensité, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la loi de Pouillet. Étape 1 : $E = 9$ V, $r = 1$ Ω, $R_1 = 5$ Ω. Étape 2 : $R = 5$ Ω. Étape 3 : $I = \\dfrac{E}{R + r}$. Étape 4 : $I = \\dfrac{9}{5 + 1} = 1{,}5$ A.",
+              "answers": [
+                {
+                  "content": "1,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce nouveau circuit (pile avec $r = 1$ Ω, $R_1 = 5$ Ω, $I = 1{,}5$ A), calcule la tension entre les bornes de la pile, en volts.",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Étape 5 de la loi de Pouillet : $U = E - rI = 9 - 1 \\times 1{,}5 = 7{,}5$ V. Vérification : $R_1 I = 5 \\times 1{,}5 = 7{,}5$ V.",
+              "answers": [
+                {
+                  "content": "7,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi l'intensité du courant augmente quand on retire une ampoule du circuit en série. Utilise la loi de Pouillet.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Écrit la loi de Pouillet $I = E/(R + r)$",
+                "Dit que la résistance totale diminue quand on retire une ampoule",
+                "Conclut que l'intensité augmente, avec les valeurs 0,5 A puis 1,5 A"
+              ],
+              "explanation": "Corrigé modèle : D'après la loi de Pouillet, $I = \\dfrac{E}{R + r}$. La f.é.m. $E = 9$ V et la résistance interne $r = 1$ Ω ne changent pas. En retirant l'ampoule $R_2$, la résistance du circuit extérieur passe de $R = 17$ Ω à $R = 5$ Ω, donc le dénominateur diminue de 18 Ω à 6 Ω. L'intensité augmente : elle passe de 0,5 A à 1,5 A. Barème : 0,5 pour la loi, 0,5 pour la baisse de $R$, 1 pour la conclusion chiffrée.",
+              "answers": [],
+              "starter": "D'après la loi de Pouillet…"
+            }
+          ]
+        },
+        {
+          "title": "Étudier la pile de la lampe d'un pêcheur de Grand-Lahou",
+          "statement": "À Grand-Lahou, un pêcheur utilise une lampe frontale alimentée par une pile. Pour l'étudier, un élève mesure d'abord la tension à vide de la pile : 3,6 V. Puis il relie la pile à un résistor et relève une intensité de 0,3 A pour une tension de 3 V aux bornes de la pile. La figure montre la caractéristique, qui passe par (0 A ; 3,6 V), (0,3 A ; 3 V) et (0,6 A ; 2,4 V). Les justifications reprennent les méthodes de la fiche.",
+          "exercise_type": "evaluation",
+          "figure": "caracteristique-pile-lampe",
+          "questions": [
+            {
+              "content": "Quelle est la f.é.m. de la pile de la lampe, en volts ? (Tension mesurée à vide : 3,6 V.)",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode de la f.é.m. — Étape 1 : à vide, $I = 0$. Étape 2 : le voltmètre est en dérivation sur la pile. Étape 3 : il lit 3,6 V. Étape 4 : $E = U = 3{,}6$ V.",
+              "answers": [
+                {
+                  "content": "3,6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la résistance interne de la pile, en ohms. ($E = 3{,}6$ V ; pour $I = 0{,}3$ A, la tension vaut $U = 3$ V.)",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Méthode de la caractéristique. Étape 1 : $E = 3{,}6$ V. Étape 2 : on choisit le point (0,3 A ; 3 V). Étape 3 : la chute de tension est $E - U = 3{,}6 - 3 = 0{,}6$ V. Étape 4 : $r = \\dfrac{0{,}6}{0{,}3} = 2$ Ω.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour contrôler, calcule avec la loi de la pile la tension entre les bornes quand la pile débite 0,6 A ($E = 3{,}6$ V, $r = 2$ Ω).",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Méthode de la pile qui débite. Étape 1 : $E = 3{,}6$ V, $r = 2$ Ω, $I = 0{,}6$ A. Étape 2 : $U = E - rI$. Étape 3 : $rI = 2 \\times 0{,}6 = 1{,}2$ V. Étape 4 : $U = 3{,}6 - 1{,}2 = 2{,}4$ V, ce qui correspond au point (0,6 A ; 2,4 V) de la caractéristique.",
+              "answers": [
+                {
+                  "content": "2,4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On branche sur la pile ($E = 3{,}6$ V, $r = 2$ Ω) un résistor de 2 Ω. Calcule l'intensité du courant, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la loi de Pouillet. Étape 1 : $E = 3{,}6$ V, $r = 2$ Ω, $R = 2$ Ω. Étape 2 : $R = 2$ Ω. Étape 3 : $I = \\dfrac{E}{R + r}$. Étape 4 : $I = \\dfrac{3{,}6}{2 + 2} = 0{,}9$ A.",
+              "answers": [
+                {
+                  "content": "0,9",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour ce courant de 0,9 A, calcule la tension entre les bornes de la pile, en volts ($E = 3{,}6$ V, $r = 2$ Ω).",
+              "question_type": "numeric",
+              "unit": "V",
+              "tolerance": 0,
+              "explanation": "Étape 5 de la loi de Pouillet : $U = E - rI = 3{,}6 - 2 \\times 0{,}9 = 3{,}6 - 1{,}8 = 1{,}8$ V. Vérification : $RI = 2 \\times 0{,}9 = 1{,}8$ V.",
+              "answers": [
+                {
+                  "content": "1,8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un fil de résistance négligeable relie par erreur les deux bornes de la pile ($E = 3{,}6$ V, $r = 2$ Ω). Calcule l'intensité du courant de court-circuit, en ampères.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la loi de Pouillet avec $R = 0$. Étape 3 : $I = \\dfrac{E}{R + r}$. Étape 4 : $I = \\dfrac{3{,}6}{0 + 2} = 1{,}8$ A. C'est l'intensité où la droite de la figure atteint l'axe horizontal.",
+              "answers": [
+                {
+                  "content": "1,8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi faut-il éviter de relier directement les deux bornes d'une pile par un fil ?",
+              "question_type": "single_choice",
+              "explanation": "Avec $R \\approx 0$, la loi de Pouillet donne $I = \\dfrac{E}{r}$, une intensité très grande (ici 1,8 A pour une pile de lampe, bien plus pour une pile de faible résistance interne). La tension n'est pas infinie : elle vaut $U = E - rI = 0$. La f.é.m. ne s'annule pas, et le courant ne s'arrête pas.",
+              "answers": [
+                {
+                  "content": "Parce que l'intensité devient très grande, ce qui abîme la pile et le fil.",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que la tension devient infinie.",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que la f.é.m. de la pile s'annule.",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il n'y a plus aucun courant.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige la démarche qui permet de calculer la résistance interne d'une pile à partir de sa f.é.m. et d'une mesure de tension et d'intensité. Applique-la à $E = 3{,}6$ V, $U = 2{,}4$ V et $I = 0{,}6$ A.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Relève $E$, $U$ et $I$ avec leurs unités",
+                "Calcule la chute de tension $E - U$",
+                "Écrit $r = (E - U)/I$",
+                "Obtient $r = 2$ Ω avec l'unité"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Lire : $E = 3{,}6$ V est la tension à vide ; on a une mesure $U = 2{,}4$ V pour $I = 0{,}6$ A. Étape 2 — Choisir ce point de la caractéristique. Étape 3 — Calculer la chute de tension : $E - U = 3{,}6 - 2{,}4 = 1{,}2$ V. Étape 4 — Calculer $r = \\dfrac{E - U}{I} = \\dfrac{1{,}2}{0{,}6} = 2$ Ω, puis écrire $U = 3{,}6 - 2I$. Barème : 0,5 pour les données, 0,5 pour la chute de tension, 1 pour la formule, 1 pour le résultat avec l'unité.",
+              "answers": [],
+              "starter": "Étape 1 — Lire…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur la pile",
+          "notions": "Dipôle actif, f.é.m. et voltmètre ; calcul de $U = E - rI$ avec conversion des mA ; lecture d'une caractéristique ($E$, $r$, loi de la pile) ; loi de Pouillet pour une pile et un résistor.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au lycée de Daloa, un professeur présente la pile d'une lampe-torche à ses élèves. Les valeurs données sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La f.é.m. se mesure avec un voltmètre en dérivation, circuit ouvert. Une pile est un dipôle actif : elle fournit elle-même une tension.",
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un dipôle actif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la pile a deux bornes et fournit, grâce à une réaction chimique, une tension au circuit : c'est un dipôle actif. Le résistor, lui, reçoit de l'énergie : c'est un dipôle passif.",
+                  "answers": [
+                    {
+                      "content": "Un dipôle qui fournit une tension au circuit, comme la pile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un dipôle qui s'oppose au passage du courant, comme un résistor",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un dipôle qui ne fonctionne que lorsqu'il est allumé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil de connexion entre deux dipôles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La f.é.m. d'une pile s'exprime en volts.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Lire avec son unité : la f.é.m. $E$ est une tension, elle s'exprime en volts (V) et se mesure avec un voltmètre. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le professeur branche un voltmètre en dérivation aux bornes de la pile d'une lanterne, interrupteur ouvert. Le voltmètre affiche 6 V. Quelle est la f.é.m. de la pile, en volts ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : interrupteur ouvert, donc $I = 0$. Étape 2 — Brancher : voltmètre en dérivation. Étape 3 — Lire : 6 V. Étape 4 — Conclure : à vide, $E = U = 6$ V.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Complète : le voltmètre se branche en ___ aux bornes de la pile.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Brancher : le voltmètre se branche en dérivation (ou en parallèle), directement sur les deux bornes de la pile, jamais en série.",
+                  "answers": [
+                    {
+                      "content": "dérivation",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile ne débite aucun courant (circuit ouvert). Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : circuit ouvert, donc $I = 0$. Étape 4 — Conclure : à vide, $U = E - r \\times 0 = E$. La tension ne s'annule pas, la f.é.m. non plus, et le voltmètre reste en dérivation.",
+                  "answers": [
+                    {
+                      "content": "L'intensité du courant dans la pile est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension entre ses bornes est égale à sa f.é.m.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension entre ses bornes est nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa f.é.m. est nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le voltmètre doit être monté en série.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une pile de poste radio a pour f.é.m. $E = 9$ V et pour résistance interne $r = 3$ Ω.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis les mA en A avant de calculer. Calcule d'abord la chute de tension $rI$, puis retranche-la de $E$.",
+              "questions": [
+                {
+                  "content": "La pile débite 0,5 A. Calcule la tension entre ses bornes ($E = 9$ V ; $r = 3$ Ω), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 9$ V, $r = 3$ Ω, $I = 0{,}5$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 3 \\times 0{,}5 = 1{,}5$ V. Étape 4 — Calculer : $U = 9 - 1{,}5 = 7{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La pile débite 1 A. Calcule la chute de tension $rI$ ($r = 3$ Ω), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $r = 3$ Ω et $I = 1$ A. Étape 3 — Remplacer : $rI = 3 \\times 1 = 3$ V. C'est la chute de tension à l'intérieur de la pile.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La pile débite 200 mA. Calcule la tension entre ses bornes ($E = 9$ V ; $r = 3$ Ω), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $I = 200$ mA $= 0{,}2$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 3 \\times 0{,}2 = 0{,}6$ V. Étape 4 — Calculer : $U = 9 - 0{,}6 = 8{,}4$ V.",
+                  "answers": [
+                    {
+                      "content": "8,4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Pour $E = 9$ V, $r = 3$ Ω et $I = 300$ mA, un élève trouve $U = -891$ V. Quelle erreur a-t-il faite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever en unités SI : $300$ mA $= 0{,}3$ A. Étape 4 — Calculer : $U = 9 - 3 \\times 0{,}3 = 8{,}1$ V. L'élève a calculé $9 - 3 \\times 300 = -891$ V : il a gardé 300 au lieu de 0,3.",
+                  "answers": [
+                    {
+                      "content": "Il n'a pas converti 300 mA en ampères.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a ajouté $rI$ à $E$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a confondu $E$ et $r$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a fait aucune erreur.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'intensité débitée par une pile augmente, la tension entre ses bornes augmente aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Remplacer : dans $U = E - rI$, la chute $rI$ grandit avec $I$. Étape 4 — Calculer : $U$ diminue quand $I$ augmente. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève trace la caractéristique d'une pile de jouet : c'est un segment de droite qui passe par les points (0 A ; 3 V) et (0,5 A ; 2 V).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Lis $E$ au point où $I = 0$. Pour $r$, divise la chute de tension $E - U$ par $I$, et non $U$ par $I$.",
+              "questions": [
+                {
+                  "content": "Quelle est la f.é.m. de la pile, en volts ? (La caractéristique passe par (0 A ; 3 V) et (0,5 A ; 2 V).)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : le point où $I = 0$ est (0 A ; 3 V), donc $E = 3$ V.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par (0 A ; 3 V) et (0,5 A ; 2 V). Calcule la chute de tension $E - U$ au point (0,5 A ; 2 V), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : $E = 3$ V. Étape 2 — Choisir le point (0,5 A ; 2 V). Étape 3 — Calculer la chute de tension : $E - U = 3 - 2 = 1$ V.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par (0 A ; 3 V) et (0,5 A ; 2 V). Calcule sa résistance interne, en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : $E = 3$ V. Étape 2 — Choisir (0,5 A ; 2 V). Étape 3 — Chute de tension : $3 - 2 = 1$ V. Étape 4 — Calculer $r = 1 / 0{,}5 = 2$ Ω.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par (0 A ; 3 V) et (0,5 A ; 2 V). Quelle est la loi de cette pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — $r = (3 - 2) / 0{,}5 = 2$ Ω, donc $U = 3 - 2I$. La loi $U = 3 - 4I$ vient du rapport $U / I = 2 / 0{,}5 = 4$ Ω, qui n'est pas la résistance interne ; $U = 3 + 2I$ a un mauvais signe ; $U = 2 - 3I$ échange $E$ et $U$.",
+                  "answers": [
+                    {
+                      "content": "$U = 3 - 2I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$U = 3 + 2I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 2 - 3I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 3 - 4I$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'une pile est une droite qui passe par l'origine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : à $I = 0$, $U = E \\neq 0$. La droite ne passe donc pas par l'origine. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une pile de f.é.m. $E = 6$ V et de résistance interne $r = 1$ Ω alimente un résistor de résistance $R = 5$ Ω.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Additionne $R$ et $r$ avant de diviser : $I = E / (R + r)$. Ensuite $U = E - rI$.",
+              "questions": [
+                {
+                  "content": "Calcule la résistance totale $R + r$ du circuit ($R = 5$ Ω ; $r = 1$ Ω), en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $R = 5$ Ω et $r = 1$ Ω. Étape 2 — Le circuit extérieur est un seul résistor : $R = 5$ Ω. Étape 3 — Le dénominateur de la loi de Pouillet est $R + r = 5 + 1 = 6$ Ω.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "Calcule l'intensité du courant ($E = 6$ V ; $r = 1$ Ω ; $R = 5$ Ω), en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer et calculer : $I = 6 / (5 + 1) = 1$ A.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile ($E = 6$ V ; $r = 1$ Ω ; $I = 1$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 5 — Calculer : $U = E - rI = 6 - 1 \\times 1 = 5$ V.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La tension entre les bornes de la pile est égale à la tension entre les bornes du résistor ($E = 6$ V ; $r = 1$ Ω ; $R = 5$ Ω).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Calculer : la tension de la pile est $U = E - rI = 6 - 1 = 5$ V. La tension du résistor est $RI = 5 \\times 1 = 5$ V. Les deux valeurs sont égales : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On ajoute un second résistor de 5 Ω en série avec le premier ($E = 6$ V ; $r = 1$ Ω). Que devient l'intensité du courant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Nouvelle résistance totale : $R = 5 + 5 = 10$ Ω. Étape 4 — $I = 6 / (10 + 1) = 6/11 \\approx 0{,}55$ A, contre 1 A avant. Plus de résistance en série, moins de courant.",
+                  "answers": [
+                    {
+                      "content": "Elle diminue.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle augmente.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle reste la même.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle devient nulle.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La pile dans la vie courante en Côte d'Ivoire",
+          "notions": "Situations d'exemple à Bouaké, Korhogo, San-Pédro et Yopougon : piles de lampe-torche, de poste radio et de lampe de pêcheur ; tension à vide et en charge, résistance interne, conversion mA en A, caractéristique, court-circuit, ampoules en série.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Bouaké, un élève étudie la pile plate de la lampe-torche d'une commerçante. Interrupteur ouvert, le voltmètre indique 4,5 V. Lampe allumée, la pile débite 0,4 A et le voltmètre indique 3,9 V. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "À vide, la tension est la f.é.m. Lampe allumée, la chute de tension est $E - U$, et la résistance interne est $(E - U) / I$.",
+              "questions": [
+                {
+                  "content": "Quelle est la f.é.m. de la pile, en volts ? (Voltmètre : 4,5 V interrupteur ouvert.)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : interrupteur ouvert, $I = 0$. Étape 3 — Lire : 4,5 V. Étape 4 — Conclure : $E = U = 4{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Lampe allumée, la pile ($E = 4{,}5$ V) donne $U = 3{,}9$ V. Calcule la chute de tension $E - U$, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 4{,}5$ V et $U = 3{,}9$ V. Étape 3 — Calculer la chute de tension : $E - U = 4{,}5 - 3{,}9 = 0{,}6$ V.",
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Lampe allumée, la pile ($E = 4{,}5$ V) débite 0,4 A sous $U = 3{,}9$ V. Calcule sa résistance interne, en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Chute de tension : $4{,}5 - 3{,}9 = 0{,}6$ V. Étape 4 — Calculer $r$ $= (E - U) / I$ $= 0{,}6 / 0{,}4$ $= 1{,}5$ Ω.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "Pourquoi la tension du voltmètre baisse-t-elle quand on allume la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire la loi de la pile : $U = E - rI$. Quand $I$ n'est plus nul, la chute $rI$ apparaît et $U$ passe sous $E$. La f.é.m. ne change pas, le voltmètre n'est pas en cause, et la pile reste un dipôle actif.",
+                  "answers": [
+                    {
+                      "content": "Parce que la pile débite un courant et qu'une chute de tension $rI$ apparaît dans la pile.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la f.é.m. de la pile a diminué.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le voltmètre est défectueux.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la pile est devenue un dipôle passif.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on rouvre l'interrupteur, le voltmètre indique de nouveau 4,5 V.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : interrupteur ouvert, donc $I = 0$. Étape 4 — Conclure : $U = E - r \\times 0 = E = 4{,}5$ V. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Korhogo, un réparateur teste le poste radio d'un client. Sa pile a pour f.é.m. $E = 6$ V et pour résistance interne $r = 2$ Ω. Quand le volume est faible, elle débite 150 mA.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis 150 mA en ampères : on divise par 1 000. La chute de tension est $rI$ ; la tension de la pile est $E - rI$.",
+              "questions": [
+                {
+                  "content": "Convertis 150 mA en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever en unités SI : on divise par 1 000 pour passer des mA aux A, donc $150 / 1000 = 0{,}15$ A.",
+                  "answers": [
+                    {
+                      "content": "0,15",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Quelle est la chute de tension $rI$ à l'intérieur de la pile ($r = 2$ Ω ; $I = 150$ mA) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — $I = 0{,}15$ A. Étape 3 — Remplacer : $rI = 2 \\times 0{,}15 = 0{,}3$ V. Garder 150 mA donne 300 V ; diviser $I$ par $r$ donne 0,075 ; 6,3 V est $E + rI$, une addition au lieu d'une soustraction.",
+                  "answers": [
+                    {
+                      "content": "0,3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "300 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,075 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "6,3 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile ($E = 6$ V ; $r = 2$ Ω ; $I = 150$ mA), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $I = 0{,}15$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 0{,}3$ V. Étape 4 — Calculer : $U = 6 - 0{,}3 = 5{,}7$ V.",
+                  "answers": [
+                    {
+                      "content": "5,7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Le client monte le volume : la pile débite 0,6 A. Calcule la tension entre ses bornes ($E = 6$ V ; $r = 2$ Ω), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $I = 0{,}6$ A. Étape 3 — Remplacer : $rI = 2 \\times 0{,}6 = 1{,}2$ V. Étape 4 — Calculer : $U = 6 - 1{,}2 = 4{,}8$ V.",
+                  "answers": [
+                    {
+                      "content": "4,8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Plus le volume est fort, c'est-à-dire plus le courant débité est grand, plus la tension entre les bornes de la pile est petite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Remplacer : la chute $rI$ grandit avec $I$. Étape 4 — Calculer : $U = E - rI$ diminue. Ici, 5,7 V pour 0,15 A et 4,8 V pour 0,6 A. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À San-Pédro, un pêcheur utilise une lampe frontale. Son fils trace la caractéristique de la pile : un segment de droite qui passe par les points (0 A ; 4,8 V) et (0,4 A ; 4 V).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Lis $E$ à $I = 0$, puis $r = (E - U) / I$. Le court-circuit correspond à $U = 0$, soit $I = E / r$.",
+              "questions": [
+                {
+                  "content": "Quelle est la f.é.m. de la pile, en volts ? (La caractéristique passe par (0 A ; 4,8 V) et (0,4 A ; 4 V).)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : à $I = 0$, $U = 4{,}8$ V, donc $E = 4{,}8$ V.",
+                  "answers": [
+                    {
+                      "content": "4,8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par (0 A ; 4,8 V) et (0,4 A ; 4 V). Calcule sa résistance interne, en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : $E = 4{,}8$ V. Étape 2 — Choisir (0,4 A ; 4 V). Étape 3 — Chute de tension : $4{,}8 - 4 = 0{,}8$ V. Étape 4 — $r = 0{,}8 / 0{,}4 = 2$ Ω.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "Quelle est la loi de cette pile ($E = 4{,}8$ V ; $r = 2$ Ω) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — La loi s'écrit $U = E - rI = 4{,}8 - 2I$. La loi avec 10 vient du rapport $U / I = 4 / 0{,}4 = 10$ Ω, qui n'est pas la résistance interne ; les deux autres ont un mauvais signe ou échangent $E$ et $r$.",
+                  "answers": [
+                    {
+                      "content": "$U = 4{,}8 - 2I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$U = 4{,}8 + 2I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 2 - 4{,}8I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 4{,}8 - 10I$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la loi $U = 4{,}8 - 2I$, calcule la tension de la pile quand elle débite 0,3 A, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Remplacer : $rI = 2 \\times 0{,}3 = 0{,}6$ V. Étape 4 — Calculer : $U = 4{,}8 - 0{,}6 = 4{,}2$ V.",
+                  "answers": [
+                    {
+                      "content": "4,2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Un fil de résistance négligeable relie par erreur les deux bornes de la pile ($E = 4{,}8$ V ; $r = 2$ Ω). Calcule l'intensité du courant de court-circuit, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Court-circuit : $U = 0$ dans $U = E - rI$, donc $I = E / r = 4{,}8 / 2 = 2{,}4$ A. Cette intensité est très grande pour une petite pile.",
+                  "answers": [
+                    {
+                      "content": "2,4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Au point (0,4 A ; 4 V), le rapport $U / I = 10$ Ω est la résistance interne de la pile.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Pour $r$, on utilise la chute de tension : $r$ $= (E - U) / I$ $= (4{,}8 - 4) / 0{,}4$ $= 2$ Ω. Le rapport $U / I$ est la résistance du circuit extérieur (loi d'Ohm). L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Sur un stand du marché de Yopougon, une pile de f.é.m. $E = 12$ V et de résistance interne $r = 1$ Ω alimente, en série, deux ampoules assimilées à des résistors : $R_1 = 4$ Ω et $R_2 = 7$ Ω. Les fils ont une résistance négligeable.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Additionne $R_1$ et $R_2$, puis applique $I = E / (R + r)$. La tension d'une ampoule vaut $R I$.",
+              "questions": [
+                {
+                  "content": "Calcule la résistance totale $R$ du circuit extérieur ($R_1 = 4$ Ω ; $R_2 = 7$ Ω), en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $R_1 = 4$ Ω et $R_2 = 7$ Ω. Étape 2 — En série : $R = R_1 + R_2 = 4 + 7 = 11$ Ω.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "Calcule l'intensité du courant ($E = 12$ V ; $r = 1$ Ω ; $R = 11$ Ω), en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I = 12 / (11 + 1) = 1$ A.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile ($E = 12$ V ; $r = 1$ Ω ; $I = 1$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 5 — Calculer : $U = E - rI = 12 - 1 \\times 1 = 11$ V ; on vérifie $RI = 11 \\times 1 = 11$ V.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de l'ampoule $R_2 = 7$ Ω, traversée par 1 A, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Dans un circuit en série, la même intensité traverse chaque dipôle. Étape 4 — La tension de l'ampoule est $R_2 I = 7 \\times 1 = 7$ V.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "On retire l'ampoule $R_2$ ($E = 12$ V ; $r = 1$ Ω ; il reste $R_1 = 4$ Ω). Que devient l'éclat de l'ampoule $R_1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Nouvelle résistance : $R = 4$ Ω. Étape 4 — $I = 12 / (4 + 1) = 2{,}4$ A, contre 1 A avant. L'intensité augmente, l'ampoule brille plus fort. Le circuit n'est pas coupé : on a retiré un résistor, pas ouvert la boucle.",
+                  "answers": [
+                    {
+                      "content": "Elle brille plus fort, car l'intensité augmente.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle brille moins fort, car l'intensité diminue.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle brille de la même façon.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle s'éteint, car le circuit est coupé.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier avec la pile",
+          "notions": "Juger des affirmations sur la tension d'une pile ; comparer deux piles de résistances internes différentes ; expliquer l'usure d'une pile avec la loi de Pouillet ; justifier le danger d'un court-circuit.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève affirme : « La tension aux bornes d'une pile est toujours égale à sa f.é.m. ». Son professeur lui demande de tester l'affirmation sur une pile de f.é.m. $E = 6$ V et de résistance interne $r = 2$ Ω.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche dans quelle condition $U = E$. Teste avec $I = 0$, puis avec $I = 1$ A en calculant $rI$.",
+              "questions": [
+                {
+                  "content": "Si la pile ne débite aucun courant, la tension entre ses bornes vaut 6 V ($E = 6$ V ; $r = 2$ Ω).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : $I = 0$. Étape 3 — Remplacer : $rI = 2 \\times 0 = 0$. Étape 4 — Calculer : $U = 6 - 0 = 6$ V. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la pile débite 1 A, la tension entre ses bornes vaut encore 6 V ($E = 6$ V ; $r = 2$ Ω).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Remplacer : $rI = 2 \\times 1 = 2$ V. Étape 4 — Calculer : $U = 6 - 2 = 4$ V, et non 6 V. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile quand elle débite 1 A ($E = 6$ V ; $r = 2$ Ω), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 6$ V, $r = 2$ Ω, $I = 1$ A. Étape 2 — Écrire : $U = E - rI$. Étape 3 — Remplacer : $rI = 2$ V. Étape 4 — Calculer : $U = 4$ V.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Quel est le défaut de l'affirmation de l'élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — La loi de la pile est $U = E - rI$ : $U = E$ seulement si $rI = 0$, c'est-à-dire si $I = 0$. L'élève a généralisé la mesure à vide à toutes les situations.",
+                  "answers": [
+                    {
+                      "content": "Elle oublie la chute de tension $rI$ qui apparaît quand la pile débite.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle confond la f.é.m. avec l'intensité.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est toujours vraie, il n'y a aucun défaut.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle oublie que la f.é.m. s'exprime en ohms.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour tester l'affirmation avec une pile qui débite.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever. Étape 2 — Écrire $U = E - rI$. Étape 3 — Remplacer. Étape 4 — Calculer $U$ et comparer à $E$ : ici $4$ V est plus petit que $6$ V, ce qui réfute l'affirmation.",
+                  "answers": [
+                    {
+                      "content": "Relever $E$, $r$ et $I$ en unités SI."
+                    },
+                    {
+                      "content": "Écrire la loi de la pile : $U = E - rI$."
+                    },
+                    {
+                      "content": "Remplacer par les valeurs en calculant $rI$."
+                    },
+                    {
+                      "content": "Calculer $U$ et la comparer à $E$."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux piles ont la même f.é.m. $E = 6$ V. La pile A a une résistance interne $r_A = 1$ Ω, la pile B une résistance interne $r_B = 3$ Ω. Chacune débite 1 A dans un circuit.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule la chute de tension $rI$ de chaque pile. La pile qui perd le moins de tension est celle de plus petite résistance interne.",
+              "questions": [
+                {
+                  "content": "Calcule la tension entre les bornes de la pile A ($E = 6$ V ; $r_A = 1$ Ω ; $I = 1$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 6$ V, $r_A = 1$ Ω, $I = 1$ A. Étape 3 — $r_A I = 1$ V. Étape 4 — $U_A = 6 - 1 = 5$ V.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile B ($E = 6$ V ; $r_B = 3$ Ω ; $I = 1$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $E = 6$ V, $r_B = 3$ Ω, $I = 1$ A. Étape 3 — $r_B I = 3$ V. Étape 4 — $U_B = 6 - 3 = 3$ V.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Laquelle des deux piles a la plus petite tension quand elle débite 1 A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — On a $U_A = 5$ V et $U_B = 3$ V. La pile B perd 3 V dans sa résistance interne, la pile A seulement 1 V. Avoir la même f.é.m. ne donne la même tension qu'à vide.",
+                  "answers": [
+                    {
+                      "content": "La pile B, car sa chute de tension est plus grande.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile A, car sa résistance interne est plus petite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune : elles ont la même f.é.m., donc la même tension.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pile A, car sa f.é.m. est plus petite.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle pile convient mieux pour un appareil qui demande un courant fort ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Pour un courant fort, $rI$ grandit : la pile de plus petite résistance interne garde la tension la plus proche de $E$. C'est la pile A.",
+                  "answers": [
+                    {
+                      "content": "La pile A, car sa chute de tension $rI$ reste petite.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pile B, car sa résistance interne est plus grande.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux piles se valent.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune, car il faut une pile de plus grande f.é.m. seulement.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite caractéristique de la pile B descend plus vite que celle de la pile A.",
+                  "question_type": "true_false",
+                  "explanation": "La pente de la caractéristique vaut $-r$ : $-3$ pour la pile B et $-1$ pour la pile A. La droite de B est plus raide, elle descend plus vite. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une pile neuve a pour f.é.m. $E = 3$ V et pour résistance interne $r = 1$ Ω. Quand elle est usée, sa résistance interne passe à 5 Ω, sa f.é.m. restant 3 V. Elle alimente une petite ampoule assimilée à un résistor de $R = 5$ Ω.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Applique $I = E / (R + r)$ avec la résistance interne de chaque pile. Une pile usée a surtout une résistance interne plus grande.",
+              "questions": [
+                {
+                  "content": "Calcule l'intensité avec la pile neuve ($E = 3$ V ; $r = 1$ Ω ; $R = 5$ Ω), en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I = 3 / (5 + 1) = 0{,}5$ A.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Calcule l'intensité avec la pile usée ($E = 3$ V ; $r = 5$ Ω ; $R = 5$ Ω), en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I = 3 / (5 + 5) = 0{,}3$ A.",
+                  "answers": [
+                    {
+                      "content": "0,3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile usée ($E = 3$ V ; $r = 5$ Ω ; $I = 0{,}3$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 5 — Calculer : $U$ $= E - rI$ $= 3 - 5 \\times 0{,}3$ $= 1{,}5$ V ; on vérifie $RI = 5 \\times 0{,}3 = 1{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "1,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Pourquoi l'ampoule brille-t-elle moins avec la pile usée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Dans $I = E / (R + r)$, $r$ passe de 1 Ω à 5 Ω : le dénominateur double, l'intensité passe de 0,5 A à 0,3 A. La f.é.m. reste 3 V.",
+                  "answers": [
+                    {
+                      "content": "Parce que la résistance interne a augmenté, donc $R + r$ augmente et l'intensité diminue.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la f.é.m. est devenue nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que l'ampoule a perdu de la résistance.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la loi de Pouillet ne s'applique plus.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La f.é.m. de la pile usée est nulle puisque l'ampoule brille moins.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : l'énoncé donne $E = 3$ V pour la pile usée. C'est la résistance interne qui a augmenté, pas la f.é.m. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élève de 1ère A relie par erreur les deux bornes d'une pile de f.é.m. $E = 4{,}5$ V et de résistance interne $r = 1{,}5$ Ω avec un fil de résistance négligeable.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Avec $R = 0$, la loi de Pouillet donne $I = E / r$. Calcule ensuite $rI$ et compare-la à $E$.",
+              "questions": [
+                {
+                  "content": "Calcule l'intensité du courant de court-circuit ($E = 4{,}5$ V ; $r = 1{,}5$ Ω ; $R = 0$), en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer avec $R = 0$ : $I = 4{,}5 / 1{,}5 = 3$ A.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Calcule la chute de tension $rI$ dans la pile ($r = 1{,}5$ Ω ; $I = 3$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Remplacer : $rI = 1{,}5 \\times 3 = 4{,}5$ V. Toute la f.é.m. est perdue à l'intérieur de la pile.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile en court-circuit ($E = 4{,}5$ V ; $r = 1{,}5$ Ω ; $I = 3$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 5 — Calculer : $U = E - rI = 4{,}5 - 4{,}5 = 0$ V ; on vérifie $RI = 0 \\times 3 = 0$ V.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Pourquoi faut-il éviter de relier directement les deux bornes d'une pile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Avec $R = 0$, $I = E / r$ est la plus grande intensité possible pour cette pile. Ce courant fort échauffe la pile et le fil. La tension, elle, tombe à 0 V.",
+                  "answers": [
+                    {
+                      "content": "Parce que l'intensité devient très grande, ce qui échauffe la pile et le fil.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la tension devient infinie.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la f.é.m. s'annule.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il n'y a plus aucun courant.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique, avec la loi de Pouillet, pourquoi on ne doit jamais relier directement les deux bornes d'une pile. Applique ton raisonnement à $E = 4{,}5$ V et $r = 1{,}5$ Ω.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : Étape 3 — La loi de Pouillet donne $I = E / (R + r)$. Étape 4 — Si un fil relie les bornes, $R$ est négligeable, donc $I = E / r = 4{,}5 / 1{,}5 = 3$ A. Cette intensité est très grande pour une petite pile : elle échauffe la pile et le fil, d'où le danger. Barème : 0,5 pour la loi, 0,5 pour $R \\approx 0$, 1 pour le calcul avec l'unité, 1 pour la conséquence.",
+                  "answers": [],
+                  "points": 3,
+                  "criteria": [
+                    "Écrit la loi $I = E / (R + r)$",
+                    "Remarque que $R$ est négligeable donc $I = E / r$",
+                    "Obtient $I = 3$ A avec l'unité",
+                    "Relie la grande intensité à l'échauffement"
+                  ],
+                  "starter": "Étape 3 — La loi de Pouillet…"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur le dipôle actif et la loi de Pouillet",
+          "notions": "Bilan de toutes les notions : f.é.m. à vide, tension d'une pile qui débite, caractéristique, résistance interne, loi de Pouillet, résistors en série, court-circuit ; niveau devoir.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au lycée de Gagnoa, un groupe étudie une pile. Le voltmètre indique 4,5 V à vide. La pile est ensuite reliée à un résistor : le courant vaut 0,5 A et la tension entre les bornes de la pile 3,5 V. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Tension à vide = $E$. Résistance interne : $r = (E - U) / I$. Le résistor a pour résistance $R = U / I$ (loi d'Ohm). Puis Pouillet.",
+              "questions": [
+                {
+                  "content": "Quelle est la f.é.m. de la pile, en volts ? (Voltmètre : 4,5 V à vide.)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : à vide, $I = 0$. Étape 3 — Lire : 4,5 V. Étape 4 — Conclure : $E = 4{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Calcule la résistance interne de la pile ($E = 4{,}5$ V ; elle débite 0,5 A sous 3,5 V), en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Chute de tension : $E - U = 4{,}5 - 3{,}5 = 1$ V. Étape 4 — Calculer $r = 1 / 0{,}5 = 2$ Ω.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "Quelle est la loi de cette pile ($E = 4{,}5$ V ; $r = 2$ Ω) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — $U = E - rI = 4{,}5 - 2I$. La loi avec 7 utilise $U / I = 3{,}5 / 0{,}5 = 7$ Ω, résistance du résistor et non de la pile ; la loi avec 3,5 prend $U$ pour $E$.",
+                  "answers": [
+                    {
+                      "content": "$U = 4{,}5 - 2I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$U = 4{,}5 + 2I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 3{,}5 - 2I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 4{,}5 - 7I$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la résistance $R$ du résistor, sachant que la tension à ses bornes est 3,5 V pour 0,5 A, en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : $U = 3{,}5$ V aux bornes du résistor et $I = 0{,}5$ A. La loi d'Ohm donne $R = U / I = 3{,}5 / 0{,}5 = 7$ Ω.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "On remplace le résistor par un résistor de $R' = 2{,}5$ Ω ($E = 4{,}5$ V ; $r = 2$ Ω). Calcule la nouvelle intensité, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I$ $= 4{,}5 / (2{,}5 + 2)$ $= 4{,}5 / 4{,}5$ $= 1$ A.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Pour ce nouveau circuit ($E = 4{,}5$ V ; $r = 2$ Ω ; $I = 1$ A), calcule la tension entre les bornes de la pile, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 5 — Calculer : $U = E - rI = 4{,}5 - 2 = 2{,}5$ V ; on vérifie $R'I = 2{,}5 \\times 1 = 2{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "La caractéristique d'une pile de radio est un segment de droite qui passe par les points (0 A ; 7,5 V) et (1,5 A ; 6 V).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Lis $E$, calcule $r = (E - U) / I$, écris la loi, puis utilise Pouillet. Le court-circuit correspond à $U = 0$.",
+              "questions": [
+                {
+                  "content": "Quelle est la f.é.m. de la pile, en volts ? (La caractéristique passe par (0 A ; 7,5 V) et (1,5 A ; 6 V).)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : à $I = 0$, $U = 7{,}5$ V, donc $E = 7{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La caractéristique d'une pile passe par (0 A ; 7,5 V) et (1,5 A ; 6 V). Calcule sa résistance interne, en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Chute de tension : $7{,}5 - 6 = 1{,}5$ V. Étape 4 — $r = 1{,}5 / 1{,}5 = 1$ Ω.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "Quelle est la loi de cette pile ($E = 7{,}5$ V ; $r = 1$ Ω) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — $U$ $= E - rI$ $= 7{,}5 - 1 \\times I$ $= 7{,}5 - I$. La loi avec 4 utilise $U / I = 6 / 1{,}5 = 4$ Ω ; $U = 6 - I$ prend $U$ pour $E$ ; la dernière a un mauvais signe.",
+                  "answers": [
+                    {
+                      "content": "$U = 7{,}5 - I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$U = 7{,}5 - 4I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 6 - I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 7{,}5 + I$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la loi $U = 7{,}5 - I$, calcule la tension de la pile quand elle débite 3 A, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Remplacer : $rI = 1 \\times 3 = 3$ V. Étape 4 — Calculer : $U = 7{,}5 - 3 = 4{,}5$ V.",
+                  "answers": [
+                    {
+                      "content": "4,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La pile ($E = 7{,}5$ V ; $r = 1$ Ω) alimente un résistor de $R = 6{,}5$ Ω. Calcule l'intensité du courant, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I$ $= 7{,}5 / (6{,}5 + 1)$ $= 7{,}5 / 7{,}5$ $= 1$ A.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Calcule l'intensité du courant de court-circuit de cette pile ($E = 7{,}5$ V ; $r = 1$ Ω), en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Court-circuit : $U = 0$, donc $I = E / r = 7{,}5 / 1 = 7{,}5$ A.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une pile de f.é.m. $E = 24$ V et de résistance interne $r = 2$ Ω alimente en série deux résistors : $R_1 = 3$ Ω et $R_2 = 7$ Ω.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Additionne les résistances en série, applique Pouillet, puis $U = E - rI$. Chaque résistor est traversé par le même courant.",
+              "questions": [
+                {
+                  "content": "Calcule la résistance totale $R$ du circuit extérieur ($R_1 = 3$ Ω ; $R_2 = 7$ Ω), en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — En série : $R = R_1 + R_2 = 3 + 7 = 10$ Ω.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "Calcule l'intensité du courant ($E = 24$ V ; $r = 2$ Ω ; $R = 10$ Ω), en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I = 24 / (10 + 2) = 2$ A.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile ($E = 24$ V ; $r = 2$ Ω ; $I = 2$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 5 — Calculer : $U = E - rI = 24 - 4 = 20$ V ; on vérifie $RI = 10 \\times 2 = 20$ V.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Calcule la tension aux bornes du résistor $R_1 = 3$ Ω, traversé par 2 A, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Le même courant de 2 A traverse les deux résistors en série. La tension de $R_1$ est $R_1 I = 3 \\times 2 = 6$ V.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Calcule la tension aux bornes du résistor $R_2 = 7$ Ω, traversé par 2 A, en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Même courant de 2 A. La tension de $R_2$ est $R_2 I = 7 \\times 2 = 14$ V.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "La somme des tensions des deux résistors ($6$ V et $14$ V) est égale à la tension entre les bornes de la pile ($24$ V avec $I = 2$ A et $r = 2$ Ω).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — La tension de la pile est $U = E - rI = 24 - 2 \\times 2 = 20$ V. La somme des tensions des résistors est $6 + 14 = 20$ V. Les deux valeurs sont égales : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une pile de f.é.m. $E = 6$ V est reliée à un résistor. Deux mesures donnent : pour $I = 0{,}2$ A, $U = 5{,}6$ V ; pour $I = 0{,}6$ A, $U = 4{,}8$ V. Les valeurs sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Utilise le premier point : $r = (E - U) / I$. Puis vérifie que le second point est sur la droite $U = E - rI$.",
+              "questions": [
+                {
+                  "content": "Calcule la résistance interne de la pile avec la mesure ($I = 0{,}2$ A ; $U = 5{,}6$ V), sachant que $E = 6$ V, en ohms.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : $E = 6$ V. Étape 2 — Choisir le point (0,2 A ; 5,6 V). Étape 3 — Chute de tension : $6 - 5{,}6 = 0{,}4$ V. Étape 4 — $r = 0{,}4 / 0{,}2 = 2$ Ω.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "Ω"
+                },
+                {
+                  "content": "Le point (0,6 A ; 4,8 V) est sur la caractéristique de la pile ($E = 6$ V ; $r = 2$ Ω).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Remplacer : $rI = 2 \\times 0{,}6 = 1{,}2$ V. Étape 4 — Calculer : $U = 6 - 1{,}2 = 4{,}8$ V. Le point vérifie la loi : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la loi de cette pile ($E = 6$ V ; $r = 2$ Ω) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — $U = E - rI = 6 - 2I$. La loi avec 28 vient du rapport $U / I = 5{,}6 / 0{,}2 = 28$ Ω ; $U = 5{,}6 - 2I$ prend $U$ pour $E$ ; la dernière a un mauvais signe.",
+                  "answers": [
+                    {
+                      "content": "$U = 6 - 2I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$U = 6 - 28I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 5{,}6 - 2I$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = 6 + 2I$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pile ($E = 6$ V ; $r = 2$ Ω) alimente un résistor de $R = 10$ Ω. Calcule l'intensité du courant, en ampères.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Écrire : $I = E / (R + r)$. Étape 4 — Remplacer : $I = 6 / 12 = 0{,}5$ A.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "A"
+                },
+                {
+                  "content": "Calcule la tension entre les bornes de la pile dans ce circuit ($E = 6$ V ; $r = 2$ Ω ; $I = 0{,}5$ A), en volts.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 5 — Calculer : $U = E - rI = 6 - 1 = 5$ V ; on vérifie $RI = 10 \\times 0{,}5 = 5$ V.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "V"
+                },
+                {
+                  "content": "Un élève calcule la résistance interne avec le rapport $U / I$ au point (0,2 A ; 5,6 V) et trouve 28 Ω. Explique son erreur et donne la bonne valeur.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : le rapport $U / I = 5{,}6 / 0{,}2 = 28$ Ω est la résistance du circuit extérieur (loi d'Ohm), pas celle de la pile. Étape 3 — Il faut la chute de tension $E - U = 6 - 5{,}6 = 0{,}4$ V. Étape 4 — $r = 0{,}4 / 0{,}2 = 2$ Ω. Barème : 1 pour l'explication, 0,5 pour la chute, 0,5 pour la formule, 1 pour le résultat avec l'unité.",
+                  "answers": [],
+                  "points": 3,
+                  "criteria": [
+                    "Dit que $U / I$ est la résistance du circuit extérieur",
+                    "Utilise la chute de tension $E - U$",
+                    "Calcule $r = 0{,}4 / 0{,}2$",
+                    "Obtient $r = 2$ Ω avec l'unité"
+                  ],
+                  "starter": "Le rapport $U / I$ est…"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

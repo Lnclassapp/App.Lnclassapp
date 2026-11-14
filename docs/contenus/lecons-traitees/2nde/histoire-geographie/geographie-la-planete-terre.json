@@ -1,0 +1,3386 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — La planète terre",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Histoire-Géographie",
+      "figures": [
+        {
+          "key": "carte-abidjan-paris",
+          "kind": "map",
+          "description": "Une carte du monde sur laquelle sont repérés Abidjan, en Côte d'Ivoire, et Paris, en France, reliés par un trait qui représente l'appel téléphonique d'un élève à son cousin. Elle sert à situer les deux villes : la France se trouve plus à l'est et plus au nord que la Côte d'Ivoire.",
+          "params": {
+            "base": "world",
+            "areas": [
+              {
+                "id": "civ",
+                "category": 1
+              },
+              {
+                "id": "fra",
+                "category": 2
+              }
+            ],
+            "places": [
+              {
+                "id": "abidjan",
+                "label": "Abidjan"
+              },
+              {
+                "id": "paris",
+                "label": "Paris"
+              }
+            ],
+            "routes": [
+              {
+                "from": "abidjan",
+                "to": "paris",
+                "label": "Appel"
+              }
+            ],
+            "legend": [
+              "Côte d'Ivoire",
+              "France"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "mouvements-de-la-terre",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : les mouvements de la Terre se divisent en deux. La rotation sur elle-même, en 24 heures environ, mène à l'alternance du jour et de la nuit. La révolution autour du Soleil, en 365 jours et un quart, avec l'axe incliné, mène aux saisons. Il sert à relier chaque mouvement à sa conséquence.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "m",
+                "label": "Mouvements de la Terre"
+              },
+              {
+                "id": "rot",
+                "label": "Rotation : 24 h environ",
+                "category": 1
+              },
+              {
+                "id": "rev",
+                "label": "Révolution : 365 jours et un quart",
+                "category": 2
+              },
+              {
+                "id": "jn",
+                "label": "Jour et nuit",
+                "category": 1
+              },
+              {
+                "id": "sa",
+                "label": "Saisons (axe incliné)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "m",
+                "to": "rot"
+              },
+              {
+                "from": "m",
+                "to": "rev"
+              },
+              {
+                "from": "rot",
+                "to": "jn",
+                "label": "provoque"
+              },
+              {
+                "from": "rev",
+                "to": "sa",
+                "label": "provoque"
+              }
+            ],
+            "legend": [
+              "Rotation",
+              "Révolution"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "structure-interne-terre",
+          "kind": "diagram",
+          "description": "Un schéma fléché de la surface vers le centre de la Terre : la croûte, mince et solide, puis le manteau, épais et fait de roches chaudes, puis le noyau externe, liquide, et enfin le noyau interne, solide. Il sert à retenir l'ordre des couches de l'intérieur de la Terre.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "c",
+                "label": "Croûte (solide, mince)"
+              },
+              {
+                "id": "m",
+                "label": "Manteau (roches chaudes)"
+              },
+              {
+                "id": "ne",
+                "label": "Noyau externe (liquide)"
+              },
+              {
+                "id": "ni",
+                "label": "Noyau interne (solide)"
+              }
+            ],
+            "edges": [
+              {
+                "from": "c",
+                "to": "m"
+              },
+              {
+                "from": "m",
+                "to": "ne"
+              },
+              {
+                "from": "ne",
+                "to": "ni"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "La Terre dans le système solaire",
+          "remember": "Le **système solaire** est formé du **Soleil**, une étoile qui produit sa propre lumière, et des astres qui tournent autour de lui, dont **8 planètes**. De la plus proche à la plus éloignée : Mercure, Vénus, **la Terre**, Mars, Jupiter, Saturne, Uranus, Neptune.\n\nLa Terre est la **troisième planète** à partir du Soleil, à environ **150 millions de km** de lui. C'est une planète **tellurique** (rocheuse, à surface solide), comme Mercure, Vénus et Mars. Jupiter et Saturne sont des planètes géantes. Un **satellite naturel** tourne autour d'une planète : la Lune est le satellite de la Terre.\n\nLa Terre a la forme d'une **sphère légèrement aplatie aux pôles**. Son rayon est d'environ **6 370 km**. L'**équateur** est le cercle imaginaire à égale distance des deux pôles.",
+          "method": [
+            "Situer la Terre : donner son rang parmi les planètes et sa distance au Soleil.",
+            "Décrire la Terre : sa nature (planète tellurique), sa forme et sa taille.",
+            "Conclure en présentant la Terre comme une planète rocheuse, sphérique et éclairée par le Soleil."
+          ],
+          "example": {
+            "statement": "Présente la Terre à partir de ces données : troisième planète, 150 millions de km du Soleil, surface rocheuse, rayon de 6 370 km.",
+            "steps": [
+              "Situer : la Terre est la troisième planète à partir du Soleil, après Mercure et Vénus, à environ 150 millions de km de lui.",
+              "Décrire : sa surface est rocheuse, c'est une planète tellurique ; sa forme est une sphère légèrement aplatie aux pôles, de rayon 6 370 km.",
+              "Conclure : la Terre est une planète rocheuse et sphérique, éclairée par le Soleil, qui est une étoile."
+            ]
+          },
+          "pitfall": "Ne pas confondre une étoile, une planète et un satellite. Contre-exemple : le Soleil produit sa lumière, c'est une étoile ; la Terre ne fait que la recevoir, c'est une planète ; la Lune tourne autour de la Terre, c'est un satellite naturel. Un astre qui tourne autour de la Terre n'est donc pas une planète.",
+          "practice": {
+            "statement": "Tu t'entraînes à situer et décrire la Terre avec la méthode : situer, décrire, conclure.",
+            "questions": [
+              {
+                "content": "La Terre est la ___ planète à partir du Soleil (rang, en toutes lettres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : on compte Mercure (1), Vénus (2), la Terre (3). Le rang attendu est troisième.",
+                "answers": [
+                  {
+                    "content": "troisième",
+                    "correct": true
+                  },
+                  {
+                    "content": "3e",
+                    "correct": true
+                  },
+                  {
+                    "content": "3ème",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte les planètes depuis le Soleil."
+              },
+              {
+                "content": "Le Soleil est une planète tellurique.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Décrire : le Soleil produit sa lumière, c'est une étoile, pas une planète. Les planètes telluriques (Mercure, Vénus, Terre, Mars) sont rocheuses.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Qui produit sa propre lumière ?"
+              },
+              {
+                "content": "Quelle planète est tellurique comme la Terre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Décrire : Mars a une surface rocheuse, donc elle est tellurique. Jupiter et Saturne sont des planètes géantes ; le Soleil est une étoile.",
+                "answers": [
+                  {
+                    "content": "Mars",
+                    "correct": true
+                  },
+                  {
+                    "content": "Jupiter",
+                    "correct": false
+                  },
+                  {
+                    "content": "Saturne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Soleil",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense aux quatre planètes les plus proches du Soleil."
+              }
+            ]
+          },
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Situer et décrire la Terre",
+              "statement": "Dans cet exercice, tu appliques les trois étapes de la fiche (situer, décrire, conclure) à la Terre et à son voisinage.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Combien de planètes compte le système solaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le système solaire compte huit planètes, de Mercure à Neptune. Les autres nombres ne correspondent pas à la liste de la fiche.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase situe correctement la Terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : on donne le rang de la Terre, troisième, après Mercure et Vénus. Dire qu'elle est au centre est l'erreur de confondre la Terre et le Soleil.",
+                  "answers": [
+                    {
+                      "content": "C'est la troisième planète à partir du Soleil, après Mercure et Vénus",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est la première planète à partir du Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est la planète placée entre Mars et Jupiter",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est l'astre central autour duquel tournent les planètes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Décrire : chaque mot a une définition précise. L'étoile éclaire, la planète tourne autour de l'étoile, le satellite autour de la planète, et la planète tellurique est rocheuse.",
+                  "answers": [
+                    {
+                      "content": "Étoile",
+                      "match": "Astre qui produit sa propre lumière"
+                    },
+                    {
+                      "content": "Planète",
+                      "match": "Astre qui tourne autour du Soleil"
+                    },
+                    {
+                      "content": "Satellite naturel",
+                      "match": "Astre qui tourne autour d'une planète"
+                    },
+                    {
+                      "content": "Planète tellurique",
+                      "match": "Planète rocheuse à surface solide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le rayon de la Terre est d'environ 6 370 km. Quel est son diamètre, en km ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Décrire : le diamètre est le double du rayon. $6\\,370 \\times 2 = 12\\,740$. Le diamètre de la Terre est d'environ 12 740 km.",
+                  "answers": [
+                    {
+                      "content": "12740",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "km"
+                },
+                {
+                  "content": "La Lune est une planète qui tourne autour du Soleil.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Conclure : la Lune tourne autour de la Terre, c'est un satellite naturel. Elle n'est pas une planète : c'est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Ce que l'on sait de la Terre",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions pour situer, décrire et conclure sur la Terre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Reprends les trois étapes : situer, décrire, conclure.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre, du plus proche au plus éloigné du Soleil.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : on range les planètes selon leur distance au Soleil : Mercure, Vénus, la Terre, puis Mars.",
+                  "answers": [
+                    {
+                      "content": "Mercure"
+                    },
+                    {
+                      "content": "Vénus"
+                    },
+                    {
+                      "content": "La Terre"
+                    },
+                    {
+                      "content": "Mars"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre a la forme d'une ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Décrire : la Terre est une sphère un peu aplatie aux pôles. Disque et pyramide sont des formes fausses ; « parfaitement ronde » oublie l'aplatissement aux pôles.",
+                  "answers": [
+                    {
+                      "content": "sphère légèrement aplatie aux pôles",
+                      "correct": true
+                    },
+                    {
+                      "content": "disque plat",
+                      "correct": false
+                    },
+                    {
+                      "content": "pyramide",
+                      "correct": false
+                    },
+                    {
+                      "content": "sphère parfaitement ronde",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre est une planète ___ car sa surface est rocheuse (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Décrire : une planète rocheuse à surface solide est dite tellurique.",
+                  "answers": [
+                    {
+                      "content": "tellurique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux planètes telluriques ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Décrire : Vénus et Mars sont rocheuses, comme la Terre. Jupiter et Saturne sont des planètes géantes.",
+                  "answers": [
+                    {
+                      "content": "Vénus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mars",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jupiter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Saturne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre est à environ 150 millions de km du Soleil.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : la distance moyenne Terre-Soleil est d'environ 150 millions de km, valeur donnée dans la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion présente le mieux la Terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Conclure : la Terre est une planète tellurique, sphérique, éclairée par une étoile. Les autres propositions confondent étoile, satellite ou planète géante.",
+                  "answers": [
+                    {
+                      "content": "Une planète rocheuse et sphérique, éclairée par le Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une étoile qui produit sa lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un satellite de la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une planète gazeuse géante",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La rotation de la Terre",
+          "remember": "La Terre tourne sur elle-même autour d'un axe qui passe par les deux pôles : c'est la **rotation**. Un tour complet dure environ **24 heures**, soit un **jour**. La Terre tourne **d'ouest en est**.\n\nLe Soleil n'éclaire toujours que la moitié de la Terre. La face tournée vers le Soleil a le **jour**, l'autre face a la **nuit** : la rotation provoque l'**alternance du jour et de la nuit**.\n\nLe Soleil semble se lever à l'**est** et se coucher à l'**ouest** : c'est un mouvement apparent, dû à la rotation. Les lieux situés plus à l'est voient le Soleil plus tôt : d'où des **heures différentes** selon les pays.",
+          "method": [
+            "Identifier le mouvement de la Terre dont on parle : sa rotation sur elle-même.",
+            "Préciser sa durée (environ 24 heures) et son sens (d'ouest en est).",
+            "Relier ce mouvement à sa conséquence : alternance du jour et de la nuit, lever du Soleil à l'est, heures différentes.",
+            "Conclure par une phrase qui répond à la question posée."
+          ],
+          "example": {
+            "statement": "Un élève d'Abidjan appelle son cousin en France à 12 h, en décembre. Le cousin répond qu'il est 13 h chez lui. Explique cette différence d'heure.",
+            "steps": [
+              "Identifier : la différence d'heure vient de la rotation de la Terre sur elle-même.",
+              "Préciser : un tour dure environ 24 heures et se fait d'ouest en est ; le Soleil atteint donc d'abord les lieux situés plus à l'est.",
+              "Relier : la France est plus à l'est qu'Abidjan, le Soleil y est plus avancé dans sa journée, et l'heure y est en avance (une heure en hiver).",
+              "Conclure : quand il est 12 h à Abidjan, il est 13 h en France, à cause de la rotation de la Terre."
+            ]
+          },
+          "pitfall": "Ne pas confondre la rotation et la révolution, ni croire que le Soleil tourne autour de la Terre. Contre-exemple : si le Soleil faisait le tour de la Terre en 24 h, le jour et la nuit existeraient aussi, mais c'est la Terre qui tourne sur elle-même en 24 h. Une rotation dure 24 heures ; la révolution autour du Soleil dure environ un an.",
+          "practice": {
+            "statement": "Tu t'entraînes à relier la rotation de la Terre à ses conséquences avec la méthode : identifier, préciser, relier, conclure.",
+            "questions": [
+              {
+                "content": "Combien d'heures dure environ un tour complet de la Terre sur elle-même ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Préciser : la rotation de la Terre dure environ 24 heures, soit un jour.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ],
+                "unit": "h",
+                "hint": "C'est la durée d'un jour."
+              },
+              {
+                "content": "Dans quel sens la Terre tourne-t-elle sur elle-même ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Préciser : la Terre tourne d'ouest en est. Le Soleil nous paraît aller d'est en ouest, mais c'est un mouvement apparent : c'est l'erreur tentante.",
+                "answers": [
+                  {
+                    "content": "D'ouest en est",
+                    "correct": true
+                  },
+                  {
+                    "content": "D'est en ouest",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du nord au sud",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du sud au nord",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le Soleil se lève à l'est."
+              },
+              {
+                "content": "La rotation de la Terre provoque l'alternance du jour et de la ___ (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Relier : la face tournée vers le Soleil a le jour, la face opposée a la nuit. Le mot attendu est nuit.",
+                "answers": [
+                  {
+                    "content": "nuit",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le contraire du jour."
+              }
+            ]
+          },
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Rotation, jour et nuit",
+              "statement": "Dans cet exercice, tu appliques les étapes de la fiche (identifier, préciser, relier, conclure) à la rotation de la Terre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Quel mouvement de la Terre cause l'alternance du jour et de la nuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : c'est la rotation de la Terre sur elle-même. La révolution dure un an et explique plutôt les saisons.",
+                  "answers": [
+                    {
+                      "content": "Sa rotation sur elle-même",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa révolution autour du Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mouvement du Soleil autour de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mouvement de la Lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tour complet de la Terre sur elle-même dure environ ___ heures (un nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Préciser : la durée de la rotation est d'environ 24 heures.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Où le Soleil semble-t-il se lever ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Relier : la Terre tourne d'ouest en est, donc le Soleil paraît se lever à l'est et se coucher à l'ouest.",
+                  "answers": [
+                    {
+                      "content": "À l'est",
+                      "correct": true
+                    },
+                    {
+                      "content": "À l'ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand il fait jour à Abidjan, il fait jour partout sur la Terre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Relier : le Soleil n'éclaire que la moitié de la Terre. Quand c'est le jour d'un côté, c'est la nuit de l'autre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "C'est le Soleil qui tourne autour de la Terre en 24 heures.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : c'est la Terre qui tourne sur elle-même. Le mouvement du Soleil dans le ciel n'est qu'apparent : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Heures et lever du Soleil",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la rotation et les heures différentes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Rappelle-toi : un tour en 24 heures, d'ouest en est.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre le raisonnement qui explique le jour et la nuit.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier la rotation, Étape 2 — Préciser sa durée, Étape 3 — Relier à la face éclairée et à la face dans l'ombre, Étape 4 — Conclure par la nuit.",
+                  "answers": [
+                    {
+                      "content": "La Terre tourne sur elle-même en 24 heures"
+                    },
+                    {
+                      "content": "Une moitié de la Terre est tournée vers le Soleil"
+                    },
+                    {
+                      "content": "Cette moitié est éclairée : c'est le jour"
+                    },
+                    {
+                      "content": "L'autre moitié est dans l'ombre : c'est la nuit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque phénomène à sa cause.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Relier : chaque phénomène s'explique par la rotation de la Terre. Les trois paires utilisent la durée et le sens de la rotation.",
+                  "answers": [
+                    {
+                      "content": "Alternance du jour et de la nuit",
+                      "match": "Rotation de la Terre"
+                    },
+                    {
+                      "content": "Soleil qui se lève à l'est",
+                      "match": "Rotation d'ouest en est"
+                    },
+                    {
+                      "content": "Durée d'un jour",
+                      "match": "Environ 24 heures"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre tourne sur elle-même ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Préciser : le sens de la rotation est d'ouest en est. Les autres sens ne sont pas ceux de la fiche.",
+                  "answers": [
+                    {
+                      "content": "d'ouest en est",
+                      "correct": true
+                    },
+                    {
+                      "content": "d'est en ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "du nord au sud",
+                      "correct": false
+                    },
+                    {
+                      "content": "de bas en haut",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences de la rotation de la Terre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Relier : la rotation explique le jour et la nuit et le lever à l'est. Les saisons et l'année dépendent de la révolution.",
+                  "answers": [
+                    {
+                      "content": "L'alternance du jour et de la nuit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lever du Soleil à l'est",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les quatre saisons",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'année de 365 jours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En combien d'heures la Terre fait-elle deux tours complets sur elle-même ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Préciser : un tour dure 24 heures. $24 \\times 2 = 48$. Deux tours durent 48 heures.",
+                  "answers": [
+                    {
+                      "content": "48",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "h"
+                },
+                {
+                  "content": "À Paris, il est plus tôt ou plus tard qu'à Abidjan, au même instant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Relier : la Terre tourne d'ouest en est, donc les lieux plus à l'est ont une heure en avance. Étape 4 — Conclure : la France a de l'avance sur Abidjan.",
+                  "answers": [
+                    {
+                      "content": "Plus tard : la France est plus à l'est, le Soleil y arrive d'abord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plus tôt : la France est plus à l'ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "La même heure, car le Soleil est le même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus tard, car la France est plus près du Soleil",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La révolution de la Terre et les saisons",
+          "remember": "La Terre tourne aussi autour du Soleil : c'est la **révolution**. Elle dure environ **365 jours et un quart**, soit une **année**. Pour compenser le quart de jour, une année de 366 jours (année **bissextile**) revient tous les quatre ans.\n\nL'**axe** des pôles est **incliné** d'environ **23°26′** et garde la même direction pendant toute la révolution. Selon la position de la Terre, un hémisphère reçoit les rayons du Soleil plus directement : c'est l'été, avec des jours longs. L'autre hémisphère a l'hiver. D'où les **saisons**.\n\nLe **solstice de juin** (vers le 21 juin) : été au nord, jour le plus long au nord. Le **solstice de décembre** (vers le 21 décembre) : hiver au nord, jour le plus court au nord, c'est l'inverse au sud. Aux **équinoxes** (vers le 21 mars et vers le 23 septembre), le jour et la nuit durent environ 12 heures partout.\n\nPrès de l'équateur, comme en Côte d'Ivoire, la durée du jour varie peu et reste proche de 12 heures. Loin de l'équateur, les rayons sont de plus en plus inclinés : il fait plus froid, d'où les **zones climatiques** : **chaude** autour de l'équateur, **froide** autour des pôles, **tempérée** entre les deux.",
+          "method": [
+            "Identifier le mouvement et l'inclinaison de l'axe qui expliquent la question.",
+            "Repérer la date (solstice ou équinoxe) et l'hémisphère concernés.",
+            "Relier cette position de la Terre à la durée du jour et à la saison.",
+            "Conclure par une phrase qui répond à la question posée."
+          ],
+          "example": {
+            "statement": "Vers le 21 juin, quelle saison a-t-on dans l'hémisphère Nord et dans l'hémisphère Sud ? Quel hémisphère a le jour le plus long ?",
+            "steps": [
+              "Identifier : la révolution de la Terre autour du Soleil et l'inclinaison de son axe d'environ 23°26′ expliquent les saisons.",
+              "Repérer : vers le 21 juin, c'est le solstice de juin ; on étudie les deux hémisphères.",
+              "Relier : l'hémisphère Nord est incliné vers le Soleil, il reçoit plus de lumière, les jours y sont longs ; le Sud est incliné à l'opposé.",
+              "Conclure : vers le 21 juin, c'est l'été au Nord, avec le jour le plus long, et l'hiver au Sud."
+            ]
+          },
+          "pitfall": "Ne pas croire que les saisons viennent de la distance au Soleil. Contre-exemple : début janvier, la Terre est un peu plus proche du Soleil qu'en juillet, et pourtant c'est l'hiver dans l'hémisphère Nord. Les saisons viennent de l'inclinaison de l'axe, pas de la distance.",
+          "practice": {
+            "statement": "Tu t'entraînes à relier la révolution, l'inclinaison de l'axe et les saisons avec la méthode : identifier, repérer, relier, conclure.",
+            "questions": [
+              {
+                "content": "La Terre met environ 365 jours et un ___ pour faire le tour du Soleil (un mot : fraction).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : la révolution dure environ 365 jours et un quart. Le mot attendu est quart.",
+                "answers": [
+                  {
+                    "content": "quart",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à l'année bissextile."
+              },
+              {
+                "content": "Que se passe-t-il vers le 21 décembre dans l'hémisphère Nord ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer : le 21 décembre est le solstice de décembre. Étape 3 — Relier : le Nord est incliné à l'opposé du Soleil, c'est l'hiver et le jour est le plus court.",
+                "answers": [
+                  {
+                    "content": "C'est l'hiver, avec le jour le plus court",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est l'été, avec le jour le plus long",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le jour et la nuit durent 12 heures",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est le printemps",
+                    "correct": false
+                  }
+                ],
+                "hint": "C'est l'inverse du 21 juin."
+              },
+              {
+                "content": "Aux équinoxes, le jour et la nuit durent chacun environ 12 heures partout sur la Terre.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer : les équinoxes sont vers le 21 mars et vers le 23 septembre. Étape 3 — Relier : ce jour-là, jour et nuit sont égaux, 12 heures chacun.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le mot équinoxe veut dire nuit égale au jour."
+              }
+            ]
+          },
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Révolution, axe incliné et saisons",
+              "statement": "Dans cet exercice, tu appliques les étapes de la fiche (identifier, repérer, relier, conclure) pour expliquer les saisons.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Combien de temps dure environ une révolution de la Terre autour du Soleil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la révolution dure environ 365 jours et un quart, soit une année. 24 heures est la durée de la rotation.",
+                  "answers": [
+                    {
+                      "content": "365 jours et un quart",
+                      "correct": true
+                    },
+                    {
+                      "content": "24 heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 jours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la cause des saisons ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'inclinaison de l'axe, d'environ 23°26′, et la révolution expliquent les saisons. Étape 3 — Relier : la distance n'est pas la cause, c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "L'inclinaison de l'axe de la Terre pendant sa révolution",
+                      "correct": true
+                    },
+                    {
+                      "content": "La distance entre la Terre et le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La rotation de la Terre sur elle-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune qui cache le Soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vers le 21 juin, c'est l'été dans l'hémisphère Nord.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer : vers le 21 juin, c'est le solstice de juin. Étape 3 — Relier : le Nord est incliné vers le Soleil, c'est l'été.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux dates où le jour et la nuit sont égaux (vers le 21 mars et vers le 23 septembre) sont les ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer : les deux dates où jour et nuit sont égaux sont les équinoxes. Les solstices sont vers le 21 juin et vers le 21 décembre.",
+                  "answers": [
+                    {
+                      "content": "équinoxes",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre est plus proche du Soleil en été qu'en hiver dans l'hémisphère Nord, ce qui explique les saisons.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : la distance n'explique pas les saisons. C'est l'inclinaison de l'axe, comme le dit le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Durée du jour et saisons",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la durée du jour, les dates et les saisons.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Rappelle-toi : l'axe incliné, les deux solstices et les deux équinoxes.",
+              "questions": [
+                {
+                  "content": "Relie chaque date à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer : deux solstices (juin et décembre) et deux équinoxes (mars et septembre). Les dates sont données par « vers le ».",
+                  "answers": [
+                    {
+                      "content": "Vers le 21 juin",
+                      "match": "Solstice de juin"
+                    },
+                    {
+                      "content": "Vers le 21 décembre",
+                      "match": "Solstice de décembre"
+                    },
+                    {
+                      "content": "Vers le 21 mars",
+                      "match": "Équinoxe de mars"
+                    },
+                    {
+                      "content": "Vers le 23 septembre",
+                      "match": "Équinoxe de septembre"
+                    }
+                  ]
+                },
+                {
+                  "content": "En Côte d'Ivoire, proche de l'équateur, la durée du jour est ___ toute l'année.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Relier : près de l'équateur, la durée du jour varie peu. Étape 4 — Conclure : elle reste proche de 12 heures.",
+                  "answers": [
+                    {
+                      "content": "proche de 12 heures",
+                      "correct": true
+                    },
+                    {
+                      "content": "très variable, de 4 à 20 heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "toujours de 24 heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "égale à la nuit seulement en juin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de jours comptent quatre années, dont une année bissextile de 366 jours et trois de 365 jours ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : trois années de 365 jours et une de 366 jours. $3 \\times 365 = 1\\,095$, puis $1\\,095 + 366 = 1\\,461$. Quatre années comptent 1 461 jours.",
+                  "answers": [
+                    {
+                      "content": "1461",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "jours"
+                },
+                {
+                  "content": "Quelles sont les deux dates des solstices ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer : les solstices sont vers le 21 juin et vers le 21 décembre ; les deux autres dates sont des équinoxes.",
+                  "answers": [
+                    {
+                      "content": "Vers le 21 juin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vers le 21 décembre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vers le 21 mars",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vers le 23 septembre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement qui explique l'été au Nord.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier la révolution et l'axe incliné, Étape 3 — Relier à l'hémisphère tourné vers le Soleil, Étape 4 — Conclure : c'est l'été.",
+                  "answers": [
+                    {
+                      "content": "La Terre fait sa révolution autour du Soleil"
+                    },
+                    {
+                      "content": "Son axe incliné reste dans la même direction"
+                    },
+                    {
+                      "content": "L'hémisphère Nord est incliné vers le Soleil"
+                    },
+                    {
+                      "content": "Il reçoit plus de lumière : les jours sont longs, c'est l'été"
+                    }
+                  ]
+                },
+                {
+                  "content": "Vers le 21 juin, que se passe-t-il dans l'hémisphère Sud ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Relier : le Sud est incliné à l'opposé du Soleil quand le Nord est incliné vers lui. Étape 4 — Conclure : hiver au Sud.",
+                  "answers": [
+                    {
+                      "content": "C'est l'hiver, avec des jours courts",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est l'été, avec des jours longs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le jour et la nuit sont égaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de saisons",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La structure interne et les enveloppes de la Terre",
+          "remember": "L'intérieur de la Terre est formé de trois couches, de la surface vers le centre : la **croûte**, mince et solide ; le **manteau**, épais, fait de roches chaudes ; le **noyau**, fait surtout de fer et de nickel, liquide à l'extérieur (noyau externe) et solide au centre (noyau interne).\n\nÀ la surface, la Terre a quatre **enveloppes** : la **lithosphère** (les roches solides de la surface), l'**hydrosphère** (toute l'eau : océans, fleuves, lacs, glaces ; elle couvre environ 70 % de la surface), l'**atmosphère** (la couche de gaz autour de la Terre, surtout azote et oxygène) et la **biosphère** (l'ensemble des êtres vivants et des milieux où ils vivent).\n\nLe rayon de la Terre est d'environ 6 370 km.",
+          "method": [
+            "Repérer la couche ou l'enveloppe dont parle la question : où se trouve-t-elle ?",
+            "Décrire sa nature : solide, liquide, gazeuse ou vivante.",
+            "Nommer la couche ou l'enveloppe qui correspond à cette description."
+          ],
+          "example": {
+            "statement": "Classe dans les enveloppes de la Terre : le sable d'une plage, l'eau de la lagune, l'air et un manguier.",
+            "steps": [
+              "Repérer : ces éléments se trouvent tous à la surface de la Terre, dans ses enveloppes.",
+              "Décrire : le sable est une roche solide ; l'eau est liquide ; l'air est un gaz ; le manguier est un être vivant.",
+              "Nommer : le sable relève de la lithosphère, l'eau de l'hydrosphère, l'air de l'atmosphère et le manguier de la biosphère."
+            ]
+          },
+          "pitfall": "Ne pas limiter l'hydrosphère aux océans, ni la biosphère aux humains. Contre-exemple : un lac et un glacier sont de l'eau, donc de l'hydrosphère ; un arbre, un poisson et une bactérie sont des êtres vivants, donc de la biosphère. Demande-toi toujours : est-ce de l'eau, de la roche, du gaz ou un être vivant ?",
+          "practice": {
+            "statement": "Tu t'entraînes à repérer, décrire et nommer les couches et enveloppes de la Terre.",
+            "questions": [
+              {
+                "content": "Quelle est la couche la plus externe et la plus mince de l'intérieur de la Terre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on part de la surface. Étape 3 — Nommer : la couche mince et solide est la croûte ; le manteau est dessous, le noyau au centre.",
+                "answers": [
+                  {
+                    "content": "La croûte",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le manteau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'atmosphère",
+                    "correct": false
+                  }
+                ],
+                "hint": "C'est la couche sur laquelle nous marchons."
+              },
+              {
+                "content": "L'ensemble de l'eau de la Terre forme l'___ (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Décrire : l'eau est liquide, solide ou vapeur. Étape 3 — Nommer : l'enveloppe de l'eau est l'hydrosphère.",
+                "answers": [
+                  {
+                    "content": "hydrosphère",
+                    "correct": true
+                  }
+                ],
+                "hint": "Hydro veut dire eau."
+              },
+              {
+                "content": "Le noyau de la Terre est entièrement liquide.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Décrire : le noyau externe est liquide mais le noyau interne, au centre, est solide. Le noyau n'est donc pas entièrement liquide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au centre de la Terre."
+              }
+            ]
+          },
+          "figure": "structure-interne-terre",
+          "exercise": [
+            {
+              "title": "Repérer, décrire, nommer",
+              "statement": "Dans cet exercice, tu appliques les trois étapes de la fiche (repérer, décrire, nommer) à l'intérieur de la Terre et à ses enveloppes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les couches de l'intérieur de la Terre, de la surface vers le centre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on part de la surface. Étape 3 — Nommer : croûte, manteau, noyau externe, noyau interne.",
+                  "answers": [
+                    {
+                      "content": "Croûte"
+                    },
+                    {
+                      "content": "Manteau"
+                    },
+                    {
+                      "content": "Noyau externe"
+                    },
+                    {
+                      "content": "Noyau interne"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle enveloppe est la couche de gaz autour de la Terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire : un gaz entoure la Terre. Étape 3 — Nommer : c'est l'atmosphère.",
+                  "answers": [
+                    {
+                      "content": "L'atmosphère",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lithosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hydrosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La biosphère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque enveloppe à son contenu.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Décrire : roches, eau, gaz, êtres vivants. Étape 3 — Nommer : lithosphère, hydrosphère, atmosphère, biosphère.",
+                  "answers": [
+                    {
+                      "content": "Lithosphère",
+                      "match": "Les roches solides de la surface"
+                    },
+                    {
+                      "content": "Hydrosphère",
+                      "match": "Toute l'eau de la Terre"
+                    },
+                    {
+                      "content": "Atmosphère",
+                      "match": "La couche de gaz"
+                    },
+                    {
+                      "content": "Biosphère",
+                      "match": "Les êtres vivants"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les êtres vivants et les milieux où ils vivent forment la ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Décrire : il s'agit du monde du vivant. Étape 3 — Nommer : c'est la biosphère.",
+                  "answers": [
+                    {
+                      "content": "biosphère",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un glacier appartient à l'hydrosphère.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Décrire : un glacier est de l'eau solide. Étape 3 — Nommer : il appartient à l'hydrosphère, pas seulement les océans : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Couches et enveloppes",
+              "statement": "Dans cet exercice, tu mélanges plusieurs types de questions sur la structure interne et les enveloppes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pour chaque élément : roche, eau, gaz ou être vivant ?",
+              "questions": [
+                {
+                  "content": "Le manteau est une couche ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Décrire : le manteau est épais et fait de roches chaudes. Étape 3 — Nommer : les autres descriptions sont celles de l'atmosphère, de l'hydrosphère ou du noyau.",
+                  "answers": [
+                    {
+                      "content": "épaisse, faite de roches chaudes",
+                      "correct": true
+                    },
+                    {
+                      "content": "gazeuse, autour de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "mince et faite d'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "liquide, au centre de la Terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux éléments de la biosphère ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Décrire : un manguier et un poisson sont des êtres vivants. Une roche relève de la lithosphère et l'air de l'atmosphère.",
+                  "answers": [
+                    {
+                      "content": "Un manguier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un poisson de la lagune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une roche",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois éléments de l'hydrosphère ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Décrire : océan, fleuve et glacier sont de l'eau. Étape 3 — Nommer : hydrosphère.",
+                  "answers": [
+                    {
+                      "content": "Un océan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fleuve",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un glacier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un nuage de gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un manguier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De quoi le noyau est-il surtout fait ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire : le noyau est fait surtout de fer et de nickel. L'eau et le gaz appartiennent aux enveloppes de la surface.",
+                  "answers": [
+                    {
+                      "content": "De fer et de nickel",
+                      "correct": true
+                    },
+                    {
+                      "content": "D'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "De gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'air",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le rayon de la Terre est d'environ 6 370 km. Quelle est la longueur d'un trajet qui irait de la surface au centre, en km ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : de la surface au centre, on parcourt un rayon. Étape 2 — Décrire : il vaut environ 6 370 km.",
+                  "answers": [
+                    {
+                      "content": "6370",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "km"
+                },
+                {
+                  "content": "Le manteau se trouve entre la croûte et le noyau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'ordre est croûte, manteau, noyau. Le manteau est donc entre la croûte et le noyau.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Exposé sur la Terre : situer et décrire",
+          "statement": "Situation d'exemple, avec des données simples : Kouadio, élève de seconde à Abidjan, prépare un exposé. Sa fiche indique : la Terre est la troisième planète à partir du Soleil, à environ 150 millions de km de lui, sa surface est rocheuse, son rayon est d'environ 6 370 km et elle a un seul satellite naturel, la Lune. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "hint": "Reprends la fiche de Kouadio, puis situe, décris et conclus.",
+          "questions": [
+            {
+              "content": "Combien de planètes se trouvent entre le Soleil et la Terre ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Situer : la Terre est la troisième planète. 2) Les planètes avant elle sont Mercure et Vénus. 3) $3 - 1 = 2$ planètes séparent la Terre du Soleil.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux planètes telluriques parmi celles-ci ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Décrire la nature de chaque planète. 2) Mercure et Mars ont une surface rocheuse, ce sont des planètes telluriques comme la Terre. 3) Jupiter et Neptune sont des planètes géantes.",
+              "answers": [
+                {
+                  "content": "Mercure",
+                  "correct": true
+                },
+                {
+                  "content": "Mars",
+                  "correct": true
+                },
+                {
+                  "content": "Jupiter",
+                  "correct": false
+                },
+                {
+                  "content": "Neptune",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La Lune est le ___ naturel de la Terre (un mot).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1) Situer : la Lune tourne autour de la Terre. 2) Un astre qui tourne autour d'une planète est un satellite naturel. 3) Ce n'est pas une planète.",
+              "answers": [
+                {
+                  "content": "satellite",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle phrase décrit correctement la forme de la Terre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Décrire la forme à partir de la fiche de révision. 2) La Terre est une sphère un peu aplatie aux pôles. 3) Une sphère parfaite oublie l'aplatissement ; un disque ou un cube sont faux.",
+              "answers": [
+                {
+                  "content": "Une sphère légèrement aplatie aux pôles",
+                  "correct": true
+                },
+                {
+                  "content": "Un disque plat",
+                  "correct": false
+                },
+                {
+                  "content": "Une sphère parfaite",
+                  "correct": false
+                },
+                {
+                  "content": "Un cube arrondi",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le Soleil est une planète qui reçoit la lumière de la Terre.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Distinguer étoile et planète. 2) Le Soleil produit sa lumière, c'est une étoile ; la Terre reçoit sa lumière. 3) La phrase inverse les rôles, elle est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un appel entre Abidjan et la France",
+          "statement": "Situation d'exemple : en décembre, Kofi, élève à Abidjan, appelle son cousin Yao qui vit en France. Il est 8 h à Abidjan. Yao dit qu'il est 9 h chez lui. Kofi se demande pourquoi l'heure n'est pas la même alors qu'il s'agit du même moment. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "carte-abidjan-paris",
+          "hint": "Pense à la rotation de la Terre, à son sens et à la position de la France par rapport à Abidjan.",
+          "questions": [
+            {
+              "content": "Quel mouvement de la Terre explique la différence d'heure entre deux lieux ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Identifier le mouvement : la rotation, qui dure environ 24 heures. 2) La révolution explique les saisons, pas les heures. 3) Donc la rotation.",
+              "answers": [
+                {
+                  "content": "La rotation de la Terre sur elle-même",
+                  "correct": true
+                },
+                {
+                  "content": "La révolution autour du Soleil",
+                  "correct": false
+                },
+                {
+                  "content": "L'inclinaison de la Lune",
+                  "correct": false
+                },
+                {
+                  "content": "La forme du Soleil",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand il est 20 h à Abidjan, en décembre, quelle heure est-il en France (avec l'avance d'une heure de l'exemple) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Préciser : la France a une heure d'avance. 2) Calculer : $20 + 1 = 21$. 3) Il est 21 h en France.",
+              "answers": [
+                {
+                  "content": "21",
+                  "correct": true
+                }
+              ],
+              "unit": "h"
+            },
+            {
+              "content": "La France a une heure en avance sur Abidjan parce qu'elle est située plus à ___.",
+              "question_type": "select",
+              "explanation": "Méthode : 1) Préciser : la Terre tourne d'ouest en est. 2) Un lieu plus à l'est voit le Soleil plus tôt. 3) La France est plus à l'est, donc son heure est en avance.",
+              "answers": [
+                {
+                  "content": "l'est",
+                  "correct": true
+                },
+                {
+                  "content": "l'ouest",
+                  "correct": false
+                },
+                {
+                  "content": "le sud",
+                  "correct": false
+                },
+                {
+                  "content": "la verticale",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le raisonnement qui explique la différence d'heure.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1) Identifier la rotation d'ouest en est. 2) Relier : le Soleil atteint d'abord l'est. 3) Appliquer à la France. 4) Conclure sur l'avance de l'heure.",
+              "answers": [
+                {
+                  "content": "La Terre tourne sur elle-même d'ouest en est"
+                },
+                {
+                  "content": "Le Soleil atteint d'abord les lieux plus à l'est"
+                },
+                {
+                  "content": "La France est plus à l'est qu'Abidjan"
+                },
+                {
+                  "content": "L'heure de la France est en avance sur celle d'Abidjan"
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois phrases pourquoi Yao a une heure d'avance sur Kofi.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il identifie la rotation de la Terre sur elle-même",
+                "Il précise le sens d'ouest en est",
+                "Il explique que la France est plus à l'est donc voit le Soleil plus tôt",
+                "Il conclut sur l'avance d'une heure"
+              ],
+              "explanation": "Corrigé modèle : La Terre tourne sur elle-même en 24 heures, d'ouest en est. Le Soleil éclaire donc d'abord les lieux plus à l'est. La France est plus à l'est qu'Abidjan : l'heure y est en avance d'une heure en décembre. Barème : 1 point pour la rotation, 1 point pour le sens et la position, 1 point pour la conclusion.",
+              "answers": [],
+              "starter": "La Terre tourne…"
+            }
+          ]
+        },
+        {
+          "title": "Comparer la durée du jour à Abidjan et en France",
+          "statement": "Situation d'exemple, avec des données arrondies et inventées pour l'exercice. Document 1 : à Abidjan, le jour dure 12 h 10 vers le 21 juin et 11 h 50 vers le 21 décembre. Document 2 : à Paris, le jour dure environ 16 h vers le 21 juin et environ 8 h vers le 21 décembre. Document 3 : Abidjan est proche de l'équateur ; Paris en est éloigné. Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "hint": "Calcule d'abord les deux écarts, puis compare-les avec la position des villes.",
+          "questions": [
+            {
+              "content": "De combien de minutes la durée du jour change-t-elle à Abidjan entre le 21 juin et le 21 décembre ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Recueillir : 12 h 10 et 11 h 50. 2) Calculer l'écart : $12\\text{ h }10 - 11\\text{ h }50 = 20$ minutes. 3) L'écart est de 20 minutes.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "min"
+            },
+            {
+              "content": "De combien d'heures la durée du jour change-t-elle à Paris entre le 21 juin et le 21 décembre ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Recueillir : 16 h et 8 h. 2) Calculer : $16 - 8 = 8$ heures. 3) L'écart est de 8 heures.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "unit": "h"
+            },
+            {
+              "content": "Que conclure de la comparaison des deux villes ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Comparer 20 minutes et 8 heures. 2) Près de l'équateur la durée du jour varie peu, loin de l'équateur elle varie beaucoup. 3) La distance au Soleil n'explique pas ces écarts.",
+              "answers": [
+                {
+                  "content": "La durée du jour varie beaucoup plus à Paris, qui est loin de l'équateur",
+                  "correct": true
+                },
+                {
+                  "content": "La durée du jour varie plus à Abidjan",
+                  "correct": false
+                },
+                {
+                  "content": "La durée du jour est la même partout",
+                  "correct": false
+                },
+                {
+                  "content": "La durée du jour dépend de la distance au Soleil",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux causes qui expliquent ces durées du jour ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Identifier les mouvements. 2) L'axe incliné et la révolution font varier la durée du jour selon la saison. 3) La rotation donne le jour et la nuit mais pas leur inégale durée.",
+              "answers": [
+                {
+                  "content": "L'inclinaison de l'axe de la Terre",
+                  "correct": true
+                },
+                {
+                  "content": "La révolution de la Terre autour du Soleil",
+                  "correct": true
+                },
+                {
+                  "content": "La rotation de la Terre en 24 heures",
+                  "correct": false
+                },
+                {
+                  "content": "La distance de la Lune",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi la durée du jour varie très peu à Abidjan mais beaucoup à Paris.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Il rappelle l'inclinaison de l'axe et la révolution",
+                "Il situe Abidjan près de l'équateur et Paris loin",
+                "Il compare les écarts du document (20 minutes et 8 heures)",
+                "Il conclut avec une phrase claire"
+              ],
+              "explanation": "Corrigé modèle : Avec l'axe incliné et la révolution, la durée du jour change selon la saison. Près de l'équateur, comme à Abidjan, elle reste proche de 12 heures : 20 minutes d'écart seulement. Loin de l'équateur, comme à Paris, elle varie beaucoup : 8 heures d'écart. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Près de l'équateur…"
+            }
+          ]
+        },
+        {
+          "title": "Bilan sur la Terre : un exposé de fin de chapitre",
+          "statement": "Situation d'exemple : pour un exposé, Awa résume la Terre en quatre phrases. Phrase 1 : la Terre est la troisième planète. Phrase 2 : elle tourne sur elle-même en 24 heures, ce qui donne le jour et la nuit. Phrase 3 : elle fait le tour du Soleil en 365 jours et un quart, et son axe est incliné, ce qui donne les saisons. Phrase 4 : elle a quatre enveloppes, dont l'atmosphère et l'hydrosphère. La lumière du Soleil voyage à environ 300 000 km/s. Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": "mouvements-de-la-terre",
+          "hint": "Sépare bien la rotation (24 heures) et la révolution (365 jours et un quart).",
+          "questions": [
+            {
+              "content": "La lumière du Soleil parcourt environ 150 000 000 km à la vitesse de 300 000 km/s. Combien de secondes met-elle pour arriver sur la Terre ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Données : distance 150 000 000 km, vitesse 300 000 km/s. 2) Calculer : $150\\,000\\,000 \\div 300\\,000 = 500$. 3) La lumière met 500 secondes, soit un peu plus de 8 minutes.",
+              "answers": [
+                {
+                  "content": "500",
+                  "correct": true
+                }
+              ],
+              "unit": "s"
+            },
+            {
+              "content": "Relie chaque phénomène à sa cause.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Identifier le mouvement. 2) Relier chaque conséquence à sa cause. 3) Le jour et la nuit et le lever à l'est viennent de la rotation, les saisons de la révolution avec l'axe incliné.",
+              "answers": [
+                {
+                  "content": "L'alternance du jour et de la nuit",
+                  "match": "La rotation de la Terre"
+                },
+                {
+                  "content": "Les saisons",
+                  "match": "La révolution et l'axe incliné"
+                },
+                {
+                  "content": "Le Soleil qui se lève à l'est",
+                  "match": "Le sens ouest-est de la rotation"
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont trois enveloppes de la Terre ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1) Repérer : les enveloppes sont à la surface. 2) Nommer : atmosphère, hydrosphère, biosphère (et lithosphère). 3) Le manteau et le noyau sont des couches de l'intérieur.",
+              "answers": [
+                {
+                  "content": "L'atmosphère",
+                  "correct": true
+                },
+                {
+                  "content": "L'hydrosphère",
+                  "correct": true
+                },
+                {
+                  "content": "La biosphère",
+                  "correct": true
+                },
+                {
+                  "content": "Le manteau",
+                  "correct": false
+                },
+                {
+                  "content": "Le noyau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les couches de l'intérieur de la Terre, de la surface vers le centre.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1) Repérer le sens surface vers centre. 2) Décrire : croûte solide, manteau de roches chaudes, noyau externe liquide, noyau interne solide. 3) Nommer dans cet ordre.",
+              "answers": [
+                {
+                  "content": "Croûte"
+                },
+                {
+                  "content": "Manteau"
+                },
+                {
+                  "content": "Noyau externe"
+                },
+                {
+                  "content": "Noyau interne"
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe qui explique pourquoi on a des saisons et pourquoi le jour et la nuit alternent.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Il distingue clairement la rotation et la révolution",
+                "Il donne la durée de chaque mouvement",
+                "Il cite l'inclinaison de l'axe pour les saisons",
+                "Il relie la rotation à l'alternance du jour et de la nuit",
+                "Il conclut sans confondre les deux phénomènes"
+              ],
+              "explanation": "Corrigé modèle : La Terre tourne sur elle-même en 24 heures environ : une moitié est éclairée, c'est le jour, l'autre est dans l'ombre, c'est la nuit. La Terre fait aussi le tour du Soleil en 365 jours et un quart. Son axe est incliné d'environ 23°26′ : selon sa position, un hémisphère reçoit plus de lumière, d'où les saisons. Barème : 1 point par critère, 1 point de clarté.",
+              "answers": [],
+              "starter": "La Terre tourne sur elle-même…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base : la Terre, ses mouvements et ses couches",
+          "notions": "Rang et nature de la Terre, rotation et jour et nuit, révolution, axe incliné et saisons, solstices et équinoxes, couches et enveloppes de la Terre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : un élève lit dans son manuel que le système solaire comprend le Soleil et huit planètes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Situe, décris puis conclus pour chaque astre.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre ces astres, du plus proche au plus éloigné du Soleil.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Situer chaque planète par sa distance au Soleil. 2) Ordre : Mercure, Vénus, la Terre, Mars, Jupiter. 3) La Terre est donc la troisième.",
+                  "answers": [
+                    {
+                      "content": "Mercure"
+                    },
+                    {
+                      "content": "Vénus"
+                    },
+                    {
+                      "content": "La Terre"
+                    },
+                    {
+                      "content": "Mars"
+                    },
+                    {
+                      "content": "Jupiter"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel astre est une étoile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Distinguer les astres. 2) Le Soleil produit sa lumière : c'est une étoile. 3) La Terre et Mars sont des planètes, la Lune est un satellite.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mars",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une planète rocheuse comme la Terre est dite ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Décrire la nature de la planète. 2) Rocheuse, à surface solide : tellurique. 3) Les planètes géantes sont gazeuses.",
+                  "answers": [
+                    {
+                      "content": "tellurique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Lune est un satellite naturel de la Terre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Situer : la Lune tourne autour de la Terre. 2) Un astre qui tourne autour d'une planète est un satellite naturel. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de planètes compte le système solaire ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Compter de Mercure à Neptune. 2) Cela fait huit planètes. 3) Le Soleil n'est pas une planète.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : à Abidjan, le Soleil se lève le matin du côté de l'est et se couche le soir du côté de l'ouest.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à la rotation, à son sens et à sa durée.",
+              "questions": [
+                {
+                  "content": "Quel mouvement explique ce lever et ce coucher du Soleil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier la rotation. 2) La Terre tourne d'ouest en est, donc le Soleil paraît se lever à l'est. 3) La révolution explique les saisons.",
+                  "answers": [
+                    {
+                      "content": "La rotation de la Terre sur elle-même",
+                      "correct": true
+                    },
+                    {
+                      "content": "La révolution de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mouvement de la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'inclinaison du Soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'heures dure environ un tour de la Terre sur elle-même ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Préciser la durée de la rotation. 2) Un tour dure environ 24 heures, soit un jour. 3) Réponse : 24.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "h"
+                },
+                {
+                  "content": "La Terre tourne sur elle-même ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1) Préciser le sens de la rotation. 2) Elle se fait d'ouest en est. 3) Le Soleil paraît aller en sens contraire, mais c'est un mouvement apparent.",
+                  "answers": [
+                    {
+                      "content": "d'ouest en est",
+                      "correct": true
+                    },
+                    {
+                      "content": "d'est en ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "du nord au sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il fait jour sur toute la Terre au même moment.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Relier la rotation au jour et à la nuit. 2) Le Soleil n'éclaire que la moitié de la Terre. 3) L'autre moitié est dans la nuit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La face de la Terre qui n'est pas éclairée par le Soleil a la ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Relier à la face éclairée et à la face dans l'ombre. 2) Face éclairée : jour. 3) Face dans l'ombre : nuit.",
+                  "answers": [
+                    {
+                      "content": "nuit",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : un groupe d'élèves prépare un affichage sur la révolution de la Terre et les saisons.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Retiens la durée de la révolution et le rôle de l'axe incliné.",
+              "questions": [
+                {
+                  "content": "Combien de temps dure environ la révolution de la Terre autour du Soleil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier la révolution. 2) Elle dure 365 jours et un quart, soit une année. 3) 24 heures est la durée de la rotation.",
+                  "answers": [
+                    {
+                      "content": "365 jours et un quart",
+                      "correct": true
+                    },
+                    {
+                      "content": "24 heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "28 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une année de 366 jours est dite ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Identifier : le quart de jour s'ajoute. 2) Tous les quatre ans, on ajoute un jour. 3) Cette année de 366 jours est bissextile.",
+                  "answers": [
+                    {
+                      "content": "bissextile",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque date à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Repérer la date. 2) Juin et décembre : solstices ; mars et septembre : équinoxes. 3) Relier chaque date à son nom.",
+                  "answers": [
+                    {
+                      "content": "Vers le 21 juin",
+                      "match": "Solstice de juin"
+                    },
+                    {
+                      "content": "Vers le 21 décembre",
+                      "match": "Solstice de décembre"
+                    },
+                    {
+                      "content": "Vers le 21 mars",
+                      "match": "Équinoxe de mars"
+                    }
+                  ]
+                },
+                {
+                  "content": "Aux équinoxes, le jour et la nuit durent chacun environ 12 heures.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Repérer l'équinoxe (vers le 21 mars ou le 23 septembre). 2) Jour et nuit sont égaux. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la cause des saisons ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier l'axe incliné et la révolution. 2) Relier à la lumière reçue par chaque hémisphère. 3) La distance n'est pas la cause.",
+                  "answers": [
+                    {
+                      "content": "L'inclinaison de l'axe pendant la révolution",
+                      "correct": true
+                    },
+                    {
+                      "content": "La distance au Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La rotation en 24 heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les nuages",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : un élève dessine l'intérieur de la Terre et ses enveloppes pour un exposé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque élément : roche, eau, gaz ou être vivant ?",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les couches de l'intérieur de la Terre, de la surface vers le centre.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Repérer : on part de la surface. 2) Décrire chaque couche. 3) Nommer : croûte, manteau, noyau externe, noyau interne.",
+                  "answers": [
+                    {
+                      "content": "Croûte"
+                    },
+                    {
+                      "content": "Manteau"
+                    },
+                    {
+                      "content": "Noyau externe"
+                    },
+                    {
+                      "content": "Noyau interne"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque enveloppe à ce qu'elle contient.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Décrire le contenu : roche, eau, gaz, vivant. 2) Nommer l'enveloppe. 3) Chaque contenu correspond à une enveloppe.",
+                  "answers": [
+                    {
+                      "content": "Lithosphère",
+                      "match": "Les roches solides"
+                    },
+                    {
+                      "content": "Hydrosphère",
+                      "match": "L'eau"
+                    },
+                    {
+                      "content": "Atmosphère",
+                      "match": "L'air"
+                    },
+                    {
+                      "content": "Biosphère",
+                      "match": "Les êtres vivants"
+                    }
+                  ]
+                },
+                {
+                  "content": "La couche mince et solide en surface s'appelle la ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Repérer la couche la plus externe de l'intérieur. 2) Mince et solide. 3) C'est la croûte.",
+                  "answers": [
+                    {
+                      "content": "croûte",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le noyau est fait surtout de fer et de nickel.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Repérer le noyau, au centre. 2) Décrire : fer et nickel. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle enveloppe classe-t-on un glacier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Décrire : un glacier est de l'eau solide. 2) Nommer : toute l'eau relève de l'hydrosphère. 3) Elle ne se limite pas aux océans.",
+                  "answers": [
+                    {
+                      "content": "L'hydrosphère",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'atmosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La biosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lithosphère seulement",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La Terre dans la vie courante en Côte d'Ivoire",
+          "notions": "Rotation et décalage horaire entre Abidjan et la France, durée du jour près de l'équateur, chaleur toute l'année, enveloppes de la Terre dans l'environnement ivoirien.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : en décembre, Aya, élève à Abidjan, appelle son cousin à Paris. Il est 8 h à Abidjan et 9 h à Paris.",
+              "exercise_type": "evaluation",
+              "figure": "carte-abidjan-paris",
+              "hint": "Pense à la rotation, à l'est et à l'avance de l'heure.",
+              "questions": [
+                {
+                  "content": "Quand il est 18 h à Abidjan, quelle heure est-il à Paris, avec la même avance d'une heure ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Préciser : Paris a une heure d'avance. 2) Calculer : $18 + 1 = 19$. 3) Il est 19 h à Paris.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "h"
+                },
+                {
+                  "content": "Quel mouvement de la Terre explique cette différence d'heure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier la rotation. 2) Elle se fait d'ouest en est. 3) Les lieux plus à l'est ont une heure en avance.",
+                  "answers": [
+                    {
+                      "content": "La rotation de la Terre sur elle-même",
+                      "correct": true
+                    },
+                    {
+                      "content": "La révolution autour du Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'inclinaison de la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La forme du Soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Paris est située plus à ___ qu'Abidjan.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1) Préciser le sens ouest-est de la rotation. 2) Paris voit le Soleil plus tôt. 3) Elle est donc plus à l'est.",
+                  "answers": [
+                    {
+                      "content": "l'est",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "le sud",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand il est midi à Abidjan, il est aussi midi à Paris.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Relier la rotation aux heures. 2) La France est en avance. 3) Il y est plus de midi : la réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences de la rotation de la Terre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Identifier la rotation. 2) Relier : jour et nuit, heures différentes. 3) Saisons et année viennent de la révolution.",
+                  "answers": [
+                    {
+                      "content": "Le jour et la nuit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des heures différentes selon les pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les saisons",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'année de 365 jours",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple, avec des données arrondies : à Abidjan, le jour dure 12 h 10 vers le 21 juin et 11 h 50 vers le 21 décembre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les deux durées et rappelle-toi la position d'Abidjan.",
+              "questions": [
+                {
+                  "content": "Comment la durée du jour varie-t-elle à Abidjan au cours de l'année ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Recueillir : 12 h 10 et 11 h 50. 2) L'écart est faible. 3) La durée reste proche de 12 heures.",
+                  "answers": [
+                    {
+                      "content": "Très peu, elle reste proche de 12 heures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Beaucoup, de 4 à 20 heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est toujours de 24 heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est nulle en décembre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de minutes la durée du jour change-t-elle entre juin et décembre à Abidjan ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Recueillir : 12 h 10 et 11 h 50. 2) Calculer : $12\\text{ h }10 - 11\\text{ h }50 = 20$ minutes. 3) L'écart est de 20 minutes.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "min"
+                },
+                {
+                  "content": "Abidjan est proche de l'___ (un mot), ce qui explique ce faible écart.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Situer Abidjan. 2) Près de l'équateur, la durée du jour varie peu. 3) Le mot attendu est équateur.",
+                  "answers": [
+                    {
+                      "content": "équateur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En Côte d'Ivoire, les jours sont beaucoup plus longs en été qu'en hiver, comme en France.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Comparer. 2) Près de l'équateur, la durée du jour varie très peu. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que se passe-t-il vers le 21 mars, un équinoxe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Repérer l'équinoxe. 2) Le jour et la nuit sont égaux. 3) Ils durent chacun 12 heures.",
+                  "answers": [
+                    {
+                      "content": "Le jour et la nuit durent 12 heures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le jour est le plus long de l'année",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nuit est la plus longue de l'année",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a plus de nuit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : un élève de Man se demande pourquoi il fait chaud presque toute l'année en Côte d'Ivoire, alors qu'il fait froid en hiver dans certains pays éloignés de l'équateur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à l'équateur, aux rayons du Soleil et aux zones climatiques.",
+              "questions": [
+                {
+                  "content": "Pourquoi fait-il chaud presque toute l'année près de l'équateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier l'axe incliné et la zone. 2) Près de l'équateur, les rayons sont peu inclinés. 3) La distance n'est pas la cause.",
+                  "answers": [
+                    {
+                      "content": "Les rayons du Soleil y arrivent presque à la verticale toute l'année",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Terre y est plus près du Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune réchauffe cette région",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de rotation à l'équateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque zone climatique à sa position.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Repérer la position. 2) Plus on s'éloigne de l'équateur, plus les rayons sont inclinés. 3) Zone chaude autour de l'équateur, zone froide autour des pôles, zone tempérée entre les deux.",
+                  "answers": [
+                    {
+                      "content": "Zone chaude",
+                      "match": "Autour de l'équateur"
+                    },
+                    {
+                      "content": "Zone tempérée",
+                      "match": "Entre la zone chaude et la zone froide"
+                    },
+                    {
+                      "content": "Zone froide",
+                      "match": "Autour des pôles"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Côte d'Ivoire est dans une zone où la durée du jour varie peu.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Situer la Côte d'Ivoire près de l'équateur. 2) Relier : la durée du jour y varie peu. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus on s'éloigne de l'équateur, plus les rayons du Soleil sont ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1) Identifier l'effet de la rotondité et de l'axe. 2) Les rayons sont de plus en plus inclinés. 3) Il fait donc plus froid.",
+                  "answers": [
+                    {
+                      "content": "inclinés",
+                      "correct": true
+                    },
+                    {
+                      "content": "verticaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "supprimés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Près des pôles se trouve la zone ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Repérer la position près des pôles. 2) Les rayons sont très inclinés. 3) C'est la zone froide.",
+                  "answers": [
+                    {
+                      "content": "froide",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : un élève d'Abidjan observe son quartier : la lagune, du sable, l'air chaud, un manguier et un poisson dans un seau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque élément du quartier, demande-toi : roche, eau, gaz ou être vivant ?",
+              "questions": [
+                {
+                  "content": "Quels sont les deux éléments de la biosphère ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Repérer. 2) Le manguier et le poisson sont des êtres vivants. 3) Le sable relève de la lithosphère, l'air de l'atmosphère.",
+                  "answers": [
+                    {
+                      "content": "Le manguier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sable",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'air",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle enveloppe classe-t-on l'eau de la lagune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Décrire : de l'eau liquide. 2) Nommer : hydrosphère. 3) Elle se trouve dans toute l'eau de la Terre.",
+                  "answers": [
+                    {
+                      "content": "L'hydrosphère",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lithosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'atmosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "La biosphère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sable de la plage appartient à la ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1) Décrire : une roche solide. 2) Nommer : la lithosphère. 3) Les êtres vivants et l'eau relèvent d'autres enveloppes.",
+                  "answers": [
+                    {
+                      "content": "lithosphère",
+                      "correct": true
+                    },
+                    {
+                      "content": "biosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "hydrosphère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'air du quartier appartient à l'atmosphère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Décrire : un gaz. 2) Nommer : atmosphère. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La couche de gaz qui entoure la Terre, faite surtout d'azote et d'oxygène, est l'___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Décrire : une couche de gaz. 2) Nommer : atmosphère. 3) Elle contient azote et oxygène.",
+                  "answers": [
+                    {
+                      "content": "atmosphère",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier : mouvements, saisons et couches",
+          "notions": "Justifier une affirmation sur la rotation, la révolution et les saisons, comparer Abidjan et Paris, repérer des erreurs, raisonner sur les couches de la Terre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : un élève affirme que le Soleil tourne autour de la Terre en 24 heures et que les saisons dépendent de la distance au Soleil.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque affirmation, retrouve le bon mouvement de la Terre.",
+              "questions": [
+                {
+                  "content": "Le Soleil tourne autour de la Terre en 24 heures.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Identifier le mouvement. 2) C'est la Terre qui tourne sur elle-même. 3) Le mouvement du Soleil est apparent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le Soleil paraît-il se déplacer dans le ciel au cours de la journée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier la rotation. 2) Préciser son sens et sa durée. 3) Relier : le Soleil paraît se déplacer, c'est un mouvement apparent.",
+                  "answers": [
+                    {
+                      "content": "La rotation de la Terre donne l'impression que le Soleil se déplace",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Soleil tourne vraiment autour de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune pousse le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Terre est immobile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les saisons dépendent de la distance entre la Terre et le Soleil.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Identifier la cause des saisons. 2) C'est l'inclinaison de l'axe pendant la révolution. 3) Début janvier, la Terre est un peu plus proche du Soleil et c'est l'hiver au Nord.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la bonne explication des saisons ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier l'axe incliné. 2) Relier à la lumière reçue par chaque hémisphère. 3) La distance varie peu : ce n'est pas la cause.",
+                  "answers": [
+                    {
+                      "content": "L'axe de la Terre est incliné et garde la même direction",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Terre s'éloigne beaucoup du Soleil en hiver",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil change de taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Terre s'arrête pendant l'hiver",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aux équinoxes, le jour et la nuit sont égaux.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Repérer l'équinoxe. 2) Jour et nuit durent 12 heures. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple, avec des données arrondies : le 21 juin, le jour dure 12 h 10 à Abidjan et 16 h 00 à Paris. Le 21 décembre, il dure 11 h 50 à Abidjan et 8 h 00 à Paris.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule les écarts avant de comparer les villes.",
+              "questions": [
+                {
+                  "content": "Quelle ville a la durée du jour qui varie le plus au cours de l'année ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Recueillir les écarts : 20 minutes et 8 heures. 2) Comparer. 3) Loin de l'équateur, la durée varie plus.",
+                  "answers": [
+                    {
+                      "content": "Paris, car elle est loin de l'équateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Abidjan, car elle est près de l'équateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune, les deux varient pareil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan, car elle est plus près du Soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le 21 juin, de combien de minutes le jour est-il plus long à Paris qu'à Abidjan ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Recueillir : 16 h 00 et 12 h 10. 2) Calculer : $16\\text{ h} - 12\\text{ h }10$, soit $3\\text{ h }50$. 3) $3 \\times 60 + 50 = 230$ minutes.",
+                  "answers": [
+                    {
+                      "content": "230",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "min"
+                },
+                {
+                  "content": "Le 21 décembre, le jour est plus long à Paris qu'à Abidjan.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Comparer 8 h 00 et 11 h 50. 2) Paris a moins de jour en hiver. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conclusions justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Comparer les écarts. 2) Paris varie beaucoup, Abidjan très peu. 3) Les deux autres propositions contredisent les données.",
+                  "answers": [
+                    {
+                      "content": "Les saisons sont plus marquées à Paris qu'à Abidjan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Abidjan reçoit presque autant de lumière toute l'année",
+                      "correct": true
+                    },
+                    {
+                      "content": "Abidjan a la nuit la plus longue en juin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Paris a toujours 12 heures de jour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'écart de durée du jour est faible à Abidjan parce qu'elle est proche de l'___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : 1) Situer Abidjan. 2) Près de l'équateur, la durée du jour varie peu. 3) Le mot attendu est équateur.",
+                  "answers": [
+                    {
+                      "content": "équateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Antarctique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Soleil",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : trois élèves donnent leur avis. Élève 1 : « La rotation dure un an. » Élève 2 : « La révolution explique les saisons. » Élève 3 : « Le noyau est tout entier liquide. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Reprends les durées de la rotation et de la révolution.",
+              "questions": [
+                {
+                  "content": "L'élève 1 a raison : la rotation de la Terre dure un an.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Identifier la rotation. 2) Elle dure environ 24 heures. 3) La révolution dure un an : l'élève confond les deux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève 2 a raison : la révolution, avec l'axe incliné, explique les saisons.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Identifier la révolution et l'axe incliné. 2) Ils expliquent les saisons. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève 3 a raison : le noyau est tout entier liquide.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Repérer le noyau. 2) Le noyau externe est liquide, mais le noyau interne est solide. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la correction de l'erreur de l'élève 3.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Repérer. 2) Décrire les deux parties. 3) Conclure que le noyau n'est pas entièrement liquide.",
+                  "answers": [
+                    {
+                      "content": "Repérer le noyau, au centre de la Terre"
+                    },
+                    {
+                      "content": "Décrire le noyau externe : il est liquide"
+                    },
+                    {
+                      "content": "Décrire le noyau interne : il est solide"
+                    },
+                    {
+                      "content": "Conclure : le noyau n'est pas entièrement liquide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle correction est exacte pour l'élève 1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier les deux mouvements. 2) Préciser leurs durées. 3) Conclure sans les confondre.",
+                  "answers": [
+                    {
+                      "content": "La rotation dure environ 24 heures ; la révolution dure environ un an",
+                      "correct": true
+                    },
+                    {
+                      "content": "La rotation dure un mois",
+                      "correct": false
+                    },
+                    {
+                      "content": "La révolution dure 24 heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux durent un an",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : un élève doit justifier le classement de plusieurs éléments dans les enveloppes de la Terre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Décris d'abord, nomme ensuite.",
+              "questions": [
+                {
+                  "content": "Pourquoi un glacier appartient-il à l'hydrosphère ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Décrire : un glacier est de l'eau gelée. 2) Nommer : l'hydrosphère contient toute l'eau. 3) Elle ne se limite pas aux océans.",
+                  "answers": [
+                    {
+                      "content": "Parce que c'est de l'eau, ici solide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que c'est un gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que c'est un être vivant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il est au centre de la Terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La biosphère ne contient que les êtres humains.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Décrire : la biosphère est le monde du vivant. 2) Elle contient plantes, animaux et micro-organismes. 3) La réponse est Faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux couches de l'intérieur de la Terre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Repérer l'intérieur. 2) Manteau et noyau en font partie. 3) Atmosphère et hydrosphère sont des enveloppes de la surface.",
+                  "answers": [
+                    {
+                      "content": "Le manteau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le noyau",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'atmosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hydrosphère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque description à sa couche.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Décrire. 2) Nommer. 3) Mince et solide : croûte ; roches chaudes : manteau ; fer et nickel : noyau.",
+                  "answers": [
+                    {
+                      "content": "Mince et solide",
+                      "match": "Croûte"
+                    },
+                    {
+                      "content": "Épais, roches chaudes",
+                      "match": "Manteau"
+                    },
+                    {
+                      "content": "Fer et nickel",
+                      "match": "Noyau"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble des roches solides de la surface forme la ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Décrire : roches solides. 2) Nommer : lithosphère. 3) Le préfixe litho veut dire pierre.",
+                  "answers": [
+                    {
+                      "content": "lithosphère",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : la planète Terre",
+          "notions": "Bilan de toutes les notions : place de la Terre dans le système solaire, rotation, révolution et saisons, structure interne et enveloppes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation d'exemple : pour un bilan, un élève résume la place de la Terre. La distance Terre-Soleil est d'environ 150 millions de km et le rayon de la Terre d'environ 6 370 km.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Situe, décris puis conclus.",
+              "questions": [
+                {
+                  "content": "Quelle phrase résume bien la Terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Situer : troisième planète. 2) Décrire : tellurique. 3) Conclure : planète rocheuse.",
+                  "answers": [
+                    {
+                      "content": "Une planète tellurique, la troisième à partir du Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une étoile au centre du système solaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un satellite de Mars",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une planète géante et gazeuse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le diamètre de la Terre, à partir de son rayon de 6 370 km ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode : 1) Décrire : le diamètre est le double du rayon. 2) $6\\,370 \\times 2 = 12\\,740$. 3) Environ 12 740 km.",
+                  "answers": [
+                    {
+                      "content": "12740",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "km"
+                },
+                {
+                  "content": "La Terre est une sphère légèrement aplatie aux pôles.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Décrire la forme. 2) La fiche la décrit ainsi. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux planètes placées entre le Soleil et la Terre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : 1) Situer. 2) Mercure et Vénus sont avant la Terre. 3) Mars et Jupiter sont après.",
+                  "answers": [
+                    {
+                      "content": "Mercure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vénus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mars",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jupiter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Soleil est une ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Décrire : il produit sa lumière. 2) C'est une étoile. 3) Ce n'est pas une planète.",
+                  "answers": [
+                    {
+                      "content": "étoile",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation d'exemple : une élève d'Abidjan veut comprendre le jour, la nuit et les saisons.",
+              "exercise_type": "evaluation",
+              "figure": "mouvements-de-la-terre",
+              "hint": "Associe chaque mouvement à sa conséquence.",
+              "questions": [
+                {
+                  "content": "Relie chaque mouvement à sa durée.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Identifier le mouvement. 2) Préciser sa durée. 3) La rotation fait le jour, la révolution l'année.",
+                  "answers": [
+                    {
+                      "content": "Rotation",
+                      "match": "Environ 24 heures"
+                    },
+                    {
+                      "content": "Révolution",
+                      "match": "Environ 365 jours et un quart"
+                    },
+                    {
+                      "content": "Année bissextile",
+                      "match": "366 jours"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel mouvement donne l'alternance du jour et de la nuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier la rotation. 2) Une face est éclairée, l'autre dans l'ombre. 3) Relier au jour et à la nuit.",
+                  "answers": [
+                    {
+                      "content": "La rotation",
+                      "correct": true
+                    },
+                    {
+                      "content": "La révolution",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'inclinaison de la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les saisons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que provoque la révolution avec l'axe incliné ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier la révolution. 2) Relier à l'axe incliné. 3) Conclure : les saisons.",
+                  "answers": [
+                    {
+                      "content": "Les saisons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le jour et la nuit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lever à l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le décalage horaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vers le 21 décembre, c'est l'été dans l'hémisphère Nord.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Repérer le solstice de décembre. 2) Le Nord est incliné à l'opposé du Soleil. 3) C'est l'hiver au Nord.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Vers le 21 juin et le 21 décembre ont lieu les ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Repérer les dates. 2) Les jours les plus longs et les plus courts. 3) Ce sont les solstices.",
+                  "answers": [
+                    {
+                      "content": "solstices",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation d'exemple : un document montre l'intérieur de la Terre et décrit ses enveloppes.",
+              "exercise_type": "evaluation",
+              "figure": "structure-interne-terre",
+              "hint": "Pour chaque couche, décris sa nature avant de la nommer.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre, de la surface vers le centre.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : 1) Repérer. 2) Décrire. 3) Nommer dans l'ordre.",
+                  "answers": [
+                    {
+                      "content": "Croûte"
+                    },
+                    {
+                      "content": "Manteau"
+                    },
+                    {
+                      "content": "Noyau externe"
+                    },
+                    {
+                      "content": "Noyau interne"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont trois éléments de l'hydrosphère ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : 1) Décrire : de l'eau. 2) Nommer : hydrosphère. 3) Le manguier est de la biosphère.",
+                  "answers": [
+                    {
+                      "content": "Un océan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un fleuve",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un lac",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un manguier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un nuage de gaz",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle enveloppe regroupe les êtres vivants ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Décrire : le vivant. 2) Nommer : biosphère. 3) Les autres sont roche, gaz et eau.",
+                  "answers": [
+                    {
+                      "content": "La biosphère",
+                      "correct": true
+                    },
+                    {
+                      "content": "La lithosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'atmosphère",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hydrosphère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'atmosphère est une couche de gaz.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Décrire. 2) Nommer : atmosphère. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le manteau est fait de ___ chaudes (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Repérer le manteau. 2) Décrire : roches chaudes. 3) Mot attendu : roches.",
+                  "answers": [
+                    {
+                      "content": "roches",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation d'exemple : en décembre, Awa, à Abidjan, appelle sa cousine en France. Elle lui dit qu'elle a froid, alors qu'à Abidjan il fait chaud et que le jour dure environ 12 heures.",
+              "exercise_type": "evaluation",
+              "figure": "carte-abidjan-paris",
+              "hint": "Sépare ce qui vient de la rotation et ce qui vient de la révolution.",
+              "questions": [
+                {
+                  "content": "Pourquoi Awa et sa cousine n'ont-elles pas la même heure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier la rotation. 2) Préciser son sens. 3) Relier : la France est en avance.",
+                  "answers": [
+                    {
+                      "content": "La Terre tourne d'ouest en est et la France est plus à l'est",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Terre tourne d'est en ouest",
+                      "correct": false
+                    },
+                    {
+                      "content": "La France est plus près du Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil se déplace autour de la France",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi fait-il froid en France en décembre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1) Identifier l'axe incliné. 2) Repérer le solstice de décembre. 3) Relier : hiver au Nord.",
+                  "answers": [
+                    {
+                      "content": "L'hémisphère Nord est incliné à l'opposé du Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "La France est loin du Soleil en décembre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La rotation s'arrête en hiver",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune cache le Soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La durée du jour varie peu à Abidjan toute l'année.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 1) Situer Abidjan près de l'équateur. 2) Relier. 3) La réponse est Vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque phénomène à sa cause.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : 1) Identifier le mouvement. 2) Relier. 3) Heures : rotation ; saisons : axe et révolution.",
+                  "answers": [
+                    {
+                      "content": "L'heure en avance en France",
+                      "match": "Rotation d'ouest en est"
+                    },
+                    {
+                      "content": "L'hiver en France en décembre",
+                      "match": "Axe incliné et révolution"
+                    },
+                    {
+                      "content": "Une durée du jour proche de 12 h à Abidjan",
+                      "match": "Position près de l'équateur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Près de l'équateur, la durée du jour varie ___ (un mot : peu ou beaucoup).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1) Situer. 2) Relier. 3) Le mot attendu est peu.",
+                  "answers": [
+                    {
+                      "content": "peu",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

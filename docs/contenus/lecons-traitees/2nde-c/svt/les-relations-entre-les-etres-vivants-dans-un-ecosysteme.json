@@ -1,0 +1,3884 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les relations entre les êtres vivants dans un écosystème",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "SVT",
+      "series_name": "C",
+      "figures": [
+        {
+          "key": "chaine-mais",
+          "kind": "diagram",
+          "description": "Schéma fléché de la chaîne alimentaire d'un champ de maïs, de gauche à droite : le maïs, producteur, est mangé par la chenille, consommateur primaire ; la chenille est mangée par l'oiseau insectivore ; l'oiseau est mangé par le rapace. Chaque flèche se lit « est mangé par ».",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Producteur",
+              "Consommateur primaire",
+              "Consommateur d'un niveau supérieur"
+            ],
+            "nodes": [
+              {
+                "id": "mais",
+                "label": "Maïs",
+                "category": 1
+              },
+              {
+                "id": "chenille",
+                "label": "Chenille",
+                "category": 2
+              },
+              {
+                "id": "oiseau",
+                "label": "Oiseau insectivore",
+                "category": 3
+              },
+              {
+                "id": "rapace",
+                "label": "Rapace",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "mais",
+                "to": "chenille"
+              },
+              {
+                "from": "chenille",
+                "to": "oiseau"
+              },
+              {
+                "from": "oiseau",
+                "to": "rapace"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "chaine-lagune",
+          "kind": "diagram",
+          "description": "Schéma fléché de la chaîne alimentaire de la lagune, de gauche à droite : les algues microscopiques, producteurs, sont mangées par un petit crustacé ; le crustacé est mangé par un petit poisson ; le petit poisson est mangé par le héron. Chaque flèche se lit « est mangé par ».",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Producteur",
+              "Consommateur primaire",
+              "Consommateur d'un niveau supérieur"
+            ],
+            "nodes": [
+              {
+                "id": "algues",
+                "label": "Algues microscopiques",
+                "category": 1
+              },
+              {
+                "id": "crustace",
+                "label": "Petit crustacé",
+                "category": 2
+              },
+              {
+                "id": "poisson",
+                "label": "Petit poisson",
+                "category": 3
+              },
+              {
+                "id": "heron",
+                "label": "Héron",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "algues",
+                "to": "crustace"
+              },
+              {
+                "from": "crustace",
+                "to": "poisson"
+              },
+              {
+                "from": "poisson",
+                "to": "heron"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cycle-matiere",
+          "kind": "diagram",
+          "description": "Cycle de la matière dans un écosystème, en quatre étapes : les sels minéraux du sol sont absorbés par les plantes vertes ; les plantes sont mangées par les animaux ; les animaux, leurs déchets et leurs restes sont recyclés par les décomposeurs ; les décomposeurs libèrent des sels minéraux dans le sol.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "sels",
+                "label": "Sels minéraux du sol"
+              },
+              {
+                "id": "plantes",
+                "label": "Plantes vertes"
+              },
+              {
+                "id": "animaux",
+                "label": "Animaux"
+              },
+              {
+                "id": "decomp",
+                "label": "Décomposeurs"
+              }
+            ],
+            "edges": [
+              {
+                "from": "sels",
+                "to": "plantes",
+                "label": "absorbés"
+              },
+              {
+                "from": "plantes",
+                "to": "animaux",
+                "label": "mangées"
+              },
+              {
+                "from": "animaux",
+                "to": "decomp",
+                "label": "restes"
+              },
+              {
+                "from": "decomp",
+                "to": "sels",
+                "label": "libèrent"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "arbre-relations",
+          "kind": "diagram",
+          "description": "Arbre des relations entre deux espèces selon le bilan de chacune. Les deux gagnent : la symbiose. L'une gagne, l'autre perd : la prédation et le parasitisme. L'une gagne, l'autre ne change pas : le commensalisme. Les deux perdent : la compétition.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "rel",
+                "label": "Relations entre deux espèces"
+              },
+              {
+                "id": "pp",
+                "label": "Les deux espèces gagnent"
+              },
+              {
+                "id": "pm",
+                "label": "Une gagne, l'autre perd"
+              },
+              {
+                "id": "p0",
+                "label": "Une gagne, l'autre ne change pas"
+              },
+              {
+                "id": "mm",
+                "label": "Les deux perdent"
+              },
+              {
+                "id": "symb",
+                "label": "Symbiose"
+              },
+              {
+                "id": "pred",
+                "label": "Prédation"
+              },
+              {
+                "id": "para",
+                "label": "Parasitisme"
+              },
+              {
+                "id": "comm",
+                "label": "Commensalisme"
+              },
+              {
+                "id": "comp",
+                "label": "Compétition"
+              }
+            ],
+            "edges": [
+              {
+                "from": "rel",
+                "to": "pp"
+              },
+              {
+                "from": "rel",
+                "to": "pm"
+              },
+              {
+                "from": "rel",
+                "to": "p0"
+              },
+              {
+                "from": "rel",
+                "to": "mm"
+              },
+              {
+                "from": "pp",
+                "to": "symb"
+              },
+              {
+                "from": "pm",
+                "to": "pred"
+              },
+              {
+                "from": "pm",
+                "to": "para"
+              },
+              {
+                "from": "p0",
+                "to": "comm"
+              },
+              {
+                "from": "mm",
+                "to": "comp"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "reseau-savane",
+          "kind": "diagram",
+          "description": "Réseau trophique d'une savane, d'après un exemple d'exercice. L'herbe est mangée par le criquet et par l'antilope ; l'acacia est mangé par l'antilope ; le criquet est mangé par le lézard, le lézard par le serpent, le serpent par le rapace ; l'antilope est mangée par le lion.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Producteur",
+              "Consommateur primaire",
+              "Consommateur d'un niveau supérieur"
+            ],
+            "nodes": [
+              {
+                "id": "herbe",
+                "label": "Herbe",
+                "category": 1
+              },
+              {
+                "id": "acacia",
+                "label": "Acacia",
+                "category": 1
+              },
+              {
+                "id": "criquet",
+                "label": "Criquet",
+                "category": 2
+              },
+              {
+                "id": "antilope",
+                "label": "Antilope",
+                "category": 2
+              },
+              {
+                "id": "lezard",
+                "label": "Lézard",
+                "category": 3
+              },
+              {
+                "id": "serpent",
+                "label": "Serpent",
+                "category": 3
+              },
+              {
+                "id": "rapace",
+                "label": "Rapace",
+                "category": 3
+              },
+              {
+                "id": "lion",
+                "label": "Lion",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "herbe",
+                "to": "criquet"
+              },
+              {
+                "from": "herbe",
+                "to": "antilope"
+              },
+              {
+                "from": "acacia",
+                "to": "antilope"
+              },
+              {
+                "from": "criquet",
+                "to": "lezard"
+              },
+              {
+                "from": "lezard",
+                "to": "serpent"
+              },
+              {
+                "from": "serpent",
+                "to": "rapace"
+              },
+              {
+                "from": "antilope",
+                "to": "lion"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "reseau-lagune",
+          "kind": "diagram",
+          "description": "Réseau trophique de la lagune et de sa mangrove, d'après un exemple d'exercice. Les algues sont mangées par le petit crustacé et par le poisson herbivore ; la feuille de palétuvier par le crabe ; le poisson carnivore mange le crustacé, le crabe et le poisson herbivore ; le héron mange le poisson carnivore et le crabe.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Producteur",
+              "Consommateur primaire",
+              "Consommateur d'un niveau supérieur"
+            ],
+            "nodes": [
+              {
+                "id": "algues",
+                "label": "Algues",
+                "category": 1
+              },
+              {
+                "id": "feuilles",
+                "label": "Feuilles de palétuvier",
+                "category": 1
+              },
+              {
+                "id": "crustace",
+                "label": "Petit crustacé",
+                "category": 2
+              },
+              {
+                "id": "herbivore",
+                "label": "Poisson herbivore",
+                "category": 2
+              },
+              {
+                "id": "crabe",
+                "label": "Crabe",
+                "category": 2
+              },
+              {
+                "id": "carnivore",
+                "label": "Poisson carnivore",
+                "category": 3
+              },
+              {
+                "id": "heron",
+                "label": "Héron",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "algues",
+                "to": "crustace"
+              },
+              {
+                "from": "algues",
+                "to": "herbivore"
+              },
+              {
+                "from": "feuilles",
+                "to": "crabe"
+              },
+              {
+                "from": "crustace",
+                "to": "carnivore"
+              },
+              {
+                "from": "crabe",
+                "to": "carnivore"
+              },
+              {
+                "from": "herbivore",
+                "to": "carnivore"
+              },
+              {
+                "from": "carnivore",
+                "to": "heron"
+              },
+              {
+                "from": "crabe",
+                "to": "heron"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "courbe-chenilles",
+          "kind": "stat_chart",
+          "description": "Courbe, résultats d'exercice : nombre de chenilles pour 10 plants de maïs, relevé chaque semaine après la disparition des oiseaux insectivores d'un champ. Il est de 10 au départ, puis 14, 22, 40, 70 et 120 au bout de cinq semaines : le nombre de chenilles augmente de plus en plus vite.",
+          "params": {
+            "chart": "line",
+            "series": [
+              10,
+              14,
+              22,
+              40,
+              70,
+              120
+            ],
+            "labels": [
+              "Sem. 0",
+              "Sem. 1",
+              "Sem. 2",
+              "Sem. 3",
+              "Sem. 4",
+              "Sem. 5"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "feuilles-rongees",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres, résultats d'exercice : pourcentage de feuilles de maïs rongées par les chenilles après un mois. Parcelle accessible aux oiseaux insectivores : 10 %. Parcelle recouverte d'un filet qui les écarte : 45 %. Les deux parcelles ont le même sol, la même eau et le même nombre de plants.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              10,
+              45
+            ],
+            "labels": [
+              "Sans filet",
+              "Sous filet"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "L'écosystème : biotope et biocénose",
+          "remember": "Un **écosystème** est un milieu de vie délimité (une mare, une forêt, une savane, une lagune) avec tout ce qu'il contient. Il comprend deux parties liées. Le **biotope** est l'ensemble des éléments non vivants du lieu : sol, eau, air, lumière, température, relief. La **biocénose** est l'ensemble des êtres vivants qui y habitent : plantes, animaux, champignons, micro-organismes. Les éléments du biotope sont des facteurs **abiotiques** (« sans vie ») ; les actions des êtres vivants les uns sur les autres sont des facteurs **biotiques**. Biotope et biocénose agissent l'un sur l'autre : les plantes dépendent du sol et de la lumière, et elles modifient le sol et l'air. Un écosystème peut être petit (un tronc d'arbre mort) ou grand (une forêt).",
+          "method": [
+            "Délimiter le milieu étudié : un lieu précis, avec ses limites.",
+            "Relever le biotope : les éléments non vivants (sol, eau, air, lumière, température).",
+            "Relever la biocénose : tous les êtres vivants du lieu, même les plus petits.",
+            "Conclure : l'écosystème est formé du biotope et de la biocénose, liés par des relations."
+          ],
+          "example": {
+            "statement": "Au bord de la lagune Ébrié, des élèves étudient un morceau de mangrove de 20 m de long, entre la berge et l'eau. Ils notent 8 éléments : la vase, l'eau salée, le soleil, des palétuviers, des crabes, des petits poissons, des bactéries de la vase et des oiseaux pêcheurs. Quel est le biotope et quelle est la biocénose de cet écosystème ?",
+            "steps": [
+              "Délimiter : le milieu étudié est ce morceau de mangrove de 20 m, entre la berge et l'eau de la lagune.",
+              "Relever le biotope : la vase, l'eau salée et le soleil sont des éléments non vivants.",
+              "Relever la biocénose : les palétuviers, les crabes, les petits poissons, les bactéries de la vase et les oiseaux pêcheurs sont vivants.",
+              "Conclure : l'écosystème est formé du biotope (vase, eau salée, soleil) et de la biocénose (palétuviers, crabes, poissons, bactéries, oiseaux), liés par des relations."
+            ]
+          },
+          "pitfall": "Ne pas croire que la biocénose ne compte que les animaux qu'on voit. Les bactéries de la vase, trop petites pour être vues, sont vivantes : elles sont dans la biocénose. À l'inverse, l'eau, même indispensable, est dans le biotope. Contre-exemple : dans la liste de 8 éléments de l'exemple, 3 sont du biotope et 5 de la biocénose. Pour chaque élément, pose la question : est-il vivant ?",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à séparer le biotope et la biocénose d'un milieu.",
+            "questions": [
+              {
+                "content": "Dans un champ de maïs, quel élément fait partie du biotope ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Délimiter : le milieu est le champ de maïs. Étape 2 — Relever le biotope : le sol est un élément non vivant. Étape 3 — Relever la biocénose : les chenilles, le maïs et les champignons sont vivants. Donc le sol fait partie du biotope. L'erreur tentante est de croire que tout ce qui est dans le champ est du biotope.",
+                "answers": [
+                  {
+                    "content": "Le sol du champ",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les chenilles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les plants de maïs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les champignons du sol",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un élément du biotope n'est pas vivant."
+              },
+              {
+                "content": "Les bactéries du sol, trop petites pour être vues à l'œil nu, font partie de la biocénose.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Délimiter : le milieu est le sol. Étape 3 — Relever la biocénose : les bactéries sont des êtres vivants, même invisibles. Étape 4 — Conclure : elles appartiennent donc à la biocénose. Leur taille ne compte pas : seul le fait d'être vivant compte.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pose la question : est-ce vivant ?"
+              },
+              {
+                "content": "L'ensemble des êtres vivants d'un écosystème s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Relever la biocénose : la biocénose regroupe tous les êtres vivants du lieu. Étape 4 — Conclure : avec le biotope, elle forme l'écosystème. Le biotope, lui, regroupe les éléments non vivants.",
+                "answers": [
+                  {
+                    "content": "biocénose",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot commence par « bio »."
+              },
+              {
+                "content": "Relie chaque mot à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Relever le biotope : le biotope est non vivant. Étape 3 — Relever la biocénose : la biocénose est vivante. Étape 4 — Conclure : l'écosystème réunit les deux. On ne confond pas une partie (biotope ou biocénose) avec le tout (écosystème).",
+                "answers": [
+                  {
+                    "content": "Biotope",
+                    "match": "Ensemble des éléments non vivants du milieu"
+                  },
+                  {
+                    "content": "Biocénose",
+                    "match": "Ensemble des êtres vivants du milieu"
+                  },
+                  {
+                    "content": "Écosystème",
+                    "match": "Biotope et biocénose liés par des relations"
+                  }
+                ],
+                "hint": "Une partie, une autre partie, puis le tout."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Biotope ou biocénose ?",
+              "statement": "Dans cet exercice, tu sépares les éléments non vivants et les êtres vivants de quelques milieux, avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une forêt d'un parc national est un écosystème. Parmi ces éléments, lequel fait partie de sa biocénose ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Délimiter : le milieu est la forêt du parc. Étape 2 — Relever le biotope : l'humidité, la roche et la lumière sont non vivantes : c'est le biotope. Étape 3 — Relever la biocénose : le singe est vivant. Étape 4 — Conclure : il appartient à la biocénose. L'humidité est tentante parce qu'elle est liée à la vie, mais elle n'est pas vivante.",
+                  "answers": [
+                    {
+                      "content": "Un singe perché dans un arbre",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'humidité de l'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "La roche du sous-sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lumière qui passe entre les feuilles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments font partie du biotope d'une savane ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Délimiter : le milieu est la savane. Étape 2 — Relever le biotope : le sol et la chaleur sont non vivants : ils sont du biotope. Étape 3 — Relever la biocénose : termites, herbe et antilopes sont vivants : ils forment la biocénose. Les termites sont petits, mais ils restent vivants.",
+                  "answers": [
+                    {
+                      "content": "Le sol sableux",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chaleur du soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les termites",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'herbe haute",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les antilopes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments font partie de la biocénose d'une lagune ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Délimiter : le milieu est la lagune. Étape 2 — Relever le biotope : l'eau salée, la vase et la température sont le biotope. Étape 3 — Relever la biocénose : poissons, algues microscopiques et bactéries sont vivants : c'est la biocénose. Les algues microscopiques sont des êtres vivants, même si on ne les voit pas une à une.",
+                  "answers": [
+                    {
+                      "content": "Les poissons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les algues microscopiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les bactéries de la vase",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau salée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vase du fond",
+                      "correct": false
+                    },
+                    {
+                      "content": "La température de l'eau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le biotope et la biocénose d'un milieu forment ensemble un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : le biotope et la biocénose, liés par des relations, forment un écosystème. Le biotope n'est qu'une partie du tout.",
+                  "answers": [
+                    {
+                      "content": "écosystème",
+                      "correct": true
+                    },
+                    {
+                      "content": "biotope",
+                      "correct": false
+                    },
+                    {
+                      "content": "réseau",
+                      "correct": false
+                    },
+                    {
+                      "content": "habitat",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une mare, les poissons et l'eau font tous deux partie de la biocénose.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever le biotope : l'eau est non vivante : elle est du biotope. Étape 3 — Relever la biocénose : les poissons sont vivants : ils sont de la biocénose. Les deux n'appartiennent donc pas à la même partie. L'erreur est de classer l'eau avec les êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer les éléments d'une mangrove",
+              "statement": "Dans cet exercice, tu classes des éléments de la mangrove et tu retrouves les étapes pour décrire un écosystème.",
+              "hint": "Pour chaque élément, demande-toi d'abord : est-il vivant ?",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Sur un morceau de forêt, un élève note 9 éléments : le sol, l'eau de pluie et la lumière, puis 2 espèces de champignons, 3 espèces d'insectes et 1 espèce de mousse. Combien d'éléments notés appartiennent à la biocénose ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Délimiter : le milieu est ce morceau de forêt. Étape 2 — Relever le biotope : sol, eau et lumière : 3 éléments du biotope. Étape 3 — Relever la biocénose : $2 + 3 + 1 = 6$ éléments vivants. Étape 4 — Conclure : la biocénose compte 6 éléments notés. Les 3 éléments du biotope ne se comptent pas.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour décrire un écosystème.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Délimiter : on commence par délimiter. Étape 2 — Relever le biotope : on relève le biotope. Étape 3 — Relever la biocénose : on relève la biocénose. Étape 4 — Conclure : on conclut. On ne conclut jamais avant d'avoir relevé les deux parties.",
+                  "answers": [
+                    {
+                      "content": "Délimiter le milieu étudié"
+                    },
+                    {
+                      "content": "Relever le biotope"
+                    },
+                    {
+                      "content": "Relever la biocénose"
+                    },
+                    {
+                      "content": "Conclure : biotope et biocénose forment l'écosystème"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à un exemple de la mangrove.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever le biotope : vase, eau et température sont non vivantes. Étape 3 — Relever la biocénose : crabes, palétuviers et oiseaux sont vivants. Un facteur abiotique est non vivant ; un facteur biotique vient des êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "Biotope",
+                      "match": "La vase et l'eau salée"
+                    },
+                    {
+                      "content": "Biocénose",
+                      "match": "Les crabes et les palétuviers"
+                    },
+                    {
+                      "content": "Facteur abiotique",
+                      "match": "La température de l'eau"
+                    },
+                    {
+                      "content": "Facteur biotique",
+                      "match": "La concurrence entre deux espèces d'oiseaux"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un champ de maïs avec ses chenilles est un écosystème : le ___ comprend le sol, l'eau et la lumière.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Relever le biotope : sol, eau et lumière sont non vivants. Étape 4 — Conclure : ils forment le biotope de l'écosystème. La biocénose, elle, comprend le maïs et les chenilles.",
+                  "answers": [
+                    {
+                      "content": "biotope",
+                      "correct": true
+                    },
+                    {
+                      "content": "biocénose",
+                      "correct": false
+                    },
+                    {
+                      "content": "réseau",
+                      "correct": false
+                    },
+                    {
+                      "content": "milieu vivant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la température de l'air d'une forêt change, c'est un élément du biotope qui change.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever le biotope : la température est un élément non vivant : elle appartient au biotope. Elle peut ensuite agir sur la biocénose, mais elle reste du biotope.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les éléments non vivants d'un milieu (sol, eau, lumière) sont des facteurs ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever le biotope : les éléments non vivants du biotope sont des facteurs abiotiques. Les facteurs biotiques viennent, eux, des êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "abiotiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "abiotique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les chaînes alimentaires et les niveaux trophiques",
+          "remember": "Dans un écosystème, les êtres vivants sont liés par la nourriture. Un **producteur** (plante verte, algue) fabrique sa matière organique par photosynthèse, à partir d'eau, de sels minéraux et de gaz carbonique, grâce à la lumière. Un **consommateur** se nourrit d'autres êtres vivants : il est **primaire** s'il mange un producteur (herbivore), **secondaire** s'il mange un consommateur primaire (carnivore), **tertiaire** s'il mange un consommateur secondaire. Un **décomposeur** (bactéries, champignons) se nourrit de débris et d'êtres morts, qu'il transforme en éléments minéraux que les producteurs réabsorbent. Une **chaîne alimentaire** est une suite d'êtres vivants où chacun mange le précédent. La flèche signifie « est mangé par » : elle indique le sens du transfert de matière. Chaque maillon est un **niveau trophique**.",
+          "method": [
+            "Repérer le producteur : l'être vivant chlorophyllien (plante verte, algue) qui fabrique sa matière organique.",
+            "Identifier le consommateur primaire : celui qui mange le producteur (un herbivore).",
+            "Poursuivre avec les consommateurs suivants : le secondaire mange le primaire, le tertiaire mange le secondaire.",
+            "Tracer la chaîne : écrire les êtres vivants dans l'ordre, avec des flèches qui veulent dire « est mangé par ».",
+            "Nommer le niveau trophique de chaque maillon, puis ajouter les décomposeurs qui recyclent les êtres morts."
+          ],
+          "example": {
+            "statement": "Dans un champ de maïs du village, des chenilles rongent les feuilles. Un oiseau insectivore mange les chenilles, et un rapace attrape parfois l'oiseau. Construire la chaîne alimentaire et nommer les niveaux trophiques.",
+            "steps": [
+              "Repérer : le maïs est une plante verte qui fabrique sa matière organique par photosynthèse : c'est le producteur.",
+              "Identifier : la chenille mange les feuilles de maïs : c'est le consommateur primaire.",
+              "Poursuivre : l'oiseau insectivore mange la chenille (consommateur secondaire) et le rapace mange l'oiseau (consommateur tertiaire).",
+              "Tracer : maïs → chenille → oiseau insectivore → rapace ; chaque flèche veut dire « est mangé par ».",
+              "Nommer : maïs, producteur ; chenille, primaire ; oiseau, secondaire ; rapace, tertiaire ; à leur mort, les décomposeurs recyclent leurs restes en éléments minéraux."
+            ]
+          },
+          "pitfall": "Ne pas orienter la flèche dans le mauvais sens. Elle part de l'être mangé et va vers celui qui le mange. Contre-exemple : « chenille → maïs » voudrait dire que le maïs mange la chenille, ce qui est faux. Le producteur est toujours le premier maillon. Une chaîne de 4 maillons, comme celle de l'exemple, compte 3 flèches.",
+          "figure": "chaine-mais",
+          "practice": {
+            "statement": "Tu t'entraînes à ordonner une chaîne alimentaire et à nommer ses niveaux.",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre la chaîne alimentaire d'une savane, du producteur au dernier consommateur.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : l'herbe est le producteur, donc le premier maillon. Étape 2 — Identifier : le criquet mange l'herbe. Étape 3 — Poursuivre : le lézard mange le criquet, puis le rapace mange le lézard. Étape 4 — Tracer : on trace herbe → criquet → lézard → rapace. L'erreur tentante est de mettre le rapace en premier parce qu'il est le plus grand.",
+                "answers": [
+                  {
+                    "content": "Herbe"
+                  },
+                  {
+                    "content": "Criquet"
+                  },
+                  {
+                    "content": "Lézard"
+                  },
+                  {
+                    "content": "Rapace"
+                  }
+                ],
+                "hint": "Commence par la plante."
+              },
+              {
+                "content": "Dans la chaîne maïs → chenille → oiseau insectivore, quel est le consommateur primaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le maïs est le producteur. Étape 2 — Identifier : la chenille mange le maïs : c'est le consommateur primaire. Étape 3 — Poursuivre : l'oiseau mange la chenille : il est secondaire. Le maïs est tentant parce qu'il est au début, mais c'est un producteur.",
+                "answers": [
+                  {
+                    "content": "La chenille",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le maïs",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'oiseau insectivore",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les décomposeurs",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qui mange directement la plante ?"
+              },
+              {
+                "content": "Dans une chaîne alimentaire, la flèche part du mangeur et va vers l'être mangé.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Tracer : la flèche veut dire « est mangé par » : elle part de l'être mangé vers le mangeur. Sens inverse : « herbe → antilope » signifie que l'herbe est mangée par l'antilope.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Lis la flèche comme « est mangé par »."
+              },
+              {
+                "content": "Un être vivant chlorophyllien, qui fabrique sa matière organique, est un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on repère le producteur : il fabrique sa matière organique par photosynthèse. Un consommateur, lui, mange d'autres êtres vivants.",
+                "answers": [
+                  {
+                    "content": "producteur",
+                    "correct": true
+                  }
+                ],
+                "hint": "Il est le premier maillon."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Producteurs, consommateurs et décomposeurs",
+              "statement": "Dans cet exercice, tu reconnais les niveaux trophiques de quelques chaînes, avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans une forêt, une chenille mange une feuille. Qui est le producteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'arbre est une plante verte qui fabrique sa matière organique : c'est le producteur. Étape 2 — Identifier : la chenille le mange : consommateur primaire. La chenille est un consommateur, pas un producteur.",
+                  "answers": [
+                    {
+                      "content": "L'arbre qui porte la feuille",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chenille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un oiseau qui mangera la chenille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les champignons du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la chaîne herbe → antilope → lion, quel est le consommateur secondaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'herbe est le producteur. Étape 2 — Identifier : l'antilope mange l'herbe : primaire. Étape 3 — Poursuivre : le lion mange l'antilope : secondaire. L'antilope est primaire, pas secondaire.",
+                  "answers": [
+                    {
+                      "content": "Le lion",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'antilope",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'herbe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun : il n'y a que des consommateurs primaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels êtres vivants sont des décomposeurs ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 5 — Nommer : les décomposeurs se nourrissent de débris et d'êtres morts : bactéries et champignons. Herbivores et rapaces mangent des êtres vivants ; les plantes vertes fabriquent leur matière.",
+                  "answers": [
+                    {
+                      "content": "Les bactéries du sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les champignons qui poussent sur du bois mort",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les herbivores",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les plantes vertes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les rapaces",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque niveau trophique à un exemple de la lagune.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : les algues fabriquent leur matière : producteur. Étape 2 — Identifier : le poisson qui mange les algues : primaire. Étape 3 — Poursuivre : celui qui mange l'herbivore : secondaire. Étape 5 — Nommer : les bactéries recyclent les êtres morts. Il faut regarder ce que mange chaque être vivant.",
+                  "answers": [
+                    {
+                      "content": "Producteur",
+                      "match": "Les algues microscopiques"
+                    },
+                    {
+                      "content": "Consommateur primaire",
+                      "match": "Un poisson qui mange des algues"
+                    },
+                    {
+                      "content": "Consommateur secondaire",
+                      "match": "Un poisson qui mange ce poisson herbivore"
+                    },
+                    {
+                      "content": "Décomposeur",
+                      "match": "Les bactéries de la vase"
+                    }
+                  ]
+                },
+                {
+                  "content": "La chaîne « chenille → maïs → oiseau » est correcte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le producteur, le maïs, doit être le premier maillon. Étape 4 — Tracer : la flèche « chenille → maïs » dit que le maïs mange la chenille : c'est faux. La bonne chaîne est maïs → chenille → oiseau.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "La chaîne alimentaire de la lagune",
+              "statement": "Dans cet exercice, tu construis et tu lis une chaîne alimentaire de la lagune Ébrié : algues microscopiques → petit crustacé → petit poisson → héron.",
+              "hint": "Pars du producteur, puis suis les flèches : « est mangé par ».",
+              "exercise_type": "fixation",
+              "figure": "chaine-lagune",
+              "questions": [
+                {
+                  "content": "Une chaîne de la lagune compte 4 maillons : algues microscopiques, petit crustacé, petit poisson, héron. Combien y a-t-il de flèches ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Tracer : on trace une flèche entre deux maillons qui se suivent : 4 maillons, donc $4 - 1 = 3$ flèches. Il n'y a pas une flèche par maillon.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Remets dans l'ordre la chaîne de la lagune.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : les algues sont les producteurs. Étape 2 — Identifier : le crustacé les mange. Étape 3 — Poursuivre : le petit poisson mange le crustacé et le héron mange le poisson. Le héron ne peut pas venir avant ce qu'il mange.",
+                  "answers": [
+                    {
+                      "content": "Algues microscopiques"
+                    },
+                    {
+                      "content": "Petit crustacé"
+                    },
+                    {
+                      "content": "Petit poisson"
+                    },
+                    {
+                      "content": "Héron"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette chaîne, le petit crustacé est un consommateur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Identifier : le crustacé mange les algues, qui sont le producteur : il est consommateur primaire. Secondaire serait faux : il ne mange pas un consommateur.",
+                  "answers": [
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "secondaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "tertiaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "producteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces êtres vivants de la chaîne ou de la lagune, lesquels sont des consommateurs ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : algues et plantes aquatiques sont des producteurs. Étape 3 — Poursuivre : crustacé, poisson et héron mangent d'autres êtres vivants : ce sont des consommateurs. Les producteurs fabriquent leur matière, ils ne sont pas consommateurs.",
+                  "answers": [
+                    {
+                      "content": "Le petit crustacé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le petit poisson",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le héron",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les algues microscopiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les plantes aquatiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le héron est le producteur de cette chaîne.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le producteur est l'algue microscopique, premier maillon. Étape 3 — Poursuivre : le héron mange le petit poisson : consommateur d'un niveau supérieur. Le héron est au bout de la chaîne, pas au début.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À la mort du héron, ses restes sont recyclés par les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 5 — Nommer : les décomposeurs (bactéries, champignons) recyclent les êtres morts en éléments minéraux. Les consommateurs ne remplacent pas ce rôle.",
+                  "answers": [
+                    {
+                      "content": "décomposeurs",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les relations entre les espèces",
+          "remember": "Deux espèces d'un même milieu peuvent entrer en relation. On compare ce que chacune **gagne (+)**, **perd (−)**, ou si rien ne change (0). **Prédation** (+ / −) : le prédateur tue et mange sa proie (le héron et le poisson). **Parasitisme** (+ / −) : le parasite vit sur ou dans l'hôte et se nourrit à ses dépens, sans le tuer vite (la tique et le bœuf). **Symbiose** ou mutualisme (+ / +) : association étroite à bénéfices réciproques (le lichen, champignon et algue ; les nodosités des légumineuses, où des bactéries fournissent des substances azotées contre des sucres). **Commensalisme** (+ / 0) : l'une profite, l'autre n'est ni aidée ni gênée (l'orchidée sur la branche d'un arbre). **Compétition** (− / −) : deux espèces recherchent la même ressource (lumière, eau, nourriture, espace) et se gênent (le maïs et les mauvaises herbes). Entre individus d'une même espèce, il existe aussi de la compétition et de la coopération.",
+          "method": [
+            "Identifier les deux espèces en présence et ce que chacune fait ou subit.",
+            "Relever le bilan de chaque espèce : elle gagne (+), elle perd (−), ou rien ne change (0).",
+            "Comparer ces bilans avec ceux des cinq relations de la fiche.",
+            "Nommer la relation et la justifier par le bilan de chaque espèce."
+          ],
+          "example": {
+            "statement": "Dans un village, une tique se fixe sur la peau d'un bœuf et se nourrit de son sang. Le bœuf s'affaiblit quand les tiques sont nombreuses, mais il ne meurt pas. Quelle relation lie la tique et le bœuf ?",
+            "steps": [
+              "Identifier : la tique se nourrit du sang du bœuf, qui est son hôte.",
+              "Relever : la tique gagne de la nourriture (+) ; le bœuf perd du sang et s'affaiblit (−), sans être tué.",
+              "Comparer : le bilan « + / − » correspond à la prédation ou au parasitisme ; ici la tique vit sur son hôte au lieu de le tuer pour le manger.",
+              "Nommer : c'est du parasitisme, car la tique (parasite) profite du bœuf (hôte) à ses dépens."
+            ]
+          },
+          "pitfall": "Ne pas confondre prédation et parasitisme : les deux sont « + / − », mais le prédateur tue sa proie pour la manger (le héron mange un poisson, qui meurt), alors que le parasite garde son hôte vivant. Ne pas confondre non plus symbiose et commensalisme. Contre-exemple : l'orchidée sur une branche profite du support (+), mais l'arbre ne gagne rien (0) : c'est du commensalisme, pas de la symbiose.",
+          "figure": "arbre-relations",
+          "practice": {
+            "statement": "Tu t'entraînes à nommer une relation d'après le bilan de chaque espèce.",
+            "questions": [
+              {
+                "content": "Un lion tue et mange une antilope. Quelle est la relation entre le lion et l'antilope ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le lion mange l'antilope. Étape 2 — Relever : le lion gagne (+), l'antilope perd la vie (−). Étape 3 — Comparer : « + / − » avec mise à mort : prédation. Étape 4 — Nommer : c'est de la prédation. Le parasitisme est faux : l'hôte n'est pas tué pour être mangé.",
+                "answers": [
+                  {
+                    "content": "La prédation",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le parasitisme",
+                    "correct": false
+                  },
+                  {
+                    "content": "La symbiose",
+                    "correct": false
+                  },
+                  {
+                    "content": "La compétition",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le lion tue-t-il l'antilope ?"
+              },
+              {
+                "content": "Dans une symbiose, les deux espèces tirent profit de l'association.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever : la symbiose a le bilan « + / + ». Étape 4 — Nommer : on la nomme ainsi parce que les deux espèces gagnent. Un bilan « + / − » serait du parasitisme ou de la prédation.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde le bilan « + / + »."
+              },
+              {
+                "content": "Relie chaque exemple à sa relation.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : on repère les deux espèces de chaque cas. Étape 2 — Relever : on relève +/−, +/0, +/+ ou −/−. Étape 4 — Nommer : on nomme la relation. Ne confonds pas commensalisme (+ / 0) et symbiose (+ / +).",
+                "answers": [
+                  {
+                    "content": "Un ver intestinal vit chez l'Homme et se nourrit à ses dépens",
+                    "match": "Parasitisme"
+                  },
+                  {
+                    "content": "Une orchidée pousse sur la branche d'un arbre sans lui nuire",
+                    "match": "Commensalisme"
+                  },
+                  {
+                    "content": "Un champignon et une algue forment un lichen",
+                    "match": "Symbiose"
+                  },
+                  {
+                    "content": "Deux plantes se disputent la lumière",
+                    "match": "Compétition"
+                  }
+                ],
+                "hint": "Cherche le bilan de chaque espèce."
+              },
+              {
+                "content": "La relation « + / − » où un être vivant en tue un autre pour le manger s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Comparer : le bilan « + / − » avec mise à mort est celui de la prédation. Étape 4 — Nommer : on nomme donc la prédation. Le parasitisme garde l'hôte vivant.",
+                "answers": [
+                  {
+                    "content": "prédation",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mangeur est le prédateur."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Nommer une relation",
+              "statement": "Dans cet exercice, tu nommes des relations entre êtres vivants du champ, de la forêt et de la lagune, avec les étapes de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les mauvaises herbes poussent entre les plants de maïs et leur prennent lumière, eau et sels minéraux. Quelle relation lie les mauvaises herbes et le maïs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les mauvaises herbes et le maïs vivent côte à côte. Étape 2 — Relever : chacun perd une partie de ses ressources (− / −). Étape 3 — Comparer : « − / − » pour la même ressource : compétition. Étape 4 — Nommer : c'est de la compétition. Le parasitisme serait faux : les mauvaises herbes ne vivent pas aux dépens du maïs en s'y fixant.",
+                  "answers": [
+                    {
+                      "content": "La compétition",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le parasitisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commensalisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La symbiose",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les nodosités des racines d'un haricot abritent des bactéries qui fournissent des substances azotées à la plante, qui leur donne des sucres. Quelle relation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le haricot et les bactéries des nodosités. Étape 2 — Relever : les deux gagnent (+ / +). Étape 4 — Nommer : c'est de la symbiose. Le commensalisme serait faux : ici les deux espèces gagnent, pas une seule.",
+                  "answers": [
+                    {
+                      "content": "La symbiose",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le parasitisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commensalisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La prédation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles relations ont un bilan « + / − » ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Relever : prédation et parasitisme : le prédateur et le parasite gagnent, la proie et l'hôte perdent. Étape 3 — Comparer : symbiose + / +, commensalisme + / 0, compétition − / −. La compétition est tentante parce qu'une espèce perd, mais l'autre perd aussi.",
+                  "answers": [
+                    {
+                      "content": "La prédation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le parasitisme",
+                      "correct": true
+                    },
+                    {
+                      "content": "La symbiose",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commensalisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La compétition",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une orchidée pousse sur une branche d'arbre : elle profite du support, l'arbre n'y gagne rien et n'y perd rien. C'est du ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Relever : orchidée +, arbre 0. Étape 4 — Nommer : le bilan « + / 0 » est celui du commensalisme. Le parasitisme serait faux : l'arbre ne perd rien.",
+                  "answers": [
+                    {
+                      "content": "commensalisme",
+                      "correct": true
+                    },
+                    {
+                      "content": "parasitisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "symbiose",
+                      "correct": false
+                    },
+                    {
+                      "content": "prédation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un parasite tue toujours son hôte très vite.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever : le parasite se nourrit à ses dépens (+ / −), mais il a besoin de son hôte vivant. Étape 3 — Comparer : c'est ce qui le distingue du prédateur. Un hôte tué trop vite priverait le parasite de nourriture.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Quelle relation entre ces espèces ?",
+              "statement": "Dans cet exercice, tu analyses des relations dans un champ de maïs, une lagune et une forêt.",
+              "hint": "Compare toujours le bilan des deux espèces avant de nommer la relation.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans une lagune, un héron attrape et avale un poisson. Quel est le bilan de cette relation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le héron mange le poisson. Étape 2 — Relever : le héron gagne un repas (+), le poisson perd la vie (−). Étape 4 — Nommer : c'est de la prédation. Les deux gagnent est faux : le poisson meurt.",
+                  "answers": [
+                    {
+                      "content": "Héron + / poisson −",
+                      "correct": true
+                    },
+                    {
+                      "content": "Héron − / poisson +",
+                      "correct": false
+                    },
+                    {
+                      "content": "Héron + / poisson +",
+                      "correct": false
+                    },
+                    {
+                      "content": "Héron − / poisson −",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un champ de maïs, les mauvaises herbes font concurrence au maïs. Sur 40 plants envahis, chaque plant donne 3 épis au lieu de 5 sur une parcelle propre. Combien d'épis sont perdus sur ces 40 plants ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : chaque plant perd $5 - 3 = 2$ épis (−). Étape 3 — Comparer : sur 40 plants, la perte totale est $40 \\times 2$. Étape 4 — Nommer : la compétition fait perdre 80 épis. Les épis récoltés, 120, ne sont pas la perte demandée.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "épis"
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour nommer une relation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on identifie les espèces. Étape 2 — Relever : on relève le bilan. Étape 3 — Comparer : on compare. Étape 4 — Nommer : on nomme et on justifie. Nommer sans avoir relevé le bilan expose à confondre prédation et parasitisme.",
+                  "answers": [
+                    {
+                      "content": "Identifier les deux espèces"
+                    },
+                    {
+                      "content": "Relever le bilan de chaque espèce"
+                    },
+                    {
+                      "content": "Comparer avec les relations de la fiche"
+                    },
+                    {
+                      "content": "Nommer et justifier la relation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles ressources peuvent faire l'objet d'une compétition entre deux plantes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Relever : deux plantes se gênent quand elles se disputent ce dont elles ont besoin : lumière, eau, sels minéraux. Étape 3 — Comparer : fleurs de l'autre plante et chant d'oiseau ne sont pas des ressources partagées. Une ressource doit être utilisée par les deux espèces.",
+                  "answers": [
+                    {
+                      "content": "La lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau du sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les fleurs de l'autre plante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chant d'un oiseau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une relation où les deux espèces profitent de l'association s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever : bilan « + / + ». Étape 4 — Nommer : on la nomme symbiose, ou mutualisme. Le commensalisme n'avantage qu'une espèce.",
+                  "answers": [
+                    {
+                      "content": "symbiose",
+                      "correct": true
+                    },
+                    {
+                      "content": "mutualisme",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La tique et le bœuf sont en relation de commensalisme.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever : tique +, bœuf − (il s'affaiblit). Étape 4 — Nommer : ce bilan « + / − » est celui du parasitisme. Le commensalisme exigerait un bilan nul pour le bœuf.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les réseaux trophiques et l'équilibre d'un écosystème",
+          "remember": "Dans un milieu, plusieurs chaînes alimentaires se croisent : un même être vivant peut manger plusieurs espèces et être mangé par plusieurs autres. L'ensemble de ces chaînes reliées forme un **réseau trophique**. Chaque flèche va de l'être mangé vers celui qui le mange. Dans un écosystème en **équilibre**, le nombre d'individus de chaque espèce varie peu : quand les proies sont nombreuses, les prédateurs se multiplient, puis ils mangent beaucoup de proies et les proies diminuent. C'est une **régulation** naturelle. L'équilibre peut être **rompu** par la disparition ou la prolifération d'une espèce (maladie, feu de brousse, chasse ou pêche excessive, introduction d'une espèce nouvelle). Les effets se transmettent le long des flèches : la disparition d'un prédateur fait proliférer ses proies, qui épuisent ce qu'elles mangent. L'Homme peut protéger l'équilibre, par exemple par des aires protégées.",
+          "method": [
+            "Rassembler les chaînes alimentaires du milieu.",
+            "Relier les maillons communs : les chaînes qui partagent un être vivant forment un réseau trophique.",
+            "Repérer l'espèce qui change : celle qui disparaît ou qui prolifère.",
+            "Suivre les conséquences de proche en proche le long des flèches : ses proies, ses prédateurs, les producteurs.",
+            "Conclure sur l'équilibre : dire si le milieu se régule ou si l'équilibre est rompu."
+          ],
+          "example": {
+            "statement": "Dans une savane (réseau simplifié d'exercice), on a : herbe → criquet, criquet → lézard, lézard → serpent, serpent → rapace, herbe → antilope, antilope → lion. Une maladie fait disparaître tous les serpents. Quelles conséquences peut-on prévoir ?",
+            "steps": [
+              "Rassembler : herbe → criquet → lézard → serpent → rapace, et herbe → antilope → lion.",
+              "Relier : l'herbe est un maillon commun aux deux chaînes, qui forment un réseau trophique.",
+              "Repérer : l'espèce qui change est le serpent, qui disparaît.",
+              "Suivre : les lézards ne sont plus mangés et se multiplient ; ils mangent plus de criquets, qui diminuent ; le rapace, privé de proie dans ce réseau, diminue aussi.",
+              "Conclure : l'équilibre est rompu, car la disparition d'une seule espèce modifie plusieurs autres."
+            ]
+          },
+          "pitfall": "Ne pas croire que la disparition d'une espèce n'a d'effet que sur celle qui la mange. Les effets se propagent dans tout le réseau. Contre-exemple : sans serpents, on pense que seul le rapace est touché, alors que les lézards augmentent et que les criquets diminuent. Ne crois pas non plus qu'on peut supprimer un prédateur sans risque : sans lui, ses proies prolifèrent et épuisent leur nourriture.",
+          "figure": "reseau-savane",
+          "practice": {
+            "statement": "Tu t'entraînes à prévoir les effets d'un changement dans un réseau trophique.",
+            "questions": [
+              {
+                "content": "Qu'est-ce qui distingue un réseau trophique d'une chaîne alimentaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Rassembler : on rassemble plusieurs chaînes. Étape 2 — Relier : on les relie par un maillon commun : cela forme le réseau. Une chaîne est une seule suite, sans croisement.",
+                "answers": [
+                  {
+                    "content": "Plusieurs chaînes sont reliées par des êtres vivants communs",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il ne compte qu'un seul consommateur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il ne contient pas de producteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les flèches y vont des mangeurs vers les mangés",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un réseau croise plusieurs chaînes."
+              },
+              {
+                "content": "Si les prédateurs d'une espèce disparaissent, cette espèce peut proliférer.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Repérer : l'espèce qui change est le prédateur disparu. Étape 4 — Suivre : ses proies ne sont plus mangées : elles se multiplient. Elles ne diminuent pas, puisque plus rien ne les mange.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qui mange encore les proies ?"
+              },
+              {
+                "content": "Dans un champ de maïs, les oiseaux insectivores sont chassés. Sans oiseaux, les chenilles vont ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Repérer : les oiseaux disparaissent. Étape 4 — Suivre : les chenilles ne sont plus mangées et se multiplient, donc le maïs sera plus rongé. Elles ne diminuent pas : ce sont les prédateurs qui disparaissent.",
+                "answers": [
+                  {
+                    "content": "se multiplier",
+                    "correct": true
+                  },
+                  {
+                    "content": "diminuer",
+                    "correct": false
+                  },
+                  {
+                    "content": "disparaître aussitôt",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qui mange les chenilles ?"
+              },
+              {
+                "content": "Un ensemble de chaînes alimentaires reliées s'appelle un réseau ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Relier : les chaînes reliées par des maillons communs forment un réseau trophique. Une chaîne seule n'est pas un réseau.",
+                "answers": [
+                  {
+                    "content": "trophique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot vient de « nourriture »."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Un réseau de la savane",
+              "statement": "Dans cet exercice, tu lis un réseau de la savane (d'exercice) : herbe → criquet, herbe → antilope, acacia → antilope, criquet → lézard, lézard → serpent, serpent → rapace, antilope → lion.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans ce réseau, quels êtres vivants mangent l'herbe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rassembler : on rassemble les chaînes qui partent de l'herbe. Étape 2 — Relier : l'herbe est le maillon commun : criquet et antilope la mangent. Le lézard mange le criquet, pas l'herbe.",
+                  "answers": [
+                    {
+                      "content": "Le criquet",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'antilope",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lézard",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le lion",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le serpent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de flèches compte ce réseau ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Rassembler : on compte une flèche par repas : herbe → criquet, herbe → antilope, acacia → antilope, criquet → lézard, lézard → serpent, serpent → rapace, antilope → lion. Étape 2 — Relier : cela fait 7 flèches. Le nombre d'êtres vivants est 8, pas le nombre de flèches.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les lions disparaissent. Que devient probablement le nombre d'antilopes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer : le lion disparaît. Étape 4 — Suivre : l'antilope n'est plus mangée par lui : son nombre augmente. Il ne diminue pas, puisque son prédateur n'est plus là.",
+                  "answers": [
+                    {
+                      "content": "Il augmente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il diminue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne change pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les antilopes disparaissent aussi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand les antilopes deviennent trop nombreuses, l'herbe et l'acacia risquent de diminuer.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Suivre : plus d'antilopes mangent plus d'herbe et d'acacia. Étape 5 — Conclure : le milieu se déséquilibre. Les producteurs ne peuvent pas augmenter quand on les mange davantage.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La disparition des serpents n'a de conséquence que sur les rapaces.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer : le serpent disparaît. Étape 4 — Suivre : les lézards se multiplient et les criquets diminuent, en plus du rapace. Les effets se propagent à tout le réseau.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "La lagune déséquilibrée par la surpêche",
+              "statement": "Dans cet exercice, tu étudies un réseau de la lagune Ébrié et de sa mangrove (d'exercice) : algues → petit crustacé, algues → poisson herbivore, feuilles de palétuvier → crabe, petit crustacé → poisson carnivore, crabe → poisson carnivore, poisson herbivore → poisson carnivore, poisson carnivore → héron, crabe → héron.",
+              "hint": "Pars de l'espèce qui change, puis suis les flèches vers ses proies et ses prédateurs.",
+              "exercise_type": "fixation",
+              "figure": "reseau-lagune",
+              "questions": [
+                {
+                  "content": "Une surpêche fait disparaître les poissons carnivores. Avant, on comptait 30 poissons herbivores par filet ; après, on en compte 90. Par combien le nombre de poissons herbivores est-il multiplié ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Repérer : les poissons carnivores disparaissent. Étape 4 — Suivre : $90 \\div 30 = 3$ : les poissons herbivores sont trois fois plus nombreux. On divise le nombre après par le nombre avant.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "fois"
+                },
+                {
+                  "content": "Quels êtres vivants mangent le crabe dans ce réseau ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rassembler : on rassemble les flèches qui partent du crabe. Étape 2 — Relier : crabe → poisson carnivore et crabe → héron. Le poisson herbivore mange des algues, pas des crabes.",
+                  "answers": [
+                    {
+                      "content": "Le poisson carnivore",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le héron",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poisson herbivore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le petit crustacé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les algues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les poissons carnivores disparaissent, les poissons herbivores vont ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Repérer : le poisson carnivore disparaît. Étape 4 — Suivre : les poissons herbivores ne sont plus mangés : ils se multiplient. Ils ne diminuent pas.",
+                  "answers": [
+                    {
+                      "content": "se multiplier",
+                      "correct": true
+                    },
+                    {
+                      "content": "diminuer",
+                      "correct": false
+                    },
+                    {
+                      "content": "rester identiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les poissons herbivores deviennent très nombreux, que risque-t-il d'arriver aux algues ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Suivre : plus de poissons herbivores mangent plus d'algues. Étape 5 — Conclure : l'équilibre est rompu. Elles ne peuvent pas augmenter quand on les mange davantage.",
+                  "answers": [
+                    {
+                      "content": "Elles diminuent, car elles sont davantage mangées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles augmentent, car elles sont mangées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles ne sont pas touchées",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles deviennent des consommateurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les conséquences de la surpêche.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Repérer : on part de l'espèce qui change. Étape 4 — Suivre : on suit les conséquences de proche en proche. Étape 5 — Conclure : on conclut sur l'équilibre. On ne conclut qu'après avoir suivi les conséquences.",
+                  "answers": [
+                    {
+                      "content": "Les poissons carnivores disparaissent"
+                    },
+                    {
+                      "content": "Les poissons herbivores se multiplient"
+                    },
+                    {
+                      "content": "Les algues diminuent"
+                    },
+                    {
+                      "content": "L'équilibre de la lagune est rompu"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le héron peut être touché par la disparition des poissons carnivores.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer : les poissons carnivores disparaissent. Étape 4 — Suivre : le héron les mange : il perd une proie. Il mange aussi des crabes, mais il perd tout de même une nourriture.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le champ de maïs et ses chenilles",
+          "statement": "Un paysan cultive du maïs. Des chenilles rongent les feuilles ; des oiseaux insectivores viennent les manger, et un rapace chasse parfois ces oiseaux. Dans le sol vivent des bactéries et des champignons (situation d'exercice).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans ce champ, quel élément fait partie du biotope ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Délimiter : le milieu est le champ de maïs. Étape 2 — Relever le biotope : sol et lumière sont non vivants : ils forment le biotope. Étape 3 — Relever la biocénose : chenilles, bactéries et oiseaux sont vivants : biocénose. Les bactéries sont tentantes parce qu'elles sont dans le sol, mais elles sont vivantes.",
+              "answers": [
+                {
+                  "content": "Le sol et la lumière du soleil",
+                  "correct": true
+                },
+                {
+                  "content": "Les chenilles",
+                  "correct": false
+                },
+                {
+                  "content": "Les bactéries du sol",
+                  "correct": false
+                },
+                {
+                  "content": "Les oiseaux insectivores",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la chaîne alimentaire de ce champ.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer : le maïs est le producteur. Étape 2 — Identifier : la chenille le mange : primaire. Étape 3 — Poursuivre : l'oiseau mange la chenille, le rapace mange l'oiseau. Étape 4 — Tracer : maïs → chenille → oiseau insectivore → rapace. Le rapace, plus grand, n'est pas le premier maillon : la chaîne commence par le producteur.",
+              "answers": [
+                {
+                  "content": "Maïs"
+                },
+                {
+                  "content": "Chenille"
+                },
+                {
+                  "content": "Oiseau insectivore"
+                },
+                {
+                  "content": "Rapace"
+                }
+              ]
+            },
+            {
+              "content": "L'oiseau insectivore est un consommateur ___.",
+              "question_type": "select",
+              "explanation": "Étape 2 — Identifier : la chenille, qui mange le maïs, est le consommateur primaire. Étape 3 — Poursuivre : l'oiseau mange la chenille : il est secondaire. Il n'est pas tertiaire : c'est le rapace qui l'est.",
+              "answers": [
+                {
+                  "content": "secondaire",
+                  "correct": true
+                },
+                {
+                  "content": "primaire",
+                  "correct": false
+                },
+                {
+                  "content": "tertiaire",
+                  "correct": false
+                },
+                {
+                  "content": "décomposeur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle relation lie l'oiseau insectivore et la chenille ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Relever : l'oiseau gagne un repas (+), la chenille perd la vie (−). Étape 3 — Comparer : « + / − » avec mise à mort : prédation. Étape 4 — Nommer : c'est de la prédation. Le parasitisme est faux : la chenille n'est pas gardée vivante.",
+              "answers": [
+                {
+                  "content": "La prédation",
+                  "correct": true
+                },
+                {
+                  "content": "Le parasitisme",
+                  "correct": false
+                },
+                {
+                  "content": "La symbiose",
+                  "correct": false
+                },
+                {
+                  "content": "Le commensalisme",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les bactéries et les champignons du sol sont les décomposeurs de ce champ.",
+              "question_type": "true_false",
+              "explanation": "Étape 5 — Nommer : les décomposeurs se nourrissent de débris et d'êtres morts : bactéries et champignons. Ce ne sont ni des producteurs ni des consommateurs de ce champ.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La forêt du parc national",
+          "statement": "Dans la forêt d'un parc national (situation d'exercice), on observe des arbres, des orchidées fixées sur leurs branches, des singes qui mangent des fruits, un léopard qui chasse parfois les singes, des champignons sur le bois mort, un sol humide et une lumière filtrée par les feuilles.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels éléments forment le biotope de cette forêt ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Délimiter : le milieu est la forêt du parc. Étape 2 — Relever le biotope : sol humide et lumière sont non vivants. Étape 3 — Relever la biocénose : orchidées, champignons et léopard sont vivants : biocénose. La lumière passe par les feuilles, mais elle n'est pas vivante.",
+              "answers": [
+                {
+                  "content": "Le sol humide",
+                  "correct": true
+                },
+                {
+                  "content": "La lumière filtrée par les feuilles",
+                  "correct": true
+                },
+                {
+                  "content": "Les orchidées",
+                  "correct": false
+                },
+                {
+                  "content": "Les champignons",
+                  "correct": false
+                },
+                {
+                  "content": "Le léopard",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une orchidée pousse sur une branche d'arbre, sans lui nuire ni l'aider. Quelle relation ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : l'orchidée profite du support de l'arbre. Étape 2 — Relever : orchidée +, arbre 0. Étape 4 — Nommer : le bilan « + / 0 » est celui du commensalisme. La symbiose est fausse : l'arbre ne gagne rien.",
+              "answers": [
+                {
+                  "content": "Le commensalisme",
+                  "correct": true
+                },
+                {
+                  "content": "La symbiose",
+                  "correct": false
+                },
+                {
+                  "content": "Le parasitisme",
+                  "correct": false
+                },
+                {
+                  "content": "La compétition",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la chaîne : arbre (fruits), singe, léopard.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer : l'arbre fabrique ses fruits : producteur. Étape 2 — Identifier : le singe les mange : primaire. Étape 3 — Poursuivre : le léopard mange le singe : secondaire. Le léopard est au bout de la chaîne.",
+              "answers": [
+                {
+                  "content": "Arbre (fruits)"
+                },
+                {
+                  "content": "Singe"
+                },
+                {
+                  "content": "Léopard"
+                }
+              ]
+            },
+            {
+              "content": "Les champignons du bois mort font partie des ___ de cette forêt.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 5 — Nommer : ils se nourrissent d'êtres morts : ce sont des décomposeurs. Un producteur fabriquerait sa matière, ce qu'un champignon ne fait pas.",
+              "answers": [
+                {
+                  "content": "décomposeurs",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Des braconniers font disparaître tous les léopards. Que devient probablement le nombre de singes ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Repérer : le léopard disparaît. Étape 4 — Suivre : les singes ne sont plus mangés par lui. Étape 5 — Conclure : ils se multiplient, ce qui peut rompre l'équilibre. Il ne diminue pas : le prédateur n'est plus là.",
+              "answers": [
+                {
+                  "content": "Il augmente",
+                  "correct": true
+                },
+                {
+                  "content": "Il diminue",
+                  "correct": false
+                },
+                {
+                  "content": "Il ne change pas",
+                  "correct": false
+                },
+                {
+                  "content": "Les singes disparaissent aussi",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La lagune Ébrié et sa mangrove",
+          "statement": "Dans la lagune Ébrié et sa mangrove (réseau d'exercice), les algues sont mangées par le petit crustacé et par le poisson herbivore ; les feuilles de palétuvier par le crabe ; le poisson carnivore mange le crustacé, le crabe et le poisson herbivore ; le héron mange le poisson carnivore et le crabe. Des pêcheurs capturent trop de poissons carnivores.",
+          "exercise_type": "evaluation",
+          "figure": "reseau-lagune",
+          "questions": [
+            {
+              "content": "Quels maillons de ce réseau sont des producteurs ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : les producteurs fabriquent leur matière organique : algues et palétuvier. Étape 2 — Identifier : crabe et crustacé mangent des producteurs : consommateurs primaires. Étape 3 — Poursuivre : le héron est un consommateur d'un niveau supérieur. Le crabe est tentant parce qu'il vit sur les feuilles, mais il est consommateur.",
+              "answers": [
+                {
+                  "content": "Les algues",
+                  "correct": true
+                },
+                {
+                  "content": "Les feuilles de palétuvier",
+                  "correct": true
+                },
+                {
+                  "content": "Le crabe",
+                  "correct": false
+                },
+                {
+                  "content": "Le petit crustacé",
+                  "correct": false
+                },
+                {
+                  "content": "Le héron",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de flèches ce réseau compte-t-il ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Rassembler : on rassemble les chaînes : algues → crustacé, algues → herbivore, feuilles → crabe, crustacé → carnivore, crabe → carnivore, herbivore → carnivore, carnivore → héron, crabe → héron. Étape 2 — Relier : on les relie en un réseau. Le nombre de flèches se compte une à une.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Si les poissons carnivores deviennent rares, les crabes et les poissons herbivores vont ___.",
+              "question_type": "select",
+              "explanation": "Étape 3 — Repérer : le poisson carnivore, prédateur des deux, diminue. Étape 4 — Suivre : ses proies sont moins mangées : elles se multiplient. Elles ne diminuent pas.",
+              "answers": [
+                {
+                  "content": "se multiplier",
+                  "correct": true
+                },
+                {
+                  "content": "diminuer",
+                  "correct": false
+                },
+                {
+                  "content": "disparaître",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans ce réseau, le héron peut être touché par la surpêche des poissons carnivores.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Repérer : les poissons carnivores diminuent. Étape 4 — Suivre : le héron les mange : il perd une proie, mais il garde les crabes. Il n'est pas protégé parce qu'il mange aussi des crabes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois phrases pourquoi la surpêche des poissons carnivores peut rompre l'équilibre de la lagune.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Il nomme l'espèce qui disparaît ou diminue (les poissons carnivores)",
+                "Il suit une conséquence sur leurs proies (elles se multiplient)",
+                "Il suit une conséquence sur les algues ou sur le héron",
+                "Il conclut que l'équilibre est rompu"
+              ],
+              "explanation": "Étape 3 — Repérer : l'espèce qui change est le poisson carnivore, qui diminue par la surpêche. Étape 4 — Suivre : ses proies, poissons herbivores et crabes, se multiplient ; les algues et les feuilles qu'elles mangent diminuent ; le héron perd une proie. Étape 5 — Conclure : l'équilibre est rompu. Corrigé modèle : « Les pêcheurs capturent trop de poissons carnivores. Leurs proies, les poissons herbivores et les crabes, ne sont plus assez mangées et se multiplient. Elles mangent davantage d'algues et de feuilles, et le héron manque d'une proie : l'équilibre de la lagune est rompu. » Barème : 1 point par critère présent, sur 4 points.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Une invasion de chenilles dans un champ de maïs",
+          "statement": "Dans une plantation de maïs, des chasseurs capturent presque tous les oiseaux insectivores. Chaque semaine, des élèves comptent les chenilles pour 10 plants de maïs (résultats d'exercice) : 10, 14, 22, 40, 70 puis 120 au bout de cinq semaines. Le paysan constate aussi que beaucoup de feuilles sont rongées.",
+          "exercise_type": "evaluation",
+          "figure": "courbe-chenilles",
+          "questions": [
+            {
+              "content": "Par combien le nombre de chenilles est-il multiplié entre la semaine 0 et la semaine 5 ?",
+              "question_type": "numeric",
+              "explanation": "Étape 3 — Repérer : l'espèce qui change est l'oiseau insectivore, qui disparaît. Étape 4 — Suivre : les chenilles passent de 10 à 120 : $120 \\div 10 = 12$. On divise le nombre final par le nombre de départ, on ne soustrait pas.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "fois"
+            },
+            {
+              "content": "Pourquoi le nombre de chenilles augmente-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Rassembler : la chaîne est maïs → chenille → oiseau. Étape 3 — Repérer : l'oiseau disparaît. Étape 4 — Suivre : les chenilles ne sont plus mangées : elles se multiplient. Les autres propositions sont fausses : les chenilles mangent davantage de maïs, et le maïs ne mange pas les chenilles.",
+              "answers": [
+                {
+                  "content": "Leurs prédateurs, les oiseaux, ont disparu",
+                  "correct": true
+                },
+                {
+                  "content": "Les chenilles mangent moins de maïs",
+                  "correct": false
+                },
+                {
+                  "content": "Le maïs mange les chenilles",
+                  "correct": false
+                },
+                {
+                  "content": "Les oiseaux sont devenus des producteurs",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles conséquences peut-on prévoir pour le maïs et les rapaces ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Suivre : plus de chenilles mangent plus de maïs ; moins d'oiseaux signifie moins de nourriture pour le rapace. Étape 5 — Conclure : l'équilibre est rompu. Les effets se transmettent de proche en proche dans la chaîne.",
+              "answers": [
+                {
+                  "content": "Le maïs sera davantage rongé",
+                  "correct": true
+                },
+                {
+                  "content": "Le rapace trouvera moins d'oiseaux à manger",
+                  "correct": true
+                },
+                {
+                  "content": "Le rapace sera plus nombreux",
+                  "correct": false
+                },
+                {
+                  "content": "Le maïs produira plus de chenilles",
+                  "correct": false
+                },
+                {
+                  "content": "Les décomposeurs disparaîtront",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Cette situation est un exemple de rupture d'équilibre d'un écosystème.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Repérer : une espèce disparaît. Étape 5 — Conclure : une autre prolifère : l'équilibre est rompu. Dans un écosystème en équilibre, les effectifs varient peu.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Propose une solution pour retrouver un équilibre dans cette plantation et justifie-la avec le réseau trophique.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Il propose une mesure réaliste (protéger les oiseaux, arrêter la chasse, installer des perchoirs)",
+                "Il relie la mesure à la chaîne maïs, chenille, oiseau",
+                "Il explique l'effet attendu sur le nombre de chenilles",
+                "Il conclut sur l'équilibre retrouvé"
+              ],
+              "explanation": "Étape 3 — Repérer : l'espèce à rétablir est l'oiseau insectivore. Étape 4 — Suivre : si les oiseaux reviennent, ils mangent les chenilles, dont le nombre diminue. Étape 5 — Conclure : le maïs est moins rongé : l'équilibre se rétablit. Corrigé modèle : « Il faut arrêter de chasser les oiseaux insectivores et leur laisser des arbres où se poser. Dans la chaîne maïs, chenille, oiseau, les oiseaux mangent les chenilles : leur nombre diminue, le maïs est moins rongé et l'équilibre se rétablit. » Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Il faut protéger les oiseaux parce que…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Biotope et biocénose, chaîne alimentaire et niveaux trophiques, relations entre espèces, réseau trophique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans la forêt d'un parc national (situation d'exercice), on observe des arbres, des singes, des termites, un sol argileux, de l'eau de pluie, des champignons et une température douce.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels éléments font partie du biotope ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Délimiter : le milieu est la forêt du parc. Étape 2 — Relever le biotope : sol, eau de pluie et température sont non vivants. Étape 3 — Relever la biocénose : termites et champignons sont vivants. Termites et champignons sont petits, mais vivants.",
+                  "answers": [
+                    {
+                      "content": "Le sol argileux",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau de pluie",
+                      "correct": true
+                    },
+                    {
+                      "content": "La température douce",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les termites",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les champignons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les champignons de cette forêt font partie de la biocénose.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Relever la biocénose : les champignons sont des êtres vivants : ils font partie de la biocénose. Ils ne sont pas du biotope.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble des éléments non vivants d'un milieu s'appelle le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever le biotope : les éléments non vivants forment le biotope. La biocénose regroupe les êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "biotope",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le biotope et la biocénose forment ensemble un ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : biotope et biocénose, liés par des relations, forment l'écosystème. Un réseau décrit les relations alimentaires, pas le milieu entier.",
+                  "answers": [
+                    {
+                      "content": "écosystème",
+                      "correct": true
+                    },
+                    {
+                      "content": "réseau",
+                      "correct": false
+                    },
+                    {
+                      "content": "niveau trophique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever le biotope : biotope : non vivant. Étape 3 — Relever la biocénose : biocénose : vivant. Étape 4 — Conclure : écosystème : les deux. On ne confond pas la partie et le tout.",
+                  "answers": [
+                    {
+                      "content": "Biotope",
+                      "match": "Éléments non vivants du milieu"
+                    },
+                    {
+                      "content": "Biocénose",
+                      "match": "Êtres vivants du milieu"
+                    },
+                    {
+                      "content": "Écosystème",
+                      "match": "Biotope et biocénose liés"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un champ de maïs (situation d'exercice), des chenilles rongent le maïs, des oiseaux mangent les chenilles et un rapace mange les oiseaux. La chaîne est : maïs → chenille → oiseau insectivore → rapace.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "chaine-mais",
+              "questions": [
+                {
+                  "content": "Quel est le producteur de cette chaîne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le maïs fabrique sa matière organique par photosynthèse : producteur. Les autres maillons mangent d'autres êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "Le maïs",
+                      "correct": true
+                    },
+                    {
+                      "content": "La chenille",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'oiseau insectivore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rapace",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La chenille est un consommateur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Identifier : la chenille mange le producteur : consommateur primaire. Secondaire serait faux : elle ne mange pas un consommateur.",
+                  "answers": [
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "secondaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "tertiaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de flèches compte cette chaîne ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Tracer : 4 maillons donnent $4 - 1 = 3$ flèches. Il n'y a pas une flèche par maillon.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Dans cette chaîne, la flèche « chenille → oiseau » signifie que l'oiseau est mangé par la chenille.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Tracer : la flèche veut dire « est mangé par » : la chenille est mangée par l'oiseau. Le sens est inverse de celui proposé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets la chaîne dans l'ordre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : le producteur commence la chaîne. Étape 3 — Poursuivre : chaque maillon mange le précédent. Le rapace ne peut pas précéder ce qu'il mange.",
+                  "answers": [
+                    {
+                      "content": "Maïs"
+                    },
+                    {
+                      "content": "Chenille"
+                    },
+                    {
+                      "content": "Oiseau insectivore"
+                    },
+                    {
+                      "content": "Rapace"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Des situations de la nature sont présentées (situations d'exercice).",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "arbre-relations",
+              "questions": [
+                {
+                  "content": "Un ver intestinal vit chez l'Homme et se nourrit à ses dépens sans le tuer vite. Quelle relation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : ver +, Homme −, sans mise à mort. Étape 4 — Nommer : c'est du parasitisme. La prédation tuerait l'hôte pour le manger.",
+                  "answers": [
+                    {
+                      "content": "Le parasitisme",
+                      "correct": true
+                    },
+                    {
+                      "content": "La prédation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La symbiose",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commensalisme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un champignon et une algue vivent ensemble dans un lichen et profitent tous deux de l'association. Quelle relation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : les deux gagnent (+ / +). Étape 4 — Nommer : c'est de la symbiose. La compétition serait « − / − ».",
+                  "answers": [
+                    {
+                      "content": "La symbiose",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le parasitisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La compétition",
+                      "correct": false
+                    },
+                    {
+                      "content": "La prédation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La prédation et le parasitisme ont tous deux un bilan « + / − ».",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever : le prédateur et le parasite gagnent, la proie et l'hôte perdent. Ce qui les distingue est la mise à mort.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque relation à son bilan.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever : on relève le bilan de chaque relation. Étape 3 — Comparer : on compare avec la fiche. Prédation et parasitisme partagent « + / − ».",
+                  "answers": [
+                    {
+                      "content": "Symbiose",
+                      "match": "+ / +"
+                    },
+                    {
+                      "content": "Commensalisme",
+                      "match": "+ / 0"
+                    },
+                    {
+                      "content": "Compétition",
+                      "match": "− / −"
+                    },
+                    {
+                      "content": "Parasitisme",
+                      "match": "+ / −"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux plantes qui se disputent la lumière et l'eau sont en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever : les deux perdent une partie de leurs ressources. Étape 4 — Nommer : c'est une compétition. Aucune ne gagne.",
+                  "answers": [
+                    {
+                      "content": "compétition",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans une savane (réseau d'exercice) : herbe → criquet, herbe → antilope, acacia → antilope, criquet → lézard, lézard → serpent, serpent → rapace, antilope → lion.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "reseau-savane",
+              "questions": [
+                {
+                  "content": "Quels êtres vivants de ce réseau mangent l'herbe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rassembler : on rassemble les flèches qui partent de l'herbe. Étape 2 — Relier : criquet et antilope la mangent. Le lion mange l'antilope, pas l'herbe.",
+                  "answers": [
+                    {
+                      "content": "Le criquet",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'antilope",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le lion",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le serpent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rapace",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de flèches compte ce réseau ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Rassembler : on compte chaque repas : 7 flèches. Il y a 8 êtres vivants, mais 7 flèches.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les lions disparaissent. Que devient le nombre d'antilopes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer : le lion disparaît. Étape 4 — Suivre : l'antilope n'est plus mangée par lui. Il ne diminue pas.",
+                  "answers": [
+                    {
+                      "content": "Il augmente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il diminue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reste identique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand les antilopes deviennent trop nombreuses, l'herbe peut diminuer.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Suivre : plus d'antilopes mangent plus d'herbe. Les producteurs ne peuvent pas augmenter alors qu'on les mange davantage.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un réseau est formé de plusieurs chaînes ___ par des êtres vivants communs.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Relier : les chaînes reliées par un maillon commun forment un réseau. Des chaînes séparées ne forment pas de réseau.",
+                  "answers": [
+                    {
+                      "content": "reliées",
+                      "correct": true
+                    },
+                    {
+                      "content": "séparées",
+                      "correct": false
+                    },
+                    {
+                      "content": "inversées",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Dans la vie courante en Côte d'Ivoire",
+          "notions": "Champ de maïs, lagune Ébrié, nodosités de l'arachide, élevage en savane : niveaux trophiques, relations, équilibre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un paysan observe son champ de maïs après la saison des pluies (situation d'exercice) : des mauvaises herbes poussent entre les plants et des chenilles rongent les feuilles.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle relation lie les mauvaises herbes et le maïs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : les deux perdent de la lumière, de l'eau et des sels minéraux. Étape 4 — Nommer : c'est de la compétition. Aucun des deux n'est mangé par l'autre.",
+                  "answers": [
+                    {
+                      "content": "La compétition",
+                      "correct": true
+                    },
+                    {
+                      "content": "La symbiose",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commensalisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La prédation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle relation lie la chenille et le maïs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : chenille +, plante −. Étape 3 — Comparer : le bilan « + / − » correspond à un consommateur et sa ressource. La chenille se nourrit à ses dépens.",
+                  "answers": [
+                    {
+                      "content": "Le maïs est mangé : la chenille gagne, la plante perd",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux gagnent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux perdent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux ne change",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une parcelle de 60 plants envahis perd 2 épis par plant à cause des mauvaises herbes. Combien d'épis sont perdus ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : chaque plant perd 2 épis (−). Étape 4 — Nommer : $60 \\times 2 = 120$ épis perdus. On multiplie le nombre de plants par la perte par plant.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Désherber le champ réduit la compétition pour la lumière et l'eau.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever : sans mauvaises herbes, le maïs ne perd plus de ressources. La compétition disparaît avec les mauvaises herbes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les bactéries et champignons du sol recyclent les êtres morts : ce sont des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 5 — Nommer : ils transforment les êtres morts en éléments minéraux. Ce ne sont pas des producteurs.",
+                  "answers": [
+                    {
+                      "content": "décomposeurs",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur la lagune Ébrié (réseau d'exercice), les algues sont mangées par le petit crustacé et par le poisson herbivore ; les feuilles de palétuvier par le crabe ; le poisson carnivore mange le crustacé, le crabe et le poisson herbivore ; le héron mange le poisson carnivore et le crabe.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "reseau-lagune",
+              "questions": [
+                {
+                  "content": "Qui mange les algues ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rassembler : on rassemble les flèches qui partent des algues. Étape 2 — Relier : algues → crustacé et algues → herbivore. Le héron est loin de la base du réseau.",
+                  "answers": [
+                    {
+                      "content": "Le petit crustacé et le poisson herbivore",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le crabe et le héron",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poisson carnivore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement le héron",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'êtres vivants différents composent ce réseau ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Rassembler : algues, feuilles de palétuvier, petit crustacé, poisson herbivore, crabe, poisson carnivore, héron. Étape 2 — Relier : cela fait 7 êtres vivants. Ne compte pas les flèches, qui sont 8.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quels consommateurs sont mangés par le poisson carnivore ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Relier : les flèches vers le poisson carnivore partent du crustacé, du crabe et de l'herbivore. Le héron mange le poisson carnivore, pas l'inverse.",
+                  "answers": [
+                    {
+                      "content": "Le petit crustacé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le crabe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poisson herbivore",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le héron",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les algues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les crabes disparaissent, le héron perd une de ses deux proies.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer : le crabe disparaît. Étape 4 — Suivre : le héron le mangeait : il perd une proie. Il lui reste le poisson carnivore.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Des pêcheurs prennent trop de poissons herbivores : les algues vont probablement ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Repérer : le poisson herbivore diminue. Étape 4 — Suivre : les algues sont moins mangées par lui. Le crustacé mange aussi des algues, mais il y en a moins de mangées au total.",
+                  "answers": [
+                    {
+                      "content": "augmenter",
+                      "correct": true
+                    },
+                    {
+                      "content": "diminuer",
+                      "correct": false
+                    },
+                    {
+                      "content": "disparaître aussitôt",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un village, un jardinier cultive de l'arachide (une légumineuse). En arrachant un plant, il voit de petites boules, les nodosités, sur les racines. Elles abritent des bactéries qui fournissent des substances azotées à la plante, laquelle leur donne des sucres.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle relation lie l'arachide et les bactéries des nodosités ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : les bactéries reçoivent des sucres (+), la plante reçoit des substances azotées (+). Étape 4 — Nommer : c'est de la symbiose. Le parasitisme est faux : aucun des deux ne perd.",
+                  "answers": [
+                    {
+                      "content": "La symbiose",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le parasitisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La prédation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La compétition",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette relation, la plante ne gagne rien.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Relever : la plante reçoit des substances azotées (+). Les deux espèces gagnent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une association où les deux espèces profitent s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever : bilan « + / + ». Le commensalisme n'avantage qu'une espèce.",
+                  "answers": [
+                    {
+                      "content": "symbiose",
+                      "correct": true
+                    },
+                    {
+                      "content": "mutualisme",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque association à sa relation.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : on identifie les espèces. Étape 2 — Relever : on relève le bilan. Étape 4 — Nommer : on nomme la relation. Parasitisme et prédation se distinguent par la mise à mort.",
+                  "answers": [
+                    {
+                      "content": "Les nodosités et l'arachide",
+                      "match": "Symbiose"
+                    },
+                    {
+                      "content": "Une tique sur un bœuf",
+                      "match": "Parasitisme"
+                    },
+                    {
+                      "content": "Une orchidée sur un arbre",
+                      "match": "Commensalisme"
+                    },
+                    {
+                      "content": "Un héron et un poisson",
+                      "match": "Prédation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour nommer la relation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on identifie. Étape 2 — Relever : on relève. Étape 3 — Comparer : on compare. Étape 4 — Nommer : on nomme. On ne nomme qu'après avoir comparé.",
+                  "answers": [
+                    {
+                      "content": "Identifier les deux espèces"
+                    },
+                    {
+                      "content": "Relever le bilan de chaque espèce"
+                    },
+                    {
+                      "content": "Comparer avec les relations de la fiche"
+                    },
+                    {
+                      "content": "Nommer et justifier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un élevage de bœufs en savane (situation d'exercice), les bœufs mangent l'herbe, des tiques se fixent sur leur peau et des rapaces charognards nettoient les restes d'animaux morts.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel est le niveau trophique du bœuf ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'herbe est le producteur. Étape 2 — Identifier : le bœuf mange l'herbe : primaire. Il ne fabrique pas sa matière organique.",
+                  "answers": [
+                    {
+                      "content": "Consommateur primaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Producteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Consommateur secondaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décomposeur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle relation lie la tique et le bœuf ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : tique +, bœuf −, sans mort rapide. Étape 4 — Nommer : c'est du parasitisme. La symbiose supposerait un gain pour le bœuf.",
+                  "answers": [
+                    {
+                      "content": "Le parasitisme",
+                      "correct": true
+                    },
+                    {
+                      "content": "La symbiose",
+                      "correct": false
+                    },
+                    {
+                      "content": "La prédation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La compétition",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les charognards sont des producteurs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Nommer : ils mangent des animaux morts : ce sont des consommateurs (nécrophages), pas des producteurs. Un producteur fabrique sa matière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un troupeau de 50 bœufs porte en moyenne 8 tiques par animal. Combien de tiques en tout ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : chaque bœuf perd du sang au profit de 8 tiques (+ / −). Étape 4 — Nommer : $50 \\times 8 = 400$ tiques. On multiplie le nombre de bœufs par le nombre de tiques par bœuf.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Si on supprime l'herbe du pâturage, les bœufs de ce milieu vont ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Repérer : l'herbe, le producteur, disparaît. Étape 4 — Suivre : les bœufs, qui la mangent, n'ont plus de nourriture. Ils ne deviennent pas producteurs.",
+                  "answers": [
+                    {
+                      "content": "manquer de nourriture",
+                      "correct": true
+                    },
+                    {
+                      "content": "se multiplier",
+                      "correct": false
+                    },
+                    {
+                      "content": "devenir producteurs",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Lire une courbe et une expérience avec témoin, symbiose du lichen, compétition entre plants.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Après la disparition des oiseaux insectivores, des élèves comptent les chenilles pour 10 plants de maïs chaque semaine (résultats d'exercice) : 10, 14, 22, 40, 70, 120 sur cinq semaines.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "courbe-chenilles",
+              "questions": [
+                {
+                  "content": "Que montre la courbe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rassembler : on lit la courbe : 10, 14, 22, 40, 70, 120. Étape 3 — Repérer : l'espèce qui change est l'oiseau. Étape 4 — Suivre : les chenilles se multiplient. Les chenilles augmentent, elles ne diminuent pas.",
+                  "answers": [
+                    {
+                      "content": "Le nombre de chenilles augmente de plus en plus vite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre de chenilles diminue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de chenilles reste constant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'oiseaux augmente",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de chenilles le nombre augmente-t-il entre la semaine 3 et la semaine 5 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Suivre : $120 - 40 = 80$ chenilles de plus pour 10 plants. On soustrait la valeur de la semaine 3 à celle de la semaine 5.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "chenilles"
+                },
+                {
+                  "content": "L'augmentation des chenilles s'explique par la disparition de leurs prédateurs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer : les oiseaux disparaissent. Étape 4 — Suivre : les chenilles ne sont plus mangées. Les chenilles ne se multiplient pas à cause du maïs seul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles conséquences sont probables ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Suivre : plus de chenilles mangent plus de maïs ; moins d'oiseaux affament le rapace. Étape 5 — Conclure : l'équilibre est rompu. Les effets se propagent le long des flèches.",
+                  "answers": [
+                    {
+                      "content": "Le maïs sera davantage rongé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les rapaces manqueront d'oiseaux à manger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les chenilles deviendront des producteurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les rapaces mangeront plus d'oiseaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le maïs mangera les chenilles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette évolution est une ___ de l'équilibre de l'écosystème.",
+                  "question_type": "select",
+                  "explanation": "Étape 5 — Conclure : une espèce prolifère après la disparition de son prédateur : l'équilibre est rompu. Une régulation garde les effectifs stables.",
+                  "answers": [
+                    {
+                      "content": "rupture",
+                      "correct": true
+                    },
+                    {
+                      "content": "régulation",
+                      "correct": false
+                    },
+                    {
+                      "content": "protection",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur deux parcelles de maïs identiques (même sol, même eau, même nombre de plants), on recouvre l'une d'un filet qui écarte les oiseaux insectivores. Après un mois, 10 % des feuilles sont rongées sans filet et 45 % sous le filet (résultats d'exercice).",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "feuilles-rongees",
+              "questions": [
+                {
+                  "content": "Quelle est la parcelle témoin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Délimiter : on délimite deux parcelles identiques. Étape 4 — Conclure : le témoin garde les conditions naturelles : sans filet. Le filet est le facteur qu'on fait varier.",
+                  "answers": [
+                    {
+                      "content": "La parcelle sans filet, où les oiseaux viennent",
+                      "correct": true
+                    },
+                    {
+                      "content": "La parcelle sous filet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux parcelles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune parcelle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de points de pourcentage le taux de feuilles rongées est-il plus élevé sous le filet ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Suivre : $45 - 10 = 35$ points de plus. On soustrait le taux sans filet au taux sous filet.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "points"
+                },
+                {
+                  "content": "Que peut-on conclure de cette expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer : sous le filet, les oiseaux sont absents. Étape 4 — Suivre : les chenilles se multiplient et rongent plus de feuilles. Étape 5 — Conclure : les oiseaux régulent les chenilles. Les oiseaux mangent les chenilles, pas les feuilles.",
+                  "answers": [
+                    {
+                      "content": "Les oiseaux limitent le nombre de chenilles, donc les dégâts",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les oiseaux rongent les feuilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le filet nourrit les chenilles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les chenilles mangent les oiseaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette expérience, un seul facteur change entre les deux parcelles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Délimiter : même sol, même eau, même nombre de plants. Étape 3 — Relever la biocénose : seule la présence des oiseaux change. Un seul facteur permet de conclure.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le prédateur de la chenille dans cette parcelle est l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Poursuivre : l'oiseau insectivore mange la chenille : c'est son prédateur. Le maïs est mangé par la chenille, il n'est pas son prédateur.",
+                  "answers": [
+                    {
+                      "content": "oiseau",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève sépare un lichen en ses deux partenaires : un champignon et une algue. Isolés, ils survivent mal sur une roche nue au soleil, alors qu'associés ils s'y développent (situation d'exercice).",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que montre cette observation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : associés, les deux vivent mieux : bilan + / +. Étape 4 — Nommer : c'est une symbiose. Si l'un mangeait l'autre, il y aurait un perdant.",
+                  "answers": [
+                    {
+                      "content": "Chaque partenaire profite de l'association",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le champignon mange l'algue",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'algue gêne le champignon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun partenaire ne gagne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'association d'un champignon et d'une algue forme un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : les deux espèces forment ensemble un lichen. C'est un exemple de symbiose.",
+                  "answers": [
+                    {
+                      "content": "lichen",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le lichen est un exemple de symbiose.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Nommer : bilan « + / + » : symbiose. Il n'y a pas de victime.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bilan de l'algue et du champignon est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : les deux gagnent. Un bilan « + / − » serait du parasitisme ou de la prédation.",
+                  "answers": [
+                    {
+                      "content": "+ / +",
+                      "correct": true
+                    },
+                    {
+                      "content": "+ / −",
+                      "correct": false
+                    },
+                    {
+                      "content": "+ / 0",
+                      "correct": false
+                    },
+                    {
+                      "content": "− / −",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on sépare les partenaires, chacun survit ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Relever : séparés, ils survivent moins bien. L'association leur est bénéfique.",
+                  "answers": [
+                    {
+                      "content": "plus difficilement",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus facilement",
+                      "correct": false
+                    },
+                    {
+                      "content": "aussi bien",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un champ, on sème du maïs à deux densités (valeurs d'exercice) : 4 plants par poquet, ou 1 plant par poquet. Les plants isolés donnent chacun 2 épis ; ceux du poquet très serré en donnent 1 chacun.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi les plants serrés produisent-ils moins d'épis ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : chaque plant perd des ressources (−) car ils sont trop proches. Étape 3 — Comparer : « − / − » pour la même ressource. Étape 4 — Nommer : c'est une compétition. Un plant ne mange pas son voisin.",
+                  "answers": [
+                    {
+                      "content": "Ils se font concurrence pour la lumière, l'eau et les sels minéraux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils se mangent entre eux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont parasites les uns des autres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils vivent en symbiose",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'épis donne un poquet de 4 plants serrés ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : $4 \\times 1 = 4$ épis. On multiplie le nombre de plants par les épis par plant.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "épis"
+                },
+                {
+                  "content": "Combien d'épis donnent 4 plants isolés ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : $4 \\times 2 = 8$ épis. Les plants isolés ne se font pas concurrence.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "épis"
+                },
+                {
+                  "content": "Cette compétition oppose des individus de la même espèce.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : ce sont des plants de maïs : même espèce. La compétition peut aussi opposer des espèces différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour limiter cette compétition, le paysan doit ___ les plants.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Nommer : espacer les plants limite la concurrence pour les ressources. Serrer l'aggraverait.",
+                  "answers": [
+                    {
+                      "content": "espacer",
+                      "correct": true
+                    },
+                    {
+                      "content": "serrer",
+                      "correct": false
+                    },
+                    {
+                      "content": "rapprocher",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan",
+          "notions": "Écosystème, niveaux trophiques, relations entre espèces, réseau trophique et équilibre, recyclage de la matière.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans la mangrove de la lagune Ébrié (situation d'exercice), on trouve la vase, l'eau salée, le soleil, des palétuviers, des crabes, des poissons et des bactéries de la vase.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels éléments forment la biocénose ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Relever le biotope : vase, eau salée et soleil sont le biotope. Étape 3 — Relever la biocénose : palétuviers, crabes, poissons et bactéries sont vivants. La vase est tentante, mais elle n'est pas vivante.",
+                  "answers": [
+                    {
+                      "content": "Les palétuviers",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les crabes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les bactéries de la vase",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vase",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau salée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette mangrove est un écosystème.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : biotope et biocénose liés forment un écosystème. Il ne manque ni l'une ni l'autre partie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les palétuviers sont :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : ils fabriquent leur matière par photosynthèse. Ils ne mangent pas d'autres êtres vivants.",
+                  "answers": [
+                    {
+                      "content": "Des producteurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des consommateurs primaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des décomposeurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des consommateurs secondaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les bactéries de la vase recyclent les êtres morts : ce sont des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 5 — Nommer : elles recyclent les êtres morts. Ce ne sont pas des producteurs.",
+                  "answers": [
+                    {
+                      "content": "décomposeurs",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre : palétuvier, crabe, poisson carnivore, héron.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : le palétuvier est le producteur. Étape 3 — Poursuivre : chaque maillon mange le précédent. Le héron est le dernier maillon.",
+                  "answers": [
+                    {
+                      "content": "Palétuvier"
+                    },
+                    {
+                      "content": "Crabe"
+                    },
+                    {
+                      "content": "Poisson carnivore"
+                    },
+                    {
+                      "content": "Héron"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur la lagune (réseau d'exercice), une surpêche réduit fortement les poissons carnivores. Les algues sont mangées par le crustacé et le poisson herbivore ; les feuilles de palétuvier par le crabe ; le poisson carnivore mange le crustacé, le crabe et le poisson herbivore ; le héron mange le poisson carnivore et le crabe.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "reseau-lagune",
+              "questions": [
+                {
+                  "content": "Que devient probablement le nombre de poissons herbivores ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer : le poisson carnivore diminue. Étape 4 — Suivre : ses proies sont moins mangées. Il ne diminue pas.",
+                  "answers": [
+                    {
+                      "content": "Il augmente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il diminue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reste identique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avant, 40 poissons herbivores par filet ; après, 120. Par combien le nombre est-il multiplié ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Suivre : $120 \\div 40 = 3$. On divise le nombre après par le nombre avant.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "fois"
+                },
+                {
+                  "content": "Quelles conséquences sont probables ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Suivre : plus d'herbivores mangent plus d'algues ; le héron perd une proie. Étape 5 — Conclure : l'équilibre est rompu. Les effets se propagent à tout le réseau.",
+                  "answers": [
+                    {
+                      "content": "Les algues sont davantage mangées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le héron manque d'une proie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les algues deviennent des consommateurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le héron devient producteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les crabes disparaissent aussitôt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La surpêche peut rompre l'équilibre de la lagune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : la disparition d'une espèce modifie plusieurs autres. L'équilibre suppose des effectifs stables.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour préserver l'équilibre, on peut ___ la pêche des poissons carnivores.",
+                  "question_type": "select",
+                  "explanation": "Étape 5 — Conclure : limiter la pêche protège les effectifs. L'augmenter aggraverait la rupture.",
+                  "answers": [
+                    {
+                      "content": "limiter",
+                      "correct": true
+                    },
+                    {
+                      "content": "multiplier",
+                      "correct": false
+                    },
+                    {
+                      "content": "doubler",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Cinq situations de la nature sont présentées.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "arbre-relations",
+              "questions": [
+                {
+                  "content": "Relie chaque situation à sa relation.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : on identifie les espèces. Étape 2 — Relever : on relève le bilan. Étape 4 — Nommer : on nomme la relation. Chaque relation a son bilan.",
+                  "answers": [
+                    {
+                      "content": "Le lion mange l'antilope",
+                      "match": "Prédation"
+                    },
+                    {
+                      "content": "La tique vit sur le bœuf",
+                      "match": "Parasitisme"
+                    },
+                    {
+                      "content": "Les bactéries des nodosités et l'arachide",
+                      "match": "Symbiose"
+                    },
+                    {
+                      "content": "Le maïs et les mauvaises herbes se disputent la lumière",
+                      "match": "Compétition"
+                    },
+                    {
+                      "content": "L'orchidée sur l'arbre",
+                      "match": "Commensalisme"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle relation a un bilan « + / 0 » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : une espèce gagne, l'autre ne change pas. La symbiose serait « + / + ».",
+                  "answers": [
+                    {
+                      "content": "Le commensalisme",
+                      "correct": true
+                    },
+                    {
+                      "content": "La symbiose",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le parasitisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La compétition",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle relation a un bilan « − / − » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : les deux espèces perdent. La prédation est « + / − ».",
+                  "answers": [
+                    {
+                      "content": "La compétition",
+                      "correct": true
+                    },
+                    {
+                      "content": "La prédation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commensalisme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La symbiose",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un parasite garde en général son hôte vivant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : c'est ce qui le distingue du prédateur. Un hôte mort ne nourrirait plus le parasite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'association à bénéfices réciproques s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever : « + / + ». Étape 4 — Nommer : c'est la symbiose. Le commensalisme n'avantage qu'une espèce.",
+                  "answers": [
+                    {
+                      "content": "symbiose",
+                      "correct": true
+                    },
+                    {
+                      "content": "mutualisme",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le recyclage de la matière dans un écosystème (situation d'exercice) : les sels minéraux du sol sont absorbés par les plantes vertes, les animaux mangent les plantes, les décomposeurs recyclent les êtres morts et libèrent des sels minéraux.",
+              "hint": "Applique les étapes de la fiche, dans l'ordre.",
+              "exercise_type": "evaluation",
+              "figure": "cycle-matiere",
+              "questions": [
+                {
+                  "content": "Qui absorbe les sels minéraux du sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les plantes vertes sont les producteurs qui absorbent les sels minéraux. Les carnivores ne les prélèvent pas dans le sol.",
+                  "answers": [
+                    {
+                      "content": "Les plantes vertes, par leurs racines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les animaux carnivores",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les décomposeurs seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le biotope",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui libère des sels minéraux à partir des êtres morts ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 5 — Nommer : les décomposeurs recyclent les êtres morts en éléments minéraux. Les herbivores ne recyclent pas les êtres morts.",
+                  "answers": [
+                    {
+                      "content": "Les décomposeurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les herbivores",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les producteurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les carnivores",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sans décomposeurs, les sels minéraux du sol pourraient s'épuiser.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Conclure : sans recyclage, les producteurs manquent de sels minéraux. Les décomposeurs ferment le cycle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets le cycle dans l'ordre à partir des sels minéraux.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : les plantes absorbent les sels minéraux. Étape 3 — Poursuivre : les animaux mangent les plantes. Étape 5 — Nommer : les décomposeurs recyclent les restes. Les décomposeurs agissent à la fin.",
+                  "answers": [
+                    {
+                      "content": "Sels minéraux du sol"
+                    },
+                    {
+                      "content": "Plantes vertes"
+                    },
+                    {
+                      "content": "Animaux"
+                    },
+                    {
+                      "content": "Décomposeurs"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les êtres vivants qui fabriquent leur matière organique sont les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : ils fabriquent leur matière par photosynthèse. Les consommateurs la prélèvent chez d'autres.",
+                  "answers": [
+                    {
+                      "content": "producteurs",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3647 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — Les mécanismes de prévention et de résolution des conflits chez les peuples de Côte d'Ivoire",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "prevenir-resoudre",
+          "kind": "diagram",
+          "description": "Cycle de la vie en paix et du conflit. La vie en paix est protégée par la prévention (alliances, mariages, parenté à plaisanterie). Si une dispute éclate, c'est le conflit. Le conflit est réglé par la résolution (palabre, décision du chef et des anciens, serment). La réconciliation ramène à la vie en paix.",
+          "params": {
+            "layout": "cycle",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "paix",
+                "label": "Vie en paix, protégée par la prévention",
+                "category": 1
+              },
+              {
+                "id": "conflit",
+                "label": "Un conflit éclate",
+                "category": 2
+              },
+              {
+                "id": "reso",
+                "label": "Résolution : palabre, décision, serment",
+                "category": 3
+              },
+              {
+                "id": "recon",
+                "label": "Réconciliation",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "paix",
+                "to": "conflit",
+                "label": "si la prévention échoue"
+              },
+              {
+                "from": "conflit",
+                "to": "reso"
+              },
+              {
+                "from": "reso",
+                "to": "recon"
+              },
+              {
+                "from": "recon",
+                "to": "paix"
+              }
+            ],
+            "legend": [
+              "Avant le conflit : prévention",
+              "Le conflit",
+              "Après le conflit : résolution"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "mecanismes-prevention",
+          "kind": "diagram",
+          "description": "Arbre des mécanismes de prévention des conflits. En haut, prévenir les conflits. En dessous, quatre branches : les alliances interethniques, les mariages entre familles de peuples différents, la parenté à plaisanterie, les échanges et les fêtes communes.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "prev",
+                "label": "Prévenir les conflits"
+              },
+              {
+                "id": "all",
+                "label": "Alliances interethniques",
+                "category": 1
+              },
+              {
+                "id": "mar",
+                "label": "Mariages entre peuples",
+                "category": 1
+              },
+              {
+                "id": "pla",
+                "label": "Parenté à plaisanterie",
+                "category": 1
+              },
+              {
+                "id": "ech",
+                "label": "Échanges et fêtes",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "prev",
+                "to": "all"
+              },
+              {
+                "from": "prev",
+                "to": "mar"
+              },
+              {
+                "from": "prev",
+                "to": "pla"
+              },
+              {
+                "from": "prev",
+                "to": "ech"
+              }
+            ],
+            "legend": [
+              "Liens créés avant le conflit"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "deroulement-palabre",
+          "kind": "diagram",
+          "description": "Déroulement d'une palabre, de haut en bas. Le conflit est signalé au chef. Les anciens se réunissent sous l'arbre à palabres. Chacun parle à tour de rôle. Les témoins sont entendus. Les anciens délibèrent. Le chef annonce la décision. Les adversaires scellent la paix par un serment et un repas partagé.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "s1",
+                "label": "Le conflit est signalé au chef"
+              },
+              {
+                "id": "s2",
+                "label": "Les anciens se réunissent sous l'arbre à palabres"
+              },
+              {
+                "id": "s3",
+                "label": "Chacun parle à tour de rôle"
+              },
+              {
+                "id": "s4",
+                "label": "Les témoins sont entendus"
+              },
+              {
+                "id": "s5",
+                "label": "Les anciens délibèrent"
+              },
+              {
+                "id": "s6",
+                "label": "Le chef annonce la décision"
+              },
+              {
+                "id": "s7",
+                "label": "Serment et repas partagé"
+              }
+            ],
+            "edges": [
+              {
+                "from": "s1",
+                "to": "s2"
+              },
+              {
+                "from": "s2",
+                "to": "s3"
+              },
+              {
+                "from": "s3",
+                "to": "s4"
+              },
+              {
+                "from": "s4",
+                "to": "s5"
+              },
+              {
+                "from": "s5",
+                "to": "s6"
+              },
+              {
+                "from": "s6",
+                "to": "s7"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Distinguer prévenir et résoudre un conflit",
+          "remember": "Un **conflit** est une opposition entre des personnes ou des groupes. Chez les peuples de Côte d'Ivoire, ses causes sont souvent un litige de **terre** (les limites d'un champ), une querelle de **succession** (qui sera chef ?), un **vol**, une offense ou un litige de mariage. Pour vivre en paix, les peuples ont des **mécanismes**, c'est-à-dire des moyens organisés. La **prévention** agit **avant** le conflit pour l'empêcher de naître. La **résolution** agit **après** que le conflit a éclaté, pour y mettre fin et rétablir la paix. Exemples de prévention : alliances, mariages, parenté à plaisanterie. Exemples de résolution : palabre, décision du chef et des anciens, serment.",
+          "method": [
+            "Repérer le moment : le conflit a-t-il déjà éclaté, ou n'y a-t-il encore qu'une menace de désaccord ?",
+            "Chercher le but de l'action : empêcher un conflit de naître, ou y mettre fin.",
+            "Conclure : c'est de la prévention si l'action a lieu avant le conflit, de la résolution s'il a déjà éclaté.",
+            "Justifier avec un mécanisme connu du cours (alliance, mariage, palabre, serment…)."
+          ],
+          "example": {
+            "statement": "Dans un récit écrit pour Lnclass, deux villages voisins se disputent les limites d'un champ. Les anciens des deux villages se réunissent sous l'arbre à palabres pour mettre fin à la dispute. Est-ce de la prévention ou de la résolution ?",
+            "steps": [
+              "Repérer : le conflit a déjà éclaté, car les deux villages se disputent les limites d'un champ.",
+              "Chercher : les anciens se réunissent pour mettre fin à la dispute, pas pour l'empêcher de naître.",
+              "Conclure : c'est de la résolution, puisque l'action a lieu après l'éclatement du conflit.",
+              "Justifier : la palabre sous l'arbre est un mécanisme de résolution du cours."
+            ]
+          },
+          "pitfall": "Ne pas confondre prévention et résolution. Contre-exemple : deux villages sans aucune dispute échangent des mariages depuis longtemps. C'est de la prévention, car aucun conflit n'a éclaté. Si, plus tard, un champ les oppose et que les anciens se réunissent, c'est de la résolution. Pose toujours la question : le conflit a-t-il déjà éclaté ?",
+          "figure": "prevenir-resoudre",
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer la prévention de la résolution.",
+            "questions": [
+              {
+                "content": "Deux peuples voisins, qui ne se sont jamais battus, marient leurs familles pour rester amis. Est-ce de la prévention ou de la résolution ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : aucun conflit n'a éclaté entre ces peuples. Étape 2 — Chercher : le but est de rester amis, donc d'empêcher un futur conflit. Étape 3 — Conclure : c'est de la prévention. Étape 4 — Justifier : le mariage entre familles est un mécanisme de prévention. La résolution suppose qu'un conflit a déjà éclaté, ce qui n'est pas le cas ici.",
+                "answers": [
+                  {
+                    "content": "Prévention",
+                    "correct": true
+                  },
+                  {
+                    "content": "Résolution",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sanction",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni l'une ni l'autre",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le conflit a-t-il déjà éclaté ?"
+              },
+              {
+                "content": "Un mécanisme qui agit avant le conflit pour l'empêcher de naître est un mécanisme de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : l'action a lieu avant le conflit. Étape 2 — Chercher : son but est d'empêcher le conflit de naître. Étape 3 — Conclure : c'est de la prévention. Étape 4 — Justifier : l'alliance entre deux peuples en est un exemple.",
+                "answers": [
+                  {
+                    "content": "prévention",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot commence par « pré »."
+              },
+              {
+                "content": "Une querelle sur les limites d'un champ peut être une cause de conflit.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on parle d'une querelle de terre. Étape 2 — Chercher : la terre fait vivre les familles, donc la perdre est grave. Étape 3 — Conclure : c'est bien une cause possible de conflit. Étape 4 — Justifier : les litiges de terre sont une cause fréquente entre villages voisins.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Distinguer un conflit, ses causes et les deux familles de mécanismes",
+              "statement": "Dans cet exercice, tu reconnais les causes d'un conflit et tu distingues prévention et résolution avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "prevenir-resoudre",
+              "questions": [
+                {
+                  "content": "Deux familles disent que la même parcelle leur appartient. Quelle est la cause du conflit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : deux familles réclament la même parcelle. Étape 2 — Chercher : l'objet de la dispute est un champ. Étape 3 — Conclure : la cause est un litige de terre. Étape 4 — Justifier : les limites de champs sont une cause fréquente de conflit. Un mariage ou une fête rapprochent les familles : ce ne sont pas des causes de conflit.",
+                  "answers": [
+                    {
+                      "content": "Un litige de terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un mariage entre deux familles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une visite d'amitié",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fête commune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à la cause du conflit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : trois situations de dispute sont décrites. Étape 2 — Chercher : chacune a un objet précis : le pouvoir, un champ, un bien pris. Étape 3 — Conclure : la succession, la terre et le vol sont les trois causes. Étape 4 — Justifier : le litige de terre et la succession sont des causes fréquentes. Il ne faut pas tout mettre dans la terre : seule la situation du champ est un litige de terre.",
+                  "answers": [
+                    {
+                      "content": "Deux frères veulent devenir chef à la place de leur père",
+                      "match": "La succession"
+                    },
+                    {
+                      "content": "Deux villages se disputent les limites d'un champ",
+                      "match": "La terre"
+                    },
+                    {
+                      "content": "Un homme prend des ignames sans permission",
+                      "match": "Le vol"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux mécanismes relèvent de la résolution ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : cinq mécanismes sont proposés. Étape 2 — Chercher : la palabre et la décision du chef ont lieu quand le conflit a éclaté. Étape 3 — Conclure : ce sont des mécanismes de résolution. Étape 4 — Justifier : l'alliance, le mariage et la parenté à plaisanterie viennent avant le conflit. Ces trois derniers sont de la prévention, car ils agissent avant le conflit.",
+                  "answers": [
+                    {
+                      "content": "La palabre sous l'arbre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La décision du chef et des anciens",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'alliance entre deux peuples",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mariage entre deux familles voisines",
+                      "correct": false
+                    },
+                    {
+                      "content": "La parenté à plaisanterie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La résolution d'un conflit a lieu avant qu'il éclate.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on parle de résolution. Étape 2 — Chercher : résoudre, c'est mettre fin à un conflit. Étape 3 — Conclure : il faut donc que le conflit ait déjà éclaté. Étape 4 — Justifier : la palabre se tient après la dispute. L'action qui a lieu avant le conflit s'appelle la prévention, pas la résolution.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Le mariage entre deux familles voisines est de la résolution, car il met fin aux conflits. » Où est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le mariage rapproche deux familles avant toute dispute. Étape 2 — Chercher : on cherche si le conflit a déjà éclaté : ce n'est pas le cas. Étape 3 — Conclure : c'est donc de la prévention. Étape 4 — Justifier : le mariage entre familles est un mécanisme de prévention du cours. Confondre les deux, c'est l'erreur du piège : la résolution suppose un conflit déjà éclaté.",
+                  "answers": [
+                    {
+                      "content": "Aucun conflit n'a éclaté : c'est de la prévention",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mariage ne sert jamais à la paix",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il fallait parler de sanction",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mariage est une cause de conflit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer les mécanismes et les causes de conflit",
+              "statement": "Dans cet exercice, tu mélanges plusieurs façons de reconnaître un conflit, ses causes et les deux familles de mécanismes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on commence par voir si le conflit a éclaté. Étape 2 — Chercher : on cherche ensuite le but de l'action. Étape 3 — Conclure : on conclut : prévention ou résolution. Étape 4 — Justifier : on termine avec un exemple du cours. Conclure avant de chercher le but est une erreur : on ne peut pas classer sans avoir regardé le moment.",
+                  "answers": [
+                    {
+                      "content": "Repérer si le conflit a déjà éclaté."
+                    },
+                    {
+                      "content": "Chercher le but de l'action."
+                    },
+                    {
+                      "content": "Conclure : prévention ou résolution."
+                    },
+                    {
+                      "content": "Justifier avec un mécanisme du cours."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : trois mots sont à définir. Étape 2 — Chercher : le point commun est la paix, gardée ou rétablie. Étape 3 — Conclure : prévention : avant ; résolution : après ; mécanisme : le moyen. Étape 4 — Justifier : l'alliance est un mécanisme de prévention, la palabre un mécanisme de résolution. Ne pas mettre la prévention après le conflit : elle agit avant.",
+                  "answers": [
+                    {
+                      "content": "Prévention",
+                      "match": "Action qui agit avant le conflit"
+                    },
+                    {
+                      "content": "Résolution",
+                      "match": "Action qui met fin à un conflit éclaté"
+                    },
+                    {
+                      "content": "Mécanisme",
+                      "match": "Moyen organisé pour garder ou rétablir la paix"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un conflit est une ___ entre des personnes ou des groupes.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on définit le mot conflit. Étape 2 — Chercher : un conflit met face à face des personnes ou des groupes. Étape 3 — Conclure : c'est une opposition. Étape 4 — Justifier : une dispute de terre en est un exemple.",
+                  "answers": [
+                    {
+                      "content": "opposition",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles trois situations peuvent être des causes de conflit ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : cinq situations sont proposées. Étape 2 — Chercher : un champ disputé, une succession et un vol opposent des personnes. Étape 3 — Conclure : ce sont des causes de conflit. Étape 4 — Justifier : le repas et la fête rapprochent au contraire. Un repas ou une fête partagés sont des occasions de prévention, pas des causes.",
+                  "answers": [
+                    {
+                      "content": "Un litige sur les limites d'un champ",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une querelle sur la succession du chef",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un vol dans le village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un repas partagé entre deux villages",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fête commune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette leçon, on distingue deux familles de mécanismes : la prévention et la résolution. Combien de familles cela fait-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la leçon oppose deux mots. Étape 2 — Chercher : la prévention agit avant, la résolution après. Étape 3 — Conclure : il y a 2 familles. Étape 4 — Justifier : l'alliance relève de la première, la palabre de la seconde. Alliance, mariage et palabre sont des exemples, pas des familles.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une alliance entre deux peuples avant toute dispute est de la prévention.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on parle d'une alliance conclue avant toute dispute. Étape 2 — Chercher : aucun conflit n'a éclaté. Étape 3 — Conclure : c'est donc de la prévention. Étape 4 — Justifier : c'est un mécanisme du cours. La dire résolution serait fausse : il n'y a pas encore de conflit à résoudre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Demande-toi toujours si le conflit a déjà éclaté."
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître un mécanisme de prévention",
+          "remember": "Prévenir un conflit, c'est créer des liens avant qu'une dispute n'éclate. **Alliance interethnique** : pacte d'amitié et d'entraide entre des peuples ou des villages différents, souvent scellé par un serment. **Mariage** : en unissant deux familles de peuples différents, il fait des parents de deux groupes qui pourraient s'opposer. **Parenté à plaisanterie** : des familles ou des peuples ont le droit de se moquer l'un de l'autre sans se fâcher ; la plaisanterie détend les tensions. Elle naît souvent d'une ancienne alliance entre ces groupes : on parle aussi d'alliance à plaisanterie. **Échanges et fêtes** : marchés, commerce, fêtes et funérailles où l'on se rend visite font se connaître les voisins. Tous ces liens créent de la confiance et obligent chacun à respecter l'autre.",
+          "method": [
+            "Repérer le lien créé entre les deux groupes : pacte, mariage, plaisanterie, échange ou fête commune.",
+            "Chercher si ce lien existe avant tout conflit, pour confirmer qu'il s'agit de prévention.",
+            "Nommer le mécanisme : alliance interethnique, mariage, parenté à plaisanterie, ou échanges et fêtes.",
+            "Expliquer comment il évite le conflit : il crée de la confiance et oblige chacun à respecter l'autre."
+          ],
+          "example": {
+            "statement": "Dans un récit écrit pour Lnclass, les chefs de deux peuples voisins ont juré de s'entraider en cas de danger, avant toute dispute. Quel mécanisme de prévention est-ce ?",
+            "steps": [
+              "Repérer : un serment d'entraide lie les chefs de deux peuples différents.",
+              "Chercher : ce serment date d'avant toute dispute, donc il s'agit de prévention.",
+              "Nommer : c'est une alliance interethnique.",
+              "Expliquer : chacun a juré d'aider l'autre, donc se battre contre lui trahirait son serment."
+            ]
+          },
+          "pitfall": "Ne pas confondre la parenté à plaisanterie avec une vraie insulte. Contre-exemple : quand un cousin à plaisanterie dit à l'autre « tu manges trop ! », personne ne se venge : c'est un jeu permis, qui détend l'ambiance. La même phrase dite par un ennemi serait une offense. La plaisanterie prévient les conflits parce que les deux groupes se reconnaissent comme parents.",
+          "figure": "mecanismes-prevention",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un mécanisme de prévention.",
+            "questions": [
+              {
+                "content": "Un pacte d'amitié et d'entraide entre deux peuples s'appelle une ___ interethnique.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : un pacte d'amitié et d'entraide lie deux peuples. Étape 2 — Chercher : il est conclu avant toute dispute. Étape 3 — Nommer : on l'appelle une alliance interethnique. Étape 4 — Expliquer : il crée de la confiance entre les deux peuples. La palabre est une discussion après un conflit, pas un pacte.",
+                "answers": [
+                  {
+                    "content": "alliance",
+                    "correct": true
+                  },
+                  {
+                    "content": "palabre",
+                    "correct": false
+                  },
+                  {
+                    "content": "sanction",
+                    "correct": false
+                  },
+                  {
+                    "content": "succession",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au mot « allié »."
+              },
+              {
+                "content": "Deux familles de peuples différents se marient. Quel est l'effet de ce mariage sur le risque de conflit ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un mariage unit deux familles de peuples différents. Étape 2 — Chercher : il a lieu avant tout conflit. Étape 3 — Nommer : c'est un mécanisme de prévention : le mariage. Étape 4 — Expliquer : les deux peuples deviennent parents, donc ils se respectent. Il ne met pas fin à une guerre : il agit avant, en prévention.",
+                "answers": [
+                  {
+                    "content": "Il crée des liens de parenté qui rendent le conflit moins probable",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il met fin à une guerre déjà commencée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il donne toute la terre à un seul peuple",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il oblige un des peuples à partir",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le mariage fait de deux familles des parents."
+              },
+              {
+                "content": "Dans la parenté à plaisanterie, une moquerie entre cousins provoque une vengeance.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on parle de moqueries entre cousins à plaisanterie. Étape 2 — Chercher : ces moqueries sont permises par la tradition. Étape 3 — Nommer : c'est la parenté à plaisanterie. Étape 4 — Expliquer : elle détend les tensions, donc elle ne provoque pas de vengeance.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître les mécanismes de prévention",
+              "statement": "Dans cet exercice, tu reconnais et tu nommes des mécanismes de prévention avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "mecanismes-prevention",
+              "questions": [
+                {
+                  "content": "Relie chaque mécanisme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : quatre mécanismes sont à définir. Étape 2 — Chercher : tous créent un lien avant le conflit. Étape 3 — Nommer : on nomme chaque mécanisme avec sa définition. Étape 4 — Expliquer : chaque lien crée de la confiance entre les groupes. Il ne faut pas confondre l'alliance, qui est un pacte, avec le mariage, qui est une union de familles.",
+                  "answers": [
+                    {
+                      "content": "Alliance interethnique",
+                      "match": "Pacte d'amitié et d'entraide entre des peuples"
+                    },
+                    {
+                      "content": "Mariage entre peuples",
+                      "match": "Union de deux familles de peuples différents"
+                    },
+                    {
+                      "content": "Parenté à plaisanterie",
+                      "match": "Droit de se moquer sans se fâcher"
+                    },
+                    {
+                      "content": "Échanges et fêtes",
+                      "match": "Marchés et visites qui font se connaître les voisins"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les chefs de deux peuples jurent de s'entraider avant toute dispute. Quel mécanisme est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : un serment d'entraide lie les chefs de deux peuples. Étape 2 — Chercher : il date d'avant toute dispute. Étape 3 — Nommer : c'est une alliance interethnique. Étape 4 — Expliquer : se battre contre un allié trahirait le serment. La palabre se tient après un conflit, et une compensation répare un tort déjà commis : aucun des deux ne correspond à un pacte juré avant toute dispute.",
+                  "answers": [
+                    {
+                      "content": "Une alliance interethnique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une palabre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une compensation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une sanction",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux mécanismes sont de la prévention ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : cinq mécanismes sont proposés. Étape 2 — Chercher : la parenté à plaisanterie et le mariage existent avant tout conflit. Étape 3 — Nommer : ce sont deux mécanismes de prévention. Étape 4 — Expliquer : ils créent des liens entre les groupes. La palabre, l'amende et la décision du chef ont lieu après un conflit : ce sont des mécanismes de résolution.",
+                  "answers": [
+                    {
+                      "content": "La parenté à plaisanterie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mariage entre familles de peuples différents",
+                      "correct": true
+                    },
+                    {
+                      "content": "La palabre sous l'arbre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'amende payée après un vol",
+                      "correct": false
+                    },
+                    {
+                      "content": "La décision du chef après une bagarre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un marché où des villages voisins échangent leurs produits aide à ___ les conflits.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : des villages voisins échangent leurs produits. Étape 2 — Chercher : ces échanges ont lieu en temps de paix. Étape 3 — Nommer : ce sont des échanges : un mécanisme de prévention. Étape 4 — Expliquer : en se connaissant, les voisins se font confiance.",
+                  "answers": [
+                    {
+                      "content": "prévenir",
+                      "correct": true
+                    },
+                    {
+                      "content": "éviter",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Se moquer de son cousin à plaisanterie est une insulte grave. » Il a tort. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on parle d'une moquerie entre cousins à plaisanterie. Étape 2 — Chercher : elle existe avant tout conflit, comme un jeu. Étape 3 — Nommer : c'est la parenté à plaisanterie. Étape 4 — Expliquer : elle détend l'ambiance et ne provoque pas de vengeance. Dire que c'est une insulte grave confond la plaisanterie permise avec une vraie offense.",
+                  "answers": [
+                    {
+                      "content": "C'est un jeu permis entre parents, qui détend les tensions",
+                      "correct": true
+                    },
+                    {
+                      "content": "La moquerie est interdite partout",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une sanction décidée par le chef",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seul le chef a le droit de plaisanter",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Expliquer comment les liens évitent les conflits",
+              "statement": "Dans cet exercice, tu mélanges plusieurs façons de reconnaître et d'expliquer un mécanisme de prévention.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on commence par voir le lien. Étape 2 — Chercher : on vérifie qu'il date d'avant le conflit. Étape 3 — Nommer : on donne le nom du mécanisme. Étape 4 — Expliquer : on termine par l'explication. Expliquer sans avoir nommé le mécanisme donne une réponse floue.",
+                  "answers": [
+                    {
+                      "content": "Repérer le lien créé entre les deux groupes."
+                    },
+                    {
+                      "content": "Chercher si ce lien existe avant tout conflit."
+                    },
+                    {
+                      "content": "Nommer le mécanisme."
+                    },
+                    {
+                      "content": "Expliquer comment il évite le conflit."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mariage entre deux familles de peuples voisins peut aider à éviter un conflit.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on parle d'un mariage entre deux peuples voisins. Étape 2 — Chercher : il crée un lien de parenté avant tout conflit. Étape 3 — Nommer : c'est un mécanisme de prévention. Étape 4 — Expliquer : on se bat plus difficilement contre ses parents. Dire que c'est faux oublie que le mariage rapproche les familles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fiche cite quatre mécanismes de prévention : alliance, mariage, parenté à plaisanterie, échanges et fêtes. Combien cela fait-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la fiche donne une liste de mécanismes. Étape 2 — Chercher : on les compte un par un. Étape 3 — Nommer : alliance, mariage, parenté à plaisanterie, échanges et fêtes : 4. Étape 4 — Expliquer : chacun crée un lien différent. Il ne faut pas compter la palabre : c'est un mécanisme de résolution.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois éléments créent des liens entre des voisins avant tout conflit ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : cinq éléments sont proposés. Étape 2 — Chercher : un mariage, un marché et une fête créent des liens avant tout conflit. Étape 3 — Nommer : ce sont des mécanismes de prévention. Étape 4 — Expliquer : ils font se connaître et se respecter les voisins. L'amende et la décision du chef suivent un conflit : ce sont des mécanismes de résolution.",
+                  "answers": [
+                    {
+                      "content": "Un mariage entre deux familles voisines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un marché où les villages échangent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une fête où les voisins se rendent visite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une amende payée après un vol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une décision du chef après une bagarre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les liens créés avant une dispute servent à ___ le conflit.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on parle de liens créés avant la dispute. Étape 2 — Chercher : ils agissent avant que le conflit n'éclate. Étape 3 — Nommer : c'est de la prévention. Étape 4 — Expliquer : ils rendent le conflit moins probable. Résoudre suppose un conflit déjà éclaté.",
+                  "answers": [
+                    {
+                      "content": "prévenir",
+                      "correct": true
+                    },
+                    {
+                      "content": "résoudre",
+                      "correct": false
+                    },
+                    {
+                      "content": "punir",
+                      "correct": false
+                    },
+                    {
+                      "content": "provoquer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pacte d'amitié et d'entraide entre deux peuples s'appelle une ___ interethnique.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on décrit un pacte entre deux peuples. Étape 2 — Chercher : il est conclu avant tout conflit. Étape 3 — Nommer : c'est une alliance. Étape 4 — Expliquer : elle oblige chaque peuple à aider l'autre.",
+                  "answers": [
+                    {
+                      "content": "alliance",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche ce qui existe avant la dispute."
+            }
+          ]
+        },
+        {
+          "name": "Analyser une palabre sous l'arbre à palabres",
+          "remember": "Quand un conflit a éclaté, on le règle par la **palabre** : une discussion publique, tenue sur la place du village, souvent sous un grand arbre, l'**arbre à palabres**. Le **chef** du village la préside et annonce la décision ; dans une société lignagère, sans roi, c'est le conseil des anciens qui décide ensemble. Les **anciens**, respectés pour leur sagesse, donnent leur avis et rappellent les règles. Chez les Akan, le **porte-canne** parle au nom du chef. Un **médiateur** est une personne respectée qui n'est pas partie au conflit et aide à trouver l'accord. Déroulement : chacun expose sa version à tour de rôle, les témoins sont entendus, les anciens délibèrent, le chef annonce la décision. Le but est la **réconciliation**.",
+          "method": [
+            "Repérer les parties en conflit et l'objet de la dispute.",
+            "Nommer qui conduit la palabre : le chef, les anciens, le porte-canne ou un médiateur.",
+            "Décrire le déroulement : chacun parle à tour de rôle, les témoins sont entendus, les anciens délibèrent, le chef annonce la décision.",
+            "Conclure : le but est l'accord et la réconciliation, pas la victoire d'un camp."
+          ],
+          "example": {
+            "statement": "Dans un récit écrit pour Lnclass, deux voisins se disputent un champ. Le chef réunit le village sous l'arbre à palabres. Chacun parle à tour de rôle, un témoin est entendu, les anciens discutent, puis le chef annonce que le champ sera partagé. Analyse cette palabre.",
+            "steps": [
+              "Repérer : les parties sont deux voisins ; l'objet de la dispute est un champ.",
+              "Nommer : le chef conduit la palabre, aidé par les anciens.",
+              "Décrire : chacun parle à tour de rôle, un témoin est entendu, les anciens discutent, puis le chef annonce que le champ sera partagé.",
+              "Conclure : le partage cherche un accord acceptable pour les deux voisins, donc la réconciliation."
+            ]
+          },
+          "pitfall": "Ne pas croire que la palabre est une dispute où le plus fort gagne, ni que le chef décide seul sans écouter. Contre-exemple : dans la palabre du champ, on entend deux voisins, puis un témoin, puis les anciens, avant toute décision. On écoute avant de trancher, et la décision cherche la paix, pas la victoire d'un camp.",
+          "figure": "deroulement-palabre",
+          "practice": {
+            "statement": "Tu t'entraînes à décrire une palabre.",
+            "questions": [
+              {
+                "content": "Où se tient la palabre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche le lieu de la discussion publique. Étape 2 — Nommer : c'est le village qui se réunit. Étape 3 — Décrire : la palabre se tient sur la place du village, sous l'arbre à palabres. Étape 4 — Conclure : tout le monde peut voir et entendre. Elle n'est pas cachée : une discussion publique est mieux acceptée.",
+                "answers": [
+                  {
+                    "content": "Sur la place du village, souvent sous l'arbre à palabres",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans la forêt, loin des villageois",
+                    "correct": false
+                  },
+                  {
+                    "content": "Chez la personne qui a porté plainte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Au marché d'une ville lointaine",
+                    "correct": false
+                  }
+                ],
+                "hint": "La palabre est publique."
+              },
+              {
+                "content": "Remets dans l'ordre le déroulement de la palabre.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : la palabre commence quand les parties sont réunies. Étape 2 — Nommer : chacun parle à tour de rôle, puis les témoins. Étape 3 — Décrire : on décrit : exposé, témoins, délibération, décision. Étape 4 — Conclure : le chef décide en dernier, après avoir tout entendu. Annoncer la décision avant d'avoir écouté serait injuste.",
+                "answers": [
+                  {
+                    "content": "Chacun expose sa version à tour de rôle."
+                  },
+                  {
+                    "content": "Les témoins sont entendus."
+                  },
+                  {
+                    "content": "Les anciens délibèrent."
+                  },
+                  {
+                    "content": "Le chef annonce la décision."
+                  }
+                ],
+                "hint": "On écoute avant de décider."
+              },
+              {
+                "content": "Le but de la palabre est la ___ des parties.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on cherche le but de la palabre. Étape 2 — Nommer : elle réunit les deux parties du conflit. Étape 3 — Décrire : elle décrit un accord entre elles. Étape 4 — Conclure : le but est la réconciliation.",
+                "answers": [
+                  {
+                    "content": "réconciliation",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Analyser une palabre",
+              "statement": "Dans cet exercice, tu analyses une palabre avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "deroulement-palabre",
+              "questions": [
+                {
+                  "content": "Relie chaque acteur à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : quatre acteurs de la palabre sont cités. Étape 2 — Nommer : chacun a un rôle précis. Étape 3 — Décrire : le chef préside, les anciens conseillent, le porte-canne transmet, le médiateur aide à trouver l'accord. Étape 4 — Conclure : la palabre cherche la réconciliation. Le chef ne décide pas seul avant d'avoir entendu les anciens.",
+                  "answers": [
+                    {
+                      "content": "Le chef",
+                      "match": "Il préside la palabre et annonce la décision"
+                    },
+                    {
+                      "content": "Les anciens",
+                      "match": "Ils donnent leur avis et rappellent les règles"
+                    },
+                    {
+                      "content": "Le porte-canne",
+                      "match": "Il parle au nom du chef chez les Akan"
+                    },
+                    {
+                      "content": "Le médiateur",
+                      "match": "Personne respectée qui n'est pas partie au conflit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui annonce la décision à la fin de la palabre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la palabre réunit plusieurs personnes. Étape 2 — Nommer : le chef la préside. Étape 3 — Décrire : les anciens donnent leur avis, puis le chef annonce la décision. Étape 4 — Conclure : le but est la réconciliation. Les parties ne se jugent pas elles-mêmes : elles seraient juge et partie.",
+                  "answers": [
+                    {
+                      "content": "Le chef",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plaignant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un témoin",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accusé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la palabre, on entend les deux parties avant de décider.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on parle du déroulement de la palabre. Étape 2 — Nommer : chacun expose sa version à tour de rôle. Étape 3 — Décrire : les deux parties sont entendues, puis les anciens délibèrent. Étape 4 — Conclure : le but est un accord juste. Dire que le chef décide sans écouter oublie l'étape de l'exposé de chacun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux acteurs aident le chef pendant la palabre ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : cinq personnes sont proposées. Étape 2 — Nommer : les anciens et le porte-canne entourent le chef. Étape 3 — Décrire : les anciens conseillent, le porte-canne parle au nom du chef. Étape 4 — Conclure : le chef préside l'ensemble. Une partie qui jugerait sa propre faute rendrait la palabre injuste.",
+                  "answers": [
+                    {
+                      "content": "Les anciens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le porte-canne chez les Akan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plaignant, qui décide seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accusé, qui juge sa propre faute",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un étranger qui refuse d'écouter",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « À la palabre, le plus fort gagne. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élève parle du résultat de la palabre. Étape 2 — Nommer : les anciens et le chef conduisent la discussion. Étape 3 — Décrire : chacun parle à tour de rôle, les témoins sont entendus, les anciens délibèrent. Étape 4 — Conclure : le but est l'accord, pas la victoire d'un camp. Croire que le plus fort gagne confond la palabre avec une bagarre.",
+                  "answers": [
+                    {
+                      "content": "Faux : on écoute les deux parties et on cherche l'accord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai : le chef donne toujours raison au plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai : seul le plaignant a le droit de parler",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : la palabre n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître les étapes et les acteurs de la palabre",
+              "statement": "Dans cet exercice, tu mélanges plusieurs façons de décrire une palabre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les six moments d'une palabre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : tout commence quand le conflit est signalé au chef. Étape 2 — Nommer : les anciens se réunissent, puis chacun parle et les témoins sont entendus. Étape 3 — Décrire : les anciens délibèrent, puis le chef annonce sa décision. Étape 4 — Conclure : la palabre cherche la réconciliation. Délibérer avant d'avoir entendu les parties serait injuste.",
+                  "answers": [
+                    {
+                      "content": "Le conflit est signalé au chef."
+                    },
+                    {
+                      "content": "Les anciens se réunissent sous l'arbre à palabres."
+                    },
+                    {
+                      "content": "Chacun parle à tour de rôle."
+                    },
+                    {
+                      "content": "Les témoins sont entendus."
+                    },
+                    {
+                      "content": "Les anciens délibèrent."
+                    },
+                    {
+                      "content": "Le chef annonce la décision."
+                    }
+                  ]
+                },
+                {
+                  "content": "La palabre se tient sous l'arbre à ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche le lieu de la palabre. Étape 2 — Nommer : c'est la place du village. Étape 3 — Décrire : on y trouve l'arbre à palabres. Étape 4 — Conclure : la discussion y est publique.",
+                  "answers": [
+                    {
+                      "content": "palabres",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ___ est une personne respectée, qui n'est pas partie au conflit et qui aide à trouver l'accord.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on cherche une personne qui aide sans être partie au conflit. Étape 2 — Nommer : elle est respectée de tous. Étape 3 — Décrire : c'est le médiateur. Étape 4 — Conclure : il aide à trouver l'accord. Le plaignant et l'accusé sont les parties au conflit, pas des médiateurs.",
+                  "answers": [
+                    {
+                      "content": "médiateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "plaignant",
+                      "correct": false
+                    },
+                    {
+                      "content": "témoin",
+                      "correct": false
+                    },
+                    {
+                      "content": "accusé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un conflit oppose deux voisins. Combien de parties s'opposent dans ce conflit ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le conflit oppose deux voisins. Étape 2 — Nommer : chaque voisin est une partie. Étape 3 — Décrire : il y a 2 parties. Étape 4 — Conclure : la palabre doit les entendre toutes les deux. Les témoins ne sont pas des parties : ils racontent ce qu'ils ont vu.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles trois étapes font partie de la palabre ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : cinq propositions sont faites. Étape 2 — Nommer : l'exposé, les témoins et la délibération sont des étapes de la palabre. Étape 3 — Décrire : elles préparent la décision du chef. Étape 4 — Conclure : le but est l'accord. Imposer sa volonté ou cacher le conflit ne résout rien : ce n'est pas la palabre.",
+                  "answers": [
+                    {
+                      "content": "Chacun parle à tour de rôle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les témoins sont entendus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les anciens délibèrent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plus fort impose sa volonté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le conflit est caché au chef",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chez les Akan, le porte-canne parle au nom du chef.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on parle du porte-canne. Étape 2 — Nommer : c'est un acteur de la palabre chez les Akan. Étape 3 — Décrire : il transmet la parole et la décision du chef. Étape 4 — Conclure : le chef reste celui qui décide. Dire qu'il décide à la place du chef est faux : il parle au nom du chef.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "On écoute d'abord, on décide ensuite."
+            }
+          ]
+        },
+        {
+          "name": "Comprendre les sanctions, les serments et la réconciliation",
+          "remember": "Une fois la décision rendue, il faut réparer et sceller la paix. **Sanction** : celui qui a eu tort répare le dommage, par exemple en rendant ce qu'il a pris ou en donnant une **compensation** (un animal, des produits, de l'argent). Le but est de **réparer**, pas d'humilier. **Serment** : promesse solennelle faite devant les ancêtres et la communauté ; celui qui rompt sa parole craint leur colère. **Libation** : on verse une boisson en offrande aux ancêtres pour demander leur protection. **Repas partagé** : en mangeant ensemble, les anciens adversaires montrent qu'ils sont réconciliés.",
+          "method": [
+            "Repérer la décision rendue à la fin de la palabre.",
+            "Identifier la sanction ou la réparation demandée à celui qui a eu tort.",
+            "Nommer le rite qui scelle la paix : serment, libation ou repas partagé.",
+            "Expliquer pourquoi la paix tient : la parole donnée devant les ancêtres et la communauté oblige chacun."
+          ],
+          "example": {
+            "statement": "Dans un récit écrit pour Lnclass, après la palabre, le chef décide que l'homme qui a pris des ignames chez son voisin doit rendre le même nombre d'ignames. Les deux hommes jurent devant les ancêtres de rester en paix, puis partagent un repas. Analyse la fin de cette palabre.",
+            "steps": [
+              "Repérer : la décision est que l'homme rende les ignames prises.",
+              "Identifier : la réparation demandée est de rendre autant d'ignames qu'il en a pris.",
+              "Nommer : le serment devant les ancêtres, puis le repas partagé, scellent la paix.",
+              "Expliquer : la parole donnée devant les ancêtres et le village oblige les deux hommes à tenir leur promesse."
+            ]
+          },
+          "pitfall": "Ne pas croire que la sanction sert surtout à humilier ou à punir. Contre-exemple : l'homme qui rend ses ignames les remet à son voisin, puis partage un repas avec lui : il répare le tort et retrouve sa place dans le village. La sanction répare ; le serment et le repas scellent la paix. Sans eux, la rancune resterait.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à analyser la fin d'une palabre.",
+            "questions": [
+              {
+                "content": "Que signifie le mot « serment » ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le mot serment est utilisé à la fin d'un conflit. Étape 2 — Identifier : c'est une promesse faite devant témoins. Étape 3 — Nommer : c'est une promesse solennelle devant les ancêtres. Étape 4 — Expliquer : celui qui la rompt craint leur colère. L'amende est une réparation, pas une promesse.",
+                "answers": [
+                  {
+                    "content": "Une promesse solennelle faite devant les ancêtres et la communauté",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une amende payée en argent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un jugement rendu par le chef seul",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un impôt payé au village",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à « jurer »."
+              },
+              {
+                "content": "Le but de la sanction est de réparer le tort causé.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la décision a désigné celui qui a eu tort. Étape 2 — Identifier : on lui demande de réparer. Étape 3 — Nommer : la sanction répare le tort, par exemple par une compensation. Étape 4 — Expliquer : elle aide à rétablir la paix.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Verser une boisson en offrande aux ancêtres s'appelle une ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : on parle d'une offrande de boisson. Étape 2 — Identifier : elle s'adresse aux ancêtres. Étape 3 — Nommer : c'est une libation. Étape 4 — Expliquer : elle demande leur protection pour la paix. La palabre est une discussion, pas une offrande.",
+                "answers": [
+                  {
+                    "content": "libation",
+                    "correct": true
+                  },
+                  {
+                    "content": "palabre",
+                    "correct": false
+                  },
+                  {
+                    "content": "succession",
+                    "correct": false
+                  },
+                  {
+                    "content": "alliance",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le mot commence par « li »."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Comprendre la fin d'une palabre",
+              "statement": "Dans cet exercice, tu analyses les sanctions, les serments et les rites qui scellent la paix avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : quatre mots de la fin de la palabre sont à définir. Étape 2 — Identifier : chacun a un rôle : réparer ou sceller la paix. Étape 3 — Nommer : on relie chaque mot à sa définition. Étape 4 — Expliquer : ensemble, ils rétablissent la paix. Le serment n'est pas une sanction : c'est une promesse.",
+                  "answers": [
+                    {
+                      "content": "Sanction",
+                      "match": "Réparation demandée à celui qui a eu tort"
+                    },
+                    {
+                      "content": "Serment",
+                      "match": "Promesse solennelle devant les ancêtres"
+                    },
+                    {
+                      "content": "Libation",
+                      "match": "Offrande d'une boisson aux ancêtres"
+                    },
+                    {
+                      "content": "Repas partagé",
+                      "match": "Signe que les adversaires sont réconciliés"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un homme a pris du riz à son voisin. Que lui demande la décision de la palabre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la palabre a conclu que l'homme a eu tort. Étape 2 — Identifier : on lui demande de réparer le tort causé. Étape 3 — Nommer : la sanction est de rendre le riz ou de donner une compensation. Étape 4 — Expliquer : le but est de rétablir la paix. Le chasser du village ne répare rien : la sanction vise la réparation.",
+                  "answers": [
+                    {
+                      "content": "Rendre le riz pris ou donner une compensation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quitter le village pour toujours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire la guerre au voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne rien faire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux rites scellent la paix après la décision ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : cinq réactions sont proposées. Étape 2 — Identifier : après la décision, il faut sceller la paix. Étape 3 — Nommer : le serment et le repas partagé la scellent. Étape 4 — Expliquer : la vengeance, le départ et le silence gardent la rancune. La vengeance recommence le conflit au lieu de le terminer.",
+                  "answers": [
+                    {
+                      "content": "Le serment devant les ancêtres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le repas partagé",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vengeance de la famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le départ du village",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le refus de se parler",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Celui qui a eu tort répare le tort en versant une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la palabre a désigné celui qui a eu tort. Étape 2 — Identifier : on lui demande de réparer. Étape 3 — Nommer : la réparation est une compensation (un animal, des produits, de l'argent). Étape 4 — Expliquer : elle montre qu'il reconnaît son tort.",
+                  "answers": [
+                    {
+                      "content": "compensation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « La sanction sert à humilier celui qui a eu tort. » Que lui réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'élève parle du but de la sanction. Étape 2 — Identifier : la sanction demande de réparer. Étape 3 — Nommer : la réparation rétablit la paix. Étape 4 — Expliquer : le coupable retrouve sa place dans le village. Croire que la sanction humilie est l'erreur du piège : elle répare.",
+                  "answers": [
+                    {
+                      "content": "Non : elle sert à réparer le tort et à rétablir la paix",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : c'est son seul but",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : elle sert à chasser le coupable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : le chef veut montrer sa force",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Sceller la paix après la palabre",
+              "statement": "Dans cet exercice, tu mélanges plusieurs façons de reconnaître les sanctions et les rites de réconciliation.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on part de la décision. Étape 2 — Identifier : on regarde la réparation demandée. Étape 3 — Nommer : on nomme le rite : serment, libation ou repas. Étape 4 — Expliquer : on explique pourquoi la paix tient. Expliquer avant d'avoir repéré la décision donne une réponse vague.",
+                  "answers": [
+                    {
+                      "content": "Repérer la décision rendue."
+                    },
+                    {
+                      "content": "Identifier la sanction ou la réparation."
+                    },
+                    {
+                      "content": "Nommer le rite qui scelle la paix."
+                    },
+                    {
+                      "content": "Expliquer pourquoi la paix tient."
+                    }
+                  ]
+                },
+                {
+                  "content": "Celui qui rompt son serment craint la colère des ancêtres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le serment est une promesse solennelle. Étape 2 — Identifier : il est fait devant les ancêtres. Étape 3 — Nommer : celui qui le rompt craint leur colère. Étape 4 — Expliquer : c'est pourquoi la parole donnée est respectée. Dire que le serment n'engage à rien oublie qu'il est placé sous la garde des ancêtres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La décision demande à un homme de rendre les 12 ignames qu'il a prises à son voisin. Combien d'ignames doit-il rendre ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la décision est de rendre les ignames prises. Étape 2 — Identifier : il en a pris 12 et on lui demande de les rendre. Étape 3 — Nommer : la réparation est de rendre 12 ignames. Étape 4 — Expliquer : en réparant, il rétablit la paix. Rendre moins de 12 ignames ne répare pas tout le tort.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ignames"
+                },
+                {
+                  "content": "Quels trois éléments servent à sceller la paix ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : cinq éléments sont proposés. Étape 2 — Identifier : le serment, la libation et le repas partagé scellent la paix. Étape 3 — Nommer : ce sont des rites de réconciliation. Étape 4 — Expliquer : la vengeance et le silence rancunier gardent la haine. La vengeance est le contraire d'une réconciliation.",
+                  "answers": [
+                    {
+                      "content": "Le serment",
+                      "correct": true
+                    },
+                    {
+                      "content": "La libation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le repas partagé",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vengeance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le silence rancunier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour sceller la paix, les anciens adversaires partagent un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la décision est rendue. Étape 2 — Identifier : les adversaires veulent montrer qu'ils sont réconciliés. Étape 3 — Nommer : ils partagent un repas. Étape 4 — Expliquer : manger ensemble montre que la paix est revenue.",
+                  "answers": [
+                    {
+                      "content": "repas",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La promesse solennelle faite devant les ancêtres s'appelle le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on parle d'une promesse solennelle. Étape 2 — Identifier : elle est faite devant les ancêtres. Étape 3 — Nommer : c'est le serment. Étape 4 — Expliquer : il engage celui qui le prononce. Le vol est une cause de conflit, pas un rite de paix.",
+                  "answers": [
+                    {
+                      "content": "serment",
+                      "correct": true
+                    },
+                    {
+                      "content": "vol",
+                      "correct": false
+                    },
+                    {
+                      "content": "partage",
+                      "correct": false
+                    },
+                    {
+                      "content": "héritage",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Réparer d'abord, sceller la paix ensuite."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Problème 1 · Une fiche d'exposé sur la paix entre voisins",
+          "statement": "Document : fiche écrite pour Lnclass. Une élève prépare un exposé sur les moyens de garder la paix chez les peuples de Côte d'Ivoire. Sa fiche cite cinq mots : alliance interethnique, mariage entre peuples, parenté à plaisanterie, palabre, serment.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque mécanisme à sa définition.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Repérer : quatre mécanismes sont cités. Étape 2 — Chercher : chacun a une fonction précise, créer un lien ou régler un conflit. Étape 3 — Relier chaque mot à sa définition. Ne pas confondre l'alliance, qui est un pacte, avec le serment, qui est une promesse devant les ancêtres.",
+              "answers": [
+                {
+                  "content": "Alliance interethnique",
+                  "match": "Pacte d'amitié et d'entraide entre des peuples"
+                },
+                {
+                  "content": "Parenté à plaisanterie",
+                  "match": "Droit de se moquer sans se fâcher"
+                },
+                {
+                  "content": "Palabre",
+                  "match": "Discussion publique pour régler un conflit"
+                },
+                {
+                  "content": "Serment",
+                  "match": "Promesse solennelle devant les ancêtres"
+                }
+              ]
+            },
+            {
+              "content": "Quels trois mécanismes de la fiche agissent avant le conflit ? (3 réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 1 — Repérer : cinq mécanismes sont proposés. Étape 2 — Chercher : l'alliance, le mariage et la parenté à plaisanterie existent avant toute dispute. Étape 3 — Conclure : ce sont des mécanismes de prévention. La palabre et le serment après la décision viennent après le conflit : ce sont des mécanismes de résolution.",
+              "answers": [
+                {
+                  "content": "L'alliance interethnique",
+                  "correct": true
+                },
+                {
+                  "content": "Le mariage entre peuples",
+                  "correct": true
+                },
+                {
+                  "content": "La parenté à plaisanterie",
+                  "correct": true
+                },
+                {
+                  "content": "La palabre",
+                  "correct": false
+                },
+                {
+                  "content": "Le serment prononcé après la décision",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La palabre est un mécanisme de quelle famille ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : la palabre se tient pour régler une dispute. Étape 2 — Chercher : le conflit a déjà éclaté. Étape 3 — Conclure : c'est un mécanisme de résolution. La prévention agit avant le conflit, ce qui n'est pas le cas de la palabre.",
+              "answers": [
+                {
+                  "content": "La résolution",
+                  "correct": true
+                },
+                {
+                  "content": "La prévention",
+                  "correct": false
+                },
+                {
+                  "content": "La sanction",
+                  "correct": false
+                },
+                {
+                  "content": "L'alliance",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La palabre se tient sous l'arbre à ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Repérer : on cherche le lieu de la palabre. Étape 2 — Chercher : elle se tient sur la place du village, sous un grand arbre qui porte le nom de cette discussion. Étape 3 — Conclure : c'est l'arbre à palabres. Le mot prend un « s » : on y tient de nombreuses palabres.",
+              "answers": [
+                {
+                  "content": "palabres",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique, en deux ou trois phrases, la différence entre la prévention et la résolution d'un conflit. Donne un exemple pour chacune.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que la prévention agit avant le conflit",
+                "Dit que la résolution agit après que le conflit a éclaté",
+                "Donne un exemple exact pour chacune"
+              ],
+              "explanation": "Corrigé modèle : la prévention agit avant le conflit, pour l'empêcher de naître, comme une alliance entre deux peuples. La résolution agit après que le conflit a éclaté, pour y mettre fin, comme la palabre sous l'arbre. Barème : prévention (1), résolution (1), exemples exacts (1).",
+              "answers": [],
+              "starter": "La prévention agit…"
+            }
+          ],
+          "hint": "Demande-toi si le conflit a déjà éclaté."
+        },
+        {
+          "title": "Problème 2 · Une dispute entre deux villages",
+          "statement": "Document : récit écrit pour Lnclass. Deux villages voisins, A et B, se disputent les limites d'un champ. Le chef d'un village voisin, respecté des deux villages et qui n'est pas partie au conflit, les réunit sous l'arbre à palabres. Chacun parle à tour de rôle, un témoin est entendu, puis les anciens discutent. Le chef annonce que le champ sera partagé en deux parts égales.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la cause du conflit ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : les deux villages se disputent les limites d'un champ. Étape 2 — Chercher : l'objet de la dispute est la terre. Étape 3 — Conclure : la cause est un litige de terre. Aucun vol ni succession n'est évoqué dans le récit.",
+              "answers": [
+                {
+                  "content": "Un litige de terre",
+                  "correct": true
+                },
+                {
+                  "content": "Une querelle de succession",
+                  "correct": false
+                },
+                {
+                  "content": "Un vol de bétail",
+                  "correct": false
+                },
+                {
+                  "content": "Une offense à un chef",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les moments de la palabre.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Repérer : le récit donne les moments de la palabre. Étape 2 — Chercher : on écoute les parties et le témoin avant de délibérer. Étape 3 — Conclure : le chef décide en dernier. Annoncer la décision avant d'avoir écouté serait injuste.",
+              "answers": [
+                {
+                  "content": "Les deux villages se réunissent sous l'arbre à palabres."
+                },
+                {
+                  "content": "Chacun parle à tour de rôle."
+                },
+                {
+                  "content": "Le témoin est entendu."
+                },
+                {
+                  "content": "Les anciens discutent."
+                },
+                {
+                  "content": "Le chef annonce que le champ sera partagé."
+                }
+              ]
+            },
+            {
+              "content": "Quels deux acteurs participent à cette palabre ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Repérer : le récit nomme le chef et les anciens. Étape 2 — Chercher : ce sont les acteurs de la palabre. Étape 3 — Conclure : le chef et les anciens y participent. Les autres personnes ne figurent pas dans le récit.",
+              "answers": [
+                {
+                  "content": "Le chef",
+                  "correct": true
+                },
+                {
+                  "content": "Les anciens",
+                  "correct": true
+                },
+                {
+                  "content": "Un voleur",
+                  "correct": false
+                },
+                {
+                  "content": "Un étranger qui n'a rien vu",
+                  "correct": false
+                },
+                {
+                  "content": "L'armée d'un royaume lointain",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La décision du chef cherche un accord acceptable pour les deux villages.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Repérer : le champ est partagé en deux parts égales. Étape 2 — Chercher : chaque village reçoit autant que l'autre. Étape 3 — Conclure : la décision cherche l'accord et la réconciliation. Dire qu'elle donne tout à un village est faux : le partage est égal.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois ou quatre phrases pourquoi cette palabre est un mécanisme de résolution et non de prévention.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que le conflit a déjà éclaté",
+                "Dit que la palabre met fin à la dispute",
+                "Cite une étape de la palabre (parole à tour de rôle, témoin, anciens, décision)",
+                "Emploie les mots résolution et prévention correctement"
+              ],
+              "explanation": "Corrigé modèle : cette palabre est un mécanisme de résolution, car le conflit a déjà éclaté : les deux villages se disputent un champ. La palabre sert à y mettre fin : chacun parle, le témoin est entendu, les anciens discutent, puis le chef annonce le partage. La prévention aurait agi avant la dispute. Barème : conflit déjà éclaté (1), fin du conflit (1), étape citée (0,5), vocabulaire exact (0,5).",
+              "answers": [],
+              "starter": "Cette palabre est de la résolution car…"
+            }
+          ],
+          "hint": "Le conflit a-t-il déjà éclaté ?"
+        },
+        {
+          "title": "Problème 3 · Prévenir ou résoudre : quatre situations",
+          "statement": "Document : liste écrite pour Lnclass. Situation a : deux peuples voisins jurent de s'entraider avant toute dispute. Situation b : deux frères se disputent la succession de leur père, et le chef et les anciens se réunissent. Situation c : une famille d'un peuple épouse une famille d'un peuple voisin. Situation d : après la décision du chef, les deux adversaires partagent un repas.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque situation au mécanisme qu'elle illustre.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Repérer : quatre situations sont décrites. Étape 2 — Chercher : le serment d'entraide, la réunion du chef, l'union de deux familles, le repas. Étape 3 — Conclure : alliance, palabre, mariage, repas de réconciliation. Ne pas mettre la situation b dans la prévention : le conflit a déjà éclaté.",
+              "answers": [
+                {
+                  "content": "Situation a",
+                  "match": "Alliance interethnique"
+                },
+                {
+                  "content": "Situation b",
+                  "match": "Palabre"
+                },
+                {
+                  "content": "Situation c",
+                  "match": "Mariage entre peuples"
+                },
+                {
+                  "content": "Situation d",
+                  "match": "Repas de réconciliation"
+                }
+              ]
+            },
+            {
+              "content": "Quelles deux situations sont de la prévention ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Repérer : quatre situations sont proposées. Étape 2 — Chercher : l'alliance et le mariage ont lieu avant toute dispute. Étape 3 — Conclure : ce sont des situations de prévention. Les situations b et d suivent un conflit : ce sont des situations de résolution.",
+              "answers": [
+                {
+                  "content": "Situation a",
+                  "correct": true
+                },
+                {
+                  "content": "Situation c",
+                  "correct": true
+                },
+                {
+                  "content": "Situation b",
+                  "correct": false
+                },
+                {
+                  "content": "Situation d",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la cause du conflit dans la situation b ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : deux frères se disputent la succession de leur père. Étape 2 — Chercher : l'objet de la dispute est le pouvoir. Étape 3 — Conclure : la cause est une querelle de succession. La terre n'est pas citée dans la situation.",
+              "answers": [
+                {
+                  "content": "Une querelle de succession",
+                  "correct": true
+                },
+                {
+                  "content": "Un litige de terre",
+                  "correct": false
+                },
+                {
+                  "content": "Un vol",
+                  "correct": false
+                },
+                {
+                  "content": "Une offense",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la situation d, le repas partagé montre que les adversaires sont réconciliés.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Repérer : les adversaires partagent un repas après la décision. Étape 2 — Chercher : manger ensemble est un signe de paix. Étape 3 — Conclure : c'est un rite de réconciliation. Dire que le repas prolonge le conflit est faux : il le termine.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La situation c est un mécanisme de ___.",
+              "question_type": "select",
+              "explanation": "Méthode. Étape 1 — Repérer : l'union de deux familles voisines. Étape 2 — Chercher : aucun conflit n'a éclaté. Étape 3 — Conclure : c'est de la prévention. La résolution suppose un conflit déjà éclaté.",
+              "answers": [
+                {
+                  "content": "prévention",
+                  "correct": true
+                },
+                {
+                  "content": "résolution",
+                  "correct": false
+                },
+                {
+                  "content": "sanction",
+                  "correct": false
+                },
+                {
+                  "content": "succession",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Choisis une situation de résolution parmi les quatre. Explique en trois ou quatre phrases pourquoi c'est de la résolution et comment elle rétablit la paix.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Choisit la situation b ou la situation d",
+                "Dit que le conflit a déjà éclaté",
+                "Explique comment la paix est rétablie (décision, accord ou repas)",
+                "Écrit des phrases claires"
+              ],
+              "explanation": "Corrigé modèle : la situation b est de la résolution, car le conflit a déjà éclaté : deux frères se disputent la succession. Le chef et les anciens se réunissent pour entendre les frères, puis le chef annonce la décision. Elle rétablit la paix en mettant fin à la querelle. Barème : choix exact (1), conflit déjà éclaté (1), rétablissement de la paix (1), clarté (1).",
+              "answers": [],
+              "starter": "La situation b est de la résolution car…"
+            }
+          ],
+          "hint": "Prévention : avant le conflit. Résolution : après."
+        },
+        {
+          "title": "Problème 4 · Deux villages au bord d'une rivière",
+          "statement": "Document : texte écrit pour Lnclass. Les villages A et B partagent une rivière. Leurs familles se marient entre elles depuis longtemps, et chaque année leurs jeunes se moquent gentiment les uns des autres pendant la fête de la pêche. Un jour, des pêcheurs de A prennent du poisson dans la partie de la rivière réservée à B. Les jeunes de B veulent se battre, mais leur chef refuse et convoque la palabre sous l'arbre. Les chefs, les anciens et les pêcheurs parlent à tour de rôle. Les anciens délibèrent et décident que les pêcheurs de A rendront une partie de leurs prises. Les deux villages jurent devant les ancêtres de respecter les limites, versent une libation et partagent un repas.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la cause du conflit entre A et B ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : le texte dit que des pêcheurs de A pêchent dans la partie de B. Étape 2 — Chercher : l'objet de la dispute est une ressource et ses limites. Étape 3 — Conclure : le conflit vient de ce poisson pris sur la partie réservée à B. Le texte ne parle ni de succession ni d'offense.",
+              "answers": [
+                {
+                  "content": "Des pêcheurs de A ont pris du poisson dans la partie réservée à B",
+                  "correct": true
+                },
+                {
+                  "content": "Un désaccord sur la succession du chef",
+                  "correct": false
+                },
+                {
+                  "content": "Un mariage refusé",
+                  "correct": false
+                },
+                {
+                  "content": "Une offense pendant la fête",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels deux éléments du texte relèvent de la prévention ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Repérer : le texte décrit d'abord la vie des deux villages avant la dispute. Étape 2 — Chercher : les mariages et les moqueries (parenté à plaisanterie) existent depuis longtemps. Étape 3 — Conclure : ce sont des mécanismes de prévention. La palabre, la décision et le repas ont lieu après le conflit : ce sont des mécanismes de résolution.",
+              "answers": [
+                {
+                  "content": "Les mariages entre les familles de A et de B",
+                  "correct": true
+                },
+                {
+                  "content": "Les moqueries gentilles pendant la fête de la pêche",
+                  "correct": true
+                },
+                {
+                  "content": "La palabre sous l'arbre",
+                  "correct": false
+                },
+                {
+                  "content": "La décision des anciens",
+                  "correct": false
+                },
+                {
+                  "content": "Le repas partagé à la fin",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les moments de la résolution du conflit.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Repérer : le texte donne les moments de la résolution. Étape 2 — Chercher : on convoque, on écoute, on délibère, on décide la réparation, puis on scelle la paix. Étape 3 — Conclure : l'ordre est celui de la palabre puis des rites. Faire le serment avant la décision n'aurait pas de sens : on ne scelle la paix qu'après l'accord.",
+              "answers": [
+                {
+                  "content": "Le chef de B refuse le combat et convoque la palabre."
+                },
+                {
+                  "content": "Chacun parle à tour de rôle."
+                },
+                {
+                  "content": "Les anciens délibèrent."
+                },
+                {
+                  "content": "Les anciens décident que les pêcheurs de A rendront une partie de leurs prises."
+                },
+                {
+                  "content": "Les deux villages jurent, versent une libation et partagent un repas."
+                }
+              ]
+            },
+            {
+              "content": "Que représente le fait de rendre une partie des prises ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : les pêcheurs de A rendent une partie de leurs prises. Étape 2 — Chercher : ils réparent le tort commis. Étape 3 — Conclure : c'est une sanction de réparation. Une libation est une offrande de boisson, pas une réparation.",
+              "answers": [
+                {
+                  "content": "Une sanction qui répare le tort",
+                  "correct": true
+                },
+                {
+                  "content": "Une alliance interethnique",
+                  "correct": false
+                },
+                {
+                  "content": "Une libation",
+                  "correct": false
+                },
+                {
+                  "content": "Une parenté à plaisanterie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels trois rites scellent la paix à la fin du texte ? (3 réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 1 — Repérer : le texte décrit la fin de la palabre. Étape 2 — Chercher : les deux villages jurent, versent une libation et partagent un repas. Étape 3 — Conclure : serment, libation et repas scellent la paix. Les jeunes de B voulaient se battre, mais leur chef a refusé : la vengeance n'a pas eu lieu.",
+              "answers": [
+                {
+                  "content": "Le serment devant les ancêtres",
+                  "correct": true
+                },
+                {
+                  "content": "La libation",
+                  "correct": true
+                },
+                {
+                  "content": "Le repas partagé",
+                  "correct": true
+                },
+                {
+                  "content": "La vengeance des jeunes de B",
+                  "correct": false
+                },
+                {
+                  "content": "Le refus de se parler",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un paragraphe d'au moins cinq phrases, montre que les villages A et B ont utilisé la prévention avant la dispute puis la résolution après. Appuie-toi sur le texte.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Cite deux mécanismes de prévention du texte (mariages, plaisanterie)",
+                "Explique pourquoi ce sont des mécanismes de prévention",
+                "Décrit la palabre (parole à tour de rôle, anciens, décision)",
+                "Cite la sanction et les rites qui scellent la paix",
+                "Écrit un paragraphe organisé : prévention puis résolution"
+              ],
+              "explanation": "Corrigé modèle : avant la dispute, les villages A et B pratiquaient la prévention : leurs familles se mariaient entre elles et leurs jeunes se moquaient gentiment pendant la fête de la pêche. Ces liens créaient de la confiance. Quand des pêcheurs de A ont pris du poisson chez B, le conflit a éclaté. Il a été réglé par la résolution : le chef a convoqué la palabre, chacun a parlé à tour de rôle, puis les anciens ont délibéré. Ils ont décidé que les pêcheurs de A rendraient une partie de leurs prises. Les villages ont ensuite juré devant les ancêtres, versé une libation et partagé un repas. Barème : prévention citée (1,5), explication (1), palabre (1,5), sanction et rites (1), organisation du paragraphe (1).",
+              "answers": [],
+              "starter": "Avant la dispute, les villages A et B…"
+            }
+          ],
+          "hint": "Pense à l'avant-conflit, puis à l'après."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Vocabulaire du cours, causes de conflit, mécanismes de prévention, acteurs et déroulement de la palabre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : liste écrite pour Lnclass. Voici cinq mots du cours : conflit, prévention, résolution, palabre, serment.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un conflit oppose, la prévention agit avant, la résolution après.",
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq mots sont à définir. Étape 2 — Chercher : chaque mot a un rôle précis dans la paix ou le conflit. Étape 3 — Relier chaque mot à sa définition. Ne pas confondre prévention et résolution : l'une agit avant, l'autre après.",
+                  "answers": [
+                    {
+                      "content": "Conflit",
+                      "match": "Opposition entre des personnes ou des groupes"
+                    },
+                    {
+                      "content": "Prévention",
+                      "match": "Action qui agit avant le conflit"
+                    },
+                    {
+                      "content": "Résolution",
+                      "match": "Action qui met fin à un conflit éclaté"
+                    },
+                    {
+                      "content": "Palabre",
+                      "match": "Discussion publique pour régler un conflit"
+                    },
+                    {
+                      "content": "Serment",
+                      "match": "Promesse solennelle devant les ancêtres"
+                    }
+                  ]
+                },
+                {
+                  "content": "La prévention agit après que le conflit a éclaté.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on définit la prévention. Étape 2 — Chercher : prévenir, c'est agir avant. Étape 3 — Conclure : la phrase est fausse. Agir après l'éclatement du conflit, c'est la résolution.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une opposition entre des personnes ou des groupes s'appelle un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : on cherche le mot qui désigne une opposition. Étape 2 — Chercher : des personnes ou des groupes s'opposent, par exemple deux villages pour un champ. Étape 3 — Conclure : c'est un conflit. Ne pas écrire « palabre » : la palabre est le moyen de régler le conflit, pas le conflit lui-même.",
+                  "answers": [
+                    {
+                      "content": "conflit",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La palabre est un mécanisme de quelle famille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : la palabre se tient pour régler une dispute. Étape 2 — Chercher : le conflit a déjà éclaté. Étape 3 — Conclure : c'est de la résolution. La prévention agit avant le conflit.",
+                  "answers": [
+                    {
+                      "content": "La résolution",
+                      "correct": true
+                    },
+                    {
+                      "content": "La prévention",
+                      "correct": false
+                    },
+                    {
+                      "content": "La succession",
+                      "correct": false
+                    },
+                    {
+                      "content": "La parenté",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La promesse solennelle faite devant les ancêtres s'appelle le ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Repérer : on décrit une promesse solennelle. Étape 2 — Chercher : elle est faite devant les ancêtres. Étape 3 — Conclure : c'est le serment. Le conflit est une opposition, pas une promesse.",
+                  "answers": [
+                    {
+                      "content": "serment",
+                      "correct": true
+                    },
+                    {
+                      "content": "conflit",
+                      "correct": false
+                    },
+                    {
+                      "content": "marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "impôt",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : phrases écrites pour Lnclass sur les causes de conflit entre voisins.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à l'objet de la dispute : un champ, un pouvoir, un bien pris.",
+              "questions": [
+                {
+                  "content": "Relie chaque situation à sa cause.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : trois situations de dispute. Étape 2 — Chercher : ce qui est disputé dans chacune. Étape 3 — Relier chaque situation à sa cause. Ne pas mettre le vol dans la terre : l'objet pris est un bien.",
+                  "answers": [
+                    {
+                      "content": "Deux villages se disputent les limites d'un champ",
+                      "match": "La terre"
+                    },
+                    {
+                      "content": "Deux frères veulent la place de chef",
+                      "match": "La succession"
+                    },
+                    {
+                      "content": "Un homme prend des ignames sans permission",
+                      "match": "Le vol"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux familles disent que la même parcelle leur appartient. Quelle est la cause ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : la même parcelle est réclamée. Étape 2 — Chercher : l'objet disputé est la terre. Étape 3 — Conclure : c'est un litige de terre. Un mariage ou une fête rapprochent au contraire.",
+                  "answers": [
+                    {
+                      "content": "Un litige de terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une succession",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mariage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fête",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une querelle sur la succession du chef peut devenir un conflit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : plusieurs personnes veulent devenir chef. Étape 2 — Chercher : elles s'opposent pour le pouvoir. Étape 3 — Conclure : c'est une cause de conflit. Dire que c'est faux oublie que le pouvoir est disputé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux situations sont des causes de conflit ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq situations sont proposées. Étape 2 — Chercher : le vol et le champ disputé opposent des personnes. Étape 3 — Conclure : ce sont des causes de conflit. Le mariage, la fête et le marché créent des liens.",
+                  "answers": [
+                    {
+                      "content": "Un vol dans le village",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un litige sur les limites d'un champ",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un mariage entre deux familles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fête où les voisins se rendent visite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un marché commun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un litige sur les limites d'un champ est un litige de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : il s'agit des limites d'un champ. Étape 2 — Chercher : ce qui est disputé, c'est le sol cultivé, donc la terre. Étape 3 — Conclure : c'est un litige de terre. Ne pas écrire « succession » : la succession concerne la place de chef, pas un champ.",
+                  "answers": [
+                    {
+                      "content": "terre",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : liste écrite pour Lnclass. Voici quatre mécanismes : l'alliance interethnique, le mariage entre peuples, la parenté à plaisanterie, les échanges et fêtes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Tous créent un lien avant le conflit.",
+              "questions": [
+                {
+                  "content": "Quel mécanisme est un pacte d'amitié et d'entraide entre des peuples ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : on décrit un pacte. Étape 2 — Chercher : il lie des peuples avant toute dispute. Étape 3 — Conclure : c'est l'alliance interethnique. La palabre est une discussion après le conflit.",
+                  "answers": [
+                    {
+                      "content": "L'alliance interethnique",
+                      "correct": true
+                    },
+                    {
+                      "content": "La palabre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sanction",
+                      "correct": false
+                    },
+                    {
+                      "content": "La libation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mécanisme à son effet.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre mécanismes. Étape 2 — Chercher : l'effet de chacun sur la confiance. Étape 3 — Relier chaque mécanisme à son effet. Ne pas attribuer la moquerie permise au mariage.",
+                  "answers": [
+                    {
+                      "content": "Mariage entre peuples",
+                      "match": "Il fait des parents de deux groupes"
+                    },
+                    {
+                      "content": "Parenté à plaisanterie",
+                      "match": "Il détend les tensions par la moquerie permise"
+                    },
+                    {
+                      "content": "Échanges et fêtes",
+                      "match": "Il fait se connaître les voisins"
+                    },
+                    {
+                      "content": "Alliance interethnique",
+                      "match": "Il engage à l'entraide"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mécanismes de prévention agissent avant le conflit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on parle de prévention. Étape 2 — Chercher : prévenir, c'est agir avant. Étape 3 — Conclure : c'est vrai. Dire qu'ils agissent après confond prévention et résolution.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois mécanismes sont de la prévention ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq mécanismes sont proposés. Étape 2 — Chercher : alliance, mariage et plaisanterie existent avant le conflit. Étape 3 — Conclure : ce sont des mécanismes de prévention. La palabre et l'amende suivent un conflit.",
+                  "answers": [
+                    {
+                      "content": "L'alliance interethnique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mariage entre peuples",
+                      "correct": true
+                    },
+                    {
+                      "content": "La parenté à plaisanterie",
+                      "correct": true
+                    },
+                    {
+                      "content": "La palabre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'amende de réparation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le droit de se moquer sans se fâcher s'appelle la parenté à ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : on décrit une moquerie permise, sans fâcherie. Étape 2 — Chercher : ce lien existe entre des groupes qui se reconnaissent comme parents, avant tout conflit. Étape 3 — Conclure : c'est la parenté à plaisanterie. Ce n'est pas une insulte : dite par un ennemi, la même phrase serait une offense.",
+                  "answers": [
+                    {
+                      "content": "plaisanterie",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : liste écrite pour Lnclass sur la palabre : le chef, les anciens, le porte-canne, le médiateur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le chef préside, les anciens conseillent.",
+              "questions": [
+                {
+                  "content": "Relie chaque acteur à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre acteurs. Étape 2 — Chercher : le rôle de chacun. Étape 3 — Relier chaque acteur à son rôle. Le porte-canne ne décide pas à la place du chef.",
+                  "answers": [
+                    {
+                      "content": "Le chef",
+                      "match": "Il préside la palabre et annonce la décision"
+                    },
+                    {
+                      "content": "Les anciens",
+                      "match": "Ils donnent leur avis et rappellent les règles"
+                    },
+                    {
+                      "content": "Le porte-canne",
+                      "match": "Il parle au nom du chef chez les Akan"
+                    },
+                    {
+                      "content": "Le médiateur",
+                      "match": "Il aide à trouver l'accord sans être partie au conflit"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le déroulement de la palabre.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre moments. Étape 2 — Chercher : on écoute avant de décider. Étape 3 — Conclure : exposé, témoins, délibération, décision. Annoncer la décision d'abord serait injuste.",
+                  "answers": [
+                    {
+                      "content": "Chacun expose sa version à tour de rôle."
+                    },
+                    {
+                      "content": "Les témoins sont entendus."
+                    },
+                    {
+                      "content": "Les anciens délibèrent."
+                    },
+                    {
+                      "content": "Le chef annonce la décision."
+                    }
+                  ]
+                },
+                {
+                  "content": "Où se tient la palabre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : la palabre est publique. Étape 2 — Chercher : le village se réunit. Étape 3 — Conclure : sur la place, sous l'arbre à palabres. Une discussion cachée serait moins acceptée.",
+                  "answers": [
+                    {
+                      "content": "Sur la place du village, sous l'arbre à palabres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans la forêt, en cachette",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chez un seul des adversaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans une ville lointaine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le but de la palabre est la victoire du plus fort.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on parle du but de la palabre. Étape 2 — Chercher : elle cherche l'accord. Étape 3 — Conclure : la phrase est fausse. Le but est la réconciliation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le but de la palabre est la ___ des adversaires.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : on cherche le but de la palabre. Étape 2 — Chercher : elle écoute les deux adversaires pour trouver un accord accepté par les deux. Étape 3 — Conclure : son but est la réconciliation. Ce n'est pas la victoire d'un camp : un perdant humilié garderait de la rancune.",
+                  "answers": [
+                    {
+                      "content": "réconciliation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Situations de la vie des villages et des marchés : reconnaître la prévention, la résolution, la sanction et les rites de paix.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : récit écrit pour Lnclass. Chaque année, deux villages voisins organisent une fête commune. Leurs familles se marient entre elles et leurs jeunes se moquent gentiment les uns des autres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Ces liens existent avant toute dispute.",
+              "questions": [
+                {
+                  "content": "Ces liens entre les deux villages sont de quelle famille de mécanismes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : les liens existent depuis longtemps. Étape 2 — Chercher : aucun conflit n'a éclaté. Étape 3 — Conclure : c'est de la prévention. La résolution suppose un conflit déjà éclaté.",
+                  "answers": [
+                    {
+                      "content": "La prévention",
+                      "correct": true
+                    },
+                    {
+                      "content": "La résolution",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sanction",
+                      "correct": false
+                    },
+                    {
+                      "content": "La palabre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois éléments du récit relèvent de la prévention ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Repérer : le récit décrit la vie des deux villages. Étape 2 — Chercher : fête, mariages et moqueries sont des liens. Étape 3 — Conclure : ce sont des mécanismes de prévention. La palabre et le serment ne figurent pas dans le récit.",
+                  "answers": [
+                    {
+                      "content": "La fête commune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les mariages entre familles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les moqueries gentilles",
+                      "correct": true
+                    },
+                    {
+                      "content": "La palabre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le serment après la décision",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les moqueries gentilles entre les jeunes sont une insulte grave.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les jeunes se moquent gentiment. Étape 2 — Chercher : c'est la parenté à plaisanterie. Étape 3 — Conclure : ce n'est pas une insulte. Elle détend l'ambiance et ne provoque pas de vengeance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mariages entre familles de villages voisins créent des liens de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : deux familles de villages voisins s'unissent par le mariage. Étape 2 — Chercher : les membres des deux familles deviennent parents, avant tout conflit. Étape 3 — Conclure : des liens de parenté. C'est pour cela que le mariage est un mécanisme de prévention : on se bat difficilement contre ses parents.",
+                  "answers": [
+                    {
+                      "content": "parenté",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fête commune permet aux voisins de mieux se ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Repérer : les voisins se retrouvent pour la fête. Étape 2 — Chercher : ils échangent et se rencontrent. Étape 3 — Conclure : ils apprennent à se connaître. Se combattre est le contraire de la fête.",
+                  "answers": [
+                    {
+                      "content": "connaître",
+                      "correct": true
+                    },
+                    {
+                      "content": "combattre",
+                      "correct": false
+                    },
+                    {
+                      "content": "juger",
+                      "correct": false
+                    },
+                    {
+                      "content": "punir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : récit écrit pour Lnclass. Au marché, un commerçant accuse un client de lui avoir pris un sac de riz. La dispute s'échauffe. Un ancien respecté, qui ne connaît ni l'un ni l'autre, les calme et les conduit devant le chef.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche qui aide à trouver l'accord.",
+              "questions": [
+                {
+                  "content": "Quel rôle joue l'ancien qui calme la dispute ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : un ancien respecté, non concerné, calme la dispute. Étape 2 — Chercher : il aide à trouver l'accord sans être partie au conflit. Étape 3 — Conclure : c'est un médiateur. Le plaignant et l'accusé sont les deux parties.",
+                  "answers": [
+                    {
+                      "content": "Il est médiateur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est la partie accusée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est le voleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est le plaignant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la cause du conflit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : le commerçant accuse le client d'avoir pris un sac de riz. Étape 2 — Chercher : l'objet de la dispute est un bien. Étape 3 — Conclure : la cause est un vol présumé. Aucune terre ni succession n'est citée.",
+                  "answers": [
+                    {
+                      "content": "Un bien pris (un vol présumé)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une succession",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un litige de terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mariage refusé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Conduire les adversaires devant le chef est un mécanisme de résolution.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : la dispute a éclaté. Étape 2 — Chercher : le chef pourra conduire une palabre. Étape 3 — Conclure : c'est un mécanisme de résolution. La prévention aurait agi avant la dispute.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les moments de cette histoire.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Repérer : le récit donne quatre moments. Étape 2 — Chercher : l'accusation précède la dispute, le médiateur intervient ensuite. Étape 3 — Conclure : accusation, dispute, calme, chef. Le chef n'intervient qu'à la fin.",
+                  "answers": [
+                    {
+                      "content": "Le commerçant accuse le client."
+                    },
+                    {
+                      "content": "La dispute s'échauffe."
+                    },
+                    {
+                      "content": "L'ancien calme les deux hommes."
+                    },
+                    {
+                      "content": "Les deux hommes sont conduits devant le chef."
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ancien aide à trouver l'accord sans être partie au conflit : c'est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'ancien n'est pas partie au conflit. Étape 2 — Chercher : il calme les deux hommes et les aide à aller vers un accord. Étape 3 — Conclure : c'est un médiateur. Ce n'est pas un témoin : un témoin raconte ce qu'il a vu, il n'aide pas à trouver l'accord.",
+                  "answers": [
+                    {
+                      "content": "médiateur",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : récit écrit pour Lnclass. Après une palabre, un homme doit rendre 8 sacs de manioc pris à un voisin. Les deux hommes jurent devant les ancêtres de rester en paix, versent une libation et partagent un repas.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Réparer d'abord, sceller ensuite.",
+              "questions": [
+                {
+                  "content": "Combien de sacs de manioc l'homme doit-il rendre ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : la décision demande de rendre les sacs pris. Étape 2 — Chercher : le nombre est 8. Étape 3 — Conclure : il rend 8 sacs. Rendre moins de 8 sacs ne répare pas tout le tort.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "sacs"
+                },
+                {
+                  "content": "Que représente le fait de rendre les sacs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : il rend ce qu'il a pris. Étape 2 — Chercher : il répare le tort. Étape 3 — Conclure : c'est une sanction. Un serment est une promesse, pas une réparation.",
+                  "answers": [
+                    {
+                      "content": "Une sanction qui répare",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une alliance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une parenté à plaisanterie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un serment",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois rites scellent la paix dans le récit ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Repérer : le récit décrit la fin de la palabre. Étape 2 — Chercher : serment, libation et repas. Étape 3 — Conclure : ces trois rites scellent la paix. La vengeance et le silence ne réconcilient pas.",
+                  "answers": [
+                    {
+                      "content": "Le serment",
+                      "correct": true
+                    },
+                    {
+                      "content": "La libation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le repas partagé",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vengeance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le silence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le but de la sanction est surtout d'humilier le coupable.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on parle du but de la sanction. Étape 2 — Chercher : elle répare le tort. Étape 3 — Conclure : la phrase est fausse. L'humiliation ne rétablit pas la paix.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Offrir une boisson aux ancêtres s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : une boisson est versée. Étape 2 — Chercher : elle est offerte aux ancêtres pour demander leur protection sur la paix retrouvée. Étape 3 — Conclure : c'est une libation. Ce n'est pas un repas partagé : le repas réunit les vivants, la libation s'adresse aux ancêtres.",
+                  "answers": [
+                    {
+                      "content": "libation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : récit écrit pour Lnclass. Deux villages ont conclu depuis longtemps une alliance : ils se sont juré de s'entraider. Un jour, un champ à la limite des deux villages est disputé. Les chefs se réunissent avec les anciens et trouvent un accord.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Avant la dispute : prévention. Après : résolution.",
+              "questions": [
+                {
+                  "content": "Quel mécanisme existait déjà avant la dispute ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'alliance date de longtemps. Étape 2 — Chercher : elle existait avant la dispute. Étape 3 — Conclure : c'est le mécanisme de prévention. La palabre n'a lieu qu'après la dispute.",
+                  "answers": [
+                    {
+                      "content": "L'alliance entre les deux villages",
+                      "correct": true
+                    },
+                    {
+                      "content": "La palabre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sanction",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le repas de réconciliation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la cause du conflit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : un champ à la limite des villages est disputé. Étape 2 — Chercher : l'objet est la terre. Étape 3 — Conclure : litige de terre. Aucun vol n'est cité.",
+                  "answers": [
+                    {
+                      "content": "Un litige de terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un vol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une succession",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une offense",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La réunion des chefs et des anciens est un mécanisme de résolution.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : la dispute a éclaté. Étape 2 — Chercher : les chefs et les anciens se réunissent pour y mettre fin. Étape 3 — Conclure : c'est de la résolution. La prévention aurait agi avant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux acteurs participent à la résolution ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : le récit nomme les chefs et les anciens. Étape 2 — Chercher : ils se réunissent. Étape 3 — Conclure : ils résolvent le conflit. Les autres personnes ne figurent pas dans le récit.",
+                  "answers": [
+                    {
+                      "content": "Les chefs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les anciens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un voleur inconnu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les ennemis des deux villages",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un roi lointain",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une alliance conclue avant le conflit est un mécanisme de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'alliance a été conclue longtemps avant la dispute du champ. Étape 2 — Chercher : elle agit avant le conflit, pour l'empêcher de naître. Étape 3 — Conclure : c'est un mécanisme de prévention. Ce n'est pas de la résolution : la réunion des chefs et des anciens, elle, vient après la dispute.",
+                  "answers": [
+                    {
+                      "content": "prévention",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Juger des affirmations, trouver l'intrus, comprendre pourquoi la parole vaut mieux que le combat, relier réparation et serment.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : phrases écrites pour Lnclass. Un élève affirme cinq choses sur la paix chez les peuples de Côte d'Ivoire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Vérifie chaque phrase avec le cours.",
+              "questions": [
+                {
+                  "content": "« La palabre est un mécanisme de prévention. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on classe la palabre. Étape 2 — Chercher : elle se tient après le conflit. Étape 3 — Conclure : c'est de la résolution. La prévention agit avant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "« Le mariage entre deux peuples peut éviter un conflit. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : le mariage unit deux familles. Étape 2 — Chercher : il crée une parenté avant tout conflit. Étape 3 — Conclure : il peut éviter un conflit. Le dire faux oublie la parenté créée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« Le chef décide toujours sans écouter. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on parle du chef. Étape 2 — Chercher : les parties parlent à tour de rôle et les témoins sont entendus. Étape 3 — Conclure : le chef écoute avant de décider. Décider sans écouter est injuste.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "« La sanction sert à réparer le tort. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on parle de sanction. Étape 2 — Chercher : elle demande de réparer. Étape 3 — Conclure : la phrase est vraie. La dire humiliante est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "« Le serment engage celui qui le prononce devant les ancêtres. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on parle du serment. Étape 2 — Chercher : il est fait devant les ancêtres. Étape 3 — Conclure : il engage. Dire qu'il n'engage à rien est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : liste écrite pour Lnclass. Quatre éléments : le mariage entre deux familles voisines, la palabre, l'alliance interethnique, la sanction.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche l'intrus dans chaque question.",
+              "questions": [
+                {
+                  "content": "Quel élément n'est pas de la prévention ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre éléments. Étape 2 — Chercher : la palabre a lieu après le conflit. Étape 3 — Conclure : c'est l'intrus. Les trois autres agissent avant le conflit.",
+                  "answers": [
+                    {
+                      "content": "La palabre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mariage entre deux familles voisines",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'alliance interethnique",
+                      "correct": false
+                    },
+                    {
+                      "content": "La parenté à plaisanterie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément n'est pas de la résolution ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre éléments. Étape 2 — Chercher : l'alliance se conclut avant le conflit. Étape 3 — Conclure : c'est l'intrus. Les trois autres suivent le conflit.",
+                  "answers": [
+                    {
+                      "content": "L'alliance interethnique",
+                      "correct": true
+                    },
+                    {
+                      "content": "La palabre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sanction",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le serment après la décision",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments se font après la décision du chef ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq éléments. Étape 2 — Chercher : sanction et repas suivent la décision. Étape 3 — Conclure : ce sont les deux bonnes réponses. Les trois autres existent avant la dispute.",
+                  "answers": [
+                    {
+                      "content": "La sanction de réparation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le repas partagé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'alliance conclue avant la dispute",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mariage entre deux familles",
+                      "correct": false
+                    },
+                    {
+                      "content": "La parenté à plaisanterie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la palabre, la sanction est décidée avant que les parties soient entendues.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on place la sanction dans le déroulement de la palabre. Étape 2 — Chercher : chacun expose d'abord sa version, les témoins sont entendus, les anciens délibèrent, puis la décision est annoncée ; la sanction en fait partie. Étape 3 — Conclure : la phrase est fausse, la sanction vient après l'écoute. Décider avant d'écouter serait injuste et ne réconcilierait pas les parties.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mécanisme qui agit avant le conflit s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : le mécanisme agit avant le conflit. Étape 2 — Chercher : il crée des liens (alliance, mariage, plaisanterie, fêtes) pour empêcher la dispute de naître. Étape 3 — Conclure : c'est la prévention. Ne pas écrire « résolution » : la résolution agit après que le conflit a éclaté.",
+                  "answers": [
+                    {
+                      "content": "prévention",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : récit écrit pour Lnclass. Dans un village, deux voisins se disputent un champ. Un jeune propose de se battre. Un ancien répond : « Écoutons d'abord chacun. » Le chef réunit la palabre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pourquoi vaut-il mieux parler que se battre ?",
+              "questions": [
+                {
+                  "content": "Pourquoi l'ancien refuse-t-il le combat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'ancien propose d'écouter chacun. Étape 2 — Chercher : la palabre cherche l'accord. Étape 3 — Conclure : la parole règle la dispute sans violence. Rien dans le récit ne parle d'un champ sacré.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'on peut régler la dispute par la parole",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le champ est sacré",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le jeune est fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le chef est absent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Se battre résout mieux le conflit que la palabre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on compare le combat et la palabre. Étape 2 — Chercher : le combat laisse de la rancune. Étape 3 — Conclure : la phrase est fausse. La palabre cherche la réconciliation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les moments du récit.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre moments. Étape 2 — Chercher : la dispute précède les propositions. Étape 3 — Conclure : dispute, combat proposé, écoute, palabre. La palabre ne peut pas précéder la dispute.",
+                  "answers": [
+                    {
+                      "content": "Deux voisins se disputent un champ."
+                    },
+                    {
+                      "content": "Un jeune propose de se battre."
+                    },
+                    {
+                      "content": "Un ancien propose d'écouter chacun."
+                    },
+                    {
+                      "content": "Le chef réunit la palabre."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux raisons font préférer la palabre au combat ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq raisons. Étape 2 — Chercher : la palabre écoute et réconcilie. Étape 3 — Conclure : accord et fin de la rancune. Donner raison au plus fort est le contraire de la palabre.",
+                  "answers": [
+                    {
+                      "content": "Elle cherche l'accord des deux parties",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle évite la rancune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle donne raison au plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est réservée aux jeunes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle supprime toute règle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La palabre cherche l'accord et la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : la palabre réunit les adversaires et les écoute. Étape 2 — Chercher : elle vise un accord accepté par les deux, pour qu'il ne reste pas de rancune. Étape 3 — Conclure : elle cherche l'accord et la réconciliation. Le combat proposé par le jeune, lui, laisserait un vainqueur et un vaincu.",
+                  "answers": [
+                    {
+                      "content": "réconciliation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : récit écrit pour Lnclass. Un homme a coupé des arbres dans le champ de son voisin. Après la palabre, il doit replanter dix jeunes arbres. Puis les deux hommes jurent devant les ancêtres de rester en paix.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Quelle est la réparation ? Quel est le rite ?",
+              "questions": [
+                {
+                  "content": "Combien de jeunes arbres l'homme doit-il replanter ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : la décision demande de replanter des arbres. Étape 2 — Chercher : le nombre est dix. Étape 3 — Conclure : il replante 10 arbres. Un nombre plus petit ne répare pas tout le tort.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "arbres"
+                },
+                {
+                  "content": "Replanter les arbres est…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : il répare ce qu'il a détruit. Étape 2 — Chercher : c'est une sanction de réparation. Étape 3 — Conclure : une réparation. Une libation est une offrande, pas une réparation.",
+                  "answers": [
+                    {
+                      "content": "Une réparation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une alliance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une plaisanterie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une libation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le serment devant les ancêtres scelle la paix.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les deux hommes jurent. Étape 2 — Chercher : devant les ancêtres, l'engagement est fort. Étape 3 — Conclure : le serment scelle la paix. Le dire inutile oublie sa force.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Couper des arbres dans le champ d'un voisin est une cause de ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Repérer : un bien est détruit. Étape 2 — Chercher : le voisin est lésé. Étape 3 — Conclure : cause de conflit. Une alliance rapproche, elle ne cause pas de dispute.",
+                  "answers": [
+                    {
+                      "content": "conflit",
+                      "correct": true
+                    },
+                    {
+                      "content": "alliance",
+                      "correct": false
+                    },
+                    {
+                      "content": "mariage",
+                      "correct": false
+                    },
+                    {
+                      "content": "fête",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Celui qui a eu tort doit ___ le tort qu'il a causé.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : la palabre a désigné celui qui a eu tort, l'homme qui a coupé les arbres. Étape 2 — Chercher : la sanction lui demande de replanter dix jeunes arbres, donc de réparer. Étape 3 — Conclure : il doit réparer le tort. Le but n'est pas de l'humilier mais de rétablir la paix entre les deux voisins.",
+                  "answers": [
+                    {
+                      "content": "réparer",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Classer les mécanismes, suivre un conflit de sa cause à la réconciliation, rappeler le but commun : la paix.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : fiche écrite pour Lnclass. Voici neuf mots à classer : alliance, mariage entre peuples, parenté à plaisanterie, échanges et fêtes, palabre, décision du chef, sanction, serment, repas partagé.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Prévention : avant. Résolution : après.",
+              "questions": [
+                {
+                  "content": "Quels trois mots sont de la prévention ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq mots sont proposés. Étape 2 — Chercher : alliance, mariage et plaisanterie existent avant le conflit. Étape 3 — Conclure : ce sont de la prévention. Palabre et sanction suivent le conflit.",
+                  "answers": [
+                    {
+                      "content": "Alliance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mariage entre peuples",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parenté à plaisanterie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Palabre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sanction",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels trois mots sont de la résolution ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq mots sont proposés. Étape 2 — Chercher : palabre, décision et sanction suivent le conflit. Étape 3 — Conclure : ce sont de la résolution. Alliance et fêtes existent avant le conflit.",
+                  "answers": [
+                    {
+                      "content": "Palabre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Décision du chef",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sanction",
+                      "correct": true
+                    },
+                    {
+                      "content": "Alliance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Échanges et fêtes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel mot désigne le signe de réconciliation à la fin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : on cherche un rite de fin. Étape 2 — Chercher : manger ensemble montre la paix revenue. Étape 3 — Conclure : le repas partagé. L'alliance existe avant le conflit.",
+                  "answers": [
+                    {
+                      "content": "Le repas partagé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'alliance",
+                      "correct": false
+                    },
+                    {
+                      "content": "La parenté à plaisanterie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le litige",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le serment est une promesse solennelle devant les ancêtres.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on définit le serment. Étape 2 — Chercher : devant les ancêtres. Étape 3 — Conclure : vrai. Le dire sans valeur oublie les ancêtres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arbre sous lequel se tient la palabre s'appelle l'arbre à ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : la palabre se tient sous un grand arbre, sur la place du village. Étape 2 — Chercher : cet arbre porte le nom de la discussion qui s'y tient. Étape 3 — Conclure : l'arbre à palabres. Le mot prend un « s » : on y tient de nombreuses palabres.",
+                  "answers": [
+                    {
+                      "content": "palabres",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : récit écrit pour Lnclass. Deux peuples voisins se marient entre eux et s'invitent aux fêtes. Un jour, des bergers de l'un des peuples font paître leurs bêtes dans les champs de l'autre. La palabre est réunie et les bergers dédommagent les cultivateurs. Tous partagent un repas.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Avant : prévention. Après : résolution.",
+              "questions": [
+                {
+                  "content": "Relie chaque élément du récit à son mécanisme.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre éléments du récit. Étape 2 — Chercher : quand chacun a lieu par rapport à la dispute. Étape 3 — Relier chaque élément à son mécanisme. Le mariage a lieu avant la dispute, la palabre après.",
+                  "answers": [
+                    {
+                      "content": "Les mariages entre eux",
+                      "match": "Prévention"
+                    },
+                    {
+                      "content": "La palabre réunie",
+                      "match": "Résolution"
+                    },
+                    {
+                      "content": "Les bergers dédommagent",
+                      "match": "Sanction de réparation"
+                    },
+                    {
+                      "content": "Le repas partagé",
+                      "match": "Rite de réconciliation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la cause de la dispute ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : des bergers font paître leurs bêtes chez l'autre peuple. Étape 2 — Chercher : ils abîment les champs. Étape 3 — Conclure : la cause est la terre et les cultures. Aucune succession n'est citée.",
+                  "answers": [
+                    {
+                      "content": "Les bêtes dans les champs d'autrui",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une succession",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mariage refusé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une offense",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mariages et les fêtes ont aidé à éviter le conflit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : les liens existaient avant. Étape 2 — Chercher : ils créent de la confiance. Étape 3 — Conclure : ils aident la paix. Dire qu'ils sont inutiles oublie qu'ils ont facilité la palabre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments suivent la dispute ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq éléments. Étape 2 — Chercher : palabre et repas suivent la dispute. Étape 3 — Conclure : ce sont les deux bonnes réponses. Les autres existaient avant.",
+                  "answers": [
+                    {
+                      "content": "La palabre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le repas partagé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les mariages entre les peuples",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les invitations aux fêtes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les liens d'amitié anciens",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les bergers réparent le tort en dédommageant les ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : les bêtes des bergers ont abîmé des champs. Étape 2 — Chercher : les victimes sont ceux qui cultivent ces champs, les cultivateurs. Étape 3 — Conclure : les bergers dédommagent les cultivateurs. Ce ne sont pas les bergers qui sont dédommagés : ce sont eux qui ont causé le tort.",
+                  "answers": [
+                    {
+                      "content": "cultivateurs",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : récit écrit pour Lnclass. Dans un village, un jeune insulte un ancien. Les jeunes du village veulent le punir sévèrement. L'ancien demande une palabre. Le jeune présente ses excuses, offre une boisson et l'ancien accepte de rester en paix.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Que cherche l'ancien ?",
+              "questions": [
+                {
+                  "content": "Que cherche l'ancien en demandant une palabre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'ancien demande une palabre. Étape 2 — Chercher : il veut parler plutôt que punir. Étape 3 — Conclure : il cherche la réconciliation. La vengeance prolonge le conflit.",
+                  "answers": [
+                    {
+                      "content": "La réconciliation",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vengeance",
+                      "correct": false
+                    },
+                    {
+                      "content": "La victoire du plus fort",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fuite du jeune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la cause du conflit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : un jeune insulte un ancien. Étape 2 — Chercher : l'objet est l'honneur. Étape 3 — Conclure : la cause est une offense. Aucune terre n'est citée.",
+                  "answers": [
+                    {
+                      "content": "Une offense",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un litige de terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un vol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une succession",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le jeune répare le tort en présentant ses excuses.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : il présente ses excuses. Étape 2 — Chercher : il reconnaît son tort. Étape 3 — Conclure : c'est une réparation. Dire qu'il n'a rien réparé oublie les excuses.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les moments du récit.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre moments. Étape 2 — Chercher : l'offense précède tout. Étape 3 — Conclure : offense, colère, palabre, excuses. Les excuses viennent après la palabre.",
+                  "answers": [
+                    {
+                      "content": "Le jeune insulte l'ancien."
+                    },
+                    {
+                      "content": "Les jeunes veulent le punir."
+                    },
+                    {
+                      "content": "L'ancien demande une palabre."
+                    },
+                    {
+                      "content": "Le jeune présente ses excuses."
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ancien refuse la vengeance et demande une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : l'ancien insulté refuse que les jeunes punissent sévèrement le coupable. Étape 2 — Chercher : il préfère une discussion publique pour régler le conflit. Étape 3 — Conclure : il demande une palabre. La vengeance des jeunes aurait prolongé le conflit au lieu de le terminer.",
+                  "answers": [
+                    {
+                      "content": "palabre",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document : bilan écrit pour Lnclass. Chez les peuples de Côte d'Ivoire, les liens créés avant les conflits (alliances, mariages, plaisanterie, fêtes) et les moyens de les régler (palabre, sanction, serment, repas) ont le même but : la paix.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Prévention et résolution : un même but.",
+              "questions": [
+                {
+                  "content": "Quel est le but commun de la prévention et de la résolution ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : le bilan parle de paix. Étape 2 — Chercher : tous les mécanismes servent la paix. Étape 3 — Conclure : garder ou rétablir la paix. La guerre est ce que les mécanismes cherchent à éviter.",
+                  "answers": [
+                    {
+                      "content": "Garder ou rétablir la paix",
+                      "correct": true
+                    },
+                    {
+                      "content": "Gagner la guerre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Punir le plus faible",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fermer les marchés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mécanisme à ce qui le caractérise.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer : quatre mécanismes. Étape 2 — Chercher : quand chacun agit et à quoi il sert. Étape 3 — Relier chaque mécanisme à ce qui le caractérise : la famille (prévention ou résolution) pour l'alliance et la palabre, le rôle pour la sanction et le serment. Ne pas mettre la palabre dans la prévention.",
+                  "answers": [
+                    {
+                      "content": "Alliance interethnique",
+                      "match": "Prévention"
+                    },
+                    {
+                      "content": "Palabre",
+                      "match": "Résolution"
+                    },
+                    {
+                      "content": "Sanction",
+                      "match": "Réparation du tort"
+                    },
+                    {
+                      "content": "Serment",
+                      "match": "Promesse devant les ancêtres"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un peuple sans roi n'a aucun moyen de régler ses conflits.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : on parle d'un peuple sans roi. Étape 2 — Chercher : les anciens et la palabre existent. Étape 3 — Conclure : la phrase est fausse. Le pouvoir est seulement partagé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux acteurs conduisent la palabre ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : cinq acteurs. Étape 2 — Chercher : le chef préside, les anciens conseillent. Étape 3 — Conclure : chef et anciens. Les adversaires ne se jugent pas eux-mêmes.",
+                  "answers": [
+                    {
+                      "content": "Le chef",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les anciens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux adversaires seuls",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un étranger inconnu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un voleur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mécanismes de prévention et de résolution servent à garder ou rétablir la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Repérer : le bilan réunit les liens créés avant les conflits et les moyens de les régler. Étape 2 — Chercher : les premiers gardent la paix, les seconds la rétablissent. Étape 3 — Conclure : tous servent la paix. Ce n'est pas la guerre : les mécanismes servent justement à l'éviter.",
+                  "answers": [
+                    {
+                      "content": "paix",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

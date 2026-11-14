@@ -1,0 +1,4189 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les phases de la Lune et les éclipses",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Physique-Chimie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "systeme-soleil-terre-lune",
+          "kind": "diagram",
+          "description": "Schéma du système Soleil, Terre, Lune. Le Soleil, source primaire de lumière, est en haut. La Terre, éclairée par le Soleil, tourne autour de lui en environ 365 jours. La Lune, éclairée aussi par le Soleil, tourne autour de la Terre : elle revient à la même position en environ 29,5 jours.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "soleil",
+                "label": "Soleil (source primaire)",
+                "category": 1
+              },
+              {
+                "id": "terre",
+                "label": "Terre (éclairée)",
+                "category": 2
+              },
+              {
+                "id": "lune",
+                "label": "Lune (éclairée)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "soleil",
+                "to": "terre",
+                "label": "la Terre tourne autour : 365 jours"
+              },
+              {
+                "from": "terre",
+                "to": "lune",
+                "label": "la Lune tourne autour : 29,5 jours"
+              }
+            ],
+            "legend": [
+              "Produit sa lumière",
+              "Renvoie la lumière reçue"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cycle-des-phases",
+          "kind": "diagram",
+          "description": "Cycle des huit phases de la Lune, dans l'ordre, sur une lunaison d'environ 29,5 jours : nouvelle lune, premier croissant, premier quartier, gibbeuse croissante, pleine lune, gibbeuse décroissante, dernier quartier, dernier croissant, puis retour à la nouvelle lune. La partie éclairée visible grossit jusqu'à la pleine lune, puis diminue.",
+          "params": {
+            "layout": "cycle",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "n1",
+                "label": "Nouvelle lune",
+                "category": 1
+              },
+              {
+                "id": "n2",
+                "label": "Premier croissant",
+                "category": 2
+              },
+              {
+                "id": "n3",
+                "label": "Premier quartier",
+                "category": 2
+              },
+              {
+                "id": "n4",
+                "label": "Gibbeuse croissante",
+                "category": 2
+              },
+              {
+                "id": "n5",
+                "label": "Pleine lune",
+                "category": 1
+              },
+              {
+                "id": "n6",
+                "label": "Gibbeuse décroissante",
+                "category": 3
+              },
+              {
+                "id": "n7",
+                "label": "Dernier quartier",
+                "category": 3
+              },
+              {
+                "id": "n8",
+                "label": "Dernier croissant",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "n1",
+                "to": "n2"
+              },
+              {
+                "from": "n2",
+                "to": "n3"
+              },
+              {
+                "from": "n3",
+                "to": "n4"
+              },
+              {
+                "from": "n4",
+                "to": "n5"
+              },
+              {
+                "from": "n5",
+                "to": "n6"
+              },
+              {
+                "from": "n6",
+                "to": "n7"
+              },
+              {
+                "from": "n7",
+                "to": "n8"
+              },
+              {
+                "from": "n8",
+                "to": "n1"
+              }
+            ],
+            "legend": [
+              "Phases principales",
+              "La partie éclairée grossit",
+              "La partie éclairée diminue"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "phases-et-positions",
+          "kind": "geometry",
+          "description": "Vue de dessus. La Terre est au centre. Le Soleil est loin à gauche et envoie des rayons parallèles. La Lune tourne autour de la Terre sur un grand cercle : la figure montre quatre positions, entre le Soleil et la Terre (nouvelle lune), du côté opposé de la Terre (pleine lune), et sur la verticale de la Terre (les deux quartiers). La moitié de la Lune tournée vers le Soleil est toujours éclairée.",
+          "params": {
+            "points": [
+              {
+                "id": "T",
+                "x": 0,
+                "y": 0,
+                "label": "Terre"
+              },
+              {
+                "id": "NL",
+                "x": -8,
+                "y": 0,
+                "label": "Nouvelle lune"
+              },
+              {
+                "id": "PL",
+                "x": 8,
+                "y": 0,
+                "label": "Pleine lune"
+              },
+              {
+                "id": "Q1",
+                "x": 0,
+                "y": -8,
+                "label": "Premier quartier"
+              },
+              {
+                "id": "Q2",
+                "x": 0,
+                "y": 8,
+                "label": "Dernier quartier"
+              },
+              {
+                "id": "S",
+                "x": -19,
+                "y": 0,
+                "label": "Soleil"
+              },
+              {
+                "id": "R1",
+                "x": -16,
+                "y": 5
+              },
+              {
+                "id": "R2",
+                "x": -12,
+                "y": 5
+              },
+              {
+                "id": "R3",
+                "x": -16,
+                "y": -5
+              },
+              {
+                "id": "R4",
+                "x": -12,
+                "y": -5
+              }
+            ],
+            "segments": [
+              [
+                "R1",
+                "R2"
+              ],
+              [
+                "R3",
+                "R4"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "T",
+                "r": 2
+              },
+              {
+                "center": "T",
+                "r": 8
+              },
+              {
+                "center": "NL",
+                "r": 1
+              },
+              {
+                "center": "PL",
+                "r": 1
+              },
+              {
+                "center": "Q1",
+                "r": 1
+              },
+              {
+                "center": "Q2",
+                "r": 1
+              }
+            ],
+            "labels": [
+              {
+                "from": "R1",
+                "to": "R2",
+                "text": "Rayons du Soleil"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "eclipse-de-soleil",
+          "kind": "geometry",
+          "description": "Figure non à l'échelle, vue de dessus. Le Soleil est à gauche, la Lune au milieu, la Terre à droite, tous alignés. La Lune, opaque, arrête la lumière : son ombre est un cône étroit dont la pointe touche la Terre, et la pénombre s'élargit autour. Un observateur dans l'ombre voit une éclipse totale, dans la pénombre une éclipse partielle.",
+          "params": {
+            "points": [
+              {
+                "id": "S",
+                "x": -17,
+                "y": 0,
+                "label": "Soleil"
+              },
+              {
+                "id": "Su",
+                "x": -17,
+                "y": 4
+              },
+              {
+                "id": "Sl",
+                "x": -17,
+                "y": -4
+              },
+              {
+                "id": "M",
+                "x": 3,
+                "y": 0,
+                "label": "Lune"
+              },
+              {
+                "id": "T",
+                "x": 13,
+                "y": 0,
+                "label": "Terre"
+              },
+              {
+                "id": "U",
+                "x": 9.7,
+                "y": 0
+              },
+              {
+                "id": "P1",
+                "x": 10.1,
+                "y": 2.8
+              },
+              {
+                "id": "P2",
+                "x": 10.1,
+                "y": -2.8
+              }
+            ],
+            "segments": [
+              [
+                "Su",
+                "U"
+              ],
+              [
+                "Sl",
+                "U"
+              ],
+              [
+                "Sl",
+                "P1"
+              ],
+              [
+                "Su",
+                "P2"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "S",
+                "r": 4
+              },
+              {
+                "center": "M",
+                "r": 1
+              },
+              {
+                "center": "T",
+                "r": 4
+              }
+            ],
+            "labels": [
+              {
+                "from": "M",
+                "to": "U",
+                "text": "Ombre"
+              },
+              {
+                "from": "M",
+                "to": "P1",
+                "text": "Pénombre"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "eclipse-de-lune",
+          "kind": "geometry",
+          "description": "Figure non à l'échelle, vue de dessus. Le Soleil est à gauche, la Terre au milieu, la Lune à droite, tous alignés. La Terre, opaque, arrête la lumière du Soleil : son ombre est un cône derrière elle. La Lune est entrée dans cette ombre : c'est une éclipse de Lune, qui a lieu à la pleine lune.",
+          "params": {
+            "points": [
+              {
+                "id": "S",
+                "x": -17,
+                "y": 0,
+                "label": "Soleil"
+              },
+              {
+                "id": "Su",
+                "x": -17,
+                "y": 4
+              },
+              {
+                "id": "Sl",
+                "x": -17,
+                "y": -4
+              },
+              {
+                "id": "T",
+                "x": -2,
+                "y": 0,
+                "label": "Terre"
+              },
+              {
+                "id": "M",
+                "x": 8,
+                "y": 0,
+                "label": "Lune"
+              },
+              {
+                "id": "U",
+                "x": 13,
+                "y": 0
+              }
+            ],
+            "segments": [
+              [
+                "Su",
+                "U"
+              ],
+              [
+                "Sl",
+                "U"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "S",
+                "r": 4
+              },
+              {
+                "center": "T",
+                "r": 2
+              },
+              {
+                "center": "M",
+                "r": 0.5
+              }
+            ],
+            "labels": [
+              {
+                "from": "T",
+                "to": "U",
+                "text": "Ombre de la Terre"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "classement-des-eclipses",
+          "kind": "diagram",
+          "description": "Arbre de classement des éclipses. Quand le Soleil, la Terre et la Lune sont alignés, on regarde quel astre est au milieu. Si c'est la Lune, c'est une éclipse de Soleil, à la nouvelle lune. Si c'est la Terre, c'est une éclipse de Lune, à la pleine lune.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "al",
+                "label": "Soleil, Terre et Lune alignés"
+              },
+              {
+                "id": "es",
+                "label": "ÉCLIPSE DE SOLEIL (nouvelle lune)",
+                "category": 1
+              },
+              {
+                "id": "el",
+                "label": "ÉCLIPSE DE LUNE (pleine lune)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "al",
+                "to": "es",
+                "label": "Lune au milieu"
+              },
+              {
+                "from": "al",
+                "to": "el",
+                "label": "Terre au milieu"
+              }
+            ],
+            "legend": [
+              "Éclipse de Soleil",
+              "Éclipse de Lune"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lunaison-en-jours",
+          "kind": "number_line",
+          "description": "Droite graduée en jours, de 0 à 30, pour une lunaison d'environ 29,5 jours. Les phases sont placées avec des valeurs arrondies : nouvelle lune au jour 0, premier quartier vers le jour 7,4, pleine lune vers le jour 14,8, dernier quartier vers le jour 22,1, nouvelle lune suivante au jour 29,5.",
+          "params": {
+            "min": 0,
+            "max": 30,
+            "step": 5,
+            "points": [
+              {
+                "value": 0,
+                "label": "Nouvelle lune"
+              },
+              {
+                "value": 7.4,
+                "label": "1er quartier"
+              },
+              {
+                "value": 14.8,
+                "label": "Pleine lune"
+              },
+              {
+                "value": 22.1,
+                "label": "Dernier quartier"
+              },
+              {
+                "value": 29.5,
+                "label": "Nouvelle lune"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Décrire le système Soleil, Terre, Lune",
+          "remember": "Le **Soleil** est une étoile : c'est la seule **source primaire** de lumière du système. La **Terre** et la **Lune** sont des boules qui ne produisent pas de lumière : ce sont des **sources secondaires**, éclairées par le Soleil. Sur chacune, la **moitié tournée vers le Soleil est éclairée** (jour sur la Terre) et l'autre moitié reste dans l'obscurité (nuit). La Terre tourne autour du Soleil : elle fait un tour en environ **365 jours**, soit un an. La Lune tourne autour de la Terre : elle revient dans la même position par rapport au Soleil et à la Terre en environ **29,5 jours**. Cette durée s'appelle une **lunaison**.",
+          "method": [
+            "Identifier la source primaire de lumière et les corps éclairés.",
+            "Repérer sur chaque corps la moitié tournée vers le Soleil : c'est la moitié éclairée.",
+            "Situer chaque mouvement : qui tourne autour de quoi, et en combien de jours.",
+            "Conclure en disant ce qui produit la lumière, ce qui est éclairé et ce qui tourne."
+          ],
+          "example": {
+            "statement": "Un soir, Mariam regarde la Lune briller au-dessus du village. Décrire le système Soleil, Terre, Lune.",
+            "steps": [
+              "Identifier : le Soleil est la seule source primaire. La Terre et la Lune sont des corps éclairés, donc des sources secondaires.",
+              "Repérer : sur la Lune comme sur la Terre, la moitié tournée vers le Soleil est éclairée, l'autre moitié est sombre.",
+              "Situer : la Terre tourne autour du Soleil en environ 365 jours. La Lune tourne autour de la Terre, et revient à la même position en environ 29,5 jours.",
+              "Conclure : le Soleil produit la lumière, la Terre et la Lune sont éclairées, la Terre tourne autour du Soleil et la Lune autour de la Terre. La Lune que voit Mariam renvoie la lumière du Soleil."
+            ]
+          },
+          "pitfall": "Ne pas croire que la Lune produit sa propre lumière, ni que sa moitié éclairée change d'un soir à l'autre. Contre-exemple : la Lune est une boule dont la moitié tournée vers le Soleil est toujours éclairée, soit 1 moitié éclairée sur 2, même le soir où on ne la voit pas dans le ciel. Ce qui change d'un soir à l'autre, ce n'est pas la moitié éclairée, c'est la part de cette moitié que l'on voit depuis la Terre. Pose-toi la question : « D'où vient la lumière de la Lune ? » Réponse : du Soleil.",
+          "figure": "systeme-soleil-terre-lune",
+          "practice": {
+            "statement": "Tu t'entraînes à décrire le système Soleil, Terre, Lune avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quelle est la seule source primaire de lumière du système Soleil, Terre, Lune ?",
+                "question_type": "single_choice",
+                "hint": "Quel corps produit lui-même sa lumière ?",
+                "explanation": "Étape 1 — Identifier : le Soleil est une étoile, il produit sa lumière. La Terre et la Lune ne font que renvoyer la lumière reçue. Étape 4 — Conclure : la seule source primaire est le Soleil. La Lune brille mais elle est une source secondaire.",
+                "answers": [
+                  {
+                    "content": "Le Soleil",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Lune",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Terre",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Lune et la Terre ensemble",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La Lune produit sa propre lumière.",
+                "question_type": "true_false",
+                "hint": "Peut-on voir la Lune si le Soleil n'existe pas ?",
+                "explanation": "Étape 1 — Identifier : la Lune est un corps éclairé, donc une source secondaire. Étape 4 — Conclure : elle renvoie une partie de la lumière du Soleil. Elle brille la nuit, mais elle ne produit pas de lumière.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La Terre fait un tour autour du Soleil en environ ___ jours.",
+                "question_type": "fill_blank",
+                "hint": "Combien de jours y a-t-il dans une année ?",
+                "explanation": "Étape 3 — Situer : la Terre tourne autour du Soleil, et un tour dure environ 365 jours, c'est-à-dire un an. Étape 4 — Conclure : la réponse est 365.",
+                "answers": [
+                  {
+                    "content": "365",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Qui produit la lumière, qui est éclairé ?",
+              "statement": "Dans cet exercice, tu décris le système Soleil, Terre, Lune pas à pas, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "systeme-soleil-terre-lune",
+              "questions": [
+                {
+                  "content": "Le soir, tu vois la Lune briller. D'où vient la lumière qu'elle t'envoie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la source primaire est le Soleil, la Lune est un corps éclairé. Étape 4 — Conclure : la Lune renvoie la lumière du Soleil. Dire qu'elle brille d'elle-même est l'erreur du piège : une source secondaire disparaît dans le noir si la source primaire est supprimée.",
+                  "answers": [
+                    {
+                      "content": "Du Soleil, que la Lune renvoie",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la Lune elle-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des étoiles seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la Terre, qui l'éclaire de sa propre lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À tout moment, la moitié de la Lune tournée vers le Soleil est éclairée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer : le Soleil éclaire toujours la moitié de la Lune qui lui fait face. Étape 4 — Conclure : l'affirmation est vraie, qu'on voie cette moitié ou non depuis la Terre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels corps sont des sources secondaires de lumière ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : la Terre et la Lune sont éclairées par le Soleil, donc secondaires. Le Soleil, une étoile et une flamme produisent leur lumière : ce sont des sources primaires.",
+                  "answers": [
+                    {
+                      "content": "La Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une étoile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une flamme de bougie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Autour de quel astre la Lune tourne-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Situer : la Lune tourne autour de la Terre et revient à la même position en environ 29,5 jours. Dire « autour du Soleil » est faux : c'est la Terre qui tourne autour du Soleil.",
+                  "answers": [
+                    {
+                      "content": "La Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne tourne autour de rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une étoile lointaine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on ne voit plus la Lune dans le ciel, sa moitié tournée vers le Soleil n'est plus éclairée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer : la moitié tournée vers le Soleil est toujours éclairée. Étape 4 — Conclure : l'affirmation est fausse. Si on ne voit pas la Lune, c'est que la moitié éclairée n'est pas tournée vers nous, pas qu'elle est éteinte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le système Soleil, Terre, Lune vu du village",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour décrire le système Soleil, Terre, Lune, avec des questions de types variés.",
+              "hint": "Pour chaque question, demande-toi d'abord : qui produit la lumière ? Qui est éclairé ? Qui tourne autour de quoi ?",
+              "exercise_type": "fixation",
+              "figure": "systeme-soleil-terre-lune",
+              "questions": [
+                {
+                  "content": "Relie chaque astre à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : le Soleil produit la lumière. Étape 3 — Situer : la Terre tourne autour du Soleil en environ 365 jours, la Lune tourne autour de la Terre.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil",
+                      "match": "Source primaire de lumière"
+                    },
+                    {
+                      "content": "La Terre",
+                      "match": "Tourne autour du Soleil en environ 365 jours"
+                    },
+                    {
+                      "content": "La Lune",
+                      "match": "Tourne autour de la Terre"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour décrire le système Soleil, Terre, Lune.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier d'abord qui produit la lumière. Étape 2 — Repérer la moitié éclairée. Étape 3 — Situer les mouvements. Étape 4 — Conclure. On ne peut pas conclure avant d'avoir identifié et repéré.",
+                  "answers": [
+                    {
+                      "content": "Identifier la source primaire et les corps éclairés"
+                    },
+                    {
+                      "content": "Repérer la moitié éclairée de chaque corps"
+                    },
+                    {
+                      "content": "Situer qui tourne autour de quoi"
+                    },
+                    {
+                      "content": "Conclure sur la lumière et les mouvements"
+                    }
+                  ]
+                },
+                {
+                  "content": "La moitié de la Lune tournée vers le ___ est toujours éclairée.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer : la moitié éclairée est celle qui fait face à la source primaire, le Soleil. Étape 4 — Conclure : le mot est « Soleil ».",
+                  "answers": [
+                    {
+                      "content": "Soleil",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre met environ 365 jours pour faire un tour autour du Soleil. Combien de jours met-elle pour faire 2 tours ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Situer : un tour dure environ 365 jours. Il suffit de multiplier : 2 × 365 = 730. Étape 4 — Conclure : 2 tours durent environ 730 jours.",
+                  "answers": [
+                    {
+                      "content": "730",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : la Lune est éclairée. Étape 3 — Situer : la Terre tourne autour du Soleil et la Lune autour de la Terre. Le Soleil ne tourne pas autour de la Terre, et la Lune ne produit pas de lumière.",
+                  "answers": [
+                    {
+                      "content": "La Lune est éclairée par le Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Terre tourne autour du Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune tourne autour de la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Soleil tourne autour de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune produit sa propre lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand il fait nuit chez toi, ta région est sur la moitié de la Terre ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Repérer : la moitié de la Terre tournée vers le Soleil est éclairée, c'est le jour. L'autre moitié est dans l'obscurité, c'est la nuit. Étape 4 — Conclure : la nuit, ta région est sur la moitié non éclairée.",
+                  "answers": [
+                    {
+                      "content": "non éclairée par le Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "éclairée par le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "qui produit sa propre lumière",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître les phases de la Lune",
+          "remember": "Depuis la Terre, la Lune prend des **aspects différents** au cours d'une lunaison (environ 29,5 jours) : ce sont les **phases de la Lune**. Dans l'ordre : **nouvelle lune** (on ne voit pas la Lune), **premier croissant** (mince arc lumineux qui grossit), **premier quartier** (demi-disque lumineux qui grossit), **gibbeuse croissante** (plus qu'un demi-disque), **pleine lune** (disque entier lumineux), **gibbeuse décroissante**, **dernier quartier** (demi-disque lumineux qui diminue), **dernier croissant**, puis de nouveau la nouvelle lune. Le cycle recommence tous les 29,5 jours environ.",
+          "method": [
+            "Observer la forme de la partie éclairée de la Lune visible dans le ciel.",
+            "Comparer cette forme au disque entier, au demi-disque, au croissant ou à l'absence de lumière.",
+            "Déterminer si la partie éclairée grossit ou diminue d'un jour à l'autre.",
+            "Conclure en nommant la phase."
+          ],
+          "example": {
+            "statement": "Un soir, Awa voit la Lune sous la forme d'un demi-disque lumineux. Les soirs suivants, la partie éclairée devient plus grande. Quelle est la phase ?",
+            "steps": [
+              "Observer : la partie éclairée visible a la forme d'un demi-disque.",
+              "Comparer : un demi-disque lumineux correspond à un quartier (ni croissant, ni disque entier).",
+              "Déterminer : les soirs suivants, la partie éclairée grossit : la Lune va vers la pleine lune.",
+              "Conclure : un demi-disque qui grossit, c'est le premier quartier."
+            ]
+          },
+          "pitfall": "Ne pas croire que « quartier » veut dire « un quart du disque ». Contre-exemple : le premier quartier est atteint au bout de 29,5 ÷ 4 ≈ 7,4 jours, soit un quart du cycle, mais on voit alors la moitié du disque lumineux, soit 1 sur 2. Le mot « quartier » désigne un quart du cycle de la Lune, pas un quart de son disque. Ne confonds pas non plus le premier quartier (la partie éclairée grossit) et le dernier quartier (elle diminue) : les deux montrent un demi-disque.",
+          "figure": "cycle-des-phases",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les phases de la Lune avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un soir, tu vois un disque lumineux entier dans le ciel. Quelle est la phase ?",
+                "question_type": "single_choice",
+                "hint": "Compare le disque entier au demi-disque et au croissant.",
+                "explanation": "Étape 1 — Observer : la partie éclairée visible est un disque entier. Étape 2 — Comparer : un disque entier est la pleine lune. Étape 4 — Conclure : c'est la pleine lune. Un quartier montrerait seulement un demi-disque.",
+                "answers": [
+                  {
+                    "content": "La pleine lune",
+                    "correct": true
+                  },
+                  {
+                    "content": "La nouvelle lune",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le premier quartier",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dernier quartier",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un demi-disque lumineux s'appelle un quartier.",
+                "question_type": "true_false",
+                "hint": "Quelle forme prend la Lune à un quartier ?",
+                "explanation": "Étape 1 — Observer : la partie éclairée est un demi-disque. Étape 2 — Comparer : cette forme porte le nom de quartier. Étape 4 — Conclure : l'affirmation est vraie ; il reste à savoir s'il s'agit du premier ou du dernier quartier.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces phases dans l'ordre, en partant de la nouvelle lune.",
+                "question_type": "ordering",
+                "hint": "Au début la partie éclairée grossit, puis elle diminue.",
+                "explanation": "Étape 3 — Déterminer : après la nouvelle lune, la partie éclairée grossit : premier quartier, puis pleine lune. Ensuite elle diminue : dernier quartier. Étape 4 — Conclure : nouvelle lune, premier quartier, pleine lune, dernier quartier.",
+                "answers": [
+                  {
+                    "content": "Nouvelle lune"
+                  },
+                  {
+                    "content": "Premier quartier"
+                  },
+                  {
+                    "content": "Pleine lune"
+                  },
+                  {
+                    "content": "Dernier quartier"
+                  }
+                ]
+              },
+              {
+                "content": "À la ___ lune, on ne voit pas la Lune dans le ciel.",
+                "question_type": "fill_blank",
+                "hint": "C'est la première phase du cycle.",
+                "explanation": "Étape 1 — Observer : aucune partie éclairée n'est visible. Étape 4 — Conclure : cette phase s'appelle la nouvelle lune.",
+                "answers": [
+                  {
+                    "content": "nouvelle",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Nommer la phase de la Lune",
+              "statement": "Dans cet exercice, tu nommes la phase de la Lune à partir de ce que l'on voit, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "cycle-des-phases",
+              "questions": [
+                {
+                  "content": "Awa voit un demi-disque lumineux. Les soirs suivants, la partie éclairée grossit. Quelle est la phase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : un demi-disque lumineux. Étape 2 — Comparer : c'est un quartier. Étape 3 — Déterminer : la partie éclairée grossit. Étape 4 — Conclure : premier quartier. Le dernier quartier montre aussi un demi-disque, mais il diminue.",
+                  "answers": [
+                    {
+                      "content": "Le premier quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pleine lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi voit un demi-disque lumineux. Les soirs suivants, la partie éclairée devient plus petite. Quelle est la phase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : un demi-disque lumineux. Étape 2 — Comparer : c'est un quartier. Étape 3 — Déterminer : la partie éclairée diminue. Étape 4 — Conclure : dernier quartier.",
+                  "answers": [
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pleine lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier croissant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa voit un mince arc lumineux, moins qu'un demi-disque, qui grossit d'un soir à l'autre. Quelle est la phase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Observer : un mince arc lumineux. Étape 2 — Comparer : moins qu'un demi-disque, c'est un croissant. Étape 3 — Déterminer : il grossit, on va vers le premier quartier. Étape 4 — Conclure : premier croissant.",
+                  "answers": [
+                    {
+                      "content": "Le premier croissant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dernier croissant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La gibbeuse croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phases montrent un demi-disque lumineux ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Comparer : un demi-disque lumineux correspond à un quartier. Il existe deux quartiers : le premier (la partie éclairée grossit) et le dernier (elle diminue). La nouvelle lune, la pleine lune et le croissant ont d'autres formes.",
+                  "answers": [
+                    {
+                      "content": "Le premier quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pleine lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier croissant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au premier quartier, on voit un quart du disque lumineux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Observer : au premier quartier, la partie éclairée est un demi-disque. Étape 4 — Conclure : l'affirmation est fausse. Le mot quartier désigne un quart du cycle (environ 7,4 jours), pas un quart du disque.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Observer la Lune pendant un mois",
+              "statement": "Dans cet exercice, tu suis les phases de la Lune pendant une lunaison, avec des questions de types variés.",
+              "hint": "Pour chaque phase, observe la forme, compare-la au disque et au demi-disque, puis demande-toi si elle grossit ou diminue.",
+              "exercise_type": "fixation",
+              "figure": "cycle-des-phases",
+              "questions": [
+                {
+                  "content": "Relie chaque phase à ce que l'on voit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Observer et Étape 2 — Comparer : nouvelle lune = rien de visible ; pleine lune = disque entier ; quartier = demi-disque. Étape 3 — Déterminer : au premier quartier la partie éclairée grossit, au dernier elle diminue.",
+                  "answers": [
+                    {
+                      "content": "Nouvelle lune",
+                      "match": "Aucune partie éclairée visible"
+                    },
+                    {
+                      "content": "Premier quartier",
+                      "match": "Demi-disque qui grossit"
+                    },
+                    {
+                      "content": "Pleine lune",
+                      "match": "Disque entier lumineux"
+                    },
+                    {
+                      "content": "Dernier quartier",
+                      "match": "Demi-disque qui diminue"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces phases dans l'ordre, de la nouvelle lune à la pleine lune.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Déterminer : la partie éclairée grossit : rien, puis un croissant, puis un demi-disque, puis plus qu'un demi-disque, puis le disque entier. Étape 4 — Conclure : cet ordre.",
+                  "answers": [
+                    {
+                      "content": "Nouvelle lune"
+                    },
+                    {
+                      "content": "Premier croissant"
+                    },
+                    {
+                      "content": "Premier quartier"
+                    },
+                    {
+                      "content": "Gibbeuse croissante"
+                    },
+                    {
+                      "content": "Pleine lune"
+                    }
+                  ]
+                },
+                {
+                  "content": "La durée entre deux nouvelles lunes est d'environ ___ jours.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : le cycle des phases, ou lunaison, dure environ 29,5 jours. Ce n'est pas exactement 28 ni 30 jours.",
+                  "answers": [
+                    {
+                      "content": "29,5",
+                      "correct": true
+                    },
+                    {
+                      "content": "29.5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre le premier quartier et la pleine lune, la partie éclairée visible ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Déterminer : on passe d'un demi-disque à un disque entier, donc la partie éclairée grossit. Elle diminue seulement après la pleine lune.",
+                  "answers": [
+                    {
+                      "content": "grossit",
+                      "correct": true
+                    },
+                    {
+                      "content": "diminue",
+                      "correct": false
+                    },
+                    {
+                      "content": "reste identique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Observer et Étape 2 — Comparer : la pleine lune est un disque entier, le quartier un demi-disque, la nouvelle lune est invisible. Le dernier quartier montre un demi-disque, et le premier croissant grossit.",
+                  "answers": [
+                    {
+                      "content": "À la pleine lune, le disque est entièrement éclairé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au premier quartier, on voit un demi-disque lumineux",
+                      "correct": true
+                    },
+                    {
+                      "content": "À la nouvelle lune, la Lune n'est pas visible dans le ciel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au dernier quartier, on voit un disque entier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au premier croissant, la partie éclairée diminue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après la pleine lune, la partie éclairée visible diminue chaque jour.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Déterminer : après la pleine lune, on va vers le dernier quartier puis la nouvelle lune. La partie éclairée visible diminue. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Expliquer les phases de la Lune par sa position",
+          "remember": "Les phases de la Lune s'expliquent par **la position de la Lune** sur son tour autour de la Terre. La moitié de la Lune tournée vers le Soleil est toujours éclairée. Selon la position de la Lune, la Terre voit toute cette moitié éclairée, une partie ou rien. **Nouvelle lune** : la Lune est entre le Soleil et la Terre, sa moitié éclairée est du côté opposé à la Terre. **Pleine lune** : la Terre est entre le Soleil et la Lune, toute la moitié éclairée est tournée vers la Terre. **Quartiers** : la Lune a fait un quart ou trois quarts de tour depuis la nouvelle lune, et la direction Terre-Lune est à peu près perpendiculaire à la direction Terre-Soleil. Les phases ne viennent **pas** de l'ombre de la Terre.",
+          "method": [
+            "Placer le Soleil, la Terre et la Lune sur un schéma, avec les rayons du Soleil parallèles.",
+            "Marquer la moitié de la Lune tournée vers le Soleil : c'est la moitié éclairée.",
+            "Regarder, depuis la Terre, quelle part de cette moitié éclairée est tournée vers l'observateur.",
+            "Conclure en nommant la phase qui correspond à cette position."
+          ],
+          "example": {
+            "statement": "La Lune est exactement entre le Soleil et la Terre. Quelle phase l'observateur voit-il ?",
+            "steps": [
+              "Placer : le Soleil, la Lune et la Terre sont alignés dans cet ordre, les rayons du Soleil arrivent parallèles.",
+              "Marquer : la moitié de la Lune tournée vers le Soleil est éclairée. Elle est du côté opposé à la Terre.",
+              "Regarder : l'observateur sur la Terre voit la moitié de la Lune qui n'est pas éclairée, donc aucune partie lumineuse.",
+              "Conclure : la Lune n'est pas visible, c'est la nouvelle lune."
+            ]
+          },
+          "pitfall": "Ne pas croire que les phases de la Lune viennent de l'ombre de la Terre qui cache une partie de la Lune. Contre-exemple : il y a une pleine lune environ tous les 29,5 jours, soit environ 12 fois par an (365 ÷ 29,5 ≈ 12,4), alors que les éclipses de Lune sont bien plus rares. Si l'ombre de la Terre causait les phases, la Lune serait dans l'ombre à chaque pleine lune. En réalité, la Lune est toujours à moitié éclairée par le Soleil : les phases viennent de ce que la Terre voit, selon la position de la Lune.",
+          "figure": "phases-et-positions",
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer les phases de la Lune par sa position avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La Lune est entre le Soleil et la Terre, tous les trois alignés. Quelle phase voit-on ?",
+                "question_type": "single_choice",
+                "hint": "Quelle moitié de la Lune la Terre voit-elle ?",
+                "explanation": "Étape 1 — Placer : Soleil, Lune, Terre alignés. Étape 2 — Marquer : la moitié éclairée de la Lune est du côté opposé à la Terre. Étape 3 — Regarder : la Terre voit la moitié sombre. Étape 4 — Conclure : nouvelle lune.",
+                "answers": [
+                  {
+                    "content": "La nouvelle lune",
+                    "correct": true
+                  },
+                  {
+                    "content": "La pleine lune",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le premier quartier",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dernier quartier",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À la pleine lune, la Terre est à peu près entre le Soleil et la Lune.",
+                "question_type": "true_false",
+                "hint": "Quelle moitié de la Lune la Terre voit-elle à la pleine lune ?",
+                "explanation": "Étape 1 — Placer : à la pleine lune, l'ordre est Soleil, Terre, Lune. Étape 3 — Regarder : toute la moitié éclairée de la Lune est tournée vers la Terre. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Depuis la nouvelle lune, la Lune a fait un quart de tour autour de la Terre. Quelle phase voit-on ?",
+                "question_type": "single_choice",
+                "hint": "Un quart de tour depuis la nouvelle lune, c'est le premier ou le dernier quartier ?",
+                "explanation": "Étape 1 — Placer : la Lune est à un quart de tour, la direction Terre-Lune est à peu près perpendiculaire à la direction Terre-Soleil. Étape 3 — Regarder : la Terre voit la moitié de la moitié éclairée, un demi-disque. Étape 4 — Conclure : premier quartier.",
+                "answers": [
+                  {
+                    "content": "Le premier quartier",
+                    "correct": true
+                  },
+                  {
+                    "content": "La pleine lune",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dernier quartier",
+                    "correct": false
+                  },
+                  {
+                    "content": "La nouvelle lune",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Où est la Lune quand on voit cette phase ?",
+              "statement": "Dans cet exercice, tu expliques les phases de la Lune par la position de la Lune, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "phases-et-positions",
+              "questions": [
+                {
+                  "content": "Pourquoi ne voit-on pas la Lune à la nouvelle lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : Soleil, Lune, Terre sont alignés dans cet ordre. Étape 2 — Marquer : la moitié éclairée est tournée vers le Soleil. Étape 3 — Regarder : la Terre voit l'autre moitié, sombre. Dire que la Lune est dans l'ombre de la Terre est faux : la Terre n'est pas entre le Soleil et la Lune.",
+                  "answers": [
+                    {
+                      "content": "Sa moitié éclairée est tournée vers le Soleil, donc du côté opposé à la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune est dans l'ombre de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune ne reçoit plus la lumière du Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune est cachée par les nuages",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la pleine lune, quelle part de la moitié éclairée de la Lune est tournée vers la Terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : Soleil, Terre, Lune dans cet ordre. Étape 2 — Marquer : la moitié éclairée est tournée vers le Soleil, donc vers la Terre. Étape 3 — Regarder : on voit toute la moitié éclairée, un disque entier. Étape 4 — Conclure : pleine lune.",
+                  "answers": [
+                    {
+                      "content": "Toute la moitié éclairée",
+                      "correct": true
+                    },
+                    {
+                      "content": "La moitié de la moitié éclairée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune partie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un quart de la moitié éclairée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au premier quartier, les directions Terre-Lune et Terre-Soleil sont à peu près perpendiculaires.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Placer : au premier quartier, la Lune a fait un quart de tour depuis la nouvelle lune, donc à peu près un angle droit autour de la Terre. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour expliquer une phase.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Placer les trois astres. Étape 2 — Marquer la moitié éclairée. Étape 3 — Regarder depuis la Terre. Étape 4 — Conclure. On ne peut pas regarder avant d'avoir marqué la moitié éclairée.",
+                  "answers": [
+                    {
+                      "content": "Placer le Soleil, la Terre et la Lune"
+                    },
+                    {
+                      "content": "Marquer la moitié de la Lune éclairée par le Soleil"
+                    },
+                    {
+                      "content": "Regarder ce que voit l'observateur sur la Terre"
+                    },
+                    {
+                      "content": "Conclure en nommant la phase"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les phases de la Lune sont dues à l'ombre de la Terre qui cache une partie de la Lune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Marquer : la moitié de la Lune tournée vers le Soleil est toujours éclairée. Étape 3 — Regarder : les phases viennent de la part de cette moitié que la Terre voit. L'affirmation est fausse : l'ombre de la Terre ne tombe sur la Lune que lors d'une éclipse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Positions de la Lune et phases",
+              "statement": "Dans cet exercice, tu relies les positions de la Lune à ses phases, avec des questions de types variés.",
+              "hint": "Fais un petit schéma : le Soleil à gauche, la Terre au milieu, la Lune sur son tour. Marque la moitié de la Lune tournée vers le Soleil.",
+              "exercise_type": "fixation",
+              "figure": "phases-et-positions",
+              "questions": [
+                {
+                  "content": "Relie chaque position de la Lune à la phase vue de la Terre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Placer et Étape 2 — Marquer : la moitié éclairée est toujours tournée vers le Soleil. Étape 3 — Regarder : entre Soleil et Terre on voit la face sombre, de l'autre côté on voit la face éclairée, à un quart ou trois quarts de tour on voit un demi-disque.",
+                  "answers": [
+                    {
+                      "content": "La Lune est entre le Soleil et la Terre",
+                      "match": "Nouvelle lune"
+                    },
+                    {
+                      "content": "La Terre est entre le Soleil et la Lune",
+                      "match": "Pleine lune"
+                    },
+                    {
+                      "content": "La Lune a fait un quart de tour après la nouvelle lune",
+                      "match": "Premier quartier"
+                    },
+                    {
+                      "content": "La Lune a fait trois quarts de tour après la nouvelle lune",
+                      "match": "Dernier quartier"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre est entre le Soleil et la Lune. Que voit-on de la Lune depuis la Terre, et pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Placer : Soleil, Terre, Lune. Étape 2 — Marquer : la moitié éclairée est du côté du Soleil, donc vers la Terre. Étape 3 — Regarder : on voit toute cette moitié, soit un disque entier. Dire que la Lune est dans l'ombre est faux, sauf lors d'une éclipse.",
+                  "answers": [
+                    {
+                      "content": "Un disque entier lumineux, car la moitié éclairée est tournée vers la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un demi-disque lumineux, car la Lune est à un quart de tour",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien, car la Lune est dans l'ombre de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un croissant, car le Soleil éclaire un côté",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la nouvelle lune, la Lune se trouve entre le Soleil et la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Placer : l'ordre est Soleil, Lune, Terre. La Lune est donc entre le Soleil et la Terre. Étape 4 — Conclure : le mot est « Terre ».",
+                  "answers": [
+                    {
+                      "content": "Terre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au dernier quartier, la Lune a fait ___ de son tour autour de la Terre depuis la nouvelle lune.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Placer : le dernier quartier vient après la pleine lune (la moitié du tour) et avant la nouvelle lune suivante (un tour complet). C'est à trois quarts du tour. Un quart de tour donne le premier quartier.",
+                  "answers": [
+                    {
+                      "content": "trois quarts",
+                      "correct": true
+                    },
+                    {
+                      "content": "un quart",
+                      "correct": false
+                    },
+                    {
+                      "content": "la moitié",
+                      "correct": false
+                    },
+                    {
+                      "content": "un tour complet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le schéma des phases, on dessine les rayons du Soleil parallèles, car le Soleil est très loin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Placer : on dessine les rayons du Soleil parallèles, comme dans la leçon sur la propagation de la lumière, car le Soleil est très loin de la Terre et de la Lune. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phases voit-on quand le Soleil, la Terre et la Lune sont alignés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Placer : alignés, soit la Lune est entre le Soleil et la Terre (nouvelle lune), soit la Terre est entre le Soleil et la Lune (pleine lune). Aux quartiers, les directions sont à peu près perpendiculaires, donc pas alignées.",
+                  "answers": [
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pleine lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier croissant",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Distinguer l'éclipse de Soleil et l'éclipse de Lune",
+          "remember": "Une **éclipse** a lieu quand le Soleil, la Terre et la Lune sont **alignés** : l'un des astres, opaque, arrête la lumière et fait une ombre sur un autre (propagation rectiligne). **Éclipse de Soleil** : la Lune est entre le Soleil et la Terre (à la nouvelle lune). Elle fait une ombre portée sur la Terre. Dans l'**ombre**, l'éclipse est **totale** ; dans la **pénombre**, elle est **partielle**. On ne la voit que d'une petite région de la Terre. **Éclipse de Lune** : la Terre est entre le Soleil et la Lune (à la pleine lune). La Lune entre dans l'ombre de la Terre. On la voit de toute la partie de la Terre où il fait nuit. Ne regarde jamais le Soleil directement, même pendant une éclipse : il faut des lunettes spéciales.",
+          "method": [
+            "Repérer l'astre qui devient sombre et l'astre qui produit la lumière, le Soleil.",
+            "Placer les trois astres alignés dans l'ordre qui convient.",
+            "Nommer l'astre du milieu, qui fait de l'ombre, et l'astre qui reçoit cette ombre.",
+            "Conclure : éclipse de Soleil si la Lune est au milieu, éclipse de Lune si la Terre est au milieu ; totale dans l'ombre, partielle dans la pénombre."
+          ],
+          "example": {
+            "statement": "À midi, un observateur voit le Soleil entièrement caché par un disque sombre pendant quelques minutes. Quelle éclipse observe-t-il ?",
+            "steps": [
+              "Repérer : l'astre qui devient sombre est le Soleil, qui est aussi l'astre producteur de lumière.",
+              "Placer : pour que le Soleil soit caché, l'ordre est Soleil, Lune, Terre, tous alignés.",
+              "Nommer : la Lune est au milieu et fait de l'ombre ; la Terre reçoit cette ombre.",
+              "Conclure : c'est une éclipse de Soleil. Le Soleil est entièrement caché, donc l'observateur est dans l'ombre de la Lune : l'éclipse est totale."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'il y a une éclipse à chaque nouvelle lune et à chaque pleine lune. Contre-exemple : il y a environ 12 nouvelles lunes par an (365 ÷ 29,5 ≈ 12,4), mais les éclipses de Soleil sont bien plus rares. La Lune passe le plus souvent un peu au-dessus ou un peu en dessous de la ligne qui joint le Soleil à la Terre, donc les trois astres ne sont pas alignés. Pour avoir une éclipse, il faut un alignement presque parfait. Ne confonds pas non plus les deux éclipses : Lune au milieu pour le Soleil, Terre au milieu pour la Lune.",
+          "figure": "classement-des-eclipses",
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer l'éclipse de Soleil et l'éclipse de Lune avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Pendant une éclipse de Soleil, quel astre est au milieu, entre les deux autres ?",
+                "question_type": "single_choice",
+                "hint": "Qui cache le Soleil ?",
+                "explanation": "Étape 2 — Placer : l'ordre est Soleil, Lune, Terre. Étape 3 — Nommer : l'astre du milieu qui fait de l'ombre est la Lune. Étape 4 — Conclure : éclipse de Soleil. Si la Terre était au milieu, ce serait une éclipse de Lune.",
+                "answers": [
+                  {
+                    "content": "La Lune",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Terre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Soleil",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun, ils ne sont pas alignés",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une éclipse de Lune a lieu à la pleine lune.",
+                "question_type": "true_false",
+                "hint": "À la pleine lune, qui est au milieu ?",
+                "explanation": "Étape 2 — Placer : pour une éclipse de Lune, l'ordre est Soleil, Terre, Lune. Étape 4 — Conclure : la Terre est entre le Soleil et la Lune, c'est la position de la pleine lune. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pendant une éclipse de Lune, la Lune entre dans l'ombre de la ___.",
+                "question_type": "fill_blank",
+                "hint": "Quel astre est entre le Soleil et la Lune ?",
+                "explanation": "Étape 3 — Nommer : l'astre du milieu qui fait de l'ombre est la Terre, et la Lune reçoit cette ombre. Étape 4 — Conclure : le mot est « Terre ».",
+                "answers": [
+                  {
+                    "content": "Terre",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un observateur est dans l'ombre de la Lune pendant une éclipse de Soleil. Que voit-il ?",
+                "question_type": "single_choice",
+                "hint": "Ombre ou pénombre ?",
+                "explanation": "Étape 3 — Nommer : l'ombre de la Lune tombe sur la Terre. Étape 4 — Conclure : dans l'ombre, l'éclipse est totale ; dans la pénombre elle serait partielle.",
+                "answers": [
+                  {
+                    "content": "Une éclipse totale de Soleil",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une éclipse partielle de Soleil",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une éclipse de Lune",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pas d'éclipse",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Quelle éclipse observe-t-on ?",
+              "statement": "Dans cet exercice, tu distingues l'éclipse de Soleil et l'éclipse de Lune avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "eclipse-de-soleil",
+              "questions": [
+                {
+                  "content": "À midi, le ciel s'assombrit et le Soleil est entièrement caché par un disque sombre. Quelle éclipse est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'astre qui devient sombre est le Soleil. Étape 2 — Placer : Soleil, Lune, Terre. Étape 3 — Nommer : la Lune fait de l'ombre sur la Terre. Étape 4 — Conclure : éclipse de Soleil, totale.",
+                  "answers": [
+                    {
+                      "content": "Une éclipse de Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse de Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une nouvelle phase de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une éclipse de la Terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La nuit, pendant une pleine lune, la Lune devient peu à peu sombre. La Terre est entre le Soleil et la Lune. Quelle éclipse est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'astre qui devient sombre est la Lune. Étape 2 — Placer : Soleil, Terre, Lune. Étape 3 — Nommer : la Terre fait de l'ombre sur la Lune. Étape 4 — Conclure : éclipse de Lune.",
+                  "answers": [
+                    {
+                      "content": "Une éclipse de Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse de Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une nouvelle lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un premier quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les astres lors d'une éclipse de Soleil, du côté de la lumière vers l'observateur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Placer : la lumière part du Soleil, rencontre la Lune qui est opaque, puis la Terre. L'ordre est Soleil, Lune, Terre.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil"
+                    },
+                    {
+                      "content": "La Lune"
+                    },
+                    {
+                      "content": "La Terre"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant une éclipse totale de Soleil, l'observateur est dans la pénombre de la Lune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Nommer : l'observateur dans l'ombre de la Lune voit une éclipse totale. Dans la pénombre, l'éclipse est partielle. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Il y a une éclipse de Soleil à chaque nouvelle lune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Placer : il faut un alignement presque parfait du Soleil, de la Lune et de la Terre. Le plus souvent la Lune passe un peu au-dessus ou en dessous. L'affirmation est fausse : il y a environ 12 nouvelles lunes par an, mais bien moins d'éclipses.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Éclipses : ombre, pénombre et alignement",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour étudier les éclipses, avec des questions de types variés.",
+              "hint": "Pour chaque question, demande-toi : qui est au milieu ? Qui reçoit l'ombre ? Est-on dans l'ombre ou la pénombre ?",
+              "exercise_type": "fixation",
+              "figure": "eclipse-de-lune",
+              "questions": [
+                {
+                  "content": "Relie chaque situation à ce qu'elle décrit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Placer et Étape 3 — Nommer : l'astre du milieu donne le type d'éclipse. Étape 4 — Conclure : dans l'ombre, l'éclipse est totale ; dans la pénombre, elle est partielle.",
+                  "answers": [
+                    {
+                      "content": "La Lune est entre le Soleil et la Terre",
+                      "match": "Éclipse de Soleil"
+                    },
+                    {
+                      "content": "La Terre est entre le Soleil et la Lune",
+                      "match": "Éclipse de Lune"
+                    },
+                    {
+                      "content": "Observateur dans l'ombre de la Lune",
+                      "match": "Éclipse totale de Soleil"
+                    },
+                    {
+                      "content": "Observateur dans la pénombre de la Lune",
+                      "match": "Éclipse partielle de Soleil"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une éclipse de Soleil a lieu à la ___ lune.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Placer : la Lune est entre le Soleil et la Terre, c'est la position de la nouvelle lune. À la pleine lune, c'est la Terre qui est au milieu.",
+                  "answers": [
+                    {
+                      "content": "nouvelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "pleine",
+                      "correct": false
+                    },
+                    {
+                      "content": "premier quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant une éclipse de Lune, l'astre qui fait de l'ombre est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Nommer : la Terre est au milieu, elle arrête la lumière du Soleil et fait de l'ombre sur la Lune. Le mot est « Terre ».",
+                  "answers": [
+                    {
+                      "content": "Terre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Nommer : l'ombre de la Terre est grande, toute la nuit terrestre voit la Lune éclipsée. L'ombre de la Lune est petite sur la Terre. Étape 2 — Placer : l'éclipse de Soleil a lieu à la nouvelle lune, et celle de Lune la nuit à la pleine lune.",
+                  "answers": [
+                    {
+                      "content": "Une éclipse de Lune se voit de toute la partie de la Terre où il fait nuit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse totale de Soleil ne se voit que d'une petite région de la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour une éclipse de Soleil, la Lune est opaque et arrête la lumière du Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse de Soleil a lieu à la pleine lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une éclipse de Lune a lieu en plein jour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il ne faut jamais regarder directement le Soleil pendant une éclipse sans lunettes de protection spéciales.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le Soleil reste une source de lumière très intense, même en partie caché. Regarder le Soleil sans protection peut abîmer l'œil. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un observateur est dans la pénombre de la Lune. Que voit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Nommer : dans la pénombre, une partie seulement du Soleil est cachée. Étape 4 — Conclure : éclipse partielle de Soleil. Dans l'ombre, elle serait totale.",
+                  "answers": [
+                    {
+                      "content": "Une éclipse partielle de Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse totale de Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une éclipse de Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune éclipse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Calculer des dates et des durées liées à la Lune",
+          "remember": "Une **lunaison** (le cycle des phases) dure environ **29,5 jours**. Les phases reviennent dans le même ordre : après 1 lunaison, la même phase revient ; après 2 lunaisons, au bout de 2 × 29,5 = 59 jours. La pleine lune arrive à peu près à la **moitié** de la lunaison après la nouvelle lune (29,5 ÷ 2 = 14,75 jours). Pour trouver une date, on **ajoute la durée** à la date de départ en comptant les jours de chaque mois. Une année de 365 jours contient 12 lunaisons entières.",
+          "method": [
+            "Relever la date de départ, la phase connue et la durée d'une lunaison (29,5 jours).",
+            "Exprimer la durée cherchée avec des lunaisons ou une fraction de lunaison.",
+            "Calculer cette durée en jours.",
+            "Convertir la durée en date en comptant les jours de chaque mois, puis conclure."
+          ],
+          "example": {
+            "statement": "La nouvelle lune a lieu le 4 janvier. Février compte 28 jours. À quelle date aura lieu la nouvelle lune 2 lunaisons plus tard ?",
+            "steps": [
+              "Relever : départ le 4 janvier, nouvelle lune, une lunaison dure 29,5 jours, février compte 28 jours.",
+              "Exprimer : la durée cherchée est de 2 lunaisons, soit 2 × 29,5 jours.",
+              "Calculer : 2 × 29,5 = 59 jours.",
+              "Convertir : du 4 au 31 janvier, il y a 27 jours ; 27 + 28 = 55 jours amènent au 28 février ; il reste 59 − 55 = 4 jours, donc le 4 mars. La nouvelle lune aura lieu le 4 mars."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une lunaison dure exactement 4 semaines, soit 28 jours, ni qu'elle suit les mois du calendrier. Contre-exemple : 12 lunaisons de 28 jours font 12 × 28 = 336 jours, alors que 12 lunaisons de 29,5 jours font 12 × 29,5 = 354 jours, et l'année dure 365 jours. Avec 28 jours, l'écart atteint 18 jours (354 − 336 = 18) sur 12 lunaisons. Utilise toujours 29,5 jours.",
+          "figure": "lunaison-en-jours",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer des dates et des durées liées à la Lune avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une lunaison dure 29,5 jours. Combien de jours durent 2 lunaisons ?",
+                "question_type": "numeric",
+                "hint": "Multiplie 29,5 par 2.",
+                "unit": "jours",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : une lunaison dure 29,5 jours. Étape 2 — Exprimer : 2 lunaisons, soit 2 × 29,5. Étape 3 — Calculer : 2 × 29,5 = 59. La durée est 59 jours.",
+                "answers": [
+                  {
+                    "content": "59",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lunaison dure 29,5 jours. Combien de jours durent 3 lunaisons ?",
+                "question_type": "numeric",
+                "hint": "29,5 + 29,5 + 29,5.",
+                "unit": "jours",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Exprimer : 3 lunaisons, soit 3 × 29,5. Étape 3 — Calculer : 3 × 29,5 = 88,5. La durée est 88,5 jours.",
+                "answers": [
+                  {
+                    "content": "88,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La pleine lune arrive à la moitié de la lunaison (29,5 jours) après la nouvelle lune. Combien de jours après ?",
+                "question_type": "numeric",
+                "hint": "Divise 29,5 par 2.",
+                "unit": "jours",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Exprimer : la moitié de la lunaison, soit 29,5 ÷ 2. Étape 3 — Calculer : 29,5 ÷ 2 = 14,75. La pleine lune arrive 14,75 jours après.",
+                "answers": [
+                  {
+                    "content": "14,75",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La nouvelle lune a lieu le 6 juin. Juin compte 30 jours et juillet 31 jours. Quand aura lieu la nouvelle lune 2 lunaisons plus tard ?",
+                "question_type": "single_choice",
+                "hint": "Compte les jours restants de juin, puis ceux de juillet.",
+                "explanation": "Étape 1 — Relever : départ le 6 juin. Étape 3 — Calculer : 2 × 29,5 = 59 jours. Étape 4 — Convertir : du 6 au 30 juin, 24 jours ; 24 + 31 = 55 amènent au 31 juillet ; il reste 59 − 55 = 4 jours, donc le 4 août.",
+                "answers": [
+                  {
+                    "content": "Le 4 août",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le 6 août",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le 3 août",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le 4 juillet",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Dates et durées des phases",
+              "statement": "Dans cet exercice, tu calcules des durées et des dates liées à la Lune pas à pas, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "lunaison-en-jours",
+              "questions": [
+                {
+                  "content": "Une lunaison dure 29,5 jours. Combien de jours durent 4 lunaisons ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : une lunaison dure 29,5 jours. Étape 2 — Exprimer : 4 lunaisons, soit 4 × 29,5. Étape 3 — Calculer : 4 × 29,5 = 118. La durée est 118 jours.",
+                  "answers": [
+                    {
+                      "content": "118",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La nouvelle lune a lieu un lundi. Environ combien de jours plus tard aura lieu la pleine lune suivante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Exprimer : la pleine lune est à la moitié de la lunaison. Étape 3 — Calculer : 29,5 ÷ 2 = 14,75, soit environ 15 jours. 7 jours est un quart de la lunaison et 30 jours une lunaison entière.",
+                  "answers": [
+                    {
+                      "content": "Environ 15 jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "Environ 7 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Environ 30 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Environ 59 jours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pleine lune a lieu le 2 octobre. Octobre compte 31 jours, novembre 30 jours. Quand aura lieu la pleine lune 2 lunaisons plus tard ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer : 2 × 29,5 = 59 jours. Étape 4 — Convertir : du 2 au 31 octobre, 29 jours ; il reste 59 − 29 = 30 jours, donc le 30 novembre (novembre compte 30 jours).",
+                  "answers": [
+                    {
+                      "content": "Le 30 novembre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le 2 décembre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 28 novembre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 31 octobre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de lunaisons entières tiennent dans une année de 365 jours ?",
+                  "question_type": "numeric",
+                  "unit": "lunaisons",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Exprimer : on cherche combien de fois 29,5 tient dans 365. Étape 3 — Calculer : 12 × 29,5 = 354 est inférieur à 365, et 13 × 29,5 = 383,5 est supérieur. Il y a 12 lunaisons entières.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lunaison dure exactement 4 semaines, soit 28 jours.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : une lunaison dure environ 29,5 jours. Étape 3 — Calculer : 12 × 28 = 336 jours, contre 12 × 29,5 = 354 jours. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Le calendrier de la Lune",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour calculer des durées et des dates, avec des questions de types variés.",
+              "hint": "Commence par écrire combien de lunaisons sont demandées, puis multiplie par 29,5 avant de passer aux dates.",
+              "exercise_type": "fixation",
+              "figure": "lunaison-en-jours",
+              "questions": [
+                {
+                  "content": "Une lunaison dure 29,5 jours. Combien de jours durent 3 lunaisons ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Exprimer : 3 lunaisons, soit 3 × 29,5. Étape 3 — Calculer : 3 × 29,5 = 88,5. La durée est 88,5 jours.",
+                  "answers": [
+                    {
+                      "content": "88,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pleine lune a lieu le 3 septembre. Septembre compte 30 jours, octobre 31 jours. Quand aura lieu la pleine lune 2 lunaisons plus tard ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer : 2 × 29,5 = 59 jours. Étape 4 — Convertir : du 3 au 30 septembre, 27 jours ; 27 + 31 = 58 amènent au 31 octobre ; il reste 59 − 58 = 1 jour, donc le 1er novembre.",
+                  "answers": [
+                    {
+                      "content": "Le 1er novembre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le 3 novembre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 30 octobre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 3 octobre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour calculer une date.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever les données. Étape 2 — Exprimer en lunaisons. Étape 3 — Calculer en jours. Étape 4 — Convertir en date. On ne peut pas convertir en date avant d'avoir calculé la durée.",
+                  "answers": [
+                    {
+                      "content": "Relever la date de départ et la durée d'une lunaison"
+                    },
+                    {
+                      "content": "Exprimer la durée cherchée en lunaisons"
+                    },
+                    {
+                      "content": "Calculer la durée en jours"
+                    },
+                    {
+                      "content": "Convertir en date et conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lunaisons durent ___ jours.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Calculer : 2 × 29,5 = 59. Le nombre attendu est 59.",
+                  "answers": [
+                    {
+                      "content": "59",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une année de 365 jours contient exactement 12 lunaisons.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer : 365 ÷ 29,5 ≈ 12,4. Il y a 12 lunaisons entières, plus une partie de lunaison. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles durées sont des multiples entiers de la lunaison de 29,5 jours ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Calculer : 2 × 29,5 = 59 et 3 × 29,5 = 88,5. En revanche 30, 45 et 14,75 ne sont pas des multiples entiers de 29,5 : 14,75 est la moitié d'une lunaison.",
+                  "answers": [
+                    {
+                      "content": "59 jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "88,5 jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "45 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "14,75 jours",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Veillée de pleine lune au village",
+          "statement": "Un soir, au village, la famille de Yao fait une veillée. Dans le ciel, la Lune apparaît comme un disque entier lumineux. La grand-mère dit : « La Lune brille parce qu'elle fabrique sa lumière. » Yao se souvient de sa leçon et veut vérifier.",
+          "exercise_type": "fixation",
+          "figure": "phases-et-positions",
+          "questions": [
+            {
+              "content": "La Lune est-elle une source primaire ou une source secondaire de lumière ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Identifier : la Lune ne produit pas de lumière, elle est éclairée par le Soleil. Étape 2 — Repérer : seule sa moitié tournée vers le Soleil est éclairée ; sans le Soleil, elle disparaîtrait dans le noir. Étape 4 — Conclure : source secondaire. L'erreur tentante est de croire qu'un objet qui brille produit sa lumière.",
+              "answers": [
+                {
+                  "content": "Une source secondaire, car elle renvoie la lumière du Soleil",
+                  "correct": true
+                },
+                {
+                  "content": "Une source primaire, car elle brille la nuit",
+                  "correct": false
+                },
+                {
+                  "content": "Une source primaire, car elle est ronde",
+                  "correct": false
+                },
+                {
+                  "content": "Ni l'une ni l'autre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao voit un disque entier lumineux. Quelle phase est-ce ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Observer : un disque entier. Étape 2 — Comparer : un disque entier est la pleine lune ; un quartier est un demi-disque ; à la nouvelle lune on ne voit rien. Étape 4 — Conclure : pleine lune.",
+              "answers": [
+                {
+                  "content": "La pleine lune",
+                  "correct": true
+                },
+                {
+                  "content": "La nouvelle lune",
+                  "correct": false
+                },
+                {
+                  "content": "Le premier quartier",
+                  "correct": false
+                },
+                {
+                  "content": "Le dernier quartier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la position des astres à la pleine lune ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Placer : à la pleine lune, l'ordre est Soleil, Terre, Lune. Étape 2 — Marquer : la moitié éclairée de la Lune est tournée vers le Soleil, donc vers la Terre. Étape 3 — Regarder : on voit toute cette moitié. L'ordre Soleil, Lune, Terre est celui de la nouvelle lune.",
+              "answers": [
+                {
+                  "content": "La Terre est à peu près entre le Soleil et la Lune",
+                  "correct": true
+                },
+                {
+                  "content": "La Lune est entre le Soleil et la Terre",
+                  "correct": false
+                },
+                {
+                  "content": "Le Soleil est entre la Terre et la Lune",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois astres forment un angle droit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Il faut une demi-lunaison pour passer de la pleine lune à la nouvelle lune. Une lunaison dure 29,5 jours. Combien de jours séparent la pleine lune de la nouvelle lune suivante ?",
+              "question_type": "numeric",
+              "unit": "jours",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Relever : une lunaison dure 29,5 jours. Étape 2 — Exprimer : la moitié, soit 29,5 ÷ 2. Étape 3 — Calculer : 29,5 ÷ 2 = 14,75. La nouvelle lune aura lieu environ 14,75 jours plus tard.",
+              "answers": [
+                {
+                  "content": "14,75",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À chaque pleine lune, il y a forcément une éclipse de Lune.",
+              "question_type": "true_false",
+              "explanation": "Méthode : pour une éclipse, il faut un alignement presque parfait du Soleil, de la Terre et de la Lune. Le plus souvent la Lune passe un peu au-dessus ou en dessous de l'ombre de la Terre. Il y a environ 12 pleines lunes par an, mais bien moins d'éclipses de Lune. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une éclipse de Lune a lieu quand la Lune entre dans l'ombre de la ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 2 — Placer : Soleil, Terre, Lune. Étape 3 — Nommer : la Terre est au milieu, elle est opaque et fait une ombre sur la Lune. Le mot est « Terre ».",
+              "answers": [
+                {
+                  "content": "Terre",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le calendrier lunaire du club de l'école",
+          "statement": "Le club d'astronomie du collège note les phases de la Lune. Il observe une nouvelle lune le 6 juin. Juin compte 30 jours et juillet 31 jours. Une lunaison dure 29,5 jours. Les élèves veulent prévoir les prochaines phases.",
+          "exercise_type": "fixation",
+          "figure": "lunaison-en-jours",
+          "questions": [
+            {
+              "content": "Relie chaque phase au nombre de jours écoulés depuis la nouvelle lune (valeurs arrondies).",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Relever : une lunaison dure 29,5 jours. Étape 2 — Exprimer : un quart de lunaison pour le premier quartier (29,5 ÷ 4 ≈ 7), la moitié pour la pleine lune (≈ 15), trois quarts pour le dernier quartier (≈ 22). Étape 3 — Calculer : ces durées sont arrondies à l'unité.",
+              "answers": [
+                {
+                  "content": "Premier quartier",
+                  "match": "Environ 7 jours"
+                },
+                {
+                  "content": "Pleine lune",
+                  "match": "Environ 15 jours"
+                },
+                {
+                  "content": "Dernier quartier",
+                  "match": "Environ 22 jours"
+                },
+                {
+                  "content": "Nouvelle lune suivante",
+                  "match": "29,5 jours"
+                }
+              ]
+            },
+            {
+              "content": "Combien de jours durent 2 lunaisons ?",
+              "question_type": "numeric",
+              "unit": "jours",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Relever : 29,5 jours par lunaison. Étape 2 — Exprimer : 2 lunaisons. Étape 3 — Calculer : 2 × 29,5 = 59. La durée est 59 jours.",
+              "answers": [
+                {
+                  "content": "59",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle sera la date de la nouvelle lune 2 lunaisons après le 6 juin ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 3 — Calculer : 2 × 29,5 = 59 jours. Étape 4 — Convertir : du 6 au 30 juin, 24 jours ; 24 + 31 = 55 jours amènent au 31 juillet ; il reste 59 − 55 = 4 jours, donc le 4 août. Se tromper d'un jour vient souvent d'un mois mal compté.",
+              "answers": [
+                {
+                  "content": "Le 4 août",
+                  "correct": true
+                },
+                {
+                  "content": "Le 6 août",
+                  "correct": false
+                },
+                {
+                  "content": "Le 3 août",
+                  "correct": false
+                },
+                {
+                  "content": "Le 4 juillet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de lunaisons entières contient une année de 365 jours ?",
+              "question_type": "numeric",
+              "unit": "lunaisons",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 2 — Exprimer : combien de fois 29,5 tient dans 365. Étape 3 — Calculer : 12 × 29,5 = 354 ≤ 365 et 13 × 29,5 = 383,5 > 365. Il y a 12 lunaisons entières. Le résultat 12,4 de la division n'est pas un nombre entier.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le 4 août est une nouvelle lune. Environ 15 jours plus tard, quelle phase observe-t-on ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Relever : départ à la nouvelle lune. Étape 2 — Exprimer : 15 jours est environ la moitié d'une lunaison (14,75 jours). Étape 4 — Conclure : à mi-cycle on observe la pleine lune.",
+              "answers": [
+                {
+                  "content": "La pleine lune",
+                  "correct": true
+                },
+                {
+                  "content": "Le premier quartier",
+                  "correct": false
+                },
+                {
+                  "content": "La nouvelle lune",
+                  "correct": false
+                },
+                {
+                  "content": "Le dernier quartier",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une éclipse observée depuis la cour",
+          "statement": "Un jour de nouvelle lune, les élèves de 4ème observent depuis la cour, avec des lunettes de protection spéciales, une éclipse partielle de Soleil. Ils savent que la lumière va à 300 000 km/s. La distance Soleil–Terre est d'environ 150 000 000 km et la distance Terre–Lune d'environ 384 000 km.",
+          "exercise_type": "evaluation",
+          "figure": "eclipse-de-soleil",
+          "questions": [
+            {
+              "content": "Pourquoi cette éclipse est-elle une éclipse de Soleil ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : l'astre qui devient sombre est le Soleil. Étape 2 — Placer : Soleil, Lune, Terre alignés. Étape 3 — Nommer : la Lune, opaque, arrête la lumière et fait de l'ombre sur la Terre. Étape 4 — Conclure : éclipse de Soleil. Si la Terre était au milieu, ce serait une éclipse de Lune.",
+              "answers": [
+                {
+                  "content": "La Lune est entre le Soleil et la Terre et arrête une partie de la lumière du Soleil",
+                  "correct": true
+                },
+                {
+                  "content": "La Terre est entre le Soleil et la Lune",
+                  "correct": false
+                },
+                {
+                  "content": "Le Soleil a cessé de produire de la lumière",
+                  "correct": false
+                },
+                {
+                  "content": "La Lune produit moins de lumière",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les élèves sont dans la pénombre de la Lune. Quelle éclipse voient-ils ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 3 — Nommer : l'ombre de la Lune est la zone qui ne reçoit aucune lumière du Soleil ; la pénombre n'en reçoit qu'une partie (voir la leçon sur la propagation de la lumière). Étape 4 — Conclure : dans la pénombre, l'éclipse est partielle.",
+              "answers": [
+                {
+                  "content": "Une éclipse partielle de Soleil",
+                  "correct": true
+                },
+                {
+                  "content": "Une éclipse totale de Soleil",
+                  "correct": false
+                },
+                {
+                  "content": "Une éclipse de Lune",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune éclipse",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si la Lune était transparente, elle ferait quand même une ombre sur la Terre.",
+              "question_type": "true_false",
+              "explanation": "Méthode : une ombre est produite par un objet opaque qui arrête la lumière. Un objet transparent laisse passer la lumière : il ne fait pas d'ombre portée nette. Sans ombre, il n'y aurait pas d'éclipse. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de secondes la lumière met-elle pour aller du Soleil à la Terre (150 000 000 km à 300 000 km/s) ?",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Méthode : durée = distance ÷ vitesse. Étape 1 — Relever : 150 000 000 km et 300 000 km/s. Étape 2 — Écrire : t = 150 000 000 ÷ 300 000. Étape 3 — Calculer : 150 000 000 ÷ 300 000 = 500. La lumière met 500 secondes, soit 8 minutes 20 secondes.",
+              "answers": [
+                {
+                  "content": "500",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de secondes la lumière met-elle pour aller de la Lune à la Terre (384 000 km à 300 000 km/s) ?",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Méthode : durée = distance ÷ vitesse. Étape 2 — Écrire : t = 384 000 ÷ 300 000. Étape 3 — Calculer : 384 ÷ 300 = 1,28. La lumière met 1,28 seconde.",
+              "answers": [
+                {
+                  "content": "1,28",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi il n'y a pas d'éclipse de Soleil à chaque nouvelle lune.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "À la nouvelle lune, la Lune est entre le Soleil et la Terre, mais…",
+              "criteria": [
+                "Il faut que le Soleil, la Lune et la Terre soient alignés",
+                "La Lune passe le plus souvent un peu au-dessus ou en dessous de cet alignement",
+                "Il y a environ 12 nouvelles lunes par an mais bien moins d'éclipses"
+              ],
+              "explanation": "Corrigé modèle : à la nouvelle lune, la Lune est entre le Soleil et la Terre, mais pas toujours exactement sur la ligne qui joint le Soleil à la Terre. Le plus souvent elle passe un peu au-dessus ou un peu en dessous, donc son ombre manque la Terre. Il y a environ 12 nouvelles lunes par an (365 ÷ 29,5 ≈ 12,4), mais l'alignement presque parfait est rare, donc les éclipses de Soleil aussi. Barème : alignement nécessaire (1 point), Lune au-dessus ou en dessous (1 point), comparaison avec le nombre de nouvelles lunes (1 point).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Dossier : la Lune, le Soleil et la Terre",
+          "statement": "Dans le cadre du devoir de fin de trimestre, tu étudies un dossier. Une nouvelle lune a lieu le 4 janvier. Février compte 28 jours et une lunaison dure 29,5 jours. Vitesse de la lumière : 300 000 km/s. Distances : Terre–Lune 384 000 km, Soleil–Terre 150 000 000 km. Pour cet exercice, on suppose que la distance Soleil–Lune vaut aussi environ 150 000 000 km.",
+          "exercise_type": "evaluation",
+          "figure": "classement-des-eclipses",
+          "questions": [
+            {
+              "content": "À peu près à quelle date aura lieu la pleine lune suivante ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Relever : départ le 4 janvier, lunaison 29,5 jours. Étape 2 — Exprimer : la pleine lune est à la moitié d'une lunaison. Étape 3 — Calculer : 29,5 ÷ 2 = 14,75 jours. Étape 4 — Convertir : 4 + 14,75 = 18,75, soit environ le 19 janvier.",
+              "answers": [
+                {
+                  "content": "Le 19 janvier",
+                  "correct": true
+                },
+                {
+                  "content": "Le 12 janvier",
+                  "correct": false
+                },
+                {
+                  "content": "Le 4 février",
+                  "correct": false
+                },
+                {
+                  "content": "Le 4 mars",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle sera la date de la nouvelle lune 2 lunaisons après le 4 janvier ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 3 — Calculer : 2 × 29,5 = 59 jours. Étape 4 — Convertir : du 4 au 31 janvier, 27 jours ; 27 + 28 = 55 jours amènent au 28 février ; il reste 59 − 55 = 4 jours, donc le 4 mars.",
+              "answers": [
+                {
+                  "content": "Le 4 mars",
+                  "correct": true
+                },
+                {
+                  "content": "Le 4 février",
+                  "correct": false
+                },
+                {
+                  "content": "Le 2 mars",
+                  "correct": false
+                },
+                {
+                  "content": "Le 6 mars",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La lumière de la pleine lune vient du Soleil, puis de la Lune jusqu'à la Terre. Quelle est la durée totale du trajet en secondes (Soleil–Lune 150 000 000 km, puis Lune–Terre 384 000 km) ?",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Méthode : durée = distance ÷ vitesse. Étape 1 — Relever : 150 000 000 ÷ 300 000 = 500 s pour Soleil–Lune, et 384 000 ÷ 300 000 = 1,28 s pour Lune–Terre. Étape 2 — Additionner : 500 + 1,28 = 501,28. La lumière met environ 501,28 secondes.",
+              "answers": [
+                {
+                  "content": "501,28",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont vraies à la pleine lune ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Placer : à la pleine lune l'ordre est Soleil, Terre, Lune. Étape 2 — Marquer : la moitié éclairée est tournée vers le Soleil, donc vers la Terre. Étape 3 — Regarder : on voit un disque entier. Les deux autres propositions décrivent la nouvelle lune.",
+              "answers": [
+                {
+                  "content": "La Terre est à peu près entre le Soleil et la Lune",
+                  "correct": true
+                },
+                {
+                  "content": "On voit toute la moitié éclairée de la Lune",
+                  "correct": true
+                },
+                {
+                  "content": "La Lune est entre le Soleil et la Terre",
+                  "correct": false
+                },
+                {
+                  "content": "On ne voit pas la Lune",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec un schéma décrit en quelques phrases, explique pourquoi on ne voit pas la Lune à la nouvelle lune.",
+              "question_type": "written",
+              "points": 4,
+              "starter": "À la nouvelle lune, le Soleil, la Lune et la Terre sont…",
+              "criteria": [
+                "Placer le Soleil, la Lune et la Terre alignés dans cet ordre",
+                "La moitié éclairée de la Lune est tournée vers le Soleil",
+                "La Terre voit la moitié sombre de la Lune",
+                "Conclure : la Lune n'est pas visible, c'est la nouvelle lune"
+              ],
+              "explanation": "Corrigé modèle : à la nouvelle lune, le Soleil, la Lune et la Terre sont alignés dans cet ordre, les rayons du Soleil étant parallèles. La moitié de la Lune tournée vers le Soleil est éclairée, mais elle est du côté opposé à la Terre. L'observateur sur la Terre voit donc la moitié non éclairée : la Lune n'est pas visible. Barème : alignement (1 point), moitié éclairée vers le Soleil (1 point), la Terre voit la face sombre (1 point), conclusion (1 point).",
+              "answers": []
+            },
+            {
+              "content": "Distingue l'éclipse de Soleil et l'éclipse de Lune en donnant, pour chacune, l'astre du milieu et la phase de la Lune.",
+              "question_type": "written",
+              "points": 4,
+              "starter": "Pour l'éclipse de Soleil, l'astre du milieu est…",
+              "criteria": [
+                "Éclipse de Soleil : la Lune est au milieu",
+                "Éclipse de Soleil : nouvelle lune",
+                "Éclipse de Lune : la Terre est au milieu",
+                "Éclipse de Lune : pleine lune"
+              ],
+              "explanation": "Corrigé modèle : lors d'une éclipse de Soleil, l'ordre est Soleil, Lune, Terre : la Lune est au milieu et fait de l'ombre sur la Terre, c'est la nouvelle lune. Lors d'une éclipse de Lune, l'ordre est Soleil, Terre, Lune : la Terre est au milieu et la Lune entre dans son ombre, c'est la pleine lune. Barème : un point pour chacun des quatre critères.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Décrire le système Soleil, Terre, Lune, reconnaître les phases, les expliquer par la position de la Lune, distinguer les deux éclipses et connaître la durée d'une lunaison.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le soir, Koffi regarde le ciel depuis la cour de sa maison. Il veut décrire le système formé par le Soleil, la Terre et la Lune.",
+              "hint": "Demande-toi : qui produit la lumière, qui est éclairé, qui tourne autour de quoi ?",
+              "exercise_type": "evaluation",
+              "figure": "systeme-soleil-terre-lune",
+              "questions": [
+                {
+                  "content": "Quelle est la seule source primaire de lumière du système Soleil, Terre, Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Identifier : le Soleil est une étoile, il produit sa lumière. La Terre et la Lune sont éclairées, donc secondaires. Étape 4 — Conclure : le Soleil. La Lune brille mais elle ne produit rien.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune et la Terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La moitié de la Lune tournée vers le Soleil est toujours éclairée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 2 — Repérer : le Soleil éclaire toujours la moitié de la Lune qui lui fait face. Étape 4 — Conclure : vrai, qu'on la voie ou non depuis la Terre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre fait un tour autour du Soleil en environ ___ jours.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : Étape 3 — Situer : la Terre tourne autour du Soleil, un tour dure environ 365 jours, soit un an. La réponse est 365.",
+                  "answers": [
+                    {
+                      "content": "365",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque astre à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : Étape 1 — Identifier : le Soleil produit la lumière. Étape 3 — Situer : la Terre tourne autour du Soleil, la Lune autour de la Terre.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil",
+                      "match": "Source primaire de lumière"
+                    },
+                    {
+                      "content": "La Terre",
+                      "match": "Tourne autour du Soleil"
+                    },
+                    {
+                      "content": "La Lune",
+                      "match": "Tourne autour de la Terre"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les phases de la Lune reviennent tous les ___ jours environ.",
+                  "question_type": "select",
+                  "explanation": "Méthode : Étape 3 — Situer : la Lune revient dans la même position par rapport au Soleil et à la Terre en environ 29,5 jours, une lunaison. 365 jours est la durée d'un tour de la Terre autour du Soleil.",
+                  "answers": [
+                    {
+                      "content": "29,5",
+                      "correct": true
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    },
+                    {
+                      "content": "365",
+                      "correct": false
+                    },
+                    {
+                      "content": "14",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Chaque soir, Moussa note la forme de la partie éclairée de la Lune qu'il voit dans le ciel.",
+              "hint": "Observe la forme, compare-la, puis demande-toi si elle grossit ou diminue.",
+              "exercise_type": "evaluation",
+              "figure": "cycle-des-phases",
+              "questions": [
+                {
+                  "content": "Un soir, Moussa voit un demi-disque lumineux. Les soirs suivants, la partie éclairée grossit. Quelle est la phase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Observer : un demi-disque. Étape 2 — Comparer : c'est un quartier. Étape 3 — Déterminer : la partie éclairée grossit. Étape 4 — Conclure : premier quartier. Le dernier quartier diminue.",
+                  "answers": [
+                    {
+                      "content": "Le premier quartier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pleine lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa voit un disque entier lumineux. Quelle est la phase ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Observer : disque entier. Étape 2 — Comparer : c'est la pleine lune. Étape 4 — Conclure : pleine lune.",
+                  "answers": [
+                    {
+                      "content": "La pleine lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dernier croissant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces phases dans l'ordre, de la nouvelle lune à la pleine lune.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : Étape 3 — Déterminer : la partie éclairée grossit : rien, croissant, demi-disque, plus qu'un demi-disque, disque entier.",
+                  "answers": [
+                    {
+                      "content": "Nouvelle lune"
+                    },
+                    {
+                      "content": "Premier croissant"
+                    },
+                    {
+                      "content": "Premier quartier"
+                    },
+                    {
+                      "content": "Gibbeuse croissante"
+                    },
+                    {
+                      "content": "Pleine lune"
+                    }
+                  ]
+                },
+                {
+                  "content": "À la ___ lune, on ne voit pas la Lune dans le ciel.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : Étape 1 — Observer : aucune partie éclairée visible. Étape 4 — Conclure : nouvelle lune.",
+                  "answers": [
+                    {
+                      "content": "nouvelle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au premier quartier, on voit un quart du disque lumineux.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Observer : on voit un demi-disque. Le quartier désigne un quart du cycle (environ 7,4 jours), pas un quart du disque. Étape 4 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le professeur dessine au tableau le Soleil, la Terre et la Lune sur son tour autour de la Terre, avec des rayons du Soleil parallèles.",
+              "hint": "Fais un petit schéma : le Soleil à gauche, la Terre au milieu, la Lune sur son tour.",
+              "exercise_type": "evaluation",
+              "figure": "phases-et-positions",
+              "questions": [
+                {
+                  "content": "La Lune est entre le Soleil et la Terre, alignés. Quelle phase voit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Placer : Soleil, Lune, Terre. Étape 2 — Marquer : la moitié éclairée est du côté du Soleil, opposé à la Terre. Étape 3 — Regarder : la Terre voit la moitié sombre. Étape 4 — Conclure : nouvelle lune.",
+                  "answers": [
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pleine lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Terre est entre le Soleil et la Lune. Quelle phase voit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Placer : Soleil, Terre, Lune. Étape 2 — Marquer : la moitié éclairée est tournée vers le Soleil, donc vers la Terre. Étape 3 — Regarder : on voit toute cette moitié. Étape 4 — Conclure : pleine lune.",
+                  "answers": [
+                    {
+                      "content": "La pleine lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque position de la Lune à sa phase.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : Étape 1 — Placer : la Lune revient à la même position par rapport au Soleil et à la Terre en 29,5 jours. Un quart de tour donne le premier quartier, la moitié du tour la pleine lune, trois quarts de tour le dernier quartier.",
+                  "answers": [
+                    {
+                      "content": "Un quart de tour après la nouvelle lune",
+                      "match": "Premier quartier"
+                    },
+                    {
+                      "content": "La moitié du tour après la nouvelle lune",
+                      "match": "Pleine lune"
+                    },
+                    {
+                      "content": "Trois quarts de tour après la nouvelle lune",
+                      "match": "Dernier quartier"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les phases de la Lune sont dues à l'ombre de la Terre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 2 — Marquer : la moitié de la Lune tournée vers le Soleil est toujours éclairée. Les phases viennent de la part de cette moitié que la Terre voit. L'ombre de la Terre ne tombe sur la Lune que lors d'une éclipse de Lune.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À la pleine lune, la Lune est du côté de la Terre ___ du Soleil.",
+                  "question_type": "select",
+                  "explanation": "Méthode : Étape 1 — Placer : l'ordre est Soleil, Terre, Lune : la Lune est du côté de la Terre opposé au Soleil.",
+                  "answers": [
+                    {
+                      "content": "opposé",
+                      "correct": true
+                    },
+                    {
+                      "content": "identique",
+                      "correct": false
+                    },
+                    {
+                      "content": "entre la Terre et le Soleil",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Lors d'une séance sur les éclipses, la classe fait le point sur les alignements et les durées.",
+              "hint": "Pour les éclipses, demande-toi qui est au milieu ; pour les durées, multiplie par 29,5.",
+              "exercise_type": "evaluation",
+              "figure": "classement-des-eclipses",
+              "questions": [
+                {
+                  "content": "Pendant une éclipse de Soleil, quel astre est au milieu, entre les deux autres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 2 — Placer : Soleil, Lune, Terre. Étape 3 — Nommer : la Lune est opaque et fait de l'ombre sur la Terre. Étape 4 — Conclure : la Lune.",
+                  "answers": [
+                    {
+                      "content": "La Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant une éclipse de Lune, la Lune entre dans l'ombre de la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : Étape 3 — Nommer : la Terre est au milieu, elle fait de l'ombre sur la Lune. Le mot est « Terre ».",
+                  "answers": [
+                    {
+                      "content": "Terre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lunaison dure 29,5 jours. Combien de jours durent 2 lunaisons ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : 29,5 jours. Étape 2 — Exprimer : 2 lunaisons. Étape 3 — Calculer : 2 × 29,5 = 59 jours.",
+                  "answers": [
+                    {
+                      "content": "59",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lunaison dure exactement 28 jours.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : une lunaison dure environ 29,5 jours. Avec 28 jours, 12 lunaisons feraient 336 jours au lieu de 354 : l'erreur est grande. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phases voit-on quand le Soleil, la Terre et la Lune sont alignés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 1 — Placer : alignés, soit la Lune est au milieu (nouvelle lune), soit la Terre est au milieu (pleine lune). Aux quartiers, les directions sont à peu près perpendiculaires.",
+                  "answers": [
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pleine lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier croissant",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Phases de la Lune, dates et éclipses dans des situations de la vie courante : marché du soir, pêche sur la lagune, cour d'école, fête du village.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché du soir de Korhogo, Awa vend des mangues. Ce soir, la Lune est pleine et le ciel est dégagé : Awa se demande pourquoi elle voit aussi bien sans lampe.",
+              "hint": "Pense au Soleil comme source primaire, à la Lune comme corps éclairé.",
+              "exercise_type": "evaluation",
+              "figure": "phases-et-positions",
+              "questions": [
+                {
+                  "content": "D'où vient la lumière que la Lune envoie à Awa ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Identifier : la source primaire est le Soleil, la Lune est un corps éclairé. Étape 4 — Conclure : la Lune renvoie la lumière du Soleil.",
+                  "answers": [
+                    {
+                      "content": "Du Soleil, que la Lune renvoie",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la Lune elle-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des lampes du marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "De la Terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phase de la Lune Awa voit-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Observer : la Lune est pleine, c'est un disque entier. Étape 2 — Comparer : disque entier = pleine lune. Étape 4 — Conclure : pleine lune.",
+                  "answers": [
+                    {
+                      "content": "La pleine lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la pleine lune, quelle est la position des astres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Placer : Soleil, Terre, Lune. Étape 2 — Marquer : la moitié éclairée est tournée vers le Soleil, donc vers la Terre. Étape 3 — Regarder : on voit toute la moitié éclairée.",
+                  "answers": [
+                    {
+                      "content": "La Terre est à peu près entre le Soleil et la Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune est entre le Soleil et la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil est entre la Terre et la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les astres forment un angle droit",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pleine lune a lieu ce soir. Une lunaison dure 29,5 jours. Combien de jours jusqu'à la nouvelle lune (une demi-lunaison) ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : 29,5 jours. Étape 2 — Exprimer : la moitié. Étape 3 — Calculer : 29,5 ÷ 2 = 14,75 jours.",
+                  "answers": [
+                    {
+                      "content": "14,75",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le ciel est nuageux, la Lune n'est plus une source secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un nuage cache la Lune mais ne change pas sa nature : elle reste un corps éclairé qui renvoie la lumière du Soleil. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Grand-Lahou, des pêcheurs de la lagune notent le calendrier de la Lune pour préparer leurs sorties. Ils savent qu'une lunaison dure 29,5 jours. La nouvelle lune a lieu le 3 mars. Mars compte 31 jours et avril 30 jours.",
+              "hint": "Multiplie par 29,5 puis ajoute les jours mois par mois.",
+              "exercise_type": "evaluation",
+              "figure": "lunaison-en-jours",
+              "questions": [
+                {
+                  "content": "Combien de jours durent 2 lunaisons ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : 29,5 jours. Étape 2 — Exprimer : 2 lunaisons. Étape 3 — Calculer : 2 × 29,5 = 59 jours.",
+                  "answers": [
+                    {
+                      "content": "59",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle sera la date de la nouvelle lune 2 lunaisons après le 3 mars ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 3 — Calculer : 59 jours. Étape 4 — Convertir : du 3 au 31 mars, 28 jours ; 28 + 30 = 58 jours amènent au 30 avril ; il reste 59 − 58 = 1 jour, donc le 1er mai.",
+                  "answers": [
+                    {
+                      "content": "Le 1er mai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le 3 mai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 30 avril",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 3 avril",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Environ combien de jours après le 3 mars aura lieu la pleine lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 2 — Exprimer : la moitié de la lunaison. Étape 3 — Calculer : 29,5 ÷ 2 = 14,75, soit environ 15 jours.",
+                  "answers": [
+                    {
+                      "content": "Environ 15 jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "Environ 7 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Environ 30 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Environ 59 jours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque phase au nombre de jours écoulés depuis le 3 mars (valeurs arrondies).",
+                  "question_type": "matching",
+                  "explanation": "Méthode : Étape 2 — Exprimer : un quart de lunaison (29,5 ÷ 4 ≈ 7), la moitié (≈ 15), trois quarts (≈ 22).",
+                  "answers": [
+                    {
+                      "content": "Premier quartier",
+                      "match": "Environ 7 jours"
+                    },
+                    {
+                      "content": "Pleine lune",
+                      "match": "Environ 15 jours"
+                    },
+                    {
+                      "content": "Dernier quartier",
+                      "match": "Environ 22 jours"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les phases de la Lune suivent les mois du calendrier.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : une lunaison dure 29,5 jours, alors que les mois comptent 28, 30 ou 31 jours. Les phases ne suivent pas les mois. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans la cour de l'école de Bouaké, les élèves portent des lunettes de protection spéciales pour observer une éclipse de Soleil. Le Soleil est en partie caché à midi.",
+              "hint": "Demande-toi : qui est au milieu, qui reçoit l'ombre ?",
+              "exercise_type": "evaluation",
+              "figure": "eclipse-de-soleil",
+              "questions": [
+                {
+                  "content": "Pourquoi le Soleil est-il en partie caché ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer : l'astre qui devient sombre est le Soleil. Étape 2 — Placer : Soleil, Lune, Terre. Étape 3 — Nommer : la Lune, opaque, arrête la lumière. Étape 4 — Conclure : éclipse de Soleil.",
+                  "answers": [
+                    {
+                      "content": "La Lune passe devant le Soleil et arrête une partie de sa lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Terre passe entre le Soleil et la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil produit moins de lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un nuage opaque passe devant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les élèves sont dans la pénombre de la Lune. Quelle éclipse voient-ils ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 3 — Nommer : dans la pénombre, une partie seulement de la lumière du Soleil est arrêtée. Étape 4 — Conclure : éclipse partielle.",
+                  "answers": [
+                    {
+                      "content": "Une éclipse partielle de Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse totale de Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une éclipse de Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune éclipse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les élèves peuvent regarder le Soleil sans protection pendant l'éclipse, car il est en partie caché.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : même en partie caché, le Soleil reste très lumineux et peut abîmer l'œil. Il faut toujours des lunettes de protection spéciales. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une éclipse de Soleil a lieu à la ___ lune.",
+                  "question_type": "select",
+                  "explanation": "Méthode : Étape 2 — Placer : la Lune est entre le Soleil et la Terre, c'est la nouvelle lune.",
+                  "answers": [
+                    {
+                      "content": "nouvelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "pleine",
+                      "correct": false
+                    },
+                    {
+                      "content": "dernier quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de secondes la lumière du Soleil met-elle pour arriver à l'école (150 000 000 km à 300 000 km/s) ?",
+                  "question_type": "numeric",
+                  "unit": "s",
+                  "tolerance": 0,
+                  "explanation": "Méthode : durée = distance ÷ vitesse. Étape 3 — Calculer : 150 000 000 ÷ 300 000 = 500. La lumière met 500 secondes.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le village de Yao fête la récolte à la pleine lune. La pleine lune a lieu le 8 mai. Mai compte 31 jours et juin 30 jours. Une lunaison dure 29,5 jours.",
+              "hint": "Compte les jours restants de mai, puis ceux de juin.",
+              "exercise_type": "evaluation",
+              "figure": "lunaison-en-jours",
+              "questions": [
+                {
+                  "content": "Combien de jours durent 2 lunaisons ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 3 — Calculer : 2 × 29,5 = 59 jours.",
+                  "answers": [
+                    {
+                      "content": "59",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle sera la date de la pleine lune 2 lunaisons après le 8 mai ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 4 — Convertir : du 8 au 31 mai, 23 jours ; 23 + 30 = 53 jours amènent au 30 juin ; il reste 59 − 53 = 6 jours, donc le 6 juillet.",
+                  "answers": [
+                    {
+                      "content": "Le 6 juillet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le 8 juillet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 4 juillet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 8 juin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le jour de la fête, la Terre est à peu près entre le Soleil et la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : Étape 1 — Placer : à la pleine lune l'ordre est Soleil, Terre, Lune. Le mot est « Lune ».",
+                  "answers": [
+                    {
+                      "content": "Lune",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le jour de la fête, il y aura forcément une éclipse de Lune.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : il faut un alignement presque parfait. Le plus souvent la Lune passe un peu au-dessus ou en dessous de l'ombre de la Terre. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que voit-on de la Lune à la pleine lune ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 3 — Regarder : à la pleine lune, la moitié éclairée est tournée vers la Terre, on voit un disque entier. Le demi-disque est un quartier, le croissant est une autre phase.",
+                  "answers": [
+                    {
+                      "content": "Un disque entier lumineux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toute la moitié éclairée de la Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un demi-disque lumineux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mince croissant",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Corriger des erreurs fréquentes, justifier un calcul de lunaison, expliquer une éclipse et calculer la durée du trajet de la lumière.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois élèves discutent. Awa dit : « La Lune produit sa lumière. » Koffi dit : « Les phases viennent de l'ombre de la Terre. » Moussa dit : « Le premier quartier montre un quart du disque. » Tu dois corriger ces trois affirmations.",
+              "hint": "Pour chaque affirmation, retrouve la règle de la leçon qui la contredit.",
+              "exercise_type": "evaluation",
+              "figure": "phases-et-positions",
+              "questions": [
+                {
+                  "content": "Awa a raison : la Lune produit sa propre lumière.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Identifier : la Lune est éclairée par le Soleil. Étape 2 — Repérer : seule sa moitié tournée vers le Soleil est éclairée ; sans le Soleil, elle disparaîtrait dans le noir. Étape 4 — Conclure : c'est une source secondaire. Awa se trompe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi a raison : les phases viennent de l'ombre de la Terre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 2 — Marquer : la moitié de la Lune tournée vers le Soleil est toujours éclairée. Les phases viennent de la part de cette moitié que la Terre voit. L'ombre de la Terre n'intervient que lors d'une éclipse de Lune.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa a raison : au premier quartier, on voit un quart du disque.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : au premier quartier on voit un demi-disque lumineux. Le quartier est un quart du cycle : 29,5 ÷ 4 ≈ 7,4 jours. Moussa confond quart de cycle et quart de disque.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase corrige le mieux l'erreur de Koffi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 2 — Marquer : la moitié tournée vers le Soleil est toujours éclairée. Étape 3 — Regarder : la Terre en voit une part qui dépend de la position de la Lune. Les autres propositions sont les erreurs d'élèves.",
+                  "answers": [
+                    {
+                      "content": "La moitié éclairée de la Lune est toujours tournée vers le Soleil, et on en voit plus ou moins selon la position de la Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune change de forme au cours du mois",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Terre cache la Lune à chaque nouvelle lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil éclaire la Lune seulement à la pleine lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique, avec la position des astres, pourquoi on voit un disque entier à la pleine lune.",
+                  "question_type": "written",
+                  "points": 3,
+                  "starter": "À la pleine lune, la Terre est entre…",
+                  "criteria": [
+                    "Ordre Soleil, Terre, Lune",
+                    "La moitié éclairée de la Lune est tournée vers le Soleil donc vers la Terre",
+                    "La Terre voit toute la moitié éclairée : disque entier"
+                  ],
+                  "explanation": "Corrigé modèle : à la pleine lune, la Terre est à peu près entre le Soleil et la Lune. La moitié de la Lune tournée vers le Soleil est éclairée, et comme la Lune est du côté opposé de la Terre, cette moitié est tournée vers la Terre. L'observateur voit donc toute la moitié éclairée, soit un disque entier. Barème : ordre des astres (1 point), moitié éclairée tournée vers la Terre (1 point), conclusion (1 point).",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le professeur affirme qu'une année de 365 jours contient 12 lunaisons entières, et que 12 × 28 = 336 donne le bon compte. Les élèves vérifient avec 29,5 jours par lunaison.",
+              "hint": "Calcule chaque durée avec la même méthode, puis compare à 365.",
+              "exercise_type": "evaluation",
+              "figure": "lunaison-en-jours",
+              "questions": [
+                {
+                  "content": "Combien font 12 lunaisons de 29,5 jours, en jours ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : 29,5 jours par lunaison. Étape 2 — Exprimer : 12 lunaisons. Étape 3 — Calculer : 12 × 29,5 = 354. La durée est 354 jours.",
+                  "answers": [
+                    {
+                      "content": "354",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien font 12 lunaisons de 28 jours, en jours ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 2 — Exprimer : 12 lunaisons de 28 jours. Étape 3 — Calculer : 12 × 28 = 336. Ce résultat est trop petit : la lunaison ne dure pas 28 jours.",
+                  "answers": [
+                    {
+                      "content": "336",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle durée de lunaison est la bonne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever : la lunaison dure environ 29,5 jours. 12 × 29,5 = 354 est proche de 365 ; 12 × 28 = 336 en est trop loin.",
+                  "answers": [
+                    {
+                      "content": "29,5 jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "28 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 jours exactement",
+                      "correct": false
+                    },
+                    {
+                      "content": "365 jours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une année de 365 jours contient 13 lunaisons entières.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 3 — Calculer : 13 × 29,5 = 383,5, qui dépasse 365. Il y a donc 12 lunaisons entières. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles durées sont des multiples entiers de 29,5 jours ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 3 — Calculer : 2 × 29,5 = 59 et 3 × 29,5 = 88,5. Les autres durées ne sont pas des multiples entiers de 29,5.",
+                  "answers": [
+                    {
+                      "content": "59 jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "88,5 jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "45 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "14,75 jours",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Lors d'une éclipse de Lune, la Lune devient sombre pendant la nuit. Un élève propose trois explications : un nuage, l'ombre de la Terre, ou l'extinction de la Lune.",
+              "hint": "Cherche l'astre du milieu, puis l'astre qui reçoit l'ombre.",
+              "exercise_type": "evaluation",
+              "figure": "eclipse-de-lune",
+              "questions": [
+                {
+                  "content": "Quelle explication est la bonne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer : l'astre qui devient sombre est la Lune. Étape 2 — Placer : Soleil, Terre, Lune alignés. Étape 3 — Nommer : la Terre, opaque, fait de l'ombre sur la Lune. La Lune ne produit pas de lumière, elle ne peut pas s'éteindre.",
+                  "answers": [
+                    {
+                      "content": "La Lune est entrée dans l'ombre de la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un nuage opaque passe devant la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Lune a arrêté de produire de la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil est passé entre la Terre et la Lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phase de la Lune a lieu au moment d'une éclipse de Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 4 — Conclure : la Terre est entre le Soleil et la Lune, c'est la position de la pleine lune.",
+                  "answers": [
+                    {
+                      "content": "La pleine lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'éclipse de Lune se voit de toute la partie de la Terre où il fait nuit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'ombre de la Terre est grande, la Lune éclipsée est visible de tous les endroits de la Terre où elle est au-dessus de l'horizon, c'est-à-dire où il fait nuit. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une éclipse totale de Soleil se voit depuis toute la Terre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'ombre de la Lune sur la Terre est petite, donc l'éclipse totale ne se voit que depuis une petite région. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi une éclipse de Lune n'a pas lieu à chaque pleine lune.",
+                  "question_type": "written",
+                  "points": 3,
+                  "starter": "À la pleine lune, la Terre est à peu près entre…",
+                  "criteria": [
+                    "Il faut que le Soleil, la Terre et la Lune soient alignés",
+                    "La Lune passe le plus souvent un peu au-dessus ou en dessous de l'ombre de la Terre",
+                    "Les pleines lunes sont plus nombreuses que les éclipses"
+                  ],
+                  "explanation": "Corrigé modèle : à la pleine lune, la Terre est à peu près entre le Soleil et la Lune, mais pas toujours exactement alignée avec eux. Le plus souvent la Lune passe un peu au-dessus ou un peu en dessous de l'ombre de la Terre : elle reste éclairée. Il y a environ 12 pleines lunes par an, mais bien moins d'éclipses de Lune. Barème : alignement nécessaire (1 point), Lune au-dessus ou en dessous de l'ombre (1 point), comparaison avec le nombre de pleines lunes (1 point).",
+                  "answers": []
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le club d'astronomie compare la distance Terre–Lune (384 000 km) et la distance Soleil–Terre (150 000 000 km). La vitesse de la lumière est de 300 000 km/s. Les élèves veulent justifier chaque durée par un calcul.",
+              "hint": "Écris la formule, remplace par les valeurs, puis calcule.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de secondes la lumière met-elle pour aller de la Lune à la Terre ?",
+                  "question_type": "numeric",
+                  "unit": "s",
+                  "tolerance": 0,
+                  "explanation": "Méthode : durée = distance ÷ vitesse. Étape 1 — Relever : 384 000 km et 300 000 km/s. Étape 2 — Écrire : t = 384 000 ÷ 300 000. Étape 3 — Calculer : 384 ÷ 300 = 1,28. La lumière met 1,28 seconde.",
+                  "answers": [
+                    {
+                      "content": "1,28",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de secondes la lumière met-elle pour aller du Soleil à la Terre ?",
+                  "question_type": "numeric",
+                  "unit": "s",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 2 — Écrire : t = 150 000 000 ÷ 300 000. Étape 3 — Calculer : 150 000 000 ÷ 300 000 = 500. La lumière met 500 secondes.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peux-tu dire de ces deux durées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la lumière va à la même vitesse partout (300 000 km/s). La durée est plus grande pour le Soleil (500 s contre 1,28 s), donc le Soleil est plus loin.",
+                  "answers": [
+                    {
+                      "content": "Le Soleil est beaucoup plus loin de la Terre que la Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Lune est plus loin que le Soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux astres sont à la même distance",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lumière va plus vite de la Lune que du Soleil",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La lumière du Soleil met environ 8 minutes et 20 secondes pour arriver à la Terre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 500 secondes = 8 × 60 + 20 = 480 + 20. Il y a 8 minutes et 20 secondes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La durée du trajet de la lumière est égale à la distance divisée par la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : on retrouve la formule de la leçon sur la propagation de la lumière : durée = distance ÷ vitesse. Le mot est « vitesse ».",
+                  "answers": [
+                    {
+                      "content": "vitesse",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : système Soleil, Terre, Lune, phases, positions, éclipses, dates et durées liées à la Lune.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour le bilan de la leçon, la classe étudie la nuit de la nouvelle lune du 4 janvier. Une lunaison dure 29,5 jours.",
+              "hint": "Utilise la méthode des phases : observer, comparer, déterminer, conclure.",
+              "exercise_type": "evaluation",
+              "figure": "cycle-des-phases",
+              "questions": [
+                {
+                  "content": "Que voit-on de la Lune à la nouvelle lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Placer : Soleil, Lune, Terre alignés. Étape 2 — Marquer : la moitié éclairée est du côté du Soleil. Étape 3 — Regarder : la Terre voit la moitié sombre. Étape 4 — Conclure : rien n'est visible.",
+                  "answers": [
+                    {
+                      "content": "Rien : la Lune n'est pas visible dans le ciel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un disque entier lumineux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un demi-disque lumineux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mince croissant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle position des astres correspond à la nouvelle lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Placer : à la nouvelle lune, l'ordre est Soleil, Lune, Terre.",
+                  "answers": [
+                    {
+                      "content": "La Lune est entre le Soleil et la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Terre est entre le Soleil et la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Soleil est entre la Terre et la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un angle droit entre les trois astres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de jours séparent la nouvelle lune du dernier quartier, à peu près trois quarts de lunaison ? Arrondis à l'unité.",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 2 — Exprimer : trois quarts de 29,5. Étape 3 — Calculer : 3 × 29,5 = 88,5 puis 88,5 ÷ 4 = 22,125, soit environ 22 jours.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Après le 4 janvier, la partie éclairée visible de la Lune grossit jusqu'à la pleine lune.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 3 — Déterminer : après la nouvelle lune, la partie éclairée visible grossit jusqu'à la pleine lune. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre phases principales, en partant de la nouvelle lune.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : Étape 3 — Déterminer : la partie éclairée grossit (premier quartier, pleine lune) puis diminue (dernier quartier).",
+                  "answers": [
+                    {
+                      "content": "Nouvelle lune"
+                    },
+                    {
+                      "content": "Premier quartier"
+                    },
+                    {
+                      "content": "Pleine lune"
+                    },
+                    {
+                      "content": "Dernier quartier"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une nouvelle lune a lieu le 4 janvier. Une lunaison dure 29,5 jours. Janvier compte 31 jours et février 28 jours. On cherche des dates à partir de cette nouvelle lune.",
+              "hint": "Calcule la durée en jours, puis compte les jours de chaque mois.",
+              "exercise_type": "evaluation",
+              "figure": "lunaison-en-jours",
+              "questions": [
+                {
+                  "content": "Combien de jours durent 2 lunaisons ?",
+                  "question_type": "numeric",
+                  "unit": "jours",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 3 — Calculer : 2 × 29,5 = 59 jours.",
+                  "answers": [
+                    {
+                      "content": "59",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la date de la nouvelle lune 2 lunaisons plus tard ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 4 — Convertir : du 4 au 31 janvier, 27 jours ; 27 + 28 = 55 jours amènent au 28 février ; il reste 59 − 55 = 4 jours, donc le 4 mars.",
+                  "answers": [
+                    {
+                      "content": "Le 4 mars",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le 4 février",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 2 mars",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 6 mars",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À peu près quelle sera la date de la pleine lune suivante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 3 — Calculer : 29,5 ÷ 2 = 14,75 jours. Étape 4 — Convertir : 4 + 14,75 ≈ 19, donc environ le 19 janvier.",
+                  "answers": [
+                    {
+                      "content": "Le 19 janvier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le 12 janvier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 4 février",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 4 mars",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La nouvelle lune suivante aura lieu le 28 janvier.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : 28 janvier est 24 jours après le 4. Une lunaison dure 29,5 jours : la nouvelle lune suivante aura lieu vers le 2 ou le 3 février. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une année de 365 jours contient ___ lunaisons entières.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 12 × 29,5 = 354 ≤ 365 et 13 × 29,5 = 383,5 > 365. Il y a 12 lunaisons entières.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour le bilan, la classe étudie les éclipses de Soleil et de Lune avec le schéma de l'alignement des astres.",
+              "hint": "Pour chaque éclipse, demande-toi qui est au milieu.",
+              "exercise_type": "evaluation",
+              "figure": "classement-des-eclipses",
+              "questions": [
+                {
+                  "content": "Relie chaque éclipse à l'astre du milieu ou à la zone où on l'observe.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : Étape 3 — Nommer : pour une éclipse de Soleil, la Lune est entre le Soleil et la Terre ; pour une éclipse de Lune, la Terre est entre le Soleil et la Lune.",
+                  "answers": [
+                    {
+                      "content": "Éclipse de Soleil",
+                      "match": "La Lune"
+                    },
+                    {
+                      "content": "Éclipse de Lune",
+                      "match": "La Terre"
+                    },
+                    {
+                      "content": "Éclipse totale de Soleil",
+                      "match": "Dans l'ombre de la Lune"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phase de la Lune correspond à une éclipse de Soleil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 2 — Placer : la Lune est entre le Soleil et la Terre, c'est la nouvelle lune.",
+                  "answers": [
+                    {
+                      "content": "La nouvelle lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pleine lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le premier quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dernier quartier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'ombre de la Lune, l'éclipse de Soleil est…",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 4 — Conclure : dans l'ombre, aucune lumière du Soleil n'arrive : l'éclipse est totale. Dans la pénombre, elle serait partielle.",
+                  "answers": [
+                    {
+                      "content": "totale",
+                      "correct": true
+                    },
+                    {
+                      "content": "partielle",
+                      "correct": false
+                    },
+                    {
+                      "content": "inexistante",
+                      "correct": false
+                    },
+                    {
+                      "content": "une éclipse de Lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il y a une éclipse de Soleil à chaque nouvelle lune.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : il faut un alignement presque parfait ; le plus souvent la Lune passe un peu au-dessus ou en dessous. Il y a environ 12 nouvelles lunes par an, mais bien moins d'éclipses de Soleil.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 3 — Nommer : l'ombre vient d'un objet opaque, et l'éclipse de Lune a lieu à la pleine lune. Les autres affirmations sont des erreurs : l'éclipse de Soleil a lieu à la nouvelle lune, et les phases ne viennent pas de l'ombre de la Terre.",
+                  "answers": [
+                    {
+                      "content": "La Lune est opaque",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse de Lune a lieu à la pleine lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une éclipse de Soleil a lieu à la pleine lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ombre de la Terre cause les phases",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À Abidjan, une élève de 4ème prépare son devoir de fin de trimestre sur la Lune et le Soleil. La vitesse de la lumière est de 300 000 km/s ; la distance Terre–Lune est de 384 000 km.",
+              "hint": "Reprends les trois idées de la leçon : lumière du Soleil, position de la Lune, durée.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La Lune est-elle une source primaire ou secondaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Identifier : la Lune ne produit pas de lumière. Étape 4 — Conclure : source secondaire.",
+                  "answers": [
+                    {
+                      "content": "Secondaire, car elle renvoie la lumière du Soleil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Primaire, car elle brille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Primaire, car elle est ronde",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'est ni une source ni un objet éclairé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de secondes la lumière met-elle pour aller de la Lune à la Terre ?",
+                  "question_type": "numeric",
+                  "unit": "s",
+                  "tolerance": 0,
+                  "explanation": "Méthode : durée = distance ÷ vitesse = 384 000 ÷ 300 000 = 1,28 s.",
+                  "answers": [
+                    {
+                      "content": "1,28",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À la pleine lune, que voit l'élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Placer : Soleil, Terre, Lune. Étape 3 — Regarder : toute la moitié éclairée est tournée vers la Terre, on voit un disque entier.",
+                  "answers": [
+                    {
+                      "content": "Un disque entier lumineux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un demi-disque lumineux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mince croissant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève peut regarder directement une éclipse de Soleil si elle est partielle.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : même partielle, une éclipse laisse une partie du Soleil très lumineuse. Il faut des lunettes de protection spéciales. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résume en quelques phrases le cycle de la Lune : sa durée, l'ordre des quatre phases principales.",
+                  "question_type": "written",
+                  "points": 4,
+                  "starter": "La Lune est éclairée par…",
+                  "criteria": [
+                    "Durée d'une lunaison : environ 29,5 jours",
+                    "Nouvelle lune puis premier quartier",
+                    "Pleine lune puis dernier quartier",
+                    "La Lune est éclairée par le Soleil"
+                  ],
+                  "explanation": "Corrigé modèle : la Lune est éclairée par le Soleil. Elle revient à la même position par rapport au Soleil et à la Terre en environ 29,5 jours et montre quatre phases principales dans l'ordre : nouvelle lune, premier quartier, pleine lune, dernier quartier, puis de nouveau la nouvelle lune. Barème : un point pour chaque critère.",
+                  "answers": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

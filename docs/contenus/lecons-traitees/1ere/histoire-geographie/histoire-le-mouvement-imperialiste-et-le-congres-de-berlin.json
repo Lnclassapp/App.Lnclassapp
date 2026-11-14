@@ -1,0 +1,3965 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — Le mouvement impérialiste et le congrès de Berlin",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "causes-imperialisme",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : la racine « Mouvement impérialiste (vers 1880-1914) » est reliée à quatre familles de causes, économiques, politiques, démographiques et idéologiques, et à un facteur qui facilite la conquête, les progrès techniques et médicaux. Chaque cause est accompagnée d'un exemple court.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "imp",
+                "label": "Mouvement impérialiste (vers 1880-1914)"
+              },
+              {
+                "id": "eco",
+                "label": "Économique : matières premières, marchés",
+                "category": 1
+              },
+              {
+                "id": "pol",
+                "label": "Politique : prestige, rivalités",
+                "category": 1
+              },
+              {
+                "id": "dem",
+                "label": "Démographique : population en hausse",
+                "category": 1
+              },
+              {
+                "id": "ide",
+                "label": "Idéologique : mission civilisatrice",
+                "category": 1
+              },
+              {
+                "id": "tec",
+                "label": "Technique : vapeur, quinine, armes",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "imp",
+                "to": "eco"
+              },
+              {
+                "from": "imp",
+                "to": "pol"
+              },
+              {
+                "from": "imp",
+                "to": "dem"
+              },
+              {
+                "from": "imp",
+                "to": "ide"
+              },
+              {
+                "from": "imp",
+                "to": "tec"
+              }
+            ],
+            "legend": [
+              "Cause de la conquête",
+              "Facteur qui la facilite"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-partage",
+          "kind": "timeline",
+          "description": "Une frise de 1870 à 1920 qui place les repères de la course à l'Afrique : conférence de géographie de Bruxelles (1876), traité Brazza-Makoko (1880), Tunisie (1881), Égypte (1882), Togo et Cameroun allemands (1884), conférence de Berlin (1884-1885), Adoua (1896), Fachoda (1898) et la situation de 1914. Le curseur règle le début de la frise.",
+          "params": {
+            "start": 1870,
+            "end": 1920,
+            "step": 10,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1884,
+                "to": 1885,
+                "label": "Conférence de Berlin"
+              }
+            ],
+            "events": [
+              {
+                "at": 1876,
+                "label": "Conférence de géographie de Bruxelles"
+              },
+              {
+                "at": 1880,
+                "label": "Traité Brazza-Makoko"
+              },
+              {
+                "at": 1881,
+                "label": "France : protectorat sur la Tunisie"
+              },
+              {
+                "at": 1882,
+                "label": "Royaume-Uni : occupation de l'Égypte"
+              },
+              {
+                "at": 1884,
+                "label": "Allemagne : Togo et Cameroun"
+              },
+              {
+                "at": 1896,
+                "label": "Victoire éthiopienne d'Adoua"
+              },
+              {
+                "at": 1898,
+                "label": "Crise de Fachoda"
+              },
+              {
+                "at": 1914,
+                "label": "Seuls l'Éthiopie et le Libéria sont libres"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "param": "start",
+              "min": 1870,
+              "max": 1890,
+              "step": 10,
+              "label": "Début de la frise"
+            }
+          ]
+        },
+        {
+          "key": "decisions-berlin",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : la racine « Acte général de Berlin (26 février 1885) » est reliée à quatre éléments : la liberté du commerce dans le bassin du Congo, la liberté de navigation sur le Congo et le Niger, le principe de l'occupation effective avec information des autres puissances, et la reconnaissance du domaine de Léopold II au Congo, obtenue pendant la conférence par des accords avec chaque puissance.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "acte",
+                "label": "Acte général de Berlin (26 février 1885)"
+              },
+              {
+                "id": "com",
+                "label": "Liberté du commerce (bassin du Congo)",
+                "category": 1
+              },
+              {
+                "id": "nav",
+                "label": "Liberté de navigation (Congo et Niger)",
+                "category": 1
+              },
+              {
+                "id": "occ",
+                "label": "Occupation effective et information des autres",
+                "category": 1
+              },
+              {
+                "id": "leo",
+                "label": "Domaine de Léopold II reconnu",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "acte",
+                "to": "com"
+              },
+              {
+                "from": "acte",
+                "to": "nav"
+              },
+              {
+                "from": "acte",
+                "to": "occ"
+              },
+              {
+                "from": "acte",
+                "to": "leo"
+              }
+            ],
+            "legend": [
+              "Règle commune à toutes les puissances",
+              "Cas particulier"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "afrique-1914",
+          "kind": "map",
+          "description": "Une carte de l'Afrique vers 1914. L'Éthiopie et le Libéria, les deux États indépendants, sont colorés à part. Quelques territoires sont colorés selon la puissance qui les domine : France (Algérie, Sénégal, Mali, Burkina Faso, Côte d'Ivoire), Royaume-Uni (Nigeria, Ghana, Kenya), Allemagne (Togo, Cameroun, Namibie, Tanzanie continentale), Belgique (Congo), Portugal (Angola, Mozambique). Les territoires portent les noms des pays actuels.",
+          "params": {
+            "base": "africa",
+            "areas": [
+              {
+                "id": "eth",
+                "category": 1
+              },
+              {
+                "id": "lbr",
+                "category": 1
+              },
+              {
+                "id": "dza",
+                "category": 2
+              },
+              {
+                "id": "sen",
+                "category": 2
+              },
+              {
+                "id": "mli",
+                "category": 2
+              },
+              {
+                "id": "bfa",
+                "category": 2
+              },
+              {
+                "id": "civ",
+                "category": 2
+              },
+              {
+                "id": "nga",
+                "category": 3
+              },
+              {
+                "id": "gha",
+                "category": 3
+              },
+              {
+                "id": "ken",
+                "category": 3
+              },
+              {
+                "id": "tgo",
+                "category": 4
+              },
+              {
+                "id": "cmr",
+                "category": 4
+              },
+              {
+                "id": "nam",
+                "category": 4
+              },
+              {
+                "id": "tza",
+                "category": 4
+              },
+              {
+                "id": "cod",
+                "category": 5
+              },
+              {
+                "id": "ago",
+                "category": 6
+              },
+              {
+                "id": "moz",
+                "category": 6
+              }
+            ],
+            "places": [
+              {
+                "id": "addis_ababa",
+                "label": "Addis-Abeba"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "États indépendants",
+              "Domination française",
+              "Domination britannique",
+              "Domination allemande",
+              "Domination belge",
+              "Domination portugaise"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les causes du mouvement impérialiste",
+          "remember": "L'**impérialisme** est la politique par laquelle un État cherche à dominer d'autres territoires et d'autres peuples. Le **mouvement impérialiste** désigne la grande poussée de conquêtes des Européens, surtout en Afrique, d'environ **1880 à 1914**. La **colonisation** est l'occupation et l'exploitation d'un territoire : le territoire dominé est la **colonie**, la puissance qui domine la **métropole**.\n\nQuatre familles de causes se renforcent : **économiques** (matières premières comme le caoutchouc, le coton ou les minerais pour les usines de la seconde révolution industrielle ; marchés pour vendre les produits fabriqués ; placement des capitaux), **politiques** (prestige, rivalités entre puissances), **démographiques** (population européenne en forte croissance, qui cherche des terres) et **idéologiques** (mission dite « civilisatrice », évangélisation, préjugés racistes de l'époque). Les progrès techniques (bateau à vapeur, quinine contre le paludisme, armes modernes) **facilitent** la conquête.",
+          "method": [
+            "Situer le mouvement dans le temps et dans l'espace.",
+            "Classer les causes par domaine : économique, politique, démographique, idéologique.",
+            "Illustrer chaque cause par un fait ou un exemple précis.",
+            "Conclure en montrant comment les causes se renforcent."
+          ],
+          "example": {
+            "statement": "Explique pourquoi les puissances européennes se lancent dans la conquête de l'Afrique à partir de 1880.",
+            "steps": [
+              "Situer : le mouvement impérialiste se déroule d'environ 1880 à 1914 ; il vise surtout l'Afrique, dont les Européens connaissent encore mal l'intérieur.",
+              "Classer : causes économiques (matières premières et marchés), politiques (prestige et rivalités), démographiques (population européenne en hausse) et idéologiques (mission « civilisatrice », évangélisation).",
+              "Illustrer : les usines de la seconde révolution industrielle ont besoin de caoutchouc, de coton et de minerais ; chaque puissance veut occuper un territoire avant ses rivales.",
+              "Conclure : les causes se renforcent ; les intérêts économiques et politiques sont les moteurs, et la « mission civilisatrice » sert surtout à justifier la conquête."
+            ]
+          },
+          "pitfall": "Ne crois pas que la colonisation commence en 1884. La France conquiert l'Algérie à partir de **1830**, soit plus de **50 ans** avant la conférence de Berlin. Ce qui change vers 1880, c'est la **course à toute l'Afrique**. Ne prends pas non plus l'argument affiché pour la cause réelle : la « mission civilisatrice » est une justification, alors que les intérêts économiques et politiques sont les moteurs.",
+          "practice": {
+            "statement": "Tu t'entraînes à classer les causes de la conquête de l'Afrique, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Que désigne le mot « métropole » dans le vocabulaire de la colonisation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la colonie est le territoire dominé, la métropole est la puissance qui domine. Choisir « le territoire dominé » inverse les deux mots.",
+                "answers": [
+                  {
+                    "content": "Le territoire dominé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le port d'un comptoir",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une ville africaine très peuplée",
+                    "correct": false
+                  },
+                  {
+                    "content": "La puissance qui domine une colonie",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au mot colonie : qui est dominé, qui domine ?"
+              },
+              {
+                "content": "Le caoutchouc, le coton et les minerais sont des matières premières dont les usines européennes ont besoin.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Classer : ce sont des causes économiques. Les usines de la seconde révolution industrielle réclament ces matières premières.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense aux usines d'Europe et à ce qu'elles transforment."
+              },
+              {
+                "content": "Le mouvement impérialiste vise surtout le continent de l'___ (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : le mouvement impérialiste se déroule vers 1880-1914 et vise surtout l'Afrique, dont l'intérieur est encore mal connu des Européens.",
+                "answers": [
+                  {
+                    "content": "Afrique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce continent est celui de la conférence de Berlin."
+              },
+              {
+                "content": "Une cause politique de la conquête est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Classer : prestige et rivalités sont des causes politiques. Le besoin de matières premières est économique, la mission « civilisatrice » est idéologique.",
+                "answers": [
+                  {
+                    "content": "la rivalité entre les puissances",
+                    "correct": true
+                  },
+                  {
+                    "content": "le besoin de matières premières",
+                    "correct": false
+                  },
+                  {
+                    "content": "la mission « civilisatrice »",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une cause politique touche le pouvoir et le prestige des États."
+              }
+            ]
+          },
+          "figure": "causes-imperialisme",
+          "exercise": [
+            {
+              "title": "Expliquer les causes du mouvement impérialiste",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche : situer, classer, illustrer, conclure.",
+              "exercise_type": "fixation",
+              "figure": "causes-imperialisme",
+              "questions": [
+                {
+                  "content": "Que désigne le mot « impérialisme » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le mouvement impérialiste se déroule d'environ 1880 à 1914. Le mot « impérialisme » désigne la politique de domination d'un État sur d'autres territoires et d'autres peuples. Les autres propositions décrivent une organisation intérieure, le commerce ou l'exode rural : aucune ne parle de domination.",
+                  "answers": [
+                    {
+                      "content": "La politique par laquelle un État cherche à dominer d'autres territoires et d'autres peuples",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'organisation d'un État en plusieurs régions autonomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commerce libre entre des pays égaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le départ d'une population vers une ville",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque motivation à la famille de causes qu'elle illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Classer par domaine. Le caoutchouc et le coton sont des matières premières : cause économique. Le prestige et la rivalité entre puissances : cause politique. Des terres pour une population en hausse : cause démographique. L'évangélisation relève des idées et des croyances : cause idéologique. Étape 3 — Illustrer : chaque motivation est un fait précis rattaché à une famille.",
+                  "answers": [
+                    {
+                      "content": "Obtenir du caoutchouc et du coton pour les usines",
+                      "match": "Cause économique"
+                    },
+                    {
+                      "content": "Gagner du prestige face à une puissance rivale",
+                      "match": "Cause politique"
+                    },
+                    {
+                      "content": "Offrir des terres à des Européens trop nombreux",
+                      "match": "Cause démographique"
+                    },
+                    {
+                      "content": "Envoyer des missionnaires pour évangéliser",
+                      "match": "Cause idéologique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mouvement impérialiste commence avec la conférence de Berlin, en 1884.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer dans le temps : le mouvement impérialiste se situe d'environ 1880 à 1914, et la colonisation est plus ancienne : la France conquiert l'Algérie à partir de 1830, soit plus de 50 ans avant Berlin. Berlin (1884-1885) est un moment de la course à l'Afrique, pas son point de départ. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois causes économiques de la conquête ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Classer par domaine. Sont économiques : les matières premières, les marchés et le placement des capitaux. Le prestige est une cause politique (étape 2, famille politique) et l'évangélisation une cause idéologique : ce sont les deux propositions fausses.",
+                  "answers": [
+                    {
+                      "content": "Trouver des matières premières pour les usines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trouver des marchés pour vendre les produits fabriqués",
+                      "correct": true
+                    },
+                    {
+                      "content": "Placer des capitaux dans de nouveaux territoires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Gagner du prestige face aux rivaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Évangéliser les populations",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le territoire dominé par une puissance étrangère s'appelle une ___, et la puissance qui domine s'appelle la métropole.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer en employant le bon vocabulaire : le territoire dominé est la colonie, la puissance qui domine est la métropole. Ne confonds pas avec le mot « comptoir », qui désigne un petit établissement commercial sur la côte.",
+                  "answers": [
+                    {
+                      "content": "colonie",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un discours de 1885 affirme que la conquête de l'Afrique a pour but de « civiliser » les peuples. Comment faut-il l'interpréter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Illustrer et étape 4 — Conclure : la « mission civilisatrice » est l'argument affiché, une cause idéologique qui sert à justifier la conquête. Les moteurs sont aussi les matières premières, les marchés et la rivalité entre puissances. Dire qu'elle est l'unique cause, c'est tomber dans le piège de la fiche : prendre l'argument affiché pour la cause réelle.",
+                  "answers": [
+                    {
+                      "content": "C'est une justification de la conquête, qui s'ajoute aux intérêts économiques et politiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est l'unique cause de la conquête",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une cause démographique",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une preuve que la conquête n'avait aucun intérêt économique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer les motivations de la conquête par famille de causes",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (situer, classer, illustrer, conclure) à des motivations de la conquête de l'Afrique vers 1880-1914.",
+              "exercise_type": "fixation",
+              "figure": "causes-imperialisme",
+              "hint": "Situe d'abord la période (vers 1880-1914), puis demande-toi si le motif touche l'argent, le pouvoir, la population ou les idées.",
+              "questions": [
+                {
+                  "content": "Un industriel européen cherche de nouveaux acheteurs pour ses tissus fabriqués. À quelle famille de causes ce motif appartient-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Classer : chercher des marchés pour vendre des produits fabriqués est une cause économique. Le prestige relève des causes politiques, la mission « civilisatrice » des causes idéologiques.",
+                  "answers": [
+                    {
+                      "content": "Économique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Politique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Démographique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Idéologique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les progrès techniques, comme la quinine contre le paludisme, rendent la conquête de l'Afrique plus facile.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Illustrer : la quinine, le bateau à vapeur et les armes modernes facilitent la conquête. Dire le contraire oublie que ces progrès sont un moyen, à côté des quatre familles de causes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque motivation à la famille de causes qu'elle illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Classer : minerais = économique, rivalité = politique, population en hausse = démographique, évangélisation et mission « civilisatrice » = idéologique. Confondre prestige et marchés mélange politique et économique.",
+                  "answers": [
+                    {
+                      "content": "Obtenir des minerais pour les usines",
+                      "match": "Cause économique"
+                    },
+                    {
+                      "content": "Devancer une puissance rivale sur un territoire",
+                      "match": "Cause politique"
+                    },
+                    {
+                      "content": "Trouver des terres pour une population européenne en forte croissance",
+                      "match": "Cause démographique"
+                    },
+                    {
+                      "content": "Évangéliser et se dire « civilisateur »",
+                      "match": "Cause idéologique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mouvement impérialiste se déroule d'environ 1880 à ___ (écris l'année).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer : le mouvement impérialiste va d'environ 1880 à 1914. Écrire 1884 confond le mouvement avec la conférence de Berlin, qui n'en est qu'un moment.",
+                  "answers": [
+                    {
+                      "content": "1914",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La France conquiert l'Algérie à partir de 1830. La conférence de Berlin s'ouvre en 1884. Combien d'années séparent ces deux dates ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Situer : $1884 - 1830 = 54$ ans. La colonisation ne commence donc pas en 1884 : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "54",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre étapes de la méthode pour expliquer les causes du mouvement impérialiste.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — à 4 : on situe d'abord, puis on classe, on illustre, et on conclut. Conclure avant d'avoir classé ferait un résumé sans preuve.",
+                  "answers": [
+                    {
+                      "content": "Situer le mouvement dans le temps et dans l'espace"
+                    },
+                    {
+                      "content": "Classer les causes par domaine"
+                    },
+                    {
+                      "content": "Illustrer chaque cause par un fait précis"
+                    },
+                    {
+                      "content": "Conclure en montrant que les causes se renforcent"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Explorations et rivalités avant la conférence de Berlin",
+          "remember": "Avant 1884, les Européens tiennent surtout des **côtes** (comptoirs) ; l'intérieur de l'Afrique est mal connu. Des **explorateurs** l'ouvrent : le missionnaire britannique **David Livingstone**, **Henry Morton Stanley**, qui travaille ensuite pour le roi des Belges, et **Pierre Savorgnan de Brazza**, au service de la France.\n\nEn **1876**, le roi des Belges **Léopold II** réunit une conférence de géographie à Bruxelles et lance son projet au Congo. En **1880**, Brazza signe un traité avec le roi **Makoko**, qui place la rive droite du Congo sous protection française. En **1881**, la France établit un protectorat sur la **Tunisie**. En **1882**, le Royaume-Uni occupe l'**Égypte**, ce qui protège le canal de Suez et la route des Indes. En **1884**, l'Allemagne place le **Togo** et le **Cameroun** sous sa protection.\n\nCes prises de contrôle rivales rendent nécessaire une règle commune : c'est l'objet de la conférence de Berlin.",
+          "method": [
+            "Situer l'action dans le temps et dans l'espace.",
+            "Identifier la puissance et l'acteur.",
+            "Expliquer l'objectif de la puissance.",
+            "Dégager la rivalité avec les autres puissances."
+          ],
+          "example": {
+            "statement": "Présente l'occupation de l'Égypte par le Royaume-Uni en 1882.",
+            "steps": [
+              "Situer : en 1882, en Égypte, en Afrique du Nord-Est, autour du canal de Suez.",
+              "Identifier : la puissance est le Royaume-Uni, qui envoie ses troupes occuper le pays.",
+              "Expliquer : l'objectif est de protéger le canal de Suez et la route maritime vers les Indes, très utiles à son commerce.",
+              "Dégager : les autres puissances, dont la France, voient le Royaume-Uni renforcer sa position ; chacune veut à son tour assurer ses propres intérêts, et la course à l'Afrique s'accélère."
+            ]
+          },
+          "pitfall": "Ne confonds pas les acteurs ni les dates. Brazza agit pour la **France** au Congo, Stanley travaille pour **Léopold II** et Livingstone est un **missionnaire britannique**. De même, **1881** = Tunisie (France) et **1882** = Égypte (Royaume-Uni) : une seule année d'écart, mais deux puissances différentes. Si tu inverses, tu attribues à chaque puissance la conquête de l'autre.",
+          "practice": {
+            "statement": "Tu t'entraînes à identifier les acteurs et les puissances de la course à l'Afrique avant 1884.",
+            "questions": [
+              {
+                "content": "Qui est David Livingstone ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : Livingstone est un missionnaire britannique. Brazza sert la France, Léopold II est le roi des Belges, Bismarck le chancelier allemand.",
+                "answers": [
+                  {
+                    "content": "Un explorateur au service de la France",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le roi des Belges",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le chancelier allemand",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un missionnaire britannique qui explore l'Afrique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot missionnaire est dans la fiche."
+              },
+              {
+                "content": "La France établit un protectorat sur la Tunisie en 1882.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : la Tunisie est française en 1881 ; 1882 est l'année de l'occupation britannique de l'Égypte. Les deux dates ne sont séparées que d'un an, d'où la confusion.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Retiens la paire : 1881 pour la Tunisie, 1882 pour l'Égypte."
+              },
+              {
+                "content": "Léopold II est le roi des ___ (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier : Léopold II est le roi des Belges ; il lance son projet au Congo en 1876 et Stanley travaille pour lui.",
+                "answers": [
+                  {
+                    "content": "Belges",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le nom du pays se retrouve dans l'adjectif Belge."
+              },
+              {
+                "content": "Henry Morton Stanley travaille ensuite pour ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Identifier : Stanley travaille pour Léopold II. Attribuer son action à la France, c'est le confondre avec Brazza.",
+                "answers": [
+                  {
+                    "content": "l'Allemagne",
+                    "correct": false
+                  },
+                  {
+                    "content": "le roi des Belges Léopold II",
+                    "correct": true
+                  },
+                  {
+                    "content": "la France",
+                    "correct": false
+                  }
+                ],
+                "hint": "Ne le confonds pas avec Brazza."
+              }
+            ]
+          },
+          "figure": "frise-partage",
+          "exercise": [
+            {
+              "title": "Situer les prises de contrôle avant 1884",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche : situer, identifier, expliquer, dégager la rivalité. Tu peux t'aider de la frise.",
+              "exercise_type": "fixation",
+              "figure": "frise-partage",
+              "questions": [
+                {
+                  "content": "Relie chaque acteur à la puissance qu'il sert ou qu'il représente.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier la puissance et l'acteur. Brazza est au service de la France, Stanley travaille ensuite pour Léopold II, Livingstone est un missionnaire britannique et l'occupation de l'Égypte (1882) est britannique. Ce sont les confusions que le piège de la fiche signale.",
+                  "answers": [
+                    {
+                      "content": "Pierre Savorgnan de Brazza",
+                      "match": "La France"
+                    },
+                    {
+                      "content": "Henry Morton Stanley",
+                      "match": "Le roi des Belges Léopold II"
+                    },
+                    {
+                      "content": "David Livingstone",
+                      "match": "Le Royaume-Uni (missionnaire et explorateur)"
+                    },
+                    {
+                      "content": "L'occupation de l'Égypte en 1882",
+                      "match": "Le Royaume-Uni, par ses troupes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces événements dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer dans le temps : 1876 (Bruxelles), 1880 (Brazza et Makoko), 1881 (Tunisie), 1882 (Égypte), 1884 (Togo et Cameroun). Étape 4 — Dégager la rivalité : chaque année voit une puissance s'installer, ce qui pousse les autres à agir. La confusion classique est d'inverser 1881 et 1882.",
+                  "answers": [
+                    {
+                      "content": "Conférence de géographie de Bruxelles (1876)"
+                    },
+                    {
+                      "content": "Traité Brazza-Makoko (1880)"
+                    },
+                    {
+                      "content": "Protectorat français sur la Tunisie (1881)"
+                    },
+                    {
+                      "content": "Occupation britannique de l'Égypte (1882)"
+                    },
+                    {
+                      "content": "Le Togo et le Cameroun passent sous protection allemande (1884)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le Royaume-Uni occupe-t-il l'Égypte en 1882 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer l'objectif de la puissance : le Royaume-Uni veut protéger le canal de Suez et la route des Indes. Étape 1 — Situer : 1882 précède la conférence de Berlin (1884-1885), donc on ne peut pas y répondre. Le Togo et le Cameroun sont pris par l'Allemagne en 1884.",
+                  "answers": [
+                    {
+                      "content": "Pour protéger le canal de Suez et la route des Indes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour fonder un comptoir sur la côte de Guinée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour répondre à la conférence de Berlin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour s'emparer du Togo et du Cameroun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1881, la France établit un protectorat sur la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer dans l'espace : le protectorat de 1881 concerne la Tunisie, en Afrique du Nord. Étape 2 — Identifier la puissance : la France. L'Égypte est occupée par le Royaume-Uni en 1882, ce qui est la confusion que le piège de la fiche signale.",
+                  "answers": [
+                    {
+                      "content": "Tunisie",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Stanley est un explorateur français au service de la France.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier l'acteur et la puissance : Stanley travaille ensuite pour le roi des Belges Léopold II, alors que Brazza est l'explorateur au service de la France. L'affirmation est fausse : c'est la confusion entre Stanley et Brazza que le piège de la fiche signale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent la conférence de géographie de Bruxelles (1876) de l'ouverture de la conférence de Berlin (1884) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "ans",
+                  "explanation": "Étape 1 — Situer dans le temps : Bruxelles en 1876, ouverture de Berlin en 1884. Le calcul est 1884 - 1876 = 8 ans. Étape 4 — Dégager : en 8 ans, les rivalités se sont multipliées (Congo, Tunisie, Égypte, Togo, Cameroun), ce qui rend une règle commune nécessaire.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Identifier les puissances et leurs actions avant 1884",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (situer, identifier, expliquer, dégager la rivalité) aux prises de contrôle qui précèdent la conférence de Berlin. Tu peux t'aider de la frise.",
+              "exercise_type": "fixation",
+              "figure": "frise-partage",
+              "hint": "Pour chaque fait, demande-toi : quand, où, quelle puissance, quel objectif ? Ne confonds pas 1881 (Tunisie) et 1882 (Égypte).",
+              "questions": [
+                {
+                  "content": "Relie chaque fait à la puissance qui l'accomplit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier : la Tunisie est française, l'Égypte britannique, le Togo et le Cameroun allemands, le projet de 1876 est celui de Léopold II. Inverser deux puissances est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Protectorat sur la Tunisie (1881)",
+                      "match": "La France"
+                    },
+                    {
+                      "content": "Occupation de l'Égypte (1882)",
+                      "match": "Le Royaume-Uni"
+                    },
+                    {
+                      "content": "Togo et Cameroun placés sous protection (1884)",
+                      "match": "L'Allemagne"
+                    },
+                    {
+                      "content": "Projet au Congo lancé à Bruxelles (1876)",
+                      "match": "Le roi des Belges Léopold II"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces événements dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : 1882, puis 1884 (Togo et Cameroun), puis l'ouverture de la conférence en novembre 1884, puis l'Acte général de février 1885.",
+                  "answers": [
+                    {
+                      "content": "Occupation britannique de l'Égypte (1882)"
+                    },
+                    {
+                      "content": "Le Togo et le Cameroun passent sous protection allemande (1884)"
+                    },
+                    {
+                      "content": "Ouverture de la conférence de Berlin (15 novembre 1884)"
+                    },
+                    {
+                      "content": "Signature de l'Acte général de Berlin (26 février 1885)"
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1880, Brazza signe un traité qui place la rive droite du Congo sous protection française avec le roi ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Identifier : le traité de 1880 est signé avec le roi Makoko. Ménélik II est l'empereur d'Éthiopie (Adoua, 1896) et Léopold II le roi des Belges.",
+                  "answers": [
+                    {
+                      "content": "Makoko",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ménélik II",
+                      "correct": false
+                    },
+                    {
+                      "content": "Léopold II",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pierre Savorgnan de ___ agit au service de la France au Congo.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Identifier : Brazza est l'explorateur de la France. Stanley travaille pour Léopold II, Livingstone est un missionnaire britannique.",
+                  "answers": [
+                    {
+                      "content": "Brazza",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1876, Léopold II réunit à Bruxelles une conférence de géographie et lance son projet au Congo.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : la conférence de Bruxelles date de 1876 et marque le début du projet de Léopold II au Congo, huit ans avant Berlin.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent le protectorat français sur la Tunisie (1881) du placement du Togo et du Cameroun sous protection allemande (1884) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Situer : $1884 - 1881 = 3$ ans. Ces prises de contrôle rapprochées rendent une règle commune nécessaire (étape 4, dégager la rivalité).",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La conférence de Berlin (1884-1885)",
+          "remember": "La **conférence de Berlin** se tient du **15 novembre 1884 au 26 février 1885**, à l'initiative du chancelier allemand **Bismarck**. **Quatorze États** y participent : des puissances européennes, les États-Unis et l'Empire ottoman. **Aucun Africain** n'est présent ni consulté. Elle vise à régler la rivalité autour du **bassin du Congo** et à éviter une guerre entre puissances.\n\nSon **Acte général**, du 26 février 1885, pose des règles : **liberté du commerce** dans le bassin du Congo, **liberté de navigation** sur le Congo et le Niger, et **principe de l'occupation effective** : pour revendiquer un territoire, une puissance doit y être réellement présente (administration, force) et en informer les autres. Pendant la conférence, les puissances reconnaissent aussi, par des accords séparés, le domaine de **Léopold II** au Congo, qui devient l'**État indépendant du Congo** en 1885.\n\nLa conférence **ne trace pas les frontières** : elle fixe les règles de la course au partage, qui se déroule ensuite.",
+          "method": [
+            "Présenter le document ou l'événement : nature, auteur, date.",
+            "Dégager les décisions principales.",
+            "Expliquer ce qu'elles changent pour les puissances.",
+            "Montrer les limites et les absents."
+          ],
+          "example": {
+            "statement": "Document : l'Acte général de la conférence de Berlin, du 26 février 1885 (texte résumé par Lnclass). Il prévoit la liberté du commerce dans le bassin du Congo, la liberté de navigation sur le Congo et le Niger, et l'obligation, pour revendiquer un territoire, de l'occuper réellement et d'en informer les autres puissances. Analyse ce document.",
+            "steps": [
+              "Présenter : c'est un acte international, signé le 26 février 1885 à l'issue de la conférence de Berlin organisée par Bismarck, entre les États participants.",
+              "Dégager : trois décisions principales, la liberté du commerce au Congo, la liberté de navigation sur le Congo et le Niger, et l'occupation effective avec information des autres puissances.",
+              "Expliquer : pour ne pas être devancée, chaque puissance doit occuper réellement les territoires qu'elle veut ; la compétition s'accélère.",
+              "Montrer : aucun Africain n'a participé ni signé ; l'acte ne trace pas les frontières ; le partage réel se fait après, par traités et conquêtes."
+            ]
+          },
+          "pitfall": "Ne dis pas que Berlin a « partagé l'Afrique » et tracé ses frontières en 1885. La conférence dure un peu plus de **3 mois**, réunit **14 États** et **0 Africain**. Le partage réel se fait de **1885 à 1914**, par des traités entre puissances et par des conquêtes. Berlin donne les **règles**, pas la **carte**.",
+          "practice": {
+            "statement": "Tu t'entraînes à présenter la conférence de Berlin et à dégager son rôle.",
+            "questions": [
+              {
+                "content": "Quel est l'objectif de la conférence de Berlin ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter : la conférence vise à régler la rivalité autour du bassin du Congo. Tracer les frontières est une erreur classique : le partage vient après.",
+                "answers": [
+                  {
+                    "content": "Tracer toutes les frontières de l'Afrique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Donner l'indépendance aux colonies",
+                    "correct": false
+                  },
+                  {
+                    "content": "Interdire la navigation sur le Congo",
+                    "correct": false
+                  },
+                  {
+                    "content": "Régler la rivalité autour du bassin du Congo et éviter une guerre entre puissances",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à ce que les puissances veulent éviter entre elles."
+              },
+              {
+                "content": "Les États-Unis font partie des États qui participent à la conférence de Berlin.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Présenter : quatorze États y participent, des puissances européennes, les États-Unis et l'Empire ottoman. Aucun Africain n'est présent.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "La fiche cite trois types de participants."
+              },
+              {
+                "content": "Le domaine de Léopold II au Congo devient en 1885 l'État ___ du Congo (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Dégager : les puissances reconnaissent le domaine de Léopold II, qui devient l'État indépendant du Congo en 1885.",
+                "answers": [
+                  {
+                    "content": "indépendant",
+                    "correct": true
+                  }
+                ],
+                "hint": "L'adjectif s'accorde au masculin singulier."
+              }
+            ]
+          },
+          "figure": "decisions-berlin",
+          "exercise": [
+            {
+              "title": "Analyser la conférence de Berlin",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche : présenter, dégager, expliquer, montrer les limites.",
+              "exercise_type": "fixation",
+              "figure": "decisions-berlin",
+              "questions": [
+                {
+                  "content": "Quel chancelier est à l'initiative de la conférence de Berlin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Présenter l'événement : la conférence de Berlin (15 novembre 1884-26 février 1885) est organisée à l'initiative du chancelier allemand Bismarck. Léopold II est le roi des Belges, Brazza et Stanley sont des explorateurs : aucun n'est chancelier.",
+                  "answers": [
+                    {
+                      "content": "Bismarck",
+                      "correct": true
+                    },
+                    {
+                      "content": "Léopold II",
+                      "correct": false
+                    },
+                    {
+                      "content": "Brazza",
+                      "correct": false
+                    },
+                    {
+                      "content": "Stanley",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'États participent à la conférence de Berlin ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "États",
+                  "explanation": "Étape 1 — Présenter : quatorze États participent, des puissances européennes, les États-Unis et l'Empire ottoman. Étape 4 — Montrer les absents : parmi ces 14 États, aucun n'est africain.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois règles posées par l'Acte général de 1885 ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Dégager les décisions principales : liberté du commerce, liberté de navigation, occupation effective. Étape 4 — Limites : la conférence ne trace pas les frontières et aucun Africain n'est présent, donc les deux dernières propositions sont fausses.",
+                  "answers": [
+                    {
+                      "content": "Liberté du commerce dans le bassin du Congo",
+                      "correct": true
+                    },
+                    {
+                      "content": "Liberté de navigation sur le Congo et le Niger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Occupation effective d'un territoire et information des autres puissances",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tracé des frontières de toute l'Afrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Droit de vote des Africains à la conférence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Des représentants africains participent à la conférence de Berlin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Montrer les limites et les absents : aucun Africain n'est présent ni consulté. Les décisions sur l'Afrique sont prises entre puissances étrangères. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Selon le principe de l'___ effective, une puissance doit être réellement présente sur un territoire pour le revendiquer. Écris le mot qui manque.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Dégager la décision : le principe de l'occupation effective. Étape 3 — Expliquer ce qui change : pour ne pas être devancée, chaque puissance doit installer une administration ou une force sur place, ce qui accélère la conquête.",
+                  "answers": [
+                    {
+                      "content": "occupation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : « La conférence de Berlin a tracé les frontières de l'Afrique en 1885. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Montrer les limites : l'Acte général donne des règles (commerce, navigation, occupation effective), mais ne trace pas les frontières. Le partage réel s'étend de 1885 à 1914, par traités et conquêtes. C'est le piège de la fiche : Berlin donne les règles, pas la carte. Dire que la conférence n'a rien décidé est aussi faux, puisque l'Acte pose des règles qui accélèrent la course.",
+                  "answers": [
+                    {
+                      "content": "La conférence a fixé des règles ; le partage réel a eu lieu de 1885 à 1914",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est exact, les frontières sont fixées en 1885",
+                      "correct": false
+                    },
+                    {
+                      "content": "La conférence n'a rien décidé",
+                      "correct": false
+                    },
+                    {
+                      "content": "La conférence a partagé l'Afrique entre les Africains",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Présenter et évaluer l'Acte général de Berlin",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (présenter, dégager, expliquer, montrer les limites) à l'Acte général de la conférence de Berlin, signé le 26 février 1885.",
+              "exercise_type": "fixation",
+              "figure": "decisions-berlin",
+              "hint": "Présente le document (acte international, 1885), dégage ses trois règles, puis cherche ce qu'il ne fait pas et qui est absent.",
+              "questions": [
+                {
+                  "content": "L'Acte général de 1885 pose le principe de l'occupation effective. Que signifie ce principe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Dégager les décisions : l'occupation effective demande une présence réelle (administration, force) et l'information des autres puissances. Un simple trait sur une carte ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Le commerce est interdit dans le bassin du Congo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour revendiquer un territoire, une puissance doit y être réellement présente et en informer les autres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque puissance garde le territoire qu'elle a tracé sur une carte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les Africains choisissent la puissance qui les protège",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La conférence de Berlin dure du 15 novembre 1884 au 26 février 1885, soit un peu plus de trois mois.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Présenter : la conférence s'ouvre le 15 novembre 1884 et se termine le 26 février 1885. Elle ne dure donc pas des années, et ne peut pas avoir tracé toute la carte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque décision de Berlin à son objet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Dégager : chaque décision a son objet précis. Mélanger commerce et navigation est l'erreur à éviter : le commerce concerne le bassin du Congo, la navigation le Congo et le Niger.",
+                  "answers": [
+                    {
+                      "content": "Liberté du commerce",
+                      "match": "Le bassin du Congo"
+                    },
+                    {
+                      "content": "Liberté de navigation",
+                      "match": "Le Congo et le Niger"
+                    },
+                    {
+                      "content": "Occupation effective",
+                      "match": "Une présence réelle et l'information des autres puissances"
+                    },
+                    {
+                      "content": "Reconnaissance du domaine de Léopold II",
+                      "match": "L'État indépendant du Congo, en 1885"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le partage réel de l'Afrique se déroule de 1885 à 1914. Combien d'années dure-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Expliquer : $1914 - 1885 = 29$ ans. Le partage réel est bien plus long que la conférence, qui n'a duré que trois mois.",
+                  "answers": [
+                    {
+                      "content": "29",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "La conférence de Berlin donne les ___ de la course au partage, pas la carte.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Expliquer : Berlin fixe des règles ; le tracé des frontières vient après, par traités et conquêtes. Écrire « frontières » ou « colonies » reprend l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "règles",
+                      "correct": true
+                    },
+                    {
+                      "content": "frontières",
+                      "correct": false
+                    },
+                    {
+                      "content": "colonies",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle limite de la conférence de Berlin faut-il signaler ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Montrer les limites : aucun Africain n'est présent ni consulté, et l'acte ne trace pas les frontières. Les autres propositions disent l'inverse de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Elle réunit seulement des États africains",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle interdit tout commerce au Congo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fixe la carte précise des colonies",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun Africain n'y est présent ni consulté",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le partage de l'Afrique et ses conséquences",
+          "remember": "Après Berlin, les puissances se partagent l'Afrique par des **traités** entre elles et par des **conquêtes**. Les rivalités peuvent frôler la guerre : à **Fachoda** (1898), la France et le Royaume-Uni s'opposent sur le Haut-Nil, et la France finit par se retirer.\n\nVers **1914**, seuls deux États restent indépendants : l'**Éthiopie**, dont l'empereur **Ménélik II** bat l'armée italienne à **Adoua** en **1896**, et le **Libéria**. Les principales puissances sont la **France**, le **Royaume-Uni**, l'**Allemagne**, la **Belgique** (le Congo), le **Portugal** (Angola, Mozambique), l'**Italie** et l'**Espagne**.\n\nConséquences : les **frontières** sont souvent tracées par les puissances, parfois en lignes droites, **sans tenir compte** des peuples, des langues et des États africains ; les populations perdent leur souveraineté ; les colonies fournissent des **matières premières** à la métropole et lui achètent des produits fabriqués.",
+          "method": [
+            "Situer le territoire et la période.",
+            "Décrire qui possède quoi.",
+            "Expliquer les causes et les conséquences du partage.",
+            "Conclure sur la situation de l'Afrique vers 1914."
+          ],
+          "example": {
+            "statement": "Présente la situation de l'Afrique vers 1914.",
+            "steps": [
+              "Situer : le continent africain, vers 1914, près de trente ans après la conférence de Berlin (1885).",
+              "Décrire : presque tout le continent est contrôlé par des puissances européennes (France, Royaume-Uni, Allemagne, Belgique, Portugal, Italie, Espagne) ; seuls l'Éthiopie et le Libéria sont indépendants.",
+              "Expliquer : le partage est la suite de la course à l'occupation lancée par la conférence de Berlin ; il a pour conséquences des frontières qui ignorent les peuples et l'exploitation des richesses de l'Afrique au profit des métropoles.",
+              "Conclure : vers 1914, l'Afrique est presque entièrement dominée, avec 2 États libres sur le continent."
+            ]
+          },
+          "pitfall": "Ne dis pas que toute l'Afrique est colonisée en 1914 : **2 États** restent indépendants, l'Éthiopie et le Libéria. Ne dis pas non plus que les frontières respectent les peuples : elles sont tracées par les puissances **sans consulter** les Africains, si bien que des peuples sont séparés et que des peuples différents sont réunis dans une même colonie.",
+          "practice": {
+            "statement": "Tu t'entraînes à décrire la situation de l'Afrique vers 1914, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel État africain reste indépendant vers 1914, avec le Libéria ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Décrire : l'Éthiopie et le Libéria sont les deux États indépendants. Le Sénégal est français, le Nigeria britannique, le Congo belge.",
+                "answers": [
+                  {
+                    "content": "L'Éthiopie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Sénégal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Nigeria",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Congo",
+                    "correct": false
+                  }
+                ],
+                "hint": "Ménélik II est son empereur."
+              },
+              {
+                "content": "En 1896, l'armée italienne bat l'armée éthiopienne à Adoua.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Décrire : c'est l'inverse. L'armée éthiopienne de Ménélik II bat l'armée italienne à Adoua.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Relis qui est vainqueur à Adoua."
+              },
+              {
+                "content": "Dans le partage de l'Afrique, le Congo dépend de la ___ (un pays).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Décrire : le Congo est dominé par la Belgique, l'Angola et le Mozambique par le Portugal.",
+                "answers": [
+                  {
+                    "content": "Belgique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Léopold II est le roi de ce pays."
+              },
+              {
+                "content": "Vers 1914, le Portugal domine l'Angola et le ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Décrire : les colonies portugaises sont l'Angola et le Mozambique. Le Sénégal est français, le Togo allemand.",
+                "answers": [
+                  {
+                    "content": "Mozambique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sénégal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Togo",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense aux colonies portugaises de la fiche."
+              }
+            ]
+          },
+          "figure": "afrique-1914",
+          "exercise": [
+            {
+              "title": "Décrire le partage de l'Afrique vers 1914",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche : situer, décrire, expliquer, conclure. Tu peux t'aider de la carte de l'Afrique vers 1914.",
+              "exercise_type": "fixation",
+              "figure": "afrique-1914",
+              "questions": [
+                {
+                  "content": "Quels sont les deux États africains indépendants vers 1914 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Décrire qui possède quoi : vers 1914, seuls l'Éthiopie et le Libéria sont indépendants. Le Sénégal est contrôlé par la France, le Nigeria par le Royaume-Uni et le Togo par l'Allemagne. Étape 4 — Conclure : 2 États libres seulement.",
+                  "answers": [
+                    {
+                      "content": "L'Éthiopie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Libéria",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Sénégal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Nigeria",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Togo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque territoire à la puissance qui le domine vers 1914.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Décrire qui possède quoi (voir la carte de l'Afrique vers 1914) : le Sénégal est français, le Nigeria britannique, le Togo allemand, le Congo belge et l'Angola portugais. Étape 1 — Situer : cette répartition vaut pour la période 1914, avant les changements de la Première Guerre mondiale.",
+                  "answers": [
+                    {
+                      "content": "Sénégal",
+                      "match": "France"
+                    },
+                    {
+                      "content": "Nigeria",
+                      "match": "Royaume-Uni"
+                    },
+                    {
+                      "content": "Togo",
+                      "match": "Allemagne"
+                    },
+                    {
+                      "content": "Congo (actuelle RDC)",
+                      "match": "Belgique"
+                    },
+                    {
+                      "content": "Angola",
+                      "match": "Portugal"
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1896, l'armée éthiopienne bat l'armée italienne à la bataille d'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Expliquer : la victoire d'Adoua en 1896 contre l'Italie permet à l'Éthiopie de rester indépendante. Étape 2 — Décrire : c'est une des deux exceptions du continent, avec le Libéria.",
+                  "answers": [
+                    {
+                      "content": "Adoua",
+                      "correct": true
+                    },
+                    {
+                      "content": "Adwa",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1914, toute l'Afrique est colonisée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : deux États sont encore indépendants, l'Éthiopie et le Libéria. C'est le piège de la fiche : dire « toute l'Afrique » alors que 2 États restent libres. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent la fin de la conférence de Berlin (1885) de la situation de 1914 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "ans",
+                  "explanation": "Étape 1 — Situer dans le temps : la conférence se termine en 1885 et la situation décrite est celle de 1914. Le calcul est 1914 - 1885 = 29 ans. Étape 3 — Expliquer : c'est la durée de la course à l'occupation et du partage, par traités et conquêtes.",
+                  "answers": [
+                    {
+                      "content": "29",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique en deux ou trois phrases pourquoi des frontières tracées par les puissances européennes posent problème aux peuples africains.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Dire que les frontières sont tracées par les puissances sans consulter les Africains",
+                    "Donner une conséquence : peuples séparés ou réunis dans une même colonie",
+                    "Phrases claires, en lien avec le partage"
+                  ],
+                  "explanation": "Corrigé modèle : Étape 3 — Expliquer les conséquences. Les frontières coloniales sont tracées par les puissances européennes, sans consulter les Africains. Elles ne tiennent pas compte des peuples, des langues ni des anciens États : certains peuples sont séparés par une frontière, d'autres, très différents, sont réunis dans une même colonie. Barème sur 2 points : 0,5 pour l'idée que les puissances décident seules ; 1 pour une conséquence précise ; 0,5 pour la clarté de la rédaction.",
+                  "answers": [],
+                  "starter": "Les frontières sont tracées…"
+                }
+              ]
+            },
+            {
+              "title": "Décrire le partage de l'Afrique et ses conséquences",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (situer, décrire, expliquer, conclure) au partage de l'Afrique après Berlin. Tu peux t'aider de la carte de l'Afrique vers 1914.",
+              "exercise_type": "fixation",
+              "figure": "afrique-1914",
+              "hint": "Après Berlin, les puissances se partagent le continent par traités et conquêtes ; vers 1914, seuls deux États restent indépendants.",
+              "questions": [
+                {
+                  "content": "En 1898, la France et le Royaume-Uni s'opposent sur le Haut-Nil. Comment s'appelle cet épisode ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire : à Fachoda, en 1898, la France et le Royaume-Uni frôlent la guerre et la France se retire. Adoua est la victoire éthiopienne de 1896.",
+                  "answers": [
+                    {
+                      "content": "Berlin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tunis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fachoda",
+                      "correct": true
+                    },
+                    {
+                      "content": "Adoua",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque territoire à la puissance qui le domine vers 1914.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Décrire qui possède quoi : la Côte d'Ivoire est française, le Kenya britannique, le Cameroun allemand, le Mozambique portugais. Attribuer deux territoires à la même puissance est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "Côte d'Ivoire",
+                      "match": "France"
+                    },
+                    {
+                      "content": "Kenya",
+                      "match": "Royaume-Uni"
+                    },
+                    {
+                      "content": "Cameroun",
+                      "match": "Allemagne"
+                    },
+                    {
+                      "content": "Mozambique",
+                      "match": "Portugal"
+                    }
+                  ]
+                },
+                {
+                  "content": "Certaines frontières coloniales sont tracées en lignes droites, sans tenir compte des peuples.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer les conséquences : les puissances tracent les frontières sans consulter les Africains, ce qui sépare des peuples ou en réunit de différents.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1896, l'empereur éthiopien ___ II bat l'armée italienne à Adoua.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Décrire : Ménélik II bat l'armée italienne à Adoua, ce qui permet à l'Éthiopie de rester indépendante vers 1914.",
+                  "answers": [
+                    {
+                      "content": "Ménélik",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux conséquences du partage pour les populations africaines ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer : perte de souveraineté et matières premières envoyées à la métropole. Les trois autres propositions sont fausses : les frontières ignorent les peuples, l'Éthiopie reste libre, et 1914 n'apporte pas d'indépendance.",
+                  "answers": [
+                    {
+                      "content": "Leurs colonies fournissent des matières premières à la métropole",
+                      "correct": true
+                    },
+                    {
+                      "content": "Leurs frontières respectent les peuples",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Éthiopie devient une colonie italienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles deviennent indépendantes en 1914",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles perdent leur souveraineté",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent Fachoda (1898) de la situation de l'Afrique vers 1914 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Conclure : $1914 - 1898 = 16$ ans. Vers 1914, la domination européenne est presque complète.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un port d'Afrique de l'Ouest vers 1880",
+          "exercise_type": "fixation",
+          "figure": "causes-imperialisme",
+          "statement": "Récit écrit pour Lnclass. Vers 1880, un navire à vapeur européen accoste dans un port de la côte africaine. Il décharge des tissus et des outils, et charge de l'huile de palme, du caoutchouc et de l'ivoire. Dans le même temps, en Europe, des journaux vantent la « mission civilisatrice » et des députés parlent de la rivalité avec les pays voisins. Réponds aux questions en t'appuyant sur la fiche « Les causes du mouvement impérialiste ».",
+          "questions": [
+            {
+              "content": "Quels sont les deux éléments du récit qui montrent des causes économiques ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode (fiche « Les causes du mouvement impérialiste »). Étape 1 — Situer : vers 1880, sur la côte africaine. Étape 2 — Classer par domaine : le caoutchouc et l'huile de palme sont des matières premières, les tissus et les outils vendus montrent un marché : deux causes économiques. Le discours sur la mission civilisatrice est idéologique, la rivalité avec les voisins est politique : c'est la confusion entre les familles de causes. Étape 3 — Illustrer : on rattache chaque fait du récit à sa famille.",
+              "answers": [
+                {
+                  "content": "L'achat de caoutchouc et d'huile de palme, matières premières pour les usines",
+                  "correct": true
+                },
+                {
+                  "content": "La vente de tissus et d'outils, qui offre un marché aux produits fabriqués",
+                  "correct": true
+                },
+                {
+                  "content": "Le discours sur la mission civilisatrice",
+                  "correct": false
+                },
+                {
+                  "content": "La rivalité avec les pays voisins",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément du récit à la famille de causes qu'il illustre.",
+              "question_type": "matching",
+              "explanation": "Méthode : étape 2 — Classer par domaine, étape 3 — Illustrer par un fait précis. Le caoutchouc : matière première, donc économique. La rivalité entre pays voisins : politique. La mission civilisatrice : idéologique. Le navire à vapeur n'est pas une cause mais un moyen technique qui rend la pénétration et le commerce plus rapides et moins coûteux.",
+              "answers": [
+                {
+                  "content": "Le caoutchouc chargé dans le navire",
+                  "match": "Cause économique"
+                },
+                {
+                  "content": "La rivalité avec les pays voisins",
+                  "match": "Cause politique"
+                },
+                {
+                  "content": "La « mission civilisatrice » vantée par les journaux",
+                  "match": "Cause idéologique"
+                },
+                {
+                  "content": "Le navire à vapeur",
+                  "match": "Facteur technique qui facilite la conquête"
+                }
+              ]
+            },
+            {
+              "content": "D'après le récit, la « mission civilisatrice » est la seule cause réelle de l'arrivée des Européens.",
+              "question_type": "true_false",
+              "explanation": "Méthode : étape 4 — Conclure en montrant comment les causes se renforcent. Le récit montre aussi des échanges commerciaux (matières premières, marché) et une rivalité entre puissances. La « mission civilisatrice » est l'argument affiché, une justification, pas l'unique cause : il ne faut pas prendre l'argument affiché pour la cause réelle. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le caoutchouc est une ___ première dont les usines européennes ont besoin.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : étape 2 — Classer. Le caoutchouc est une matière première : on l'utilise pour fabriquer d'autres produits. C'est une cause économique du mouvement impérialiste. Ne confonds pas avec un produit fabriqué, que les usines vendent justement aux marchés extérieurs.",
+              "answers": [
+                {
+                  "content": "matière",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce récit, que montre l'arrivée d'un navire à vapeur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : étape 2 — Classer. La vapeur est un progrès technique qui facilite la conquête, sans la causer. Étape 1 — Situer : le récit se passe vers 1880, avant la conférence de Berlin (1884-1885), donc il ne peut pas en être une décision. Le mouvement impérialiste est alors en plein essor.",
+              "answers": [
+                {
+                  "content": "Un progrès technique qui facilite le commerce et la conquête",
+                  "correct": true
+                },
+                {
+                  "content": "Une cause démographique du mouvement",
+                  "correct": false
+                },
+                {
+                  "content": "Une décision de la conférence de Berlin",
+                  "correct": false
+                },
+                {
+                  "content": "La fin du mouvement impérialiste",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En trois ou quatre phrases, explique pourquoi la rivalité entre les puissances européennes accélère la conquête de l'Afrique.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dire que chaque puissance veut occuper les territoires avant ses rivales",
+                "Donner un exemple ou un fait précis (prestige, matières premières)",
+                "Conclure sur l'accélération de la conquête",
+                "Phrases courtes et claires"
+              ],
+              "explanation": "Corrigé modèle : Étape 2 — Classer : la rivalité est une cause politique. Étape 3 — Illustrer : chaque puissance veut gagner du prestige et s'assurer des matières premières et des marchés avant les autres ; si l'une prend un territoire, les autres craignent d'être devancées. Étape 4 — Conclure : les causes se renforcent et la conquête de l'Afrique s'accélère. Barème sur 3 points : 1 pour l'idée de course à l'occupation ; 1 pour un exemple précis ; 0,5 pour la conclusion ; 0,5 pour la clarté.",
+              "answers": [],
+              "starter": "Chaque puissance veut…"
+            }
+          ]
+        },
+        {
+          "title": "Lire une frise : de Bruxelles à Berlin",
+          "exercise_type": "fixation",
+          "figure": "frise-partage",
+          "statement": "Document : une frise chronologique de 1870 à 1920. Elle place la conférence de géographie de Bruxelles (1876), le traité Brazza-Makoko (1880), le protectorat français sur la Tunisie (1881), l'occupation britannique de l'Égypte (1882), le passage du Togo et du Cameroun sous protection allemande (1884), la conférence de Berlin (1884-1885), la victoire éthiopienne d'Adoua (1896), la crise de Fachoda (1898) et la situation de 1914. Réponds aux questions.",
+          "questions": [
+            {
+              "content": "Remets ces événements dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Méthode de lecture d'une frise (fiche « Explorations et rivalités »). Étape 1 — Situer dans le temps : lis les dates de gauche à droite, 1876 (Bruxelles), 1880 (Brazza-Makoko), 1882 (Égypte), 1884 (Togo et Cameroun), 1896 (Adoua). Il suffit de comparer les années : 1876 < 1880 < 1882 < 1884 < 1896.",
+              "answers": [
+                {
+                  "content": "Conférence de géographie de Bruxelles"
+                },
+                {
+                  "content": "Traité Brazza-Makoko"
+                },
+                {
+                  "content": "Occupation britannique de l'Égypte"
+                },
+                {
+                  "content": "Le Togo et le Cameroun passent sous protection allemande"
+                },
+                {
+                  "content": "Victoire éthiopienne d'Adoua"
+                }
+              ]
+            },
+            {
+              "content": "Combien d'années séparent le protectorat français sur la Tunisie (1881) de la victoire d'Adoua (1896) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "ans",
+              "explanation": "Méthode : étape 1 — Situer. On lit 1881 pour la Tunisie et 1896 pour Adoua. Le calcul est 1896 - 1881 = 15 ans. Attention à ne pas confondre avec 1882 (Égypte) qui donnerait 14.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle période est mise en évidence par une bande colorée sur la frise ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : étape 1 — Situer. La seule période colorée est 1884-1885, celle de la conférence de Berlin (15 novembre 1884-26 février 1885). Les autres propositions sont des événements ponctuels, placés par une date unique.",
+              "answers": [
+                {
+                  "content": "1884-1885, la conférence de Berlin",
+                  "correct": true
+                },
+                {
+                  "content": "1876-1880, la conférence de Bruxelles",
+                  "correct": false
+                },
+                {
+                  "content": "1896-1898, Adoua et Fachoda",
+                  "correct": false
+                },
+                {
+                  "content": "1914, la situation de l'Afrique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque événement à sa date.",
+              "question_type": "matching",
+              "explanation": "Méthode : étape 1 — Situer, étape 2 — Identifier la puissance. 1880 : Brazza signe avec Makoko pour la France. 1881 : la France en Tunisie. 1882 : le Royaume-Uni en Égypte. 1898 : Fachoda oppose la France et le Royaume-Uni. Le piège classique est d'inverser 1881 et 1882.",
+              "answers": [
+                {
+                  "content": "Traité Brazza-Makoko",
+                  "match": "1880"
+                },
+                {
+                  "content": "Protectorat français sur la Tunisie",
+                  "match": "1881"
+                },
+                {
+                  "content": "Occupation britannique de l'Égypte",
+                  "match": "1882"
+                },
+                {
+                  "content": "Crise de Fachoda",
+                  "match": "1898"
+                }
+              ]
+            },
+            {
+              "content": "La crise de Fachoda (1898) oppose la France et le ___.",
+              "question_type": "select",
+              "explanation": "Méthode : étape 2 — Identifier les puissances. À Fachoda, sur le Haut-Nil, la France et le Royaume-Uni s'opposent, et la France se retire. Étape 4 — Dégager la rivalité : les rivalités coloniales peuvent frôler la guerre. Le Portugal, la Belgique et le Libéria ne sont pas les protagonistes de cette crise.",
+              "answers": [
+                {
+                  "content": "Royaume-Uni",
+                  "correct": true
+                },
+                {
+                  "content": "Portugal",
+                  "correct": false
+                },
+                {
+                  "content": "Belgique",
+                  "correct": false
+                },
+                {
+                  "content": "Libéria",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À l'aide de la frise, montre en quelques phrases que la conférence de Berlin arrive dans un contexte de rivalités entre puissances.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Citer au moins deux événements antérieurs à 1884 avec leur date",
+                "Nommer les puissances concernées",
+                "Expliquer que ces prises de contrôle rendent une règle commune nécessaire",
+                "Phrases claires"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Situer : avant 1884, plusieurs puissances s'installent en Afrique. Étape 2 — Identifier : la France établit un protectorat sur la Tunisie en 1881, le Royaume-Uni occupe l'Égypte en 1882, l'Allemagne prend le Togo et le Cameroun en 1884. Étape 4 — Dégager la rivalité : ces prises de contrôle rendent nécessaire une règle commune, donnée par la conférence de Berlin (1884-1885). Barème sur 3 points : 1 pour deux événements datés ; 1 pour les puissances ; 1 pour le lien avec Berlin.",
+              "answers": [],
+              "starter": "Avant 1884…"
+            }
+          ]
+        },
+        {
+          "title": "Analyser l'Acte général de Berlin",
+          "exercise_type": "evaluation",
+          "figure": "decisions-berlin",
+          "statement": "Document : l'Acte général de la conférence de Berlin, du 26 février 1885 (texte résumé par Lnclass). Il décide la liberté du commerce dans le bassin du Congo, la liberté de navigation sur le Congo et le Niger, et il demande à toute puissance qui veut revendiquer un territoire de l'occuper réellement et d'en informer les autres puissances. Pendant la conférence, les puissances ont aussi reconnu le domaine de Léopold II au Congo. Il est signé par les États participants, dont aucun n'est africain. Réponds aux questions.",
+          "questions": [
+            {
+              "content": "Quelle est la nature de ce document ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode d'analyse de document (fiche « La conférence de Berlin »). Étape 1 — Présenter : nature, auteur, date. C'est un acte international, daté du 26 février 1885, signé par les États de la conférence. L'énoncé précise qu'il est signé par les États participants : ce n'est ni un récit d'explorateur ni un journal de bord, et aucun peuple africain ne l'a voté.",
+              "answers": [
+                {
+                  "content": "Un acte international signé par les États participants à une conférence",
+                  "correct": true
+                },
+                {
+                  "content": "Le récit d'un explorateur",
+                  "correct": false
+                },
+                {
+                  "content": "Un journal de bord d'un navire",
+                  "correct": false
+                },
+                {
+                  "content": "Une loi votée par un peuple africain",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois décisions de l'Acte général ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : étape 2 — Dégager les décisions principales : commerce, navigation, occupation effective. Étape 4 — Limites : l'Acte n'interdit pas l'installation des Européens et ne trace pas les frontières ; ces deux propositions sont fausses (la conférence fixe les règles de la course, pas la carte).",
+              "answers": [
+                {
+                  "content": "Liberté du commerce dans le bassin du Congo",
+                  "correct": true
+                },
+                {
+                  "content": "Liberté de navigation sur le Congo et le Niger",
+                  "correct": true
+                },
+                {
+                  "content": "Occupation effective et information des autres puissances",
+                  "correct": true
+                },
+                {
+                  "content": "Interdiction pour les Européens de s'installer en Afrique",
+                  "correct": false
+                },
+                {
+                  "content": "Tracé de toutes les frontières africaines",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Des représentants africains ont signé l'Acte général de Berlin.",
+              "question_type": "true_false",
+              "explanation": "Méthode : étape 4 — Montrer les limites et les absents. Aucun Africain ne participe ni ne signe : les décisions concernant l'Afrique sont prises entre États étrangers. L'énoncé le rappelle d'ailleurs : aucun État signataire n'est africain. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La conférence de Berlin est organisée à l'initiative du chancelier allemand ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : étape 1 — Présenter l'auteur et l'organisation de l'événement. La conférence se tient à Berlin du 15 novembre 1884 au 26 février 1885 à l'initiative du chancelier Bismarck. Léopold II est le roi des Belges, non le chancelier allemand.",
+              "answers": [
+                {
+                  "content": "Bismarck",
+                  "correct": true
+                },
+                {
+                  "content": "Otto von Bismarck",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique le principe de l'occupation effective et montre pourquoi il accélère la conquête de l'Afrique.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Définir l'occupation effective : être réellement présent et informer les autres puissances",
+                "Montrer que chaque puissance doit installer une administration ou une force",
+                "Conclure sur l'accélération de la conquête",
+                "Rédaction claire en phrases complètes"
+              ],
+              "explanation": "Corrigé modèle : Étape 2 — Dégager la décision : selon l'occupation effective, une puissance ne peut revendiquer un territoire que si elle y est réellement présente et si elle prévient les autres. Étape 3 — Expliquer ce que cela change : pour ne pas être devancée, chaque puissance doit vite installer des postes, une administration ou des troupes sur place. Étape 4 — Conclure : la course à l'occupation s'accélère, de 1885 à 1914. Barème sur 3 points : 1 pour la définition ; 1 pour la conséquence sur les puissances ; 1 pour la conclusion.",
+              "answers": [],
+              "starter": "Selon le principe de l'occupation effective…"
+            },
+            {
+              "content": "Montre que la conférence de Berlin ne partage pas elle-même l'Afrique.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dire que l'Acte pose des règles et ne trace pas les frontières",
+                "Situer le partage réel entre 1885 et 1914, par traités et conquêtes"
+              ],
+              "explanation": "Corrigé modèle : Étape 4 — Montrer les limites. L'Acte général fixe des règles (commerce, navigation, occupation effective) mais ne trace pas les frontières. Le partage réel a lieu de 1885 à 1914, par des traités entre puissances et par des conquêtes. Berlin donne les règles, pas la carte. Barème sur 2 points : 1 pour les règles sans frontières ; 1 pour la période du partage réel.",
+              "answers": [],
+              "starter": "La conférence se contente de…"
+            }
+          ]
+        },
+        {
+          "title": "Sujet de type bac : le partage de l'Afrique",
+          "exercise_type": "evaluation",
+          "figure": "afrique-1914",
+          "statement": "Sujet de type bac. Document : une carte de l'Afrique vers 1914. L'Éthiopie et le Libéria, indépendants, sont colorés à part. Les autres territoires sont colorés selon la puissance qui les domine : la France (Algérie, Sénégal, Mali, Burkina Faso, Côte d'Ivoire), le Royaume-Uni (Nigeria, Ghana, Kenya), l'Allemagne (Togo, Cameroun, Namibie, Tanzanie continentale), la Belgique (Congo) et le Portugal (Angola, Mozambique). Les territoires portent les noms des pays actuels. Réponds aux questions, puis rédige la synthèse.",
+          "questions": [
+            {
+              "content": "D'après la carte, quels sont les deux États indépendants ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode d'analyse de document (fiche « Le partage de l'Afrique et ses conséquences »). Étape 1 — Situer : l'Afrique vers 1914. Étape 2 — Décrire qui possède quoi : les territoires colorés à part sont l'Éthiopie et le Libéria. Le Ghana et le Kenya sont britanniques, le Burkina Faso est français : ce sont les confusions possibles quand on lit mal la légende.",
+              "answers": [
+                {
+                  "content": "L'Éthiopie",
+                  "correct": true
+                },
+                {
+                  "content": "Le Libéria",
+                  "correct": true
+                },
+                {
+                  "content": "Le Ghana",
+                  "correct": false
+                },
+                {
+                  "content": "Le Burkina Faso",
+                  "correct": false
+                },
+                {
+                  "content": "Le Kenya",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque territoire à la puissance qui le domine d'après la carte.",
+              "question_type": "matching",
+              "explanation": "Méthode : étape 2 — Décrire qui possède quoi, en lisant la légende de la carte. La Côte d'Ivoire est dans le domaine français, le Ghana dans le domaine britannique, le Cameroun dans le domaine allemand et le Mozambique dans le domaine portugais. Pense à lire la couleur du territoire, puis la légende.",
+              "answers": [
+                {
+                  "content": "Côte d'Ivoire",
+                  "match": "France"
+                },
+                {
+                  "content": "Ghana",
+                  "match": "Royaume-Uni"
+                },
+                {
+                  "content": "Cameroun",
+                  "match": "Allemagne"
+                },
+                {
+                  "content": "Mozambique",
+                  "match": "Portugal"
+                }
+              ]
+            },
+            {
+              "content": "Les frontières coloniales respectent toujours les territoires des peuples africains.",
+              "question_type": "true_false",
+              "explanation": "Méthode : étape 3 — Expliquer les conséquences. Les frontières sont tracées par les puissances sans consulter les Africains, parfois en lignes droites : des peuples sont séparés, d'autres réunis dans une même colonie. L'affirmation est fausse, c'est le piège de la fiche.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien d'années séparent la fin de la conférence de Berlin (1885) de la situation représentée sur la carte (1914) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "ans",
+              "explanation": "Méthode : étape 1 — Situer dans le temps. La conférence se termine en 1885 et la carte représente 1914. Le calcul est 1914 - 1885 = 29 ans. C'est la durée de la course à l'occupation et du partage.",
+              "answers": [
+                {
+                  "content": "29",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets ces étapes dans l'ordre pour expliquer le partage de l'Afrique.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la fiche « Le partage de l'Afrique et ses conséquences ». Étape 3 — Expliquer les causes : d'abord les besoins économiques et la rivalité entre puissances. Puis la conférence de Berlin (1884-1885) donne les règles. Ensuite le partage réel (1885-1914). Étape 4 — Conclure : la situation de 1914, avec 2 États libres.",
+              "answers": [
+                {
+                  "content": "Les besoins économiques et les rivalités poussent les Européens à conquérir"
+                },
+                {
+                  "content": "La conférence de Berlin fixe les règles de l'occupation effective (1884-1885)"
+                },
+                {
+                  "content": "Les puissances se partagent le continent par traités et conquêtes (1885-1914)"
+                },
+                {
+                  "content": "Vers 1914, seuls l'Éthiopie et le Libéria restent indépendants"
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe d'une dizaine de lignes qui explique les causes du partage de l'Afrique, le rôle de la conférence de Berlin et les conséquences du partage.",
+              "question_type": "written",
+              "points": 8,
+              "criteria": [
+                "Présenter au moins deux causes : économique, politique, démographique ou idéologique",
+                "Situer la conférence de Berlin (1884-1885) et citer une de ses règles",
+                "Dire que la conférence ne trace pas elle-même les frontières",
+                "Citer deux conséquences : frontières artificielles, domination, exploitation",
+                "Mentionner les deux États indépendants vers 1914",
+                "Plan clair : causes, Berlin, conséquences",
+                "Vocabulaire du cours : impérialisme, colonie, métropole, occupation effective",
+                "Rédaction claire, sans faute grave"
+              ],
+              "explanation": "Corrigé modèle : À la fin du XIXe siècle, les puissances européennes se lancent dans la conquête de l'Afrique pour des raisons économiques (matières premières et marchés), politiques (prestige et rivalités), démographiques et idéologiques (mission « civilisatrice »). Pour régler leurs rivalités, elles se réunissent à Berlin du 15 novembre 1884 au 26 février 1885, sans aucun Africain. L'Acte général pose des règles : liberté du commerce, liberté de navigation et occupation effective. La conférence ne trace pas elle-même les frontières : le partage se fait ensuite, de 1885 à 1914, par des traités et des conquêtes. Vers 1914, seuls l'Éthiopie et le Libéria restent indépendants. Les conséquences sont la domination politique, l'exploitation des richesses au profit des métropoles et des frontières tracées sans tenir compte des peuples. Barème sur 8 points : 2 pour les causes ; 2 pour Berlin et ses règles ; 2 pour les conséquences ; 1 pour les deux États indépendants ; 1 pour la clarté et le vocabulaire.",
+              "answers": [],
+              "starter": "À la fin du XIXe siècle, les Européens…"
+            },
+            {
+              "content": "Dire que la conférence de Berlin a donné les règles de la course au partage et non le tracé des frontières est exact.",
+              "question_type": "true_false",
+              "explanation": "Méthode : étape 3 — Expliquer. La conférence fixe des règles (commerce, navigation, occupation effective) ; le partage réel se fait de 1885 à 1914 par traités et conquêtes. L'affirmation est vraie : Berlin donne les règles, pas la carte.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Mouvement impérialiste (vers 1880-1914) et ses causes, explorateurs et prises de contrôle avant 1884, conférence de Berlin (1884-1885) et Acte général, partage de l'Afrique et situation vers 1914.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Repères de la leçon. Le mouvement impérialiste désigne la grande poussée de conquêtes des Européens, surtout en Afrique, d'environ 1880 à 1914. Les causes sont économiques, politiques, démographiques et idéologiques.",
+              "exercise_type": "evaluation",
+              "figure": "causes-imperialisme",
+              "hint": "Situe, classe, illustre, conclus : quatre familles de causes qui se renforcent.",
+              "questions": [
+                {
+                  "content": "Quelle est la période du mouvement impérialiste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le mouvement impérialiste va d'environ 1880 à 1914.",
+                  "answers": [
+                    {
+                      "content": "Vers 1880-1914",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vers 1750-1800",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vers 1920-1960",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vers 1450-1500",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La puissance qui domine une colonie s'appelle la ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Situer : la colonie est le territoire dominé, la métropole la puissance qui domine.",
+                  "answers": [
+                    {
+                      "content": "métropole",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque famille de causes à un exemple.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Classer : chaque famille a ses exemples. Mélanger économique et politique est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "Économique",
+                      "match": "Matières premières et marchés"
+                    },
+                    {
+                      "content": "Politique",
+                      "match": "Prestige et rivalités"
+                    },
+                    {
+                      "content": "Démographique",
+                      "match": "Population européenne en forte croissance"
+                    },
+                    {
+                      "content": "Idéologique",
+                      "match": "Mission « civilisatrice » et évangélisation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les progrès techniques, comme le bateau à vapeur et la quinine, facilitent la conquête.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Illustrer : ces progrès facilitent la conquête, sans en être la cause.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux causes économiques de la conquête ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Classer : matières premières et marchés sont économiques ; prestige = politique, évangélisation = idéologique, terres = démographique.",
+                  "answers": [
+                    {
+                      "content": "Offrir des terres à une population en hausse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trouver des matières premières",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trouver des marchés pour les produits fabriqués",
+                      "correct": true
+                    },
+                    {
+                      "content": "Gagner du prestige",
+                      "correct": false
+                    },
+                    {
+                      "content": "Évangéliser les populations",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Repères de la leçon. Avant 1884, les Européens tiennent surtout les côtes. Des explorateurs ouvrent l'intérieur : Livingstone, Stanley et Brazza. En 1880, Brazza signe un traité avec le roi Makoko ; en 1881, la France établit un protectorat sur la Tunisie ; en 1882, le Royaume-Uni occupe l'Égypte.",
+              "exercise_type": "evaluation",
+              "figure": "frise-partage",
+              "hint": "Pour chaque fait : quand, où, quelle puissance, quel objectif ?",
+              "questions": [
+                {
+                  "content": "Qui est David Livingstone ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : Livingstone est un missionnaire britannique.",
+                  "answers": [
+                    {
+                      "content": "Un explorateur français",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le roi des Belges",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chancelier allemand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un missionnaire britannique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque personnage à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier : chaque acteur a sa puissance. Confondre Brazza et Stanley est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Brazza",
+                      "match": "Explorateur au service de la France"
+                    },
+                    {
+                      "content": "Livingstone",
+                      "match": "Missionnaire britannique"
+                    },
+                    {
+                      "content": "Léopold II",
+                      "match": "Roi des Belges"
+                    },
+                    {
+                      "content": "Makoko",
+                      "match": "Roi dont le traité de 1880 place la rive droite du Congo sous protection française"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : 1876, 1882, 1884, 1896.",
+                  "answers": [
+                    {
+                      "content": "Conférence de géographie de Bruxelles (1876)"
+                    },
+                    {
+                      "content": "Occupation britannique de l'Égypte (1882)"
+                    },
+                    {
+                      "content": "Le Togo et le Cameroun passent sous protection allemande (1884)"
+                    },
+                    {
+                      "content": "Victoire éthiopienne d'Adoua (1896)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent le traité Brazza-Makoko (1880) de l'occupation de l'Égypte (1882) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Situer : $1882 - 1880 = 2$ ans.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "Avant 1884, les Européens tiennent surtout les côtes de l'Afrique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : avant 1884, ils tiennent surtout des côtes (comptoirs) ; l'intérieur est mal connu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Repères de la leçon. La conférence de Berlin se tient du 15 novembre 1884 au 26 février 1885, à l'initiative de Bismarck. Quatorze États y participent. Son Acte général pose des règles : liberté du commerce dans le bassin du Congo, liberté de navigation sur le Congo et le Niger, occupation effective.",
+              "exercise_type": "evaluation",
+              "figure": "decisions-berlin",
+              "hint": "Présente, dégage, explique, montre les limites : règles, pas carte.",
+              "questions": [
+                {
+                  "content": "Quelle décision de l'Acte général concerne la navigation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Dégager : la navigation est libre sur le Congo et le Niger. Le commerce libre est une autre décision.",
+                  "answers": [
+                    {
+                      "content": "La liberté de navigation sur le Congo et le Niger",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le commerce libre dans le bassin du Congo",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'interdiction de naviguer sur le Congo",
+                      "correct": false
+                    },
+                    {
+                      "content": "La navigation réservée à la Belgique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'États participent à la conférence de Berlin ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Présenter : quatorze États participent à la conférence.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La conférence de Berlin a tracé la carte précise des frontières africaines.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Montrer les limites : la conférence fixe des règles ; le partage réel se fait de 1885 à 1914.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour revendiquer un territoire, une puissance applique le principe de l'___ effective et informe les autres (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Dégager : l'occupation effective exige une présence réelle sur le territoire.",
+                  "answers": [
+                    {
+                      "content": "occupation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aucun ___ n'est présent à la conférence de Berlin.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Montrer les limites : aucun Africain n'est présent ni consulté.",
+                  "answers": [
+                    {
+                      "content": "Allemand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Africain",
+                      "correct": true
+                    },
+                    {
+                      "content": "Européen",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Repères de la leçon. Après Berlin, les puissances se partagent l'Afrique par des traités et des conquêtes. En 1896, Ménélik II bat l'armée italienne à Adoua. En 1898, à Fachoda, la France et le Royaume-Uni s'opposent sur le Haut-Nil. Vers 1914, seuls l'Éthiopie et le Libéria sont indépendants.",
+              "exercise_type": "evaluation",
+              "figure": "afrique-1914",
+              "hint": "Situe, décris qui possède quoi, explique, conclus : 2 États libres en 1914.",
+              "questions": [
+                {
+                  "content": "Quels sont les deux États africains indépendants vers 1914 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Décrire : l'Éthiopie et le Libéria échappent à la domination ; les trois autres sont des colonies.",
+                  "answers": [
+                    {
+                      "content": "L'Éthiopie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Libéria",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Sénégal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Nigeria",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Togo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles puissances s'opposent à Fachoda en 1898 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire : Fachoda oppose la France et le Royaume-Uni sur le Haut-Nil.",
+                  "answers": [
+                    {
+                      "content": "La Belgique et le Portugal",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Éthiopie et l'Italie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La France et le Royaume-Uni",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'Allemagne et l'Italie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À Fachoda, la France finit par se retirer.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Décrire : la France se retire, la crise ne dégénère pas en guerre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque territoire à la puissance qui le domine vers 1914.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Décrire qui possède quoi : Sénégal français, Ghana britannique, Namibie allemande, Angola portugais.",
+                  "answers": [
+                    {
+                      "content": "Sénégal",
+                      "match": "France"
+                    },
+                    {
+                      "content": "Ghana",
+                      "match": "Royaume-Uni"
+                    },
+                    {
+                      "content": "Namibie",
+                      "match": "Allemagne"
+                    },
+                    {
+                      "content": "Angola",
+                      "match": "Portugal"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'États africains restent indépendants vers 1914 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Conclure : seuls l'Éthiopie et le Libéria restent indépendants, soit 2 États.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Causes du mouvement impérialiste, carte de l'Afrique vers 1914 et domination de la Côte d'Ivoire par la France, conséquences du partage (frontières, souveraineté, matières premières), cas de l'Éthiopie après Adoua.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Awa, élève de 1ère à Abidjan, prépare un exposé. Sa professeure lui demande d'expliquer pourquoi presque toute l'Afrique, dont la Côte d'Ivoire, passe sous domination européenne avant 1914. Awa suit la méthode de la fiche.",
+              "exercise_type": "evaluation",
+              "figure": "causes-imperialisme",
+              "hint": "Awa situe (1880-1914), classe les causes, illustre, puis conclut.",
+              "questions": [
+                {
+                  "content": "Awa lit que l'Europe a besoin de caoutchouc et de coton pour ses usines. À quelle famille de causes ce motif appartient-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Classer : les matières premières pour les usines sont une cause économique.",
+                  "answers": [
+                    {
+                      "content": "Idéologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Économique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Politique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Démographique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa lit qu'une puissance veut occuper un territoire avant sa rivale pour gagner du prestige. À quelle famille de causes ce motif appartient-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Classer : prestige et rivalités entre puissances sont des causes politiques.",
+                  "answers": [
+                    {
+                      "content": "Idéologique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Politique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Économique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Démographique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa peut écrire que la colonisation de l'Afrique commence avec la conférence de Berlin, en 1884.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : la France conquiert l'Algérie dès 1830, plus de 50 ans avant Berlin ; vers 1880 commence la course à toute l'Afrique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un discours de 1885 affirme que la conquête a pour but de « civiliser » l'Afrique. Comment Awa doit-elle l'interpréter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : la mission « civilisatrice » justifie la conquête ; les moteurs sont les intérêts économiques et politiques.",
+                  "answers": [
+                    {
+                      "content": "Comme une justification de la conquête, à côté des intérêts économiques et politiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Comme l'unique cause de la conquête",
+                      "correct": false
+                    },
+                    {
+                      "content": "Comme une cause démographique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Comme une règle de l'Acte général",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le plan de l'exposé d'Awa.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — à 4 : situer, classer, illustrer, conclure.",
+                  "answers": [
+                    {
+                      "content": "Situer le mouvement vers 1880-1914"
+                    },
+                    {
+                      "content": "Classer les causes en quatre familles"
+                    },
+                    {
+                      "content": "Illustrer chaque cause par un exemple"
+                    },
+                    {
+                      "content": "Conclure : les causes se renforcent"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la salle d'histoire du lycée, une carte de l'Afrique vers 1914 est affichée. La Côte d'Ivoire est colorée comme la France, le Nigeria comme le Royaume-Uni, le Togo comme l'Allemagne, et l'Éthiopie et le Libéria sont colorés à part.",
+              "exercise_type": "evaluation",
+              "figure": "afrique-1914",
+              "hint": "Lis la légende de la carte : une couleur par puissance, deux États à part.",
+              "questions": [
+                {
+                  "content": "D'après cette carte, quelle puissance domine la Côte d'Ivoire vers 1914 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire : sur la carte, la Côte d'Ivoire a la couleur de la France.",
+                  "answers": [
+                    {
+                      "content": "Le Royaume-Uni",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Allemagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Belgique",
+                      "correct": false
+                    },
+                    {
+                      "content": "La France",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après cette carte, quelle puissance domine le Togo vers 1914 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire : le Togo est coloré comme l'Allemagne.",
+                  "answers": [
+                    {
+                      "content": "La France",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Royaume-Uni",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Portugal",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Allemagne",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels États sont colorés à part sur cette carte, car ils sont indépendants ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Conclure : seuls l'Éthiopie et le Libéria sont indépendants vers 1914.",
+                  "answers": [
+                    {
+                      "content": "Le Nigeria",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Togo",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Côte d'Ivoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Éthiopie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Libéria",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur cette carte, la Côte d'Ivoire et le Nigeria dépendent de la même puissance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Décrire : la Côte d'Ivoire est française, le Nigeria britannique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur cette carte, le Nigeria est dominé par le Royaume-___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Décrire : le Nigeria a la couleur du Royaume-Uni.",
+                  "answers": [
+                    {
+                      "content": "Uni",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un lycéen d'Abidjan observe une carte d'Afrique où plusieurs frontières sont des lignes droites. Son professeur explique que ces frontières ont été tracées par les puissances européennes, sans consulter les peuples africains.",
+              "exercise_type": "evaluation",
+              "figure": "afrique-1914",
+              "hint": "Frontières tracées sans consulter les Africains : des peuples séparés, d'autres réunis.",
+              "questions": [
+                {
+                  "content": "Des frontières tracées sans consulter les peuples peuvent séparer des familles d'un même peuple.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : les frontières coloniales séparent des peuples, et en réunissent d'autres dans une même colonie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Selon la leçon, qui a tracé ces frontières coloniales ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : les puissances ont tracé les frontières par traités entre elles, sans consulter les Africains.",
+                  "answers": [
+                    {
+                      "content": "Les puissances européennes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les peuples africains eux-mêmes",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Éthiopie après Adoua",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les missionnaires seuls",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux conséquences du partage pour les colonies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer : souveraineté perdue et matières premières pour la métropole.",
+                  "answers": [
+                    {
+                      "content": "La fin de la domination en 1914",
+                      "correct": false
+                    },
+                    {
+                      "content": "La participation à la conférence de Berlin",
+                      "correct": false
+                    },
+                    {
+                      "content": "La perte de souveraineté",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'envoi de matières premières à la métropole",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le respect des langues et des peuples",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque conséquence à son sens.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Expliquer : la colonie fournit des matières premières et achète des produits fabriqués.",
+                  "answers": [
+                    {
+                      "content": "Frontières sans tenir compte des peuples",
+                      "match": "Des peuples séparés ou réunis de force"
+                    },
+                    {
+                      "content": "Perte de souveraineté",
+                      "match": "Les Africains ne gouvernent plus leurs États"
+                    },
+                    {
+                      "content": "Matières premières",
+                      "match": "Envoyées vers la métropole"
+                    },
+                    {
+                      "content": "Produits fabriqués",
+                      "match": "Achetés à la métropole"
+                    }
+                  ]
+                },
+                {
+                  "content": "La conférence de Berlin n'a pas ___ les frontières ; elle a fixé des règles.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : Berlin donne les règles, pas la carte.",
+                  "answers": [
+                    {
+                      "content": "tracé",
+                      "correct": true
+                    },
+                    {
+                      "content": "interdit",
+                      "correct": false
+                    },
+                    {
+                      "content": "signé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au CDI, un élève prépare une affiche sur l'Éthiopie : en 1896, l'empereur Ménélik II bat l'armée italienne à Adoua ; vers 1914, l'Éthiopie reste indépendante, comme le Libéria.",
+              "exercise_type": "evaluation",
+              "figure": "frise-partage",
+              "hint": "L'Éthiopie est un cas à part : victoire à Adoua, indépendance conservée.",
+              "questions": [
+                {
+                  "content": "Quel empereur éthiopien bat l'armée italienne à Adoua en 1896 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Décrire : c'est Ménélik II qui bat l'armée italienne à Adoua.",
+                  "answers": [
+                    {
+                      "content": "Léopold II",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bismarck",
+                      "correct": false
+                    },
+                    {
+                      "content": "Makoko",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ménélik II",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Adoua est une victoire de l'armée italienne.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Décrire : à Adoua, l'armée italienne est battue par l'Éthiopie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent Adoua (1896) de la situation de l'Afrique vers 1914 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Situer : $1914 - 1896 = 18$ ans.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "Pourquoi l'Éthiopie est-elle un cas à part vers 1914 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : l'Éthiopie et le Libéria sont les deux seuls États indépendants vers 1914.",
+                  "answers": [
+                    {
+                      "content": "Elle participe à la conférence de Berlin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est une colonie belge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle reste indépendante, comme le Libéria",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est dominée par l'Italie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces événements dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : 1884-1885, 1896, 1898, 1914.",
+                  "answers": [
+                    {
+                      "content": "Conférence de Berlin (1884-1885)"
+                    },
+                    {
+                      "content": "Victoire éthiopienne d'Adoua (1896)"
+                    },
+                    {
+                      "content": "Crise de Fachoda (1898)"
+                    },
+                    {
+                      "content": "Situation de l'Afrique (vers 1914)"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Distinguer cause réelle et justification, corriger des confusions d'acteurs et de dates, analyser un document résumé de l'Acte général de Berlin, réfuter des affirmations sur 1914 et sur les frontières coloniales.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois élèves donnent leur avis. A : « La colonisation commence en 1884. » B : « La mission civilisatrice est la vraie cause de la conquête. » C : « Les causes économiques, politiques, démographiques et idéologiques se renforcent. »",
+              "exercise_type": "evaluation",
+              "figure": "causes-imperialisme",
+              "hint": "Retiens les deux pièges de la fiche : la date de 1884 et la mission « civilisatrice ».",
+              "questions": [
+                {
+                  "content": "Parmi les élèves A, B et C, lequel a raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : les causes se renforcent ; A confond la date et B prend l'argument affiché pour la cause.",
+                  "answers": [
+                    {
+                      "content": "C",
+                      "correct": true
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "B",
+                      "correct": false
+                    },
+                    {
+                      "content": "A et B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'affirmation « la colonisation commence en 1884 » est-elle fausse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : 1830 pour l'Algérie ; vers 1880, c'est la course à toute l'Afrique qui commence.",
+                  "answers": [
+                    {
+                      "content": "Les Européens n'ont jamais colonisé l'Algérie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La France conquiert l'Algérie dès 1830, plus de 50 ans avant la conférence",
+                      "correct": true
+                    },
+                    {
+                      "content": "La conférence de Berlin a lieu en 1900",
+                      "correct": false
+                    },
+                    {
+                      "content": "La colonisation commence après 1914",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'affirmation « la mission civilisatrice est la vraie cause » est-elle discutable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : l'argument affiché n'est pas la cause réelle.",
+                  "answers": [
+                    {
+                      "content": "Elle justifie la conquête, dont les moteurs sont économiques et politiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est la seule cause démographique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle date de la conférence de Berlin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a jamais été invoquée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les causes de la conquête sont indépendantes les unes des autres.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : les causes se renforcent mutuellement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La « mission civilisatrice » est surtout une ___ de la conquête.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : c'est une justification, qui s'ajoute aux intérêts économiques et politiques.",
+                  "answers": [
+                    {
+                      "content": "justification",
+                      "correct": true
+                    },
+                    {
+                      "content": "cause principale",
+                      "correct": false
+                    },
+                    {
+                      "content": "conséquence",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève écrit : « La France établit un protectorat sur la Tunisie en 1882, Brazza travaille pour Léopold II, Livingstone est un explorateur français et la France occupe l'Égypte. » Plusieurs informations sont fausses.",
+              "exercise_type": "evaluation",
+              "figure": "frise-partage",
+              "hint": "Corrige : Tunisie 1881, Égypte 1882 (Royaume-Uni), Brazza pour la France.",
+              "questions": [
+                {
+                  "content": "Quelle est la bonne date du protectorat français sur la Tunisie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : la Tunisie est française en 1881 ; 1882 est l'année de l'Égypte.",
+                  "answers": [
+                    {
+                      "content": "1876",
+                      "correct": false
+                    },
+                    {
+                      "content": "1884",
+                      "correct": false
+                    },
+                    {
+                      "content": "1881",
+                      "correct": true
+                    },
+                    {
+                      "content": "1882",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quel État Brazza travaille-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : Brazza sert la France ; Stanley travaille pour Léopold II.",
+                  "answers": [
+                    {
+                      "content": "La France",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le roi des Belges",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Royaume-Uni",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Allemagne",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dire que Stanley travaille pour la France est exact.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Identifier : Stanley travaille pour le roi des Belges Léopold II.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque erreur à sa correction.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier : chaque confusion a sa correction dans la fiche.",
+                  "answers": [
+                    {
+                      "content": "Tunisie en 1882",
+                      "match": "Tunisie en 1881 (l'Égypte est en 1882)"
+                    },
+                    {
+                      "content": "Brazza pour Léopold II",
+                      "match": "Brazza pour la France"
+                    },
+                    {
+                      "content": "Livingstone, explorateur français",
+                      "match": "Livingstone, missionnaire britannique"
+                    },
+                    {
+                      "content": "Égypte occupée par la France",
+                      "match": "Égypte occupée par le Royaume-Uni"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conséquence l'occupation de l'Égypte par le Royaume-Uni a-t-elle sur la course à l'Afrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Dégager la rivalité : la rivalité des puissances accélère la course.",
+                  "answers": [
+                    {
+                      "content": "Elle rend la conférence inutile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle donne l'Égypte à l'Allemagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les autres puissances veulent assurer à leur tour leurs intérêts : la course s'accélère",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle arrête toute conquête",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document (texte résumé par Lnclass). Les États signataires reconnaissent la liberté du commerce dans le bassin du Congo et la liberté de navigation sur le Congo et le Niger. Toute puissance qui prend possession d'un territoire doit y exercer une autorité réelle et en informer les autres. Aucun représentant africain n'a été présent.",
+              "exercise_type": "evaluation",
+              "figure": "decisions-berlin",
+              "hint": "Présente le document, dégage ses règles, explique l'effet de l'information des autres, montre les absents.",
+              "questions": [
+                {
+                  "content": "Quelle est la nature de ce document ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Présenter : le texte résume l'Acte général de 1885, un acte entre États.",
+                  "answers": [
+                    {
+                      "content": "Un récit de voyage",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un acte international entre des États",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le journal d'un explorateur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lettre privée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que montre la dernière phrase du document ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Montrer les limites : aucun Africain n'est présent.",
+                  "answers": [
+                    {
+                      "content": "Que l'acte est écrit en Afrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que le commerce est interdit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que les Africains sont absents de la décision",
+                      "correct": true
+                    },
+                    {
+                      "content": "Que les Africains ont signé l'acte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce document trace les frontières entre les colonies.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Montrer les limites : il pose des règles, il ne trace pas de frontières.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'obligation d'informer les autres puissances accélère-t-elle la course ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : pour ne pas être devancée, chaque puissance occupe réellement et vite.",
+                  "answers": [
+                    {
+                      "content": "Une puissance doit occuper vite un territoire avant ses rivales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle interdit toute occupation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle supprime les rivalités",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle donne les territoires aux Africains",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux libertés prévues par ce document ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Dégager : commerce dans le bassin du Congo et navigation sur le Congo et le Niger.",
+                  "answers": [
+                    {
+                      "content": "Le choix du protecteur par les Africains",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'indépendance du Togo",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'abolition des frontières",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commerce dans le bassin du Congo",
+                      "correct": true
+                    },
+                    {
+                      "content": "La navigation sur le Congo et le Niger",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Deux affirmations sont proposées. A : « En 1914, toute l'Afrique est colonisée. » B : « Les frontières coloniales respectent les peuples africains. » Il faut les discuter avec la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "afrique-1914",
+              "hint": "Cherche un contre-exemple pour A (Adoua) et la conséquence pour B (peuples séparés).",
+              "questions": [
+                {
+                  "content": "En 1914, toute l'Afrique est colonisée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : l'Éthiopie et le Libéria restent indépendants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les frontières coloniales respectent les peuples, les langues et les États africains.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : elles sont tracées sans consulter les Africains.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel exemple contredit l'idée que toute l'Afrique est colonisée en 1914 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : l'Éthiopie reste libre après Adoua.",
+                  "answers": [
+                    {
+                      "content": "La France se retire à Fachoda",
+                      "correct": false
+                    },
+                    {
+                      "content": "Berlin fixe des règles en 1885",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Congo est belge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ménélik II bat l'armée italienne à Adoua en 1896 et l'Éthiopie reste indépendante",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conséquence montre que les frontières coloniales ne respectent pas les peuples ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : séparer et réunir sans consulter est la conséquence des frontières tracées par les puissances.",
+                  "answers": [
+                    {
+                      "content": "Chaque peuple a son propre État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les frontières suivent les langues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des peuples sont séparés et des peuples différents sont réunis dans une même colonie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les peuples choisissent leur colonie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre cette chaîne de faits.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Expliquer : les rivalités mènent à Berlin, puis au partage, puis à la situation de 1914.",
+                  "answers": [
+                    {
+                      "content": "Prises de contrôle rivales avant 1884"
+                    },
+                    {
+                      "content": "Conférence de Berlin : des règles communes"
+                    },
+                    {
+                      "content": "Course à l'occupation, traités et conquêtes"
+                    },
+                    {
+                      "content": "Vers 1914, deux États restent indépendants"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : causes du mouvement impérialiste, rivalités et acteurs avant 1884, conférence de Berlin et Acte général, partage de l'Afrique, Adoua, Fachoda et situation vers 1914. Lecture de texte, de frise et plan de type bac.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Texte (écrit pour Lnclass). « Dans les années 1880, les usines d'Europe réclament du caoutchouc, du coton et des minerais. Les gouvernements veulent plus de prestige que leurs rivaux. Les villes d'Europe comptent de plus en plus d'habitants. Beaucoup d'Européens disent apporter la civilisation. »",
+              "exercise_type": "evaluation",
+              "figure": "causes-imperialisme",
+              "hint": "Chaque phrase du texte correspond à une famille de causes.",
+              "questions": [
+                {
+                  "content": "Relie chaque phrase du texte à la famille de causes qu'elle illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Classer : chaque phrase illustre une famille différente.",
+                  "answers": [
+                    {
+                      "content": "Les usines réclament du caoutchouc, du coton et des minerais",
+                      "match": "Cause économique"
+                    },
+                    {
+                      "content": "Les gouvernements veulent plus de prestige",
+                      "match": "Cause politique"
+                    },
+                    {
+                      "content": "Les villes d'Europe comptent de plus en plus d'habitants",
+                      "match": "Cause démographique"
+                    },
+                    {
+                      "content": "Beaucoup d'Européens disent apporter la civilisation",
+                      "match": "Cause idéologique"
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après ce texte, la mission « civilisatrice » est la seule cause de la conquête.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : le texte cite aussi des motifs économiques, politiques et démographiques.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion tire-t-on de l'ensemble du texte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : les causes se renforcent.",
+                  "answers": [
+                    {
+                      "content": "Plusieurs causes se renforcent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule cause suffit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les causes sont sans lien avec l'Afrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "La conquête est sans cause",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle période du mouvement impérialiste le texte évoque-t-il, avec les bornes de la leçon ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le mouvement impérialiste va d'environ 1880 à 1914.",
+                  "answers": [
+                    {
+                      "content": "Le XVe siècle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les années 1880, dans un mouvement qui va d'environ 1880 à 1914",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les années 1830, avec l'Algérie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les années 1920",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle idée du texte est surtout une justification de la conquête ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : l'idée d'apporter la civilisation justifie la conquête ; les moteurs sont économiques et politiques.",
+                  "answers": [
+                    {
+                      "content": "Les gouvernements veulent du prestige",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les villes comptent plus d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Beaucoup d'Européens disent apporter la civilisation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les usines réclament des matières premières",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : une frise de 1870 à 1920. Elle place la conférence de géographie de Bruxelles (1876), le traité Brazza-Makoko (1880), la Tunisie (1881), l'Égypte (1882), le Togo et le Cameroun allemands (1884), la conférence de Berlin (1884-1885), Adoua (1896), Fachoda (1898) et la situation de 1914.",
+              "exercise_type": "evaluation",
+              "figure": "frise-partage",
+              "hint": "Lis les dates dans l'ordre et associe chacune à sa puissance.",
+              "questions": [
+                {
+                  "content": "Remets ces repères de la frise dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : 1876, 1881, 1884-1885, 1896, 1898.",
+                  "answers": [
+                    {
+                      "content": "Conférence de géographie de Bruxelles (1876)"
+                    },
+                    {
+                      "content": "Protectorat français sur la Tunisie (1881)"
+                    },
+                    {
+                      "content": "Conférence de Berlin (1884-1885)"
+                    },
+                    {
+                      "content": "Victoire éthiopienne d'Adoua (1896)"
+                    },
+                    {
+                      "content": "Crise de Fachoda (1898)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent la conférence de Bruxelles (1876) de Fachoda (1898) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Situer : $1898 - 1876 = 22$ ans.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "Parmi ces événements, lequel a lieu avant la conférence de Berlin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : 1882 précède 1884.",
+                  "answers": [
+                    {
+                      "content": "L'occupation de l'Égypte (1882)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Adoua (1896)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fachoda (1898)",
+                      "correct": false
+                    },
+                    {
+                      "content": "La situation de 1914",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel événement de la frise oppose la France et le Royaume-Uni sans aller jusqu'à la guerre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : à Fachoda, la France finit par se retirer.",
+                  "answers": [
+                    {
+                      "content": "La Tunisie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La conférence de Berlin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fachoda",
+                      "correct": true
+                    },
+                    {
+                      "content": "Adoua",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les prises de contrôle rivales de 1880 à 1884 rendent nécessaire une règle commune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Dégager la rivalité : c'est l'objet de la conférence de Berlin.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque date à l'événement correspondant.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Situer : chaque date a son événement.",
+                  "answers": [
+                    {
+                      "content": "1881",
+                      "match": "Protectorat français sur la Tunisie"
+                    },
+                    {
+                      "content": "1882",
+                      "match": "Occupation britannique de l'Égypte"
+                    },
+                    {
+                      "content": "1896",
+                      "match": "Victoire éthiopienne d'Adoua"
+                    },
+                    {
+                      "content": "1898",
+                      "match": "Crise de Fachoda"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sujet de type bac : « Montrez que la conférence de Berlin fixe des règles sans tracer la carte de l'Afrique. » Plan proposé : I. Les règles de 1885 ; II. Le partage de 1885 à 1914 ; III. Les conséquences pour l'Afrique.",
+              "exercise_type": "evaluation",
+              "figure": "decisions-berlin",
+              "hint": "Chaque partie du plan reprend une étape : dégager, expliquer, conclure.",
+              "questions": [
+                {
+                  "content": "Que place-t-on dans la partie I ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Dégager : les règles de l'Acte général.",
+                  "answers": [
+                    {
+                      "content": "La bataille d'Adoua uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commerce libre, la navigation libre et l'occupation effective",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les traités de 1900",
+                      "correct": false
+                    },
+                    {
+                      "content": "La carte précise des frontières",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que place-t-on dans la partie II ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : le partage réel se fait après Berlin.",
+                  "answers": [
+                    {
+                      "content": "Le traité Brazza-Makoko de 1880 seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les causes économiques uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le protectorat sur la Tunisie de 1881",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les traités et les conquêtes entre 1885 et 1914, comme Adoua et Fachoda",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que place-t-on dans la partie III ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : les conséquences du partage.",
+                  "answers": [
+                    {
+                      "content": "Les frontières sans les peuples, la perte de souveraineté, les matières premières",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les règles de la navigation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La date du 15 novembre 1884 seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La liste des participants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plan qui affirme que Berlin a tracé les frontières répond bien au sujet.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Montrer les limites : Berlin ne trace pas les frontières, c'est le piège du sujet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux exemples qui illustrent la partie II ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer : Adoua et Fachoda sont après Berlin ; les autres lui sont antérieurs.",
+                  "answers": [
+                    {
+                      "content": "L'occupation de l'Égypte en 1882",
+                      "correct": false
+                    },
+                    {
+                      "content": "La conférence de Bruxelles de 1876",
+                      "correct": false
+                    },
+                    {
+                      "content": "La victoire éthiopienne d'Adoua en 1896",
+                      "correct": true
+                    },
+                    {
+                      "content": "La crise de Fachoda en 1898",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le traité Brazza-Makoko de 1880",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un exemple de limite de la conférence est que les ___ n'y sont pas présents.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Montrer les limites : aucun Africain n'est présent ni consulté.",
+                  "answers": [
+                    {
+                      "content": "Belges",
+                      "correct": false
+                    },
+                    {
+                      "content": "Africains",
+                      "correct": true
+                    },
+                    {
+                      "content": "Allemands",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan de la leçon. Quatre questions structurent le cours : Pourquoi conquérir ? Qui prend quoi avant 1884 ? Quelles règles en 1885 ? Qui possède quoi vers 1914 ?",
+              "exercise_type": "evaluation",
+              "figure": "causes-imperialisme",
+              "hint": "Associe chaque question à la notion de la leçon qui y répond.",
+              "questions": [
+                {
+                  "content": "Relie chaque question à la notion qui y répond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — à 4 : chaque question correspond à une notion.",
+                  "answers": [
+                    {
+                      "content": "Pourquoi conquérir ?",
+                      "match": "Les causes du mouvement impérialiste"
+                    },
+                    {
+                      "content": "Qui prend quoi avant 1884 ?",
+                      "match": "Explorations et rivalités"
+                    },
+                    {
+                      "content": "Quelles règles en 1885 ?",
+                      "match": "La conférence de Berlin"
+                    },
+                    {
+                      "content": "Qui possède quoi vers 1914 ?",
+                      "match": "Le partage de l'Afrique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la conférence de Berlin a-t-elle lieu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : les rivalités rendent une règle commune nécessaire.",
+                  "answers": [
+                    {
+                      "content": "Les prises de contrôle rivales rendent nécessaire une règle commune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Africains l'ont demandée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle trace les frontières",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle met fin à l'impérialisme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'Allemagne, la Belgique, le Portugal, l'Italie et l'Espagne comptent parmi les puissances qui se partagent l'Afrique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Décrire : avec la France et le Royaume-Uni, ce sont les puissances de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent la fin de la conférence de Berlin (1885) de la situation de 1914 ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Conclure : $1914 - 1885 = 29$ ans.",
+                  "answers": [
+                    {
+                      "content": "29",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "Quelles puissances s'opposent à Fachoda en 1898 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Décrire : Fachoda oppose la France et le Royaume-Uni.",
+                  "answers": [
+                    {
+                      "content": "L'Allemagne",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Italie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Belgique",
+                      "correct": false
+                    },
+                    {
+                      "content": "La France",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Royaume-Uni",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi dit-on que Berlin donne les règles, pas la carte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : Berlin fixe des règles ; le partage vient après.",
+                  "answers": [
+                    {
+                      "content": "Le partage réel se fait de 1885 à 1914, par traités et conquêtes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la conférence dure 30 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les Africains tracent les frontières",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que toutes les frontières datent de 1884",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

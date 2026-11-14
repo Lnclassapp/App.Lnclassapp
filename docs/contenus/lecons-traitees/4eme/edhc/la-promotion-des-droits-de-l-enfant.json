@@ -1,0 +1,3273 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La promotion des droits de l'enfant",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "EDHC",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "droits-de-l-enfant",
+          "kind": "diagram",
+          "description": "Un arbre qui part des droits de l'enfant et se divise en quatre familles : la survie (vivre, être nourri, être soigné), le développement (aller à l'école, jouer, se reposer), la protection (contre la violence, l'exploitation et l'abandon) et la participation (donner son avis, être écouté). Chaque famille a sa couleur.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "droits",
+                "label": "Droits de l'enfant"
+              },
+              {
+                "id": "survie",
+                "label": "Survie : vivre, être nourri, être soigné",
+                "category": 1
+              },
+              {
+                "id": "developpement",
+                "label": "Développement : école, jeu, repos",
+                "category": 2
+              },
+              {
+                "id": "protection",
+                "label": "Protection : contre la violence et l'exploitation",
+                "category": 3
+              },
+              {
+                "id": "participation",
+                "label": "Participation : donner son avis, être écouté",
+                "category": 4
+              }
+            ],
+            "edges": [
+              {
+                "from": "droits",
+                "to": "survie"
+              },
+              {
+                "from": "droits",
+                "to": "developpement"
+              },
+              {
+                "from": "droits",
+                "to": "protection"
+              },
+              {
+                "from": "droits",
+                "to": "participation"
+              }
+            ],
+            "legend": [
+              "Vivre",
+              "Grandir",
+              "Être protégé",
+              "S'exprimer"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "agir-pour-les-droits",
+          "kind": "diagram",
+          "description": "Un schéma en quatre étapes qui montre comment agir quand un droit de l'enfant n'est pas respecté : on constate le problème, on en parle à un adulte de confiance comme un parent ou un enseignant, on alerte une structure de protection comme le centre social ou une ONG, puis l'État protège l'enfant et fait respecter la loi.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "probleme",
+                "label": "Un droit de l'enfant n'est pas respecté"
+              },
+              {
+                "id": "adulte",
+                "label": "En parler à un adulte de confiance"
+              },
+              {
+                "id": "structure",
+                "label": "Alerter le centre social ou une ONG"
+              },
+              {
+                "id": "etat",
+                "label": "L'État protège l'enfant et fait respecter la loi"
+              }
+            ],
+            "edges": [
+              {
+                "from": "probleme",
+                "to": "adulte"
+              },
+              {
+                "from": "adulte",
+                "to": "structure",
+                "label": "si besoin"
+              },
+              {
+                "from": "structure",
+                "to": "etat"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Connaître les droits de l'enfant et leurs textes",
+          "remember": "Un **enfant** est tout être humain de **moins de 18 ans**. Un **droit** est ce que la loi reconnaît à l'enfant et que les adultes et l'État doivent respecter. Trois textes protègent l'enfant : la **Convention relative aux droits de l'enfant** (adoptée par l'ONU, l'Organisation des Nations unies, le 20 novembre 1989 et ratifiée par la Côte d'Ivoire), la **Charte africaine des droits et du bien-être de l'enfant** (1990) et la **Constitution ivoirienne**. On range les droits en quatre familles : la **survie** (vivre, être nourri, être soigné), le **développement** (aller à l'école, jouer, se reposer), la **protection** (être protégé contre la violence, l'exploitation et l'abandon) et la **participation** (donner son avis, être écouté, s'informer). Une règle guide tout : l'**intérêt supérieur de l'enfant**. Ces droits valent pour **tous** les enfants.",
+          "method": [
+            "Identifier la situation de l'enfant : ce dont il a besoin ou ce qu'il fait.",
+            "Nommer le droit de l'enfant qui correspond à cette situation.",
+            "Classer ce droit dans sa famille : survie, développement, protection ou participation.",
+            "Conclure en citant le texte qui reconnaît ce droit : la Convention de 1989 ou la Charte africaine de 1990."
+          ],
+          "example": {
+            "statement": "Awa a 8 ans. Chaque matin, elle va à l'école de son quartier, où elle apprend à lire et à écrire. Quel droit exerce-t-elle, dans quelle famille se range-t-il et quel texte le reconnaît ?",
+            "steps": [
+              "Identifier : Awa, 8 ans, va à l'école et apprend à lire : elle s'instruit.",
+              "Nommer : c'est le droit à l'éducation.",
+              "Classer : le droit à l'éducation fait partie de la famille du développement.",
+              "Conclure : la Convention de 1989 et la Charte africaine de 1990 reconnaissent le droit à l'éducation."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'on perd ses droits d'enfant en grandissant ou qu'ils dépendent de l'argent des parents. Contre-exemple : Yao a 16 ans. Il se trouve grand, mais 16 est inférieur à 18 : il est un enfant au sens de la Convention et il reste protégé. De même, un enfant pauvre a les mêmes droits qu'un enfant riche. Avant de dire qu'une personne n'a pas de droits d'enfant, compte donc son âge : moins de 18 ans, c'est un enfant.",
+          "figure": "droits-de-l-enfant",
+          "practice": {
+            "statement": "Tu t'entraînes à nommer un droit de l'enfant, à le classer et à citer son texte, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le droit d'aller à l'école se range dans la famille des droits de ___.",
+                "question_type": "select",
+                "hint": "Pense à ce qui fait grandir l'enfant : apprendre, jouer.",
+                "explanation": "Étape 1 — Identifier la situation : un enfant va à l'école. Étape 2 — Nommer le droit : le droit à l'éducation. Étape 3 — Classer ce droit : aller à l'école, jouer et se reposer font partie du développement. La survie concerne la vie et la santé ; la protection concerne la violence et l'exploitation.",
+                "answers": [
+                  {
+                    "content": "participation",
+                    "correct": false
+                  },
+                  {
+                    "content": "survie",
+                    "correct": false
+                  },
+                  {
+                    "content": "développement",
+                    "correct": true
+                  },
+                  {
+                    "content": "protection",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pendant une discussion sur le règlement de la classe, Mariam, 10 ans, donne son avis et le maître l'écoute. Quel droit exerce-t-elle ?",
+                "question_type": "single_choice",
+                "hint": "Que fait Mariam avec sa parole ?",
+                "explanation": "Étape 1 — Identifier la situation : Mariam exprime son avis et on l'écoute. Étape 2 — Nommer le droit : le droit de donner son avis. Étape 3 — Classer ce droit : c'est la participation. Étape 4 — Conclure : la Convention de 1989 reconnaît ce droit. Le droit aux soins relève de la survie, ce qui n'est pas la situation de Mariam.",
+                "answers": [
+                  {
+                    "content": "Le droit d'être soignée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit d'être protégée contre l'exploitation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit de se reposer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit de donner son avis et d'être écoutée",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Selon la Convention, un enfant est un être humain de moins de ___ ans.",
+                "question_type": "fill_blank",
+                "hint": "Le nombre est celui de la majorité.",
+                "explanation": "Étape 1 — Identifier la situation : on cherche l'âge qui limite l'enfance. Étape 2 — Nommer la règle : la Convention définit l'enfant comme toute personne de moins de 18 ans. Étape 4 — Conclure : la réponse est 18. Dire 15 ou 16 serait la confusion du piège, qui fait perdre ses droits trop tôt.",
+                "answers": [
+                  {
+                    "content": "18",
+                    "correct": true
+                  },
+                  {
+                    "content": "dix-huit",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître un droit, sa famille et son texte",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des situations d'enfants du quartier et de l'école.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Fatou, 6 ans, est vaccinée au centre de santé de son quartier. Quel droit est respecté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : Fatou est vaccinée au centre de santé. Étape 2 — Nommer le droit : le droit à la santé. Étape 3 — Classer ce droit : il fait partie de la survie, car il protège la vie de l'enfant. Étape 4 — Conclure : la Convention de 1989 et la Charte africaine de 1990 reconnaissent ce droit. Le droit de donner son avis relève de la participation, pas de la santé.",
+                  "answers": [
+                    {
+                      "content": "Le droit de donner son avis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit à la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit d'avoir un deuxième prénom",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit au jeu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces droits, lesquels font partie de la famille du développement ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier la situation : on classe des droits. Étape 2 — Nommer chaque droit : éducation, jeu et repos, santé, protection, avis. Étape 3 — Classer : l'éducation, le jeu et le repos font grandir l'enfant, ce sont des droits de développement. Être soigné relève de la survie, être protégé contre les coups de la protection, donner son avis de la participation. Étape 4 — Conclure : ces droits sont dans la Convention de 1989.",
+                  "answers": [
+                    {
+                      "content": "Être protégé contre les coups",
+                      "correct": false
+                    },
+                    {
+                      "content": "Être soigné quand on est malade",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aller à l'école",
+                      "correct": true
+                    },
+                    {
+                      "content": "Jouer et se reposer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Donner son avis",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao a 16 ans. Comme il est grand, il n'est plus un enfant et n'a plus de droits d'enfant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : Yao a 16 ans. Étape 2 — Nommer la règle : la Convention appelle enfant toute personne de moins de 18 ans. Étape 4 — Conclure : 16 est inférieur à 18, Yao reste un enfant protégé. Croire qu'on n'a plus de droits parce qu'on se sent grand est la confusion du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à la famille de droits qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier chaque situation. Étape 2 — Nommer le droit : santé, éducation, protection contre la violence, avis. Étape 3 — Classer : la santé relève de la survie, l'éducation du développement, la protection contre les coups de la protection, l'avis de la participation. Étape 4 — Conclure : les quatre familles de la Convention couvrent toute la vie de l'enfant.",
+                  "answers": [
+                    {
+                      "content": "Un enfant malade est soigné au centre de santé",
+                      "match": "Survie"
+                    },
+                    {
+                      "content": "Une fillette apprend à lire à l'école",
+                      "match": "Développement"
+                    },
+                    {
+                      "content": "Un garçon est protégé contre les coups",
+                      "match": "Protection"
+                    },
+                    {
+                      "content": "Les élèves donnent leur avis sur le règlement de la classe",
+                      "match": "Participation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camarade dit : « Mon grand frère a 17 ans, il n'a plus aucun droit d'enfant. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : un jeune de 17 ans. Étape 2 — Nommer la règle : la Convention définit l'enfant par l'âge, moins de 18 ans. Étape 3 — Classer : cette règle ouvre toutes les familles de droits. Étape 4 — Conclure : à 17 ans on est encore un enfant. Les autres réponses reprennent l'erreur du piège, qui fixe une limite d'âge inventée.",
+                  "answers": [
+                    {
+                      "content": "Il perd ses droits dès qu'il travaille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a moins de 18 ans, donc il est encore un enfant et ses droits restent protégés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tu as raison, après 15 ans on est adulte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seuls les enfants de moins de 10 ans ont des droits",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Droits de l'enfant, familles et textes de référence",
+              "statement": "Dans cet exercice, tu retrouves les étapes de la méthode, les textes qui protègent l'enfant et les quatre familles de droits.",
+              "exercise_type": "fixation",
+              "hint": "Relis la définition de l'enfant et les quatre familles de droits de la fiche.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître un droit de l'enfant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier la situation : on regarde d'abord ce que vit l'enfant. Étape 2 — Nommer le droit qui correspond. Étape 3 — Classer ce droit dans sa famille : survie, développement, protection ou participation. Étape 4 — Conclure en citant le texte. On ne peut pas classer un droit avant de l'avoir nommé, ni le nommer avant d'avoir regardé la situation.",
+                  "answers": [
+                    {
+                      "content": "Identifier la situation de l'enfant"
+                    },
+                    {
+                      "content": "Nommer le droit qui correspond"
+                    },
+                    {
+                      "content": "Classer ce droit dans sa famille"
+                    },
+                    {
+                      "content": "Conclure en citant le texte de référence"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Convention relative aux droits de l'enfant a été adoptée le 20 novembre 1989 par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier la situation : on cherche l'auteur d'un traité international. Étape 2 — Nommer le texte : la Convention relative aux droits de l'enfant. Étape 4 — Conclure : elle est adoptée par l'ONU, puis ratifiée par les États, dont la Côte d'Ivoire. Un parlement national ou un ministère ne fait pas un traité mondial.",
+                  "answers": [
+                    {
+                      "content": "le ministère de l'Éducation nationale",
+                      "correct": false
+                    },
+                    {
+                      "content": "un conseil de quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'ONU, l'Organisation des Nations unies",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'Assemblée nationale de Côte d'Ivoire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Marie a 14 ans. Combien d'années lui manquent pour atteindre 18 ans, l'âge à partir duquel on n'est plus un enfant selon la Convention ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "ans",
+                  "explanation": "Étape 1 — Identifier la situation : Marie a 14 ans. Étape 2 — Nommer la règle : un enfant a moins de 18 ans. Étape 3 — Calculer l'écart : 18 − 14 = 4. Étape 4 — Conclure : il lui manque 4 ans. Marie est une enfant pendant ces 4 années et ses droits restent protégés.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels textes protègent les droits de l'enfant en Côte d'Ivoire ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier la situation : on cherche des textes de référence. Étape 2 — Nommer ces textes : la Convention de l'ONU de 1989, la Charte africaine de 1990 et la Constitution ivoirienne. Étape 4 — Conclure : ce sont les trois textes de la fiche. Un règlement de marché ou une chanson n'est pas un texte de loi sur l'enfant.",
+                  "answers": [
+                    {
+                      "content": "La Charte africaine des droits et du bien-être de l'enfant (1990)",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Constitution ivoirienne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le règlement intérieur d'un marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une chanson sur l'enfance",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Convention relative aux droits de l'enfant (1989)",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Toute décision qui touche un enfant doit d'abord servir l'intérêt ___ de l'enfant.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier la situation : une décision concerne un enfant. Étape 2 — Nommer le principe : la Convention demande de penser d'abord à l'intérêt supérieur de l'enfant. Étape 4 — Conclure : le mot attendu est supérieur.",
+                  "answers": [
+                    {
+                      "content": "supérieur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droits de l'enfant ne concernent que les enfants dont les parents ont de l'argent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : on se demande qui a des droits. Étape 2 — Nommer la règle : les droits valent pour tous les enfants. Étape 3 — Classer : aucune famille de droits n'est réservée aux riches. Étape 4 — Conclure : l'affirmation est fausse, un enfant pauvre a les mêmes droits qu'un enfant riche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Reconnaître la violation d'un droit de l'enfant",
+          "remember": "Un droit de l'enfant est **violé** quand un adulte, une famille ou la société **empêche** l'enfant d'en profiter, par un acte (le frapper) ou par un manque (ne pas le soigner). Les violations les plus courantes sont : l'enfant **retiré de l'école** pour travailler (droit à l'éducation), l'enfant **exploité** par un travail qui le fatigue ou le met en danger (droit d'être protégé de l'exploitation), l'enfant **battu** (droit d'être protégé contre la violence, même dans la famille), l'enfant **non soigné** (droit à la santé), l'enfant **sans acte de naissance** (droit à un nom et à une identité) et l'enfant **abandonné** (droit d'être protégé et d'avoir une famille). Les causes sont la pauvreté, l'ignorance ou de mauvaises habitudes. Aucune ne justifie la violation : l'**intérêt supérieur de l'enfant** passe d'abord.",
+          "method": [
+            "Relever ce qui arrive à l'enfant : ce qu'on lui fait ou ce qu'on ne lui donne pas.",
+            "Nommer le droit de l'enfant qui est concerné.",
+            "Chercher qui empêche l'enfant d'exercer ce droit, et pourquoi.",
+            "Conclure : violation ou non, en justifiant avec le droit et l'intérêt de l'enfant."
+          ],
+          "example": {
+            "statement": "Koffi a 11 ans. Son oncle l'a retiré de l'école : Koffi vend des mouchoirs au carrefour toute la journée et son oncle garde l'argent. Y a-t-il violation d'un droit de l'enfant ?",
+            "steps": [
+              "Relever : Koffi ne va plus à l'école et il vend des mouchoirs toute la journée.",
+              "Nommer : le droit à l'éducation, et le droit d'être protégé contre l'exploitation.",
+              "Chercher : c'est son oncle, un adulte, qui l'empêche d'aller à l'école et qui profite de son travail.",
+              "Conclure : il y a violation, car l'intérêt de Koffi est d'apprendre et de grandir, pas de travailler pour un adulte."
+            ]
+          },
+          "pitfall": "Ne confonds pas **aider un peu** et **être exploité**. Contre-exemple : Mariam balaie la cour pendant 15 minutes avant de partir à l'école, puis elle étudie et joue : aucun droit n'est violé, elle apprend à vivre en famille. Koffi, lui, travaille toute la journée et ne va plus à l'école : son droit à l'éducation et sa protection sont violés. Pose-toi la question : ce que fait l'enfant l'empêche-t-il d'aller à l'école, de se reposer ou de rester en bonne santé ? Si oui, c'est une violation.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître la violation d'un droit, avec la méthode de la fiche : relever, nommer, chercher, conclure.",
+            "questions": [
+              {
+                "content": "Un enfant de 7 ans est laissé seul plusieurs jours, sans nourriture ni soins, par l'adulte qui devait s'en occuper. Quels droits sont violés ?",
+                "question_type": "single_choice",
+                "hint": "Un enfant seul a besoin de manger, d'être soigné et protégé.",
+                "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : il est seul, sans nourriture ni soins. Étape 2 — Nommer le droit concerné : survie (être nourri, soigné) et protection contre l'abandon. Étape 3 — Chercher qui l'en empêche : l'adulte responsable. Étape 4 — Conclure : il y a violation, car l'intérêt de l'enfant n'est pas respecté. Être petit ne retire aucun droit.",
+                "answers": [
+                  {
+                    "content": "Le droit de donner son avis",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit au jeu seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit d'être nourri, soigné et protégé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Aucun droit, car l'enfant est petit",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Demander à Aïcha, 13 ans, de ranger sa chambre avant d'aller jouer est une violation de ses droits.",
+                "question_type": "true_false",
+                "hint": "Cela l'empêche-t-il d'étudier ou de se reposer ?",
+                "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : on lui demande un petit service à la maison. Étape 2 — Nommer le droit concerné : aucun droit n'est atteint, elle va à l'école et peut jouer. Étape 3 — Chercher qui l'en empêche : personne. Étape 4 — Conclure : il n'y a pas de violation. C'est la différence entre aider un peu et être exploité.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un enfant que l'on empêche d'aller à l'école voit violé son droit à ___.",
+                "question_type": "select",
+                "hint": "Que fait-on à l'école ?",
+                "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : on l'empêche d'aller à l'école. Étape 2 — Nommer le droit concerné : le droit à l'éducation. Étape 4 — Conclure : c'est ce droit qui est violé. Le droit à la santé concerne les soins, pas la classe.",
+                "answers": [
+                  {
+                    "content": "la santé",
+                    "correct": false
+                  },
+                  {
+                    "content": "la nationalité",
+                    "correct": false
+                  },
+                  {
+                    "content": "la participation",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'éducation",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la violation d'un droit de l'enfant",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des situations de famille, de quartier et d'école.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un père frappe son fils de 9 ans « pour l'éduquer ». Quel droit de l'enfant est violé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : son père le frappe. Étape 2 — Nommer le droit concerné : le droit d'être protégé contre la violence, même dans la famille. Étape 3 — Chercher qui l'en empêche : c'est le père, un adulte responsable de lui. Étape 4 — Conclure : il y a violation. Vouloir éduquer ne justifie pas les coups, car l'intérêt de l'enfant est d'être protégé.",
+                  "answers": [
+                    {
+                      "content": "Le droit à un nom",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit d'être protégé contre la violence",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit au jeu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit de donner son avis",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam balaie la cour 15 minutes avant de partir à l'école, puis elle étudie et joue. Il y a violation de ses droits.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : un petit travail de 15 minutes, puis l'école et le jeu. Étape 2 — Nommer le droit concerné : éducation, repos, jeu. Étape 3 — Chercher qui l'en empêche : personne, tous ses droits sont respectés. Étape 4 — Conclure : il n'y a pas de violation. C'est le piège : aider un peu n'est pas être exploité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles situations sont des violations des droits de l'enfant ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant dans chaque situation. Étape 2 — Nommer le droit : éducation et protection contre l'exploitation dans le premier cas, santé dans le second. Étape 3 — Chercher qui l'en empêche : un adulte, dans les deux cas. Étape 4 — Conclure : ce sont des violations. Ranger, jouer ou aider un peu ne privent l'enfant d'aucun droit.",
+                  "answers": [
+                    {
+                      "content": "Un enfant joue au football après ses devoirs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des parents qui en ont les moyens n'emmènent pas leur enfant malade au centre de santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un enfant range ses affaires après le repas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un enfant de 10 ans est retiré de l'école pour vendre toute la journée au marché",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un enfant aide sa mère à porter les courses le samedi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant dont la naissance n'est pas déclarée risque d'être privé de son droit à un ___ et à une identité.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : sa naissance n'est pas déclarée, il n'a pas d'acte de naissance. Étape 2 — Nommer le droit concerné : le droit à un nom et à une identité. Étape 3 — Chercher qui l'en empêche : ceux qui ne font pas la déclaration. Étape 4 — Conclure : le mot attendu est nom.",
+                  "answers": [
+                    {
+                      "content": "nom",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un voisin dit : « Je laisse mon neveu de 12 ans travailler toute la semaine, ça lui apprend la vie. » Que réponds-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : le neveu travaille toute la semaine. Étape 2 — Nommer le droit concerné : le droit à l'éducation et la protection contre l'exploitation. Étape 3 — Chercher qui l'en empêche : l'adulte qui le fait travailler. Étape 4 — Conclure : il y a violation, car l'enfant n'a plus le temps d'apprendre. Le lien de famille ne change rien, c'est le piège du travail qui « apprend la vie ».",
+                  "answers": [
+                    {
+                      "content": "Ce n'est une violation que si l'enfant pleure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce n'est pas grave, car son oncle est de la famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Travailler toute la semaine l'empêche d'aller à l'école : c'est une violation de ses droits",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tu as raison, le travail apprend toujours la vie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Violations des droits : droit concerné, responsable, conclusion",
+              "statement": "Dans cet exercice, tu retrouves les étapes de la méthode et tu l'appliques à des cas variés.",
+              "exercise_type": "fixation",
+              "hint": "Pose-toi d'abord la question : ce que vit l'enfant l'empêche-t-il d'apprendre, de se reposer ou d'être soigné ?",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître la violation d'un droit.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant. Étape 2 — Nommer le droit concerné. Étape 3 — Chercher qui l'en empêche. Étape 4 — Conclure : violation ou non. On ne peut pas conclure avant d'avoir relevé les faits ni avant d'avoir nommé le droit.",
+                  "answers": [
+                    {
+                      "content": "Relever ce qui arrive à l'enfant"
+                    },
+                    {
+                      "content": "Nommer le droit concerné"
+                    },
+                    {
+                      "content": "Chercher qui empêche l'enfant d'exercer ce droit"
+                    },
+                    {
+                      "content": "Conclure : violation ou non"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation au droit qui est violé.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant dans chaque cas. Étape 2 — Nommer le droit : les coups violent la protection, l'absence de soins la santé, le retrait de l'école l'éducation, l'absence d'acte de naissance le droit à un nom et à une identité. Étape 3 — Chercher qui en est responsable : un adulte ou la famille. Étape 4 — Conclure : chaque situation est une violation.",
+                  "answers": [
+                    {
+                      "content": "Un enfant est battu par un adulte",
+                      "match": "Protection contre la violence"
+                    },
+                    {
+                      "content": "Un enfant malade n'est pas soigné",
+                      "match": "Santé"
+                    },
+                    {
+                      "content": "Un enfant est retiré de l'école",
+                      "match": "Éducation"
+                    },
+                    {
+                      "content": "Un enfant n'a pas d'acte de naissance",
+                      "match": "Nom et identité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi, 11 ans, vend des mouchoirs 9 heures par jour, 6 jours par semaine, au lieu d'aller à l'école. Combien d'heures travaille-t-il par semaine ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "h",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : 9 heures par jour pendant 6 jours. Étape 2 — Nommer le droit concerné : éducation et protection contre l'exploitation. Étape 3 — Chercher qui l'en empêche : l'adulte qui l'envoie vendre. Calcul : 9 × 6 = 54. Étape 4 — Conclure : 54 heures par semaine, c'est une violation, car l'enfant n'a plus de temps pour apprendre.",
+                  "answers": [
+                    {
+                      "content": "54",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant est puni par des coups à la maison. On dit que son droit d'être protégé contre la ___ est violé.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : il reçoit des coups. Étape 2 — Nommer le droit concerné : la protection contre la violence. Étape 4 — Conclure : le mot attendu est violence.",
+                  "answers": [
+                    {
+                      "content": "participation",
+                      "correct": false
+                    },
+                    {
+                      "content": "récréation",
+                      "correct": false
+                    },
+                    {
+                      "content": "violence",
+                      "correct": true
+                    },
+                    {
+                      "content": "nationalité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La pauvreté de la famille permet de retirer un enfant de l'école sans violer son droit à l'éducation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : il est retiré de l'école. Étape 2 — Nommer le droit concerné : l'éducation. Étape 3 — Chercher qui l'en empêche et pourquoi : la famille, à cause de la pauvreté. Étape 4 — Conclure : la cause explique, elle ne justifie pas. Le droit est violé et l'État comme les associations peuvent aider la famille.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase résume le mieux la bonne conclusion devant une situation où un enfant travaille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : ce qu'il fait et combien de temps. Étape 2 — Nommer le droit concerné : éducation, repos, santé. Étape 3 — Chercher qui l'en empêche. Étape 4 — Conclure selon l'intérêt de l'enfant. Interdire tout service est excessif, tout permettre expose à l'exploitation, et l'argent rapporté ne compte pas.",
+                  "answers": [
+                    {
+                      "content": "Tout travail d'enfant est interdit, même ranger sa chambre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seul compte l'argent que l'enfant rapporte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tout travail est permis si l'enfant est d'accord",
+                      "correct": false
+                    },
+                    {
+                      "content": "On regarde si le travail l'empêche d'aller à l'école, de se reposer ou d'être en bonne santé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Agir pour promouvoir les droits de l'enfant",
+          "remember": "**Promouvoir** les droits de l'enfant, c'est les **faire connaître**, les **faire respecter** et les **défendre**. Chacun a un rôle : la **famille** nourrit, soigne, éduque et protège ; l'**école** instruit et apprend aux élèves leurs droits ; l'**État** fait les lois, les fait appliquer et crée des services de protection comme les centres sociaux ; les **organisations non gouvernementales** (ONG) et l'**UNICEF**, le Fonds des Nations unies pour l'enfance, informent, aident et défendent les enfants ; l'**enfant** lui-même connaît ses droits et respecte ceux des autres. Les actions sont : **informer**, **protéger**, **aider** et **alerter** quand un droit est violé. Le **20 novembre**, anniversaire de la Convention de 1989, et le **16 juin**, Journée de l'enfant africain, servent à sensibiliser. Les droits vont avec des **devoirs** : la Charte africaine rappelle que l'enfant a aussi des devoirs envers sa famille et sa communauté, comme étudier et respecter les autres.",
+          "method": [
+            "Identifier le droit en jeu et la situation à améliorer.",
+            "Repérer les acteurs qui peuvent agir : famille, école, État, associations, enfant lui-même.",
+            "Choisir pour chaque acteur l'action adaptée : informer, protéger, aider ou alerter.",
+            "Conclure par le comportement responsable de l'enfant : respecter les droits des autres et accomplir ses devoirs."
+          ],
+          "example": {
+            "statement": "Dans le quartier, beaucoup d'enfants ne connaissent pas leurs droits. Le directeur de l'école veut agir. Que peuvent faire l'école et les élèves ?",
+            "steps": [
+              "Identifier : les enfants ignorent leurs droits, donc ils ne savent pas les défendre ni les faire respecter.",
+              "Repérer : l'école (le directeur, les enseignants), les parents, une ONG du quartier et les élèves eux-mêmes peuvent agir.",
+              "Choisir : l'école informe par une causerie le 20 novembre, anniversaire de la Convention ; en cas de violation, elle alerte le centre social.",
+              "Conclure : chaque élève respecte les droits de ses camarades et fait son devoir d'élève, qui est d'étudier."
+            ]
+          },
+          "pitfall": "Ne crois pas que défendre les droits de l'enfant est seulement l'affaire des adultes, ni que les droits dispensent des devoirs. Contre-exemple : Yao dit « J'ai le droit de jouer, donc je ne fais plus mes devoirs ». Le jeu est bien un droit, mais l'éducation en est un autre, et l'élève a le devoir d'étudier. Un enfant qui connaît ses droits doit aussi respecter ceux des autres : on ne se moque pas d'un camarade, on ne le frappe pas. Les droits et les devoirs vont ensemble.",
+          "figure": "agir-pour-les-droits",
+          "practice": {
+            "statement": "Tu t'entraînes à choisir l'acteur et l'action qui promeuvent les droits de l'enfant, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Relie chaque acteur à son action pour promouvoir les droits de l'enfant.",
+                "question_type": "matching",
+                "hint": "Pense à ce que chacun peut faire le mieux.",
+                "explanation": "Étape 1 — Identifier le droit en jeu : il s'agit de promouvoir tous les droits. Étape 2 — Repérer les acteurs : école, État, enfant. Étape 3 — Choisir l'action : l'école informe, l'État fait les lois et les fait appliquer, l'enfant respecte les autres. Étape 4 — Conclure : chaque acteur a un rôle différent.",
+                "answers": [
+                  {
+                    "content": "L'école",
+                    "match": "Informer les élèves sur leurs droits"
+                  },
+                  {
+                    "content": "L'État",
+                    "match": "Faire appliquer les lois qui protègent l'enfant"
+                  },
+                  {
+                    "content": "L'enfant",
+                    "match": "Respecter les droits des autres"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève voit qu'un camarade est régulièrement battu chez lui. Quel comportement est responsable ?",
+                "question_type": "single_choice",
+                "hint": "Qui peut protéger l'enfant ?",
+                "explanation": "Étape 1 — Identifier le droit en jeu : la protection contre la violence. Étape 2 — Repérer les acteurs : l'enseignant, le centre social. Étape 3 — Choisir l'action : alerter un adulte de confiance. Étape 4 — Conclure : l'élève agit sans violence. Se taire laisse le droit violé, et frapper ajoute de la violence.",
+                "answers": [
+                  {
+                    "content": "En parler à un adulte de confiance, comme un enseignant",
+                    "correct": true
+                  },
+                  {
+                    "content": "Se taire, car c'est une affaire de famille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Se moquer de son camarade",
+                    "correct": false
+                  },
+                  {
+                    "content": "Frapper l'adulte pour le punir",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Prévenir le centre social qu'un enfant est victime de violences, c'est ___.",
+                "question_type": "select",
+                "hint": "Les quatre actions sont informer, protéger, aider, alerter.",
+                "explanation": "Étape 1 — Identifier le droit en jeu : la protection contre la violence. Étape 2 — Repérer l'acteur : le centre social. Étape 3 — Choisir l'action : quand un droit est violé, on alerte. Informer est une action de prévention, aider apporte une aide matérielle.",
+                "answers": [
+                  {
+                    "content": "alerter",
+                    "correct": true
+                  },
+                  {
+                    "content": "fêter l'anniversaire de la Convention",
+                    "correct": false
+                  },
+                  {
+                    "content": "informer par une causerie",
+                    "correct": false
+                  },
+                  {
+                    "content": "aider avec des fournitures",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Agir pour promouvoir les droits de l'enfant",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des actions de l'école, de la famille et du quartier.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le directeur organise une causerie sur les droits de l'enfant pour tous les élèves. Quelle action de promotion est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : les élèves doivent connaître leurs droits. Étape 2 — Repérer les acteurs : le directeur et les enseignants, qui sont l'école. Étape 3 — Choisir l'action : faire connaître les droits est informer. Étape 4 — Conclure : l'élève qui sait ses droits peut les défendre et respecter ceux des autres. Alerter suppose qu'un droit soit déjà violé.",
+                  "answers": [
+                    {
+                      "content": "Punir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Informer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Alerter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Protéger par la loi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels acteurs peuvent agir pour les droits de l'enfant ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : tous les droits de l'enfant. Étape 2 — Repérer les acteurs : famille, école, État, ONG, enfant. Étape 3 — Choisir l'action : informer pour l'école, faire les lois pour l'État. Étape 4 — Conclure : tous les acteurs ont un rôle. Les droits ne se défendent pas tout seuls, et la richesse ne compte pas.",
+                  "answers": [
+                    {
+                      "content": "Personne, car les droits se défendent tout seuls",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement les adultes riches",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'école, qui apprend aux élèves leurs droits",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement les enfants eux-mêmes",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État, qui fait les lois et crée des centres sociaux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant qui a des droits n'a aucun devoir.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : on compare droits et devoirs. Étape 2 — Repérer les acteurs : l'enfant lui-même. Étape 3 — Choisir l'action : respecter les autres et étudier. Étape 4 — Conclure : la Charte africaine rappelle que l'enfant a aussi des devoirs. C'est le piège : les droits ne dispensent pas des devoirs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque acteur à une action qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : tous les droits de l'enfant. Étape 2 — Repérer les acteurs : famille, école, État, ONG. Étape 3 — Choisir l'action : la famille s'occupe de l'enfant au quotidien, l'école instruit et informe, l'État fait les lois et les centres sociaux, l'ONG sensibilise et aide. Étape 4 — Conclure : c'est ensemble qu'ils font respecter les droits.",
+                  "answers": [
+                    {
+                      "content": "La famille",
+                      "match": "Nourrir, soigner et protéger l'enfant"
+                    },
+                    {
+                      "content": "L'école",
+                      "match": "Instruire et informer sur les droits"
+                    },
+                    {
+                      "content": "L'État",
+                      "match": "Faire les lois et créer des services de protection"
+                    },
+                    {
+                      "content": "Une ONG",
+                      "match": "Sensibiliser et aider les familles"
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao dit : « J'ai le droit de jouer, donc je ne fais plus mes devoirs. » Quelle réponse est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : Yao oppose le droit de jouer au droit d'étudier. Étape 2 — Repérer les acteurs : Yao lui-même, qui est l'enfant concerné. Étape 3 — Choisir l'action : il doit respecter ses devoirs et concilier jeu et étude. Étape 4 — Conclure : droits et devoirs vont ensemble. Les autres réponses oublient soit l'éducation, soit les droits de l'enfant.",
+                  "answers": [
+                    {
+                      "content": "Le jeu est un droit, mais l'éducation aussi, et l'élève a le devoir d'étudier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les enfants n'ont pas de droits, seulement des devoirs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tu as raison, un droit passe avant tout",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit de jouer n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Promouvoir les droits : acteurs, actions, dates et devoirs",
+              "statement": "Dans cet exercice, tu retrouves les étapes de la méthode, les acteurs, les actions et les dates à connaître.",
+              "exercise_type": "fixation",
+              "hint": "Relis la liste des acteurs et les quatre actions : informer, protéger, aider, alerter.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour promouvoir les droits de l'enfant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier le droit en jeu. Étape 2 — Repérer les acteurs. Étape 3 — Choisir l'action adaptée à chaque acteur. Étape 4 — Conclure par le comportement responsable. On choisit l'action seulement quand on a repéré qui peut agir.",
+                  "answers": [
+                    {
+                      "content": "Identifier le droit en jeu et la situation à améliorer"
+                    },
+                    {
+                      "content": "Repérer les acteurs qui peuvent agir"
+                    },
+                    {
+                      "content": "Choisir l'action adaptée à chaque acteur"
+                    },
+                    {
+                      "content": "Conclure par le comportement responsable de l'enfant"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Journée de l'enfant africain se célèbre le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : faire connaître les droits de l'enfant. Étape 2 — Repérer les acteurs : les États africains, les écoles et les ONG. Étape 3 — Choisir l'action : sensibiliser le 16 juin, Journée de l'enfant africain. Le 20 novembre est la journée de la Convention, le 1er mai la fête du travail.",
+                  "answers": [
+                    {
+                      "content": "1er mai",
+                      "correct": false
+                    },
+                    {
+                      "content": "16 juin",
+                      "correct": true
+                    },
+                    {
+                      "content": "25 décembre",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 août",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Convention relative aux droits de l'enfant a été adoptée en 1989. En 2026, combien d'années se sont écoulées depuis son adoption ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "ans",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : la Convention date de 1989. Étape 2 — Repérer le repère de temps : l'année 2026. Étape 3 — Calculer : 2026 − 1989 = 37. Étape 4 — Conclure : 37 ans se sont écoulés, l'enfant de 1989 est aujourd'hui un adulte.",
+                  "answers": [
+                    {
+                      "content": "37",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque geste à l'action de promotion qu'il illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le droit en jeu dans chaque geste. Étape 2 — Repérer les acteurs : école, famille, ONG, élève. Étape 3 — Choisir l'action : la causerie informe, l'accueil protège, les fournitures aident, la prévention du centre social alerte. Étape 4 — Conclure : les quatre actions de la fiche couvrent ces gestes.",
+                  "answers": [
+                    {
+                      "content": "Organiser une causerie sur les droits",
+                      "match": "Informer"
+                    },
+                    {
+                      "content": "Accueillir un enfant en danger",
+                      "match": "Protéger"
+                    },
+                    {
+                      "content": "Donner des fournitures à un élève sans moyens",
+                      "match": "Aider"
+                    },
+                    {
+                      "content": "Prévenir le centre social d'un cas de violence",
+                      "match": "Alerter"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels comportements sont responsables pour un élève qui connaît ses droits ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : respect, éducation, protection. Étape 2 — Repérer les acteurs : l'élève et l'adulte de confiance. Étape 3 — Choisir l'action : respecter, étudier, alerter. Étape 4 — Conclure : ces trois comportements respectent les droits et les devoirs. Se moquer ou se taire laisse les droits violés.",
+                  "answers": [
+                    {
+                      "content": "Parler à un adulte de confiance d'un camarade battu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire ses devoirs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Garder le silence quand un enfant est battu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se moquer d'un camarade sans acte de naissance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Respecter ses camarades",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Défendre les droits de l'enfant est seulement l'affaire de l'État.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : tous les droits. Étape 2 — Repérer les acteurs : famille, école, État, ONG et enfant. Étape 3 — Choisir l'action : chacun agit à sa place. Étape 4 — Conclure : l'affirmation est fausse, c'est le piège de laisser tout aux autres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Mariam, l'attiéké du matin et l'école",
+          "statement": "Mariam a 12 ans. Orpheline, elle vit chez sa tante, qui la nourrit, la loge et la soigne quand elle est malade. Chaque matin, de 5 h à 7 h 30, la tante l'envoie vendre de l'attiéké au bord de la rue. Mariam arrive à l'école en retard et fatiguée, et elle manque souvent la première heure de cours. Elle fait ses devoirs le soir. Dans cet exercice, tu analyses la situation avec les méthodes des fiches.",
+          "exercise_type": "fixation",
+          "hint": "Utilise les fiches : reconnaître un droit, reconnaître une violation, puis choisir qui peut agir.",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Mariam a 12 ans. Combien d'années lui manquent pour atteindre 18 ans, l'âge à partir duquel on n'est plus un enfant selon la Convention ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "ans",
+              "explanation": "Étape 1 — Identifier la situation : Mariam a 12 ans. Étape 2 — Nommer la règle : un enfant a moins de 18 ans. Étape 3 — Calculer : 18 − 12 = 6. Étape 4 — Conclure : il lui manque 6 ans, Mariam est une enfant et tous ses droits la protègent.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque fait de la situation de Mariam à la famille de droits correspondante.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Relever chaque fait. Étape 2 — Nommer le droit concerné : santé et nourriture pour la tante, éducation pour l'école, éducation et repos pour la vente. Étape 3 — Classer : survie, développement, puis développement menacé. Étape 4 — Conclure : deux droits sont respectés, un est menacé par la vente du matin.",
+              "answers": [
+                {
+                  "content": "Sa tante la nourrit et la soigne",
+                  "match": "Survie : droit respecté"
+                },
+                {
+                  "content": "Mariam va à l'école et fait ses devoirs",
+                  "match": "Développement : droit respecté"
+                },
+                {
+                  "content": "La vente du matin la fatigue et la fait arriver en retard",
+                  "match": "Éducation et repos : droit menacé"
+                }
+              ]
+            },
+            {
+              "content": "La tante de Mariam la nourrit et la soigne. Peut-on dire qu'il n'y a aucun problème ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : elle vend de 5 h à 7 h 30 puis arrive fatiguée et en retard, et manque une heure de cours. Étape 2 — Nommer le droit concerné : l'éducation et le repos. Étape 3 — Chercher qui l'en empêche : sa tante, qui l'envoie vendre. Étape 4 — Conclure : le droit à l'éducation est menacé. Bien nourrir un enfant ne dispense pas de respecter les autres droits, et être orpheline ne retire aucun droit.",
+              "answers": [
+                {
+                  "content": "Non : la vente du matin nuit à son droit à l'éducation et à son repos",
+                  "correct": true
+                },
+                {
+                  "content": "Oui, car Mariam est orpheline",
+                  "correct": false
+                },
+                {
+                  "content": "Non, mais seulement si la tante la frappe",
+                  "correct": false
+                },
+                {
+                  "content": "Oui, car une tante qui nourrit un enfant a tous les droits",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces personnes, laquelle peut le mieux alerter pour aider Mariam ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le droit en jeu : l'éducation de Mariam. Étape 2 — Repérer les acteurs : l'enseignant, la tante, le centre social, une ONG. Étape 3 — Choisir l'action : l'enseignant informe la tante des conséquences et alerte le centre social si rien ne change. Étape 4 — Conclure : on agit sans violence et dans l'intérêt de Mariam. Se moquer ou se taire laisse le droit menacé.",
+              "answers": [
+                {
+                  "content": "Un camarade qui se moque d'elle",
+                  "correct": false
+                },
+                {
+                  "content": "Un voisin qui lui demande de vendre davantage",
+                  "correct": false
+                },
+                {
+                  "content": "Personne, car la famille décide seule",
+                  "correct": false
+                },
+                {
+                  "content": "Son enseignant, qui peut parler à la tante et prévenir le centre social",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En cinq lignes, explique quel droit de Mariam est menacé, qui en est responsable et deux actions possibles pour l'aider.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Nomme le droit menacé : éducation et repos",
+                "Désigne la tante comme responsable de la vente du matin",
+                "Propose deux actions : parler à la tante, alerter le centre social ou une ONG",
+                "Justifie avec l'intérêt de l'enfant en phrases complètes"
+              ],
+              "starter": "Le droit de Mariam qui est menacé est…",
+              "explanation": "Corrigé modèle : Étape 1 — Mariam vend de l'attiéké de 5 h à 7 h 30, arrive fatiguée et manque une heure de cours. Étape 2 — Son droit à l'éducation et à son repos est menacé. Étape 3 — Sa tante en est responsable, puisqu'elle l'envoie vendre. Étape 4 — Son enseignant peut parler à la tante et, si rien ne change, prévenir le centre social. Une ONG du quartier peut aussi aider la famille. L'intérêt de Mariam est d'étudier. Barème : 0,5 point pour le droit, 0,5 point pour le responsable, 1 point pour deux actions, 1 point pour la justification.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le club des droits de l'enfant de l'école",
+          "statement": "L'école du quartier crée un club des droits de l'enfant. Les élèves veulent préparer une causerie pour le 20 novembre, avec les parents et une ONG du quartier. Dans cet exercice, tu prépares la causerie avec les méthodes des fiches.",
+          "exercise_type": "fixation",
+          "hint": "Pense aux quatre actions de la fiche : informer, protéger, aider, alerter.",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La Convention relative aux droits de l'enfant a été adoptée par l'ONU le 20 ___ 1989.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Identifier le droit en jeu : on cherche la date de la Convention. Étape 2 — Repérer l'acteur : l'ONU, l'Organisation des Nations unies. Étape 3 — Choisir l'action : sensibiliser à cette date. Étape 4 — Conclure : le mot attendu est novembre, d'où la causerie du 20 novembre.",
+              "answers": [
+                {
+                  "content": "novembre",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels textes le club doit-il présenter aux élèves ? (trois réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Identifier la situation : on cherche les textes de référence. Étape 2 — Nommer les textes : Convention de l'ONU, Charte africaine, Constitution. Étape 3 — Classer : un traité mondial, un texte africain et la loi fondamentale du pays. Étape 4 — Conclure : ce sont les trois textes à citer. Le règlement du club ou un affichage de match ne protège pas l'enfant au sens de la loi.",
+              "answers": [
+                {
+                  "content": "La Convention relative aux droits de l'enfant (1989)",
+                  "correct": true
+                },
+                {
+                  "content": "Le règlement intérieur du club",
+                  "correct": false
+                },
+                {
+                  "content": "La Charte africaine des droits et du bien-être de l'enfant (1990)",
+                  "correct": true
+                },
+                {
+                  "content": "La Constitution ivoirienne",
+                  "correct": true
+                },
+                {
+                  "content": "Un affichage de match de football",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque geste du club à l'action de promotion qu'il illustre.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Identifier le droit en jeu dans chaque geste. Étape 2 — Repérer les acteurs : club, école, centre social, ONG. Étape 3 — Choisir l'action : la causerie informe, la prévention du centre social alerte, les cahiers aident, l'accueil protège. Étape 4 — Conclure : les quatre actions de la fiche sont réunies dans le club.",
+              "answers": [
+                {
+                  "content": "Présenter les droits aux élèves lors de la causerie",
+                  "match": "Informer"
+                },
+                {
+                  "content": "Prévenir le centre social d'un cas de violence",
+                  "match": "Alerter"
+                },
+                {
+                  "content": "Collecter des cahiers pour des élèves sans moyens",
+                  "match": "Aider"
+                },
+                {
+                  "content": "Accueillir et mettre en sécurité un enfant en danger",
+                  "match": "Protéger"
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de préparation de la causerie.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Identifier le droit en jeu : le club choisit d'abord de quoi il parle. Étape 2 — Repérer les acteurs : on invite ensuite les parents et l'ONG. Étape 3 — Choisir l'action : la causerie informe les élèves. Étape 4 — Conclure par les engagements : chacun promet de respecter les droits des autres et ses devoirs.",
+              "answers": [
+                {
+                  "content": "Choisir le droit à présenter"
+                },
+                {
+                  "content": "Inviter les parents et l'ONG du quartier"
+                },
+                {
+                  "content": "Informer les élèves pendant la causerie"
+                },
+                {
+                  "content": "Terminer par les engagements des élèves"
+                }
+              ]
+            },
+            {
+              "content": "Le club peut remplacer le centre social quand un enfant est en danger.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier le droit en jeu : la protection d'un enfant en danger. Étape 2 — Repérer les acteurs : le club informe, le centre social protège. Étape 3 — Choisir l'action : le club alerte le centre social. Étape 4 — Conclure : le club ne remplace pas le centre social. Penser le contraire est le piège de tout laisser à un seul acteur.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige en quatre lignes une invitation aux élèves pour la causerie du 20 novembre. Cite un droit de l'enfant et un devoir de l'élève.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Annonce la causerie et la date du 20 novembre",
+                "Cite un droit de l'enfant correct",
+                "Cite un devoir de l'élève correct",
+                "Phrases complètes et ton adapté"
+              ],
+              "explanation": "Corrigé modèle : « Chers camarades, le 20 novembre, jour anniversaire de la Convention relative aux droits de l'enfant, le club vous invite à une causerie dans la cour. Nous parlerons du droit à l'éducation. Chacun a aussi un devoir : respecter ses camarades. Venez nombreux ! » Barème : 0,5 point pour la date, 0,5 point pour le droit, 0,5 point pour le devoir, 0,5 point pour la rédaction.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Yao, l'acte de naissance et l'étal du père",
+          "statement": "Yao a 15 ans. Sa naissance n'a jamais été déclarée : il n'a pas d'acte de naissance. Son père le frappe quand il rapporte de mauvaises notes et veut qu'il quitte l'école pour tenir l'étal du marché avec lui. Sa mère veut qu'il continue ses études. L'ONG du quartier tient une permanence le samedi. Dans cet exercice, tu analyses la situation avec les méthodes des fiches. Le schéma « Agir pour les droits de l'enfant » te sert pour les recours.",
+          "exercise_type": "evaluation",
+          "hint": "Pense aux trois droits menacés et aux acteurs qui peuvent protéger Yao.",
+          "figure": "agir-pour-les-droits",
+          "questions": [
+            {
+              "content": "Yao a 15 ans : il est un enfant au sens de la Convention.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier la situation : Yao a 15 ans. Étape 2 — Nommer la règle : un enfant a moins de 18 ans. Étape 3 — Classer : 15 est inférieur à 18. Étape 4 — Conclure : Yao est un enfant et reste protégé.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels droits de Yao sont menacés dans cette situation ? (trois réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : pas d'acte de naissance, des coups, un retrait de l'école. Étape 2 — Nommer le droit : identité, protection contre la violence, éducation. Étape 3 — Chercher qui l'en empêche : le père pour les coups et pour l'école, la non-déclaration de la naissance pour l'identité. Étape 4 — Conclure : ces trois droits sont menacés. Voter et une nationalité sportive ne sont pas des droits de l'enfant de la Convention.",
+              "answers": [
+                {
+                  "content": "Le droit à un nom et à une identité",
+                  "correct": true
+                },
+                {
+                  "content": "Le droit d'être protégé contre la violence",
+                  "correct": true
+                },
+                {
+                  "content": "Le droit à l'éducation",
+                  "correct": true
+                },
+                {
+                  "content": "Le droit à la nationalité sportive",
+                  "correct": false
+                },
+                {
+                  "content": "Le droit de voter",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque fait de la situation au droit de Yao qui est menacé.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Relever chaque fait. Étape 2 — Nommer le droit concerné. Étape 3 — Chercher qui l'en empêche : le père ou la déclaration de naissance manquante. Étape 4 — Conclure : trois faits, trois droits menacés.",
+              "answers": [
+                {
+                  "content": "Yao n'a pas d'acte de naissance",
+                  "match": "Nom et identité"
+                },
+                {
+                  "content": "Le père le frappe après les mauvaises notes",
+                  "match": "Protection contre la violence"
+                },
+                {
+                  "content": "Le père veut qu'il quitte l'école pour l'étal",
+                  "match": "Éducation"
+                }
+              ]
+            },
+            {
+              "content": "Yao a un problème de violence à la maison. Que peut faire sa mère ou son enseignant en premier ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le droit en jeu : la protection de Yao contre la violence. Étape 2 — Repérer les acteurs : la mère, l'enseignant, l'ONG, le centre social. Étape 3 — Choisir l'action : alerter une structure de protection. Étape 4 — Conclure : on protège Yao sans violence. Attendre laisse le droit violé, et envoyer un enfant seul la nuit l'expose à des dangers.",
+              "answers": [
+                {
+                  "content": "Attendre qu'il arrête tout seul",
+                  "correct": false
+                },
+                {
+                  "content": "Frapper le père pour qu'il comprenne",
+                  "correct": false
+                },
+                {
+                  "content": "Dire à Yao de quitter la maison seul la nuit",
+                  "correct": false
+                },
+                {
+                  "content": "En parler à l'ONG ou au centre social, qui peut protéger Yao et aider la famille",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Analyse la situation de Yao en suivant les étapes de la méthode : ce qui lui arrive, les droits menacés, qui l'en empêche, ta conclusion.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Relève les trois faits : acte de naissance, coups, retrait de l'école",
+                "Nomme les trois droits menacés",
+                "Désigne le père, ou la déclaration non faite, comme responsable selon le fait",
+                "Conclut à des violations, avec l'intérêt de l'enfant",
+                "Rédaction organisée avec le vocabulaire de la leçon"
+              ],
+              "starter": "Yao est un enfant dont…",
+              "explanation": "Corrigé modèle : Étape 1 — Yao n'a pas d'acte de naissance, son père le frappe et veut qu'il quitte l'école. Étape 2 — Les droits menacés sont le droit à un nom et à une identité, la protection contre la violence et l'éducation. Étape 3 — Le père est responsable des coups et du retrait de l'école ; la naissance non déclarée prive Yao de son identité. Étape 4 — Il y a violation de ces droits, car l'intérêt de Yao est d'être protégé et d'étudier. Barème : 1 point pour les faits, 1 point pour les droits, 1 point pour les responsables, 0,5 point pour la conclusion, 0,5 point pour la rédaction.",
+              "answers": []
+            },
+            {
+              "content": "Le père dit : « C'est mon fils, j'en fais ce que je veux. » Es-tu d'accord ? Prends position et donne deux arguments.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Prend position clairement",
+                "Argument tiré des droits de l'enfant",
+                "Argument tiré de l'intérêt supérieur de l'enfant ou des textes",
+                "Rédaction claire en phrases complètes"
+              ],
+              "explanation": "Corrigé modèle : Je ne suis pas d'accord avec le père. D'abord, Yao est un enfant : la Convention de 1989 lui reconnaît le droit d'être protégé contre la violence et le droit à l'éducation, même vis-à-vis de ses parents. Ensuite, toute décision qui touche un enfant doit d'abord servir son intérêt supérieur, et l'intérêt de Yao est d'étudier et d'avoir une identité. Les parents ont des devoirs envers l'enfant, pas un pouvoir sans limite. Barème : 1 point pour la position, 1 point par argument (2 points au total).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Les Lauriers : Kader, Awa et la réunion du 20 novembre",
+          "statement": "Dans le quartier des Lauriers, Kader, 13 ans, a quitté l'école depuis la rentrée pour travailler chez son oncle mécanicien, de 7 h à 18 h, sans salaire. Sa petite sœur Awa, 9 ans, n'a jamais eu d'acte de naissance, et l'école lui demande ce papier pour l'inscrire. Un voisin frappe son fils de 8 ans avec une ceinture. Le centre social et une ONG organisent une réunion le 20 novembre. Un camarade de Kader dit : « Les droits, c'est bon pour les enfants insolents. » Dans cet exercice, tu analyses la situation avec les méthodes des fiches et tu prends position comme au BEPC.",
+          "exercise_type": "evaluation",
+          "hint": "Reprends les trois méthodes : reconnaître un droit, reconnaître une violation, promouvoir les droits.",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Faire connaître, faire respecter et défendre les droits de l'enfant, c'est les ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Identifier le droit en jeu : on définit l'action de la réunion. Étape 2 — Repérer les acteurs : centre social, ONG, école. Étape 3 — Choisir l'action : faire connaître, faire respecter, défendre. Étape 4 — Conclure : le mot est promouvoir.",
+              "answers": [
+                {
+                  "content": "promouvoir",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque texte à son auteur ou à sa date.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Identifier la situation : on classe des textes. Étape 2 — Nommer chaque texte. Étape 3 — Classer : un traité de l'ONU, un texte africain, la loi du pays. Étape 4 — Conclure : la Convention date du 20 novembre 1989, la Charte de 1990 et la Constitution est la loi fondamentale.",
+              "answers": [
+                {
+                  "content": "Convention relative aux droits de l'enfant",
+                  "match": "ONU, 20 novembre 1989"
+                },
+                {
+                  "content": "Charte africaine des droits et du bien-être de l'enfant",
+                  "match": "1990"
+                },
+                {
+                  "content": "Constitution ivoirienne",
+                  "match": "Loi fondamentale de la Côte d'Ivoire"
+                }
+              ]
+            },
+            {
+              "content": "Kader travaille de 7 h à 18 h. Combien d'heures par jour travaille-t-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "h",
+              "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : il travaille de 7 h à 18 h. Étape 2 — Nommer le droit concerné : éducation et protection contre l'exploitation. Étape 3 — Calculer : 18 − 7 = 11. Étape 4 — Conclure : 11 heures par jour, sans école ni salaire : il y a violation.",
+              "answers": [
+                {
+                  "content": "11",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels droits sont violés dans cette situation ? (deux réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Relever ce qui arrive à chaque enfant : Kader ne va plus à l'école, Awa n'a pas d'acte de naissance, le fils du voisin est frappé. Étape 2 — Nommer le droit concerné : éducation pour Kader, nom et identité pour Awa, protection contre la violence pour le fils du voisin. Étape 3 — Chercher qui l'en empêche : l'oncle de Kader, ceux qui n'ont pas déclaré la naissance d'Awa, et le voisin. Étape 4 — Conclure : parmi les propositions, les droits violés sont le droit d'Awa à un nom et à une identité et le droit de Kader à l'éducation. Le fils du voisin voit lui aussi violé son droit d'être protégé contre la violence, mais ce droit n'est pas proposé ici. Le « droit du voisin de frapper son fils » n'existe pas : c'est le piège de croire que l'autorité d'un parent permet tout. Jouer au football n'est pas ce qui est en jeu pour Kader.",
+              "answers": [
+                {
+                  "content": "Le droit d'Awa à un nom et à une identité",
+                  "correct": true
+                },
+                {
+                  "content": "Le droit à l'éducation de Kader",
+                  "correct": true
+                },
+                {
+                  "content": "Le droit de Kader de jouer au football",
+                  "correct": false
+                },
+                {
+                  "content": "Le droit du voisin de frapper son fils",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La réunion du 20 novembre est une action de promotion des droits. Laquelle ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le droit en jeu : les habitants connaissent mal les droits. Étape 2 — Repérer les acteurs : centre social et ONG. Étape 3 — Choisir l'action : informer par une réunion, et alerter en cas de violation. Étape 4 — Conclure : informer est l'action de la réunion. La punition revient à la justice, pas à la réunion.",
+              "answers": [
+                {
+                  "content": "Fermer l'école du quartier",
+                  "correct": false
+                },
+                {
+                  "content": "Punir l'oncle de Kader",
+                  "correct": false
+                },
+                {
+                  "content": "Interdire aux enfants de parler",
+                  "correct": false
+                },
+                {
+                  "content": "Informer les habitants sur les droits de l'enfant",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Fais le bilan de la situation : les droits violés pour Kader, Awa et le fils du voisin, ceux qui en sont responsables, et deux actions pour la réunion du 20 novembre.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Cite le droit violé pour Kader : éducation et protection contre l'exploitation",
+                "Cite le droit violé pour Awa : nom et identité",
+                "Cite le droit violé pour le fils du voisin : protection contre la violence",
+                "Désigne les responsables : l'oncle, la déclaration non faite, le voisin",
+                "Propose deux actions : informer et alerter ou aider",
+                "Rédaction claire en phrases complètes"
+              ],
+              "starter": "Dans cette situation, trois enfants…",
+              "explanation": "Corrigé modèle : Étape 1 — Kader travaille 11 heures par jour sans aller à l'école, Awa n'a pas d'acte de naissance, le fils du voisin est frappé. Étape 2 — Les droits violés sont l'éducation et la protection contre l'exploitation pour Kader, le droit à un nom et à une identité pour Awa, la protection contre la violence pour le fils du voisin. Étape 3 — L'oncle, la naissance non déclarée et le voisin en sont responsables. Étape 4 — À la réunion, on informe les habitants et on alerte le centre social pour les trois cas, avec une aide de l'ONG pour la déclaration de naissance d'Awa. Barème : 1,5 point pour les droits, 1 point pour les responsables, 1,5 point pour deux actions, 1 point pour la rédaction.",
+              "answers": []
+            },
+            {
+              "content": "Le camarade dit : « Les droits, c'est bon pour les enfants insolents. » Es-tu d'accord ? Réponds en huit lignes environ, avec deux arguments et un exemple tiré de la situation.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Prend position clairement",
+                "Premier argument : les droits protègent tous les enfants, pas seulement les insolents",
+                "Deuxième argument : les droits vont avec des devoirs",
+                "Un exemple pris dans la situation de Kader, d'Awa ou du fils du voisin",
+                "Rédaction organisée et vocabulaire de la leçon"
+              ],
+              "explanation": "Corrigé modèle : Je ne suis pas d'accord avec mon camarade. D'abord, les droits protègent tous les enfants de moins de 18 ans, pas seulement les insolents : le fils du voisin n'a rien fait et il est frappé, alors que la Convention de 1989 le protège contre la violence. Ensuite, les droits vont avec des devoirs : connaître ses droits, c'est aussi respecter ceux des autres et étudier. Par exemple, Kader a le droit d'aller à l'école et le devoir d'y travailler. Barème : 1 point pour la position, 1 point par argument (2 points), 1 point pour l'exemple, 1 point pour la rédaction.",
+              "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Définition de l'enfant, textes de référence, quatre familles de droits, violations courantes, acteurs et actions de promotion.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Texte. « Un enfant est tout être humain de moins de 18 ans. La Convention relative aux droits de l'enfant a été adoptée par l'ONU le 20 novembre 1989. La Charte africaine des droits et du bien-être de l'enfant date de 1990. » Réponds aux questions avec ce texte et ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Relis la définition de l'enfant et les textes de la fiche.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "D'après le texte, un enfant a moins de 18 ans. Léa a 13 ans. Combien d'années lui manquent pour atteindre 18 ans ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "ans",
+                  "explanation": "Étape 1 — Identifier la situation : Léa a 13 ans. Étape 2 — Nommer la règle : un enfant a moins de 18 ans. Étape 3 — Calculer : 18 − 13 = 5. Étape 4 — Conclure : il lui manque 5 ans, elle reste une enfant protégée.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après le texte, la Convention a été adoptée par l'ONU le 20 ___ 1989.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier la situation : on lit la date dans le texte. Étape 2 — Nommer le texte : la Convention. Étape 3 — Classer : c'est un traité international de l'ONU. Étape 4 — Conclure : le mois est novembre.",
+                  "answers": [
+                    {
+                      "content": "novembre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel texte est africain et date de 1990 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : on cherche le texte de 1990. Étape 2 — Nommer : la Charte africaine des droits et du bien-être de l'enfant. Étape 3 — Classer : un texte adopté par des États africains. Étape 4 — Conclure : la Convention vient de l'ONU en 1989, la Constitution est la loi du pays.",
+                  "answers": [
+                    {
+                      "content": "La Charte africaine des droits et du bien-être de l'enfant",
+                      "correct": true
+                    },
+                    {
+                      "content": "La Constitution ivoirienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Convention relative aux droits de l'enfant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le règlement de l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un jeune de 16 ans est un adulte au sens de la Convention.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : un jeune de 16 ans. Étape 2 — Nommer la règle : l'enfant a moins de 18 ans. Étape 3 — Classer : 16 est inférieur à 18. Étape 4 — Conclure : il est un enfant, l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Convention a été adoptée par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier la situation : un traité mondial. Étape 2 — Nommer l'auteur : l'Organisation des Nations unies. Étape 3 — Classer : c'est une organisation de plusieurs États. Étape 4 — Conclure : la réponse est l'ONU.",
+                  "answers": [
+                    {
+                      "content": "un club de quartier",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'Assemblée nationale ivoirienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'ONU",
+                      "correct": true
+                    },
+                    {
+                      "content": "le ministère de la Santé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Mariam, Yao, Awa et Koffi sont quatre enfants du quartier. Mariam est soignée au centre de santé. Yao va à l'école. Awa donne son avis au conseil de classe. Koffi est protégé contre les coups par sa famille. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Rappelle-toi les quatre familles : survie, développement, protection, participation.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque enfant à la famille de droits qu'il illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la situation de chaque enfant. Étape 2 — Nommer le droit : santé, éducation, avis, protection. Étape 3 — Classer : survie, développement, participation, protection. Étape 4 — Conclure : les quatre familles de droits sont illustrées.",
+                  "answers": [
+                    {
+                      "content": "Mariam est soignée au centre de santé",
+                      "match": "Survie"
+                    },
+                    {
+                      "content": "Yao va à l'école",
+                      "match": "Développement"
+                    },
+                    {
+                      "content": "Awa donne son avis au conseil de classe",
+                      "match": "Participation"
+                    },
+                    {
+                      "content": "Koffi est protégé contre les coups",
+                      "match": "Protection"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le droit qu'exerce Awa ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : Awa donne son avis au conseil de classe. Étape 2 — Nommer le droit : le droit de donner son avis et d'être écoutée. Étape 3 — Classer ce droit : c'est un droit de participation. Étape 4 — Conclure par le texte : la Convention de 1989 reconnaît ce droit. Être soignée, aller à l'école ou être nourrie sont d'autres droits, qui ne décrivent pas ce que fait Awa.",
+                  "answers": [
+                    {
+                      "content": "Être soignée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Être nourrie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Donner son avis et être écoutée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aller à l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels droits font partie de la survie ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier la situation : on classe des droits. Étape 2 — Nommer chaque droit. Étape 3 — Classer : être nourri et être soigné protègent la vie, ce sont des droits de survie. Étape 4 — Conclure : école, avis et protection relèvent d'autres familles.",
+                  "answers": [
+                    {
+                      "content": "Aller à l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Être soigné",
+                      "correct": true
+                    },
+                    {
+                      "content": "Être protégé contre l'exploitation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Être nourri",
+                      "correct": true
+                    },
+                    {
+                      "content": "Donner son avis",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droits de la protection servent à défendre l'enfant contre la violence et l'exploitation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : on décrit la protection. Étape 2 — Nommer les droits : être protégé contre la violence et contre l'exploitation. Étape 3 — Classer ces droits : ils forment la famille de la protection. Étape 4 — Conclure : l'affirmation est vraie, la protection défend l'enfant contre les dangers que les adultes peuvent lui faire courir.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Donner son avis et être écouté sont des droits de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier la situation : on cherche la famille du droit de donner son avis. Étape 2 — Nommer le droit : donner son avis et être écouté. Étape 3 — Classer ce droit : il appartient à la participation, car l'enfant prend part aux décisions qui le concernent. Étape 4 — Conclure : le mot attendu est participation.",
+                  "answers": [
+                    {
+                      "content": "participation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un surveillant d'école note quatre cas. Cas A : Koffi, 10 ans, vend au marché toute la journée au lieu d'aller à l'école. Cas B : Fatou, 8 ans, n'a jamais eu d'acte de naissance. Cas C : un père frappe son fils pour une mauvaise note. Cas D : Mariam, 12 ans, range sa chambre chaque soir. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Distingue un petit service d'un travail qui empêche d'étudier.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel cas n'est PAS une violation d'un droit de l'enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever ce qui arrive à chaque enfant. Étape 2 — Nommer le droit : éducation pour A, identité pour B, protection pour C, aucun pour D. Étape 3 — Chercher qui empêche l'enfant : un adulte dans A, B, C ; personne dans D. Étape 4 — Conclure : D n'est pas une violation. Ranger sa chambre est aider un peu, c'est le piège de tout confondre.",
+                  "answers": [
+                    {
+                      "content": "Cas C : le père frappe son fils",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cas D : Mariam range sa chambre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Cas B : Fatou n'a pas d'acte de naissance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cas A : Koffi vend au marché toute la journée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels cas sont des violations ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Relever ce qui arrive à chaque enfant : Koffi ne va plus à l'école, Fatou n'a pas d'acte de naissance, un fils est frappé, Mariam range sa chambre. Étape 2 — Nommer le droit : éducation, identité, protection contre la violence, aucun droit atteint pour Mariam. Étape 3 — Chercher qui l'en empêche : un adulte dans les cas A, B et C, personne dans le cas D. Étape 4 — Conclure : A, B et C sont des violations. Le cas D est une aide, et dire qu'aucun cas n'est une violation oublie trois enfants en difficulté.",
+                  "answers": [
+                    {
+                      "content": "Cas C",
+                      "correct": true
+                    },
+                    {
+                      "content": "Cas A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Cas B",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucun cas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cas D",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le cas B, Fatou est privée de son droit à un nom et à une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever le fait : pas d'acte de naissance. Étape 2 — Nommer le droit : un nom et une identité. Étape 3 — Chercher la cause : naissance non déclarée. Étape 4 — Conclure : le mot est identité.",
+                  "answers": [
+                    {
+                      "content": "identité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le cas C, frapper son fils est permis car c'est le père.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever le fait : un père frappe son fils pour une mauvaise note. Étape 2 — Nommer le droit : la protection contre la violence, qui s'applique même dans la famille. Étape 3 — Chercher qui l'en empêche : le père lui-même. Étape 4 — Conclure : l'affirmation est fausse. Être le père ne donne pas le droit de frapper, et une mauvaise note ne justifie aucune violence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le cas A, le droit violé est le droit à ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Relever le fait : Koffi n'est plus à l'école. Étape 2 — Nommer le droit : l'éducation. Étape 3 — Chercher qui : l'adulte qui l'envoie vendre. Étape 4 — Conclure : l'éducation est violée.",
+                  "answers": [
+                    {
+                      "content": "l'éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "la nationalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "la participation",
+                      "correct": false
+                    },
+                    {
+                      "content": "la santé",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "L'école organise une semaine des droits de l'enfant. Le directeur informe les élèves, une ONG apporte des cahiers à ceux qui n'en ont pas, le centre social est prévenu d'un cas de violence et une famille accueille un enfant en danger. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Rappelle-toi les quatre actions : informer, protéger, aider, alerter.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque geste à l'action de promotion.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : chaque geste protège ou fait connaître un droit. Étape 2 — Repérer les acteurs : le directeur, l'ONG, le centre social, une famille. Étape 3 — Choisir l'action : le directeur informe, l'ONG aide avec des cahiers, le centre social est alerté, la famille protège l'enfant. Étape 4 — Conclure : les quatre actions de la fiche (informer, aider, alerter, protéger) sont toutes représentées.",
+                  "answers": [
+                    {
+                      "content": "Le directeur informe les élèves",
+                      "match": "Informer"
+                    },
+                    {
+                      "content": "L'ONG apporte des cahiers",
+                      "match": "Aider"
+                    },
+                    {
+                      "content": "Le centre social est prévenu d'un cas de violence",
+                      "match": "Alerter"
+                    },
+                    {
+                      "content": "Une famille accueille un enfant en danger",
+                      "match": "Protéger"
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui fait les lois qui protègent l'enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : protéger l'enfant par des lois. Étape 2 — Repérer les acteurs. Étape 3 — Choisir l'acteur : l'État. Étape 4 — Conclure : l'État fait les lois et crée des centres sociaux.",
+                  "answers": [
+                    {
+                      "content": "Le voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'élève",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vendeur du marché",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droits de l'enfant ne dispensent pas l'enfant de ses devoirs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : droits et devoirs. Étape 2 — Repérer l'acteur : l'enfant. Étape 3 — Choisir l'action : respecter les autres et étudier. Étape 4 — Conclure : vrai, les droits vont avec des devoirs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'UNICEF est le Fonds des Nations unies pour l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : l'UNICEF travaille pour les droits de l'enfant. Étape 2 — Repérer l'acteur : une agence de l'ONU, qui aide et défend les enfants dans le monde. Étape 3 — Choisir l'action : informer, aider et défendre. Étape 4 — Conclure : UNICEF signifie Fonds des Nations unies pour l'enfance, le mot attendu est enfance.",
+                  "answers": [
+                    {
+                      "content": "enfance",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La Journée de l'enfant africain se célèbre le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : faire connaître les droits. Étape 2 — Repérer les acteurs : États, écoles, ONG. Étape 3 — Choisir l'action : sensibiliser le 16 juin. Étape 4 — Conclure : la date est le 16 juin.",
+                  "answers": [
+                    {
+                      "content": "16 juin",
+                      "correct": true
+                    },
+                    {
+                      "content": "1er mai",
+                      "correct": false
+                    },
+                    {
+                      "content": "25 décembre",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 août",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Droits de l'enfant dans la cour commune, à l'école, au marché et au centre de santé ; reconnaître une violation ; savoir qui alerter.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans une cour commune d'Abobo, Aya, 7 ans, mange à sa faim, dort dans une chambre propre et va au centre de santé du quartier quand elle a de la fièvre. Sa tante lui demande de porter un seau d'eau à la cuisine avant le repas, puis elle fait ses devoirs. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Distingue ce qui aide l'enfant à vivre de ce qui le prive d'un droit.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel droit d'Aya est respecté quand on la soigne au centre de santé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : Aya est soignée quand elle a de la fièvre. Étape 2 — Nommer le droit : la santé. Étape 3 — Classer ce droit : survie. Étape 4 — Conclure : la Convention de 1989 reconnaît ce droit.",
+                  "answers": [
+                    {
+                      "content": "Le droit à la santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit de donner son avis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit de voter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit au nom",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Porter un seau d'eau à la cuisine avant le repas est une violation des droits d'Aya.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever ce qui arrive à l'enfant : un petit service, puis les devoirs. Étape 2 — Nommer le droit : aucun droit n'est atteint. Étape 3 — Chercher qui l'en empêche : personne. Étape 4 — Conclure : pas de violation, c'est aider un peu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels droits d'Aya sont respectés ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier la situation : elle mange, dort, est soignée. Étape 2 — Nommer les droits : nourriture et santé. Étape 3 — Classer : survie. Étape 4 — Conclure : ces deux droits sont respectés. Les deux autres propositions ne sont pas des droits.",
+                  "answers": [
+                    {
+                      "content": "Le droit de ne jamais aider",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit de travailler toute la journée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit d'être nourrie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit d'être soignée",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Manger, être soigné et dormir à l'abri relèvent de la famille de droits de la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier la situation : manger, être soigné et dormir à l'abri sont des besoins pour vivre. Étape 2 — Nommer les droits : être nourri, être soigné, avoir un toit. Étape 3 — Classer ces droits : ils servent à la vie même de l'enfant, c'est la survie. Étape 4 — Conclure : le mot attendu est survie. Le développement concerne plutôt l'école et le jeu.",
+                  "answers": [
+                    {
+                      "content": "survie",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya fait ses devoirs : elle exerce son droit à ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier la situation : Aya fait ses devoirs après le repas. Étape 2 — Nommer le droit : le droit à l'éducation. Étape 3 — Classer ce droit : c'est un droit de développement. Étape 4 — Conclure : Aya exerce son droit à l'éducation. La nationalité et la participation décrivent d'autres droits.",
+                  "answers": [
+                    {
+                      "content": "la participation",
+                      "correct": false
+                    },
+                    {
+                      "content": "la protection contre la violence",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "la nationalité",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À l'école du quartier, un élève de 6ème, Issouf, se moque d'un camarade parce qu'il n'a pas d'acte de naissance. Le maître organise une causerie sur les droits et les devoirs. Plusieurs élèves donnent leur avis. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Rappelle-toi qu'on respecte les droits des autres.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Le camarade d'Issouf n'a pas d'acte de naissance. Quel droit est menacé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever le fait : pas d'acte de naissance. Étape 2 — Nommer le droit : un nom et une identité. Étape 3 — Chercher qui l'en empêche : la naissance n'a pas été déclarée. Étape 4 — Conclure : ce droit est menacé.",
+                  "answers": [
+                    {
+                      "content": "Le droit de se reposer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit de voyager seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le droit à un nom et à une identité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit au jeu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Se moquer d'un camarade respecte ses droits.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : le respect et la dignité de l'autre. Étape 2 — Repérer l'acteur : Issouf. Étape 3 — Choisir l'action : respecter. Étape 4 — Conclure : se moquer ne respecte pas l'autre, c'est le piège du devoir oublié.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels comportements sont responsables ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : droits et devoirs. Étape 2 — Repérer l'acteur : l'élève. Étape 3 — Choisir l'action : respecter, s'exprimer, étudier. Étape 4 — Conclure : ces trois comportements sont responsables.",
+                  "answers": [
+                    {
+                      "content": "Respecter ses camarades",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faire ses devoirs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Se moquer d'un camarade",
+                      "correct": false
+                    },
+                    {
+                      "content": "Donner son avis avec politesse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Garder le silence devant une injustice",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque comportement à ce qu'il illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : droits et devoirs de l'élève. Étape 2 — Repérer l'acteur : l'élève lui-même. Étape 3 — Choisir l'action : donner son avis est un droit de participation, faire ses devoirs est un devoir, se moquer est un manquement au respect. Étape 4 — Conclure : chaque comportement est relié à ce qu'il illustre.",
+                  "answers": [
+                    {
+                      "content": "Donner son avis en classe",
+                      "match": "Un droit de participation"
+                    },
+                    {
+                      "content": "Faire ses devoirs",
+                      "match": "Un devoir de l'élève"
+                    },
+                    {
+                      "content": "Se moquer d'un camarade",
+                      "match": "Un comportement irrespectueux"
+                    }
+                  ]
+                },
+                {
+                  "content": "La causerie du maître est une action pour ___ les élèves.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : les élèves connaissent mal leurs droits. Étape 2 — Repérer l'acteur : le maître, qui représente l'école. Étape 3 — Choisir l'action : une causerie sert à faire connaître, donc à informer. Étape 4 — Conclure : le mot attendu est informer. Alerter suppose qu'un droit soit déjà violé.",
+                  "answers": [
+                    {
+                      "content": "alerter",
+                      "correct": false
+                    },
+                    {
+                      "content": "punir",
+                      "correct": false
+                    },
+                    {
+                      "content": "chasser",
+                      "correct": false
+                    },
+                    {
+                      "content": "informer",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au marché, Koffi, 11 ans, vend des beignets avec sa mère le samedi matin, puis il rentre faire ses devoirs. Son voisin Sali, 11 ans, vend des beignets tous les jours de 6 h à 19 h pour son oncle et ne va plus à l'école. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Compare la durée du travail et le temps laissé pour l'école.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui voit ses droits violés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever ce qui arrive à chaque enfant : Koffi aide le samedi matin, Sali travaille toute la journée. Étape 2 — Nommer le droit : l'éducation de Sali. Étape 3 — Chercher qui l'en empêche : l'oncle de Sali. Étape 4 — Conclure : Sali. Koffi aide un peu, ce que fait Koffi n'est pas de l'exploitation.",
+                  "answers": [
+                    {
+                      "content": "Sali",
+                      "correct": true
+                    },
+                    {
+                      "content": "Koffi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Koffi et Sali",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sali vend de 6 h à 19 h. Combien d'heures par jour travaille-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "h",
+                  "explanation": "Étape 1 — Relever le fait : Sali vend de 6 h à 19 h. Étape 2 — Nommer le droit concerné : l'éducation, car il n'a plus de temps pour apprendre. Étape 3 — Calculer la durée : 19 − 6 = 13 heures. Étape 4 — Conclure : 13 heures de travail par jour sont une violation, bien loin de l'aide de Koffi, le samedi matin seulement. Répondre 12 ou 14 serait une erreur de soustraction : de 6 h à 19 h, il y a 19 − 6 = 13 heures.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi, qui vend le samedi matin et fait ses devoirs, subit une violation de ses droits.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever le fait : Koffi vend le samedi matin avec sa mère, puis il fait ses devoirs. Étape 2 — Nommer le droit : l'éducation reste respectée et son repos aussi. Étape 3 — Chercher qui l'en empêche : personne, le travail est court et se fait avec sa mère. Étape 4 — Conclure : l'affirmation est fausse, ce n'est pas une violation. C'est la différence entre aider un peu et être exploité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sali est privé de son droit à l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever le fait : Sali ne va plus à l'école et vend toute la journée. Étape 2 — Nommer le droit : l'éducation. Étape 3 — Chercher qui l'en empêche : son oncle, qui profite de son travail. Étape 4 — Conclure : le mot attendu est éducation.",
+                  "answers": [
+                    {
+                      "content": "éducation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut faire un enseignant pour aider Sali ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : l'éducation de Sali. Étape 2 — Repérer les acteurs : l'enseignant, l'oncle, le centre social. Étape 3 — Choisir l'action : informer l'oncle et alerter. Étape 4 — Conclure : ces deux actions aident Sali. Ne rien faire laisse le droit violé.",
+                  "answers": [
+                    {
+                      "content": "Se moquer de Sali",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parler à l'oncle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne rien faire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Alerter le centre social",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au centre de santé, une infirmière explique aux mères l'importance du carnet de santé et de la déclaration de naissance. Une affiche rappelle le 20 novembre, anniversaire de la Convention relative aux droits de l'enfant. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Pense aux actions : informer, protéger, aider, alerter.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi déclarer la naissance d'un enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : un enfant vient de naître et sa naissance doit être déclarée. Étape 2 — Nommer le droit : le droit à un nom et à une identité. Étape 3 — Classer ce droit : il est reconnu à tout enfant par la Convention de 1989. Étape 4 — Conclure : on déclare la naissance pour donner à l'enfant un nom et une identité ; l'acte de naissance lui servira aussi pour s'inscrire à l'école. Les autres propositions inversent le but de la déclaration : elle protège les droits de l'enfant, elle ne les lui retire pas.",
+                  "answers": [
+                    {
+                      "content": "Pour lui donner un nom et une identité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour qu'il travaille plus tôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour qu'il perde ses droits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour ne plus aller à l'école",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vacciner un enfant contribue à son droit à la santé.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : un vaccin protège l'enfant d'une maladie. Étape 2 — Nommer le droit : le droit à la santé. Étape 3 — Classer ce droit : il fait partie de la survie. Étape 4 — Conclure : l'affirmation est vraie, la vaccination aide à protéger la santé de l'enfant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le 20 novembre est l'anniversaire de la Convention relative aux droits de l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier la situation : le 20 novembre est une date de 1989. Étape 2 — Nommer le texte : la Convention relative aux droits de l'enfant, adoptée par l'ONU. Étape 3 — Classer ce texte : c'est un traité international. Étape 4 — Conclure : le mot attendu est enfant.",
+                  "answers": [
+                    {
+                      "content": "enfant",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque acteur à son action.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : la santé et l'identité de l'enfant. Étape 2 — Repérer les acteurs : l'infirmière, l'ONG, le centre social. Étape 3 — Choisir l'action : l'infirmière informe, l'ONG aide, le centre social protège. Étape 4 — Conclure : chaque acteur remplit un rôle différent.",
+                  "answers": [
+                    {
+                      "content": "L'infirmière",
+                      "match": "Informer les mères"
+                    },
+                    {
+                      "content": "L'ONG",
+                      "match": "Aider les familles"
+                    },
+                    {
+                      "content": "Le centre social",
+                      "match": "Protéger l'enfant en danger"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une affiche du 20 novembre est une action de ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : faire connaître les droits de l'enfant. Étape 2 — Repérer l'acteur : le centre de santé, qui affiche le message. Étape 3 — Choisir l'action : sensibiliser les familles. Étape 4 — Conclure : le mot attendu est sensibilisation. Une punition ou la violence ne sont pas des actions de promotion.",
+                  "answers": [
+                    {
+                      "content": "sensibilisation",
+                      "correct": true
+                    },
+                    {
+                      "content": "violence",
+                      "correct": false
+                    },
+                    {
+                      "content": "punition",
+                      "correct": false
+                    },
+                    {
+                      "content": "publicité de marché",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Juger des affirmations, comparer deux situations, corriger des idées reçues, choisir la bonne conclusion en la justifiant.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Quatre élèves donnent leur avis sur les droits de l'enfant. Awa : « À 17 ans, on n'a plus de droits d'enfant. » Yao : « Les droits servent à tous les enfants. » Mariam : « Les droits dispensent des devoirs. » Koffi : « L'intérêt supérieur de l'enfant doit guider les décisions. » Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Compare chaque phrase à la définition de l'enfant et aux devoirs.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Awa a raison : à 17 ans, on n'a plus de droits d'enfant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : un jeune de 17 ans. Étape 2 — Nommer la règle : un enfant a moins de 18 ans. Étape 3 — Classer : 17 est inférieur à 18. Étape 4 — Conclure : Awa se trompe, c'est l'idée reçue de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao a raison : les droits servent à tous les enfants.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : qui a des droits. Étape 2 — Nommer la règle : les droits valent pour tous les enfants. Étape 3 — Classer : aucune famille n'est réservée à certains. Étape 4 — Conclure : Yao a raison.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam a raison : les droits dispensent des devoirs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : Mariam pense que les droits dispensent des devoirs. Étape 2 — Nommer la règle : les droits vont avec des devoirs, comme respecter les autres et étudier. Étape 3 — Classer : la Charte africaine rappelle que l'enfant a aussi des devoirs. Étape 4 — Conclure : Mariam se trompe, c'est le piège de la fiche sur les devoirs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élève a bien compris le principe qui guide toutes les décisions concernant un enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : on cherche le principe qui guide toute décision concernant un enfant. Étape 2 — Nommer le principe : l'intérêt supérieur de l'enfant. Étape 3 — Classer : c'est ce que dit Koffi. Étape 4 — Conclure : Koffi a bien compris. Awa se trompe sur l'âge et Mariam sur les devoirs.",
+                  "answers": [
+                    {
+                      "content": "Aucun des quatre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mariam",
+                      "correct": false
+                    },
+                    {
+                      "content": "Awa",
+                      "correct": false
+                    },
+                    {
+                      "content": "Koffi",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le principe cité par Koffi s'appelle l'intérêt ___ de l'enfant.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier la situation : Koffi cite le principe de la Convention. Étape 2 — Nommer le principe : l'intérêt supérieur de l'enfant. Étape 3 — Classer : c'est la règle qui guide toute décision. Étape 4 — Conclure : le mot attendu est supérieur.",
+                  "answers": [
+                    {
+                      "content": "supérieur",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux enfants du quartier. Situation A : Ali, 12 ans, aide son père à garder l'étal une heure après l'école, puis il fait ses devoirs. Situation B : Moussa, 12 ans, garde l'étal toute la journée et ne va plus à l'école. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Le critère est ce que le travail empêche de faire.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle phrase compare bien les deux situations ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever ce qui arrive aux enfants : une heure pour Ali, toute la journée pour Moussa. Étape 2 — Nommer le droit : l'éducation. Étape 3 — Chercher qui l'en empêche : personne pour Ali, le père pour Moussa. Étape 4 — Conclure : A est une aide, B est une violation.",
+                  "answers": [
+                    {
+                      "content": "A et B sont toutes deux des violations",
+                      "correct": false
+                    },
+                    {
+                      "content": "A est une violation, B est normale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni A ni B ne concernent les droits de l'enfant",
+                      "correct": false
+                    },
+                    {
+                      "content": "A est une aide, B est une violation du droit à l'éducation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La durée du travail et le temps laissé pour l'école comptent pour juger une situation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever les faits : l'un travaille une heure, l'autre toute la journée. Étape 2 — Nommer le droit : l'éducation et le repos. Étape 3 — Chercher si le travail les empêche : c'est la question à se poser. Étape 4 — Conclure : vrai, la durée et le temps laissé pour l'école décident entre aider un peu et être exploité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels droits de Moussa sont menacés ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever le fait : il garde l'étal toute la journée. Étape 2 — Nommer les droits : éducation et protection contre l'exploitation. Étape 3 — Chercher qui : le père. Étape 4 — Conclure : ces deux droits sont menacés.",
+                  "answers": [
+                    {
+                      "content": "Le droit de donner son avis sur la météo",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit de voter",
+                      "correct": false
+                    },
+                    {
+                      "content": "La protection contre l'exploitation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la situation A, l'activité d'Ali est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Relever le fait : une heure après l'école. Étape 2 — Nommer le droit : l'éducation reste respectée. Étape 3 — Chercher qui l'en empêche : personne. Étape 4 — Conclure : c'est une aide compatible avec l'école.",
+                  "answers": [
+                    {
+                      "content": "une violence",
+                      "correct": false
+                    },
+                    {
+                      "content": "une punition",
+                      "correct": false
+                    },
+                    {
+                      "content": "une exploitation",
+                      "correct": false
+                    },
+                    {
+                      "content": "une aide compatible avec l'école",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail de Moussa le prive de son droit à l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever le fait : Moussa garde l'étal toute la journée et ne va plus à l'école. Étape 2 — Nommer le droit : l'éducation. Étape 3 — Chercher qui l'en empêche : son père. Étape 4 — Conclure : le mot attendu est éducation.",
+                  "answers": [
+                    {
+                      "content": "éducation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève rapporte quatre idées entendues dans le quartier : (1) « Ne pas déclarer la naissance d'un enfant, ce n'est pas grave. » (2) « Les droits sont réservés aux enfants des villes. » (3) « Les parents peuvent frapper, c'est de l'éducation. » (4) « L'enfant doit respecter ses camarades. » Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque idée, cherche le droit ou le devoir qui la contredit.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "L'idée (1) est exacte : ne pas déclarer la naissance d'un enfant, ce n'est pas grave.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever le fait : la naissance n'est pas déclarée, l'enfant n'a donc pas d'acte de naissance. Étape 2 — Nommer le droit : le droit à un nom et à une identité. Étape 3 — Chercher qui l'en empêche : ceux qui devaient déclarer la naissance, en général les parents. Étape 4 — Conclure : l'affirmation est fausse. Sans acte de naissance, l'enfant est privé de son droit à un nom et à une identité, et il peut avoir du mal à s'inscrire à l'école. Croire que ce papier ne compte pas est une idée reçue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'idée (2) est exacte : les droits sont réservés aux enfants des villes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la règle : les droits valent pour tous les enfants, sans distinction de lieu. Étape 2 — Nommer la source : la Convention de 1989 et la Charte africaine. Étape 3 — Classer : aucune ville n'a de droits en plus. Étape 4 — Conclure : l'idée (2) est fausse, c'est l'erreur de croire que les droits dépendent du lieu ou de l'argent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'idée (3) est exacte : les parents peuvent frapper, c'est de l'éducation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever le fait : on frappe un enfant en disant que c'est de l'éducation. Étape 2 — Nommer le droit : la protection contre la violence, même dans la famille. Étape 3 — Chercher qui l'en empêche : le parent. Étape 4 — Conclure : l'idée (3) est fausse. Frapper ne remplace pas l'éducation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle idée est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la règle : droits et devoirs vont ensemble. Étape 2 — Nommer le devoir : respecter ses camarades. Étape 3 — Classer : c'est un devoir de l'enfant, rappelé par la Charte africaine. Étape 4 — Conclure : l'idée (4) est exacte, les trois autres sont les idées reçues de la fiche.",
+                  "answers": [
+                    {
+                      "content": "L'idée (1)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'idée (2)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'idée (3)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'idée (4) : l'enfant doit respecter ses camarades",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Respecter ses camarades est un ___ de l'enfant.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier la règle : on cherche la nature du respect des camarades. Étape 2 — Nommer cette action : respecter les autres. Étape 3 — Classer : c'est un devoir de l'enfant. Étape 4 — Conclure : le mot attendu est devoir. Un droit exclusif ou un privilège ne décrivent pas le respect des autres.",
+                  "answers": [
+                    {
+                      "content": "privilège des riches",
+                      "correct": false
+                    },
+                    {
+                      "content": "danger",
+                      "correct": false
+                    },
+                    {
+                      "content": "droit exclusif",
+                      "correct": false
+                    },
+                    {
+                      "content": "devoir",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles idées sont fausses ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Relever les quatre idées. Étape 2 — Nommer les droits ou devoirs : identité pour (1), tous les enfants pour (2), protection contre la violence pour (3), devoir de respecter pour (4). Étape 3 — Chercher les erreurs : (1), (2) et (3) contredisent la Convention. Étape 4 — Conclure : seules (1), (2) et (3) sont fausses. L'idée (4) est exacte, et dire qu'aucune n'est fausse oublie les trois erreurs.",
+                  "answers": [
+                    {
+                      "content": "Aucune des quatre",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'idée (4)",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'idée (3)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'idée (2)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'idée (1)",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À la sortie de l'école, tu vois un camarade, Idrissa, 12 ans, qui pleure : son père veut qu'il quitte l'école pour garder les bœufs. Tu hésites entre quatre réactions. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Rappelle-toi qu'on agit sans violence.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle réaction est responsable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : l'éducation d'Idrissa. Étape 2 — Repérer les acteurs : l'enseignant, le centre social. Étape 3 — Choisir l'action : alerter un adulte de confiance. Étape 4 — Conclure : c'est la réaction responsable. Se moquer, frapper ou se taire sont des erreurs.",
+                  "answers": [
+                    {
+                      "content": "En parler à un enseignant, qui peut alerter le centre social",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ne rien dire parce que c'est une affaire de famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Frapper son père",
+                      "correct": false
+                    },
+                    {
+                      "content": "Se moquer de lui",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enseignant peut parler au père d'Idrissa et alerter le centre social si besoin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : l'éducation d'Idrissa. Étape 2 — Repérer les acteurs : l'enseignant, le père, le centre social. Étape 3 — Choisir l'action : informer le père, puis alerter si rien ne change. Étape 4 — Conclure : vrai, on agit dans l'intérêt de l'enfant et sans violence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand un droit est violé, on peut ___ le centre social.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : un droit est violé. Étape 2 — Repérer l'acteur : le centre social, qui protège les enfants. Étape 3 — Choisir l'action : quand un droit est violé, on alerte. Étape 4 — Conclure : le mot attendu est alerter.",
+                  "answers": [
+                    {
+                      "content": "alerter",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Idrissa a le droit de continuer ses études : c'est le droit à ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : Idrissa veut continuer ses études. Étape 2 — Repérer l'acteur : son père, qui veut l'en empêcher. Étape 3 — Choisir l'action : défendre ce droit. Étape 4 — Conclure : c'est le droit à l'éducation. La santé ou la nationalité n'ont aucun lien avec l'école.",
+                  "answers": [
+                    {
+                      "content": "l'éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "la nationalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "la participation",
+                      "correct": false
+                    },
+                    {
+                      "content": "la santé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles actions peuvent protéger Idrissa ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : l'éducation d'Idrissa. Étape 2 — Repérer les acteurs : le père, une ONG, le centre social. Étape 3 — Choisir les actions : informer le père et alerter une structure de protection. Étape 4 — Conclure : ces deux actions protègent Idrissa. Se cacher ou se taire ne règle rien.",
+                  "answers": [
+                    {
+                      "content": "Alerter une ONG ou le centre social",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dire à Idrissa de se cacher",
+                      "correct": false
+                    },
+                    {
+                      "content": "Informer le père des droits de son fils",
+                      "correct": true
+                    },
+                    {
+                      "content": "Garder le silence",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : droits de l'enfant et textes, violations d'un droit, acteurs et actions de promotion, droits et devoirs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Fanta a 10 ans. Elle va à l'école, mange à sa faim et a été vaccinée. Sa naissance a été déclarée. Au conseil de classe, elle a donné son avis sur le règlement. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Rappelle-toi les quatre familles de droits.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque fait à la famille de droits correspondante.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la situation de Fanta. Étape 2 — Nommer le droit : santé, éducation, avis. Étape 3 — Classer : survie, développement, participation. Étape 4 — Conclure : plusieurs droits de Fanta sont respectés.",
+                  "answers": [
+                    {
+                      "content": "Fanta est vaccinée",
+                      "match": "Survie"
+                    },
+                    {
+                      "content": "Fanta va à l'école",
+                      "match": "Développement"
+                    },
+                    {
+                      "content": "Fanta donne son avis au conseil de classe",
+                      "match": "Participation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta a 10 ans. Quel texte de l'ONU lui reconnaît ces droits ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la situation : Fanta, 10 ans, exerce plusieurs droits. Étape 2 — Nommer le texte : la Convention relative aux droits de l'enfant, adoptée par l'ONU en 1989. Étape 3 — Classer : c'est un traité international. Étape 4 — Conclure : la Convention les lui reconnaît. Un règlement d'école, un bulletin ou une affiche ne sont pas des textes de loi sur l'enfant.",
+                  "answers": [
+                    {
+                      "content": "La Convention relative aux droits de l'enfant (1989)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un bulletin de notes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le règlement de l'école",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une affiche de marché",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années manque-t-il à Fanta pour atteindre 18 ans ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "unit": "ans",
+                  "explanation": "Étape 1 — Identifier la situation : Fanta a 10 ans. Étape 2 — Nommer la règle : un enfant a moins de 18 ans. Étape 3 — Calculer : 18 − 10 = 8. Étape 4 — Conclure : il lui manque 8 ans pour atteindre l'âge adulte.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La déclaration de naissance de Fanta respecte son droit à un nom et à une identité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la situation : la naissance de Fanta a été déclarée. Étape 2 — Nommer le droit : un nom et une identité. Étape 3 — Classer : droit reconnu par la Convention. Étape 4 — Conclure : l'affirmation est vraie, la déclaration lui donne une identité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta a le droit de donner son ___ au conseil de classe.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier la situation : Fanta s'exprime au conseil de classe. Étape 2 — Nommer le droit : donner son avis. Étape 3 — Classer : participation. Étape 4 — Conclure : le mot attendu est avis.",
+                  "answers": [
+                    {
+                      "content": "avis",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans une cour commune, un enfant de 9 ans, Salif, est battu avec un bâton par son oncle. Il ne va plus à l'école depuis deux mois. Sa naissance n'a jamais été déclarée. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Cherche pour chaque fait le droit qui est atteint.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels droits de Salif sont violés ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Relever ce qui arrive à Salif : coups, pas d'école, pas d'acte de naissance. Étape 2 — Nommer les droits : protection, éducation, identité. Étape 3 — Chercher qui l'en empêche : l'oncle et la naissance non déclarée. Étape 4 — Conclure : trois droits sont violés.",
+                  "answers": [
+                    {
+                      "content": "L'éducation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le droit de choisir son oncle",
+                      "correct": false
+                    },
+                    {
+                      "content": "La protection contre la violence",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nom et l'identité",
+                      "correct": true
+                    },
+                    {
+                      "content": "La participation à un vote",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la bonne conclusion ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever les faits : Salif est battu, il ne va plus à l'école, il n'a pas d'acte de naissance. Étape 2 — Nommer les droits : protection, éducation, identité. Étape 3 — Chercher qui l'en empêche : l'oncle et la naissance non déclarée. Étape 4 — Conclure : plusieurs droits sont violés. Les coups ne sont pas de l'éducation et ce n'est pas normal dans une cour commune.",
+                  "answers": [
+                    {
+                      "content": "C'est normal dans une cour commune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucun problème, c'est de l'éducation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seul le droit de jouer est atteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a violation de plusieurs droits de l'enfant",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un oncle a le droit de battre un enfant dont il s'occupe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever le fait : des coups. Étape 2 — Nommer le droit : protection contre la violence. Étape 3 — Chercher qui : l'oncle. Étape 4 — Conclure : faux, la protection vaut dans la famille.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque fait au droit violé.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Relever chaque fait : coups, absence d'école, absence d'acte de naissance. Étape 2 — Nommer le droit : protection contre la violence, éducation, nom et identité. Étape 3 — Chercher qui l'en empêche : l'oncle ou ceux qui n'ont pas déclaré la naissance. Étape 4 — Conclure : trois faits, trois droits violés.",
+                  "answers": [
+                    {
+                      "content": "Salif est battu",
+                      "match": "Protection contre la violence"
+                    },
+                    {
+                      "content": "Salif ne va plus à l'école",
+                      "match": "Éducation"
+                    },
+                    {
+                      "content": "Salif n'a pas d'acte de naissance",
+                      "match": "Nom et identité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Salif est privé de son droit à un nom et à une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever le fait : Salif n'a pas d'acte de naissance. Étape 2 — Nommer le droit : un nom et une identité. Étape 3 — Chercher qui l'en empêche : la naissance n'a pas été déclarée. Étape 4 — Conclure : le mot attendu est identité.",
+                  "answers": [
+                    {
+                      "content": "identité",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le centre social de la commune apprend le cas de Salif. Il prévient une ONG, qui informe la famille, aide à obtenir l'acte de naissance et suit la scolarisation de l'enfant. Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Rappelle-toi les quatre actions.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque acteur à son action.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : la protection de Salif, son éducation et son identité. Étape 2 — Repérer les acteurs : le centre social, l'ONG et l'oncle. Étape 3 — Choisir l'action de chacun : le centre social protège Salif et suit sa situation ; l'ONG informe la famille et l'aide pour l'acte de naissance et l'école ; l'oncle doit cesser les coups et respecter les droits de Salif. Étape 4 — Conclure : chacun a un rôle, et l'adulte qui s'occupe de l'enfant a des devoirs envers lui.",
+                  "answers": [
+                    {
+                      "content": "Le centre social",
+                      "match": "Protéger Salif et suivre sa situation"
+                    },
+                    {
+                      "content": "L'ONG",
+                      "match": "Informer et aider la famille"
+                    },
+                    {
+                      "content": "L'oncle",
+                      "match": "Cesser les coups et respecter les droits de Salif"
+                    }
+                  ]
+                },
+                {
+                  "content": "Aider à obtenir l'acte de naissance est surtout une action pour garantir le droit à ___.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : le droit à un nom et à une identité. Étape 2 — Repérer l'acteur : l'ONG. Étape 3 — Choisir l'action : l'ONG aide la famille à faire les démarches. Étape 4 — Conclure : aider pour l'acte de naissance garantit le droit à un nom et à une identité.",
+                  "answers": [
+                    {
+                      "content": "la politique",
+                      "correct": false
+                    },
+                    {
+                      "content": "un nom et une identité",
+                      "correct": true
+                    },
+                    {
+                      "content": "la nationalité sportive",
+                      "correct": false
+                    },
+                    {
+                      "content": "la détente",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Prévenir le centre social est une action d'alerte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : la protection de Salif. Étape 2 — Repérer l'acteur : le centre social, qui reçoit les signalements. Étape 3 — Choisir l'action : prévenir le centre social d'un cas de violence, c'est alerter. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'ONG explique leurs droits aux familles, elle ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : les familles connaissent mal les droits. Étape 2 — Repérer l'acteur : l'ONG. Étape 3 — Choisir l'action : expliquer les droits, c'est informer. Étape 4 — Conclure : l'ONG informe. Punir ou ignorer le problème ne promeut pas les droits.",
+                  "answers": [
+                    {
+                      "content": "alerte la police sans raison",
+                      "correct": false
+                    },
+                    {
+                      "content": "punit",
+                      "correct": false
+                    },
+                    {
+                      "content": "ignore le problème",
+                      "correct": false
+                    },
+                    {
+                      "content": "informe",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels acteurs agissent pour promouvoir les droits de l'enfant ? (deux réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : la protection des enfants. Étape 2 — Repérer les acteurs : famille, école, État, ONG, enfant. Étape 3 — Choisir l'action : l'ONG informe et aide, l'État protège avec ses centres sociaux. Étape 4 — Conclure : l'ONG et l'État agissent. Personne n'agit pas, et le voisin seul ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "Seulement le voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une ONG",
+                      "correct": true
+                    },
+                    {
+                      "content": "Personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État, par ses centres sociaux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un journal scolaire publie : « Le 16 juin, Journée de l'enfant africain, et le 20 novembre, anniversaire de la Convention, nous rappellent que chacun a des droits et des devoirs. » Réponds aux questions avec ta leçon.",
+              "exercise_type": "evaluation",
+              "hint": "Pense à l'équilibre entre droits et devoirs.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle date est celle de la Journée de l'enfant africain ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : faire connaître les droits des enfants africains. Étape 2 — Repérer les acteurs : États africains, écoles, ONG. Étape 3 — Choisir l'action : sensibiliser chaque année le 16 juin. Étape 4 — Conclure : la Journée de l'enfant africain est le 16 juin. Le 20 novembre est l'anniversaire de la Convention.",
+                  "answers": [
+                    {
+                      "content": "Le 1er mai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 16 juin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le 7 août",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le 25 décembre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droits de l'enfant vont avec des devoirs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : droits et devoirs. Étape 2 — Repérer l'acteur : l'enfant. Étape 3 — Choisir l'action : respecter les autres et étudier. Étape 4 — Conclure : vrai, les droits vont avec des devoirs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le 20 novembre est l'anniversaire de la ___ relative aux droits de l'enfant.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : le 20 novembre rappelle les droits. Étape 2 — Repérer le texte : la Convention de 1989. Étape 3 — Choisir l'action : sensibiliser à cette date. Étape 4 — Conclure : le mot attendu est convention.",
+                  "answers": [
+                    {
+                      "content": "convention",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels devoirs ont les enfants ? (trois réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : les devoirs vont avec les droits. Étape 2 — Repérer l'acteur : l'enfant. Étape 3 — Choisir l'action : étudier, respecter ses camarades et sa famille. Étape 4 — Conclure : ces trois devoirs sont ceux de la fiche. Se moquer ou frapper sont des manquements.",
+                  "answers": [
+                    {
+                      "content": "Se moquer des autres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Respecter ses camarades",
+                      "correct": true
+                    },
+                    {
+                      "content": "Étudier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Frapper les plus petits",
+                      "correct": false
+                    },
+                    {
+                      "content": "Respecter sa famille",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque acteur à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le droit en jeu : tous les droits de l'enfant. Étape 2 — Repérer les acteurs : famille, école, État. Étape 3 — Choisir l'action : la famille nourrit et protège, l'école instruit et informe, l'État fait les lois. Étape 4 — Conclure : chaque acteur a son rôle.",
+                  "answers": [
+                    {
+                      "content": "La famille",
+                      "match": "Nourrir et protéger"
+                    },
+                    {
+                      "content": "L'école",
+                      "match": "Instruire et informer"
+                    },
+                    {
+                      "content": "L'État",
+                      "match": "Faire les lois"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

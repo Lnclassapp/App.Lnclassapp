@@ -13,7 +13,7 @@ Histoire-Géographie et EDHC : 30 leçons, rangées dans `docs/contenus/lecons-t
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-11-13 | Les couples `6eme/<matière>` sont ajoutés à la fin de `lecons:` dans `db/seeds/standard/jeu.yml` | Sans eux, `StandardTestSet` refuse le manifeste (`couple_missing`) ; en fin de liste, les 27 premières leçons du test d'activité ne bougent pas | Non |
-| 2026-11-14 | `PRD_COUPLES` du test du manifeste suit le nombre de couples (57 au lot A, 59 au lot B) | Le test compte les couples du jeu standard | Non |
+| 2026-11-14 | `PRD_COUPLES` du test du manifeste suit le nombre de couples (57 au lot A, 59 au lot B ; 65 après la fusion de Develop, qui apporte les 6 couples de 4ème) | Le test compte les couples du jeu standard | Non |
 
 ## Ce qui a dérapé
 
