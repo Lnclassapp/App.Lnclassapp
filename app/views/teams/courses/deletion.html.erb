@@ -1,4 +1,4 @@
-<%# 🌐 UI · teams/courses/deletion — confirmation « Supprimer la leçon <nom> ? », ou son refus si des élèves s'en sont servis %>
+<%# 🌐 UI · teams/courses/deletion — confirmation « Supprimer la fiche de cours <nom> ? », ou son refus si des élèves s'en sont servis %>
 <%# Rôle : servie dans le frame « modal » depuis le menu ⋮ de la page de la leçon ; sans frame (sans JavaScript), page complète utilisable %>
 <%# ADR  : 0036, XXXX-suppression-d-une-lecon-sans-activite-eleve · UDR : 0006, 0054, XXXX-supprimer-une-lecon-depuis-sa-fiche %>
 <% page_title @refused ? t("teams.courses.deletion.refused_title") : t("teams.courses.deletion.title", name: @course.name) %>
