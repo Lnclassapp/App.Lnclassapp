@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
 # Rôle : traduit Orm::Exercise, ses questions, propositions et images ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : blank, hint), 0121
+# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113 (§4.6, amendement du 2026-11-14), 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : blank, hint), 0121
 module Repositories
   module Assessment
     class ExerciseRepository
@@ -50,6 +50,28 @@ module Repositories
           destroy_uncited(previous)
         end
         find_by_public_id(public_id: record.public_id)
+      end
+
+      # Appelé dans la transaction du use case, après lock. Chaque écriture est bornée à l'exercice : une question d'un autre
+      # exercice, ou une proposition d'une autre question, ne bouge pas. Aucune ligne n'est créée ni retirée ; les tentatives et
+      # les sessions ne sont pas touchées (edition-lecon-equipe, décision du porteur du 2026-11-14).
+      def lock(id:)
+        Orm::Exercise.lock.find(id)
+        true
+      end
+
+      def correct_text(exercise:)
+        Orm::Exercise.where(id: exercise.id).update_all(title: exercise.title, statement: exercise.statement, hint: exercise.hint,
+                                                        updated_at: Time.current)
+        exercise.questions.each do |question|
+          Orm::Question.where(id: question.id, exercise_id: exercise.id)
+                       .update_all(content: question.content, explanation: question.explanation, hint: question.hint, updated_at: Time.current)
+          question.answers.each do |answer|
+            Orm::Answer.where(id: answer.id, question_id: Orm::Question.where(id: question.id, exercise_id: exercise.id).select(:id))
+                       .update_all(content: answer.content, match_content: answer.match_content, correct: answer.correct, updated_at: Time.current)
+          end
+        end
+        true
       end
 
       # La première publication pose published_at ; l'archivage pose archived_at (ADR-0035).

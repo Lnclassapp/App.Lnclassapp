@@ -84,8 +84,8 @@ git push -u origin HEAD:main                                                    
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application)
-- [ ] Pureté du domaine, rubocop, tests, parcours système : au vert
-- [ ] ADR et UDR à jour et indexés
-- [ ] `journal.md` complété
+- [x] Tous les lots sont `Done` (A #597 ; B `main` du dépôt de contenus, contenus#1 et #2 ; C #602)
+- [x] Un rôle distinct de l'auteur a **exécuté** le résultat (l'orchestrateur a vérifié #602 ; `valider.yml` vert sur `main` du dépôt de contenus, 463 leçons)
+- [x] Pureté du domaine, rubocop, tests, parcours système : au vert (`bin/ci-quiet` sur `0ad7a085`)
+- [x] ADR et UDR à jour et indexés (ADR-0134, aucun UDR)
+- [x] `journal.md` complété

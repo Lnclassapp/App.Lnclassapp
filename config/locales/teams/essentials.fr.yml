@@ -10,3 +10,27 @@ fr:
           archive: "Archivage impossible"
         parent_not_published: "La fiche de cours de cette fiche de révision n'est pas publiée : publiez d'abord la fiche de cours."
         transition_not_allowed: "Cette fiche de révision est déjà dans cet état, ou ne peut pas prendre ce statut."
+      # edition-texte-lecon (ADR-0113 §4.6, amendement du 2026-11-14) : correction du texte en modale, structure inchangée.
+      edit_text:
+        title: "Modifier le texte de la fiche de révision"
+        notice: "Les étapes ne s'ajoutent ni ne se retirent ici ; l'entraînement et la figure viennent de l'import : réimportez la fiche de cours pour les changer."
+        name: "Nom"
+        remember: "À retenir"
+        method: "Méthode"
+        example: "Exemple"
+        example_statement: "Énoncé de l'exemple"
+        step: "Étape %{number}"
+        pitfall: "Piège à éviter"
+        cancel: "Annuler"
+        submit: "Enregistrer"
+      update_text:
+        updated: "Texte de la fiche de révision « %{name} » enregistré."
+      text_errors:
+        blank: "Ce champ est obligatoire."
+        too_long: "Ce texte est trop long."
+        taken: "Une autre fiche de révision de cette fiche de cours porte déjà ce nom."
+        structure_changed: "La fiche de révision a changé depuis l'ouverture de cette fenêtre. Fermez-la et rouvrez-la."
+        reimport: "Le nombre d'étapes de cette fiche de révision est hors des bornes : corrigez-le dans le fichier, puis réimportez la fiche de cours."
+        write_failed: "L'enregistrement a échoué. Réessayez."
+        no_sheet: "Cette fiche de révision n'a pas de contenu importé : réimportez la fiche de cours."
+        invalid: "Ce texte n'est pas valide."

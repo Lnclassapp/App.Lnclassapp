@@ -1,6 +1,6 @@
 # 🌐 UI · Catalog::ContentStatusHelper — statut d'un cours, d'une fiche ou d'un exercice, et ses transitions
 # Rôle : badge du statut pour tous ; pour l'équipe, le badge (panneau) et les transitions en entrées du menu ⋮, que les streams remplacent
-# ADR  : 0035, 0113, 0121 · UDR : 0005, 0007, 0015, 0021, 0042
+# ADR  : 0035, 0113 (§4.6, amendement du 2026-11-14), 0121 · UDR : 0005, 0007, 0015, 0021, 0042
 module Catalog
   module ContentStatusHelper
     CONTENT_STATUS_TONES = { "draft" => :warning, "published" => :success, "archived" => :neutral }.freeze
@@ -41,11 +41,16 @@ module Catalog
     end
 
     # edition-lecon-equipe : le badge et le menu ⋮ d'une notion ou d'un exercice, là où il se lit dans la leçon (ADR-0113, ADR-0121).
+    # edition-texte-lecon : « Modifier le texte » ouvre la modale de correction, quel que soit le statut (ADR-0113 §4.6, amendement).
     def content_status_menu(type:, key:, status:, label:)
       ref = Ref.new(type: type.to_s, key:, status:)
       tag.div(class: "my-2 flex flex-wrap items-center gap-2 font-sans text-base text-ink print:hidden") do
         content_status_panel(record: ref) +
-          ui_dropdown(label:, id: "#{type}-actions-menu-#{key}", fixed: true) { content_transition_items(record: ref) }
+          ui_dropdown(label:, id: "#{type}-actions-menu-#{key}", fixed: true) do
+            ui_dropdown_item(t("catalog.content_status.actions.edit_text"), href: public_send("text_teams_#{type}_path", key),
+                                                                            icon: "pencil-square", frame: "modal") +
+              content_transition_items(record: ref)
+          end
       end
     end
 

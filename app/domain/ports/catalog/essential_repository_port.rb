@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::EssentialRepositoryPort
 # Rôle : contrat de persistance des fiches essentielles d'un cours
-# ADR  : 0029, 0035, 0039, 0119-entrainement-de-notion-corrige-sans-trace
+# ADR  : 0029, 0035, 0039, 0113 (§4.6, amendement du 2026-11-14), 0119-entrainement-de-notion-corrige-sans-trace
 module Ports
   module Catalog
     module EssentialRepositoryPort
@@ -12,6 +12,16 @@ module Ports
       # Verrouille la ligne jusqu'à la fin de la transaction en cours (publication contre modification). → true
       def lock(id:)
         raise NotImplementedError, "#{self.class} doit implémenter #lock"
+      end
+
+      # La fiche de la notion telle que l'import l'a écrite (jsonb), {} sans fiche. → Hash
+      def sheet_of(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #sheet_of"
+      end
+
+      # edition-lecon-equipe : écrit le nom et la fiche entière (déjà fusionnée par le use case) ; slug, statut et position restent. → true
+      def correct_text(id:, name:, sheet:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #correct_text"
       end
 
       # → true

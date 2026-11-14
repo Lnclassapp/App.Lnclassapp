@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::EssentialRepository
 # Rôle : traduit Orm::Essential ↔ Entities::Catalog::Essential, avec le statut du cours ; transitions et clés de l'import
-# ADR  : 0029, 0035, 0039, 0116, 0119-entrainement-de-notion-corrige-sans-trace
+# ADR  : 0029, 0035, 0039, 0113 (§4.6, amendement du 2026-11-14), 0116, 0119-entrainement-de-notion-corrige-sans-trace
 module Repositories
   module Catalog
     class EssentialRepository
@@ -32,6 +32,16 @@ module Repositories
         slug, name, status, course_status, level_id, series_id, sheet = row
         practice = Entities::Catalog::NotionPractice.from_raw(sheet["practice"])
         PracticeNotion.new(slug:, name:, status:, course_status:, level_id:, series_id:, practice:) if practice
+      end
+
+      def sheet_of(id:)
+        Orm::Essential.where(id:).pick(:sheet) || {}
+      end
+
+      # edition-lecon-equipe : le nom et la fiche fusionnée par le use case ; slug, statut, position et dates de publication restent.
+      def correct_text(id:, name:, sheet:, at:)
+        Orm::Essential.where(id:).update_all(name:, sheet:, updated_at: at)
+        true
       end
 
       # La première publication pose published_at ; l'archivage pose archived_at (ADR-0035).

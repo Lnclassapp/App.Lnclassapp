@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseRepositoryPort
 # Rôle : contrat de persistance des exercices, de leurs questions et de leurs propositions
-# ADR  : 0035, 0036, 0039, 0054, 0105, 0113
+# ADR  : 0035, 0036, 0039, 0054, 0105, 0113 (§4.6, amendement du 2026-11-14)
 module Ports
   module Assessment
     module ExerciseRepositoryPort
@@ -36,6 +36,17 @@ module Ports
       # replace_questions : remplace questions et propositions (interdit dès qu'une session existe). → Exercise ; lève ImageUnavailable
       def update(exercise:, replace_questions:)
         raise NotImplementedError, "#{self.class} doit implémenter #update"
+      end
+
+      # Verrouille la ligne de l'exercice jusqu'à la fin de la transaction en cours. → true
+      def lock(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #lock"
+      end
+
+      # edition-lecon-equipe : écrit titre, sujet et indice, puis, par identifiant et sans en créer ni en retirer, le texte des
+      # questions et de leurs propositions et leur drapeau correct. Ni tentative ni session n'est touchée. → true
+      def correct_text(exercise:)
+        raise NotImplementedError, "#{self.class} doit implémenter #correct_text"
       end
 
       # Pose published_at ou archived_at. → true

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Contrôle d'un fichier de leçon `lnclass.course-tree` v3 contre les règles de docs/contenus/prompt-redaction.md.
+# Contrôle d'un fichier de leçon `lnclass.course-tree` v3 contre les règles de prompts/prompt-redaction.md du dépôt
+# de contenus Lnclassapp/App.Lnclassapp-contenus (ADR-0134).
 # Usage : ruby script/contenus/valider.rb fichier.json [fichier.json …]   (code de sortie 1 s'il y a une erreur)
 # Ruby pur : ni Rails ni bundler. Les ERREURS reprennent les règles et les codes de raison de l'import v3
 # (ADR fiche-de-revision-par-notion-et-figures-parametrees §4.1 et §4.2 ; ADR-0115 pour les types de question) : un fichier qui
