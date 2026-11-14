@@ -43,6 +43,8 @@ Le correctif d'affichage à 390 px de « composés carbonylés » (formules cond
 
 ## À trancher
 
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+
 - **Lectures graphiques sans tolérance**, **valeurs illustratives**, **textes d'appui de l'oral** : comme en Tle C, option prudente appliquée (laissé tel quel ; un enseignant relit avant publication).
 - **Noms non conformes comme distracteurs** (amines, S1.E2.Q3) : option prudente appliquée, laissés car la correction les explique. Option possible : les remplacer par des molécules différentes.
 

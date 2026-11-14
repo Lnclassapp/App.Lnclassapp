@@ -36,7 +36,8 @@ module Ports
       # Écrit, en une seule transaction, une ligne par assignation reçue, dans l'ordre reçu. Un exercice déjà assigné à la
       #   classe (index partiel actif) est écarté et nommé, il n'annule pas l'envoi : les autres partent.
       # → Result(BatchCreation) ; created est vide si tous les exercices étaient déjà assignés.
-      #   Aucune autre erreur n'est rendue : le choix des exercices et les droits se vérifient avant, dans le use case.
+      #   | failure(:invalid, base: [:unknown_exercise]) si un exercice a disparu entre la lecture et l'écriture (leçon supprimée,
+      #   ADR-0136) : rien n'est écrit. Les droits se vérifient avant, dans le use case.
       def create_batch(assignments:)
         raise NotImplementedError, "#{self.class} doit implémenter #create_batch"
       end

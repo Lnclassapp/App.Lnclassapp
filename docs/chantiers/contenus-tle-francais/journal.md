@@ -28,7 +28,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Points « à faire valider par un enseignant » (journal du programme, vague T7) | Aucun enseignant de Français dans le chantier ; règles d'épreuve du BAC ivoirien non accessibles ici | — (avant publication) |
+| Points « à faire valider par un enseignant » (journal du programme, vague T7) — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Aucun enseignant de Français dans le chantier ; règles d'épreuve du BAC ivoirien non accessibles ici | — (avant publication) |
 | Liste des œuvres intégrales de l'établissement : aucune œuvre unique supposée | Varie selon l'établissement | — |
 
 ## Clôture

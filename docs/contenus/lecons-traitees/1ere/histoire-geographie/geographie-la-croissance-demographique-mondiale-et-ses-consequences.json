@@ -1,0 +1,4064 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — La croissance démographique mondiale et ses conséquences",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Histoire-Géographie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "courbe-population-mondiale",
+          "kind": "stat_chart",
+          "description": "Une courbe de la population mondiale, en milliards d'habitants, à huit dates : 1 milliard vers 1800, 2 milliards vers 1927, 3 milliards en 1960, 4 milliards en 1974, 5 milliards en 1987, 6 milliards en 1999, 7 milliards en 2011 et 8 milliards en 2022. La courbe monte de plus en plus vite : les dates se rapprochent.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "labels": [
+              "1800",
+              "1927",
+              "1960",
+              "1974",
+              "1987",
+              "1999",
+              "2011",
+              "2022"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "transition-demographique",
+          "kind": "diagram",
+          "description": "Un schéma fléché de gauche à droite qui présente les quatre phases de la transition démographique : natalité et mortalité fortes, puis baisse de la mortalité avec une natalité forte, puis baisse de la natalité, enfin natalité et mortalité faibles. Les flèches indiquent ce qui change d'une phase à l'autre.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "p1",
+                "label": "Phase 1 : natalité et mortalité fortes"
+              },
+              {
+                "id": "p2",
+                "label": "Phase 2 : mortalité en baisse, natalité forte"
+              },
+              {
+                "id": "p3",
+                "label": "Phase 3 : natalité en baisse"
+              },
+              {
+                "id": "p4",
+                "label": "Phase 4 : natalité et mortalité faibles"
+              }
+            ],
+            "edges": [
+              {
+                "from": "p1",
+                "to": "p2",
+                "label": "progrès sanitaires"
+              },
+              {
+                "from": "p2",
+                "to": "p3",
+                "label": "école, villes"
+              },
+              {
+                "from": "p3",
+                "to": "p4",
+                "label": "deux taux bas"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-peuplement",
+          "kind": "map",
+          "description": "Une carte du monde. La Chine et l'Inde, qui comptent chacune plus d'un milliard d'habitants, sont colorées dans la même teinte. La Côte d'Ivoire est colorée à part pour que l'élève la situe. Le reste du monde reste neutre : la carte sert à situer les deux pays les plus peuplés.",
+          "params": {
+            "base": "world",
+            "areas": [
+              {
+                "id": "chn",
+                "category": 1
+              },
+              {
+                "id": "ind",
+                "category": 1
+              },
+              {
+                "id": "civ",
+                "category": 2
+              }
+            ],
+            "places": [],
+            "routes": [],
+            "legend": [
+              "Pays de plus d'un milliard d'habitants",
+              "Côte d'Ivoire"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "consequences-croissance",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : la croissance rapide de la population est reliée à cinq besoins qu'elle augmente : l'alimentation, l'éducation, la santé, l'emploi et la protection de l'environnement. La racine est la cause, les cinq branches sont les besoins à satisfaire.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "croissance",
+                "label": "Croissance rapide de la population",
+                "category": 1
+              },
+              {
+                "id": "alim",
+                "label": "Alimentation",
+                "category": 2
+              },
+              {
+                "id": "educ",
+                "label": "Éducation",
+                "category": 2
+              },
+              {
+                "id": "sante",
+                "label": "Santé",
+                "category": 2
+              },
+              {
+                "id": "emploi",
+                "label": "Emploi",
+                "category": 2
+              },
+              {
+                "id": "env",
+                "label": "Environnement",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "croissance",
+                "to": "alim"
+              },
+              {
+                "from": "croissance",
+                "to": "educ"
+              },
+              {
+                "from": "croissance",
+                "to": "sante"
+              },
+              {
+                "from": "croissance",
+                "to": "emploi"
+              },
+              {
+                "from": "croissance",
+                "to": "env"
+              }
+            ],
+            "legend": [
+              "Cause",
+              "Besoins à satisfaire"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Mesurer la croissance d'une population",
+          "remember": "La **démographie** étudie les populations humaines. La **natalité** est le nombre de naissances d'une année pour 1 000 habitants ; la **mortalité** est le nombre de décès d'une année pour 1 000 habitants. Les deux se mesurent en **pour mille (‰)**.\n\nL'**accroissement naturel** est la différence : natalité − mortalité. Il devient un **taux en %** quand on divise le résultat en ‰ par 10 (1 ‰ = 0,1 %). Le **solde migratoire** est la différence entre les entrées et les sorties de personnes d'un pays. L'**accroissement total** additionne l'accroissement naturel et le solde migratoire. Si le résultat est positif, la population augmente ; s'il est négatif, elle diminue.",
+          "method": [
+            "Relever la natalité et la mortalité, avec leur unité (‰).",
+            "Calculer la différence : natalité moins mortalité.",
+            "Convertir le résultat de ‰ en % en divisant par 10.",
+            "Interpréter : la population augmente si le résultat est positif, elle diminue s'il est négatif."
+          ],
+          "example": {
+            "statement": "En 2020, un pays fictif a une natalité de 35 ‰ et une mortalité de 9 ‰. Calculer son taux d'accroissement naturel.",
+            "steps": [
+              "Relever : la natalité est de 35 ‰ et la mortalité de 9 ‰.",
+              "Calculer la différence : 35 − 9 = 26 ‰.",
+              "Convertir : 26 ÷ 10 = 2,6 %.",
+              "Interpréter : le résultat est positif, donc la population augmente de 2,6 % par an, sans compter les migrations."
+            ]
+          },
+          "pitfall": "Ne pas confondre le pour mille (‰) et le pour cent (%). Contre-exemple : un accroissement de 26 ‰ veut dire 26 habitants de plus pour 1 000, soit 2,6 pour 100. Dans une ville de 1 000 habitants, cela fait 26 personnes en plus. Lire 26 % ferait croire à 260 personnes en plus. Pour éviter l'erreur, divise toujours par 10 en passant de ‰ à %.",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer l'accroissement naturel et à changer d'unité, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Comment calcule-t-on l'accroissement naturel d'une population ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer la différence : l'accroissement naturel est la natalité moins la mortalité. Entrées moins sorties est le solde migratoire.",
+                "answers": [
+                  {
+                    "content": "Natalité moins mortalité",
+                    "correct": true
+                  },
+                  {
+                    "content": "Natalité plus mortalité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Mortalité moins natalité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Entrées moins sorties de personnes",
+                    "correct": false
+                  }
+                ],
+                "hint": "Il s'agit d'une différence entre deux taux."
+              },
+              {
+                "content": "Un pays (valeur d'exercice) a une natalité de 20 ‰ et une mortalité de 8 ‰. Calcule son accroissement naturel, en ‰.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : natalité 20 ‰, mortalité 8 ‰. Étape 2 — Calculer : $20 - 8 = 12$ ‰.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ],
+                "hint": "Soustrais la mortalité de la natalité.",
+                "tolerance": 0,
+                "unit": "‰"
+              },
+              {
+                "content": "1 ‰ est égal à 0,1 %.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Convertir : 1 pour 1 000 vaut 0,1 pour 100, donc on divise par 10 pour passer de ‰ à %.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare 1 sur 1 000 et 1 sur 100."
+              },
+              {
+                "content": "Le solde ___ est la différence entre les entrées et les sorties de personnes d'un pays (un adjectif).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Interpréter : l'accroissement total additionne l'accroissement naturel et le solde migratoire.",
+                "answers": [
+                  {
+                    "content": "migratoire",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot vient de migration."
+              }
+            ]
+          },
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Calculer l'accroissement naturel d'une population",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Pendant la récréation, dans la cour de l'école, le club de géographie s'entraîne à calculer l'accroissement naturel avec la méthode de la fiche. Réponds aux questions.",
+              "questions": [
+                {
+                  "content": "Que mesure la natalité d'un pays ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever les données : la natalité se relève en ‰ (pour 1 000 habitants) et compte les naissances d'une année. Les décès relèvent de la mortalité. La différence entre les deux est l'accroissement naturel. Le nombre d'enfants par femme est un autre indicateur, la fécondité : c'est la confusion la plus courante.",
+                  "answers": [
+                    {
+                      "content": "Le nombre de décès en un an pour 1 000 habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de naissances en un an pour 1 000 habitants",
+                      "correct": true
+                    },
+                    {
+                      "content": "La différence entre les naissances et les décès",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre moyen d'enfants par femme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays a une natalité de 40 ‰ et une mortalité de 12 ‰. Calcule son accroissement naturel en ‰.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : natalité 40 ‰, mortalité 12 ‰. Étape 2 — Calculer la différence : 40 − 12 = 28 ‰. Le résultat est positif : la population augmente par le seul jeu des naissances et des décès.",
+                  "answers": [
+                    {
+                      "content": "28",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "‰"
+                },
+                {
+                  "content": "Un pays a un accroissement naturel de 28 ‰. Exprime-le en pourcentage (%).",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : l'accroissement est de 28 ‰. Étape 3 — Convertir de ‰ en % en divisant par 10 : 28 ÷ 10 = 2,8 %. Le piège est de lire 28 % : 28 ‰ veut dire 28 pour 1 000, soit 2,8 pour 100.",
+                  "answers": [
+                    {
+                      "content": "2,8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Un pays de 1 000 000 d'habitants compte 30 000 naissances en un an. Sa natalité est de ___ ‰ (écris le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever : 30 000 naissances pour 1 000 000 d'habitants. Pour passer à 1 000 habitants, on divise par 1 000 : 30 000 ÷ 1 000 = 30 naissances pour 1 000 habitants, soit 30 ‰. Étape 3 — Convertir : 30 ‰ = 3 %, ce qui n'est pas la même chose que 30 %.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays a une natalité de 10 ‰ et une mortalité de 18 ‰. Sa population augmente par accroissement naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : natalité 10 ‰, mortalité 18 ‰. Étape 2 — Calculer la différence : 10 − 18 = −8 ‰. Étape 4 — Interpréter : le résultat est négatif, la population diminue (−0,8 %) si les migrations ne la compensent pas. Il y a plus de décès que de naissances.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays a un accroissement naturel de 15 ‰. Quel est son taux d'accroissement naturel en pourcentage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Convertir : on divise les ‰ par 10 : 15 ÷ 10 = 1,5 %. Vérification avec 1 000 habitants : 15 habitants de plus, c'est 1,5 pour 100. Lire 15 % reviendrait à croire que 150 habitants de plus sur 1 000 : c'est l'erreur de confusion entre ‰ et %.",
+                  "answers": [
+                    {
+                      "content": "1,5 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "15 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,15 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "150 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour calculer l'accroissement naturel.",
+                  "question_type": "ordering",
+                  "explanation": "La méthode suit toujours le même ordre. Étape 1 — Relever les deux taux. Étape 2 — Calculer la différence. Étape 3 — Convertir en %. Étape 4 — Interpréter le signe. On ne convertit pas avant d'avoir la différence, et on n'interprète qu'à la fin.",
+                  "answers": [
+                    {
+                      "content": "Relever la natalité et la mortalité, avec leur unité (‰)"
+                    },
+                    {
+                      "content": "Calculer la différence : natalité moins mortalité"
+                    },
+                    {
+                      "content": "Convertir le résultat de ‰ en % en divisant par 10"
+                    },
+                    {
+                      "content": "Interpréter : la population augmente si le résultat est positif"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer l'accroissement total d'une population",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (relever, calculer la différence, convertir, interpréter) à des pays dont les valeurs sont des valeurs d'exercice.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Natalité moins mortalité donne l'accroissement naturel en ‰ ; divise par 10 pour passer en %. Le solde migratoire s'ajoute ensuite.",
+              "questions": [
+                {
+                  "content": "Un pays (valeur d'exercice) a une natalité de 32 ‰ et une mortalité de 7 ‰. Calcule son accroissement naturel, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : natalité 32 ‰, mortalité 7 ‰. Étape 2 — Calculer la différence : $32 - 7 = 25$ ‰. Répondre 39 additionne les deux taux au lieu de les soustraire.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Un pays (valeur d'exercice) a un accroissement naturel de 25 ‰. Exprime-le en pourcentage (%).",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Convertir : $25 \\div 10 = 2{,}5$ %. Répondre 25 % confond le pour mille et le pour cent.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "%"
+                },
+                {
+                  "content": "Un pays (valeur d'exercice) a une natalité de 9 ‰ et une mortalité de 14 ‰. Sa population diminue par accroissement naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer la différence : $9 - 14 = -5$ ‰. Étape 4 — Interpréter : le résultat est négatif, donc la population diminue (sans compter les migrations).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays (valeur d'exercice) gagne 12 000 habitants par accroissement naturel et perd 2 000 habitants à cause d'un solde migratoire négatif. Quel est son accroissement total, en habitants ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : l'accroissement total additionne l'accroissement naturel et le solde migratoire, soit $12\\,000 + (-2\\,000) = 10\\,000$. Étape 4 — Interpréter : le résultat est positif, la population augmente.",
+                  "answers": [
+                    {
+                      "content": "10000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "habitants"
+                },
+                {
+                  "content": "Pour passer d'un taux en ‰ à un taux en %, on ___ par 10.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Convertir : 1 ‰ = 0,1 %, donc on divise par 10. Multiplier par 10 donnerait un taux dix fois trop fort.",
+                  "answers": [
+                    {
+                      "content": "divise",
+                      "correct": true
+                    },
+                    {
+                      "content": "multiplie",
+                      "correct": false
+                    },
+                    {
+                      "content": "ajoute",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays de 500 000 habitants compte 10 000 décès en un an (valeurs d'exercice). Sa mortalité est de ___ ‰ (écris le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever : $10\\,000 \\div 500\\,000 = 0{,}02$, soit 20 pour 1 000. La mortalité est de 20 ‰ ; écrire 2 serait lire un pour cent.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lire l'évolution de la population mondiale",
+          "remember": "La population mondiale a longtemps augmenté lentement. Elle est d'environ **1 milliard vers 1800**, puis passe à **2 milliards vers 1927**, **3 milliards en 1960**, **4 milliards en 1974**, **5 milliards en 1987**, **6 milliards en 1999**, **7 milliards en 2011** et **8 milliards en 2022**. Ces valeurs sont des estimations de l'ONU, arrondies.\n\nLe temps nécessaire pour gagner **un milliard d'habitants** passe de plus de **120 ans** (de 1800 à 1927) à **une douzaine d'années** (de 1999 à 2011). Cette forte accélération au XXe siècle s'appelle l'**explosion démographique**. Depuis la fin des années 1960, la croissance **en pourcentage** ralentit, mais la population continue d'augmenter **en nombre**.",
+          "method": [
+            "Présenter le document : sa nature, son titre, sa période et son unité.",
+            "Relever les valeurs aux dates clés.",
+            "Calculer la durée ou l'écart entre deux valeurs.",
+            "Conclure sur le rythme de la croissance : lent, accéléré ou ralenti."
+          ],
+          "example": {
+            "statement": "Une courbe donne la population mondiale en milliards d'habitants, de 1800 à 2022. Montrer que la croissance s'est accélérée.",
+            "steps": [
+              "Présenter : le document est une courbe de la population mondiale, en milliards d'habitants, de 1800 à 2022.",
+              "Relever : 1 milliard vers 1800, 2 milliards en 1927, 7 milliards en 2011 et 8 milliards en 2022.",
+              "Calculer : de 1800 à 1927, il faut 1927 − 1800 = 127 ans pour gagner 1 milliard ; de 2011 à 2022, il faut 2022 − 2011 = 11 ans.",
+              "Conclure : 127 ans contre 11 ans pour le même gain d'un milliard, la croissance s'est fortement accélérée."
+            ]
+          },
+          "pitfall": "Ne pas confondre un gain en nombre et un rythme en pourcentage. Contre-exemple : de 3 à 4 milliards, la population augmente de 1 sur 3, soit environ 33 %, en 14 ans. De 7 à 8 milliards, elle augmente de 1 sur 7, soit environ 14 %, en 11 ans. Le gain est d'un milliard dans les deux cas, mais il pèse moins sur une population plus grande : le rythme en pourcentage ralentit, alors que le nombre d'habitants continue de monter.",
+          "practice": {
+            "statement": "Tu t'entraînes à lire la courbe de la population mondiale et à calculer des durées.",
+            "questions": [
+              {
+                "content": "La population mondiale atteint 5 milliards en 1987 et 6 milliards en 1999. En combien d'années gagne-t-elle ce milliard ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Relever : 1987 et 1999. Étape 3 — Calculer : $1999 - 1987 = 12$ ans.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ],
+                "hint": "Soustrais la date la plus ancienne de la plus récente.",
+                "tolerance": 0,
+                "unit": "ans"
+              },
+              {
+                "content": "Environ combien d'habitants la Terre compte-t-elle en 2022, d'après la courbe de la fiche ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever : la population mondiale atteint 8 milliards en 2022. 7 milliards est la valeur de 2011.",
+                "answers": [
+                  {
+                    "content": "8 milliards",
+                    "correct": true
+                  },
+                  {
+                    "content": "6 milliards",
+                    "correct": false
+                  },
+                  {
+                    "content": "7 milliards",
+                    "correct": false
+                  },
+                  {
+                    "content": "5 milliards",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde la dernière date de la courbe."
+              },
+              {
+                "content": "La population mondiale est d'environ 1 milliard vers 1800.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever : la fiche donne 1 milliard vers 1800, puis 2 milliards vers 1927.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "C'est le point de départ de la courbe."
+              },
+              {
+                "content": "Le temps nécessaire pour gagner un milliard d'habitants est ___ au XXe siècle qu'au XIXe siècle.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Conclure : il faut plus de 120 ans pour gagner le premier milliard, et environ une douzaine d'années ensuite. La croissance s'est accélérée.",
+                "answers": [
+                  {
+                    "content": "identique",
+                    "correct": false
+                  },
+                  {
+                    "content": "plus court",
+                    "correct": true
+                  },
+                  {
+                    "content": "plus long",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare 127 ans et une douzaine d'années."
+              }
+            ]
+          },
+          "figure": "courbe-population-mondiale",
+          "exercise": [
+            {
+              "title": "Lire la courbe de la population mondiale",
+              "exercise_type": "fixation",
+              "figure": "courbe-population-mondiale",
+              "statement": "Document : une courbe de la population mondiale, en milliards d'habitants. Elle donne 1 milliard vers 1800, 2 milliards vers 1927, 3 milliards en 1960, 4 milliards en 1974, 5 milliards en 1987, 6 milliards en 1999, 7 milliards en 2011 et 8 milliards en 2022. Applique la méthode de la fiche.",
+              "questions": [
+                {
+                  "content": "D'après la courbe de la population mondiale, en quelle année l'humanité atteint-elle 8 milliards d'habitants ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Présenter : la courbe donne la population mondiale en milliards. Étape 2 — Relever : on lit le seuil de 8 milliards en face de la dernière date, 2022. Les seuils 7, 6 et 5 milliards sont atteints en 2011, 1999 et 1987 : ce sont des dates plus anciennes.",
+                  "answers": [
+                    {
+                      "content": "2011",
+                      "correct": false
+                    },
+                    {
+                      "content": "1999",
+                      "correct": false
+                    },
+                    {
+                      "content": "2022",
+                      "correct": true
+                    },
+                    {
+                      "content": "1987",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La population mondiale atteint 3 milliards en 1960 et 4 milliards en 1974. En combien d'années a-t-elle gagné ce milliard ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Relever : 3 milliards en 1960, 4 milliards en 1974. Étape 3 — Calculer l'écart : 1974 − 1960 = 14 ans. Il suffit de soustraire les deux dates.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "La population mondiale atteint 1 milliard vers 1800 et 2 milliards en 1927. Combien d'années a-t-il fallu pour gagner ce premier milliard ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Relever : 1 milliard vers 1800, 2 milliards en 1927. Étape 3 — Calculer l'écart : 1927 − 1800 = 127 ans. Étape 4 — Conclure : c'est très long comparé aux 11 ans de 2011 à 2022.",
+                  "answers": [
+                    {
+                      "content": "127",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "ans"
+                },
+                {
+                  "content": "Remets dans l'ordre chronologique le moment où la population mondiale atteint chacun de ces seuils.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Relever les dates : 2 milliards vers 1927, 3 milliards en 1960, 5 milliards en 1987, 7 milliards en 2011. Un seuil plus élevé est toujours atteint plus tard, puisque la population mondiale n'a pas diminué sur cette période.",
+                  "answers": [
+                    {
+                      "content": "2 milliards (vers 1927)"
+                    },
+                    {
+                      "content": "3 milliards (1960)"
+                    },
+                    {
+                      "content": "5 milliards (1987)"
+                    },
+                    {
+                      "content": "7 milliards (2011)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque seuil de population mondiale à la date où il est atteint.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever les valeurs aux dates clés : 4 milliards en 1974, 6 milliards en 1999, 7 milliards en 2011, 8 milliards en 2022. Étape 3 — Calcul de contrôle : de 6 à 7 milliards, 2011 − 1999 = 12 ans.",
+                  "answers": [
+                    {
+                      "content": "4 milliards",
+                      "match": "1974"
+                    },
+                    {
+                      "content": "6 milliards",
+                      "match": "1999"
+                    },
+                    {
+                      "content": "7 milliards",
+                      "match": "2011"
+                    },
+                    {
+                      "content": "8 milliards",
+                      "match": "2022"
+                    }
+                  ]
+                },
+                {
+                  "content": "La population mondiale a mis moins de temps pour passer de 7 à 8 milliards que pour passer de 1 à 2 milliards.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer les durées : de 1 à 2 milliards, 1927 − 1800 = 127 ans ; de 7 à 8 milliards, 2022 − 2011 = 11 ans. Étape 4 — Conclure : 11 ans est bien plus court que 127 ans, la croissance s'est accélérée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De 3 à 4 milliards (14 ans), la population mondiale augmente d'environ 33 %. De 7 à 8 milliards (11 ans), elle augmente d'environ 14 %. Quelle conclusion est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer : 1 sur 3 donne environ 33 %, 1 sur 7 donne environ 14 %. Étape 4 — Conclure : le gain en nombre est le même, mais rapporté à une population plus grande, il pèse moins. Le rythme en pourcentage ralentit. Confondre « moins de temps » et « plus vite en pourcentage » est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "La croissance en pourcentage est plus rapide de 7 à 8 milliards, car l'écart de temps est plus court",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gain est d'un milliard dans les deux cas, mais la croissance en pourcentage est plus lente de 7 à 8 milliards",
+                      "correct": true
+                    },
+                    {
+                      "content": "La population mondiale diminue après 2011",
+                      "correct": false
+                    },
+                    {
+                      "content": "La croissance est identique, car le gain est toujours d'un milliard",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Mesurer le rythme de la croissance de la population mondiale",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (présenter, relever, calculer, conclure) à la courbe de la population mondiale, en milliards d'habitants, de 1800 à 2022 (estimations de l'ONU, arrondies).",
+              "exercise_type": "fixation",
+              "figure": "courbe-population-mondiale",
+              "hint": "Relève les dates des seuils sur la courbe, soustrais-les, puis compare les durées pour conclure sur le rythme.",
+              "questions": [
+                {
+                  "content": "La population mondiale atteint 4 milliards en 1974 et 5 milliards en 1987. En combien d'années gagne-t-elle ce milliard ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : 4 milliards en 1974, 5 milliards en 1987. Étape 3 — Calculer : $1987 - 1974 = 13$ ans.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "La population mondiale atteint 2 milliards en 1927 et 3 milliards en 1960. En combien d'années gagne-t-elle ce milliard ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Relever : 2 milliards en 1927, 3 milliards en 1960. Étape 3 — Calculer : $1960 - 1927 = 33$ ans.",
+                  "answers": [
+                    {
+                      "content": "33",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "La population mondiale atteint 5 milliards en 1987, 6 milliards en 1999, 7 milliards en 2011 et 8 milliards en 2022. Quel milliard a été gagné le plus vite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer les durées : $1999 - 1987 = 12$, $2011 - 1999 = 12$, $2022 - 2011 = 11$. Étape 4 — Conclure : le plus rapide est le milliard gagné en 11 ans. Choisir 12 ans oublie de calculer la dernière durée.",
+                  "answers": [
+                    {
+                      "content": "Celui de 7 à 8 milliards, en 11 ans",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celui de 5 à 6 milliards, en 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui de 6 à 7 milliards, en 12 ans",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont tous été gagnés en 12 ans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre chronologique le moment où la population mondiale atteint chacun de ces seuils.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Relever les valeurs aux dates clés : 1974, puis 1987, puis 1999, puis 2022.",
+                  "answers": [
+                    {
+                      "content": "4 milliards (1974)"
+                    },
+                    {
+                      "content": "5 milliards (1987)"
+                    },
+                    {
+                      "content": "6 milliards (1999)"
+                    },
+                    {
+                      "content": "8 milliards (2022)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Depuis la fin des années 1960, la croissance de la population mondiale ralentit en pourcentage, mais la population continue d'augmenter en nombre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : le gain en milliards reste proche, mais il pèse moins sur une population plus grande. Dire que la population baisse est faux : elle monte toujours.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La forte accélération de la croissance au XXe siècle s'appelle l'___ démographique (un nom).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : la fiche nomme cette accélération l'explosion démographique. Elle vient de la baisse de la mortalité.",
+                  "answers": [
+                    {
+                      "content": "explosion",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Décrire la répartition de la population mondiale",
+          "remember": "La population mondiale est **très inégalement répartie**. La **densité de population** est le nombre d'habitants divisé par la superficie, en **habitants par km²** (hab/km²).\n\nPlus de la moitié de l'humanité vit en **Asie**. La **Chine** et l'**Inde** comptent chacune plus d'un milliard d'habitants. L'Asie de l'Est, l'Asie du Sud et l'Europe sont des espaces très peuplés. Les grands déserts, les hautes montagnes, les forêts équatoriales et les régions polaires sont peu peuplés.\n\nLa répartition s'explique par des **facteurs naturels** (eau, sols fertiles, climat, relief) et des **facteurs humains** (agriculture, villes, ports, industries, histoire du peuplement).",
+          "method": [
+            "Situer les espaces très peuplés et les espaces peu peuplés.",
+            "Calculer la densité en divisant la population par la superficie.",
+            "Expliquer la répartition par les facteurs naturels et humains."
+          ],
+          "example": {
+            "statement": "Deux régions fictives : une plaine traversée par un fleuve (4 000 000 d'habitants sur 20 000 km²) et un désert (100 000 habitants sur 500 000 km²). Comparer leur peuplement.",
+            "steps": [
+              "Situer : la plaine est un espace très peuplé, le désert est un espace peu peuplé.",
+              "Calculer la densité : plaine, 4 000 000 ÷ 20 000 = 200 hab/km² ; désert, 100 000 ÷ 500 000 = 0,2 hab/km².",
+              "Expliquer : la plaine a de l'eau et des sols fertiles (facteurs naturels) ainsi que des champs et des villes (facteurs humains) ; le désert manque d'eau et de sols cultivables."
+            ]
+          },
+          "pitfall": "Ne pas confondre le nombre d'habitants et la densité. Contre-exemple : un pays A compte 50 millions d'habitants sur 1 000 000 km², soit 50 hab/km². Un pays B compte 20 millions d'habitants sur 100 000 km², soit 200 hab/km². A a plus d'habitants, mais B est quatre fois plus dense. Pour comparer deux espaces, calcule toujours la densité.",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer une densité et à situer les espaces peu peuplés.",
+            "questions": [
+              {
+                "content": "Une région (valeur d'exercice) compte 2 000 000 d'habitants sur 25 000 km². Calcule sa densité, en habitants par km².",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Calculer la densité : $2\\,000\\,000 \\div 25\\,000 = 80$ hab/km².",
+                "answers": [
+                  {
+                    "content": "80",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise le nombre d'habitants par la superficie.",
+                "tolerance": 0,
+                "unit": "hab/km²"
+              },
+              {
+                "content": "Quel milieu est en général très peu peuplé ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : forêts équatoriales, déserts, hautes montagnes et régions polaires sont peu peuplés. Les plaines à fleuve, ports et villes attirent la population.",
+                "answers": [
+                  {
+                    "content": "Une forêt équatoriale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une plaine fertile traversée par un fleuve",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un grand port industriel",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une grande ville côtière",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense aux espaces difficiles à aménager."
+              },
+              {
+                "content": "Pour comparer le peuplement de deux espaces, il faut calculer leur densité.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer : seul un calcul de densité compare deux espaces de superficie différente ; le nombre d'habitants ne suffit pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Deux espaces n'ont pas la même superficie."
+              },
+              {
+                "content": "La densité de population se calcule en divisant le nombre d'habitants par la ___ (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Calculer : densité = nombre d'habitants divisé par la superficie, en km².",
+                "answers": [
+                  {
+                    "content": "superficie",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot désigne la taille de l'espace en km²."
+              }
+            ]
+          },
+          "figure": "carte-peuplement",
+          "exercise": [
+            {
+              "title": "Situer et expliquer le peuplement du monde",
+              "exercise_type": "fixation",
+              "figure": "carte-peuplement",
+              "statement": "Document : une carte du monde sur laquelle la Chine et l'Inde, qui comptent chacune plus d'un milliard d'habitants, sont colorées, ainsi que la Côte d'Ivoire. Applique la méthode de la fiche.",
+              "questions": [
+                {
+                  "content": "Quelle formule donne la densité de population d'une région ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer la densité : elle compare la population à l'espace occupé, donc habitants ÷ superficie, en habitants par km². Diviser la superficie par les habitants donnerait des km² par habitant, ce n'est pas une densité.",
+                  "answers": [
+                    {
+                      "content": "Superficie en km² divisée par le nombre d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nombre d'habitants divisé par la superficie en km²",
+                      "correct": true
+                    },
+                    {
+                      "content": "Nombre d'habitants multiplié par la superficie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nombre de naissances divisé par le nombre de décès",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région compte 3 000 000 d'habitants sur 15 000 km². Calcule sa densité, en habitants par km².",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer la densité : 3 000 000 ÷ 15 000 = 200 habitants par km². On simplifie en enlevant trois zéros : 3 000 ÷ 15 = 200.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Une région compte 900 000 habitants sur 30 000 km². Calcule sa densité, en habitants par km².",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Calculer la densité : 900 000 ÷ 30 000 = 30 habitants par km². On simplifie : 90 ÷ 3 = 30. Cette région est moins dense que celle de 200 habitants par km².",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Quels milieux sont, en général, très peu peuplés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer les espaces peu peuplés : les grands déserts manquent d'eau et les régions polaires sont trop froides. Étape 3 — Expliquer : ce sont des facteurs naturels défavorables. Les plaines fertiles, les deltas et les ports attirent au contraire les hommes.",
+                  "answers": [
+                    {
+                      "content": "Les régions polaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deltas très aménagés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les grands déserts",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les plaines fertiles traversées par un fleuve",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les littoraux avec de grands ports",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels pays comptent plus d'un milliard d'habitants ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer sur la carte du monde les deux pays d'Asie les plus peuplés : la Chine et l'Inde ont chacune plus d'un milliard d'habitants. Les États-Unis, le Brésil et le Nigeria sont très peuplés, mais restent loin du milliard.",
+                  "answers": [
+                    {
+                      "content": "L'Inde",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Brésil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Chine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les États-Unis",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Nigeria",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays qui a plus d'habitants qu'un autre a forcément une densité plus forte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer la densité : il faut diviser par la superficie. Exemple : le pays A a 50 millions d'habitants sur 1 000 000 km², soit 50 hab/km². Le pays B a 20 millions d'habitants sur 100 000 km², soit 200 hab/km². B a moins d'habitants mais une densité plus forte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son rôle dans le peuplement.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Expliquer par les facteurs : on distingue les facteurs naturels (eau, sols, climat, relief) des facteurs humains (villes, ports, industries, histoire du peuplement). Un fleuve et un sol fertile favorisent l'agriculture donc le peuplement ; un désert sans eau le limite ; un port et des usines attirent les travailleurs.",
+                  "answers": [
+                    {
+                      "content": "Un fleuve et des sols fertiles",
+                      "match": "Facteur naturel favorable au peuplement"
+                    },
+                    {
+                      "content": "Un désert sans eau",
+                      "match": "Facteur naturel défavorable au peuplement"
+                    },
+                    {
+                      "content": "Un grand port et des usines",
+                      "match": "Facteur humain favorable au peuplement"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer et comparer des densités de population",
+              "statement": "Dans cet exercice, tu appliques les trois étapes de la fiche (situer, calculer la densité, expliquer) à des espaces dont les valeurs sont des valeurs d'exercice.",
+              "exercise_type": "fixation",
+              "figure": "carte-peuplement",
+              "hint": "Densité = nombre d'habitants divisé par superficie en km². Pour comparer deux espaces, calcule toujours les deux densités.",
+              "questions": [
+                {
+                  "content": "Une région (valeur d'exercice) compte 8 000 000 d'habitants sur 20 000 km². Calcule sa densité, en habitants par km².",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer la densité : $8\\,000\\,000 \\div 20\\,000 = 400$ hab/km².",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Une région (valeur d'exercice) compte 150 000 habitants sur 50 000 km². Calcule sa densité, en habitants par km².",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer la densité : $150\\,000 \\div 50\\,000 = 3$ hab/km². C'est un espace très peu peuplé.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Un pays A compte 30 millions d'habitants sur 600 000 km². Un pays B compte 10 millions d'habitants sur 50 000 km² (valeurs d'exercice). Lequel est le plus dense ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer : A, $30\\,000\\,000 \\div 600\\,000 = 50$ ; B, $10\\,000\\,000 \\div 50\\,000 = 200$. Choisir A parce qu'il a plus d'habitants confond nombre d'habitants et densité.",
+                  "answers": [
+                    {
+                      "content": "Ils ont la même densité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays B, avec 200 hab/km² contre 50",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pays A, car il a le plus d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays A, avec 50 hab/km² contre 20",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux facteurs humains du peuplement ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer : les facteurs humains sont l'agriculture, les villes, les ports, les industries et l'histoire du peuplement. Le climat, les sols et le relief sont des facteurs naturels.",
+                  "answers": [
+                    {
+                      "content": "Le climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les sols fertiles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les hautes montagnes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les ports et les industries",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les villes",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus de la moitié de l'humanité vit en Asie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : la fiche indique que plus de la moitié de l'humanité vit en Asie, où se trouvent la Chine et l'Inde.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La densité de population s'exprime en habitants par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Calculer la densité : on divise un nombre d'habitants par une superficie en km², d'où l'unité hab/km².",
+                  "answers": [
+                    {
+                      "content": "km²",
+                      "correct": true
+                    },
+                    {
+                      "content": "litre",
+                      "correct": false
+                    },
+                    {
+                      "content": "kilogramme",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Expliquer la croissance par la transition démographique",
+          "remember": "La **transition démographique** est le passage d'une population à natalité et mortalité fortes vers une population à natalité et mortalité faibles. Elle comporte quatre phases :\n\n1. natalité et mortalité **fortes**, croissance faible ;\n2. la **mortalité baisse** (vaccins, soins, hygiène, eau potable, meilleure alimentation) alors que la natalité reste forte : croissance **très rapide** ;\n3. la **natalité baisse** à son tour (scolarisation des filles, villes, mariage plus tardif, contraception) : la croissance ralentit ;\n4. natalité et mortalité **faibles** : croissance faible.\n\nL'Europe a connu la phase 2 au XIXe siècle. Beaucoup de pays en développement, surtout en Afrique, la vivent depuis la seconde moitié du XXe siècle.",
+          "method": [
+            "Relever l'évolution de la natalité et de la mortalité.",
+            "Comparer les deux taux pour mesurer l'écart.",
+            "Expliquer les causes de chaque évolution.",
+            "Conclure sur la phase de la transition et sur le rythme de la croissance."
+          ],
+          "example": {
+            "statement": "Un pays fictif a en 1950 une natalité de 45 ‰ et une mortalité de 30 ‰. En 1990, sa natalité est de 42 ‰ et sa mortalité de 12 ‰. Expliquer pourquoi sa croissance s'accélère.",
+            "steps": [
+              "Relever : la natalité passe de 45 à 42 ‰ (presque stable) ; la mortalité passe de 30 à 12 ‰ (forte baisse).",
+              "Comparer : l'écart est de 45 − 30 = 15 ‰ en 1950 et de 42 − 12 = 30 ‰ en 1990. L'écart double.",
+              "Expliquer : la mortalité baisse grâce aux vaccins, aux soins, à l'hygiène et à l'eau potable ; la natalité reste forte, avec des familles nombreuses.",
+              "Conclure : le pays est en phase 2 de la transition, et sa croissance passe de 1,5 % à 3 % par an."
+            ]
+          },
+          "pitfall": "Ne pas croire que la croissance vient d'une hausse des naissances. Contre-exemple : dans le pays de la fiche, la natalité baisse même un peu (45 ‰ puis 42 ‰), et pourtant la croissance double (1,5 % puis 3 %). La cause est la chute de la mortalité (30 ‰ puis 12 ‰). Compare toujours les deux taux avant de conclure.",
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les phases de la transition démographique.",
+            "questions": [
+              {
+                "content": "Que se passe-t-il en phase 4 de la transition démographique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : en phase 4, les deux taux sont faibles et la croissance est faible. La phrase « la mortalité baisse et la natalité reste forte » décrit la phase 2.",
+                "answers": [
+                  {
+                    "content": "La mortalité baisse et la natalité reste forte",
+                    "correct": false
+                  },
+                  {
+                    "content": "La natalité et la mortalité sont fortes",
+                    "correct": false
+                  },
+                  {
+                    "content": "La natalité baisse alors que la mortalité est forte",
+                    "correct": false
+                  },
+                  {
+                    "content": "La natalité et la mortalité sont faibles",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est la dernière phase."
+              },
+              {
+                "content": "Un pays (valeur d'exercice) a une natalité de 20 ‰ et une mortalité de 10 ‰. Calcule l'écart entre les deux taux, en ‰.",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Comparer : $20 - 10 = 10$ ‰, soit 1 % par an.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "hint": "Soustrais la mortalité de la natalité.",
+                "tolerance": 0,
+                "unit": "‰"
+              },
+              {
+                "content": "En phase 2, la croissance de la population est très rapide.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : en phase 2, la mortalité baisse alors que la natalité reste forte, l'écart est grand et la croissance très rapide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à l'écart entre natalité et mortalité."
+              },
+              {
+                "content": "Combien de phases comporte la transition démographique ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : la fiche décrit quatre phases, de la natalité et la mortalité fortes à la natalité et la mortalité faibles.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "Elles sont numérotées dans la fiche.",
+                "tolerance": 0
+              }
+            ]
+          },
+          "figure": "transition-demographique",
+          "exercise": [
+            {
+              "title": "Reconnaître les phases de la transition démographique",
+              "exercise_type": "fixation",
+              "figure": "transition-demographique",
+              "statement": "Document : un schéma fléché qui présente les quatre phases de la transition démographique, de la natalité et de la mortalité fortes jusqu'à la natalité et la mortalité faibles. Applique la méthode de la fiche.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les quatre phases de la transition démographique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever l'évolution de la natalité et de la mortalité : la mortalité baisse la première, la natalité baisse ensuite. Étape 4 — Conclure : l'ordre des phases suit ce décalage. La phase 2 est celle où l'écart entre les deux taux est le plus grand.",
+                  "answers": [
+                    {
+                      "content": "Phase 1 : natalité et mortalité fortes, croissance faible"
+                    },
+                    {
+                      "content": "Phase 2 : la mortalité baisse, la natalité reste forte, la croissance est très rapide"
+                    },
+                    {
+                      "content": "Phase 3 : la natalité baisse à son tour, la croissance ralentit"
+                    },
+                    {
+                      "content": "Phase 4 : natalité et mortalité faibles, croissance faible"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la phase 2 de la transition démographique, que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : en phase 2, la mortalité chute (vaccins, soins, hygiène) et la natalité reste forte (familles nombreuses). Étape 2 — Comparer : l'écart est grand, la population croît très vite. Dire que la natalité augmente est l'erreur de la fiche : elle reste forte, elle ne monte pas.",
+                  "answers": [
+                    {
+                      "content": "La mortalité baisse alors que la natalité reste forte",
+                      "correct": true
+                    },
+                    {
+                      "content": "La natalité baisse alors que la mortalité reste forte",
+                      "correct": false
+                    },
+                    {
+                      "content": "La natalité et la mortalité sont toutes deux faibles",
+                      "correct": false
+                    },
+                    {
+                      "content": "La natalité augmente alors que la mortalité baisse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays a une natalité de 38 ‰ et une mortalité de 8 ‰. Calcule l'écart entre les deux taux, en ‰.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : natalité 38 ‰, mortalité 8 ‰. Étape 2 — Comparer les deux taux : 38 − 8 = 30 ‰, soit 3 % par an. Étape 4 — Conclure : cet écart est typique d'une phase 2, avec une croissance très rapide.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "‰"
+                },
+                {
+                  "content": "Quelles causes expliquent la baisse de la mortalité dans le monde au XXe siècle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer les causes : la mortalité baisse grâce aux vaccins, aux soins, à l'eau potable, à l'hygiène et à une meilleure alimentation. Les deux autres propositions feraient au contraire monter la mortalité.",
+                  "answers": [
+                    {
+                      "content": "L'eau potable et l'hygiène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'arrêt des campagnes de vaccination",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les vaccins et les progrès de la médecine",
+                      "correct": true
+                    },
+                    {
+                      "content": "La disparition des centres de santé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la phase 3 de la transition démographique, la ___ baisse à son tour.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Relever : en phase 3, c'est la natalité qui baisse (scolarisation des filles, villes, mariage plus tardif, contraception), car la mortalité a déjà baissé en phase 2. Étape 4 — Conclure : la croissance ralentit.",
+                  "answers": [
+                    {
+                      "content": "natalité",
+                      "correct": true
+                    },
+                    {
+                      "content": "mortalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "superficie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'explosion démographique du XXe siècle vient surtout de la baisse de la mortalité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : la natalité des pays en développement reste forte, tandis que la mortalité baisse nettement. Étape 4 — Conclure : c'est cet écart qui provoque l'explosion démographique, non une hausse des naissances.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays a une natalité de 12 ‰ et une mortalité de 11 ‰. Dans quelle phase est-il, et quelle est sa croissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : natalité 12 ‰, mortalité 11 ‰. Étape 2 — Comparer : 12 − 11 = 1 ‰, soit 0,1 %. Étape 4 — Conclure : natalité et mortalité sont toutes deux faibles et proches, c'est la phase 4. Une phase 1 aurait des taux forts, une phase 2 un grand écart.",
+                  "answers": [
+                    {
+                      "content": "Phase 2 : croissance très rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 1 : croissance faible, avec une mortalité forte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 4 : croissance très faible, de 0,1 % environ",
+                      "correct": true
+                    },
+                    {
+                      "content": "Phase 3 : croissance plus rapide qu'en phase 2",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Identifier la phase de la transition démographique",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (relever, comparer, expliquer, conclure) à des pays dont les valeurs sont des valeurs d'exercice.",
+              "exercise_type": "fixation",
+              "figure": "transition-demographique",
+              "hint": "Compare toujours la natalité et la mortalité : celle qui baisse d'abord explique le rythme de la croissance.",
+              "questions": [
+                {
+                  "content": "Un pays (valeur d'exercice) a une natalité de 41 ‰ et une mortalité de 15 ‰. Calcule l'écart entre les deux taux, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Relever : natalité 41 ‰, mortalité 15 ‰. Étape 2 — Comparer : $41 - 15 = 26$ ‰, soit 2,6 % par an.",
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Un pays (valeur d'exercice) a en 1960 une natalité de 46 ‰ et une mortalité de 28 ‰ ; en 2000, une natalité de 44 ‰ et une mortalité de 11 ‰. Que montre cette évolution ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : natalité 46 puis 44 ‰, mortalité 28 puis 11 ‰. Étape 4 — Conclure : la mortalité chute et la natalité reste forte, c'est la phase 2. Croire à une hausse des naissances est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Les deux taux restent forts : phase 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mortalité baisse fortement alors que la natalité reste forte : phase 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "La natalité baisse fortement alors que la mortalité reste forte : phase 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux taux baissent beaucoup : phase 4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à ce qu'il explique ou désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Expliquer : vaccins et eau potable font baisser la mortalité, la scolarisation des filles et la contraception la natalité. Phase 1 : deux taux forts ; phase 4 : deux taux faibles.",
+                  "answers": [
+                    {
+                      "content": "Vaccins et eau potable",
+                      "match": "Baisse de la mortalité"
+                    },
+                    {
+                      "content": "Scolarisation des filles et contraception",
+                      "match": "Baisse de la natalité"
+                    },
+                    {
+                      "content": "Natalité et mortalité fortes",
+                      "match": "Phase 1"
+                    },
+                    {
+                      "content": "Natalité et mortalité faibles",
+                      "match": "Phase 4"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la transition démographique, la natalité baisse avant la mortalité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : la mortalité baisse en premier (phase 2), la natalité baisse à son tour en phase 3. L'ordre inverse est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux causes de la baisse de la natalité ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer : scolarisation des filles, villes, mariage plus tardif et contraception font baisser la natalité. Les trois autres propositions concernent la mortalité ou vont dans le mauvais sens.",
+                  "answers": [
+                    {
+                      "content": "La scolarisation des filles",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'accès à la contraception",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'arrêt des vaccinations",
+                      "correct": false
+                    },
+                    {
+                      "content": "La disparition de l'eau potable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mariage de plus en plus précoce",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'Europe a connu la phase 2 de la transition démographique au ___ siècle.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Conclure : la fiche situe la phase 2 de l'Europe au XIXe siècle ; beaucoup de pays d'Afrique la vivent depuis la seconde moitié du XXe siècle.",
+                  "answers": [
+                    {
+                      "content": "XIXe",
+                      "correct": true
+                    },
+                    {
+                      "content": "XVe",
+                      "correct": false
+                    },
+                    {
+                      "content": "XXIe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Analyser les conséquences de la croissance démographique",
+          "remember": "Quand la population augmente plus vite que les ressources et les services, apparaissent des **besoins** à satisfaire :\n\n- **alimentation** : produire assez pour nourrir tous les habitants ;\n- **éducation** : construire des écoles et former des enseignants ;\n- **santé** : soigner une population plus nombreuse ;\n- **emploi** : offrir du travail aux jeunes qui arrivent sur le marché du travail ;\n- **environnement** : les champs, le bois et les villes gagnent sur la forêt et les terres.\n\nUne population jeune est aussi un **atout** (main-d'œuvre, marché) si elle est formée et trouve du travail. Les **réponses** passent par la production agricole, l'éducation (notamment des filles), l'accès à la planification familiale, la création d'emplois et l'aménagement du territoire.",
+          "method": [
+            "Identifier le besoin concerné : alimentation, éducation, santé, emploi ou environnement.",
+            "Comparer la croissance de la population à celle des ressources ou des services.",
+            "Expliquer la conséquence pour la population et pour le pays.",
+            "Proposer une réponse adaptée."
+          ],
+          "example": {
+            "statement": "Un pays fictif de 20 millions d'habitants croît de 3 % par an. Le nombre de ses salles de classe ne croît que de 1 % par an. Quelle est la conséquence pour l'école, et que faire ?",
+            "steps": [
+              "Identifier : le besoin concerné est l'éducation (salles de classe et enseignants).",
+              "Comparer : 20 000 000 × 3 ÷ 100 = 600 000 habitants en plus par an, alors que les salles de classe ne progressent que de 1 % : la demande croît plus vite que l'offre.",
+              "Expliquer : les classes sont surchargées, des enfants restent sans école et la qualité de l'enseignement baisse.",
+              "Proposer : construire des écoles, recruter et former des enseignants, et scolariser les filles, ce qui aide aussi à faire baisser la natalité."
+            ]
+          },
+          "pitfall": "Ne pas juger la situation d'un pays d'après son seul nombre d'habitants. Contre-exemple : un pays A de 100 millions d'habitants qui croît de 0,5 % gagne 500 000 habitants par an. Un pays B de 20 millions d'habitants qui croît de 3 % en gagne 600 000. B est moins peuplé mais il doit répondre plus vite à de nouveaux besoins. Compare toujours le rythme de croissance aux ressources et aux services du pays.",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer le gain annuel d'une population et à identifier le besoin concerné.",
+            "questions": [
+              {
+                "content": "Un pays (valeur d'exercice) compte 8 000 000 d'habitants et sa population augmente de 3 % par an. Combien d'habitants gagne-t-il en un an ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Comparer : $8\\,000\\,000 \\times 3 \\div 100$ $= 240\\,000$ habitants en un an.",
+                "answers": [
+                  {
+                    "content": "240000",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule 3 pour 100 de 8 millions.",
+                "tolerance": 0,
+                "unit": "habitants"
+              },
+              {
+                "content": "Un jeune qui arrive sur le marché du travail et ne trouve pas de travail illustre quel besoin ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le besoin : manquer de travail relève de l'emploi. L'alimentation concerne les récoltes, la santé les soins.",
+                "answers": [
+                  {
+                    "content": "L'emploi",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'alimentation",
+                    "correct": false
+                  },
+                  {
+                    "content": "La santé",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'environnement",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le besoin concerne le travail."
+              },
+              {
+                "content": "Une population jeune est un atout si elle est formée et trouve du travail.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : une population jeune apporte de la main-d'œuvre et un marché si elle est formée et employée.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "La fiche parle d'atout sous condition."
+              },
+              {
+                "content": "Scolariser les filles aide à faire baisser la ___.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Proposer une réponse : la scolarisation des filles est une cause de la baisse de la natalité.",
+                "answers": [
+                  {
+                    "content": "superficie",
+                    "correct": false
+                  },
+                  {
+                    "content": "natalité",
+                    "correct": true
+                  },
+                  {
+                    "content": "mortalité",
+                    "correct": false
+                  }
+                ],
+                "hint": "C'est la même cause que dans la transition démographique."
+              }
+            ]
+          },
+          "figure": "consequences-croissance",
+          "exercise": [
+            {
+              "title": "Relier croissance de la population, besoins et réponses",
+              "exercise_type": "fixation",
+              "figure": "consequences-croissance",
+              "statement": "Document : un schéma en arbre. La croissance rapide de la population est reliée à cinq besoins : l'alimentation, l'éducation, la santé, l'emploi et l'environnement. Applique la méthode de la fiche.",
+              "questions": [
+                {
+                  "content": "Relie chaque situation au domaine concerné par la croissance de la population.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le besoin concerné : classes surchargées, éducation ; jeunes sans travail, emploi ; forêt défrichée, environnement ; manque de centres de soins, santé. Étape 2 — Comparer : à chaque fois, la demande augmente plus vite que l'offre de services ou de ressources.",
+                  "answers": [
+                    {
+                      "content": "Des classes de 100 élèves",
+                      "match": "Éducation"
+                    },
+                    {
+                      "content": "Des jeunes diplômés sans travail",
+                      "match": "Emploi"
+                    },
+                    {
+                      "content": "Des forêts défrichées pour de nouveaux champs",
+                      "match": "Environnement"
+                    },
+                    {
+                      "content": "Un seul centre de santé pour une grande région",
+                      "match": "Santé"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays compte 10 000 000 d'habitants. Sa population augmente de 2 % par an. Combien d'habitants gagne-t-il en un an ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Comparer la croissance de la population aux services : 10 000 000 × 2 ÷ 100 = 200 000 habitants en plus par an. Étape 3 — Expliquer : il faut donc chaque année de quoi nourrir, soigner et scolariser 200 000 personnes de plus.",
+                  "answers": [
+                    {
+                      "content": "200000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "hab"
+                },
+                {
+                  "content": "Quelle réponse est adaptée à un besoin alimentaire qui augmente avec la population ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le besoin : l'alimentation. Étape 4 — Proposer une réponse adaptée : produire plus sur la même surface (semences, irrigation, engrais, formation des paysans). Les autres propositions réduiraient la production au lieu de l'augmenter.",
+                  "answers": [
+                    {
+                      "content": "Fermer les marchés pour limiter les achats",
+                      "correct": false
+                    },
+                    {
+                      "content": "Améliorer les rendements agricoles avec de meilleures semences et de l'irrigation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Supprimer les écoles agricoles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réduire la superficie des terres cultivées",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles actions peuvent faire baisser la natalité à long terme ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer : une fille plus longtemps scolarisée se marie plus tard et a souvent moins d'enfants ; la planification familiale permet de choisir le nombre d'enfants. Étape 4 — Proposer une réponse : ces deux actions agissent sur la natalité. Les deux autres propositions la feraient monter.",
+                  "answers": [
+                    {
+                      "content": "Faciliter l'accès à la planification familiale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Encourager le mariage très précoce",
+                      "correct": false
+                    },
+                    {
+                      "content": "Scolariser les filles plus longtemps",
+                      "correct": true
+                    },
+                    {
+                      "content": "Supprimer les centres de santé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une population jeune et nombreuse est toujours un handicap pour un pays.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : avec une formation et des emplois, une population jeune est une main-d'œuvre et un marché pour le pays. Elle devient un handicap seulement si les écoles, les emplois et les services ne suivent pas. Étape 4 — Proposer : investir dans l'éducation et créer des emplois.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays A compte 100 millions d'habitants et croît de 0,5 % par an. Un pays B compte 20 millions d'habitants et croît de 3 % par an. Lequel gagne le plus d'habitants en un an ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : pays A, 100 000 000 × 0,5 ÷ 100 = 500 000 ; pays B, 20 000 000 × 3 ÷ 100 = 600 000. Étape 3 — Expliquer : c'est le rythme de croissance qui compte, non le nombre total d'habitants. Juger sur le seul nombre d'habitants est l'erreur de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Le pays A, car il a le plus d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays B, avec 600 000 habitants en plus contre 500 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux pays, à égalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays A, car son taux est le plus faible",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Relier la croissance de la population à ses besoins",
+              "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche (identifier le besoin, comparer, expliquer, proposer une réponse) à des pays dont les valeurs sont des valeurs d'exercice.",
+              "exercise_type": "fixation",
+              "figure": "consequences-croissance",
+              "hint": "Un pays gagne des habitants chaque année : calcule ce gain, puis demande-toi quel besoin augmente et quelle réponse convient.",
+              "questions": [
+                {
+                  "content": "Un pays (valeur d'exercice) compte 50 000 000 d'habitants et sa population augmente de 2 % par an. Combien d'habitants gagne-t-il en un an ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : $50\\,000\\,000 \\times 2 \\div 100$ $= 1\\,000\\,000$ habitants en un an. Les services doivent suivre cette hausse.",
+                  "answers": [
+                    {
+                      "content": "1000000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "habitants"
+                },
+                {
+                  "content": "Relie chaque situation au domaine concerné par la croissance de la population.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le besoin : santé, environnement, alimentation et éducation sont quatre des cinq besoins de la fiche. Confondre alimentation et environnement est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "Des hôpitaux trop peu nombreux",
+                      "match": "Santé"
+                    },
+                    {
+                      "content": "Des champs qui avancent sur la forêt",
+                      "match": "Environnement"
+                    },
+                    {
+                      "content": "Des récoltes trop faibles pour nourrir tous les habitants",
+                      "match": "Alimentation"
+                    },
+                    {
+                      "content": "Des écoles surchargées",
+                      "match": "Éducation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Des jeunes arrivent chaque année sur le marché du travail. Quelle réponse est adaptée au besoin d'emploi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Proposer une réponse : face au besoin d'emploi, la réponse est la création d'emplois. Les trois autres propositions aggravent la situation.",
+                  "answers": [
+                    {
+                      "content": "Créer des emplois pour ces jeunes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fermer les écoles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Interdire aux jeunes de travailler",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réduire la production agricole",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la population augmente plus vite que les services, la demande dépasse l'offre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Comparer : si la population croît de 3 % et les services de 1 %, la demande croît plus vite que l'offre. Étape 3 — Expliquer : les classes, les hôpitaux ou les emplois manquent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays A compte 40 millions d'habitants et croît de 1 % par an. Un pays B compte 10 millions d'habitants et croît de 3 % par an (valeurs d'exercice). Lequel gagne le plus d'habitants en un an ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : A, $40\\,000\\,000 \\times 1 \\div 100$ $= 400\\,000$ ; B, $10\\,000\\,000 \\times 3 \\div 100$ $= 300\\,000$. Choisir B parce que le taux est plus fort oublie la taille de la population.",
+                  "answers": [
+                    {
+                      "content": "Les deux pays, à égalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays B, avec 400 000 habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays A, avec 400 000 habitants contre 300 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pays B, car il croît plus vite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux réponses adaptées au manque d'écoles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Proposer une réponse : construire des écoles, former des enseignants et scolariser les filles. Les autres propositions diminuent l'offre d'école.",
+                  "answers": [
+                    {
+                      "content": "Supprimer des classes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réduire le nombre d'enseignants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fermer les écoles rurales",
+                      "correct": false
+                    },
+                    {
+                      "content": "Construire des écoles et former des enseignants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Scolariser les filles plus longtemps",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Exposé dans la cour : la population mondiale",
+          "exercise_type": "fixation",
+          "figure": "courbe-population-mondiale",
+          "statement": "Pendant la récréation, dans la cour de l'école, le club de géographie affiche un document : une courbe de la population mondiale, en milliards d'habitants, de 1800 à 2022. Elle donne 1 milliard vers 1800, 2 milliards vers 1927, 3 milliards en 1960, 4 milliards en 1974, 5 milliards en 1987, 6 milliards en 1999, 7 milliards en 2011 et 8 milliards en 2022. Réponds aux questions, puis rédige.",
+          "questions": [
+            {
+              "content": "Quelle est la nature du document affiché dans la cour ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode pour lire une courbe : 1) Présenter le document. On donne sa nature (une courbe), son sujet (la population mondiale), son unité (milliards d'habitants) et sa période (1800 à 2022). 2) Relever les valeurs. 3) Calculer. 4) Conclure. Ici, aucune carte ni aucun texte : c'est une courbe de l'évolution d'une grandeur dans le temps.",
+              "answers": [
+                {
+                  "content": "Une courbe de la population mondiale, en milliards d'habitants, de 1800 à 2022",
+                  "correct": true
+                },
+                {
+                  "content": "Une carte des densités de population du monde",
+                  "correct": false
+                },
+                {
+                  "content": "Un tableau des naissances de la Côte d'Ivoire",
+                  "correct": false
+                },
+                {
+                  "content": "Un texte sur la transition démographique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après la courbe de la population mondiale (1 milliard vers 1800, 2 en 1927, 3 en 1960, 4 en 1974, 5 en 1987, 6 en 1999, 7 en 2011, 8 en 2022), combien de milliards d'habitants compte-t-on en 1987 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Présenter la courbe. 2) Relever la valeur à la date demandée : en 1987, le seuil de 5 milliards est atteint. Cette lecture suffit, aucun calcul n'est nécessaire.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "unit": "milliards"
+            },
+            {
+              "content": "La population mondiale atteint 6 milliards en 1999 et 7 milliards en 2011. Combien d'années faut-il pour gagner ce milliard ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 2) Relever les dates : 6 milliards en 1999, 7 milliards en 2011. 3) Calculer l'écart : 2011 − 1999 = 12 ans. Comparé aux 127 ans qu'il faut de 1800 à 1927 pour gagner le premier milliard, c'est environ dix fois plus rapide.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "ans"
+            },
+            {
+              "content": "Un pays a une natalité de 25 ‰ et une mortalité de 7 ‰. Calcule son taux d'accroissement naturel, en %.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode du calcul de la croissance : 1) Relever natalité 25 ‰ et mortalité 7 ‰. 2) Calculer la différence : 25 − 7 = 18 ‰. 3) Convertir de ‰ en % en divisant par 10 : 18 ÷ 10 = 1,8 %. 4) Interpréter : le résultat est positif, la population augmente de 1,8 % par an. Écrire 18 % serait confondre ‰ et %.",
+              "answers": [
+                {
+                  "content": "1,8",
+                  "correct": true
+                }
+              ],
+              "unit": "%"
+            },
+            {
+              "content": "Entre 1999 et 2011, la population mondiale a gagné un milliard d'habitants plus vite qu'entre 1800 et 1927.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 3) Calculer les durées. De 1800 à 1927 : 127 ans pour gagner 1 milliard. De 1999 à 2011 : 12 ans. 4) Conclure : 12 ans est beaucoup plus court que 127 ans, donc la croissance s'est accélérée. C'est ce qu'on appelle l'explosion démographique.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige trois phrases pour montrer, à partir de la courbe, que la croissance de la population mondiale s'est accélérée depuis 1800.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Présente la courbe : nature, unité et période",
+                "Cite deux valeurs ou durées précises relevées sur la courbe",
+                "Compare les durées (127 ans contre 11 ou 12 ans) avec un calcul juste",
+                "Conclut clairement à une accélération"
+              ],
+              "explanation": "Corrigé modèle : « La courbe montre la population mondiale en milliards d'habitants de 1800 à 2022. Il faut 127 ans pour passer de 1 à 2 milliards (de 1800 à 1927), mais seulement 11 ans pour passer de 7 à 8 milliards (de 2011 à 2022). La croissance de la population mondiale s'est donc fortement accélérée. » Barème sur 3 : présenter le document (0,5), deux valeurs relevées (1), calcul ou comparaison juste (1), conclusion (0,5).",
+              "answers": [],
+              "starter": "La courbe montre…"
+            }
+          ]
+        },
+        {
+          "title": "Une carte dans la cour : où vivent les hommes ?",
+          "exercise_type": "fixation",
+          "figure": "carte-peuplement",
+          "statement": "Sur le mur de la cour de l'école, les élèves de 1ère affichent une carte du monde. La Chine et l'Inde, qui comptent chacune plus d'un milliard d'habitants, y sont colorées, ainsi que la Côte d'Ivoire. Le professeur demande de situer, calculer et expliquer. Réponds aux questions.",
+          "questions": [
+            {
+              "content": "Quels pays comptent chacun plus d'un milliard d'habitants ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Situer sur la carte du monde les espaces très peuplés. La Chine et l'Inde, en Asie, comptent chacune plus d'un milliard d'habitants. La Côte d'Ivoire, le Brésil et les États-Unis sont bien moins peuplés.",
+              "answers": [
+                {
+                  "content": "L'Inde",
+                  "correct": true
+                },
+                {
+                  "content": "Le Brésil",
+                  "correct": false
+                },
+                {
+                  "content": "La Chine",
+                  "correct": true
+                },
+                {
+                  "content": "La Côte d'Ivoire",
+                  "correct": false
+                },
+                {
+                  "content": "Les États-Unis",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une région d'Asie compte 8 000 000 d'habitants sur 40 000 km². Calcule sa densité, en habitants par km².",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 2) Calculer la densité : habitants ÷ superficie. 8 000 000 ÷ 40 000 = 200 hab/km². On simplifie en enlevant quatre zéros : 800 ÷ 4 = 200. Cette densité est forte.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ],
+              "unit": "hab/km²"
+            },
+            {
+              "content": "Une région de désert compte 60 000 habitants sur 300 000 km². Calcule sa densité, en habitants par km².",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 2) Calculer la densité : 60 000 ÷ 300 000 = 0,2 habitant par km², soit un habitant pour cinq km². Cette densité est très faible, ce qui est caractéristique d'un désert.",
+              "answers": [
+                {
+                  "content": "0,2",
+                  "correct": true
+                }
+              ],
+              "unit": "hab/km²"
+            },
+            {
+              "content": "Pourquoi une plaine traversée par un fleuve est-elle souvent très peuplée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 3) Expliquer par les facteurs naturels (eau, sols fertiles) et les facteurs humains (agriculture, villes). Une plaine avec un fleuve permet de cultiver et de nourrir beaucoup de monde. La superficie, la natalité ou le froid ne l'expliquent pas.",
+              "answers": [
+                {
+                  "content": "Elle réunit de l'eau et des sols fertiles, qui favorisent l'agriculture, puis les villes",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est toujours plus grande que les autres régions",
+                  "correct": false
+                },
+                {
+                  "content": "Elle compte moins de naissances que de décès",
+                  "correct": false
+                },
+                {
+                  "content": "Le climat y est toujours le plus froid",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un pays de 80 millions d'habitants sur 800 000 km² est plus dense qu'un pays de 30 millions d'habitants sur 60 000 km².",
+              "question_type": "true_false",
+              "explanation": "Méthode : 2) Calculer les deux densités. Premier pays : 80 000 000 ÷ 800 000 = 100 hab/km². Second pays : 30 000 000 ÷ 60 000 = 500 hab/km². Le second est donc plus dense, bien qu'il ait moins d'habitants : on ne compare pas les populations totales, on compare les densités.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes pourquoi la population mondiale est inégalement répartie, en citant un facteur naturel et un facteur humain.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que la répartition est inégale (espaces très peuplés et peu peuplés)",
+                "Cite un facteur naturel précis (eau, sols, climat, relief)",
+                "Cite un facteur humain précis (agriculture, villes, ports, industries)",
+                "Illustre avec un exemple d'espace peuplé et un exemple d'espace peu peuplé"
+              ],
+              "explanation": "Corrigé modèle : « La population mondiale est très inégalement répartie : l'Asie de l'Est et du Sud sont très peuplées, alors que les grands déserts et les régions polaires le sont très peu. Les plaines avec un fleuve et des sols fertiles attirent les hommes (facteur naturel), ainsi que les villes, les ports et les industries (facteur humain). Au contraire, un désert manque d'eau. » Barème sur 3 : inégalité (0,5), facteur naturel (1), facteur humain (1), exemples (0,5).",
+              "answers": [],
+              "starter": "La population est inégalement répartie…"
+            }
+          ]
+        },
+        {
+          "title": "Devoir : étudier la croissance d'un pays fictif",
+          "exercise_type": "evaluation",
+          "figure": "transition-demographique",
+          "statement": "Dans la cour de l'école, le professeur d'histoire-géographie affiche un tableau de données écrit pour Lnclass, qui décrit un pays fictif. En 1950, sa natalité est de 46 ‰ et sa mortalité de 28 ‰. En 1980, sa natalité est de 44 ‰ et sa mortalité de 14 ‰. En 2010, sa natalité est de 30 ‰ et sa mortalité de 8 ‰. Un schéma fléché présente aussi les quatre phases de la transition démographique. Réponds aux questions.",
+          "questions": [
+            {
+              "content": "En 1950, un pays a une natalité de 46 ‰ et une mortalité de 28 ‰. Calcule son accroissement naturel, en ‰.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Relever natalité 46 ‰ et mortalité 28 ‰. 2) Calculer la différence : 46 − 28 = 18 ‰. 3) En %, cela fait 18 ÷ 10 = 1,8 %. 4) Interpréter : le résultat est positif, la population augmente.",
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ],
+              "unit": "‰"
+            },
+            {
+              "content": "En 1980, un pays a une natalité de 44 ‰ et une mortalité de 14 ‰. Calcule son accroissement naturel, en ‰.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Relever natalité 44 ‰ et mortalité 14 ‰. 2) Calculer la différence : 44 − 14 = 30 ‰. 3) Convertir : 30 ÷ 10 = 3 %. 4) Interpréter : la population augmente de 3 % par an, un rythme très rapide.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "‰"
+            },
+            {
+              "content": "En 2010, un pays a une natalité de 30 ‰ et une mortalité de 8 ‰. Calcule son accroissement naturel, en ‰.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Relever natalité 30 ‰ et mortalité 8 ‰. 2) Calculer la différence : 30 − 8 = 22 ‰. 3) Convertir : 22 ÷ 10 = 2,2 %. 4) Interpréter : la croissance reste forte mais ralentit par rapport à 1980.",
+              "answers": [
+                {
+                  "content": "22",
+                  "correct": true
+                }
+              ],
+              "unit": "‰"
+            },
+            {
+              "content": "Les accroissements naturels de ce pays sont de 18 ‰ en 1950, 30 ‰ en 1980 et 22 ‰ en 2010. À quelle date la croissance est-elle la plus rapide, et pourquoi ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la transition démographique : 1) Relever l'évolution des taux. 2) Comparer : l'écart est de 18 ‰ en 1950, 30 ‰ en 1980 et 22 ‰ en 2010. 3) Expliquer : en 1980, la mortalité a baissé de moitié alors que la natalité reste forte. 4) Conclure : la croissance est maximale en 1980. La natalité n'a pas augmenté (46 puis 44 ‰) : c'est le piège de la fiche.",
+              "answers": [
+                {
+                  "content": "En 1980 : la mortalité a beaucoup baissé (28 à 14 ‰) alors que la natalité reste forte (44 ‰)",
+                  "correct": true
+                },
+                {
+                  "content": "En 1950 : la natalité y est la plus forte",
+                  "correct": false
+                },
+                {
+                  "content": "En 2010 : la mortalité y est la plus faible",
+                  "correct": false
+                },
+                {
+                  "content": "En 1980 : la natalité a augmenté pour atteindre 44 ‰",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Entre 1980 et 2010, la natalité de ce pays passe de 44 à 30 ‰. Le pays est entré dans la phase ___ de la transition démographique.",
+              "question_type": "select",
+              "explanation": "Méthode : 1) Relever : la natalité baisse nettement entre 1980 et 2010 (44 puis 30 ‰), alors que la mortalité avait déjà baissé. 4) Conclure : c'est la caractéristique de la phase 3, où la natalité baisse à son tour et où la croissance ralentit. En phase 4, les deux taux seraient faibles, ce n'est pas encore le cas.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": false
+                },
+                {
+                  "content": "3",
+                  "correct": true
+                },
+                {
+                  "content": "2",
+                  "correct": false
+                },
+                {
+                  "content": "4",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi la mortalité de ce pays baisse entre 1950 et 1980, puis pourquoi sa natalité baisse entre 1980 et 2010.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Relève les valeurs des taux de 1950, 1980 et 2010",
+                "Donne au moins deux causes de la baisse de la mortalité",
+                "Donne au moins deux causes de la baisse de la natalité",
+                "Conclut sur le rythme de la croissance et la phase de la transition"
+              ],
+              "explanation": "Corrigé modèle : « Entre 1950 et 1980, la mortalité baisse de 28 à 14 ‰ grâce aux vaccins, aux soins, à l'hygiène et à l'eau potable, alors que la natalité reste forte (46 puis 44 ‰) : le pays est en phase 2 et sa croissance atteint 3 % par an. Entre 1980 et 2010, la natalité baisse de 44 à 30 ‰ grâce à la scolarisation des filles, à l'urbanisation et à la planification familiale : le pays entre en phase 3 et sa croissance ralentit à 2,2 %. » Barème sur 4 : valeurs relevées (1), causes de la mortalité (1), causes de la natalité (1), conclusion (1).",
+              "answers": [],
+              "starter": "Entre 1950 et 1980…"
+            }
+          ]
+        },
+        {
+          "title": "Sujet de type bac : une croissance rapide et ses conséquences",
+          "exercise_type": "evaluation",
+          "figure": "consequences-croissance",
+          "statement": "Sujet de type bac. Document : texte écrit pour Lnclass. « Un pays fictif compte 15 millions d'habitants. Sa natalité est de 38 ‰ et sa mortalité de 8 ‰. Les écoles sont surchargées, une partie des jeunes ne trouve pas de travail et les champs gagnent sur la forêt. L'État construit des écoles et soutient la scolarisation des filles. » Un schéma en arbre relie la croissance rapide de la population à cinq besoins : l'alimentation, l'éducation, la santé, l'emploi et l'environnement. Réponds aux questions, puis rédige la synthèse.",
+          "questions": [
+            {
+              "content": "Un pays a une natalité de 38 ‰ et une mortalité de 8 ‰. Calcule son taux d'accroissement naturel, en %.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1) Relever natalité 38 ‰ et mortalité 8 ‰. 2) Calculer la différence : 38 − 8 = 30 ‰. 3) Convertir de ‰ en % : 30 ÷ 10 = 3 %. 4) Interpréter : le résultat est positif, la population augmente de 3 % par an.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "%"
+            },
+            {
+              "content": "Un pays de 15 millions d'habitants croît de 3 % par an. Combien d'habitants gagne-t-il en un an ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode des conséquences : 2) Comparer la croissance aux services. 15 000 000 × 3 ÷ 100 = 450 000 habitants en plus par an. Il faut donc de quoi nourrir, soigner, scolariser et employer 450 000 personnes de plus chaque année.",
+              "answers": [
+                {
+                  "content": "450000",
+                  "correct": true
+                }
+              ],
+              "unit": "hab"
+            },
+            {
+              "content": "Relie chaque information du texte au besoin concerné.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Identifier le besoin concerné. Écoles surchargées : éducation. Jeunes sans travail : emploi. Champs qui gagnent sur la forêt : environnement. Chaque situation traduit une demande qui augmente plus vite que l'offre (étape 2 : comparer).",
+              "answers": [
+                {
+                  "content": "Les écoles sont surchargées",
+                  "match": "Éducation"
+                },
+                {
+                  "content": "Une partie des jeunes ne trouve pas de travail",
+                  "match": "Emploi"
+                },
+                {
+                  "content": "Les champs gagnent sur la forêt",
+                  "match": "Environnement"
+                }
+              ]
+            },
+            {
+              "content": "Quelles mesures du pays fictif ou de pays comparables répondent à la croissance rapide de la population ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 4) Proposer une réponse adaptée. Construire des écoles répond au besoin d'éducation, scolariser les filles fait baisser la natalité à long terme, et améliorer les rendements agricoles répond au besoin d'alimentation. Fermer les centres de santé et arrêter les créations d'emplois aggraveraient les problèmes.",
+              "answers": [
+                {
+                  "content": "Soutenir la scolarisation des filles",
+                  "correct": true
+                },
+                {
+                  "content": "Fermer les centres de santé",
+                  "correct": false
+                },
+                {
+                  "content": "Construire des écoles",
+                  "correct": true
+                },
+                {
+                  "content": "Améliorer les rendements agricoles",
+                  "correct": true
+                },
+                {
+                  "content": "Arrêter les créations d'emplois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un élève écrit : « Ce pays a un problème parce qu'il compte 15 millions d'habitants. » Quelle correction est exacte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 2) Comparer la croissance de la population à celle des ressources et des services. Ce n'est pas le nombre d'habitants seul qui compte, mais la vitesse de croissance (ici 450 000 habitants de plus par an) face aux écoles, aux emplois et aux terres. Une natalité qui aurait augmenté n'est pas indiquée dans le texte.",
+              "answers": [
+                {
+                  "content": "Il a raison : plus un pays est peuplé, plus il a de problèmes",
+                  "correct": false
+                },
+                {
+                  "content": "Le problème vient du rythme de croissance (3 % par an) comparé aux écoles, aux emplois et aux terres, non du nombre d'habitants seul",
+                  "correct": true
+                },
+                {
+                  "content": "Le pays n'a aucun problème, car la mortalité baisse",
+                  "correct": false
+                },
+                {
+                  "content": "Le problème vient d'une natalité qui a augmenté",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Compare le rythme de croissance du pays fictif (3 % par an) à celui d'un pays de 100 millions d'habitants qui croît de 0,5 % par an. Lequel gagne le plus d'habitants en un an ? Calcule et conclus.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Calcule 15 000 000 × 3 ÷ 100 = 450 000 pour le pays fictif",
+                "Calcule 100 000 000 × 0,5 ÷ 100 = 500 000 pour le grand pays",
+                "Compare les deux résultats de manière juste",
+                "Conclut que le rythme de croissance et les ressources comptent, pas le seul nombre d'habitants"
+              ],
+              "explanation": "Corrigé modèle : « Le pays fictif gagne 15 000 000 × 3 ÷ 100 = 450 000 habitants par an. Le pays de 100 millions d'habitants gagne 100 000 000 × 0,5 ÷ 100 = 500 000 habitants par an. Le grand pays gagne donc un peu plus d'habitants, mais le pays fictif croît six fois plus vite en pourcentage, avec des ressources bien plus petites : il a plus de mal à répondre à ses besoins. » Barème sur 3 : calcul du pays fictif (0,5), calcul du grand pays (0,5), comparaison (1), conclusion (1).",
+              "answers": [],
+              "starter": "Le pays fictif gagne…"
+            },
+            {
+              "content": "Synthèse : en une dizaine de lignes, explique pourquoi la population de ce pays croît vite, quelles en sont les conséquences et quelles réponses peut-il apporter.",
+              "question_type": "written",
+              "points": 8,
+              "criteria": [
+                "Explique la croissance par l'écart entre natalité (38 ‰) et mortalité (8 ‰) avec un calcul",
+                "Relie la baisse de la mortalité à ses causes (vaccins, soins, hygiène)",
+                "Cite au moins trois conséquences (éducation, emploi, environnement, santé, alimentation)",
+                "Propose au moins trois réponses adaptées et justifiées",
+                "Rédige un texte construit, clair, en phrases complètes"
+              ],
+              "explanation": "Corrigé modèle : « Le pays a une natalité de 38 ‰ et une mortalité de 8 ‰ : l'écart de 30 ‰ donne une croissance de 3 % par an. La mortalité a baissé grâce aux vaccins, aux soins et à l'hygiène, alors que la natalité est restée forte : c'est la phase 2 de la transition démographique. Cette croissance de 450 000 habitants par an crée des besoins : les écoles sont surchargées, des jeunes n'ont pas d'emploi, les champs gagnent sur la forêt, et il faut nourrir et soigner davantage de personnes. Le pays peut construire des écoles et former des enseignants, scolariser les filles pour faire baisser la natalité, améliorer les rendements agricoles et créer des emplois. » Barème sur 8 : calcul et explication de la croissance (2), causes de la baisse de la mortalité (1), conséquences (2), réponses (2), qualité de la rédaction (1).",
+              "answers": [],
+              "starter": "Le pays a une croissance rapide parce que…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Natalité, mortalité, accroissement naturel et conversion ‰ en %, solde migratoire, population mondiale de 1800 à 2022, densité et répartition, quatre phases de la transition démographique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Repères de la leçon. La natalité est le nombre de naissances d'une année pour 1 000 habitants ; la mortalité, le nombre de décès pour 1 000 habitants. L'accroissement naturel est la natalité moins la mortalité ; on le convertit en % en divisant par 10.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Natalité moins mortalité, puis divise par 10 pour obtenir des %.",
+              "questions": [
+                {
+                  "content": "Que mesure la mortalité d'un pays ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : la mortalité est le nombre de décès pour 1 000 habitants.",
+                  "answers": [
+                    {
+                      "content": "Le nombre de décès en un an pour 1 000 habitants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre de naissances en un an pour 1 000 habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "La différence entre naissances et décès",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'habitants par km²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays (valeur d'exercice) a une natalité de 30 ‰ et une mortalité de 10 ‰. Quel est son accroissement naturel, en ‰ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : $30 - 10 = 20$ ‰.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Un pays (valeur d'exercice) a un accroissement naturel de 20 ‰. Exprime-le en %.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Convertir : $20 \\div 10 = 2$ %.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "%"
+                },
+                {
+                  "content": "Un accroissement naturel négatif signifie que la population diminue, sans compter les migrations.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Interpréter : un résultat négatif indique une population qui diminue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le solde ___ est la différence entre les entrées et les sorties de personnes.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Interpréter : l'accroissement total additionne accroissement naturel et solde migratoire.",
+                  "answers": [
+                    {
+                      "content": "migratoire",
+                      "correct": true
+                    },
+                    {
+                      "content": "naturel",
+                      "correct": false
+                    },
+                    {
+                      "content": "démographique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Repères de la leçon. La population mondiale est d'environ 1 milliard vers 1800, 2 milliards vers 1927, 3 milliards en 1960, 7 milliards en 2011 et 8 milliards en 2022 (estimations de l'ONU, arrondies).",
+              "exercise_type": "evaluation",
+              "figure": "courbe-population-mondiale",
+              "hint": "Relève les dates, soustrais-les, compare les durées.",
+              "questions": [
+                {
+                  "content": "D'après ces repères, combien d'habitants la population mondiale compte-t-elle en 2022 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : 8 milliards en 2022.",
+                  "answers": [
+                    {
+                      "content": "8 milliards",
+                      "correct": true
+                    },
+                    {
+                      "content": "7 milliards",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 milliards",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 milliards",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La population mondiale atteint 3 milliards en 1960 et 7 milliards en 2011. En combien d'années gagne-t-elle ces 4 milliards ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Calculer : $2011 - 1960 = 51$ ans.",
+                  "answers": [
+                    {
+                      "content": "51",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "Il a fallu plus de temps pour passer de 1 à 2 milliards (vers 1800 à vers 1927) que de 7 à 8 milliards (2011 à 2022).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : 127 ans contre 11 ans, la croissance s'est accélérée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les valeurs de la courbe de la population mondiale sont des estimations de l'___ (un sigle).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Présenter : la fiche précise que ces valeurs sont des estimations de l'ONU, arrondies.",
+                  "answers": [
+                    {
+                      "content": "ONU",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces seuils dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Relever : vers 1800, 1960, 2011, 2022.",
+                  "answers": [
+                    {
+                      "content": "1 milliard (vers 1800)"
+                    },
+                    {
+                      "content": "3 milliards (1960)"
+                    },
+                    {
+                      "content": "7 milliards (2011)"
+                    },
+                    {
+                      "content": "8 milliards (2022)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Repères de la leçon. La densité est le nombre d'habitants divisé par la superficie, en hab/km². Plus de la moitié de l'humanité vit en Asie. Les déserts, les hautes montagnes, les forêts équatoriales et les régions polaires sont peu peuplés.",
+              "exercise_type": "evaluation",
+              "figure": "carte-peuplement",
+              "hint": "Densité = habitants divisés par superficie en km².",
+              "questions": [
+                {
+                  "content": "Quelle formule donne la densité de population ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer la densité : habitants divisés par superficie.",
+                  "answers": [
+                    {
+                      "content": "Habitants divisés par la superficie en km²",
+                      "correct": true
+                    },
+                    {
+                      "content": "Superficie divisée par les habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Habitants multipliés par la superficie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Habitants moins superficie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région (valeur d'exercice) compte 540 000 habitants sur 9 000 km². Calcule sa densité, en hab/km².",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : $540\\,000 \\div 9\\,000 = 60$ hab/km².",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Quels sont deux espaces en général très peu peuplés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer : déserts et régions polaires sont peu peuplés.",
+                  "answers": [
+                    {
+                      "content": "Les grands ports industriels",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deltas très aménagés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les grands déserts",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les régions polaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les plaines fertiles traversées par un fleuve",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Côte d'Ivoire compte plus d'un milliard d'habitants.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : la Chine et l'Inde comptent chacune plus d'un milliard d'habitants, pas la Côte d'Ivoire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les sols fertiles sont un facteur ___ du peuplement.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Expliquer : eau, sols fertiles, climat et relief sont des facteurs naturels.",
+                  "answers": [
+                    {
+                      "content": "naturel",
+                      "correct": true
+                    },
+                    {
+                      "content": "humain",
+                      "correct": false
+                    },
+                    {
+                      "content": "statistique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Repères de la leçon. La transition démographique comporte quatre phases. Phase 1 : natalité et mortalité fortes. Phase 2 : la mortalité baisse, la natalité reste forte. Phase 3 : la natalité baisse à son tour. Phase 4 : natalité et mortalité faibles.",
+              "exercise_type": "evaluation",
+              "figure": "transition-demographique",
+              "hint": "Compare natalité et mortalité, phase par phase.",
+              "questions": [
+                {
+                  "content": "Relie chaque phase à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Relever : chaque phase a sa description.",
+                  "answers": [
+                    {
+                      "content": "Phase 1",
+                      "match": "Natalité et mortalité fortes, croissance faible"
+                    },
+                    {
+                      "content": "Phase 2",
+                      "match": "Mortalité en baisse, natalité forte, croissance très rapide"
+                    },
+                    {
+                      "content": "Phase 3",
+                      "match": "Natalité en baisse, croissance qui ralentit"
+                    },
+                    {
+                      "content": "Phase 4",
+                      "match": "Natalité et mortalité faibles, croissance faible"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle phase la croissance est-elle la plus rapide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : en phase 2, l'écart entre natalité et mortalité est le plus grand.",
+                  "answers": [
+                    {
+                      "content": "Phase 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Phase 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la transition démographique, la mortalité baisse avant la natalité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : la mortalité baisse en phase 2, la natalité en phase 3.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays (valeur d'exercice) a une natalité de 33 ‰ et une mortalité de 5 ‰. Calcule l'écart entre les deux taux, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : $33 - 5 = 28$ ‰.",
+                  "answers": [
+                    {
+                      "content": "28",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "La transition démographique est le passage d'une natalité et d'une mortalité fortes à une natalité et une mortalité ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure : à la fin de la transition, les deux taux sont faibles.",
+                  "answers": [
+                    {
+                      "content": "faibles",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Accroissement naturel d'un village et gain d'habitants, densité de deux villes, lecture d'un tableau de natalité et de mortalité, besoins liés à la croissance de la population (santé, services).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le club de géographie d'un lycée de Bouaké étudie un village fictif : pour 1 000 habitants, 40 naissances et 10 décès par an (valeurs d'exercice). Le village compte 2 000 habitants.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Natalité moins mortalité, puis 1 000 habitants correspondent à 1 ‰ de 1 000.",
+              "questions": [
+                {
+                  "content": "Que signifie une natalité de 40 ‰ dans ce village ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : la natalité est un nombre de naissances pour 1 000 habitants.",
+                  "answers": [
+                    {
+                      "content": "40 décès pour 1 000 habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 habitants par km²",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 naissances en un an pour 1 000 habitants",
+                      "correct": true
+                    },
+                    {
+                      "content": "40 naissances pour 100 habitants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'accroissement naturel du village, en ‰ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : $40 - 10 = 30$ ‰.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "En pourcentage, cet accroissement naturel est de ___ % (écris le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Convertir : $30 \\div 10 = 3$ %.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le village compte 2 000 habitants et son accroissement naturel est de 30 ‰. Combien d'habitants gagne-t-il en un an par accroissement naturel ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Interpréter : $2\\,000 \\times 30 \\div 1\\,000 = 60$ habitants.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "habitants"
+                },
+                {
+                  "content": "La population de ce village augmente par accroissement naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Interpréter : le résultat est positif, donc la population augmente.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux élèves d'Abidjan comparent deux villes fictives (valeurs d'exercice). La ville A compte 600 000 habitants sur 300 km². La ville B compte 150 000 habitants sur 25 km².",
+              "exercise_type": "evaluation",
+              "figure": "carte-peuplement",
+              "hint": "Calcule les deux densités avant de comparer.",
+              "questions": [
+                {
+                  "content": "Calcule la densité de la ville A, en hab/km².",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : $600\\,000 \\div 300 = 2\\,000$ hab/km².",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Calcule la densité de la ville B, en hab/km².",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : $150\\,000 \\div 25 = 6\\,000$ hab/km².",
+                  "answers": [
+                    {
+                      "content": "6000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Une ville A de 600 000 habitants sur 300 km² (2 000 hab/km²) et une ville B de 150 000 habitants sur 25 km² (6 000 hab/km²) : laquelle est la plus dense ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer : 6 000 est supérieur à 2 000 hab/km².",
+                  "answers": [
+                    {
+                      "content": "Elles sont aussi denses",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas comparer",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ville B",
+                      "correct": true
+                    },
+                    {
+                      "content": "La ville A",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ville qui a plus d'habitants qu'une autre a forcément une densité plus forte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer : la ville A a plus d'habitants que B mais une densité plus faible.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élément est un facteur humain qui attire la population dans une ville ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : ports et industries sont des facteurs humains ; sol, climat et relief sont des facteurs naturels.",
+                  "answers": [
+                    {
+                      "content": "Un grand port et des usines",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un sol fertile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un relief de plaine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un tableau fictif (valeurs d'exercice) donne la natalité et la mortalité d'un pays. En 1990 : natalité 45 ‰, mortalité 20 ‰. En 2020 : natalité 38 ‰, mortalité 8 ‰.",
+              "exercise_type": "evaluation",
+              "figure": "transition-demographique",
+              "hint": "Compare les deux années : quel taux baisse le plus ?",
+              "questions": [
+                {
+                  "content": "Calcule l'écart entre natalité et mortalité en 1990, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : $45 - 20 = 25$ ‰.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Calcule l'écart entre natalité et mortalité en 2020, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : $38 - 8 = 30$ ‰.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Entre 1990 et 2020, natalité de 45 à 38 ‰ et mortalité de 20 à 8 ‰ : quel taux baisse le plus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : la natalité baisse de 7 ‰, la mortalité de 12 ‰.",
+                  "answers": [
+                    {
+                      "content": "La natalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux baissent autant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun ne baisse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mortalité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La croissance de ce pays s'accélère entre 1990 et 2020 parce que le nombre de naissances augmente.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : la natalité baisse ; c'est la chute de la mortalité qui accélère la croissance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle phase de la transition se situe ce pays, avec une mortalité en forte baisse et une natalité encore forte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : mortalité en baisse et natalité forte caractérisent la phase 2.",
+                  "answers": [
+                    {
+                      "content": "Phase 4",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Phase 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 3",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un pays fictif de 30 millions d'habitants (valeurs d'exercice), la population augmente de 2 % par an, mais le nombre de centres de santé n'augmente que de 1 % par an.",
+              "exercise_type": "evaluation",
+              "figure": "consequences-croissance",
+              "hint": "Compare la croissance de la population à celle des services.",
+              "questions": [
+                {
+                  "content": "Combien d'habitants ce pays gagne-t-il en un an ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : $30\\,000\\,000 \\times 2 \\div 100$ $= 600\\,000$ habitants.",
+                  "answers": [
+                    {
+                      "content": "600000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "habitants"
+                },
+                {
+                  "content": "Quel besoin est surtout concerné par le manque de centres de santé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le besoin : les centres de santé concernent la santé.",
+                  "answers": [
+                    {
+                      "content": "La santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'éducation",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'alimentation",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'emploi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conséquence est probable quand la population croît de 2 % et les centres de santé de 1 % ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : la demande croît plus vite que l'offre.",
+                  "answers": [
+                    {
+                      "content": "Aucun changement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des soignants débordés et des files d'attente plus longues",
+                      "correct": true
+                    },
+                    {
+                      "content": "Moins de patients pour chaque centre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus de centres que de besoins",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux réponses adaptées ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Proposer une réponse : plus de centres et plus de personnel.",
+                  "answers": [
+                    {
+                      "content": "Réduire le nombre de soignants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Interdire les consultations",
+                      "correct": false
+                    },
+                    {
+                      "content": "Construire des centres de santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Former du personnel de santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fermer des centres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la population augmente plus vite que les services, la demande dépasse l'offre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : c'est la situation décrite par la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Distinguer ‰ et %, nombre d'habitants et densité, gain en nombre et rythme en pourcentage, hausse des naissances et baisse de la mortalité comme cause de la croissance.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois élèves donnent leur avis. A : « Un pour mille et un pour cent, c'est pareil. » B : « Un accroissement naturel de 26 ‰ fait 2,6 %. » C : « Un accroissement naturel de 26 ‰ fait 26 %. »",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour passer de ‰ à %, divise par 10.",
+              "questions": [
+                {
+                  "content": "Parmi les élèves A, B et C, lequel a raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Convertir : $26 \\div 10 = 2{,}6$ %.",
+                  "answers": [
+                    {
+                      "content": "B",
+                      "correct": true
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "C",
+                      "correct": false
+                    },
+                    {
+                      "content": "A et C",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi C se trompe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Convertir : lire 26 % ferait croire à 260 personnes en plus pour 1 000 habitants.",
+                  "answers": [
+                    {
+                      "content": "Parce que le pour mille n'existe pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que 26 ‰ vaut 0,26 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "26 ‰ veut dire 26 habitants de plus pour 1 000, soit 2,6 pour 100",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que 26 ‰ vaut 260 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une ville de 1 000 habitants, l'accroissement naturel est de 26 ‰ (valeur d'exercice). Combien d'habitants en plus par an ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Interpréter : 26 pour 1 000 habitants donne 26 habitants.",
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "habitants"
+                },
+                {
+                  "content": "Pour passer de ‰ à %, on multiplie par 10.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Convertir : on divise par 10.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays avec une natalité de 15 ‰ et une mortalité de 20 ‰ voit sa population diminuer par accroissement naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer : $15 - 20 = -5$ ‰, donc la population diminue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux pays fictifs (valeurs d'exercice). Le pays A compte 50 millions d'habitants sur 1 000 000 km². Le pays B compte 20 millions d'habitants sur 100 000 km².",
+              "exercise_type": "evaluation",
+              "figure": "carte-peuplement",
+              "hint": "Pour comparer deux espaces, calcule toujours la densité.",
+              "questions": [
+                {
+                  "content": "Calcule la densité du pays A, en hab/km².",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : $50\\,000\\,000 \\div 1\\,000\\,000 = 50$.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Calcule la densité du pays B, en hab/km².",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : $20\\,000\\,000 \\div 100\\,000 = 200$.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Un pays A (50 millions d'habitants, 50 hab/km²) et un pays B (20 millions d'habitants, 200 hab/km²) : lequel est le plus dense ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer : 200 est supérieur à 50.",
+                  "answers": [
+                    {
+                      "content": "On ne peut pas conclure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays B",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pays A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont aussi denses",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pays qui a le plus d'habitants est forcément le plus dense.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer : A a plus d'habitants, mais B est quatre fois plus dense.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour comparer le peuplement de deux espaces, que faut-il calculer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer : seule la densité tient compte de la superficie.",
+                  "answers": [
+                    {
+                      "content": "Seulement le nombre d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement la superficie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La natalité de chacun",
+                      "correct": false
+                    },
+                    {
+                      "content": "La densité de chacun",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : de 3 à 4 milliards d'habitants (1960 à 1974, 14 ans), la population mondiale augmente d'environ 33 %. De 7 à 8 milliards (2011 à 2022, 11 ans), elle augmente d'environ 14 %. Le gain est d'un milliard dans les deux cas.",
+              "exercise_type": "evaluation",
+              "figure": "courbe-population-mondiale",
+              "hint": "Distingue le gain en nombre et le rythme en pourcentage.",
+              "questions": [
+                {
+                  "content": "Quelle conclusion est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : 14 % est inférieur à 33 % ; un milliard pèse moins sur une population plus grande.",
+                  "answers": [
+                    {
+                      "content": "Le gain est d'un milliard dans les deux cas, mais la croissance en pourcentage est plus lente de 7 à 8 milliards",
+                      "correct": true
+                    },
+                    {
+                      "content": "La croissance en pourcentage est plus rapide de 7 à 8 milliards",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gain est plus grand de 7 à 8 milliards",
+                      "correct": false
+                    },
+                    {
+                      "content": "La population mondiale baisse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Malgré le ralentissement en pourcentage, la population mondiale continue d'augmenter en nombre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : le gain d'un milliard continue de s'ajouter.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années faut-il pour passer de 3 milliards (1960) à 4 milliards (1974) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Calculer : $1974 - 1960 = 14$ ans.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "Un gain d'un milliard d'habitants représente la même part d'une population de 3 milliards et d'une population de 7 milliards.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer : 1 sur 3 est supérieur à 1 sur 7.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le rythme en pourcentage ralentit-il alors que le gain d'un milliard reste le même ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : la même quantité représente une part plus petite d'un total plus grand.",
+                  "answers": [
+                    {
+                      "content": "Parce que la superficie du monde diminue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le milliard s'ajoute à une population plus grande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la mortalité augmente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la population baisse",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un pays fictif (valeurs d'exercice) a en 1950 une natalité de 45 ‰ et une mortalité de 30 ‰. En 1990, sa natalité est de 42 ‰ et sa mortalité de 12 ‰.",
+              "exercise_type": "evaluation",
+              "figure": "transition-demographique",
+              "hint": "Compare les deux taux avant de conclure.",
+              "questions": [
+                {
+                  "content": "Calcule l'écart entre natalité et mortalité en 1950, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : $45 - 30 = 15$ ‰.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Calcule l'écart entre natalité et mortalité en 1990, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : $42 - 12 = 30$ ‰.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Entre 1950 et 1990, l'écart passe de 15 à 30 ‰. Quelle est la cause de cette accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Expliquer : la mortalité passe de 30 à 12 ‰, la natalité baisse même un peu.",
+                  "answers": [
+                    {
+                      "content": "La hausse de la superficie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La chute de la mortalité",
+                      "correct": true
+                    },
+                    {
+                      "content": "La hausse de la natalité",
+                      "correct": false
+                    },
+                    {
+                      "content": "La baisse des migrations",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La croissance de ce pays vient d'une hausse des naissances.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : la natalité baisse de 45 à 42 ‰ ; c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle phase est ce pays en 1990 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : mortalité en baisse et natalité forte, croissance très rapide.",
+                  "answers": [
+                    {
+                      "content": "Phase 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 4",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : courbe de la population mondiale, accroissement naturel et conversion, densité et facteurs du peuplement, phases de la transition démographique, besoins liés à la croissance et réponses.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document : une courbe de la population mondiale, en milliards d'habitants. Elle donne 1 milliard vers 1800, 2 milliards vers 1927, 3 milliards en 1960, 4 milliards en 1974, 5 milliards en 1987, 6 milliards en 1999, 7 milliards en 2011 et 8 milliards en 2022.",
+              "exercise_type": "evaluation",
+              "figure": "courbe-population-mondiale",
+              "hint": "Relève les dates, calcule les durées, conclus sur le rythme.",
+              "questions": [
+                {
+                  "content": "Combien d'habitants la population mondiale compte-t-elle en 2022, d'après la courbe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : 8 milliards en 2022.",
+                  "answers": [
+                    {
+                      "content": "5 milliards",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 milliards",
+                      "correct": true
+                    },
+                    {
+                      "content": "7 milliards",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 milliards",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années sépare-t-il 6 milliards (1999) de 7 milliards (2011) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Calculer : $2011 - 1999 = 12$ ans.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "ans"
+                },
+                {
+                  "content": "Remets ces seuils dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Relever : vers 1927, 1974, 1999, 2022.",
+                  "answers": [
+                    {
+                      "content": "2 milliards (vers 1927)"
+                    },
+                    {
+                      "content": "4 milliards (1974)"
+                    },
+                    {
+                      "content": "6 milliards (1999)"
+                    },
+                    {
+                      "content": "8 milliards (2022)"
+                    }
+                  ]
+                },
+                {
+                  "content": "La population mondiale a mis moins de temps pour passer de 7 à 8 milliards que de 1 à 2 milliards.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer : 11 ans contre 127 ans.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque seuil à sa date.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever : chaque seuil a sa date.",
+                  "answers": [
+                    {
+                      "content": "3 milliards",
+                      "match": "1960"
+                    },
+                    {
+                      "content": "5 milliards",
+                      "match": "1987"
+                    },
+                    {
+                      "content": "6 milliards",
+                      "match": "1999"
+                    },
+                    {
+                      "content": "7 milliards",
+                      "match": "2011"
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment appelle-t-on la forte accélération de la croissance au XXe siècle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : la fiche nomme cette accélération l'explosion démographique.",
+                  "answers": [
+                    {
+                      "content": "La transition migratoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le déclin démographique",
+                      "correct": false
+                    },
+                    {
+                      "content": "La densification",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'explosion démographique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un pays fictif (valeurs d'exercice). En 1980, natalité 44 ‰ et mortalité 20 ‰. En 2020, natalité 28 ‰ et mortalité 6 ‰.",
+              "exercise_type": "evaluation",
+              "figure": "transition-demographique",
+              "hint": "Calcule l'écart pour chaque année, convertis en % et compare.",
+              "questions": [
+                {
+                  "content": "Calcule l'accroissement naturel en 1980, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer la différence : $44 - 20 = 24$ ‰.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Calcule l'accroissement naturel en 2020, en ‰.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer la différence : $28 - 6 = 22$ ‰.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "‰"
+                },
+                {
+                  "content": "Exprime l'accroissement naturel de 2020 (22 ‰) en %.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Convertir : $22 \\div 10 = 2{,}2$ %.",
+                  "answers": [
+                    {
+                      "content": "2,2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "%"
+                },
+                {
+                  "content": "La croissance naturelle de ce pays en 2020 (22 ‰) est plus lente qu'en 1980 (24 ‰).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Interpréter : 22 est inférieur à 24.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En 2020, les deux taux ont baissé : natalité de 44 à 28 ‰ et mortalité de 20 à 6 ‰. Dans quelle phase est ce pays ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure : la natalité baisse à son tour, la croissance ralentit.",
+                  "answers": [
+                    {
+                      "content": "Phase 3, la natalité a baissé à son tour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Phase 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Phase 4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux causes de la baisse de la natalité ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Expliquer : scolarisation des filles, mariage plus tardif, contraception.",
+                  "answers": [
+                    {
+                      "content": "La scolarisation des filles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mariage plus tardif",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'arrêt des vaccins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le manque d'eau potable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mariage très précoce",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : une carte du monde. La Chine et l'Inde, qui comptent chacune plus d'un milliard d'habitants, sont colorées, ainsi que la Côte d'Ivoire. Deux régions fictives (valeurs d'exercice) : P, 4 000 000 d'habitants sur 8 000 km², et Q, 9 000 000 d'habitants sur 90 000 km².",
+              "exercise_type": "evaluation",
+              "figure": "carte-peuplement",
+              "hint": "Densité = habitants divisés par superficie ; pense aux facteurs naturels et humains.",
+              "questions": [
+                {
+                  "content": "Une région (valeur d'exercice) compte 5 000 000 d'habitants sur 200 000 km². Calcule sa densité, en hab/km².",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Calculer : $5\\,000\\,000 \\div 200\\,000 = 25$.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "hab/km²"
+                },
+                {
+                  "content": "Une région P compte 4 000 000 d'habitants sur 8 000 km² et une région Q 9 000 000 d'habitants sur 90 000 km². Laquelle est la plus dense ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer : P, $4\\,000\\,000 \\div 8\\,000 = 500$ ; Q, $9\\,000\\,000 \\div 90\\,000 = 100$.",
+                  "answers": [
+                    {
+                      "content": "La région Q, car elle a plus d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "La région Q, avec 500 hab/km²",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles ont la même densité",
+                      "correct": false
+                    },
+                    {
+                      "content": "La région P, avec 500 hab/km² contre 100",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels pays comptent chacun plus d'un milliard d'habitants ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Situer : la Chine et l'Inde dépassent chacune un milliard d'habitants.",
+                  "answers": [
+                    {
+                      "content": "La Côte d'Ivoire",
+                      "correct": false
+                    },
+                    {
+                      "content": "La France",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Nigeria",
+                      "correct": false
+                    },
+                    {
+                      "content": "La Chine",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'Inde",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à son rôle dans le peuplement.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Expliquer : eau et sols favorisent, absence d'eau défavorise, ports et industries sont humains.",
+                  "answers": [
+                    {
+                      "content": "Eau et sols fertiles",
+                      "match": "Facteur naturel favorable"
+                    },
+                    {
+                      "content": "Absence d'eau",
+                      "match": "Facteur naturel défavorable"
+                    },
+                    {
+                      "content": "Ports et industries",
+                      "match": "Facteur humain favorable"
+                    },
+                    {
+                      "content": "Asie",
+                      "match": "Plus de la moitié de l'humanité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus de la moitié de l'humanité vit en Asie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : la fiche l'indique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La densité de population s'exprime en habitants par ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Calculer : superficie en km².",
+                  "answers": [
+                    {
+                      "content": "km²",
+                      "correct": true
+                    },
+                    {
+                      "content": "litre",
+                      "correct": false
+                    },
+                    {
+                      "content": "tonne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un pays fictif de 25 millions d'habitants (valeurs d'exercice) croît de 3 % par an. Schéma : la croissance rapide est reliée à cinq besoins : alimentation, éducation, santé, emploi, environnement.",
+              "exercise_type": "evaluation",
+              "figure": "consequences-croissance",
+              "hint": "Calcule le gain annuel, identifie le besoin, propose une réponse.",
+              "questions": [
+                {
+                  "content": "Combien d'habitants un pays de 25 millions d'habitants gagne-t-il en un an avec une croissance de 3 % ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Comparer : $25\\,000\\,000 \\times 3 \\div 100$ $= 750\\,000$.",
+                  "answers": [
+                    {
+                      "content": "750000",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "habitants"
+                },
+                {
+                  "content": "Relie chaque situation au domaine concerné.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le besoin : chaque situation correspond à un besoin.",
+                  "answers": [
+                    {
+                      "content": "Des classes de 100 élèves",
+                      "match": "Éducation"
+                    },
+                    {
+                      "content": "Des diplômés sans travail",
+                      "match": "Emploi"
+                    },
+                    {
+                      "content": "Des forêts défrichées",
+                      "match": "Environnement"
+                    },
+                    {
+                      "content": "Des récoltes insuffisantes",
+                      "match": "Alimentation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle réponse est adaptée à un besoin alimentaire qui augmente ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Proposer une réponse : améliorer la production agricole.",
+                  "answers": [
+                    {
+                      "content": "Améliorer les rendements agricoles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Supprimer des champs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réduire les marchés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fermer les écoles agricoles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles actions peuvent faire baisser la natalité à long terme ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Proposer une réponse : planification familiale et scolarisation des filles.",
+                  "answers": [
+                    {
+                      "content": "Scolariser les filles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Encourager le mariage très précoce",
+                      "correct": false
+                    },
+                    {
+                      "content": "Fermer les écoles de filles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Supprimer les centres de santé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faciliter la planification familiale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une population jeune est toujours un handicap pour un pays.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Expliquer : elle est un atout si elle est formée et trouve du travail.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pays A de 60 millions d'habitants croît de 0,5 % ; un pays B de 15 millions croît de 4 % (valeurs d'exercice). Lequel doit répondre le plus vite à de nouveaux besoins ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer : A, $60\\,000\\,000 \\times 0{,}5 \\div 100$ $= 300\\,000$ ; B, $15\\,000\\,000 \\times 4 \\div 100$ $= 600\\,000$.",
+                  "answers": [
+                    {
+                      "content": "Le pays A, car il est plus peuplé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux de la même façon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pays B, qui gagne 600 000 habitants contre 300 000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

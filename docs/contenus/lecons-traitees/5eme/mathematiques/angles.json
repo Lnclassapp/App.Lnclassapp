@@ -1,0 +1,3337 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Angles",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Mathématiques",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "coin-de-terrain",
+          "kind": "geometry",
+          "description": "Le coin d'un terrain de football, vu de dessus. En O, la ligne de but [OA] et la ligne de touche [OC] forment un angle droit, marqué par un petit carré. Le tir d'un joueur part du coin O vers le point B et fait un angle de 35° avec la ligne de but : l'arc est affiché sur la figure.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": -6,
+                "y": -4
+              },
+              {
+                "id": "A",
+                "x": 8,
+                "y": -4
+              },
+              {
+                "id": "C",
+                "x": -6,
+                "y": 6
+              },
+              {
+                "id": "B",
+                "x": 1.3724,
+                "y": 1.1622
+              }
+            ],
+            "segments": [
+              [
+                "O",
+                "A"
+              ],
+              [
+                "O",
+                "C"
+              ],
+              [
+                "O",
+                "B"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "O",
+                "from": "A",
+                "to": "C",
+                "mark": "right"
+              },
+              {
+                "vertex": "O",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rue-et-ruelle",
+          "kind": "geometry",
+          "description": "Une rue droite (AC) du quartier et une ruelle qui la quitte en O pour aller en B. Les points A, O et C sont alignés, O est entre A et C. L'angle entre la ruelle [OB) et le côté [OC) de la rue mesure 50° : son arc est affiché. L'angle AOB, de l'autre côté de la ruelle, n'est pas marqué.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -9,
+                "y": -3
+              },
+              {
+                "id": "O",
+                "x": 0,
+                "y": -3
+              },
+              {
+                "id": "C",
+                "x": 9,
+                "y": -3
+              },
+              {
+                "id": "B",
+                "x": 5.1423,
+                "y": 3.1284
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "O"
+              ],
+              [
+                "O",
+                "C"
+              ],
+              [
+                "O",
+                "B"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "O",
+                "from": "C",
+                "to": "B",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "croisement-rues",
+          "kind": "geometry",
+          "description": "Deux rues droites du quartier se croisent au carrefour O. La première rue passe par A, O et C, la seconde par B, O et D. Les quatre angles formés en O sont deux à deux face à face. L'arc affiché indique l'angle AOB, qui mesure 60°. Les trois autres angles ne sont pas marqués.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 7.5175,
+                "y": 2.7362
+              },
+              {
+                "id": "B",
+                "x": 1.3892,
+                "y": 7.8785
+              },
+              {
+                "id": "C",
+                "x": -7.5175,
+                "y": -2.7362
+              },
+              {
+                "id": "D",
+                "x": -1.3892,
+                "y": -7.8785
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "C"
+              ],
+              [
+                "B",
+                "D"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "O",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "touches-et-diagonale",
+          "kind": "geometry",
+          "description": "Deux droites parallèles (QP) et (RS), qui représentent les deux lignes de touche d'un terrain, sont coupées par une droite (GH), la course oblique d'un joueur. La course coupe la droite (QP) en E et la droite (RS) en F. L'arc affiché indique l'angle PEF, qui mesure 120°.",
+          "params": {
+            "points": [
+              {
+                "id": "E",
+                "x": 1,
+                "y": 6
+              },
+              {
+                "id": "F",
+                "x": -3.6188,
+                "y": -2
+              },
+              {
+                "id": "G",
+                "x": 2.7321,
+                "y": 9
+              },
+              {
+                "id": "H",
+                "x": -5.3509,
+                "y": -5
+              },
+              {
+                "id": "P",
+                "x": 8,
+                "y": 6
+              },
+              {
+                "id": "Q",
+                "x": -8,
+                "y": 6
+              },
+              {
+                "id": "S",
+                "x": 8,
+                "y": -2
+              },
+              {
+                "id": "R",
+                "x": -8,
+                "y": -2
+              }
+            ],
+            "segments": [
+              [
+                "G",
+                "H"
+              ]
+            ],
+            "lines": [
+              [
+                "Q",
+                "P"
+              ],
+              [
+                "R",
+                "S"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "E",
+                "from": "P",
+                "to": "F",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "bissectrice-angle",
+          "kind": "geometry",
+          "description": "Un gardien de but est placé en O. Deux poteaux sont vus depuis O dans les directions des demi-droites [OA) et [OB). Le ballon est en M, sur la demi-droite [OM), qui partage l'angle AOB en deux angles de même mesure. L'arc affiché indique l'angle AOB, qui mesure 80°.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": -4,
+                "y": -3
+              },
+              {
+                "id": "A",
+                "x": 6.8329,
+                "y": -1.0899
+              },
+              {
+                "id": "B",
+                "x": -4.0,
+                "y": 6.0
+              },
+              {
+                "id": "M",
+                "x": 2.4279,
+                "y": 4.6604
+              }
+            ],
+            "segments": [
+              [
+                "O",
+                "A"
+              ],
+              [
+                "O",
+                "B"
+              ],
+              [
+                "O",
+                "M"
+              ]
+            ],
+            "angles": [
+              {
+                "vertex": "O",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Angles adjacents, complémentaires et supplémentaires",
+          "remember": "Deux angles sont adjacents quand ils ont le même sommet, un côté commun, et qu'ils sont de part et d'autre de ce côté commun. Deux angles sont complémentaires quand la somme de leurs mesures est $90^\\circ$ (un angle droit). Deux angles sont supplémentaires quand la somme de leurs mesures est $180^\\circ$ (un angle plat). Deux angles complémentaires ou supplémentaires ne sont pas forcément adjacents.",
+          "method": [
+            "Repérer la somme visée : $90^\\circ$ si les angles sont complémentaires ou forment un angle droit, $180^\\circ$ s'ils sont supplémentaires ou forment un angle plat.",
+            "Écrire l'égalité : angle cherché + angle connu = somme visée.",
+            "Calculer l'angle cherché par une soustraction.",
+            "Vérifier que la somme des deux angles donne bien la somme visée."
+          ],
+          "example": {
+            "statement": "Dans une rue droite (AC), une ruelle part du point O vers B, avec O entre A et C. L'angle $\\widehat{BOC}$ mesure $50^\\circ$. Calculer $\\widehat{AOB}$.",
+            "steps": [
+              "Repérer : A, O et C sont alignés, donc $\\widehat{AOB}$ et $\\widehat{BOC}$ forment un angle plat. La somme visée est $180^\\circ$.",
+              "Écrire : $\\widehat{AOB} + \\widehat{BOC} = 180^\\circ$, donc $\\widehat{AOB} + 50^\\circ = 180^\\circ$.",
+              "Calculer : $\\widehat{AOB} = 180^\\circ - 50^\\circ = 130^\\circ$.",
+              "Vérifier : $130^\\circ + 50^\\circ = 180^\\circ$. Le résultat est juste."
+            ]
+          },
+          "pitfall": "Ne pas confondre complémentaire (somme $90^\\circ$) et supplémentaire (somme $180^\\circ$). Contre-exemple : l'angle complémentaire de $40^\\circ$ est $90^\\circ - 40^\\circ = 50^\\circ$, mais son angle supplémentaire est $180^\\circ - 40^\\circ = 140^\\circ$. Pour ne pas se tromper, retiens que C vient avant S, comme 90 vient avant 180.",
+          "figure": "coin-de-terrain",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer un angle complémentaire ou supplémentaire.",
+            "questions": [
+              {
+                "content": "Deux angles sont complémentaires. L'un mesure 70°. Combien mesure l'autre ?",
+                "question_type": "numeric",
+                "hint": "Complémentaires : la somme doit faire 90°.",
+                "explanation": "Étape 1 — Repérer : des angles complémentaires ont pour somme visée 90°. Étape 2 — Écrire : 70° + angle cherché = 90°. Étape 3 — Calculer : 90° − 70° = 20°. Étape 4 — Vérifier : 70° + 20° = 90°. Si tu avais calculé avec 180°, tu aurais trouvé 110°, ce qui est faux pour des angles complémentaires.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "unit": "°",
+                "tolerance": 0
+              },
+              {
+                "content": "Deux angles de 110° et de 70° sont supplémentaires.",
+                "question_type": "true_false",
+                "hint": "Additionne les deux mesures et compare à 180°.",
+                "explanation": "Étape 1 — Repérer : « supplémentaires » veut dire que la somme visée est 180°. Étape 2 — Écrire : on additionne 110° + 70°. Étape 3 — Calculer : 110° + 70° = 180°. Étape 4 — Vérifier : la somme est bien 180°, donc ces angles sont supplémentaires. Ils ne sont pas complémentaires, car leur somme n'est pas 90°.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux angles sont supplémentaires. L'un mesure 115°. Combien mesure l'autre ?",
+                "question_type": "single_choice",
+                "hint": "Soustrais 115° à la somme visée.",
+                "explanation": "Étape 1 — Repérer : supplémentaires, donc la somme visée est 180°. Étape 2 — Écrire : 115° + angle cherché = 180°. Étape 3 — Calculer : 180° − 115° = 65°. Étape 4 — Vérifier : 115° + 65° = 180°. Le résultat 25° vient de 115° − 90° : c'est l'erreur de celui qui prend 90°.",
+                "answers": [
+                  {
+                    "content": "65°",
+                    "correct": true
+                  },
+                  {
+                    "content": "25°",
+                    "correct": false
+                  },
+                  {
+                    "content": "75°",
+                    "correct": false
+                  },
+                  {
+                    "content": "245°",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux angles dont la somme est 90° sont dits ___.",
+                "question_type": "fill_blank",
+                "hint": "C vient avant S, comme 90 vient avant 180.",
+                "explanation": "Étape 1 — Repérer : la somme visée est 90°, c'est un angle droit. Étape 2 — Écrire : les deux angles forment ensemble un angle droit. Étape 3 — Calculer : rien à calculer ici, il faut seulement donner le nom. Étape 4 — Vérifier : la somme 90° se nomme complémentaire, la somme 180° se nomme supplémentaire. La réponse est complémentaires.",
+                "answers": [
+                  {
+                    "content": "complémentaires",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître et calculer au coin du terrain",
+              "statement": "Au coin O d'un terrain de football, la ligne de but et la ligne de touche forment un angle droit. Tu appliques la méthode de la fiche à des angles du terrain et des rues du quartier.",
+              "hint": "Choisis d'abord la somme : 90° pour un angle droit, 180° pour une rue droite.",
+              "exercise_type": "fixation",
+              "figure": "coin-de-terrain",
+              "questions": [
+                {
+                  "content": "Deux angles sont adjacents. Que peut-on dire de sûr ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche la définition des angles adjacents. Étape 2 — Écrire : même sommet, un côté commun, de part et d'autre de ce côté. Étape 3 — Calculer : aucun calcul, on choisit la définition. Étape 4 — Vérifier : deux angles adjacents peuvent avoir des mesures différentes et une somme quelconque. Dire que leur somme est toujours 180° est faux : seuls les adjacents supplémentaires l'ont.",
+                  "answers": [
+                    {
+                      "content": "Ils ont le même sommet et un côté commun, et ils sont de part et d'autre de ce côté",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils ont la même mesure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Leur somme est toujours 180°",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont le même sommet mais aucun côté commun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au coin O d'un terrain, la ligne de but et la ligne de touche forment un angle droit. Le tir de Koffi part du coin et fait un angle de 35° avec la ligne de but. Quel angle fait ce tir avec la ligne de touche ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la ligne de but et la ligne de touche forment un angle droit, la somme visée est 90°. Étape 2 — Écrire : 35° + angle cherché = 90°. Étape 3 — Calculer : 90° − 35° = 55°. Étape 4 — Vérifier : 35° + 55° = 90°. Les deux angles sont adjacents et complémentaires. Utiliser 180° donnerait 145°, ce qui est faux ici.",
+                  "answers": [
+                    {
+                      "content": "55",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une rue droite (AC) est coupée en O par une ruelle qui va vers B, avec O entre A et C. L'angle entre la ruelle et le côté [OC) de la rue mesure 50°. Quel est l'angle entre la ruelle et le côté [OA) de la rue ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : A, O et C sont alignés, les deux angles forment un angle plat, la somme visée est 180°. Étape 2 — Écrire : 50° + angle cherché = 180°. Étape 3 — Calculer : 180° − 50° = 130°. Étape 4 — Vérifier : 50° + 130° = 180°. Prendre 90° donnerait 40°, ce qui est faux : la rue est droite, l'angle est plat et non droit.",
+                  "answers": [
+                    {
+                      "content": "130",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux angles complémentaires sont toujours adjacents.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : « complémentaires » parle de la somme 90°, pas de la position. Étape 2 — Écrire : deux angles de 30° et de 60° ont pour somme 90°. Étape 3 — Calculer : 30° + 60° = 90°, ils sont complémentaires. Étape 4 — Vérifier : ils peuvent être dessinés à deux endroits différents, sans sommet commun. Être complémentaires ne suffit donc pas pour être adjacents : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle mesure 40°. Quels sont son angle complémentaire puis son angle supplémentaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : complémentaire, la somme visée est 90° ; supplémentaire, la somme visée est 180°. Étape 2 — Écrire : 40° + a = 90° et 40° + b = 180°. Étape 3 — Calculer : a = 90° − 40° = 50° et b = 180° − 40° = 140°. Étape 4 — Vérifier : 40° + 50° = 90° et 40° + 140° = 180°. Inverser l'ordre (140° puis 50°) est l'erreur de celui qui confond les deux mots.",
+                  "answers": [
+                    {
+                      "content": "50° puis 140°",
+                      "correct": true
+                    },
+                    {
+                      "content": "140° puis 50°",
+                      "correct": false
+                    },
+                    {
+                      "content": "50° puis 320°",
+                      "correct": false
+                    },
+                    {
+                      "content": "140° puis 320°",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer des angles dans le quartier",
+              "statement": "Dans cet exercice, tu reconnais des angles complémentaires et supplémentaires, puis tu calcules un angle avec la méthode de la fiche.",
+              "hint": "Écris toujours l'égalité avec la somme visée avant de soustraire.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux angles qui forment ensemble un angle plat sont ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : un angle plat mesure 180°, la somme visée est 180°. Étape 2 — Écrire : les deux angles s'ajoutent pour faire 180°. Étape 3 — Calculer : aucun calcul ici, il faut nommer. Étape 4 — Vérifier : une somme de 180° se dit supplémentaires. Complémentaires serait pour 90°. Deux angles qui forment un angle plat ne sont pas toujours de même mesure.",
+                  "answers": [
+                    {
+                      "content": "supplémentaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "complémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "adjacents de même mesure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux angles sont complémentaires. L'un mesure 64°, l'autre mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : complémentaires, la somme visée est 90°. Étape 2 — Écrire : 64° + angle cherché = 90°. Étape 3 — Calculer : 90° − 64° = 26°. Étape 4 — Vérifier : 64° + 26° = 90°. La réponse 116° vient de 180° − 64° : c'est le piège du mot supplémentaire.",
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces couples d'angles, lesquels sont des angles supplémentaires ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : supplémentaires, la somme visée est 180°. Étape 2 — Écrire : on additionne chaque couple. Étape 3 — Calculer : 120° + 60° = 180° ; 95° + 85° = 180° ; 30° + 60° = 90° ; 100° + 70° = 170° ; 50° + 50° = 100°. Étape 4 — Vérifier : seuls les couples 120° et 60°, et 95° et 85°, font 180°. Le couple 30° et 60° est complémentaire, pas supplémentaire.",
+                  "answers": [
+                    {
+                      "content": "120° et 60°",
+                      "correct": true
+                    },
+                    {
+                      "content": "95° et 85°",
+                      "correct": true
+                    },
+                    {
+                      "content": "30° et 60°",
+                      "correct": false
+                    },
+                    {
+                      "content": "100° et 70°",
+                      "correct": false
+                    },
+                    {
+                      "content": "50° et 50°",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque description à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on lit chaque description. Étape 2 — Écrire : 90° correspond à un angle droit, 180° à un angle plat. Étape 3 — Calculer : aucun calcul, il faut associer. Étape 4 — Vérifier : somme 90° donne complémentaires, somme 180° donne supplémentaires, la position des côtés donne adjacents. Complémentaires et supplémentaires parlent de la mesure, adjacents parle de la position.",
+                  "answers": [
+                    {
+                      "content": "Leur somme vaut 90°",
+                      "match": "complémentaires"
+                    },
+                    {
+                      "content": "Leur somme vaut 180°",
+                      "match": "supplémentaires"
+                    },
+                    {
+                      "content": "Même sommet, un côté commun, de part et d'autre",
+                      "match": "adjacents"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle plat est partagé en trois angles adjacents de 50°, de 70° et d'un troisième angle. Combien mesure le troisième angle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : trois angles adjacents forment un angle plat, la somme visée est 180°. Étape 2 — Écrire : 50° + 70° + angle cherché = 180°. Étape 3 — Calculer : 180° − 50° − 70° = 60°. Étape 4 — Vérifier : 50° + 70° + 60° = 180°. Oublier un des deux angles connus donnerait 130° ou 110°, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer un angle supplémentaire ou complémentaire.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on commence toujours par choisir la somme visée. Étape 2 — Écrire : on pose l'égalité avec l'angle cherché. Étape 3 — Calculer : on soustrait l'angle connu à la somme. Étape 4 — Vérifier : on additionne pour contrôler. Calculer avant de repérer la somme expose à prendre 90° au lieu de 180°.",
+                  "answers": [
+                    {
+                      "content": "Repérer la somme visée, 90° ou 180°."
+                    },
+                    {
+                      "content": "Écrire l'égalité : angle cherché + angle connu = somme."
+                    },
+                    {
+                      "content": "Calculer l'angle cherché par une soustraction."
+                    },
+                    {
+                      "content": "Vérifier que la somme donne bien 90° ou 180°."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Angles opposés par le sommet",
+          "remember": "Deux angles sont opposés par le sommet quand ils ont le même sommet et que les côtés de l'un sont les prolongements des côtés de l'autre. Deux droites qui se coupent forment deux paires d'angles opposés par le sommet. Propriété : deux angles opposés par le sommet ont la même mesure. Attention : deux angles de même mesure ne sont pas forcément opposés par le sommet.",
+          "method": [
+            "Repérer le point d'intersection des deux droites et l'angle dont la mesure est connue.",
+            "Identifier l'angle opposé par le sommet : ses côtés prolongent ceux de l'angle connu.",
+            "Conclure que les deux angles ont la même mesure.",
+            "Déduire les deux autres angles : chacun forme un angle plat avec l'angle connu, il est donc supplémentaire."
+          ],
+          "example": {
+            "statement": "Deux rues droites se coupent au carrefour O. La première passe par A et C, la seconde par B et D. On sait que $\\widehat{AOB} = 60^\\circ$. Trouver $\\widehat{COD}$ et $\\widehat{BOC}$.",
+            "steps": [
+              "Repérer : les droites (AC) et (BD) se coupent en O ; l'angle connu est $\\widehat{AOB} = 60^\\circ$.",
+              "Identifier : [OC) prolonge [OA) et [OD) prolonge [OB), donc $\\widehat{COD}$ est opposé par le sommet à $\\widehat{AOB}$.",
+              "Conclure : deux angles opposés par le sommet ont la même mesure, donc $\\widehat{COD} = 60^\\circ$.",
+              "Déduire : $\\widehat{BOC}$ et $\\widehat{AOB}$ forment un angle plat, donc $\\widehat{BOC} = 180^\\circ - 60^\\circ = 120^\\circ$."
+            ]
+          },
+          "pitfall": "Ne pas croire que deux angles égaux sont forcément opposés par le sommet, ni que des angles voisins sont égaux. Contre-exemple : au carrefour, $\\widehat{AOB} = 60^\\circ$ et son voisin $\\widehat{BOC} = 120^\\circ$ sont différents. Seul l'angle qui lui fait face, de l'autre côté du sommet, mesure $60^\\circ$.",
+          "figure": "croisement-rues",
+          "practice": {
+            "statement": "Tu t'entraînes à trouver l'angle opposé par le sommet et les angles voisins.",
+            "questions": [
+              {
+                "content": "Deux droites se coupent en O. L'angle AOB mesure 48°. L'angle COD est opposé par le sommet à AOB. Combien mesure COD ?",
+                "question_type": "numeric",
+                "hint": "Les angles opposés par le sommet sont égaux.",
+                "explanation": "Étape 1 — Repérer : les deux droites se coupent en O, l'angle connu est AOB = 48°. Étape 2 — Identifier : COD est opposé par le sommet à AOB, ses côtés les prolongent. Étape 3 — Conclure : deux angles opposés par le sommet ont la même mesure, donc COD = 48°. Étape 4 — Déduire : rien d'autre n'est demandé. Chercher 180° − 48° = 132° serait l'erreur de celui qui prend l'angle voisin.",
+                "answers": [
+                  {
+                    "content": "48",
+                    "correct": true
+                  }
+                ],
+                "unit": "°",
+                "tolerance": 0
+              },
+              {
+                "content": "Deux angles opposés par le sommet ont toujours la même mesure.",
+                "question_type": "true_false",
+                "hint": "Relis la propriété de la fiche.",
+                "explanation": "Étape 1 — Repérer : on parle de deux droites qui se coupent. Étape 2 — Identifier : les angles qui se font face de part et d'autre du sommet sont opposés par le sommet. Étape 3 — Conclure : la propriété du cours dit qu'ils ont la même mesure. Étape 4 — Déduire : cela marche pour n'importe quelle valeur de l'angle, pas seulement pour 90°. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux droites se coupent. Un angle mesure 70°. Combien mesure un angle voisin de lui (adjacent, de l'autre côté d'un des côtés) ?",
+                "question_type": "single_choice",
+                "hint": "Le voisin forme un angle plat avec l'angle connu.",
+                "explanation": "Étape 1 — Repérer : l'angle connu est 70° et son voisin forme avec lui un angle plat. Étape 2 — Identifier : l'angle voisin n'est pas l'opposé par le sommet. Étape 3 — Conclure : les deux angles sont supplémentaires, la somme est 180°. Étape 4 — Déduire : 180° − 70° = 110°. La réponse 70° est celle de l'opposé par le sommet, pas du voisin ; 20° vient de 90° − 70°.",
+                "answers": [
+                  {
+                    "content": "110°",
+                    "correct": true
+                  },
+                  {
+                    "content": "70°",
+                    "correct": false
+                  },
+                  {
+                    "content": "20°",
+                    "correct": false
+                  },
+                  {
+                    "content": "290°",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux droites sécantes forment ___ paires d'angles opposés par le sommet.",
+                "question_type": "fill_blank",
+                "hint": "Quatre angles, rangés deux par deux.",
+                "explanation": "Étape 1 — Repérer : deux droites sécantes forment quatre angles autour du point d'intersection. Étape 2 — Identifier : chaque angle a un seul angle qui lui fait face. Étape 3 — Conclure : quatre angles se rangent en deux paires. Étape 4 — Déduire : il y a deux paires d'angles opposés par le sommet, chacune de deux angles égaux. La réponse est deux.",
+                "answers": [
+                  {
+                    "content": "deux",
+                    "correct": true
+                  },
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Lire un carrefour",
+              "statement": "Deux rues droites se croisent au carrefour O. La première rue passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 60°. Tu appliques la méthode de la fiche aux quatre angles du carrefour.",
+              "hint": "Cherche d'abord l'angle qui fait face à AOB, puis les angles voisins.",
+              "exercise_type": "fixation",
+              "figure": "croisement-rues",
+              "questions": [
+                {
+                  "content": "Deux rues se croisent en O. La première passe par A, O et C, la seconde par B, O et D. Quel angle est opposé par le sommet à l'angle AOB ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les rues (AC) et (BD) se coupent en O, l'angle connu est AOB. Étape 2 — Identifier : [OC) prolonge [OA) et [OD) prolonge [OB), donc l'angle opposé par le sommet est COD. Étape 3 — Conclure : COD est le seul angle qui fait face à AOB. Étape 4 — Déduire : BOC et DOA sont des voisins de AOB, pas ses opposés. AOC est un angle plat, il ne fait pas face à AOB.",
+                  "answers": [
+                    {
+                      "content": "$\\widehat{COD}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\widehat{BOC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{DOA}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{AOC}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 60°. Combien mesure l'angle COD ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est AOB = 60°. Étape 2 — Identifier : COD est opposé par le sommet à AOB. Étape 3 — Conclure : deux angles opposés par le sommet ont la même mesure, COD = 60°. Étape 4 — Déduire : rien d'autre à calculer. La valeur 120° serait celle d'un voisin, pas de l'opposé.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 60°. Combien mesure l'angle voisin BOC ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est AOB = 60°, et A, O, C sont alignés. Étape 2 — Identifier : BOC et AOB sont adjacents et forment un angle plat. Étape 3 — Conclure : ils sont supplémentaires, la somme est 180°. Étape 4 — Déduire : BOC = 180° − 60° = 120°. La réponse 60° serait fausse, car BOC n'est pas l'opposé de AOB.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 60°. Combien mesure l'angle DOA ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est AOB = 60°, et B, O, D sont alignés. Étape 2 — Identifier : DOA est adjacent à AOB et forme avec lui un angle plat ; il est aussi opposé par le sommet à BOC. Étape 3 — Conclure : DOA = BOC, ou bien 180° − 60°. Étape 4 — Déduire : DOA = 120°. Les deux chemins donnent le même résultat, ce qui confirme le calcul.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux angles de même mesure sont toujours opposés par le sommet.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on teste l'affirmation avec un exemple. Étape 2 — Identifier : dans un carrefour, deux rues à angle droit forment quatre angles droits. Étape 3 — Conclure : les quatre angles mesurent 90° mais deux voisins ne sont pas opposés par le sommet. Étape 4 — Déduire : être égaux ne suffit pas, il faut aussi que les côtés se prolongent. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Quatre angles autour d'un point",
+              "statement": "Dans cet exercice, tu retrouves les angles formés par deux droites sécantes en appliquant la méthode de la fiche.",
+              "hint": "L'opposé par le sommet est égal ; le voisin est supplémentaire.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux angles opposés par le sommet sont ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on parle de deux droites qui se coupent. Étape 2 — Identifier : les deux angles se font face de part et d'autre du sommet. Étape 3 — Conclure : la propriété dit qu'ils ont la même mesure. Étape 4 — Déduire : ce sont leurs voisins qui sont supplémentaires. Dire que les opposés sont supplémentaires est faux, sauf dans le cas particulier de 90°.",
+                  "answers": [
+                    {
+                      "content": "égaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "complémentaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux rues se croisent. Un des angles mesure 125°. L'angle opposé par le sommet mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'angle connu mesure 125°. Étape 2 — Identifier : l'angle qui lui fait face est son opposé par le sommet. Étape 3 — Conclure : deux angles opposés par le sommet ont la même mesure, donc 125°. Étape 4 — Déduire : il n'y a rien à retrancher. La valeur 55° est celle d'un voisin, obtenue par 180° − 125°.",
+                  "answers": [
+                    {
+                      "content": "125",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux rues se croisent et l'un des quatre angles mesure 35°. Quelles mesures trouve-t-on parmi les quatre angles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est 35°. Étape 2 — Identifier : son opposé par le sommet mesure aussi 35°, et ses deux voisins sont supplémentaires. Étape 3 — Conclure : les opposés ont la même mesure. Étape 4 — Déduire : les deux voisins mesurent 180° − 35° = 145°. On trouve donc 35° et 145°, jamais 55° ni 90° pour ces rues.",
+                  "answers": [
+                    {
+                      "content": "35°",
+                      "correct": true
+                    },
+                    {
+                      "content": "145°",
+                      "correct": true
+                    },
+                    {
+                      "content": "55°",
+                      "correct": false
+                    },
+                    {
+                      "content": "90°",
+                      "correct": false
+                    },
+                    {
+                      "content": "325°",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites se coupent en O. Les angles AOB et COD sont opposés par le sommet. L'angle BOC mesure 105°. Combien mesure l'angle AOB ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est BOC = 105°. Étape 2 — Identifier : AOB est un voisin de BOC, il forme avec lui un angle plat. Étape 3 — Conclure : les deux angles sont supplémentaires. Étape 4 — Déduire : AOB = 180° − 105° = 75°. Répondre 105° serait faux : BOC n'est pas l'opposé de AOB.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Dans un carrefour, les côtés d'un angle sont les prolongements des côtés de l'angle opposé par le sommet.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on relit la définition de la fiche. Étape 2 — Identifier : deux angles opposés par le sommet ont le même sommet. Étape 3 — Conclure : les côtés de l'un sont les prolongements des côtés de l'autre. Étape 4 — Déduire : c'est exactement la définition, l'affirmation est vraie. Elle ne dit rien des angles voisins.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver les angles d'un carrefour.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on commence par l'angle connu. Étape 2 — Identifier : on cherche celui qui lui fait face. Étape 3 — Conclure : on donne sa mesure. Étape 4 — Déduire : on calcule les voisins par 180° moins l'angle connu. Calculer les voisins avant d'avoir identifié l'opposé mène à des confusions.",
+                  "answers": [
+                    {
+                      "content": "Repérer le point d'intersection et l'angle connu."
+                    },
+                    {
+                      "content": "Identifier l'angle opposé par le sommet."
+                    },
+                    {
+                      "content": "Conclure qu'il a la même mesure."
+                    },
+                    {
+                      "content": "Déduire les deux autres angles par 180° moins l'angle connu."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Deux droites parallèles et une sécante",
+          "remember": "Une sécante est une droite qui coupe deux autres droites. Elle forme huit angles. Deux angles sont alternes-internes quand ils sont entre les deux droites et de part et d'autre de la sécante. Deux angles sont correspondants quand ils sont du même côté de la sécante et à la même place, l'un en haut, l'autre en bas. Propriété : si les deux droites sont parallèles, alors deux angles alternes-internes sont égaux et deux angles correspondants sont égaux. Réciproque : si deux angles alternes-internes (ou correspondants) sont égaux, alors les deux droites sont parallèles.",
+          "method": [
+            "Repérer les deux droites, la sécante, et dire si les droites sont parallèles.",
+            "Nommer la position des deux angles : alternes-internes ou correspondants.",
+            "Appliquer la propriété : les angles sont égaux si les droites sont parallèles.",
+            "Calculer l'angle cherché, en passant au besoin par un angle supplémentaire."
+          ],
+          "example": {
+            "statement": "Les droites (QP) et (RS) sont parallèles. La sécante (GH) les coupe en E et en F. On sait que $\\widehat{PEF} = 120^\\circ$. Trouver $\\widehat{RFE}$ puis $\\widehat{SFE}$.",
+            "steps": [
+              "Repérer : (QP) // (RS), la sécante (GH) les coupe en E et en F, l'angle connu est $\\widehat{PEF} = 120^\\circ$.",
+              "Nommer : $\\widehat{PEF}$ et $\\widehat{RFE}$ sont entre les deux droites et de part et d'autre de (GH) : ils sont alternes-internes.",
+              "Appliquer : les droites sont parallèles, donc les angles alternes-internes sont égaux : $\\widehat{RFE} = 120^\\circ$.",
+              "Calculer : $\\widehat{SFE}$ forme un angle plat avec $\\widehat{RFE}$, donc $\\widehat{SFE} = 180^\\circ - 120^\\circ = 60^\\circ$."
+            ]
+          },
+          "pitfall": "Ne pas dire que des angles alternes-internes sont égaux quand on ne sait pas que les droites sont parallèles. Contre-exemple : deux droites qui se rapprochent forment avec une sécante des angles de $70^\\circ$ et de $80^\\circ$ : ils sont alternes-internes mais différents. L'égalité est vraie seulement si les droites sont parallèles.",
+          "figure": "touches-et-diagonale",
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser les angles formés par deux parallèles et une sécante.",
+            "questions": [
+              {
+                "content": "Deux droites parallèles sont coupées par une sécante. Deux angles alternes-internes sont ___.",
+                "question_type": "fill_blank",
+                "hint": "Relis la propriété de la fiche.",
+                "explanation": "Étape 1 — Repérer : les droites sont parallèles et coupées par une sécante. Étape 2 — Nommer : on parle d'angles alternes-internes. Étape 3 — Appliquer : la propriété dit qu'ils sont égaux. Étape 4 — Calculer : aucun calcul, il faut donner le mot. La réponse est égaux, pas supplémentaires.",
+                "answers": [
+                  {
+                    "content": "égaux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les droites (d1) et (d2) sont parallèles et coupées par une sécante. Un angle mesure 70°. Combien mesure son angle correspondant ?",
+                "question_type": "numeric",
+                "hint": "Les correspondants sont égaux si les droites sont parallèles.",
+                "explanation": "Étape 1 — Repérer : (d1) // (d2) et une sécante les coupe. Étape 2 — Nommer : les deux angles sont correspondants. Étape 3 — Appliquer : les droites sont parallèles, donc les angles correspondants sont égaux. Étape 4 — Calculer : l'angle cherché mesure 70°. Écrire 110° (180° − 70°) serait confondre avec un angle voisin.",
+                "answers": [
+                  {
+                    "content": "70",
+                    "correct": true
+                  }
+                ],
+                "unit": "°",
+                "tolerance": 0
+              },
+              {
+                "content": "Si deux droites sont parallèles, alors deux angles correspondants formés avec une sécante sont égaux.",
+                "question_type": "true_false",
+                "hint": "C'est la propriété de la fiche.",
+                "explanation": "Étape 1 — Repérer : les droites sont parallèles, une sécante les coupe. Étape 2 — Nommer : on regarde des angles correspondants. Étape 3 — Appliquer : c'est la propriété du cours, ils sont égaux. Étape 4 — Calculer : aucun calcul. L'affirmation est vraie, et elle exige que les droites soient parallèles.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux droites sont coupées par une sécante. Deux angles correspondants mesurent chacun 55°. Que peut-on conclure ?",
+                "question_type": "single_choice",
+                "hint": "Utilise la réciproque.",
+                "explanation": "Étape 1 — Repérer : une sécante coupe deux droites, deux angles correspondants sont connus. Étape 2 — Nommer : les deux angles sont correspondants et mesurent 55° tous les deux. Étape 3 — Appliquer : la réciproque dit que si deux correspondants sont égaux, alors les droites sont parallèles. Étape 4 — Calculer : aucun calcul. Les droites sont donc parallèles. Perpendiculaires demanderait des angles de 90°.",
+                "answers": [
+                  {
+                    "content": "Les deux droites sont parallèles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les deux droites sont perpendiculaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les deux droites se coupent",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut rien conclure",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "La course oblique sur le terrain",
+              "statement": "Les droites (QP) et (RS), parallèles, représentent les deux lignes de touche d'un terrain. La droite (GH) est la course oblique d'un joueur, elle coupe (QP) en E et (RS) en F. L'angle PEF mesure 120°. Tu appliques la méthode de la fiche.",
+              "hint": "Repère les angles entre les deux droites : ils sont alternes-internes s'ils sont de part et d'autre de la sécante.",
+              "exercise_type": "fixation",
+              "figure": "touches-et-diagonale",
+              "questions": [
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées en E et en F par la sécante (GH). Quel angle est correspondant à l'angle PEF ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), la sécante (GH) les coupe en E et en F. Étape 2 — Nommer : le correspondant de PEF est du même côté de la sécante et à la même place en F : c'est SFH. Étape 3 — Appliquer : les droites sont parallèles, donc SFH = PEF. Étape 4 — Calculer : SFH = 120°. L'angle RFE est alterne-interne avec PEF et non correspondant ; SFE et QEF sont des angles voisins.",
+                  "answers": [
+                    {
+                      "content": "$\\widehat{SFH}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\widehat{RFE}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{SFE}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{QEF}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées en E et en F par la sécante (GH). Quel angle est alterne-interne avec l'angle PEF ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), la sécante (GH) les coupe en E et en F. Étape 2 — Nommer : un alterne-interne est entre les deux droites et de l'autre côté de la sécante : c'est RFE. Étape 3 — Appliquer : les droites sont parallèles, donc RFE = PEF. Étape 4 — Calculer : RFE = 120°. L'angle SFH est correspondant à PEF et non alterne-interne ; SFE est du même côté que PEF.",
+                  "answers": [
+                    {
+                      "content": "$\\widehat{RFE}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\widehat{SFH}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{SFE}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{QEF}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées en E et en F par la sécante (GH), avec PEF = 120°. Combien mesure l'angle alterne-interne RFE ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), l'angle connu est PEF = 120°. Étape 2 — Nommer : RFE et PEF sont alternes-internes. Étape 3 — Appliquer : les droites sont parallèles, donc RFE = PEF. Étape 4 — Calculer : RFE = 120°. La valeur 60° serait celle d'un angle voisin.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées en E et en F par la sécante (GH), avec PEF = 120°. Combien mesure l'angle SFE ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), PEF = 120°, et RFE est son alterne-interne. Étape 2 — Nommer : SFE et RFE sont adjacents et forment un angle plat sur (RS). Étape 3 — Appliquer : RFE = PEF = 120° car les droites sont parallèles. Étape 4 — Calculer : SFE = 180° − 120° = 60°. Répondre 120° serait oublier le passage par l'angle supplémentaire.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Si deux droites ne sont pas parallèles, deux angles alternes-internes formés avec une sécante sont quand même égaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les droites ne sont pas parallèles. Étape 2 — Nommer : on regarde des angles alternes-internes. Étape 3 — Appliquer : la propriété exige des droites parallèles. Étape 4 — Calculer : avec des angles de 70° et de 80°, les alternes-internes sont différents. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Parallèles, sécante et réciproque",
+              "statement": "Dans cet exercice, tu reconnais des angles alternes-internes et correspondants, puis tu calcules ou tu prouves un parallélisme avec la méthode de la fiche.",
+              "hint": "Les angles égaux demandent des droites parallèles ; pour prouver un parallélisme, on utilise la réciproque.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque position d'angles à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on lit la position de chaque paire d'angles. Étape 2 — Nommer : de part et d'autre de la sécante et entre les droites donne alternes-internes ; du même côté et à la même place donne correspondants. Étape 3 — Appliquer : un même sommet avec des côtés qui se prolongent donne opposés par le sommet. Étape 4 — Calculer : aucun calcul, il faut associer. Les opposés par le sommet n'ont pas besoin de parallèles.",
+                  "answers": [
+                    {
+                      "content": "Entre les deux droites, de part et d'autre de la sécante",
+                      "match": "alternes-internes"
+                    },
+                    {
+                      "content": "Du même côté de la sécante, à la même place",
+                      "match": "correspondants"
+                    },
+                    {
+                      "content": "Même sommet, côtés dans le prolongement l'un de l'autre",
+                      "match": "opposés par le sommet"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle mesure 115°. Un autre angle est son correspondant, et un troisième forme avec ce correspondant un angle plat. Combien mesure ce troisième angle ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les droites sont parallèles, l'angle connu est 115°. Étape 2 — Nommer : le deuxième angle est correspondant du premier. Étape 3 — Appliquer : les droites sont parallèles, donc le correspondant mesure 115°. Étape 4 — Calculer : le troisième angle mesure 180° − 115° = 65°. Répondre 115° oublierait le passage à l'angle supplémentaire.",
+                  "answers": [
+                    {
+                      "content": "65",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux droites parallèles sont coupées par une sécante. Deux angles alternes-internes mesurent 72° et x. Alors x mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : les droites sont parallèles, l'angle connu est 72°. Étape 2 — Nommer : les deux angles sont alternes-internes. Étape 3 — Appliquer : les droites sont parallèles, donc les angles sont égaux. Étape 4 — Calculer : x = 72°. La valeur 108° viendrait de 180° − 72° : c'est une erreur de piège.",
+                  "answers": [
+                    {
+                      "content": "72",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites sont coupées par une sécante. Deux angles alternes-internes mesurent 80° et 100°. Que peut-on dire de ces deux droites ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une sécante coupe deux droites, les alternes-internes mesurent 80° et 100°. Étape 2 — Nommer : ces deux angles sont alternes-internes. Étape 3 — Appliquer : si les droites étaient parallèles, ils seraient égaux. Étape 4 — Calculer : 80° est différent de 100°, donc les droites ne sont pas parallèles. 80° + 100° = 180° ne prouve rien pour des alternes-internes.",
+                  "answers": [
+                    {
+                      "content": "Elles ne sont pas parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quels cas peut-on affirmer que deux droites coupées par une sécante sont parallèles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche ce qui prouve le parallélisme. Étape 2 — Nommer : seules les paires alternes-internes et correspondants servent à cela. Étape 3 — Appliquer : la réciproque dit que des alternes-internes égaux ou des correspondants égaux donnent des droites parallèles. Étape 4 — Calculer : aucun calcul. Les opposés par le sommet sont toujours égaux et les adjacents sur une droite toujours supplémentaires, sans aucun parallélisme.",
+                  "answers": [
+                    {
+                      "content": "Deux angles alternes-internes sont égaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux angles correspondants sont égaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux angles opposés par le sommet sont égaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux angles adjacents sont supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux angles voisins ont des mesures différentes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer un angle avec deux parallèles et une sécante.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on vérifie d'abord que les droites sont parallèles. Étape 2 — Nommer : on dit comment les angles sont placés. Étape 3 — Appliquer : on écrit l'égalité des angles. Étape 4 — Calculer : on termine par la valeur. Appliquer la propriété sans avoir vérifié le parallélisme conduirait à une erreur.",
+                  "answers": [
+                    {
+                      "content": "Repérer les droites, la sécante et le parallélisme."
+                    },
+                    {
+                      "content": "Nommer la position des angles : alternes-internes ou correspondants."
+                    },
+                    {
+                      "content": "Appliquer la propriété : les angles sont égaux."
+                    },
+                    {
+                      "content": "Calculer l'angle cherché, au besoin avec un angle supplémentaire."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bissectrice d'un angle",
+          "remember": "La bissectrice d'un angle est la demi-droite qui a pour origine le sommet de l'angle et qui le partage en deux angles de même mesure. Si [Oz) est la bissectrice de l'angle $\\widehat{xOy}$, alors $\\widehat{xOz} = \\widehat{zOy}$ et chacun de ces angles vaut la moitié de $\\widehat{xOy}$. Au rapporteur, on construit la bissectrice en traçant un angle égal à la moitié de la mesure de l'angle.",
+          "method": [
+            "Repérer l'angle à partager et son sommet.",
+            "Lire la mesure de l'angle, ou la mesurer au rapporteur.",
+            "Calculer la moitié de cette mesure.",
+            "Tracer, à partir d'un côté, un angle égal à cette moitié, puis la demi-droite qui part du sommet."
+          ],
+          "example": {
+            "statement": "Un gardien de but est en O. Les poteaux sont dans les directions [OA) et [OB), et $\\widehat{AOB} = 80^\\circ$. Construire la bissectrice [OM) de $\\widehat{AOB}$ et donner $\\widehat{AOM}$.",
+            "steps": [
+              "Repérer : l'angle à partager est $\\widehat{AOB}$, de sommet O.",
+              "Lire : au rapporteur, on lit $\\widehat{AOB} = 80^\\circ$.",
+              "Calculer : la moitié de $80^\\circ$ est $80^\\circ \\div 2 = 40^\\circ$, donc $\\widehat{AOM} = 40^\\circ$.",
+              "Tracer : on place le rapporteur sur [OA), on marque $40^\\circ$, puis on trace la demi-droite [OM) qui part de O."
+            ]
+          },
+          "pitfall": "Ne pas confondre la bissectrice d'un angle avec la médiatrice d'un segment, et ne pas dire que la bissectrice « mesure » la moitié. Contre-exemple : pour un angle de $80^\\circ$, la bissectrice est une demi-droite, ce sont les deux angles formés qui mesurent $40^\\circ$ chacun. La médiatrice, elle, est perpendiculaire à un segment en son milieu.",
+          "figure": "bissectrice-angle",
+          "practice": {
+            "statement": "Tu t'entraînes à calculer les angles formés par une bissectrice.",
+            "questions": [
+              {
+                "content": "La bissectrice d'un angle de 70° le partage en deux angles. Combien mesure chacun de ces deux angles ?",
+                "question_type": "numeric",
+                "hint": "Divise la mesure par 2.",
+                "explanation": "Étape 1 — Repérer : l'angle à partager mesure 70°. Étape 2 — Lire : la mesure de l'angle est donnée, 70°. Étape 3 — Calculer : la moitié de 70° est 70° ÷ 2 = 35°. Étape 4 — Tracer : la bissectrice partage l'angle en deux angles égaux de 35°. Répondre 70° oublierait de diviser par 2.",
+                "answers": [
+                  {
+                    "content": "35",
+                    "correct": true
+                  }
+                ],
+                "unit": "°",
+                "tolerance": 0
+              },
+              {
+                "content": "La bissectrice d'un angle le partage en deux angles de même mesure.",
+                "question_type": "true_false",
+                "hint": "C'est la définition.",
+                "explanation": "Étape 1 — Repérer : on parle de la bissectrice d'un angle. Étape 2 — Lire : on rappelle la définition du cours. Étape 3 — Calculer : si l'angle mesure 60°, chaque partie mesure 30°. Étape 4 — Tracer : la demi-droite partage l'angle en deux parts égales. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La demi-droite [Oz) est la bissectrice de l'angle xOy. On sait que xOz = 28°. Combien mesure l'angle xOy ?",
+                "question_type": "single_choice",
+                "hint": "xOz est la moitié de xOy.",
+                "explanation": "Étape 1 — Repérer : [Oz) partage xOy en deux angles égaux, xOz est une moitié. Étape 2 — Lire : la moitié mesure 28°. Étape 3 — Calculer : l'angle entier est le double, 28° × 2 = 56°. Étape 4 — Tracer : si on dessine, xOz et zOy mesurent 28° chacun. La valeur 14° viendrait d'une division par 2 au lieu d'une multiplication.",
+                "answers": [
+                  {
+                    "content": "56°",
+                    "correct": true
+                  },
+                  {
+                    "content": "14°",
+                    "correct": false
+                  },
+                  {
+                    "content": "28°",
+                    "correct": false
+                  },
+                  {
+                    "content": "152°",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une ___ partage un angle en deux angles de même mesure.",
+                "question_type": "fill_blank",
+                "hint": "Ce mot commence par B.",
+                "explanation": "Étape 1 — Repérer : on cherche la demi-droite qui partage un angle. Étape 2 — Lire : elle donne deux angles de même mesure. Étape 3 — Calculer : aucun calcul, il faut donner le nom. Étape 4 — Tracer : cette demi-droite s'appelle la bissectrice. La médiatrice partage un segment, pas un angle.",
+                "answers": [
+                  {
+                    "content": "bissectrice",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "L'angle de tir du gardien",
+              "statement": "Un gardien est en O. Les poteaux sont dans les directions [OA) et [OB), et l'angle AOB mesure 80°. Le ballon est en M, sur la bissectrice [OM) de l'angle AOB. Tu appliques la méthode de la fiche.",
+              "hint": "La bissectrice partage l'angle en deux moitiés égales.",
+              "exercise_type": "fixation",
+              "figure": "bissectrice-angle",
+              "questions": [
+                {
+                  "content": "La demi-droite [OM) est la bissectrice de l'angle AOB qui mesure 80°. Combien mesure l'angle AOM ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [OM) partage AOB en deux angles de même mesure. Étape 2 — Lire : l'angle AOB mesure 80°. Étape 3 — Calculer : la moitié de 80° est 80° ÷ 2 = 40°. Étape 4 — Tracer : AOM = 40°. Répondre 80° serait oublier de partager.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La demi-droite [OM) est la bissectrice de l'angle AOB qui mesure 80°. Combien mesure l'angle MOB ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [OM) est la bissectrice de AOB, donc MOB = AOM. Étape 2 — Lire : AOB = 80°. Étape 3 — Calculer : MOB = 80° ÷ 2 = 40°. Étape 4 — Tracer : les deux angles AOM et MOB mesurent 40° chacun. La somme 40° + 40° = 80° confirme le résultat.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La demi-droite [OM) est la bissectrice de l'angle AOB. Que peut-on dire des angles AOM et MOB ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : [OM) est la bissectrice de l'angle AOB. Étape 2 — Lire : par définition, elle partage AOB en deux angles de même mesure. Étape 3 — Calculer : AOM = MOB, chacun vaut la moitié de AOB. Étape 4 — Tracer : AOM et MOB sont adjacents, pas opposés par le sommet. Ils ne sont pas supplémentaires, car leur somme est AOB et non 180°.",
+                  "answers": [
+                    {
+                      "content": "Ils ont la même mesure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont opposés par le sommet",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'un mesure le double de l'autre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La demi-droite [OM) est la bissectrice de l'angle AOB. On sait que AOM = 40°. Combien mesure l'angle AOB ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [OM) est la bissectrice de AOB, AOM est une moitié. Étape 2 — Lire : AOM = 40°. Étape 3 — Calculer : AOB est le double, 40° × 2 = 80°. Étape 4 — Tracer : MOB mesure aussi 40°. Diviser 40° par 2 serait l'erreur de celui qui confond moitié et double.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La bissectrice d'un angle de 80° mesure 40°.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la bissectrice est une demi-droite, pas un angle. Étape 2 — Lire : l'angle de départ mesure 80°. Étape 3 — Calculer : chacun des deux angles formés mesure 80° ÷ 2 = 40°. Étape 4 — Tracer : la demi-droite n'a pas de mesure, ce sont les angles AOM et MOB qui mesurent 40°. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître et calculer avec la bissectrice",
+              "statement": "Dans cet exercice, tu définis la bissectrice, tu la distingues de la médiatrice, puis tu calcules avec la méthode de la fiche.",
+              "hint": "Une bissectrice partage en deux parts égales : divise par 2, ou multiplie par 2 pour revenir à l'angle entier.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La bissectrice d'un angle est une ___ qui partage l'angle en deux angles de même mesure.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on cherche la nature de la bissectrice. Étape 2 — Lire : elle part du sommet de l'angle. Étape 3 — Calculer : aucun calcul, il faut choisir le mot. Étape 4 — Tracer : c'est une demi-droite d'origine le sommet. Une médiatrice est liée à un segment, pas à un angle.",
+                  "answers": [
+                    {
+                      "content": "demi-droite",
+                      "correct": true
+                    },
+                    {
+                      "content": "droite perpendiculaire à un côté",
+                      "correct": false
+                    },
+                    {
+                      "content": "médiatrice",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque notion à ce qu'elle partage.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on rappelle les trois notions. Étape 2 — Lire : la bissectrice agit sur un angle, la médiatrice et le milieu sur un segment. Étape 3 — Calculer : aucun calcul, il faut associer. Étape 4 — Tracer : la médiatrice est perpendiculaire au segment, le milieu est un point. Les relier à un angle serait une confusion.",
+                  "answers": [
+                    {
+                      "content": "Bissectrice",
+                      "match": "un angle en deux angles égaux"
+                    },
+                    {
+                      "content": "Médiatrice",
+                      "match": "un segment en deux segments égaux, à angle droit"
+                    },
+                    {
+                      "content": "Milieu",
+                      "match": "le point qui partage un segment en deux segments de même longueur"
+                    }
+                  ]
+                },
+                {
+                  "content": "La demi-droite [Oz) est la bissectrice de l'angle xOy qui mesure 130°. Combien mesure l'angle xOz ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [Oz) partage xOy en deux angles égaux. Étape 2 — Lire : xOy mesure 130°. Étape 3 — Calculer : la moitié de 130° est 65°. Étape 4 — Tracer : xOz = 65°. Répondre 130° ou 260° serait mal comprendre le partage.",
+                  "answers": [
+                    {
+                      "content": "65",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La demi-droite [Oz) est la bissectrice de l'angle xOy. Si xOz mesure 47°, alors zOy mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : [Oz) est la bissectrice de xOy. Étape 2 — Lire : xOz = 47°. Étape 3 — Calculer : les deux parts sont égales, donc zOy = 47°. Étape 4 — Tracer : l'angle xOy mesure 94°. La réponse 94° est celle de l'angle entier, pas de zOy.",
+                  "answers": [
+                    {
+                      "content": "47",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La demi-droite [Oz) est la bissectrice de l'angle xOy qui mesure 64°. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : [Oz) partage xOy = 64° en deux angles égaux. Étape 2 — Lire : xOy = 64°. Étape 3 — Calculer : xOz = zOy = 64° ÷ 2 = 32°. Étape 4 — Tracer : xOy reste 64°, c'est l'angle entier. Les égalités xOz = 64° et zOy = 128° sont fausses.",
+                  "answers": [
+                    {
+                      "content": "xOz = 32°",
+                      "correct": true
+                    },
+                    {
+                      "content": "zOy = 32°",
+                      "correct": true
+                    },
+                    {
+                      "content": "xOz = 64°",
+                      "correct": false
+                    },
+                    {
+                      "content": "xOy = 32°",
+                      "correct": false
+                    },
+                    {
+                      "content": "zOy = 128°",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour construire la bissectrice d'un angle au rapporteur.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on identifie l'angle et son sommet. Étape 2 — Lire : on mesure l'angle. Étape 3 — Calculer : on divise par 2. Étape 4 — Tracer : on marque l'angle moitié et on trace la demi-droite. Tracer avant de mesurer ne donne pas le bon angle.",
+                  "answers": [
+                    {
+                      "content": "Repérer l'angle à partager et son sommet."
+                    },
+                    {
+                      "content": "Lire la mesure de l'angle au rapporteur."
+                    },
+                    {
+                      "content": "Calculer la moitié de cette mesure."
+                    },
+                    {
+                      "content": "Tracer un angle égal à cette moitié, puis la demi-droite."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le carrefour du marché",
+          "statement": "Deux rues droites se croisent au carrefour O du marché. La première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 75°. Tu appliques les fiches sur les angles opposés par le sommet et supplémentaires.",
+          "hint": "Les opposés par le sommet sont égaux, les voisins sont supplémentaires.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 75°. Combien mesure l'angle COD ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : (AC) et (BD) se coupent en O, l'angle connu est AOB = 75°. Étape 2 — Identifier : COD fait face à AOB, il est opposé par le sommet. Étape 3 — Conclure : deux angles opposés par le sommet ont la même mesure, donc COD = 75°. Étape 4 — Déduire : rien d'autre n'est demandé. Calculer 180° − 75° donnerait la mesure d'un voisin, pas de COD.",
+              "answers": [
+                {
+                  "content": "75",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 75°. Combien mesure l'angle BOC ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : A, O, C sont alignés et AOB = 75°. Étape 2 — Identifier : BOC et AOB sont adjacents, ils forment un angle plat. Étape 3 — Conclure : ils sont supplémentaires. Étape 4 — Déduire : BOC = 180° − 75° = 105°. Prendre 90° − 75° = 15° serait confondre avec complémentaire.",
+              "answers": [
+                {
+                  "content": "105",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 75°. Combien mesure l'angle DOA ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : B, O, D sont alignés et AOB = 75°. Étape 2 — Identifier : DOA est adjacent à AOB et forme avec lui un angle plat. Étape 3 — Conclure : DOA et AOB sont supplémentaires. Étape 4 — Déduire : DOA = 180° − 75° = 105°. C'est aussi la mesure de BOC, son opposé par le sommet.",
+              "answers": [
+                {
+                  "content": "105",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Les angles AOB et BOC de ce carrefour (AOB = 75°) sont complémentaires.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : AOB = 75° et BOC = 105° car A, O, C sont alignés. Étape 2 — Identifier : ils forment un angle plat sur (AC). Étape 3 — Conclure : leur somme est 180°, ils sont supplémentaires. Étape 4 — Déduire : pour être complémentaires, il faudrait 90°. L'affirmation est fausse : 75° + 105° = 180°.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce carrefour (AOB = 75°), quel couple d'angles est un couple d'angles opposés par le sommet ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : les angles autour de O sont AOB, BOC, COD et DOA. Étape 2 — Identifier : deux angles opposés par le sommet se font face : AOB avec COD, BOC avec DOA. Étape 3 — Conclure : le couple BOC et DOA convient. Étape 4 — Déduire : les autres couples sont des voisins qui ont un côté en commun, donc adjacents et non opposés.",
+              "answers": [
+                {
+                  "content": "$\\widehat{BOC}$ et $\\widehat{DOA}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\widehat{AOB}$ et $\\widehat{BOC}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\widehat{AOB}$ et $\\widehat{DOA}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\widehat{BOC}$ et $\\widehat{COD}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les tirs du coin",
+          "statement": "Au coin O d'un terrain, la ligne de but [Ox) et la ligne de touche [Oy) forment un angle droit. Ama tire le long de la demi-droite [Oz), la bissectrice de l'angle xOy. Yao tire le long de [Ot), qui fait 30° avec [Ox).",
+          "hint": "Un angle droit mesure 90° ; une bissectrice le partage en deux angles de 45°.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Au coin O d'un terrain, la ligne de but [Ox) et la ligne de touche [Oy) forment un angle droit. [Oz) est la bissectrice de l'angle xOy. Combien mesure l'angle xOz ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : [Oz) partage l'angle droit xOy en deux angles égaux. Étape 2 — Lire : xOy = 90°. Étape 3 — Calculer : la moitié de 90° est 45°. Étape 4 — Tracer : xOz = 45°. Répondre 90° oublierait de partager.",
+              "answers": [
+                {
+                  "content": "45",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Au coin O d'un terrain, la ligne de but [Ox) et la ligne de touche [Oy) forment un angle droit. Le tir de Yao suit [Ot) avec xOt = 30°. Combien mesure l'angle tOy ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : xOy est un angle droit, la somme visée est 90°. Étape 2 — Écrire : xOt + tOy = 90°, donc 30° + tOy = 90°. Étape 3 — Calculer : tOy = 90° − 30° = 60°. Étape 4 — Vérifier : 30° + 60° = 90°. Utiliser 180° donnerait 150°, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Au coin O d'un terrain, l'angle droit xOy est partagé par la bissectrice [Oz) (xOz = 45°) et par le tir de Yao [Ot) avec xOt = 30°. Combien mesure l'angle tOz entre les deux tirs ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : [Ot) et [Oz) sont tous deux dans l'angle droit, depuis [Ox). Étape 2 — Écrire : tOz = xOz − xOt. Étape 3 — Calculer : tOz = 45° − 30° = 15°. Étape 4 — Vérifier : xOt + tOz = 30° + 15° = 45° = xOz. Additionner 45° + 30° serait faux.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Les angles xOt (30°) et tOy (60°) du coin sont ___.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Repérer : 30° + 60° donne la somme à tester. Étape 2 — Écrire : 30° + 60° = 90°. Étape 3 — Calculer : la somme est 90°. Étape 4 — Vérifier : une somme de 90° se dit complémentaires. Supplémentaires demanderait 180°, et opposés par le sommet des côtés qui se prolongent.",
+              "answers": [
+                {
+                  "content": "complémentaires",
+                  "correct": true
+                },
+                {
+                  "content": "supplémentaires",
+                  "correct": false
+                },
+                {
+                  "content": "opposés par le sommet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La demi-droite [Oz) est la médiatrice de l'angle xOy.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : [Oz) partage l'angle xOy en deux angles égaux. Étape 2 — Écrire : ce partage s'appelle une bissectrice. Étape 3 — Calculer : aucun calcul, il faut utiliser le bon mot. Étape 4 — Vérifier : une médiatrice concerne un segment, pas un angle. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La course oblique du milieu de terrain",
+          "statement": "Les droites (QP) et (RS), parallèles, représentent les deux lignes de touche d'un terrain. Un joueur court le long de la droite (GH) qui les coupe en E et en F. L'angle PEF mesure 120°. Le point K, utilisé dans une question, n'est pas dessiné sur la figure.",
+          "hint": "Dis toujours si les angles sont alternes-internes ou correspondants avant de conclure.",
+          "exercise_type": "evaluation",
+          "figure": "touches-et-diagonale",
+          "questions": [
+            {
+              "content": "Les droites parallèles (QP) et (RS) sont coupées en E et F par la sécante (GH), avec PEF = 120°. Combien mesure l'angle correspondant SFH ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : (QP) // (RS), la sécante est (GH), PEF = 120°. Étape 2 — Nommer : SFH est du même côté de la sécante et à la même place en F : c'est le correspondant de PEF. Étape 3 — Appliquer : les droites sont parallèles, donc les correspondants sont égaux. Étape 4 — Calculer : SFH = 120°. Écrire 60° serait confondre avec un angle voisin.",
+              "answers": [
+                {
+                  "content": "120",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Les droites parallèles (QP) et (RS) sont coupées en E et F par la sécante (GH), avec PEF = 120°. Combien mesure l'angle alterne-interne RFE ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : (QP) // (RS), PEF = 120°. Étape 2 — Nommer : RFE est entre les droites et de l'autre côté de la sécante, il est alterne-interne avec PEF. Étape 3 — Appliquer : les droites sont parallèles, donc RFE = PEF. Étape 4 — Calculer : RFE = 120°. Cette valeur se retrouve aussi par l'opposé par le sommet de SFH.",
+              "answers": [
+                {
+                  "content": "120",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Les droites parallèles (QP) et (RS) sont coupées en E et F par la sécante (GH), avec PEF = 120°. Combien mesure l'angle SFE ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : (QP) // (RS), PEF = 120° donc RFE = 120°. Étape 2 — Nommer : SFE est adjacent à RFE sur la droite (RS). Étape 3 — Appliquer : SFE et RFE forment un angle plat, ils sont supplémentaires. Étape 4 — Calculer : SFE = 180° − 120° = 60°. Répondre 120° oublierait que SFE est le voisin.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Les droites parallèles (QP) et (RS) sont coupées en E et F par la sécante (GH), avec PEF = 120°. La demi-droite [EK) est la bissectrice de l'angle PEF. Combien mesure l'angle PEK ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : [EK) partage PEF en deux angles égaux. Étape 2 — Nommer : PEF = 120°, c'est l'angle à partager. Étape 3 — Appliquer : la moitié de 120° est 60°. Étape 4 — Calculer : PEK = 60°. Répondre 120° oublierait de diviser par 2.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "Si l'angle RFE mesurait 118° (avec PEF = 120°), les droites (QP) et (RS) seraient parallèles.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : PEF = 120° et RFE = 118° seraient alternes-internes. Étape 2 — Nommer : ils sont de part et d'autre de la sécante, entre les droites. Étape 3 — Appliquer : la réciproque demande des angles égaux pour conclure au parallélisme. Étape 4 — Calculer : 118° est différent de 120°, donc les droites ne seraient pas parallèles. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les rues du quartier",
+          "statement": "Une rue droite (AC) est coupée en O par une ruelle qui va vers B, avec O entre A et C. L'angle BOC mesure 50°. Une autre ruelle (d') est parallèle à la rue (AC) et coupe la ruelle (OB) en P. Une troisième ruelle part de O le long de [OE), la bissectrice de l'angle AOB. Les points E et P et la ruelle (d') ne sont pas dessinés sur la figure.",
+          "hint": "Pars de l'angle plat de la rue, puis utilise la bissectrice et le parallélisme.",
+          "exercise_type": "evaluation",
+          "figure": "rue-et-ruelle",
+          "questions": [
+            {
+              "content": "Une rue droite (AC) est coupée en O par une ruelle qui va vers B, avec O entre A et C. L'angle BOC mesure 50°. Combien mesure l'angle AOB ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : A, O, C sont alignés, la somme visée est 180°. Étape 2 — Écrire : AOB + BOC = 180°, donc AOB + 50° = 180°. Étape 3 — Calculer : AOB = 180° − 50° = 130°. Étape 4 — Vérifier : 130° + 50° = 180°. Le résultat est juste.",
+              "answers": [
+                {
+                  "content": "130",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "La ruelle [OE) est la bissectrice de l'angle AOB, qui mesure 130° (la rue (AC) étant droite et BOC = 50°). Combien mesure l'angle AOE ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : [OE) partage AOB en deux angles égaux. Étape 2 — Lire : AOB = 130°. Étape 3 — Calculer : la moitié de 130° est 65°. Étape 4 — Tracer : AOE = 65°. Répondre 130° oublierait de diviser par 2.",
+              "answers": [
+                {
+                  "content": "65",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "La rue (AC) est droite avec O entre A et C, AOB = 130°, et [OE) est la bissectrice de AOB, donc EOB = 65°. Combien mesure l'angle EOC ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : EOC est formé de EOB et de BOC, deux angles adjacents. Étape 2 — Écrire : EOC = EOB + BOC. Étape 3 — Calculer : EOC = 65° + 50° = 115°. Étape 4 — Vérifier : AOE + EOC = 65° + 115° = 180°, c'est un angle plat. Le résultat est juste.",
+              "answers": [
+                {
+                  "content": "115",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "La ruelle (d') est parallèle à la rue (AC) et coupe la ruelle (OB) en P. L'angle BOC (50°) a pour correspondant en P un angle de la ruelle (d'). Combien mesure cet angle ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : (d') // (AC), la sécante est la ruelle (OB). Étape 2 — Nommer : l'angle BOC et l'angle en P sont correspondants. Étape 3 — Appliquer : les droites sont parallèles, donc les correspondants sont égaux. Étape 4 — Calculer : l'angle en P mesure 50°. Répondre 130° serait prendre l'angle voisin.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ],
+              "unit": "°",
+              "tolerance": 0
+            },
+            {
+              "content": "L'angle opposé par le sommet à l'angle BOC (50°) mesure 130°.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : l'angle connu est BOC = 50°. Étape 2 — Identifier : son opposé par le sommet fait face à BOC, avec les côtés dans le prolongement. Étape 3 — Conclure : deux angles opposés par le sommet ont la même mesure, donc 50°. Étape 4 — Déduire : 130° est la mesure du voisin AOB, pas de l'opposé. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces angles de la figure (BOC = 50°, AOB = 130°, AOE = EOB = 65°), lesquels mesurent 65° ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : [OE) est la bissectrice de AOB = 130°. Étape 2 — Lire : AOB = 130°. Étape 3 — Calculer : chaque moitié mesure 65°, donc AOE = EOB = 65°. Étape 4 — Tracer : EOC = 65° + 50° = 115°, AOB = 130° et BOC = 50° ont d'autres mesures. Les deux angles de 65° sont AOE et EOB.",
+              "answers": [
+                {
+                  "content": "$\\widehat{AOE}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\widehat{EOB}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\widehat{EOC}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\widehat{AOB}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\widehat{BOC}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Angles adjacents, complémentaires et supplémentaires ; angles opposés par le sommet ; angles alternes-internes et correspondants de deux parallèles ; bissectrice d'un angle.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Une rue droite (AC) est coupée en O par une ruelle qui va vers B, avec O entre A et C. L'angle BOC entre la ruelle et la rue mesure 50°.",
+              "hint": "Une rue droite forme un angle plat de 180°.",
+              "exercise_type": "evaluation",
+              "figure": "rue-et-ruelle",
+              "questions": [
+                {
+                  "content": "Une rue droite (AC) est coupée en O par une ruelle qui part vers B, avec O entre A et C. L'angle BOC mesure 50°. Combien mesure l'angle AOB ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : A, O et C sont alignés, donc AOB et BOC forment un angle plat ; la somme visée est 180°. Étape 2 — Écrire : AOB + 50° = 180°. Étape 3 — Calculer : AOB = 180° − 50° = 130°. Étape 4 — Vérifier : 130° + 50° = 180°. L'erreur tentante est d'utiliser 90° et de répondre 40° : c'est faux, car une rue droite forme un angle plat de 180° et non un angle droit.",
+                  "answers": [
+                    {
+                      "content": "130",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une rue droite (AC) est coupée en O par une ruelle vers B, avec O entre A et C, et BOC = 50°. Comment sont les angles AOB et BOC ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : AOB et BOC ont le même sommet O et le côté commun [OB), et ils sont de part et d'autre de ce côté : ils sont adjacents. Étape 2 — Écrire : A, O et C sont alignés, donc AOB + BOC = 180°. Étape 3 — Calculer : 130° + 50° = 180°. Étape 4 — Vérifier : leur somme est 180°, ils sont donc supplémentaires. Complémentaires serait faux : cela demande une somme de 90°, or 130° + 50° = 180°.",
+                  "answers": [
+                    {
+                      "content": "Adjacents et supplémentaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Adjacents et complémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Opposés par le sommet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni adjacents ni supplémentaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ruelle part du point O d'une rue droite et fait un angle de 50° avec un côté de la rue. Quelle est la mesure de l'angle complémentaire de cet angle de 50° ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : complémentaire, la somme visée est 90°. Étape 2 — Écrire : 50° + angle cherché = 90°. Étape 3 — Calculer : 90° − 50° = 40°. Étape 4 — Vérifier : 50° + 40° = 90°. Répondre 130° est l'erreur de celui qui confond avec supplémentaire : 130° est l'angle supplémentaire, pas le complémentaire.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Dans cette rue droite (AC) avec BOC = 50° et AOB = 130°, les angles AOB et BOC sont complémentaires.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on calcule la somme AOB + BOC. Étape 2 — Écrire : 130° + 50° = 180°. Étape 3 — Calculer : la somme est 180° et non 90°. Étape 4 — Vérifier : une somme de 180° donne des angles supplémentaires. L'affirmation est donc fausse : des angles complémentaires auraient une somme de 90°, comme 50° et 40°.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle plat mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : un angle plat est formé par deux demi-droites opposées, comme les deux côtés d'une rue droite. Étape 2 — Écrire : il est le double d'un angle droit, 2 × 90°. Étape 3 — Calculer : 2 × 90° = 180°. Étape 4 — Vérifier : deux angles supplémentaires s'ajoutent bien pour faire un angle plat. La valeur 90° est celle de l'angle droit : l'angle plat est deux fois plus grand.",
+                  "answers": [
+                    {
+                      "content": "180",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux rues droites se croisent au carrefour O. La première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 60°.",
+              "hint": "L'angle qui fait face est égal ; l'angle voisin est supplémentaire.",
+              "exercise_type": "evaluation",
+              "figure": "croisement-rues",
+              "questions": [
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. Quel angle est opposé par le sommet à l'angle AOB ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les rues (AC) et (BD) se coupent en O. Étape 2 — Identifier : [OC) prolonge [OA) et [OD) prolonge [OB), donc COD fait face à AOB. Étape 3 — Conclure : COD est l'angle opposé par le sommet à AOB. Étape 4 — Déduire : BOC et DOA sont les voisins de AOB. BOC et DOA sont adjacents à AOB, pas opposés ; BOD est un angle plat sur la rue (BD).",
+                  "answers": [
+                    {
+                      "content": "$\\widehat{COD}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\widehat{BOC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{DOA}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{BOD}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 60°. Combien mesure l'angle opposé par le sommet COD ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est AOB = 60°. Étape 2 — Identifier : COD fait face à AOB. Étape 3 — Conclure : deux angles opposés par le sommet ont la même mesure, donc COD = 60°. Étape 4 — Déduire : il n'y a rien à retrancher. Écrire 120° serait faux : 120° est la mesure du voisin BOC, obtenue avec 180° − 60°.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 60°. Combien mesure l'angle BOC ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : A, O et C sont alignés et AOB = 60°. Étape 2 — Identifier : BOC est adjacent à AOB, ils forment un angle plat. Étape 3 — Conclure : ils sont supplémentaires. Étape 4 — Déduire : BOC = 180° − 60° = 120°. Répondre 60° serait faux : BOC est un voisin de AOB et non son opposé par le sommet.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O, avec AOB = 60° et BOC = 120°. L'angle DOA, opposé par le sommet à BOC, mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : BOC = 120° est connu et DOA lui fait face. Étape 2 — Identifier : DOA est opposé par le sommet à BOC. Étape 3 — Conclure : ils ont la même mesure, DOA = 120°. Étape 4 — Déduire : on peut contrôler avec DOA + AOB = 120° + 60° = 180°, angle plat. La valeur 60° est celle de AOB, qui est un voisin de DOA.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux rues se croisent en O avec AOB = 60° et BOC = 120°. Les angles AOB et BOC ont la même mesure.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : AOB = 60° et BOC = 120°. Étape 2 — Identifier : ils sont voisins, ils ont un côté commun. Étape 3 — Conclure : ils sont supplémentaires, 60° + 120° = 180°, mais pas égaux. Étape 4 — Déduire : seuls les angles opposés par le sommet sont égaux. Dire qu'ils sont égaux est l'erreur de celui qui confond voisins et opposés par le sommet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Les droites (QP) et (RS), parallèles, sont coupées par la droite (GH) en E et en F. L'angle PEF mesure 120°.",
+              "hint": "Alternes-internes : entre les droites, de part et d'autre. Correspondants : même côté, même place.",
+              "exercise_type": "evaluation",
+              "figure": "touches-et-diagonale",
+              "questions": [
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées en E et en F par la droite (GH), avec PEF = 120°. Combien mesure l'angle correspondant SFH ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS) et la sécante (GH). Étape 2 — Nommer : SFH est du même côté de la sécante et à la même place en F : c'est le correspondant de PEF. Étape 3 — Appliquer : les droites sont parallèles, donc les correspondants sont égaux. Étape 4 — Calculer : SFH = 120°. Répondre 60° serait faux : 60° est la mesure d'un angle voisin, pas du correspondant.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées en E et en F par la droite (GH), avec PEF = 120°. Combien mesure l'angle alterne-interne RFE ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), PEF = 120°. Étape 2 — Nommer : RFE est entre les droites et de l'autre côté de la sécante : il est alterne-interne avec PEF. Étape 3 — Appliquer : les droites sont parallèles, donc les alternes-internes sont égaux. Étape 4 — Calculer : RFE = 120°. L'erreur tentante est de répondre 60° en pensant à un supplémentaire : c'est faux, car des alternes-internes de parallèles sont égaux.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées en E et en F par la droite (GH), avec PEF = 120°. Combien mesure l'angle SFE ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), PEF = 120° et RFE = 120°. Étape 2 — Nommer : SFE est adjacent à RFE sur la droite (RS). Étape 3 — Appliquer : SFE et RFE forment un angle plat. Étape 4 — Calculer : SFE = 180° − 120° = 60°. Répondre 120° serait faux : SFE est le voisin de RFE, il n'est pas égal à lui.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les droites (QP) et (RS) sont parallèles, coupées par (GH) en E et en F. Pourquoi les angles PEF et RFE sont-ils égaux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), la sécante (GH). Étape 2 — Nommer : PEF et RFE sont entre les droites et de part et d'autre de la sécante : alternes-internes. Étape 3 — Appliquer : des alternes-internes de parallèles sont égaux. Étape 4 — Calculer : aucun calcul, il faut justifier. Ils ne sont pas opposés par le sommet : leurs sommets E et F sont différents. Ils ne sont pas supplémentaires : 120° + 120° n'est pas 180°.",
+                  "answers": [
+                    {
+                      "content": "Ils sont alternes-internes et les droites sont parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont opposés par le sommet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont adjacents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites (QP) et (RS) sont parallèles. Les angles PEF et SFH sont correspondants.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS) coupées par (GH) en E et en F. Étape 2 — Nommer : PEF est en E, du côté droit de la sécante et sous (QP) ; SFH est en F, du côté droit de la sécante et sous (RS). Étape 3 — Appliquer : même côté de la sécante et même place, ils sont correspondants. Étape 4 — Calculer : ils sont donc égaux, PEF = SFH = 120°. L'affirmation est vraie ; ce ne sont pas des alternes-internes, qui seraient de part et d'autre de la sécante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un gardien de but est en O. Les poteaux sont dans les directions [OA) et [OB), avec AOB = 80°. Le ballon est en M, sur la bissectrice [OM) de l'angle AOB.",
+              "hint": "Une bissectrice partage l'angle en deux moitiés égales.",
+              "exercise_type": "evaluation",
+              "figure": "bissectrice-angle",
+              "questions": [
+                {
+                  "content": "Un gardien de but est en O et voit les poteaux A et B sous un angle AOB de 80°. La demi-droite [OM), vers le ballon, est la bissectrice de AOB. Quelle est la mesure de l'angle AOM ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [OM) partage AOB en deux angles égaux. Étape 2 — Lire : AOB = 80°. Étape 3 — Calculer : AOM = 80° ÷ 2 = 40°. Étape 4 — Tracer : on porterait 40° depuis [OA). Répondre 80° serait faux : l'angle AOB entier mesure 80°, mais la moitié seulement mesure 40°.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un gardien de but est en O et voit les poteaux A et B sous un angle AOB de 80°. La demi-droite [OM), vers le ballon, est la bissectrice de AOB. Quelle est la mesure de l'angle MOB ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [OM) est la bissectrice de AOB, donc MOB = AOM. Étape 2 — Lire : AOB = 80°. Étape 3 — Calculer : MOB = 80° ÷ 2 = 40°. Étape 4 — Tracer : on porterait 40° depuis [OB). Écrire 160° serait faux : c'est le double, obtenu en multipliant au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La demi-droite [OM) est la bissectrice de l'angle AOB qui mesure 80°. Que vaut la somme AOM + MOB ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : AOM et MOB sont adjacents, de côté commun [OM). Étape 2 — Lire : leur réunion forme l'angle AOB = 80°. Étape 3 — Calculer : AOM + MOB = 40° + 40° = 80°. Étape 4 — Tracer : la somme est égale à l'angle entier. 180° serait faux : ces angles ne forment pas un angle plat. 40° serait la valeur d'une seule moitié.",
+                  "answers": [
+                    {
+                      "content": "80°",
+                      "correct": true
+                    },
+                    {
+                      "content": "40°",
+                      "correct": false
+                    },
+                    {
+                      "content": "160°",
+                      "correct": false
+                    },
+                    {
+                      "content": "180°",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La demi-droite [OM) est la bissectrice de l'angle AOB. Si AOM = 40°, l'angle AOB mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : [OM) partage AOB en deux angles égaux, AOM est une moitié. Étape 2 — Lire : AOM = 40°. Étape 3 — Calculer : AOB = 2 × 40° = 80°. Étape 4 — Tracer : MOB mesure aussi 40°. Répondre 20° serait faux : c'est diviser par 2 au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tracer la bissectrice [OM) de l'angle AOB de 80°, remets les étapes dans l'ordre.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on identifie d'abord l'angle et son sommet. Étape 2 — Lire : on mesure l'angle au rapporteur. Étape 3 — Calculer : on divise la mesure par 2. Étape 4 — Tracer : on porte l'angle moitié depuis un côté puis on trace la demi-droite. Tracer avant de calculer ne donne pas le bon angle : il faut connaître la moitié avant de placer le rapporteur.",
+                  "answers": [
+                    {
+                      "content": "Repérer l'angle AOB et son sommet O."
+                    },
+                    {
+                      "content": "Lire au rapporteur que AOB = 80°."
+                    },
+                    {
+                      "content": "Calculer la moitié, 80° ÷ 2 = 40°."
+                    },
+                    {
+                      "content": "Tracer depuis [OA) un angle de 40°, puis la demi-droite [OM)."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante dans le quartier",
+          "notions": "Angles complémentaires et supplémentaires dans un terrain et dans une rue ; angles d'un carrefour ; angles de deux rues parallèles coupées par une avenue ; bissectrice et angle de tir.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Sur le terrain du quartier, la ligne de but et la ligne de touche se coupent à angle droit au coin O. Ama et Yao tirent depuis le coin.",
+              "hint": "Coin de terrain : angle droit, 90°. Ligne droite : angle plat, 180°.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Au coin O d'un terrain, la ligne de but et la ligne de touche forment un angle droit. Le tir d'Ama fait un angle de 28° avec la ligne de but. Quel angle fait ce tir avec la ligne de touche ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la ligne de but et la ligne de touche forment un angle droit, la somme visée est 90°. Étape 2 — Écrire : 28° + angle cherché = 90°. Étape 3 — Calculer : 90° − 28° = 62°. Étape 4 — Vérifier : 28° + 62° = 90°. Répondre 152° serait faux : 152° = 180° − 28° est l'angle supplémentaire, mais un coin de terrain forme un angle droit, pas un angle plat.",
+                  "answers": [
+                    {
+                      "content": "62",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le long d'une ligne de touche droite, un joueur sort du terrain en un point P et la direction de sa course fait un angle de 135° avec un côté de la ligne. Quel angle fait-elle avec l'autre côté de la ligne ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la ligne de touche est droite, les deux angles forment un angle plat ; la somme visée est 180°. Étape 2 — Écrire : 135° + angle cherché = 180°. Étape 3 — Calculer : 180° − 135° = 45°. Étape 4 — Vérifier : 135° + 45° = 180°. Répondre 135° oublierait que l'autre côté est un voisin ; répondre 225° serait faux, car un angle ne dépasse pas ici l'angle plat de 180°.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Au coin d'un terrain, un tir fait 28° avec la ligne de but et 62° avec la ligne de touche. Ces deux angles sont complémentaires.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on teste la somme 28° + 62°. Étape 2 — Écrire : 28° + 62° = 90°. Étape 3 — Calculer : la somme vaut 90°. Étape 4 — Vérifier : une somme de 90° donne des angles complémentaires. Ils ne sont pas supplémentaires : cela demanderait 180°. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tir fait 40° avec la ligne de but au coin d'un terrain. Avec la ligne de touche, il fait ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le coin est un angle droit, la somme visée est 90°. Étape 2 — Écrire : 40° + angle cherché = 90°. Étape 3 — Calculer : 90° − 40° = 50°. Étape 4 — Vérifier : 40° + 50° = 90°. La valeur 140° viendrait de 180° − 40° : c'est l'angle supplémentaire, qui ne convient pas ici.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le terrain du quartier, Ama longe une ligne de touche droite et change de direction : son nouveau trajet fait un angle de 100° avec la ligne, d'un côté. Quel angle fait-il avec la ligne de l'autre côté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la ligne de touche est droite, les deux angles forment un angle plat ; la somme visée est 180°. Étape 2 — Écrire : 100° + angle cherché = 180°. Étape 3 — Calculer : 180° − 100° = 80°. Étape 4 — Vérifier : 100° + 80° = 180°. La réponse 10° vient de 100° − 90° : c'est faux, car une ligne droite forme un angle plat de 180°. La réponse 100° oublie que l'autre côté est un voisin.",
+                  "answers": [
+                    {
+                      "content": "80°",
+                      "correct": true
+                    },
+                    {
+                      "content": "10°",
+                      "correct": false
+                    },
+                    {
+                      "content": "100°",
+                      "correct": false
+                    },
+                    {
+                      "content": "260°",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux avenues droites se croisent au carrefour O de la gare. La première passe par M, O et P, la seconde par N, O et Q. L'angle MON mesure 40°.",
+              "hint": "L'opposé est égal ; le voisin est supplémentaire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux avenues se croisent en O, la première passe par M, O et P, la seconde par N, O et Q. L'angle MON mesure 40°. Combien mesure l'angle POQ, opposé par le sommet ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (MP) et (NQ) se coupent en O, l'angle connu est MON = 40°. Étape 2 — Identifier : POQ fait face à MON. Étape 3 — Conclure : deux angles opposés par le sommet ont la même mesure, POQ = 40°. Étape 4 — Déduire : rien à retrancher. Répondre 140° serait faux : 140° est la mesure du voisin NOP, pas de l'opposé.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux avenues se croisent en O, la première passe par M, O et P, la seconde par N, O et Q. L'angle MON mesure 40°. Combien mesure l'angle NOP ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : M, O et P sont alignés et MON = 40°. Étape 2 — Identifier : NOP est adjacent à MON et forme avec lui un angle plat. Étape 3 — Conclure : les deux angles sont supplémentaires. Étape 4 — Déduire : NOP = 180° − 40° = 140°. Répondre 50° serait faux : c'est le résultat de 90° − 40°, qui ne s'applique pas à un angle plat.",
+                  "answers": [
+                    {
+                      "content": "140",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux avenues se croisent en O, la première passe par M, O et P, la seconde par N, O et Q, et MON = 40°. Quelles mesures trouve-t-on parmi les quatre angles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est MON = 40°. Étape 2 — Identifier : son opposé par le sommet POQ mesure 40°. Étape 3 — Conclure : les deux voisins sont supplémentaires de 40°. Étape 4 — Déduire : ils mesurent 180° − 40° = 140°. On trouve donc 40° et 140° seulement. 50° viendrait d'un calcul avec 90°, et 90° n'apparaît pas : les avenues ne sont pas perpendiculaires.",
+                  "answers": [
+                    {
+                      "content": "40°",
+                      "correct": true
+                    },
+                    {
+                      "content": "140°",
+                      "correct": true
+                    },
+                    {
+                      "content": "50°",
+                      "correct": false
+                    },
+                    {
+                      "content": "90°",
+                      "correct": false
+                    },
+                    {
+                      "content": "320°",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux avenues se croisent en O avec MON = 40° et NOP = 140°. Quel couple est un couple d'angles opposés par le sommet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les angles autour de O sont MON, NOP, POQ et QOM. Étape 2 — Identifier : MON fait face à POQ, et NOP fait face à QOM. Étape 3 — Conclure : le couple NOP et QOM est opposé par le sommet. Étape 4 — Déduire : les autres couples sont des voisins. Les couples de voisins ont un côté commun, ce sont des angles adjacents, pas opposés par le sommet.",
+                  "answers": [
+                    {
+                      "content": "$\\widehat{NOP}$ et $\\widehat{QOM}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\widehat{MON}$ et $\\widehat{NOP}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{MON}$ et $\\widehat{QOM}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{POQ}$ et $\\widehat{NOP}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux avenues se croisent et l'un des angles est un angle droit. Les trois autres angles mesurent chacun ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : un des angles mesure 90°. Étape 2 — Identifier : son opposé par le sommet mesure aussi 90°. Étape 3 — Conclure : ses voisins sont supplémentaires, 180° − 90° = 90°. Étape 4 — Déduire : les quatre angles sont droits. Il est faux de croire que les voisins seraient différents : si un angle est droit, ses voisins le sont aussi.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Deux rues parallèles (d1) et (d2) du quartier sont coupées par une avenue (d). Un des angles situés entre les deux rues mesure 65° avec (d1).",
+              "hint": "Parallèles : alternes-internes et correspondants égaux. Réciproque : angles égaux, donc parallèles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux rues parallèles (d1) et (d2) sont coupées par une avenue (d). Un angle situé entre les deux rues, d'un côté de l'avenue, mesure 65° avec (d1). Combien mesure son angle correspondant formé avec (d2) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (d1) // (d2) et la sécante (d). Étape 2 — Nommer : l'angle de (d2) à la même place, du même côté de (d), est le correspondant. Étape 3 — Appliquer : les droites sont parallèles, donc les correspondants sont égaux. Étape 4 — Calculer : l'angle cherché mesure 65°. Répondre 115° serait faux : 115° est la mesure d'un angle voisin et non du correspondant.",
+                  "answers": [
+                    {
+                      "content": "65",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues parallèles (d1) et (d2) sont coupées par une avenue (d). Un angle situé entre les deux rues, d'un côté de l'avenue, mesure 65° avec (d1). Combien mesure l'angle alterne-interne avec lui, formé avec (d2) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (d1) // (d2) et la sécante (d). Étape 2 — Nommer : l'angle de (d2) entre les rues et de l'autre côté de (d) est alterne-interne. Étape 3 — Appliquer : des alternes-internes de parallèles sont égaux. Étape 4 — Calculer : l'angle cherché mesure 65°. Répondre 25° serait faux : c'est le complémentaire de 65°, qui n'intervient pas ici.",
+                  "answers": [
+                    {
+                      "content": "65",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues parallèles (d1) et (d2) sont coupées par une avenue (d). Un angle situé entre les deux rues, d'un côté de l'avenue, mesure 65° avec (d1). Un autre angle de (d2) est le voisin de son correspondant et forme avec lui un angle plat. Combien mesure-t-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (d1) // (d2), l'angle connu est 65° et son correspondant mesure aussi 65°. Étape 2 — Nommer : l'autre angle est le voisin du correspondant sur la droite (d2). Étape 3 — Appliquer : les deux angles forment un angle plat. Étape 4 — Calculer : 180° − 65° = 115°. Répondre 65° serait faux : l'angle cherché est le voisin, pas le correspondant.",
+                  "answers": [
+                    {
+                      "content": "115",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une avenue coupe deux rues. Deux angles correspondants mesurent chacun 70°. Que peut-on dire des deux rues ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une avenue coupe deux rues, avec deux correspondants de 70°. Étape 2 — Nommer : les deux angles sont correspondants. Étape 3 — Appliquer : si deux correspondants sont égaux, les deux droites sont parallèles (réciproque). Étape 4 — Calculer : 70° = 70°, donc les rues sont parallèles. Perpendiculaires serait faux : cela demanderait des angles droits de 90°.",
+                  "answers": [
+                    {
+                      "content": "Elles sont parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles ne sont pas parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une avenue coupe deux rues. Deux angles alternes-internes mesurent 65° et 75°. Les deux rues sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : une avenue coupe deux rues, avec des alternes-internes de 65° et de 75°. Étape 2 — Nommer : les deux angles sont alternes-internes. Étape 3 — Appliquer : si les rues étaient parallèles, ces angles seraient égaux. Étape 4 — Calculer : 65° est différent de 75°, donc les rues ne sont pas parallèles. L'affirmation est fausse : l'égalité des alternes-internes est nécessaire pour conclure au parallélisme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Le gardien de but Moussa est en O. Les deux poteaux sont vus sous un angle de 70° et Moussa regarde le ballon, placé sur la bissectrice de cet angle.",
+              "hint": "Une bissectrice partage l'angle en deux moitiés égales.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un gardien est en O. Les poteaux A et B sont vus sous un angle AOB de 70°. La demi-droite [OM), vers le ballon, est la bissectrice de AOB. Combien mesure l'angle AOM ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [OM) partage AOB en deux angles égaux. Étape 2 — Lire : AOB = 70°. Étape 3 — Calculer : AOM = 70° ÷ 2 = 35°. Étape 4 — Tracer : on porterait 35° depuis [OA). Répondre 70° serait faux : c'est l'angle entier, pas la moitié.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un gardien est en O. La demi-droite [OM) est la bissectrice de l'angle AOB et l'angle MOB mesure 35°. Combien mesure l'angle AOB ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [OM) partage AOB en deux angles égaux, MOB est une moitié. Étape 2 — Lire : MOB = 35°. Étape 3 — Calculer : AOB = 2 × 35° = 70°. Étape 4 — Tracer : AOM mesure aussi 35°. Répondre 17,5° serait faux : on a divisé par 2 au lieu de doubler.",
+                  "answers": [
+                    {
+                      "content": "70",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un gardien est en O. La demi-droite [OM) est la bissectrice de l'angle AOB. Que peut-on affirmer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : [OM) est la bissectrice de AOB. Étape 2 — Lire : par définition, elle partage l'angle en deux angles de même mesure. Étape 3 — Calculer : AOM = MOB. Étape 4 — Tracer : aucune des deux moitiés n'est le double de l'autre. Les angles ne sont pas supplémentaires : leur somme est AOB et non 180°. La bissectrice n'est pas perpendiculaire à un côté en général.",
+                  "answers": [
+                    {
+                      "content": "AOM et MOB ont la même mesure",
+                      "correct": true
+                    },
+                    {
+                      "content": "AOM est le double de MOB",
+                      "correct": false
+                    },
+                    {
+                      "content": "AOM et MOB sont supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "[OM) est perpendiculaire à [OA)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gardien est en O. La demi-droite [OM) est la bissectrice de l'angle AOB de 70°. Alors AOM et MOB mesurent chacun 35°.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : [OM) partage AOB en deux angles égaux. Étape 2 — Lire : AOB = 70°. Étape 3 — Calculer : 70° ÷ 2 = 35°, donc AOM = MOB = 35°. Étape 4 — Tracer : 35° + 35° = 70°. L'affirmation est vraie ; dire que chaque angle mesure 70° serait oublier de partager.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gardien est en O, la demi-droite [OM) est la bissectrice de l'angle AOB de 70°. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : [OM) partage AOB = 64° en deux angles égaux. Étape 2 — Lire : AOB = 70°. Étape 3 — Calculer : AOM = MOB = 70° ÷ 2 = 35°. Étape 4 — Tracer : AOB reste l'angle entier de 70°. Les égalités AOM = 70° et MOB = 140° sont fausses : une moitié ne peut pas égaler ou dépasser l'angle entier.",
+                  "answers": [
+                    {
+                      "content": "AOM = 35°",
+                      "correct": true
+                    },
+                    {
+                      "content": "MOB = 35°",
+                      "correct": true
+                    },
+                    {
+                      "content": "AOM = 70°",
+                      "correct": false
+                    },
+                    {
+                      "content": "AOB = 35°",
+                      "correct": false
+                    },
+                    {
+                      "content": "MOB = 140°",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Juger des affirmations sur les angles complémentaires, supplémentaires, opposés par le sommet ; enchaîner des déductions dans un carrefour ; prouver un parallélisme avec la réciproque ; raisonner avec une bissectrice.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Awa prépare son devoir : elle relit des affirmations sur les angles et doit dire lesquelles sont justes.",
+              "hint": "Pour réfuter, cherche un exemple qui marche pour les mots mais pas pour la règle.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux angles complémentaires sont tous les deux plus petits que 90°.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : deux angles complémentaires ont pour somme 90°. Étape 2 — Écrire : si l'un des deux était 90° ou plus, l'autre serait 0° ou négatif. Étape 3 — Calculer : chacun est donc strictement compris entre 0° et 90°. Étape 4 — Conclure : les deux angles sont aigus. L'affirmation est vraie ; penser qu'un angle complémentaire peut dépasser 90° vient d'une confusion avec supplémentaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux angles supplémentaires sont toujours adjacents.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : supplémentaires parle de la somme 180°, pas de la position. Étape 2 — Écrire : deux angles de 120° et de 60° ont pour somme 180°. Étape 3 — Calculer : 120° + 60° = 180°, ils sont supplémentaires. Étape 4 — Conclure : on peut les dessiner loin l'un de l'autre, sans sommet commun. L'affirmation est fausse : être supplémentaires ne suffit pas pour être adjacents.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on teste chaque affirmation avec le cours. Étape 2 — Écrire : les opposés par le sommet sont égaux ; la bissectrice partage l'angle en deux moitiés. Étape 3 — Calculer : deux angles complémentaires ont pour somme 90° et non 180°. Étape 4 — Conclure : les alternes-internes ne sont égaux que si les droites sont parallèles. Dire que les opposés par le sommet sont supplémentaires est faux en général : ils sont égaux.",
+                  "answers": [
+                    {
+                      "content": "Deux angles opposés par le sommet ont la même mesure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une bissectrice partage un angle en deux angles de même mesure",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux angles opposés par le sommet sont supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux angles complémentaires ont pour somme 180°",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des angles alternes-internes sont toujours égaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une même figure montre des angles de 40°, de 50° et de 130°. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Repérer : on additionne chaque couple. Étape 2 — Écrire : 40° + 50° = 90° ; 50° + 130° = 180° ; 40° + 130° = 170°. Étape 3 — Calculer : 90° donne complémentaires, 180° donne supplémentaires. Étape 4 — Conclure : 170° n'est ni 90° ni 180°. 40° et 130° ne sont pas supplémentaires, car 170° est différent de 180° ; 50° et 130° ne sont pas complémentaires, car 180° est différent de 90°.",
+                  "answers": [
+                    {
+                      "content": "40° et 50° sont complémentaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "50° et 130° sont supplémentaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "40° et 130° ne sont ni complémentaires ni supplémentaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "40° et 130° sont supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "50° et 130° sont complémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "40° et 50° sont supplémentaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour montrer que l'affirmation « deux angles égaux sont opposés par le sommet » est fausse, quel contre-exemple choisir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche deux angles égaux qui ne sont pas opposés par le sommet. Étape 2 — Écrire : dans un carrefour à angle droit, les quatre angles mesurent 90°. Étape 3 — Calculer : deux angles voisins mesurent 90° et sont égaux sans être opposés par le sommet. Étape 4 — Conclure : c'est un contre-exemple. Deux angles opposés par le sommet de 40° ne réfutent pas l'affirmation : ils la confirment.",
+                  "answers": [
+                    {
+                      "content": "Deux angles droits d'un carrefour, qui sont voisins",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux angles opposés par le sommet de 40°",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux angles supplémentaires de 100° et de 80°",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un angle de 60° et sa bissectrice",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux rues droites se croisent en O : la première passe par A, O et C, la seconde par B, O et D. On sait que l'angle DOC mesure 35°.",
+              "hint": "Fais une chaîne : alignement, angle plat, calcul.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle DOC mesure 35°. Combien mesure l'angle opposé par le sommet AOB ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (AC) et (BD) se coupent en O, DOC = 35°. Étape 2 — Identifier : AOB fait face à DOC, avec les côtés dans le prolongement. Étape 3 — Conclure : AOB = DOC = 35°. Étape 4 — Déduire : aucun autre calcul. Répondre 145° serait faux : 145° est la mesure du voisin, obtenue avec 180° − 35°.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D. L'angle DOC mesure 35°. Combien mesure l'angle voisin BOC ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : B, O et D sont alignés, DOC = 35°. Étape 2 — Identifier : BOC est adjacent à DOC et forme avec lui un angle plat. Étape 3 — Conclure : ils sont supplémentaires. Étape 4 — Déduire : BOC = 180° − 35° = 145°. Répondre 35° serait faux : BOC est un voisin et non l'opposé par le sommet de DOC.",
+                  "answers": [
+                    {
+                      "content": "145",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O, la première passe par A, O et C, la seconde par B, O et D, avec DOC = 35°. Combien mesure l'angle DOA, voisin de DOC sur la rue (AC) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : A, O et C sont alignés, DOC = 35°. Étape 2 — Identifier : DOA est adjacent à DOC et forme avec lui un angle plat. Étape 3 — Conclure : DOA et DOC sont supplémentaires. Étape 4 — Déduire : DOA = 180° − 35° = 145°, ce qui est aussi la mesure de BOC, son opposé par le sommet. Répondre 55° viendrait du complémentaire et serait faux, car A, O et C sont alignés : l'angle est plat.",
+                  "answers": [
+                    {
+                      "content": "145",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O avec DOC = 35°, BOC = 145° et DOA = 145°. Quelle phrase justifie que DOA = BOC ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : DOA et BOC ont le même sommet O. Étape 2 — Identifier : [OD) prolonge [OB) et [OA) prolonge [OC), ils sont opposés par le sommet. Étape 3 — Conclure : deux angles opposés par le sommet sont égaux. Étape 4 — Déduire : DOA = BOC = 145°. Adjacents ne suffit pas pour être égaux, et complémentaires donnerait une somme de 90° alors que 145° + 145° est bien plus grand.",
+                  "answers": [
+                    {
+                      "content": "Ils sont opposés par le sommet, donc égaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont adjacents, donc égaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont complémentaires, donc égaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont alternes-internes, donc égaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la justification : on cherche BOC sachant DOC = 35°, avec B, O et D alignés.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on part de l'alignement de B, O et D. Étape 2 — Identifier : cet alignement donne un angle plat. Étape 3 — Conclure : on écrit l'égalité avec 180°. Étape 4 — Déduire : on calcule BOC en soustrayant. Calculer BOC avant d'avoir justifié l'angle plat n'est pas une preuve : dans un devoir, chaque étape doit s'appuyer sur la précédente.",
+                  "answers": [
+                    {
+                      "content": "Les points B, O et D sont alignés."
+                    },
+                    {
+                      "content": "Donc BOC et DOC forment un angle plat."
+                    },
+                    {
+                      "content": "Donc BOC + 35° = 180°."
+                    },
+                    {
+                      "content": "Donc BOC = 145°."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour savoir si deux rues (d1) et (d2) sont parallèles, un élève mesure les angles qu'une avenue (d) fait avec elles.",
+              "hint": "La propriété dit : parallèles, donc égaux. La réciproque dit : égaux, donc parallèles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une avenue (d) coupe deux rues (d1) et (d2). Deux angles alternes-internes mesurent 63° et 63°. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une avenue coupe deux rues, avec deux alternes-internes de 63°. Étape 2 — Nommer : les deux angles sont alternes-internes. Étape 3 — Appliquer : la réciproque dit que des alternes-internes égaux donnent des droites parallèles. Étape 4 — Calculer : 63° = 63°, donc les rues sont parallèles. Perpendiculaires serait faux : cela demanderait des angles de 90°. On peut conclure, car l'égalité suffit.",
+                  "answers": [
+                    {
+                      "content": "Les rues sont parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les rues sont perpendiculaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les rues ne sont pas parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une avenue coupe deux rues. Deux angles correspondants mesurent 112° et 68°. Les deux rues sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : une avenue coupe deux rues, avec des correspondants de 112° et de 68°. Étape 2 — Nommer : les deux angles sont correspondants. Étape 3 — Appliquer : si les rues étaient parallèles, ils seraient égaux. Étape 4 — Calculer : 112° est différent de 68°, donc les rues ne sont pas parallèles. 112° + 68° = 180° ne prouve rien ici : pour des correspondants, c'est l'égalité qui prouve le parallélisme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les rues (d1) et (d2) sont parallèles et coupées par une avenue (d). Deux angles alternes-internes mesurent 63° et x. Combien vaut x ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (d1) // (d2), la sécante est (d). Étape 2 — Nommer : les deux angles sont alternes-internes. Étape 3 — Appliquer : des alternes-internes de droites parallèles sont égaux. Étape 4 — Calculer : x = 63°. Répondre 117° serait faux : 117° = 180° − 63° serait un angle voisin, mais x est l'alterne-interne.",
+                  "answers": [
+                    {
+                      "content": "63",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux droites sont coupées par une sécante. Dans quels cas peut-on affirmer qu'elles sont parallèles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche les situations qui prouvent le parallélisme. Étape 2 — Nommer : seuls les alternes-internes et les correspondants sont utiles. Étape 3 — Appliquer : la réciproque demande qu'ils soient égaux. Étape 4 — Calculer : 50° = 50° et 120° = 120° conviennent ; 50° et 130° sont différents. Les opposés par le sommet sont toujours égaux et les adjacents de 50° et 130° sont toujours supplémentaires : ni l'un ni l'autre ne prouve un parallélisme.",
+                  "answers": [
+                    {
+                      "content": "Deux alternes-internes mesurent chacun 50°",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux correspondants mesurent chacun 120°",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux angles opposés par le sommet mesurent chacun 50°",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux angles adjacents mesurent 50° et 130°",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux alternes-internes mesurent 50° et 130°",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites sont coupées par une sécante. Si deux angles correspondants sont égaux, alors les deux droites sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : une sécante coupe deux droites. Étape 2 — Nommer : on a deux angles correspondants égaux. Étape 3 — Appliquer : la réciproque de la propriété s'applique. Étape 4 — Calculer : aucun calcul, il faut conclure. Les droites sont parallèles. Elles ne sont pas forcément perpendiculaires : cela dépendrait de la valeur des angles.",
+                  "answers": [
+                    {
+                      "content": "parallèles",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un angle xOy mesure 120°. La demi-droite [Oz) est sa bissectrice et la demi-droite [Ot) est la bissectrice de l'angle xOz.",
+              "hint": "Une bissectrice de la bissectrice partage en quarts : divise deux fois par 2.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un angle xOy mesure 120°. La demi-droite [Oz) est sa bissectrice. Combien mesure l'angle xOz ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [Oz) partage xOy en deux angles égaux. Étape 2 — Lire : xOy = 120°. Étape 3 — Calculer : xOz = 120° ÷ 2 = 60°. Étape 4 — Tracer : on porterait 60° depuis [Ox). Répondre 120° serait faux : c'est l'angle entier, pas une moitié.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "L'angle xOy mesure 120°, [Oz) est sa bissectrice (xOz = 60°) et [Ot) est la bissectrice de xOz. Combien mesure l'angle xOt ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [Ot) partage xOz = 60° en deux angles égaux. Étape 2 — Lire : xOz = 60°. Étape 3 — Calculer : xOt = 60° ÷ 2 = 30°. Étape 4 — Tracer : on porterait 30° depuis [Ox). Répondre 15° ou 60° serait faux : on divise une seule fois 60° par 2, pas deux fois.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "L'angle xOy mesure 120°, avec xOz = 60° et xOt = 30°. Combien mesure l'angle tOy ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : tOy est formé de tOz et de zOy. Étape 2 — Lire : xOt = 30°, xOz = 60°, xOy = 120°. Étape 3 — Calculer : tOy = xOy − xOt = 120° − 30° = 90°. Étape 4 — Tracer : tOz = 30° et zOy = 60°, et 30° + 60° = 90°. Répondre 30° serait faux : c'est l'angle xOt, mesuré de l'autre côté.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "L'angle xOy mesure 120°, avec xOt = 30° et tOy = 90°. Que peut-on dire de l'angle tOy ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : tOy mesure 90°. Étape 2 — Lire : un angle de 90° est un angle droit. Étape 3 — Calculer : 90° est différent de 180° et de 30°. Étape 4 — Tracer : la demi-droite [Ot) est perpendiculaire à [Oy). Il n'est pas plat, car un angle plat mesure 180°. Il n'est pas égal à xOt, car xOt mesure 30°.",
+                  "answers": [
+                    {
+                      "content": "C'est un angle droit",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un angle plat",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un angle aigu",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un angle égal à xOt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'angle xOy mesure 120°, avec xOt = 30° et zOy = 60°. Les angles xOt et zOy sont complémentaires.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on additionne xOt et zOy. Étape 2 — Écrire : 30° + 60°. Étape 3 — Calculer : 30° + 60° = 90°. Étape 4 — Conclure : la somme est 90°, ils sont complémentaires. Ils ne sont pas supplémentaires : cela demanderait 180°. Ils ne sont pas adjacents non plus, mais cela n'empêche pas d'être complémentaires.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : angles complémentaires et supplémentaires, angles opposés par le sommet, angles alternes-internes et correspondants de parallèles, bissectrice, sur des figures du terrain et du quartier.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au coin O d'un terrain, la ligne de but [OA) et la ligne de touche [OC) forment un angle droit. Le tir de Yao part de O vers B, avec AOB = 35°.",
+              "hint": "Un coin de terrain est un angle droit : 90°.",
+              "exercise_type": "evaluation",
+              "figure": "coin-de-terrain",
+              "questions": [
+                {
+                  "content": "Au coin O d'un terrain, [OA) et [OC) forment un angle droit. Le tir de Yao part de O vers B, avec AOB = 35°. Combien mesure l'angle BOC ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : AOC est un angle droit, la somme visée est 90°. Étape 2 — Écrire : 35° + BOC = 90°. Étape 3 — Calculer : BOC = 90° − 35° = 55°. Étape 4 — Vérifier : 35° + 55° = 90°. Répondre 145° serait faux : 145° = 180° − 35° est l'angle supplémentaire, qui ne s'applique pas à un coin droit.",
+                  "answers": [
+                    {
+                      "content": "55",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Au coin d'un terrain, les angles AOB de 35° et BOC de 55° sont complémentaires.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on additionne 35° et 55°. Étape 2 — Écrire : 35° + 55°. Étape 3 — Calculer : 35° + 55° = 90°. Étape 4 — Conclure : la somme est 90°, ils sont complémentaires, et ils sont aussi adjacents. Ils ne sont pas supplémentaires, car leur somme n'est pas 180°.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au coin O d'un terrain, l'angle droit AOC est partagé par sa bissectrice [Oz). Combien mesure l'angle AOz ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [Oz) partage l'angle droit en deux angles égaux. Étape 2 — Lire : AOC = 90°. Étape 3 — Calculer : AOz = 90° ÷ 2 = 45°. Étape 4 — Tracer : on porterait 45° depuis [OA). Répondre 90° serait faux : c'est l'angle entier ; répondre 180° ne correspond à rien.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Au coin O d'un terrain, la bissectrice [Oz) de l'angle droit AOC fait 45° avec [OA). Le tir de Yao fait 35° avec [OA). Combien mesure l'angle entre le tir et [Oz) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : le tir [OB) et [Oz) sont dans l'angle droit, depuis [OA). Étape 2 — Écrire : angle cherché = AOz − AOB. Étape 3 — Calculer : 45° − 35° = 10°. Étape 4 — Vérifier : 35° + 10° = 45° = AOz. Additionner 45° + 35° = 80° serait faux : le tir et la bissectrice partent du même côté, il faut soustraire.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Au coin O d'un terrain, un tir fait 35° avec la ligne de but. L'angle supplémentaire de 35° mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : supplémentaire, la somme visée est 180°. Étape 2 — Écrire : 35° + angle cherché = 180°. Étape 3 — Calculer : 180° − 35° = 145°. Étape 4 — Vérifier : 35° + 145° = 180°. La valeur 55° est le complémentaire de 35° : elle ne répond pas à la question posée.",
+                  "answers": [
+                    {
+                      "content": "145",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Deux rues droites se croisent en O : la première passe par A, O et C, la seconde par B, O et D. L'angle AOB mesure 60°.",
+              "hint": "L'opposé par le sommet est égal, le voisin est supplémentaire, la bissectrice partage en deux.",
+              "exercise_type": "evaluation",
+              "figure": "croisement-rues",
+              "questions": [
+                {
+                  "content": "Deux rues se croisent en O avec AOB = 60°. Les angles AOB et COD sont :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : (AC) et (BD) se coupent en O. Étape 2 — Identifier : [OC) prolonge [OA) et [OD) prolonge [OB), donc COD est opposé par le sommet à AOB. Étape 3 — Conclure : ils ont la même mesure, COD = 60°. Étape 4 — Déduire : ils ne sont pas adjacents car ils n'ont aucun côté commun. Complémentaires serait faux : 60° + 60° = 120° et non 90°.",
+                  "answers": [
+                    {
+                      "content": "opposés par le sommet, donc égaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "adjacents et supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "alternes-internes",
+                      "correct": false
+                    },
+                    {
+                      "content": "complémentaires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux rues se croisent en O avec AOB = 60°. Combien mesure l'angle BOC ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : A, O et C sont alignés, AOB = 60°. Étape 2 — Identifier : BOC et AOB sont adjacents, ils forment un angle plat. Étape 3 — Conclure : ils sont supplémentaires. Étape 4 — Déduire : BOC = 180° − 60° = 120°. Répondre 30° serait faux : c'est le résultat de 90° − 60°, qui ne s'applique pas à un angle plat.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O avec AOB = 60°, et [Ou) est la bissectrice de l'angle AOB. Combien mesure l'angle AOu ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [Ou) partage AOB en deux angles égaux. Étape 2 — Lire : AOB = 60°. Étape 3 — Calculer : AOu = 60° ÷ 2 = 30°. Étape 4 — Tracer : on porterait 30° depuis [OA). Répondre 60° serait faux : c'est l'angle entier AOB et non sa moitié.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O avec BOC = 120°, et [Ov) est la bissectrice de l'angle BOC. Combien mesure l'angle BOv ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : [Ov) partage BOC en deux angles égaux. Étape 2 — Lire : BOC = 120°. Étape 3 — Calculer : BOv = 120° ÷ 2 = 60°. Étape 4 — Tracer : on porterait 60° depuis [OB). Répondre 240° serait faux : on a doublé au lieu de partager.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Deux rues se croisent en O avec AOB = 60° et BOC = 120°. Quels angles mesurent 120° ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : AOB = 60° et BOC = 120° ; COD fait face à AOB et DOA fait face à BOC. Étape 2 — Identifier : les opposés par le sommet sont égaux. Étape 3 — Conclure : COD = 60° et DOA = 120°. Étape 4 — Déduire : AOC est un angle plat de 180°. AOB et COD mesurent 60° ; AOC est plat : ils ne sont pas à 120°.",
+                  "answers": [
+                    {
+                      "content": "$\\widehat{BOC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\widehat{DOA}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\widehat{AOB}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{COD}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\widehat{AOC}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Les droites (QP) et (RS), parallèles, sont les lignes de touche d'un terrain. Un joueur court le long de (GH), qui les coupe en E et en F. L'angle PEF mesure 120°.",
+              "hint": "Nomme chaque paire d'angles avant d'appliquer une propriété.",
+              "exercise_type": "evaluation",
+              "figure": "touches-et-diagonale",
+              "questions": [
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées par (GH) en E et en F, avec PEF = 120°. Combien mesure l'angle correspondant SFH ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS) et la sécante (GH). Étape 2 — Nommer : SFH est du même côté de la sécante et à la même place en F : il est correspondant à PEF. Étape 3 — Appliquer : les droites sont parallèles, donc les correspondants sont égaux. Étape 4 — Calculer : SFH = 120°. Répondre 60° serait faux : 60° est la mesure d'un voisin et non du correspondant.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées par (GH) en E et en F, avec PEF = 120°. Combien mesure l'angle QEF, voisin de PEF sur la droite (QP) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : Q, E et P sont alignés, PEF = 120°. Étape 2 — Nommer : QEF et PEF sont adjacents, ils forment un angle plat. Étape 3 — Appliquer : ils sont supplémentaires. Étape 4 — Calculer : QEF = 180° − 120° = 60°. Répondre 120° serait faux : QEF est le voisin de PEF, non son égal.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les droites parallèles (QP) et (RS) sont coupées par (GH) en E et en F, avec PEF = 120°. Combien mesure l'angle SFE ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), PEF = 120°, donc RFE = 120° (alternes-internes). Étape 2 — Nommer : SFE est adjacent à RFE sur (RS). Étape 3 — Appliquer : SFE et RFE sont supplémentaires. Étape 4 — Calculer : SFE = 180° − 120° = 60°. Répondre 120° serait faux : SFE n'est pas l'alterne-interne de PEF, mais un angle voisin de RFE.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les droites (QP) et (RS) sont parallèles, avec QEF = 60° et SFE = 60°. Pourquoi ces deux angles sont-ils égaux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : (QP) // (RS), la sécante (GH). Étape 2 — Nommer : QEF et SFE sont entre les droites et de part et d'autre de la sécante : alternes-internes. Étape 3 — Appliquer : des alternes-internes de parallèles sont égaux. Étape 4 — Calculer : QEF = SFE = 60°. Ils ne sont pas opposés par le sommet : leurs sommets E et F sont différents. Ils ne sont pas complémentaires : 60° + 60° = 120°.",
+                  "answers": [
+                    {
+                      "content": "Ils sont alternes-internes et les droites sont parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont opposés par le sommet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont complémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont adjacents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce terrain (PEF = 120°), si l'angle RFE mesurait 100°, les droites (QP) et (RS) pourraient quand même être parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : PEF = 120° et RFE = 100° seraient alternes-internes. Étape 2 — Nommer : ils sont de part et d'autre de la sécante, entre les droites. Étape 3 — Appliquer : des droites parallèles donnent des alternes-internes égaux. Étape 4 — Calculer : 120° est différent de 100°, donc les droites ne seraient pas parallèles. L'affirmation est fausse : une différence entre les angles suffit pour exclure le parallélisme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une rue droite (AC) est coupée en O par une ruelle qui va vers B, avec O entre A et C. L'angle BOC mesure 50°. Une autre ruelle part de O vers D, perpendiculaire à la rue (AC), du même côté que B. Le point D et la ruelle (d') ne sont pas dessinés sur la figure.",
+              "hint": "Un angle droit donne 90° ; une rue droite donne 180°.",
+              "exercise_type": "evaluation",
+              "figure": "rue-et-ruelle",
+              "questions": [
+                {
+                  "content": "Une rue droite (AC) est coupée en O par une ruelle vers B, avec O entre A et C, et BOC = 50°. Une autre ruelle part de O vers D, perpendiculaire à (AC), du côté de B. Combien mesure l'angle BOD ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : DOC est un angle droit, la somme visée est 90°. Étape 2 — Écrire : BOC + BOD = 90°, donc 50° + BOD = 90°. Étape 3 — Calculer : BOD = 90° − 50° = 40°. Étape 4 — Vérifier : 50° + 40° = 90°. Répondre 130° serait faux : c'est le supplémentaire de 50°, alors que l'angle DOC est droit.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une rue droite (AC) est coupée en O par une ruelle vers B, avec BOC = 50°. Une autre ruelle part de O vers D, perpendiculaire à (AC), du côté de B, avec BOD = 40°. Comment sont les angles BOC et BOD ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : BOC et BOD ont le sommet O et le côté commun [OB). Étape 2 — Écrire : ils sont de part et d'autre de [OB), donc adjacents. Étape 3 — Calculer : 50° + 40° = 90°. Étape 4 — Vérifier : leur somme est 90°, ils sont complémentaires. Supplémentaires serait faux : cela demanderait 180°. Ils ne sont pas non plus complémentaires sans être adjacents : ils ont bien un côté commun.",
+                  "answers": [
+                    {
+                      "content": "Adjacents et complémentaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Adjacents et supplémentaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Opposés par le sommet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Complémentaires mais non adjacents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une rue droite (AC) est coupée en O par une ruelle vers B, avec O entre A et C, et BOC = 50°. Combien mesure l'angle AOB ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : A, O et C sont alignés, la somme visée est 180°. Étape 2 — Écrire : AOB + 50° = 180°. Étape 3 — Calculer : AOB = 180° − 50° = 130°. Étape 4 — Vérifier : 130° + 50° = 180°. Répondre 40° serait faux : c'est le complémentaire de 50° et non son supplémentaire.",
+                  "answers": [
+                    {
+                      "content": "130",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "°",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une rue droite (AC) est coupée en O par une ruelle vers B, avec BOC = 50°. L'angle opposé par le sommet à BOC mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : BOC = 50°. Étape 2 — Identifier : son opposé par le sommet est formé en prolongeant [OB) et [OC). Étape 3 — Conclure : deux angles opposés par le sommet ont la même mesure, donc 50°. Étape 4 — Déduire : aucun autre calcul. Répondre 130° serait faux : 130° est la mesure de AOB, le voisin de BOC.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ruelle (d') est parallèle à la rue (AC) et coupe la ruelle (OB) en P. L'angle BOC mesure 50°. Son correspondant en P mesure aussi 50°.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : (d') // (AC), la sécante est (OB). Étape 2 — Nommer : l'angle BOC et l'angle de même place en P sont correspondants. Étape 3 — Appliquer : les droites sont parallèles, donc les correspondants sont égaux. Étape 4 — Calculer : l'angle en P mesure 50°. Ce n'est pas 130° : 130° serait la mesure d'un angle voisin et non du correspondant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

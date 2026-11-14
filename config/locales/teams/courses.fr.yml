@@ -48,6 +48,9 @@ fr:
       edit:
         title: "Modifier la fiche de cours"
         status_notice: "Le statut se change depuis la page de la fiche de cours, jamais dans ce formulaire."
+        # edition-lecon-equipe (ADR-0113 §4.6) : la fiche de révision, les notions et les exercices viennent de l'import.
+        import_notice: "La fiche de révision, les notions et les exercices ne se modifient pas ici : corrigez le fichier importé, puis réimportez-le."
+        import_link: "Réimporter la fiche de cours"
         submit: "Enregistrer"
         cancel: "Annuler"
       create:
@@ -58,3 +61,17 @@ fr:
         published: "Fiche de cours « %{name} » publiée : elle est visible des élèves et des enseignants."
         archived: "Fiche de cours « %{name} » archivée : elle n'est plus visible des élèves ni des enseignants."
         refused: "La fiche de cours « %{name} » est déjà dans cet état ou ne peut pas prendre ce statut. Rechargez la page pour voir son statut actuel."
+      # UDR-0172 : la confirmation (ou son refus) et la suppression.
+      deletion:
+        title: "Supprimer la fiche de cours « %{name} » ?"
+        body: "La fiche de cours, ses fiches de révision, ses exercices, ses sujets et ses images seront supprimés définitivement. Vous pourrez la réimporter depuis Imports."
+        confirm: "Supprimer définitivement"
+        cancel: "Annuler"
+        back: "Retour à la fiche de cours"
+        refused_title: "Cette fiche de cours ne peut pas être supprimée"
+        refused_body: "Des élèves se sont déjà servis de « %{name} » (exercices, lectures, devoirs). Pour la corriger, modifiez-la."
+        edit: "Modifier la fiche de cours"
+        close: "Fermer"
+      destroy:
+        deleted: "Fiche de cours « %{name} » supprimée. Vous pouvez la réimporter depuis Imports."
+        refused: "La fiche de cours « %{name} » a servi à des élèves : elle n'est pas supprimée."

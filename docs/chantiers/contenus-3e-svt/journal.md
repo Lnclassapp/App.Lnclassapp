@@ -35,7 +35,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Relecture des 8 planches par un enseignant de SVT (captures envoyées au porteur) | Hors de portée d'un agent | — (avant publication) |
-| Points « à faire valider par un enseignant » des 10 leçons (vocabulaire du programme, valeurs illustratives) | Programme officiel non accessible ici | — (avant publication) |
+| Points « à faire valider par un enseignant » des 10 leçons (vocabulaire du programme, valeurs illustratives) — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Programme officiel non accessible ici | — (avant publication) |
 | Libellés longs d'abscisse d'une courbe coupés à 390 px | Code de la vague 2 ; contourné dans la leçon | à signaler à la vague 2 / train |
 
 ## Clôture

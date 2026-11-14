@@ -105,3 +105,9 @@ L'équipe saisit les cours du catalogue : nom, sous-titre, niveau, série, mati�
 
 - **Modification refusée** : un niveau ou une série qui sortirait de son niveau une classe où un exercice du cours est assigné → 422, la modale se rouvre, sous « Niveau » : « Ce cours est assigné à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer. ». Élargir à « sans série », changer le nom, le contenu ou la matière restent permis.
 
+
+## Amendement du 2026-11-14 — ce que la modale ne modifie pas
+
+*Chantier [`docs/chantiers/edition-lecon-equipe`](../../chantiers/edition-lecon-equipe/memo.md), ADR-0113 §4.6.*
+
+- La modale « Modifier » dit, sous la ligne du statut (`#course-import-notice`) : « La fiche de révision, les notions et les exercices ne se modifient pas ici : corrigez le fichier importé, puis réimportez-le. », suivi du lien « Réimporter la fiche de cours » (import `course_tree`, dans la modale).

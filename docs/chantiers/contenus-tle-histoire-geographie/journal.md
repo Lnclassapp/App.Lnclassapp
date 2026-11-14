@@ -19,7 +19,9 @@
 - **4 sous-agents simultanés** un court moment (deux corrections lancées en même temps qu'un rédacteur et un relecteur), au-dessus de la limite de 3 demandée.
 - **Commits** : force-push refusé par l'environnement, donc commits de sauvegarde successifs au lieu d'un commit unique amendé ; à écraser à la fusion (squash).
 
-## À faire valider par un enseignant d'Histoire-Géographie
+## Points pédagogiques tranchés
+
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
 
 | Leçon | Point à valider |
 |---|---|
@@ -37,7 +39,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Relecture par un enseignant d'HG (table ci-dessus) | Aucun enseignant dans le chantier ; les leçons restent en brouillon | Programme `contenus-v3-tous-niveaux` |
+| Relecture par un enseignant d'HG (table ci-dessus) — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Aucun enseignant dans le chantier ; les leçons restent en brouillon | Programme `contenus-v3-tous-niveaux` |
 | Challenger empirique (import en brouillon, captures 390 px et ordinateur, dont la carte `world` cadrée sur l'Europe de L9) | Aucune vue modifiée ; non fait dans la session de rédaction | Avant publication, par l'équipe |
 | Pas de fond de carte « France » | Hors périmètre (sorte ou paramètre nouveau = amendement d'ADR) | À ouvrir si un enseignant le demande |
 

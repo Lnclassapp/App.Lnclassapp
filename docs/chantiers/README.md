@@ -130,6 +130,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`contenus-3e-histoire-geographie`](contenus-3e-histoire-geographie/memo.md) | en cours | feature | 2026-10-30 | Leçons de 3ème en Histoire-Géographie, et leurs figures (frise, carte, schéma, courbe) |
 | [`contenus-3e-physique-chimie`](contenus-3e-physique-chimie/memo.md) | planifié | feature | 2026-10-30 | Les 10 premières leçons de Physique-Chimie de 3ème, tracé optique, molécule et planches de PC |
 | [`contenus-3e-svt`](contenus-3e-svt/memo.md) | livré | feature | 2026-10-30 | Les 10 premières leçons de SVT de 3ème et leurs planches |
+| [`contenus-depot-dedie`](contenus-depot-dedie/memo.md) | planifié | feature | 2026-11-14 | Les leçons vivent dans leur propre dépôt |
 | [`contenus-develop-staging`](contenus-develop-staging/memo.md) | livré | feature | 2026-10-31 | Les leçons arrivent seules sur Develop et Staging |
 | [`contenus-tle-francais`](contenus-tle-francais/memo.md) | livré | feature | 2026-10-31 | Les 7 leçons de Français de Terminale (A1, A2, C, D) |
 | [`contenus-tle-histoire-geographie`](contenus-tle-histoire-geographie/memo.md) | livré | feature | 2026-10-31 | Les 10 premières leçons d'Histoire-Géographie de Tle (progression commune) |
@@ -156,6 +157,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`develop-rouge-medailles`](develop-rouge-medailles/memo.md) | livré | bugfix | 2026-11-09 | Develop rouge après les médailles |
 | [`dockerfile-docker-hub-429`](dockerfile-docker-hub-429/memo.md) | en cours | bugfix | 2026-10-09 | Dockerfile et limite de Docker Hub (429) |
 | [`ecrans-direction-lents`](ecrans-direction-lents/memo.md) | livré | optimisation | 2026-10-04 | Écrans de la direction dans leur budget |
+| [`edition-lecon-equipe`](edition-lecon-equipe/memo.md) | livré | bugfix | 2026-11-14 | Édition d'une leçon par l'équipe |
 | [`eleve-sans-prof`](eleve-sans-prof/memo.md) | livré | feature | 2026-11-12 | L'élève sans enseignant a quelque chose à faire dès l'accueil |
 | [`enrolement-secret-stable`](enrolement-secret-stable/memo.md) | livré | bugfix | 2026-09-30 | Le QR code d'enrôlement reste valable quand la page est rouverte |
 | [`enseignant-plusieurs-matieres`](enseignant-plusieurs-matieres/memo.md) | exécution | feature | 2026-10-16 | Un enseignant qui enseigne plusieurs matières |
@@ -195,7 +197,11 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`interrupteur-theme`](interrupteur-theme/memo.md) | en cours | feature | 2026-10-03 | Interrupteur clair / sombre |
 | [`je-m-entraine-dans-la-fiche`](je-m-entraine-dans-la-fiche/memo.md) | livré | feature | 2026-10-30 | « Je m’entraîne » dans la fiche de révision |
 | [`lecons-1ere-2nde-debut`](lecons-1ere-2nde-debut/memo.md) | livré | feature | 2026-11-12 | Les trois premières leçons de 1ère et de 2nde, comme Thalès |
+| [`lecons-2nde-4-5`](lecons-2nde-4-5/) | pas de memo | — | — | — |
 | [`lecons-3eme-comme-thales`](lecons-3eme-comme-thales/memo.md) | PR prête | feature | 2026-11-05 | Les leçons de 3ème préparées comme Thalès |
+| [`lecons-4eme`](lecons-4eme/) | pas de memo | — | — | — |
+| [`lecons-5eme`](lecons-5eme/) | pas de memo | — | — | — |
+| [`lecons-6eme`](lecons-6eme/) | pas de memo | — | — | — |
 | [`lecons-defauts-affichage`](lecons-defauts-affichage/memo.md) | décision | bugfix | 2026-11-02 | Leçons v3 en défaut d'affichage |
 | [`lecons-tle-a1-comme-thales`](lecons-tle-a1-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale A1 préparées comme Thalès |
 | [`lecons-tle-a2-comme-thales`](lecons-tle-a2-comme-thales/memo.md) | en cours | feature | 2026-11-08 | Les leçons de Terminale A2 préparées comme Thalès |
@@ -269,6 +275,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`sujet-comme-une-epreuve`](sujet-comme-une-epreuve/memo.md) | livré | feature | 2026-11-04 | Le sujet se lit comme une vraie épreuve |
 | [`sujets-cahier-noir-blanc`](sujets-cahier-noir-blanc/memo.md) | livré | feature | 2026-11-05 | Les sujets d'interrogation en cahier noir et blanc |
 | [`sujets-thales-feuilles`](sujets-thales-feuilles/memo.md) | livré | feature | 2026-10-31 | Sujets de devoir Thalès, titres numérotés des feuilles, correction en bloc |
+| [`suppression-lecon`](suppression-lecon/memo.md) | livré | feature | 2026-11-14 | Supprimer une leçon qui n'a jamais servi à un élève |
 | [`teams-dashboard-cours-recents`](teams-dashboard-cours-recents/memo.md) | livré | bugfix | 2026-09-23 | Le tableau de bord Team plante en 500 |
 | [`test-date-figee`](test-date-figee/memo.md) | livré | bugfix | 2026-10-30 | Un test de suivi d'exercice rouge depuis le 30 octobre 2026 |
 | [`tester-pr-en-local`](tester-pr-en-local/memo.md) | livré | feature | 2026-10-21 | Tester une PR sur sa machine |
@@ -283,6 +290,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`ux-pages-eleve`](ux-pages-eleve/) | pas de memo | — | — | — |
 | [`validation-enseignants-en-pause`](validation-enseignants-en-pause/memo.md) | en cours | feature | 2026-10-02 | Validation des enseignants en pause |
 | [`validation-figures-bornee`](validation-figures-bornee/memo.md) | livré | optimisation | 2026-10-30 | Validation des figures bornée |
+| [`validation-pedagogique-agent`](validation-pedagogique-agent/memo.md) | livré | refactoring | 2026-11-14 | Validateur pédagogique des leçons |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | backlog | feature | 2026-09-28 | Vérifier le numéro par WhatsApp à l'inscription sans code |
 | [`vie-de-la-classe`](vie-de-la-classe/memo.md) | livré | feature | 2026-10-16 | La vie de la classe : la modifier, la lire, la fermer pour de bon |
 <!-- chantiers:end -->
