@@ -118,7 +118,7 @@
         {
           "key": "difference-buts",
           "kind": "coordinate_plane",
-          "description": "Un repère où le numéro de la journée est en abscisse (de 0 à 8) et la différence de buts d'une équipe en ordonnée (de −2 à 4). La ligne brisée relie A(0 ; 2), B(2 ; −2), C(4 ; 2), D(6 ; 0) et E(8 ; 4) : elle descend jusqu'à B, monte jusqu'à C, descend jusqu'à D puis monte jusqu'à E.",
+          "description": "Un repère où le temps écoulé, en heures, est en abscisse (de 0 à 8) et la température d'une chambre froide, en °C, en ordonnée (de −2 à 4). La ligne brisée relie A(0 ; 2), B(2 ; −2), C(4 ; 2), D(6 ; 0) et E(8 ; 4) : elle descend jusqu'à B, monte jusqu'à C, descend jusqu'à D puis monte jusqu'à E.",
           "params": {
             "xmin": -1,
             "xmax": 9,
@@ -1486,8 +1486,8 @@
       ],
       "exercises": [
         {
-          "title": "Les spectateurs du tournoi",
-          "statement": "Le club de football d'un quartier d'Abobo étudie, dans un modèle fictif, la fonction $f$ définie par $f(x)=\\frac{2x+6}{x-4}$, où $x$ est le nombre de milliers de spectateurs attendus.",
+          "title": "Une fonction rationnelle",
+          "statement": "On étudie la fonction $f$ définie par $f(x)=\\frac{2x+6}{x-4}$, où $x$ est un nombre réel.",
           "exercise_type": "fixation",
           "figure": null,
           "questions": [
@@ -1693,7 +1693,7 @@
         },
         {
           "title": "Étude d'une fonction pour l'entraîneur",
-          "statement": "Pour préparer ses séances, un entraîneur de football étudie la fonction $f(x)=x^2-6x+5$, où $x$ est le nombre d'heures d'entraînement de la semaine (modèle fictif). On veut connaître son sens de variation.",
+          "statement": "On étudie la fonction $f$ définie sur $\\mathbb{R}$ par $f(x)=x^2-6x+5$. On veut connaître son sens de variation.",
           "exercise_type": "evaluation",
           "figure": null,
           "questions": [
@@ -2328,7 +2328,7 @@
         },
         {
           "title": "Sujet 2 · La vie courante en contexte ivoirien",
-          "notions": "Prix d'une course de gbaka (fonction affine) ; différence de buts d'une équipe lue sur une courbe ; partage d'une somme et temps d'attente (quotient et racine) ; recette d'une buvette (carré).",
+          "notions": "Prix d'une course de gbaka (fonction affine) ; température d'une chambre froide lue sur une courbe ; partage d'une somme et temps d'attente (quotient et racine) ; recette d'une buvette (carré).",
           "exercises": [
             {
               "title": "Exercice 1",
@@ -2415,7 +2415,7 @@
             },
             {
               "title": "Exercice 2",
-              "statement": "Au fil des huit premières journées, la différence de buts $f(x)$ d'une équipe de quartier est représentée par la ligne brisée qui relie $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$ ($x$ est le numéro de la journée).",
+              "statement": "Pendant huit heures, la température $f(x)$ d'une chambre froide, en °C, est représentée par la ligne brisée qui relie $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$ ($x$ est le temps écoulé, en heures ; données d'exemple).",
               "exercise_type": "evaluation",
               "figure": "difference-buts",
               "questions": [
@@ -2423,7 +2423,7 @@
                   "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, quelle est l'image de $4$ ?",
                   "question_type": "numeric",
                   "tolerance": 0,
-                  "explanation": "Étape 1 — Identifier : on donne $x=4$ et on cherche son image. Étape 2 — Écrire la relation : on trace la verticale $x=4$. Étape 3 — Lire : elle passe par le point $C(4\\,;\\,2)$. Étape 4 — Conclure : l'image de $4$ est $2$ : après la journée $4$, la différence de buts est $2$.",
+                  "explanation": "Étape 1 — Identifier : on donne $x=4$ et on cherche son image. Étape 2 — Écrire la relation : on trace la verticale $x=4$. Étape 3 — Lire : elle passe par le point $C(4\\,;\\,2)$. Étape 4 — Conclure : l'image de $4$ est $2$ : au bout de $4$ heures, la température est de $2$ °C.",
                   "answers": [
                     {
                       "content": "2",
@@ -2459,7 +2459,7 @@
                   ]
                 },
                 {
-                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, quel est le maximum de la différence de buts ?",
+                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, quel est le maximum de la température, en °C ?",
                   "question_type": "numeric",
                   "tolerance": 0,
                   "explanation": "Étape 1 — Repérer : les bornes sont $0$ et $8$ ; le sens change en $x=2$, $x=4$, $x=6$. Étape 2 — Lire les images : $f(0)=2$, $f(2)=-2$, $f(4)=2$, $f(6)=0$, $f(8)=4$. Étape 3 — Écrire le sens : ↘ sur $[0\\,;\\,2]$, ↗ sur $[2\\,;\\,4]$, ↘ sur $[4\\,;\\,6]$, ↗ sur $[6\\,;\\,8]$. Étape 4 — Conclure : le maximum est $4$, atteint en $x=8$ ; le minimum est $-2$, atteint en $x=2$. Ne confonds pas la valeur d'un extremum (une ordonnée) avec l'abscisse où il est atteint.",
@@ -2471,7 +2471,7 @@
                   ]
                 },
                 {
-                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, à quelle journée le minimum est-il atteint ?",
+                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, au bout de combien d'heures le minimum est-il atteint ?",
                   "question_type": "single_choice",
                   "explanation": "Étape 1 — Repérer : les bornes sont $0$ et $8$ ; le sens change en $x=2$, $x=4$, $x=6$. Étape 2 — Lire les images : $f(0)=2$, $f(2)=-2$, $f(4)=2$, $f(6)=0$, $f(8)=4$. Étape 3 — Écrire le sens : ↘ sur $[0\\,;\\,2]$, ↗ sur $[2\\,;\\,4]$, ↘ sur $[4\\,;\\,6]$, ↗ sur $[6\\,;\\,8]$. Étape 4 — Conclure : le maximum est $4$, atteint en $x=8$ ; le minimum est $-2$, atteint en $x=2$. Ne confonds pas la valeur d'un extremum (une ordonnée) avec l'abscisse où il est atteint.",
                   "answers": [
@@ -2494,9 +2494,9 @@
                   ]
                 },
                 {
-                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, la différence de buts est négative entre les journées $1$ et $3$.",
+                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, la température est négative entre $x=1$ et $x=3$.",
                   "question_type": "true_false",
-                  "explanation": "Étape 1 — Repérer : les bornes sont $0$ et $8$ ; le sens change en $x=2$, $x=4$, $x=6$. Étape 2 — Lire les images : $f(0)=2$, $f(2)=-2$, $f(4)=2$, $f(6)=0$, $f(8)=4$. Étape 3 — Écrire le sens : ↘ sur $[0\\,;\\,2]$, ↗ sur $[2\\,;\\,4]$, ↘ sur $[4\\,;\\,6]$, ↗ sur $[6\\,;\\,8]$. Étape 4 — Conclure : la courbe est sous l'axe des abscisses entre ses points d'abscisses $1$ et $3$ (là où elle coupe l'axe), donc la différence de buts y est négative. L'affirmation est vraie.",
+                  "explanation": "Étape 1 — Repérer : les bornes sont $0$ et $8$ ; le sens change en $x=2$, $x=4$, $x=6$. Étape 2 — Lire les images : $f(0)=2$, $f(2)=-2$, $f(4)=2$, $f(6)=0$, $f(8)=4$. Étape 3 — Écrire le sens : ↘ sur $[0\\,;\\,2]$, ↗ sur $[2\\,;\\,4]$, ↘ sur $[4\\,;\\,6]$, ↗ sur $[6\\,;\\,8]$. Étape 4 — Conclure : la courbe est sous l'axe des abscisses entre ses points d'abscisses $1$ et $3$ (là où elle coupe l'axe), donc la température y est négative. L'affirmation est vraie.",
                   "answers": [
                     {
                       "content": "Vrai",
@@ -2509,7 +2509,7 @@
                   ]
                 },
                 {
-                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, quel est le minimum de la différence de buts ?",
+                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, quel est le minimum de la température, en °C ?",
                   "question_type": "numeric",
                   "tolerance": 0,
                   "explanation": "Étape 1 — Repérer : les bornes sont $0$ et $8$ ; le sens change en $x=2$, $x=4$, $x=6$. Étape 2 — Lire les images : $f(0)=2$, $f(2)=-2$, $f(4)=2$, $f(6)=0$, $f(8)=4$. Étape 3 — Écrire le sens : ↘ sur $[0\\,;\\,2]$, ↗ sur $[2\\,;\\,4]$, ↘ sur $[4\\,;\\,6]$, ↗ sur $[6\\,;\\,8]$. Étape 4 — Conclure : le maximum est $4$, atteint en $x=8$ ; le minimum est $-2$, atteint en $x=2$. Ne confonds pas la valeur d'un extremum (une ordonnée) avec l'abscisse où il est atteint.",
@@ -3122,7 +3122,7 @@
           "exercises": [
             {
               "title": "Exercice 1",
-              "statement": "Un entraîneur modélise le nombre de points d'un joueur par la fonction $f(x)=x^2-4x+3$, définie sur $\\mathbb{R}$ (modèle fictif).",
+              "statement": "On étudie la fonction $f$ définie sur $\\mathbb{R}$ par $f(x)=x^2-4x+3$.",
               "exercise_type": "evaluation",
               "figure": null,
               "questions": [
@@ -3308,7 +3308,7 @@
             },
             {
               "title": "Exercice 3",
-              "statement": "Au fil des huit premières journées, la différence de buts d'une équipe est représentée par la ligne brisée qui relie $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$.",
+              "statement": "Pendant huit heures, la température d'une chambre froide, en °C, est représentée par la ligne brisée qui relie $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$.",
               "exercise_type": "evaluation",
               "figure": "difference-buts",
               "questions": [
@@ -3325,7 +3325,7 @@
                   ]
                 },
                 {
-                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, à quelle journée le maximum est-il atteint ?",
+                  "content": "Sur la ligne brisée $ABCDE$ avec $A(0\\,;\\,2)$, $B(2\\,;\\,-2)$, $C(4\\,;\\,2)$, $D(6\\,;\\,0)$ et $E(8\\,;\\,4)$, au bout de combien d'heures le maximum est-il atteint ?",
                   "question_type": "single_choice",
                   "explanation": "Étape 1 — Repérer : les bornes sont $0$ et $8$ ; le sens change en $x=2$, $x=4$, $x=6$. Étape 2 — Lire les images : $f(0)=2$, $f(2)=-2$, $f(4)=2$, $f(6)=0$, $f(8)=4$. Étape 3 — Écrire le sens : ↘ sur $[0\\,;\\,2]$, ↗ sur $[2\\,;\\,4]$, ↘ sur $[4\\,;\\,6]$, ↗ sur $[6\\,;\\,8]$. Étape 4 — Conclure : le maximum est $4$, atteint en $x=8$ ; le minimum est $-2$, atteint en $x=2$. Ne confonds pas la valeur d'un extremum (une ordonnée) avec l'abscisse où il est atteint.",
                   "answers": [

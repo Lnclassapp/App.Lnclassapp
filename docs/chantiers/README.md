@@ -130,6 +130,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`contenus-3e-histoire-geographie`](contenus-3e-histoire-geographie/memo.md) | en cours | feature | 2026-10-30 | Leçons de 3ème en Histoire-Géographie, et leurs figures (frise, carte, schéma, courbe) |
 | [`contenus-3e-physique-chimie`](contenus-3e-physique-chimie/memo.md) | planifié | feature | 2026-10-30 | Les 10 premières leçons de Physique-Chimie de 3ème, tracé optique, molécule et planches de PC |
 | [`contenus-3e-svt`](contenus-3e-svt/memo.md) | livré | feature | 2026-10-30 | Les 10 premières leçons de SVT de 3ème et leurs planches |
+| [`contenus-depot-dedie`](contenus-depot-dedie/memo.md) | planifié | feature | 2026-11-14 | Les leçons vivent dans leur propre dépôt |
 | [`contenus-develop-staging`](contenus-develop-staging/memo.md) | livré | feature | 2026-10-31 | Les leçons arrivent seules sur Develop et Staging |
 | [`contenus-tle-francais`](contenus-tle-francais/memo.md) | livré | feature | 2026-10-31 | Les 7 leçons de Français de Terminale (A1, A2, C, D) |
 | [`contenus-tle-histoire-geographie`](contenus-tle-histoire-geographie/memo.md) | livré | feature | 2026-10-31 | Les 10 premières leçons d'Histoire-Géographie de Tle (progression commune) |
@@ -156,6 +157,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`develop-rouge-medailles`](develop-rouge-medailles/memo.md) | livré | bugfix | 2026-11-09 | Develop rouge après les médailles |
 | [`dockerfile-docker-hub-429`](dockerfile-docker-hub-429/memo.md) | en cours | bugfix | 2026-10-09 | Dockerfile et limite de Docker Hub (429) |
 | [`ecrans-direction-lents`](ecrans-direction-lents/memo.md) | livré | optimisation | 2026-10-04 | Écrans de la direction dans leur budget |
+| [`edition-lecon-equipe`](edition-lecon-equipe/memo.md) | livré | bugfix | 2026-11-14 | Édition d'une leçon par l'équipe |
 | [`eleve-sans-prof`](eleve-sans-prof/memo.md) | livré | feature | 2026-11-12 | L'élève sans enseignant a quelque chose à faire dès l'accueil |
 | [`enrolement-secret-stable`](enrolement-secret-stable/memo.md) | livré | bugfix | 2026-09-30 | Le QR code d'enrôlement reste valable quand la page est rouverte |
 | [`enseignant-plusieurs-matieres`](enseignant-plusieurs-matieres/memo.md) | exécution | feature | 2026-10-16 | Un enseignant qui enseigne plusieurs matières |
@@ -288,6 +290,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`ux-pages-eleve`](ux-pages-eleve/) | pas de memo | — | — | — |
 | [`validation-enseignants-en-pause`](validation-enseignants-en-pause/memo.md) | en cours | feature | 2026-10-02 | Validation des enseignants en pause |
 | [`validation-figures-bornee`](validation-figures-bornee/memo.md) | livré | optimisation | 2026-10-30 | Validation des figures bornée |
+| [`validation-pedagogique-agent`](validation-pedagogique-agent/memo.md) | livré | refactoring | 2026-11-14 | Validateur pédagogique des leçons |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | backlog | feature | 2026-09-28 | Vérifier le numéro par WhatsApp à l'inscription sans code |
 | [`vie-de-la-classe`](vie-de-la-classe/memo.md) | livré | feature | 2026-10-16 | La vie de la classe : la modifier, la lire, la fermer pour de bon |
 <!-- chantiers:end -->

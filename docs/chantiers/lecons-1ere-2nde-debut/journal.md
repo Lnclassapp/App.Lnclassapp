@@ -31,6 +31,8 @@
 
 ## À trancher
 
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+
 Options prudentes appliquées ; un enseignant de la matière relit avant publication.
 
 - **Valeurs illustratives** : les données chiffrées des énoncés ajoutés (mesures, effectifs, prix, résultats d'expérience) sont fictives. En Histoire-Géographie 1ère, seuls les recensements (1975, 1988, 1998, 2014, 2021) et la population de 2021 de la fiche sont des chiffres réels.

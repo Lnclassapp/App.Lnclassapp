@@ -46,7 +46,7 @@ Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/
 
 Règle et table : [`docs/workflows/README.md`](docs/workflows/README.md#quel-modèle-pour-quel-rôle), décision [ADR-0104](docs/decisions/adr/0104-routage-des-modeles-par-role.md).
 
-- **Opus** : l'orchestrateur (cadrage, décisions, arbitrage, fusions qui ne sont pas de routine) et les sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`).
+- **Opus** : l'orchestrateur (cadrage, décisions, arbitrage, fusions qui ne sont pas de routine), les sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) et le `validateur-pedagogique` des leçons, qui tranche avant la PR ce qu'on laissait à un enseignant.
 - **Sonnet** : l'exécution d'un lot déjà cadré (`executant-lot`), tests et corrections compris ; les fusions de routine vers `Develop` (`fusionneur`).
 - **Haiku** : les vérifications pures (`verificateur-ci` : `bin/ci-quiet`, tests système relancés, verdict).
 - **Déléguer à Haiku** la recherche (trouver un fichier, lire du code ou un journal) à l'agent `Explore`, et les tâches mécaniques hors lot (lancer une commande et lire sa sortie, renommer un fichier de doc) à l'agent `chores`. Jamais le code de `app/` : c'est `executant-lot`.

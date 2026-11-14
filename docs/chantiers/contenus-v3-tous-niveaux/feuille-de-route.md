@@ -20,7 +20,7 @@ Source : `docs/contenus/progressions-2026-2027/` (10 premières leçons par mati
 
 ## Les vagues
 
-Règle : **une vague = une matière d'un niveau**, coupée en deux par groupe de séries au-delà de 17 leçons distinctes. Chaque vague : chantier, session enfant, prompt de matière, `valider.rb` sans avertissement, relecture indépendante, « Je m'entraîne », rangement, points enseignant au journal, PR prête avec la ligne de preuve `bin/ci-quiet`.
+Règle : **une vague = une matière d'un niveau**, coupée en deux par groupe de séries au-delà de 17 leçons distinctes. Chaque vague : chantier, session enfant, prompt de matière, `valider.rb` sans avertissement, relecture indépendante, validateur pédagogique (chaque point tranché au journal, aucun laissé à un enseignant), « Je m'entraîne », rangement, PR prête avec la ligne de preuve `bin/ci-quiet`.
 
 | # | Niveau | Matière | Séries | Leçons |
 |---|---|---|---|---:|
@@ -83,7 +83,7 @@ Règle : **une vague = une matière d'un niveau**, coupée en deux par groupe de
 - [ ] 2nde : 7 vagues fusionnées, 68 leçons
 - [x] 3ème : rien à compléter (D2)
 - [ ] 4ème, 5ème, 6ème : 6 vagues chacune
-- [ ] Points « à faire valider par un enseignant » tous inscrits au journal ; leçons en brouillon
+- [x] Points pédagogiques tous tranchés par le validateur pédagogique (2026-11-14, chantier `validation-pedagogique-agent`) ; plus aucun point « à faire valider par un enseignant »
 - [ ] Index des chantiers mis à jour à la clôture, `journal.md` clos
 
 ## Challenger empirique — par vague

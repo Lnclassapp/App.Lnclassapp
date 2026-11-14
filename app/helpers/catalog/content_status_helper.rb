@@ -1,6 +1,6 @@
 # 🌐 UI · Catalog::ContentStatusHelper — statut d'un cours, d'une fiche ou d'un exercice, et ses transitions
 # Rôle : badge du statut pour tous ; pour l'équipe, le badge (panneau) et les transitions en entrées du menu ⋮, que les streams remplacent
-# ADR  : 0035 · UDR : 0005, 0007, 0042
+# ADR  : 0035, 0113, 0121 · UDR : 0005, 0007, 0015, 0021, 0042
 module Catalog
   module ContentStatusHelper
     CONTENT_STATUS_TONES = { "draft" => :warning, "published" => :success, "archived" => :neutral }.freeze
@@ -12,6 +12,8 @@ module Catalog
     }.freeze
     TRANSITION_ACTIONS = { "published" => "publish", "archived" => "archive" }.freeze
     TRANSITION_ICONS = { "publish" => "check-circle", "archive" => "archive-box" }.freeze
+    # Un contenu lu par une query (feuille, fiche de révision) et non par son repository : son type, sa clé de route, son statut.
+    Ref = Data.define(:type, :key, :status)
 
     def content_status_badge(status)
       tone = CONTENT_STATUS_TONES.fetch(status)
@@ -38,9 +40,20 @@ module Catalog
       tag.div(safe_join(items), id: "content_transitions_#{type}_#{key}", class: "contents", role: "none")
     end
 
+    # edition-lecon-equipe : le badge et le menu ⋮ d'une notion ou d'un exercice, là où il se lit dans la leçon (ADR-0113, ADR-0121).
+    def content_status_menu(type:, key:, status:, label:)
+      ref = Ref.new(type: type.to_s, key:, status:)
+      tag.div(class: "my-2 flex flex-wrap items-center gap-2 font-sans text-base text-ink print:hidden") do
+        content_status_panel(record: ref) +
+          ui_dropdown(label:, id: "#{type}-actions-menu-#{key}", fixed: true) { content_transition_items(record: ref) }
+      end
+    end
+
     private
 
     def content_address(record)
+      return [ record.type, record.key ] if record.is_a?(Ref)
+
       type, key_attribute = CONTENT_TYPES.fetch(record.class.name)
       [ type, record.public_send(key_attribute) ]
     end

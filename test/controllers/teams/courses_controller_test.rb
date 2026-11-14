@@ -154,6 +154,8 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "select[name='course[material_slug]'] option[selected][value=svt]"
     assert_select "input[type=hidden][name='course[content]'][value*='<strong>ADN</strong>']"
     assert_select "dialog", text: including(I18n.t("catalog.content_status.published"))
+    # edition-lecon-equipe (ADR-0113 §4.6) : notions et exercices ne sont pas dans ce formulaire ; la modale dit où ils se corrigent.
+    assert_select "#course-import-notice a[href='#{new_teams_import_path(kind: "course_tree")}'][data-turbo-frame=modal]"
   end
 
   test "a course without series is edited with « Aucune série »; an unknown course is not found" do

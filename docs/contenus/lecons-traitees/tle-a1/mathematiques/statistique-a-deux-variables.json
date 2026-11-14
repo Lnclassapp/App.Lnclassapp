@@ -1059,7 +1059,7 @@
         },
         {
           "name": "Ajustement affine : la méthode de Mayer",
-          "remember": "**Ajuster** un nuage, c'est le remplacer par une droite d'équation $y = ax + b$ qui passe au plus près des points. La **méthode de Mayer** s'applique à une série de $n$ points, avec $n$ pair : on range les points par $x$ croissant, on forme deux groupes de même effectif, et on calcule le point moyen $G_1$ du premier groupe et le point moyen $G_2$ du second. La **droite de Mayer** est la droite $(G_1G_2)$. Elle passe aussi par le point moyen $G$ de toute la série, qui est le milieu de $[G_1G_2]$.",
+          "remember": "**Ajuster** un nuage, c'est le remplacer par une droite d'équation $y = ax + b$ qui passe au plus près des points. La **méthode de Mayer** : on range les points par $x$ croissant, on les partage en deux groupes, et on calcule le point moyen $G_1$ du premier groupe et le point moyen $G_2$ du second. Dans cette leçon, le nombre $n$ de points est pair : les deux groupes ont le même effectif $\\dfrac{n}{2}$. La **droite de Mayer** est la droite $(G_1G_2)$. Elle passe aussi par le point moyen $G$ de toute la série ; avec deux groupes de même effectif, $G$ est le milieu de $[G_1G_2]$.",
           "method": [
             "Ordonner et partager : classer les points par $x$ croissant, puis former deux groupes de même effectif (la première moitié, la seconde moitié).",
             "Calculer $G_1$ et $G_2$ : le point moyen de chaque groupe, avec la méthode du point moyen.",
@@ -3074,20 +3074,20 @@
                   "unit": "unités"
                 },
                 {
-                  "content": "La méthode de Mayer partage la série en deux groupes de même effectif. Avec 7 points, c'est impossible, car 7 est ___.",
+                  "content": "Une série de 8 points est rangée par $x$ croissant. Avec la méthode de Mayer, chacun des deux groupes contient ___ points.",
                   "question_type": "select",
-                  "explanation": "Étape 1 — Condition : la méthode de Mayer s'applique à une série de $n$ points avec $n$ pair, pour former deux groupes de même effectif. Étape 2 — Vérifier : 7 n'est pas divisible par 2, il est impair, donc on ne peut pas le partager en deux groupes égaux. Dire « pair » serait faux, et être multiple de 3 ne joue aucun rôle : 7 n'est d'ailleurs pas un multiple de 3.",
+                  "explanation": "Étape 1 — Ordonner et partager : on forme deux groupes de même effectif, la première moitié et la seconde moitié des points : $8 \\div 2 = 4$ points par groupe. « 8 » oublie de partager la série ; « 2 » est le nombre de groupes, pas leur effectif.",
                   "answers": [
                     {
-                      "content": "pair",
+                      "content": "2",
                       "correct": false
                     },
                     {
-                      "content": "impair",
+                      "content": "4",
                       "correct": true
                     },
                     {
-                      "content": "multiple de 3",
+                      "content": "8",
                       "correct": false
                     }
                   ]
