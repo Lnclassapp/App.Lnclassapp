@@ -402,6 +402,26 @@ module UseCases
         assert_equal [ before, "Calculer et simplifier" ], [ tree_counts, course.reload.subtitle ]
       end
 
+      # CA-05 (chantier suppression-lecon) : une leçon publiée refusée à l'import se réimporte une fois supprimée.
+      test "a published lesson refused as already published is imported again once deleted" do
+        run_import(envelope(lesson))
+        course = Orm::Course.find_by!(slug: "racines-carrees")
+        course.update_columns(status: "published", published_at: Time.current)
+        assert_equal [ [ "courses[0]", "lesson_already_published" ] ], report_pairs(run_import(envelope(lesson)))
+        deletion = DeleteCourse.new(courses: Repositories::Catalog::CourseRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
+                                    transaction: Repositories::Shared::Transaction.new, policy: Policies::Catalog::ManageContentPolicy.new,
+                                    clock: Time.zone)
+
+        assert deletion.call(actor: Entities::Identity::Actor.new(user_id: @author.id, role: :team, team_role: "content"),
+                             slug: "racines-carrees").success?
+        report = run_import(envelope(lesson))
+
+        assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
+        reimported = Orm::Course.find_by!(name: course.name)
+        assert_not_equal course.id, reimported.id
+        assert_equal "draft", reimported.status
+      end
+
       # Une écriture que la base refuse dit, dans la ligne d'Imports, la classe de l'exception et la contrainte en cause (aucune donnée).
       test "a write the database refuses is reported write_failed with the exception class and the constraint name" do
         refusing = Class.new(SimpleDelegator) do

@@ -42,6 +42,9 @@ CI_PLAN = CiPlan.define do
     # conventions.md §2: the decision indexes are up to date, no number is taken twice, and no XXXX- decision reaches
     # Develop, Staging or main (GITHUB_BASE_REF names the target of a pull request).
     step "Guard: Decision index (numbers set at merge)", "script/docs/build_index --check"
+    # ADR-0134 §4.5: docs/contenus/lecons-traitees/ is a frozen copy of the contents repository; a lesson changed
+    # without docs/contenus/VERSION (written by script/contenus/synchroniser.rb) fails here, even in a documents-only branch.
+    step "Guard: Frozen lessons match docs/contenus/VERSION", "ruby script/contenus/synchroniser.rb --verifier"
 
     step "Style: Ruby", "bin/rubocop", inputs: :ruby
 
