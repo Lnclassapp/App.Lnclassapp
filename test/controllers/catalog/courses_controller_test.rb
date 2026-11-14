@@ -930,6 +930,31 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{assignments_href(@draft.slug)}']", 0
   end
 
+  # edition-lecon-equipe : la notion n'a plus de page (ADR-0113) ; son statut et ses transitions (ADR-0035, UDR-0042) vivent
+  # sur sa section de la fiche de révision, pour l'équipe seulement.
+  test "edition-lecon-equipe: each notion of the revision sheet carries its status and its ⋮ menu for the team, not for a student" do
+    published = create_essential(course: @course, name: "La méiose", position: 1, sheet: notion_sheet("Deux divisions."))
+    draft = create_essential(course: @course, name: "La mitose", position: 2, status: "draft", sheet: notion_sheet("Une division."))
+    sign_in_as create_team_member
+
+    get course_path(@course.slug)
+
+    assert_response :success
+    assert_select "#notion-#{published.slug}" do
+      assert_select "#content_status_essential_#{published.slug}", text: including(status_label(:published))
+      assert_select "#content_transitions_essential_#{published.slug} a[role=menuitem][data-turbo-method=patch]" \
+                    "[href='#{archive_teams_essential_path(published.slug)}']"
+    end
+    assert_select "#notion-#{draft.slug} #content_transitions_essential_#{draft.slug}" do
+      assert_select "a[href='#{publish_teams_essential_path(draft.slug)}']"
+      assert_select "a[href='#{archive_teams_essential_path(draft.slug)}']", 0 # un brouillon ne s'archive pas (ContentStatus::TRANSITIONS)
+    end
+
+    sign_in_as create_student_for(@course)
+    get course_path(@course.slug)
+    assert_select "[id^=content_status_essential_], [id^=content_transitions_essential_]", 0
+  end
+
   # Audit B-046 (décision du porteur) : comme le catalogue, la leçon par son adresse se limite aux matières de l'enseignant.
   test "B-046: a teacher gets 404 on the lesson, its old sheet address, and its notion of another subject; direction, team and student unchanged" do
     notion = create_essential(course: @course)

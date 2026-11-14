@@ -226,6 +226,30 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to course_sheet_path(@course.slug, @devoir_sheet)
   end
 
+  # edition-lecon-equipe : l'exercice se lit dans la feuille (ADR-0121) ; son statut et ses transitions (ADR-0035, UDR-0021) y
+  # sont, pour l'équipe seulement.
+  test "edition-lecon-equipe: each exercise of the sheet carries its status and its ⋮ menu for the team, not for the teacher" do
+    draft = create_exercise(subject: @subject, course: @course, title: "Brouillon", status: "draft", position: 50)
+    sign_in_as create_team_member
+
+    get course_sheet_path(@course.slug, @devoir_sheet)
+
+    assert_response :success
+    assert_select paper(@devoirs.first) do
+      assert_select "#content_status_exercise_#{@devoirs.first.public_id}"
+      assert_select "#content_transitions_exercise_#{@devoirs.first.public_id} a[role=menuitem][data-turbo-method=patch]" \
+                    "[href='#{archive_teams_exercise_path(@devoirs.first.public_id)}']"
+    end
+    assert_select "#{paper(draft)} #content_transitions_exercise_#{draft.public_id}" do
+      assert_select "a[href='#{publish_teams_exercise_path(draft.public_id)}']"
+      assert_select "a[href='#{archive_teams_exercise_path(draft.public_id)}']", 0 # un brouillon ne s'archive pas (ContentStatus::TRANSITIONS)
+    end
+
+    sign_in_as @teacher
+    get course_sheet_path(@course.slug, @devoir_sheet)
+    assert_select "[id^=content_transitions_exercise_]", 0
+  end
+
   test "the sheet page needs a session" do
     get course_sheet_path(@course.slug, @devoir_sheet)
 
