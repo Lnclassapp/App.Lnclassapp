@@ -11,7 +11,7 @@ Décision : ADR-0134 §4.3. La production n'a **aucun** chargement automatique (
 
 **Création seule.** Cette skill ne prépare jamais un remplacement ni une suppression. Une leçon dont le titre existe déjà en production — **publiée ou en brouillon** (l'import remplace un brouillon de même titre) — est écartée et listée. Elle ne part que si le porteur l'a confirmée **par écrit, leçon par leçon**, dans ce fil ; un « oui » général ne suffit pas. Aucune suppression, jamais.
 
-Tu n'importes pas toi-même : tu prépares, un membre de l'équipe importe.
+Tu ne fais pas l'import dans cette skill : tu prépares. L'import et la publication se jouent ensuite par `/prod-agent` (écran Imports, navigateur, compte équipe de l'environnement), sans demander ; un membre de l'équipe peut aussi les faire à la main avec la marche à suivre du rapport.
 
 ## 1. Ce qu'on publie
 
@@ -24,7 +24,7 @@ Tu n'importes pas toi-même : tu prépares, un membre de l'équipe importe.
 Il faut la liste des titres de leçons (cours) présents en production, publiés et brouillons :
 
 - `RAILWAY_API_TOKEN` présent : lis-la en lecture seule (`railway run` sur l'environnement `production`, `bin/rails runner` qui lit `Orm::Catalog::Course` (nom, statut, niveau, série, matière) sans rien écrire). **Aucune écriture.**
-- Variable absente : nomme `RAILWAY_API_TOKEN` en une ligne, ne la demande pas, et rends la liste à vérifier au porteur (étape 4) en marquant chaque leçon « présence en production non vérifiée ». Rien n'est classé « à créer » sans vérification.
+- Variable absente : essaie `/prod-agent lire prod` (liste des cours dans l'écran équipe, lecture seule) ; si `LNCLASS_TEAM_CONTACT`, `LNCLASS_TEAM_PIN` ou le code de vérification du porteur manquent aussi, nomme les variables absentes en une ligne, ne les demande pas, et rends la liste à vérifier au porteur (étape 4) en marquant chaque leçon « présence en production non vérifiée ». Rien n'est classé « à créer » sans vérification.
 
 Compare par titre exact **et** par niveau-série + matière (un même titre peut exister dans deux niveaux).
 
@@ -49,7 +49,7 @@ publier-prod-AAAA-MM-JJ/
 | Non vérifiées | si la production n'a pas pu être lue |
 | Marche à suivre | 1. se connecter avec un compte équipe ; 2. Imports → Fiches de cours complètes ; 3. importer les fichiers de `a-creer/` dans l'ordre du tableau ; 4. vérifier la ligne de chaque import (créée, aucune erreur) ; 5. publier depuis la leçon ; 6. ne jamais importer un fichier de la section « Écartées » |
 
-Envoie `RAPPORT.md` au porteur (SendUserFile), et l'archive des fichiers à créer.
+Envoie `RAPPORT.md` au porteur (SendUserFile), et l'archive des fichiers à créer. Les fichiers de `a-creer/` sont ce que `/prod-agent importer prod` prend en entrée.
 
 ## 4. Confirmation du porteur
 

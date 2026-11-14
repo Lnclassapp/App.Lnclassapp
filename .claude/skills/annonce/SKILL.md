@@ -5,7 +5,7 @@ description: Prépare une annonce Lnclass prête à publier — texte court en f
 
 # Préparer une annonce
 
-Tu prépares ; un membre de l'équipe publie dans **Annonces**. Contraintes de l'application (chantier `annonces-logo-audio`) : audio **MP3 ou M4A, 10 secondes au plus (tolérance 0,3 s), 1 Mo au plus**.
+Tu prépares ; un membre de l'équipe publie dans **Annonces**, ou `/prod-agent` pour le faire dans le navigateur (publier : sans demander ; modifier ou retirer une annonce déjà publiée : accord écrit du porteur). Contraintes de l'application (chantier `annonces-logo-audio`) : audio **MP3 ou M4A, 10 secondes au plus (tolérance 0,3 s), 1 Mo au plus**.
 
 Argument : le message à faire passer et son public (élèves, enseignants, direction, tous). S'il manque, déduis-le de la demande.
 
@@ -38,6 +38,10 @@ stat -c %s annonce.mp3                                                    # ≤ 
 ```
 
 Trop long : raccourcis le texte parlé (ou `speakingRate` jusqu'à 1.15), on régénère. Ne livre jamais un fichier hors bornes : l'écran le refuserait.
+
+## 4. Publier (facultatif)
+
+Sur demande du porteur seulement : `/prod-agent` ouvre l'écran Annonces avec le compte équipe de l'environnement, joint `annonce.mp3`, saisit titre et texte, publie. Essai d'abord sur `staging`. Audio absent : publie le texte seul si le porteur l'a demandé.
 
 ## Fin
 
