@@ -53,52 +53,34 @@ module Contenus
         record = essentials[index]
         next group.map { row(file, it, :introuvable, "notion absente") } if record.nil?
 
-        sheet = record.sheet.deep_dup
-        values = { "name" => record.name }
-        group.map { |change| [ change, notion_status(change, record, sheet, values) ] }.then { settle_notion(file, record, sheet, values, it, apply:) }
+        doc = record.sheet.deep_dup.merge("name" => record.name)
+        group.map { |change| [ change, notion_status(change, doc) ] }.then { settle_notion(file, record, doc, it, apply:) }
       end
     end
 
-    def notion_status(change, record, sheet, values)
-      current = read_notion(change["field"], sheet, values)
+    # « example.steps[2] » → ["example", "steps", 2] : le nom et les blocs de la fiche se lisent et s'écrivent par le même chemin.
+    def keys_of(field) = field.split(/\.|\[(\d+)\]/).reject(&:empty?).map { it.match?(/\A\d+\z/) ? it.to_i : it }
+
+    def notion_status(change, doc)
+      keys = keys_of(change["field"])
+      current = doc.dig(*keys)
       return :deja_a_jour if same?(current, change["apres"])
       return :introuvable unless same?(current, change["avant"])
 
-      write_notion(change["field"], sheet, values, change["apres"])
+      keys[0..-2].reduce(doc) { |node, key| node[key] }[keys.last] = change["apres"]
       :a_appliquer
     end
 
-    def read_notion(field, sheet, values)
-      case field
-      when "name" then values["name"]
-      when "remember", "pitfall" then sheet[field]
-      when "example.statement" then sheet.dig("example", "statement")
-      when /\Amethod\[(\d+)\]\z/ then Array(sheet["method"])[$1.to_i]
-      when /\Aexample\.steps\[(\d+)\]\z/ then Array(sheet.dig("example", "steps"))[$1.to_i]
-      end
-    end
-
-    def write_notion(field, sheet, values, text)
-      case field
-      when "name" then values["name"] = text
-      when "remember", "pitfall" then sheet[field] = text
-      when "example.statement" then sheet["example"]["statement"] = text
-      when /\Amethod\[(\d+)\]\z/ then sheet["method"][$1.to_i] = text
-      when /\Aexample\.steps\[(\d+)\]\z/ then sheet["example"]["steps"][$1.to_i] = text
-      end
-    end
-
-    def settle_notion(file, record, sheet, values, statuses, apply:)
+    def settle_notion(file, record, doc, statuses, apply:)
       rows = rows_of(file, statuses)
-      return rows unless apply && statuses.any? { it.last == :a_appliquer } && statuses.none? { it.last == :introuvable }
+      return rows unless writable?(apply, statuses)
 
       text = UseCases::Catalog::CorrectNotionText::NotionText.new(
-        name: values["name"], remember: sheet["remember"].to_s, method_steps: Array(sheet["method"]).map(&:to_s),
-        example_statement: sheet.dig("example", "statement").to_s, example_steps: Array(sheet.dig("example", "steps")).map(&:to_s),
-        pitfall: sheet["pitfall"].to_s
+        name: doc["name"], remember: doc["remember"].to_s, method_steps: Array(doc["method"]).map(&:to_s),
+        example_statement: doc.dig("example", "statement").to_s, example_steps: Array(doc.dig("example", "steps")).map(&:to_s),
+        pitfall: doc["pitfall"].to_s
       )
-      result = @notion_use_case.call(actor: @actor, slug: record.slug, text:)
-      conclude(rows, result)
+      conclude(rows, @notion_use_case.call(actor: @actor, slug: record.slug, text:))
     end
 
     # --- Exercices -----------------------------------------------------------------------------------------------------------
@@ -112,7 +94,7 @@ module Contenus
         edit = ExerciseEdit.new(entity)
         statuses = group.map { |change| [ change, edit.stage(change) ] }
         rows = rows_of(file, statuses)
-        next rows unless apply && statuses.any? { it.last == :a_appliquer } && statuses.none? { it.last == :introuvable }
+        next rows unless writable?(apply, statuses)
 
         conclude(rows, @exercise_use_case.call(actor: @actor, public_id: entity.public_id, text: edit.text))
       end
@@ -135,7 +117,6 @@ module Contenus
     # Le texte d'un exercice relu en base, modifié champ par champ ; chaque champ n'est remplacé que s'il vaut l'« Avant ».
     class ExerciseEdit
       def initialize(entity)
-        @entity = entity
         @values = { "title" => entity.title.to_s, "statement" => entity.statement.to_s, "hint" => entity.hint.to_s }
         @questions = entity.questions.sort_by(&:position).map do |question|
           { "id" => question.id, "content" => question.content.to_s, "explanation" => question.explanation.to_s, "hint" => question.hint.to_s,
@@ -189,6 +170,8 @@ module Contenus
       rows.map { it.status == :a_appliquer ? it.with(status: :echec, detail: "#{result.code} #{result.errors.to_h.to_json}") : it }
     end
 
+    def writable?(apply, statuses) = apply && statuses.any? { it.last == :a_appliquer } && statuses.none? { it.last == :introuvable }
+
     # Une cible (notion ou exercice) s'écrit en entier ou pas du tout : un champ introuvable laisse les autres à reporter à la main,
     # sinon le texte écrit se contredirait (ex. une explication qui annonce une réponse que la correction n'a pas pu ajouter).
     def rows_of(file, statuses)
@@ -218,7 +201,7 @@ module Contenus
       @out.puts "Mode : #{apply ? 'APPLIQUER (écritures)' : 'essai (aucune écriture)'}"
       rows.group_by(&:status).sort_by { |status, _| STATUSES.index(status) }.each { |status, group| @out.puts "#{status} : #{group.size}" }
       rows.reject { %i[deja_a_jour appliquee a_appliquer].include?(it.status) }.each do |row|
-        @out.puts "  [#{row.status}] #{row.file} · #{row.place}#{" — #{row.detail}" if row.detail}"
+        @out.puts "  [#{row.status}] #{row.file} · #{row.place} — #{row.detail}"
       end
     end
   end

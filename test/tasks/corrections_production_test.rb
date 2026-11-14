@@ -7,6 +7,7 @@ require Rails.root.join("lib/contenus/corrections_production")
 class CorrectionsProductionTest < ActiveSupport::TestCase
   setup do
     referential = seed_referential
+    @series = referential[:series].values.first
     @level = referential[:levels].fetch("3eme")
     @material = referential[:materials].fetch("mathematiques")
     @team = create_team_member(team_role: "content", second_factor: false)
@@ -102,6 +103,69 @@ class CorrectionsProductionTest < ActiveSupport::TestCase
     practice = { "kind" => "hors_perimetre", "path" => "notions[0].practice.questions[0].explanation", "avant" => "a", "apres" => "b" }
     rows, = run_script(data(other_notion, other_exercise, practice), apply: true)
     assert_equal [ :hors_perimetre, :introuvable, :introuvable ], rows.map(&:status).sort_by { [ :hors_perimetre, :introuvable ].index(it) }
+  end
+
+  def change_in(group, **place)
+    explanation_change.merge("group" => group, "path" => "#{group}.explanation", **place.transform_keys(&:to_s))
+  end
+
+  test "corrections-production: problems and subject exercises are found by their place, a missing one is listed" do
+    problem = create_lesson_wide_exercise(course: @course)
+    problem.questions.order(:position).first.update!(explanation: "Ancienne explication.")
+    subject = create_subject(course: @course)
+    in_subject = create_exercise(subject:, course: @course)
+    in_subject.questions.order(:position).first.update!(explanation: "Ancienne explication.")
+
+    rows, = run_script(data(change_in("problem", exercise: 0), change_in("subject", subject: 0, exercise: 0), change_in("subject", subject: 3, exercise: 0),
+                            change_in("problem", exercise: 7)), apply: true)
+
+    assert_equal [ :appliquee, :appliquee, :introuvable, :introuvable ], rows.map(&:status)
+    assert_equal "Nouvelle explication.", problem.questions.order(:position).first.reload.explanation
+    assert_equal "Nouvelle explication.", in_subject.questions.order(:position).first.reload.explanation
+  end
+
+  test "corrections-production: a question or an answer that does not exist is listed" do
+    rows, = run_script(data(explanation_change.merge("question" => 9), key_change(answer: 9)))
+
+    assert_equal [ :introuvable, :introuvable ], rows.map(&:status)
+  end
+
+  test "corrections-production: a lesson of a series is found by its series" do
+    course = create_course(level: @level, material: @material, series: @series, name: "Calcul serie")
+    create_essential(course:, name: "Notion serie", sheet: @notion.sheet)
+    identity = { "name" => "Calcul serie", "level_name" => @level.name, "material_name" => @material.name, "series_name" => @series.name }
+    with_series = notion_change.merge("path" => "notions[0].example.steps[1]", "field" => "example.steps[1]", "avant" => "Un", "apres" => "Deux")
+    steps = @notion.sheet.dig("example", "steps")
+    rows, = run_script(data(with_series.merge("avant" => steps[1], "apres" => "Corrigé"), course: identity), apply: true)
+
+    assert_equal [ :appliquee ], rows.map(&:status)
+    assert_equal "Corrigé", course.essentials.first.reload.sheet.dig("example", "steps", 1)
+  end
+
+  test "corrections-production: the name, the example and the method of a notion are corrected by their path" do
+    sheet = @notion.sheet
+    edits = [ [ "name", "name", @notion.name, "Notion corrigée" ], [ "example.statement", "example.statement", sheet.dig("example", "statement"), "Énoncé corrigé" ],
+              [ "method[1]", "method[1]", sheet["method"][1], "Méthode corrigée" ] ]
+    changes = edits.map { |path, field, avant, apres| notion_change(avant:, apres:).merge("path" => path, "field" => field) }
+    rows, = run_script(data(*changes), apply: true)
+
+    assert_equal [ :appliquee ] * 3, rows.map(&:status)
+    @notion.reload
+    assert_equal [ "Notion corrigée", "Énoncé corrigé", "Méthode corrigée" ], [ @notion.name, @notion.sheet.dig("example", "statement"), @notion.sheet["method"][1] ]
+  end
+
+  test "corrections-production: the title of an exercise is corrected, and fields already up to date stay as they are in a mixed target" do
+    title = explanation_change.except("question").merge("path" => "notions[0].exercise[0].title", "field" => "title", "avant" => "Exo un", "apres" => "Exo corrigé")
+    done = explanation_change(avant: "Autre", apres: "Ancienne explication.")
+    rows, = run_script(data(title, done), apply: true)
+
+    assert_equal [ :appliquee, :deja_a_jour ], rows.map(&:status)
+    assert_equal "Exo corrigé", @exercise.reload.title
+
+    refused = title.merge("avant" => "Exo corrigé", "apres" => "")
+    failed, = run_script(data(refused, done), apply: true)
+    assert_equal [ :echec, :deja_a_jour ], failed.map(&:status)
+    assert_equal "Exo corrigé", @exercise.reload.title
   end
 
   test "corrections-production: a refused write is reported as a failure and changes nothing" do
