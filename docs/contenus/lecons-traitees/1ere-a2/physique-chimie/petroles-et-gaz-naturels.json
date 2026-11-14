@@ -1,0 +1,3648 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Pétroles et gaz naturels",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "A2",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "alcane-longueur",
+          "kind": "molecule",
+          "description": "Un alcane à chaîne ouverte, écrit en formule semi-développée avec son nom et sa formule brute. Le curseur règle le nombre d'atomes de carbone de 1 à 10, du méthane au décane : on voit la chaîne s'allonger et la formule suivre la règle CnH2n+2. Plus la chaîne est longue, plus la température d'ébullition est élevée.",
+          "params": {
+            "mode": "alkane",
+            "carbons": 4,
+            "display": "semi_developed"
+          },
+          "controls": [
+            {
+              "param": "carbons",
+              "min": 1,
+              "max": 10,
+              "step": 1,
+              "label": "Nombre d'atomes de carbone"
+            }
+          ]
+        },
+        {
+          "key": "tour-distillation",
+          "kind": "diagram",
+          "description": "Schéma en arbre de la distillation fractionnée. Le pétrole brut chauffé dans un four entre dans la tour de distillation, qui donne cinq fractions : gaz (1 à 4 carbones), essence, kérosène, gazole, et fioul et résidus (bitume). La légende classe les fractions selon la hauteur où on les recueille : haut de la tour (chaînes courtes), milieu, bas de la tour (chaînes longues).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "brut",
+                "label": "Pétrole brut chauffé (four)"
+              },
+              {
+                "id": "tour",
+                "label": "Tour de distillation"
+              },
+              {
+                "id": "gaz",
+                "label": "Gaz : propane, butane (1 à 4 C)",
+                "category": 1
+              },
+              {
+                "id": "ess",
+                "label": "Essence (environ 5 à 10 C)",
+                "category": 1
+              },
+              {
+                "id": "ker",
+                "label": "Kérosène (environ 10 à 14 C)",
+                "category": 2
+              },
+              {
+                "id": "gzl",
+                "label": "Gazole (environ 14 à 20 C)",
+                "category": 2
+              },
+              {
+                "id": "res",
+                "label": "Fioul et résidus (bitume)",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "brut",
+                "to": "tour",
+                "label": "entre dans"
+              },
+              {
+                "from": "tour",
+                "to": "gaz"
+              },
+              {
+                "from": "tour",
+                "to": "ess"
+              },
+              {
+                "from": "tour",
+                "to": "ker"
+              },
+              {
+                "from": "tour",
+                "to": "gzl"
+              },
+              {
+                "from": "tour",
+                "to": "res"
+              }
+            ],
+            "legend": [
+              "Haut de la tour : chaînes courtes",
+              "Milieu de la tour : chaînes moyennes",
+              "Bas de la tour : chaînes longues"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "ethylene-craquage",
+          "kind": "molecule",
+          "description": "Formule développée de l'éthylène C2H4, l'alcène le plus simple, produit par le craquage. Deux atomes de carbone sont reliés par une double liaison (deux traits) et chacun porte deux atomes d'hydrogène. L'éthylène est une matière première de la fabrication de plastiques comme le polyéthylène.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 8,
+                "y": 6
+              },
+              {
+                "id": "h1",
+                "element": "H",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "h2",
+                "element": "H",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "h3",
+                "element": "H",
+                "x": 10,
+                "y": 4
+              },
+              {
+                "id": "h4",
+                "element": "H",
+                "x": 10,
+                "y": 8
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "c2",
+                2
+              ],
+              [
+                "c1",
+                "h1",
+                1
+              ],
+              [
+                "c1",
+                "h2",
+                1
+              ],
+              [
+                "c2",
+                "h3",
+                1
+              ],
+              [
+                "c2",
+                "h4",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Origine et composition du pétrole brut et du gaz naturel",
+          "remember": "Le **pétrole brut** et le **gaz naturel** sont des **combustibles fossiles** : ils viennent d'organismes marins microscopiques morts, enfouis sans air dans des roches et transformés pendant des millions d'années. Les hydrocarbures formés s'accumulent dans une roche poreuse fermée par une roche imperméable : c'est un **gisement**, exploité à terre ou en mer. Un **hydrocarbure** ne contient que du carbone et de l'hydrogène ; un alcane s'écrit $\\mathrm{C_nH_{2n+2}}$. Le **pétrole brut** est un **mélange** liquide d'hydrocarbures de tailles très différentes, avec un peu d'impuretés. Le **gaz naturel** est un mélange gazeux formé surtout de **méthane** $\\mathrm{CH_{4}}$, avec un peu d'éthane, de propane et de butane. Ces ressources sont **non renouvelables** : elles se forment en des millions d'années et on les consomme bien plus vite.",
+          "method": [
+            "Identifier l'échantillon : pétrole brut (liquide) ou gaz naturel (gaz).",
+            "Écrire le constituant majoritaire : un mélange d'hydrocarbures pour le pétrole brut, le méthane pour le gaz naturel.",
+            "Vérifier les formules : un hydrocarbure ne contient que du carbone et de l'hydrogène, et un alcane s'écrit $\\mathrm{C_nH_{2n+2}}$.",
+            "Conclure sur la nature et l'origine : mélange issu d'organismes marins enfouis, combustible fossile non renouvelable."
+          ],
+          "example": {
+            "statement": "Un gisement exploité en mer, au large de la Côte d'Ivoire, fournit un échantillon gazeux qui contient surtout du méthane $\\mathrm{CH_{4}}$, avec de l'éthane $\\mathrm{C_{2}H_{6}}$ et du propane $\\mathrm{C_{3}H_{8}}$. Quelles sont sa nature et son origine ?",
+            "steps": [
+              "Identifier : l'échantillon est gazeux, c'est donc du gaz naturel.",
+              "Écrire le constituant majoritaire : c'est le méthane $\\mathrm{CH_{4}}$ ; l'éthane et le propane sont en petites quantités.",
+              "Vérifier les formules : $\\mathrm{CH_{4}}$ ($2 \\times 1 + 2 = 4$ H), $\\mathrm{C_{2}H_{6}}$ ($2 \\times 2 + 2 = 6$ H) et $\\mathrm{C_{3}H_{8}}$ ($2 \\times 3 + 2 = 8$ H) sont des alcanes, donc des hydrocarbures.",
+              "Conclure : c'est un mélange d'hydrocarbures issu d'organismes marins enfouis, un combustible fossile non renouvelable."
+            ]
+          },
+          "pitfall": "Ne prends pas le pétrole brut pour un corps pur : c'est un **mélange**. Contre-exemple : le butane $\\mathrm{C_{4}H_{10}}$ (gaz, température d'ébullition $-0{,}5$ °C) et l'hexane $\\mathrm{C_{6}H_{14}}$ (liquide, 69 °C) se trouvent dans le même pétrole brut ; il n'a donc pas une température d'ébullition unique, il bout sur un large intervalle. Retiens aussi qu'« hydrocarbure » ne veut pas dire « carburant » : un hydrocarbure est défini par ses atomes (C et H seulement).",
+          "figure": "alcane-longueur",
+          "exercise": [
+            {
+              "title": "Reconnaître le pétrole brut et le gaz naturel",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : identifier l'échantillon, écrire son constituant majoritaire, vérifier les formules, conclure sur sa nature et son origine.",
+              "exercise_type": "fixation",
+              "figure": "alcane-longueur",
+              "questions": [
+                {
+                  "content": "Quelle est la nature du pétrole brut ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le pétrole brut est un liquide. Étape 2 — Écrire le constituant majoritaire : un mélange d'hydrocarbures de tailles variées. Étape 4 — Conclure : c'est un mélange, pas un corps pur. Le piège est de croire qu'une seule formule, comme $\\mathrm{C_{8}H_{18}}$, le décrit : plusieurs hydrocarbures sont présents.",
+                  "answers": [
+                    {
+                      "content": "Un mélange liquide d'hydrocarbures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un corps pur liquide, le $\\mathrm{C_{8}H_{18}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un gaz formé uniquement de méthane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide formé de carbone pur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gaz naturel est un liquide formé surtout de butane.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le gaz naturel est un gaz. Étape 2 — Écrire le constituant majoritaire : c'est le méthane $\\mathrm{CH_{4}}$, pas le butane, qui n'y est qu'en petite quantité. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois formules qui sont celles d'alcanes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Vérifier les formules : un alcane s'écrit $\\mathrm{C_nH_{2n+2}}$. $\\mathrm{C_{2}H_{6}}$ ($2 \\times 2 + 2 = 6$), $\\mathrm{C_{5}H_{12}}$ ($2 \\times 5 + 2 = 12$) et $\\mathrm{C_{8}H_{18}}$ ($2 \\times 8 + 2 = 18$) conviennent. un alcane à 2 C aurait 6 H et un alcane à 4 C aurait 10 H : $\\mathrm{C_{2}H_{4}}$ et $\\mathrm{C_{4}H_{8}}$ ont deux H de moins, ce ne sont pas des alcanes (ce sont des alcènes).",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{C_{2}H_{6}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{5}H_{12}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{8}H_{18}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{2}H_{4}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{4}H_{8}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un alcane possède 8 atomes de carbone. Combien d'atomes d'hydrogène contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Vérifier les formules : un alcane s'écrit $\\mathrm{C_nH_{2n+2}}$ avec $n = 8$. Le nombre d'atomes d'hydrogène est $2 \\times 8 + 2 = 18$. La formule est $\\mathrm{C_{8}H_{18}}$.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "atomes",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le pétrole brut et le gaz naturel sont des combustibles ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Conclure sur la nature et l'origine : ces deux ressources viennent d'organismes marins enfouis pendant des millions d'années. Ce sont des combustibles fossiles, non renouvelables.",
+                  "answers": [
+                    {
+                      "content": "fossiles",
+                      "correct": true
+                    },
+                    {
+                      "content": "fossile",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le butane $\\mathrm{C_{4}H_{10}}$ bout à $-0{,}5$ °C et l'hexane $\\mathrm{C_{6}H_{14}}$ à 69 °C ; les deux se trouvent dans le même pétrole brut. Pourquoi le pétrole brut n'a-t-il pas de température d'ébullition unique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le pétrole brut est liquide. Étape 2 — Écrire le constituant majoritaire : un mélange d'hydrocarbures. Étape 4 — Conclure : comme il contient des hydrocarbures de tailles différentes, il bout sur un large intervalle de températures. Un corps pur, lui, a une seule température d'ébullition.",
+                  "answers": [
+                    {
+                      "content": "Parce que c'est un mélange d'hydrocarbures qui bouillent à des températures différentes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que c'est un corps pur dont la température d'ébullition change avec l'heure",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'un hydrocarbure n'a jamais de température d'ébullition",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le butane et l'hexane sont le même corps",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Vérifier les formules : un hydrocarbure est défini par ses atomes, C et H seulement. Étape 1 — Identifier : le gaz naturel est le mélange gazeux, le pétrole brut le mélange liquide. Étape 4 — Conclure : un gisement est l'endroit où ces mélanges se sont accumulés.",
+                  "answers": [
+                    {
+                      "content": "Hydrocarbure",
+                      "match": "Composé qui ne contient que du carbone et de l'hydrogène"
+                    },
+                    {
+                      "content": "Gisement",
+                      "match": "Accumulation d'hydrocarbures dans une roche réservoir"
+                    },
+                    {
+                      "content": "Mélange",
+                      "match": "Produit formé de plusieurs constituants"
+                    },
+                    {
+                      "content": "Gaz naturel",
+                      "match": "Mélange gazeux formé surtout de méthane"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître le pétrole brut et le gaz naturel d'un échantillon",
+              "statement": "Dans cet exercice, tu identifies des échantillons avec la méthode de la fiche : identifier, écrire le constituant majoritaire, vérifier les formules, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Un liquide est du pétrole brut, un gaz est du gaz naturel. Un alcane a $2n + 2$ atomes d'hydrogène pour $n$ atomes de carbone.",
+              "questions": [
+                {
+                  "content": "Un échantillon liquide remonte d'un puits exploité en mer. De quoi s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'échantillon est liquide, c'est donc du pétrole brut. Étape 2 — Écrire le constituant majoritaire : un mélange d'hydrocarbures. Étape 4 — Conclure : mélange issu d'organismes marins enfouis. Le gaz naturel est gazeux ; le pétrole brut n'est pas un corps pur ; il ne contient pas que du carbone.",
+                  "answers": [
+                    {
+                      "content": "Du pétrole brut, un mélange liquide d'hydrocarbures",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du gaz naturel, formé surtout de méthane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un corps pur liquide, le butane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide formé de carbone pur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un alcane possède 12 atomes de carbone. Combien d'atomes d'hydrogène contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Vérifier les formules : un alcane s'écrit $\\mathrm{C_nH_{2n+2}}$. Avec $n = 12$ : $2 \\times 12 + 2 = 26$ atomes d'hydrogène, soit $\\mathrm{C_{12}H_{26}}$.",
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "La formule $\\mathrm{C_{6}H_{12}}$ est celle d'un alcane.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Vérifier les formules : pour $n = 6$, un alcane a $2 \\times 6 + 2 = 14$ atomes d'hydrogène, soit $\\mathrm{C_{6}H_{14}}$. La formule $\\mathrm{C_{6}H_{12}}$ en a 12 : ce n'est pas un alcane.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le constituant majoritaire du gaz naturel est le ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Écrire le constituant majoritaire : pour le gaz naturel, c'est le méthane $\\mathrm{CH_{4}}$, avec un peu d'éthane, de propane et de butane.",
+                  "answers": [
+                    {
+                      "content": "méthane",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations vraies sur le pétrole brut ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Écrire le constituant majoritaire : un mélange d'hydrocarbures de tailles différentes. Étape 4 — Conclure : combustible fossile, formé en des millions d'années et consommé bien plus vite, donc non renouvelable. Un corps pur et le méthane seul décrivent d'autres choses (gaz naturel, un seul hydrocarbure).",
+                  "answers": [
+                    {
+                      "content": "C'est un mélange d'hydrocarbures.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un combustible fossile non renouvelable.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un corps pur de formule $\\mathrm{C_{8}H_{18}}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une ressource renouvelable, formée en quelques années.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est formé uniquement de méthane.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque alcane à son nom.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Vérifier les formules : le nom d'un alcane donne le nombre de carbones : 1 carbone, méthane ; 2, éthane ; 3, propane ; 4, butane.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{CH_{4}}$",
+                      "match": "Méthane"
+                    },
+                    {
+                      "content": "$\\mathrm{C_{2}H_{6}}$",
+                      "match": "Éthane"
+                    },
+                    {
+                      "content": "$\\mathrm{C_{3}H_{8}}$",
+                      "match": "Propane"
+                    },
+                    {
+                      "content": "$\\mathrm{C_{4}H_{10}}$",
+                      "match": "Butane"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Un élève de la région de San-Pédro étudie les alcanes que contiennent le pétrole brut et le gaz naturel.",
+            "questions": [
+              {
+                "content": "Un alcane contient 7 atomes de carbone. Il s'écrit $\\mathrm{C_xH_y}$. Complète : x = ___ et y = ___ .",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Vérifier les formules : un alcane s'écrit $\\mathrm{C_nH_{2n+2}}$. Ici $n = 7$, donc x = 7 et y = $2 \\times 7 + 2 = 16$. C'est l'heptane $\\mathrm{C_{7}H_{16}}$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "16",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "unit": "",
+                "tolerance": 0,
+                "hint": "Applique $2n + 2$ avec $n = 7$."
+              },
+              {
+                "content": "Le gaz naturel se renouvelle en quelques années.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure sur la nature et l'origine : le gaz naturel est un combustible fossile formé en des millions d'années. Il est non renouvelable à l'échelle humaine, donc l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un échantillon liquide, mélange d'hydrocarbures de tailles variées, est du ___ .",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : l'échantillon est liquide, c'est donc du pétrole brut. Étape 2 — Écrire le constituant majoritaire : un mélange d'hydrocarbures, pas le seul méthane.",
+                "answers": [
+                  {
+                    "content": "pétrole brut",
+                    "correct": true
+                  },
+                  {
+                    "content": "gaz naturel",
+                    "correct": false
+                  },
+                  {
+                    "content": "méthane pur",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La distillation fractionnée du pétrole brut",
+          "remember": "La **distillation fractionnée** sépare le pétrole brut en **fractions** selon les températures d'ébullition. Le brut chauffé entre dans une tour dont la température **diminue du bas vers le haut**. Les vapeurs montent et chaque fraction se condense à la hauteur où la température correspond à son ébullition. Plus la chaîne carbonée est **longue**, plus la température d'ébullition est **élevée** : les chaînes longues sont recueillies **en bas**, les courtes **en haut**. Ordres de grandeur, de haut en bas : **gaz** (1 à 4 carbones, propane et butane des bouteilles de gaz) ; **essence** (environ 5 à 10 carbones) ; **kérosène** (environ 10 à 14) ; **gazole** (environ 14 à 20) ; **fioul et résidus** (chaînes plus longues, dont le bitume). Chaque fraction reste un mélange. La distillation est une **séparation physique** : les molécules ne changent pas. On la pratique dans une raffinerie comme celle de Vridi, à Abidjan.",
+          "method": [
+            "Lire les données : nombre d'atomes de carbone ou température d'ébullition de chaque hydrocarbure.",
+            "Classer les hydrocarbures par température d'ébullition croissante : la chaîne la plus courte d'abord.",
+            "Placer chaque hydrocarbure dans la tour : la température d'ébullition la plus basse en haut, la plus élevée en bas.",
+            "Nommer la fraction : gaz, essence, kérosène, gazole, ou fioul et résidus, d'après la longueur de la chaîne."
+          ],
+          "example": {
+            "statement": "Dans la tour de la raffinerie de Vridi, on trouve du propane $\\mathrm{C_{3}H_{8}}$ ($-42$ °C), de l'octane $\\mathrm{C_{8}H_{18}}$ (126 °C) et de l'hexadécane $\\mathrm{C_{16}H_{34}}$ (287 °C). Où les recueille-t-on, et dans quelle fraction ?",
+            "steps": [
+              "Lire : propane, 3 carbones, $-42$ °C ; octane, 8 carbones, 126 °C ; hexadécane, 16 carbones, 287 °C.",
+              "Classer : $-42 < 126 < 287$, donc propane, puis octane, puis hexadécane (plus la chaîne est longue, plus la température d'ébullition est élevée).",
+              "Placer : le propane est recueilli tout en haut, l'octane plus bas, l'hexadécane le plus bas des trois.",
+              "Nommer : le propane (3 carbones) est dans la fraction gaz, l'octane (8 carbones) dans l'essence, l'hexadécane (16 carbones) dans le gazole."
+            ]
+          },
+          "pitfall": "Ne place pas les grosses molécules en haut sous prétexte qu'elles seraient « plus fortes ». Plus la chaîne est longue, plus la température d'ébullition est élevée, donc plus la molécule se condense tôt, en bas de la tour. Contre-exemple : l'octane $\\mathrm{C_{8}H_{18}}$ (8 carbones, 126 °C) bout bien plus bas que l'hexadécane $\\mathrm{C_{16}H_{34}}$ (16 carbones, 287 °C) : l'octane monte plus haut dans la tour. N'oublie pas non plus que la distillation ne change pas les molécules : elle les trie.",
+          "figure": "tour-distillation",
+          "exercise": [
+            {
+              "title": "Lire la tour de distillation de Vridi",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : lire les données, classer par température d'ébullition, placer dans la tour, nommer la fraction.",
+              "exercise_type": "fixation",
+              "figure": "tour-distillation",
+              "questions": [
+                {
+                  "content": "Classe les fractions de la tour de distillation, de la plus haute à la plus basse.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 3 — Placer : les chaînes courtes sont recueillies en haut. Étape 4 — Nommer : gaz (1 à 4 carbones), puis essence (environ 5 à 10), kérosène (environ 10 à 14), gazole (environ 14 à 20), et enfin fioul et résidus, aux chaînes les plus longues, en bas.",
+                  "answers": [
+                    {
+                      "content": "Gaz"
+                    },
+                    {
+                      "content": "Essence"
+                    },
+                    {
+                      "content": "Kérosène"
+                    },
+                    {
+                      "content": "Gazole"
+                    },
+                    {
+                      "content": "Fioul et résidus"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la tour de distillation, comment varie la température ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Placer chaque hydrocarbure dans la tour : les molécules à température d'ébullition élevée se condensent en bas, là où il fait le plus chaud ; les molécules à basse température d'ébullition montent jusqu'en haut, où il fait plus frais. La température diminue donc du bas vers le haut.",
+                  "answers": [
+                    {
+                      "content": "Elle diminue du bas vers le haut",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle augmente du bas vers le haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est la même partout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'éthane $\\mathrm{C_{2}H_{6}}$ (2 carbones, $-89$ °C) est recueilli ___ le décane $\\mathrm{C_{10}H_{22}}$ (10 carbones, 174 °C).",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : éthane $-89$ °C, décane 174 °C. Étape 2 — Classer : $-89 < 174$, l'éthane est le plus bas en température d'ébullition. Étape 3 — Placer : la plus basse température va en haut, donc l'éthane est recueilli au-dessus du décane.",
+                  "answers": [
+                    {
+                      "content": "au-dessus du",
+                      "correct": true
+                    },
+                    {
+                      "content": "en dessous du",
+                      "correct": false
+                    },
+                    {
+                      "content": "au même niveau que le",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque hydrocarbure à la fraction où on le recueille.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on compte les atomes de carbone de chaque formule. Étape 4 — Nommer la fraction : 3 carbones, gaz (1 à 4) ; 8 carbones, essence (environ 5 à 10) ; 12 carbones, kérosène (environ 10 à 14) ; 16 carbones, gazole (environ 14 à 20).",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{C_{3}H_{8}}$ (3 carbones)",
+                      "match": "Gaz"
+                    },
+                    {
+                      "content": "$\\mathrm{C_{8}H_{18}}$ (8 carbones)",
+                      "match": "Essence"
+                    },
+                    {
+                      "content": "$\\mathrm{C_{12}H_{26}}$ (12 carbones)",
+                      "match": "Kérosène"
+                    },
+                    {
+                      "content": "$\\mathrm{C_{16}H_{34}}$ (16 carbones)",
+                      "match": "Gazole"
+                    }
+                  ]
+                },
+                {
+                  "content": "La distillation fractionnée transforme les molécules du pétrole brut en molécules différentes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Placer : la distillation trie les molécules selon leur température d'ébullition, chacune se condense à sa hauteur. Étape 4 — Nommer : chaque fraction est un mélange de molécules qui existaient déjà dans le brut. C'est une séparation physique, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pentane bout à 36 °C, l'hexane à 69 °C et l'octane à 126 °C. Lequel est recueilli le plus bas dans la tour ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 36 °C, 69 °C et 126 °C. Étape 2 — Classer : $36 < 69 < 126$, soit pentane, hexane, octane. Étape 3 — Placer : la température d'ébullition la plus élevée est en bas, donc l'octane. Le pentane, lui, monte le plus haut des trois.",
+                  "answers": [
+                    {
+                      "content": "L'octane",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pentane",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hexane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun : ils sont recueillis ensemble au même niveau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus la chaîne carbonée est longue, plus la température d'ébullition est ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Classer : en classant par température d'ébullition croissante, on retrouve les chaînes de la plus courte à la plus longue. Plus la chaîne est longue, plus la température d'ébullition est élevée.",
+                  "answers": [
+                    {
+                      "content": "élevée",
+                      "correct": true
+                    },
+                    {
+                      "content": "haute",
+                      "correct": true
+                    },
+                    {
+                      "content": "grande",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Placer des hydrocarbures dans la tour de distillation",
+              "statement": "Dans cet exercice, tu lis la tour de distillation avec la méthode de la fiche : lire les données, classer par température d'ébullition, placer dans la tour, nommer la fraction.",
+              "exercise_type": "fixation",
+              "figure": "tour-distillation",
+              "hint": "Plus la chaîne est longue, plus la température d'ébullition est élevée et plus on recueille la molécule bas dans la tour. Les valeurs de température sont des données d'exercice.",
+              "questions": [
+                {
+                  "content": "Range ces hydrocarbures dans l'ordre où on les recueille dans la tour, du plus haut au plus bas : le décane $\\mathrm{C_{10}H_{22}}$ (174 °C), l'éthane $\\mathrm{C_{2}H_{6}}$ (−89 °C), l'hexadécane $\\mathrm{C_{16}H_{34}}$ (287 °C) et le pentane $\\mathrm{C_{5}H_{12}}$ (36 °C).",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : éthane −89 °C, pentane 36 °C, décane 174 °C, hexadécane 287 °C. Étape 2 — Classer par température d'ébullition croissante : $-89 < 36 < 174 < 287$. Étape 3 — Placer : la température d'ébullition la plus basse en haut, la plus élevée en bas. L'ordre du haut vers le bas est donc éthane, pentane, décane, hexadécane.",
+                  "answers": [
+                    {
+                      "content": "Éthane (−89 °C)"
+                    },
+                    {
+                      "content": "Pentane (36 °C)"
+                    },
+                    {
+                      "content": "Décane (174 °C)"
+                    },
+                    {
+                      "content": "Hexadécane (287 °C)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le butane (4 carbones), l'octane (8 carbones) et l'hexadécane (16 carbones) sont dans la tour. Lequel est recueilli dans la fraction essence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : 4, 8 et 16 carbones. Étape 4 — Nommer la fraction d'après la longueur de la chaîne : gaz de 1 à 4 carbones (butane), essence d'environ 5 à 10 carbones (octane), gazole d'environ 14 à 20 carbones (hexadécane). L'essence contient donc l'octane.",
+                  "answers": [
+                    {
+                      "content": "L'octane",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le butane",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hexadécane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hexane bout à 69 °C et le décane à 174 °C. De combien de degrés la température d'ébullition du décane dépasse-t-elle celle de l'hexane ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : hexane 69 °C, décane 174 °C. Étape 2 — Comparer : $174 > 69$, le décane (chaîne plus longue) bout plus haut. Calcul : $174 - 69 = 105$ °C. Le décane est donc recueilli plus bas que l'hexane.",
+                  "answers": [
+                    {
+                      "content": "105",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                },
+                {
+                  "content": "Relie chaque fraction au nombre d'atomes de carbone de ses molécules.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Nommer la fraction d'après la longueur de la chaîne : plus la chaîne est longue, plus on descend dans la tour : gaz, essence, kérosène, gazole, puis fioul et résidus.",
+                  "answers": [
+                    {
+                      "content": "Gaz",
+                      "match": "1 à 4 carbones"
+                    },
+                    {
+                      "content": "Essence",
+                      "match": "environ 5 à 10 carbones"
+                    },
+                    {
+                      "content": "Kérosène",
+                      "match": "environ 10 à 14 carbones"
+                    },
+                    {
+                      "content": "Gazole",
+                      "match": "environ 14 à 20 carbones"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la tour de distillation, l'hydrocarbure dont la température d'ébullition est la plus élevée est recueilli le plus haut.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Placer : la température diminue du bas vers le haut. Une molécule à température d'ébullition élevée se condense déjà en bas de la tour. L'affirmation est fausse : elle est recueillie le plus bas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les molécules de la fraction gazole ont des chaînes carbonées ___ que celles de la fraction essence.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Nommer la fraction : gazole, environ 14 à 20 carbones ; essence, environ 5 à 10 carbones. Les chaînes du gazole sont plus longues, donc il est recueilli plus bas.",
+                  "answers": [
+                    {
+                      "content": "plus longues",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus courtes",
+                      "correct": false
+                    },
+                    {
+                      "content": "aussi longues",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Dans une raffinerie, on suit quelques hydrocarbures du pétrole brut au fil de la distillation.",
+            "questions": [
+              {
+                "content": "Le $\\mathrm{C_6H_{14}}$ (hexane, 6 carbones) est recueilli dans la fraction ___ .",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire : l'hexane a 6 atomes de carbone. Étape 4 — Nommer la fraction : environ 5 à 10 carbones, c'est l'essence.",
+                "answers": [
+                  {
+                    "content": "essence",
+                    "correct": true
+                  },
+                  {
+                    "content": "gaz",
+                    "correct": false
+                  },
+                  {
+                    "content": "gazole",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compte les carbones : de 5 à 10, c'est l'essence."
+              },
+              {
+                "content": "Remets ces hydrocarbures dans l'ordre où on les recueille dans la tour, du plus haut au plus bas : octane (126 °C), butane ($-0{,}5$ °C), hexane (69 °C), éthane ($-89$ °C).",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Classer par température d'ébullition croissante : $-89 < -0{,}5 < 69 < 126$. Étape 3 — Placer : la plus basse température est en haut, donc éthane, butane, hexane, octane.",
+                "answers": [
+                  {
+                    "content": "Éthane"
+                  },
+                  {
+                    "content": "Butane"
+                  },
+                  {
+                    "content": "Hexane"
+                  },
+                  {
+                    "content": "Octane"
+                  }
+                ],
+                "hint": "Classe d'abord les températures, de la plus basse à la plus haute."
+              },
+              {
+                "content": "La distillation fractionnée est une transformation chimique.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Placer chaque hydrocarbure dans la tour : on ne fait que trier les molécules, elles ne changent pas. C'est une séparation physique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le craquage des fractions lourdes",
+          "remember": "Le **craquage** casse, à haute température et souvent en présence d'un **catalyseur** (substance qui accélère la réaction), de grosses molécules d'alcanes venues des fractions lourdes, comme le gazole, en molécules **plus petites**, utiles pour l'essence. Une grosse molécule d'alcane donne **un alcane plus court et un alcène** $\\mathrm{C_mH_{2m}}$. Exemple : $\\mathrm{C_{12}H_{26} \\to  C_{8}H_{18} + C_{4}H_{8}}$. Les atomes de carbone et d'hydrogène se **conservent** : leur nombre est le même avant et après la flèche. Le craquage est une **transformation chimique**, à la différence de la distillation. Il fabrique aussi des alcènes, comme l'éthylène, matière première des plastiques (polyéthylène).",
+          "method": [
+            "Écrire l'équation incomplète : alcane long $\\to$ alcane court + alcène inconnu.",
+            "Compter les atomes de carbone de l'alcène : carbones du réactif moins carbones de l'alcane court.",
+            "Compter les atomes d'hydrogène de l'alcène : hydrogènes du réactif moins hydrogènes de l'alcane court.",
+            "Vérifier que l'alcène s'écrit $\\mathrm{C_mH_{2m}}$, puis le nommer (éthène, propène, butène…)."
+          ],
+          "example": {
+            "statement": "Écrire l'équation du craquage de $\\mathrm{C_{14}H_{30}}$ qui donne le décane $\\mathrm{C_{10}H_{22}}$ et un alcène.",
+            "steps": [
+              "Écrire : $\\mathrm{C_{14}H_{30} \\to  C_{10}H_{22} + X}$.",
+              "Compter les carbones : $14 - 10 = 4$ atomes de carbone dans l'alcène.",
+              "Compter les hydrogènes : $30 - 22 = 8$ atomes d'hydrogène dans l'alcène.",
+              "Vérifier : $\\mathrm{C_{4}H_{8}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 4$ ($2 \\times 4 = 8$) ; c'est un butène. Équation : $\\mathrm{C_{14}H_{30} \\to  C_{10}H_{22} + C_{4}H_{8}}$."
+            ]
+          },
+          "pitfall": "Ne crois pas que le craquage donne deux alcanes. Il donne un alcane et un alcène, et les atomes doivent se conserver. Contre-exemple : $\\mathrm{C_{14}H_{30} \\to  C_{10}H_{22} + C_{4}H_{10}}$ est faux, car il y a 30 hydrogènes à gauche et $22 + 10 = 32$ à droite. Le second produit est $\\mathrm{C_{4}H_{8}}$ : il lui manque 2 hydrogènes par rapport à l'alcane, c'est un alcène.",
+          "figure": "ethylene-craquage",
+          "exercise": [
+            {
+              "title": "Écrire l'équation d'un craquage",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : écrire l'équation incomplète, compter les carbones et les hydrogènes de l'alcène, vérifier sa formule et le nommer.",
+              "exercise_type": "fixation",
+              "figure": "ethylene-craquage",
+              "questions": [
+                {
+                  "content": "Que fait le craquage d'un alcane à longue chaîne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire l'équation incomplète : alcane long $\\to$ alcane court + alcène. Le craquage casse donc la grosse molécule en molécules plus petites, dont un alcène. Séparer sans changer les molécules, c'est la distillation ; assembler, c'est autre chose.",
+                  "answers": [
+                    {
+                      "content": "Il le casse en molécules plus petites, dont un alcène",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il sépare, sans les changer, les molécules selon leur température d'ébullition",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il assemble de petites molécules en une longue chaîne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il brûle l'alcane en formant du dioxyde de carbone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Craquage : $\\mathrm{C_{12}H_{26} \\to  C_{9}H_{20} + X}$, où X est un alcène. Combien d'atomes de carbone X contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $\\mathrm{C_{12}H_{26} \\to  C_{9}H_{20} + X}$. Étape 2 — Compter les carbones : $12 - 9 = 3$ atomes de carbone dans X.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "atomes",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Craquage : $\\mathrm{C_{12}H_{26} \\to  C_{9}H_{20} + X}$, où X est un alcène. Combien d'atomes d'hydrogène X contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $\\mathrm{C_{12}H_{26} \\to  C_{9}H_{20} + X}$. Étape 3 — Compter les hydrogènes : $26 - 20 = 6$ atomes d'hydrogène dans X.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "atomes",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Dans $\\mathrm{C_{12}H_{26} \\to  C_{9}H_{20} + C_{3}H_{6}}$, l'alcène $\\mathrm{C_{3}H_{6}}$ s'appelle le ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Vérifier puis nommer : $\\mathrm{C_{3}H_{6}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 3$ ($2 \\times 3 = 6$), c'est un alcène à 3 carbones : le propène (ou propylène).",
+                  "answers": [
+                    {
+                      "content": "propène",
+                      "correct": true
+                    },
+                    {
+                      "content": "propylène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le craquage est une transformation physique, comme la distillation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire l'équation : les formules changent entre les réactifs et les produits, de nouvelles molécules sont formées. Le craquage est une transformation chimique. La distillation, elle, ne change pas les molécules.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le craquage de $\\mathrm{C_{14}H_{30}}$ donne l'octane $\\mathrm{C_{8}H_{18}}$ et un alcène. Quelle est la formule de l'alcène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $\\mathrm{C_{14}H_{30} \\to  C_{8}H_{18} + X}$. Étape 2 — Compter les carbones : $14 - 8 = 6$. Étape 3 — Compter les hydrogènes : $30 - 18 = 12$. Étape 4 — Vérifier : $\\mathrm{C_{6}H_{12}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 6$. $\\mathrm{C_{6}H_{14}}$ est un alcane : avec lui il y aurait $18 + 14 = 32$ H à droite pour 30 à gauche.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{C_{6}H_{12}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{6}H_{14}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{6}H_{10}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{8}H_{12}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux équations de craquage où les atomes se conservent ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Compter les carbones et Étape 3 — Compter les hydrogènes de chaque côté. Correctes : $5 + 3 = 8$ C et $12 + 6 = 18$ H ; $7 + 3 = 10$ C et $16 + 6 = 22$ H. Fausses : $\\mathrm{C_{10}H_{22} \\to  C_{6}H_{14} + C_{4}H_{10}}$ donne $14 + 10 = 24$ H pour 22 ; $\\mathrm{C_{12}H_{26} \\to  C_{8}H_{18} + C_{4}H_{10}}$ donne $18 + 10 = 28$ H pour 26 (deux alcanes, c'est le piège) ; $\\mathrm{C_{9}H_{20} \\to  C_{5}H_{12} + C_{3}H_{6}}$ donne $5 + 3 = 8$ C pour 9.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{C_{8}H_{18} \\to  C_{5}H_{12} + C_{3}H_{6}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{10}H_{22} \\to  C_{7}H_{16} + C_{3}H_{6}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{10}H_{22} \\to  C_{6}H_{14} + C_{4}H_{10}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{12}H_{26} \\to  C_{8}H_{18} + C_{4}H_{10}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{9}H_{20} \\to  C_{5}H_{12} + C_{3}H_{6}}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Écrire des équations de craquage",
+              "statement": "Dans cet exercice, tu écris des équations de craquage avec la méthode de la fiche : écrire l'équation incomplète, compter les carbones et les hydrogènes de l'alcène, vérifier sa formule et le nommer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "L'alcène a autant de carbones et d'hydrogènes qu'il en manque pour que les atomes se conservent. Il s'écrit $\\mathrm{C_mH_{2m}}$.",
+              "questions": [
+                {
+                  "content": "Craquage : $\\mathrm{C_{10}H_{22}}$ → $\\mathrm{C_{6}H_{14}}$ + X, où X est un alcène. Combien d'atomes de carbone X contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire l'équation incomplète : alcane long → alcane court + alcène X. Étape 2 — Compter les carbones : $10 - 6 = 4$ atomes de carbone dans X.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Craquage : $\\mathrm{C_{13}H_{28}}$ → $\\mathrm{C_{8}H_{18}}$ + X, où X est un alcène. Combien d'atomes d'hydrogène X contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire l'équation incomplète. Étape 2 — Compter les carbones : $13 - 8 = 5$. Étape 3 — Compter les hydrogènes : $28 - 18 = 10$. Étape 4 — Vérifier : $\\mathrm{C_{5}H_{10}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 5$ : c'est un alcène.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Le craquage de $\\mathrm{C_{12}H_{26}}$ donne l'heptane $\\mathrm{C_{7}H_{16}}$ et un alcène. Quelle est la formule de l'alcène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Compter les carbones : $12 - 7 = 5$. Étape 3 — Compter les hydrogènes : $26 - 16 = 10$. Étape 4 — Vérifier : $\\mathrm{C_{5}H_{10}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 5$. La formule $\\mathrm{C_{5}H_{12}}$ serait un alcane : le craquage donne un alcane et un alcène ; les deux autres ne conservent pas les atomes.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{C_{5}H_{10}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{5}H_{12}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{5}H_{8}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{7}H_{10}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'alcène $\\mathrm{C_{4}H_{8}}$ s'appelle le ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Vérifier, puis nommer : $\\mathrm{C_{4}H_{8}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 4$ ; avec 4 carbones, c'est un butène (éthène, propène, butène…).",
+                  "answers": [
+                    {
+                      "content": "butène",
+                      "correct": true
+                    },
+                    {
+                      "content": "butylène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $\\mathrm{C_{9}H_{20}}$ → $\\mathrm{C_{5}H_{12}}$ + $\\mathrm{C_{3}H_{6}}$ respecte la conservation des atomes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Compter les carbones : $5 + 3 = 8$ à droite, contre 9 à gauche. Étape 3 — Compter les hydrogènes : $12 + 6 = 18$ à droite, contre 20 à gauche. Les atomes ne se conservent pas : l'équation est fausse. Il manque un carbone et deux hydrogènes, donc le second produit devrait être $\\mathrm{C_{4}H_{8}}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour écrire une équation de craquage.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire l'équation incomplète. Étape 2 — Compter les carbones. Étape 3 — Compter les hydrogènes. Étape 4 — Vérifier la forme $\\mathrm{C_mH_{2m}}$ et nommer l'alcène. Il faut connaître le nombre de carbones et d'hydrogènes avant de vérifier la formule.",
+                  "answers": [
+                    {
+                      "content": "Écrire l'équation incomplète : alcane long → alcane court + alcène inconnu."
+                    },
+                    {
+                      "content": "Compter les atomes de carbone de l'alcène : carbones du réactif moins carbones de l'alcane court."
+                    },
+                    {
+                      "content": "Compter les atomes d'hydrogène de l'alcène : hydrogènes du réactif moins hydrogènes de l'alcane court."
+                    },
+                    {
+                      "content": "Vérifier que l'alcène s'écrit $\\mathrm{C_mH_{2m}}$, puis le nommer."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Dans une raffinerie, on casse du gazole par craquage pour obtenir de l'essence et des alcènes.",
+            "questions": [
+              {
+                "content": "Craquage : $\\mathrm{C_{12}H_{26} \\to  C_{7}H_{16} + X}$, où X est un alcène. Complète : X a ___ atomes de carbone et ___ atomes d'hydrogène.",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Compter les carbones : $12 - 7 = 5$. Étape 3 — Compter les hydrogènes : $26 - 16 = 10$. Étape 4 — Vérifier : $\\mathrm{C_{5}H_{10}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 5$ : c'est un pentène.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "unit": "",
+                "tolerance": 0,
+                "hint": "Soustrais les carbones, puis les hydrogènes."
+              },
+              {
+                "content": "Le craquage donne toujours deux alcanes.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire l'équation incomplète : alcane long $\\to$ alcane court + alcène inconnu. Un des deux produits est un alcène, pas un alcane. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le craquage transforme des fractions ___ en molécules plus petites.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Écrire l'équation incomplète : on part d'un alcane long, venu d'une fraction lourde comme le gazole. Le craquage le casse en molécules plus petites.",
+                "answers": [
+                  {
+                    "content": "lourdes",
+                    "correct": true
+                  },
+                  {
+                    "content": "légères",
+                    "correct": false
+                  },
+                  {
+                    "content": "gazeuses",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Utilisations des produits du pétrole et pollutions",
+          "remember": "Chaque fraction a ses usages : le **gaz** (propane, butane) remplit les bouteilles de gaz de cuisine ; l'**essence** fait rouler voitures et motos ; le **kérosène**, les avions ; le **gazole**, camions et autocars ; le **fioul et les résidus**, le chauffage industriel et le bitume des routes. La **pétrochimie** fabrique des plastiques, à partir d'alcènes. Les combustions polluent. La **combustion complète** donne du dioxyde de carbone $\\mathrm{CO_{2}}$ et de l'eau, par exemple $\\mathrm{CH_{4} + 2\\,O_{2} \\to  CO_{2} + 2\\,H_{2}O}$ ; le $\\mathrm{CO_{2}}$ est un gaz à effet de serre. La **combustion incomplète** (manque de dioxygène) donne en plus du **monoxyde de carbone** CO, gaz très toxique, et de la suie. Les composés du soufre du pétrole donnent des oxydes de soufre, responsables de pluies acides. Du pétrole déversé en mer cause une **marée noire**. Le propane et le butane sont plus lourds que l'air : en cas de fuite, ils restent près du sol.",
+          "method": [
+            "Identifier la fraction ou le composé en cause (gaz, essence, kérosène, gazole, fioul et résidus).",
+            "Associer son usage : cuisine, transport, route, chauffage ou pétrochimie.",
+            "Repérer le produit nocif ou le danger : $\\mathrm{CO_{2}}$, CO, suie, oxydes de soufre, fuite de gaz, nappe de pétrole.",
+            "Proposer la précaution adaptée : aérer, régler l'arrivée d'air, limiter la consommation."
+          ],
+          "example": {
+            "statement": "Dans un maquis de Bouaké, la flamme de la cuisinière à gaz de bouteille (butane) est jaune et noircit les marmites. Quels sont la fraction, l'usage, le danger et la précaution ?",
+            "steps": [
+              "Identifier : le gaz de la bouteille est du butane, de la fraction gaz.",
+              "Associer : son usage est la cuisine.",
+              "Repérer : la flamme jaune et la suie noire montrent une combustion incomplète, qui forme du monoxyde de carbone CO, très toxique, et du carbone (suie).",
+              "Proposer : aérer la pièce et faire régler l'arrivée d'air du brûleur pour obtenir une combustion complète."
+            ]
+          },
+          "pitfall": "Ne crois pas que seule la combustion incomplète pollue. Une flamme bleue, sans suie, rejette quand même du dioxyde de carbone, gaz à effet de serre. Contre-exemple : $\\mathrm{C_{3}H_{8} + 5\\,O_{2} \\to  3\\,CO_{2} + 4\\,H_{2}O}$ : même quand la combustion du propane est complète, chaque molécule brûlée rejette 3 molécules de $\\mathrm{CO_{2}}$.",
+          "figure": null,
+          "exercise": [
+            {
+              "title": "Usages du pétrole et dangers des combustions",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : identifier la fraction, associer son usage, repérer le produit nocif ou le danger, proposer la précaution adaptée.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque fraction à son usage.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la fraction, puis Étape 2 — Associer son usage : le gaz remplit les bouteilles de cuisine, l'essence alimente voitures et motos, le kérosène les avions, le fioul et les résidus servent au chauffage industriel et au bitume des routes.",
+                  "answers": [
+                    {
+                      "content": "Gaz (propane, butane)",
+                      "match": "Bouteille de gaz de cuisine"
+                    },
+                    {
+                      "content": "Essence",
+                      "match": "Voitures et motos"
+                    },
+                    {
+                      "content": "Kérosène",
+                      "match": "Avions"
+                    },
+                    {
+                      "content": "Fioul et résidus (bitume)",
+                      "match": "Chauffage industriel et revêtement des routes"
+                    }
+                  ]
+                },
+                {
+                  "content": "La flamme d'une cuisinière à gaz est jaune et noircit les marmites. Que montre-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le gaz de cuisine est du butane ou du propane. Étape 3 — Repérer le produit nocif : une flamme jaune qui fait de la suie signale une combustion incomplète, donc du monoxyde de carbone CO, très toxique. Étape 4 — Proposer : aérer et régler l'arrivée d'air.",
+                  "answers": [
+                    {
+                      "content": "Une combustion incomplète, avec formation de CO et de suie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une combustion complète, la flamme idéale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une distillation fractionnée du gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un gaz sans aucun danger",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois affirmations vraies sur les effets nocifs des produits du pétrole ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 3 — Repérer le produit nocif ou le danger : le CO2 est un gaz à effet de serre ; le CO d'une combustion incomplète est très toxique ; une nappe de pétrole en mer cause une marée noire. Fausses : la combustion complète rejette du CO2 et de l'eau ; le propane est plus lourd que l'air et reste près du sol.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone des combustions renforce l'effet de serre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le monoxyde de carbone d'une combustion incomplète est très toxique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Du pétrole déversé en mer provoque une marée noire",
+                      "correct": true
+                    },
+                    {
+                      "content": "La combustion complète ne rejette aucun gaz dans l'air",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le propane, plus léger que l'air, monte au plafond en cas de fuite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la combustion complète du méthane $\\mathrm{CH_4 + 2\\,O_2 \\to CO_2 + x\\,H_2O}$, quelle est la valeur de x ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Repérer le produit : la combustion complète forme du dioxyde de carbone et de l'eau. Il y a 4 atomes d'hydrogène à gauche, et chaque molécule d'eau en contient 2 : $x = 4 / 2 = 2$. Vérification des oxygènes : $2 \\times 2 = 4$ à gauche, $2 + 2 \\times 1 = 4$ à droite.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "",
+                  "tolerance": 0
+                },
+                {
+                  "content": "La combustion incomplète forme un gaz très toxique : le monoxyde de ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Repérer le produit nocif : quand le dioxygène manque, la combustion forme du monoxyde de carbone CO. Étape 4 — Proposer la précaution : aérer la pièce et régler l'arrivée d'air.",
+                  "answers": [
+                    {
+                      "content": "carbone",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une flamme bleue, sans suie, ne rejette pas de dioxyde de carbone.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer le produit nocif : une flamme bleue indique une combustion complète, mais cette combustion forme justement du dioxyde de carbone et de l'eau, comme $\\mathrm{C_{3}H_{8} + 5\\,O_{2} \\to  3\\,CO_{2} + 4\\,H_{2}O}$. Le CO2 est un gaz à effet de serre : il faut donc limiter la consommation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En cas d'odeur de gaz dans une cuisine, quel geste est dangereux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer le danger : le butane et le propane sont plus lourds que l'air, ils s'accumulent près du sol, et une étincelle ou une flamme peut les enflammer. Étape 4 — Proposer la précaution : fermer le robinet, aérer, sortir. Allumer une allumette ou actionner un interrupteur est donc le geste à éviter.",
+                  "answers": [
+                    {
+                      "content": "Allumer une allumette ou actionner un interrupteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fermer le robinet de la bouteille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ouvrir les portes et les fenêtres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sortir de la pièce",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Associer produits du pétrole, usages et précautions",
+              "statement": "Dans cet exercice, tu traites des situations avec la méthode de la fiche : identifier la fraction, associer son usage, repérer le produit nocif ou le danger, proposer la précaution.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Une combustion complète donne du dioxyde de carbone et de l'eau. Une combustion incomplète (manque de dioxygène) donne aussi du monoxyde de carbone et de la suie.",
+              "questions": [
+                {
+                  "content": "Relie chaque produit ou situation à son effet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Repérer le produit nocif ou le danger : le dioxyde de carbone renforce l'effet de serre ; le monoxyde de carbone est très toxique et vient d'une combustion incomplète ; les oxydes de soufre causent les pluies acides ; une nappe de pétrole en mer est une marée noire.",
+                  "answers": [
+                    {
+                      "content": "Dioxyde de carbone",
+                      "match": "Gaz à effet de serre"
+                    },
+                    {
+                      "content": "Monoxyde de carbone",
+                      "match": "Gaz très toxique d'une combustion incomplète"
+                    },
+                    {
+                      "content": "Oxydes de soufre",
+                      "match": "Pluies acides"
+                    },
+                    {
+                      "content": "Pétrole déversé en mer",
+                      "match": "Marée noire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle fraction du pétrole sert de carburant aux avions ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la fraction. Étape 2 — Associer son usage : le gaz remplit les bouteilles de cuisine, l'essence fait rouler voitures et motos, le gazole camions et autocars, le kérosène les avions.",
+                  "answers": [
+                    {
+                      "content": "Le kérosène",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'essence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gazole",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gaz (propane, butane)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combustion complète de l'éthane : 2 $\\mathrm{C_{2}H_{6}}$ + x $\\mathrm{O_{2}}$ → 4 $\\mathrm{CO_{2}}$ + 6 $\\mathrm{H_{2}O}$. Quelle est la valeur de x ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Repérer les produits : $\\mathrm{CO_2}$ et $\\mathrm{H_2O}$. On compte l'oxygène à droite : $4 \\times 2 + 6 = 14$ atomes, qui viennent de $x$ molécules $\\mathrm{O_2}$ de 2 atomes : $2x = 14$, donc $x = 7$. Vérification : le carbone ($2 \\times 2 = 4$) et l'hydrogène ($2 \\times 6 = 12 = 6 \\times 2$) sont conservés.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le propane est plus léger que l'air : en cas de fuite, il monte vers le plafond.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer le danger : le propane et le butane sont plus lourds que l'air. En cas de fuite, ils restent près du sol et s'accumulent. Étape 4 — Proposer la précaution : fermer le robinet, aérer. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : une combustion qui manque de dioxygène est dite ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Repérer : un manque de dioxygène donne une combustion incomplète, avec du monoxyde de carbone et de la suie (flamme jaune). Étape 4 — Proposer : aérer et régler l'arrivée d'air.",
+                  "answers": [
+                    {
+                      "content": "incomplète",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux produits de la combustion complète d'un alcane ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Repérer le produit nocif : la combustion complète donne du dioxyde de carbone et de l'eau, par exemple $\\mathrm{CH_4 + 2\\,O_2}$ donne $\\mathrm{CO_2 + 2\\,H_2O}$. Le monoxyde de carbone et la suie apparaissent seulement en combustion incomplète.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le monoxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La suie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dihydrogène",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "practice": {
+            "statement": "Chez une marchande de beignets d'Abidjan, tu étudies la combustion du gaz de cuisine et ses dangers.",
+            "questions": [
+              {
+                "content": "Combustion complète du propane : $\\mathrm{C_3H_8 + 5\\,O_2 \\to x\\,CO_2 + y\\,H_2O}$. Complète : x = ___ et y = ___ .",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Repérer le produit : la combustion complète forme du CO2 et de l'eau. Les 3 carbones donnent x = 3 molécules de CO2 ; les 8 hydrogènes donnent $y = 8 / 2 = 4$ molécules d'eau. Contrôle des oxygènes : $2 \\times 5 = 10 = 3 \\times 2 + 4$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "unit": "",
+                "tolerance": 0,
+                "hint": "Compte les carbones pour x, puis les hydrogènes pour y (2 H par molécule d'eau)."
+              },
+              {
+                "content": "Le bitume des routes se trouve dans la fraction ___ de la distillation.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier la fraction : le bitume est dans les résidus, au bas de la tour. Étape 2 — Associer son usage : il sert au revêtement des routes.",
+                "answers": [
+                  {
+                    "content": "fioul et résidus",
+                    "correct": true
+                  },
+                  {
+                    "content": "essence",
+                    "correct": false
+                  },
+                  {
+                    "content": "gaz",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "En cas de fuite, le gaz de la bouteille monte vite vers le plafond.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Repérer le danger : le propane et le butane sont plus lourds que l'air, ils restent près du sol. L'affirmation est fausse. Étape 4 — Proposer la précaution : ne pas allumer de flamme, aérer.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La bouteille de gaz de Mme Kouassi",
+          "statement": "Mme Kouassi vend des beignets au marché d'Adjamé, à Abidjan. Sa cuisinière fonctionne avec une bouteille de gaz qui contient surtout du butane $\\mathrm{C_{4}H_{10}}$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans quelle fraction de la distillation du pétrole brut trouve-t-on le butane ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Lire : le butane $\\mathrm{C_{4}H_{10}}$ a 4 atomes de carbone. Étape 4 — Nommer la fraction : de 1 à 4 carbones, c'est la fraction gaz. L'essence commence autour de 5 carbones, le gazole autour de 14, le fioul et les résidus sont encore plus longs.",
+              "answers": [
+                {
+                  "content": "Le gaz (1 à 4 carbones)",
+                  "correct": true
+                },
+                {
+                  "content": "L'essence",
+                  "correct": false
+                },
+                {
+                  "content": "Le gazole",
+                  "correct": false
+                },
+                {
+                  "content": "Le fioul et les résidus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le butane est un alcane de formule $\\mathrm{C_4H_n}$. Combien d'atomes d'hydrogène contient une molécule de butane ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : un alcane s'écrit $\\mathrm{C_nH_{2n+2}}$ (Étape 3 de la fiche sur l'origine et la composition). Ici $n = 4$ : $2 \\times 4 + 2 = 10$ atomes d'hydrogène. La formule est $\\mathrm{C_{4}H_{10}}$.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "atomes",
+              "tolerance": 0
+            },
+            {
+              "content": "Le butane est recueilli en bas de la tour de distillation.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Classer : plus la chaîne est courte, plus la température d'ébullition est basse ($-0{,}5$ °C pour le butane). Étape 3 — Placer : la plus basse température d'ébullition est en haut de la tour. Le butane est donc recueilli en haut, avec les gaz, et non en bas.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour la combustion complète du butane, on veut équilibrer $\\mathrm{2\\,C_4H_{10} + x\\,O_2 \\to 8\\,CO_2 + 10\\,H_2O}$. Quelle est la valeur de x ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 3 — Repérer le produit : la combustion complète donne du CO2 et de l'eau. On compte les atomes d'oxygène à droite : $8 \\times 2 + 10 \\times 1 = 26$. À gauche, il faut 26 atomes d'oxygène, soit $x = 26 / 2 = 13$ molécules de dioxygène. Vérification : 8 C et $2 \\times 10 = 20$ H à gauche pour $8$ C et $10 \\times 2 = 20$ H à droite.",
+              "answers": [
+                {
+                  "content": "13",
+                  "correct": true
+                }
+              ],
+              "unit": "",
+              "tolerance": 0
+            },
+            {
+              "content": "Un jour, la flamme de la cuisinière devient jaune et noircit les beignets. Quelle est la cause la plus probable ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Identifier : le gaz de la bouteille est du butane, fraction gaz. Étape 3 — Repérer le produit nocif : une flamme jaune qui noircit révèle une combustion incomplète, due à un manque de dioxygène, avec formation de CO et de suie. La combustion complète donne une flamme bleue.",
+              "answers": [
+                {
+                  "content": "Un manque de dioxygène : la combustion est incomplète",
+                  "correct": true
+                },
+                {
+                  "content": "La bouteille contient du kérosène",
+                  "correct": false
+                },
+                {
+                  "content": "La combustion est complète et sans danger",
+                  "correct": false
+                },
+                {
+                  "content": "Le butane est devenu du pétrole brut",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux précautions adaptées dans cette cuisine ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 4 — Proposer la précaution adaptée : aérer pour évacuer le CO et renouveler le dioxygène, et régler l'arrivée d'air pour obtenir une combustion complète. Fermer les fenêtres ou continuer comme avant augmente le risque d'intoxication par le CO.",
+              "answers": [
+                {
+                  "content": "Aérer la cuisine",
+                  "correct": true
+                },
+                {
+                  "content": "Faire régler l'arrivée d'air du brûleur",
+                  "correct": true
+                },
+                {
+                  "content": "Fermer les fenêtres pour garder la chaleur",
+                  "correct": false
+                },
+                {
+                  "content": "Continuer à cuisiner car la flamme jaune est normale",
+                  "correct": false
+                },
+                {
+                  "content": "Garder la bouteille tout près de la flamme",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La raffinerie de Vridi",
+          "statement": "Dans la tour de distillation de la raffinerie de Vridi, à Abidjan, on suit quatre hydrocarbures du pétrole brut : le propane $\\mathrm{C_{3}H_{8}}$ ($-42$ °C), l'hexane $\\mathrm{C_{6}H_{14}}$ (69 °C), le nonane $\\mathrm{C_{9}H_{20}}$ (151 °C) et l'hexadécane $\\mathrm{C_{16}H_{34}}$ (287 °C), avec leur température d'ébullition.",
+          "exercise_type": "fixation",
+          "figure": "tour-distillation",
+          "questions": [
+            {
+              "content": "Remets ces hydrocarbures dans l'ordre où on les recueille dans la tour, du plus haut au plus bas : hexadécane, propane, nonane, hexane.",
+              "question_type": "ordering",
+              "explanation": "Méthode : Étape 1 — Lire : $-42$ °C, 69 °C, 151 °C et 287 °C. Étape 2 — Classer par température d'ébullition croissante : $-42 < 69 < 151 < 287$. Étape 3 — Placer : la température la plus basse est en haut, donc propane, hexane, nonane, hexadécane.",
+              "answers": [
+                {
+                  "content": "Propane"
+                },
+                {
+                  "content": "Hexane"
+                },
+                {
+                  "content": "Nonane"
+                },
+                {
+                  "content": "Hexadécane"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque hydrocarbure à sa fraction.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Lire le nombre d'atomes de carbone. Étape 4 — Nommer la fraction : 3 carbones, gaz (1 à 4) ; 6 carbones, essence (environ 5 à 10) ; 16 carbones, gazole (environ 14 à 20).",
+              "answers": [
+                {
+                  "content": "Propane $\\mathrm{C_{3}H_{8}}$",
+                  "match": "Gaz"
+                },
+                {
+                  "content": "Hexane $\\mathrm{C_{6}H_{14}}$",
+                  "match": "Essence"
+                },
+                {
+                  "content": "Hexadécane $\\mathrm{C_{16}H_{34}}$",
+                  "match": "Gazole"
+                }
+              ]
+            },
+            {
+              "content": "De combien de degrés la température d'ébullition du nonane dépasse-t-elle celle de l'hexane ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Lire : nonane 151 °C, hexane 69 °C. Étape 2 — Classer : $151 > 69$, le nonane (9 carbones) bout plus haut que l'hexane (6 carbones). Écart : $151 - 69 = 82$ °C.",
+              "answers": [
+                {
+                  "content": "82",
+                  "correct": true
+                }
+              ],
+              "unit": "°C",
+              "tolerance": 0
+            },
+            {
+              "content": "Combien d'atomes d'hydrogène contient une molécule d'hexadécane $\\mathrm{C_{16}H_n}$, un alcane ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : un alcane s'écrit $\\mathrm{C_nH_{2n+2}}$. Avec $n = 16$ : $2 \\times 16 + 2 = 34$. La formule est $\\mathrm{C_{16}H_{34}}$, comme dans l'énoncé.",
+              "answers": [
+                {
+                  "content": "34",
+                  "correct": true
+                }
+              ],
+              "unit": "atomes",
+              "tolerance": 0
+            },
+            {
+              "content": "Le nonane est recueilli plus bas dans la tour que l'hexane.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Classer : $69 < 151$, l'hexane a la température d'ébullition la plus basse. Étape 3 — Placer : la température la plus élevée est en bas, donc le nonane est recueilli plus bas que l'hexane. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La distillation fractionnée transforme le nonane en hexane et en propane.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 3 — Placer : la distillation ne fait que trier les molécules selon leur température d'ébullition. Chaque hydrocarbure existait déjà dans le brut. Transformer un alcane long en plus petits, c'est le rôle du craquage, une transformation chimique.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Du gazole aux sacs plastiques",
+          "statement": "Une raffinerie dispose de beaucoup de gazole, dont les molécules sont longues, comme l'hexadécane $\\mathrm{C_{16}H_{34}}$. Pour fabriquer plus d'essence, elle le casse par craquage. Un des alcènes obtenus peut servir de matière première dans une usine de plastiques de la zone industrielle de Yopougon.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la nature du craquage ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Écrire l'équation : $\\mathrm{C_{16}H_{34} \\to  C_{8}H_{18} + X}$ a des formules différentes de chaque côté. De nouvelles molécules sont formées, c'est donc une transformation chimique. La séparation physique sans changement des molécules, c'est la distillation.",
+              "answers": [
+                {
+                  "content": "Une transformation chimique : de nouvelles molécules sont formées",
+                  "correct": true
+                },
+                {
+                  "content": "Une séparation physique des molécules selon leur température d'ébullition",
+                  "correct": false
+                },
+                {
+                  "content": "Un simple chauffage sans changement des molécules",
+                  "correct": false
+                },
+                {
+                  "content": "Un mélange de deux fractions",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le craquage de $\\mathrm{C_{16}H_{34}}$ donne l'octane $\\mathrm{C_{8}H_{18}}$ et un alcène X. Combien d'atomes de carbone X contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Écrire : $\\mathrm{C_{16}H_{34} \\to  C_{8}H_{18} + X}$. Étape 2 — Compter les carbones : $16 - 8 = 8$ atomes de carbone dans X.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "unit": "atomes",
+              "tolerance": 0
+            },
+            {
+              "content": "Le craquage de $\\mathrm{C_{16}H_{34}}$ donne l'octane $\\mathrm{C_{8}H_{18}}$ et un alcène X. Combien d'atomes d'hydrogène X contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 3 — Compter les hydrogènes : $34 - 18 = 16$ atomes d'hydrogène dans X. Étape 4 — Vérifier : X est $\\mathrm{C_{8}H_{16}}$, qui s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 8$ ($2 \\times 8 = 16$) : c'est bien un alcène.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ],
+              "unit": "atomes",
+              "tolerance": 0
+            },
+            {
+              "content": "L'alcène $\\mathrm{C_{8}H_{16}}$ a 8 carbones : il s'appelle l'___ .",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 4 — Nommer l'alcène d'après son nombre de carbones : 8 carbones se disent « oct- » comme pour l'octane, et la terminaison des alcènes est « -ène ». C'est l'octène.",
+              "answers": [
+                {
+                  "content": "octène",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi l'équation $\\mathrm{C_{16}H_{34} \\to  C_{8}H_{18} + C_{8}H_{18}}$ est-elle fausse ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 2 — Compter les carbones : $8 + 8 = 16$, c'est bon. Étape 3 — Compter les hydrogènes : $18 + 18 = 36$ à droite, contre 34 à gauche : l'équation ne respecte pas la conservation des atomes. C'est le piège « deux alcanes » : le second produit doit être un alcène $\\mathrm{C_{8}H_{16}}$.",
+              "answers": [
+                {
+                  "content": "Il y aurait 36 atomes d'hydrogène à droite pour 34 à gauche",
+                  "correct": true
+                },
+                {
+                  "content": "Il y aurait trop d'atomes de carbone à droite",
+                  "correct": false
+                },
+                {
+                  "content": "Un craquage ne produit jamais d'alcane",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est correcte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'éthylène $\\mathrm{C_{2}H_{4}}$ est fabriqué par craquage. À quoi sert-il dans l'usine de plastiques ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Identifier le composé : l'éthylène est un alcène. Étape 2 — Associer son usage : par polymérisation, il donne le polyéthylène, un plastique (sacs, films d'emballage). Le bitume vient des résidus, le gaz de cuisine de la fraction gaz, et les avions utilisent le kérosène.",
+              "answers": [
+                {
+                  "content": "À fabriquer du polyéthylène par polymérisation",
+                  "correct": true
+                },
+                {
+                  "content": "À fabriquer du bitume pour les routes",
+                  "correct": false
+                },
+                {
+                  "content": "À remplir les bouteilles de gaz de cuisine",
+                  "correct": false
+                },
+                {
+                  "content": "À faire voler les avions",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases la différence entre la distillation fractionnée et le craquage.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Distillation : séparation physique selon les températures d'ébullition",
+                "Craquage : transformation chimique qui casse de grosses molécules",
+                "Le craquage change les molécules, pas la distillation"
+              ],
+              "explanation": "Corrigé modèle : « La distillation fractionnée est une séparation physique : elle trie les molécules du pétrole brut selon leur température d'ébullition, sans les changer. Le craquage est une transformation chimique : il casse de grosses molécules d'alcanes en un alcane plus court et un alcène. » Barème : 1 point pour la distillation (séparation physique, tri selon les températures d'ébullition) ; 1 point pour le craquage (transformation chimique qui casse les molécules).",
+              "answers": [],
+              "starter": "La distillation fractionnée est…"
+            }
+          ]
+        },
+        {
+          "title": "Le gaz naturel d'une centrale thermique",
+          "statement": "Dans une centrale thermique de la zone d'Abidjan, du gaz naturel, formé surtout de méthane $\\mathrm{CH_{4}}$, est brûlé pour produire de l'électricité. Un élève de 1ère A visite la centrale et s'interroge sur la ressource et sur les pollutions.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Que contient surtout le gaz naturel ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Identifier : le gaz naturel est un gaz. Étape 2 — Écrire le constituant majoritaire : c'est le méthane $\\mathrm{CH_{4}}$, avec un peu d'éthane, de propane et de butane. Le CO est un produit de combustion incomplète, le bitume vient des résidus de la distillation.",
+              "answers": [
+                {
+                  "content": "Du méthane",
+                  "correct": true
+                },
+                {
+                  "content": "De l'hexadécane",
+                  "correct": false
+                },
+                {
+                  "content": "Du monoxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "Du bitume",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi dit-on que le gaz naturel est une ressource non renouvelable ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 4 — Conclure sur la nature et l'origine : le gaz naturel est un combustible fossile, issu d'organismes marins enfouis et transformés pendant des millions d'années. On le consomme beaucoup plus vite qu'il ne se forme : il est non renouvelable à l'échelle humaine.",
+              "answers": [
+                {
+                  "content": "Il vient d'organismes enfouis depuis des millions d'années, et on le consomme bien plus vite qu'il ne se forme",
+                  "correct": true
+                },
+                {
+                  "content": "Parce qu'il est fabriqué chaque jour par la centrale",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il est un corps pur",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il ne brûle qu'une seule fois par jour",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combustion complète du méthane : $\\mathrm{CH_4 + x\\,O_2 \\to CO_2 + 2\\,H_2O}$. Quelle est la valeur de x ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 3 — Repérer le produit : la combustion complète donne du CO2 et de l'eau. Il y a $2 + 2 \\times 1 = 4$ atomes d'oxygène à droite, donc $x = 4 / 2 = 2$ molécules de dioxygène. Vérification : 4 H à gauche, $2 \\times 2 = 4$ H à droite.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "unit": "",
+              "tolerance": 0
+            },
+            {
+              "content": "Avec l'équation $\\mathrm{CH_4 + 2\\,O_2 \\to CO_2 + 2\\,H_2O}$, combien de molécules d'eau se forment quand 10 molécules de méthane brûlent complètement ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 3 — Repérer le produit : l'équation dit qu'une molécule de méthane donne 2 molécules d'eau. Pour 10 molécules de méthane, on obtient $10 \\times 2 = 20$ molécules d'eau (et 10 molécules de CO2).",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "molécules",
+              "tolerance": 0
+            },
+            {
+              "content": "Quelles sont les deux conséquences possibles d'une combustion incomplète dans un local mal aéré ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 3 — Repérer le produit nocif : quand le dioxygène manque, la combustion forme du monoxyde de carbone CO, très toxique, et de la suie. Une flamme bleue signale au contraire une combustion complète, qui rejette du CO2.",
+              "answers": [
+                {
+                  "content": "Formation de monoxyde de carbone, très toxique",
+                  "correct": true
+                },
+                {
+                  "content": "Dépôt de suie",
+                  "correct": true
+                },
+                {
+                  "content": "La flamme devient plus chaude et plus bleue",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun rejet de dioxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "Formation de pétrole brut",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le dioxyde de carbone rejeté par une combustion complète est un gaz à effet de serre.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 3 — Repérer le produit nocif : même une combustion complète rejette du dioxyde de carbone, qui renforce l'effet de serre. Étape 4 — Proposer la précaution : limiter la consommation de combustibles fossiles. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un cargo a laissé échapper du pétrole brut en mer près d'une plage. Cite deux conséquences de cette marée noire et une précaution pour limiter ce type de pollution.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Deux conséquences citées (littoral pollué, animaux marins touchés, pêche perturbée)",
+                "Une précaution ou un moyen de limitation cohérent",
+                "Vocabulaire correct : marée noire, pétrole brut"
+              ],
+              "explanation": "Corrigé modèle : « Le pétrole déversé forme une nappe qui pollue le littoral et touche les poissons et les oiseaux marins ; les pêcheurs ne peuvent plus travailler normalement. Pour limiter ce type de pollution, on peut contrôler les navires et leurs cuves, et intervenir vite avec des barrages flottants pour contenir la nappe. » Barème : 1 point par conséquence correcte (2 points), 1 point pour la précaution.",
+              "answers": [],
+              "starter": "Une marée noire a pour conséquences…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur le pétrole et le gaz naturel",
+          "notions": "Pétrole brut et gaz naturel, combustibles fossiles ; hydrocarbures et alcanes $\\mathrm{C_nH_{2n+2}}$ ; distillation fractionnée et fractions ; craquage et alcènes ; combustions complète et incomplète.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au lycée de San-Pédro, un professeur de physique-chimie présente le pétrole brut et le gaz naturel à sa classe de 1ère A.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un hydrocarbure ne contient que du carbone et de l'hydrogène. Un alcane a $2n + 2$ atomes d'hydrogène pour $n$ atomes de carbone.",
+              "questions": [
+                {
+                  "content": "Que sont le pétrole brut et le gaz naturel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : ils viennent d'organismes marins enfouis pendant des millions d'années. Étape 4 — Conclure : ce sont des combustibles fossiles, non renouvelables ; ce sont des mélanges, pas des corps purs.",
+                  "answers": [
+                    {
+                      "content": "Des combustibles fossiles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des corps purs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des ressources renouvelables",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des métaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : un hydrocarbure ne contient que du carbone et de l'___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Vérifier les formules : un hydrocarbure est défini par ses atomes, carbone et hydrogène seulement.",
+                  "answers": [
+                    {
+                      "content": "hydrogène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un alcane possède 10 atomes de carbone. Combien d'atomes d'hydrogène contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Vérifier les formules : $\\mathrm{C_nH_{2n+2}}$ avec $n = 10$ donne $2 \\times 10 + 2 = 22$ atomes d'hydrogène.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Le gaz naturel est un mélange gazeux formé surtout de méthane.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Écrire le constituant majoritaire : pour le gaz naturel, c'est le méthane, avec un peu d'éthane, de propane et de butane. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux formules qui sont celles d'alcanes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Vérifier les formules : $\\mathrm{C_nH_{2n+2}}$ donne 8 hydrogènes pour 3 carbones et 16 pour 7. Les formules $\\mathrm{C_{3}H_{6}}$, $\\mathrm{C_{5}H_{10}}$ et $\\mathrm{C_{6}H_{12}}$ ont $2n$ hydrogènes : ce sont des alcènes, pas des alcanes.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{C_{3}H_{8}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{7}H_{16}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{3}H_{6}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{5}H_{10}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{6}H_{12}}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la raffinerie de Vridi, à Abidjan, on suit trois hydrocarbures du pétrole brut : l'éthane $\\mathrm{C_{2}H_{6}}$ (−89 °C), l'hexane $\\mathrm{C_{6}H_{14}}$ (69 °C) et le décane $\\mathrm{C_{10}H_{22}}$ (174 °C). Les températures d'ébullition sont des données d'exercice.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Plus la chaîne est longue, plus la température d'ébullition est élevée et plus on recueille la molécule bas dans la tour.",
+              "questions": [
+                {
+                  "content": "Range ces trois hydrocarbures dans l'ordre où on les recueille dans la tour, du plus haut au plus bas.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire les températures. Étape 2 — Classer : $-89 < 69 < 174$. Étape 3 — Placer : la température la plus basse en haut. Ordre du haut vers le bas : éthane, hexane, décane.",
+                  "answers": [
+                    {
+                      "content": "Éthane (−89 °C)"
+                    },
+                    {
+                      "content": "Hexane (69 °C)"
+                    },
+                    {
+                      "content": "Décane (174 °C)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle grandeur détermine la hauteur où une fraction est recueillie dans la tour ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Placer : chaque fraction se condense à la hauteur où la température correspond à son ébullition, et celle-ci augmente avec la longueur de la chaîne.",
+                  "answers": [
+                    {
+                      "content": "Sa température d'ébullition, liée à la longueur de la chaîne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa couleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son prix",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa date de formation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La distillation fractionnée est une transformation chimique.",
+                  "question_type": "true_false",
+                  "explanation": "La distillation fractionnée est une séparation physique : les molécules ne changent pas, elles sont triées. Le craquage, lui, est une transformation chimique. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque fraction à un usage.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Nommer la fraction, puis associer son usage : le gaz sert à la cuisine, l'essence aux voitures et motos, le kérosène aux avions, le gazole aux camions et autocars.",
+                  "answers": [
+                    {
+                      "content": "Gaz",
+                      "match": "Bouteilles de gaz de cuisine"
+                    },
+                    {
+                      "content": "Essence",
+                      "match": "Voitures et motos"
+                    },
+                    {
+                      "content": "Kérosène",
+                      "match": "Avions"
+                    },
+                    {
+                      "content": "Gazole",
+                      "match": "Camions et autocars"
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien de degrés la température d'ébullition du décane (174 °C) dépasse-t-elle celle de l'éthane (−89 °C) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 174 °C et −89 °C. Calcul : $174 - (-89) = 174 + 89 = 263$ °C. Oublier le signe moins donnerait $174 - 89 = 85$ °C, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "263",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans la raffinerie, on casse par craquage le tétradécane $\\mathrm{C_{14}H_{30}}$ : il donne le nonane $\\mathrm{C_{9}H_{20}}$ et un alcène X.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "L'alcène a autant de carbones et d'hydrogènes qu'il en manque pour que les atomes se conservent. Il s'écrit $\\mathrm{C_mH_{2m}}$.",
+              "questions": [
+                {
+                  "content": "Combien d'atomes de carbone l'alcène X contient-il ? ($\\mathrm{C_{14}H_{30}}$ → $\\mathrm{C_{9}H_{20}}$ + X)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire l'équation incomplète. Étape 2 — Compter les carbones : $14 - 9 = 5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Combien d'atomes d'hydrogène l'alcène X contient-il ? ($\\mathrm{C_{14}H_{30}}$ → $\\mathrm{C_{9}H_{20}}$ + X)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Compter les hydrogènes : $30 - 20 = 10$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Quelle est la formule de l'alcène X ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Vérifier : $5$ carbones et $10$ hydrogènes, soit $\\mathrm{C_mH_{2m}}$ avec $m = 5$. La formule $\\mathrm{C_{5}H_{12}}$ serait celle d'un alcane.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{C_{5}H_{10}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{5}H_{12}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{5}H_{8}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{9}H_{10}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le craquage est une transformation chimique.",
+                  "question_type": "true_false",
+                  "explanation": "Le craquage casse de grosses molécules en molécules plus petites : de nouvelles molécules apparaissent. C'est une transformation chimique, à la différence de la distillation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'alcène $\\mathrm{C_{5}H_{10}}$ s'appelle le ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Nommer : 5 carbones, alcène : pentène (éthène, propène, butène, pentène…).",
+                  "answers": [
+                    {
+                      "content": "pentène",
+                      "correct": true
+                    },
+                    {
+                      "content": "pentylène",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un maquis d'Abidjan, la cuisinière à gaz de bouteille (butane) a une flamme jaune qui noircit les marmites.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une flamme jaune et de la suie montrent une combustion incomplète. Pour équilibrer, compte les atomes d'oxygène à droite.",
+              "questions": [
+                {
+                  "content": "Que montre la flamme jaune qui noircit les marmites ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer le produit nocif : la flamme jaune et la suie noire montrent une combustion incomplète, qui forme du monoxyde de carbone CO, très toxique.",
+                  "answers": [
+                    {
+                      "content": "Une combustion incomplète, avec formation de monoxyde de carbone et de suie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une combustion complète, la flamme idéale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une distillation fractionnée du gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un gaz sans aucun danger",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le gaz très toxique d'une combustion incomplète est le monoxyde de ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Repérer : le monoxyde de carbone CO se forme quand le dioxygène manque.",
+                  "answers": [
+                    {
+                      "content": "carbone",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Équilibre la combustion complète du pentane : $\\mathrm{C_{5}H_{12}}$ + x $\\mathrm{O_{2}}$ → 5 $\\mathrm{CO_{2}}$ + 6 $\\mathrm{H_{2}O}$. Quelle est la valeur de x ?",
+                  "question_type": "numeric",
+                  "explanation": "On compte l'oxygène à droite : $5 \\times 2 + 6 = 16$ atomes, donc $2x = 16$ et $x = 8$. Le carbone (5) et l'hydrogène ($12 = 6 \\times 2$) sont conservés.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le dioxyde de carbone est un gaz à effet de serre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer le produit nocif : le dioxyde de carbone des combustions renforce l'effet de serre. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'appelle-t-on une marée noire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer le danger : du pétrole déversé en mer cause une marée noire. Les pluies acides viennent des oxydes de soufre, la suie d'une combustion incomplète.",
+                  "answers": [
+                    {
+                      "content": "Du pétrole déversé en mer qui forme une nappe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une fuite de gaz de cuisine dans une maison",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une forte pluie acide",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fumée noire d'une cuisinière",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Le pétrole et le gaz dans la vie courante en Côte d'Ivoire",
+          "notions": "Situations d'exemple : bouteille de gaz d'une vendeuse du marché d'Adjamé, station-service de Bouaké, raffinerie de Vridi et usine de plastiques de Yopougon, centrale thermique de la zone d'Abidjan ; fractions et usages, craquage, combustion du méthane, précautions.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Une vendeuse de garba du marché de Cocody, à Abidjan, cuisine avec une bouteille de gaz qui contient surtout du butane $\\mathrm{C_{4}H_{10}}$. Le propane $\\mathrm{C_{3}H_{8}}$ bout à −42 °C et le butane à −0,5 °C (données d'exercice).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Propane et butane sont de la fraction gaz et sont plus lourds que l'air. Une fuite se traite en fermant le robinet et en aérant.",
+              "questions": [
+                {
+                  "content": "Dans quelle fraction du pétrole trouve-t-on le butane ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le butane a 4 carbones. Étape 4 — Nommer la fraction : 1 à 4 carbones, c'est la fraction gaz.",
+                  "answers": [
+                    {
+                      "content": "Le gaz (1 à 4 carbones)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'essence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gazole",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le fioul et les résidus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le propane est un alcane à 3 atomes de carbone. Combien d'atomes d'hydrogène contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Vérifier : $\\mathrm{C_nH_{2n+2}}$ avec $n = 3$ donne $2 \\times 3 + 2 = 8$, soit $\\mathrm{C_3H_8}$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "De combien de degrés la température d'ébullition du butane (−0,5 °C) dépasse-t-elle celle du propane (−42 °C) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : −0,5 °C et −42 °C. Calcul : $-0{,}5 - (-42) = -0{,}5 + 42 = 41{,}5$ °C. Le butane, à chaîne plus longue, bout plus haut.",
+                  "answers": [
+                    {
+                      "content": "41,5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                },
+                {
+                  "content": "Le propane et le butane sont plus lourds que l'air : en cas de fuite, ils restent près du sol.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer le danger : le propane et le butane sont plus lourds que l'air et s'accumulent près du sol. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il y a une odeur de gaz dans la cuisine. Quels sont les deux gestes adaptés ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Proposer la précaution : fermer le robinet et aérer. Une flamme ou une étincelle (allumette, interrupteur) peut enflammer le gaz accumulé : c'est dangereux.",
+                  "answers": [
+                    {
+                      "content": "Fermer le robinet de la bouteille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ouvrir les portes et les fenêtres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Allumer une allumette pour chercher la fuite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Actionner un interrupteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rester près de la bouteille",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans une station-service de Bouaké, un élève observe les carburants vendus et se demande d'où ils viennent dans le pétrole brut.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Chaque fraction a un usage. Plus la chaîne est longue, plus la fraction est recueillie bas dans la tour.",
+              "questions": [
+                {
+                  "content": "Relie chaque produit du pétrole à son usage.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Associer son usage : l'essence fait rouler motos et voitures, le gazole les camions et autocars, le kérosène les avions, le bitume (fioul et résidus) sert au revêtement des routes.",
+                  "answers": [
+                    {
+                      "content": "Essence",
+                      "match": "Motos et voitures"
+                    },
+                    {
+                      "content": "Gazole",
+                      "match": "Camions et autocars"
+                    },
+                    {
+                      "content": "Kérosène",
+                      "match": "Avions"
+                    },
+                    {
+                      "content": "Bitume",
+                      "match": "Revêtement des routes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Environ combien d'atomes de carbone ont les molécules de l'essence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Nommer la fraction : gaz, 1 à 4 carbones ; essence, environ 5 à 10 ; kérosène, environ 10 à 14 ; gazole, environ 14 à 20.",
+                  "answers": [
+                    {
+                      "content": "5 à 10",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 à 4",
+                      "correct": false
+                    },
+                    {
+                      "content": "14 à 20",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus de 30",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle des deux fractions est recueillie plus haut dans la tour : l'essence ou le gazole ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Placer : plus la chaîne est courte, plus la température d'ébullition est basse et plus on monte dans la tour. Les chaînes de l'essence sont plus courtes que celles du gazole.",
+                  "answers": [
+                    {
+                      "content": "L'essence, car ses chaînes sont plus courtes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gazole, car ses chaînes sont plus longues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont recueillies au même niveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des deux, elles sont chauffées avant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hexane bout à 69 °C et l'octane à 126 °C. De combien de degrés l'octane dépasse-t-il l'hexane ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 69 °C et 126 °C. Calcul : $126 - 69 = 57$ °C.",
+                  "answers": [
+                    {
+                      "content": "57",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                },
+                {
+                  "content": "Le bitume des routes vient du fioul et des résidus de la distillation.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Associer son usage : le fioul et les résidus servent au chauffage industriel et au bitume des routes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À la raffinerie de Vridi, on dispose de beaucoup de gazole, dont l'hexadécane $\\mathrm{C_{16}H_{34}}$. Pour fabriquer plus d'essence, on le casse par craquage : il donne le décane $\\mathrm{C_{10}H_{22}}$ et un alcène X, que l'usine de plastiques de Yopougon utilise.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte les carbones et les hydrogènes qui manquent à droite : X est un alcène $\\mathrm{C_mH_{2m}}$.",
+              "questions": [
+                {
+                  "content": "Combien d'atomes de carbone l'alcène X contient-il ? ($\\mathrm{C_{16}H_{34}}$ → $\\mathrm{C_{10}H_{22}}$ + X)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Compter les carbones : $16 - 10 = 6$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Combien d'atomes d'hydrogène l'alcène X contient-il ? ($\\mathrm{C_{16}H_{34}}$ → $\\mathrm{C_{10}H_{22}}$ + X)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Compter les hydrogènes : $34 - 22 = 12$. Étape 4 — $\\mathrm{C_6H_{12}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 6$.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Complète : l'alcène $\\mathrm{C_{6}H_{12}}$ s'appelle l'___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Nommer : 6 carbones, alcène : hexène.",
+                  "answers": [
+                    {
+                      "content": "hexène",
+                      "correct": true
+                    },
+                    {
+                      "content": "hexylène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le craquage sépare les molécules du gazole sans les modifier.",
+                  "question_type": "true_false",
+                  "explanation": "Le craquage est une transformation chimique : les grosses molécules sont cassées en molécules différentes (un alcane plus court et un alcène). C'est la distillation qui sépare sans modifier. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À quoi sert l'éthylène, fabriqué par craquage, dans une usine de plastiques ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les alcènes comme l'éthylène sont la matière première de la pétrochimie : ils servent à fabriquer des plastiques, comme le polyéthylène. Le bitume vient des résidus, le gaz des bouteilles de la fraction gaz, le kérosène fait voler les avions.",
+                  "answers": [
+                    {
+                      "content": "À fabriquer du polyéthylène",
+                      "correct": true
+                    },
+                    {
+                      "content": "À fabriquer du bitume pour les routes",
+                      "correct": false
+                    },
+                    {
+                      "content": "À remplir les bouteilles de gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "À faire voler les avions",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une centrale thermique de la zone d'Abidjan brûle du gaz naturel, formé surtout de méthane $\\mathrm{CH_{4}}$, pour produire de l'électricité. La combustion complète s'écrit $\\mathrm{CH_{4}}$ + 2 $\\mathrm{O_{2}}$ → $\\mathrm{CO_{2}}$ + 2 $\\mathrm{H_{2}O}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Les coefficients de l'équation donnent les nombres de molécules : pour 5 molécules de méthane, multiplie chaque coefficient par 5.",
+              "questions": [
+                {
+                  "content": "Que contient surtout le gaz naturel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire le constituant majoritaire : pour le gaz naturel, c'est le méthane.",
+                  "answers": [
+                    {
+                      "content": "Du méthane",
+                      "correct": true
+                    },
+                    {
+                      "content": "De l'hexadécane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du monoxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du bitume",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de molécules de dioxygène sont consommées quand 5 molécules de méthane brûlent complètement ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Lire l'équation : 1 molécule de méthane consomme 2 molécules de dioxygène. Pour 5 molécules : $2 \\times 5 = 10$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "molécules"
+                },
+                {
+                  "content": "Combien de molécules de dioxyde de carbone se forment quand 5 molécules de méthane brûlent complètement ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Lire l'équation : 1 molécule de méthane donne 1 molécule de dioxyde de carbone. Pour 5 molécules : $1 \\times 5 = 5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "molécules"
+                },
+                {
+                  "content": "Le gaz naturel est une ressource renouvelable.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : le gaz naturel est un combustible fossile, formé en des millions d'années et consommé bien plus vite : il est non renouvelable. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux produits rejetés par la combustion complète du méthane ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Repérer les produits : $\\mathrm{CH_4 + 2\\,O_2}$ donne $\\mathrm{CO_2 + 2\\,H_2O}$ : dioxyde de carbone et eau. Le monoxyde de carbone et la suie viennent d'une combustion incomplète ; les oxydes de soufre, des composés du soufre.",
+                  "answers": [
+                    {
+                      "content": "Le dioxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le monoxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La suie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les oxydes de soufre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier sur le pétrole",
+          "notions": "Réfuter l'idée que le pétrole brut est un corps pur ; distinguer distillation, craquage et combustion ; justifier qu'une équation de craquage est fausse ; comparer deux flammes et leurs rejets.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève affirme : « Le pétrole brut est un corps pur, puisqu'il sort d'un seul puits ». Son professeur lui rappelle que le butane $\\mathrm{C_{4}H_{10}}$ (−0,5 °C) et l'hexane $\\mathrm{C_{6}H_{14}}$ (69 °C) sont dans le même pétrole brut.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un corps pur a une température d'ébullition unique. Cherche si le pétrole brut en a une.",
+              "questions": [
+                {
+                  "content": "Le pétrole brut est un mélange d'hydrocarbures.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Écrire le constituant majoritaire : le pétrole brut est un mélange liquide d'hydrocarbures de tailles différentes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps pur a une température d'ébullition unique.",
+                  "question_type": "true_false",
+                  "explanation": "Un corps pur bout à une température bien définie. Le pétrole brut, lui, contient des hydrocarbures qui bouillent à des températures différentes : il bout sur un large intervalle. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel argument réfute l'idée de l'élève ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le butane bout à −0,5 °C et l'hexane à 69 °C, et les deux sont dans le même brut. Étape 4 — Conclure : mélange, pas corps pur.",
+                  "answers": [
+                    {
+                      "content": "Le pétrole brut contient des hydrocarbures de températures d'ébullition différentes, donc il n'en a pas une seule.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pétrole brut est un solide.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un puits ne peut contenir qu'un seul corps pur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le butane et l'hexane sont le même corps.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un hydrocarbure est-il la même chose qu'un carburant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Vérifier : un hydrocarbure est défini par sa composition (C et H seulement), pas par son usage. « Carburant » désigne un usage.",
+                  "answers": [
+                    {
+                      "content": "Non : un hydrocarbure est défini par ses atomes, carbone et hydrogène seulement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : tout hydrocarbure est un carburant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : un hydrocarbure contient aussi de l'oxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : un carburant est toujours un corps pur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : le pétrole brut est un ___ d'hydrocarbures.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Écrire : le pétrole brut est un mélange d'hydrocarbures.",
+                  "answers": [
+                    {
+                      "content": "mélange",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Trois opérations ont lieu sur le pétrole et ses produits : la distillation fractionnée, le craquage et la combustion complète.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Distillation : on trie sans changer les molécules. Craquage : on casse une grosse molécule. Combustion : on fait réagir avec le dioxygène.",
+              "questions": [
+                {
+                  "content": "Dans la distillation fractionnée, que deviennent les molécules ?",
+                  "question_type": "single_choice",
+                  "explanation": "La distillation est une séparation physique : les molécules ne changent pas, elles sont triées. Casser les molécules, c'est le craquage ; brûler, c'est la combustion.",
+                  "answers": [
+                    {
+                      "content": "Elles ne changent pas : elles sont triées selon leur température d'ébullition.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont cassées en molécules plus petites.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brûlent.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles s'assemblent en longues chaînes.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le craquage, que deviennent les molécules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : alcane long → alcane court + alcène. Le craquage est une transformation chimique qui ne donne pas que des alcanes.",
+                  "answers": [
+                    {
+                      "content": "Une grosse molécule d'alcane donne un alcane plus court et un alcène.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles ne changent pas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles brûlent en donnant du dioxyde de carbone.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles donnent uniquement des alcanes.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque description à l'opération.",
+                  "question_type": "matching",
+                  "explanation": "Distillation : séparation physique selon la température d'ébullition. Craquage : une grosse molécule d'alcane devient un alcane plus court et un alcène. Combustion complète : l'hydrocarbure et le dioxygène donnent du dioxyde de carbone et de l'eau.",
+                  "answers": [
+                    {
+                      "content": "Les molécules sont triées sans changer",
+                      "match": "Distillation fractionnée"
+                    },
+                    {
+                      "content": "Une grosse molécule donne un alcane court et un alcène",
+                      "match": "Craquage"
+                    },
+                    {
+                      "content": "L'hydrocarbure réagit avec le dioxygène et donne du dioxyde de carbone et de l'eau",
+                      "match": "Combustion complète"
+                    }
+                  ]
+                },
+                {
+                  "content": "Craquage : $\\mathrm{C_{12}H_{26}}$ → $\\mathrm{C_{8}H_{18}}$ + X. Combien d'atomes d'hydrogène l'alcène X contient-il ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Compter les carbones : $12 - 8 = 4$. Étape 3 — Compter les hydrogènes : $26 - 18 = 8$. X est $\\mathrm{C_{4}H_{8}}$, un butène.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Dans un craquage, le nombre total d'atomes de carbone est le même avant et après la flèche.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Vérifier : les atomes se conservent dans une transformation chimique. Exemple : $12 = 8 + 4$ pour le carbone. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève propose l'équation de craquage $\\mathrm{C_{14}H_{30}}$ → $\\mathrm{C_{10}H_{22}}$ + $\\mathrm{C_{4}H_{10}}$. Son professeur lui demande de vérifier si elle est correcte.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte les atomes de chaque élément à gauche et à droite. Le second produit d'un craquage est un alcène $\\mathrm{C_mH_{2m}}$.",
+              "questions": [
+                {
+                  "content": "Combien d'atomes d'hydrogène y a-t-il à gauche de la flèche ? ($\\mathrm{C_{14}H_{30}}$)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Compter les hydrogènes à gauche : la molécule $\\mathrm{C_{14}H_{30}}$ en contient 30.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Combien d'atomes d'hydrogène y a-t-il à droite de la flèche ? ($\\mathrm{C_{10}H_{22}}$ + $\\mathrm{C_{4}H_{10}}$)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Compter les hydrogènes à droite : $22 + 10 = 32$.",
+                  "answers": [
+                    {
+                      "content": "32",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Pourquoi l'équation de l'élève est-elle fausse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Compter les carbones : $10 + 4 = 14$, conservés. Étape 3 — Compter les hydrogènes : 32 à droite, 30 à gauche : ils ne se conservent pas. Le craquage produit bien un alcane (le décane).",
+                  "answers": [
+                    {
+                      "content": "Il y a 32 hydrogènes à droite pour 30 à gauche.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a trop de carbones à droite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un craquage ne produit jamais d'alcane.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est correcte.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le bon nombre d'atomes d'hydrogène de l'alcène X dans $\\mathrm{C_{14}H_{30}}$ → $\\mathrm{C_{10}H_{22}}$ + X ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 2 — Carbones : $14 - 10 = 4$. Étape 3 — Hydrogènes : $30 - 22 = 8$. Étape 4 — $\\mathrm{C_{4}H_{8}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 4$ : c'est un butène.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Complète : le second produit d'un craquage, de formule $\\mathrm{C_mH_{2m}}$, est un ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Vérifier : un composé de formule $\\mathrm{C_mH_{2m}}$ est un alcène (éthène, propène, butène…).",
+                  "answers": [
+                    {
+                      "content": "alcène",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Deux cuisinières au gaz fonctionnent dans une cantine scolaire. La flamme de la cuisinière A est bleue. La flamme de la cuisinière B est jaune et noircit les marmites.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une flamme bleue correspond à une combustion complète. Même complète, la combustion rejette du dioxyde de carbone.",
+              "questions": [
+                {
+                  "content": "Quelle cuisinière a une combustion complète ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer : une flamme bleue sans suie indique une combustion complète ; une flamme jaune avec de la suie indique une combustion incomplète.",
+                  "answers": [
+                    {
+                      "content": "La cuisinière A, à flamme bleue",
+                      "correct": true
+                    },
+                    {
+                      "content": "La cuisinière B, à flamme jaune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La cuisinière A ne rejette aucun gaz polluant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Repérer : même complète, la combustion rejette du dioxyde de carbone, un gaz à effet de serre. Exemple : $\\mathrm{C_3H_8 + 5\\,O_2}$ donne $\\mathrm{3\\,CO_2 + 4\\,H_2O}$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux produits qui apparaissent en plus avec la cuisinière B ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Repérer : la combustion incomplète donne en plus du monoxyde de carbone, très toxique, et de la suie. L'eau se forme aussi en combustion complète.",
+                  "answers": [
+                    {
+                      "content": "Le monoxyde de carbone",
+                      "correct": true
+                    },
+                    {
+                      "content": "La suie",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dioxygène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pétrole brut",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle précaution convient pour la cuisinière B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Proposer la précaution : aérer et régler l'arrivée d'air pour obtenir une combustion complète.",
+                  "answers": [
+                    {
+                      "content": "Aérer et faire régler l'arrivée d'air du brûleur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Fermer les fenêtres pour garder la chaleur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Continuer car la flamme jaune est normale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Approcher la bouteille de la flamme",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi une flamme bleue ne rend pas la combustion sans conséquence pour le climat. Appuie-toi sur l'équation $\\mathrm{C_3H_8 + 5\\,O_2}$ donne $\\mathrm{3\\,CO_2 + 4\\,H_2O}$.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : Étape 3 — Même complète, la combustion du propane rejette du dioxyde de carbone : chaque molécule de propane brûlée donne 3 molécules de $\\mathrm{CO_2}$. Ce gaz renforce l'effet de serre, donc la combustion complète évite la suie et le monoxyde de carbone mais pas le $\\mathrm{CO_2}$. Barème : 1 pour la combustion complète, 1 pour les 3 molécules, 1 pour l'effet de serre.",
+                  "answers": [],
+                  "points": 3,
+                  "criteria": [
+                    "Dit que la combustion complète est sans suie ni monoxyde de carbone",
+                    "Repère que 3 molécules de dioxyde de carbone se forment par molécule de propane",
+                    "Relie le dioxyde de carbone à l'effet de serre"
+                  ],
+                  "starter": "Même complète, la combustion rejette…"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur le pétrole et le gaz naturel",
+          "notions": "Bilan de toutes les notions : composition d'un gaz naturel d'exemple, distillation et fractions, craquage et alcènes, combustion et précautions ; niveau devoir.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un gaz naturel d'exemple (valeurs d'exercice) contient, sur 100 molécules : 90 de méthane $\\mathrm{CH_{4}}$, 6 d'éthane $\\mathrm{C_{2}H_{6}}$, 3 de propane $\\mathrm{C_{3}H_{8}}$ et 1 de butane $\\mathrm{C_{4}H_{10}}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte les molécules, puis multiplie par le nombre d'atomes d'une molécule. Le constituant majoritaire est celui qui a le plus de molécules.",
+              "questions": [
+                {
+                  "content": "Quel est le constituant majoritaire de ce gaz ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire le constituant majoritaire : 90 molécules sur 100 sont du méthane, c'est le plus nombreux.",
+                  "answers": [
+                    {
+                      "content": "Le méthane",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'éthane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le propane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le butane",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de molécules de ce gaz ne sont pas du méthane ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 90 molécules de méthane sur 100. Calcul : $100 - 90 = 10$ molécules (6 + 3 + 1).",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "molécules"
+                },
+                {
+                  "content": "Combien d'atomes de carbone contiennent les 6 molécules d'éthane ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Vérifier les formules : une molécule d'éthane $\\mathrm{C_{2}H_{6}}$ contient 2 atomes de carbone. Pour 6 molécules : $6 \\times 2 = 12$.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Combien d'atomes d'hydrogène contiennent les 3 molécules de propane ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Vérifier : le propane $\\mathrm{C_{3}H_{8}}$ a 8 atomes d'hydrogène ($2 \\times 3 + 2 = 8$). Pour 3 molécules : $3 \\times 8 = 24$.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Ce gaz naturel est un corps pur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : il contient quatre hydrocarbures différents. C'est un mélange, pas un corps pur. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la tour de distillation de la raffinerie de Vridi, on suit quatre hydrocarbures : le propane $\\mathrm{C_{3}H_{8}}$ (−42 °C), le pentane $\\mathrm{C_{5}H_{12}}$ (36 °C), le nonane $\\mathrm{C_{9}H_{20}}$ (151 °C) et l'hexadécane $\\mathrm{C_{16}H_{34}}$ (287 °C). Les températures sont des données d'exercice.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe par température d'ébullition croissante. Essence : environ 5 à 10 carbones. Plus la chaîne est longue, plus on descend dans la tour.",
+              "questions": [
+                {
+                  "content": "Range ces hydrocarbures dans l'ordre où on les recueille dans la tour, du plus haut au plus bas.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire les températures. Étape 2 — Classer : $-42 < 36 < 151 < 287$. Étape 3 — Placer : température basse en haut. Ordre du haut vers le bas : propane, pentane, nonane, hexadécane.",
+                  "answers": [
+                    {
+                      "content": "Propane (−42 °C)"
+                    },
+                    {
+                      "content": "Pentane (36 °C)"
+                    },
+                    {
+                      "content": "Nonane (151 °C)"
+                    },
+                    {
+                      "content": "Hexadécane (287 °C)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'atomes d'hydrogène contient une molécule de nonane $\\mathrm{C_{9}H_{20}}$ ? Vérifie avec $\\mathrm{C_nH_{2n+2}}$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Vérifier : $2 \\times 9 + 2 = 20$ atomes d'hydrogène, ce qui correspond à $\\mathrm{C_{9}H_{20}}$.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "De combien de degrés la température d'ébullition de l'hexadécane (287 °C) dépasse-t-elle celle du nonane (151 °C) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : 287 °C et 151 °C. Calcul : $287 - 151 = 136$ °C.",
+                  "answers": [
+                    {
+                      "content": "136",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "°C"
+                },
+                {
+                  "content": "Dans quelle fraction trouve-t-on le nonane (9 carbones) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Nommer la fraction : 9 carbones se situent dans l'intervalle d'environ 5 à 10 carbones de l'essence. Le gaz a 1 à 4 carbones ; le kérosène environ 10 à 14 ; le gazole environ 14 à 20.",
+                  "answers": [
+                    {
+                      "content": "L'essence",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gaz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le kérosène",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gazole",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pentane est recueilli plus bas dans la tour que le nonane.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Placer : le pentane (36 °C) bout plus bas que le nonane (151 °C) ; il est recueilli plus haut. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les molécules à chaîne longue sont-elles recueillies en bas de la tour ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Placer : la température diminue du bas vers le haut. Une molécule à température d'ébullition élevée se condense à une température élevée, donc en bas. La distillation ne casse pas les molécules.",
+                  "answers": [
+                    {
+                      "content": "Parce que leur température d'ébullition est élevée : elles se condensent à haute température, donc en bas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que ces molécules sont plus fortes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elles sont plus légères que les autres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la distillation les casse en bas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une raffinerie casse par craquage l'octadécane $\\mathrm{C_{18}H_{38}}$ en octane $\\mathrm{C_{8}H_{18}}$ et un alcène X.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compte les atomes qui manquent à droite, puis vérifie la forme $\\mathrm{C_mH_{2m}}$ de l'alcène avant de le nommer.",
+              "questions": [
+                {
+                  "content": "Combien d'atomes de carbone l'alcène X contient-il ? ($\\mathrm{C_{18}H_{38}}$ → $\\mathrm{C_{8}H_{18}}$ + X)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire l'équation incomplète. Étape 2 — Compter les carbones : $18 - 8 = 10$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Combien d'atomes d'hydrogène l'alcène X contient-il ? ($\\mathrm{C_{18}H_{38}}$ → $\\mathrm{C_{8}H_{18}}$ + X)",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Compter les hydrogènes : $38 - 18 = 20$.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "atomes"
+                },
+                {
+                  "content": "Quelle est la formule de l'alcène X ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Vérifier : $\\mathrm{C_{10}H_{20}}$ s'écrit $\\mathrm{C_mH_{2m}}$ avec $m = 10$. La formule $\\mathrm{C_{10}H_{22}}$ est celle d'un alcane.",
+                  "answers": [
+                    {
+                      "content": "$\\mathrm{C_{10}H_{20}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathrm{C_{10}H_{22}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{8}H_{18}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathrm{C_{10}H_{18}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'alcène $\\mathrm{C_{10}H_{20}}$ s'appelle le ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Nommer : 10 carbones, alcène : décène.",
+                  "answers": [
+                    {
+                      "content": "décène",
+                      "correct": true
+                    },
+                    {
+                      "content": "décylène",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans cette équation, les atomes d'hydrogène se conservent : $38 = 18 + 20$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Vérifier : $18 + 20 = 38$ pour l'hydrogène, et $8 + 10 = 18$ pour le carbone. L'équation est correcte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi une raffinerie casse-t-elle le gazole par craquage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le craquage casse de grosses molécules des fractions lourdes en molécules plus petites, utiles pour l'essence, et fabrique des alcènes, matière première des plastiques. Séparer sans changer, c'est la distillation.",
+                  "answers": [
+                    {
+                      "content": "Pour obtenir des molécules plus petites, utiles pour l'essence, et des alcènes pour la pétrochimie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour séparer le gazole en fractions sans le changer",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour brûler le gazole en formant du dioxyde de carbone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour assembler de petites molécules en grosses",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une cantine scolaire d'Abidjan cuisine avec de l'hexane $\\mathrm{C_{6}H_{14}}$ (carburant d'exercice). Sa combustion complète s'écrit : 2 $\\mathrm{C_{6}H_{14}}$ + x $\\mathrm{O_{2}}$ → 12 $\\mathrm{CO_{2}}$ + 14 $\\mathrm{H_{2}O}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour x, compte les atomes d'oxygène à droite. Les coefficients donnent les nombres de molécules : multiplie-les par le même facteur.",
+              "questions": [
+                {
+                  "content": "Quelle est la valeur de x ?",
+                  "question_type": "numeric",
+                  "explanation": "On compte l'oxygène à droite : $12 \\times 2 + 14 = 38$ atomes, donc $2x = 38$ et $x = 19$. Carbone : $2 \\times 6 = 12$ ; hydrogène : $2 \\times 14 = 28 = 14 \\times 2$ : conservés.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Combien de molécules de dioxyde de carbone se forment quand 10 molécules d'hexane brûlent complètement ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Lire l'équation : 2 molécules d'hexane donnent 12 molécules de dioxyde de carbone. Pour 10 molécules, on multiplie par 5 : $12 \\times 5 = 60$.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "molécules"
+                },
+                {
+                  "content": "Combien de molécules d'eau se forment quand 10 molécules d'hexane brûlent complètement ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 3 — Lire l'équation : 2 molécules d'hexane donnent 14 molécules d'eau. Pour 10 molécules : $14 \\times 5 = 70$.",
+                  "answers": [
+                    {
+                      "content": "70",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "molécules"
+                },
+                {
+                  "content": "La flamme devient jaune et la marmite noircit. Qu'est-ce qui se forme en plus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Repérer le produit nocif : une combustion incomplète forme du monoxyde de carbone, très toxique, et de la suie.",
+                  "answers": [
+                    {
+                      "content": "Du monoxyde de carbone et de la suie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Uniquement de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du pétrole brut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Du kérosène",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Réduire la consommation de pétrole et de gaz limite les rejets de dioxyde de carbone.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Proposer la précaution : limiter la consommation. Chaque molécule d'hydrocarbure brûlée rejette du dioxyde de carbone. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Explique pourquoi le pétrole est une ressource non renouvelable et propose deux gestes pour limiter sa consommation.",
+                  "question_type": "written",
+                  "explanation": "Corrigé modèle : le pétrole vient d'organismes marins enfouis, transformés pendant des millions d'années. On le consomme bien plus vite qu'il ne se forme : il est non renouvelable. Pour limiter la consommation, on peut par exemple éviter les trajets inutiles en moto ou en voiture et éteindre le gaz dès que la cuisson est finie. Barème : 1 pour l'origine, 1 pour la comparaison des rythmes, 1 par geste cohérent.",
+                  "answers": [],
+                  "points": 4,
+                  "criteria": [
+                    "Origine : organismes marins enfouis pendant des millions d'années",
+                    "Consommation bien plus rapide que la formation",
+                    "Premier geste cohérent pour limiter la consommation",
+                    "Second geste cohérent pour limiter la consommation"
+                  ],
+                  "starter": "Le pétrole vient de…"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
