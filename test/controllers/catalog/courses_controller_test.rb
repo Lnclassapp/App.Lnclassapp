@@ -472,6 +472,14 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#lesson_tiles_page_2 li", 6
     assert_select "turbo-frame#courses_page_3", 0
   end
+  test "O-C02: a student without a class has no lessons page to read: 404" do
+    sign_in_as create_student
+
+    get courses_path(page: 2), headers: { "Turbo-Frame" => "lessons_page_2" }
+
+    assert_response :not_found
+  end
+
   test "O-C02: the next lessons frame never reads a subject outside the student's own" do
     sign_in_as create_student_for(@course)
 
@@ -527,19 +535,13 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   # UDR-0054 §3.2: from the filtered catalogue, « Cours » brings back to the same filter; from anywhere else, or from
   # another site, to the bare catalogue.
-  test "the back link of a course keeps the filter of the catalogue the student came from, never another site's address" do
+  test "the back arrow of a lesson leads to its subject, whatever the page the student came from" do
     sign_in_as create_student_for(@course)
-    back = "nav[aria-label='#{I18n.t('components.back_link.label')}'] a[href=?]"
-    filtered = courses_path(material: @svt.slug)
 
-    get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{filtered}" }
-    assert_select back, filtered, text: "Cours"
+    get course_path(@course.slug), headers: { "Referer" => "https://ailleurs.example#{courses_path}" }
 
-    get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{student_home_path}" }
-    assert_select back, courses_path
-
-    get course_path(@course.slug), headers: { "Referer" => "https://ailleurs.example#{filtered}" }
-    assert_select back, courses_path
+    assert_select "a#inner_back[href=?]", courses_path(material: @svt.slug)
+    assert_select "a#inner_back[aria-label=?]", I18n.t("shared.screens.back")
   end
 
   test "the team's catalogue is unchanged: subtitle, level badge, subject badge even when filtered" do
@@ -787,7 +789,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   # ── Page d'un cours ────────────────────────────────────────────────────────
 
-  test "a student reads a published course: back link, badges, then « Fiche de révision » and « Prépare interros »" do
+  test "a student reads a published course on the Wave screen: back arrow, title, subtitle, « Réviser », then « Prépare interros »" do
     meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions", sheet: notion_sheet("Deux divisions successives."))
     create_exercise(essential: meiose)
     create_essential(course: @course, name: "Fiche en brouillon", status: "draft")
@@ -797,29 +799,22 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "title", text: "Génétique et évolution · Élève · Lnclass"
-    # FU-14 : le seul retour est « Cours », vers le catalogue ; le fil complet a disparu.
-    assert_select "main nav", 1
-    assert_select "nav[aria-label=?] a[href='#{courses_path}']", I18n.t("components.back_link.label"), text: "Cours"
-    assert_no_match(/href="#{Regexp.escape(courses_path)}\?material=/, response.body)
-    assert_select "main [aria-current=page]", 0
-    assert_select "#course_header h1", text: "Génétique et évolution"
-    assert_select "#course_header", text: including("Du gène à l'espèce")
-    assert_select "#course_header", text: including("Tle D")
-    assert_select "#course_header", text: including("SVT")
-    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; la fiche de révision montre les notions publiées au
-    # gabarit des quatre blocs (UDR-0141 fiche de révision) ; « Prépare interros » liste l'exercice de la notion (Lot B).
-    assert_select "#course_essentials", 0
-    assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
+    # UDR XXXX écrans minimalistes style Wave §3 : ni barre ni menu, une flèche vers la matière, le titre, « Leçon n · Matière · Niveau ».
+    assert_select "header.sticky, aside, nav", 0
+    assert_select "#student_lesson a#inner_back[href=?]", courses_path(material: @svt.slug)
+    assert_select "#student_lesson h1", text: "Génétique et évolution"
+    assert_select "#inner_subtitle", text: "SVT · Tle D"
+    assert_select "#course_header, #lesson_next_exercise, .ps-card", 0
+    assert_no_match(/Prochain exercice|Tous les exercices|PRÉPARE DEVOIRS/, response.body)
+    assert_select "#student_lesson_revise h2", text: "Réviser"
+    assert_select "#student_lesson_revision_link a[href='#fiche-de-revision']", text: including("Fiche de révision")
     assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
     assert_select "section#fiche-de-revision h4", text: "1. La méiose"
-    assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
-    assert_select "section#prepare-interros a.ps-card#notion-#{meiose.slug} .ps-card-kind", text: "Prépare interros n°1"
-    assert_select "section#prepare-interros a.ps-card#notion-#{meiose.slug} .ps-card-title", text: "La méiose"
-    assert_select "section#prepare-interros .ps-sheet", 0
-    assert_select "section#prepare-interros", text: including(tl("show.exercises_empty")), count: 0
+    assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: "Prépare interros"
+    assert_select "section#prepare-interros li#notion-#{meiose.slug} a", text: including("Interro 1 · La méiose")
+    assert_select "section#prepare-devoirs", 0
     assert_no_match(/Fiche en brouillon/, response.body)
-    assert_select "#content_status_course_#{@course.slug}", 0
-    assert_select "#course-actions-menu", 0
+    assert_select "#content_status_course_#{@course.slug}, #course-actions-menu", 0
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
   end
 
@@ -1036,7 +1031,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get course_path(bare.slug)
 
     assert_select "#fiche-de-revision", text: including(tl("show.revision_empty"))
-    assert_select "#prepare-interros", text: including(tl("show.exercises_empty"))
+    assert_select "#prepare-interros, #prepare-devoirs", 0
     assert_select "#course_content", 0
     assert_select "#course_sheet_link", 0
   end
@@ -1330,21 +1325,6 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
     assert_select "#lesson_next_exercise", 0
-  end
-
-  test "CA-5: the lesson page shows the card under the header and before the revision sheet, with a link to all exercises" do
-    with_exercises
-    create_lesson_wide_exercise(course: @published, title: "D'une autre leçon")
-
-    get course_path(@course.slug)
-
-    assert_select "#course_header ~ #lesson_next_exercise ~ div #fiche-de-revision", 1
-    assert_select "#lesson_next_exercise" do
-      assert_select "#lesson_next_exercise_title", text: "Premier exercice"
-      assert_select "p", text: @course.name, count: 0
-      assert_select "a[href='#prepare-interros']", text: tl("next_exercise.all")
-      assert_select "form[action='#{exercise_sessions_path(@first.public_id)}']"
-    end
   end
 
   test "CA-7: the teacher and the team see no card on the subject view nor on the lesson" do

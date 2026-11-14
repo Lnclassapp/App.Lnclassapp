@@ -51,11 +51,10 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
 
       assert_no_page_reload do
         find("#course_#{@course.slug} a").click
-        assert_selector "#course_header h1", text: "Génétique et évolution"
+        assert_selector "#student_lesson h1", text: "Génétique et évolution"
       end
       assert_current_path course_path(@course.slug)
       assert_selector "#fiche-de-revision .katex", count: 1
-      assert_selector "#prepare-interros"
 
       assert_not resource_loaded?("trix"), "une page sans formulaire ne charge pas Trix"
       assert page.evaluate_script("performance.getEntriesByType('resource').every((entry) => entry.name.startsWith(location.origin))"),
@@ -198,23 +197,21 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       visit courses_path(material: @svt.slug)
-      assert_selector "#courses_material_title h1", text: "SVT"
-      assert_selector "#courses_groups li", count: 1
+      assert_selector "#student_material h1", text: "SVT"
+      assert_selector "#lesson_tiles li", count: 1
       assert_single_primary_action
-      assert_blocks_above_fold "#student_courses > *", max: 5
+      assert_blocks_above_fold "#student_material > *", max: 5
       within("#course_#{@course.slug}") do
-        assert_selector "a.min-h-tap", text: "Génétique et évolution"
+        assert_selector "a.min-h-tap", text: "Génétique"
         assert_no_text "Commencer la fiche de cours"
-        assert_no_text "SVT"
         assert_no_text "Tle"
       end
 
       visit course_path(@course.slug)
       assert_single_primary_action
-      assert_blocks_above_fold "#main > div > *", max: 5
+      assert_blocks_above_fold "#student_lesson > *", max: 5
       assert_no_selector "#course_essentials"
       assert_selector "#fiche-de-revision"
-      assert_selector "#prepare-interros"
     end
   end
 

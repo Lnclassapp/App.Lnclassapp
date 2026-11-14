@@ -91,24 +91,20 @@ module Finitions
       end
     end
 
-    test "FU-14 : sur la page d'un cours, le seul retour est « Cours », vers le catalogue" do
+    test "FU-14 (UDR XXXX écrans minimalistes style Wave §3) : sur la page d'une leçon, le seul retour est la flèche, vers la matière" do
       sign_in_as @student
       visit course_path(@course.slug)
 
       assert_title "Génétique et évolution · Élève · Lnclass"
       within "main" do
-        assert_selector "nav", count: 1
-        assert_selector "nav[aria-label='#{t('components.back_link.label')}'] a[href='#{courses_path}']",
-                        text: "Cours"
-        assert_no_link "SVT"
-        # UDR page de la leçon §3.1 : les deux sections.
-        assert_selector "#revision_title", text: "Fiche de révision"
-        assert_selector "#prepare_title", text: "Prépare interros"
+        assert_no_selector "nav"
+        assert_selector "a#inner_back[href='#{courses_path(material: @svt.slug)}']"
+        assert_selector "#student_lesson h1", text: "Génétique et évolution"
       end
-      within("main nav") { click_on "Cours" }
-      assert_current_path courses_path
-      assert_title "Cours · Élève · Lnclass"
-      assert_selector "#lessons_total", text: /\A\d+ fiches? de cours · Progression DPFC 2026-2027\z/
+      find("a#inner_back").click
+      assert_current_path courses_path(material: @svt.slug)
+      assert_title "SVT · Élève · Lnclass"
+      assert_selector "#student_lessons_title", text: "Fiches de cours"
     end
 
     # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.

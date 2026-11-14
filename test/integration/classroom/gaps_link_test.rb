@@ -51,7 +51,7 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
-    assert_select "a.ps-card##{anchor}[href=?]", course_sheet_path(@course.slug, anchor)
+    assert_select "li##{anchor} a[href=?]", course_sheet_path(@course.slug, anchor)
     exercise = Orm::Exercise.find_by!(essential: @notion)
     get fill_course_sheet_path(@course.slug, anchor)
     assert_select ".ps-sheet##{anchor} turbo-frame#sheet-exercise-#{exercise.public_id}"

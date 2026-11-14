@@ -183,7 +183,7 @@ module LessonRendering
       defects << "page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
       defects << "** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
       missing_figures(lesson, seen["figures"]).each { defects << "figure « #{it} » absente de la page ou vide" }
-      sheets = all(".ps-card", minimum: 0).map { it[:id] }
+      sheets = all("#prepare-interros li[id], #prepare-devoirs li[id]", visible: :all, minimum: 0).map { it[:id] }
       defects << "aucune feuille d'exercices sur la page, alors que la leçon a des questions" if sheets.empty? && lesson.to_json.include?('"questions"')
       defects += sheets.flat_map { |sheet| inspect_sheet(course, sheet) }
       defects.map { LessonRendering::Defect.new(file, width, it) }

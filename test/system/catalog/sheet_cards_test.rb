@@ -25,12 +25,12 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
 
   test "case, lecture, Commencer, vérifier, retour à la feuille, puis « Continuer » et le progrès sur la case" do
     visit course_path(@course.slug)
-    assert_selector "a.ps-card", count: 1
+    assert_selector "#prepare-devoirs li a", count: 1
     assert_no_selector ".ps-sheet"
     assert_no_button "Vérifier ma réponse"
-    assert_selector "#sujet-#{@subject.position} .ps-card-meta", text: "0 / 4 exercice réussi"
+    assert_selector "#sujet-#{@subject.position} span.tabular-nums", text: "0/4"
 
-    click_link "Prépare devoirs n°1"
+    find("#sujet-#{@subject.position} a").click
     assert_selector "h1.ps-paper-heading", text: /\AÉPREUVE DE /
     assert_selector ".ps-paper-name", text: "Prépare devoirs n°1", exact_text: false
     assert_selector ".ps-paper-exercise", count: 4
@@ -52,8 +52,8 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
     within(frame(@exercises.first)) { assert_selector ".ps-status", text: "Réussi" }
 
     visit course_path(@course.slug)
-    assert_selector "#sujet-#{@subject.position} .ps-card-meta", text: "1 / 4 exercice réussi"
-    find("a.ps-card#sujet-#{@subject.position}").click
+    assert_selector "#sujet-#{@subject.position} span.tabular-nums", text: "1/4"
+    find("#sujet-#{@subject.position} a").click
     assert_selector "a.ps-start", text: "Commencer l'exercice"
   end
 

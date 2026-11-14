@@ -36,7 +36,9 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- Le garde `design_tokens_test` refuse toute valeur arbitraire, graisse > 500 et espacement hors échelle : les 187/159/73 px et 28 px passent par 4 tokens `wave` du `@theme`.
+- Dans un `render layout:` de partial, `t(".clé")` se résout au chemin de la partial de mise en page : clés absolues dans le bloc.
+- Les 213 leçons du dépôt `leçons/` sont toutes couvertes par les règles d'icône (test) ; les 463 importées en prod restent à vérifier : une leçon sans règle retombe sur l'icône de sa matière.
 
 ## Dette laissée derrière
 
@@ -44,7 +46,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| `StudentHomeQuery#next_step` et `DailyExerciseQuery` ne sont plus lus par l'accueil (calcul mort) ; `next_step/_start` et `NextExerciseQuery` après le lot C | Les retirer touche la query et ses ~40 tests ; hors du périmètre « écrans » | nettoyage `next-step-mort` |
+| `StudentHomeQuery#next_step` et `DailyExerciseQuery` ne sont plus lus par l'accueil (calcul mort) | Les retirer touche la query et ses ~40 tests ; hors du périmètre « écrans » | nettoyage `next-step-mort` |
 
 ## Clôture
 

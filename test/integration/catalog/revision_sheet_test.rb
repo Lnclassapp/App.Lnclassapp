@@ -35,7 +35,6 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
     open_course
 
     assert_select "section#fiche-de-revision h2", text: t("revision_title")
-    assert_operator response.body.index("id=\"fiche-de-revision\""), :<, response.body.index("id=\"prepare-interros\"")
     assert_select "section#fiche-de-revision .sheet-screen[data-sheet-theme='teal'][data-seyes='true'][data-embedded='true'][data-controller='math']"
     assert_select ".sheet-screen article.sheet-page", count: 1
     assert_select ".sheet-eyebrow", text: /#{@course.material.name} · #{@course.level.name}.*#{sheet_t("eyebrow")}/m
