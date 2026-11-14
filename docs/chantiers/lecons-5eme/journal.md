@@ -28,7 +28,8 @@ Chaque leçon : un rédacteur, puis un relecteur indépendant qui refait chaque 
 - Lot B : 0 à 4 « faux » par leçon, surtout des corrections qui réfutaient une proposition retirée pour tenir sous 230 000 octets (SVT 3 : 46 cas), et des conclusions contraires aux données (SVT 4 : humidité « favorable » alors que le lot sans eau est à zéro). Tous corrigés, contrôle relancé jusqu'à ✓.
 - La limite de quota a coupé les rédacteurs deux fois ; ils ont repris là où ils étaient.
 - Le script de contrôle supprimait « œ » dans le nom attendu du fichier ; corrigé en « oe », comme la 3ème.
-- Develop a reçu la 4ème (#591) pendant le chantier : intégrée par merge, les deux blocs gardés dans `jeu.yml`, `PRD_COUPLES` recalculé.
+- Lot C : 0 ou 1 « faux » par leçon sauf HG 4 (4 : deux explications du ‰ et deux figures qui contredisaient leur énoncé) ; en EDHC surtout des fuites, une question ou un indice qui donne la réponse d'une autre du même exercice (EDHC 4 : 18). La leçon HG 5 disait les Gur venus du Mali et du Burkina, la leçon 3 du seul Burkina : alignée. Tous corrigés, contrôle relancé jusqu'à ✓.
+- Develop a reçu la 4ème (#591), la 6ème (#595) puis #587 pendant le chantier : intégrés par merge, tous les blocs gardés dans `jeu.yml`, `PRD_COUPLES` recalculé (73).
 
 ## Ce qu'on a appris sur la codebase
 
@@ -70,5 +71,19 @@ Choix prudents appliqués, à valider par un enseignant de la matière.
 - Champignons : « carpophore » et « bouton » ; matière organique citée seulement comme condition favorable (la nutrition est une leçon suivante) ; spores qui « tombent » (simplification) ; aucune comestibilité affirmée.
 - Croissance : « métamorphose incomplète » pour le criquet, la blatte, la sauterelle et le termite ; « larve » plutôt que « nymphe » pour leurs jeunes ; nymphe du moustique, asticot, abeille à métamorphose complète.
 - Toutes les données d'élevage, de comptage et d'expérience sont des exemples écrits pour Lnclass.
+
+**Histoire-Géographie**
+- Premiers habitants : aucun site, peuple ancien ni date cités (l'enseignant ajoute ceux du manuel) ; pierre taillée puis polie, amas coquilliers du littoral, hache polie pour défricher ; « maîtres de la terre » selon les traditions orales ; documents et nombres de fouille inventés ; pas de frise, faute de dates sûres.
+- Milieu physique : seuls chiffres 322 462 km² et mont Nimba 1 752 m ; noms des climats (attiéen, baouléen, soudanais, de montagne) ; littoral rocheux à l'ouest, lagunaire à l'est ; le fond de carte ne trace ni fleuves ni relief.
+- Migrations : groupes Akan (est, actuel Ghana), Krou (ouest, actuel Liberia), Mandé (nord-ouest, actuels Mali et Guinée), Gur (nord, un peu nord-est, actuel Burkina Faso) ; « Gur » ici, « Gour » dans la leçon de 4ème ; Abla Pokou comme tradition, vers le XVIIIe siècle ; flèches dessinées vers Yamoussoukro (direction générale seulement).
+- Croissance démographique : RGPH arrondis 6,7 / 10,8 / 15,4 / 22,7 / 29,4 millions (comme la 3ème) et sigle « … de l'habitat », de mémoire ; immigration burkinabè et malienne sans pourcentage ; « mariages précoces » parmi les causes de la natalité ; taux d'accroissement naturel (‰ → %), « urbanisation », « quartiers précaires » peut-être au-delà de la 5ème.
+- Origine et installation des peuples : Akan (Baoulé, Agni, Abron), Krou (Bété, Dida, Wè, Kroumen), Mandé (Malinké, Dan, Gouro), Gur (Sénoufo, Lobi, Koulango), alors que l'ancien fichier v1 de 4ème mettait les Sénoufo avec les Mandé ; lagunaires « en général rattachés aux Akan » ; villes repères (Gouro à Bouaflé, Dida à Divo, Wè à Guiglo, Lobi et Koulango à Bouna, absente du fond de carte) ; récits d'installation écrits pour Lnclass.
+
+**EDHC**
+- Droits au développement et à la participation : santé et alimentation rangées dans la survie (classement UNICEF) ; 3 droits au développement et 4 à la participation, à rapprocher du manuel ; Convention de 1989, enfant de moins de 18 ans ; règles de vote laissées à une leçon suivante.
+- Principes des droits humains : universalité, inaliénabilité, indivisibilité, interdépendance, égalité et non-discrimination (participation et responsabilité absentes) ; DUDH du 10 décembre 1948 citée sans article ; « seul un juge, selon la loi, peut limiter certains droits » ; eau, logement, circulation, presse présentés comme droits humains ; rampe et place devant présentées comme des aides, pas des discriminations.
+- Victimes des conflits armés : quatre Conventions de Genève (1949), CICR, Croix-Rouge de Côte d'Ivoire ; aucun âge limite d'enrôlement ; cristal rouge non cité ; personnel de santé en catégorie à part (en droit strict, des civils) ; pays imaginaire, aucun conflit réel nommé.
+- Le Parlement : Assemblée nationale et Sénat (Constitution de 2016) ; mandat de 5 ans pour les deux ; sénateurs élus « par exemple » par des conseillers municipaux et régionaux ; ministres « nommés par le Président » (la proposition du Premier ministre est omise) ; « juger revient aux juridictions » (la Haute Cour de justice n'est pas citée) ; nombres de sièges fictifs, signalés.
+- Droits et devoirs du citoyen : un enfant ivoirien présenté comme « déjà citoyen », avec des droits et devoirs adaptés à son âge ; vote à 18 ans, sans « majorité civile » ; l'étranger ne vote pas (question limitée à la présidentielle) ; éligibilité citée sans âge ; respect du drapeau et de l'hymne dans le devoir de défendre la patrie ; voter présenté comme un devoir moral, sans dire si la loi l'impose.
 
 ## Clôture
