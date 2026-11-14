@@ -24,7 +24,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Points « à faire valider par un enseignant » (journal du programme, vague P5) | Programme officiel détaillé non accessible ici | — (avant publication) |
+| Points « à faire valider par un enseignant » (journal du programme, vague P5) — **soldé le 2026-11-14 par le validateur pédagogique** ([`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur)) | Programme officiel détaillé non accessible ici | — (avant publication) |
 | Planches manquantes : testicule et tube séminifère, méiose, fécondation, ribosome, coupe du globe et de subduction, complexe argilo-humique, chloroplaste, moelle épinière, œil | Aucune sorte nouvelle dans ce chantier (hors périmètre) | à proposer au programme |
 
 ## Clôture

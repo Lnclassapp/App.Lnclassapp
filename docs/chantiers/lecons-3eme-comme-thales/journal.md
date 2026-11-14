@@ -39,6 +39,8 @@
 
 ## À trancher
 
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+
 - **Lentilles (Physique-Chimie)** : la position et la hauteur de l'image se lisent sur une construction graphique, la méthode de la leçon, mais les réponses `numeric` n'acceptent aucun écart (`tolerance` 0). Les valeurs sont entières et la figure les montre. Option prudente appliquée : laisser tel quel. Option possible : tolérance de 0,5 cm.
 - **Valeurs illustratives** : les nombres de T4 (VIH) et les montants (Histoire-Géographie, Physique-Chimie) sont inventés pour les énoncés et présentés comme des exemples. Un enseignant relit avant publication, comme pour le reste de la 3ème.
 

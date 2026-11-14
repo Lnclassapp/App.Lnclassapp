@@ -49,6 +49,8 @@ Même fiche dans un autre dossier de Terminale ; le chantier suivant (Tle D, pui
 
 ## À trancher
 
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+
 - **Lectures graphiques sans tolérance** : comme en 3ème, une valeur lue sur une construction est en `numeric` avec `tolerance` 0 quand la valeur est entière. Option prudente appliquée : laisser tel quel. Option possible : une tolérance d'une demi-unité.
 - **Valeurs illustratives** : les données chiffrées des énoncés (mesures, effectifs, prix, résultats d'expérience en SVT et physique-chimie) sont inventées et présentées comme des exemples. Un enseignant relit avant publication.
 - **Oral du bac (Français)** : les textes d'appui reprennent Birago Diop (1947) et Bernard Dadié, « Climbié » (1956), sur le modèle de la 3ème.

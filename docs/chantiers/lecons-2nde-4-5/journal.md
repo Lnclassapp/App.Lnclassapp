@@ -31,6 +31,8 @@ Un rédacteur par leçon (6 en parallèle au plus), puis une relecture IA indép
 
 ## À trancher
 
+> **Tranché le 2026-11-14** par le validateur pédagogique (chantier [`validation-pedagogique-agent`](../validation-pedagogique-agent/journal.md#décisions-du-validateur), ADR-0135). Chaque point ci-dessous a sa décision (Confirmé, Corrigé, Retiré ou reformulé, Hors base) et sa justification dans la table de sa matière. Plus aucun point n'attend d'enseignant.
+
 Options prudentes appliquées ; un enseignant de la matière relit avant publication. Partout : les valeurs chiffrées des énoncés (mesures, prix, données d'expérience, relevés) sont fictives.
 
 ### Français (A et C)

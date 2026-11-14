@@ -17,7 +17,7 @@ Contrat de session (docs/workflows/contrat-de-session.md) : ta PR, tu la surveil
 ## Modèles et sobriété (décision du porteur, 2026-11-01, à partir de la 1ère)
 
 - La session de vague tourne sur **Sonnet** : cadrage du chantier, rédaction, déclinaisons, contrôles, PR.
-- La **relecture indépendante** de chaque leçon se fait avec un sous-agent **Opus** (`model: "opus"`), distinct de l'auteur ; Opus aussi pour les points délicats (philosophie, chiffres et faits à valider).
+- La **relecture indépendante** de chaque leçon se fait avec un sous-agent **Opus** (`model: "opus"`), distinct de l'auteur ; puis le **validateur pédagogique** (`.claude/agents/validateur-pedagogique.md`, Opus, ni auteur ni relecteur) tranche chaque point délicat (philosophie, chiffres, faits, programme, barème) : il corrige ou confirme avec sa source, rien ne reste à faire valider par un enseignant.
 - Les **vérifications de CI** (`bin/ci-quiet`, verdict) passent par l'agent `verificateur-ci` (**Haiku**).
 - Au plus 3 sous-agents en même temps. Les leçons de Tle fusionnées (`docs/contenus/lecons-traitees/tle*/`) servent de modèle.
 - Les tests qui lisaient les v1 de Tle D lisent désormais `test/fixtures/files/lecons_v1/` : remplacer une v1 dans `docs/` ne casse plus rien ; ne touche pas aux tests.
