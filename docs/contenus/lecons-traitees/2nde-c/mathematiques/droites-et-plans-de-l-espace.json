@@ -1,0 +1,3456 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Droites et plans de l'espace",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "series_name": "C",
+      "material_name": "Mathématiques",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "charpente-pyramide",
+          "kind": "solid",
+          "description": "La charpente d'une case à toit pyramidal : une pyramide SABCD dont la base ABCD est un carré de 6 unités de côté et dont la hauteur vaut 4 unités. Le sommet S est au-dessus du centre O du carré. On voit les quatre arêtes SA, SB, SC, SD et les quatre faces triangulaires du toit.",
+          "params": {
+            "shape": "pyramid",
+            "base": "square",
+            "side": 6,
+            "height": 4
+          },
+          "controls": []
+        },
+        {
+          "key": "trepied-tetraedre",
+          "kind": "solid",
+          "description": "Un trépied de menuisier en forme de tétraèdre : une pyramide à base triangulaire dont la base est le triangle ABC (de 6 unités de côté) et dont le sommet D est à 5 unités de hauteur. Le solide a 4 sommets, 6 arêtes et 4 faces triangulaires : ABC, ABD, ACD et BCD.",
+          "params": {
+            "shape": "pyramid",
+            "base": "triangular",
+            "side": 6,
+            "height": 5
+          },
+          "controls": []
+        },
+        {
+          "key": "toit-quatre-pentes",
+          "kind": "solid",
+          "description": "Le toit à quatre pentes d'une case rectangulaire : une pyramide SABCD dont la base ABCD est un rectangle de 8 unités de long sur 5 de large et dont la hauteur vaut 3 unités. Le sommet S est au-dessus du centre O du rectangle ; les côtés opposés AB et CD, puis AD et BC, sont parallèles.",
+          "params": {
+            "shape": "pyramid",
+            "base": "rectangular",
+            "width": 8,
+            "depth": 5,
+            "height": 3
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Règles d'incidence et plans déterminés",
+          "remember": "Dans l'espace, un point **appartient** ($\\in$) à une droite ou à un plan, et une droite est **incluse** ($\\subset$) dans un plan. Règles : **(1)** deux points distincts déterminent une seule droite ; **(2)** trois points **non alignés** déterminent un seul plan ; **(3)** si deux points distincts d'une droite sont dans un plan, la droite est incluse dans ce plan ; **(4)** un plan est aussi déterminé par une droite et un point qui n'est pas sur elle, par deux droites sécantes, ou par deux droites parallèles distinctes. Dans un plan, toute la géométrie plane (milieux, parallèles, Thalès) reste valable.",
+          "method": [
+            "Repérer les points ou les droites donnés et ce que l'on cherche : un plan, ou l'inclusion d'une droite dans un plan.",
+            "Vérifier la condition de la règle : points non alignés, point hors de la droite, droites sécantes ou parallèles distinctes.",
+            "Appliquer la règle d'incidence qui convient : trois points, droite et point, deux droites, ou deux points d'une droite dans le plan.",
+            "Conclure en nommant le plan obtenu ou l'inclusion démontrée."
+          ],
+          "example": {
+            "statement": "Dans le cube $ABCDEFGH$ d'une caisse ($ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$), montrer que $A$, $C$ et $G$ déterminent un plan, puis que la droite $(AG)$ est incluse dans ce plan.",
+            "steps": [
+              "Repérer : les points donnés sont $A$, $C$, $G$ ; on cherche le plan $(ACG)$ et l'inclusion $(AG) \\subset (ACG)$.",
+              "Vérifier : $(AC)$ est dans le plan du fond, et $G$, situé au-dessus de $C$, n'est pas dans ce plan ; donc $G \\notin (AC)$ et $A$, $C$, $G$ ne sont pas alignés.",
+              "Appliquer : trois points non alignés déterminent un seul plan, noté $(ACG)$. Les points $A$ et $G$ sont deux points distincts de $(AG)$ et ils sont dans ce plan.",
+              "Conclure : la droite $(AG)$ est incluse dans le plan $(ACG)$ (règle 3)."
+            ]
+          },
+          "pitfall": "Ne pas croire que trois points déterminent toujours un plan : s'ils sont alignés, une infinité de plans les contiennent, comme les pages d'un livre autour de sa reliure. Ne pas croire non plus que quatre points sont toujours dans un même plan : dans la caisse, $A$, $B$, $C$ et $G$ ne le sont pas, car $A$, $B$, $C$ déterminent le plan du fond et $G$ n'y est pas. Vérifie toujours la condition de la règle avant de conclure.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à appliquer les règles d'incidence dans une caisse cubique $ABCDEFGH$ ($ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$).",
+            "questions": [
+              {
+                "content": "Dans la caisse $ABCDEFGH$, le point $I$ est le milieu de $[AB]$, $K$ le milieu de $[CG]$ et $L$ le milieu de $[DH]$. Quel triplet détermine un plan ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche le triplet qui détermine un plan. Étape 2 — Vérifier : $A$, $I$, $B$ sont alignés sur $(AB)$ ; $C$, $K$, $G$ sur $(CG)$ ; $D$, $L$, $H$ sur $(DH)$. Au contraire $G$ n'est pas sur $(AC)$. Étape 3 — Appliquer : trois points non alignés déterminent un plan. Étape 4 — Conclure : $A$, $C$, $G$ déterminent le plan $(ACG)$.",
+                "answers": [
+                  {
+                    "content": "$A$, $C$ et $G$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$A$, $I$ et $B$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$C$, $K$ et $G$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$D$, $L$ et $H$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Trois points alignés ne déterminent pas un seul plan."
+              },
+              {
+                "content": "Si une droite a deux points distincts dans un plan, elle est incluse dans ce plan.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : une droite $d$ et un plan $P$ ; deux points distincts de $d$ sont dans $P$. Étape 2 — Vérifier : les deux points sont bien distincts. Étape 3 — Appliquer : c'est la règle 3 des règles d'incidence. Étape 4 — Conclure : $d \\subset P$, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à une règle posée sur une table : deux points suffisent."
+              },
+              {
+                "content": "Trois points non ___ déterminent un unique plan.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on lit la règle 2 de la fiche. Étape 2 — Vérifier : la condition porte sur la position des trois points. Étape 3 — Appliquer : trois points non alignés déterminent un seul plan. Étape 4 — Conclure : le mot attendu est « alignés ».",
+                "answers": [
+                  {
+                    "content": "alignés",
+                    "correct": true
+                  }
+                ],
+                "hint": "Quelle condition faut-il sur les trois points ?"
+              },
+              {
+                "content": "Combien de plans contiennent à la fois les droites parallèles distinctes $(AB)$ et $(DC)$ de la caisse ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $(AB)$ et $(DC)$ sont deux droites parallèles distinctes (côtés opposés du fond). Étape 2 — Vérifier : elles sont parallèles et distinctes. Étape 3 — Appliquer : deux droites parallèles distinctes déterminent un seul plan. Étape 4 — Conclure : un seul plan, celui du fond $(ABC)$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ],
+                "hint": "Deux parallèles distinctes déterminent un plan."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître les plans de la caisse",
+              "statement": "Un menuisier assemble une caisse cubique $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$. Dans cet exercice, tu appliques les règles d'incidence.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les points $A$, $B$ et $G$ ne sont pas alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les points sont $A$, $B$, $G$. Étape 2 — Vérifier : $(AB)$ est dans le plan du fond, et $G$, au-dessus de $C$, n'y est pas ; $G \\notin (AB)$. Étape 3 — Appliquer : trois points non alignés déterminent le plan $(ABG)$. Étape 4 — Conclure : $A$, $B$, $G$ ne sont pas alignés, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel sommet appartient au plan $(ABF)$, c'est-à-dire au plan de la face de devant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le plan $(ABF)$ contient la face $ABFE$. Étape 2 — Vérifier : $(AE)$ et $(BF)$ sont deux droites parallèles distinctes. Étape 3 — Appliquer : elles déterminent un plan, qui est $(ABF)$ ; $E$ est sur $(AE)$. Étape 4 — Conclure : $E \\in (ABF)$. Les sommets $G$, $H$, $D$ sont à l'arrière de la caisse, hors de ce plan.",
+                  "answers": [
+                    {
+                      "content": "$E$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$H$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites parallèles $(AE)$ et $(CG)$ déterminent le plan $(ACG)$. Ce plan contient aussi le sommet ___ (une lettre, autre que $A$, $C$, $G$).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche un quatrième sommet dans le plan défini par $(AE)$ et $(CG)$. Étape 2 — Vérifier : ces droites sont parallèles et distinctes. Étape 3 — Appliquer : elles déterminent un seul plan, qui contient toute la droite $(AE)$, donc $E$. Étape 4 — Conclure : le sommet est $E$ (la face $AEGC$ est un rectangle vertical).",
+                  "answers": [
+                    {
+                      "content": "E",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de faces du cube sont contenues dans un plan qui contient la droite $(AB)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la droite $(AB)$ est une arête du cube. Étape 2 — Vérifier : deux faces ont $(AB)$ comme côté : $ABCD$ et $ABFE$. Étape 3 — Appliquer : si deux points $A$, $B$ d'une droite sont dans le plan d'une face, la droite est incluse dans ce plan. Étape 4 — Conclure : il y a 2 faces.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$, $C$ et $G$ sont-ils dans un même plan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : quatre points $A$, $B$, $C$, $G$ ; question : sont-ils coplanaires ? Étape 2 — Vérifier : $A$, $B$, $C$ ne sont pas alignés. Étape 3 — Appliquer : ils déterminent un seul plan, celui du fond, et $G$ est au-dessus de $C$, donc hors de ce plan. Étape 4 — Conclure : non. Dire que quatre points sont toujours coplanaires est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Non : $A$, $B$, $C$ déterminent le plan du fond, qui ne contient pas $G$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : quatre points sont toujours dans un même plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : $G$ est relié à $C$ par une arête",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : trois points de la liste suffisent à dire que le quatrième y est",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Plans, droites et règles dans la caisse",
+              "statement": "Un menuisier assemble une caisse cubique $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$. Dans cet exercice, tu choisis, relies et justifies des plans déterminés par des points et des droites.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Chaque donnée détermine le plan de la face de devant $ABFE$. Relie chaque donnée à la règle utilisée.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on lit chaque donnée. Étape 2 — Vérifier : $A$, $B$, $F$ sont trois points non alignés ; $E \\notin (AB)$ ; $(AE)$ et $(BF)$ sont parallèles et distinctes ; $(AB)$ et $(AE)$ se coupent en $A$. Étape 3 — Appliquer : on associe chaque donnée à la règle 2 ou 4 qui lui correspond. Étape 4 — Conclure : les quatre données donnent le même plan $(ABF)$.",
+                  "answers": [
+                    {
+                      "content": "$A$, $B$ et $F$",
+                      "match": "Trois points non alignés"
+                    },
+                    {
+                      "content": "La droite $(AB)$ et le point $E$",
+                      "match": "Une droite et un point extérieur"
+                    },
+                    {
+                      "content": "Les droites $(AE)$ et $(BF)$",
+                      "match": "Deux droites parallèles distinctes"
+                    },
+                    {
+                      "content": "Les droites $(AB)$ et $(AE)$",
+                      "match": "Deux droites sécantes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour montrer que $(AG)$ est incluse dans le plan $(ACG)$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer en premier : on nomme les points et le but. Étape 2 — Vérifier ensuite la condition d'alignement. Étape 3 — Appliquer la règle des trois points, puis celle des deux points d'une droite. Étape 4 — Conclure à la fin : on ne conclut jamais avant d'avoir vérifié la condition.",
+                  "answers": [
+                    {
+                      "content": "Repérer les points $A$, $C$ et $G$ et l'inclusion à démontrer."
+                    },
+                    {
+                      "content": "Vérifier que $A$, $C$ et $G$ ne sont pas alignés."
+                    },
+                    {
+                      "content": "Appliquer la règle : trois points non alignés déterminent le plan $(ACG)$, qui contient les points $A$ et $G$ de $(AG)$."
+                    },
+                    {
+                      "content": "Conclure que la droite $(AG)$ est incluse dans $(ACG)$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on juge cinq affirmations. Étape 2 — Vérifier : trois points alignés ne déterminent pas un seul plan ; quatre points peuvent être hors d'un même plan ($A$, $B$, $C$, $G$) ; deux droites sans point commun peuvent être non coplanaires. Étape 3 — Appliquer : les règles 3 et 4 sont exactes. Étape 4 — Conclure : les deux premières sont vraies, les trois autres sont des pièges classiques.",
+                  "answers": [
+                    {
+                      "content": "Une droite et un point qui n'est pas sur elle déterminent un plan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si deux points d'une droite sont dans un plan, la droite est incluse dans ce plan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois points déterminent toujours un plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre points sont toujours dans un même plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux droites sans point commun déterminent toujours un plan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(AB)$ et $(GH)$ sont parallèles et distinctes. Le plan $(ABG)$ contient donc aussi le sommet ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le plan $(ABG)$ et la droite $(GH)$. Étape 2 — Vérifier : $(AB)$ et $(GH)$ sont parallèles (elles sont parallèles à $(DC)$) et distinctes. Étape 3 — Appliquer : elles déterminent un seul plan, qui est $(ABG)$ puisqu'il contient $A$, $B$, $G$ ; il contient toute la droite $(GH)$. Étape 4 — Conclure : $H \\in (ABG)$.",
+                  "answers": [
+                    {
+                      "content": "H",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plan passe par les quatre sommets de la face $ABCD$. Combien de sommets du cube (parmi les huit) n'appartiennent pas à ce plan ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le plan est $(ABC)$, celui du fond. Étape 2 — Vérifier : $A$, $B$, $C$ ne sont pas alignés, le plan est unique. Étape 3 — Appliquer : le fond contient $A$, $B$, $C$, $D$ ; $E$, $F$, $G$, $H$ sont au-dessus de lui. Étape 4 — Conclure : 4 sommets n'y sont pas.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $E$ et $C$ ne sont pas alignés, donc ils ___ un seul plan.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : trois points $A$, $E$, $C$. Étape 2 — Vérifier : ils ne sont pas alignés ($C$ n'est pas sur $(AE)$). Étape 3 — Appliquer : trois points non alignés déterminent un seul plan. Étape 4 — Conclure : le mot est « déterminent ». « Ne déterminent pas » serait vrai pour trois points alignés.",
+                  "answers": [
+                    {
+                      "content": "déterminent",
+                      "correct": true
+                    },
+                    {
+                      "content": "ne déterminent pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "coupent",
+                      "correct": false
+                    },
+                    {
+                      "content": "rencontrent",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Avant d'appliquer une règle, vérifie sa condition : alignement, point extérieur, droites sécantes ou parallèles."
+            }
+          ]
+        },
+        {
+          "name": "Positions relatives de deux droites de l'espace",
+          "remember": "Deux droites de l'espace sont soit **coplanaires** (dans un même plan), soit **non coplanaires**. Si elles sont coplanaires, elles sont **sécantes** (un seul point commun), **strictement parallèles** (aucun point commun) ou **confondues**. Si elles sont non coplanaires, elles n'ont aucun point commun et ne sont pas parallèles. Deux droites parallèles à une même troisième sont parallèles entre elles. Dans le plan, deux droites sans point commun sont parallèles ; **dans l'espace, ce n'est plus vrai**.",
+          "method": [
+            "Chercher un plan qui contient les deux droites : une face, un plan défini par deux parallèles, ou un plan défini par trois points.",
+            "Si ce plan existe, étudier les points communs dans ce plan : un seul point, sécantes ; aucun, parallèles ; tous, confondues. Sinon, montrer qu'aucun plan ne contient les deux droites.",
+            "Conclure avec le mot exact (sécantes, parallèles, non coplanaires) en citant la justification."
+          ],
+          "example": {
+            "statement": "Dans la caisse cubique $ABCDEFGH$ ($ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$), donner la position relative des droites $(AC)$ et $(EG)$.",
+            "steps": [
+              "Chercher un plan : $(AE)$ et $(CG)$ sont parallèles et distinctes ; elles déterminent le plan $(ACG)$, qui contient $A$, $C$, $E$, $G$, donc les deux droites $(AC)$ et $(EG)$.",
+              "Étudier les points communs dans ce plan : $AEGC$ est un rectangle, et $(AC)$, $(EG)$ sont deux côtés opposés ; elles n'ont aucun point commun, donc elles sont parallèles.",
+              "Conclure : $(AC)$ et $(EG)$ sont strictement parallèles, car coplanaires et sans point commun."
+            ]
+          },
+          "pitfall": "Ne pas écrire « sans point commun, donc parallèles ». Dans l'espace, cela n'est vrai que pour des droites coplanaires. Contre-exemple : $(AB)$ et $(CG)$ de la caisse n'ont aucun point commun, mais elles ne sont pas parallèles : un plan qui contiendrait $(AB)$ et $(CG)$ contiendrait $A$, $B$, $C$, donc serait le fond, qui ne contient pas $G$. Elles sont non coplanaires. Cherche toujours d'abord un plan commun.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à donner la position relative de deux droites de la caisse cubique $ABCDEFGH$ ($ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$).",
+            "questions": [
+              {
+                "content": "Dans la caisse $ABCDEFGH$, quelle est la position relative des droites $(AB)$ et $(EF)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Chercher un plan : $(AB)$ et $(EF)$ sont dans la face de devant $ABFE$. Étape 2 — Étudier les points communs : $ABFE$ est un carré et $(AB)$, $(EF)$ sont deux côtés opposés, sans point commun. Étape 3 — Conclure : elles sont strictement parallèles. « Non coplanaires » est faux, car un plan commun existe.",
+                "answers": [
+                  {
+                    "content": "Strictement parallèles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sécantes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non coplanaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "Confondues",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les deux droites sont dans la face de devant."
+              },
+              {
+                "content": "Deux droites de l'espace qui n'ont aucun point commun sont toujours parallèles.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Chercher un plan : prenons $(AB)$ et $(CG)$ de la caisse ; aucun plan ne contient les deux. Étape 2 — Étudier : elles n'ont aucun point commun et ne sont pas parallèles. Étape 3 — Conclure : l'affirmation est fausse ; elles sont non coplanaires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à une arête du fond et à une arête verticale éloignée."
+              },
+              {
+                "content": "Les droites $(AE)$ et $(CG)$ de la caisse sont ___ (un mot : sécantes, parallèles ou non coplanaires).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Chercher un plan : $(AE)$ et $(CG)$ sont les arêtes verticales, dans le plan $(ACG)$. Étape 2 — Étudier : $AEGC$ est un rectangle dont elles sont deux côtés opposés, sans point commun. Étape 3 — Conclure : elles sont parallèles.",
+                "answers": [
+                  {
+                    "content": "parallèles",
+                    "correct": true
+                  },
+                  {
+                    "content": "parallèle",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les droites $(AC)$ et $(BD)$, diagonales du fond, sont ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Chercher un plan : $(AC)$ et $(BD)$ sont dans le plan du fond. Étape 2 — Étudier : les diagonales d'un carré se coupent en son centre, leur seul point commun. Étape 3 — Conclure : elles sont sécantes.",
+                "answers": [
+                  {
+                    "content": "sécantes",
+                    "correct": true
+                  },
+                  {
+                    "content": "parallèles",
+                    "correct": false
+                  },
+                  {
+                    "content": "non coplanaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "confondues",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Position de deux arêtes ou diagonales",
+              "statement": "Un menuisier assemble une caisse cubique $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$. Dans cet exercice, tu donnes la position relative de deux droites avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la position relative de $(AD)$ et $(FG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : $(AD)$ est parallèle à $(BC)$, et $(BC)$ est parallèle à $(FG)$ ; deux droites parallèles à une même troisième sont parallèles. Étape 2 — Étudier : elles sont distinctes et coplanaires, donc sans point commun. Étape 3 — Conclure : strictement parallèles. Non coplanaires est faux : on a trouvé un plan, $(ADG)$.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non coplanaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(AB)$ et $(BC)$ sont sécantes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher un plan : $(AB)$ et $(BC)$ sont dans le fond. Étape 2 — Étudier : elles ont le point $B$ en commun et ne sont pas confondues. Étape 3 — Conclure : elles sont sécantes en $B$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position relative de $(AB)$ et $(CG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : un plan contenant $(AB)$ et $(CG)$ contiendrait $A$, $B$, $C$, donc serait le fond, qui ne contient pas $G$. Étape 2 — Aucun plan ne convient. Étape 3 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "Non coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(AF)$ et $(DG)$ sont ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Chercher un plan : $(AD)$ et $(FG)$ sont parallèles et distinctes ; elles déterminent un plan qui contient $A$, $D$, $F$, $G$. Étape 2 — Étudier : $ADGF$ est un rectangle et $(AF)$, $(DG)$ en sont deux côtés opposés. Étape 3 — Conclure : elles sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(AF)$ et $(BG)$ n'ont aucun point commun. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : un plan contenant $(AF)$ et $(BG)$ contiendrait $A$, $B$, $F$, donc serait la face de devant, qui ne contient pas $G$. Étape 2 — Aucun plan ne convient. Étape 3 — Conclure : non coplanaires. « Sans point commun donc parallèles » est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Elles sont non coplanaires, donc pas parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont parallèles, car elles n'ont aucun point commun",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont sécantes, car elles sont dans le même cube",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont confondues",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Toutes les positions dans la caisse",
+              "statement": "Un menuisier assemble une caisse cubique $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$. Dans cet exercice, tu classes des droites de la caisse selon leur position.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque couple de droites à sa position relative.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Chercher un plan : $(AB)$ et $(DC)$ sont dans le fond ; $(AB)$ et $(AD)$ aussi ; aucun plan ne contient $(AB)$ et $(DH)$ (il contiendrait $A$, $B$, $D$, donc serait le fond, sans $H$). Étape 2 — Étudier : $(AB)$ et $(DC)$ sont des côtés opposés ; $(AB)$ et $(AD)$ se coupent en $A$. Étape 3 — Conclure : parallèles, sécantes, non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "$(AB)$ et $(DC)$",
+                      "match": "Strictement parallèles"
+                    },
+                    {
+                      "content": "$(AB)$ et $(AD)$",
+                      "match": "Sécantes"
+                    },
+                    {
+                      "content": "$(AB)$ et $(DH)$",
+                      "match": "Non coplanaires"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour donner la position relative de deux droites.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Chercher un plan : c'est le point de départ, car on ne parle de points communs qu'ensuite. Étape 2 — Étudier les points communs, ou montrer qu'aucun plan ne convient. Étape 3 — Conclure avec un mot exact : sécantes, parallèles ou non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "Chercher un plan qui contient les deux droites."
+                    },
+                    {
+                      "content": "Étudier leurs points communs dans ce plan, ou montrer qu'aucun plan ne convient."
+                    },
+                    {
+                      "content": "Conclure avec le mot exact et la justification."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles droites sont parallèles à $(AB)$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Chercher un plan : les arêtes du cube se classent par direction. Étape 2 — Étudier : $(DC)$, $(EF)$, $(HG)$ sont parallèles à $(AB)$ (côtés opposés de faces ou parallèles à $(DC)$). $(BC)$, $(AE)$, $(BF)$ ont un point commun avec $(AB)$ : elles sont sécantes. Étape 3 — Conclure : les trois premières.",
+                  "answers": [
+                    {
+                      "content": "$(DC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(EF)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(HG)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(BC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AE)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(BF)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les 11 autres arêtes de la caisse, combien sont non coplanaires avec l'arête $(AB)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher un plan : 3 arêtes sont parallèles à $(AB)$ ($DC$, $EF$, $HG$) et 4 la coupent ($AD$, $AE$, $BC$, $BF$). Étape 2 — Étudier : il reste $11 - 3 - 4 = 4$ arêtes : $CG$, $DH$, $EH$, $FG$. Étape 3 — Conclure : 4 arêtes sont non coplanaires avec $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites parallèles à une même troisième droite de l'espace sont parallèles entre elles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher un plan : par exemple $(AB)$ et $(HG)$ sont toutes deux parallèles à $(DC)$. Étape 2 — Étudier : elles sont aussi parallèles entre elles (côtés opposés du rectangle $ABGH$). Étape 3 — Conclure : la propriété est vraie dans l'espace.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(BD)$ et $(EG)$ de la caisse sont ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Chercher un plan : si $(BD)$ et $(EG)$ étaient coplanaires, elles seraient sécantes ou parallèles. Étape 2 — Étudier : elles n'ont aucun point commun ($(BD)$ est dans le fond, $(EG)$ dans le dessus, deux plans parallèles distincts), et elles ne sont pas parallèles, car $(EG)$ est parallèle à $(AC)$, qui coupe $(BD)$. Aucun plan ne convient. Étape 3 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "non coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "confondues",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche d'abord un plan commun ; sans plan commun, les droites sont non coplanaires."
+            }
+          ]
+        },
+        {
+          "name": "Droite et plan, deux plans : positions et parallélisme",
+          "remember": "Une droite $d$ et un plan $P$ sont : **incluse** ($d \\subset P$), **sécants** (un seul point commun) ou **strictement parallèles** (aucun point commun). Deux plans sont **confondus**, **strictement parallèles** ou **sécants selon une droite**. **(1)** $d$ est parallèle à $P$ si elle est parallèle à une droite de $P$ sans être dans $P$. **(2)** Deux plans distincts qui ont un point commun ont toute une droite commune. **(3) Théorème du toit** : si deux plans sécants $P$ et $P'$ contiennent deux droites parallèles distinctes $d$ et $d'$, leur intersection est parallèle à $d$ et à $d'$. **(4)** Si deux plans sont parallèles, un plan qui coupe l'un coupe l'autre, et les deux droites d'intersection sont parallèles. **(5)** Si deux droites sécantes d'un plan sont parallèles à deux droites sécantes d'un autre plan, les deux plans sont parallèles.",
+          "method": [
+            "Nommer les deux plans (ou la droite et le plan) et ce que l'on cherche : une intersection ou une position.",
+            "Chercher des points communs : un point d'une droite de l'un qui appartient aussi à l'autre.",
+            "Utiliser la propriété qui convient : deux points communs donnent la droite d'intersection ; un point commun et deux parallèles donnent, par le toit, la parallèle passant par ce point.",
+            "Conclure sur la position relative en nommant la droite d'intersection ou en disant que les éléments sont parallèles."
+          ],
+          "example": {
+            "statement": "Dans la pyramide $SABCD$ de base carrée, déterminer l'intersection des plans $(SAB)$ et $(SCD)$.",
+            "steps": [
+              "Nommer : les deux plans sont $(SAB)$ et $(SCD)$ ; on cherche leur intersection.",
+              "Chercher des points communs : le point $S$ appartient aux deux plans. Ils sont distincts, car $C$ n'est pas dans $(SAB)$ (sinon $S$ serait dans le plan de la base).",
+              "Utiliser le toit : $(AB) \\subset (SAB)$, $(CD) \\subset (SCD)$ et $(AB)$ est parallèle à $(CD)$ (côtés opposés du carré). L'intersection est donc parallèle à $(AB)$ et passe par $S$.",
+              "Conclure : les plans sont sécants selon la droite passant par $S$, parallèle à $(AB)$ et à $(CD)$."
+            ]
+          },
+          "pitfall": "Ne pas écrire que l'intersection de deux plans sécants est un point : c'est une droite. Dans la caisse, le fond et la face de devant se coupent selon toute la droite $(AB)$. Ne pas croire non plus qu'une droite parallèle à un plan est parallèle à toutes ses droites : $(AB)$ est parallèle au plan $(EFG)$ du dessus, mais elle est non coplanaire avec la droite $(FG)$ de ce plan. Elle est seulement parallèle à $(EF)$ et à ses parallèles.",
+          "figure": "charpente-pyramide",
+          "practice": {
+            "statement": "Tu t'entraînes à positionner une droite et un plan, puis deux plans, dans la caisse cubique $ABCDEFGH$ ($ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$).",
+            "questions": [
+              {
+                "content": "Dans la caisse $ABCDEFGH$, quelle est la position de la droite $(AB)$ et du plan $(EFG)$ du dessus ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer : la droite $(AB)$ et le plan $(EFG)$. Étape 2 — Chercher des points communs : $(AB)$ est parallèle à $(EF)$, qui est dans $(EFG)$, et $A$ n'est pas dans $(EFG)$. Étape 3 — Utiliser la propriété (1) : une droite parallèle à une droite du plan, sans y être incluse, est parallèle au plan. Étape 4 — Conclure : strictement parallèles.",
+                "answers": [
+                  {
+                    "content": "Strictement parallèles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sécants en un point",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(AB)$ est incluse dans le plan",
+                    "correct": false
+                  },
+                  {
+                    "content": "Confondus",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche une droite du dessus parallèle à $(AB)$."
+              },
+              {
+                "content": "Deux plans sécants ont pour intersection un point.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Nommer : deux plans sécants, par exemple le fond et la face de devant. Étape 2 — Chercher des points communs : $A$ et $B$ sont communs. Étape 3 — Utiliser la propriété (2) : deux points communs distincts donnent toute la droite $(AB)$. Étape 4 — Conclure : l'intersection est une droite, l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à un mur qui rencontre le sol."
+              },
+              {
+                "content": "L'intersection des plans $(ABC)$ et $(ABF)$ de la caisse est la droite ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Nommer : le fond $(ABC)$ et la face de devant $(ABF)$. Étape 2 — Chercher des points communs : $A$ et $B$ sont dans les deux plans. Étape 3 — Utiliser la propriété : deux points communs distincts donnent la droite d'intersection. Étape 4 — Conclure : c'est $(AB)$.",
+                "answers": [
+                  {
+                    "content": "$(AB)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(BC)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(BF)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(AF)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La droite $(EG)$ est parallèle à $(AC)$, qui est dans le plan $(ABC)$, et $(EG)$ n'est pas dans ce plan : $(EG)$ est donc ___ au plan $(ABC)$ (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Nommer : la droite $(EG)$ et le plan $(ABC)$. Étape 2 — Chercher : $(EG)$ est parallèle à $(AC) \\subset (ABC)$. Étape 3 — Utiliser la propriété (1) : elle est parallèle au plan. Étape 4 — Conclure : $(EG)$ est parallèle au plan $(ABC)$.",
+                "answers": [
+                  {
+                    "content": "parallèle",
+                    "correct": true
+                  },
+                  {
+                    "content": "parallèles",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Droites et plans de la caisse",
+              "statement": "Un menuisier assemble une caisse cubique $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$. Dans cet exercice, tu donnes la position d'une droite et d'un plan, ou de deux plans, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la position de la droite $(EG)$ et du plan $(ABC)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : la droite $(EG)$ et le plan du fond. Étape 2 — Chercher : $(EG)$ est parallèle à $(AC)$, droite du fond, et $E$ n'est pas dans le fond. Étape 3 — Utiliser (1) : elle est parallèle au plan. Étape 4 — Conclure : strictement parallèles.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécants en un point",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(EG)$ est incluse dans $(ABC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(AE)$ coupe le plan $(ABC)$ en un seul point.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $(AE)$ et le plan du fond. Étape 2 — Chercher : $A$ est commun. Étape 3 — Utiliser la propriété : $E$ est au-dessus du fond, donc $(AE)$ n'y est pas incluse et n'a pas d'autre point commun. Étape 4 — Conclure : elle coupe le fond en $A$ seulement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position des plans $(ABF)$ (face de devant) et $(DCG)$ (face de derrière) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : les plans des faces opposées $ABFE$ et $DCGH$. Étape 2 — Chercher : $(AB)$ et $(AE)$ du premier sont parallèles à $(DC)$ et $(DH)$ du second. Étape 3 — Utiliser la propriété (5) : deux plans contenant des droites sécantes respectivement parallèles sont parallèles. Étape 4 — Conclure : strictement parallèles, sans point commun.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécants selon $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sécants selon $(DC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intersection des plans $(ABG)$ et $(ABC)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : $(ABG)$ et le fond $(ABC)$. Étape 2 — Chercher : $A$ et $B$ sont dans les deux plans. Étape 3 — Utiliser (2) : deux points communs distincts donnent la droite $(AB)$. Étape 4 — Conclure : l'intersection est la droite $(AB)$, pas un point.",
+                  "answers": [
+                    {
+                      "content": "La droite $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $(BG)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le point $B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(AG)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $(AB)$ est parallèle au plan $(EFG)$, alors $(AB)$ est parallèle à toutes les droites de ce plan.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : la droite $(AB)$ et le plan $(EFG)$. Étape 2 — Chercher : $(AB)$ est parallèle à $(EF)$, mais elle ne coupe pas $(FG)$ et n'est pas parallèle à $(FG)$. Étape 3 — Utiliser la propriété : $(AB)$ et $(FG)$ sont non coplanaires. Étape 4 — Conclure : l'affirmation est fausse (piège de la fiche).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Les plans de la charpente",
+              "statement": "La charpente d'une case est une pyramide $SABCD$ : la base $ABCD$ est un carré de centre $O$ et $S$ est le sommet. Dans cet exercice, tu étudies les droites et les plans de cette charpente avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "charpente-pyramide",
+              "questions": [
+                {
+                  "content": "Quelle est l'intersection des plans $(SAB)$ et $(SCD)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : $(SAB)$ et $(SCD)$. Étape 2 — Chercher : $S$ est commun. Étape 3 — Utiliser le toit : $(AB) \\subset (SAB)$, $(CD) \\subset (SCD)$, $(AB)$ parallèle à $(CD)$, donc l'intersection est parallèle à $(AB)$. Étape 4 — Conclure : c'est la parallèle à $(AB)$ passant par $S$. Un seul point est faux : deux plans sécants se coupent selon une droite.",
+                  "answers": [
+                    {
+                      "content": "La droite passant par $S$ et parallèle à $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le seul point $S$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(SA)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(AB)$ est parallèle au plan $(SCD)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $(AB)$ et le plan $(SCD)$. Étape 2 — Chercher : $(AB)$ est parallèle à $(CD)$, droite de $(SCD)$ (côtés opposés du carré). Étape 3 — Utiliser (1) : $(AB)$ n'est pas dans $(SCD)$, donc elle est parallèle à ce plan. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plans $(SAC)$ et $(SBD)$ se coupent suivant la droite qui passe par $S$ et par le point ___ (une lettre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer : $(SAC)$ et $(SBD)$. Étape 2 — Chercher : $S$ est commun ; $O$ est le point d'intersection de $(AC)$ et $(BD)$, donc il est dans les deux plans. Étape 3 — Utiliser (2) : deux points communs distincts $S$ et $O$ donnent la droite $(SO)$. Étape 4 — Conclure : la lettre est $O$.",
+                  "answers": [
+                    {
+                      "content": "O",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque couple de plans à sa droite d'intersection.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Nommer : quatre couples de plans. Étape 2 — Chercher : $(SAB)$ et $(SBC)$ ont $S$ et $B$ ; $(SAB)$ et $(ABC)$ ont $A$ et $B$ ; $(SAC)$ et $(ABC)$ ont $A$ et $C$ ; $(SCD)$ et $(SAD)$ ont $S$ et $D$. Étape 3 — Utiliser (2) : deux points communs distincts donnent la droite. Étape 4 — Conclure : $(SB)$, $(AB)$, $(AC)$, $(SD)$.",
+                  "answers": [
+                    {
+                      "content": "$(SAB)$ et $(SBC)$",
+                      "match": "$(SB)$"
+                    },
+                    {
+                      "content": "$(SAB)$ et $(ABC)$",
+                      "match": "$(AB)$"
+                    },
+                    {
+                      "content": "$(SAC)$ et $(ABC)$",
+                      "match": "$(AC)$"
+                    },
+                    {
+                      "content": "$(SCD)$ et $(SAD)$",
+                      "match": "$(SD)$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles droites sont incluses dans le plan $(SBD)$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Nommer : le plan $(SBD)$. Étape 2 — Chercher : $B$ et $D$ sont dans le plan, donc $(BD)$ aussi ; $S$ et $B$ aussi, donc $(SB)$. Étape 3 — Utiliser la règle des deux points : seules ces droites ont deux points dans le plan. Étape 4 — Conclure : $(BD)$ et $(SB)$. La droite $(AC)$ ne coupe le plan qu'en $O$, et $(SA)$, $(AB)$ n'ont qu'un point dans ce plan ($S$ et $B$).",
+                  "answers": [
+                    {
+                      "content": "$(BD)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(SB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(AC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(SA)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AB)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver l'intersection de $(SAB)$ et $(SCD)$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Nommer d'abord les plans. Étape 2 — Chercher le point commun $S$. Étape 3 — Utiliser le théorème du toit avec les droites parallèles $(AB)$ et $(CD)$. Étape 4 — Conclure par la droite d'intersection. L'ordre suit la méthode de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Nommer les plans $(SAB)$ et $(SCD)$."
+                    },
+                    {
+                      "content": "Trouver un point commun : $S$."
+                    },
+                    {
+                      "content": "Appliquer le toit avec $(AB)$ et $(CD)$ parallèles."
+                    },
+                    {
+                      "content": "Conclure : la parallèle à $(AB)$ passant par $S$."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche d'abord un point commun aux deux plans, puis utilise deux points communs ou le toit."
+            }
+          ]
+        },
+        {
+          "name": "Section d'un solide par un plan",
+          "remember": "La **section** d'un solide par un plan est la figure formée par les points communs au plan et au solide. Pour un cube ou un tétraèdre, c'est un polygone dont les sommets sont sur les arêtes et dont chaque côté est dans une face. **(1)** Deux points de la section situés sur une même face sont reliés par un côté de la section. **(2)** Si le plan coupe deux faces parallèles, il les coupe selon deux segments parallèles. **(3)** Si le plan contient une droite parallèle à une droite d'une face, son intersection avec cette face lui est parallèle (toit). **(4)** La section a au plus autant de côtés que le solide a de faces : 3 ou 4 pour un tétraèdre, de 3 à 6 pour un cube. Un plan parallèle à une face du cube le coupe selon un carré.",
+          "method": [
+            "Repérer les points du plan donnés sur les arêtes et la ou les faces qui contiennent chacun.",
+            "Relier deux points situés sur une même face : c'est un côté de la section.",
+            "Utiliser le parallélisme : le côté dans une face parallèle (ou obtenu par le toit) est parallèle au côté déjà tracé ; en déduire le point suivant.",
+            "Fermer le polygone en reliant les points obtenus, puis nommer sa nature en la justifiant."
+          ],
+          "example": {
+            "statement": "Un trépied de menuisier est un tétraèdre $ABCD$. Les points $I$, $J$, $K$ sont les milieux de $[AB]$, $[AC]$, $[BD]$. Construire la section par le plan $(IJK)$.",
+            "steps": [
+              "Repérer : $I$ est sur les faces $ABC$ et $ABD$ ; $J$ sur $ABC$ et $ACD$ ; $K$ sur $ABD$ et $BCD$.",
+              "Relier : $I$ et $J$ sont sur la face $ABC$ : $[IJ]$ est un côté. $I$ et $K$ sont sur la face $ABD$ : $[IK]$ est un côté.",
+              "Utiliser le parallélisme : $(IJ)$ est parallèle à $(BC)$ (droite des milieux dans $ABC$). Dans la face $BCD$, l'intersection est la parallèle à $(BC)$ passant par $K$ (toit) ; elle coupe $[CD]$ en son milieu $L$ (droite des milieux dans $BCD$).",
+              "Fermer : la section est le quadrilatère $IJLK$ ; $(IJ)$ et $(KL)$ sont parallèles à $(BC)$, $(IK)$ et $(JL)$ sont parallèles à $(AD)$ : c'est un parallélogramme."
+            ]
+          },
+          "pitfall": "Ne pas relier deux points qui ne sont pas sur une même face : le segment traverse l'intérieur du solide et n'est pas un côté de la section. Dans la caisse $ABCDEFGH$, $[AG]$ passe à l'intérieur du cube, car $A$ et $G$ ne sont sur aucune face commune. Ne pas croire non plus qu'une section peut avoir autant de côtés qu'on veut : un cube n'a que 6 faces, donc au plus 6 côtés.",
+          "figure": "trepied-tetraedre",
+          "practice": {
+            "statement": "Tu t'entraînes à construire et à reconnaître une section de cube ou de tétraèdre. Le cube est $ABCDEFGH$ ($ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$).",
+            "questions": [
+              {
+                "content": "Combien de côtés peut avoir la section d'un tétraèdre par un plan ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un tétraèdre a 4 faces. Étape 2 — Relier : chaque côté de la section est dans une face, et deux côtés ne sont pas dans la même face. Étape 3 — Utiliser la règle (4) : au plus 4 côtés, au moins 3 pour fermer un polygone. Étape 4 — Fermer : 3 ou 4 côtés.",
+                "answers": [
+                  {
+                    "content": "3 ou 4",
+                    "correct": true
+                  },
+                  {
+                    "content": "3 seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "4 seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "3, 4, 5 ou 6",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un côté de section par face coupée."
+              },
+              {
+                "content": "Deux points de la section situés sur une même face sont reliés par un côté de la section.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : deux points de la section sur une même face. Étape 2 — Relier : la droite qui les joint est dans le plan et dans la face. Étape 3 — Utiliser (1) : c'est donc l'intersection du plan et de la face. Étape 4 — Fermer : le segment est un côté, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La section d'un cube par un plan parallèle à une face est un ___ (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : un plan parallèle à la face $ABCD$ coupe les quatre arêtes verticales. Étape 2 — Relier : les points sur deux arêtes voisines sont sur une même face verticale. Étape 3 — Utiliser (2) : les côtés dans les faces opposées sont parallèles. Étape 4 — Fermer : la section est un carré de même dimension que la face.",
+                "answers": [
+                  {
+                    "content": "carré",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un plan passe par $I \\in [BA]$, $J \\in [BC]$ et $K \\in [BF]$, trois points distincts de $B$ sur les arêtes issues de $B$. Quelle est la section du cube ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $I$ et $J$ sont sur la face $ABCD$, $J$ et $K$ sur $BCGF$, $I$ et $K$ sur $ABFE$. Étape 2 — Relier : $[IJ]$, $[JK]$, $[KI]$ sont trois côtés. Étape 3 — Utiliser le parallélisme : inutile, le contour est déjà fermé. Étape 4 — Fermer : la section est le triangle $IJK$ (il coupe le coin $B$).",
+                "answers": [
+                  {
+                    "content": "Le triangle $IJK$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un carré",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un hexagone",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un pentagone",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Sections d'un cube",
+              "statement": "Un menuisier assemble une caisse cubique $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$. Dans cet exercice, tu reconnais la section de la caisse par un plan avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un plan passe par $I \\in [BA]$, $J \\in [BC]$ et $K \\in [BF]$, distincts de $B$. La section du cube est un",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $I$, $J$, $K$ sont sur trois arêtes issues de $B$. Étape 2 — Relier : deux à deux, ils sont sur une même face ($ABCD$, $BCGF$, $ABFE$). Étape 3 — Utiliser : les trois côtés ferment déjà le contour. Étape 4 — Fermer : triangle $IJK$.",
+                  "answers": [
+                    {
+                      "content": "triangle",
+                      "correct": true
+                    },
+                    {
+                      "content": "carré",
+                      "correct": false
+                    },
+                    {
+                      "content": "pentagone",
+                      "correct": false
+                    },
+                    {
+                      "content": "hexagone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La section d'un cube par un plan peut avoir 7 côtés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : un cube a 6 faces. Étape 2 — Relier : chaque côté de la section est dans une face, et une face contient au plus un côté. Étape 3 — Utiliser la règle (4) : au plus 6 côtés. Étape 4 — Fermer : 7 côtés est impossible.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $I$ est le milieu de $[AE]$, $J$ le milieu de $[BF]$, $K$ le milieu de $[CG]$. La section du cube par $(IJK)$ est un",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $I$, $J$, $K$ sont à mi-hauteur de trois arêtes verticales. Étape 2 — Relier : $[IJ]$ dans la face $ABFE$, $[JK]$ dans $BCGF$. Étape 3 — Utiliser le parallélisme : la face $DCGH$ est parallèle à $ABFE$, donc le côté qui passe par $K$ est parallèle à $(IJ)$ et coupe $[DH]$ en son milieu $L$. Étape 4 — Fermer : $(IJ)$ est parallèle à $(AB)$ et $(JK)$ à $(BC)$, donc le plan est parallèle au fond (propriété (5)) et la section $IJKL$ est un carré.",
+                  "answers": [
+                    {
+                      "content": "carré",
+                      "correct": true
+                    },
+                    {
+                      "content": "triangle",
+                      "correct": false
+                    },
+                    {
+                      "content": "pentagone",
+                      "correct": false
+                    },
+                    {
+                      "content": "hexagone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plan passe par les milieux $I$, $J$, $K$ de $[AE]$, $[BF]$, $[CG]$ et coupe $[DH]$ en son milieu $L$. Combien de faces du cube contiennent un côté de la section ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la section est le carré $IJKL$, avec $L$ milieu de $[DH]$. Étape 2 — Relier : $[IJ]$ dans $ABFE$, $[JK]$ dans $BCGF$, $[KL]$ dans $CDHG$, $[LI]$ dans $ADHE$. Étape 3 — Utiliser : le fond et le dessus ne sont pas coupés. Étape 4 — Fermer : 4 faces.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève trace le segment $[AG]$ comme côté d'une section du cube. Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $A$ est sur les faces $ABCD$, $ABFE$, $ADHE$ ; $G$ est sur $BCGF$, $CDHG$, $EFGH$. Étape 2 — Relier : on ne relie que deux points d'une même face. Étape 3 — Utiliser (1) : $A$ et $G$ n'ont aucune face commune. Étape 4 — Fermer : $[AG]$ traverse l'intérieur, ce n'est pas un côté (piège de la fiche).",
+                  "answers": [
+                    {
+                      "content": "$A$ et $G$ ne sont sur aucune face commune : $[AG]$ traverse l'intérieur du cube",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $[AG]$ est trop long",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $A$ et $G$ ne sont pas des sommets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'une section n'a jamais de diagonale",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Section d'un trépied",
+              "statement": "Un trépied de menuisier est un tétraèdre $ABCD$. Les points $I$, $J$, $K$ sont les milieux de $[AB]$, $[AC]$, $[BD]$. Le plan $(IJK)$ coupe $[CD]$ en $L$. Dans cet exercice, tu étudies la section $IJLK$ avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "trepied-tetraedre",
+              "questions": [
+                {
+                  "content": "Quelle droite est parallèle à $(IJ)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $I$ et $J$ sont les milieux de $[AB]$ et $[AC]$, sur la face $ABC$. Étape 2 — Relier : $[IJ]$ est un côté de la section. Étape 3 — Utiliser le parallélisme : dans le triangle $ABC$, la droite des milieux $(IJ)$ est parallèle à $(BC)$. Étape 4 — Fermer : la réponse est $(BC)$ ; $(AD)$ est parallèle à $(IK)$, pas à $(IJ)$.",
+                  "answers": [
+                    {
+                      "content": "$(BC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(AD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(CD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(BD)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $L$ est le ___ de $[CD]$ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : $K$ est sur la face $BCD$, $L$ sur $[CD]$. Étape 2 — Relier : $[KL]$ est le côté dans cette face. Étape 3 — Utiliser le toit : $(IJ)$ est parallèle à $(BC)$, donc $(KL)$ aussi ; dans le triangle $BCD$, la parallèle à $(BC)$ passant par le milieu $K$ de $[BD]$ coupe $[CD]$ en son milieu. Étape 4 — Fermer : $L$ est le milieu de $[CD]$.",
+                  "answers": [
+                    {
+                      "content": "milieu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quadrilatère $IJLK$ est un parallélogramme.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $I$, $J$, $K$, $L$ sont les milieux de $[AB]$, $[AC]$, $[BD]$, $[CD]$. Étape 2 — Relier : $[IJ]$, $[JL]$, $[LK]$, $[KI]$ sont dans les faces $ABC$, $ACD$, $BCD$, $ABD$. Étape 3 — Utiliser : $(IJ)$ et $(KL)$ sont parallèles à $(BC)$ ; $(IK)$ et $(JL)$ sont parallèles à $(AD)$. Étape 4 — Fermer : côtés opposés parallèles, c'est un parallélogramme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque face du tétraèdre au côté de la section $IJLK$ qu'elle contient.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : $I$, $J$, $K$, $L$ et leurs arêtes. Étape 2 — Relier : $I$ et $J$ sont sur $ABC$ ; $I$ et $K$ sur $ABD$ ; $K$ et $L$ sur $BCD$ ; $J$ et $L$ sur $ACD$. Étape 3 — Utiliser (1) : deux points d'une même face donnent un côté. Étape 4 — Fermer : les quatre faces sont coupées.",
+                  "answers": [
+                    {
+                      "content": "Face $ABC$",
+                      "match": "$[IJ]$"
+                    },
+                    {
+                      "content": "Face $ABD$",
+                      "match": "$[IK]$"
+                    },
+                    {
+                      "content": "Face $BCD$",
+                      "match": "$[KL]$"
+                    },
+                    {
+                      "content": "Face $ACD$",
+                      "match": "$[JL]$"
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $BC = 6$ cm. Quelle est la longueur de $[IJ]$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : $I$ et $J$ sont les milieux de $[AB]$ et $[AC]$. Étape 2 — Relier : $[IJ]$ est dans la face $ABC$. Étape 3 — Utiliser la droite des milieux : $IJ = \\frac{BC}{2}$. Étape 4 — Fermer : $IJ = \\frac{6}{2} = 3$ cm.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : $(IJ)$ et $(KL)$ sont parallèles à $(BC)$ ; $(IK)$ et $(JL)$ sont parallèles à $(AD)$. Étape 2 — Relier : $(IJ)$ et $(IK)$ se coupent en $I$. Étape 3 — Utiliser : les directions $(BC)$ et $(AD)$ ne sont pas parallèles (non coplanaires). Étape 4 — Fermer : seules les deux premières sont vraies.",
+                  "answers": [
+                    {
+                      "content": "$(IK)$ et $(JL)$ sont parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(IJ)$ et $(KL)$ sont parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(IJ)$ et $(IK)$ sont parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(IJ)$ est parallèle à $(AD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(IK)$ est parallèle à $(BC)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Utilise la droite des milieux dans chaque face, puis le parallélisme."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La caisse de rangement",
+          "statement": "Dans son atelier, un menuisier fabrique une caisse de rangement cubique de 60 cm d'arête. On la modélise par le cube $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. Il veut fixer des tasseaux le long de certaines diagonales de faces.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la position relative des droites $(BD)$ et $(FH)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Chercher un plan : $(BF)$ et $(DH)$ sont parallèles et distinctes, elles déterminent le plan $(BDH)$ qui contient $B$, $D$, $F$, $H$. Étape 2 — Étudier les points communs : $BDHF$ est un rectangle dont $(BD)$ et $(FH)$ sont deux côtés opposés, sans point commun. Étape 3 — Conclure : strictement parallèles.",
+              "answers": [
+                {
+                  "content": "Strictement parallèles",
+                  "correct": true
+                },
+                {
+                  "content": "Sécantes",
+                  "correct": false
+                },
+                {
+                  "content": "Non coplanaires",
+                  "correct": false
+                },
+                {
+                  "content": "Confondues",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la position relative des droites $(AH)$ et $(FC)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Chercher un plan : un plan contenant $(AH)$ et $(FC)$ contiendrait $A$, $H$, $C$, donc serait le plan $(ACH)$ ; or $F$, point de $(FC)$, n'est pas dans $(ACH)$. Étape 2 — Aucun plan ne contient les deux droites. Étape 3 — Conclure : non coplanaires, donc ni sécantes ni parallèles.",
+              "answers": [
+                {
+                  "content": "Non coplanaires",
+                  "correct": true
+                },
+                {
+                  "content": "Sécantes",
+                  "correct": false
+                },
+                {
+                  "content": "Strictement parallèles",
+                  "correct": false
+                },
+                {
+                  "content": "Confondues",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les quatre points $B$, $D$, $H$, $F$ sont dans un même plan.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : les droites $(BF)$ et $(DH)$ sont les arêtes verticales parallèles et distinctes. Étape 2 — Vérifier : deux droites parallèles distinctes déterminent un plan. Étape 3 — Appliquer : ce plan contient $B$, $F$, $D$, $H$. Étape 4 — Conclure : les quatre points sont coplanaires.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'arêtes du cube sont parallèles à $(AE)$ sans compter $(AE)$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Chercher : les arêtes verticales sont $(AE)$, $(BF)$, $(CG)$, $(DH)$. Étape 2 — Étudier : deux droites parallèles à une même droite sont parallèles. Étape 3 — Conclure : il y en a 3 autres, $(BF)$, $(CG)$, $(DH)$.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'intersection des plans $(BDH)$ et $(ABC)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Nommer : le plan $(BDH)$ et le fond $(ABC)$. Étape 2 — Chercher des points communs : $B$ et $D$ sont dans les deux plans. Étape 3 — Utiliser : deux points communs distincts donnent la droite $(BD)$. Étape 4 — Conclure : l'intersection est $(BD)$. Un point seul est faux : deux plans sécants se coupent selon une droite.",
+              "answers": [
+                {
+                  "content": "La droite $(BD)$",
+                  "correct": true
+                },
+                {
+                  "content": "La droite $(DH)$",
+                  "correct": false
+                },
+                {
+                  "content": "Le point $B$",
+                  "correct": false
+                },
+                {
+                  "content": "La droite $(AC)$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'établi de l'atelier",
+          "statement": "L'établi du menuisier est un pavé $ABCDEFGH$ de 120 cm de long ($AB$), 60 cm de large ($AD$) et 80 cm de haut ($AE$) ; $ABCD$ est le plateau du dessous, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. Les arêtes se placent comme celles d'un cube.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la position relative des droites $(AC)$ et $(EG)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Chercher un plan : $(AE)$ et $(CG)$ sont parallèles et distinctes, elles déterminent le plan $(ACG)$ qui contient les deux droites. Étape 2 — Étudier : $AEGC$ est un rectangle et $(AC)$, $(EG)$ en sont deux côtés opposés, sans point commun. Étape 3 — Conclure : strictement parallèles.",
+              "answers": [
+                {
+                  "content": "Strictement parallèles",
+                  "correct": true
+                },
+                {
+                  "content": "Sécantes",
+                  "correct": false
+                },
+                {
+                  "content": "Non coplanaires",
+                  "correct": false
+                },
+                {
+                  "content": "Confondues",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les plans $(ABF)$ (face de devant) et $(DCG)$ (face de derrière) sont strictement parallèles.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Nommer : les plans des deux grandes faces verticales opposées. Étape 2 — Chercher : $(AB)$ et $(AE)$ du premier sont parallèles à $(DC)$ et $(DH)$ du second. Étape 3 — Utiliser : deux plans contenant deux droites sécantes respectivement parallèles sont parallèles. Étape 4 — Conclure : strictement parallèles.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la position relative des droites $(EH)$ et $(BC)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Chercher un plan : $(EH)$ est parallèle à $(AD)$ et $(BC)$ est parallèle à $(AD)$, donc $(EH)$ et $(BC)$ sont parallèles entre elles. Étape 2 — Étudier : elles sont distinctes, donc sans point commun. Étape 3 — Conclure : strictement parallèles.",
+              "answers": [
+                {
+                  "content": "Strictement parallèles",
+                  "correct": true
+                },
+                {
+                  "content": "Sécantes",
+                  "correct": false
+                },
+                {
+                  "content": "Non coplanaires",
+                  "correct": false
+                },
+                {
+                  "content": "Confondues",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la position de la droite $(EG)$ et du plan $(ABC)$ du plateau du dessous ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Nommer : la droite $(EG)$ et le plan $(ABC)$. Étape 2 — Chercher : $(EG)$ est parallèle à $(AC)$, qui est dans $(ABC)$, et $E$ n'est pas dans ce plan. Étape 3 — Utiliser : une droite parallèle à une droite du plan, sans y être incluse, est parallèle au plan. Étape 4 — Conclure : strictement parallèles.",
+              "answers": [
+                {
+                  "content": "Strictement parallèles",
+                  "correct": true
+                },
+                {
+                  "content": "Sécants en un point",
+                  "correct": false
+                },
+                {
+                  "content": "$(EG)$ est incluse dans le plan",
+                  "correct": false
+                },
+                {
+                  "content": "Confondus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Justifie que le plan $(ACG)$ contient le point $E$.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Citer les deux droites parallèles $(AE)$ et $(CG)$",
+                "Citer la règle : deux parallèles distinctes déterminent un plan",
+                "Conclure que $E$ appartient au plan $(ACG)$"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Les droites $(AE)$ et $(CG)$ sont parallèles (arêtes verticales) et distinctes. Étape 2 — Deux droites parallèles distinctes déterminent un seul plan, qui est $(ACG)$ puisqu'il contient $A$, $C$, $G$. Étape 3 — Ce plan contient la droite $(AE)$ entière, donc le point $E$. Conclusion : $E \\in (ACG)$. Points : 1 pour le choix des deux parallèles, 1 pour la règle citée et la conclusion.",
+              "answers": [],
+              "starter": "Les droites $(AE)$ et $(CG)$ sont..."
+            }
+          ]
+        },
+        {
+          "title": "La charpente de la case",
+          "statement": "La charpente d'une case est une pyramide $SABCD$ : la base $ABCD$ est un carré de centre $O$ et $S$ est le sommet. Le charpentier doit vérifier des alignements et des parallélismes avant de poser les chevrons.",
+          "exercise_type": "evaluation",
+          "figure": "charpente-pyramide",
+          "questions": [
+            {
+              "content": "Quelle est l'intersection des plans $(SAB)$ et $(SCD)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Nommer : les plans $(SAB)$ et $(SCD)$. Étape 2 — Chercher des points communs : $S$ est commun. Étape 3 — Utiliser le toit : $(AB) \\subset (SAB)$, $(CD) \\subset (SCD)$ et $(AB)$ parallèle à $(CD)$. Étape 4 — Conclure : l'intersection est la parallèle à $(AB)$ passant par $S$.",
+              "answers": [
+                {
+                  "content": "La droite passant par $S$ et parallèle à $(AB)$",
+                  "correct": true
+                },
+                {
+                  "content": "La droite $(AB)$",
+                  "correct": false
+                },
+                {
+                  "content": "Le seul point $S$",
+                  "correct": false
+                },
+                {
+                  "content": "La droite $(SC)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Justifie que la droite $(AB)$ est parallèle au plan $(SCD)$.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Citer le parallélisme de $(AB)$ avec $(CD)$, droite du plan",
+                "Préciser que $(AB)$ n'est pas incluse dans $(SCD)$",
+                "Conclure avec la propriété : parallèle à une droite du plan"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — $ABCD$ est un carré, donc $(AB)$ est parallèle à $(CD)$. Étape 2 — $(CD)$ est une droite du plan $(SCD)$. Étape 3 — $(AB)$ n'est pas incluse dans $(SCD)$ : sinon $A$, $B$, $S$ seraient dans $(SCD)$ et $(SCD)$ serait le plan de la base. Conclusion : une droite parallèle à une droite du plan, sans y être incluse, est parallèle au plan. Points : 1 pour le parallélisme avec $(CD)$, 1 pour la non-inclusion et la conclusion.",
+              "answers": [],
+              "starter": "Dans le carré $ABCD$, ..."
+            },
+            {
+              "content": "Quelle est la position relative des droites $(SA)$ et $(BC)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Chercher un plan : un plan contenant $(BC)$ et $(SA)$ contiendrait $B$, $C$ et $A$, donc serait le plan de la base, qui ne contient pas $S$. Étape 2 — Aucun plan ne convient. Étape 3 — Conclure : non coplanaires, malgré l'absence de point commun.",
+              "answers": [
+                {
+                  "content": "Non coplanaires",
+                  "correct": true
+                },
+                {
+                  "content": "Sécantes",
+                  "correct": false
+                },
+                {
+                  "content": "Strictement parallèles",
+                  "correct": false
+                },
+                {
+                  "content": "Confondues",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La droite $(BC)$ est parallèle au plan $(SAD)$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Nommer : $(BC)$ et le plan $(SAD)$. Étape 2 — Chercher : $(BC)$ est parallèle à $(AD)$, droite de $(SAD)$. Étape 3 — Utiliser : $(BC)$ n'est pas dans $(SAD)$, donc elle est parallèle à ce plan. Étape 4 — Conclure : vrai.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les plans $(SAC)$ et $(SBD)$ se coupent suivant la droite $(SO)$ ; $O$ est le point d'intersection de $(AC)$ et de ___ (écris deux lettres majuscules).",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Nommer : $(SAC)$ et $(SBD)$. Étape 2 — Chercher : $S$ est commun, et le centre $O$ du carré est sur $(AC)$ et sur $(BD)$, donc dans les deux plans. Étape 3 — Utiliser : $S$ et $O$ donnent la droite $(SO)$. Étape 4 — Conclure : $O$ est le point d'intersection de $(AC)$ et $(BD)$.",
+              "answers": [
+                {
+                  "content": "BD",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Cherche toujours un point commun avant de conclure sur une intersection."
+        },
+        {
+          "title": "Un plateau de table taillé en biais",
+          "statement": "Un menuisier assemble une caisse cubique $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont les sommets situés au-dessus de $A$, $B$, $C$, $D$. La caisse a 60 cm d'arête ; pour tailler un plateau de table en biais, il la coupe par un plan. Le point $I$ est le milieu de $[AE]$, $J$ le milieu de $[BF]$ et $K$ le point de $[CG]$ tel que $CK = 15$ cm. Le plan $(IJK)$ coupe $[DH]$ en $L$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans quelle face du cube se trouve le côté $[IJ]$ de la section ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $I \\in [AE]$ et $J \\in [BF]$. Étape 2 — Relier : $[AE]$ et $[BF]$ sont deux arêtes de la face de devant $ABFE$. Étape 3 — Utiliser : deux points d'une même face sont reliés par un côté de la section. Étape 4 — Conclure : $[IJ]$ est dans la face $ABFE$.",
+              "answers": [
+                {
+                  "content": "La face $ABFE$",
+                  "correct": true
+                },
+                {
+                  "content": "La face $ABCD$",
+                  "correct": false
+                },
+                {
+                  "content": "La face $DCGH$",
+                  "correct": false
+                },
+                {
+                  "content": "La face $EFGH$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La face $DCGH$ est parallèle à la face $ABFE$. Quelle droite est parallèle au côté de la section situé dans $DCGH$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le côté dans $DCGH$ passe par $K$ et $L$. Étape 2 — Relier : $[IJ]$ est dans $ABFE$. Étape 3 — Utiliser le parallélisme : un plan qui coupe deux faces parallèles les coupe selon des segments parallèles. Étape 4 — Conclure : $(KL)$ est parallèle à $(IJ)$.",
+              "answers": [
+                {
+                  "content": "$(IJ)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(IK)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(AE)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(JK)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La droite $(KL)$ est parallèle à $(CD)$, et $(CK)$ est parallèle à $(DL)$ (arêtes verticales). Quelle est la longueur $DL$, en cm ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : $K$ est sur $[CG]$ avec $CK = 15$ cm, et $L$ sur $[DH]$. Étape 2 — Relier : $[KL]$ est dans la face $DCGH$. Étape 3 — Utiliser : $(KL)$ est parallèle à $(CD)$ et $(CK)$ est parallèle à $(DL)$, donc $DCKL$ est un parallélogramme. Étape 4 — Conclure : $DL = CK = 15$ cm.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ],
+              "unit": "cm"
+            },
+            {
+              "content": "Le quadrilatère $IJKL$ est un parallélogramme.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : $I, J, K, L$ sont les sommets de la section. Étape 2 — Relier : $[IJ]$, $[JK]$, $[KL]$, $[LI]$ sont dans les faces $ABFE$, $BCGF$, $DCGH$, $ADHE$. Étape 3 — Utiliser le parallélisme : $ABFE$ est parallèle à $DCGH$, donc $(IJ)$ et $(KL)$ sont parallèles ; $ADHE$ est parallèle à $BCGF$, donc $(IL)$ et $(JK)$ sont parallèles. Étape 4 — Conclure : côtés opposés parallèles, c'est un parallélogramme.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de côtés a la section du cube par le plan $(IJK)$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le plan coupe les quatre arêtes verticales $[AE]$, $[BF]$, $[CG]$, $[DH]$ en $I$, $J$, $K$, $L$. Étape 2 — Relier : ces points sont reliés deux à deux dans les quatre faces verticales. Étape 3 — Utiliser : le fond et le dessus ne sont pas coupés selon un segment. Étape 4 — Conclure : la section a 4 côtés.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi les droites $(IL)$ et $(JK)$ sont parallèles.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Placer $(IL)$ et $(JK)$ dans les faces opposées $ADHE$ et $BCGF$",
+                "Dire que ces faces sont parallèles",
+                "Conclure avec la propriété des plans parallèles coupés par un troisième plan"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — $I$ et $L$ sont dans la face $ADHE$, $J$ et $K$ dans la face $BCGF$. Étape 2 — Ces deux faces sont des faces opposées du cube, donc parallèles. Étape 3 — Le plan $(IJK)$ coupe deux plans parallèles selon deux droites parallèles. Conclusion : $(IL)$ est parallèle à $(JK)$. Points : 1 pour les deux faces, 1 pour la propriété citée.",
+              "answers": [],
+              "starter": "Les points $I$ et $L$ sont dans la face..."
+            }
+          ],
+          "hint": "Un plan qui coupe deux faces parallèles les coupe selon des segments parallèles."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Savoirs de base",
+          "notions": "Règles d'incidence et plans déterminés ; positions relatives de deux droites ; droite et plan, deux plans, parallélisme ; section d'un cube ou d'un tétraèdre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un menuisier fabrique une caisse en forme de cube $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. On revoit les règles d'incidence.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Trois points alignés déterminent un unique plan.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : trois points alignés sur une droite $d$. Étape 2 — Vérifier : la règle exige des points non alignés. Étape 3 — Appliquer : une infinité de plans contiennent $d$, comme les pages d'un livre autour de sa reliure. Étape 4 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de points non alignés faut-il au minimum pour déterminer un plan ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on cherche le nombre minimal de points. Étape 2 — Vérifier : deux points ne déterminent qu'une droite, contenue dans une infinité de plans. Étape 3 — Appliquer : trois points non alignés déterminent un seul plan. Étape 4 — Conclure : 3 points.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une droite $d$ et un point $M$ hors de $d$ déterminent ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : une droite $d$ et un point $M$ qui n'est pas sur elle. Étape 2 — Vérifier : $M \\notin d$. Étape 3 — Appliquer : la règle 4 donne un plan unique (on prend deux points de $d$ et $M$). Étape 4 — Conclure : un seul plan.",
+                  "answers": [
+                    {
+                      "content": "un seul plan",
+                      "correct": true
+                    },
+                    {
+                      "content": "une infinité de plans",
+                      "correct": false
+                    },
+                    {
+                      "content": "aucun plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "deux plans",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si deux points distincts d'une droite sont dans un plan, la droite est ___ dans ce plan (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : deux points distincts d'une droite sont dans un plan. Étape 2 — Vérifier : les points sont distincts. Étape 3 — Appliquer : règle 3, la droite est incluse (ou contenue). Étape 4 — Conclure : le mot est « incluse ».",
+                  "answers": [
+                    {
+                      "content": "incluse",
+                      "correct": true
+                    },
+                    {
+                      "content": "contenue",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $E$, $F$, $G$ et $C$ de la caisse sont-ils dans un même plan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : quatre points $E$, $F$, $G$, $C$. Étape 2 — Vérifier : $E$, $F$, $G$ ne sont pas alignés. Étape 3 — Appliquer : ils déterminent le plan du dessus, et $C$ est dans le fond, hors de ce plan. Étape 4 — Conclure : non coplanaires. Dire que quatre points sont toujours coplanaires est faux.",
+                  "answers": [
+                    {
+                      "content": "Non : $E$, $F$, $G$ déterminent le dessus, qui ne contient pas $C$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : quatre sommets d'un cube sont toujours dans un même plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : $C$ est relié à $G$ par une arête",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas le savoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une règle d'incidence s'applique seulement si sa condition est vérifiée."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un menuisier fabrique une caisse en forme de cube $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. On étudie la position de deux arêtes ou diagonales.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la position relative des droites $(AB)$ et $(EF)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : $(AB)$ et $(EF)$ sont dans la face de devant $ABFE$. Étape 2 — Étudier : ce sont deux côtés opposés du carré, sans point commun. Étape 3 — Conclure : strictement parallèles.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non coplanaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position relative des droites $(BC)$ et $(CG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : $(BC)$ et $(CG)$ sont dans la face $BCGF$. Étape 2 — Étudier : elles ont le point $C$ en commun et ne sont pas confondues. Étape 3 — Conclure : sécantes en $C$.",
+                  "answers": [
+                    {
+                      "content": "Sécantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non coplanaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position relative des droites $(AD)$ et $(BF)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : un plan contenant $(AD)$ et $(BF)$ contiendrait $A$, $D$, $B$, donc serait le fond, qui ne contient pas $F$. Étape 2 — Aucun plan ne convient. Étape 3 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "Non coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites non coplanaires peuvent avoir un point commun.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher un plan : si deux droites ont un point commun $M$, elles sont sécantes ou confondues. Étape 2 — Étudier : deux droites sécantes sont dans un même plan (règle 4). Étape 3 — Conclure : elles seraient coplanaires, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les autres arêtes de la caisse, combien sont sécantes avec l'arête $(AB)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher un plan : les arêtes qui coupent $(AB)$ passent par $A$ ou par $B$. Étape 2 — Étudier : en $A$ : $(AD)$ et $(AE)$ ; en $B$ : $(BC)$ et $(BF)$. Étape 3 — Conclure : 4 arêtes sécantes.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Cherche d'abord un plan qui contient les deux droites."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le toit d'une case est une pyramide $SABCD$ : la base $ABCD$ est un rectangle de centre $O$ et $S$ est le sommet. On étudie des droites et des plans de cette toiture.",
+              "exercise_type": "evaluation",
+              "figure": "toit-quatre-pentes",
+              "questions": [
+                {
+                  "content": "La droite $(AB)$ est parallèle au plan $(SCD)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $(AB)$ et le plan $(SCD)$. Étape 2 — Chercher : $ABCD$ est un rectangle, donc $(AB)$ est parallèle à $(CD)$, droite de $(SCD)$. Étape 3 — Utiliser : $(AB)$ n'est pas dans $(SCD)$, donc elle est parallèle à ce plan. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intersection des plans $(SAB)$ et $(ABC)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : $(SAB)$ et la base $(ABC)$. Étape 2 — Chercher : $A$ et $B$ sont communs. Étape 3 — Utiliser : deux points communs distincts donnent la droite $(AB)$. Étape 4 — Conclure : la droite $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "La droite $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point $A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(SA)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(SB)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intersection des plans $(SAD)$ et $(SBC)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : $(SAD)$ et $(SBC)$. Étape 2 — Chercher : $S$ est commun. Étape 3 — Utiliser le toit : $(AD) \\subset (SAD)$, $(BC) \\subset (SBC)$ et $(AD)$ est parallèle à $(BC)$ (côtés opposés du rectangle). Étape 4 — Conclure : la parallèle à $(AD)$ passant par $S$.",
+                  "answers": [
+                    {
+                      "content": "La droite passant par $S$ et parallèle à $(AD)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $(AD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le seul point $S$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(SO)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position de la droite $(SC)$ et du plan $(ABC)$ de la base ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : la droite $(SC)$ et la base. Étape 2 — Chercher : $C$ est commun. Étape 3 — Utiliser : $S$ n'est pas dans la base, donc la droite n'y est pas incluse, et elle n'a pas d'autre point commun. Étape 4 — Conclure : sécants en $C$.",
+                  "answers": [
+                    {
+                      "content": "Sécants en un seul point, le point $C$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(SC)$ est incluse dans le plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux plans sécants ont pour intersection ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Nommer : deux plans sécants. Étape 2 — Chercher : ils ont un point commun. Étape 3 — Utiliser : deux plans distincts qui ont un point commun ont toute une droite commune. Étape 4 — Conclure : une droite.",
+                  "answers": [
+                    {
+                      "content": "une droite",
+                      "correct": true
+                    },
+                    {
+                      "content": "un point",
+                      "correct": false
+                    },
+                    {
+                      "content": "un plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "deux points",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour une intersection de deux plans, cherche deux points communs ou utilise le toit."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un menuisier fabrique une caisse en forme de cube $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. On coupe la caisse par un plan.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un plan passe par $I \\in [AB]$, $J \\in [AD]$ et $K \\in [AE]$, distincts de $A$. La section du cube est un",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $I$, $J$, $K$ sont sur trois arêtes issues de $A$. Étape 2 — Relier : deux à deux, ils sont sur une même face. Étape 3 — Utiliser : les trois côtés ferment le contour. Étape 4 — Fermer : triangle $IJK$.",
+                  "answers": [
+                    {
+                      "content": "triangle",
+                      "correct": true
+                    },
+                    {
+                      "content": "carré",
+                      "correct": false
+                    },
+                    {
+                      "content": "pentagone",
+                      "correct": false
+                    },
+                    {
+                      "content": "hexagone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de côtés peut avoir la section d'un tétraèdre par un plan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : un tétraèdre a 4 faces. Étape 2 — Relier : un côté par face coupée, au plus. Étape 3 — Utiliser : au plus 4 côtés, au moins 3. Étape 4 — Fermer : 3 ou 4.",
+                  "answers": [
+                    {
+                      "content": "3 ou 4",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La section d'un cube par un plan parallèle à une face est un ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le plan coupe les quatre arêtes perpendiculaires à la face. Étape 2 — Relier : les points voisins sont sur une même face. Étape 3 — Utiliser : les faces opposées donnent des côtés parallèles. Étape 4 — Fermer : un carré, de même dimension que la face.",
+                  "answers": [
+                    {
+                      "content": "carré",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La section d'un cube par un plan peut être un hexagone.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : un cube a 6 faces. Étape 2 — Relier : le plan par les milieux de $[AB]$, $[BC]$, $[CG]$ coupe aussi $[GH]$, $[HE]$ et $[EA]$. Étape 3 — Utiliser : six faces sont coupées, une par côté. Étape 4 — Fermer : la section est un hexagone, le maximum possible.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On trace le segment $[AG]$ comme côté d'une section du cube. Que penser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $A$ et $G$ sont deux sommets opposés. Étape 2 — Relier : on ne relie que deux points d'une même face. Étape 3 — Utiliser : $A$ et $G$ n'ont aucune face commune. Étape 4 — Fermer : $[AG]$ traverse l'intérieur du cube, ce n'est pas un côté.",
+                  "answers": [
+                    {
+                      "content": "C'est faux : $A$ et $G$ n'ont aucune face commune, $[AG]$ traverse l'intérieur",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est juste : $A$ et $G$ sont deux points de la section",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est juste : $[AG]$ est la plus longue diagonale",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux seulement si le cube est trop petit",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un côté de section est toujours dans une face du solide."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en contexte ivoirien",
+          "notions": "Étal de marché, toit d'une case, coffre de menuisier et auvent : plans déterminés, positions de droites, droite et plan, deux plans, sections.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un étal de marché est un pavé $ABCDEFGH$ de 150 cm de long ($AB$), 70 cm de large ($AD$) et 90 cm de haut ($AE$) : $ABCD$ est le rectangle posé sur le sol, et le plateau est le rectangle $EFGH$, soutenu par les pieds $[AE]$, $[BF]$, $[CG]$, $[DH]$. Les arêtes du pavé se placent comme celles d'un cube.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la position relative des droites $(AE)$ et $(CG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : deux pieds verticaux $(AE)$ et $(CG)$ sont parallèles et distincts, ils déterminent le plan $(ACG)$. Étape 2 — Étudier : ils sont deux côtés opposés du rectangle $AEGC$, sans point commun. Étape 3 — Conclure : strictement parallèles.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non coplanaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position relative des droites $(BD)$ et $(EG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : si $(BD)$ et $(EG)$ étaient coplanaires, elles seraient sécantes ou parallèles. Étape 2 — Étudier : elles n'ont aucun point commun (sol et plateau sont deux plans parallèles distincts) et ne sont pas parallèles, car $(EG)$ est parallèle à $(AC)$, qui coupe $(BD)$. Étape 3 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "Non coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plan du plateau $(EFG)$ est parallèle au plan du sol $(ABC)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : les plans $(EFG)$ et $(ABC)$. Étape 2 — Chercher : $(EF)$ et $(EH)$ sont parallèles à $(AB)$ et $(AD)$, deux droites sécantes du sol. Étape 3 — Utiliser : deux plans contenant des droites sécantes respectivement parallèles sont parallèles. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de pieds sont parallèles au pied $(AE)$, sans compter $(AE)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher : les quatre pieds sont $(AE)$, $(BF)$, $(CG)$, $(DH)$. Étape 2 — Étudier : des droites parallèles à une même droite sont parallèles entre elles. Étape 3 — Conclure : 3 pieds.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plan $(ACG)$ contient aussi le sommet ___ (une lettre, autre que $A$, $C$, $G$).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : les droites $(AE)$ et $(CG)$ sont parallèles et distinctes. Étape 2 — Vérifier : elles déterminent un plan, qui est $(ACG)$. Étape 3 — Appliquer : il contient toute la droite $(AE)$, donc $E$. Étape 4 — Conclure : le sommet est $E$.",
+                  "answers": [
+                    {
+                      "content": "E",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Les pieds sont des arêtes verticales parallèles."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le toit d'une case est une pyramide $SABCD$ : la base $ABCD$ est un rectangle de centre $O$ et $S$ est le sommet. Le toit est posé sur des murs en forme de rectangle $ABCD$.",
+              "exercise_type": "evaluation",
+              "figure": "toit-quatre-pentes",
+              "questions": [
+                {
+                  "content": "Quelle est la position relative des droites $(AD)$ et $(BC)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : $(AD)$ et $(BC)$ sont dans le plan de la base. Étape 2 — Étudier : ce sont deux côtés opposés du rectangle, sans point commun. Étape 3 — Conclure : strictement parallèles.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non coplanaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position relative des droites $(SA)$ et $(BC)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : un plan contenant $(BC)$ et $(SA)$ contiendrait $B$, $C$, $A$, donc serait la base, qui ne contient pas $S$. Étape 2 — Aucun plan ne convient. Étape 3 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "Non coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intersection des plans $(SAB)$ et $(SCD)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : $(SAB)$ et $(SCD)$. Étape 2 — Chercher : $S$ est commun. Étape 3 — Utiliser le toit : $(AB)$ est parallèle à $(CD)$. Étape 4 — Conclure : la parallèle à $(AB)$ passant par $S$ (le faîtage de la case).",
+                  "answers": [
+                    {
+                      "content": "La droite passant par $S$ et parallèle à $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le seul point $S$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(SO)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(AD)$ est parallèle au plan $(SBC)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $(AD)$ et le plan $(SBC)$. Étape 2 — Chercher : $(AD)$ est parallèle à $(BC)$, droite de $(SBC)$. Étape 3 — Utiliser : $(AD)$ n'est pas dans $(SBC)$, donc elle lui est parallèle. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plans $(SAC)$ et $(SBD)$ se coupent suivant la droite passant par $S$ et par le point ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Nommer : $(SAC)$ et $(SBD)$. Étape 2 — Chercher : $S$ et le centre $O$ du rectangle (point d'intersection de $(AC)$ et $(BD)$) sont communs. Étape 3 — Utiliser : deux points communs donnent la droite $(SO)$. Étape 4 — Conclure : le point est $O$.",
+                  "answers": [
+                    {
+                      "content": "$O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le centre $O$ de la base est sur les deux diagonales."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un menuisier scie un coffre cubique $ABCDEFGH$ de 40 cm d'arête : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. Il coupe le coffre par un plan qui passe par les milieux $I$, $J$, $K$ de $[AE]$, $[BF]$, $[CG]$ ; ce plan coupe $[DH]$ en $L$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la nature de la section $IJKL$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $I$, $J$, $K$ sont à mi-hauteur de trois arêtes verticales. Étape 2 — Relier : $[IJ]$ dans $ABFE$, $[JK]$ dans $BCGF$. Étape 3 — Utiliser : $(IJ)$ est parallèle à $(AB)$ et $(JK)$ à $(BC)$, donc le plan est parallèle au fond (propriété (5)) ; donc $L$ est le milieu de $[DH]$. Étape 4 — Fermer : la section est un carré, de même dimension que le fond.",
+                  "answers": [
+                    {
+                      "content": "Un carré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un triangle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pentagone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un hexagone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la longueur du côté $[IJ]$ de la section, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le plan de la section $IJKL$ est parallèle au fond. Étape 2 — Relier : $[IJ]$ est dans la face $ABFE$. Étape 3 — Utiliser : un plan parallèle à une face coupe le cube selon un carré de même dimension. Étape 4 — Fermer : $IJ = AB = 40$ cm.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la longueur $DL$, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : $L$ est sur $[DH]$, à la même hauteur que $K$ sur $[CG]$. Étape 2 — Relier : $[KL]$ est dans la face $DCGH$. Étape 3 — Utiliser : $(KL)$ est parallèle à $(CD)$ et $(CK)$ est parallèle à $(DL)$, donc $DL = CK = 20$ cm (milieu de $[CG]$). Étape 4 — Fermer : $DL = 20$ cm.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Le plan $(IJK)$ est parallèle au fond $(ABC)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $(IJ)$ et $(JK)$ sont dans le plan $(IJK)$. Étape 2 — Relier : $(IJ)$ est parallèle à $(AB)$ et $(JK)$ à $(BC)$. Étape 3 — Utiliser : deux droites sécantes respectivement parallèles à deux droites sécantes d'un plan donnent deux plans parallèles. Étape 4 — Fermer : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plan $(ABG)$ coupe le coffre selon un quadrilatère de sommets $A$, $B$, $G$ et un quatrième sommet. Lequel ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le plan passe par $A$, $B$ et $G$. Étape 2 — Relier : $(AB)$ est parallèle à $(DC)$, donc à $(GH)$ (côtés opposés de faces). Étape 3 — Utiliser : le plan $(ABG)$ contient donc toute la droite $(GH)$, donc $H$. Étape 4 — Fermer : la section est le quadrilatère $ABGH$, de quatrième sommet $H$.",
+                  "answers": [
+                    {
+                      "content": "$H$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un plan parallèle à une face coupe le cube selon un carré de même dimension."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un auvent est soutenu par un tétraèdre en bois $ABCD$ ; $I$, $J$, $K$ sont les milieux de $[AB]$, $[AC]$, $[AD]$. On suppose $BC = 10$ cm, $BD = 12$ cm et $CD = 8$ cm.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle droite est parallèle à $(IJ)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $I$ et $J$ sont les milieux de $[AB]$ et $[AC]$. Étape 2 — Relier : $[IJ]$ est dans la face $ABC$. Étape 3 — Utiliser : droite des milieux dans $ABC$. Étape 4 — Fermer : $(IJ)$ est parallèle à $(BC)$.",
+                  "answers": [
+                    {
+                      "content": "$(BC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(BD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(CD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AD)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la longueur $IJ$, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : $I$ et $J$ sont les milieux de $[AB]$ et $[AC]$. Étape 2 — Relier : $[IJ]$ est dans $ABC$. Étape 3 — Utiliser : $IJ = \\frac{BC}{2}$. Étape 4 — Fermer : $IJ = \\frac{10}{2} = 5$ cm.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la longueur $IK$, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : $I$ et $K$ sont les milieux de $[AB]$ et $[AD]$. Étape 2 — Relier : $[IK]$ est dans la face $ABD$. Étape 3 — Utiliser : $IK = \\frac{BD}{2}$. Étape 4 — Fermer : $IK = \\frac{12}{2} = 6$ cm.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Les plans $(IJK)$ et $(BCD)$ sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $(IJ)$ et $(IK)$ sont deux droites sécantes du plan $(IJK)$. Étape 2 — Relier : $(IJ)$ est parallèle à $(BC)$ et $(IK)$ à $(BD)$. Étape 3 — Utiliser : ces deux droites de $(BCD)$ sont sécantes, donc les plans sont parallèles. Étape 4 — Fermer : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la nature de la section $IJK$ du tétraèdre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $I$, $J$, $K$ sont sur les trois arêtes issues de $A$. Étape 2 — Relier : deux à deux, ils sont sur une même face. Étape 3 — Utiliser : les trois côtés ferment le contour. Étape 4 — Fermer : triangle $IJK$.",
+                  "answers": [
+                    {
+                      "content": "Un triangle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un parallélogramme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pentagone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un carré",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Utilise la droite des milieux dans chaque face."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Contre-exemples, démonstration d'un parallélisme ou d'une intersection, enchaînement des étapes d'une preuve, nombre de côtés d'une section.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un menuisier fabrique une caisse en forme de cube $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. On juge des affirmations en cherchant des contre-exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux droites de l'espace sans point commun sont toujours parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher un plan : prenons $(AB)$ et $(CG)$. Étape 2 — Étudier : elles n'ont aucun point commun, mais un plan qui les contiendrait contiendrait $A$, $B$, $C$, donc serait le fond, sans $G$. Étape 3 — Conclure : elles sont non coplanaires, donc pas parallèles ; l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel couple de droites est un contre-exemple à « deux droites sans point commun sont parallèles » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : $(AE)$ et $(CG)$ sont parallèles (plan $(ACG)$) ; $(AB)$ et $(BC)$ se coupent en $B$ ; $(AC)$ et $(EG)$ sont parallèles. Étape 2 — Étudier : seules $(AB)$ et $(CG)$ n'ont aucun point commun sans être parallèles. Étape 3 — Conclure : le contre-exemple est $(AB)$ et $(CG)$.",
+                  "answers": [
+                    {
+                      "content": "$(AB)$ et $(CG)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(AE)$ et $(CG)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AB)$ et $(BC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AC)$ et $(EG)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre points de l'espace sont toujours dans un même plan.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : prenons $A$, $B$, $C$, $G$. Étape 2 — Vérifier : $A$, $B$, $C$ déterminent le fond, qui ne contient pas $G$. Étape 3 — Appliquer : trois points non alignés déterminent un seul plan. Étape 4 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on juge cinq affirmations. Étape 2 — Vérifier : deux droites non coplanaires ne sont ni sécantes ni parallèles ; trois points alignés ne déterminent pas un seul plan ; deux plans sécants ont une droite commune. Étape 3 — Appliquer : la règle 4 donne les deux premières. Étape 4 — Conclure : les deux premières sont vraies.",
+                  "answers": [
+                    {
+                      "content": "Deux droites sécantes sont toujours coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux droites parallèles distinctes déterminent un plan",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux droites non coplanaires sont parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois points déterminent toujours un plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux plans sécants ont un seul point commun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la démonstration : « $(AC)$ et $(EG)$ sont parallèles ».",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Chercher un plan : on part des deux arêtes verticales parallèles. Étape 2 — On en déduit le plan qui contient les quatre points. Étape 3 — Étudier : dans ce plan, $AEGC$ est un rectangle. Étape 4 — Conclure : $(AC)$ et $(EG)$, côtés opposés, sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "$(AE)$ et $(CG)$ sont parallèles et distinctes."
+                    },
+                    {
+                      "content": "Elles déterminent un plan qui contient $A$, $C$, $E$, $G$."
+                    },
+                    {
+                      "content": "Dans ce plan, $AEGC$ est un rectangle."
+                    },
+                    {
+                      "content": "$(AC)$ et $(EG)$ sont deux côtés opposés : elles sont parallèles."
+                    }
+                  ]
+                }
+              ],
+              "hint": "Un contre-exemple suffit à montrer qu'une affirmation générale est fausse."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un menuisier fabrique une caisse en forme de cube $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. On démontre des positions relatives avec les mots de la méthode.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la position relative des droites $(AB)$ et $(EH)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : un plan contenant $(AB)$ et $(EH)$ contiendrait $A$, $B$, $E$, donc serait la face de devant, qui ne contient pas $H$. Étape 2 — Aucun plan ne convient. Étape 3 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "Non coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position relative des droites $(BD)$ et $(FH)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : $(BF)$ et $(DH)$ sont parallèles et distinctes, elles déterminent le plan $(BDH)$. Étape 2 — Étudier : $BDHF$ est un rectangle et $(BD)$, $(FH)$ en sont deux côtés opposés. Étape 3 — Conclure : strictement parallèles.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non coplanaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque propriété à la conclusion qu'elle permet.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : trois propriétés du cours. Étape 2 — Vérifier : chacune a sa condition. Étape 3 — Appliquer : parallèles distinctes donnent un plan (règle 4) ; deux points dans un plan donnent l'inclusion (règle 3) ; le parallélisme se transmet. Étape 4 — Conclure : les trois associations.",
+                  "answers": [
+                    {
+                      "content": "Deux droites parallèles distinctes",
+                      "match": "Elles déterminent un plan"
+                    },
+                    {
+                      "content": "Deux points d'une droite dans un plan",
+                      "match": "La droite est incluse dans le plan"
+                    },
+                    {
+                      "content": "Deux droites parallèles à une troisième",
+                      "match": "Elles sont parallèles entre elles"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(AB)$ et $(CG)$ sont ___, car aucun plan ne contient les deux.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Chercher un plan : un plan commun serait le fond, qui ne contient pas $G$. Étape 2 — Aucun plan ne convient. Étape 3 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "non coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de droites parmi $(AB)$, $(DC)$, $(EF)$, $(HG)$, $(BC)$, $(AE)$ sont parallèles à $(AB)$ sans être $(AB)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Chercher un plan : $(DC)$, $(EF)$, $(HG)$ sont parallèles à $(AB)$ (côtés opposés ou parallèles à $(DC)$). Étape 2 — Étudier : $(BC)$ et $(AE)$ coupent $(AB)$ en $B$ et en $A$. Étape 3 — Conclure : 3 droites.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pour dire « non coplanaires », montre qu'aucun plan ne contient les deux droites."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le toit d'une case est une pyramide $SABCD$ : la base $ABCD$ est un rectangle de centre $O$ et $S$ est le sommet. On raisonne sur ses plans et ses droites.",
+              "exercise_type": "evaluation",
+              "figure": "toit-quatre-pentes",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver l'intersection de $(SAD)$ et $(SBC)$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Nommer les deux plans. Étape 2 — Chercher le point commun $S$. Étape 3 — Utiliser le toit avec $(AD)$ et $(BC)$. Étape 4 — Conclure par la droite.",
+                  "answers": [
+                    {
+                      "content": "Nommer les plans $(SAD)$ et $(SBC)$."
+                    },
+                    {
+                      "content": "Trouver un point commun : $S$."
+                    },
+                    {
+                      "content": "Remarquer que $(AD)$ et $(BC)$ sont parallèles et appliquer le toit."
+                    },
+                    {
+                      "content": "Conclure : la parallèle à $(AD)$ passant par $S$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque couple de plans à sa droite d'intersection.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Nommer : trois couples de plans. Étape 2 — Chercher : $(SAB)$ et $(SBC)$ ont $S$ et $B$ ; $(SAD)$ et $(ABC)$ ont $A$ et $D$ ; $(SBC)$ et $(ABC)$ ont $B$ et $C$. Étape 3 — Utiliser : deux points communs donnent la droite. Étape 4 — Conclure : $(SB)$, $(AD)$, $(BC)$.",
+                  "answers": [
+                    {
+                      "content": "$(SAB)$ et $(SBC)$",
+                      "match": "$(SB)$"
+                    },
+                    {
+                      "content": "$(SAD)$ et $(ABC)$",
+                      "match": "$(AD)$"
+                    },
+                    {
+                      "content": "$(SBC)$ et $(ABC)$",
+                      "match": "$(BC)$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une droite parallèle à une droite d'un plan, sans être dans ce plan, est ___ à ce plan (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer : une droite et un plan. Étape 2 — Chercher : la droite est parallèle à une droite du plan. Étape 3 — Utiliser : propriété (1) de la fiche. Étape 4 — Conclure : la droite est parallèle au plan.",
+                  "answers": [
+                    {
+                      "content": "parallèle",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèles",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si une droite est parallèle à un plan, elle est parallèle à toutes les droites de ce plan.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $(AB)$ et le plan $(SCD)$ ; $(AB)$ est parallèle à $(SCD)$. Étape 2 — Chercher : $(AB)$ est parallèle à $(CD)$ mais pas à $(SC)$. Étape 3 — Utiliser : $(AB)$ et $(SC)$ sont non coplanaires. Étape 4 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles droites sont incluses dans le plan $(SAC)$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Nommer : le plan $(SAC)$. Étape 2 — Chercher : $A$ et $C$ sont dans ce plan, donc $(AC)$ ; $S$ et $O$ (sur $(AC)$) aussi, donc $(SO)$. Étape 3 — Utiliser : $(BD)$ ne coupe le plan qu'en $O$ ; $(SB)$ et $(AB)$ ne sont pas incluses. Étape 4 — Conclure : $(AC)$ et $(SO)$.",
+                  "answers": [
+                    {
+                      "content": "$(AC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(SO)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(BD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(SB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AB)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le toit : deux plans sécants contenant chacun une de deux droites parallèles se coupent selon une parallèle."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un menuisier fabrique une caisse en forme de cube $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. On raisonne sur les sections du cube.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un plan qui coupe deux faces parallèles du cube les coupe selon deux segments parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : deux faces parallèles, par exemple $ABFE$ et $DCGH$. Étape 2 — Relier : le plan coupe chacune selon un segment. Étape 3 — Utiliser : deux plans parallèles coupés par un troisième plan donnent deux droites parallèles. Étape 4 — Fermer : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de faces du cube sont coupées selon un côté par un plan qui passe par les milieux de $[AB]$, $[BC]$ et $[CG]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : ces milieux sont sur les faces $ABCD$, $BCGF$, $ABFE$. Étape 2 — Relier : le plan coupe aussi $[GH]$, $[HE]$ et $[EA]$ en leur milieu. Étape 3 — Utiliser : chaque côté est dans une face différente. Étape 4 — Fermer : la section est un hexagone, les 6 faces sont coupées.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La section du cube par un plan peut avoir au plus combien de côtés ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : un cube a 6 faces. Étape 2 — Relier : un côté de section par face au plus. Étape 3 — Utiliser : la règle (4) de la fiche. Étape 4 — Fermer : au plus 6 côtés.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La section d'un cube par un plan parallèle à une face est un ___ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : plan parallèle à la face $ABCD$. Étape 2 — Relier : il coupe les quatre arêtes verticales. Étape 3 — Utiliser : les faces opposées donnent des côtés parallèles, de même longueur que les arêtes du fond. Étape 4 — Fermer : un carré.",
+                  "answers": [
+                    {
+                      "content": "carré",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi ne relie-t-on pas, comme côté de la section, deux points qui ne sont sur aucune face commune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : deux points sans face commune. Étape 2 — Relier : on ne relie que des points d'une même face. Étape 3 — Utiliser : sinon le segment passe à l'intérieur. Étape 4 — Fermer : ce n'est pas un côté de la section.",
+                  "answers": [
+                    {
+                      "content": "Parce que le segment qui les joint traverse l'intérieur du solide au lieu d'être dans une face",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le segment est toujours trop long",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'une section n'a jamais de côté oblique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il faut toujours relier les points dans l'ordre alphabétique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Chaque côté d'une section est dans une face du solide."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Règles d'incidence, positions relatives de deux droites, droite et plan, deux plans, théorème du toit, sections d'un cube et d'un tétraèdre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un établi est un pavé $ABCDEFGH$ : $ABCD$ est le rectangle posé sur le sol et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. Les arêtes se placent comme celles d'un cube.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Les points $A$, $B$ et $G$ ne sont pas alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $A$, $B$, $G$. Étape 2 — Vérifier : $G$ est au-dessus de $C$, donc n'est pas sur $(AB)$, droite du sol. Étape 3 — Appliquer : trois points non alignés déterminent un plan. Étape 4 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position relative des droites $(AF)$ et $(DG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : $(AD)$ et $(FG)$ sont parallèles et distinctes, elles déterminent un plan qui contient $A$, $D$, $F$, $G$. Étape 2 — Étudier : $ADGF$ est un rectangle et $(AF)$, $(DG)$ en sont deux côtés opposés. Étape 3 — Conclure : strictement parallèles.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non coplanaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position relative des droites $(AC)$ et $(BD)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : $(AC)$ et $(BD)$ sont dans le plan du sol. Étape 2 — Étudier : les diagonales d'un rectangle se coupent en son centre. Étape 3 — Conclure : sécantes.",
+                  "answers": [
+                    {
+                      "content": "Sécantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non coplanaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la position des plans $(ABF)$ et $(DCG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : les deux grandes faces verticales opposées. Étape 2 — Chercher : $(AB)$ et $(AE)$ sont parallèles à $(DC)$ et $(DH)$. Étape 3 — Utiliser : deux droites sécantes respectivement parallèles à deux droites sécantes d'un autre plan donnent deux plans parallèles. Étape 4 — Conclure : strictement parallèles.",
+                  "answers": [
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécants selon $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sécants selon $(DC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de sommets du pavé n'appartiennent pas au plan du sol $(ABC)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le plan $(ABC)$ contient $A$, $B$, $C$, $D$. Étape 2 — Vérifier : $A$, $B$, $C$ ne sont pas alignés. Étape 3 — Appliquer : ce plan est unique. Étape 4 — Conclure : $E$, $F$, $G$, $H$ sont hors du plan, soit 4 sommets.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Applique la méthode : cherche un plan commun, puis les points communs."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le toit d'une case est une pyramide $SABCD$ de base carrée $ABCD$ de centre $O$, de sommet $S$. Le charpentier vérifie des parallélismes avant la pose.",
+              "exercise_type": "evaluation",
+              "figure": "charpente-pyramide",
+              "questions": [
+                {
+                  "content": "Quelle est la position relative des droites $(SA)$ et $(BC)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Chercher un plan : un plan contenant $(BC)$ et $(SA)$ contiendrait $B$, $C$, $A$, donc serait la base, qui ne contient pas $S$. Étape 2 — Aucun plan ne convient. Étape 3 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "Non coplanaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sécantes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Strictement parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intersection des plans $(SAB)$ et $(SCD)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : $(SAB)$ et $(SCD)$. Étape 2 — Chercher : $S$ est commun. Étape 3 — Utiliser le toit : $(AB)$ est parallèle à $(CD)$. Étape 4 — Conclure : la parallèle à $(AB)$ passant par $S$.",
+                  "answers": [
+                    {
+                      "content": "La droite passant par $S$ et parallèle à $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le seul point $S$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(SO)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(AB)$ est parallèle au plan $(SCD)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $(AB)$ et $(SCD)$. Étape 2 — Chercher : $(AB)$ est parallèle à $(CD)$, droite de $(SCD)$. Étape 3 — Utiliser : $(AB)$ n'est pas dans $(SCD)$. Étape 4 — Conclure : $(AB)$ est parallèle au plan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plans $(SAC)$ et $(SBD)$ se coupent suivant la droite $(SO)$ ; le point $O$ est le centre du carré, donc le ___ de $[AC]$ (un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer : $(SAC)$ et $(SBD)$. Étape 2 — Chercher : $S$ et $O$ sont communs. Étape 3 — Utiliser : $O$ est le centre du carré, point d'intersection des diagonales. Étape 4 — Conclure : $O$ est le milieu de $[AC]$ (les diagonales d'un carré se coupent en leur milieu).",
+                  "answers": [
+                    {
+                      "content": "milieu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles droites sont incluses dans le plan $(SAB)$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Nommer : le plan $(SAB)$. Étape 2 — Chercher : $A$ et $B$ sont dans le plan, donc $(AB)$ ; $S$ et $B$ aussi, donc $(SB)$. Étape 3 — Utiliser : $(BC)$, $(SC)$, $(AD)$ ont un seul point dans le plan ou aucun. Étape 4 — Conclure : $(AB)$ et $(SB)$.",
+                  "answers": [
+                    {
+                      "content": "$(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(SB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(BC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(SC)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(AD)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Deux points dans un plan suffisent pour que la droite qui les joint y soit incluse."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un trépied de menuisier est un tétraèdre $ABCD$ ; $I$, $J$, $K$, $L$ sont les milieux de $[AB]$, $[AC]$, $[BD]$, $[CD]$, et le plan $(IJK)$ coupe le tétraèdre selon $IJLK$. On suppose $BC = 10$ cm et $AD = 6$ cm.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle droite est parallèle à $(IJ)$ et à $(KL)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $I$, $J$ sont les milieux de $[AB]$, $[AC]$. Étape 2 — Relier : $[IJ]$ dans $ABC$, $[KL]$ dans $BCD$. Étape 3 — Utiliser : droite des milieux dans $ABC$ ; puis le toit donne $(KL)$ parallèle à $(IJ)$. Étape 4 — Fermer : la droite est $(BC)$.",
+                  "answers": [
+                    {
+                      "content": "$(BC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(AD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(BD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(CD)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la longueur $IJ$, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : $I$, $J$ milieux de $[AB]$, $[AC]$. Étape 2 — Relier : $[IJ]$ est dans $ABC$. Étape 3 — Utiliser : $IJ = \\frac{BC}{2}$. Étape 4 — Fermer : $IJ = 5$ cm.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Quelle est la longueur $IK$, en cm ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : $I$ milieu de $[AB]$, $K$ milieu de $[BD]$. Étape 2 — Relier : $[IK]$ est dans $ABD$. Étape 3 — Utiliser : droite des milieux, $IK = \\frac{AD}{2}$. Étape 4 — Fermer : $IK = \\frac{6}{2} = 3$ cm.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Les droites $(IK)$ et $(JL)$ sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $(IK)$ est dans $ABD$ et $(JL)$ dans $ACD$. Étape 2 — Relier : $I, K$ milieux de $[AB]$, $[BD]$ ; $J, L$ milieux de $[AC]$, $[CD]$. Étape 3 — Utiliser : $(IK)$ et $(JL)$ sont toutes deux parallèles à $(AD)$. Étape 4 — Fermer : parallèles entre elles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque face du tétraèdre au côté de la section qu'elle contient.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : les quatre sommets de la section. Étape 2 — Relier : $I, J$ sur $ABC$ ; $I, K$ sur $ABD$ ; $K, L$ sur $BCD$ ; $J, L$ sur $ACD$. Étape 3 — Utiliser : deux points d'une même face donnent un côté. Étape 4 — Fermer : chaque face porte un côté.",
+                  "answers": [
+                    {
+                      "content": "Face $ABC$",
+                      "match": "$[IJ]$"
+                    },
+                    {
+                      "content": "Face $ABD$",
+                      "match": "$[IK]$"
+                    },
+                    {
+                      "content": "Face $BCD$",
+                      "match": "$[KL]$"
+                    },
+                    {
+                      "content": "Face $ACD$",
+                      "match": "$[JL]$"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Droite des milieux dans chaque face, puis le parallélisme."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un menuisier fabrique une caisse en forme de cube $ABCDEFGH$ : $ABCD$ est le fond, et $E$, $F$, $G$, $H$ sont au-dessus de $A$, $B$, $C$, $D$. Il coupe la caisse par le plan qui passe par $B$, $D$ et $G$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la section du cube par le plan $(BDG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $B$, $D$, $G$ sont des sommets du cube. Étape 2 — Relier : $B$ et $D$ sont sur la face $ABCD$, $B$ et $G$ sur $BCGF$, $D$ et $G$ sur $CDHG$. Étape 3 — Utiliser : ces trois côtés ferment le contour (le plan coupe le coin $C$). Étape 4 — Fermer : triangle $BDG$.",
+                  "answers": [
+                    {
+                      "content": "Le triangle $BDG$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un carré",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un hexagone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pentagone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de faces du cube contiennent un côté de la section $BDG$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les trois côtés $[BD]$, $[BG]$, $[DG]$. Étape 2 — Relier : ils sont dans les faces $ABCD$, $BCGF$ et $CDHG$. Étape 3 — Utiliser : un côté par face coupée. Étape 4 — Fermer : 3 faces, toutes issues du sommet $C$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(BD)$ est parallèle au plan $(EFG)$ du dessus.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : $(BD)$ et le plan $(EFG)$. Étape 2 — Chercher : $(BD)$ est parallèle à $(FH)$ (côtés opposés du rectangle $BDHF$), et $(FH)$ est dans $(EFG)$. Étape 3 — Utiliser : $(BD)$ n'est pas dans $(EFG)$. Étape 4 — Conclure : $(BD)$ est parallèle au plan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'intersection des plans $(BDG)$ et $(EFG)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : $(BDG)$ et $(EFG)$. Étape 2 — Chercher : $G$ est commun. Étape 3 — Utiliser le toit : $(BD) \\subset (BDG)$, $(FH) \\subset (EFG)$ et $(BD)$ est parallèle à $(FH)$. Étape 4 — Conclure : la parallèle à $(BD)$ passant par $G$ ; ce n'est pas $(FH)$, qui ne passe pas par $G$.",
+                  "answers": [
+                    {
+                      "content": "La droite passant par $G$ et parallèle à $(BD)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $(BD)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le seul point $G$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(FH)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $B$, $D$, $G$ et $A$ sont-ils dans un même plan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : quatre points $B$, $D$, $G$, $A$. Étape 2 — Vérifier : $B$, $D$, $G$ ne sont pas alignés. Étape 3 — Appliquer : ils déterminent le plan $(BDG)$, qui coupe le coin $C$ et laisse $A$ de l'autre côté, donc $A$ n'y est pas. Étape 4 — Conclure : non coplanaires.",
+                  "answers": [
+                    {
+                      "content": "Non : $B$, $D$, $G$ déterminent le plan $(BDG)$, qui ne contient pas $A$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : quatre points sont toujours dans un même plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : $A$ est un sommet du cube",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : $(BD)$ est une droite du fond",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le plan $(BDG)$ coupe le coin $C$ du cube."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
