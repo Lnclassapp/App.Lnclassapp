@@ -177,6 +177,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`finitions-ux`](finitions-ux/memo.md) | livré | feature | 2026-09-29 | Finitions UX |
 | [`flux-allege`](flux-allege/memo.md) | livré | refactoring | 2026-11-06 | Un flux allégé : petites branches, retouches, messages, mesure mensuelle |
 | [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | planifié | feature | 2026-10-02 | Fonctions de l'espace élève |
+| [`formules-apres-soumission`](formules-apres-soumission/memo.md) | livré | bugfix | 2026-11-14 | Formules LaTeX brutes après « Vérifier » |
 | [`generer-classes`](generer-classes/memo.md) | livré | feature | 2026-09-28 | Générer les classes manquantes des établissements |
 | [`gestion-etablissement-direction`](gestion-etablissement-direction/memo.md) | planifié | feature | 2026-10-01 | La direction gère son établissement |
 | [`historique-eleve`](historique-eleve/memo.md) | livré | feature | 2026-10-15 | Historique de l'élève aux couleurs Wave et Djamo |

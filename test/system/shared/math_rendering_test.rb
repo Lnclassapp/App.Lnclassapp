@@ -16,6 +16,22 @@ class MathRenderingTest < ApplicationSystemTestCase
     assert katex_loaded?
   end
 
+  # Un turbo-frame ou un Turbo Stream remplace le contenu sous l'élément porteur sans le reconnecter (formules-apres-soumission).
+  test "une formule arrivée après coup sous un élément math déjà connecté est rendue" do
+    visit root_path
+    page.execute_script(<<~JS)
+      document.body.insertAdjacentHTML("beforeend", '<div id="host" data-controller="math"><p>Rien</p></div>')
+    JS
+    assert_selector "#host", text: "Rien"
+
+    page.execute_script(<<~JS)
+      document.querySelector("#host").innerHTML = '<p id="late">Indice : $\\\\overrightarrow{DC}$</p>'
+    JS
+
+    assert_selector "#late .katex"
+    assert_no_text "overrightarrow{DC}"
+  end
+
   def katex_loaded? = page.evaluate_script("performance.getEntriesByType('resource').some((entry) => entry.name.includes('auto-render'))")
 
   test "le point d'entrée commun ne contient pas KaTeX" do
