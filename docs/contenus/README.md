@@ -17,14 +17,16 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 ## Le pipeline d'une leçon
 
-**rédaction → script → relecture IA → import en brouillon → validation équipe → publication**
+**rédaction → script → relecture IA indépendante → validateur pédagogique (agent) → script → PR → import → publication**
+
+Aucune leçon n'attend plus d'enseignant : l'étape « à faire valider par un enseignant » est remplacée par l'agent `validateur-pedagogique`, qui tranche chaque point avant la PR (ADR-XXXX-validateur-pedagogique-agent).
 
 1. **Rédiger.** Copier `prompt-redaction.md`, remplir son bloc **ENTRÉE** (intitulé exact de la progression, niveau, rang). Le résultat est un fichier JSON `lnclass.course-tree` version 3 : les versions 1 et 2 sont **retirées** et refusées à l'import (`format_retired`).
 2. **Contrôler avec le script.** `ruby script/contenus/valider.rb fichier.json`. Il refuse ce que l'import refuserait (gabarit, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, correction absente `blank`, `too_short` ou `too_long`, figures hors règles), avec le code que l'import rend (test de parité `test/script/contenus/parite_import_test.rb`) et avertit des défauts de rédaction : correction qui ne cite aucune étape de La méthode, mots interdits, question qui dépend d'un élément absent. Il ne vérifie pas les calculs.
-3. **Relecture IA indépendante.** Un autre modèle que l'auteur refait chaque calcul et vérifie que chaque correction suit la méthode. Les défauts sont corrigés, puis le script est relancé.
-4. **Importer en brouillon** depuis l'écran **Imports**. Rien n'est visible des élèves. Une leçon encore en brouillon peut être réimportée (elle garde son adresse) ; une leçon publiée est refusée.
-5. **Validation par l'équipe** dans l'application : la fiche de révision, les figures, les exercices et leurs corrections. Pour le pilote 3ème, un enseignant de mathématiques relit avant publication.
-6. **Publier.**
+3. **Relecture IA indépendante.** Un autre modèle que l'auteur refait chaque calcul et vérifie que chaque correction suit la méthode. Les défauts sont corrigés, puis le script est relancé. Les points où l'auteur ou le relecteur hésite vont à l'étape suivante.
+4. **Validateur pédagogique** ([`.claude/agents/validateur-pedagogique.md`](../../.claude/agents/validateur-pedagogique.md), Opus, jamais auteur ni relecteur de la leçon). Il tranche chaque point qu'on aurait renvoyé à un enseignant (fait, date, chiffre, rattachement au programme et à la progression DPFC 2026-2027, niveau de la classe et de la série, barème, méthode, planches et figures) : il corrige la leçon ou confirme avec la source ou la raison, et retire ou reformule de façon sûre ce qu'il ne peut établir avec certitude. Chaque décision va au journal du chantier (point, décision, justification). Puis `valider.rb` est relancé.
+5. **PR**, puis **import** depuis l'écran **Imports**. Une leçon encore en brouillon peut être réimportée (elle garde son adresse) ; une leçon publiée est refusée.
+6. **Publier**, après une vérification du rendu par l'équipe.
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 

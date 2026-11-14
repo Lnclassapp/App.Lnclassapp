@@ -287,6 +287,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`ux-pages-eleve`](ux-pages-eleve/) | pas de memo | — | — | — |
 | [`validation-enseignants-en-pause`](validation-enseignants-en-pause/memo.md) | en cours | feature | 2026-10-02 | Validation des enseignants en pause |
 | [`validation-figures-bornee`](validation-figures-bornee/memo.md) | livré | optimisation | 2026-10-30 | Validation des figures bornée |
+| [`validation-pedagogique-agent`](validation-pedagogique-agent/memo.md) | en cours | refactoring | 2026-11-14 | Validateur pédagogique des leçons |
 | [`verification-whatsapp`](verification-whatsapp/memo.md) | backlog | feature | 2026-09-28 | Vérifier le numéro par WhatsApp à l'inscription sans code |
 | [`vie-de-la-classe`](vie-de-la-classe/memo.md) | livré | feature | 2026-10-16 | La vie de la classe : la modifier, la lire, la fermer pour de bon |
 <!-- chantiers:end -->
