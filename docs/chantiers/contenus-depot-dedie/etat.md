@@ -2,15 +2,15 @@
 
 > Tenu par l'orchestrateur ([`docs/workflows/orchestrateur.md`](../../workflows/orchestrateur.md)). Mis à jour une fois, en fin de session ; toute session d'orchestration commence par le lire. Ni secret, ni identifiant.
 
-**Mis à jour le** : 2026-11-14 · **Vague** : 1 · **Où on en est** : Lot A fusionné (#597) ; Lot B fait (dépôt de contenus peuplé, historique conservé) ; Lot C en PR
+**Mis à jour le** : 2026-11-14 · **Vague** : 1 · **Où on en est** : Lots A, B et C livrés (#597, dépôt de contenus `main`, #602) ; reste la vérification de `valider.yml` une fois `APP_READ_TOKEN` posé
 
 ## Lots
 
 | Lot | Session | Branche | PR | SHA de tête vérifié | État |
 |---|---|---|---|---|---|
 | A | session_011uw6y8hZAQ1XKGDPRrNkSH | `feature/contenus-depot-dedie` | #597 | — | Fusionné |
-| B | session_011uw6y7ydmchvQpQZBWaziC | `main` de `Lnclassapp/App.Lnclassapp-contenus` | — | `eced0ac` | Done (`valider.yml` attend le secret `APP_READ_TOKEN`) |
-| C | session_011uw6y7ydmchvQpQZBWaziC | `feature/contenus-depot-dedie-migration` | voir journal | — | PR prête |
+| B | session_011uw6y7ydmchvQpQZBWaziC | `main` de `Lnclassapp/App.Lnclassapp-contenus` | contenus#1 (report de #603) | `1b69fc1` | Fusionné (`valider.yml` attend le secret `APP_READ_TOKEN`) |
+| C | session_011uw6y7ydmchvQpQZBWaziC | `feature/contenus-depot-dedie-migration` | #602 | `0ad7a085` | Fusionné |
 
 ## Décisions
 
@@ -23,7 +23,7 @@ Ouvertes : `script/docs/a_trancher`, et les sections `## À trancher` des journa
 
 ## Prochaine action
 
-Fusionner la PR du Lot C ; le porteur pose `APP_READ_TOKEN` dans le dépôt de contenus, puis une PR d'essai y vérifie `valider.yml`. Ensuite : portes de sortie de `plan.md`, clôture du journal.
+Le porteur pose `APP_READ_TOKEN` dans le dépôt de contenus ; relancer `valider.yml` sur `main` (workflow_dispatch) puis cocher les portes de sortie de `plan.md` et clore le journal.
 
 ## Prompt de reprise
 
