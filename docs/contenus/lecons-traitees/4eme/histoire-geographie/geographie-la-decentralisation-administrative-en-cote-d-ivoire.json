@@ -1,0 +1,3591 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — La décentralisation administrative en Côte d'Ivoire",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "4ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "fig-collectivites",
+          "kind": "diagram",
+          "description": "Schéma en arbre, de haut en bas. Au sommet, les collectivités territoriales. Elles se divisent en deux : la région et la commune. La région a pour organes le conseil régional, élu, et son président. La commune a pour organes le conseil municipal, élu, et le maire.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "ct",
+                "label": "Collectivités territoriales",
+                "category": 1
+              },
+              {
+                "id": "reg",
+                "label": "Région",
+                "category": 2
+              },
+              {
+                "id": "com",
+                "label": "Commune",
+                "category": 2
+              },
+              {
+                "id": "cr",
+                "label": "Conseil régional élu et son président",
+                "category": 3
+              },
+              {
+                "id": "cm",
+                "label": "Conseil municipal élu et le maire",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "ct",
+                "to": "reg",
+                "label": "comprennent"
+              },
+              {
+                "from": "ct",
+                "to": "com",
+                "label": "comprennent"
+              },
+              {
+                "from": "reg",
+                "to": "cr",
+                "label": "a pour organes"
+              },
+              {
+                "from": "com",
+                "to": "cm",
+                "label": "a pour organes"
+              }
+            ],
+            "legend": [
+              "Ensemble",
+              "Collectivité",
+              "Organes"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "fig-ressources",
+          "kind": "diagram",
+          "description": "Schéma fléché de gauche à droite. Les impôts et taxes locaux, payés par les habitants et les commerçants, et les subventions de l'État alimentent le budget de la commune. Le budget finance ensuite les services de la commune : état civil, salubrité, écoles primaires, marchés et voirie.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "taxes",
+                "label": "Impôts et taxes locaux",
+                "category": 1
+              },
+              {
+                "id": "subv",
+                "label": "Subventions de l'État",
+                "category": 1
+              },
+              {
+                "id": "budget",
+                "label": "Budget de la commune",
+                "category": 2
+              },
+              {
+                "id": "serv",
+                "label": "État civil, salubrité, écoles, marchés, voirie",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "taxes",
+                "to": "budget",
+                "label": "alimentent"
+              },
+              {
+                "from": "subv",
+                "to": "budget",
+                "label": "alimentent"
+              },
+              {
+                "from": "budget",
+                "to": "serv",
+                "label": "finance"
+              }
+            ],
+            "legend": [
+              "Ressources",
+              "Budget",
+              "Services rendus"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "fig-comparaison",
+          "kind": "diagram",
+          "description": "Schéma en arbre, de haut en bas. L'État, au sommet, agit de deux façons. À gauche, la déconcentration : l'État envoie des agents nommés, comme le préfet, qui obéissent. À droite, la décentralisation : l'État transfère des compétences à des collectivités dirigées par des élus et les contrôle par la tutelle.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "etat",
+                "label": "État",
+                "category": 1
+              },
+              {
+                "id": "dec",
+                "label": "Déconcentration : agents nommés, comme le préfet",
+                "category": 2
+              },
+              {
+                "id": "decen",
+                "label": "Décentralisation : collectivités dirigées par des élus",
+                "category": 3
+              },
+              {
+                "id": "ordre",
+                "label": "Les agents obéissent à des ordres",
+                "category": 2
+              },
+              {
+                "id": "tut",
+                "label": "Les collectivités sont contrôlées : tutelle",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "etat",
+                "to": "dec",
+                "label": "envoie des agents"
+              },
+              {
+                "from": "etat",
+                "to": "decen",
+                "label": "transfère des compétences"
+              },
+              {
+                "from": "dec",
+                "to": "ordre",
+                "label": "lien"
+              },
+              {
+                "from": "decen",
+                "to": "tut",
+                "label": "lien"
+              }
+            ],
+            "legend": [
+              "État",
+              "Déconcentration",
+              "Décentralisation"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir la décentralisation",
+          "remember": "La **décentralisation** est une manière d'organiser l'État : il **transfère des compétences** (des responsabilités) à des **collectivités territoriales**. Une collectivité territoriale est un territoire dont les affaires locales sont gérées par des **élus**. Elle a la **personnalité morale** (elle agit en son nom, signe des contrats, possède des biens) et l'**autonomie financière** (elle a son propre budget). Elle ne reçoit pas d'ordres comme un agent de l'État, mais l'État la contrôle (notion 4).",
+          "method": [
+            "Repérer qui prend la décision dans la situation : un agent de l'État ou une autorité locale.",
+            "Vérifier comment cette autorité est désignée : élue par les habitants ou nommée par l'État.",
+            "Relever ses moyens : a-t-elle son propre budget et agit-elle en son nom (autonomie financière, personnalité morale) ?",
+            "Conclure : des élus qui gèrent des compétences transférées avec leur propre budget relèvent de la décentralisation."
+          ],
+          "example": {
+            "statement": "Le conseil d'une commune, élu par les habitants, vote la construction d'un marché et le budget qui la paie. Montrer que c'est de la décentralisation.",
+            "steps": [
+              "Repérer : le conseil de la commune décide de construire le marché.",
+              "Vérifier : ses membres sont élus par les habitants, l'État ne les nomme pas.",
+              "Relever : la commune vote son propre budget et agit en son nom pour payer le marché.",
+              "Conclure : des élus gèrent une compétence avec leur budget, c'est de la décentralisation."
+            ]
+          },
+          "pitfall": "Ne confonds pas décentralisation et déconcentration parce que, dans les deux cas, l'administration est proche des habitants. Contre-exemple : le préfet est nommé par l'État et lui obéit (déconcentration) ; le maire est choisi par des conseillers élus et gère le budget de sa commune (décentralisation). Le critère à retenir : qui désigne l'autorité, et qui décide.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître la décentralisation avec la méthode : repérer, vérifier, relever, conclure.",
+            "questions": [
+              {
+                "content": "Le conseil d'une commune, élu par les habitants, vote le budget de la commune et décide de réparer le marché. Comment appelle-t-on cette organisation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le conseil de la commune décide. Étape 2 — Vérifier : ses membres sont élus par les habitants. Étape 3 — Relever : il vote son propre budget. Étape 4 — Conclure : c'est de la décentralisation. Parler de déconcentration est faux : les agents déconcentrés sont nommés, pas élus.",
+                "answers": [
+                  {
+                    "content": "La décentralisation",
+                    "correct": true
+                  },
+                  {
+                    "content": "La déconcentration",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un ordre donné par le ministre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une décision prise par le préfet",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qui a désigné les membres du conseil ?"
+              },
+              {
+                "content": "Dans la décentralisation, l'État transfère des compétences à des collectivités territoriales dirigées par des élus.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Vérifier : les responsables de la collectivité sont élus. Étape 4 — Conclure : l'État transfère des compétences : c'est la définition de la décentralisation.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Relis À retenir : qui reçoit les compétences ?"
+              },
+              {
+                "content": "Une collectivité territoriale a son propre budget : on dit qu'elle a l'___ financière.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Relever : on relève les moyens de la collectivité : un budget propre. Étape 4 — Conclure : cette liberté de gérer son argent s'appelle l'autonomie financière.",
+                "answers": [
+                  {
+                    "content": "autonomie",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le contraire de dépendre en tout de l'État."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître la décentralisation",
+              "statement": "Tu reconnais la décentralisation avec la méthode de la fiche : repérer, vérifier, relever, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle phrase définit le mieux la décentralisation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on repère qui reçoit le pouvoir de décider : la collectivité. Étape 2 — Vérifier : ses responsables sont élus. Étape 3 — Relever : elle a son budget propre. Étape 4 — Conclure : c'est la décentralisation. La phrase sur les agents nommés qui obéissent décrit la déconcentration, pas la décentralisation.",
+                  "answers": [
+                    {
+                      "content": "L'État transfère des compétences à des collectivités territoriales dirigées par des élus",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'État nomme des agents qui obéissent à ses ordres",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État supprime toutes ses administrations",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les habitants d'un village font leurs propres lois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une collectivité territoriale est dirigée par des élus.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Vérifier : on vérifie la désignation des responsables : les conseillers sont élus par les habitants. Étape 4 — Conclure : c'est un trait de la décentralisation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une collectivité peut agir en son nom, signer des contrats et posséder des biens : elle a la personnalité ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Relever : on relève ses moyens d'agir en son nom. Étape 4 — Conclure : cette capacité s'appelle la personnalité morale.",
+                  "answers": [
+                    {
+                      "content": "morale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases décrivent une collectivité territoriale ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Vérifier : les responsables sont élus. Étape 3 — Relever : elle gère son budget propre. Étape 4 — Conclure : ce sont les deux traits de la décentralisation. Un agent nommé qui obéit au ministre relève de la déconcentration, et une collectivité a bien un budget propre.",
+                  "answers": [
+                    {
+                      "content": "Elle est dirigée par des élus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a son propre budget",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est dirigée par un agent nommé qui obéit au ministre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle n'a aucun budget : l'État paie tout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sous-préfet, nommé par l'État, fait appliquer sur place une décision du ministre. De quoi s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on repère un agent de l'État. Étape 2 — Vérifier : il est nommé, pas élu. Étape 3 — Relever : il n'a pas de budget propre et obéit au ministre. Étape 4 — Conclure : c'est de la déconcentration. La décentralisation est fausse ici : elle suppose des élus et un budget propre.",
+                  "answers": [
+                    {
+                      "content": "De la déconcentration",
+                      "correct": true
+                    },
+                    {
+                      "content": "De la décentralisation",
+                      "correct": false
+                    },
+                    {
+                      "content": "D'une élection locale",
+                      "correct": false
+                    },
+                    {
+                      "content": "De l'autonomie financière d'une commune",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Distinguer et définir la décentralisation",
+              "statement": "Dans cet exercice, tu utilises les mots de la décentralisation et tu appliques la méthode à plusieurs situations.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on repère chaque mot. Étape 4 — Conclure : on le relie à sa définition : la compétence est une responsabilité transférée, la personnalité morale permet d'agir en son nom, l'autonomie financière donne un budget propre, la collectivité territoriale est gérée par des élus.",
+                  "answers": [
+                    {
+                      "content": "Compétence",
+                      "match": "Une responsabilité transférée par l'État"
+                    },
+                    {
+                      "content": "Personnalité morale",
+                      "match": "Capacité d'agir en son nom et de posséder des biens"
+                    },
+                    {
+                      "content": "Autonomie financière",
+                      "match": "Droit de gérer son propre budget"
+                    },
+                    {
+                      "content": "Collectivité territoriale",
+                      "match": "Territoire dont les élus gèrent les affaires locales"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître la décentralisation.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on repère qui décide. Étape 2 — Vérifier : on vérifie sa désignation. Étape 3 — Relever : on relève ses moyens. Étape 4 — Conclure : on conclut à la fin, jamais avant d'avoir regardé les trois indices.",
+                  "answers": [
+                    {
+                      "content": "Repérer qui prend la décision"
+                    },
+                    {
+                      "content": "Vérifier comment l'autorité est désignée"
+                    },
+                    {
+                      "content": "Relever son budget et sa capacité d'agir"
+                    },
+                    {
+                      "content": "Conclure : décentralisation ou non"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la décentralisation, les responsables de la collectivité sont ___ par les habitants.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Vérifier : on vérifie la désignation. Étape 4 — Conclure : dans la décentralisation, les responsables sont élus. Nommés décrit la déconcentration.",
+                  "answers": [
+                    {
+                      "content": "élus",
+                      "correct": true
+                    },
+                    {
+                      "content": "nommés",
+                      "correct": false
+                    },
+                    {
+                      "content": "dispensés",
+                      "correct": false
+                    },
+                    {
+                      "content": "désignés par le ministre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments caractérisent la décentralisation ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Vérifier : les responsables sont élus. Étape 3 — Relever : la collectivité a son budget. Étape 4 — Conclure : les compétences sont transférées : voilà les trois traits. Les agents sous hiérarchie et les chefs nommés sont ceux de la déconcentration.",
+                  "answers": [
+                    {
+                      "content": "Des compétences transférées par l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des responsables élus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un budget propre à la collectivité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des agents qui obéissent à une hiérarchie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des chefs nommés par le ministre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la décentralisation, l'État garde le pouvoir de commander chaque décision de la collectivité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on repère qui décide : la collectivité, par ses élus. Étape 3 — Relever : elle gère ses compétences transférées. Étape 4 — Conclure : l'État la contrôle, mais ne commande pas chaque décision : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une commune est une collectivité ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on repère le mot qui complète : le type de collectivité. Étape 4 — Conclure : la commune est une collectivité territoriale.",
+                  "answers": [
+                    {
+                      "content": "territoriale",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Pense aux trois indices de la méthode : désignation, budget, capacité d'agir."
+            }
+          ]
+        },
+        {
+          "name": "Identifier les collectivités territoriales et leurs organes",
+          "remember": "En Côte d'Ivoire, les **collectivités territoriales** sont les **régions** et les **communes**. (Les districts, dirigés par des gouverneurs nommés, relèvent de l'organisation de l'État vue en leçon 2.) Chaque collectivité a deux organes. L'**organe délibérant** est l'assemblée qui vote les décisions : le **conseil régional** pour la région, le **conseil municipal** pour la commune. L'**organe exécutif** applique ces décisions : le **président du conseil régional** et le **maire**. Les conseillers sont **élus par les habitants au suffrage universel** ; le président et le maire sont choisis parmi eux. La région est aussi une circonscription de l'État, dirigée par un préfet de région nommé : ne le confonds pas avec le président du conseil régional.",
+          "method": [
+            "Lire le nom du territoire ou de l'autorité proposé.",
+            "Chercher s'il s'agit d'une collectivité territoriale : une région ou une commune.",
+            "Associer ses deux organes : l'assemblée (le conseil) et le chef de l'exécutif (le président ou le maire).",
+            "Justifier par l'élection : les conseillers sont élus au suffrage universel, alors que le préfet est nommé par l'État."
+          ],
+          "example": {
+            "statement": "Une commune est gérée par un conseil municipal et un maire. Identifier la collectivité, ses organes et la manière dont ils sont désignés.",
+            "steps": [
+              "Lire : le territoire proposé est une commune.",
+              "Chercher : la commune est une collectivité territoriale, comme la région.",
+              "Associer : son assemblée est le conseil municipal, son chef de l'exécutif est le maire.",
+              "Justifier : les conseillers sont élus par les habitants au suffrage universel et le maire est choisi parmi eux ; aucun n'est nommé par l'État."
+            ]
+          },
+          "pitfall": "Ne confonds pas les autorités qui portent le même nom de territoire. Contre-exemple : dans une région, le préfet de région est nommé par l'État et le représente ; le président du conseil régional dirige la collectivité, avec des conseillers élus. De même, la commune a un maire élu alors que la sous-préfecture a un sous-préfet nommé. Pour t'y retrouver, demande-toi toujours : cette autorité est-elle élue ou nommée ?",
+          "figure": "fig-collectivites",
+          "practice": {
+            "statement": "Tu t'entraînes à identifier les collectivités territoriales et leurs organes avec la méthode : lire, chercher, associer, justifier.",
+            "questions": [
+              {
+                "content": "Quelles sont les deux sortes de collectivités territoriales étudiées dans ce cours ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : on lit la question : on cherche les collectivités territoriales. Étape 2 — Chercher : ce sont les régions et les communes. Étape 4 — Justifier : leurs conseillers sont élus. Le département, la sous-préfecture et le village sont des circonscriptions de l'État, pas des collectivités.",
+                "answers": [
+                  {
+                    "content": "Les régions et les communes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les départements et les villages",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les districts et les sous-préfectures",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les ministères et les préfectures",
+                    "correct": false
+                  }
+                ],
+                "hint": "Elles ont un conseil élu."
+              },
+              {
+                "content": "Le chef de l'exécutif d'une commune s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : on lit le nom de la collectivité : la commune. Étape 3 — Associer : son assemblée est le conseil municipal ; son chef de l'exécutif est le maire.",
+                "answers": [
+                  {
+                    "content": "maire",
+                    "correct": true
+                  }
+                ],
+                "hint": "Il dirige la mairie."
+              },
+              {
+                "content": "Relie chaque autorité à la collectivité qu'elle dirige.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Chercher : on cherche si l'autorité dirige une collectivité. Étape 3 — Associer : le maire dirige la commune et le président du conseil régional dirige la région. Étape 4 — Justifier : le sous-préfet est nommé par l'État : il dirige une sous-préfecture, circonscription de l'État, pas une collectivité.",
+                "answers": [
+                  {
+                    "content": "Maire",
+                    "match": "Commune"
+                  },
+                  {
+                    "content": "Président du conseil régional",
+                    "match": "Région"
+                  },
+                  {
+                    "content": "Sous-préfet",
+                    "match": "Aucune : il dirige une circonscription de l'État"
+                  }
+                ],
+                "hint": "Qui est élu, et qui est nommé ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Reconnaître les collectivités et leurs organes",
+              "statement": "Tu identifies les collectivités territoriales et leurs organes avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "fig-collectivites",
+              "questions": [
+                {
+                  "content": "Lequel de ces territoires est une collectivité territoriale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit les quatre noms. Étape 2 — Chercher : seules la région et la commune sont des collectivités territoriales. Étape 4 — Justifier : la commune a un conseil élu. Le département, la sous-préfecture et le village sont dirigés par des autorités nommées ou traditionnelles, pas par un conseil élu.",
+                  "answers": [
+                    {
+                      "content": "La commune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le département",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sous-préfecture",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'assemblée élue d'une commune s'appelle le conseil ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on lit : assemblée d'une commune. Étape 3 — Associer : l'organe délibérant de la commune est le conseil municipal.",
+                  "answers": [
+                    {
+                      "content": "municipal",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le président du conseil régional est nommé par le Président de la République.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit : président du conseil régional. Étape 3 — Associer : il préside l'assemblée d'une collectivité, le conseil régional. Étape 4 — Justifier : il est choisi par les conseillers élus, il n'est pas nommé : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux organes d'une commune ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Chercher : la commune est une collectivité. Étape 3 — Associer : ses organes sont le conseil municipal (assemblée) et le maire (chef de l'exécutif). Le préfet est un agent de l'État et le conseil des ministres est une réunion du gouvernement.",
+                  "answers": [
+                    {
+                      "content": "Le conseil municipal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le maire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le conseil des ministres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle différence y a-t-il entre le préfet de région et le président du conseil régional ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit les deux titres. Étape 2 — Chercher : la région est une circonscription de l'État et une collectivité. Étape 3 — Associer : le préfet de région représente l'État ; le président dirige l'exécutif de la collectivité. Étape 4 — Justifier : le préfet est nommé, le président est choisi par des conseillers élus. Dire que c'est la même personne est faux : l'un représente l'État, l'autre la collectivité.",
+                  "answers": [
+                    {
+                      "content": "Le préfet de région est nommé par l'État ; le président du conseil régional est choisi par des conseillers élus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'y en a aucune, c'est la même personne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le préfet de région est élu et le président est nommé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont nommés par le ministre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Organes et élection",
+              "statement": "Dans cet exercice, tu associes les collectivités à leurs organes et tu justifies par l'élection.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque organe à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Associer : on associe chaque organe à son rôle : l'assemblée vote, le chef de l'exécutif applique.",
+                  "answers": [
+                    {
+                      "content": "Conseil municipal",
+                      "match": "Assemblée qui vote les décisions de la commune"
+                    },
+                    {
+                      "content": "Maire",
+                      "match": "Chef de l'exécutif qui applique les décisions de la commune"
+                    },
+                    {
+                      "content": "Conseil régional",
+                      "match": "Assemblée qui vote les décisions de la région"
+                    },
+                    {
+                      "content": "Président du conseil régional",
+                      "match": "Chef de l'exécutif qui applique les décisions de la région"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes qui mènent à la mairie d'une commune.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 4 — Justifier : on justifie par l'élection : elle vient d'abord, puis le conseil, puis le maire choisi parmi les conseillers, enfin l'action du maire.",
+                  "answers": [
+                    {
+                      "content": "Les habitants élisent les conseillers municipaux au suffrage universel"
+                    },
+                    {
+                      "content": "Les conseillers forment le conseil municipal"
+                    },
+                    {
+                      "content": "Les conseillers choisissent le maire parmi eux"
+                    },
+                    {
+                      "content": "Le maire dirige la commune et applique les décisions du conseil"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les conseillers municipaux sont élus par les habitants au ___ universel.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Justifier : on justifie par l'élection : tous les citoyens électeurs votent, c'est le suffrage universel.",
+                  "answers": [
+                    {
+                      "content": "suffrage",
+                      "correct": true
+                    },
+                    {
+                      "content": "recensement",
+                      "correct": false
+                    },
+                    {
+                      "content": "découpage",
+                      "correct": false
+                    },
+                    {
+                      "content": "tirage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels territoires sont des circonscriptions de l'État et non des collectivités ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Chercher : on cherche les collectivités : la commune et la région. Étape 4 — Justifier : les autres sont des circonscriptions dirigées par des autorités nommées ou traditionnelles. La commune et la région ont un conseil élu.",
+                  "answers": [
+                    {
+                      "content": "Le département",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sous-préfecture",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le village",
+                      "correct": true
+                    },
+                    {
+                      "content": "La commune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La région",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une commune, le maire commande le sous-préfet.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit les deux autorités. Étape 2 — Chercher : le maire dirige une collectivité, le sous-préfet une circonscription de l'État. Étape 4 — Justifier : l'un est issu des élus, l'autre est nommé par l'État : le maire ne commande pas le sous-préfet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chef de l'exécutif d'une région s'appelle le ___ du conseil régional.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Associer : la région a une assemblée, le conseil régional, et un chef de l'exécutif : le président du conseil régional.",
+                  "answers": [
+                    {
+                      "content": "président",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Une collectivité a toujours un conseil élu et un chef choisi parmi les élus."
+            }
+          ]
+        },
+        {
+          "name": "Associer les compétences et les ressources d'une collectivité",
+          "remember": "Les **compétences transférées** à la **commune** sont des services de proximité : l'**état civil** (enregistrer les naissances, mariages et décès), la **salubrité** (propreté et hygiène : ramassage des ordures), les **écoles primaires** (construction et entretien des bâtiments), les **marchés** et la **voirie** (les rues de la commune). La **région** s'occupe du développement de son territoire. Pour payer, une collectivité vote son **budget**. Ses ressources viennent des **impôts et taxes locaux** (par exemple les taxes du marché) et des **subventions de l'État**.",
+          "method": [
+            "Lire la tâche ou la dépense décrite dans la situation.",
+            "Chercher si c'est un service de proximité transféré : état civil, salubrité, école primaire, marché ou voirie.",
+            "Rattacher cette compétence à la collectivité concernée : ici, la commune.",
+            "Relever d'où vient l'argent : impôts et taxes locaux, ou subvention de l'État."
+          ],
+          "example": {
+            "statement": "Une commune fait réparer le marché municipal. Elle paie avec les taxes des commerçants et une aide d'argent de l'État. Associer la compétence et les ressources.",
+            "steps": [
+              "Lire : la tâche est la réparation du marché municipal.",
+              "Chercher : l'aménagement du marché est un service de proximité transféré, la compétence marchés.",
+              "Rattacher : cette compétence est celle de la commune.",
+              "Relever : l'argent vient des taxes locales payées par les commerçants et d'une subvention de l'État."
+            ]
+          },
+          "pitfall": "Ne crois pas que la commune décide de tout et qu'elle paie tout seule. Contre-exemple : la défense du pays, la monnaie et la justice restent à l'État. Et la commune n'a pas des ressources infinies : elle dépend de ses taxes locales et des subventions. Une compétence transférée n'est donc ni toutes les compétences, ni un budget illimité.",
+          "figure": "fig-ressources",
+          "practice": {
+            "statement": "Tu t'entraînes à associer les compétences et les ressources d'une commune avec la méthode : lire, chercher, rattacher, relever.",
+            "questions": [
+              {
+                "content": "Une famille vient à la mairie faire enregistrer la naissance d'un enfant. De quelle compétence de la commune s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : on lit la tâche : enregistrer une naissance. Étape 2 — Chercher : c'est un service de proximité : l'état civil. Étape 3 — Rattacher : il est rattaché à la commune. La voirie concerne les rues, les marchés concernent les vendeurs, et la défense reste à l'État.",
+                "answers": [
+                  {
+                    "content": "L'état civil",
+                    "correct": true
+                  },
+                  {
+                    "content": "La voirie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les marchés",
+                    "correct": false
+                  },
+                  {
+                    "content": "La défense du pays",
+                    "correct": false
+                  }
+                ],
+                "hint": "Naissances, mariages et décès."
+              },
+              {
+                "content": "Les taxes payées par les commerçants du marché sont une ressource de la commune.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : on lit : taxes payées par les commerçants. Étape 4 — Relever : c'est un impôt ou une taxe locale, donc une ressource de la commune.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde d'où vient l'argent."
+              },
+              {
+                "content": "Quelles ressources peuvent alimenter le budget d'une commune ? (2 réponses)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Relever : on relève d'où vient l'argent : des impôts et taxes locaux et des subventions de l'État. Les propositions sur des dons mensuels du Président et le salaire des préfets ne sont pas des ressources de la commune.",
+                "answers": [
+                  {
+                    "content": "Les impôts et taxes locaux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les subventions de l'État",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les dons du Président de la République chaque mois",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le salaire des préfets",
+                    "correct": false
+                  }
+                ],
+                "hint": "Il y a une ressource locale et une ressource venue de l'État."
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Associer une tâche à sa compétence",
+              "statement": "Tu associes une tâche à la compétence de la commune et tu relèves la ressource avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "fig-ressources",
+              "questions": [
+                {
+                  "content": "Le ramassage des ordures dans la commune relève de quelle compétence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit la tâche : ramasser les ordures. Étape 2 — Chercher : c'est de la propreté et de l'hygiène : la salubrité. Étape 3 — Rattacher : elle est rattachée à la commune. L'état civil concerne les actes officiels, pas les ordures.",
+                  "answers": [
+                    {
+                      "content": "La salubrité",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'état civil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les écoles primaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les marchés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La construction et l'entretien des rues de la commune relèvent de la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on lit : rues de la commune. Étape 2 — Chercher : ce service s'appelle la voirie. Étape 3 — Rattacher : c'est une compétence de la commune.",
+                  "answers": [
+                    {
+                      "content": "voirie",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune s'occupe de l'état civil.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit le mot état civil. Étape 2 — Chercher : c'est un service de proximité transféré. Étape 3 — Rattacher : il est rattaché à la commune : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont des compétences de la commune ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Chercher : on cherche les services de proximité transférés : état civil, marchés, voirie. Étape 3 — Rattacher : ils sont rattachés à la commune. La défense du pays et la monnaie restent à l'État.",
+                  "answers": [
+                    {
+                      "content": "L'état civil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les marchés",
+                      "correct": true
+                    },
+                    {
+                      "content": "La voirie",
+                      "correct": true
+                    },
+                    {
+                      "content": "La défense du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "La monnaie nationale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « L'État paie tout, la commune n'a pas de ressources propres. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on lit l'affirmation de l'élève. Étape 4 — Relever : on relève les ressources : impôts et taxes locaux, et subventions de l'État. Dire que l'État paie tout est faux, car la commune a son propre budget.",
+                  "answers": [
+                    {
+                      "content": "La commune a aussi ses propres ressources : impôts et taxes locaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison, la commune ne reçoit rien d'autre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La commune vit seulement de dons",
+                      "correct": false
+                    },
+                    {
+                      "content": "La commune n'a aucun budget",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Compétences et ressources d'une commune",
+              "statement": "Dans cet exercice, tu relies les tâches à leurs compétences et tu repères les ressources de la commune.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque tâche à sa compétence.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on lit chaque tâche. Étape 2 — Chercher : on cherche le service de proximité. Étape 3 — Rattacher : on le rattache à la compétence de la commune.",
+                  "answers": [
+                    {
+                      "content": "Délivrer un acte de naissance",
+                      "match": "État civil"
+                    },
+                    {
+                      "content": "Aménager le marché municipal",
+                      "match": "Marchés"
+                    },
+                    {
+                      "content": "Nettoyer les caniveaux",
+                      "match": "Salubrité"
+                    },
+                    {
+                      "content": "Réparer une rue de la ville",
+                      "match": "Voirie"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le circuit de l'argent pour réparer le toit d'une école primaire.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 4 — Relever : on relève d'où vient l'argent : les ressources arrivent d'abord, puis elles forment le budget, puis le conseil vote la dépense, enfin les travaux ont lieu. L'État peut aussi verser une subvention, qui s'ajoute aux ressources.",
+                  "answers": [
+                    {
+                      "content": "Les habitants et commerçants paient des impôts et taxes locaux"
+                    },
+                    {
+                      "content": "La commune rassemble ses ressources dans son budget"
+                    },
+                    {
+                      "content": "Le conseil municipal vote la réparation de l'école"
+                    },
+                    {
+                      "content": "Les ouvriers réparent le toit de l'école"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une somme d'argent donnée par l'État pour aider une commune s'appelle une ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Relever : on relève l'aide de l'État : c'est une subvention.",
+                  "answers": [
+                    {
+                      "content": "subvention",
+                      "correct": true
+                    },
+                    {
+                      "content": "sanction",
+                      "correct": false
+                    },
+                    {
+                      "content": "pension",
+                      "correct": false
+                    },
+                    {
+                      "content": "amende",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les écoles primaires sont une compétence de la commune : elle construit et entretient leurs bâtiments.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit : écoles primaires. Étape 2 — Chercher : c'est un service de proximité transféré. Étape 3 — Rattacher : la commune s'en occupe pour les bâtiments : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les taxes payées par les vendeurs du marché sont des ressources ___ de la commune.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Relever : on relève que l'argent vient de la commune même : ce sont des ressources locales.",
+                  "answers": [
+                    {
+                      "content": "locales",
+                      "correct": true
+                    },
+                    {
+                      "content": "propres",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une commune reçoit 6 millions de francs CFA d'impôts et taxes locaux et 2 millions de subvention de l'État. Combien de millions a-t-elle en tout pour son budget ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : on lit les deux sommes : 6 et 2. Étape 4 — Relever : on relève les deux origines de l'argent et on les additionne : 6 + 2 = 8 millions.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "millions"
+                }
+              ],
+              "hint": "Une tâche de proximité est rattachée à la commune ; l'argent vient des impôts locaux et de l'État."
+            }
+          ]
+        },
+        {
+          "name": "Expliquer la tutelle de l'État et comparer avec la déconcentration",
+          "remember": "La décentralisation n'est pas l'indépendance. L'État exerce une **tutelle** sur les collectivités : un **contrôle** pour vérifier que leurs décisions respectent la loi et que leurs finances sont bien gérées. Ce n'est pas un ordre donné chaque jour. **Comparaison.** Dans la **déconcentration**, les agents sont **nommés** par l'État, **obéissent** à une hiérarchie et n'ont pas de budget propre. Dans la **décentralisation**, les responsables sont **élus**, la collectivité a la **personnalité morale** et un **budget propre**, et elle est sous **tutelle**.",
+          "method": [
+            "Repérer l'acteur et la décision ou l'action dans la situation.",
+            "Comparer sa désignation : nommé par l'État ou élu par les habitants.",
+            "Comparer son lien avec l'État : il reçoit des ordres (hiérarchie) ou l'État contrôle la légalité de ses actes (tutelle).",
+            "Conclure : déconcentration ou décentralisation, en citant les deux critères."
+          ],
+          "example": {
+            "statement": "Le préfet fait appliquer sur place une décision du ministre. Le conseil municipal vote le budget de la commune et l'État vérifie que la loi est respectée. Classer chaque cas.",
+            "steps": [
+              "Repérer : deux acteurs, le préfet et le conseil municipal.",
+              "Comparer la désignation : le préfet est nommé par l'État, les conseillers municipaux sont élus par les habitants.",
+              "Comparer le lien avec l'État : le préfet reçoit des ordres du ministre ; le conseil municipal est seulement contrôlé dans sa légalité par l'État.",
+              "Conclure : le préfet relève de la déconcentration (nommé, hiérarchie), le conseil municipal de la décentralisation (élu, tutelle)."
+            ]
+          },
+          "pitfall": "Ne confonds pas tutelle et obéissance. Contre-exemple : un sous-préfet reçoit des ordres du pouvoir central, alors que le maire décide pour sa commune et l'État vérifie seulement que la loi est respectée. Mais ne crois pas non plus que la collectivité est libre de tout : elle doit respecter les lois de l'État.",
+          "figure": "fig-comparaison",
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer la tutelle, la déconcentration et la décentralisation avec la méthode : repérer, comparer, conclure.",
+            "questions": [
+              {
+                "content": "L'État vérifie qu'une décision du conseil municipal respecte la loi, sans donner d'ordres au quotidien. Comment appelle-t-on ce contrôle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on repère l'acteur : le conseil municipal, et l'action de l'État : vérifier. Étape 3 — Comparer : c'est un contrôle de légalité, pas un ordre : la tutelle. Étape 4 — Conclure : c'est la décentralisation sous tutelle. La hiérarchie est fausse : elle suppose des ordres donnés à un agent.",
+                "answers": [
+                  {
+                    "content": "La tutelle",
+                    "correct": true
+                  },
+                  {
+                    "content": "La hiérarchie",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'élection",
+                    "correct": false
+                  },
+                  {
+                    "content": "La déconcentration",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'État contrôle sans commander."
+              },
+              {
+                "content": "Un préfet reçoit des ordres du pouvoir central : c'est de la déconcentration.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on repère le préfet. Étape 2 — Comparer : il est nommé par l'État. Étape 3 — Comparer : il reçoit des ordres : c'est une hiérarchie. Étape 4 — Conclure : c'est de la déconcentration.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Nommé et hiérarchie."
+              },
+              {
+                "content": "Relie chaque autorité à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Comparer : on compare la désignation : le préfet et le sous-préfet sont nommés, le maire est choisi parmi des élus. Étape 4 — Conclure : on conclut : préfet et sous-préfet relèvent de la déconcentration, le maire de la décentralisation.",
+                "answers": [
+                  {
+                    "content": "Préfet",
+                    "match": "Agent nommé qui obéit à l'État"
+                  },
+                  {
+                    "content": "Maire",
+                    "match": "Responsable issu d'élus"
+                  },
+                  {
+                    "content": "Sous-préfet",
+                    "match": "Agent nommé à la tête d'une sous-préfecture"
+                  }
+                ],
+                "hint": "Nommé ou élu ?"
+              }
+            ]
+          },
+          "exercise": [
+            {
+              "title": "Tutelle et comparaison",
+              "statement": "Tu expliques la tutelle et tu compares déconcentration et décentralisation avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "fig-comparaison",
+              "questions": [
+                {
+                  "content": "Que veut dire la tutelle de l'État sur une collectivité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on repère l'acteur : la collectivité. Étape 3 — Comparer : le lien avec l'État est un contrôle de légalité. Étape 4 — Conclure : c'est la tutelle. L'État ne nomme pas le maire : il est choisi parmi les conseillers élus.",
+                  "answers": [
+                    {
+                      "content": "L'État contrôle que ses décisions respectent la loi",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'État nomme le maire",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État fait voter les habitants à sa place",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'État supprime la commune quand il le souhaite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La tutelle fait de la collectivité un simple service de l'État.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on repère la collectivité. Étape 3 — Comparer : elle garde sa personnalité morale et son budget ; l'État la contrôle sans lui donner d'ordres. Étape 4 — Conclure : elle n'est donc pas un simple service de l'État : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la déconcentration, les agents sont ___ par l'État.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Comparer : on compare la désignation : les agents déconcentrés sont nommés par l'État.",
+                  "answers": [
+                    {
+                      "content": "nommés",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles phrases décrivent la décentralisation ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Comparer : on compare la désignation : les responsables sont issus d'élections. Étape 3 — Comparer : la collectivité a son budget et agit sous tutelle. La hiérarchie et la nomination décrivent la déconcentration.",
+                  "answers": [
+                    {
+                      "content": "Les responsables sont issus d'élections",
+                      "correct": true
+                    },
+                    {
+                      "content": "La collectivité a son propre budget",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les responsables obéissent à une hiérarchie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le ministre nomme les responsables",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maire, choisi parmi des conseillers élus, gère le budget de sa commune. Un sous-préfet, nommé par l'État, applique une loi sur place. Qui relève de la décentralisation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on repère deux acteurs. Étape 2 — Comparer : le maire est issu d'élus, le sous-préfet est nommé. Étape 3 — Comparer : le sous-préfet obéit à l'État ; le maire est seulement contrôlé. Étape 4 — Conclure : seul le maire relève de la décentralisation. Dire que les deux relèvent de la décentralisation est faux : le sous-préfet est un agent déconcentré.",
+                  "answers": [
+                    {
+                      "content": "Le maire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Deux organisations, deux logiques",
+              "statement": "Dans cet exercice, tu compares la déconcentration et la décentralisation et tu expliques la tutelle.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque caractère à l'organisation qu'il décrit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Comparer : on compare la désignation. Étape 3 — Comparer : on compare le lien avec l'État. Étape 4 — Conclure : on conclut pour chaque caractère.",
+                  "answers": [
+                    {
+                      "content": "Agents nommés par l'État",
+                      "match": "Déconcentration"
+                    },
+                    {
+                      "content": "Responsables élus",
+                      "match": "Décentralisation"
+                    },
+                    {
+                      "content": "Ordres venus du pouvoir central",
+                      "match": "Hiérarchie"
+                    },
+                    {
+                      "content": "Budget propre",
+                      "match": "Autonomie financière"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour comparer deux autorités.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on repère d'abord. Étape 2 — Comparer : on compare ensuite la désignation. Étape 3 — Comparer : puis le lien avec l'État. Étape 4 — Conclure : on conclut en dernier.",
+                  "answers": [
+                    {
+                      "content": "Repérer l'autorité et son action"
+                    },
+                    {
+                      "content": "Comparer sa désignation"
+                    },
+                    {
+                      "content": "Comparer son lien avec l'État"
+                    },
+                    {
+                      "content": "Conclure en citant les deux critères"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la décentralisation, le contrôle de l'État sur la collectivité s'appelle la ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Comparer : on compare le lien avec l'État : un contrôle de légalité, c'est la tutelle. La hiérarchie est le lien entre un chef et ses agents déconcentrés.",
+                  "answers": [
+                    {
+                      "content": "tutelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "hiérarchie",
+                      "correct": false
+                    },
+                    {
+                      "content": "nomination",
+                      "correct": false
+                    },
+                    {
+                      "content": "mutation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles autorités relèvent de la déconcentration ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Comparer : on compare la désignation : gouverneur, préfet et sous-préfet sont nommés par l'État. Étape 4 — Conclure : ils relèvent de la déconcentration. Le maire et le président du conseil régional sont choisis parmi des élus : décentralisation.",
+                  "answers": [
+                    {
+                      "content": "Le gouverneur de district",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le maire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le président du conseil régional",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maire reçoit des ordres du préfet comme un sous-préfet en reçoit du ministre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on repère les deux liens. Étape 3 — Comparer : le sous-préfet est dans une hiérarchie ; le maire est sous tutelle, c'est un contrôle de légalité. Étape 4 — Conclure : l'affirmation est fausse : un contrôle n'est pas un ordre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le contrôle de la légalité des décisions d'une collectivité est exercé par l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer : on compare le lien : c'est l'État qui exerce la tutelle.",
+                  "answers": [
+                    {
+                      "content": "État",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Nommé et hiérarchie : déconcentration. Élu, budget propre et tutelle : décentralisation."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une séance du conseil municipal",
+          "statement": "Document, texte écrit pour Lnclass : dans une commune de Côte d'Ivoire, le conseil municipal, élu par les habitants, se réunit pour voter le budget. Le maire propose trois dépenses : réparer le marché municipal, acheter des bennes pour les ordures et agrandir le bureau de l'état civil. Les taxes payées par les commerçants et une subvention de l'État financent ces dépenses. Tu analyses ce document.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle organisation du pouvoir le document décrit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : le conseil municipal décide et vote le budget. Étape 2 — Vérifier : ses membres sont élus par les habitants. Étape 3 — Conclure : des élus qui gèrent des compétences avec leur budget, c'est de la décentralisation. La déconcentration est fausse : elle suppose des agents nommés qui obéissent à l'État.",
+              "answers": [
+                {
+                  "content": "La décentralisation",
+                  "correct": true
+                },
+                {
+                  "content": "La déconcentration",
+                  "correct": false
+                },
+                {
+                  "content": "Une décision du ministre sans élus",
+                  "correct": false
+                },
+                {
+                  "content": "Une organisation traditionnelle du village",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque dépense à la compétence de la commune qu'elle illustre.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Lire chaque dépense du document. Étape 2 — Chercher le service de proximité transféré : marché, ordures, actes officiels. Étape 3 — Rattacher chacune à sa compétence : marchés, salubrité, état civil.",
+              "answers": [
+                {
+                  "content": "Réparer le marché municipal",
+                  "match": "Marchés"
+                },
+                {
+                  "content": "Acheter des bennes pour les ordures",
+                  "match": "Salubrité"
+                },
+                {
+                  "content": "Agrandir le bureau des naissances et des mariages",
+                  "match": "État civil"
+                }
+              ]
+            },
+            {
+              "content": "Quelles ressources financent ces dépenses d'après le document ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Relever dans le texte d'où vient l'argent. Étape 2 — Repérer : les taxes des commerçants (ressource locale) et la subvention de l'État. Étape 3 — Écarter les dons du maire et l'impôt voté par le ministre seul, que le texte ne cite pas.",
+              "answers": [
+                {
+                  "content": "Les taxes payées par les commerçants",
+                  "correct": true
+                },
+                {
+                  "content": "Une subvention de l'État",
+                  "correct": true
+                },
+                {
+                  "content": "Les dons du maire",
+                  "correct": false
+                },
+                {
+                  "content": "Un impôt voté par le ministre des Finances seul",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'assemblée élue qui vote le budget de la commune s'appelle le conseil ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Lire : une assemblée élue d'une commune. Étape 2 — Associer : son organe délibérant est le conseil municipal. Étape 3 — Vérifier : le document le nomme conseil municipal.",
+              "answers": [
+                {
+                  "content": "municipal",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "D'après le document, c'est le préfet qui vote le budget de la commune.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Relire le document : qui se réunit pour voter le budget ? Étape 2 — Constater que c'est le conseil municipal, élu. Étape 3 — Conclure : le préfet n'est pas cité ; l'affirmation est fausse. Le préfet représente l'État, il ne vote pas le budget d'une collectivité.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi ce document décrit de la décentralisation et non de la déconcentration.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les conseillers sont élus par les habitants",
+                "La commune vote son propre budget",
+                "La déconcentration est écartée parce que ses agents sont nommés et obéissent à l'État"
+              ],
+              "explanation": "Corrigé modèle : Le document décrit de la décentralisation parce que le conseil municipal est élu par les habitants et vote le budget de la commune. La commune agit avec son propre budget, financé par des taxes locales et une subvention. Dans la déconcentration, les agents sont nommés par l'État et obéissent à ses ordres, ce qui n'est pas le cas ici. Barème : 1 point pour les élus, 1 point pour le budget propre, 1 point pour l'opposition avec la déconcentration.",
+              "answers": [],
+              "starter": "Le conseil municipal est élu…"
+            }
+          ]
+        },
+        {
+          "title": "Élus ou nommés : le cas de quatre autorités",
+          "statement": "Document, texte écrit pour Lnclass : quatre autorités sont présentées. A, le préfet d'un département, nommé par l'État, fait appliquer une loi. B, le maire d'une commune, choisi par les conseillers élus, gère l'état civil. C, le président du conseil régional, dirige la collectivité région. D, le sous-préfet, nommé par l'État, réunit les chefs de village. Tu classes ces autorités.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelles autorités relèvent de la déconcentration ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Repérer les quatre autorités du document. Étape 2 — Comparer leur désignation : le préfet et le sous-préfet sont nommés par l'État. Étape 3 — Conclure : ces deux-là relèvent de la déconcentration. Le maire et le président du conseil régional sont issus d'élus : ils relèvent de la décentralisation.",
+              "answers": [
+                {
+                  "content": "Le préfet du département",
+                  "correct": true
+                },
+                {
+                  "content": "Le sous-préfet",
+                  "correct": true
+                },
+                {
+                  "content": "Le maire de la commune",
+                  "correct": false
+                },
+                {
+                  "content": "Le président du conseil régional",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles autorités dirigent une collectivité territoriale ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Repérer les territoires : une commune, une région collectivité, un département, une sous-préfecture. Étape 2 — Chercher les collectivités : la commune et la région. Étape 3 — Associer leurs chefs : le maire et le président du conseil régional.",
+              "answers": [
+                {
+                  "content": "Le maire de la commune",
+                  "correct": true
+                },
+                {
+                  "content": "Le président du conseil régional",
+                  "correct": true
+                },
+                {
+                  "content": "Le préfet du département",
+                  "correct": false
+                },
+                {
+                  "content": "Le sous-préfet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel critère distingue le mieux le sous-préfet du maire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer les deux autorités. Étape 2 — Comparer leur désignation : nommé par l'État ou issu d'élus. Étape 3 — Conclure : le critère est la désignation. Dire que le maire reçoit des ordres du sous-préfet est faux : il est sous la tutelle de l'État, pas dans une hiérarchie.",
+              "answers": [
+                {
+                  "content": "Le sous-préfet est nommé par l'État, le maire est choisi par des conseillers élus",
+                  "correct": true
+                },
+                {
+                  "content": "Le sous-préfet est élu, le maire est nommé",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux sont nommés par le ministre",
+                  "correct": false
+                },
+                {
+                  "content": "Le maire reçoit des ordres du sous-préfet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après le document, le préfet reçoit ses ordres du pouvoir central.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Relire : le préfet est nommé par l'État et fait appliquer une loi. Étape 2 — Relever le lien avec l'État : il applique ce que le pouvoir central décide. Étape 3 — Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le contrôle que l'État exerce sur les collectivités, sans leur donner d'ordres, s'appelle la ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Relever le lien entre l'État et une collectivité. Étape 2 — Constater qu'il s'agit d'un contrôle de légalité. Étape 3 — Nommer ce contrôle : la tutelle.",
+              "answers": [
+                {
+                  "content": "tutelle",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Compare en trois phrases le préfet et le maire : désignation, lien avec l'État, organisation dont ils relèvent.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le préfet est nommé, le maire est choisi par des élus",
+                "Le préfet obéit à l'État, le maire est contrôlé par la tutelle",
+                "Déconcentration pour le préfet, décentralisation pour le maire"
+              ],
+              "explanation": "Corrigé modèle : Le préfet est nommé par l'État, alors que le maire est choisi par les conseillers élus. Le préfet reçoit des ordres du pouvoir central, alors que le maire gère sa commune et l'État vérifie seulement la légalité de ses décisions : c'est la tutelle. Le préfet relève donc de la déconcentration et le maire de la décentralisation. Barème : 1 point par comparaison réussie.",
+              "answers": [],
+              "starter": "Le préfet est nommé…"
+            }
+          ]
+        },
+        {
+          "title": "Lire le budget d'une commune",
+          "statement": "Document, données fictives écrites pour Lnclass : budget d'une année d'une commune, en millions de francs CFA. Ressources : impôts locaux 18, taxes du marché 12, subvention de l'État 10. Dépenses : voirie 15, écoles primaires 12, salubrité 8, état civil 5. Tu analyses ce budget.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule le total des ressources de la commune : impôts locaux 18, taxes du marché 12, subvention de l'État 10.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Relever les trois ressources : 18, 12 et 10. Étape 2 — Additionner : 18 + 12 = 30, puis 30 + 10 = 40. Étape 3 — Conclure : la commune reçoit 40 millions.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "unit": "millions"
+            },
+            {
+              "content": "Calcule le total des dépenses : voirie 15, écoles primaires 12, salubrité 8, état civil 5.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Relever les quatre dépenses : 15, 12, 8 et 5. Étape 2 — Additionner : 15 + 12 = 27, 27 + 8 = 35, puis 35 + 5 = 40. Étape 3 — Conclure : la commune dépense 40 millions.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "unit": "millions"
+            },
+            {
+              "content": "La subvention de l'État est de 10 millions sur 40 millions de ressources. Quel pourcentage des ressources représente-t-elle ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Relever les deux données : 10 millions de subvention, 40 millions au total. Étape 2 — Calculer la part : 10 sur 40, c'est un quart. Étape 3 — Conclure : un quart, soit 25 %. Dire 10 % est faux : 10 % de 40 millions ne ferait que 4 millions.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "unit": "%"
+            },
+            {
+              "content": "Quelles ressources de ce budget sont des ressources locales ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Relever d'où vient chaque ressource. Étape 2 — Repérer les ressources levées sur place : impôts et taxes locaux. Étape 3 — Écarter la subvention, qui vient de l'État, et la voirie, qui est une dépense.",
+              "answers": [
+                {
+                  "content": "Les impôts locaux",
+                  "correct": true
+                },
+                {
+                  "content": "Les taxes du marché",
+                  "correct": true
+                },
+                {
+                  "content": "La subvention de l'État",
+                  "correct": false
+                },
+                {
+                  "content": "Les dépenses de voirie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle dépense est la plus élevée dans ce budget ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Relever les montants : voirie 15, écoles 12, salubrité 8, état civil 5. Étape 2 — Comparer : 15 est le plus grand. Étape 3 — Conclure : c'est la voirie. Les écoles primaires (12) arrivent seulement en deuxième.",
+              "answers": [
+                {
+                  "content": "La voirie",
+                  "correct": true
+                },
+                {
+                  "content": "L'état civil",
+                  "correct": false
+                },
+                {
+                  "content": "La salubrité",
+                  "correct": false
+                },
+                {
+                  "content": "Les écoles primaires",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En trois phrases, explique d'où vient l'argent de la commune et à quoi il sert.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Cite les impôts et taxes locaux",
+                "Cite la subvention de l'État",
+                "Cite au moins deux compétences financées"
+              ],
+              "explanation": "Corrigé modèle : L'argent de la commune vient des impôts locaux et des taxes du marché, auxquels s'ajoute une subvention de l'État. Ces 40 millions servent à financer des compétences transférées : la voirie, les écoles primaires, la salubrité et l'état civil. Le budget est équilibré, car les dépenses sont aussi de 40 millions. Barème : 1 point pour les ressources locales, 1 point pour la subvention, 1 point pour les compétences financées.",
+              "answers": [],
+              "starter": "L'argent vient…"
+            }
+          ]
+        },
+        {
+          "title": "Bilan : une région décentralisée",
+          "statement": "Document 1, texte écrit pour Lnclass : dans une région, le conseil régional, élu par les habitants, vote un projet de route. Le président du conseil régional applique ce projet. Le préfet de région, nommé par l'État, veille à ce que la loi soit respectée. Document 2, définition écrite pour Lnclass : la décentralisation est le transfert de compétences de l'État à des collectivités territoriales, qui ont la personnalité morale et l'autonomie financière et sont dirigées par des élus. Tu analyses ces documents.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels organes de la collectivité région le document 1 cite-t-il ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Présenter le document 1 : une région qui vote un projet de route. Étape 2 — Dégager les organes de la collectivité : l'assemblée élue et son président. Étape 3 — Conclure : le conseil régional et son président. Le préfet de région est un agent nommé de l'État, et le conseil municipal est l'organe de la commune.",
+              "answers": [
+                {
+                  "content": "Le conseil régional",
+                  "correct": true
+                },
+                {
+                  "content": "Le président du conseil régional",
+                  "correct": true
+                },
+                {
+                  "content": "Le préfet de région",
+                  "correct": false
+                },
+                {
+                  "content": "Le conseil municipal",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le rôle du préfet de région dans le document 1 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Présenter : le préfet de région est nommé par l'État. Étape 2 — Dégager son rôle : veiller à ce que la loi soit respectée. Étape 3 — Conclure : il représente l'État, c'est la tutelle. Voter le projet est le rôle du conseil régional, pas du préfet.",
+              "answers": [
+                {
+                  "content": "Représenter l'État et veiller au respect de la loi",
+                  "correct": true
+                },
+                {
+                  "content": "Voter le projet de route",
+                  "correct": false
+                },
+                {
+                  "content": "Être élu par les habitants",
+                  "correct": false
+                },
+                {
+                  "content": "Gérer le budget de la région à la place du conseil",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes décrites par le document 1.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Relever les étapes dans le texte. Étape 2 — Placer l'élection d'abord, puis le vote du projet. Étape 3 — Terminer par l'application du projet, puis la construction de la route.",
+              "answers": [
+                {
+                  "content": "Les habitants élisent le conseil régional"
+                },
+                {
+                  "content": "Le conseil régional vote un projet de route"
+                },
+                {
+                  "content": "Le président du conseil régional applique le projet"
+                },
+                {
+                  "content": "La route est construite"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque terme à sa définition d'après les documents.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Lire chaque terme. Étape 2 — Chercher son sens dans les documents. Étape 3 — Relier le terme à sa définition.",
+              "answers": [
+                {
+                  "content": "Préfet de région",
+                  "match": "Agent nommé qui représente l'État"
+                },
+                {
+                  "content": "Conseil régional",
+                  "match": "Assemblée élue de la collectivité"
+                },
+                {
+                  "content": "Tutelle",
+                  "match": "Contrôle de la légalité exercé par l'État"
+                }
+              ]
+            },
+            {
+              "content": "En quatre phrases, distingue la décentralisation de la déconcentration à l'aide des documents.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Définition de la décentralisation : transfert de compétences à des collectivités",
+                "Élus pour la décentralisation, nommés pour la déconcentration",
+                "Budget propre pour la collectivité",
+                "Obéissance à l'État pour les agents déconcentrés"
+              ],
+              "explanation": "Corrigé modèle : La décentralisation transfère des compétences de l'État à des collectivités territoriales, comme la région. Leurs responsables sont élus, et elles ont un budget propre. Dans la déconcentration, les agents, comme le préfet de région, sont nommés par l'État. Ils lui obéissent et n'ont pas de budget propre. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "La décentralisation transfère…"
+            },
+            {
+              "content": "En un paragraphe d'au moins cinq phrases, présente la décentralisation : sa définition, deux organes d'une commune, deux compétences, deux ressources et la tutelle de l'État.",
+              "question_type": "written",
+              "points": 8,
+              "criteria": [
+                "Définition exacte de la décentralisation",
+                "Deux organes de la commune : conseil municipal et maire",
+                "Deux compétences exactes",
+                "Deux ressources exactes",
+                "La tutelle comme contrôle de l'État",
+                "Paragraphe rédigé d'au moins cinq phrases"
+              ],
+              "explanation": "Corrigé modèle : La décentralisation est le transfert de compétences de l'État à des collectivités territoriales dirigées par des élus, comme la région et la commune. Une commune a deux organes : le conseil municipal, qui vote, et le maire, qui applique. Elle s'occupe par exemple de l'état civil et des marchés. Elle vit des impôts et taxes locaux et des subventions de l'État. L'État exerce sur elle une tutelle, c'est-à-dire un contrôle de la légalité de ses décisions. Barème sur 8 : 2 points pour la définition, 1 point pour les organes, 1 point pour les compétences, 1 point pour les ressources, 1 point pour la tutelle, 2 points pour la rédaction.",
+              "answers": [],
+              "starter": "La décentralisation est…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur la décentralisation",
+          "notions": "Définition de la décentralisation ; collectivités territoriales ; organes (conseil et chef de l'exécutif) ; compétences transférées.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document, définition écrite pour Lnclass : « La décentralisation est le transfert de compétences de l'État à des collectivités territoriales. Celles-ci ont la personnalité morale et l'autonomie financière, et leurs responsables sont élus. » Tu réponds sur la définition.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "D'après le document, qui reçoit les compétences dans la décentralisation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire la définition du document. Étape 2 — Relever qui reçoit les compétences : les collectivités territoriales. Étape 3 — Conclure. Les préfets sont des agents nommés de l'État, ils ne reçoivent pas de compétences à leur compte.",
+                  "answers": [
+                    {
+                      "content": "Les collectivités territoriales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les préfets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les ministères",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les chefs de village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après le document, les responsables d'une collectivité sont ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire la définition. Étape 2 — Relever le mot qui dit comment les responsables sont désignés. Étape 3 — Conclure : ils sont élus.",
+                  "answers": [
+                    {
+                      "content": "élus",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après le document, une collectivité territoriale n'a pas de budget propre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire la définition. Étape 2 — Relever l'autonomie financière, c'est-à-dire un budget propre. Étape 3 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Selon le document, une collectivité a la personnalité ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire la définition. Étape 2 — Relever l'expression qui dit qu'elle peut agir en son nom. Étape 3 — Conclure : la personnalité morale.",
+                  "answers": [
+                    {
+                      "content": "morale",
+                      "correct": true
+                    },
+                    {
+                      "content": "physique",
+                      "correct": false
+                    },
+                    {
+                      "content": "militaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "royale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments sont cités dans la définition ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire la définition. Étape 2 — Relever les deux caractères des collectivités. Étape 3 — Écarter les ordres et la nomination, qui relèvent de la déconcentration.",
+                  "answers": [
+                    {
+                      "content": "La personnalité morale",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'autonomie financière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les ordres du ministre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nomination des responsables par l'État",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document, texte écrit pour Lnclass : une région et une commune sont des collectivités territoriales. Un département et une sous-préfecture sont des circonscriptions de l'État. Tu distingues ces territoires.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Lequel de ces territoires est une collectivité territoriale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire les noms. Étape 2 — Chercher les collectivités : la région et la commune. Étape 3 — Conclure : la région. Le département est une circonscription dirigée par un préfet nommé.",
+                  "answers": [
+                    {
+                      "content": "La région",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le département",
+                      "correct": false
+                    },
+                    {
+                      "content": "La sous-préfecture",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque autorité à ce qu'elle dirige.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Lire les autorités. Étape 2 — Chercher leur territoire. Étape 3 — Associer : maire et commune, président et région, préfet et département.",
+                  "answers": [
+                    {
+                      "content": "Maire",
+                      "match": "Commune"
+                    },
+                    {
+                      "content": "Président du conseil régional",
+                      "match": "Région"
+                    },
+                    {
+                      "content": "Préfet",
+                      "match": "Département"
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune est une collectivité territoriale.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire le document. Étape 2 — Chercher les collectivités : région et commune. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le département est une ___ de l'État, pas une collectivité.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le document. Étape 2 — Relever la nature du département. Étape 3 — Conclure : une circonscription.",
+                  "answers": [
+                    {
+                      "content": "circonscription",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles collectivités territoriales sont citées ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire le document. Étape 2 — Relever les collectivités. Étape 3 — Écarter les circonscriptions de l'État.",
+                  "answers": [
+                    {
+                      "content": "La région",
+                      "correct": true
+                    },
+                    {
+                      "content": "La commune",
+                      "correct": true
+                    },
+                    {
+                      "content": "La sous-préfecture",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le département",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document, texte écrit pour Lnclass : les habitants d'une commune élisent leurs conseillers. Ceux-ci forment le conseil municipal et choisissent le maire parmi eux. Le maire applique les décisions du conseil. Tu analyses les organes de la commune.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes décrites par le document.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Relever les étapes dans le texte. Étape 2 — Placer l'élection d'abord. Étape 3 — Terminer par l'action du maire.",
+                  "answers": [
+                    {
+                      "content": "Les habitants élisent les conseillers"
+                    },
+                    {
+                      "content": "Les conseillers forment le conseil municipal"
+                    },
+                    {
+                      "content": "Les conseillers choisissent le maire"
+                    },
+                    {
+                      "content": "Le maire applique les décisions du conseil"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'assemblée de la commune s'appelle le conseil ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever le nom de l'assemblée de la commune. Étape 3 — Conclure : municipal. Le conseil régional est celui de la région.",
+                  "answers": [
+                    {
+                      "content": "municipal",
+                      "correct": true
+                    },
+                    {
+                      "content": "régional",
+                      "correct": false
+                    },
+                    {
+                      "content": "des ministres",
+                      "correct": false
+                    },
+                    {
+                      "content": "de village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chef de l'exécutif de la commune est le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever celui qui applique les décisions. Étape 3 — Conclure : le maire.",
+                  "answers": [
+                    {
+                      "content": "maire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies d'après le document ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever la désignation du maire et son rôle. Étape 3 — Écarter la nomination par le préfet ou le ministre, absente du texte.",
+                  "answers": [
+                    {
+                      "content": "Les habitants élisent les conseillers",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le maire est choisi parmi les conseillers",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le maire applique les décisions du conseil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet nomme le maire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le maire est choisi par le ministre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "D'après le document, les conseillers municipaux sont nommés par l'État.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever que les habitants élisent les conseillers. Étape 3 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document, texte écrit pour Lnclass : la commune s'occupe de plusieurs services de proximité. Elle enregistre les naissances, nettoie les rues, entretient les écoles primaires, gère le marché et répare les routes de la ville. Tu associes ces services à leurs compétences.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque service à sa compétence.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Lire chaque service. Étape 2 — Chercher la compétence. Étape 3 — Associer chaque service à sa compétence.",
+                  "answers": [
+                    {
+                      "content": "Enregistrer les naissances",
+                      "match": "État civil"
+                    },
+                    {
+                      "content": "Nettoyer les rues",
+                      "match": "Salubrité"
+                    },
+                    {
+                      "content": "Gérer le marché",
+                      "match": "Marchés"
+                    },
+                    {
+                      "content": "Réparer les routes de la ville",
+                      "match": "Voirie"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les écoles primaires sont, pour la commune, une compétence de quel type ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever les écoles primaires parmi les services de proximité. Étape 3 — Conclure : service transféré.",
+                  "answers": [
+                    {
+                      "content": "Un service de proximité transféré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un pouvoir de l'armée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une affaire du conseil des ministres seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une ressource",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La défense du pays est une compétence de la commune.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire la liste des services. Étape 2 — Constater que la défense n'y figure pas. Étape 3 — Conclure : elle reste à l'État.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont des compétences de la commune ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Lire la liste. Étape 2 — Relever les services de proximité. Étape 3 — Écarter la monnaie et la défense, qui restent à l'État.",
+                  "answers": [
+                    {
+                      "content": "L'état civil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le marché",
+                      "correct": true
+                    },
+                    {
+                      "content": "La voirie",
+                      "correct": true
+                    },
+                    {
+                      "content": "La monnaie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La défense",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'entretien des rues et des routes de la ville s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever le service qui concerne les rues. Étape 3 — Conclure : la voirie.",
+                  "answers": [
+                    {
+                      "content": "voirie",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La décentralisation dans la vie courante",
+          "notions": "L'état civil, le marché municipal, la salubrité et l'école primaire dans une commune ; ressources locales et subventions.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document, texte écrit pour Lnclass : Awa va à la mairie de sa commune pour faire enregistrer la naissance de son petit frère. L'agent de la mairie établit l'acte. Tu réponds sur cette démarche.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De quelle compétence de la commune s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire la démarche d'Awa : enregistrer une naissance. Étape 2 — Chercher le service concerné. Étape 3 — Conclure : l'état civil. La salubrité concerne la propreté, pas les actes officiels.",
+                  "answers": [
+                    {
+                      "content": "L'état civil",
+                      "correct": true
+                    },
+                    {
+                      "content": "La voirie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La salubrité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les marchés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'état civil enregistre aussi les mariages et les décès.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler ce que fait l'état civil. Étape 2 — Relever naissances, mariages et décès. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'acte établi à la mairie est un acte de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever ce qui est enregistré. Étape 3 — Conclure : une naissance.",
+                  "answers": [
+                    {
+                      "content": "naissance",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui dirige la commune où Awa se rend ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Chercher le chef de l'exécutif d'une commune. Étape 3 — Conclure : le maire. Le préfet et le sous-préfet représentent l'État.",
+                  "answers": [
+                    {
+                      "content": "Le maire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gouverneur de district",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels services sont aussi assurés par la mairie ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Rappeler les compétences de la commune. Étape 2 — Relever l'état civil et le marché. Étape 3 — Écarter la défense et la monnaie.",
+                  "answers": [
+                    {
+                      "content": "L'état civil",
+                      "correct": true
+                    },
+                    {
+                      "content": "La gestion du marché",
+                      "correct": true
+                    },
+                    {
+                      "content": "La défense",
+                      "correct": false
+                    },
+                    {
+                      "content": "La monnaie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document, texte écrit pour Lnclass : dans une commune, 20 commerçants du marché paient chacun une taxe de 5 000 francs CFA par mois. Cet argent aide la commune à entretenir le marché. Tu analyses cette ressource.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Que représente la taxe payée par les commerçants pour la commune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever d'où vient l'argent : des commerçants de la commune. Étape 3 — Conclure : une ressource locale. Une subvention vient de l'État, pas des commerçants.",
+                  "answers": [
+                    {
+                      "content": "Une ressource locale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une dépense",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une subvention de l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un salaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien la commune reçoit-elle en un mois avec ces 20 commerçants à 5 000 francs chacun ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Relever les données : 20 commerçants, 5 000 francs chacun. Étape 2 — Multiplier : 20 × 5 000. Étape 3 — Conclure : 100 000 francs CFA.",
+                  "answers": [
+                    {
+                      "content": "100000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "F CFA"
+                },
+                {
+                  "content": "Quelles ressources la commune peut-elle recevoir ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Rappeler les ressources. Étape 2 — Relever les taxes locales et les subventions de l'État. Étape 3 — Écarter les propositions qui ne sont pas des ressources prévues.",
+                  "answers": [
+                    {
+                      "content": "Les taxes locales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les subventions de l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le salaire des commerçants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cadeaux d'un ministre à chaque fête",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le marché est une compétence de la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever qui entretient le marché. Étape 3 — Conclure : la commune.",
+                  "answers": [
+                    {
+                      "content": "commune",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'argent du marché est géré par le préfet.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever qui reçoit la taxe : la commune. Étape 3 — Conclure : faux, le conseil et le maire gèrent le budget.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document, texte écrit pour Lnclass : dans un quartier, les ordures s'accumulent. Le conseil municipal vote l'achat de bennes et un service de ramassage. Le maire fait appliquer cette décision. Tu analyses la situation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "De quelle compétence relève le ramassage des ordures ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire la situation. Étape 2 — Chercher le service concerné : propreté et hygiène. Étape 3 — Conclure : la salubrité.",
+                  "answers": [
+                    {
+                      "content": "La salubrité",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'état civil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les écoles primaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "La justice",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de l'action de la commune.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Relever les étapes du texte. Étape 2 — Placer le problème d'abord. Étape 3 — Terminer par l'effet sur le quartier.",
+                  "answers": [
+                    {
+                      "content": "Les ordures s'accumulent dans le quartier"
+                    },
+                    {
+                      "content": "Le conseil municipal vote l'achat de bennes"
+                    },
+                    {
+                      "content": "Le maire fait appliquer la décision"
+                    },
+                    {
+                      "content": "Le quartier est nettoyé"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le conseil municipal est élu par les habitants.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler la désignation du conseil. Étape 2 — Relever le suffrage universel. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Celui qui fait appliquer la décision du conseil municipal est le ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Chercher le chef de l'exécutif. Étape 3 — Conclure : le maire.",
+                  "answers": [
+                    {
+                      "content": "maire",
+                      "correct": true
+                    },
+                    {
+                      "content": "préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "gouverneur",
+                      "correct": false
+                    },
+                    {
+                      "content": "chef de village",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Relire la situation. Étape 2 — Relever qui vote, qui applique et quelle compétence est en jeu. Étape 3 — Écarter les actions du ministre et du préfet, absentes du texte.",
+                  "answers": [
+                    {
+                      "content": "Le conseil municipal vote",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le maire applique",
+                      "correct": true
+                    },
+                    {
+                      "content": "La salubrité est une compétence de la commune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le ministre ramasse lui-même les ordures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le préfet vote l'achat des bennes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document, texte écrit pour Lnclass : une commune manque de salles de classe. Elle fait construire une salle pour l'école primaire du quartier. Elle utilise ses taxes locales et une subvention de l'État. Tu analyses cette décision.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle compétence de la commune est ici en jeu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire la situation. Étape 2 — Chercher la compétence concernée. Étape 3 — Conclure : les écoles primaires.",
+                  "answers": [
+                    {
+                      "content": "Les écoles primaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "La défense",
+                      "correct": false
+                    },
+                    {
+                      "content": "La monnaie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La justice",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La subvention de l'État fait partie des ressources de la commune.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler les ressources. Étape 2 — Relever les subventions de l'État. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les taxes payées sur place sont des ressources ___ de la commune.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever que ces taxes sont levées sur place. Étape 3 — Conclure : locales.",
+                  "answers": [
+                    {
+                      "content": "locales",
+                      "correct": true
+                    },
+                    {
+                      "content": "propres",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles ressources financent la salle de classe ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Relever les ressources du texte. Étape 2 — Repérer les taxes locales et la subvention. Étape 3 — Écarter ce que le texte ne cite pas.",
+                  "answers": [
+                    {
+                      "content": "Les taxes locales",
+                      "correct": true
+                    },
+                    {
+                      "content": "La subvention de l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les amendes du maire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les dons du préfet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune décide de cette dépense par un vote du conseil ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Chercher l'assemblée de la commune. Étape 3 — Conclure : municipal.",
+                  "answers": [
+                    {
+                      "content": "municipal",
+                      "correct": true
+                    },
+                    {
+                      "content": "régional",
+                      "correct": false
+                    },
+                    {
+                      "content": "des ministres",
+                      "correct": false
+                    },
+                    {
+                      "content": "de district",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier sur la décentralisation",
+          "notions": "Classer des autorités (nommées ou élues) ; tutelle de l'État ; distinguer déconcentration et décentralisation ; corriger des erreurs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document, texte écrit pour Lnclass : cinq personnes sont présentées. Le préfet est nommé par l'État. Le maire est choisi par des conseillers élus. Le sous-préfet est nommé par l'État. Le président du conseil régional est choisi par des conseillers élus. Le gouverneur de district est nommé par l'État. Tu les classes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles personnes relèvent de la déconcentration ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Lire la désignation de chaque personne. Étape 2 — Relever celles qui sont nommées par l'État. Étape 3 — Conclure : préfet, sous-préfet, gouverneur. Le maire et le président du conseil régional sont issus d'élus.",
+                  "answers": [
+                    {
+                      "content": "Le préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gouverneur de district",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le maire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le président du conseil régional",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles personnes relèvent de la décentralisation ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire la désignation. Étape 2 — Relever celles qui sont choisies parmi des élus. Étape 3 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Le maire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le président du conseil régional",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel critère permet de classer ces personnes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Comparer les cinq cas. Étape 2 — Relever ce qui change : nommé par l'État ou issu d'élus. Étape 3 — Conclure : le critère est la désignation.",
+                  "answers": [
+                    {
+                      "content": "La manière dont elles sont désignées",
+                      "correct": true
+                    },
+                    {
+                      "content": "La couleur de leur costume",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille de leur bureau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Leur âge",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un agent nommé par l'État reçoit des ordres du pouvoir central.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler la déconcentration. Étape 2 — Relever la hiérarchie. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet est nommé par l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever qui nomme le préfet. Étape 3 — Conclure : l'État.",
+                  "answers": [
+                    {
+                      "content": "État",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document, texte écrit pour Lnclass : quatre élèves donnent leur avis. Koffi : « La commune est dirigée par un sous-préfet. » Adjoua : « La commune est dirigée par un maire élu par les conseillers. » Yao : « Le département est une collectivité. » Mariam : « La région est une collectivité. » Tu vérifies ces avis.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quel élève a raison à propos de la commune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire les quatre avis. Étape 2 — Rappeler que la commune a un maire choisi parmi des conseillers élus. Étape 3 — Conclure : Adjoua a raison. Koffi se trompe : le sous-préfet dirige une sous-préfecture.",
+                  "answers": [
+                    {
+                      "content": "Adjoua",
+                      "correct": true
+                    },
+                    {
+                      "content": "Koffi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Yao",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des quatre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel élève se trompe sur le département ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire les avis. Étape 2 — Rappeler que le département est une circonscription de l'État. Étape 3 — Conclure : Yao se trompe.",
+                  "answers": [
+                    {
+                      "content": "Yao",
+                      "correct": true
+                    },
+                    {
+                      "content": "Adjoua",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mariam",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam a raison de dire que la région est une collectivité.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler les collectivités. Étape 2 — Relever la région et la commune. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels élèves ont raison ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Vérifier chaque avis. Étape 2 — Relever les avis exacts : le maire élu, la région collectivité. Étape 3 — Écarter ceux de Koffi et de Yao.",
+                  "answers": [
+                    {
+                      "content": "Adjoua",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mariam",
+                      "correct": true
+                    },
+                    {
+                      "content": "Koffi",
+                      "correct": false
+                    },
+                    {
+                      "content": "Yao",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sous-préfet dirige une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire l'avis de Koffi. Étape 2 — Rappeler quel territoire dirige un sous-préfet. Étape 3 — Conclure : une sous-préfecture.",
+                  "answers": [
+                    {
+                      "content": "sous-préfecture",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document, texte écrit pour Lnclass : une commune vote une décision contraire à la loi. L'autorité de tutelle de l'État demande au conseil de la corriger. Dans une autre situation, un ministre ordonne à un préfet de faire appliquer une loi dans son département. Tu compares ces deux situations.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle situation relève de la tutelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire les deux situations. Étape 2 — Repérer le contrôle de légalité. Étape 3 — Conclure : c'est la tutelle. L'ordre au préfet est un ordre dans une hiérarchie.",
+                  "answers": [
+                    {
+                      "content": "Le contrôle d'une décision de la commune",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ordre du ministre au préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vote d'un habitant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nomination d'un maire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle situation relève de la déconcentration ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire les deux situations. Étape 2 — Repérer l'ordre donné à un agent nommé. Étape 3 — Conclure : déconcentration.",
+                  "answers": [
+                    {
+                      "content": "L'ordre du ministre au préfet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le contrôle de la décision de la commune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une élection municipale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vote du budget",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La tutelle permet à l'État de vérifier que la loi est respectée.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler la tutelle. Étape 2 — Relever le contrôle de légalité. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la tutelle, la commune devient un service du ministère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler la tutelle. Étape 2 — Relever que la commune garde sa personnalité morale et son budget. Étape 3 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'État contrôle la légalité des décisions d'une collectivité : c'est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever le nom du contrôle. Étape 3 — Conclure : la tutelle.",
+                  "answers": [
+                    {
+                      "content": "tutelle",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document, texte écrit pour Lnclass : un élève dit : « Avec la décentralisation, la commune est indépendante de l'État. » Un autre répond : « Elle gère ses affaires locales, mais l'État la contrôle et elle doit respecter la loi. » Tu analyses cet échange.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle réponse est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire l'échange. Étape 2 — Rappeler que la commune a des compétences et que l'État exerce une tutelle. Étape 3 — Conclure. Dire que la commune est indépendante est faux : elle est contrôlée.",
+                  "answers": [
+                    {
+                      "content": "La commune gère ses affaires locales sous tutelle de l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "La commune est indépendante",
+                      "correct": false
+                    },
+                    {
+                      "content": "La commune ne gère rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "La commune obéit au ministre comme un agent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève qui dit « indépendante » oublie la ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire l'échange. Étape 2 — Chercher ce qui limite l'autonomie. Étape 3 — Conclure : la tutelle.",
+                  "answers": [
+                    {
+                      "content": "tutelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "monnaie",
+                      "correct": false
+                    },
+                    {
+                      "content": "sécheresse",
+                      "correct": false
+                    },
+                    {
+                      "content": "rentrée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune doit respecter les lois de l'État.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler la tutelle. Étape 2 — Relever le respect de la loi. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments montrent l'autonomie de la commune ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Rappeler les caractères d'une collectivité. Étape 2 — Relever l'élection et le budget propre. Étape 3 — Écarter les propositions de commandement.",
+                  "answers": [
+                    {
+                      "content": "Un conseil élu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un budget propre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un préfet qui commande",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un ministre qui décide de tout",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune a la personnalité ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Rappeler la définition. Étape 2 — Relever la capacité d'agir en son nom. Étape 3 — Conclure : morale.",
+                  "answers": [
+                    {
+                      "content": "morale",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur la décentralisation administrative",
+          "notions": "Budget d'une commune ; comparaison déconcentration et décentralisation ; organes ; compétences ; ressources ; tutelle.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document, texte écrit pour Lnclass : une commune reçoit 20 millions de francs CFA d'impôts et taxes locaux et 5 millions de subvention de l'État. Elle dépense 25 millions pour la voirie, les écoles et la salubrité. Tu analyses son budget.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule le total des ressources de la commune.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Relever les ressources : 20 et 5. Étape 2 — Additionner : 20 + 5. Étape 3 — Conclure : 25 millions.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "millions"
+                },
+                {
+                  "content": "Quelle part des ressources vient de la subvention de l'État ? (en pourcentage)",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Relever la subvention : 5 sur 25. Étape 2 — Calculer : 5 sur 25, c'est un cinquième. Étape 3 — Conclure : 20 %. Dire 5 % est faux : on compare 5 à 25, pas à 100.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Quelles ressources viennent de la commune elle-même ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Relever l'origine de l'argent. Étape 2 — Repérer les impôts et taxes locaux. Étape 3 — Écarter la subvention.",
+                  "answers": [
+                    {
+                      "content": "Les impôts locaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les taxes locales",
+                      "correct": true
+                    },
+                    {
+                      "content": "La subvention de l'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les dépenses",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune dépense autant qu'elle reçoit.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Relever 25 millions de ressources et 25 de dépenses. Étape 2 — Comparer. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qui vote ce budget dans la commune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Rappeler les organes. Étape 2 — Relever l'assemblée qui vote. Étape 3 — Conclure : le conseil municipal.",
+                  "answers": [
+                    {
+                      "content": "Le conseil municipal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gouverneur",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document, texte écrit pour Lnclass : tu rédiges un tableau pour ton cahier. Colonne A : agents nommés par l'État, ordres du pouvoir central. Colonne B : responsables élus, budget propre, tutelle. Tu complètes ce tableau.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque colonne à son organisation.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Lire le contenu de chaque colonne. Étape 2 — Comparer désignation et lien avec l'État. Étape 3 — Associer chaque colonne à l'organisation qui lui correspond.",
+                  "answers": [
+                    {
+                      "content": "Colonne A",
+                      "match": "Déconcentration"
+                    },
+                    {
+                      "content": "Colonne B",
+                      "match": "Décentralisation"
+                    },
+                    {
+                      "content": "Tutelle de l'État",
+                      "match": "Contrôle de légalité de la collectivité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la colonne A, les agents sont ___ par l'État.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire la colonne A. Étape 2 — Relever le mode de désignation. Étape 3 — Conclure : nommés.",
+                  "answers": [
+                    {
+                      "content": "nommés",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la colonne B, les responsables sont ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Lire la colonne B. Étape 2 — Relever le mode de désignation. Étape 3 — Conclure : élus.",
+                  "answers": [
+                    {
+                      "content": "élus",
+                      "correct": true
+                    },
+                    {
+                      "content": "nommés",
+                      "correct": false
+                    },
+                    {
+                      "content": "tirés au sort",
+                      "correct": false
+                    },
+                    {
+                      "content": "payés par le ministre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le préfet appartient à la colonne B.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler que le préfet est nommé. Étape 2 — Relever la colonne A. Étape 3 — Conclure : faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments appartiennent à la colonne B ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire la colonne B. Étape 2 — Relever budget et tutelle. Étape 3 — Écarter ordres et nominations.",
+                  "answers": [
+                    {
+                      "content": "Budget propre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tutelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ordres du pouvoir central",
+                      "correct": false
+                    },
+                    {
+                      "content": "Agents nommés",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document, texte écrit pour Lnclass : une commune compte un conseil municipal, un maire, un service d'état civil, un marché et une école primaire. L'État contrôle ses décisions. Tu fais le bilan de ses éléments.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les organes de la commune ? (2 réponses)",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever les organes de la commune. Étape 3 — Écarter les agents de l'État.",
+                  "answers": [
+                    {
+                      "content": "Le conseil municipal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le maire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le préfet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sous-préfet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles compétences sont citées ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever les compétences de la commune. Étape 3 — Écarter la défense et la monnaie.",
+                  "answers": [
+                    {
+                      "content": "L'état civil",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le marché",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'école primaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "La défense",
+                      "correct": false
+                    },
+                    {
+                      "content": "La monnaie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel contrôle exerce l'État sur la commune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Rappeler le contrôle de légalité. Étape 3 — Conclure : la tutelle.",
+                  "answers": [
+                    {
+                      "content": "La tutelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "La hiérarchie",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'élection",
+                      "correct": false
+                    },
+                    {
+                      "content": "La nomination du maire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La commune est une collectivité territoriale.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Rappeler les collectivités. Étape 2 — Relever la commune. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les taxes du marché sont une ressource ___ de la commune.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire le texte. Étape 2 — Relever que la taxe vient de la commune. Étape 3 — Conclure : locale.",
+                  "answers": [
+                    {
+                      "content": "locale",
+                      "correct": true
+                    },
+                    {
+                      "content": "propre",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document, texte écrit pour Lnclass : bilan du cours. La déconcentration est une organisation où l'État exerce son pouvoir près des habitants par des agents nommés. La décentralisation est une organisation où l'État transfère des compétences à des collectivités dirigées par des élus. Tu fais le bilan.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle phrase résume la différence entre les deux organisations ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Lire les deux définitions. Étape 2 — Comparer la désignation. Étape 3 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Agents nommés dans un cas, élus dans l'autre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune différence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Élus dans les deux cas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nommés dans les deux cas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour classer une autorité.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Repérer d'abord. Étape 2 — Comparer ensuite la désignation puis le lien avec l'État. Étape 3 — Conclure en dernier.",
+                  "answers": [
+                    {
+                      "content": "Repérer l'autorité et son action"
+                    },
+                    {
+                      "content": "Comparer sa désignation"
+                    },
+                    {
+                      "content": "Comparer son lien avec l'État"
+                    },
+                    {
+                      "content": "Conclure"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque autorité à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Lire chaque autorité. Étape 2 — Comparer sa désignation. Étape 3 — Associer : préfet et gouverneur sont des agents nommés (déconcentration), le maire dirige une collectivité (décentralisation).",
+                  "answers": [
+                    {
+                      "content": "Préfet",
+                      "match": "Agent nommé d'un département"
+                    },
+                    {
+                      "content": "Maire",
+                      "match": "Responsable d'une collectivité"
+                    },
+                    {
+                      "content": "Gouverneur de district",
+                      "match": "Agent nommé d'un district"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels éléments caractérisent la décentralisation ? (3 réponses)",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode. Étape 1 — Rappeler les caractères. Étape 2 — Relever élus, budget, tutelle. Étape 3 — Écarter hiérarchie et nominations.",
+                  "answers": [
+                    {
+                      "content": "Des élus",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un budget propre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une tutelle de l'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une hiérarchie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des agents nommés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le transfert de compétences de l'État à des collectivités s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Lire la définition. Étape 2 — Relever le nom. Étape 3 — Conclure : la décentralisation.",
+                  "answers": [
+                    {
+                      "content": "décentralisation",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
