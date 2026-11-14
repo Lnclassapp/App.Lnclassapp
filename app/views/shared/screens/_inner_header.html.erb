@@ -1,0 +1,15 @@
+<%# 🌐 UI · shared/screens/_inner_header — la flèche retour et le grand titre d'un écran intérieur de l'élève (matière, leçon) %>
+<%# Rôle : remplace la barre de navigation (content_for :inner) ; retour vers l'écran parent, titre en h1, sous-titre facultatif %>
+<%# UDR  : XXXX écrans minimalistes style Wave §3 (composants) · locals: (title:, back_href:, subtitle: nil) -%>
+<header class="pb-2">
+  <div class="flex items-center gap-1">
+    <%= link_to back_href, id: "inner_back", "aria-label": t("shared.screens.back"),
+                class: "-ml-3 grid size-tap shrink-0 place-items-center rounded-full text-ink focus-visible:outline-2 focus-visible:outline-brand" do %>
+      <%= ui_icon "arrow-left", size: :xl %>
+    <% end %>
+    <h1 class="min-w-0 text-2xl leading-tight font-medium text-balance text-ink"><%= title %></h1>
+  </div>
+  <% if local_assigns[:subtitle].present? %>
+    <p id="inner_subtitle" class="pl-10 text-sm text-mute"><%= subtitle %></p>
+  <% end %>
+</header>

@@ -1,0 +1,15 @@
+<%# 🌐 UI · shared/screens/_row — une ligne plate d'un groupe : pastille d'icône, titre, détail, valeur alignée à droite %>
+<%# Rôle : toute la ligne est le lien (≥ 48 px) ; la valeur (« 0/4 ») reste à droite ; masquée (folded) au-delà de 3 lignes, révélée par « Voir plus (n) » %>
+<%# UDR  : XXXX écrans minimalistes style Wave §3 (composants, règle 7) · locals: (title:, href:, icon:, tint: "bg-brand-soft", detail: nil, value: nil, folded: false, id: nil) -%>
+<% tint = local_assigns.fetch(:tint, "bg-brand-soft") %>
+<%= tag.li id: local_assigns[:id], hidden: local_assigns.fetch(:folded, false), data: { reveal_target: "item" } do %>
+  <%= link_to href, data: { turbo_prefetch: false },
+              class: "flex min-h-tap items-center gap-3 px-4 py-2.5 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>
+    <span class="<%= class_names("grid size-10 shrink-0 place-items-center rounded-ln text-brand-strong", tint) %>" aria-hidden="true"><%= icon %></span>
+    <span class="min-w-0 flex-1">
+      <span class="block text-base leading-snug font-medium text-pretty text-ink"><%= title %></span>
+      <% if local_assigns[:detail].present? %><span class="block text-sm text-mute"><%= detail %></span><% end %>
+    </span>
+    <% if local_assigns[:value].present? %><span class="shrink-0 text-base font-medium text-ink tabular-nums"><%= value %></span><% end %>
+  <% end %>
+<% end %>

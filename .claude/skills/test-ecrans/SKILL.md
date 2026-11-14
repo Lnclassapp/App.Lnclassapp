@@ -34,7 +34,7 @@ Nomme `<page>-<largeur>-<clair|sombre>.png`.
 
 ## 3. Analyse
 
-Charge la skill `anthropic-skills:lnclass-design-system` et compare : tokens (couleurs, contrastes dans les deux thèmes), en-tête et logo, grille, listes, dates, boutons, espacements. Regarde chaque image (Read), ne te fie pas aux seules mesures.
+Charge la skill `anthropic-skills:lnclass-design-system` et compare : tokens (couleurs, contrastes dans les deux thèmes), en-tête et logo, grille, listes, dates, boutons, espacements. Regarde chaque image (Read), ne te fie pas aux seules mesures. Pour l'accueil, la matière et la leçon de l'élève, l'UDR « écrans minimalistes, style Wave » (`docs/decisions/udr/`) prime sur la charte : pas de carte « Prochain exercice », pas de section vide, pas de barre de navigation sur la matière et la leçon.
 
 Gravité :
 
