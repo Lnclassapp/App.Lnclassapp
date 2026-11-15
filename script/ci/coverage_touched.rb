@@ -69,6 +69,9 @@ module CoverageTouched
       out << "  #{gap.file}: lines #{gap.percent(gap.lines.size, gap.line_total)} %, branches #{gap.percent(gap.branches.size, gap.branch_total)} %"
       out << "    lines not played: #{gap.lines.join(', ')}" if gap.lines.any?
       gap.branches.each { out << "    branch not played, #{it}" }
+      # A file counted at 0 % that a test of the change does play was loaded before SimpleCov started (a require at the
+      # top of a .rake file or of an initializer): the measure is wrong, not the test (chantier couverture-locale-et-train-divergent).
+      out << "    0 % lines: if a test plays this file, it was loaded before SimpleCov started (a require ahead of test_helper)" if gap.lines.size == gap.line_total
     end
     out << "  A test outside the change may play them: the warning blocks nothing, the train decides."
     out

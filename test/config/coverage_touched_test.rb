@@ -39,6 +39,12 @@ class CoverageTouchedTest < ActiveSupport::TestCase
     assert_includes CoverageTouched.report([ gap ]).join("\n"), "lines not played: 2, 4"
   end
 
+  test "a file at 0 % says that it may have been loaded before the measure started" do
+    report = CoverageTouched.report(gaps(result(lines: [ 0, 0, nil ]))).join("\n")
+    assert_includes report, "loaded before SimpleCov started"
+    refute_includes CoverageTouched.report(gaps(result(lines: [ 1, 0 ]))).join("\n"), "loaded before SimpleCov started"
+  end
+
   test "a result of another command name or of another worker adds to the first" do
     first = result(lines: [ 0, 1 ])
     second = { "unit 2/3" => { "coverage" => { "#{ROOT}/#{FILE}" => { "lines" => [ 3, 0 ], "branches" => {} } } } }
