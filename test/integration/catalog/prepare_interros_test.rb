@@ -28,19 +28,19 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     get course_path(@course.slug)
 
     assert_response :success
-    assert_select "#prepare-interros a.ps-card", 5
+    # UDR XXXX écrans minimalistes style Wave §3 : une ligne par feuille, 3 visibles puis « Voir plus (2) ».
+    assert_select "#prepare-interros li a", 5
+    assert_select "#prepare-interros li[hidden]", 2
+    assert_select "#prepare-interros button[data-reveal-target=button]", text: "Voir plus (2)"
     assert_select ".ps-sheet", 0
     assert_select "#prepare-interros [data-controller=prepare-sheet]", 0
-    assert_select "#notion-#{@notions.first.slug}.ps-card[href=?]", read("notion-#{@notions.first.slug}") do
-      assert_select ".ps-card-kind", text: "Prépare interros n°1"
-      assert_select ".ps-card-title", text: "Notion 1"
-      assert_select ".ps-card-meta", text: "1 exercice"
-      assert_select ".ps-card-meta", text: "0 / 1 exercice réussi"
+    assert_select "li#notion-#{@notions.first.slug} a[href=?]", read("notion-#{@notions.first.slug}") do
+      assert_select "span", text: "Interro 1 · Notion 1"
+      assert_select "span", text: "2 questions"
     end
-    assert_select "#toute-la-lecon.ps-card" do
-      assert_select ".ps-card-kind", text: "Prépare interros n°5"
-      assert_select ".ps-card-title", text: "Toute la leçon"
-      assert_select ".ps-card-meta", text: "2 exercices"
+    assert_select "li#toute-la-lecon a" do
+      assert_select "span", text: "Interro 5 · Toute la leçon"
+      assert_select "span", text: "4 questions"
     end
 
     get fill
@@ -162,10 +162,10 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
     assert_select "#prepare-devoirs h2", text: "Prépare devoirs"
-    assert_select "#prepare-devoirs a.ps-card#sujet-#{subject.position}[href=?]", read("sujet-#{subject.position}") do
-      assert_select ".ps-card-kind", text: "Prépare devoirs n°1"
-      assert_select ".ps-card-title", text: "Sujet 1 · Calculer, démontrer, conclure"
-      assert_select ".ps-card-meta", text: "2 exercices"
+    assert_select "#prepare-devoirs li#sujet-#{subject.position} a[href=?]", read("sujet-#{subject.position}") do
+      assert_select "span", text: "Sujet 1 · Calculer, démontrer, conclure"
+      assert_select "span", text: "2 exercices"
+      assert_select "span.tabular-nums", text: "0/2"
     end
 
     get fill("sujet-#{subject.position}")

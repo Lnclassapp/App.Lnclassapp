@@ -44,7 +44,7 @@ class AppAndroidShellTest < ActionDispatch::IntegrationTest
     assert_select "aside"
     assert_select "nav.fixed.bottom-0", 0
     assert_select "#install_banner"
-    assert_select "main#main.pb-12.lg\\:pl-rail:not(.pb-28)"
+    assert_select "main#main.lg\\:pl-rail:not(.pb-28)"
     assert_select BRIDGE, 0
   end
 

@@ -64,7 +64,7 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
 
     assert_select "main > div.lg\\:hidden > header.student-band.bg-brand" do
       assert_select "a[href='#{student_menu_path}'][aria-label=?]", tn("home_band.account", name: "Awa Koné")
-      assert_select "a[href='#{help_path}']", text: tn("home_band.help")
+      assert_select "a[href='#{help_path}'][aria-label=?]", tn("home_band.help")
     end
     assert_select "header.sticky.max-lg\\:hidden #avatar-menu-button"
 
@@ -137,13 +137,13 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
     classroom = create_classroom(name: "6ème 3", school: create_school(name: "Lycée moderne 2"))
     sign_in_as create_student(classroom:)
     get student_home_path
-    assert_select "#student_next_step a span.truncate", text: /\A6ème 3 · /
+    assert_select "#student_class_card h2", text: "6ème 3"
 
     classroom.update!(name: "6ème A")
     get student_home_path
 
     assert_response :success
-    assert_select "#student_next_step a span.truncate", text: /\A6ème A · /
-    assert_select "#student_next_step a span.truncate", text: /6ème 3/, count: 0
+    assert_select "#student_class_card h2", text: "6ème A"
+    assert_select "#student_class_card", text: /6ème 3/, count: 0
   end
 end

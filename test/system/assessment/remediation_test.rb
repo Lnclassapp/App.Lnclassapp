@@ -25,15 +25,11 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     play(correct: 0)
     assert_selector "#session_gap_outcome", text: "Cette notion passe à revoir."
 
-    visit student_home_path
-    within("#student_next_step[data-state=review]") do
-      assert_selector "#student_next_step_title", text: "Théorème de Thalès"
-      click_on I18n.t("classroom.student_homes.next_step.review.open")
-    end
-    # CA-25 : « Revoir la notion » mène à la leçon, sur la notion, où l'exercice est proposé (la notion n'a plus de page).
+    # UDR XXXX écrans minimalistes style Wave §3 : l'accueil ne propose plus la fiche à revoir ; la leçon porte la notion et l'exercice proposé (CA-25).
+    visit course_path(course.slug)
     assert_current_path course_path(course.slug)
     # La case de la notion est là ; sa feuille porte l'exercice proposé (« Exercice 3 ») ; la copie de remédiation se joue sur sa page.
-    assert_selector "a.ps-card#notion-#{thales.slug}"
+    assert_selector "li#notion-#{thales.slug} a"
     visit fill_course_sheet_path(course.slug, "notion-#{thales.slug}")
     assert_selector ".ps-sheet#notion-#{thales.slug} turbo-frame#sheet-exercise-#{offered.public_id}"
     visit exercise_path(offered.public_id)
@@ -41,9 +37,6 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     remediation = play(correct: QUESTIONS)
     assert_equal "remediation", Orm::ExerciseSession.find_by!(public_id: remediation).kind
     assert_selector "#session_gap_outcome", text: "Notion levée !"
-
-    visit student_home_path
-    assert_no_selector "#student_next_step[data-state=review]"
   end
 
   # Décision du porteur (2026-11-09, ouverture-remediation) : Bronze est en remédiation. 1 réponse juste sur 2 = 50 % (10/20, Bronze),

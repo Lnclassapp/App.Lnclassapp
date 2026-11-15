@@ -15,11 +15,15 @@ module Shared
       test "the student's band: brand blue, avatar on the left, help on the right, white (on-brand) text" do
         band(:student)
 
-        assert_select "header.student-band.bg-brand.text-on-brand.min-h-24" do
+        assert_select "header.student-band.bg-brand.text-on-brand.min-h-wave-band" do
           assert_select "a[href='#{student_menu_path}'][aria-label=?]", I18n.t("shared.navigation.home_band.account", name: "Awa Koné") do
             assert_select ".size-12.rounded-full.bg-white.text-brand-strong", text: "AK"
           end
-          assert_select "a[href='#{help_path}'].text-on-brand", text: I18n.t("shared.navigation.home_band.help")
+          # UDR XXXX §3 : l'aide de l'élève est une icône seule, nommée par aria-label.
+          assert_select "a[href='#{help_path}'].text-on-brand[aria-label=?]", I18n.t("shared.navigation.home_band.help") do
+            assert_select "span", 0
+            assert_select "svg", 1
+          end
           assert_select "a svg", 1
         end
         assert_select ".bg-teacher", 0

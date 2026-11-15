@@ -65,6 +65,20 @@ module Queries
         assert_equal [ @essential.slug ], row.pending_gaps.map(&:essential_slug)
       end
 
+      test "an assigned exercise carries its question count and the questions already answered in its started session" do
+        exercise = create_exercise(essential: @essential, title: "Trois questions", questions: 3)
+        first, second = exercise.questions.first(2)
+        create_assignment(classroom: @classroom, assignable: exercise, assigned_at: 1.day.ago)
+
+        assert_equal [ 3, 0 ], home.assigned_exercises.first.to_h.values_at(:question_count, :answered_count)
+
+        session = create_exercise_session(student: @student, exercise:)
+        create_attempt(session:, question: first)
+        create_attempt(session:, question: second)
+
+        assert_equal [ 3, 2 ], home.assigned_exercises.first.to_h.values_at(:question_count, :answered_count)
+      end
+
       test "the exercises assigned directly, the most recently assigned first; their sheet and course assign nothing else" do
         direct = create_exercise(essential: create_essential(course: create_course(level: @classroom.level)), title: "Direct")
         older = create_exercise(essential: @essential, title: "Plus ancien")

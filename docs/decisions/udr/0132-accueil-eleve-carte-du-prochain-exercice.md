@@ -16,6 +16,9 @@ problematique: L'accueil élève s'ouvre sur « Entrer en classe » et empile ci
 | **S'appuie sur** | UDR-0136 (jetons) · [UDR-0119](0119-fiche-a-revoir-exercice-propose-et-regle-sur-20.md) (fiche à revoir) |
 | **Remplacé par** | — |
 
+
+> **Amendement du 2026-11-14 (UDR-0173)** : la carte « Prochain exercice » et l'« Exercice du jour » n'existent plus ; l'accueil montre la carte de la classe (sigle, « Entrer en classe »), « Mes matières », les annonces, « À faire » et « Historique » seulement s'ils ne sont pas vides, et la bannière d'invitation (plus de case « Inviter »). Les états de la carte (§3.3) ne s'appliquent plus ; les règles non citées restent.
+
 ---
 
 ## 1. Contexte

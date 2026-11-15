@@ -21,7 +21,8 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
 
   def open_course(user = @student)
     sign_in_as user
-    get course_path(@course.slug)
+    # L'élève lit la fiche sur sa propre page (UDR XXXX écrans minimalistes style Wave §3) ; les autres, sur la page de la leçon.
+    get(user.role == "student" ? course_fiche_path(@course.slug) : course_path(@course.slug))
     assert_response :success
   end
 
@@ -35,7 +36,6 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
     open_course
 
     assert_select "section#fiche-de-revision h2", text: t("revision_title")
-    assert_operator response.body.index("id=\"fiche-de-revision\""), :<, response.body.index("id=\"prepare-interros\"")
     assert_select "section#fiche-de-revision .sheet-screen[data-sheet-theme='teal'][data-seyes='true'][data-embedded='true'][data-controller='math']"
     assert_select ".sheet-screen article.sheet-page", count: 1
     assert_select ".sheet-eyebrow", text: /#{@course.material.name} · #{@course.level.name}.*#{sheet_t("eyebrow")}/m
