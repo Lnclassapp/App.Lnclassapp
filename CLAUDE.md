@@ -124,6 +124,7 @@ Conventions complètes (nommage, branches, commits, format des lots) : [`docs/gu
 | Suivre un cycle de travail | [`docs/workflows/README.md`](docs/workflows/README.md) |
 | Retrouver une décision technique | [`docs/decisions/adr/`](docs/decisions/adr/) |
 | Retrouver une décision d'interface | [`docs/decisions/udr/`](docs/decisions/udr/) |
+| Créer ou relire un écran de l'élève (style Wave) | skill [`ecrans-wave`](.claude/skills/ecrans-wave/SKILL.md) |
 | Écrire un fichier d'une couche donnée | [`docs/blueprints/`](docs/blueprints/) |
 
 ## graphify

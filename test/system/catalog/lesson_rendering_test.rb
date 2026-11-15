@@ -175,15 +175,20 @@ module LessonRendering
 
     # La page de la leçon, lue à la largeur courante de la fenêtre.
     def inspect_page(file, course, lesson, width)
+      # La leçon s'arrête après « Prépare devoirs » ; la fiche est sur sa propre page (UDR XXXX §3, leçon).
       visit course_path(course.slug)
       assert_selector "h1", text: course.name, wait: 20
+      visit course_fiche_path(course.slug)
+      assert_selector "#student_revision h1", text: I18n.t("catalog.courses.show.revision_title"), wait: 20
       reveal_revision_sheet
       seen = measure_page(lesson)
+      visit course_path(course.slug)
+      assert_selector "h1", text: course.name, wait: 20
       defects = []
       defects << "page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
       defects << "** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
       missing_figures(lesson, seen["figures"]).each { defects << "figure « #{it} » absente de la page ou vide" }
-      sheets = all(".ps-card", minimum: 0).map { it[:id] }
+      sheets = all("#prepare-interros li[id], #prepare-devoirs li[id]", visible: :all, minimum: 0).map { it[:id] }
       defects << "aucune feuille d'exercices sur la page, alors que la leçon a des questions" if sheets.empty? && lesson.to_json.include?('"questions"')
       defects += sheets.flat_map { |sheet| inspect_sheet(course, sheet) }
       defects.map { LessonRendering::Defect.new(file, width, it) }

@@ -40,13 +40,12 @@ class Catalog::StudentCoursesTest < ApplicationSystemTestCase
 
       visit courses_path
       find("#courses_group_svt_title a").click
-      assert_selector "#courses_material_title h1", text: "SVT"
-      assert_selector "#courses_groups li", count: 1
-      assert_no_selector "#courses_groups h2"
+      assert_selector "#student_material h1", text: "SVT"
+      assert_selector "#lesson_tiles li", count: 1
 
       visit student_home_path
       find("#subject_svt").click
-      assert_selector "#courses_material_title h1", text: "SVT"
+      assert_selector "#student_material h1", text: "SVT"
       assert_current_path courses_path(material: "svt")
     end
   end
@@ -62,7 +61,7 @@ class Catalog::StudentCoursesTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       visit course_path(@fractions.slug)
-      assert_selector "#course_header h1", text: @fractions.name
+      assert_selector "#student_lesson h1", text: @fractions.name
 
       visit courses_path
       assert_selector "#courses_groups li", count: 24
@@ -71,7 +70,7 @@ class Catalog::StudentCoursesTest < ApplicationSystemTestCase
         assert_text t("catalog.courses.course_card.progress.done")
         click_on @fractions.name
       end
-      assert_selector "#course_header h1", text: @fractions.name
+      assert_selector "#student_lesson h1", text: @fractions.name
 
       visit courses_path
       assert_no_page_reload do
@@ -106,9 +105,9 @@ class Catalog::StudentCoursesTest < ApplicationSystemTestCase
 
     click_on "SVT"
     assert_current_path courses_path(material: "svt")
-    assert_selector "#lesson_materials a[aria-current=page]", text: "SVT"
-    visit courses_path
-    assert_selector "#lesson_materials a[aria-current=page]", text: "SVT"
+    # UDR XXXX écrans minimalistes style Wave §3 : ?material= ouvre l'écran intérieur de la matière.
+    assert_selector "#student_material h1", text: "SVT"
+    assert_no_selector "#lesson_materials"
 
     with_mobile_viewport do
       visit courses_path

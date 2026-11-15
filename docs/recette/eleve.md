@@ -5,7 +5,7 @@ Compte : `0100000166`, PIN `2468` (Tle D du Lycée Modèle Horizon, la classe qu
 | # | Étape | Résultat attendu |
 |---|---|---|
 | 1 | `/login`, contact et PIN | Accueil élève (`/students`), sans message d'erreur |
-| 2 | Lire l'accueil | Prochain exercice ou devoir proposé ; le nom de la classe est celui du compte ; aucun texte de gabarit (`translation missing`) |
+| 2 | Lire l'accueil | La carte de la classe (« Entrer en classe »), « Mes matières », « À faire » seulement s'il y a un devoir ; le nom de la classe est celui du compte ; aucun texte de gabarit (`translation missing`) |
 | 3 | Ouvrir la classe (`/students/classroom`) | Matières et devoirs de la Tle D ; devoirs rendus, en retard et à faire se distinguent |
 | 4 | Ouvrir un cours publié d'une matière | La leçon s'affiche : titre, fiche de révision, formules rendues, figures visibles, aucun `**` brut |
 | 5 | Lancer un exercice, répondre, terminer | Le résultat de la séance s'affiche avec la correction ; retour à la classe possible |

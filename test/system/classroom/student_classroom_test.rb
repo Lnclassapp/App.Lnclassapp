@@ -43,7 +43,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit student_home_path
       assert_no_page_reload do
-        find("#student_next_step a[href='#{student_classroom_path}']").click
+        find("#student_class_enter").click
         assert_current_path student_classroom_path
       end
 

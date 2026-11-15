@@ -18,9 +18,10 @@ module Queries
       Assigner = Data.define(:gender, :last_name)
       ReviewRow = Data.define(:essential_name, :essential_slug, :course_slug, :material_name, :material_slug, :score_percent)
       # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil ;
+      # question_count : ses questions ; answered_count : celles déjà répondues dans la session commencée (0 sans session), pour « 1/5 » (UDR XXXX) ;
       # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance ; material_slug : la pastille illustrée ; exercise_type : « fixation » ou « evaluation » (carte d'exercice).
       ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :material_slug, :badge_level,
-                                :best_score_percent, :completed_count, :started_session_public_id, :due_on, :exercise_type)
+                                :best_score_percent, :completed_count, :started_session_public_id, :due_on, :exercise_type, :question_count, :answered_count)
       # medal : la médaille de la session (Grading.session_medal), nil pour une copie vide.
       SessionRow = Data.define(:public_id, :exercise_id, :exercise_public_id, :exercise_title, :material_name, :material_slug, :score_percent,
                                :completed_at, :medal)
@@ -174,13 +175,18 @@ module Queries
         completed = Orm::ExerciseSession.where(student_id:, exercise_id: ids, status: "completed").group(:exercise_id)
                                         .pluck(:exercise_id, Arel.sql("MAX(score_percent)"), Arel.sql("COUNT(*)"))
                                         .to_h { |id, best, count| [ id, [ best, count ] ] }
-        started = Orm::ExerciseSession.where(student_id:, exercise_id: ids, status: "started").pluck(:exercise_id, :public_id).to_h
+        started_rows = Orm::ExerciseSession.where(student_id:, exercise_id: ids, status: "started").pluck(:exercise_id, :public_id, :id)
+        started = started_rows.to_h { |exercise_id, public_id, _id| [ exercise_id, public_id ] }
+        question_counts = Orm::Question.where(exercise_id: ids).group(:exercise_id).count
+        answered = Orm::QuestionAttempt.where(exercise_session_id: started_rows.map(&:last), unanswered: false).group(:exercise_session_id).count
+        session_of = started_rows.to_h { |exercise_id, _public_id, id| [ exercise_id, id ] }
         badges = Orm::ExerciseBadge.where(student_id:, exercise_id: ids).pluck(:exercise_id, :level).to_h
         rows.map do |id, public_id, title, material_name, material_category, material_slug, exercise_type, *program_order|
           best_score_percent, completed_count = completed.fetch(id, [ nil, 0 ])
           assigned_at, due_on = assignments.fetch(id)
           row = ExerciseRow.new(public_id:, title:, material_name:, material_category:, material_slug:, badge_level: badges[id],
-                                best_score_percent:, completed_count:, started_session_public_id: started[id], due_on:, exercise_type:)
+                                best_score_percent:, completed_count:, started_session_public_id: started[id], due_on:, exercise_type:,
+                                question_count: question_counts.fetch(id, 0), answered_count: answered.fetch(session_of[id], 0))
           [ urgency(row, assigned_at, *program_order), material_slug, row ]
         end
       end

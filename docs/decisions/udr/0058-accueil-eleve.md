@@ -15,6 +15,9 @@ problematique: Sous 1 024 px : bandeau bleu, carte « Prochain exercice » (ou l
 | **Remplace** | [UDR-0010](0010-accueil-eleve.md) |
 | **Remplacé par** | — |
 
+
+> **Amendement du 2026-11-14 (UDR-0173)** : la carte « Prochain exercice » et l'« Exercice du jour » n'existent plus ; l'accueil montre la carte de la classe (sigle, « Entrer en classe »), « Mes matières », les annonces, « À faire » et « Historique » seulement s'ils ne sont pas vides, et la bannière d'invitation (plus de case « Inviter »). Les états de la carte (§3.3) ne s'appliquent plus ; les règles non citées restent.
+
 ---
 
 ## 1. Contexte

@@ -103,8 +103,17 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   # UDR palette froide §3.2 : le texte ne dépasse pas `font-medium`. Exception écrite : le titre gras de la page d'accueil.
   FORBIDDEN_WEIGHT = /(?<![\w-])font-(?:semibold|bold|extrabold|black)(?![\w-])/
+  # Exception écrite (UDR XXXX écrans minimalistes style Wave §3, maquettes validées le 2026-11-14) : les titres, libellés et valeurs
+  # des écrans de l'élève sont en 600 ou 700. Seuls ces fichiers y échappent ; tout autre écran reste à 500.
+  WAVE_WEIGHT_SCREENS = %w[
+    app/views/shared/screens/_group.html.erb app/views/shared/screens/_row.html.erb app/views/shared/screens/_inner_header.html.erb
+    app/views/classroom/student_homes/_class_card.html.erb app/views/classroom/student_homes/_history.html.erb
+    app/views/classroom/student_homes/_subjects.html.erb app/views/classroom/student_homes/_invite_banner.html.erb
+    app/views/catalog/courses/material.html.erb app/views/communication/messages/_card.html.erb
+  ].freeze
   WEIGHT_SOURCES = Rails.root.glob("app/{views,helpers}/**/*.{erb,rb}").reject do |path|
-    path.to_s.include?("app/views/homepage/") || sheet_exception?(path.relative_path_from(Rails.root))
+    relative = path.relative_path_from(Rails.root).to_s
+    path.to_s.include?("app/views/homepage/") || sheet_exception?(path.relative_path_from(Rails.root)) || WAVE_WEIGHT_SCREENS.include?(relative)
   end.freeze
 
   test "no text heavier than font-medium outside the homepage" do

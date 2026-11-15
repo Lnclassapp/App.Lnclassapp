@@ -7,7 +7,7 @@ fr:
         # IL-14 : le bandeau d'accueil, une fois après un retrait (UDR-0081 §3.5).
         removed: "Tu ne fais plus partie de cette classe. Choisis ta classe."
       # Le bandeau bleu de l'accueil (shared/navigation/_home_band) porte ses propres clés : shared.navigation.home_band.
-      # UDR accueil élève §3.2, §3.3 : la carte du prochain exercice, un état par fichier de next_step/.
+      # UDR accueil élève §3.2, §3.3 : la carte du prochain exercice (code conservé pour le guidage d'activation, hors des écrans élève).
       next_step:
         # « 3E B · CM1T › » : le sigle de l'établissement, ou son nom ; mis en majuscules par la mise en page.
         class_link: "%{classroom} · %{school}"
@@ -64,6 +64,12 @@ fr:
           tomorrow: "Demain : %{subject}"
           none: "Rien à te proposer aujourd'hui."
       # UDR accueil élève §3.3 état 6 : l'élève sans classe active (archivée, ou retiré) ; le code, ou la cascade.
+      # UDR XXXX écrans minimalistes style Wave §3 : la carte de la classe (class_card), à cheval sur la jonction bleu → blanc.
+      class_card:
+        label: "Ta classe"
+        enter: "Entrer en classe"
+        enter_label: "Entrer en classe, %{classroom}"
+      # UDR accueil élève §3.3 état 6 : l'élève sans classe active (archivée, ou retiré) ; le code, ou la cascade.
       no_classroom:
         title: "Choisis ta classe"
         hint: "Entre le code donné par ton enseignant."
@@ -71,18 +77,15 @@ fr:
         submit: "Rejoindre"
         no_code: "Je n'ai pas de code"
         archive: "Voir mon historique"
-      # Amendement eleve-sans-prof : « À faire », les exercices assignés non terminés après celui de la carte.
+      # UDR XXXX écrans minimalistes style Wave §3 : « À faire », les exercices assignés non commencés ; la section n'existe pas s'il n'y en a aucun.
       to_do:
         title: "À faire"
-        all: "Tout voir"
-        empty: "Rien d'autre à faire pour l'instant."
-      # UDR accueil élève §3.4 : la grille de 7 cases, 6 matières puis « Inviter ».
+      # UDR accueil élève §3.4 : la grille de « Mes matières », sans case « Inviter ».
       subjects:
         label: "Mes matières"
         # Chantier eleve-sans-prof : un niveau sans leçon publiée (6e à 4e, 2nde) ; dire que ça vient, pas « aucune ».
         empty: "Les cours de ton niveau arrivent bientôt."
         late: ", exercice en retard"
-        invite: "Inviter"
         # Retouche matieres-noms-courts : noms courts de la grille, par slug ; une matière absente garde son nom entier.
         short_names:
           mathematiques: "Maths"
@@ -94,8 +97,7 @@ fr:
         title: "Historique"
         today: "Aujourd'hui"
         yesterday: "Hier"
-        empty: "Tes exercices terminés s'afficheront ici."
-        more: "Voir plus"
+        more: "Voir plus (%{count})"
         redo: "Refaire"
         redo_label: "Refaire l'exercice « %{title} »"
       # UDR-0084 §3.6, ADR-0089 §4.3 : « Ma classe » (état « sans enseignant »), la grille de l'accueil et la carte du jour ;
@@ -105,4 +107,8 @@ fr:
         action: "Inviter mon enseignant"
         # UDR-0086 §3.7 : le nom du bouton seul de « Ma classe » (standalone), qui commence par le texte visible.
         action_label: "Inviter mon enseignant sur WhatsApp"
+        # UDR XXXX écrans minimalistes style Wave §3 : la bannière de l'accueil (invite_banner), masquable sur l'appareil.
+        banner_hint: "Invite-le en 10 secondes"
+        banner_action: "Inviter"
+        banner_dismiss: "Masquer l'invitation"
         message: "Bonjour ! Je suis en %{classroom} à %{school}. Sur Lnclass, vous pouvez nous donner des exercices et suivre nos résultats. Inscrivez-vous ici : %{link}"
