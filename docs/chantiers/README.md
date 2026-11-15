@@ -149,6 +149,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`cours-eleve`](cours-eleve/memo.md) | planification | feature | 2026-10-15 | Page Cours de l'élève aux couleurs Wave et Djamo |
 | [`cours-pleine-largeur`](cours-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La fiche de cours remplit l'écran du téléphone |
 | [`couverture-catalogue`](couverture-catalogue/memo.md) | livré | bugfix | 2026-10-30 | Couverture à 100 % perdue par la refonte des maths |
+| [`couverture-locale-et-train-divergent`](couverture-locale-et-train-divergent/memo.md) | en revue | bugfix | 2026-11-15 | Couverture locale et train divergents |
 | [`couverture-train`](couverture-train/memo.md) | livré | bugfix | 2026-10-31 | Couverture du train #417 |
 | [`crm-ecoles`](crm-ecoles/memo.md) | planifié | feature | 2026-11-04 | CRM des écoles |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | feature | 2026-09-28 | Croissance par parrainage entre enseignants, démarrage à froid et mesure du k-factor |
@@ -244,6 +245,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`profil-eleve`](profil-eleve/memo.md) | lots 0 | feature | 2026-10-15 | Profil de l'élève aux couleurs Wave et Djamo |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | feature | 2026-09-27 | Page profil de chaque utilisateur |
 | [`progres-eleve`](progres-eleve/memo.md) | livré | feature | 2026-10-04 | L'élève voit son propre progrès |
+| [`puma-avis-securite`](puma-avis-securite/memo.md) | livré | bugfix | 2026-11-15 | Avis de sécurité Puma |
 | [`qcm-plusieurs-reponses`](qcm-plusieurs-reponses/memo.md) | livré | bugfix | 2026-11-04 | Un QCM à plusieurs bonnes réponses refuse tout l'exercice sans dire pourquoi |
 | [`queries-constantes-orm-disparues`](queries-constantes-orm-disparues/memo.md) | livré | bugfix | 2026-09-18 · repris le 2026-09-24 | Requêtes de lecture appelant des modèles ORM disparus (ADR-0007 non propagé) |
 | [`question-matching-instable`](question-matching-instable/memo.md) | preuve | bugfix | 2026-10-27 | Les tests « aucun id révélé » des questions à relier et à ordonner échouent sans fuite |
