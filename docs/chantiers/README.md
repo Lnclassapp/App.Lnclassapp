@@ -142,6 +142,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`contenus-tle-svt-cd`](contenus-tle-svt-cd/memo.md) | livré | feature | 2026-10-31 | Les 10 premières leçons de SVT de Terminale C et D |
 | [`contenus-v3-tous-niveaux`](contenus-v3-tous-niveaux/memo.md) | en cours | programme | 2026-10-31 | Leçons au format v3 pour tous les niveaux (Tle → 6ème) |
 | [`contrat-de-session`](contrat-de-session/memo.md) | livré | refactoring | 2026-11-05 | Contrat de session |
+| [`controleurs-stimulus-bornes`](controleurs-stimulus-bornes/memo.md) | en cours | bugfix | 2026-11-15 | Contrôleurs Stimulus bornés |
 | [`copie-refusee-page-bloquee`](copie-refusee-page-bloquee/memo.md) | livré | bugfix | 2026-10-29 | Copie refusée : la page ne répond plus |
 | [`correction-comme-en-classe`](correction-comme-en-classe/memo.md) | livré | feature | 2026-10-28 | Corriger une copie comme en classe |
 | [`corrections-production`](corrections-production/) | pas de memo | — | — | — |
