@@ -26,6 +26,16 @@ class RepositoryRulesTest < Minitest::Test
     assert_empty offenders, "« # :nocov: » est interdit (ADR-0024) : #{offenders.join(', ')}"
   end
 
+  # `bin/rails test` without a file loads every rake file (test:prepare) before SimpleCov starts: a code file required at the top of one
+  # is loaded outside the measure and counts as 0 % even though its test passes (chantier couverture-locale-et-train-divergent).
+  def test_no_rake_file_requires_the_code_of_the_app_at_its_top_level
+    offenders = ruby_files("lib/tasks/**/*.rake").select do |file|
+      File.foreach(File.join(ROOT, file)).any? { it.match?(/\A(require|require_relative|load)\b.*(Rails\.root|\.\.\/)/) }
+    end
+
+    assert_empty offenders, "Un fichier .rake ne charge pas de code en tête (le require va dans la tâche) : #{offenders.join(', ')}"
+  end
+
   # ADR-0052 §4, amended by ADR-0108 §4: the only condition allowed on the worker is a PR environment.
   def test_the_solid_queue_worker_always_runs_inside_puma
     puma = File.read(File.join(ROOT, "config/puma.rb"))
