@@ -63,7 +63,7 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
     sign_in_as @student
 
     with_mobile_viewport do
-      visit course_path(@course.slug)
+      visit course_path(@course.slug, anchor: "fiche-de-revision")
 
       assert_selector BUTTON, text: more
       assert_operator find(BUTTON).native.size.height, :>=, 48

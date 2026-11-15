@@ -3,7 +3,7 @@
 <%# UDR  : XXXX écrans minimalistes style Wave §3 (accueil, sans classe), 0132 accueil élève §3.3 (état 6), 0081 (§3.5) · ADR : 0109 code de classe (§4.7) %>
 <%# locals: (form:, archived:, overlap: true) -%>
 <%= tag.section id: "student_choose_class", "aria-labelledby": "student_choose_class_title",
-                class: class_names("relative z-10 mx-gutter space-y-3 rounded-card bg-white p-5 shadow-lift lg:mx-0", { "max-lg:-top-wave-card max-lg:-mb-wave-card" => local_assigns.fetch(:overlap, true) }) do %>
+                class: class_names("relative z-10 mx-5 space-y-3 rounded-card bg-white p-5 shadow-lift lg:mx-0", { "max-lg:-top-wave-card max-lg:-mb-wave-card" => local_assigns.fetch(:overlap, true) }) do %>
   <h2 id="student_choose_class_title" class="text-xl leading-snug font-medium text-ink"><%= t("classroom.student_homes.no_classroom.title") %></h2>
   <%= form_with model: form, scope: :student_classroom_choice, url: student_classroom_choices_path, id: "student-home-code-form", class: "space-y-3" do |f| %>
     <%= ui_field f, :join_code, label: t("classroom.student_homes.no_classroom.code"), hint: t("classroom.student_homes.no_classroom.hint"),

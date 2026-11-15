@@ -49,4 +49,12 @@ class ScreensTest < ActionView::TestCase
     assert_equal "0/4", link.css("span").last.text.strip
     assert_includes link.css("span").last[:class].split, "tabular-nums"
   end
+
+  test "a row with `native: true` is followed by the browser (an anchor needs :target), the others stay on Turbo" do
+    plain = Nokogiri::HTML.fragment(view.render("shared/screens/row", title: "A", href: "/a", icon: "i"))
+    anchor = Nokogiri::HTML.fragment(view.render("shared/screens/row", title: "B", href: "#fiche", icon: "i", native: true))
+
+    assert_equal "true", plain.at_css("a")["data-turbo"]
+    assert_equal "false", anchor.at_css("a")["data-turbo"]
+  end
 end

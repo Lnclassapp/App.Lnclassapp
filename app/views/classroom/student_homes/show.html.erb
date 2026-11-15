@@ -18,17 +18,17 @@
   <div class="<%= class_names("bg-white lg:bg-transparent", "-mt-wave-lap rounded-t-wave lg:mt-0 lg:rounded-none" => !lnclass_app?) %>">
     <% if @home %>
       <%= render "class_card", home: @home, overlap: !lnclass_app? %>
-      <div class="px-gutter pt-6 pb-6 lg:px-0 lg:pt-8 lg:pb-0">
+      <div class="px-5 pt-6 pb-6 lg:px-0 lg:pt-8 lg:pb-0">
         <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs %>
       </div>
     <% else %>
       <%= render "choose_class", form: @form, archived: @archived, overlap: !lnclass_app? %>
       <% if @subjects.present? %>
-        <div class="px-gutter pt-6 pb-6 lg:px-0 lg:pb-0"><%= render "subjects", subjects: @subjects, late_slugs: [] %></div>
+        <div class="px-5 pt-6 pb-6 lg:px-0 lg:pb-0"><%= render "subjects", subjects: @subjects, late_slugs: [] %></div>
       <% end %>
     <% end %>
     <%# Les avis, sous la grille : la carte de la classe garde le haut de la jonction. %>
-    <div class="space-y-3 px-gutter empty:hidden lg:px-0">
+    <div class="space-y-3 px-5 empty:hidden lg:px-0">
       <%= render "billing/subscriptions/home_notice", access: @access %>
       <%# UDR hors-connexion §3.6 : les copies rendues hors ligne qui attendent le réseau, lues sur l'appareil. %>
       <%= render "shared/offline/pending_copies" %>
@@ -43,12 +43,12 @@
     <% to_do = capture { render "to_do", exercises: @home.assigned_exercises } %>
     <%# Historique : le cadre différé rend son titre avec ses lignes, ou rien ; « À faire » vide ne laisse pas de bande blanche. %>
     <%# Sans annonce, le blanc de la grille se prolonge : pas de second espace au-dessus de « À faire ». %>
-    <div class="<%= class_names("bg-white px-gutter pb-3 lg:space-y-6 lg:bg-transparent lg:p-0", "pt-4" => @announcements&.any_readable?) %>">
+    <div class="<%= class_names("bg-white px-5 pb-3 lg:space-y-6 lg:bg-transparent lg:p-0", "pt-4" => @announcements&.any_readable?) %>">
       <div class="pb-3 empty:hidden lg:p-0"><%= to_do %></div>
       <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, src: student_home_path, loading: :lazy,
                           target: "_top", class: "block min-h-px" %>
     </div>
-    <div class="px-gutter pt-6 lg:p-0">
+    <div class="px-5 pt-6 lg:p-0">
       <%= render "invite_banner", invite_href: %>
     </div>
   <% end %>

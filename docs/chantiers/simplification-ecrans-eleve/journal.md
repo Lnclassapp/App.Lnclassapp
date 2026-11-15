@@ -11,6 +11,7 @@
 | 2026-11-14 | Valeur de « À faire » : « répondu/total » (`question_count`, `answered_count` ajoutés à `ExerciseRow`), échéance dans le détail | Conformité aux maquettes validées | UDR XXXX |
 | 2026-11-14 | « Prochain exercice » retiré des écrans élève mais **code conservé** (partial `_next_exercise`, `next_step/`, `NextExerciseQuery` + test, clés I18n) | Précision du porteur : il servira au guidage d'activation après l'inscription ; issue « Réutiliser « Prochain exercice » dans l'activation après l'inscription ». Les tests d'affichage seuls sont retirés, ceux de la query gardés | UDR XXXX §4 |
 | 2026-11-14 | Lot D : skill de projet `ecrans-wave`, branchée dans /retouche, /feature, /test-ecrans ; ligne dans CLAUDE.md | Demande du porteur ; la skill `lnclass-design-system` (claude.ai) est réécrite dans `lnclass-design-system-SKILL.md` pour téléversement par le porteur | non |
+| 2026-11-15 | Fiche de révision retirée de dessous les groupes : cachée (`hidden target:block`), ouverte par la ligne « Fiche de révision » (lien natif `native: true`, car Turbo ne pose pas `:target`) ; marges latérales de l'accueil à 20 px (≈ 5 %) | Demandes du porteur ; l'adresse `/courses/<slug>#fiche-de-revision` et les ancres existantes continuent de marcher | UDR XXXX |
 
 ## À trancher
 

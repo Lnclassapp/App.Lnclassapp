@@ -175,7 +175,8 @@ module LessonRendering
 
     # La page de la leçon, lue à la largeur courante de la fenêtre.
     def inspect_page(file, course, lesson, width)
-      visit course_path(course.slug)
+      # La fiche est cachée tant qu'elle n'est pas désignée (UDR XXXX §3, leçon) : l'adresse #fiche-de-revision l'ouvre.
+      visit course_path(course.slug, anchor: "fiche-de-revision")
       assert_selector "h1", text: course.name, wait: 20
       reveal_revision_sheet
       seen = measure_page(lesson)
