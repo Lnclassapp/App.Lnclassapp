@@ -142,12 +142,15 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`contenus-tle-svt-cd`](contenus-tle-svt-cd/memo.md) | livré | feature | 2026-10-31 | Les 10 premières leçons de SVT de Terminale C et D |
 | [`contenus-v3-tous-niveaux`](contenus-v3-tous-niveaux/memo.md) | en cours | programme | 2026-10-31 | Leçons au format v3 pour tous les niveaux (Tle → 6ème) |
 | [`contrat-de-session`](contrat-de-session/memo.md) | livré | refactoring | 2026-11-05 | Contrat de session |
+| [`controleurs-stimulus-bornes`](controleurs-stimulus-bornes/memo.md) | en cours | bugfix | 2026-11-15 | Contrôleurs Stimulus bornés |
 | [`copie-refusee-page-bloquee`](copie-refusee-page-bloquee/memo.md) | livré | bugfix | 2026-10-29 | Copie refusée : la page ne répond plus |
 | [`correction-comme-en-classe`](correction-comme-en-classe/memo.md) | livré | feature | 2026-10-28 | Corriger une copie comme en classe |
 | [`corrections-production`](corrections-production/) | pas de memo | — | — | — |
 | [`cours-eleve`](cours-eleve/memo.md) | planification | feature | 2026-10-15 | Page Cours de l'élève aux couleurs Wave et Djamo |
 | [`cours-pleine-largeur`](cours-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La fiche de cours remplit l'écran du téléphone |
+| [`couverture-branches-visible`](couverture-branches-visible/memo.md) | en revue | optimisation | 2026-11-15 | Voir la couverture de branches avant le train |
 | [`couverture-catalogue`](couverture-catalogue/memo.md) | livré | bugfix | 2026-10-30 | Couverture à 100 % perdue par la refonte des maths |
+| [`couverture-locale-et-train-divergent`](couverture-locale-et-train-divergent/memo.md) | en revue | bugfix | 2026-11-15 | Couverture locale et train divergents |
 | [`couverture-train`](couverture-train/memo.md) | livré | bugfix | 2026-10-31 | Couverture du train #417 |
 | [`crm-ecoles`](crm-ecoles/memo.md) | planifié | feature | 2026-11-04 | CRM des écoles |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | feature | 2026-09-28 | Croissance par parrainage entre enseignants, démarrage à froid et mesure du k-factor |
@@ -243,6 +246,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`profil-eleve`](profil-eleve/memo.md) | lots 0 | feature | 2026-10-15 | Profil de l'élève aux couleurs Wave et Djamo |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | feature | 2026-09-27 | Page profil de chaque utilisateur |
 | [`progres-eleve`](progres-eleve/memo.md) | livré | feature | 2026-10-04 | L'élève voit son propre progrès |
+| [`puma-avis-securite`](puma-avis-securite/memo.md) | livré | bugfix | 2026-11-15 | Avis de sécurité Puma |
 | [`qcm-plusieurs-reponses`](qcm-plusieurs-reponses/memo.md) | livré | bugfix | 2026-11-04 | Un QCM à plusieurs bonnes réponses refuse tout l'exercice sans dire pourquoi |
 | [`queries-constantes-orm-disparues`](queries-constantes-orm-disparues/memo.md) | livré | bugfix | 2026-09-18 · repris le 2026-09-24 | Requêtes de lecture appelant des modèles ORM disparus (ADR-0007 non propagé) |
 | [`question-matching-instable`](question-matching-instable/memo.md) | preuve | bugfix | 2026-10-27 | Les tests « aucun id révélé » des questions à relier et à ordonner échouent sans fuite |
@@ -283,6 +287,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`suppression-lecon`](suppression-lecon/memo.md) | livré | feature | 2026-11-14 | Supprimer une leçon qui n'a jamais servi à un élève |
 | [`teams-dashboard-cours-recents`](teams-dashboard-cours-recents/memo.md) | livré | bugfix | 2026-09-23 | Le tableau de bord Team plante en 500 |
 | [`test-date-figee`](test-date-figee/memo.md) | livré | bugfix | 2026-10-30 | Un test de suivi d'exercice rouge depuis le 30 octobre 2026 |
+| [`test-restauration-purge-instable`](test-restauration-purge-instable/memo.md) | preuve | bugfix | 2026-11-15 | Le test « une restauration validée la première sort le compte de la purge » échoue parfois |
 | [`tester-pr-en-local`](tester-pr-en-local/memo.md) | livré | feature | 2026-10-21 | Tester une PR sur sa machine |
 | [`tests-correction-alignes`](tests-correction-alignes/memo.md) | livré | bugfix | 2026-10-29 | Dix tests d'intégration de l'évaluation, rouges sur Develop |
 | [`tests-instables`](tests-instables/memo.md) | livré | bugfix | 2026-09-28 | Trois tests instables sous CI bloquée |
