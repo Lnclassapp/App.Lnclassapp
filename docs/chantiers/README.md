@@ -264,6 +264,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`rendu-lecons-v3-390`](rendu-lecons-v3-390/memo.md) | en cours | bugfix | 2026-11-02 | Rendu des leçons v3 à 390 px |
 | [`renommage-fiche-revision`](renommage-fiche-revision/memo.md) | planifié | feature | 2026-10-12 | « Fiche de cours » et « Fiche de révision » à l'écran |
 | [`reorganisation-equipe-enseignant`](reorganisation-equipe-enseignant/memo.md) | livré | feature | 2026-10-03 | Réorganisation des espaces Équipe et Enseignant |
+| [`reserves-revue-train`](reserves-revue-train/memo.md) | en revue | correction | 2026-11-15 | Réserves basses de la revue du train du 2026-11-15 |
 | [`retention-ip-audit`](retention-ip-audit/memo.md) | livré | feature | 2026-10-05 | Rétention de l'adresse IP du journal d'audit |
 | [`retouches`](retouches/memo.md) | permanent | retouche | 2026-11-06 | Retouches sans chantier parent |
 | [`retrait-debugbar`](retrait-debugbar/memo.md) | livré | bugfix | 2026-10-03 | Retrait de debugbar |
