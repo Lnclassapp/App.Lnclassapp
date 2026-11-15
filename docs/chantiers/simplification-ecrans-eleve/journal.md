@@ -61,3 +61,4 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+- [ ] 2026-11-15 · PR 633 · Sept citations « UDR XXXX » (avec espace) dans des commentaires de `config/locales/` (`catalog/courses.fr.yml`, `classroom/student_homes.fr.yml`, `shared/screens.fr.yml`), arrivées par `Develop` après l'ouverture de la PR, hors de son périmètre (`app/`, `test/`) — appliqué : laissées telles quelles, la PR reste du commentaire sur son périmètre ; autres : les remplacer par UDR-0173 dans cette PR ou dans une retouche ; recommandé : retouche séparée
