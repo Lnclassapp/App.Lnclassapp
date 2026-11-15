@@ -1,0 +1,18 @@
+<%# 🌐 UI · catalog/courses/_lesson_tiles — une page de tuiles de leçons (grille de 4 colonnes), puis le frame différé de la suivante %>
+<%# Rôle : 24 tuiles (CourseCatalogQuery::PER_PAGE) ; au bas, la page suivante chargée au défilement, ou son lien sans JavaScript ; les icônes d'interface sont dessinées une fois par page %>
+<%# ADR  : 0035, 0067, 0076 · UDR : XXXX écrans minimalistes style Wave §3 (matière), 0013 (amendement du 2026-10-05) · locals: (page:, nested: false) -%>
+<% nested = local_assigns.fetch(:nested, false) %>
+<%= ui_icon_sprite(prefix: ("tiles-page-#{page.page}-" if nested)) do %>
+  <ul id="<%= nested ? "lesson_tiles_page_#{page.page}" : "lesson_tiles" %>" class="grid grid-cols-4 gap-x-1 gap-y-5 px-2 pt-4 pb-3">
+    <%= render partial: "catalog/courses/lesson_tile", collection: page.rows, as: :course %>
+  </ul>
+<% end %>
+<% if page.page < page.pages %>
+  <% next_page = page.page + 1 %>
+  <% next_path = courses_path(material: student_material.slug, q: @filters[:q].presence, page: next_page) %>
+  <%= turbo_frame_tag "courses_page_#{next_page}", src: next_path, loading: :lazy, target: "_top", class: "block" do %>
+    <div class="flex justify-center py-2">
+      <%= ui_button t("catalog.courses.page.more"), href: next_path, variant: :ghost, data: { turbo_frame: "courses_page_#{next_page}" } %>
+    </div>
+  <% end %>
+<% end %>

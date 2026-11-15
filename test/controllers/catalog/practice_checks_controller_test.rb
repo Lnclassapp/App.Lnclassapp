@@ -206,7 +206,7 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
     digest = Entities::Catalog::NotionPractice.from_raw(raw_practice(notebook_question)).digest
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get course_fiche_path(@course.slug)
     assert_select "##{"practice_#{notion.slug}"} button[type=submit]", text: pt("done")
 
     check({}, notion:, digest:)

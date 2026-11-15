@@ -17,12 +17,12 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
 
   def anchor = "notion-#{@notion.slug}"
 
-  test "the student home sends « Revoir la notion » to the lesson, on the notion" do
+  test "the student home no longer lists the notion to review (UDR XXXX écrans minimalistes style Wave §3)" do
     sign_in_as @student
 
     get student_home_path
 
-    assert_select "section#student_next_step[data-state=review] a.ui-button-primary[href=?]", course_path(@course.slug, anchor:)
+    assert_select "#student_home a[href=?]", course_path(@course.slug, anchor:), 0
   end
 
   test "the « Notions à revoir » of the student classroom lead to the lesson, on the notion" do
@@ -51,7 +51,7 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
-    assert_select "a.ps-card##{anchor}[href=?]", course_sheet_path(@course.slug, anchor)
+    assert_select "li##{anchor} a[href=?]", course_sheet_path(@course.slug, anchor)
     exercise = Orm::Exercise.find_by!(essential: @notion)
     get fill_course_sheet_path(@course.slug, anchor)
     assert_select ".ps-sheet##{anchor} turbo-frame#sheet-exercise-#{exercise.public_id}"
