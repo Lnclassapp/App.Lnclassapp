@@ -32,7 +32,7 @@ L'écart était trouvable avant la fusion. Chaque fois qu'il se trouve au train,
 
 ## La solution
 
-Au niveau `pr`, les tests unitaires du périmètre (ceux que `bin/ci-quiet` jouait déjà, sous `COVERAGE=0`) jouent **avec** la mesure (`COVERAGE_PART=pr`, sans seuil). `script/ci/coverage_touched` lit le résultat et, pour les seuls fichiers `app/` et `lib/` touchés, nomme les lignes et les branches qu'aucun test de la PR ne joue. `bin/ci-quiet` l'affiche (rouge ou vert), et le redit tant que le code est le même, même si l'étape n'est pas rejouée. C'est un **avertissement**, jamais un blocage : voir l'[ADR-XXXX-couverture-des-fichiers-touches-au-niveau-pr](../../decisions/adr/XXXX-couverture-des-fichiers-touches-au-niveau-pr.md).
+Au niveau `pr`, les tests unitaires du périmètre (ceux que `bin/ci-quiet` jouait déjà, sous `COVERAGE=0`) jouent **avec** la mesure (`COVERAGE_PART=pr`, sans seuil). `script/ci/coverage_touched` lit le résultat et, pour les seuls fichiers `app/` et `lib/` touchés, nomme les lignes et les branches qu'aucun test de la PR ne joue. `bin/ci-quiet` l'affiche (rouge ou vert), et le redit tant que le code est le même, même si l'étape n'est pas rejouée. C'est un **avertissement**, jamais un blocage : voir l'[ADR-0137](../../decisions/adr/0137-couverture-des-fichiers-touches-au-niveau-pr.md).
 
 ## Mesure (PR #627 avant correction, `5f6d5bf4`, base `eea49396`)
 
