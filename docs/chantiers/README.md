@@ -280,6 +280,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`suppression-lecon`](suppression-lecon/memo.md) | livré | feature | 2026-11-14 | Supprimer une leçon qui n'a jamais servi à un élève |
 | [`teams-dashboard-cours-recents`](teams-dashboard-cours-recents/memo.md) | livré | bugfix | 2026-09-23 | Le tableau de bord Team plante en 500 |
 | [`test-date-figee`](test-date-figee/memo.md) | livré | bugfix | 2026-10-30 | Un test de suivi d'exercice rouge depuis le 30 octobre 2026 |
+| [`test-restauration-purge-instable`](test-restauration-purge-instable/memo.md) | preuve | bugfix | 2026-11-15 | Le test « une restauration validée la première sort le compte de la purge » échoue parfois |
 | [`tester-pr-en-local`](tester-pr-en-local/memo.md) | livré | feature | 2026-10-21 | Tester une PR sur sa machine |
 | [`tests-correction-alignes`](tests-correction-alignes/memo.md) | livré | bugfix | 2026-10-29 | Dix tests d'intégration de l'évaluation, rouges sur Develop |
 | [`tests-instables`](tests-instables/memo.md) | livré | bugfix | 2026-09-28 | Trois tests instables sous CI bloquée |
