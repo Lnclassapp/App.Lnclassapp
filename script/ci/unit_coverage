@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# Plays the unit tests of the change, then says which lines and branches of the touched files they leave unplayed
+# (ADR-0107 §10, script/ci/coverage_touched). Everything reaches it as positional arguments, no shell involved:
+#
+#   script/ci/unit_coverage <out> <touched file>… -- <test file>…
+#
+# A path with a space or a glob character stays one file (#643). The exit status is that of the tests: the coverage
+# warning never fails the step.
+out, *rest = ARGV
+marker = rest.index("--")
+abort "Usage : script/ci/unit_coverage <out> <touched file>… -- <test file>…" unless out && marker && marker.positive? && rest.size > marker + 1
+
+touched = rest[0...marker]
+tests = rest[(marker + 1)..]
+resultset = "coverage/.resultset.json"
+File.delete(resultset) if File.exist?(resultset)
+green = system("bin/rails", "test", *tests)
+system("script/ci/coverage_touched", resultset, out, "--", *touched)
+exit(green ? 0 : 1)

@@ -1,15 +1,16 @@
 #!/usr/bin/env ruby
 # Says which lines and branches of the given files no test of the last run plays (script/ci/coverage_touched.rb).
 #
-#   script/ci/coverage_touched <resultset.json> <out> <file>…
+#   script/ci/coverage_touched <resultset.json> <out> -- <file>…
 #
 # Prints the warning and writes it to <out> under the fingerprint of the code (script/ci/scope.rb), emptied when the files
 # are covered: bin/ci-quiet says it again for the same code, even when the step is not played again. Never fails on a gap: it is a warning.
 require_relative "coverage_touched"
 require_relative "scope"
 
-resultset, out, *files = ARGV
-abort "Usage : script/ci/coverage_touched <resultset.json> <out> <file>…" unless resultset && out && files.any?
+# The files come after `--`, as positional arguments: a path with a space or a glob character stays one file (#643).
+resultset, out, marker, *files = ARGV
+abort "Usage : script/ci/coverage_touched <resultset.json> <out> -- <file>…" unless resultset && out && marker == "--" && files.any?
 
 lines = File.exist?(resultset) ? CoverageTouched.report(CoverageTouched.gaps(JSON.parse(File.read(resultset)), files)) : []
 File.write(out, lines.empty? ? "" : "#{CiScope.fingerprint(`git ls-tree -r HEAD`)}\n#{lines.join("\n")}\n")
