@@ -64,4 +64,35 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
       assert no_sideways_scroll?, "la page défile sur le côté après Vérifier"
     end
   end
+
+  # Bug « formules-apres-soumission » : le frame garde son contrôleur math, Turbo n'en remplace que le contenu ; la réponse
+  # (énoncé, propositions, indice, correction) restait en texte brut.
+  def vector_question
+    { "content" => "$ABCD$ est un parallélogramme. Quel vecteur est égal à $\\overrightarrow{DC}$ ?", "question_type" => "single_choice",
+      "hint" => "Compare $\\overrightarrow{AB}$ et $\\overrightarrow{DC}$.", "explanation" => "Donc $\\overrightarrow{AB} = \\overrightarrow{DC}$ dans un parallélogramme.",
+      "answers" => [ { "content" => "$\\overrightarrow{AB}$", "correct" => true }, { "content" => "$\\overrightarrow{BA}$", "correct" => false },
+                     { "content" => "$\\overrightarrow{AD}$", "correct" => false } ] }
+  end
+
+  test "les formules de l'entraînement sont rendues avant et après « Vérifier » (énoncé, propositions, indice, correction)" do
+    notion = create_practice_notion(course: create_course(name: "Vecteurs", content: "", level: @course.level), questions: [ vector_question ])
+    sign_in_as @student
+
+    with_mobile_viewport do
+      visit course_path(notion.course.slug, anchor: "fiche-de-revision")
+      within("turbo-frame#practice_#{notion.slug}") do
+        assert_selector ".katex"
+        assert_no_text "overrightarrow"
+        find("input[type=radio]", match: :first, visible: :all).click
+        click_button pt("check")
+        assert_selector "summary", text: pt("correction")
+        find("summary", text: pt("correction")).click
+        find("summary", text: pt("hint"), match: :first).click
+        assert_selector ".sheet-practice-correction .katex"
+        assert_selector ".sheet-practice-hint .katex"
+        assert_no_text "overrightarrow"
+        assert_no_text "$"
+      end
+    end
+  end
 end
