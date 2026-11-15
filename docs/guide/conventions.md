@@ -258,6 +258,14 @@ Trois clauses en font partie :
 
 Le cliquet de ce dépôt monte à chaque chantier livré, jamais l'inverse. Il n'est pas un objectif : l'objectif est 100 %, atteint par la migration et non par le rattrapage. La raison de ce double régime est opérationnelle et datée — à 45,8 %, activer 100 % ici refuserait le premier commit qui répare [`queries-constantes-orm-disparues`](../chantiers/queries-constantes-orm-disparues/memo.md).
 
+### Ne pas charger à la main le code que Zeitwerk autocharge
+
+**La règle est : on n'écrit ni `require`, ni `require_relative`, ni `load` vers un fichier de `app/` ou de `lib/`** (hors `app/assets`, `app/javascript`, `app/views`, `lib/assets` et `lib/tasks`, que Zeitwerk n'autocharge pas — `config.autoload_lib(ignore: %w[assets tasks])`). Cela vaut dans un `.rake`, dans un test, dans un script, partout : la constante suffit, Zeitwerk la résout seul. Les `require` légitimes restent permis : bibliothèque standard, gems, `test_helper`, fichiers hors des répertoires autochargés (`config/`, `db/migrate/`). Les scripts autonomes de `script/` et de `docs/`, qui tournent sans Rails donc sans Zeitwerk, sont hors règle.
+
+Ce n'est pas une préférence de style. Un `require` placé en tête d'un `.rake` s'exécutait pendant `test:prepare`, avant le démarrage de SimpleCov : le fichier sortait de la mesure (118 lignes et 51 branches) et la CI affichait 100 % au train sans que personne ne le voie ([`couverture-locale-et-train-divergent`](../chantiers/couverture-locale-et-train-divergent/memo.md), issue #641). Selon le mode de chargement, il redéfinit aussi une constante déjà autochargée ou lève `Zeitwerk::NameError`.
+
+La garde `test_no_file_loads_by_hand_the_code_zeitwerk_autoloads` (`test/guards/repository_rules_test.rb`) balaie tout le code qui tourne dans Rails (`app/`, `lib/`, `config/`, `db/`, `test/`, `Rakefile`, `bin/`) et échoue sur tout chemin qui résout sous un répertoire autochargé, quelle que soit la forme d'écriture.
+
 ### Contrôleur Stimulus borné
 
 **Un contrôleur Stimulus qui réagit à une modification du DOM, ou qui change l'adresse, borne son action.** Deux boucles côté navigateur en une nuit (2026-11-14) en sont la preuve : `math_controller` (un `MutationObserver` par instance ; deux éléments `data-controller="math"` imbriqués se renvoyaient leurs mutations sans fin, la tâche de CI `lecons` a dépassé 5 minutes deux fois, PR #628) et `hash_redirect_controller` (`location.replace` sans limite, un 301 resté en cache rebouclait, issue #635).
