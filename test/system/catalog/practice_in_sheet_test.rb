@@ -15,7 +15,7 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
 
   test "the student checks her box in place : verdict, saisie kept, correction only afterwards, no reload" do
     sign_in_as @student
-    visit course_path(@course.slug, anchor: "fiche-de-revision")
+    visit course_fiche_path(@course.slug)
 
     within "turbo-frame#practice_#{@notion.slug}" do
       assert_no_selector "summary", text: pt("correction")
@@ -33,13 +33,13 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
       find("summary", text: pt("correction")).click
       assert_text "4,8 cm"
     end
-    assert_current_path course_path(@course.slug)
+    assert_current_path course_fiche_path(@course.slug)
   end
 
   test "a two-box question gets one verdict per box" do
     notion = create_practice_notion(course: create_course(name: "Thalès", content: "", level: @course.level), questions: [ two_blank_numeric_question ])
     sign_in_as @student
-    visit course_path(notion.course.slug, anchor: "fiche-de-revision")
+    visit course_fiche_path(notion.course.slug)
 
     box(0).fill_in(with: "4,8")
     box(1).fill_in(with: "5")
@@ -54,7 +54,7 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
     sign_in_as @student
 
     with_mobile_viewport do
-      visit course_path(@course.slug, anchor: "fiche-de-revision")
+      visit course_fiche_path(@course.slug)
       assert no_sideways_scroll?, "la page défile sur le côté"
       assert_operator box(0).native.size.height, :>=, 48
       assert_operator find_button(pt("check")).native.size.height, :>=, 48
@@ -62,6 +62,37 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
       click_button pt("check")
       assert_selector ".sheet-verdict", text: pt("correct")
       assert no_sideways_scroll?, "la page défile sur le côté après Vérifier"
+    end
+  end
+
+  # Bug « formules-apres-soumission » : le frame garde son contrôleur math, Turbo n'en remplace que le contenu ; la réponse
+  # (énoncé, propositions, indice, correction) restait en texte brut.
+  def vector_question
+    { "content" => "$ABCD$ est un parallélogramme. Quel vecteur est égal à $\\overrightarrow{DC}$ ?", "question_type" => "single_choice",
+      "hint" => "Compare $\\overrightarrow{AB}$ et $\\overrightarrow{DC}$.", "explanation" => "Donc $\\overrightarrow{AB} = \\overrightarrow{DC}$ dans un parallélogramme.",
+      "answers" => [ { "content" => "$\\overrightarrow{AB}$", "correct" => true }, { "content" => "$\\overrightarrow{BA}$", "correct" => false },
+                     { "content" => "$\\overrightarrow{AD}$", "correct" => false } ] }
+  end
+
+  test "les formules de l'entraînement sont rendues avant et après « Vérifier » (énoncé, propositions, indice, correction)" do
+    notion = create_practice_notion(course: create_course(name: "Vecteurs", content: "", level: @course.level), questions: [ vector_question ])
+    sign_in_as @student
+
+    with_mobile_viewport do
+      visit course_path(notion.course.slug, anchor: "fiche-de-revision")
+      within("turbo-frame#practice_#{notion.slug}") do
+        assert_selector ".katex"
+        assert_no_text "overrightarrow"
+        find("input[type=radio]", match: :first, visible: :all).click
+        click_button pt("check")
+        assert_selector "summary", text: pt("correction")
+        find("summary", text: pt("correction")).click
+        find("summary", text: pt("hint"), match: :first).click
+        assert_selector ".sheet-practice-correction .katex"
+        assert_selector ".sheet-practice-hint .katex"
+        assert_no_text "overrightarrow"
+        assert_no_text "$"
+      end
     end
   end
 end

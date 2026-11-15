@@ -30,7 +30,7 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
 
     assert_current_path student_home_path
     assert_text I18n.t("classroom.student_homes.show.removed")
-    assert_selector "#student_next_step[data-state=no_classroom]"
+    assert_selector "#student_choose_class"
     click_on I18n.t("classroom.student_homes.no_classroom.no_code")
 
     assert_current_path new_student_classroom_choice_path
@@ -44,7 +44,7 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
     click_on I18n.t("#{CHOICE}.submit")
 
     assert_current_path student_home_path
-    assert_selector "#student_next_step", text: /3e 3/i
+    assert_selector "#student_class_card", text: /3e 3/i
     assert_equal [ @next_door.id ], Orm::ClassroomStudent.where(student: @koffi, left_at: nil).pluck(:classroom_id)
   end
 
@@ -58,7 +58,7 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
     click_on I18n.t("classroom.joins.new.join_as_student")
 
     assert_current_path student_home_path
-    assert_selector "#student_next_step", text: /3e 2/i
+    assert_selector "#student_class_card", text: /3e 2/i
     sign_out
 
     sign_in_as @teacher

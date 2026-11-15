@@ -1,0 +1,16 @@
+<%# 🌐 UI · catalog/courses/fiche — la fiche de révision de l'élève, sur sa propre page : flèche retour vers la leçon, titre, la fiche %>
+<%# Rôle : écran intérieur (content_for :inner : ni barre ni menu) ; chaque notion garde son ancre « notion-<slug> » (liens, 301) ; la page de la leçon s'arrête après « Prépare devoirs » %>
+<%# ADR  : 0113 (§4.3), 0116 · UDR : XXXX écrans minimalistes style Wave §3 (leçon : fiche de révision sur sa page), 0139 §3.2, 0141 §3.1 · locals: aucun (@detail, @revision, @proposals) -%>
+<% course = @detail.course %>
+<% page_title t(".page_title", name: course.name) %>
+<% content_for :inner, "1" %>
+<% content_for :nav_key, "courses" %>
+<% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
+<div id="student_revision" class="mx-auto w-full max-w-180 space-y-6 pb-6">
+  <%= render "shared/screens/inner_header", title: t("catalog.courses.show.revision_title"), subtitle: course.name, back_href: course_path(course.slug) %>
+
+  <section id="fiche-de-revision" aria-labelledby="revision_title">
+    <h2 id="revision_title" class="sr-only"><%= t("catalog.courses.show.revision_title") %></h2>
+    <%= render "catalog/courses/revision_sheet", course:, revision: @revision, proposals: @proposals %>
+  </section>
+</div>

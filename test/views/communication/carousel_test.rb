@@ -50,10 +50,10 @@ module Communication
       assert_select "section#student_home_announcements[class*='lg:bg-paper']", 0
     end
 
-    test "student: true — from lg the band is a white card with a line, on the mist page" do
+    test "student: true — a grey band, on the page itself from lg (UDR XXXX écrans minimalistes style Wave §3)" do
       carousel([ card("a", "Une") ], student: true)
 
-      assert_select "section#student_home_announcements.bg-mist.lg\\:border.lg\\:border-line.lg\\:bg-paper.lg\\:p-4.lg\\:shadow-card"
+      assert_select "section#student_home_announcements.bg-mist.py-3.lg\\:bg-transparent.lg\\:p-0"
     end
 
     test "AN-13 — the cross on every card but the official one" do

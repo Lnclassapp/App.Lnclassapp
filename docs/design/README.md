@@ -19,6 +19,10 @@ Le design system de Lnclass est fixé par [UDR-0005](../decisions/udr/0005-desig
 2. Un nouveau composant a sa méthode dans `ComponentsHelper`, son exemple sur `/design` et son test système.
 3. [`.interface-design/system.md`](../../.interface-design/system.md) (palette `slate/blue`) est historique : l'UDR-0005 le remplace.
 
+## Écrans de l'élève
+
+Accueil, vue d'une matière et page d'une leçon suivent [UDR-0173](../decisions/udr/0173-ecrans-minimalistes-style-wave.md) : un écran, une chose de valeur, pas de carte « Prochain exercice », pas de section vide. Cette UDR prime sur la charte `lnclass-design-system` (§6 à §8, carte « Prochain exercice »), qui reste valable pour les tokens, les formats et l'accessibilité.
+
 ## Maquettes
 
 - [`maquettes/signalement-erreurs/`](maquettes/signalement-erreurs/) : prototype du signalement d'erreurs par un enseignant sur une fiche (module JavaScript autonome et page de démonstration). Il n'est pas branché à l'application.

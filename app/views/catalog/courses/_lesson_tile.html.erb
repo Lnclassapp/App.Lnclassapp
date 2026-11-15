@@ -1,0 +1,23 @@
+<%# 🌐 UI · catalog/courses/_lesson_tile — la tuile d'une leçon de la vue d'une matière : pastille pastel et pictogramme, libellé court, « Leçon n », coche si faite %>
+<%# Rôle : toute la tuile mène à la leçon (≥ 48 px) ; le pictogramme est calculé du titre (Catalog::LessonTileHelper), jamais saisi ; le nom entier est lu aux lecteurs d'écran et en title %>
+<%# ADR  : 0113 (§4.3 : pas de préchargement, l'ouverture retient les lectures) · UDR : XXXX écrans minimalistes style Wave §3 (matière) · locals: (course:) -%>
+<% number = lesson_number(course.subtitle) %>
+<li id="course_<%= course.slug %>">
+  <%= link_to course_path(course.slug), title: course.name, data: { turbo_prefetch: false },
+              class: "group relative flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" do %>
+    <span class="relative">
+      <span class="<%= class_names("grid size-12 place-items-center rounded-ln text-brand-strong transition group-active:scale-95",
+                                   lesson_icon_tint(material_slug: course.material_slug, name: course.name)) %>" aria-hidden="true">
+        <%= lesson_icon(material_slug: course.material_slug, name: course.name) %>
+      </span>
+      <%# La coche est décorative : « Terminée » est lu par les lecteurs d'écran. %>
+      <% if course.progress == :done %>
+        <%= ui_icon "check-circle", variant: :solid, size: :sm, class: "absolute -top-1 -right-1 rounded-full bg-white text-success" %>
+      <% end %>
+    </span>
+    <span class="line-clamp-2 text-sm leading-tight font-medium break-words text-ink" aria-hidden="true"><%= lesson_short_title(course.name) %></span>
+    <span class="sr-only"><%= course.name %></span>
+    <% if number %><span class="-mt-1 text-xs text-mute"><%= t(".number", number:) %></span><% end %>
+    <% if course.progress == :done %><span class="sr-only"><%= t(".done") %></span><% end %>
+  <% end %>
+</li>

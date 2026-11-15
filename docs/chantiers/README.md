@@ -148,6 +148,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`cours-eleve`](cours-eleve/memo.md) | planification | feature | 2026-10-15 | Page Cours de l'élève aux couleurs Wave et Djamo |
 | [`cours-pleine-largeur`](cours-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La fiche de cours remplit l'écran du téléphone |
 | [`couverture-catalogue`](couverture-catalogue/memo.md) | livré | bugfix | 2026-10-30 | Couverture à 100 % perdue par la refonte des maths |
+| [`couverture-locale-et-train-divergent`](couverture-locale-et-train-divergent/memo.md) | en revue | bugfix | 2026-11-15 | Couverture locale et train divergents |
 | [`couverture-train`](couverture-train/memo.md) | livré | bugfix | 2026-10-31 | Couverture du train #417 |
 | [`crm-ecoles`](crm-ecoles/memo.md) | planifié | feature | 2026-11-04 | CRM des écoles |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | feature | 2026-09-28 | Croissance par parrainage entre enseignants, démarrage à froid et mesure du k-factor |
@@ -177,6 +178,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`finitions-ux`](finitions-ux/memo.md) | livré | feature | 2026-09-29 | Finitions UX |
 | [`flux-allege`](flux-allege/memo.md) | livré | refactoring | 2026-11-06 | Un flux allégé : petites branches, retouches, messages, mesure mensuelle |
 | [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | planifié | feature | 2026-10-02 | Fonctions de l'espace élève |
+| [`formules-apres-soumission`](formules-apres-soumission/memo.md) | livré | bugfix | 2026-11-14 | Formules LaTeX brutes après « Vérifier » |
 | [`generer-classes`](generer-classes/memo.md) | livré | feature | 2026-09-28 | Générer les classes manquantes des établissements |
 | [`gestion-etablissement-direction`](gestion-etablissement-direction/memo.md) | planifié | feature | 2026-10-01 | La direction gère son établissement |
 | [`historique-eleve`](historique-eleve/memo.md) | livré | feature | 2026-10-15 | Historique de l'élève aux couleurs Wave et Djamo |
@@ -242,6 +244,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`profil-eleve`](profil-eleve/memo.md) | lots 0 | feature | 2026-10-15 | Profil de l'élève aux couleurs Wave et Djamo |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | feature | 2026-09-27 | Page profil de chaque utilisateur |
 | [`progres-eleve`](progres-eleve/memo.md) | livré | feature | 2026-10-04 | L'élève voit son propre progrès |
+| [`puma-avis-securite`](puma-avis-securite/memo.md) | livré | bugfix | 2026-11-15 | Avis de sécurité Puma |
 | [`qcm-plusieurs-reponses`](qcm-plusieurs-reponses/memo.md) | livré | bugfix | 2026-11-04 | Un QCM à plusieurs bonnes réponses refuse tout l'exercice sans dire pourquoi |
 | [`queries-constantes-orm-disparues`](queries-constantes-orm-disparues/memo.md) | livré | bugfix | 2026-09-18 · repris le 2026-09-24 | Requêtes de lecture appelant des modèles ORM disparus (ADR-0007 non propagé) |
 | [`question-matching-instable`](question-matching-instable/memo.md) | preuve | bugfix | 2026-10-27 | Les tests « aucun id révélé » des questions à relier et à ordonner échouent sans fuite |
@@ -268,6 +271,8 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`seeds-premiere-serie-a`](seeds-premiere-serie-a/memo.md) | abandonné | feature | 2026-10-11 | Référentiel de développement : séries de la 1ère (abandonné, hypothèse « A, C et D » réfutée) |
 | [`selection-par-carte-de-couverture`](selection-par-carte-de-couverture/memo.md) | cadrage | optimisation | 2026-10-03 | Ne jouer que les tests système que les fichiers touchés concernent (carte de couverture) |
 | [`seuil-remediation`](seuil-remediation/memo.md) | livré | feature | 2026-11-09 | Une seule échelle : la remédiation suit la médaille |
+| [`simplification-ecrans-eleve`](simplification-ecrans-eleve/memo.md) | en cours | feature | 2026-11-14 | simplification-ecrans-eleve |
+| [`skills-operations-prod`](skills-operations-prod/) | pas de memo | — | — | — |
 | [`sobriete-tokens`](sobriete-tokens/memo.md) | en cours | refactoring | 2026-10-09 | Sobriété de tokens |
 | [`sous-roles-equipe`](sous-roles-equipe/memo.md) | cadrage | feature | 2026-10-16 | Sous-rôles de l'équipe appliqués (admin, contenu, terrain) |
 | [`standard-de-test`](standard-de-test/memo.md) | livré | feature | 2026-11-02 | Un standard de test pour Lnclass |

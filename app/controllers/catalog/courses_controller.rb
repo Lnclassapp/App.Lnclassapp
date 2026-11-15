@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::CoursesController
 # Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière, et sur ordinateur ses leçons par matière (la dernière touchée, gardée en session) ; enseignant : une de ses matières à la fois, au niveau du rond de l'accueil
-# ADR  : hors-connexion (§4.1), 0121, 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis, 0144 parcours matière → exercice §3, 0149 §3
+# ADR  : hors-connexion (§4.1), 0121, 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis, 0144 parcours matière → exercice §3, 0149 §3, XXXX écrans minimalistes style Wave §3
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
@@ -19,7 +19,7 @@ module Catalog
 
     helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope, :student_material,
                   :after_material, :teacher_material, :teacher_level_label, :lesson_materials, :lesson_material, :lessons_page,
-                  :next_exercise_for
+                  :student_material_screen?
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
@@ -28,13 +28,13 @@ module Catalog
       # UDR enseignant §3.7 : une matière à la fois, la puce active (par défaut la première) ; la page suivante la reprend.
       @filters[:material] = teacher_material&.slug if teacher_scope
       # La série ne fait que restreindre : l'élève garde la règle de son niveau (audience).
-      shared = lessons_share_phone_page?
       @page = Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, page: params[:page], level: @filters[:level],
                                                             series: @filters[:series], material: @filters[:material],
                                                             search: @filters[:q], audience: own_audience,
-                                                            material_ids: teacher_scope&.material_ids, with_essentials: shared)
-      split_shared_page if shared
-      render partial: "page_frame", locals: { page: @page } if page_frame_request?
+                                                            material_ids: teacher_scope&.material_ids)
+      return render partial: "page_frame", locals: { page: @page } if page_frame_request?
+
+      render :material if student_material_screen?
     end
 
     def show
@@ -43,34 +43,37 @@ module Catalog
       return if refuse_out_of_level(course_slug: params[:slug]) || refuse_out_of_material(course_slug: params[:slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
-                    success: ->(_) { load_status_record; load_lesson_sections; load_next_exercise; load_remediation_proposals; record_reads }
+                    success: ->(_) { load_status_record; load_lesson_sections; load_remediation_proposals; record_reads }
     end
 
-    # CA-12 : l'ancienne adresse de la fiche de cours mène à la fiche de révision de la page de la leçon (301) ; mêmes refus
-    # que la page (404, rien de révélé).
+    # CA-12 : l'adresse de la fiche de cours. L'élève y lit la fiche de révision sur sa propre page (UDR XXXX écrans minimalistes
+    # style Wave §3, leçon) ; les autres rôles, dont la page de la leçon porte la fiche, sont menés à cette page (302 : la cible dépend du rôle, un navigateur ne doit pas la garder). Mêmes
+    # refus que la page de la leçon (404, rien de révélé).
     def fiche
-      detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:course_slug], actor: current_actor)
-      return render_not_found if detail.nil?
+      @detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:course_slug], actor: current_actor)
+      return render_not_found if @detail.nil?
       return if refuse_out_of_level(course_slug: params[:course_slug]) || refuse_out_of_material(course_slug: params[:course_slug])
 
-      render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: detail.course),
-                    success: ->(_) { redirect_to course_path(params[:course_slug], anchor: "fiche-de-revision"), status: :moved_permanently }
+      render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
+                    success: ->(_) { current_actor.student? ? render_fiche : redirect_to_course_fiche }
     end
 
     private
+
+    def render_fiche
+      @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:course_slug], actor: current_actor)
+      load_remediation_proposals
+      render :fiche
+    end
+
+    def redirect_to_course_fiche
+      redirect_to course_path(params[:course_slug], anchor: "fiche-de-revision"), status: :found
+    end
 
     # UDR page de la leçon : les deux sections, lues pour le rôle courant (squelettes du Lot 0).
     def load_lesson_sections
       @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:slug], actor: current_actor)
       @prepare = Queries::Catalog::PrepareSheetsQuery.new.call(course_slug: params[:slug], actor: current_actor)
-    end
-
-    # UDR parcours matière → exercice §3 : la carte « Prochain exercice » de la leçon, pour l'élève seulement.
-    def load_next_exercise
-      return unless current_actor.student?
-
-      @next_exercise = Queries::Catalog::NextExerciseQuery.new.call(student_id: current_actor.user_id, audience: student_audience,
-                                                                    course_slug: params[:slug])
     end
 
     # suivi-classe-lecon §3.3 : l'exercice proposé sous chaque notion de la leçon que l'élève doit revoir (@proposals) ; nil hors élève.
@@ -154,6 +157,12 @@ module Catalog
       @student_material ||= filter_options.materials.find { it.slug == @filters[:material] }
     end
 
+    # UDR XXXX écrans minimalistes style Wave §3 : la vue d'une matière de l'élève s'ouvre sur une matière de sa classe ; une autre
+    # (inconnue, d'une autre classe) garde la page d'avant.
+    def student_material_screen?
+      student_material.present? && lesson_materials.any? { it.slug == student_material.slug }
+    end
+
     # UDR-0085 §3.2 : la matière de la dernière carte de la page précédente, dont le titre de groupe est déjà rendu.
     # Toujours une chaîne : une valeur forgée (tableau, vide) ne vaut aucun slug, et le titre reste rendu.
     def after_material = params[:after_material].to_s
@@ -177,23 +186,6 @@ module Catalog
       end
     end
 
-    # Audit O-C01 : la vue d'une matière de l'élève (?material=) lit deux fois la même page, pour le téléphone (cartes sans
-    # fiches) et pour l'ordinateur (leçons avec leurs fiches). Quand les deux visent les mêmes cours (même matière, même
-    # recherche, ni niveau ni série, première page), la requête est lue une fois, avec les fiches. Hors cadre Turbo : un
-    # cadre (recherche, page suivante) ne rend pas le bloc des leçons.
-    def lessons_share_phone_page?
-      return false unless current_actor.student? && turbo_frame_request_id.blank?
-      return false if @filters.values_at(:level, :series).any?(&:present?) || params[:page].to_s.to_i > 1
-
-      @filters[:material].present? && lesson_material&.slug == @filters[:material]
-    end
-
-    # Les leçons gardent la page avec ses fiches ; le téléphone reçoit les mêmes cartes, sans fiches comme avant.
-    def split_shared_page
-      @lessons_page = @page
-      @page = @page.with(rows: @page.rows.map { it.with(essentials: []) })
-    end
-
     # CA-E14 : les leçons de cette matière avec leurs fiches, sur la recherche ; nil sans matière (élève sans classe).
     def lessons_page
       return unless lesson_material
@@ -209,18 +201,6 @@ module Catalog
       return render_not_found if page.nil?
 
       render partial: "lessons_page_frame", locals: { page:, material: lesson_material.slug }
-    end
-
-    # UDR parcours matière → exercice §3 : la carte de la vue d'une matière ; lue par les blocs de l'élève seulement (index :
-    # « if student », là où student_material et lesson_material existent), une fois par matière même si le téléphone et
-    # l'ordinateur visent la même.
-    def next_exercise_for(material_slug)
-      @next_exercises ||= {}
-      return @next_exercises[material_slug] if @next_exercises.key?(material_slug)
-
-      @next_exercises[material_slug] = Queries::Catalog::NextExerciseQuery.new.call(
-        student_id: current_actor.user_id, audience: student_audience, material: material_slug
-      )
     end
 
     def lessons_page_frame_request? = current_actor.student? && LESSONS_PAGE_FRAME.match?(turbo_frame_request_id.to_s)

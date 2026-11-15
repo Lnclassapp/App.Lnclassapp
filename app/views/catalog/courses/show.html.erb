@@ -1,9 +1,13 @@
 <%# 🌐 UI · catalog/courses/show — page d'une leçon (CA-04, CA-10), pour tous les rôles connectés %>
 <%# Rôle : retour « Cours » (UDR-0054 §3.2), en-tête, actions du rôle, puis trois sections : « Fiche de révision », « Prépare interros » et « Prépare devoirs » ; morphing (B2, B4) %>
-<%# ADR  : 0028, 0035, 0051, 0090, 0110-fiche-de-cours-en-donnees-importees, 0113, 0121 · UDR : 0006, 0007, 0013, 0054, 0139 §3.1, 0149 §3 %>
+<%# ADR  : 0028, 0035, 0051, 0090, 0110-fiche-de-cours-en-donnees-importees, 0113, 0121 · UDR : 0006, 0007, 0013, 0054, 0139 §3.1, 0149 §3, XXXX écrans minimalistes style Wave §3 (élève : _student_lesson) %>
 <% course = @detail.course %>
 <% page_title t(".page_title", name: course.name) %>
 <% content_for :nav_key, "courses" %>
+<% if current_actor.student? %>
+  <%# UDR XXXX écrans minimalistes style Wave §3 : l'élève a l'écran intérieur de la leçon, sans barre, sans carte « Prochain exercice ». %>
+  <%= render "catalog/courses/student_lesson", course:, revision: @revision, proposals: @proposals, prepare: @prepare %>
+<% else %>
 <%# UDR-0054 §3.2 : venu du catalogue filtré (?material=…), le retour y ramène avec son filtre. %>
 <%= ui_back_link t(".back"), href: back_href(courses_path, from: courses_path) %>
 
@@ -25,9 +29,6 @@
   <% end %>
 </div>
 
-<%# UDR parcours matière → exercice §3 : l'élève voit d'abord où cliquer ; la fiche de révision garde sa place. %>
-<%= render "catalog/courses/next_exercise", next_exercise: @next_exercise, scope: :lesson, id: "lesson_next_exercise" %>
-
 <div class="space-y-10">
   <section id="fiche-de-revision" aria-labelledby="revision_title">
     <h2 id="revision_title" class="mb-4 font-display text-xl font-medium"><%= t(".revision_title") %></h2>
@@ -37,3 +38,4 @@
   <%# Les deux sections « Prépare interros » et « Prépare devoirs » : des feuilles de cahier (ADR-0121, UDR-0149). %>
   <%= render "catalog/courses/prepare_sheets", prepare: @prepare %>
 </div>
+<% end %>

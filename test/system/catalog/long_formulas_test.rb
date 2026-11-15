@@ -31,7 +31,7 @@ class Catalog::LongFormulasTest < ApplicationSystemTestCase
 
   test "on a phone a long display formula scrolls in its own frame, never the page" do
     with_mobile_viewport do
-      visit course_path(@course.slug)
+      visit course_fiche_path(@course.slug)
       assert_selector ".sheet-text .katex-display", wait: 10
       assert no_sideways_scroll?, "la page défile sur le côté"
       assert displays_fit?, "une formule dépasse l'écran"

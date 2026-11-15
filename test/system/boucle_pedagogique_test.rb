@@ -376,8 +376,9 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_toast t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path
 
-    assert_selector "#student_next_step", text: /Tle D 1/i
-    within("#student_next_step", text: EXERCISE) { click_on t("classroom.student_homes.next_step.due.start") }
+    assert_selector "#student_class_card", text: /Tle D 1/i
+    within("#student_to_do") { click_on EXERCISE }
+    click_on t("assessment.exercises.show.start")
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_selector "a", text: EXERCISE
 

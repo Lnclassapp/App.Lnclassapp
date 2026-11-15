@@ -50,6 +50,16 @@ Après migration, l'aperçu se fait sur la PR de synchronisation (rendu ciblé d
 - Avant migration : PR applicative vers `Develop`, preuve `bin/ci-quiet` (CLAUDE.md). Après migration : PR de contenus vers `main` ; l'entrée dans l'application passe ensuite par `ruby script/contenus/synchroniser.rb <clone>` dans une PR applicative.
 - Tu ne fusionnes pas. Tu surveilles la PR et tu ne finis pas sur une question (`docs/workflows/contrat-de-session.md`).
 
+## 6. De bout en bout : jusqu'en production
+
+La PR fusionnée et la leçon sur `main`, la leçon complète (fiche de révision, notions, exercices) entre en production ainsi, sans doublon de skill :
+
+1. `/publier-prod` prépare `a-creer/` et `RAPPORT.md` (création seule).
+2. `/prod-agent importer prod` importe ces fichiers par l'écran Imports, puis `/prod-agent publier prod` les publie. Un texte à corriger ensuite : `/prod-agent corriger prod`.
+3. Une correction du fichier source (`/lecon <chemin>`) d'une leçon **déjà en production** est un écrasement : accord écrit du porteur (voir `/prod-agent` §4).
+
+Essai avant la prod : `/prod-agent importer staging` avec le même fichier.
+
 ## Bilan (une ligne par leçon)
 
 `<fichier> · valider.rb ✓ · relecture : N défauts corrigés, M restants · validateur : ✓ / défauts / absent`

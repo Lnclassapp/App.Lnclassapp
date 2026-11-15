@@ -1,12 +1,13 @@
 <%# 🌐 UI · classroom/student_homes/_history — contenu du frame différé de l'Historique de l'accueil %>
-<%# Rôle : les 3 dernières sessions terminées, groupées par jour (rond de la matière, titre, matière, médaille) ; sous l'Argent, « Refaire » ; « Voir plus » mène à Mon historique %>
-<%# UDR  : 0132 accueil élève §3.5, §3.7 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
+<%# Rôle : le titre et les 3 dernières sessions terminées, groupées par jour (rond de la matière, titre, matière, médaille) ; sous l'Argent, « Refaire » ; « Voir plus (n) » mène à Mon historique ; aucune session : rien, ni titre ni phrase %>
+<%# UDR  : XXXX écrans minimalistes style Wave §3 (accueil, règle 2 : jamais de section vide), 0132 accueil élève §3.5, §3.7 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
 <%# locals: (sessions:, paused_exercise_ids:) -%>
 <% shown = 3 %>
 <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, target: "_top" do %>
-  <% if sessions.empty? %>
-    <p class="text-meta text-mute"><%= t("classroom.student_homes.history.empty") %></p>
-  <% else %>
+  <% if sessions.any? %>
+    <section id="student_history" aria-labelledby="student_history_title" class="py-3 lg:p-0">
+    <h2 id="student_history_title" class="px-1 pb-2 text-sm font-semibold text-mute"><%= t("classroom.student_homes.history.title") %></h2>
+    <div class="rounded-card bg-white px-4 pb-1">
     <% grading = Entities::Assessment::Grading %>
     <% today = Time.zone.today %>
     <% sessions.first(shown).group_by { it.completed_at.to_date }.each do |day, day_sessions| %>
@@ -44,7 +45,10 @@
       </section>
     <% end %>
     <% if sessions.size > shown %>
-      <%= ui_button t("classroom.student_homes.history.more"), href: student_archive_path, variant: :secondary, full: true, class: "mt-2" %>
+      <%= link_to t("classroom.student_homes.history.more", count: sessions.size - shown), student_archive_path, id: "student_history_more",
+                  class: "-mx-4 flex min-h-tap items-center justify-center text-base font-semibold text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" %>
     <% end %>
+    </div>
+    </section>
   <% end %>
 <% end %>
