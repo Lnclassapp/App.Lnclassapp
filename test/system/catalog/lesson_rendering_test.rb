@@ -175,7 +175,7 @@ module LessonRendering
 
     # La page de la leçon, lue à la largeur courante de la fenêtre.
     def inspect_page(file, course, lesson, width)
-      # La leçon s'arrête après « Prépare devoirs » ; la fiche est sur sa propre page (UDR XXXX §3, leçon).
+      # La leçon s'arrête après « Prépare devoirs » ; la fiche est sur sa propre page (UDR-0173 §3, leçon).
       visit course_path(course.slug)
       assert_selector "h1", text: course.name, wait: 20
       visit course_fiche_path(course.slug)

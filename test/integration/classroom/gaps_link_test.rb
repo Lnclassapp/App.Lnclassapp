@@ -17,7 +17,7 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
 
   def anchor = "notion-#{@notion.slug}"
 
-  test "the student home no longer lists the notion to review (UDR XXXX écrans minimalistes style Wave §3)" do
+  test "the student home no longer lists the notion to review (UDR-0173 écrans minimalistes style Wave §3)" do
     sign_in_as @student
 
     get student_home_path

@@ -19,7 +19,7 @@ module Shared
           assert_select "a[href='#{student_menu_path}'][aria-label=?]", I18n.t("shared.navigation.home_band.account", name: "Awa Koné") do
             assert_select ".size-12.rounded-full.bg-white.text-brand-strong", text: "AK"
           end
-          # UDR XXXX §3 : l'aide de l'élève est une icône seule, nommée par aria-label.
+          # UDR-0173 §3 : l'aide de l'élève est une icône seule, nommée par aria-label.
           assert_select "a[href='#{help_path}'].text-on-brand[aria-label=?]", I18n.t("shared.navigation.home_band.help") do
             assert_select "span", 0
             assert_select "svg", 1

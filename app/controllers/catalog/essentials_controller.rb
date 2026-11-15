@@ -16,7 +16,7 @@ module Catalog
 
     private
 
-    # L'élève lit la notion dans la fiche de révision, sur sa propre page (UDR XXXX écrans minimalistes style Wave §3) ; les autres, sur la page de la leçon.
+    # L'élève lit la notion dans la fiche de révision, sur sa propre page (UDR-0173 écrans minimalistes style Wave §3) ; les autres, sur la page de la leçon.
     def notion_location(essential)
       anchor = "notion-#{essential.slug}"
       current_actor.student? ? course_fiche_path(params[:course_slug], anchor:) : course_path(params[:course_slug], anchor:)

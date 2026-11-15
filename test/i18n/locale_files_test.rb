@@ -17,7 +17,7 @@ class LocaleFilesTest < ActiveSupport::TestCase
     # UDR-0140 (correction-comme-en-classe, CA-10) : la carte « À revoir » d'un exercice de toute la leçon.
     "fr.assessment.session_results.show.to_review_lesson_html" => "À revoir dans la leçon : %{questions}",
     "fr.assessment.session_results.show.whole_lesson" => "Toute la leçon",
-    # UDR XXXX écrans minimalistes style Wave §3 (décision du porteur, maquettes validées le 2026-11-14) : « Leçon n » sur la tuile et le sous-titre.
+    # UDR-0173 écrans minimalistes style Wave §3 (décision du porteur, maquettes validées le 2026-11-14) : « Leçon n » sur la tuile et le sous-titre.
     "fr.catalog.courses.lesson_tile.number" => "Leçon %{number}",
     "fr.catalog.courses.material.search" => "Chercher une leçon"
   }.freeze

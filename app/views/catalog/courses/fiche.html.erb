@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/fiche — la fiche de révision de l'élève, sur sa propre page : flèche retour vers la leçon, titre, la fiche %>
 <%# Rôle : écran intérieur (content_for :inner : ni barre ni menu) ; chaque notion garde son ancre « notion-<slug> » (liens, 301) ; la page de la leçon s'arrête après « Prépare devoirs » %>
-<%# ADR  : 0113 (§4.3), 0116 · UDR : XXXX écrans minimalistes style Wave §3 (leçon : fiche de révision sur sa page), 0139 §3.2, 0141 §3.1 · locals: aucun (@detail, @revision, @proposals) -%>
+<%# ADR  : 0113 (§4.3), 0116 · UDR : 0173 §3 (leçon : fiche de révision sur sa page), 0139 §3.2, 0141 §3.1 · locals: aucun (@detail, @revision, @proposals) -%>
 <% course = @detail.course %>
 <% page_title t(".page_title", name: course.name) %>
 <% content_for :inner, "1" %>

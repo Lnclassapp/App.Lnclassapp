@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/_history — contenu du frame différé de l'Historique de l'accueil %>
 <%# Rôle : le titre et les 3 dernières sessions terminées, groupées par jour (rond de la matière, titre, matière, médaille) ; sous l'Argent, « Refaire » ; « Voir plus (n) » mène à Mon historique ; aucune session : rien, ni titre ni phrase %>
-<%# UDR  : XXXX écrans minimalistes style Wave §3 (accueil, règle 2 : jamais de section vide), 0132 accueil élève §3.5, §3.7 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
+<%# UDR  : 0173 §3 (accueil, règle 2 : jamais de section vide), 0132 accueil élève §3.5, §3.7 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
 <%# locals: (sessions:, paused_exercise_ids:) -%>
 <% shown = 3 %>
 <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, target: "_top" do %>

@@ -103,7 +103,7 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   # UDR palette froide §3.2 : le texte ne dépasse pas `font-medium`. Exception écrite : le titre gras de la page d'accueil.
   FORBIDDEN_WEIGHT = /(?<![\w-])font-(?:semibold|bold|extrabold|black)(?![\w-])/
-  # Exception écrite (UDR XXXX écrans minimalistes style Wave §3, maquettes validées le 2026-11-14) : les titres, libellés et valeurs
+  # Exception écrite (UDR-0173 écrans minimalistes style Wave §3, maquettes validées le 2026-11-14) : les titres, libellés et valeurs
   # des écrans de l'élève sont en 600 ou 700. Seuls ces fichiers y échappent ; tout autre écran reste à 500.
   WAVE_WEIGHT_SCREENS = %w[
     app/views/shared/screens/_group.html.erb app/views/shared/screens/_row.html.erb app/views/shared/screens/_inner_header.html.erb

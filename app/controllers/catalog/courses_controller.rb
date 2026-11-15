@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::CoursesController
 # Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière, et sur ordinateur ses leçons par matière (la dernière touchée, gardée en session) ; enseignant : une de ses matières à la fois, au niveau du rond de l'accueil
-# ADR  : hors-connexion (§4.1), 0121, 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis, 0144 parcours matière → exercice §3, 0149 §3, XXXX écrans minimalistes style Wave §3
+# ADR  : hors-connexion (§4.1), 0121, 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis, 0144 parcours matière → exercice §3, 0149 §3, 0173 §3
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
@@ -46,7 +46,7 @@ module Catalog
                     success: ->(_) { load_status_record; load_lesson_sections; load_remediation_proposals; record_reads }
     end
 
-    # CA-12 : l'adresse de la fiche de cours. L'élève y lit la fiche de révision sur sa propre page (UDR XXXX écrans minimalistes
+    # CA-12 : l'adresse de la fiche de cours. L'élève y lit la fiche de révision sur sa propre page (UDR-0173 écrans minimalistes
     # style Wave §3, leçon) ; les autres rôles, dont la page de la leçon porte la fiche, sont menés à cette page (302 : la cible dépend du rôle, un navigateur ne doit pas la garder). Mêmes
     # refus que la page de la leçon (404, rien de révélé).
     def fiche
@@ -157,7 +157,7 @@ module Catalog
       @student_material ||= filter_options.materials.find { it.slug == @filters[:material] }
     end
 
-    # UDR XXXX écrans minimalistes style Wave §3 : la vue d'une matière de l'élève s'ouvre sur une matière de sa classe ; une autre
+    # UDR-0173 écrans minimalistes style Wave §3 : la vue d'une matière de l'élève s'ouvre sur une matière de sa classe ; une autre
     # (inconnue, d'une autre classe) garde la page d'avant.
     def student_material_screen?
       student_material.present? && lesson_materials.any? { it.slug == student_material.slug }

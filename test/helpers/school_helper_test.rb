@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR XXXX écrans minimalistes style Wave §3 : le sigle de la carte de classe, celui de la base, sinon les initiales du nom.
+# UDR-0173 écrans minimalistes style Wave §3 : le sigle de la carte de classe, celui de la base, sinon les initiales du nom.
 class SchoolHelperTest < ActionView::TestCase
   test "the sigle of the database wins" do
     assert_equal "CSMT", school_sigle(sigle: " CSMT ", name: "Collège Saint Michel de Treichville")

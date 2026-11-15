@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/_to_do — « À faire » de l'accueil : les exercices assignés non commencés, une liste plate %>
 <%# Rôle : rien s'il n'y en a pas ; sinon 3 lignes puis « Voir plus (n) » ; titre bleu, « matière · échéance », « répondu/total » aligné à droite ; triées par échéance (l'ordre de la query) %>
-<%# UDR  : XXXX écrans minimalistes style Wave §3 (accueil, règles 2, 7 et 8), 0062 §3.1 (échéance) · locals: (exercises:) -%>
+<%# UDR  : 0173 §3 (accueil, règles 2, 7 et 8), 0062 §3.1 (échéance) · locals: (exercises:) -%>
 <% open = exercises.select { it.completed_count.zero? } %>
 <% if open.any? %>
   <%= render layout: "shared/screens/group", locals: { id: "student_to_do", title: t(".title"), total: open.size } do %>
