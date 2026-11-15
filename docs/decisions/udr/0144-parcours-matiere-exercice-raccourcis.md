@@ -1,18 +1,18 @@
 # UDR-0144 : Parcours matière → exercice — la carte « Prochain exercice » dans la matière et dans la leçon
 <!-- index
 titre: Parcours matière → exercice : carte Prochain exercice dans la matière et la leçon
-statut: Remplacé par [XXXX](./XXXX-ecrans-minimalistes-style-wave.md)
+statut: Remplacé par [0173](./0173-ecrans-minimalistes-style-wave.md)
 adr-lie: —
 problematique: De la grille des matières à un exercice, l'élève fait 4 clics et lit 461 mots avant le premier lien d'exercice de la leçon ; il doit voir tout de suite où cliquer.
 -->
 
 | | |
 |---|---|
-| **Statut** | Remplacé par UDR-XXXX-ecrans-minimalistes-style-wave (2026-11-14 : la carte « Prochain exercice » est supprimée de la matière et de la leçon) |
+| **Statut** | Remplacé par UDR-0173 (2026-11-14 : la carte « Prochain exercice » est supprimée de la matière et de la leçon) |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/parcours-matiere-exercice` |
 | **ADR lié** | — |
-| **Remplacé par** | [XXXX](./XXXX-ecrans-minimalistes-style-wave.md) |
+| **Remplacé par** | [0173](./0173-ecrans-minimalistes-style-wave.md) |
 
 Complète : UDR-0085 §3.1 (vue d'une matière), UDR écrans élève sans répétition §3.6 et §3.6 bis, UDR-0139 §2 (page de la leçon). Reprend le bouton de UDR-0132 (`next_step/_start`).
 

@@ -20,7 +20,7 @@ L'élève (11 à 18 ans). Le porteur a validé le 2026-11-14 des maquettes minim
 
 ## Ce qu'on fait
 
-Trois écrans conformes aux maquettes, avec les données réelles : accueil `/students`, `/courses?material=…`, `/courses/<slug>`. Les règles sont écrites d'abord : UDR-XXXX-ecrans-minimalistes-style-wave.
+Trois écrans conformes aux maquettes, avec les données réelles : accueil `/students`, `/courses?material=…`, `/courses/<slug>`. Les règles sont écrites d'abord : UDR-0173.
 
 ## Hors périmètre
 

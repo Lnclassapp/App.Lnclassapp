@@ -9,7 +9,7 @@ Lot 0 — règles et socle ─► Lot A accueil ─► Lot B matière ─► Lot
 ### Lot 0 — Règles et socle
 
 - **Couche**       : doc + ui (fichiers partagés)
-- **Fichiers**     : `docs/decisions/udr/XXXX-ecrans-minimalistes-style-wave.md` · `app/views/layouts/shell.html.erb` · `app/assets/stylesheets/application.tailwind.css` · `app/views/shared/screens/*` · `app/javascript/controllers/dismissible_controller.js` · `config/locales/fr.yml`
+- **Fichiers**     : `docs/decisions/udr/0173-ecrans-minimalistes-style-wave.md` · `app/views/layouts/shell.html.erb` · `app/assets/stylesheets/application.tailwind.css` · `app/views/shared/screens/*` · `app/javascript/controllers/dismissible_controller.js` · `config/locales/fr.yml`
 - **Dépend de**    : —
 - **Test associé** : `test/views/layouts/shell_inner_test.rb`, `test/design/design_tokens_test.rb`
 - **Done quand**   : l'UDR est écrite ; une page qui pose `content_for :inner` n'a ni barre ni menu ; les composants `shared/screens` existent

@@ -1,4 +1,4 @@
-# UDR-XXXX : Écrans minimalistes, style Wave — un écran, une chose de valeur (accueil, matière, leçon de l'élève)
+# UDR-0173 : Écrans minimalistes, style Wave — un écran, une chose de valeur (accueil, matière, leçon de l'élève)
 <!-- index
 titre: Écrans minimalistes, style Wave
 statut: Accepté

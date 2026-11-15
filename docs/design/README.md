@@ -21,7 +21,7 @@ Le design system de Lnclass est fixé par [UDR-0005](../decisions/udr/0005-desig
 
 ## Écrans de l'élève
 
-Accueil, vue d'une matière et page d'une leçon suivent [UDR-XXXX-ecrans-minimalistes-style-wave](../decisions/udr/XXXX-ecrans-minimalistes-style-wave.md) : un écran, une chose de valeur, pas de carte « Prochain exercice », pas de section vide. Cette UDR prime sur la charte `lnclass-design-system` (§6 à §8, carte « Prochain exercice »), qui reste valable pour les tokens, les formats et l'accessibilité.
+Accueil, vue d'une matière et page d'une leçon suivent [UDR-0173](../decisions/udr/0173-ecrans-minimalistes-style-wave.md) : un écran, une chose de valeur, pas de carte « Prochain exercice », pas de section vide. Cette UDR prime sur la charte `lnclass-design-system` (§6 à §8, carte « Prochain exercice »), qui reste valable pour les tokens, les formats et l'accessibilité.
 
 ## Maquettes
 
