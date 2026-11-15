@@ -103,10 +103,8 @@ steps =
     unit_env = touched.any? ? { "COVERAGE_PART" => "pr" } : { "COVERAGE" => "0" }
     unit_command = [ "bin/rails", "test", *tests ]
     if touched.any?
-      unit_command = [ "sh", "-c", 'rm -f coverage/.resultset.json; bin/rails test "$@"; status=$?; ' \
-                       'script/ci/coverage_touched coverage/.resultset.json "$0" $COVERAGE_TOUCHED || true; exit $status',
-                       COVERAGE_NOTE, *tests ]
-      unit_env = unit_env.merge("COVERAGE_TOUCHED" => touched.join(" "))
+      # Positional arguments after `--`, no shell: a path with a space or a glob character stays one file (#643).
+      unit_command = [ "script/ci/unit_coverage", COVERAGE_NOTE, *touched, "--", *tests ]
     end
     system_tests, = Open3.capture2({ "BASE" => base }, "bin/system-changed", "--list", err: File::NULL)
     [ *guards,

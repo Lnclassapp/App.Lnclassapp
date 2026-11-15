@@ -1,4 +1,6 @@
 require "test_helper"
+require "open3"
+require "tmpdir"
 require Rails.root.join("script/ci/coverage_touched").to_s
 
 # ADR-0107 §10 : the pr level says which lines and branches of the touched files no test of the change plays.
@@ -59,5 +61,24 @@ class CoverageTouchedTest < ActiveSupport::TestCase
 
   test "files outside the touched list are ignored" do
     assert_empty gaps(result(lines: [ 0 ], file: "app/other.rb"), []).reject(&:clean?)
+  end
+
+  # #643: the files reach the script as arguments after `--`, never through a variable the shell would split on spaces.
+  test "the command takes a path containing a space as one file, after the -- marker" do
+    spaced = "app/models/a file.rb"
+    Dir.mktmpdir do |dir|
+      resultset = File.join(dir, "resultset.json")
+      out = File.join(dir, "note")
+      File.write(resultset, JSON.generate("unit pr" => { "coverage" => { "#{Dir.pwd}/#{spaced}" => { "lines" => [ 1, 0 ], "branches" => {} } } }))
+
+      stdout, status = Open3.capture2(Rails.root.join("script/ci/coverage_touched").to_s, resultset, out, "--", spaced, "app/models/b.rb")
+
+      assert_predicate status, :success?
+      assert_includes stdout, "#{spaced}: lines 50.0 %"
+      assert_includes stdout, "app/models/b.rb: no test of the change loads this file"
+      refute_includes stdout, "--: no test", "the marker is not a file"
+      refute_includes stdout, "app/models/a: ", "the path is not cut at the space"
+      assert_includes File.read(out), spaced
+    end
   end
 end
