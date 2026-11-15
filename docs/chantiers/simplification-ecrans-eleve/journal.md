@@ -11,7 +11,7 @@
 | 2026-11-14 | Valeur de « À faire » : « répondu/total » (`question_count`, `answered_count` ajoutés à `ExerciseRow`), échéance dans le détail | Conformité aux maquettes validées | UDR XXXX |
 | 2026-11-14 | « Prochain exercice » retiré des écrans élève mais **code conservé** (partial `_next_exercise`, `next_step/`, `NextExerciseQuery` + test, clés I18n) | Précision du porteur : il servira au guidage d'activation après l'inscription ; issue « Réutiliser « Prochain exercice » dans l'activation après l'inscription ». Les tests d'affichage seuls sont retirés, ceux de la query gardés | UDR XXXX §4 |
 | 2026-11-14 | Lot D : skill de projet `ecrans-wave`, branchée dans /retouche, /feature, /test-ecrans ; ligne dans CLAUDE.md | Demande du porteur ; la skill `lnclass-design-system` (claude.ai) est réécrite dans `lnclass-design-system-SKILL.md` pour téléversement par le porteur | non |
-| 2026-11-15 | Fiche de révision sur sa propre page (`course_fiche`, élève 200 ; autres 301), `#fiche-de-revision` et `/essentials/<notion>` menés à elle ; marges de l'accueil à 20 px (≈ 5 %) ; « Entrer en classe » inchangé (pas de gras, demande du porteur) | Choix du porteur : conformité à la maquette (la leçon s'arrête après « Prépare devoirs »). La version « fiche cachée par `:target` » du lot F est remplacée | UDR XXXX |
+| 2026-11-15 | Fiche de révision sur sa propre page (`course_fiche`, élève 200 ; autres 302), `#fiche-de-revision` et `/essentials/<notion>` menés à elle ; marges de l'accueil à 20 px (≈ 5 %) ; « Entrer en classe » inchangé (pas de gras, demande du porteur) | Choix du porteur : conformité à la maquette (la leçon s'arrête après « Prépare devoirs »). La version « fiche cachée par `:target` » du lot F est remplacée | UDR XXXX |
 
 ## À trancher
 
