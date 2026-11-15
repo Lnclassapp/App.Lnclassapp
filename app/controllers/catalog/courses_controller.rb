@@ -160,8 +160,7 @@ module Catalog
     # UDR XXXX écrans minimalistes style Wave §3 : la vue d'une matière de l'élève s'ouvre sur une matière de sa classe ; une autre
     # (inconnue, d'une autre classe) garde la page d'avant.
     def student_material_screen?
-      @student_material_screen = (student_material.present? && lesson_materials.any? { it.slug == student_material.slug }) if @student_material_screen.nil?
-      @student_material_screen
+      student_material.present? && lesson_materials.any? { it.slug == student_material.slug }
     end
 
     # UDR-0085 §3.2 : la matière de la dernière carte de la page précédente, dont le titre de groupe est déjà rendu.
