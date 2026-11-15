@@ -12,9 +12,11 @@
 require "open3"
 require_relative "../script/ci/scope"
 require_relative "../script/ci/record_missing"
+require_relative "../script/ci/coverage_touched"
 
 Dir.chdir(File.expand_path("..", __dir__))
 LOG = "tmp/ci.log"
+COVERAGE_NOTE = "tmp/ci-coverage-touched.txt"
 FileUtils.mkdir_p("tmp")
 FileUtils.rm_f(LOG)
 
@@ -95,11 +97,22 @@ steps =
   when :pr
     rubocop = CiScope.rubocop_targets(changed.uniq)
     style = rubocop == :all ? [ "bin/rubocop" ] : ([ "bin/rubocop", "--force-exclusion", *rubocop ] if rubocop.any?)
+    # ADR-0107 §10: the unit tests of the change measure their coverage (under their own name, no threshold) and the
+    # touched app/lib files are checked for lines and branches no test of the change plays: a warning, never a block.
+    touched = CoverageTouched.touched(changed.uniq)
+    unit_env = touched.any? ? { "COVERAGE_PART" => "pr" } : { "COVERAGE" => "0" }
+    unit_command = [ "bin/rails", "test", *tests ]
+    if touched.any?
+      unit_command = [ "sh", "-c", 'rm -f coverage/.resultset.json; bin/rails test "$@"; status=$?; ' \
+                       'script/ci/coverage_touched coverage/.resultset.json "$0" $COVERAGE_TOUCHED || true; exit $status',
+                       COVERAGE_NOTE, *tests ]
+      unit_env = unit_env.merge("COVERAGE_TOUCHED" => touched.join(" "))
+    end
     system_tests, = Open3.capture2({ "BASE" => base }, "bin/system-changed", "--list", err: File::NULL)
     [ *guards,
       (Step.new(title: "Style: Ruby (#{rubocop == :all ? 'every file' : "#{rubocop.size} changed files"})", env: {}, command: style, inputs: :ruby) if style),
       *CI_PLAN.steps_for("security").drop(1).map(&from_plan),
-      (Step.new(title: "Tests: Rails (#{tests.size} files of the change)", env: { "COVERAGE" => "0" }, command: [ "bin/rails", "test", *tests ],
+      (Step.new(title: "Tests: Rails (#{tests.size} files of the change)", env: unit_env, command: unit_command,
                 inputs: :unit, unit: tests) if tests.any?),
       Step.new(title: "Tests: System (bin/system-changed)", env: { "BASE" => base }, command: [ "bin/system-changed" ],
                inputs: :system, extra: system_tests) ].compact
@@ -163,6 +176,11 @@ minutes, seconds = (Time.now - started).round.divmod(60)
 clean = pending.empty? && git("status", "--porcelain").to_s.empty? && git("rev-parse", "HEAD").to_s.strip == head &&
         results.zip(runs).none? { |(passed, _), (step, _)| step.setup && !passed }
 results.each { |passed, keys| keys.each { verdicts.record_step(it, head[0, 8]) } if passed && clean }
+# The coverage of the touched files (ADR-0107 §10): said red or green, whenever the note belongs to this code, even when the
+# step was not played again, so that a green verdict never hides a gap.
+if level == :pr && File.exist?(COVERAGE_NOTE) && (note = File.readlines(COVERAGE_NOTE)).first.to_s.strip == fingerprint
+  puts note.drop(1)
+end
 report(green, status, "level #{level}")
 exit 1 unless green
 

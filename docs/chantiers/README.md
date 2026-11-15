@@ -147,6 +147,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`corrections-production`](corrections-production/) | pas de memo | — | — | — |
 | [`cours-eleve`](cours-eleve/memo.md) | planification | feature | 2026-10-15 | Page Cours de l'élève aux couleurs Wave et Djamo |
 | [`cours-pleine-largeur`](cours-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La fiche de cours remplit l'écran du téléphone |
+| [`couverture-branches-visible`](couverture-branches-visible/memo.md) | en revue | optimisation | 2026-11-15 | Voir la couverture de branches avant le train |
 | [`couverture-catalogue`](couverture-catalogue/memo.md) | livré | bugfix | 2026-10-30 | Couverture à 100 % perdue par la refonte des maths |
 | [`couverture-train`](couverture-train/memo.md) | livré | bugfix | 2026-10-31 | Couverture du train #417 |
 | [`crm-ecoles`](crm-ecoles/memo.md) | planifié | feature | 2026-11-04 | CRM des écoles |
