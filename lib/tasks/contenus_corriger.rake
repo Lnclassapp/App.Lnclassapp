@@ -7,10 +7,6 @@ require "json"
 namespace :contenus do
   desc "Reporte les corrections du validateur pédagogique par les use cases Modifier le texte (essai par défaut ; APPLIQUER=1 écrit)"
   task corriger: :environment do
-    # Dans la tâche, pas en tête de fichier : `bin/rails test` sans fichier charge les tâches (test:prepare) avant que SimpleCov démarre,
-    # et un `require` ici sortait lib/contenus/corrections_production.rb de la mesure (chantier couverture-locale-et-train-divergent).
-    require Rails.root.join("lib/contenus/corrections_production")
-
     contact = ENV["ACTEUR"].presence || ENV["LNCLASS_TEAM_CONTACT"]
     abort "Acteur manquant : ACTEUR=<contact> ou la variable LNCLASS_TEAM_CONTACT." if contact.blank?
 
