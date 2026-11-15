@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# CA-D1, CA-D8 (mvp-teacher-student, Lot D, amendé par UDR XXXX écrans minimalistes style Wave), at 390 px: the one system test of the student home.
+# CA-D1, CA-D8 (mvp-teacher-student, Lot D, amendé par UDR-0173 écrans minimalistes style Wave), at 390 px: the one system test of the student home.
 # The band replaces the header, the class card straddles the junction, the grid has four columns, the history arrives in its frame. The states of
 # the card, the order of the exercises and the rest are proved in the query, controller and integration tests
 # (test/infrastructure/queries/classroom/student_home_query_test.rb, test/controllers/classroom/student_homes_controller_test.rb,
@@ -38,7 +38,7 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_no_selector "header.sticky", visible: :visible
       assert_equal 187, find("header.student-band").rect.height.round
 
-      # UDR XXXX §3 : le blanc commence à 159 px, la carte de la classe chevauche la jonction, le sigle est en pastille ronde.
+      # UDR-0173 §3 : le blanc commence à 159 px, la carte de la classe chevauche la jonction, le sigle est en pastille ronde.
       assert_equal 159, first("#student_home > div").rect.y.round
       card = find("#student_class_card")
       assert_operator card.rect.y, :<, 159

@@ -84,7 +84,7 @@ class PageTitlesTest < ActiveSupport::TestCase
   end
 
   test "FU-11: no back button with an arrow-left icon, no breadcrumb" do
-    # UDR XXXX écrans minimalistes style Wave §3 (amende UDR-0054 §3.2) : les écrans intérieurs de l'élève ont une flèche retour.
+    # UDR-0173 écrans minimalistes style Wave §3 (amende UDR-0054 §3.2) : les écrans intérieurs de l'élève ont une flèche retour.
     wave = "app/views/shared/screens/_inner_header.html.erb"
     offenders = (all_views + Dir[Rails.root.join("app/helpers/**/*.rb")]).reject { Pathname(it).relative_path_from(Rails.root).to_s == wave }.select do |path|
       source(path).match?(/arrow-left|breadcrumb|Fil d'Ariane/i)

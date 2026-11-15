@@ -1,6 +1,6 @@
 <%# 🌐 UI · shared/screens/_row — une ligne plate d'un groupe : pastille d'icône, titre, détail, valeur alignée à droite %>
 <%# Rôle : toute la ligne est le lien (≥ 48 px) ; la valeur (« 0/4 ») reste à droite ; masquée (folded) au-delà de 3 lignes, révélée par « Voir plus (n) » %>
-<%# UDR  : XXXX écrans minimalistes style Wave §3 (composants, règle 7) · locals: (title:, href:, icon: nil, tint: "bg-brand-soft", detail: nil, value: nil, folded: false, id: nil, link_title: false) -%>
+<%# UDR  : 0173 §3 (composants, règle 7) · locals: (title:, href:, icon: nil, tint: "bg-brand-soft", detail: nil, value: nil, folded: false, id: nil, link_title: false) -%>
 <% tint = local_assigns.fetch(:tint, "bg-brand-soft") %>
 <%= tag.li id: local_assigns[:id], hidden: local_assigns.fetch(:folded, false), data: { reveal_target: "item" } do %>
   <%= link_to href, data: { turbo_prefetch: false },

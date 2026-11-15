@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_student_lesson — la page d'une leçon de l'élève, style Wave : flèche retour, titre, « Réviser », « Prépare interros », « Prépare devoirs » %>
 <%# Rôle : écran intérieur (content_for :inner : ni barre ni menu) ; trois groupes de 3 lignes puis « Voir plus (n) », un groupe sans ligne est absent ; la ligne « Fiche de révision » mène à la fiche, sur sa propre page (course_fiche_path) ; l'ancienne adresse #fiche-de-revision y est menée (hash_redirect) ; plus de carte « Prochain exercice », de « Tous les exercices », de cadre noir ni d'étiquette « PRÉPARE DEVOIRS N°x » %>
-<%# ADR  : 0113 (§4.3 : pas de préchargement, l'ouverture retient les lectures), 0121 · UDR : XXXX écrans minimalistes style Wave §3 (leçon), 0139 §3.1, 0149 §3 · locals: (course:, revision:, proposals:, prepare:) -%>
+<%# ADR  : 0113 (§4.3 : pas de préchargement, l'ouverture retient les lectures), 0121 · UDR : 0173 §3 (leçon), 0139 §3.1, 0149 §3 · locals: (course:, revision:, proposals:, prepare:) -%>
 <% content_for :inner, "1" %>
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
 <% number = lesson_number(course.subtitle) %>

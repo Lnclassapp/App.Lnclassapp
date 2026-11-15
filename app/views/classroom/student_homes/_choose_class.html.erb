@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/_choose_class — l'élève sans classe active (archivée, ou retiré) : « Choisis ta classe » %>
 <%# Rôle : une carte blanche sur la jonction : le champ du code de classe et « Rejoindre » ; « Je n'ai pas de code » ouvre la cascade ; son historique s'il en a un ; plus d'exercice du jour %>
-<%# UDR  : XXXX écrans minimalistes style Wave §3 (accueil, sans classe), 0132 accueil élève §3.3 (état 6), 0081 (§3.5) · ADR : 0109 code de classe (§4.7) %>
+<%# UDR  : 0173 §3 (accueil, sans classe), 0132 accueil élève §3.3 (état 6), 0081 (§3.5) · ADR : 0109 code de classe (§4.7) %>
 <%# locals: (form:, archived:, overlap: true) -%>
 <%= tag.section id: "student_choose_class", "aria-labelledby": "student_choose_class_title",
                 class: class_names("relative z-10 mx-5 space-y-3 rounded-card bg-white p-5 shadow-lift lg:mx-0", { "max-lg:-top-wave-card max-lg:-mb-wave-card" => local_assigns.fetch(:overlap, true) }) do %>

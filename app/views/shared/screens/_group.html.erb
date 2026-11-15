@@ -1,6 +1,6 @@
 <%# 🌐 UI · shared/screens/_group — un groupe de lignes dans une carte blanche arrondie, sous un libellé de section gris %>
 <%# Rôle : rendu avec `layout:` et un bloc de lignes (shared/screens/_row, folded: index >= REVEAL_LIMIT) ; au-delà de 3 lignes, « Voir plus (n) » les révèle sans requête (contrôleur reveal) ; n'est jamais rendu vide %>
-<%# UDR  : XXXX écrans minimalistes style Wave §3 (composants, règles 5 et 8), 0057 R3 · locals: (id:, title:, total:) -%>
+<%# UDR  : 0173 §3 (composants, règles 5 et 8), 0057 R3 · locals: (id:, title:, total:) -%>
 <% limit = ComponentsHelper::REVEAL_LIMIT %>
 <%= tag.section id: id, "aria-labelledby": "#{id}_title", data: { turbo_prefetch: false } do %>
   <h2 id="<%= id %>_title" class="px-1 pb-2 text-sm font-semibold text-mute"><%= title %></h2>

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR XXXX écrans minimalistes style Wave §3 : la flèche retour et le grand titre, le groupe de lignes (3 puis « Voir plus (n) »)
+# UDR-0173 écrans minimalistes style Wave §3 : la flèche retour et le grand titre, le groupe de lignes (3 puis « Voir plus (n) »)
 # et la ligne plate à valeur alignée à droite. Tokens seuls : le thème sombre change leurs valeurs, pas les classes.
 class ScreensTest < ActionView::TestCase
   def group(total:)

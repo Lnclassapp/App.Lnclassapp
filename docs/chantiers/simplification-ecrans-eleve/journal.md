@@ -13,6 +13,7 @@
 | 2026-11-14 | Lot D : skill de projet `ecrans-wave`, branchée dans /retouche, /feature, /test-ecrans ; ligne dans CLAUDE.md | Demande du porteur ; la skill `lnclass-design-system` (claude.ai) est réécrite dans `lnclass-design-system-SKILL.md` pour téléversement par le porteur | non |
 | 2026-11-15 | Fiche de révision sur sa propre page (`course_fiche`, élève 200 ; autres 302), `#fiche-de-revision` et `/essentials/<notion>` menés à elle ; marges de l'accueil à 20 px (≈ 5 %) ; « Entrer en classe » inchangé (pas de gras, demande du porteur) | Choix du porteur : conformité à la maquette (la leçon s'arrête après « Prépare devoirs »). La version « fiche cachée par `:target` » du lot F est remplacée | UDR XXXX |
 | 2026-11-15 | Couverture du train #631 : deux branches de `Catalog::CoursesController` (mémo de `student_material_screen?`, devenu inutile et retiré ; mémorisation de la matière demandée par un cadre de leçons, testée) | Le job `coverage` (ADR-0024) ne tourne qu'au train ; ni exclusion SimpleCov ni `:nocov:` | UDR-0173 |
+| 2026-11-15 | Citations « UDR XXXX » (avec espace) de `app/` et `test/` remplacées par UDR-0173 ; le script de numérotation ne réécrit que `UDR-XXXX-<slug>` | Les citations avec espace partaient en production sans numéro. Hors périmètre, laissées : `XXXX accueil élève` et les citations CRM | UDR-0173 |
 
 ## À trancher
 
@@ -60,3 +61,4 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+- [ ] 2026-11-15 · PR 633 · Sept citations « UDR XXXX » (avec espace) dans des commentaires de `config/locales/` (`catalog/courses.fr.yml`, `classroom/student_homes.fr.yml`, `shared/screens.fr.yml`), arrivées par `Develop` après l'ouverture de la PR, hors de son périmètre (`app/`, `test/`) — appliqué : laissées telles quelles, la PR reste du commentaire sur son périmètre ; autres : les remplacer par UDR-0173 dans cette PR ou dans une retouche ; recommandé : retouche séparée

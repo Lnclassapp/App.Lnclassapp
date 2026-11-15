@@ -1,6 +1,6 @@
 # 🌐 UI · SchoolHelper — le sigle d'un établissement affiché en pastille ronde
 # Rôle : le sigle de la base, sinon les initiales du nom (mots de 3 lettres et plus, hors articles), 4 lettres au plus
-# UDR  : XXXX écrans minimalistes style Wave §3 (carte de classe de l'accueil)
+# UDR  : 0173 §3 (carte de classe de l'accueil)
 module SchoolHelper
   SIGLE_STOPWORDS = %w[de du des la le les et en sur sous].freeze
   SIGLE_LENGTH = 4

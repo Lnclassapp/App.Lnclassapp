@@ -18,7 +18,7 @@ module Queries
       Assigner = Data.define(:gender, :last_name)
       ReviewRow = Data.define(:essential_name, :essential_slug, :course_slug, :material_name, :material_slug, :score_percent)
       # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil ;
-      # question_count : ses questions ; answered_count : celles déjà répondues dans la session commencée (0 sans session), pour « 1/5 » (UDR XXXX) ;
+      # question_count : ses questions ; answered_count : celles déjà répondues dans la session commencée (0 sans session), pour « 1/5 » (UDR-0173) ;
       # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance ; material_slug : la pastille illustrée ; exercise_type : « fixation » ou « evaluation » (carte d'exercice).
       ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :material_slug, :badge_level,
                                 :best_score_percent, :completed_count, :started_session_public_id, :due_on, :exercise_type, :question_count, :answered_count)
