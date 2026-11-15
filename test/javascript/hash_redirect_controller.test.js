@@ -1,4 +1,4 @@
-// Règle « contrôleur Stimulus borné » (docs/guide/conventions.md §8) : hash-redirect remplace l'adresse une seule fois par paire d'adresses.
+// Règle « contrôleur Stimulus borné » (docs/guide/conventions.md §7) : hash-redirect remplace l'adresse une seule fois par paire d'adresses.
 // Constat : issue #635 (un 301 resté en cache rebouclait : /fiche → 301 → page#ancre → replace → /fiche → …).
 // Lancer : node --test test/javascript/hash_redirect_controller.test.js (aucun navigateur : window et sessionStorage sont simulés).
 import { test, beforeEach } from "node:test"
