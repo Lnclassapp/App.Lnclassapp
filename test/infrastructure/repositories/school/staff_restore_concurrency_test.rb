@@ -60,25 +60,52 @@ class StaffRestoreConcurrencyTest < ActiveSupport::TestCase
     assert_equal 3, Orm::SchoolStaff.active.where(school: @school, joined_via: "code").count
   end
 
+  def waiting_on_a_lock?(sql)
+    # Hors cache de requêtes : la même requête rejouée renverrait sinon toujours sa première réponse.
+    ActiveRecord::Base.connection_pool.with_connection { |connection| connection.uncached { connection.select_value(sql) } }
+  end
+
+  # Attend, sans durée arbitraire, qu'une autre connexion soit réellement bloquée sur un verrou : c'est l'état que le test veut observer.
+  def wait_until_a_backend_waits_on_a_lock(timeout: 10)
+    deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout
+    sql = "SELECT 1 FROM pg_stat_activity WHERE datname = current_database() AND wait_event_type = 'Lock' AND pid <> pg_backend_pid()"
+    until waiting_on_a_lock?(sql)
+      flunk "aucune purge n'attend le verrou de l'établissement après #{timeout} s" if Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
+      Thread.pass
+    end
+  end
+
+  # Ordre imposé, pas espéré : (1) la restauration prend le verrou de l'établissement, sa transaction reste ouverte ;
+  # (2) la purge démarre et se bloque sur ce verrou ; (3) seulement alors la restauration valide. La purge relit la ligne
+  # sous le verrou et doit la trouver restaurée. Avant : le signal partait avant la prise du verrou, et sous charge la purge
+  # pouvait le prendre la première (1 compte supprimé au lieu de 0).
   test "a restoration that commits first takes the account out of the 30-day purge" do
     @author = create_team_member(second_factor: false).tap { @users << it }
     aya = admin(first_name: "Aya", archived_at: 31.days.ago)
-    restoring = Queue.new
-    restored = Queue.new
+    lock_held = Queue.new
+    commit = Queue.new
 
     restorer = Thread.new do
       ActiveRecord::Base.connection_pool.with_connection do
         Orm::SchoolStaff.transaction do
-          restoring << true
-          repository.restore(user_id: aya.id, cap: 3).tap { sleep 0.3 }
+          result = repository.restore(user_id: aya.id, cap: 3) # rejoint la transaction : le verrou tient jusqu'à son commit
+          lock_held << true
+          commit.pop
+          result
         end
-      end.tap { restored << true }
+      end
     end
-    restoring.pop
-    purged = ActiveRecord::Base.connection_pool.with_connection { School::PurgeArchivedStaffJob.perform_now }
-    restorer.join
+    purger = nil
+    begin
+      assert lock_held.pop(timeout: 10), "la restauration n'a pas pris le verrou"
+      purger = Thread.new { ActiveRecord::Base.connection_pool.with_connection { School::PurgeArchivedStaffJob.perform_now } }
+      wait_until_a_backend_waits_on_a_lock
+    ensure
+      commit << true
+    end
 
-    assert_equal 0, purged
+    assert_equal :restored, restorer.value
+    assert_equal 0, purger.value
     assert_equal "Aya", aya.reload.first_name
     assert_nil Orm::SchoolStaff.find_by!(user_id: aya.id).archived_at
   end
