@@ -481,6 +481,19 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#lesson_tiles_page_2 li", 6
     assert_select "turbo-frame#courses_page_3", 0
   end
+  test "O-C02: the subject asked for by a lessons frame is the one the next frames keep" do
+    create_course(name: "Cellule vivante", level: @tle, material: @svt)
+    sign_in_as create_student_for(@published)
+
+    { @philo => "La conscience", @svt => "Cellule vivante" }.each do |material, lesson|
+      get courses_path(material: material.slug), headers: { "Turbo-Frame" => "lessons_page_1" }
+      assert_select "#lessons_list_page_1", text: including(lesson)
+
+      get courses_path, headers: { "Turbo-Frame" => "lessons_page_1" }
+      assert_select "#lessons_list_page_1", text: including(lesson)
+    end
+  end
+
   test "O-C02: a student without a class has no lessons page to read: 404" do
     sign_in_as create_student
 
