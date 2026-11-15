@@ -243,6 +243,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`profil-eleve`](profil-eleve/memo.md) | lots 0 | feature | 2026-10-15 | Profil de l'élève aux couleurs Wave et Djamo |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | feature | 2026-09-27 | Page profil de chaque utilisateur |
 | [`progres-eleve`](progres-eleve/memo.md) | livré | feature | 2026-10-04 | L'élève voit son propre progrès |
+| [`puma-avis-securite`](puma-avis-securite/memo.md) | livré | bugfix | 2026-11-15 | Avis de sécurité Puma |
 | [`qcm-plusieurs-reponses`](qcm-plusieurs-reponses/memo.md) | livré | bugfix | 2026-11-04 | Un QCM à plusieurs bonnes réponses refuse tout l'exercice sans dire pourquoi |
 | [`queries-constantes-orm-disparues`](queries-constantes-orm-disparues/memo.md) | livré | bugfix | 2026-09-18 · repris le 2026-09-24 | Requêtes de lecture appelant des modèles ORM disparus (ADR-0007 non propagé) |
 | [`question-matching-instable`](question-matching-instable/memo.md) | preuve | bugfix | 2026-10-27 | Les tests « aucun id révélé » des questions à relier et à ordonner échouent sans fuite |
