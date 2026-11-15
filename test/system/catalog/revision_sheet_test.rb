@@ -29,7 +29,7 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
     sign_in_as @student
 
     # Une adresse sur #fiche-de-revision garde la fiche repliée (UDR-0139 §3.3).
-    visit course_path(@course.slug, anchor: "fiche-de-revision")
+    visit course_fiche_path(@course.slug)
 
     assert_selector "section#fiche-de-revision h2", text: "Fiche de révision"
     assert_selector ".sheet-box[data-tone='remember']", count: 1
@@ -59,11 +59,25 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
     assert focused_button?, "le focus revient au bouton"
   end
 
+  test "an old address « lesson#fiche-de-revision » leads the student to the sheet page; the lesson alone stays on the lesson" do
+    sign_in_as @student
+
+    visit course_path(@course.slug)
+    assert_selector "#student_lesson h1", text: @course.name
+    assert_current_path course_path(@course.slug)
+
+    # Une adresse ouverte à neuf (marque-page, ancien lien), pas un simple changement d'ancre sur la page déjà là.
+    visit courses_path
+    visit course_path(@course.slug, anchor: "fiche-de-revision")
+    assert_selector "#student_revision section#fiche-de-revision"
+    assert_current_path course_fiche_path(@course.slug), ignore_query: true
+  end
+
   test "on a phone, the folded sheet fits the screen and « Voir plus » is a 48 px target" do
     sign_in_as @student
 
     with_mobile_viewport do
-      visit course_path(@course.slug, anchor: "fiche-de-revision")
+      visit course_fiche_path(@course.slug)
 
       assert_selector BUTTON, text: more
       assert_operator find(BUTTON).native.size.height, :>=, 48

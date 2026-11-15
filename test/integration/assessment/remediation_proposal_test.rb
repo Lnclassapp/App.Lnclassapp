@@ -24,7 +24,7 @@ class Assessment::RemediationProposalTest < ActionDispatch::IntegrationTest
     get exercise_session_result_path(@session.public_id)
     assert_select "#session_gap_outcome a.ui-button-primary[href=?]", href, text: /Refais un exercice sur cette notion/
 
-    get course_path(@course.slug)
+    get course_fiche_path(@course.slug)
     assert_select "section##{"notion-#{@thales.slug}"} p.sheet-todo a[href=?]", href, text: "fais cet exercice"
 
     get student_classroom_path
@@ -35,7 +35,7 @@ class Assessment::RemediationProposalTest < ActionDispatch::IntegrationTest
     @gap.update!(status: "remediated", resolved_at: Time.current)
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get course_fiche_path(@course.slug)
     assert_select "p.sheet-todo", 0
 
     get student_classroom_path

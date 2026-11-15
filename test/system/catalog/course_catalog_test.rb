@@ -54,8 +54,9 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
         assert_selector "#student_lesson h1", text: "Génétique et évolution"
       end
       assert_current_path course_path(@course.slug)
-      assert_no_selector "#fiche-de-revision", visible: :visible
+      assert_no_selector "#fiche-de-revision", visible: :all
       find("#student_lesson_revision_link a").click
+      assert_current_path course_fiche_path(@course.slug)
       assert_selector "#fiche-de-revision .katex", count: 1
 
       assert_not resource_loaded?("trix"), "une page sans formulaire ne charge pas Trix"
@@ -214,7 +215,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       assert_blocks_above_fold "#student_lesson > *", max: 5
       assert_no_selector "#course_essentials"
       assert_selector "#student_lesson_revision_link"
-      assert_no_selector "#fiche-de-revision", visible: :visible
+      assert_no_selector "#fiche-de-revision", visible: :all
     end
   end
 

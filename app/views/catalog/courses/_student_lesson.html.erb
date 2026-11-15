@@ -1,17 +1,19 @@
 <%# 🌐 UI · catalog/courses/_student_lesson — la page d'une leçon de l'élève, style Wave : flèche retour, titre, « Réviser », « Prépare interros », « Prépare devoirs » %>
-<%# Rôle : écran intérieur (content_for :inner : ni barre ni menu) ; trois groupes de 3 lignes puis « Voir plus (n) », un groupe sans ligne est absent ; la ligne « Fiche de révision » ouvre la fiche (ancre #fiche-de-revision, `:target`), cachée sinon ; plus de carte « Prochain exercice », de « Tous les exercices », de cadre noir ni d'étiquette « PRÉPARE DEVOIRS N°x » %>
+<%# Rôle : écran intérieur (content_for :inner : ni barre ni menu) ; trois groupes de 3 lignes puis « Voir plus (n) », un groupe sans ligne est absent ; la ligne « Fiche de révision » mène à la fiche, sur sa propre page (course_fiche_path) ; l'ancienne adresse #fiche-de-revision y est menée (hash_redirect) ; plus de carte « Prochain exercice », de « Tous les exercices », de cadre noir ni d'étiquette « PRÉPARE DEVOIRS N°x » %>
 <%# ADR  : 0113 (§4.3 : pas de préchargement, l'ouverture retient les lectures), 0121 · UDR : XXXX écrans minimalistes style Wave §3 (leçon), 0139 §3.1, 0149 §3 · locals: (course:, revision:, proposals:, prepare:) -%>
 <% content_for :inner, "1" %>
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
 <% number = lesson_number(course.subtitle) %>
 <% subtitle = [ (t("catalog.courses.lesson_tile.number", number:) if number), course.material_name, [ course.level_name, course.series_name ].compact.join(" ") ].compact_blank.join(" · ") %>
-<div id="student_lesson" class="mx-auto w-full max-w-180 space-y-6 pb-6">
+<%# Une ancienne adresse « /courses/<slug>#fiche-de-revision » est menée à la page de la fiche. %>
+<div id="student_lesson" class="mx-auto w-full max-w-180 space-y-6 pb-6"
+     data-controller="hash-redirect" data-hash-redirect-hash-value="fiche-de-revision" data-hash-redirect-url-value="<%= course_fiche_path(course.slug) %>">
   <%= render "shared/screens/inner_header", title: course.name, subtitle:, back_href: courses_path(material: course.material_slug) %>
 
-  <%# Réviser : la ligne ouvre la fiche, rendue plus bas mais cachée tant qu'elle n'est pas désignée. %>
+  <%# Réviser : la ligne mène à la fiche, sur sa propre page. %>
   <% if revision.kind == :sheet %>
     <%= render layout: "shared/screens/group", locals: { id: "student_lesson_revise", title: t("catalog.courses.student_lesson.revise"), total: 1 } do %>
-      <%= render "shared/screens/row", id: "student_lesson_revision_link", title: t("catalog.courses.student_lesson.revision"), href: "#fiche-de-revision", native: true,
+      <%= render "shared/screens/row", id: "student_lesson_revision_link", title: t("catalog.courses.student_lesson.revision"), href: course_fiche_path(course.slug),
                                        tint: "bg-brand-soft", icon: ui_icon("document-text") %>
     <% end %>
   <% end %>
@@ -47,10 +49,4 @@
       <% end %>
     <% end %>
   <% end %>
-
-  <%# Cachée tant que la ligne « Fiche de révision » (ou une adresse #fiche-de-revision) ne la désigne pas : sous les groupes, rien (maquettes validées). %>
-  <section id="fiche-de-revision" aria-labelledby="revision_title" class="hidden scroll-mt-4 target:block">
-    <h2 id="revision_title" class="sr-only"><%= t("catalog.courses.show.revision_title") %></h2>
-    <%= render "catalog/courses/revision_sheet", course:, revision:, proposals: %>
-  </section>
 </div>

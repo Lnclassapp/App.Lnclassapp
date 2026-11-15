@@ -12,13 +12,13 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
   def old_path(essential = @essential, course: @course) = course_essential_path(course.slug, essential.slug)
 
-  test "the student is redirected (301) to the lesson, on the anchor of the notion" do
+  test "the student is redirected (301) to the revision sheet, on the anchor of the notion" do
     sign_in_as @student
 
     get old_path
 
-    assert_redirected_to course_path(@course.slug, anchor: "notion-#{@essential.slug}")
-    assert_response :moved_permanently
+    assert_redirected_to course_fiche_path(@course.slug, anchor: "notion-#{@essential.slug}")
+    assert_response :found
   end
 
   test "a teacher and the team are redirected the same way, the team even for a draft notion" do
@@ -27,12 +27,12 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as create_teacher(material: @course.material)
     get old_path
     assert_redirected_to course_path(@course.slug, anchor: "notion-#{@essential.slug}")
-    assert_response :moved_permanently
+    assert_response :found
 
     sign_in_as create_team_member
     get old_path(draft)
     assert_redirected_to course_path(@course.slug, anchor: "notion-#{draft.slug}")
-    assert_response :moved_permanently
+    assert_response :found
   end
 
   test "an anonymous visitor is sent to the sign-in, not to the lesson" do

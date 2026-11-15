@@ -46,18 +46,29 @@ module Catalog
                     success: ->(_) { load_status_record; load_lesson_sections; load_remediation_proposals; record_reads }
     end
 
-    # CA-12 : l'ancienne adresse de la fiche de cours mène à la fiche de révision de la page de la leçon (301) ; mêmes refus
-    # que la page (404, rien de révélé).
+    # CA-12 : l'adresse de la fiche de cours. L'élève y lit la fiche de révision sur sa propre page (UDR XXXX écrans minimalistes
+    # style Wave §3, leçon) ; les autres rôles, dont la page de la leçon porte la fiche, sont menés à cette page (302 : la cible dépend du rôle, un navigateur ne doit pas la garder). Mêmes
+    # refus que la page de la leçon (404, rien de révélé).
     def fiche
-      detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:course_slug], actor: current_actor)
-      return render_not_found if detail.nil?
+      @detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:course_slug], actor: current_actor)
+      return render_not_found if @detail.nil?
       return if refuse_out_of_level(course_slug: params[:course_slug]) || refuse_out_of_material(course_slug: params[:course_slug])
 
-      render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: detail.course),
-                    success: ->(_) { redirect_to course_path(params[:course_slug], anchor: "fiche-de-revision"), status: :moved_permanently }
+      render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
+                    success: ->(_) { current_actor.student? ? render_fiche : redirect_to_course_fiche }
     end
 
     private
+
+    def render_fiche
+      @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:course_slug], actor: current_actor)
+      load_remediation_proposals
+      render :fiche
+    end
+
+    def redirect_to_course_fiche
+      redirect_to course_path(params[:course_slug], anchor: "fiche-de-revision"), status: :found
+    end
 
     # UDR page de la leçon : les deux sections, lues pour le rôle courant (squelettes du Lot 0).
     def load_lesson_sections

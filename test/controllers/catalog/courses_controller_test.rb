@@ -52,12 +52,21 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test "CA-12: /fiche of a published lesson of the student's level redirects permanently to its revision sheet" do
+  test "CA-12: /fiche of a published lesson shows the student its revision sheet on its own page" do
     sign_in_as create_student_for(@course)
 
     get course_fiche_path(@course.slug)
 
-    assert_response :moved_permanently
+    assert_response :success
+    assert_select "#student_revision section#fiche-de-revision"
+  end
+
+  test "CA-12: /fiche of a published lesson redirects permanently every other role to the lesson page, whose sheet it carries" do
+    sign_in_as create_team_member
+
+    get course_fiche_path(@course.slug)
+
+    assert_response :found
     assert_redirected_to course_path(@course.slug, anchor: "fiche-de-revision")
   end
 
@@ -807,15 +816,34 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_header, #lesson_next_exercise, .ps-card", 0
     assert_no_match(/Prochain exercice|Tous les exercices|PRÉPARE DEVOIRS/, response.body)
     assert_select "#student_lesson_revise h2", text: "Réviser"
-    assert_select "#student_lesson_revision_link a[href='#fiche-de-revision']", text: including("Fiche de révision")
-    assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
-    assert_select "section#fiche-de-revision h4", text: "1. La méiose"
+    assert_select "#student_lesson_revision_link a[href=?]", course_fiche_path(@course.slug), text: including("Fiche de révision")
+    # La leçon s'arrête après « Prépare devoirs » : la fiche est sur sa propre page, et l'ancienne adresse #fiche-de-revision y mène.
+    assert_select "section#fiche-de-revision, .sheet-box", 0
+    assert_select "#student_lesson[data-controller=hash-redirect][data-hash-redirect-hash-value=fiche-de-revision][data-hash-redirect-url-value=?]",
+                  course_fiche_path(@course.slug)
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: "Prépare interros"
     assert_select "section#prepare-interros li#notion-#{meiose.slug} a", text: including("Interro 1 · La méiose")
     assert_select "section#prepare-devoirs", 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}, #course-actions-menu", 0
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
+  end
+
+  test "a student reads the revision sheet on its own page: back arrow to the lesson, title, the notions with their anchors" do
+    meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions", sheet: notion_sheet("Deux divisions successives."))
+    sign_in_as create_student_for(@course)
+
+    get course_fiche_path(@course.slug)
+
+    assert_response :success
+    assert_select "#student_revision a#inner_back[href=?]", course_path(@course.slug)
+    assert_select "#student_revision h1", text: "Fiche de révision"
+    assert_select "#inner_subtitle", text: @course.name
+    assert_select "header.sticky, aside, nav", 0
+    assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
+    assert_select "section#fiche-de-revision h4", text: "1. La méiose"
+    # Chaque notion garde son ancre, sur cette page.
+    assert_select "#fiche-de-revision [id=?]", "notion-#{meiose.slug}"
   end
 
   # sujet-avant-de-commencer : la feuille d'une notion s'ouvre sur sa page (la leçon ne porte que des cases).
@@ -1028,9 +1056,10 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     bare = create_course(name: "Cours vide", content: nil)
     sign_in_as create_student_for(bare)
 
-    get course_path(bare.slug)
+    get course_fiche_path(bare.slug)
 
     assert_select "#fiche-de-revision", text: including(tl("show.revision_empty"))
+    get course_path(bare.slug)
     assert_select "#prepare-interros, #prepare-devoirs", 0
     assert_select "#course_content", 0
     assert_select "#course_sheet_link", 0
@@ -1043,7 +1072,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     ))
     sign_in_as create_student_for(@course)
 
-    get course_path(@course.slug)
+    get course_fiche_path(@course.slug)
 
     assert_select "#fiche-de-revision", text: including("<script>alert(2)</script>")
     assert_select "#fiche-de-revision script, #fiche-de-revision [onclick], #fiche-de-revision a[href^=javascript]", 0

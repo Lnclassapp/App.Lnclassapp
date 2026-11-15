@@ -132,9 +132,12 @@ module Finitions
       session = completed_session
       sign_in_as @student
 
-      # ADR-0113 : la notion n'a plus de page ; l'ancienne adresse mène à la leçon, qui montre le cours.
+      # ADR-0113 : la notion n'a plus de page ; l'ancienne adresse mène l'élève à sa fiche de révision (UDR XXXX écrans minimalistes style Wave §3), et la leçon montre le cours.
       visit course_essential_path(@course.slug, @essential.slug)
-      assert_current_path course_path(@course.slug)
+      assert_current_path course_fiche_path(@course.slug), ignore_query: true
+      assert_title "Fiche de révision · Génétique et évolution · Élève · Lnclass"
+      assert_selector "#student_revision h1", text: "Fiche de révision"
+      visit course_path(@course.slug)
       assert_title "Génétique et évolution · Élève · Lnclass"
       assert_selector "h1", text: @course.name
 
