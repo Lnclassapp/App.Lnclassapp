@@ -33,7 +33,7 @@ Cherché : `MutationObserver`, `ResizeObserver`, `location.replace|assign`, `Tur
 
 ## À trancher
 
-- [ ] 2026-11-15 · controleurs-stimulus-bornes · Test JS du `math_controller` : la règle exige un test du nombre d'actions, `math` n'en a pas (la boucle de #628 n'est couverte que par la CI `lecons`) — appliqué : aucun code touché, dette notée ici ; autres : écrire le test (deux instances imbriquées, DOM simulé, KaTeX réel ou simulé) dans une PR dédiée ; recommandé : l'écrire.
+- [x] 2026-11-15 · controleurs-stimulus-bornes · (fait en session 2, lot 1) Test JS du `math_controller` : la règle exige un test du nombre d'actions, `math` n'en a pas (la boucle de #628 n'est couverte que par la CI `lecons`) — appliqué : aucun code touché, dette notée ici ; autres : écrire le test (deux instances imbriquées, DOM simulé, KaTeX réel ou simulé) dans une PR dédiée ; recommandé : l'écrire.
 - [ ] 2026-11-15 · controleurs-stimulus-bornes · `figure` : `ResizeObserver` observe le cadre et `fit()` y pose `--figure-text`, qui peut changer la taille du texte de la figure et donc, en théorie, celle du cadre. Le navigateur coupe seul une boucle de `ResizeObserver` (erreur « loop completed with undelivered notifications »), mais rien ne la borne dans le code — appliqué : rien ; autres : ne rappeler `fit()` que si le rapport arrondi change ; recommandé : cette garde, avec un test.
 - [ ] 2026-11-15 · controleurs-stimulus-bornes · `teams/import_status` : le suivi recharge le frame toutes les secondes tant que l'import est en cours, sans plafond. Un import resté « importing » pour toujours (job mort) fait interroger le serveur sans fin tant que l'onglet reste ouvert — appliqué : rien ; autres : plafond de durée comme `generation_poll` ; recommandé : un plafond (par exemple 10 minutes) puis un message.
 - [ ] 2026-11-15 · controleurs-stimulus-bornes · `hash_redirect` sans `sessionStorage` (navigation privée stricte) ne redirige plus : l'ancienne adresse `#fiche-de-revision` garde la page de la leçon au lieu de mener à la fiche — appliqué : ne pas rediriger (prudent, pas de boucle) ; autre : redirection sans marqueur ; recommandé : l'option appliquée.
@@ -48,3 +48,7 @@ Cherché : `MutationObserver`, `ResizeObserver`, `location.replace|assign`, `Tur
 ## Ce qu'on a appris sur la codebase
 
 - Les tests JS de contrôleurs se font sans navigateur : `Object.create(Controller.prototype)` et valeurs Stimulus simulées (`Object.defineProperties`), `window` posé sur `globalThis`. Ils tournent dans `config/ci.rb` (étape « Tests: Node »).
+
+## Session 2 — `fix/controleurs-stimulus-bornes-2`
+
+- **Lot 1 · `math_controller`** : `test/javascript/math_controller.test.js` (4 tests). `MutationObserver` simulé (file par observateur, `takeRecords()`, livraison asynchrone), KaTeX réel, deux éléments imbriqués autour d'une feuille commune ; chaque rendu réécrit la feuille, comme KaTeX réécrit le texte. Affirme le nombre exact de rendus : 2 à la connexion (un par instance, aucun en cascade), 1 à l'arrivée de contenu sous l'élément intérieur (l'extérieur écarte ces mutations-là), 1 pour une mutation hors de l'élément rendu (la borne n'avale pas le vrai contenu), 0 après `disconnect`. Preuve : `settle()` neutralisé → 3 tests sur 4 échouent (60 rendus au lieu de 2, arrêtés par la fin de l'attente) ; borne remise → 4 sur 4.
