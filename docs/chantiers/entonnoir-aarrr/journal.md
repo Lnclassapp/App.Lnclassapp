@@ -28,6 +28,13 @@
 - La section posée en `grid` faisait déborder la page à 390 px (largeur minimale auto d'un élément de grille + tableau `min-w`) : vu par le test système existant de la page, corrigé en pile `space-y-5`.
 - Environnement cloud : Ruby 3.4.9 absent (compilé), chromedriver 147 du `PATH` incompatible avec Chrome 153 (retiré du `PATH`), locale US-ASCII qui casse `script/docs/build_index` (`LANG=C.UTF-8`).
 
+## Revues du diff final (#650)
+
+- Sécurité : rien de bloquant ; `statement_timeout` de 60 s ajouté à `entonnoir:brut` pour borner la charge en production.
+- Tests : le scénario « reprises » ne distinguait pas `COUNT(DISTINCT)` de `COUNT` ; test dédié ajouté, mutation vérifiée tuée.
+- Pannes silencieuses : première semaine tronquée affichée comme entière → marquée « partielle » ; abonnés anonymisés comptés → exclus.
+- Les agents de revue du dépôt (`.claude/agents/`) n'étaient pas chargés dans la session cloud : joués par des agents généraux lisant leur définition.
+
 ## Ce qu'on a appris sur la codebase
 
 - `joined_via` d'une adhésion est réécrit à `link` quand un élève retiré revient par le lien (ADR-0085) : la « première voie » est celle de la première adhésion, pas une donnée historique pure.

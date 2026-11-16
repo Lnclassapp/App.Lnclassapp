@@ -25,7 +25,8 @@ module Queries
         def rate = eligible.zero? ? nil : retained.fdiv(eligible)
       end
       WeekRow = Data.define(:week_on, :channel, :steps, :retention)
-      Cohort = Data.define(:week_on, :signed_up, :retention)
+      # partial : la semaine commence avant la période, seuls ses inscrits depuis le début de la période sont comptés.
+      Cohort = Data.define(:week_on, :signed_up, :retention, :partial)
       Revenue = Data.define(:activated_cards, :amount_xof, :subscribed_students, :beta_open)
       # groups : { alone:, classroom:, none: } → Steps ; median_activation_days : mêmes clés et :total, nil sans activé.
       Report = Data.define(:groups, :total, :median_activation_days, :cohorts, :revenue)
@@ -78,10 +79,10 @@ module Queries
           FROM f WHERE f.first_pass_at IS NOT NULL GROUP BY ROLLUP (1)
       SQL
       REVENUE = <<~SQL.squish.freeze
-        SELECT COUNT(*) FILTER (WHERE activated_at >= :from AND activated_at < :to) AS cards,
-               COALESCE(SUM(price_xof) FILTER (WHERE activated_at >= :from AND activated_at < :to), 0) AS amount,
-               COUNT(DISTINCT student_id) FILTER (WHERE valid_until >= :today) AS subscribed
-          FROM billing_activation_cards WHERE state = 'activated'
+        SELECT COUNT(*) FILTER (WHERE c.activated_at >= :from AND c.activated_at < :to) AS cards,
+               COALESCE(SUM(c.price_xof) FILTER (WHERE c.activated_at >= :from AND c.activated_at < :to), 0) AS amount,
+               COUNT(DISTINCT c.student_id) FILTER (WHERE c.valid_until >= :today AND u.anonymized_at IS NULL) AS subscribed
+          FROM billing_activation_cards c LEFT JOIN users u ON u.id = c.student_id WHERE c.state = 'activated'
       SQL
 
       # Une ligne par (semaine, voie) non vide, dans l'ordre. Lue par la page Croissance et par `entonnoir:brut`.
@@ -99,7 +100,7 @@ module Queries
         rows = weekly(from:, to:, now:)
         groups = GROUPS.transform_values { |channels| sum_steps(rows.select { it.channel.in?(channels) }) }
         Report.new(groups:, total: sum_steps(rows), median_activation_days: medians(from:, to:),
-                   cohorts: cohorts(rows), revenue: revenue(from:, to:, today: now.to_date))
+                   cohorts: cohorts(rows, from), revenue: revenue(from:, to:, today: now.to_date))
       end
 
       private
@@ -108,9 +109,9 @@ module Queries
 
       def sum_steps(rows) = rows.sum(Steps.zero, &:steps)
 
-      def cohorts(rows)
+      def cohorts(rows, from)
         rows.group_by(&:week_on).map do |week_on, week|
-          Cohort.new(week_on:, signed_up: sum_steps(week).signed_up,
+          Cohort.new(week_on:, signed_up: sum_steps(week).signed_up, partial: week_on.in_time_zone < from,
                      retention: RETENTION_DAYS.to_h { |days| [ days, week.sum(Retention.zero) { it.retention.fetch(days) } ] })
         end
       end

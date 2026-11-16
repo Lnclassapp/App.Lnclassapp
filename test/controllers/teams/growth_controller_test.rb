@@ -112,6 +112,7 @@ class Teams::GrowthControllerTest < ActionDispatch::IntegrationTest
     assert_select "#growth_funnel_steps tr#funnel_step_passed_one", text: /50\u00A0%/
     assert_select "#growth_funnel_steps", text: /#{Regexp.escape(I18n.t("#{FUNNEL}.median", value: I18n.t("#{FUNNEL}.days", count: 2)))}/
     assert_select "#growth_funnel_retention tbody tr", 2
+    assert_select "#growth_funnel_retention", text: /#{I18n.t("#{FUNNEL}.partial")}/, count: 0
     assert_select "#growth_funnel_retention tbody tr", text: /—/
     assert_select "#growth_funnel_referral a[href='#growth_k']"
     assert_select "#growth_funnel_revenue", text: /#{I18n.t("#{FUNNEL}.beta")}/
@@ -120,6 +121,7 @@ class Teams::GrowthControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "the student funnel of an empty period: the empty sentence, no percentage, a column for students without a class" do
+    travel_to Time.zone.local(2027, 1, 10, 12) # loin des cartes activées des fixtures (novembre 2026)
     sign_in_as @member
 
     get teams_growth_path(period: 7)
@@ -129,10 +131,15 @@ class Teams::GrowthControllerTest < ActionDispatch::IntegrationTest
     assert_select "#growth_funnel_steps table", 0
 
     create_user(role: "student", created_at: 1.day.ago)
+    create_user(role: "student", created_at: 7.days.ago + 1.hour) # dimanche 3 : sa semaine commence avant la période
     get teams_growth_path(period: 7)
+
+    assert_select "#growth_funnel_retention tbody tr:first-child th", text: /#{I18n.t("#{FUNNEL}.partial")}/
+    assert_select "#growth_funnel_retention tbody tr:last-child th", text: /#{I18n.t("#{FUNNEL}.partial")}/, count: 0
 
     assert_select "#growth_funnel_steps th[scope=col]", text: I18n.t("#{FUNNEL}.columns.none")
     assert_select "#growth_funnel_steps", text: /#{Regexp.escape(I18n.t("#{FUNNEL}.median", value: "—"))}/
+    assert_select "#growth_funnel_revenue dd", text: "0", count: 2 # aucune carte activée ni abonné sur 7 jours
   end
 
   test "revenue once the beta is over: no beta badge" do

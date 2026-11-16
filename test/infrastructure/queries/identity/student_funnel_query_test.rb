@@ -58,6 +58,15 @@ module Queries
         assert_equal 2, report.total.passed_one
       end
 
+      test "retakes: three successes of the same exercise are one exercise passed, not three" do
+        exercise = create_exercise
+        3.times { passed(@coded, at: NOW - 1.day, exercise:) }
+
+        steps = report.groups.fetch(:classroom)
+
+        assert_equal [ 1, 0 ], [ steps.passed_one, steps.passed_two ]
+      end
+
       test "the first membership gives the channel; a student without membership is apart, once" do
         create_user(role: "student", created_at: MONDAY)
         Orm::ClassroomStudent.create!(classroom: create_classroom, student: @alone, primary: false, joined_at: NOW, joined_via: "link")
@@ -100,6 +109,8 @@ module Queries
         assert_equal [ 2, 1 ], [ first.retention.fetch(1).eligible, first.retention.fetch(1).retained ]
         assert_equal [ 2, 1 ], [ first.retention.fetch(7).eligible, first.retention.fetch(7).retained ]
         assert_in_delta 0.5, first.retention.fetch(7).rate
+        assert_equal [ false, false ], cohorts.map(&:partial)
+        assert query.call(from: MONDAY + 1.hour, to: NOW, now: NOW).cohorts.first.partial
         assert_equal 0, first.retention.fetch(30).eligible
         assert_nil first.retention.fetch(30).rate
       end
@@ -112,7 +123,9 @@ module Queries
       end
 
       test "revenue: cards activated in the period, their amount, the students subscribed today" do
-        Orm::Billing::ActivationCard.where(state: "activated").order(:serial).first.update!(student_id: @alone.id)
+        cards = Orm::Billing::ActivationCard.where(state: "activated").order(:serial).to_a
+        cards.first.update!(student_id: @alone.id)
+        cards.second.update!(student_id: create_student(anonymized_at: NOW - 1.day).id) # anonymisé : plus compté abonné
 
         revenue = report.revenue
 

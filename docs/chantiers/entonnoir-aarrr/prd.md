@@ -31,7 +31,8 @@ Règle d'autorisation : `Policies::Identity::ReadGrowthPolicy`, inchangée.
 | Dernière activité | La plus récente de : `essential_reads.last_read_at`, `exercise_sessions.started_at` / `completed_at`, `question_attempts.answered_at`. |
 | **Actif à Jn** (rétention) | Dernière activité ≥ `created_at + n jours` : l'élève est **revenu** à J+n ou plus tard (rétention non bornée). n ∈ {1, 7, 30}. |
 | Mesurable à Jn | `created_at + n jours ≤ maintenant`. Taux de rétention Jn = actifs à Jn / mesurables à Jn ; « — » si aucun mesurable. |
-| Revenu | Cartes `billing_activation_cards` à l'état `activated` dont `activated_at` tombe dans la période : nombre et somme de `price_xof` ; élèves abonnés aujourd'hui (carte activée, `valid_until ≥ aujourd'hui`). |
+| Revenu | Cartes `billing_activation_cards` à l'état `activated` dont `activated_at` tombe dans la période : nombre et somme de `price_xof` ; élèves abonnés aujourd'hui (carte activée, `valid_until ≥ aujourd'hui`, compte non anonymisé). |
+| Semaine partielle | Cohorte dont le lundi précède le début de la période : seuls ses inscrits depuis ce début sont comptés ; marquée « partielle » à l'écran (revue de #650). |
 | Referral | Inchangé : `GrowthMetricsQuery` (k, conversion, cycle viral). |
 
 Pourquoi la rétention non bornée : `essential_reads.last_read_at` est écrasé et `sessions` est purgée ; seule la **dernière** date est sûre. « Actif le jour 7 pile » ne se calcule pas honnêtement (option écrite dans `journal.md` § À trancher).
