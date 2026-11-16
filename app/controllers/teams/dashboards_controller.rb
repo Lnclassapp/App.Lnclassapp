@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::DashboardsController
 # Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs par période et DRENA, établissements de la DRENA ; recherche de compte (TR-11)
-# ADR  : 0028, 0038, 0049, 0062 · UDR : 0006, 0049, 0068
+# ADR  : 0028, 0038, 0049, 0062, XXXX-notifications-web-push-aux-eleves · UDR : 0006, 0049, 0068, XXXX-notifications-eleve
 module Teams
   class DashboardsController < BaseController
     SEARCH_FRAME = "team_dashboard_search".freeze
@@ -22,6 +22,7 @@ module Teams
       @period = Entities::School::ReportingPeriod.parse(text_param(:period), today: Date.current)
       @dashboard = Queries::School::TeamDashboardQuery.new.call(period: @period, drena_public_id: text_param(:drena))
       @drenas = Queries::School::SchoolOptionsQuery.new.drenas
+      @push_usage = Queries::Communication::PushUsageQuery.new.call
       read_schools if @dashboard.drena
     end
 

@@ -1,0 +1,24 @@
+<%# 🌐 UI · teams/dashboards/_push_tile — tuile « Notifications » : élèves abonnés, abonnements, retraits, envois de la semaine par motif %>
+<%# Rôle : lecture seule, aucun nom ; « 0 élève abonné » sans liste quand personne n'est abonné %>
+<%# ADR  : XXXX-notifications-web-push-aux-eleves · UDR : XXXX-notifications-eleve (§3.4) %>
+<%# locals: (usage:) -%>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "bell", id: "team_dashboard_push" do %>
+  <div class="rounded-ln bg-mist px-3 py-4">
+    <span id="push_students" class="block font-display text-3xl font-medium tabular-nums text-ink"><%= t(".students", count: usage.students) %></span>
+    <% if usage.students.positive? %>
+      <span id="push_counts" class="block text-sm text-mute"><%= t(".counts", subscriptions: usage.subscriptions, turned_off: usage.turned_off) %></span>
+      <p id="push_week" class="mt-3 text-sm font-medium tabular-nums text-ink"><%= t(".week", sent: usage.sent, failed: usage.failed) %></p>
+      <% motives = Entities::Communication::PushMotive::PRIORITY.select { usage.by_motive.key?(it) } %>
+      <% if motives.any? %>
+        <ul id="push_by_motive" aria-label="<%= t(".by_motive_label") %>" class="mt-2 divide-y divide-line text-sm">
+          <% motives.each do |motive| %>
+            <li class="flex items-baseline justify-between gap-3 py-1.5">
+              <span class="text-ink"><%= t(".motives.#{motive}") %></span>
+              <span class="tabular-nums text-mute"><%= usage.by_motive[motive] %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
