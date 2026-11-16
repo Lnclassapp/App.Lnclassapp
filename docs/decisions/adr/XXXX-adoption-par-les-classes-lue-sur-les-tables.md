@@ -1,13 +1,13 @@
 # ADR-XXXX : L'adoption par les classes se lit en direct sur les tables existantes
 <!-- index
 titre: Adoption par les classes, lue sur les tables
-statut: Proposé
+statut: Accepté
 problematique: comment savoir où la chaîne enseignant → classe → élèves casse, sans table ni traceur
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-11-16 |
 | **Chantier** | `docs/chantiers/acquisition-classes` |
 | **Remplace** | — |

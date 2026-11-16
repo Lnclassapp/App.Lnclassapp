@@ -9,6 +9,9 @@
 | 2026-11-16 | Mesurer avant d'agir : le lot A seul, puis un unique lot B désigné par la mesure | Sept élèves excluent qu'une classe ait adopté l'app, mais ne départagent pas les goulots 1, 2, 3 et 4, dont les remèdes n'ont rien en commun | ADR-XXXX-adoption-par-les-classes-lue-sur-les-tables |
 | 2026-11-16 | Pas de Lot 0 | Aucun contrat partagé, aucune route, aucune locale, aucune migration | Non |
 | 2026-11-16 | Pas d'UDR ni d'ADR pour les lots B avant le verdict | Écrire quatre interfaces dont trois ne seront pas construites | Non |
+| 2026-11-16 | Lot A : la médiane d'élèves (règle §3.2, étape 5) porte sur les classes ouvertes **cochées** par un enseignant non anonymisé et comptant au moins 1 élève ; le PRD disait seulement « classe peuplée » | La règle juge l'adoption par les enseignants, pas les classes que l'équipe a ouvertes sans eux | Non |
+| 2026-11-16 | Lot A : le bloc CRM ne compte que les établissements `status = 'active'` ; l'indice 2b / 3 compte un enseignant « avec devoir » s'il a donné un devoir à l'une de ses classes cochées vides | Un établissement brouillon ou inactif gonflerait « prospect » ; un devoir donné ailleurs ne dit rien de la classe vide | Non |
+| 2026-11-16 | Lot A : la sortie imprime E1..E6 puis « Bloqués » en dernière colonne, et les voies d'arrivée élèves à zéro sont omises | Les scénarios PRD §6 lisent « sans enseignant : standard 1 » et « avec enseignant : code 1 » | Non |
 
 ## À trancher
 
@@ -37,7 +40,7 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Lot A : la base de test porte déjà 4 établissements et 181 classes du jeu de référence (hors fixtures). Les trois fichiers de test les retirent dans leur transaction (`delete_all`) ; sans cela, « prospect » et « classe ouverte » comptent des lignes qui ne viennent pas du test. PostgreSQL n'était pas démarré en début de session : relancé avec `service postgresql start`.
 
 ## Ce qu'on a appris sur la codebase
 
