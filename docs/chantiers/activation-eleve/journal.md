@@ -31,6 +31,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - Le message de bienvenue « Fais ton premier exercice ! » prévu au PRD a été retiré avant le code : les niveaux sans exercice publié (6e à 4e, 2nde) n'auraient pas de carte, le message aurait menti. Le CA-10 est devenu le parcours navigateur de l'inscription au premier exercice.
 - Première version : l'exercice de la carte ne sortait de « À faire » que pour l'élève amené. Le test d'ordre de l'accueil l'a montré : pour l'élève seul, le premier exercice du programme peut être un devoir de la classe, deux portes vers le même exercice. La règle est devenue « l'exercice de la carte sort de « À faire », quelle que soit sa source ».
+- Les revues du diff final ont trouvé deux écarts, corrigés avant la fusion : l'historique reprenait une copie dont la leçon était retirée (la carte, non) ; « Voir plus (n) » comptait des copies en cours que Mon historique ne liste pas. Le challenger (rôle distinct, navigateur, jeu standard) a rejoué le parcours nominal, l'élève amené, le retour par l'historique et le double clic sur « Commencer » : 4 sur 4.
 - Environnement de la session : Ruby 3.4.9 à compiler, corepack à activer, `LANG=C.UTF-8` obligatoire sinon `script/docs/build_index` tombe sur l'encodage, chromedriver du système (147) plus vieux que Chrome (153) : `CHROMEDRIVER_PATH` vers celui que selenium-manager télécharge.
 
 ## Ce qu'on a appris sur la codebase
