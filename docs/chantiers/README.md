@@ -51,6 +51,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`accueil-eleve`](accueil-eleve/memo.md) | planification | feature | 2026-10-15 | Accueil élève aux couleurs Wave et Djamo |
 | [`acteurs-fantomes-parent-examsubject`](acteurs-fantomes-parent-examsubject/memo.md) | abandonné | bugfix | 2026-09-18 | `Parent` et `ExamSubject` : déclarés partout, persistés nulle part |
 | [`actions-en-menu`](actions-en-menu/memo.md) | livré | feature | 2026-09-28 | Actions d'un objet dans un menu ⋮ |
+| [`activation-eleve`](activation-eleve/memo.md) | en cours | feature | 2026-11-16 | Activation de l'élève : de l'inscription au premier exercice réussi |
 | [`afficher-pin`](afficher-pin/memo.md) | livré | feature | 2026-09-28 | Afficher le code PIN |
 | [`aide-whatsapp-message-pret`](aide-whatsapp-message-pret/memo.md) | livré | feature | 2026-10-16 | Message prêt dans le lien WhatsApp de la carte d'aide |
 | [`alt-couverture-perdu`](alt-couverture-perdu/memo.md) | livré | bugfix | 2026-10-07 | Une image glissée dans un article prend le focus à l'auteur qui écrit ailleurs |

@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève, style Wave : bandeau, carte de la classe, grille des matières, annonces, « À faire », historique, invitation %>
-<%# Rôle : le bandeau bleu (hors de la colonne, sous lg), puis le blanc à coins arrondis qui commence à 159 px ; chaque section vide est absente ; sans classe, « Choisis ta classe », la grille de son dernier niveau et les annonces %>
+<%# Rôle : le bandeau bleu (hors de la colonne, sous lg), puis le blanc à coins arrondis qui commence à 159 px ; « Ton premier exercice » tant qu'aucun n'est réussi ; chaque section vide est absente ; sans classe, « Choisis ta classe », la grille de son dernier niveau et les annonces %>
 <%# ADR  : 0033, 0043, 0078, 0085, 0089, 0126 (contexte billing, §4.5) · UDR : 0173 §3, 0071 §3.5, 0081 §3.5, 0132 accueil élève (§3.1 structure, amendement eleve-sans-prof), 0158 (§3 bandeau, masqué en bêta : UDR acces-beta), hors-connexion-bandeau-copie-provisoire-et-file §3.6 · titre « Accueil · Élève · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# UDR-0084 §3.5 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
@@ -18,6 +18,12 @@
   <div class="<%= class_names("bg-white lg:bg-transparent", "-mt-wave-lap rounded-t-wave lg:mt-0 lg:rounded-none" => !lnclass_app?) %>">
     <% if @home %>
       <%= render "class_card", home: @home, overlap: !lnclass_app? %>
+      <%# UDR-XXXX-activation-premier-exercice §3 : tant qu'aucun exercice n'est réussi, son premier exercice, avant la grille ; sinon rien. %>
+      <% if @first_exercise %>
+        <div class="px-5 pt-6 lg:px-0 lg:pt-8">
+          <%= render "catalog/courses/next_exercise", next_exercise: @first_exercise, scope: :home, id: "student_first_exercise" %>
+        </div>
+      <% end %>
       <div class="px-5 pt-6 pb-6 lg:px-0 lg:pt-8 lg:pb-0">
         <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs %>
       </div>
@@ -40,7 +46,7 @@
     <%= render "communication/messages/carousel", carousel: @announcements, student: true %>
   <% end %>
   <% if @home %>
-    <% to_do = capture { render "to_do", exercises: @home.assigned_exercises } %>
+    <% to_do = capture { render "to_do", exercises: @to_do } %>
     <%# Historique : le cadre différé rend son titre avec ses lignes, ou rien ; « À faire » vide ne laisse pas de bande blanche. %>
     <%# Sans annonce, le blanc de la grille se prolonge : pas de second espace au-dessus de « À faire ». %>
     <div class="<%= class_names("bg-white px-5 pb-3 lg:space-y-6 lg:bg-transparent lg:p-0", "pt-4" => @announcements&.any_readable?) %>">

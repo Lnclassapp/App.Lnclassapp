@@ -46,6 +46,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   test "CA-D1: the band, the class card, the grid, the announcements, « À faire », the history frame, the invitation in this order; no bottom bar, no « Paiement »" do
     assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
     create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
+    # Activation-eleve : un élève activé (une copie réussie) n'a plus la carte de son premier exercice.
+    complete(create_exercise(essential: @essential), score: 80)
     sign_in_as @student
 
     get student_home_path
@@ -704,5 +706,79 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal one, count_queries { get student_home_path }
     assert_equal 5, announcement_titles.size
+  end
+
+  # Chantier activation-eleve (UDR-XXXX-activation-premier-exercice) : tant qu'aucun exercice n'est réussi, son premier exercice.
+  FIRST = "section#student_first_exercise".freeze
+
+  def tc(key, **) = I18n.t("catalog.courses.next_exercise.#{key}", **)
+
+  test "activation CA-8: not activated, « Ton premier exercice » follows the class card, before the grid; one tap starts it" do
+    exercise = create_exercise(essential: @essential, title: "Les étapes de la méiose")
+    sign_in_as @student
+
+    get student_home_path
+
+    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_class_card student_first_exercise student_subjects]
+    assert_equal %w[student_class_card student_first_exercise student_subjects], ids
+    assert_select FIRST, 1 do
+      assert_select "p", text: tc("first")
+      assert_select "h2#student_first_exercise_title", text: "Les étapes de la méiose"
+      assert_select "p", text: "SVT · Génétique"
+      assert_select "form[action=?][method=post] button[aria-label=?]", exercise_sessions_path(exercise.public_id),
+                    tc("start_aria", title: "Les étapes de la méiose"), text: including(tc("start"))
+    end
+  end
+
+  test "activation CA-2: a copy in progress is resumed from the card, at the next question" do
+    exercise = create_exercise(essential: @essential, title: "Les étapes de la méiose", questions: 3)
+    copy = create_exercise_session(student: @student, exercise:, answered_count: 1)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#{FIRST} a[href=?]", exercise_session_path(copy.public_id), text: including(tc("resume", number: 2))
+  end
+
+  test "activation CA-9: brought by the class code, the card is the assignment, given by the class; « À faire » is gone when it was the only one" do
+    brought = create_student(classroom: @classroom, joined_via: "code")
+    @student = brought
+    assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
+    sign_in_as brought
+
+    get student_home_path
+
+    assert_select "#{FIRST} h2", text: "Méiose, les étapes"
+    assert_select "#{FIRST} p", text: "SVT · #{tc('assigned')}"
+    assert_select "#student_to_do", 0
+  end
+
+  test "activation CA-9: the card's exercise leaves « À faire », the others stay" do
+    assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
+    assign_exercise("Mitose", due_on: Date.current + 3)
+    sign_in_as @student
+
+    get student_home_path
+
+    card = css_select("#{FIRST} h2").first.text.strip
+    rows = css_select("#student_to_do li").map(&:text).join
+    assert_not_includes rows, card
+    assert_select "#student_to_do", 1
+  end
+
+  test "activation CA-5: a copy completed at 10/20 or more: no card any more; nothing to propose: no card either" do
+    complete(create_exercise(essential: @essential), score: 50)
+    create_exercise(essential: @essential)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select FIRST, 0
+    assert_select "section#student_class_card", 1
+
+    other = create_student(classroom: create_classroom(level: create_level))
+    sign_in_as other
+    get student_home_path
+    assert_select FIRST, 0
   end
 end
