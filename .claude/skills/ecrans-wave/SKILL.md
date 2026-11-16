@@ -80,4 +80,4 @@ Dans le bloc, `t(".clé")` se résout sur la partial du groupe : utilise des cl�
 
 ## Hors périmètre
 
-La carte « Prochain exercice » n'apparaît plus sur aucun écran élève ; son code est conservé pour le guidage d'activation après l'inscription (issue « Réutiliser « Prochain exercice » dans l'activation après l'inscription »). Ne le réaffiche pas sans nouvelle décision.
+La carte « Prochain exercice » n'apparaît plus sur la matière ni la leçon. Sur l'accueil, elle n'existe que sous la forme « Ton premier exercice », tant que l'élève n'a réussi aucun exercice (UDR « activation-premier-exercice », chantier `activation-eleve`) ; son exercice sort alors de « À faire », et sa copie en cours de l'historique. Ne la réaffiche ailleurs sans nouvelle décision.

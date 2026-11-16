@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/_history — contenu du frame différé de l'Historique de l'accueil %>
-<%# Rôle : le titre et les 3 dernières sessions terminées, groupées par jour (rond de la matière, titre, matière, médaille) ; sous l'Argent, « Refaire » ; « Voir plus (n) » mène à Mon historique ; aucune session : rien, ni titre ni phrase %>
-<%# UDR  : 0173 §3 (accueil, règle 2 : jamais de section vide), 0132 accueil élève §3.5, §3.7 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
+<%# Rôle : le titre et les 3 dernières copies touchées, groupées par jour de dernière activité (rond de la matière, titre, matière) ; en cours : la ligne reprend la copie, « En cours · 2/5 » ; terminée : la médaille et « Refaire » hors pause ; « Voir plus (n) » mène à Mon historique ; aucune copie : rien, ni titre ni phrase %>
+<%# UDR  : 0173 §3 (accueil, règle 2 : jamais de section vide), 0132 accueil élève §3.5, §3.7, 0174 activation-premier-exercice §3 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
 <%# locals: (sessions:, paused_exercise_ids:) -%>
 <% shown = 3 %>
 <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, target: "_top" do %>
@@ -8,9 +8,8 @@
     <section id="student_history" aria-labelledby="student_history_title" class="py-3 lg:p-0">
     <h2 id="student_history_title" class="px-1 pb-2 text-sm font-semibold text-mute"><%= t("classroom.student_homes.history.title") %></h2>
     <div class="rounded-card bg-white px-4 pb-1">
-    <% grading = Entities::Assessment::Grading %>
     <% today = Time.zone.today %>
-    <% sessions.first(shown).group_by { it.completed_at.to_date }.each do |day, day_sessions| %>
+    <% sessions.first(shown).group_by { it.last_at.to_date }.each do |day, day_sessions| %>
       <section aria-labelledby="history_day_<%= day.iso8601 %>" class="space-y-1">
         <%# Le jour : « AUJOURD'HUI », « HIER », puis la date (majuscules par la mise en page). %>
         <h3 id="history_day_<%= day.iso8601 %>" class="pt-2 text-xs font-medium tracking-wide text-mute uppercase">
@@ -18,8 +17,11 @@
         </h3>
         <ul>
           <% day_sessions.each do |session| %>
+            <% in_progress = session.status == "started" %>
             <li class="flex items-center gap-2">
-              <%= link_to exercise_session_result_path(session.public_id),
+              <%# Une copie en cours : toute la ligne la reprend, sans second bouton ; une copie terminée mène à son résultat. %>
+              <%= link_to (in_progress ? exercise_session_path(session.public_id) : exercise_session_result_path(session.public_id)),
+                          "aria-label": (t("classroom.student_homes.history.resume_label", title: session.exercise_title) if in_progress),
                           class: "group -mx-2 flex min-h-tap min-w-0 flex-1 items-center gap-3 rounded-ln px-2 py-2 transition hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
                 <span class="grid size-10 shrink-0 place-items-center rounded-full bg-brand-soft" aria-hidden="true">
                   <%= image_tag subject_illustration(session.material_slug).path, alt: "", class: "size-6", loading: "lazy" %>
@@ -29,10 +31,17 @@
                   <span class="block text-meta text-mute"><%= session.material_name %></span>
                 </span>
                 <%# Vert dès « 14/20 » affiché (MASTERY_THRESHOLD, UDR-0090 §4), à l'encre dessous ; jamais en rouge ni en ambre. %>
-                <span data-medal class="shrink-0 text-sm"><%= medal_tag(session.medal) %></span>
+                <% if in_progress %>
+                  <span data-progress class="shrink-0 text-sm text-mute">
+                    <%= t("classroom.student_homes.history.in_progress", answered: session.answered_count, total: session.question_count) %>
+                  </span>
+                <% else %>
+                  <span data-medal class="shrink-0 text-sm"><%= medal_tag(session.medal) %></span>
+                <% end %>
               <% end %>
-              <%# Pendant la pause de « Recommencer » (ADR-0115), pas de bouton : la ligne mène au résultat, la page de l'exercice dit l'heure de reprise. %>
-              <% if !grading.reaches?(session.score_percent, grading::MASTERY_THRESHOLD) && paused_exercise_ids.exclude?(session.exercise_id) %>
+              <%# Toute copie terminée se refait (UDR-0174 §3) ; pendant la pause de « Recommencer » (ADR-0115),
+                  pas de bouton : la ligne mène au résultat, la page de l'exercice dit l'heure de reprise. %>
+              <% if !in_progress && paused_exercise_ids.exclude?(session.exercise_id) %>
                 <%= button_to exercise_sessions_path(session.exercise_public_id), form_class: "shrink-0",
                               class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm], ComponentsHelper::BUTTON_VARIANTS[:secondary]),
                               "aria-label": t("classroom.student_homes.history.redo_label", title: session.exercise_title) do %>
@@ -44,8 +53,10 @@
         </ul>
       </section>
     <% end %>
-    <% if sessions.size > shown %>
-      <%= link_to t("classroom.student_homes.history.more", count: sessions.size - shown), student_archive_path, id: "student_history_more",
+    <%# « Voir plus (n) » compte ce que Mon historique montre : les copies terminées au-delà des lignes affichées. %>
+    <% more = sessions.drop(shown).count { it.status == "completed" } %>
+    <% if more.positive? %>
+      <%= link_to t("classroom.student_homes.history.more", count: more), student_archive_path, id: "student_history_more",
                   class: "-mx-4 flex min-h-tap items-center justify-center text-base font-semibold text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" %>
     <% end %>
     </div>
