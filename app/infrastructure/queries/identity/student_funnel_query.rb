@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Identity::StudentFunnelQuery
 # Rôle : entonnoir AARRR des élèves (inscrits, notion, exercice, réussis 1/2/5, délai, rétention J1/J7/J30, revenu) en 3 requêtes
-# ADR  : 0049, 0062, 0085, 0106, 0126 · UDR : entonnoir-aarrr · chantier entonnoir-aarrr (PRD §3 : les définitions)
+# ADR  : 0049, 0062, 0085, 0106, 0126 · UDR : 0175 · chantier entonnoir-aarrr (PRD §3 : les définitions)
 module Queries
   module Identity
     class StudentFunnelQuery
