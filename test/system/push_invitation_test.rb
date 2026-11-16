@@ -12,7 +12,12 @@ class PushInvitationTest < ApplicationSystemTestCase
     PushManager.prototype.getSubscription = async () => null
   JS
 
+  # The browser profile is shared by the tests of a worker and Chrome answers « denied » to a headless page that never asked:
+  # the card would stay hidden depending on the order of the suite. The permission is pinned before the page's scripts run.
+  PERMISSION = "Object.defineProperty(Notification, 'permission', { configurable: true, get: () => 'default' })".freeze
+
   setup do
+    @permission_script = page.driver.browser.execute_cdp("Page.addScriptToEvaluateOnNewDocument", source: PERMISSION)["identifier"]
     @previous_key = ENV["VAPID_PUBLIC_KEY"]
     ENV["VAPID_PUBLIC_KEY"] = "BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U"
     @exercise = create_exercise(questions: 2)
@@ -21,7 +26,10 @@ class PushInvitationTest < ApplicationSystemTestCase
     sign_in_as @awa
   end
 
-  teardown { ENV["VAPID_PUBLIC_KEY"] = @previous_key }
+  teardown do
+    ENV["VAPID_PUBLIC_KEY"] = @previous_key
+    page.driver.browser.execute_cdp("Page.removeScriptToEvaluateOnNewDocument", identifier: @permission_script)
+  end
 
   test "the card leads to a subscription of the session, and « Couper » removes it for good" do
     visit exercise_session_result_path(@passed.public_id)
