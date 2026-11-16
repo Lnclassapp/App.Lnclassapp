@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::GrowthController
-# Rôle : page « Croissance » de l'équipe : k enseignant et sa décomposition, partages, cycle viral, parrains, classement, attente
-# ADR  : 0028, 0049, 0063 · UDR : 0006, 0018, 0050 · ne touche pas /teams/dashboard (chantier pilotage-equipe)
+# Rôle : page « Croissance » de l'équipe : entonnoir AARRR des élèves, k enseignant, partages, cycle viral, parrains, classement, attente
+# ADR  : 0028, 0049, 0062, 0063 · UDR : 0006, 0018, 0050, entonnoir-aarrr · ne touche pas /teams/dashboard (pilotage-equipe)
 module Teams
   class GrowthController < BaseController
     PERIODS = [ 7, 30, 90 ].freeze
@@ -11,6 +11,7 @@ module Teams
         @period = period
         to = Time.current
         @metrics = Queries::Identity::GrowthMetricsQuery.new.call(from: to - @period.days, to:)
+        @funnel = Queries::Identity::StudentFunnelQuery.new.call(from: to - @period.days, to:, now: to)
       }
     end
 

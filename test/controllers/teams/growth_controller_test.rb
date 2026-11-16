@@ -89,4 +89,58 @@ class Teams::GrowthControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav:not(#team_home_shortcuts) a[href='#{teams_growth_path}']", 0
     assert_not_includes NavigationHelper::DESTINATIONS.fetch(:team).map(&:second), :teams_growth_path
   end
+
+  # Chantier entonnoir-aarrr (PRD §5, UDR entonnoir-aarrr) : les cinq étages AARRR des élèves inscrits sur la période.
+  FUNNEL = "teams.growth.funnel".freeze
+
+  test "the student funnel: alone against brought by the class, the steps, the delay, retention, referral, revenue, unmeasured" do
+    travel_to Time.zone.local(2026, 11, 16, 12) # deux semaines d'inscription : vendredi 6 et vendredi 13
+    classroom = create_classroom(school: @school)
+    alone = create_student(classroom:, joined_via: "standard", created_at: 10.days.ago, first_name: "Aïcha")
+    create_essential_read(student: alone)
+    create_exercise_session(student: alone, status: "completed", score_percent: 80, completed_at: 8.days.ago)
+    create_student(classroom:, joined_via: "link", created_at: 3.days.ago)
+    sign_in_as @member
+
+    get teams_growth_path
+
+    assert_select "#growth_funnel h2", text: I18n.t("#{FUNNEL}.title")
+    assert_select "#growth_funnel_steps th[scope=col]", text: I18n.t("#{FUNNEL}.columns.alone")
+    assert_select "#growth_funnel_steps th[scope=col]", text: I18n.t("#{FUNNEL}.columns.classroom")
+    assert_select "#growth_funnel_steps th[scope=col]", text: I18n.t("#{FUNNEL}.columns.none"), count: 0
+    assert_select "#growth_funnel_steps tr#funnel_step_signed_up td", text: "2"
+    assert_select "#growth_funnel_steps tr#funnel_step_passed_one", text: /50\u00A0%/
+    assert_select "#growth_funnel_steps", text: /#{Regexp.escape(I18n.t("#{FUNNEL}.median", value: I18n.t("#{FUNNEL}.days", count: 2)))}/
+    assert_select "#growth_funnel_retention tbody tr", 2
+    assert_select "#growth_funnel_retention tbody tr", text: /—/
+    assert_select "#growth_funnel_referral a[href='#growth_k']"
+    assert_select "#growth_funnel_revenue", text: /#{I18n.t("#{FUNNEL}.beta")}/
+    assert_select "#growth_funnel_unmeasured li", 5
+    assert_select "#growth_funnel", text: /Aïcha/, count: 0
+  end
+
+  test "the student funnel of an empty period: the empty sentence, no percentage, a column for students without a class" do
+    sign_in_as @member
+
+    get teams_growth_path(period: 7)
+
+    assert_select "#growth_funnel_steps", text: /#{I18n.t("#{FUNNEL}.empty")}/
+    assert_select "#growth_funnel_retention", text: /#{I18n.t("#{FUNNEL}.empty")}/
+    assert_select "#growth_funnel_steps table", 0
+
+    create_user(role: "student", created_at: 1.day.ago)
+    get teams_growth_path(period: 7)
+
+    assert_select "#growth_funnel_steps th[scope=col]", text: I18n.t("#{FUNNEL}.columns.none")
+    assert_select "#growth_funnel_steps", text: /#{Regexp.escape(I18n.t("#{FUNNEL}.median", value: "—"))}/
+  end
+
+  test "revenue once the beta is over: no beta badge" do
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+      sign_in_as @member
+      get teams_growth_path
+
+      assert_select "#growth_funnel_revenue", text: /#{I18n.t("#{FUNNEL}.beta")}/, count: 0
+    end
+  end
 end

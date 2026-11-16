@@ -1,0 +1,130 @@
+<%# 🌐 UI · teams/growth/_funnel — « Élèves : entonnoir AARRR » : acquisition et activation par voie, rétention J1/J7/J30, referral, revenu, non mesuré %>
+<%# Rôle : lecture seule (Queries::Identity::StudentFunnelQuery::Report) ; comptes seulement, aucun nom ; définitions : chantier entonnoir-aarrr, PRD §3 %>
+<%# UDR  : entonnoir-aarrr · ADR : 0049, 0062 %>
+<% dash = "—" %>
+<%# « 67 % » : espace insécable avant le signe, comme le veut la typographie française. %>
+<% percent = ->(value) { value.nil? ? dash : "#{(value * 100).round} %" } %>
+<% columns = %i[alone classroom].push(*(funnel.groups.fetch(:none).signed_up.positive? ? [ :none ] : [])) %>
+<% steps = { signed_up: "acquisition", read_essential: nil, started: nil, passed_one: "activation", passed_two: nil, passed_five: nil } %>
+<% median = funnel.median_activation_days[:total] %>
+<% empty = funnel.total.signed_up.zero? %>
+<% revenue = funnel.revenue %>
+
+<section id="growth_funnel" aria-labelledby="growth_funnel_title" class="mb-5 space-y-5">
+  <div>
+    <h2 id="growth_funnel_title" class="font-display text-xl font-medium text-ink"><%= t(".title") %></h2>
+    <p class="mt-1 text-sm text-mute"><%= t(".subtitle") %></p>
+  </div>
+
+  <%= ui_card title: t(".steps_title"), id: "growth_funnel_steps" do %>
+    <% if empty %>
+      <p class="text-sm text-mute"><%= t(".empty") %></p>
+    <% else %>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[28rem] text-left text-sm">
+          <caption class="sr-only"><%= t(".steps_caption") %></caption>
+          <thead class="text-xs text-mute">
+            <tr class="border-b border-line">
+              <th scope="col" class="py-2 pr-3 font-medium"><%= t(".columns.step") %></th>
+              <th scope="col" class="px-3 py-2 text-right font-medium"><%= t(".columns.total") %></th>
+              <% columns.each do |column| %>
+                <th scope="col" class="px-3 py-2 text-right font-medium"><%= t(".columns.#{column}") %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line">
+            <% steps.each do |step, letter| %>
+              <tr id="funnel_step_<%= step %>" class="<%= "font-medium" if step == :passed_one %>">
+                <th scope="row" class="py-2 pr-3 font-normal text-ink">
+                  <% if letter %>
+                    <span class="block text-xs tracking-wider text-mute uppercase"><%= t(".letters.#{letter}") %></span>
+                  <% end %>
+                  <%= t(".steps.#{step}") %>
+                </th>
+                <% [ funnel.total, *columns.map { funnel.groups.fetch(it) } ].each do |cell| %>
+                  <td class="px-3 py-2 text-right align-top">
+                    <span class="font-display text-ink tabular-nums"><%= cell.public_send(step) %></span>
+                    <% unless step == :signed_up %>
+                      <span class="block text-xs text-mute tabular-nums"><%= percent.call(cell.rate(step)) %></span>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+    <p class="mt-3 text-sm text-mute"><%= t(".median", value: median.nil? ? dash : t(".days", count: median.round)) %></p>
+  <% end %>
+
+  <%= ui_card title: t(".retention_title"), id: "growth_funnel_retention" do %>
+    <% if empty %>
+      <p class="text-sm text-mute"><%= t(".empty") %></p>
+    <% else %>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[22rem] text-left text-sm">
+          <caption class="sr-only"><%= t(".retention_caption") %></caption>
+          <thead class="text-xs text-mute">
+            <tr class="border-b border-line">
+              <th scope="col" class="py-2 pr-3 font-medium"><%= t(".columns.week") %></th>
+              <th scope="col" class="px-3 py-2 text-right font-medium"><%= t(".columns.signed_up") %></th>
+              <% Queries::Identity::StudentFunnelQuery::RETENTION_DAYS.each do |days| %>
+                <th scope="col" class="px-3 py-2 text-right font-medium"><%= t(".columns.day", count: days) %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-line">
+            <% funnel.cohorts.each do |cohort| %>
+              <tr>
+                <th scope="row" class="py-2 pr-3 font-normal text-ink"><%= t(".week", date: l(cohort.week_on, format: "%-d %b")) %></th>
+                <td class="px-3 py-2 text-right font-display text-ink tabular-nums align-top"><%= cohort.signed_up %></td>
+                <% cohort.retention.each_value do |retention| %>
+                  <td class="px-3 py-2 text-right align-top">
+                    <span class="font-display text-ink tabular-nums"><%= percent.call(retention.rate) %></span>
+                    <% if retention.eligible.positive? %>
+                      <span class="block text-xs text-mute tabular-nums"><%= t(".ratio", retained: retention.retained, eligible: retention.eligible) %></span>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+    <p class="mt-3 text-xs text-mute"><%= t(".retention_note") %></p>
+  <% end %>
+
+  <div class="grid gap-5 lg:grid-cols-2">
+    <%= ui_card title: t(".referral_title"), id: "growth_funnel_referral" do %>
+      <p class="text-sm text-mute">
+        <%= t(".referral_text") %>
+        <%= link_to t(".referral_link"), "#growth_k", class: "font-medium text-brand-strong underline-offset-4 hover:underline" %>
+      </p>
+    <% end %>
+
+    <%= ui_card title: t(".revenue_title"), id: "growth_funnel_revenue" do %>
+      <dl class="divide-y divide-line text-sm">
+        <% { cards: revenue.activated_cards, amount: t(".amount", value: number_with_delimiter(revenue.amount_xof, delimiter: " ")),
+             subscribed: revenue.subscribed_students }.each do |key, value| %>
+          <div class="flex items-baseline justify-between gap-3 py-2">
+            <dt class="text-mute"><%= t(".revenue.#{key}") %></dt>
+            <dd class="font-display text-ink tabular-nums"><%= value %></dd>
+          </div>
+        <% end %>
+      </dl>
+      <% if revenue.beta_open %>
+        <div class="mt-3"><%= ui_badge t(".beta"), tone: :neutral %></div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= ui_card title: t(".unmeasured_title"), subtitle: t(".unmeasured_subtitle"), id: "growth_funnel_unmeasured" do %>
+    <ul class="list-disc space-y-1 pl-5 text-sm text-mute">
+      <% %i[courses logins screens app_opening answer_time].each do |key| %>
+        <li><%= t(".unmeasured.#{key}") %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

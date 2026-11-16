@@ -11,6 +11,7 @@ class Teams::GrowthTest < ApplicationSystemTestCase
     2.times { create_referral(referrer: aya, referee: create_teacher(school:, created_at: 5.days.ago), created_at: 5.days.ago) }
     6.times { create_referral_share(user: aya, created_at: 8.days.ago) }
     create_join_request(school:)
+    create_student(classroom: create_classroom(school:), created_at: 3.days.ago)
     @member = create_team_member
   end
 
@@ -22,6 +23,7 @@ class Teams::GrowthTest < ApplicationSystemTestCase
     assert_selector "h1", text: I18n.t("#{SCOPE}.title")
     within("#growth_top_referrers") { assert_text "Aya Koné" }
     within("#growth_leaderboard") { assert_text "Lycée Classique d'Abidjan" }
+    within("#growth_funnel") { assert_text I18n.t("teams.growth.funnel.title") }
     growth_shot("1280-page-croissance")
 
     click_on I18n.t("#{SCOPE}.period", count: 7)
@@ -34,6 +36,7 @@ class Teams::GrowthTest < ApplicationSystemTestCase
       visit teams_growth_path
 
       assert_selector "#growth_k"
+      assert_selector "#growth_funnel_steps table" # entonnoir-aarrr : le tableau défile dans sa carte, jamais la page
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
       growth_shot("390-page-croissance", desktop: false)

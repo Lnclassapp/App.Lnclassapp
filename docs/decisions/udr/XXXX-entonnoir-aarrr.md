@@ -31,7 +31,7 @@ L'équipe voit sur « Croissance » le parrainage des enseignants, mais rien du 
 
 **Structure** (dans `app/views/teams/growth/show.html.erb`, après `<nav id="growth_periods">` et **avant** la grille existante ; rendu par le partial `app/views/teams/growth/_funnel.html.erb`, locals `funnel:` = `Queries::Identity::StudentFunnelQuery::Report`)
 
-1. `<section id="growth_funnel" aria-labelledby="growth_funnel_title" class="mb-5 grid gap-5">`, titre `h2#growth_funnel_title` (`font-display text-xl font-medium text-ink`) « Élèves : entonnoir AARRR », sous-titre `text-sm text-mute` rappelant « inscrits sur la période, suivis jusqu'à aujourd'hui ».
+1. `<section id="growth_funnel" aria-labelledby="growth_funnel_title" class="mb-5 space-y-5">` (une pile, pas une grille : un élément de grille garde sa largeur minimale et le tableau ferait déborder la page à 390 px), titre `h2#growth_funnel_title` (`font-display text-xl font-medium text-ink`) « Élèves : entonnoir AARRR », sous-titre `text-sm text-mute` rappelant « inscrits sur la période, suivis jusqu'à aujourd'hui ».
 2. Carte `ui_card id: "growth_funnel_steps"`, titre « Acquisition et activation ». Contenu : un `<table>` dans `<div class="overflow-x-auto">` :
    - en-têtes de colonnes (`<th scope="col">`) : Étage · Total · Seul · Par sa classe · Sans classe (cette dernière colonne seulement si au moins un élève sans classe) ;
    - lignes (`<th scope="row">`) : « Inscrits » (étiquette `A · Acquisition`), « Ont ouvert une notion », « Ont commencé un exercice », « Ont réussi un exercice » (étiquette `A · Activation`, ligne en `font-medium`), « En ont réussi 2 », « En ont réussi 5 » ;

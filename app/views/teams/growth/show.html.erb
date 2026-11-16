@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/growth/show — « Croissance » : k enseignant (i × c) face à sa cible, indicateurs, parrains, classement, attente %>
 <%# Rôle : lecture seule (Queries::Identity::GrowthMetricsQuery::Row) ; période 7 / 30 / 90 jours ; équipe seulement %>
-<%# ADR  : 0049, 0063 · UDR : 0006, 0050, 0054 (retour « Accueil », infobulles des indicateurs) %>
+<%# ADR  : 0049, 0063 · UDR : 0006, 0050, 0054 (retour « Accueil », infobulles), entonnoir-aarrr (section des élèves) %>
 <% page_title t(".page_title") %>
 <% viral = @metrics.viral %>
 <% dash = "—" %>
@@ -18,6 +18,8 @@
                                    current ? "bg-ink text-white" : "border border-line bg-white text-ink hover:bg-mist") %>
   <% end %>
 </nav>
+
+<%= render "funnel", funnel: @funnel %>
 
 <div class="grid gap-5">
   <section id="growth_k" aria-labelledby="growth_k_title">

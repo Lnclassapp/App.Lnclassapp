@@ -25,7 +25,8 @@
 
 ## Ce qui a dérapé
 
-- …
+- La section posée en `grid` faisait déborder la page à 390 px (largeur minimale auto d'un élément de grille + tableau `min-w`) : vu par le test système existant de la page, corrigé en pile `space-y-5`.
+- Environnement cloud : Ruby 3.4.9 absent (compilé), chromedriver 147 du `PATH` incompatible avec Chrome 153 (retiré du `PATH`), locale US-ASCII qui casse `script/docs/build_index` (`LANG=C.UTF-8`).
 
 ## Ce qu'on a appris sur la codebase
 
