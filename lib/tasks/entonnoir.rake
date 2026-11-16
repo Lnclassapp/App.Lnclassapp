@@ -8,6 +8,8 @@ namespace :entonnoir do
     now = Time.current
     rows = Orm::User.transaction do
       Orm::User.connection.execute("SET TRANSACTION READ ONLY")
+      # Borne la charge sur la base de production : au-delà, la lecture s'arrête au lieu d'occuper une connexion.
+      Orm::User.connection.execute("SET LOCAL statement_timeout = '60s'")
       query.new.weekly(from: Time.zone.at(0), to: now, now:)
     end
 
