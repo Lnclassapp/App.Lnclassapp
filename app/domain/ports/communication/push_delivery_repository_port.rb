@@ -4,11 +4,14 @@
 module Ports
   module Communication
     module PushDeliveryRepositoryPort
-      # Un envoi est unique par élève, motif et clé d'objet. → true si enregistré, false si déjà connu
+      # Un envoi est unique par élève, motif et clé d'objet : l'écriture est un upsert. Un statut provisoire (`disabled`,
+      # `not_configured`, `retry`) est remplacé par le nouveau ; un statut définitif (`delivered`, `gone`, `failed`) ne bouge plus.
+      # → true si enregistré, false si déjà connu (statut définitif)
       def record(user_id:, motive:, object_key:, status:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #record"
       end
 
+      # true pour un statut définitif seulement : un motif noté `disabled` ou `not_configured` n'est pas « brûlé » (mise en service progressive)
       def sent?(user_id:, motive:, object_key:)
         raise NotImplementedError, "#{self.class} doit implémenter #sent?"
       end
@@ -19,7 +22,7 @@ module Ports
       end
 
       # → nombre supprimé
-      def purge_before(time)
+      def purge_before(before:)
         raise NotImplementedError, "#{self.class} doit implémenter #purge_before"
       end
     end

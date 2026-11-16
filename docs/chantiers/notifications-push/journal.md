@@ -32,6 +32,11 @@
 - [ ] 2026-11-16 · notifications-push · Lot A : « Couper » supprime l'abonnement de la session courante et pose l'interrupteur ; les abonnements des autres navigateurs restent en base mais ne reçoivent rien (Lot B lit `turned_off?`) et redeviennent actifs à « Réactiver » — appliqué ; autre : tout supprimer (`delete_for_user`) ; recommandé : appliqué.
 - [ ] 2026-11-16 · notifications-push · Lot A : ajout additif d'un use case `UnregisterPushSubscription` (contrôle de propriété de `DELETE /push_subscriptions/:id`, absent de la fiche) ; l'adresse d'abonnement est validée (https, nom de domaine, pas d'IP ni de `localhost`, 2 048 caractères) car le Lot B l'appellera depuis le serveur — appliqué ; recommandé : appliqué.
 - [ ] 2026-11-16 · notifications-push · Lot A : l'UDR §3.1/§3.2 est corrigée (clés `communication.push.messages`, `intent=` au lieu de `postpone: 1`, `text-error`/`shadow-card` : les tokens `text-danger`/`shadow-lift` n'existent pas ou sont des états de survol) ; la ligne du profil n'a pas de session côté serveur : « sur un autre appareil » et « bloquées » sont dites par le navigateur ; la ligne exige `VAPID_PUBLIC_KEY`, comme la carte — appliqué.
+- [ ] 2026-11-16 · notifications-push · Lot B : `PushDeliveryRepositoryPort#purge_before(time)` devient `purge_before(before:)` (changement additif : `PortsShapeTest` refusait l'argument positionnel) ; le port documente aussi l'upsert de `record` et le sens de `sent?` — appliqué.
+- [ ] 2026-11-16 · notifications-push · Lot B : `test/architecture/use_case_policies_test.rb` (exemptions des use cases sans acteur) et `test/integration/pwa_test.rb` (qui interdisait tout écouteur `push`) ne sont pas dans la fiche : exemptions ajoutées pour `DeliverPushNotifications` et `PurgePushData`, le test PWA n'interdit plus que `sync` et exige `push` et `notificationclick` — appliqué ; recommandé : appliqué.
+- [ ] 2026-11-16 · notifications-push · Lot B : la gem `web-push` 3.1 n'écrit pas l'en-tête `Topic` : une sous-classe de `WebPush::Request` l'ajoute (topic = motif) ; 401/403/400/413 et toute réponse ou erreur inattendue sont traitées comme `:retry` (jamais `:gone` : un souci de clés VAPID ne doit pas supprimer les abonnements, et trois échecs mettent l'envoi en `failed`) — appliqué ; autre : `:not_configured` pour 401/403 ; recommandé : appliqué.
+- [ ] 2026-11-16 · notifications-push · Lot B : le motif « inactif » n'est candidat que le jour même du palier (3, 7, 14 jours de différence de date d'Abidjan, `valid_until` = fin de ce jour) ; un jour sauté (fenêtre fermée par une coupure de la tâche) perd la relance du palier — appliqué ; autre : candidat dès le palier jusqu'au suivant ; recommandé : appliqué (les fenêtres couvrent chaque jour, la tâche passe toutes les 15 minutes).
+- [ ] 2026-11-16 · notifications-push · Lot B : statut noté pour plusieurs navigateurs = le plus significatif (delivered > retry > failed > not_configured > gone) ; un navigateur en `retry` quand un autre a reçu n'est pas retenté — appliqué.
 
 ## Retouches
 
@@ -46,6 +51,7 @@
 
 ## Ce qu'on a appris sur la codebase
 
+- Dans un job, le cache de requêtes d'ActiveRecord est actif : une écriture faite par `select_value` (INSERT … RETURNING) ne l'invalide pas ; `PushDeliveryRepository#record` le vide à la main.
 - Aucun bus d'événements : l'attribution d'une médaille n'est connue que du contrôleur (`earned_now`).
 - L'activation (première réussite) n'est stockée nulle part : elle se lit dans `exercise_sessions` (10/20 arrondi).
 - `classroom_session_days` n'a pas d'heure : aucune notion d'heures de classe en base.

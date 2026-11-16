@@ -12,6 +12,8 @@ class UseCasePoliciesTest < ActiveSupport::TestCase
     "UseCases::Identity::ResetPinWithCode" => "PIN oublié : la personne n'est pas connectée",
     "UseCases::Identity::AcceptInvitation" => "invitation : le compte n'existe pas encore",
     "UseCases::Communication::PublishScheduledMessages" => "job sans acteur : droit vérifié à la programmation, exposition bornée par la date de fin, retrait possible (ADR-0078 §6)",
+    "UseCases::Communication::DeliverPushNotifications" => "job sans acteur : lit les motifs prêts, droit porté par la coupure de l'élève (notifications-push)",
+    "UseCases::Communication::PurgePushData" => "job sans acteur : purge de données périmées (notifications-push)",
     "UseCases::School::GrantSecondCycle" => "réparation unique lancée en console (schools:grant_second_cycle), sans acteur ; n'ajoute que les classes du second cycle (import-second-cycle-force)"
   }.freeze
   # Modules shared by use cases, not use cases: the adapter contract of the import engine, the session renewal of the
