@@ -29,7 +29,7 @@ Les lots B sont **conditionnels et exclusifs**. Ils ne partent pas en parallèle
                      `test/domain/entities/classroom/adoption_verdict_test.rb`
                      `test/infrastructure/queries/classroom/class_adoption_query_test.rb`
                      `test/tasks/entonnoir_classes_task_test.rb`
-                     `docs/decisions/adr/XXXX-adoption-par-les-classes-lue-sur-les-tables.md` *(statut Proposé → Accepté)*
+                     `docs/decisions/adr/0138-adoption-par-les-classes-lue-sur-les-tables.md` *(statut Proposé → Accepté)*
                      `docs/chantiers/acquisition-classes/journal.md`
 - **Dépend de**    : fusion du train #653 vers `Staging` (rien n'entre dans `Develop` avant)
 - **Test associé** : les 9 scénarios du PRD §6, plus un test par branche de la règle de verdict (§3.2). Couverture 100 % lignes et branches (ADR-0024).

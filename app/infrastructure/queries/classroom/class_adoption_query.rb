@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassAdoptionQuery
 # Rôle : entonnoir enseignant E1 à E6, indice classes vides, élèves avec ou sans enseignant et écoles du CRM, en lecture seule (comptes uniquement)
-# ADR  : XXXX (adoption par les classes lue sur les tables), 0024, 0041
+# ADR  : 0138, 0024, 0041
 module Queries
   module Classroom
     class ClassAdoptionQuery

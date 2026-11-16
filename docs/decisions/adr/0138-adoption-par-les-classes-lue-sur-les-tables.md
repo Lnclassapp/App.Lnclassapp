@@ -1,4 +1,4 @@
-# ADR-XXXX : L'adoption par les classes se lit en direct sur les tables existantes
+# ADR-0138 : L'adoption par les classes se lit en direct sur les tables existantes
 <!-- index
 titre: Adoption par les classes, lue sur les tables
 statut: Accepté

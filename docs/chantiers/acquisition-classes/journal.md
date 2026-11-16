@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-16 | Mesurer avant d'agir : le lot A seul, puis un unique lot B désigné par la mesure | Sept élèves excluent qu'une classe ait adopté l'app, mais ne départagent pas les goulots 1, 2, 3 et 4, dont les remèdes n'ont rien en commun | ADR-XXXX-adoption-par-les-classes-lue-sur-les-tables |
+| 2026-11-16 | Mesurer avant d'agir : le lot A seul, puis un unique lot B désigné par la mesure | Sept élèves excluent qu'une classe ait adopté l'app, mais ne départagent pas les goulots 1, 2, 3 et 4, dont les remèdes n'ont rien en commun | ADR-0138 |
 | 2026-11-16 | Pas de Lot 0 | Aucun contrat partagé, aucune route, aucune locale, aucune migration | Non |
 | 2026-11-16 | Pas d'UDR ni d'ADR pour les lots B avant le verdict | Écrire quatre interfaces dont trois ne seront pas construites | Non |
 | 2026-11-16 | Lot A : la médiane d'élèves (règle §3.2, étape 5) porte sur les classes ouvertes **cochées** par un enseignant non anonymisé et comptant au moins 1 élève ; le PRD disait seulement « classe peuplée » | La règle juge l'adoption par les enseignants, pas les classes que l'équipe a ouvertes sans eux | Non |

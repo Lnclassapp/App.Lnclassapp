@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Classroom::AdoptionVerdict
 # Rôle : désigne le goulot d'acquisition des classes (enseignants, établissements, classes cochées, élèves) à partir des compteurs de l'entonnoir
-# ADR  : XXXX (adoption par les classes lue sur les tables), 0024
+# ADR  : 0138, 0024
 module Entities
   module Classroom
     module AdoptionVerdict

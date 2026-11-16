@@ -159,7 +159,7 @@ La requête vit dans `classroom` parce que la règle porte sur la classe. Elle l
 
 ## 8. Décisions rattachées
 
-- **ADR-XXXX-adoption-par-les-classes-lue-sur-les-tables** (projet) : la « classe adoptée » et l'entonnoir enseignant sont des définitions métier fixes, lues en direct sans table ni traceur. C'est la suite d'ADR-0049 et ADR-0062. Les lots d'action et une future section de la page Croissance devront les réutiliser telles quelles.
+- **ADR-0138** (projet) : la « classe adoptée » et l'entonnoir enseignant sont des définitions métier fixes, lues en direct sans table ni traceur. C'est la suite d'ADR-0049 et ADR-0062. Les lots d'action et une future section de la page Croissance devront les réutiliser telles quelles.
 - **Aucune UDR pour le lot A** : aucune vue ne change.
 - Les lots d'action B1 à B4 (plan) ouvrent chacun **leur** UDR, et leur ADR s'il touche aux droits, **au moment où l'un d'eux est retenu**. Les écrire maintenant, ce serait décider de quatre interfaces dont trois ne seront pas construites.
 
