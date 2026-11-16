@@ -833,4 +833,22 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal "", css_select("turbo-frame#student_home_recent_activity").text.strip
   end
+
+  test "activation: « Voir plus (n) » counts the completed copies Mon historique lists, not the copies in progress" do
+    complete(create_exercise(essential: @essential), score: 80).update!(completed_at: 1.hour.ago)
+    2.times { create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), started_at: 10.minutes.ago) }
+    complete(create_exercise(essential: @essential), score: 80).update!(completed_at: 2.hours.ago)
+    sign_in_as @student
+
+    history
+
+    assert_select "turbo-frame#student_home_recent_activity li", 3
+    assert_select "a#student_history_more", text: "Voir plus (1)"
+
+    # Au-delà des 3 lignes, une copie en cours seulement : pas de « Voir plus ».
+    Orm::ExerciseSession.where(status: "completed", student: @student).order(:completed_at).first.update_columns(status: "abandoned", score_percent: nil, completed_at: nil)
+    create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), started_at: 3.hours.ago)
+    history
+    assert_select "a#student_history_more", 0
+  end
 end

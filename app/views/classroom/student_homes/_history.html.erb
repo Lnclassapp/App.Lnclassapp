@@ -53,8 +53,10 @@
         </ul>
       </section>
     <% end %>
-    <% if sessions.size > shown %>
-      <%= link_to t("classroom.student_homes.history.more", count: sessions.size - shown), student_archive_path, id: "student_history_more",
+    <%# « Voir plus (n) » compte ce que Mon historique montre : les copies terminées au-delà des lignes affichées. %>
+    <% more = sessions.drop(shown).count { it.status == "completed" } %>
+    <% if more.positive? %>
+      <%= link_to t("classroom.student_homes.history.more", count: more), student_archive_path, id: "student_history_more",
                   class: "-mx-4 flex min-h-tap items-center justify-center text-base font-semibold text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" %>
     <% end %>
     </div>

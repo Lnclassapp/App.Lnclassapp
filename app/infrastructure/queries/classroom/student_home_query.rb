@@ -36,8 +36,10 @@ module Queries
       RECENT_SESSIONS = 10
       # La dernière activité d'une copie : sa fin, ou son début si elle est en cours.
       LAST_ACTIVITY = Arel.sql("COALESCE(exercise_sessions.completed_at, exercise_sessions.started_at)")
-      # Une copie terminée reste dans l'historique ; une copie en cours n'y est que si son exercice se reprend (publié, non archivé).
-      RESUMABLE = Arel.sql("exercise_sessions.status = 'completed' OR (exercises.status = 'published' AND exercises.archived_at IS NULL)")
+      # Une copie terminée reste dans l'historique ; une copie en cours n'y est que si son exercice se reprend (exercice publié,
+      # non archivé, dans une leçon publiée : la règle d'ActivationQuery#resume).
+      RESUMABLE = Arel.sql("exercise_sessions.status = 'completed' OR (exercises.status = 'published' AND exercises.archived_at IS NULL " \
+                           "AND courses.status = 'published')")
       # Un retrait est récent pendant 7 jours, la durée de la marque « Nouveau » (ADR-0085 §4.4) : un calcul de lecture,
       # sans colonne. Au-delà, l'accueil propose de choisir une classe sans revenir sur le départ.
       RECENT_REMOVAL = 7.days

@@ -258,6 +258,17 @@ module Queries
         assert_equal [ done.public_id ], StudentHomeQuery.new.recent_sessions(student_id: @student.id).map(&:public_id)
       end
 
+      test "a copy in progress of an archived exercise or of an unpublished lesson is not offered again" do
+        archived = create_exercise(essential: @essential, title: "Archivé")
+        create_exercise_session(student: @student, exercise: archived)
+        archived.update_columns(archived_at: Time.current)
+        hidden = create_course(material: @svt, level: @classroom.level)
+        create_exercise_session(student: @student, exercise: create_exercise(course: hidden, title: "Leçon retirée"))
+        hidden.update_columns(status: "draft")
+
+        assert_empty StudentHomeQuery.new.recent_sessions(student_id: @student.id)
+      end
+
       # Chantier accueil-eleve, PRD §7 : la page ne lit plus l'activité, que le cadre différé demande à part.
       test "the home no longer reads the recent sessions" do
         create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), status: "completed",
