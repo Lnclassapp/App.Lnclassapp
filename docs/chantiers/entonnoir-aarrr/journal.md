@@ -19,6 +19,10 @@
 - [ ] 2026-11-16 · entonnoir-aarrr · **Décision non réversible (données)** : faut-il une table d'événements pour mesurer connexions, visites d'écran, temps passé, première ouverture de l'app, cours commencé/terminé ? — appliqué : rien, version sans table livrée, ces mesures sont listées « Non mesuré » à l'écran ; autres : une table `student_events` ajout seul (amende ADR-0049/0062, impose une durée de conservation et une base légale pour des mineurs) ; ne garder que l'historique des connexions réussies (`login_attempts` en a déjà les succès) ; recommandé : attendre la sortie de `entonnoir:brut` en production — si l'acquisition est le problème, aucune table n'est utile
 - [ ] 2026-11-16 · entonnoir-aarrr · Un élève anonymisé sort-il de l'entonnoir ? — appliqué : oui (compte actif = non anonymisé, ADR-0062) ; autres : le garder dans « Inscrits » seulement ; recommandé : oui
 
+## Suivi après fusion
+
+- L'orchestrateur lance `bin/rails entonnoir:brut` en production ; la sortie dit si le problème est l'acquisition ou l'activation, et tranche le point « table d'événements » ci-dessus.
+
 ## Retouches
 
 - …
@@ -50,7 +54,7 @@
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
+| **Livré le** | 2026-11-16 (PR prête, fusion par l'orchestrateur) |
+| **PR** | [#650](https://github.com/Lnclassapp/App.Lnclassapp/pull/650) |
 | **ADR produits** | aucun |
 | **UDR produits** | UDR-XXXX-entonnoir-aarrr |

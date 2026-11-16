@@ -1,29 +1,20 @@
-# État — <slug>
+# État — entonnoir-aarrr
 
-> Tenu par l'orchestrateur ([`docs/workflows/orchestrateur.md`](../../workflows/orchestrateur.md)). Mis à jour une fois, en fin de session ; toute session d'orchestration commence par le lire. Ni secret, ni identifiant.
+> Ni secret, ni identifiant.
 
-**Mis à jour le** : AAAA-MM-JJ · **Vague** : … · **Où on en est** : …
+**Mis à jour le** : 2026-11-16 · **Vague** : unique · **Où on en est** : PR #650 prête vers `Develop`, lots 1 et 2 livrés, revues faites.
 
 ## Lots
 
 | Lot | Session | Branche | PR | SHA de tête vérifié | État |
 |---|---|---|---|---|---|
-| … | | | | | à lancer · en cours · PR prête · fusionné |
+| 1 — StudentFunnelQuery + `entonnoir:brut` | session du chantier | `feature/entonnoir-aarrr` | #650 | voir la ligne de preuve de la PR | PR prête |
+| 2 — section de la page Croissance | session du chantier | `feature/entonnoir-aarrr` | #650 | idem | PR prête |
 
 ## Décisions
 
-Prises :
-
-- AAAA-MM-JJ · … — par …
-
-Ouvertes : `script/docs/a_trancher`, et les sections `## À trancher` des journaux des chantiers de la vague.
+Ouvertes : `journal.md` § À trancher (4 entrées, dont la table d'événements, non réversible).
 
 ## Prochaine action
 
-…
-
-## Prompt de reprise
-
-```
-Orchestrateur de <slug>. Lis docs/chantiers/<slug>/etat.md, vérifie sur GitHub les PR qu'il cite, puis : …
-```
+Fusionner #650, puis lancer `bin/rails entonnoir:brut` en production et lire si le décrochage est à l'acquisition ou à l'activation.
