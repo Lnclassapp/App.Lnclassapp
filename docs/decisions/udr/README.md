@@ -182,6 +182,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0171](./0171-bleu-unique-de-marque.md) | Bleu unique de marque #0861E1 | Accepté | 2026-11-13 | — | Le logo, les boutons et le bandeau portaient trois bleus différents (#00a0ff, #0070b3, #1e6bae) ; le bleu roi #0861E1 devient le seul, en clair comme en sombre, texte blanc sur fond bleu |
 | [0172](./0172-supprimer-une-lecon-depuis-sa-fiche.md) | Supprimer une leçon depuis sa page | Accepté | 2026-11-14 | XXXX-suppression-d-une-lecon-sans-activite-eleve | l'équipe doit pouvoir supprimer une leçon sans activité d'élève, sans risque de clic malheureux, et savoir quoi faire quand c'est refusé. |
 | [0173](./0173-ecrans-minimalistes-style-wave.md) | Écrans minimalistes, style Wave | Accepté | 2026-11-14 | — | L'accueil, la vue d'une matière et la page d'une leçon empilaient cartes, raccourcis en double et sections vides ; l'élève doit voir une seule chose de valeur par écran, comme dans l'app Wave. |
+| [0174](./0174-activation-premier-exercice.md) | Carte « Ton premier exercice » et historique de reprise | Accepté | 2026-11-16 | — | l'élève qui vient de s'inscrire n'a aucun exercice sous les yeux, et celui qui revient ne retrouve pas ce qu'il a commencé |
 <!-- index:end -->
 
 ---

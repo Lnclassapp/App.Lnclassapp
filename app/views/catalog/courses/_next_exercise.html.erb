@@ -1,14 +1,20 @@
 <%# 🌐 UI · catalog/courses/_next_exercise — la carte « Prochain exercice » de la vue d'une matière et de la page d'une leçon %>
-<%# Rôle : le titre de l'exercice et un bouton qui ouvre sa feuille (commencer, ou reprendre à la question N) ; rien sans exercice à proposer %>
-<%# ADR  : 0035 · UDR : 0144 parcours matière → exercice §3 · locals: (next_exercise:, scope:, id:) — scope vaut :material ou :lesson %>
+<%# Rôle : le titre de l'exercice et un bouton qui ouvre sa feuille (commencer, ou reprendre à la question N) ; rien sans exercice à proposer ; sur l'accueil, « Ton premier exercice » %>
+<%# ADR  : 0035 · UDR : 0144 parcours matière → exercice §3, 0174 activation-premier-exercice §3 · locals: (next_exercise:, scope:, id:) — scope vaut :material, :lesson ou :home (ActivationQuery::Row) %>
 <% if next_exercise %>
   <% resume = next_exercise.kind == :resume %>
-  <section id="<%= id %>" aria-labelledby="<%= id %>_title" data-turbo-prefetch="false" class="mb-6">
+  <% home = scope == :home %>
+  <section id="<%= id %>" aria-labelledby="<%= id %>_title" data-turbo-prefetch="false" class="<%= class_names("mb-6" => !home) %>">
     <%= ui_card padding: :md do %>
-      <p class="text-xs font-medium tracking-wide text-mute uppercase"><%= t("catalog.courses.next_exercise.label") %></p>
+      <p class="text-xs font-medium tracking-wide text-mute uppercase"><%= t(home ? "catalog.courses.next_exercise.first" : "catalog.courses.next_exercise.label") %></p>
       <h2 id="<%= id %>_title" class="mt-1 line-clamp-2 font-display text-base font-medium"><%= next_exercise.title %></h2>
       <% if scope == :material %>
         <p class="mt-1 text-sm text-mute"><%= next_exercise.lesson_name %></p>
+      <% elsif home %>
+        <%# « Maths · Les angles », ou « Maths · Donné par ta classe » pour un devoir. %>
+        <p class="mt-1 text-sm text-mute">
+          <%= [ next_exercise.material_name, next_exercise.assigned ? t("catalog.courses.next_exercise.assigned") : next_exercise.lesson_name ].join(" · ") %>
+        </p>
       <% end %>
       <%= render "classroom/student_homes/next_step/start",
                  public_id: next_exercise.exercise_public_id, session_id: next_exercise.session_public_id,
