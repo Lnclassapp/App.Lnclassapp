@@ -46,6 +46,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   test "CA-D1: the band, the class card, the grid, the announcements, « À faire », the history frame, the invitation in this order; no bottom bar, no « Paiement »" do
     assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
     create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
+    # Activation-eleve : un élève activé (une copie réussie) n'a plus la carte de son premier exercice.
+    complete(create_exercise(essential: @essential), score: 80)
     sign_in_as @student
 
     get student_home_path
@@ -310,7 +312,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "the history shows a medal per line, never a grade or red; under Argent, « Refaire » starts the exercise again" do
+  # Activation-eleve, CA-12 : « Refaire » sur toute copie terminée, plus seulement sous l'Argent (hors pause, ADR-0115).
+  test "the history shows a medal per line, never a grade or red; « Refaire » starts the exercise again, whatever the medal" do
     exercise = create_exercise(essential: @essential, title: "Méiose")
     # Les trois dernières copies ne tiennent pas dans 30 minutes : pas de pause, le bouton reste.
     [ 70, 65, 20, 68 ].zip([ 1, 2, 40, 50 ]).each { |score, minutes| complete(exercise, score:).update!(completed_at: minutes.minutes.ago) }
@@ -323,7 +326,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#student_home_recent_activity", text: %r{\d+\s*/\s*20|%}, count: 0
     assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=bg-warning]", 0
     assert_select "turbo-frame#student_home_recent_activity form[action=?] button.ui-button-secondary", exercise_sessions_path(exercise.public_id),
-                  text: tl("history.redo"), count: 2
+                  text: tl("history.redo"), count: 3
   end
 
   # ADR médailles lues à la clôture : une copie vide n'a pas de médaille ; l'historique le dit, « Pas encore », comme le résultat.
@@ -704,5 +707,148 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal one, count_queries { get student_home_path }
     assert_equal 5, announcement_titles.size
+  end
+
+  # Chantier activation-eleve (UDR-0174) : tant qu'aucun exercice n'est réussi, son premier exercice.
+  FIRST = "section#student_first_exercise".freeze
+
+  def tc(key, **) = I18n.t("catalog.courses.next_exercise.#{key}", **)
+
+  test "activation CA-8: not activated, « Ton premier exercice » follows the class card, before the grid; one tap starts it" do
+    exercise = create_exercise(essential: @essential, title: "Les étapes de la méiose")
+    sign_in_as @student
+
+    get student_home_path
+
+    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_class_card student_first_exercise student_subjects]
+    assert_equal %w[student_class_card student_first_exercise student_subjects], ids
+    assert_select FIRST, 1 do
+      assert_select "p", text: tc("first")
+      assert_select "h2#student_first_exercise_title", text: "Les étapes de la méiose"
+      assert_select "p", text: "SVT · Génétique"
+      assert_select "form[action=?][method=post] button[aria-label=?]", exercise_sessions_path(exercise.public_id),
+                    tc("start_aria", title: "Les étapes de la méiose"), text: including(tc("start"))
+    end
+  end
+
+  test "activation CA-2: a copy in progress is resumed from the card, at the next question" do
+    exercise = create_exercise(essential: @essential, title: "Les étapes de la méiose", questions: 3)
+    copy = create_exercise_session(student: @student, exercise:, answered_count: 1)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#{FIRST} a[href=?]", exercise_session_path(copy.public_id), text: including(tc("resume", number: 2))
+  end
+
+  test "activation CA-9: brought by the class code, the card is the assignment, given by the class; « À faire » is gone when it was the only one" do
+    brought = create_student(classroom: @classroom, joined_via: "code")
+    @student = brought
+    assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
+    sign_in_as brought
+
+    get student_home_path
+
+    assert_select "#{FIRST} h2", text: "Méiose, les étapes"
+    assert_select "#{FIRST} p", text: "SVT · #{tc('assigned')}"
+    assert_select "#student_to_do", 0
+  end
+
+  test "activation CA-9: the card's exercise leaves « À faire », the others stay" do
+    assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
+    assign_exercise("Mitose", due_on: Date.current + 3)
+    sign_in_as @student
+
+    get student_home_path
+
+    card = css_select("#{FIRST} h2").first.text.strip
+    rows = css_select("#student_to_do li").map(&:text).join
+    assert_not_includes rows, card
+    assert_select "#student_to_do", 1
+  end
+
+  test "activation CA-5: a copy completed at 10/20 or more: no card any more; nothing to propose: no card either" do
+    complete(create_exercise(essential: @essential), score: 50)
+    create_exercise(essential: @essential)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select FIRST, 0
+    assert_select "section#student_class_card", 1
+
+    other = create_student(classroom: create_classroom(level: create_level))
+    sign_in_as other
+    get student_home_path
+    assert_select FIRST, 0
+  end
+
+  # Activation-eleve (UDR-0174 §3) : l'historique, porte du retour.
+  def history = get(student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" })
+
+  test "activation CA-11: an activated student finds his copy in progress in the history; the whole line resumes it" do
+    complete(create_exercise(essential: @essential), score: 80)
+    exercise = create_exercise(essential: @essential, title: "Mitose", questions: 5)
+    copy = create_exercise_session(student: @student, exercise:, answered_count: 2)
+    sign_in_as @student
+
+    history
+
+    assert_select "turbo-frame#student_home_recent_activity li", 2
+    assert_select "a[href=?][aria-label=?]", exercise_session_path(copy.public_id), tl("history.resume_label", title: "Mitose") do
+      assert_select "[data-progress]", text: tl("history.in_progress", answered: 2, total: 5)
+    end
+    assert_select "form[action=?]", exercise_sessions_path(exercise.public_id), 0
+  end
+
+  test "activation CA-12: a copy completed at 16/20, out of the pause, can be done again" do
+    exercise = create_exercise(essential: @essential, title: "Méiose")
+    complete(exercise, score: 80)
+    sign_in_as @student
+
+    history
+
+    assert_select "form[action=?] button[aria-label=?]", exercise_sessions_path(exercise.public_id), tl("history.redo_label", title: "Méiose"),
+                  text: tl("history.redo")
+  end
+
+  test "activation CA-13: not activated, the copy in progress is on the card, not in the history" do
+    copy = create_exercise_session(student: @student, exercise: create_exercise(essential: @essential, title: "Mitose"), answered_count: 1)
+    complete(create_exercise(essential: @essential, title: "Méiose"), score: 20)
+    sign_in_as @student
+
+    get student_home_path
+    assert_select "#student_first_exercise a[href=?]", exercise_session_path(copy.public_id)
+
+    history
+    assert_select "a[href=?]", exercise_session_path(copy.public_id), 0
+    assert_select "turbo-frame#student_home_recent_activity li", 1
+  end
+
+  test "activation CA-14: neither completed nor in progress (an abandoned copy only): no history" do
+    create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), status: "abandoned")
+    sign_in_as @student
+
+    history
+
+    assert_equal "", css_select("turbo-frame#student_home_recent_activity").text.strip
+  end
+
+  test "activation: « Voir plus (n) » counts the completed copies Mon historique lists, not the copies in progress" do
+    complete(create_exercise(essential: @essential), score: 80).update!(completed_at: 1.hour.ago)
+    2.times { create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), started_at: 10.minutes.ago) }
+    complete(create_exercise(essential: @essential), score: 80).update!(completed_at: 2.hours.ago)
+    sign_in_as @student
+
+    history
+
+    assert_select "turbo-frame#student_home_recent_activity li", 3
+    assert_select "a#student_history_more", text: "Voir plus (1)"
+
+    # Au-delà des 3 lignes, une copie en cours seulement : pas de « Voir plus ».
+    Orm::ExerciseSession.where(status: "completed", student: @student).order(:completed_at).first.update_columns(status: "abandoned", score_percent: nil, completed_at: nil)
+    create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), started_at: 3.hours.ago)
+    history
+    assert_select "a#student_history_more", 0
   end
 end

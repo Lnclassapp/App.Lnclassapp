@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/material — la vue d'une matière de l'élève, style Wave : flèche retour, nom de la matière, recherche, leçons en grille de tuiles %>
 <%# Rôle : écran intérieur (content_for :inner : ni barre ni menu) ; recherche en champ gris plein, cherchée pendant la frappe (frame « courses ») ; groupe « Progression DPFC 2026-2027 » en carte blanche, 4 colonnes ; plus de pastilles de matières ni de « Prochain exercice » %>
-<%# ADR  : 0028, 0035, 0076, 0090 · UDR : XXXX écrans minimalistes style Wave §3 (matière), 0085 §3.1, 0013 (amendement du 2026-10-05), 0133 écrans élève sans répétition §3.6 (« Progression DPFC » une fois) · par pages de 24 %>
+<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0173 §3 (matière), 0085 §3.1, 0013 (amendement du 2026-10-05), 0133 écrans élève sans répétition §3.6 (« Progression DPFC » une fois) · par pages de 24 %>
 <% material = student_material %>
 <% page_title(material.name) %>
 <% content_for :inner, "1" %>

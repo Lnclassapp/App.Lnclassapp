@@ -87,9 +87,9 @@ Autorité : l'UDR « écrans minimalistes, style Wave » du dépôt (`docs/decis
 - **Établissement : nom complet s'il tient sur la ligne, sinon le sigle.** Le sigle officiel vient de la base de données (jamais calculé automatiquement). Le nom complet reste dans l'`aria-label` et le `title`.
 - Droite : aide (icône seule, 44 px, `aria-label`) + avatar 44 px (initiales, dégradé or). Pas de point « en ligne » sur son propre avatar.
 
-## 8. Carte « Prochain exercice » (retirée des écrans)
+## 8. Carte « Prochain exercice » (seulement « Ton premier exercice », pendant l'activation)
 
-Plus affichée sur aucun écran élève (UDR style Wave). Le code reste dans le dépôt pour le guidage d'activation après l'inscription ; ne la redessine pas sur l'accueil, la matière ou la leçon.
+Retirée de la matière et de la leçon (UDR style Wave). Sur l'accueil, elle n'apparaît que sous le libellé **« Ton premier exercice »**, sous la carte de la classe et avant « Mes matières », **tant que l'élève n'a réussi aucun exercice** (une copie à 10/20 arrondi) ; elle disparaît dès la première réussite (UDR activation-premier-exercice, chantier `activation-eleve`). Ne la redessine nulle part ailleurs sans nouvelle décision.
 
 ## 9. Grille des matières (4 × 2)
 

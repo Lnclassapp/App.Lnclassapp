@@ -18,13 +18,15 @@ module Queries
       Assigner = Data.define(:gender, :last_name)
       ReviewRow = Data.define(:essential_name, :essential_slug, :course_slug, :material_name, :material_slug, :score_percent)
       # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil ;
-      # question_count : ses questions ; answered_count : celles déjà répondues dans la session commencée (0 sans session), pour « 1/5 » (UDR XXXX) ;
+      # question_count : ses questions ; answered_count : celles déjà répondues dans la session commencée (0 sans session), pour « 1/5 » (UDR-0173) ;
       # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance ; material_slug : la pastille illustrée ; exercise_type : « fixation » ou « evaluation » (carte d'exercice).
       ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :material_slug, :badge_level,
                                 :best_score_percent, :completed_count, :started_session_public_id, :due_on, :exercise_type, :question_count, :answered_count)
-      # medal : la médaille de la session (Grading.session_medal), nil pour une copie vide.
+      # medal : la médaille de la session (Grading.session_medal), nil pour une copie vide ou en cours. Activation-eleve : status
+      # « started » ou « completed » ; last_at : la dernière activité (la fin, ou le début d'une copie en cours) ; answered_count
+      # sur question_count : « 2/5 » d'une copie en cours.
       SessionRow = Data.define(:public_id, :exercise_id, :exercise_public_id, :exercise_title, :material_name, :material_slug, :score_percent,
-                               :completed_at, :medal)
+                               :last_at, :medal, :status, :answered_count, :question_count)
       GapRow = Data.define(:essential_name, :essential_slug, :course_slug)
       SubjectRow = Data.define(:slug, :name)
       # L'élève sans classe active (UDR-0081 §3.5) : la DRENA et l'établissement de sa dernière classe principale, qui
@@ -32,6 +34,12 @@ module Queries
       LastClassroom = Data.define(:drena_public_id, :school_public_id, :recent_removal_at)
 
       RECENT_SESSIONS = 10
+      # La dernière activité d'une copie : sa fin, ou son début si elle est en cours.
+      LAST_ACTIVITY = Arel.sql("COALESCE(exercise_sessions.completed_at, exercise_sessions.started_at)")
+      # Une copie terminée reste dans l'historique ; une copie en cours n'y est que si son exercice se reprend (exercice publié,
+      # non archivé, dans une leçon publiée : la règle d'ActivationQuery#resume).
+      RESUMABLE = Arel.sql("exercise_sessions.status = 'completed' OR (exercises.status = 'published' AND exercises.archived_at IS NULL " \
+                           "AND courses.status = 'published')")
       # Un retrait est récent pendant 7 jours, la durée de la marque « Nouveau » (ADR-0085 §4.4) : un calcul de lecture,
       # sans colonne. Au-delà, l'accueil propose de choisir une classe sans revenir sur le départ.
       RECENT_REMOVAL = 7.days
@@ -84,17 +92,23 @@ module Queries
       # (StudentAudienceQuery). → [SubjectRow], vide s'il n'en a aucun.
       def level_subjects(student_id:) = subjects(student_id)
 
-      # Lue seule par le frame différé de l'activité récente. → [SessionRow]
+      # Lue seule par le frame différé de l'activité récente : ce que l'élève a touché, copies terminées et copies en cours
+      # (UDR-0174 §3) ; une copie en cours d'un exercice qui n'est plus publié ne se reprend plus. → [SessionRow]
       def recent_sessions(student_id:)
-        Orm::ExerciseSession.joins(exercise: { course: :material }).where(student_id:, status: "completed")
-                            .merge(own_level(student_id))
-                            .order(completed_at: :desc, id: :desc).limit(RECENT_SESSIONS)
+        Orm::ExerciseSession.joins(exercise: { course: :material }).where(student_id:, status: %w[completed started])
+                            .where(RESUMABLE).merge(own_level(student_id))
+                            .order(LAST_ACTIVITY.desc, id: :desc).limit(RECENT_SESSIONS)
                             .pluck(:public_id, :exercise_id, "exercises.public_id", "exercises.title", "materials.name", "materials.slug", :score_percent,
-                                   :completed_at, Arel.sql(Queries::Assessment::Medals::TREATED_SQL))
-                            .map { |*values, treated| SessionRow.new(*values, Entities::Assessment::Grading.session_medal(values[6], treated:)) }
+                                   LAST_ACTIVITY, Arel.sql(Queries::Assessment::Medals::TREATED_SQL), :status, :answered_count, :question_count)
+                            .map { |*values, treated, status, answered_count, question_count| session_row(values, treated, status, answered_count, question_count) }
       end
 
       private
+
+      def session_row(values, treated, status, answered_count, question_count)
+        medal = (Entities::Assessment::Grading.session_medal(values[6], treated:) if status == "completed")
+        SessionRow.new(*values, medal, status, answered_count, question_count)
+      end
 
       # UDR-0013, amendement du 2026-10-01 : l'accueil ne liste que des contenus que l'élève peut ouvrir, de son niveau.
       # Une assignation, une session ou une lacune antérieure à la règle et hors niveau n'y apparaît plus.

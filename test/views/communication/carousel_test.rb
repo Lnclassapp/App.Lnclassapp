@@ -50,7 +50,7 @@ module Communication
       assert_select "section#student_home_announcements[class*='lg:bg-paper']", 0
     end
 
-    test "student: true — a grey band, on the page itself from lg (UDR XXXX écrans minimalistes style Wave §3)" do
+    test "student: true — a grey band, on the page itself from lg (UDR-0173 écrans minimalistes style Wave §3)" do
       carousel([ card("a", "Une") ], student: true)
 
       assert_select "section#student_home_announcements.bg-mist.py-3.lg\\:bg-transparent.lg\\:p-0"

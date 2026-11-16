@@ -105,7 +105,7 @@ class Catalog::StudentCoursesTest < ApplicationSystemTestCase
 
     click_on "SVT"
     assert_current_path courses_path(material: "svt")
-    # UDR XXXX écrans minimalistes style Wave §3 : ?material= ouvre l'écran intérieur de la matière.
+    # UDR-0173 écrans minimalistes style Wave §3 : ?material= ouvre l'écran intérieur de la matière.
     assert_selector "#student_material h1", text: "SVT"
     assert_no_selector "#lesson_materials"
 

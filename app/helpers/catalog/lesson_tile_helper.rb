@@ -1,6 +1,6 @@
 # 🌐 UI · Catalog::LessonTileHelper — la tuile d'une leçon sur la vue d'une matière de l'élève : numéro, libellé court, pictogramme calculé
 # Rôle : l'icône d'une leçon n'est jamais saisie (aucune colonne) : un jeu fini de pictogrammes, des règles par mots-clés sur le titre, par matière, puis l'illustration de la matière en repli
-# UDR  : XXXX écrans minimalistes style Wave §3 (matière : grille de tuiles, icône calculée)
+# UDR  : 0173 §3 (matière : grille de tuiles, icône calculée)
 module Catalog::LessonTileHelper
   # Pictogrammes (viewBox 28, trait) et teinte de leur pastille (tokens `tint-*`, qui ont leur valeur sombre).
   LESSON_ICONS = {

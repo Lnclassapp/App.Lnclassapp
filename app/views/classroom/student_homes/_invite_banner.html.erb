@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/_invite_banner — « Ton enseignant n'est pas sur Lnclass ? » : la seule porte « Inviter » de l'accueil %>
 <%# Rôle : bannière douce avec « Inviter » (partage WhatsApp, nouvel onglet) et une croix ; masquée sur cet appareil une fois fermée (contrôleur dismissible, localStorage), jamais côté serveur %>
-<%# ADR  : 0089 §4.3 · UDR : XXXX écrans minimalistes style Wave §3 (accueil, bannière), 0084 §3.6 · locals: (invite_href:) -%>
+<%# ADR  : 0089 §4.3 · UDR : 0173 §3 (accueil, bannière), 0084 §3.6 · locals: (invite_href:) -%>
 <% scope = "classroom.student_homes.invite_teacher" %>
 <%= tag.section id: "student_invite_banner", "aria-labelledby": "student_invite_banner_title",
                 class: "relative flex items-center gap-3 rounded-card bg-brand-soft py-4 pr-12 pl-4",

@@ -28,7 +28,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     get course_path(@course.slug)
 
     assert_response :success
-    # UDR XXXX écrans minimalistes style Wave §3 : une ligne par feuille, 3 visibles puis « Voir plus (2) ».
+    # UDR-0173 écrans minimalistes style Wave §3 : une ligne par feuille, 3 visibles puis « Voir plus (2) ».
     assert_select "#prepare-interros li a", 5
     assert_select "#prepare-interros li[hidden]", 2
     assert_select "#prepare-interros button[data-reveal-target=button]", text: "Voir plus (2)"

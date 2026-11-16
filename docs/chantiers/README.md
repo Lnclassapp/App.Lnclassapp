@@ -51,6 +51,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`accueil-eleve`](accueil-eleve/memo.md) | planification | feature | 2026-10-15 | Accueil élève aux couleurs Wave et Djamo |
 | [`acteurs-fantomes-parent-examsubject`](acteurs-fantomes-parent-examsubject/memo.md) | abandonné | bugfix | 2026-09-18 | `Parent` et `ExamSubject` : déclarés partout, persistés nulle part |
 | [`actions-en-menu`](actions-en-menu/memo.md) | livré | feature | 2026-09-28 | Actions d'un objet dans un menu ⋮ |
+| [`activation-eleve`](activation-eleve/memo.md) | livré | feature | 2026-11-16 | Activation de l'élève : de l'inscription au premier exercice réussi |
 | [`afficher-pin`](afficher-pin/memo.md) | livré | feature | 2026-09-28 | Afficher le code PIN |
 | [`aide-whatsapp-message-pret`](aide-whatsapp-message-pret/memo.md) | livré | feature | 2026-10-16 | Message prêt dans le lien WhatsApp de la carte d'aide |
 | [`alt-couverture-perdu`](alt-couverture-perdu/memo.md) | livré | bugfix | 2026-10-07 | Une image glissée dans un article prend le focus à l'auteur qui écrit ailleurs |
@@ -166,6 +167,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`eleve-sans-prof`](eleve-sans-prof/memo.md) | livré | feature | 2026-11-12 | L'élève sans enseignant a quelque chose à faire dès l'accueil |
 | [`enrolement-secret-stable`](enrolement-secret-stable/memo.md) | livré | bugfix | 2026-09-30 | Le QR code d'enrôlement reste valable quand la page est rouverte |
 | [`enseignant-plusieurs-matieres`](enseignant-plusieurs-matieres/memo.md) | exécution | feature | 2026-10-16 | Un enseignant qui enseigne plusieurs matières |
+| [`entonnoir-aarrr`](entonnoir-aarrr/memo.md) | livré | feature | 2026-11-16 | Entonnoir AARRR des élèves |
 | [`environnements-de-pr`](environnements-de-pr/memo.md) | livré | feature | 2026-10-21 | Environnements de PR sur Railway |
 | [`epuration-contenus`](epuration-contenus/memo.md) | livré | feature | — | Épuration des en-têtes de contenu et « Tout publier » |
 | [`espace-direction`](espace-direction/memo.md) | exécution | feature | 2026-10-16 | Espace direction, ce qui reste de la V2 |
@@ -264,6 +266,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`rendu-lecons-v3-390`](rendu-lecons-v3-390/memo.md) | en cours | bugfix | 2026-11-02 | Rendu des leçons v3 à 390 px |
 | [`renommage-fiche-revision`](renommage-fiche-revision/memo.md) | planifié | feature | 2026-10-12 | « Fiche de cours » et « Fiche de révision » à l'écran |
 | [`reorganisation-equipe-enseignant`](reorganisation-equipe-enseignant/memo.md) | livré | feature | 2026-10-03 | Réorganisation des espaces Équipe et Enseignant |
+| [`reserves-revue-train`](reserves-revue-train/memo.md) | en revue | correction | 2026-11-15 | Réserves basses de la revue du train du 2026-11-15 |
 | [`retention-ip-audit`](retention-ip-audit/memo.md) | livré | feature | 2026-10-05 | Rétention de l'adresse IP du journal d'audit |
 | [`retouches`](retouches/memo.md) | permanent | retouche | 2026-11-06 | Retouches sans chantier parent |
 | [`retrait-debugbar`](retrait-debugbar/memo.md) | livré | bugfix | 2026-10-03 | Retrait de debugbar |

@@ -12,7 +12,7 @@ class Catalog::PracticeInSheetTest < ActionDispatch::IntegrationTest
 
   def open_course(user = @student)
     sign_in_as user
-    # L'élève lit la fiche sur sa propre page (UDR XXXX écrans minimalistes style Wave §3).
+    # L'élève lit la fiche sur sa propre page (UDR-0173 écrans minimalistes style Wave §3).
     get(user.role == "student" ? course_fiche_path(@course.slug) : course_path(@course.slug))
     assert_response :success
   end

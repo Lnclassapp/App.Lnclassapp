@@ -1,13 +1,13 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
 <%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile, direction et équipe seulement) ; coque Android ou mode concentré : le contenu seul %>
-<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), 0134 écrans enseignant §3.3, 0132 accueil élève §3.1 (content_for :home_band, fond mist dès lg), hors-connexion §3.1, XXXX écrans minimalistes style Wave §3 (content_for :inner, :wave_home) · ADR : 0084 (§4.2), 0086 (§4.2), hors-connexion (§4.2) ; exige helper_method :shell_user %>
+<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), 0134 écrans enseignant §3.3, 0132 accueil élève §3.1 (content_for :home_band, fond mist dès lg), hors-connexion §3.1, 0173 §3 (content_for :inner, :wave_home) · ADR : 0084 (§4.2), 0086 (§4.2), hors-connexion (§4.2) ; exige helper_method :shell_user %>
 <% in_app = lnclass_app? %>
 <%# UDR-0087 §3.2 : une page qui pose content_for :focus (la séance d'exercice) n'a ni en-tête, ni menus, ni barre du bas,
     pour tous les rôles ; elle rend elle-même tout son cadre, sans le conteneur de page. %>
 <% focus = content_for?(:focus) %>
 <%# UDR-0084 §3.3, UDR enseignant §3.3 : l'élève et l'enseignant n'ont pas de barre basse (bottom_bar?) ; sans elle, la marge réservée tombe à pb-12. %>
 <% bottom_bar = !in_app && !focus && bottom_bar?(shell_user.role) %>
-<%# UDR XXXX écrans minimalistes style Wave §3 : un écran intérieur (matière, leçon) n'a ni en-tête ni menu, à aucune largeur, et un
+<%# UDR-0173 écrans minimalistes style Wave §3 : un écran intérieur (matière, leçon) n'a ni en-tête ni menu, à aucune largeur, et un
     fond gris ; l'accueil (:wave_home) rend sa propre colonne, bandeau bleu et feuille blanche comprises. %>
 <% inner = !focus && content_for?(:inner) %>
 <% wave = !focus && content_for?(:wave_home) %>
