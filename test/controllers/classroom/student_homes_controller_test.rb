@@ -312,7 +312,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "the history shows a medal per line, never a grade or red; under Argent, « Refaire » starts the exercise again" do
+  # Activation-eleve, CA-12 : « Refaire » sur toute copie terminée, plus seulement sous l'Argent (hors pause, ADR-0115).
+  test "the history shows a medal per line, never a grade or red; « Refaire » starts the exercise again, whatever the medal" do
     exercise = create_exercise(essential: @essential, title: "Méiose")
     # Les trois dernières copies ne tiennent pas dans 30 minutes : pas de pause, le bouton reste.
     [ 70, 65, 20, 68 ].zip([ 1, 2, 40, 50 ]).each { |score, minutes| complete(exercise, score:).update!(completed_at: minutes.minutes.ago) }
@@ -325,7 +326,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#student_home_recent_activity", text: %r{\d+\s*/\s*20|%}, count: 0
     assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=bg-warning]", 0
     assert_select "turbo-frame#student_home_recent_activity form[action=?] button.ui-button-secondary", exercise_sessions_path(exercise.public_id),
-                  text: tl("history.redo"), count: 2
+                  text: tl("history.redo"), count: 3
   end
 
   # ADR médailles lues à la clôture : une copie vide n'a pas de médaille ; l'historique le dit, « Pas encore », comme le résultat.
@@ -780,5 +781,56 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as other
     get student_home_path
     assert_select FIRST, 0
+  end
+
+  # Activation-eleve (UDR-XXXX-activation-premier-exercice §3) : l'historique, porte du retour.
+  def history = get(student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" })
+
+  test "activation CA-11: an activated student finds his copy in progress in the history; the whole line resumes it" do
+    complete(create_exercise(essential: @essential), score: 80)
+    exercise = create_exercise(essential: @essential, title: "Mitose", questions: 5)
+    copy = create_exercise_session(student: @student, exercise:, answered_count: 2)
+    sign_in_as @student
+
+    history
+
+    assert_select "turbo-frame#student_home_recent_activity li", 2
+    assert_select "a[href=?][aria-label=?]", exercise_session_path(copy.public_id), tl("history.resume_label", title: "Mitose") do
+      assert_select "[data-progress]", text: tl("history.in_progress", answered: 2, total: 5)
+    end
+    assert_select "form[action=?]", exercise_sessions_path(exercise.public_id), 0
+  end
+
+  test "activation CA-12: a copy completed at 16/20, out of the pause, can be done again" do
+    exercise = create_exercise(essential: @essential, title: "Méiose")
+    complete(exercise, score: 80)
+    sign_in_as @student
+
+    history
+
+    assert_select "form[action=?] button[aria-label=?]", exercise_sessions_path(exercise.public_id), tl("history.redo_label", title: "Méiose"),
+                  text: tl("history.redo")
+  end
+
+  test "activation CA-13: not activated, the copy in progress is on the card, not in the history" do
+    copy = create_exercise_session(student: @student, exercise: create_exercise(essential: @essential, title: "Mitose"), answered_count: 1)
+    complete(create_exercise(essential: @essential, title: "Méiose"), score: 20)
+    sign_in_as @student
+
+    get student_home_path
+    assert_select "#student_first_exercise a[href=?]", exercise_session_path(copy.public_id)
+
+    history
+    assert_select "a[href=?]", exercise_session_path(copy.public_id), 0
+    assert_select "turbo-frame#student_home_recent_activity li", 1
+  end
+
+  test "activation CA-14: neither completed nor in progress (an abandoned copy only): no history" do
+    create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), status: "abandoned")
+    sign_in_as @student
+
+    history
+
+    assert_equal "", css_select("turbo-frame#student_home_recent_activity").text.strip
   end
 end

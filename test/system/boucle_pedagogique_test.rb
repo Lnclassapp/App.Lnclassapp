@@ -377,8 +377,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_current_path student_home_path
 
     assert_selector "#student_class_card", text: /Tle D 1/i
-    within("#student_to_do") { click_on EXERCISE }
-    click_on t("assessment.exercises.show.start")
+    # Activation-eleve (UDR-XXXX-activation-premier-exercice) : amené par le lien de sa classe, son devoir est la carte
+    # « Ton premier exercice », qu'un tap ouvre ; il n'est plus aussi dans « À faire ».
+    assert_no_selector "#student_to_do"
+    within("#student_first_exercise") { click_on t("catalog.courses.next_exercise.start") }
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_selector "a", text: EXERCISE
 

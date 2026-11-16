@@ -92,7 +92,7 @@ fr:
           physique-chimie: "PC"
           histoire-geographie: "HG"
           philosophie: "Philo"
-      # UDR accueil élève §3.5 : l'Historique, dans le cadre différé.
+      # UDR accueil élève §3.5 : l'Historique, dans le cadre différé ; UDR-XXXX-activation-premier-exercice §3 : copies en cours comprises.
       history:
         title: "Historique"
         today: "Aujourd'hui"
@@ -100,6 +100,9 @@ fr:
         more: "Voir plus (%{count})"
         redo: "Refaire"
         redo_label: "Refaire l'exercice « %{title} »"
+        # UDR-XXXX-activation-premier-exercice §3 : une copie en cours, que la ligne reprend.
+        in_progress: "En cours · %{answered}/%{total}"
+        resume_label: "Reprendre l'exercice « %{title} »"
       # UDR-0084 §3.6, ADR-0089 §4.3 : « Ma classe » (état « sans enseignant »), la grille de l'accueil et la carte du jour ;
       # partage WhatsApp.
       invite_teacher:

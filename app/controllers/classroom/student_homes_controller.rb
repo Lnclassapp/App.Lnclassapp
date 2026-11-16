@@ -29,9 +29,13 @@ module Classroom
 
     private
 
+    # UDR-XXXX-activation-premier-exercice §2 : la copie en cours que la carte « Ton premier exercice » reprend n'y est pas une
+    # seconde fois (une porte par action).
     def render_history
-      sessions = query.recent_sessions(student_id: current_actor.user_id)
-      render partial: "history", locals: { sessions:, paused_exercise_ids: paused_exercise_ids(sessions.first(3)) }
+      on_card = Queries::Classroom::ActivationQuery.new.resume_session_public_id(student_id: current_actor.user_id)
+      sessions = query.recent_sessions(student_id: current_actor.user_id).reject { it.public_id == on_card }
+      completed = sessions.first(3).select { it.status == "completed" }
+      render partial: "history", locals: { sessions:, paused_exercise_ids: paused_exercise_ids(completed) }
     end
 
     # ADR-0115 : les exercices en pause de « Recommencer » parmi les lignes affichées ; les copies récentes de tous sont lues en
