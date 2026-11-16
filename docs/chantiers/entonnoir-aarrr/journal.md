@@ -1,0 +1,48 @@
+# Journal — Entonnoir AARRR des élèves
+
+> Rempli **pendant** le chantier, pas reconstitué à la fin. C'est ici que se capitalise ce qui ne rentre ni dans un ADR ni dans un commit.
+
+## Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-11-16 | Pas d'ADR : une query de lecture de plus sous ADR-0049 / ADR-0062, définitions dans le PRD §3 | Ni port, ni table, ni dépendance, ni contrat modifié | Non |
+| 2026-11-16 | Nouvelle query `StudentFunnelQuery` à côté de `GrowthMetricsQuery` (même contexte `identity`, même page), plutôt que d'alourdir sa `Row` | `GrowthMetricsQuery` a déjà 12 champs ; la page reste le toit commun | Non |
+| 2026-11-16 | Seuil « réussi » calculé depuis `Grading.reaches?` et passé à la requête | Une seule règle de réussite (ADR-0106) | Non |
+
+## À trancher
+
+> Décisions laissées ouvertes ou tranchées par défaut par un agent, en attente du porteur. Relevées chaque jour à 12 h par la boîte de décisions (`docs/workflows/contrat-de-session.md`). Le porteur coche `[x]` et écrit sa réponse à la suite.
+
+- [ ] 2026-11-16 · entonnoir-aarrr · « Actif à Jn » : revenu à partir de J+n (non borné) ou actif le jour n pile ? — appliqué : non borné (seule la dernière date de lecture d'une notion est gardée, le « jour pile » sous-compterait) ; autres : jour pile sur les seules traces datées (sessions, réponses) ; fenêtre glissante J7–J13 ; recommandé : non borné
+- [ ] 2026-11-16 · entonnoir-aarrr · La voie `code` (ancien code de classe, avant ADR-0085) compte-t-elle comme « amené par sa classe » ? — appliqué : oui (avec `link`) ; le brut garde `code` séparé ; autres : la compter à part à l'écran ; recommandé : oui
+- [ ] 2026-11-16 · entonnoir-aarrr · **Décision non réversible (données)** : faut-il une table d'événements pour mesurer connexions, visites d'écran, temps passé, première ouverture de l'app, cours commencé/terminé ? — appliqué : rien, version sans table livrée, ces mesures sont listées « Non mesuré » à l'écran ; autres : une table `student_events` ajout seul (amende ADR-0049/0062, impose une durée de conservation et une base légale pour des mineurs) ; ne garder que l'historique des connexions réussies (`login_attempts` en a déjà les succès) ; recommandé : attendre la sortie de `entonnoir:brut` en production — si l'acquisition est le problème, aucune table n'est utile
+- [ ] 2026-11-16 · entonnoir-aarrr · Un élève anonymisé sort-il de l'entonnoir ? — appliqué : oui (compte actif = non anonymisé, ADR-0062) ; autres : le garder dans « Inscrits » seulement ; recommandé : oui
+
+## Retouches
+
+- …
+
+## Ce qui a dérapé
+
+- …
+
+## Ce qu'on a appris sur la codebase
+
+- `joined_via` d'une adhésion est réécrit à `link` quand un élève retiré revient par le lien (ADR-0085) : la « première voie » est celle de la première adhésion, pas une donnée historique pure.
+- `Grading.reaches?` arrondit sur la note sur 20 : le seuil « réussi » de 50 % est atteint dès 48 %.
+
+## Dette laissée derrière
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| Entonnoir par établissement / DRENA | Volumes trop faibles aujourd'hui | à ouvrir selon la sortie de `entonnoir:brut` |
+
+## Clôture
+
+| | |
+|---|---|
+| **Livré le** | |
+| **PR** | |
+| **ADR produits** | aucun |
+| **UDR produits** | UDR-XXXX-entonnoir-aarrr |
