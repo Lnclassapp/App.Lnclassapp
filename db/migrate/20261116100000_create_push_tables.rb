@@ -3,7 +3,7 @@
 class CreatePushTables < ActiveRecord::Migration[8.1]
   def change
     create_table :push_subscriptions do |t|
-      t.references :user, null: false, foreign_key: { on_delete: :cascade }
+      t.references :user, null: false, foreign_key: { on_delete: :restrict }
       # Une session expirée ou supprimée ne supprime pas l'abonnement : l'élève décroché reste joignable.
       t.references :session, null: true, foreign_key: { on_delete: :nullify }
       t.text :endpoint, null: false
@@ -16,14 +16,14 @@ class CreatePushTables < ActiveRecord::Migration[8.1]
     end
 
     create_table :push_preferences do |t|
-      t.references :user, null: false, foreign_key: { on_delete: :cascade }, index: { unique: true }
+      t.references :user, null: false, foreign_key: { on_delete: :restrict }, index: { unique: true }
       t.datetime :turned_off_at
       t.datetime :invitation_postponed_until
       t.timestamps
     end
 
     create_table :push_deliveries do |t|
-      t.references :user, null: false, foreign_key: { on_delete: :cascade }, index: false
+      t.references :user, null: false, foreign_key: { on_delete: :restrict }, index: false
       t.string :motive, null: false
       t.string :object_key, null: false
       t.datetime :sent_at, null: false

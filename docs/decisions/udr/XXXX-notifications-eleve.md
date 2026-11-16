@@ -77,7 +77,7 @@ La carte est rendue `hidden` ; le contrôleur la montre si l'appareil peut s'abo
 - puces : « Jamais la nuit ni pendant les cours. » · « Ni ton nom ni tes notes sur l'écran du téléphone. » · « Tu arrêtes quand tu veux, dans ton profil. »
 - boutons : « Oui, me prévenir » · « Plus tard »
 
-**Comportement** (`app/javascript/controllers/push_subscription_controller.js`)
+**Comportement** (`app/javascript/push/push_subscription_controller.js`)
 
 - `connect()` montre la carte si `"PushManager" in window` et que `Notification.permission` ne vaut pas `"denied"`.
 - `accept()` appelle d'abord `Notification.requestPermission()`.

@@ -2,7 +2,7 @@
 // Lancer : node --test test/javascript/push/push_subscription_controller.test.js (aucun navigateur : Stimulus et le DOM sont simulés).
 import { test, beforeEach } from "node:test"
 import assert from "node:assert/strict"
-import PushSubscriptionController from "../../../app/javascript/controllers/push_subscription_controller.js"
+import PushSubscriptionController from "../../../app/javascript/push/push_subscription_controller.js"
 
 const MESSAGES = { blocked: "Bloquées", error: "Oups", loading: "…", activated: "Activées", other_device: "Autre appareil", blocked_detail: "Détail" }
 

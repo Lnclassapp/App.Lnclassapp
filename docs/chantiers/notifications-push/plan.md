@@ -66,7 +66,7 @@ Contrats gelés au Lot 0, que les lots utilisent sans les changer :
                      `app/controllers/communication/push_subscriptions_controller.rb` · `push_preferences_controller.rb`
                      `app/views/communication/push_subscriptions/_invitation.html.erb` · `app/views/identity/profiles/_push_row.html.erb`
                      `app/views/assessment/session_results/show.html.erb` · `app/views/assessment/sheet_checks/create.turbo_stream.erb` · `app/views/identity/profiles/_student_information.html.erb`
-                     `app/javascript/controllers/push_subscription_controller.js`
+                     `app/javascript/push/push_subscription_controller.js`
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/use_cases/communication/register_push_subscription_test.rb` (rattaché à la session, enseignant refusé, adresse connue = changement de propriétaire) · `turn_off_push_test.rb` · `postpone_push_invitation_test.rb` · `test/infrastructure/queries/communication/push_invitation_query_test.rb` (première réussite, déjà abonné, coupé, plus tard < 7 jours, coque Android) · `test/controllers/communication/push_subscriptions_controller_test.rb` · `push_preferences_controller_test.rb` · `test/system/push_invitation_test.rb`
 - **Done quand**   : un élève qui réussit son premier exercice voit la carte, touche « Oui », autorise, et une ligne d'abonnement existe pour sa session ; « Couper » sur le profil la supprime et la carte ne revient plus ; captures 390 px et bureau envoyées
