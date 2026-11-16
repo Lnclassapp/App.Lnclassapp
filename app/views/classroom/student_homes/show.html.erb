@@ -18,7 +18,7 @@
   <div class="<%= class_names("bg-white lg:bg-transparent", "-mt-wave-lap rounded-t-wave lg:mt-0 lg:rounded-none" => !lnclass_app?) %>">
     <% if @home %>
       <%= render "class_card", home: @home, overlap: !lnclass_app? %>
-      <%# UDR-XXXX-activation-premier-exercice §3 : tant qu'aucun exercice n'est réussi, son premier exercice, avant la grille ; sinon rien. %>
+      <%# UDR-0174 §3 : tant qu'aucun exercice n'est réussi, son premier exercice, avant la grille ; sinon rien. %>
       <% if @first_exercise %>
         <div class="px-5 pt-6 lg:px-0 lg:pt-8">
           <%= render "catalog/courses/next_exercise", next_exercise: @first_exercise, scope: :home, id: "student_first_exercise" %>

@@ -91,7 +91,7 @@ module Queries
       def level_subjects(student_id:) = subjects(student_id)
 
       # Lue seule par le frame différé de l'activité récente : ce que l'élève a touché, copies terminées et copies en cours
-      # (UDR-XXXX-activation-premier-exercice §3) ; une copie en cours d'un exercice qui n'est plus publié ne se reprend plus. → [SessionRow]
+      # (UDR-0174 §3) ; une copie en cours d'un exercice qui n'est plus publié ne se reprend plus. → [SessionRow]
       def recent_sessions(student_id:)
         Orm::ExerciseSession.joins(exercise: { course: :material }).where(student_id:, status: %w[completed started])
                             .where(RESUMABLE).merge(own_level(student_id))

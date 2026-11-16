@@ -2,7 +2,7 @@ require "test_helper"
 
 module Queries
   module Classroom
-    # Chantier activation-eleve, PRD §4 CA-1 à CA-7 (UDR-XXXX-activation-premier-exercice §2) : tant que l'élève n'a réussi
+    # Chantier activation-eleve, PRD §4 CA-1 à CA-7 (UDR-0174 §2) : tant que l'élève n'a réussi
     # aucun exercice (une copie terminée à 10/20 arrondi), l'accueil lui propose son premier exercice : la copie en cours,
     # sinon le devoir de sa classe s'il y est entré par le lien ou le code, sinon le programme, matière par matière.
     class ActivationQueryTest < ActiveSupport::TestCase

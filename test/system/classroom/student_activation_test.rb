@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# Chantier activation-eleve, PRD CA-10 (UDR-XXXX-activation-premier-exercice) : de l'inscription au premier exercice, en un tap
+# Chantier activation-eleve, PRD CA-10 (UDR-0174) : de l'inscription au premier exercice, en un tap
 # depuis l'accueil. L'élève amené par sa classe (son code) reçoit le devoir de sa classe ; l'élève seul, le programme.
 class Classroom::StudentActivationTest < ApplicationSystemTestCase
   FORM = "classroom.student_registrations.form".freeze

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré |
 | **Ouvert le** | 2026-11-16 |
 | **Branche** | `feature/activation-eleve` |
 | **Programme** | — |

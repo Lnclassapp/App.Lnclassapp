@@ -20,7 +20,7 @@ Lot A « le premier exercice sur l'accueil » ──► Lot B « reprendre ou re
                      `app/views/classroom/student_homes/show.html.erb`
                      `app/views/catalog/courses/_next_exercise.html.erb` (variante `:home`)
                      `config/locales/catalog/courses.fr.yml`
-                     `docs/decisions/udr/XXXX-activation-premier-exercice.md`
+                     `docs/decisions/udr/0174-activation-premier-exercice.md`
 - **Dépend de**    : —
 - **Test associé** : `test/infrastructure/queries/classroom/activation_query_test.rb` (CA-1 à CA-7)
                      `test/controllers/classroom/student_homes_controller_test.rb` (CA-8, CA-9)
@@ -83,9 +83,9 @@ Lots séquentiels : la collision est assumée et ordonnée.
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, nommée `XXXX-<slug>.md` (numéro et index posés à la clôture)
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle — sans objet (aucun port, lots séquentiels)
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
 - [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

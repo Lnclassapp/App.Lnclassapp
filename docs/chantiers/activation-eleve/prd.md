@@ -112,7 +112,7 @@ CA-14 Étant donné un élève qui n'a ni copie terminée ni copie en cours
 ## 6. Décisions rattachées
 
 - **Pas d'ADR** : ni port, ni table, ni dépendance, ni contrat qui change ; une query de lecture s'ajoute à côté de celles de l'accueil (CQRS, comme `StudentHomeQuery`), et la query « Prochain exercice » est réutilisée telle quelle.
-- UDR-XXXX-activation-premier-exercice — la carte « Ton premier exercice » sur l'accueil, et l'historique qui reprend et refait. Amende UDR-0173 §3 (accueil) et UDR-0132 §3.5 (historique).
+- UDR-0174 — la carte « Ton premier exercice » sur l'accueil, et l'historique qui reprend et refait. Amende UDR-0173 §3 (accueil) et UDR-0132 §3.5 (historique).
 - ADR-0049 (pas de traceur), ADR-0062 (indicateurs lus en direct), ADR-0115 (pause de « Recommencer ») : respectés.
 
 ## 7. Mesures

@@ -7,7 +7,7 @@ fr:
         # IL-14 : le bandeau d'accueil, une fois après un retrait (UDR-0081 §3.5).
         removed: "Tu ne fais plus partie de cette classe. Choisis ta classe."
       # Le bandeau bleu de l'accueil (shared/navigation/_home_band) porte ses propres clés : shared.navigation.home_band.
-      # UDR accueil élève §3.2, §3.3 : la carte du prochain exercice (code conservé pour le guidage d'activation, hors des écrans élève).
+      # UDR accueil élève §3.2, §3.3 : l'ancienne carte du prochain exercice, non affichée ; l'activation (UDR-0174) réutilise catalog.courses.next_exercise.
       next_step:
         # « 3E B · CM1T › » : le sigle de l'établissement, ou son nom ; mis en majuscules par la mise en page.
         class_link: "%{classroom} · %{school}"
@@ -92,7 +92,7 @@ fr:
           physique-chimie: "PC"
           histoire-geographie: "HG"
           philosophie: "Philo"
-      # UDR accueil élève §3.5 : l'Historique, dans le cadre différé ; UDR-XXXX-activation-premier-exercice §3 : copies en cours comprises.
+      # UDR accueil élève §3.5 : l'Historique, dans le cadre différé ; UDR-0174 §3 : copies en cours comprises.
       history:
         title: "Historique"
         today: "Aujourd'hui"
@@ -100,7 +100,7 @@ fr:
         more: "Voir plus (%{count})"
         redo: "Refaire"
         redo_label: "Refaire l'exercice « %{title} »"
-        # UDR-XXXX-activation-premier-exercice §3 : une copie en cours, que la ligne reprend.
+        # UDR-0174 §3 : une copie en cours, que la ligne reprend.
         in_progress: "En cours · %{answered}/%{total}"
         resume_label: "Reprendre l'exercice « %{title} »"
       # UDR-0084 §3.6, ADR-0089 §4.3 : « Ma classe » (état « sans enseignant »), la grille de l'accueil et la carte du jour ;

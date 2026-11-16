@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ActivationQuery
 # Rôle : le premier exercice de l'élève qui n'en a réussi aucun (copie à 10/20 arrondi) : la copie en cours, le devoir de l'élève amené par sa classe, sinon le programme
-# ADR  : 0035, 0049 (aucun traceur : tout se lit dans les copies), 0062 · UDR : XXXX-activation-premier-exercice §2 · chantier activation-eleve
+# ADR  : 0035, 0049 (aucun traceur : tout se lit dans les copies), 0062 · UDR : 0174 activation-premier-exercice §2 · chantier activation-eleve
 module Queries
   module Classroom
     class ActivationQuery

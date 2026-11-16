@@ -1,4 +1,4 @@
-# UDR-XXXX : Activation de l'élève — la carte « Ton premier exercice » de l'accueil, et l'historique qui reprend et refait
+# UDR-0174 : Activation de l'élève — la carte « Ton premier exercice » de l'accueil, et l'historique qui reprend et refait
 <!-- index
 titre: Carte « Ton premier exercice » et historique de reprise
 statut: Accepté

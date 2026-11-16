@@ -29,13 +29,18 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Le message de bienvenue « Fais ton premier exercice ! » prévu au PRD a été retiré avant le code : les niveaux sans exercice publié (6e à 4e, 2nde) n'auraient pas de carte, le message aurait menti. Le CA-10 est devenu le parcours navigateur de l'inscription au premier exercice.
+- Première version : l'exercice de la carte ne sortait de « À faire » que pour l'élève amené. Le test d'ordre de l'accueil l'a montré : pour l'élève seul, le premier exercice du programme peut être un devoir de la classe, deux portes vers le même exercice. La règle est devenue « l'exercice de la carte sort de « À faire », quelle que soit sa source ».
+- Environnement de la session : Ruby 3.4.9 à compiler, corepack à activer, `LANG=C.UTF-8` obligatoire sinon `script/docs/build_index` tombe sur l'encodage, chromedriver du système (147) plus vieux que Chrome (153) : `CHROMEDRIVER_PATH` vers celui que selenium-manager télécharge.
 
 ## Ce qu'on a appris sur la codebase
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- `classroom_students.joined_via` : « standard » = l'élève a choisi sa classe dans la liste (seul) ; « link » et « code » = il est venu par ce que l'enseignant ou l'établissement a donné.
+- `Grading.reaches?` compare des notes arrondies au point sur 20 : 48 % vaut 10/20. Un seuil lu en SQL (`score_percent >= 50`) aurait raté ce cas ; l'activation lit la meilleure note puis applique `reaches?`.
+- `NextExerciseQuery` marche sans filtre de matière, mais l'ordre du programme y est celui des leçons toutes matières confondues : l'activation l'appelle matière par matière, dans l'ordre de la grille.
+- Le parcours système `boucle_pedagogique_test` passait par « À faire » : il passe maintenant par la carte, en un tap.
 
 ## Dette laissée derrière
 
@@ -43,13 +48,16 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Moment « aha » sur la page de résultat (« Premier exercice réussi ! ») | Hors périmètre : la page de résultat ne change pas ; la carte qui disparaît suffit à marquer le passage | à ouvrir si la mesure le demande |
+| Élève sans classe active : pas de carte d'activation | Rejoindre une classe est son premier pas | — |
+| La carte coûte jusqu'à 2 requêtes par matière tant que l'élève n'est pas activé (8 matières au plus) | Seulement pendant l'activation, sans index nouveau | `entonnoir-aarrr` dira si la page en souffre |
+| Relances WhatsApp vers la carte | Chantier de l'équipe, à la main (porteur) | relances WhatsApp |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
+| **Livré le** | 2026-11-16 |
 | **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **ADR produits** | aucun (PRD §6) |
+| **UDR produits** | UDR-0174 |

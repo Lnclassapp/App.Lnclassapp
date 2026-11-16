@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentHomesController
 # Rôle : accueil élève (CL-23, TR-04, AS-36) : la carte de la classe, « Ton premier exercice » tant qu'aucun n'est réussi, la grille, les annonces, « À faire » et l'historique différé ; une section vide est absente ; sans classe principale active, « Choisis ta classe », les matières du dernier niveau et, une fois, le retrait
-# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1), hors-connexion (§4.1), 0126 (contexte billing, §4.5) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), 0132 accueil élève (§3.3, amendement eleve-sans-prof), 0158 (§3 bandeau), 0173 §3, XXXX-activation-premier-exercice
+# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1), hors-connexion (§4.1), 0126 (contexte billing, §4.5) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), 0132 accueil élève (§3.3, amendement eleve-sans-prof), 0158 (§3 bandeau), 0173 §3, 0174 activation-premier-exercice
 module Classroom
   class StudentHomesController < AuthenticatedController
     RECENT_ACTIVITY_FRAME = "student_home_recent_activity".freeze
@@ -20,7 +20,7 @@ module Classroom
       @home = query.call(student_id: current_actor.user_id)
       return no_classroom if @home.nil?
 
-      # UDR-0173 §3 : plus d'« Exercice du jour » ; la carte de la classe, la grille, les annonces. UDR-XXXX-activation-premier-exercice
+      # UDR-0173 §3 : plus d'« Exercice du jour » ; la carte de la classe, la grille, les annonces. UDR-0174
       # §2 : tant que l'élève n'a réussi aucun exercice, la carte de son premier exercice ; l'exercice qu'elle propose sort de « À faire ».
       @first_exercise = Queries::Classroom::ActivationQuery.new.call(student_id: current_actor.user_id, home: @home)
       @to_do = @home.assigned_exercises.reject { it.public_id == @first_exercise&.exercise_public_id }
@@ -29,7 +29,7 @@ module Classroom
 
     private
 
-    # UDR-XXXX-activation-premier-exercice §2 : la copie en cours que la carte « Ton premier exercice » reprend n'y est pas une
+    # UDR-0174 §2 : la copie en cours que la carte « Ton premier exercice » reprend n'y est pas une
     # seconde fois (une porte par action).
     def render_history
       on_card = Queries::Classroom::ActivationQuery.new.resume_session_public_id(student_id: current_actor.user_id)

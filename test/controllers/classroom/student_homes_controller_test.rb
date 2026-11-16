@@ -709,7 +709,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 5, announcement_titles.size
   end
 
-  # Chantier activation-eleve (UDR-XXXX-activation-premier-exercice) : tant qu'aucun exercice n'est réussi, son premier exercice.
+  # Chantier activation-eleve (UDR-0174) : tant qu'aucun exercice n'est réussi, son premier exercice.
   FIRST = "section#student_first_exercise".freeze
 
   def tc(key, **) = I18n.t("catalog.courses.next_exercise.#{key}", **)
@@ -783,7 +783,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select FIRST, 0
   end
 
-  # Activation-eleve (UDR-XXXX-activation-premier-exercice §3) : l'historique, porte du retour.
+  # Activation-eleve (UDR-0174 §3) : l'historique, porte du retour.
   def history = get(student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" })
 
   test "activation CA-11: an activated student finds his copy in progress in the history; the whole line resumes it" do
