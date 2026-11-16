@@ -152,7 +152,7 @@ Fonctionnalité: Écran
 ## 7. Décisions rattachées
 
 - **ADR** : aucun nouveau. Pas de port, pas de table, pas de dépendance, pas de contrat modifié : une query de lecture de plus sous ADR-0049 (indicateurs côté serveur, « activation, exercices terminés, rétention ») et ADR-0062 (lecture en direct, nombre de requêtes fixe, définitions d'une phrase — elles sont au §3 ci-dessus). La table d'événements éventuelle est dans `journal.md` § À trancher.
-- **UDR** : [UDR-XXXX-entonnoir-aarrr](../../decisions/udr/XXXX-entonnoir-aarrr.md) — section « Élèves : entonnoir AARRR » de la page Croissance. Prolonge UDR-0050.
+- **UDR** : [UDR-0175](../../decisions/udr/0175-entonnoir-aarrr.md) — section « Élèves : entonnoir AARRR » de la page Croissance. Prolonge UDR-0050.
 
 ## 8. Mesures
 

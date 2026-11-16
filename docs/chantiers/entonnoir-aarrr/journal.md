@@ -58,4 +58,4 @@
 | **Livré le** | 2026-11-16 (PR prête, fusion par l'orchestrateur) |
 | **PR** | [#650](https://github.com/Lnclassapp/App.Lnclassapp/pull/650) |
 | **ADR produits** | aucun |
-| **UDR produits** | UDR-XXXX-entonnoir-aarrr |
+| **UDR produits** | UDR-0175 |
