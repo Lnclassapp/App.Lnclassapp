@@ -1,0 +1,24 @@
+# Notifications aux élèves (ADR-XXXX-notifications-web-push-aux-eleves, PRD §3.1) : gabarits fermés. Tutoiement, comme l'espace élève.
+# Un texte d'écran verrouillé ne porte ni nom, ni numéro, ni note, ni niveau de médaille, ni titre d'annonce : seules `material` et `count` y entrent.
+fr:
+  communication:
+    push:
+      title: "Lnclass"
+      messages:
+        inactive:
+          body: "Ta classe avance. Un exercice t'attend sur Lnclass."
+        assignment_due:
+          body: "Un devoir de %{material} est à rendre demain."
+        quiz_prep:
+          body:
+            one: "Prépare ton interro de %{material} de demain : %{count} exercice."
+            other: "Prépare ton interro de %{material} de demain : %{count} exercices."
+        announcement:
+          body: "Nouvelle annonce de Lnclass."
+        result:
+          copy:
+            body: "Ta copie de %{material} est corrigée."
+          medal:
+            body: "Bravo ! Une nouvelle médaille en %{material}."
+        unfinished:
+          body: "Tu as commencé un exercice de %{material}. Termine-le !"

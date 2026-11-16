@@ -78,7 +78,7 @@ module Ports
     # Envoie une notification déjà rédigée à un abonnement. Ne connaît ni l'élève ni le motif.
     # message : Entities::Communication::PushMessage (title, body, url, tag), texte issu d'un gabarit fermé.
     # → :delivered | :gone (abonnement à supprimer) | :retry | :not_configured
-    class PushGatewayPort
+    module PushGatewayPort
       def deliver(subscription:, message:) = raise NotImplementedError
     end
   end

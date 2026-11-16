@@ -25,6 +25,9 @@
 - [ ] 2026-11-16 · notifications-push · Relances « inactif » — appliqué : paliers 3, 7 et 14 jours, puis plus rien sans nouvelle activité ; autres : 2-5-10, chaque semaine sans fin ; recommandé : appliqué.
 - [ ] 2026-11-16 · notifications-push · Variables d'environnement à poser par le porteur (jamais dans le chat ni le dépôt) : `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT`, `PUSH_DELIVERY_ENABLED`, `PUSH_MIN_INTERVAL_HOURS` — appliqué : absentes, l'adaptateur répond « non configuré » ; recommandé : une paire VAPID par environnement (recette, production) avant le Lot B.
 
+- [ ] 2026-11-16 · notifications-push · Lot 0 : le plan nomme `config/locales/fr.yml` et `test/fixtures/push_*.yml` ; le dépôt range les textes par contexte et n'a aucune fixture d'utilisateur — appliqué : `config/locales/communication/push.fr.yml` et des fabriques `test/support/factories/push.rb` ; autres : ajouter au `fr.yml` racine, fixtures YAML ; recommandé : appliqué.
+- [ ] 2026-11-16 · notifications-push · Lot 0 : `recurring.yml` nomme `DeliverPushNotificationsJob` et `PurgePushDataJob`, écrits au Lot B ; le test « un port, un adaptateur » (ADR-0026) reste rouge jusqu'aux Lots A et B — appliqué : un seul commit de Lot 0 laissé tel quel, la PR est verte à son head ; autres : adaptateurs vides au Lot 0 ; recommandé : appliqué.
+
 ## Retouches
 
 > Les retouches de ce chantier après sa livraison ([`retouche.md`](../../workflows/retouche.md)) : `- AAAA-MM-JJ · #<PR> · <ce qui change>`

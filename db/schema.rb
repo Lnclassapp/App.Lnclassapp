@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_16_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -807,6 +807,43 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
     t.index ["user_id"], name: "index_pin_recovery_codes_one_active", unique: true, where: "((used_at IS NULL) AND (revoked_at IS NULL))"
   end
 
+  create_table "push_deliveries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "motive", null: false
+    t.string "object_key", null: false
+    t.datetime "sent_at", null: false
+    t.string "status", null: false
+    t.index ["sent_at"], name: "index_push_deliveries_on_sent_at"
+    t.index ["user_id", "motive", "object_key"], name: "index_push_deliveries_on_user_motive_object", unique: true
+    t.index ["user_id", "sent_at"], name: "index_push_deliveries_on_user_id_and_sent_at"
+    t.check_constraint "motive::text = ANY (ARRAY['inactive'::character varying, 'assignment_due'::character varying, 'quiz_prep'::character varying, 'announcement'::character varying, 'result'::character varying, 'unfinished'::character varying]::text[])", name: "push_deliveries_motive_check"
+    t.check_constraint "status::text = ANY (ARRAY['delivered'::character varying, 'gone'::character varying, 'retry'::character varying, 'failed'::character varying, 'disabled'::character varying, 'not_configured'::character varying]::text[])", name: "push_deliveries_status_check"
+  end
+
+  create_table "push_preferences", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "turned_off_at"
+    t.datetime "invitation_postponed_until"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_push_preferences_on_user_id", unique: true
+  end
+
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "session_id"
+    t.text "endpoint", null: false
+    t.string "p256dh", null: false
+    t.string "auth", null: false
+    t.datetime "last_success_at"
+    t.integer "failure_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
+    t.index ["session_id"], name: "index_push_subscriptions_on_session_id"
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
+  end
+
   create_table "question_attempts", force: :cascade do |t|
     t.bigint "exercise_session_id", null: false
     t.bigint "question_id", null: false
@@ -1352,6 +1389,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
   add_foreign_key "offline_pack_deliveries", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", column: "issued_by_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", on_delete: :cascade
+  add_foreign_key "push_deliveries", "users", on_delete: :cascade
+  add_foreign_key "push_preferences", "users", on_delete: :cascade
+  add_foreign_key "push_subscriptions", "sessions", on_delete: :nullify
+  add_foreign_key "push_subscriptions", "users", on_delete: :cascade
   add_foreign_key "question_attempts", "exercise_sessions", on_delete: :restrict
   add_foreign_key "question_attempts", "questions", on_delete: :restrict
   add_foreign_key "question_images", "questions", on_delete: :restrict
