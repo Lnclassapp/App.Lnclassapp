@@ -17,6 +17,7 @@
 
 - [ ] 2026-11-16 · activation-eleve · « Premier exercice réussi » : à partir de quelle note ? — appliqué : 10/20 arrondi (seuil de la moyenne de la notation) ; autres : 14/20 (maîtrise, seuil de « Refaire » d'avant) ; recommandé : 10/20
 - [ ] 2026-11-16 · activation-eleve · L'élève seul (entré par la liste) dont la classe a des devoirs : la carte propose le programme ou le devoir ? — appliqué : le programme (le devoir reste dans « À faire ») ; autres : le devoir, comme l'élève amené ; recommandé : le programme
+- [ ] 2026-11-16 · #651 · **Sécurité, non tranché par la session** : le garde daté de l'avis Yarn 1240992 (`braces` ≤ 3.0.3, outil de build, chantier `audit-yarn-braces`) a expiré le 2026-11-15 ; il rend `bin/ci-quiet` rouge sur `Develop` comme sur cette PR (seul échec : `RepositoryRulesTest#test_no_ignored_yarn_advisory_is_past_its_review_date`). Aucune version corrigée publiée au 2026-11-16 (3.0.3 est la dernière). — appliqué : rien (la session ne reporte pas la date d'un avis de sécurité) ; autres : reporter le réexamen (au 2026-11-30) dans une PR dédiée ; remplacer `braces` par une résolution forcée ; recommandé : reporter au 2026-11-30 dans une PR dédiée, puis relancer `bin/ci-quiet` sur #651
 - [ ] 2026-11-16 · activation-eleve · « Refaire » dans l'historique de l'accueil : sur toute copie terminée, ou seulement sous 14/20 comme avant ? — appliqué : toute copie terminée, hors pause (le porteur veut pouvoir refaire ce qu'on a touché) ; autres : sous 14/20 ; recommandé : toute copie
 
 ## Retouches
