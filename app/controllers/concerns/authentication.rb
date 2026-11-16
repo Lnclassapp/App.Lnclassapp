@@ -95,6 +95,7 @@ module Authentication
 
   def sign_out
     UseCases::Identity::SignOut.new(sessions: Repositories::Identity::SessionRepository.new,
+                                    push_subscriptions: Repositories::Communication::PushSubscriptionRepository.new,
                                     policy: Policies::Identity::SessionPolicy.new, digest_key: secret_digest_key)
   end
 end

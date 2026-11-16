@@ -62,6 +62,9 @@ module UseCases
         @actor = Entities::Identity::Actor.new(user_id: 3, role: :teacher)
         @users = FakeUsers.new(@user)
         @sessions = FakeSessions.new
+        @push = FakePushSubscriptions.new(FakePushSubscriptions.subscription(user_id: 3, session_id: 7),
+                                          FakePushSubscriptions.subscription(user_id: 3, session_id: 42),
+                                          FakePushSubscriptions.subscription(user_id: 3, session_id: nil))
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
       end
@@ -77,7 +80,7 @@ module UseCases
 
       def change(dto = input, actor: @actor, current: session, failures: 0, last_failed_at: nil)
         @attempts = FakeAttempts.new(count: failures, last_failed_at:)
-        ChangeOwnPin.new(users: @users, sessions: @sessions, login_attempts: @attempts, audit_log: @audit, transaction: @transaction,
+        ChangeOwnPin.new(users: @users, sessions: @sessions, push_subscriptions: @push, login_attempts: @attempts, audit_log: @audit, transaction: @transaction,
                          policy: Policies::Identity::UpdateSelfPolicy.new, digest_key: KEY, clock: Clock.new(NOW))
                     .call(actor:, user: @user, session: current, dto:)
       end
@@ -103,6 +106,12 @@ module UseCases
                      @audit.entries
         assert_equal [ true ], @attempts.records.map { it[:succeeded] }
         assert_equal 1, @transaction.calls
+      end
+
+      test "the push subscriptions of the sessions it closes are deleted, never the new session's" do
+        change
+
+        assert_equal [ [ 7 ] ], @push.deleted_sessions
       end
 
       test "a verified second factor stays verified on the new session" do

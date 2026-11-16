@@ -83,6 +83,15 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "the push subscriptions of the closed sessions are deleted, not just detached" do
+    sign_in_as @teacher
+    subscription = create_push_subscription(user: @teacher, session: Orm::Session.where(user: @teacher).last)
+
+    change_pin
+
+    assert_not Orm::Communication::PushSubscription.exists?(subscription.id)
+  end
+
   test "a team member keeps the verified second factor of the current session" do
     member = create_team_member
     sign_in_as member
