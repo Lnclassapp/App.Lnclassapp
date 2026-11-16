@@ -713,4 +713,23 @@ end
     assert_select "#signup-classroom-recap", text: /3e 2/
     assert_select "fieldset[data-step='2'] #signup-rate-limited", text: I18n.t("#{FORM}.rate_limited_link")
   end
+
+  # Activation-eleve, PRD CA-10 (UDR-0174) : l'élève seul, inscrit par la liste, suit la redirection et trouve son premier
+  # exercice en un tap, sans rien avoir fait ; le devoir de sa classe reste dans « À faire » (CA-4).
+  test "activation CA-10, CA-4: signed up through the list, the home offers the first exercise of the program; the assignment stays in « À faire »" do
+    course = create_course(level: @level, material: create_material(name: "Mathématiques"), name: "Les angles")
+    first = create_exercise(course:, lesson_wide: true, title: "Mesurer un angle")
+    homework = create_exercise(course:, lesson_wide: true, title: "Angles opposés")
+    create_assignment(classroom: @classroom, assignable: homework)
+
+    register
+    assert_equal [ "standard" ], memberships.pluck(:joined_via)
+    follow_redirect!
+
+    assert_select "section#student_first_exercise" do
+      assert_select "h2", text: "Mesurer un angle"
+      assert_select "form[action=?] button", exercise_sessions_path(first.public_id)
+    end
+    assert_select "#student_to_do", text: /Angles opposés/
+  end
 end

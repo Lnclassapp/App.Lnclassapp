@@ -113,6 +113,29 @@ module Queries
         [ @first, @second ].each { it.update_columns(status: "draft") }
         assert_equal @physics.public_id, call(student).exercise_public_id
       end
+
+      test "CA-2: a copy in progress of an archived exercise, or in an unpublished lesson, is not resumed" do
+        learner = student
+        create_exercise_session(student: learner, exercise: @second)
+        @second.update_columns(archived_at: Time.current)
+        create_exercise_session(student: learner, exercise: @physics)
+        @circuits.update_columns(status: "draft")
+
+        assert_nil ActivationQuery.new.resume(student_id: learner.id)
+      end
+
+      test "CA-3: the first open assignment in the order of « À faire » wins; an assignment already started is left to the resume" do
+        learner = student(joined_via: "link")
+        create_assignment(classroom: @classroom, assignable: @second, due_on: Date.current + 3, assigned_at: 1.day.ago)
+        create_assignment(classroom: @classroom, assignable: @physics, due_on: Date.current + 1, assigned_at: 1.day.ago)
+
+        assert_equal @physics.public_id, call(learner).exercise_public_id
+
+        home = home(learner)
+        started = home.assigned_exercises.map { it.public_id == @physics.public_id ? it.with(started_session_public_id: "x") : it }
+        row = ActivationQuery.new.call(student_id: learner.id, home: home.with(assigned_exercises: started))
+        assert_equal [ @second.public_id, true ], row.to_h.values_at(:exercise_public_id, :assigned)
+      end
     end
   end
 end
