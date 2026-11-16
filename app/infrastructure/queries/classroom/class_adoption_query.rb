@@ -37,7 +37,8 @@ module Queries
         class_stats AS (
           SELECT oc.id AS classroom_id,
                  COUNT(cs.student_id) AS students,
-                 COUNT(cs.student_id) FILTER (WHERE EXISTS (SELECT 1 FROM exercise_sessions es WHERE es.student_id = cs.student_id)) AS working
+                 COUNT(cs.student_id) FILTER (WHERE EXISTS (SELECT 1 FROM exercise_sessions es
+                                                             WHERE es.student_id = cs.student_id AND es.started_at >= :year_start)) AS working
             FROM open_classes oc
             LEFT JOIN classroom_students cs ON cs.classroom_id = oc.id AND cs."primary" AND cs.left_at IS NULL
                  AND EXISTS (SELECT 1 FROM users s WHERE s.id = cs.student_id AND s.anonymized_at IS NULL)
@@ -47,7 +48,8 @@ module Queries
             FROM teacher_classrooms tc JOIN class_stats st ON st.classroom_id = tc.classroom_id),
         flags AS (
           SELECT t.joined_via, to_char(t.created_at, 'YYYY-MM') AS month,
-                 EXISTS (SELECT 1 FROM open_classes oc WHERE oc.school_id = t.school_id) AS e2,
+                 EXISTS (SELECT 1 FROM open_classes oc WHERE oc.school_id = t.school_id)
+                   OR EXISTS (SELECT 1 FROM ticked k WHERE k.teacher_id = t.id) AS e2,
                  EXISTS (SELECT 1 FROM ticked k WHERE k.teacher_id = t.id) AS e3,
                  EXISTS (SELECT 1 FROM ticked k WHERE k.teacher_id = t.id AND k.students >= 1) AS e4,
                  EXISTS (SELECT 1 FROM classroom_assignments a WHERE a.assigned_by_id = t.id) AS e5,
@@ -77,7 +79,8 @@ module Queries
             FROM classroom_students cs JOIN open_classes oc ON oc.id = cs.classroom_id JOIN users s ON s.id = cs.student_id
            WHERE cs."primary" AND cs.left_at IS NULL AND s.anonymized_at IS NULL),
         with_teacher AS (
-          SELECT DISTINCT tc.classroom_id FROM teacher_classrooms tc JOIN users t ON t.id = tc.teacher_id WHERE t.anonymized_at IS NULL)
+          SELECT DISTINCT tc.classroom_id FROM teacher_classrooms tc JOIN users t ON t.id = tc.teacher_id
+           WHERE t.role = 'teacher' AND t.anonymized_at IS NULL)
         SELECT 'students' AS part, (r.classroom_id IN (SELECT classroom_id FROM with_teacher))::text AS ticked, r.joined_via AS channel,
                COUNT(*)::float AS value
           FROM roster r GROUP BY ticked, channel
@@ -86,7 +89,7 @@ module Queries
           FROM (SELECT classroom_id, COUNT(*) AS n FROM roster WHERE classroom_id IN (SELECT classroom_id FROM with_teacher) GROUP BY classroom_id) populated
       SQL
 
-      # Écoles actives par étape saisie (prospect sans ligne CRM), croisées avec l'usage réel.
+      # Établissements non inactifs (brouillons compris) par étape saisie (prospect sans ligne CRM), croisées avec l'usage réel.
       SCHOOLS = <<~SQL.squish.freeze
         SELECT COALESCE(a.stage, 'prospect') AS stage,
                COUNT(*) AS schools,
@@ -99,15 +102,17 @@ module Queries
                                               WHERE c.school_id = s.id AND c.status = 'active' AND c.school_year = :year
                                                 AND cs."primary" AND cs.left_at IS NULL AND st.anonymized_at IS NULL)) AS with_populated_class
           FROM schools s LEFT JOIN crm_accounts a ON a.school_id = s.id
-         WHERE s.status = 'active' GROUP BY 1
+         WHERE s.status <> 'inactive' GROUP BY 1
       SQL
-      INTERACTIONS = "SELECT COUNT(*) FROM crm_interactions WHERE occurred_at >= :since".freeze
+      INTERACTIONS = "SELECT COUNT(*) FROM crm_interactions WHERE occurred_at >= :since AND occurred_at <= :now".freeze
 
       def call(today:)
         year = Entities::Classroom::SchoolYear.current(today)
-        teachers = rows(TEACHERS, year:, adopted: ADOPTED_MIN_STUDENTS)
+        # Le début de l'année scolaire n'est pas exposé par SchoolYear : 1er septembre de la première année du libellé « AAAA-AAAA ».
+        year_start = Date.new(year[0, 4].to_i, Entities::Classroom::SchoolYear::START_MONTH, 1)
+        teachers = rows(TEACHERS, year:, year_start:, adopted: ADOPTED_MIN_STUDENTS)
         students = rows(STUDENTS, year:)
-        build(teachers:, students:, schools: rows(SCHOOLS, year:), since: (today - INTERACTION_DAYS).beginning_of_day)
+        build(teachers:, students:, schools: rows(SCHOOLS, year:), since: (today - INTERACTION_DAYS).beginning_of_day, now: Time.current)
       end
 
       private
@@ -116,12 +121,12 @@ module Queries
 
       def connection = Orm::User.connection
 
-      def build(teachers:, students:, schools:, since:)
+      def build(teachers:, students:, schools:, since:, now:)
         steps = ->(group) { group.sum(Steps.zero) { |row| Steps.new(*Steps.members.map { |name| row.fetch(name.to_s) }) } }
         Row.new(total: steps.call(teachers), by_channel: by_channel(teachers, steps), by_month: teachers.group_by { it["month"] }.transform_values(&steps),
                 empty_with_assignment: teachers.sum { it["empty_with_assignment"] }, empty_without_assignment: teachers.sum { it["empty_without_assignment"] },
                 students: split_students(students), median_students: students.find { it["part"] == "median" }.fetch("value"),
-                crm_stages: crm_stages(schools), crm_interactions_30d: connection.select_value(Orm::User.sanitize_sql_array([ INTERACTIONS, { since: } ])).to_i)
+                crm_stages: crm_stages(schools), crm_interactions_30d: connection.select_value(Orm::User.sanitize_sql_array([ INTERACTIONS, { since:, now: } ])).to_i)
       end
 
       def by_channel(teachers, steps)

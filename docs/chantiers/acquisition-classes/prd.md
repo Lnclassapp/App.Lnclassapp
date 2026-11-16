@@ -31,14 +31,14 @@ Toutes ces données se lisent sur les tables existantes. Comptes seulement : ni 
 | Année en cours | `Entities::Classroom::SchoolYear.current(today)`. |
 | Classe ouverte | `classrooms.status = 'active'` de l'année en cours. |
 | **E1 Inscrit** | Enseignant. |
-| **E2 Classes ouvertes** | E1 dont l'établissement principal a au moins une classe ouverte. E1 − E2 = **bloqués** (écran « Aucune classe ouverte »). |
+| **E2 Classes ouvertes** | E1 dont l'établissement principal a au moins une classe ouverte, ou qui a coché au moins une classe ouverte. E1 − E2 = **bloqués** (écran « Aucune classe ouverte »). |
 | **E3 Classe cochée** | E1 avec au moins une ligne `teacher_classrooms` vers une classe ouverte. |
 | **E4 Classe peuplée** | E3 dont au moins une classe cochée a au moins 1 élève (adhésion `classroom_students` principale, en cours, compte non anonymisé), quelle que soit sa voie. |
 | **E5 Devoir donné** | E1 qui a au moins un `classroom_assignments.assigned_by_id` (devoir actif ou archivé). |
-| **E6 Classe adoptée** | E3 dont au moins une classe cochée compte **au moins 5 élèves qui ont commencé un exercice** (`exercise_sessions`). C'est « une classe qui s'en sert ». |
+| **E6 Classe adoptée** | E3 dont au moins une classe cochée compte **au moins 5 élèves qui ont commencé un exercice depuis le début de l'année scolaire** (`exercise_sessions.started_at`, à partir du 1er septembre). C'est « une classe qui s'en sert ». |
 | Indice 2b / 3 | Parmi E3 − E4 : ceux qui ont **donné un devoir** à une classe vide (investis, élèves absents, donc plutôt 3) et ceux qui n'en ont pas donné (plutôt 2b). |
 | Élèves par classe | Élèves inscrits (non anonymisés, classe principale ouverte), répartis en deux groupes : classe **avec** enseignant coché, classe **sans** enseignant. Pour chaque groupe, leur voie : `standard`, `link` ou `code`. |
-| Écoles du CRM | Établissements par étape **saisie** (`crm_accounts.stage`, ou `prospect` sans ligne). Pour chaque étape : le nombre total, combien ont au moins 1 échange noté (`crm_interactions`), au moins 1 enseignant, au moins 1 classe ouverte, au moins 1 classe peuplée. Plus le total des échanges notés sur les 30 derniers jours. |
+| Écoles du CRM | Établissements non inactifs (`schools.status <> 'inactive'`, brouillons compris) par étape **saisie** (`crm_accounts.stage`, ou `prospect` sans ligne). Pour chaque étape : le nombre total, combien ont au moins 1 échange noté (`crm_interactions`), au moins 1 enseignant, au moins 1 classe ouverte, au moins 1 classe peuplée. Plus le total des échanges notés sur les 30 derniers jours. |
 
 **Limites** (imprimées en pied de sortie) :
 - le partage d'un code n'est pas enregistré, donc 2b et 3 ne se distinguent que par l'indice ;

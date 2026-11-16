@@ -58,6 +58,14 @@ module Entities
         assert_equal :code_not_shared, verdict(e4: 9, empty_with_assignment: 5, empty_without_assignment: 5)
       end
 
+      test "la moitié pile des E3 peuplés n'est pas un goulot 2b ni 3" do
+        assert_equal :none, verdict(e3: 20, e4: 10, empty_without_assignment: 10)
+      end
+
+      test "2a' passe avant l'étape 4 : un cas qui déclencherait les deux" do
+        assert_equal :no_class_ticked, verdict(e3: 9, e4: 1, empty_without_assignment: 8)
+      end
+
       test "médiane sous 10 élèves : goulot 3" do
         assert_equal :code_ignored, verdict(median_students_per_populated_class: 9.5)
       end

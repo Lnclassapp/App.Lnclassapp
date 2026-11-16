@@ -12,6 +12,7 @@
 | 2026-11-16 | Lot A : la médiane d'élèves (règle §3.2, étape 5) porte sur les classes ouvertes **cochées** par un enseignant non anonymisé et comptant au moins 1 élève ; le PRD disait seulement « classe peuplée » | La règle juge l'adoption par les enseignants, pas les classes que l'équipe a ouvertes sans eux | Non |
 | 2026-11-16 | Lot A : le bloc CRM ne compte que les établissements `status = 'active'` ; l'indice 2b / 3 compte un enseignant « avec devoir » s'il a donné un devoir à l'une de ses classes cochées vides | Un établissement brouillon ou inactif gonflerait « prospect » ; un devoir donné ailleurs ne dit rien de la classe vide | Non |
 | 2026-11-16 | Lot A : la sortie imprime E1..E6 puis « Bloqués » en dernière colonne, et les voies d'arrivée élèves à zéro sont omises | Les scénarios PRD §6 lisent « sans enseignant : standard 1 » et « avec enseignant : code 1 » | Non |
+| 2026-11-16 | Lot A, retours de revue : E2 inclut l'enseignant qui coche une classe ouverte ailleurs ; E6 ne compte que les exercices commencés depuis le 1er septembre de l'année en cours ; le CRM compte les non-inactifs (brouillons compris) ; « avec enseignant » exige un `role = 'teacher'` non anonymisé ; échanges 30 j bornés à maintenant ; la valeur déclencheuse s'imprime à côté du goulot. Corrige la ligne « actifs » de l'entrée précédente | Cohérence avec E1/E3 et lecture directe du verdict | Non |
 
 ## À trancher
 

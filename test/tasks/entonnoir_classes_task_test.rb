@@ -108,7 +108,7 @@ class EntonnoirClassesTaskTest < ActiveSupport::TestCase
 
     out = classes
 
-    assert_includes out, "Goulot désigné : 4 (les établissements ne sont pas encore joints)"
+    assert_includes out, "Goulot désigné : 4 (les établissements ne sont pas encore joints) — E1 = 3, établissements avec échange = 2"
     assert_includes out, "Limites"
     assert_includes out, "le partage d'un code n'est pas enregistré"
   end
@@ -140,6 +140,44 @@ class EntonnoirClassesTaskTest < ActiveSupport::TestCase
 
     assert_match(/read-only transaction/, error.message)
     assert_equal before, table_counts
+    assert_not Orm::User.exists?(first_name: "Écrit")
+  end
+
+  test "la lecture est bornée à 60 secondes" do
+    seen = nil
+    reader = ->(**) { seen = Orm::User.connection.select_value("SHOW statement_timeout"); raise "stop" }
+
+    stub_any_instance(Queries::Classroom::ClassAdoptionQuery, :call, reader) { assert_raises(RuntimeError) { classes } }
+
+    assert_equal "1min", seen
+  end
+
+  test "chaque goulot imprime son code, son libellé et la valeur qui l'a déclenché" do
+    expected = {
+      teachers: "Goulot désigné : 1 (trop peu d'enseignants inscrits) — E1 = 0, établissements avec échange = 0",
+      awareness: "Goulot désigné : 4 (les établissements ne sont pas encore joints) — E1 = 0, établissements avec échange = 0",
+      no_open_class: "Goulot désigné : 2a (établissements sans classe ouverte) — bloqués 0/0 = 0 %",
+      no_class_ticked: "Goulot désigné : 2a′ (enseignants qui ne cochent pas de classe) — E3/E2 = 0/0",
+      code_not_shared: "Goulot désigné : 2b (code de classe pas donné aux élèves) — E4/E3 = 0/0 ; classes vides avec devoir 0, sans devoir 0",
+      code_ignored: "Goulot désigné : 3 (code donné, élèves absents) — médiane = aucune classe peuplée",
+      none: "Goulot désigné : aucun (aucun seuil franchi)"
+    }
+    expected.each do |verdict, line|
+      out = stub_method(Entities::Classroom::AdoptionVerdict, :call, ->(**) { verdict }) { classes }
+      assert_includes out, line
+    end
+  end
+
+  test "la valeur du goulot 2a est un pourcentage de E1" do
+    4.times { create_teacher(school: create_school) }
+    10.times { create_teacher(classrooms: [ classroom_with(1) ]) }
+
+    out = stub_method(Entities::Classroom::AdoptionVerdict, :call, ->(**) { :no_open_class }) { classes }
+    assert_includes out, "bloqués 4/14 = 29 %"
+  end
+
+  test "les établissements inactifs sont exclus, ce que dit le pied" do
+    assert_includes classes, "les établissements inactifs sont exclus du bloc CRM"
   end
 
   test "base vide : une ligne, puis le CRM et le goulot 4" do

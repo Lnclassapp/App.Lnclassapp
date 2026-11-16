@@ -180,6 +180,46 @@ module Queries
                        crm_schools_with_interaction: 0, median_students_per_populated_class: 2.0 }, counters)
       end
 
+      test "un enseignant qui coche une classe d'un autre établissement n'est pas bloqué" do
+        elsewhere = create_classroom
+        create_teacher(school: create_school, classrooms: [ elsewhere ])
+
+        assert_equal [ 1, 0, 1, 1 ], total.to_h.values.first(4)
+      end
+
+      test "les exercices d'une année scolaire passée ne font pas une classe adoptée" do
+        classroom = create_classroom
+        create_teacher(classrooms: [ classroom ])
+        Array.new(5) { create_student(classroom:) }.each { create_exercise_session(student: it, started_at: Time.zone.local(2026, 8, 31, 23)) }
+
+        assert_equal 0, total.e6
+      end
+
+      test "le CRM compte les brouillons, pas les établissements inactifs" do
+        draft = create_school(status: "draft")
+        Orm::CrmInteraction.create!(school: draft, author: create_user(role: "team"), kind: "call", occurred_at: 1.day.ago, outcome: "neutral")
+        create_school(status: "inactive")
+
+        assert_equal [ 1, 1 ], result.crm_stages.first.to_h.values.values_at(1, 2)
+      end
+
+      test "la classe cochée par un compte qui n'est pas enseignant ne compte pas comme ayant un enseignant" do
+        classroom = create_classroom
+        create_student(classroom:, joined_via: "code")
+        Orm::TeacherClassroom.create!(teacher: create_user(role: "school_admin"), classroom:)
+
+        assert_equal({ "code" => 1 }, result.students["without_teacher"])
+        assert_nil result.median_students
+      end
+
+      test "les échanges notés dans le futur ne comptent pas dans les 30 jours" do
+        author = create_user(role: "team")
+        school = create_school
+        Orm::CrmInteraction.create!(school:, author:, kind: "call", occurred_at: 1.hour.from_now, outcome: "neutral")
+
+        assert_equal 0, result.crm_interactions_30d
+      end
+
       test "une base vide rend des zéros" do
         data = result
 
