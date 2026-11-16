@@ -52,7 +52,7 @@ Si une seule condition manque, rien n'est rendu : ni titre, ni phrase « indispo
 
 **Structure**
 ```erb
-<section id="push_invitation" class="rounded-card bg-white p-5 shadow-lift"
+<section id="push_invitation" class="rounded-card border border-line bg-white p-5 shadow-card"
          data-controller="push-subscription"
          data-push-subscription-vapid-key-value="<%= vapid_public_key %>"
          data-push-subscription-preference-url-value="<%= push_preference_path %>"
@@ -63,7 +63,7 @@ Si une seule condition manque, rien n'est rendu : ni titre, ni phrase « indispo
   <ul class="mt-3 space-y-1 text-sm text-ink"><!-- 3 puces : quoi, quand, rien de personnel --></ul>
   <div class="mt-4 flex flex-col gap-2 sm:flex-row">
     <%= ui_button t("communication.push_subscriptions.invitation.accept"), data: { action: "push-subscription#accept" } %>
-    <%= button_to t("communication.push_subscriptions.invitation.later"), push_preference_path(postpone: 1), method: :patch,
+    <%= button_to t("communication.push_subscriptions.invitation.later"), push_preference_path, method: :patch, params: { intent: "postpone" },
                   class: "min-h-tap text-sm font-medium text-brand-strong", form: { data: { turbo_frame: "_self" } } %>
   </div>
   <p class="mt-3 text-xs text-mute" data-push-subscription-target="status" role="status" aria-live="polite"></p>
@@ -71,7 +71,7 @@ Si une seule condition manque, rien n'est rendu : ni titre, ni phrase « indispo
 ```
 La carte est rendue `hidden` ; le contrôleur la montre si l'appareil peut s'abonner (sans JS : elle reste cachée, rien n'est perdu).
 
-**Textes** (`config/locales/fr.yml`, clés absolues `communication.push_subscriptions.invitation.*`) :
+**Textes** (`config/locales/communication/push_subscriptions.fr.yml`, clés `communication.push_subscriptions.invitation.*`) :
 - titre : « Être prévenu de tes devoirs et de tes interros ? »
 - corps : « Lnclass t'envoie un rappel la veille d'un devoir ou d'une interro, quand l'équipe publie une annonce, quand tu gagnes une médaille ou laisses un exercice en plan. »
 - puces : « Jamais la nuit ni pendant les cours. » · « Ni ton nom ni tes notes sur l'écran du téléphone. » · « Tu arrêtes quand tu veux, dans ton profil. »
@@ -88,7 +88,7 @@ La carte est rendue `hidden` ; le contrôleur la montre si l'appareil peut s'abo
 **États obligatoires**
 - **Vide** : conditions non remplies → rien rendu.
 - **Chargement** : bouton « Oui » désactivé, libellé « Un instant… ».
-- **Erreur** : réseau ou 5xx → statut « Ça n'a pas marché. Réessaie plus tard. » (`text-danger`), bouton réactivé. Si la permission est refusée, le statut affiche « Ton navigateur a bloqué les notifications. Tu peux les autoriser dans ses réglages. », et la carte reste, sans bouton.
+- **Erreur** : réseau ou 5xx → statut « Ça n'a pas marché. Réessaie plus tard. » (`text-error`), bouton réactivé. Si la permission est refusée, le statut affiche « Ton navigateur a bloqué les notifications. Tu peux les autoriser dans ses réglages. », et la carte reste, sans bouton.
 - **Succès** : la carte est remplacée par une ligne `text-sm text-ink` « C'est noté. Tu seras prévenu. » avec l'icône `check-circle` (`aria-hidden`).
 
 **Accessibilité** : boutons ≥ 48 px (`min-h-tap`) ; statut en `role="status"` ; l'ordre de tabulation suit l'ordre visuel ; rien porté par la couleur seule.
@@ -101,7 +101,7 @@ La carte est rendue `hidden` ; le contrôleur la montre si l'appareil peut s'abo
 
 | État (calculé côté serveur, précisé par le contrôleur dans le navigateur) | Valeur affichée | Action |
 |---|---|---|
-| Abonnement sur ce navigateur, pas coupé | « Activées » | « Couper » : `PATCH push_preference_path(turn_off: 1)`, sans confirmation. Supprime l'abonnement de ce navigateur et pose `turned_off_at` |
+| Abonnement sur ce navigateur, pas coupé | « Activées » | « Couper » : `PATCH push_preference_path` avec `intent=turn_off`, sans confirmation. Supprime l'abonnement de ce navigateur et pose `turned_off_at` |
 | Pas coupé, abonnement sur un autre navigateur seulement | « Activées sur un autre appareil » | « Activer ici » : même contrôleur, `accept()` |
 | Permission `denied` dans ce navigateur | « Bloquées par ton navigateur » | Aucune. Détail en `text-xs text-mute` : « Autorise-les dans les réglages du navigateur. » |
 | Coupées | « Coupées » | « Réactiver » : efface `turned_off_at`, puis `accept()` |
@@ -110,7 +110,7 @@ Le retour est un Turbo Stream qui remplace `#profile_notifications_row`. Sans JS
 
 ### 3.3 Texte des notifications
 
-Gabarits fermés, `config/locales/fr.yml`, clés `communication.push_messages.<motive>.title|body`. Titre : toujours « Lnclass ». Corps : ceux du PRD §3.1. Seules variables permises : le **nom de la matière** et le **nombre d'exercices**. Icône : l'icône de l'app (`icon-192.png`) ; badge Android : silhouette monochrome à fournir. `tag` = le motif (une nouvelle notification du même motif remplace l'ancienne).
+Gabarits fermés, `config/locales/communication/push.fr.yml`, clés `communication.push.messages.<motive>.title|body`. Titre : toujours « Lnclass ». Corps : ceux du PRD §3.1. Seules variables permises : le **nom de la matière** et le **nombre d'exercices**. Icône : l'icône de l'app (`icon-192.png`) ; badge Android : silhouette monochrome à fournir. `tag` = le motif (une nouvelle notification du même motif remplace l'ancienne).
 
 `notificationclick` : ferme la notification ; ouvre l'URL seulement si elle est de la **même origine** ; focalise un onglet déjà ouvert sur cette URL plutôt que d'en ouvrir un second.
 

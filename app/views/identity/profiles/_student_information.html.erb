@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/_student_information — « Mes informations » de l'élève (Queries::Identity::ProfileQuery::Row) %>
 <%# Rôle : Photo, Nom, Numéro (lignes à toucher), Classe, Établissement (sous lg seulement : dès lg, la classe est dans « Mon compte » et l'établissement a son écran), Inscrit·e le ; remplacée par profile_names/update %>
-<%# ADR  : 0055, 0060, 0095 · UDR : 0041 (amendée), 0047, 0089 §3.2 (sans classe : ni Classe ni Établissement), écrans élève sans répétition §3.2 (Classe sans action : le changement de classe n'est plus proposé) et §3.6 bis (quatre lignes dès lg) · locals : profile %>
+<%# ADR  : 0055, 0060, 0095 · UDR : XXXX-notifications-eleve §3.2 (ligne Notifications), 0041 (amendée), 0047, 0089 §3.2 (sans classe : ni Classe ni Établissement), écrans élève sans répétition §3.2 (Classe sans action : le changement de classe n'est plus proposé) et §3.6 bis (quatre lignes dès lg) · locals : profile %>
 <%# locals: (profile:) -%>
 <% photo_value = t(".photo_value.#{profile.photo_version ? :present : :absent}") %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
@@ -21,5 +21,7 @@
     <% end %>
     <%= render "identity/profiles/student_row", icon: "calendar", label: t(".registered_on"),
                                                 value: l(profile.registered_on, format: :long) %>
+    <%# notifications-push (UDR §3.2) : la ligne n'existe qu'après un premier « Oui » ; elle porte l'id profile_notifications_row. %>
+    <%= render "identity/profiles/push_row" %>
   </ul>
 <% end %>
