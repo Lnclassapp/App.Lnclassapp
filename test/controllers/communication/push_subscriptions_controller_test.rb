@@ -1,7 +1,7 @@
 require "test_helper"
 
 # notifications-push: the browser's subscription belongs to the current session of a student; a teacher is refused;
-# a known address changes owner; a student removes only their own subscriptions.
+# a known address changes owner; the school management and the team are refused; a limit of requests per minute.
 module Communication
   class PushSubscriptionsControllerTest < ActionDispatch::IntegrationTest
     ENDPOINT = "https://fcm.googleapis.com/fcm/send/abc123".freeze
@@ -27,9 +27,7 @@ module Communication
 
     test "an address already known passes to the second student" do
       kofi = create_student
-      sign_in_as @awa
-      post push_subscriptions_path, params: body, as: :json
-      delete session_path
+      create_push_subscription(user: @awa, endpoint: ENDPOINT)
       sign_in_as kofi
 
       post push_subscriptions_path, params: body, as: :json
@@ -48,11 +46,60 @@ module Communication
       assert_equal 0, Orm::Communication::PushSubscription.count
     end
 
+    test "the school management is refused and nothing is stored" do
+      sign_in_as create_school_admin
+
+      post push_subscriptions_path, params: body, as: :json
+
+      assert_response :forbidden
+      assert_equal 0, Orm::Communication::PushSubscription.count
+    end
+
+    test "a team member is refused and nothing is stored" do
+      sign_in_as create_team_member
+
+      post push_subscriptions_path, params: body, as: :json
+
+      assert_response :forbidden
+      assert_equal 0, Orm::Communication::PushSubscription.count
+    end
+
+    test "an address outside the push services is refused with 422" do
+      sign_in_as @awa
+
+      post push_subscriptions_path, params: body(endpoint: "https://metadata.google.internal/x"), as: :json
+
+      assert_response :unprocessable_entity
+      assert_equal 0, Orm::Communication::PushSubscription.count
+    end
+
+    test "the sixth subscription of a student evicts the oldest" do
+      sign_in_as @awa
+      oldest = create_push_subscription(user: @awa, updated_at: 5.days.ago)
+      4.times { create_push_subscription(user: @awa, updated_at: 1.day.ago) }
+
+      post push_subscriptions_path, params: body, as: :json
+
+      assert_response :created
+      assert_equal 5, Orm::Communication::PushSubscription.where(user: @awa).count
+      assert_not Orm::Communication::PushSubscription.exists?(oldest.id)
+    end
+
+    test "the eleventh request of a minute answers 429" do
+      sign_in_as @awa
+      10.times { post push_subscriptions_path, params: body, as: :json }
+      assert_response :created
+
+      post push_subscriptions_path, params: body, as: :json
+
+      assert_response :too_many_requests
+    end
+
     test "a visitor is sent to sign in" do
       post push_subscriptions_path, params: body, as: :json
 
+      assert_redirected_to new_session_path
       assert_equal 0, Orm::Communication::PushSubscription.count
-      assert_not_equal 201, response.status
     end
 
     test "an unsafe address or missing keys are refused with 422" do
@@ -68,30 +115,6 @@ module Communication
       post push_subscriptions_path, params: { endpoint: [ ENDPOINT ], keys: { p256dh: "k", auth: "a" } }, as: :json
       assert_response :unprocessable_entity
       assert_equal 0, Orm::Communication::PushSubscription.count
-    end
-
-    test "the student removes their own subscription and not another one" do
-      mine = create_push_subscription(user: @awa)
-      theirs = create_push_subscription(user: create_student)
-      sign_in_as @awa
-
-      delete push_subscription_path(theirs.id), as: :json
-      assert_response :not_found
-      assert Orm::Communication::PushSubscription.exists?(theirs.id)
-
-      delete push_subscription_path(mine.id), as: :json
-      assert_response :no_content
-      assert_not Orm::Communication::PushSubscription.exists?(mine.id)
-    end
-
-    test "a teacher cannot remove a subscription" do
-      row = create_push_subscription(user: @awa)
-      sign_in_as create_teacher
-
-      delete push_subscription_path(row.id), as: :json
-
-      assert_response :forbidden
-      assert Orm::Communication::PushSubscription.exists?(row.id)
     end
   end
 end

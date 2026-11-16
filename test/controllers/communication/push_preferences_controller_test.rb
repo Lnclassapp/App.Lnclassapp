@@ -40,6 +40,16 @@ module Communication
       assert_nil preference.turned_off_at
     end
 
+    test "turn_on answers with a Turbo Stream that replaces the profile row" do
+      create_push_preference(user: @awa, turned_off_at: Time.current)
+
+      patch push_preference_path, params: { intent: "turn_on" }, as: :turbo_stream
+
+      assert_response :success
+      assert_select "turbo-stream[action=replace][target=profile_notifications_row]"
+      assert_nil preference.turned_off_at
+    end
+
     test "turn_on answers a JSON client without a body" do
       create_push_preference(user: @awa, turned_off_at: Time.current)
 
@@ -74,13 +84,17 @@ module Communication
       assert_nil preference
     end
 
-    test "a teacher is refused" do
-      delete session_path
-      sign_in_as create_teacher
+    test "a teacher, the school management and a team member are refused for every intent and nothing is written" do
+      [ create_teacher, create_school_admin, create_team_member ].each do |other|
+        delete session_path
+        sign_in_as other
 
-      patch push_preference_path, params: { intent: "turn_off" }
+        %w[turn_off turn_on postpone].each do |intent|
+          patch push_preference_path, params: { intent: }
 
-      assert_response :forbidden
+          assert_response :forbidden, "#{other.class} #{intent}"
+        end
+      end
       assert_equal 0, Orm::Communication::PushPreference.count
     end
   end

@@ -5,6 +5,9 @@ module Communication
   class DeliverPushNotificationsJob < ApplicationJob
     DEFAULT_MIN_INTERVAL_HOURS = 4
 
+    # Un seul passage à la fois : deux passages en parallèle enverraient deux fois la même notification.
+    limits_concurrency to: 1, key: -> { self.class.name }
+
     # Le résultat est journalisé, vide compris : un passage muet ne se distingue pas d'un passage qui ne tourne pas.
     def perform
       result = UseCases::Communication::DeliverPushNotifications.new(
@@ -13,6 +16,7 @@ module Communication
         gateway: Gateways::Communication::WebPushGateway.new, clock: Time.zone, delivery_enabled: delivery_enabled?, min_interval: min_interval
       ).call
       Rails.logger.info("[#{self.class.name}] push notifications by status: #{result.value.inspect}")
+      Rails.logger.warn("[#{self.class.name}] #{result.value['not_configured']} student(s) not notified: VAPID keys are missing") if result.value["not_configured"].to_i.positive?
       result.value
     end
 

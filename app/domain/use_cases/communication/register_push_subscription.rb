@@ -6,8 +6,12 @@ module UseCases
     class RegisterPushSubscription
       MAX_ENDPOINT = 2048
       MAX_KEY = 255
-      # L'adresse est appelée par le serveur à l'envoi : https seulement, un nom de domaine, ni identifiant, ni adresse locale.
-      HOST = /\A[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+\z/i
+      # L'adresse est appelée par le serveur à l'envoi : liste fermée des services de push des navigateurs (anti-SSRF), https sur le port 443,
+      # sans identifiant. Un hôte se termine par l'un des suffixes, ou lui est égal.
+      PUSH_HOSTS = %w[fcm.googleapis.com android.googleapis.com updates.push.services.mozilla.com].freeze
+      PUSH_HOST_SUFFIXES = %w[.push.apple.com .notify.windows.com].freeze
+      # Au-delà, l'abonnement le plus ancien de l'élève est supprimé.
+      MAX_PER_USER = 5
 
       def initialize(users:, subscriptions:, policy:)
         @users = users
@@ -23,7 +27,9 @@ module UseCases
         errors = problems(endpoint:, p256dh:, auth:)
         return Shared::Result.failure(:invalid, errors:) if errors.any?
 
-        Shared::Result.success(@subscriptions.register(user_id: actor.user_id, session_id:, endpoint:, p256dh:, auth:))
+        subscription = @subscriptions.register(user_id: actor.user_id, session_id:, endpoint:, p256dh:, auth:)
+        @subscriptions.delete_oldest_beyond(user_id: actor.user_id, limit: MAX_PER_USER)
+        Shared::Result.success(subscription)
       end
 
       private
@@ -39,10 +45,12 @@ module UseCases
         return false unless value.is_a?(String) && value.length <= MAX_ENDPOINT
 
         uri = URI.parse(value)
-        uri.is_a?(URI::HTTPS) && uri.userinfo.nil? && uri.host.to_s.match?(HOST) && !uri.host.match?(/\A[\d.]+\z/) && uri.host != "localhost"
+        uri.is_a?(URI::HTTPS) && uri.port == 443 && uri.userinfo.nil? && push_host?(uri.host.to_s.downcase)
       rescue URI::InvalidURIError
         false
       end
+
+      def push_host?(host) = PUSH_HOSTS.include?(host) || PUSH_HOST_SUFFIXES.any? { host.end_with?(it) && host.length > it.length }
     end
   end
 end

@@ -13,9 +13,9 @@ module Queries
         def initialize(last_activity: LastActivity.new) = @last_activity = last_activity
 
         # → [Entities::Communication::PushCandidate] ; la copie prime sur la médaille de la même session.
-        def for(now:)
-          user_ids = subscribed_user_ids
-          events = copies(user_ids, now) + medals(user_ids, now)
+        def for(now:, user_ids: nil)
+          students = subscribed_user_ids(user_ids)
+          events = copies(students, now) + medals(students, now)
           return [] if events.empty?
 
           last_active = @last_activity.at(user_ids: events.map(&:first).uniq)
@@ -49,10 +49,8 @@ module Queries
         end
 
         # Abonnés, non coupés, non anonymisés.
-        def subscribed_user_ids
-          Orm::Communication::PushSubscription.joins(:user).where(users: { anonymized_at: nil })
-                                              .where.not(user_id: Orm::Communication::PushPreference.where.not(turned_off_at: nil).select(:user_id))
-                                              .select(:user_id)
+        def subscribed_user_ids(user_ids)
+          Subscribers.scope(user_ids).select(:user_id)
         end
       end
     end

@@ -35,11 +35,14 @@ export default class extends Controller {
     this.busy(true)
     try {
       const permission = await Notification.requestPermission()
-      if (permission !== "granted") return this.blocked()
+      // Seul « denied » vaut « bloquées » : une boîte fermée sans réponse (« default ») laisse le bouton tel quel.
+      if (permission === "denied") return this.blocked()
+      if (permission !== "granted") return
 
       await this.subscribe()
       this.done()
-    } catch {
+    } catch (error) {
+      console.warn(error)
       this.fail()
     } finally {
       this.busy(false)
@@ -57,7 +60,8 @@ export default class extends Controller {
       if (!response.ok) throw new Error(response.status)
       this.stateValue = "on"
       await this.accept()
-    } catch {
+    } catch (error) {
+      console.warn(error)
       this.fail()
     }
   }
@@ -72,7 +76,8 @@ export default class extends Controller {
         const registration = await navigator.serviceWorker.ready
         const existing = await registration.pushManager.getSubscription()
         await (existing ? this.send(existing) : this.subscribe())
-      } catch {
+      } catch (error) {
+        console.warn(error)
         this.fail()
       }
     } else {

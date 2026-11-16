@@ -36,6 +36,52 @@ module Queries
         def assignment_due(now: NOW) = AssignmentDue.new.for(now:)
         def quiz_prep(now: NOW) = QuizPrep.new.for(now:)
 
+        test "UDR-0013: a sheet whose course is of another level than the student's gives no candidate, for the devoir and the interro" do
+          other_course = create_course(material: @material, level: create_level)
+          [ 3, 1 ].each do |size|
+            Array.new(size) do
+              create_assignment(classroom: @classroom, assignable: create_exercise(course: other_course), by: @teacher,
+                                batch_public_id: "N#{size}".ljust(14, "0"), due_on: TOMORROW, assigned_at: NOW - 1.day)
+            end
+          end
+          student_in
+
+          assert_empty assignment_due
+          assert_empty quiz_prep
+        end
+
+        test "UDR-0013: only the exercises of the student's level count in a mixed sheet" do
+          other_course = create_course(material: @material, level: create_level)
+          batch = "MIX".ljust(14, "0")
+          [ @course, @course, other_course ].each do |course|
+            create_assignment(classroom: @classroom, assignable: create_exercise(course:), by: @teacher, batch_public_id: batch, due_on: TOMORROW,
+                              assigned_at: NOW - 1.day)
+          end
+          student_in
+
+          assert_empty assignment_due
+          assert_equal [ "quiz_prep:#{batch}" ], quiz_prep.map(&:object_key)
+        end
+
+        test "UDR-0013: a class of another school year still gives its level to its student (the last known level)" do
+          @classroom.update_columns(school_year: "2019-2020")
+          send_sheet(3)
+          student = student_in
+
+          assert_equal [ student.id ], assignment_due.map(&:user_id)
+        end
+
+        test "user_ids limits the candidates to the given students" do
+          send_sheet(3)
+          send_sheet(1)
+          first = student_in
+          second = student_in
+
+          assert_equal [ first.id, second.id ].sort, assignment_due.map(&:user_id).sort
+          assert_equal [ second.id ], AssignmentDue.new.for(now: NOW, user_ids: [ second.id ]).map(&:user_id)
+          assert_equal [ second.id ], QuizPrep.new.for(now: NOW, user_ids: [ second.id ]).map(&:user_id)
+        end
+
         test "une feuille de 3 exercices due demain : un candidat assignment_due avec la matière, le lien de la feuille, valable jusqu'à 20 h" do
           assignments = send_sheet(3)
           student = student_in
@@ -162,7 +208,7 @@ module Queries
           3.times { student_in; send_sheet(3) }
 
           assert_equal few, query_count { assignment_due }
-          assert_equal 4, few
+          assert_equal 6, few
         end
       end
     end

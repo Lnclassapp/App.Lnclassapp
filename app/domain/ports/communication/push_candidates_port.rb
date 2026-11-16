@@ -5,7 +5,8 @@ module Ports
   module Communication
     module PushCandidatesPort
       # → [Entities::Communication::PushCandidate]
-      def for(now:)
+      # user_ids : limite aux élèves donnés (relecture d'un seul élève juste avant l'envoi) ; nil = tous.
+      def for(now:, user_ids: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #for"
       end
     end

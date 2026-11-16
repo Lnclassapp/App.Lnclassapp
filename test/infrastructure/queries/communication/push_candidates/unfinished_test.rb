@@ -34,6 +34,16 @@ module Queries
           assert_equal NOW - 30.hours + 7.days, found.valid_until
         end
 
+        test "user_ids limits the candidates to the given students" do
+          other = create_student
+          create_push_subscription(user: other)
+          session_started(30.hours)
+          session_started(30.hours, student: other)
+
+          assert_equal 2, candidates.size
+          assert_equal [ other.id ], Unfinished.new.for(now: NOW, user_ids: [ other.id ]).map(&:user_id)
+        end
+
         test "ouverte depuis moins de 24 h, ou depuis 7 jours et plus : rien" do
           session_started(23.hours)
           session_started(7.days)

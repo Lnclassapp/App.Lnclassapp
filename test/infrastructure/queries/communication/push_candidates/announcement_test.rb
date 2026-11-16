@@ -36,6 +36,14 @@ module Queries
           assert_not_includes found.to_h.values.map(&:to_s).join, "Maintenance"
         end
 
+        test "user_ids limits the candidates to the given students" do
+          announce
+          other = student_in(@classroom)
+
+          assert_equal [ @student.id, other.id ].sort, candidates.map(&:user_id).sort
+          assert_equal [ other.id ], Announcement.new.for(now: NOW, user_ids: [ other.id ]).map(&:user_id)
+        end
+
         test "une annonce d'enseignant ou de direction : aucun candidat" do
           announce(author: create_teacher, audience: "students", school: nil)
           announce(author: create_school_admin(school: @school), audience: "students", school: @school)

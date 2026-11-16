@@ -18,15 +18,12 @@ module Entities
         local = time.utc
         return local if open?(local)
 
-        (0..1).each do |offset|
-          day = local.beginning_of_day + offset.days
-          hours_of(day).each do |range|
-            opening = day + range.begin.hours
-            return opening if opening > local
-          end
-        end
-        raise "aucune fenêtre trouvée" # inatteignable : chaque jour a au moins une ouverture
+        # Chaque jour a au moins une ouverture : celle du lendemain suit toujours `time`, `find` ne renvoie jamais nil.
+        (0..1).flat_map { |offset| openings_of(local.beginning_of_day + offset.days) }.find { it > local }
       end
+
+      def self.openings_of(day) = hours_of(day).map { day + it.begin.hours }
+      private_class_method :openings_of
 
       def self.hours_of(day) = day.sunday? ? SUNDAY : WEEKDAY
       private_class_method :hours_of

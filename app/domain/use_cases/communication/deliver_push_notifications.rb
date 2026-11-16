@@ -28,11 +28,19 @@ module UseCases
         return Shared::Result.success({}) unless Entities::Communication::SendingWindow.open?(now)
 
         ready = @candidates.for(now:).reject { it.expired?(now) }.group_by(&:user_id)
-        statuses = ready.filter_map { |user_id, list| deliver_to(user_id, list, now) }
+        statuses = ready.filter_map { |user_id, list| deliver_to_safely(user_id, list, now) }
         Shared::Result.success(statuses.tally)
       end
 
       private
+
+      # Un élève dont le dépôt échoue ne bloque pas les suivants : l'erreur est signalée, le passage continue.
+      def deliver_to_safely(user_id, candidates, now)
+        deliver_to(user_id, candidates, now)
+      rescue StandardError => error
+        Rails.error.report(error, handled: true, context: { user_id:, motive: candidates.min_by(&:priority).motive })
+        nil
+      end
 
       # → le statut noté, ou nil si rien n'a été fait pour cet élève.
       def deliver_to(user_id, candidates, now)
@@ -44,10 +52,38 @@ module UseCases
         subscriptions = @subscriptions.for_user(user_id:)
         return if subscriptions.empty?
 
-        status = @delivery_enabled ? push(subscriptions, candidate, now) : "disabled"
-        @deliveries.record(user_id:, motive: candidate.motive, object_key: candidate.object_key, status:, at: now)
-        status
+        candidate = still_ready(user_id, candidate, now)
+        return if candidate.nil?
+
+        send_and_record(user_id, candidate, subscriptions, now)
       end
+
+      # PRD §3.7 : le motif est relu juste avant l'envoi, pour ce seul élève ; devenu faux depuis la sélection, rien ne part.
+      def still_ready(user_id, candidate, now)
+        @candidates.for(now:, user_ids: [ user_id ]).find { it.object_key == candidate.object_key && !it.expired?(now) }
+      end
+
+      # L'envoi est noté même si une écriture échoue après un envoi parti (ensure) : sans cela, l'élève le recevrait de nouveau au passage suivant.
+      def send_and_record(user_id, candidate, subscriptions, now)
+        statuses = []
+        begin
+          @delivery_enabled ? push(subscriptions, candidate, now, statuses) : statuses << "disabled"
+        ensure
+          write(user_id, candidate, statuses, now)
+        end
+        overall(statuses)
+      end
+
+      def write(user_id, candidate, statuses, now)
+        return if statuses.empty?
+
+        status = overall(statuses)
+        return if @deliveries.record(user_id:, motive: candidate.motive, object_key: candidate.object_key, status:, at: now)
+
+        Rails.logger.warn("[#{self.class.name}] delivery already recorded after a sent push: user #{user_id}, motive #{candidate.motive}") if status == "delivered"
+      end
+
+      def overall(statuses) = STATUS_ORDER.find { statuses.include?(it) } || statuses.first
 
       # Le plus urgent des motifs pas encore envoyés : un motif déjà parti ne bloque pas les suivants.
       def next_candidate(user_id, candidates)
@@ -59,25 +95,32 @@ module UseCases
         !last.nil? && last > now - @min_interval
       end
 
-      def push(subscriptions, candidate, now)
+      def push(subscriptions, candidate, now, statuses)
         message = Entities::Communication::PushMessage.for(candidate)
-        statuses = subscriptions.map { status_of(it, @gateway.deliver(subscription: it, message:), now) }
-        STATUS_ORDER.find { statuses.include?(it) }
+        subscriptions.each { settle(it, @gateway.deliver(subscription: it, message:), now, statuses) }
       end
 
-      def status_of(subscription, answer, now)
+      # Le statut est noté AVANT l'écriture qui suit la réponse : si elle échoue, l'envoi parti est quand même consigné.
+      def settle(subscription, answer, now, statuses)
         case answer
         when :delivered
+          statuses << "delivered"
           @subscriptions.record_success(id: subscription.id, at: now)
-          "delivered"
         when :gone
+          statuses << "gone"
           @subscriptions.delete(id: subscription.id)
-          "gone"
-        when :retry
-          @subscriptions.record_failure(id: subscription.id) >= MAX_FAILURES ? "failed" : "retry"
-        else
-          "not_configured"
+        when :retry then statuses << failure_status(subscription)
+        when :not_configured then statuses << "not_configured"
+        else raise ArgumentError, "réponse de la passerelle inconnue : #{answer.inspect}"
         end
+      end
+
+      # Au troisième échec l'envoi est abandonné et le compteur repart de zéro : le motif suivant a ses 3 essais.
+      def failure_status(subscription)
+        return "retry" if @subscriptions.record_failure(id: subscription.id) < MAX_FAILURES
+
+        @subscriptions.reset_failures(id: subscription.id)
+        "failed"
       end
     end
   end

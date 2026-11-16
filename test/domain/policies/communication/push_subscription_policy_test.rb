@@ -16,6 +16,11 @@ module Policies
         assert_equal :forbidden, call(actor: actor(:teacher), user: user).code
       end
 
+      test "the school management and a team member are refused" do
+        assert_equal :forbidden, call(actor: actor(:school_admin), user: user).code
+        assert_equal :forbidden, call(actor: actor(:team), user: user).code
+      end
+
       test "a visitor or a missing account is refused" do
         assert_equal :forbidden, call(actor: nil, user: user).code
         assert_equal :forbidden, call(actor: actor, user: nil).code

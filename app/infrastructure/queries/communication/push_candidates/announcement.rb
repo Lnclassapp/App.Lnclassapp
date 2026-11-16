@@ -10,11 +10,11 @@ module Queries
 
         # → [Entities::Communication::PushCandidate] ; un nombre fixe de lectures (annonces, classes ciblées, abonnés, inscriptions, masquages).
         # La règle de lecture est celle de ReadableMessages#scope, évaluée en mémoire pour tous les élèves à la fois (test de parité).
-        def for(now:)
+        def for(now:, user_ids: nil)
           messages = messages(now)
           return [] if messages.empty?
 
-          student_ids = subscribed_user_ids
+          student_ids = subscribed_user_ids(user_ids)
           return [] if student_ids.empty?
 
           readers = readers(student_ids)
@@ -65,10 +65,8 @@ module Queries
         end
 
         # Abonnés, non coupés, non anonymisés.
-        def subscribed_user_ids
-          Orm::Communication::PushSubscription.joins(:user).where(users: { anonymized_at: nil })
-                                              .where.not(user_id: Orm::Communication::PushPreference.where.not(turned_off_at: nil).select(:user_id))
-                                              .distinct.pluck(:user_id)
+        def subscribed_user_ids(user_ids)
+          Subscribers.scope(user_ids).distinct.pluck(:user_id)
         end
       end
     end

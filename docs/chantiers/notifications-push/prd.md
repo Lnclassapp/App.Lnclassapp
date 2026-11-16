@@ -224,7 +224,7 @@ Alors il lit « 3 élèves abonnés · 4 abonnements » et les envois de la sema
 |---|---|
 | Domaine | Entités `Communication::PushSubscription`, `PushMessage`, `PushMotive` (6 valeurs, priorité), `SendingWindow` (fenêtres, Abidjan), `PushCandidate`. Ports `PushGatewayPort`, `PushSubscriptionRepositoryPort`, `PushPreferenceRepositoryPort`, `PushDeliveryRepositoryPort`, `PushCandidatesPort`. Use cases `RegisterPushSubscription`, `TurnOffPush`, `PostponePushInvitation`, `DeliverPushNotifications` (un passage), `PurgePushData`. Policy `PushSubscriptionPolicy` |
 | Infrastructure | Migration `push_subscriptions`, `push_preferences`, `push_deliveries`. Modèles `Orm::Communication::Push*` et leurs repositories. Requêtes de candidats par motif (`Queries::Communication::PushCandidates::*`). Passerelle `WebPushGateway`. Jobs `Communication::DeliverPushNotificationsJob` (toutes les 15 min dans les fenêtres) et `Communication::PurgePushDataJob` (quotidien), dans `config/recurring.yml`. Amendement de `AnonymizeUser` et de la fermeture des sessions |
-| Delivery | `resources :push_subscriptions` (create, destroy), `resource :push_preference` (update : couper, réactiver, plus tard) dans l'espace élève. Clé publique VAPID dans un attribut `data-` |
+| Delivery | `resources :push_subscriptions` (create seulement : « Couper » passe par `PATCH /push_preference`), `resource :push_preference` (update : couper, réactiver, plus tard) dans l'espace élève. Clé publique VAPID dans un attribut `data-` |
 | UI | Carte d'invitation sur le résultat d'exercice, ligne « Notifications » du profil, écouteurs `push` et `notificationclick` du programme d'arrière-plan, contrôleur Stimulus `push-subscription`, tuile du pilotage de l'équipe |
 
 ## 6. Décisions rattachées

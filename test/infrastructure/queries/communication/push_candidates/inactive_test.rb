@@ -31,6 +31,14 @@ module Queries
           end
         end
 
+        test "user_ids limits the candidates to the given students" do
+          first = student_active_at(Time.utc(2026, 11, 15, 8))
+          second = student_active_at(Time.utc(2026, 11, 15, 8))
+
+          assert_equal [ second.id ], Inactive.new.for(now: NOW, user_ids: [ second.id ]).map(&:user_id)
+          assert_includes candidates.map(&:user_id), first.id
+        end
+
         test "la différence se compte en dates et non en heures : 2 jours 13 h d écart mais 3 dates" do
           student = student_active_at(Time.utc(2026, 11, 15, 23, 0))
 

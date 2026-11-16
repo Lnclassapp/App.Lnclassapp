@@ -5,7 +5,7 @@ class Communication::PurgePushDataJobTest < ActiveJob::TestCase
   test "supprime les abonnements périmés et les envois de plus de 90 jours, garde le reste" do
     student = create_student
     stale = create_push_subscription(user: student, last_success_at: 61.days.ago)
-    never = create_push_subscription(user: student, created_at: 61.days.ago)
+    never = create_push_subscription(user: student, created_at: 61.days.ago, updated_at: 61.days.ago)
     fresh = create_push_subscription(user: student, last_success_at: 59.days.ago)
     new_one = create_push_subscription(user: student)
     old_delivery = create_push_delivery(user: student, sent_at: 91.days.ago)

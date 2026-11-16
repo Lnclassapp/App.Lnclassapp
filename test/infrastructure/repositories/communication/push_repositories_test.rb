@@ -69,15 +69,73 @@ module Repositories
         assert_equal 0, reloaded.failure_count
       end
 
-      test "delete_stale removes what has no success since the date, creation included" do
+      test "reset_failures puts the counter back to zero" do
+        row = register
+        2.times { @subscriptions.record_failure(id: row.id) }
+
+        assert_equal 1, @subscriptions.reset_failures(id: row.id)
+        assert_equal 0, @subscriptions.for_user(user_id: @awa.id).first.failure_count
+        assert_equal 1, @subscriptions.record_failure(id: row.id)
+      end
+
+      test "delete_stale removes what has no success since the date, registration included" do
         old = register(endpoint: "https://push.example.test/old")
-        Orm::Communication::PushSubscription.where(id: old.id).update_all(created_at: 70.days.ago)
+        Orm::Communication::PushSubscription.where(id: old.id).update_all(updated_at: 70.days.ago)
         fresh = register(endpoint: "https://push.example.test/fresh")
         kept = register(endpoint: "https://push.example.test/kept")
-        Orm::Communication::PushSubscription.where(id: kept.id).update_all(created_at: 70.days.ago, last_success_at: 2.days.ago)
+        Orm::Communication::PushSubscription.where(id: kept.id).update_all(updated_at: 70.days.ago, last_success_at: 2.days.ago)
 
         assert_equal 1, @subscriptions.delete_stale(before: 60.days.ago)
         assert_equal [ fresh.id, kept.id ].sort, @subscriptions.for_user(user_id: @awa.id).map(&:id).sort
+      end
+
+      test "a subscription created 61 days ago and registered again yesterday is kept, never seen again it is purged" do
+        now = Time.utc(2026, 11, 16, 12)
+        again = register(endpoint: "https://push.example.test/again")
+        never = register(endpoint: "https://push.example.test/never")
+        Orm::Communication::PushSubscription.where(id: [ again.id, never.id ]).update_all(created_at: now - 61.days, updated_at: now - 61.days)
+        travel_to(now - 1.day) { register(endpoint: "https://push.example.test/again") }
+
+        assert_equal 1, @subscriptions.delete_stale(before: now - 60.days)
+        assert_equal [ again.id ], @subscriptions.for_user(user_id: @awa.id).map(&:id)
+      end
+
+      test "the purge limit is 60 days: 60 kept, 61 removed" do
+        now = Time.utc(2026, 11, 16, 12)
+        sixty = register(endpoint: "https://push.example.test/sixty")
+        sixty_one = register(endpoint: "https://push.example.test/sixtyone")
+        Orm::Communication::PushSubscription.where(id: sixty.id).update_all(updated_at: now - 60.days)
+        Orm::Communication::PushSubscription.where(id: sixty_one.id).update_all(updated_at: now - 61.days)
+
+        assert_equal 1, @subscriptions.delete_stale(before: now - 60.days)
+        assert_equal [ sixty.id ], @subscriptions.for_user(user_id: @awa.id).map(&:id)
+      end
+
+      test "delete_oldest_beyond keeps the most recently registered ones of that student only" do
+        rows = (1..6).map { |index| register(endpoint: "https://push.example.test/n#{index}") }
+        other = register(user: create_student, endpoint: "https://push.example.test/other")
+        rows.each_with_index { |row, index| Orm::Communication::PushSubscription.where(id: row.id).update_all(updated_at: (10 - index).days.ago) }
+        travel_to(1.hour.ago) { register(endpoint: "https://push.example.test/n1") }
+
+        assert_equal 1, @subscriptions.delete_oldest_beyond(user_id: @awa.id, limit: 5)
+        assert_equal (rows.map(&:id) - [ rows[1].id ]).sort, @subscriptions.for_user(user_id: @awa.id).map(&:id).sort
+        assert Orm::Communication::PushSubscription.exists?(other.id)
+        assert_equal 0, @subscriptions.delete_oldest_beyond(user_id: @awa.id, limit: 5)
+      end
+
+      test "reattach_session moves a session's subscriptions, delete_for_user_except_session keeps only that session's" do
+        old = create_login_session(user: @awa)
+        fresh = create_login_session(user: @awa)
+        mine = register(session: old, endpoint: "https://push.example.test/mine")
+        register(session: create_login_session(user: @awa), endpoint: "https://push.example.test/other")
+        register(session: nil, endpoint: "https://push.example.test/expired")
+        stranger = register(user: create_student, endpoint: "https://push.example.test/stranger")
+
+        assert_equal 1, @subscriptions.reattach_session(from_session_id: old.id, to_session_id: fresh.id)
+        assert_equal 2, @subscriptions.delete_for_user_except_session(user_id: @awa.id, session_id: fresh.id)
+        assert_equal [ mine.id ], @subscriptions.for_user(user_id: @awa.id).map(&:id)
+        assert_equal fresh.id, @subscriptions.for_user(user_id: @awa.id).first.session_id
+        assert_equal [ stranger.id ], @subscriptions.for_user(user_id: stranger.user_id).map(&:id)
       end
 
       test "preference: off, on, postponed — each write keeps the other column" do

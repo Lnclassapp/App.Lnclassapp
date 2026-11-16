@@ -9,16 +9,26 @@ module UseCases
       Subscription = Entities::Communication::PushSubscription
 
       class Candidates
-        def initialize(list) = @list = list
-        def for(now:) = @list
+        attr_reader :reads
+
+        # reread : ce que rend la relecture d'un seul élève (par défaut, la même liste).
+        def initialize(list, reread: nil) = (@list, @reread, @reads = list, reread, [])
+
+        def for(now:, user_ids: nil)
+          @reads << user_ids
+          list = user_ids && @reread ? @reread : @list
+          user_ids ? list.select { user_ids.include?(it.user_id) } : list
+        end
       end
 
       class Subscriptions
-        attr_reader :deleted, :successes, :failures
+        attr_reader :deleted, :successes, :failures, :resets
 
-        def initialize(rows, failure_counts: {})
+        def initialize(rows, failure_counts: {}, record_success_raises: false)
           @rows = rows
           @failure_counts = failure_counts
+          @record_success_raises = record_success_raises
+          @resets = []
           @deleted = []
           @successes = []
           @failures = []
@@ -26,7 +36,13 @@ module UseCases
 
         def for_user(user_id:) = @rows.select { it.user_id == user_id }
         def delete(id:) = @deleted << id
-        def record_success(id:, at:) = @successes << id
+        def record_success(id:, at:)
+          raise "base indisponible" if @record_success_raises
+
+          @successes << id
+        end
+
+        def reset_failures(id:) = @resets << id
 
         def record_failure(id:)
           @failures << id
@@ -42,15 +58,24 @@ module UseCases
       class Deliveries
         attr_reader :rows, :last
 
-        def initialize(sent: [], last: nil)
+        def initialize(sent: [], last: nil, recorded: true, raises_for: [])
           @sent = sent
+          @recorded = recorded
+          @raises_for = raises_for
           @last = last
           @rows = []
         end
 
-        def sent?(user_id:, motive:, object_key:) = @sent.include?([ user_id, motive, object_key ])
+        def sent?(user_id:, motive:, object_key:)
+          raise "base indisponible" if @raises_for.include?(user_id)
+
+          @sent.include?([ user_id, motive, object_key ])
+        end
         def last_sent_at(user_id:) = @last
-        def record(user_id:, motive:, object_key:, status:, at:) = @rows << [ user_id, motive, object_key, status ]
+        def record(user_id:, motive:, object_key:, status:, at:)
+          @rows << [ user_id, motive, object_key, status ]
+          @recorded
+        end
       end
 
       class Gateway
@@ -73,9 +98,10 @@ module UseCases
       def sub(id, user_id: 1) = Subscription.new(id:, user_id:, endpoint: "https://push.test/#{id}", p256dh: "p", auth: "a")
 
       def run_pass(candidates: [ candidate ], subs: [ sub(10) ], off: [], deliveries: Deliveries.new, gateway: Gateway.new(:delivered),
-                   now: WEDNESDAY_NOON, enabled: true, failure_counts: {})
-        subscriptions = Subscriptions.new(subs, failure_counts:)
-        result = DeliverPushNotifications.new(candidates: Candidates.new(candidates), subscriptions:, preferences: Preferences.new(off),
+                   now: WEDNESDAY_NOON, enabled: true, failure_counts: {}, reread: nil, record_success_raises: false)
+        subscriptions = Subscriptions.new(subs, failure_counts:, record_success_raises:)
+        @candidates = Candidates.new(candidates, reread:)
+        result = DeliverPushNotifications.new(candidates: @candidates, subscriptions:, preferences: Preferences.new(off),
                                               deliveries:, gateway:, clock: Struct.new(:now).new(now), delivery_enabled: enabled,
                                               min_interval: 4.hours).call
         [ result, subscriptions, deliveries, gateway ]
@@ -209,6 +235,117 @@ module UseCases
 
         _, _, deliveries, = run_pass(subs: [ sub(10), sub(11) ], gateway: Gateway.new(:retry, :gone), failure_counts: { 10 => 3 })
         assert_equal [ "failed" ], deliveries.rows.map(&:last)
+      end
+
+      test "au troisième échec, le compteur de l'abonnement repart de zéro ; avant, il n'est pas remis à zéro" do
+        _, subscriptions, = run_pass(gateway: Gateway.new(:retry), failure_counts: { 10 => 3 })
+        assert_equal [ 10 ], subscriptions.resets
+
+        _, subscriptions, = run_pass(gateway: Gateway.new(:retry), failure_counts: { 10 => 2 })
+        assert_empty subscriptions.resets
+      end
+
+      test "deux échecs déjà comptés : le troisième est failed, le deuxième encore retry" do
+        _, _, deliveries, = run_pass(gateway: Gateway.new(:retry), failure_counts: { 10 => 2 })
+
+        assert_equal "retry", deliveries.rows.first.last
+      end
+
+      test "retry sur un navigateur et delivered sur l'autre : delivered" do
+        _, _, deliveries, = run_pass(subs: [ sub(10), sub(11) ], gateway: Gateway.new(:retry, :delivered))
+
+        assert_equal [ "delivered" ], deliveries.rows.map(&:last)
+      end
+
+      test "failed l'emporte sur not_configured" do
+        _, _, deliveries, = run_pass(subs: [ sub(10), sub(11) ], gateway: Gateway.new(:retry, :not_configured), failure_counts: { 10 => 3 })
+
+        assert_equal [ "failed" ], deliveries.rows.map(&:last)
+      end
+
+      test "une réponse inconnue de la passerelle est un bug : le passage signale l'élève et n'écrit rien" do
+        reported = capture_reports { run_pass(gateway: Gateway.new(:boom)) }
+
+        assert_equal [ ArgumentError ], reported.map { it[:error].class }
+        assert_equal 1, reported.first[:context][:user_id]
+      end
+
+      test "12 h 05 envoyé, 13 h bloqué par l'intervalle de 4 h, 17 h part" do
+        deliveries = Deliveries.new
+        run_pass(deliveries:, now: Time.utc(2026, 11, 18, 12, 5))
+        assert_equal 1, deliveries.rows.size
+
+        blocked = Deliveries.new(last: Time.utc(2026, 11, 18, 12, 5))
+        run_pass(deliveries: blocked, now: Time.utc(2026, 11, 18, 13))
+        assert_empty blocked.rows
+
+        late = Deliveries.new(last: Time.utc(2026, 11, 18, 12, 5))
+        run_pass(deliveries: late, now: Time.utc(2026, 11, 18, 17))
+        assert_equal 1, late.rows.size
+      end
+
+      test "assignment_due contre quiz_prep : seule l'interro part" do
+        _, _, deliveries, = run_pass(candidates: [ candidate(motive: "assignment_due", key: "d"), candidate(motive: "quiz_prep", key: "q") ])
+
+        assert_equal [ [ 1, "quiz_prep", "q", "delivered" ] ], deliveries.rows
+      end
+
+      test "PRD 3.7 : le motif relu pour ce seul élève n'est plus prêt : aucun appel au port, aucune ligne" do
+        _, _, deliveries, gateway = run_pass(reread: [])
+
+        assert_empty gateway.calls
+        assert_empty deliveries.rows
+        assert_equal [ nil, [ 1 ] ], @candidates.reads
+      end
+
+      test "PRD 3.7 : le motif relu et encore prêt part ; un motif relu expiré ne part pas" do
+        _, _, deliveries, = run_pass(reread: [ candidate ])
+        assert_equal 1, deliveries.rows.size
+
+        _, _, expired, gateway = run_pass(reread: [ candidate(valid_until: WEDNESDAY_NOON - 1.minute) ])
+        assert_empty gateway.calls
+        assert_empty expired.rows
+      end
+
+      test "le dépôt échoue pour un élève : l'erreur est signalée et les élèves suivants sont servis" do
+        deliveries = Deliveries.new(raises_for: [ 1 ])
+        reported = capture_reports do
+          _, _, @out, = run_pass(candidates: [ candidate(user_id: 1), candidate(user_id: 2) ], subs: [ sub(10), sub(11, user_id: 2) ], deliveries:)
+        end
+
+        assert_equal [ 2 ], deliveries.rows.map(&:first)
+        assert_equal [ { user_id: 1, motive: "inactive" } ], reported.map { it[:context] }
+      end
+
+      test "l'écriture après le départ échoue : l'envoi est quand même noté (ensure), l'erreur est signalée" do
+        reported = capture_reports do
+          _, _, @deliveries, = run_pass(record_success_raises: true)
+        end
+
+        assert_equal [ [ 1, "inactive", "k", "delivered" ] ], @deliveries.rows
+        assert_equal 1, reported.size
+      end
+
+      test "un envoi parti dont l'écriture renvoie faux (déjà noté) est journalisé" do
+        log = capture_log { run_pass(deliveries: Deliveries.new(recorded: false)) }
+
+        assert_includes log, "delivery already recorded after a sent push: user 1, motive inactive"
+      end
+
+      test "un statut non delivered dont l'écriture renvoie faux n'est pas journalisé" do
+        assert_not_includes capture_log { run_pass(gateway: Gateway.new(:gone), deliveries: Deliveries.new(recorded: false)) }, "already recorded"
+      end
+
+      def capture_reports
+        reports = []
+        subscriber = Class.new do
+          define_method(:report) { |error, handled:, severity:, context:, source: nil| reports << { error:, context: } }
+        end.new
+        Rails.error.subscribe(subscriber)
+        yield
+        reports
+      ensure
+        Rails.error.unsubscribe(subscriber)
       end
     end
   end

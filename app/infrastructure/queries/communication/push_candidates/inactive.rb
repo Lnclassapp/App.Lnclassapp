@@ -11,9 +11,9 @@ module Queries
 
         # → [Entities::Communication::PushCandidate]. Le palier est atteint le jour même (valid_until : fin de ce jour) ;
         # passé le dernier palier, plus rien sans nouvelle activité. Abidjan est à UTC+0 : la date UTC est la date d'Abidjan.
-        def for(now:)
+        def for(now:, user_ids: nil)
           today = now.utc.to_date
-          last_active = @last_activity.at(user_ids: subscribed_user_ids)
+          last_active = @last_activity.at(user_ids: subscribed_user_ids(user_ids))
           last_active.filter_map do |user_id, last|
             day = last.utc.to_date
             step = (today - day).to_i
@@ -27,10 +27,8 @@ module Queries
         private
 
         # Abonnés, non coupés, non anonymisés (LastActivity écarte les comptes qui ne sont pas des élèves).
-        def subscribed_user_ids
-          Orm::Communication::PushSubscription.joins(:user).where(users: { anonymized_at: nil })
-                                              .where.not(user_id: Orm::Communication::PushPreference.where.not(turned_off_at: nil).select(:user_id))
-                                              .distinct.pluck(:user_id)
+        def subscribed_user_ids(user_ids)
+          Subscribers.scope(user_ids).distinct.pluck(:user_id)
         end
       end
     end

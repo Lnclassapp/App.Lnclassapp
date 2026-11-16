@@ -7,7 +7,7 @@ class PushInvitationTest < ApplicationSystemTestCase
   STUB = <<~JS.freeze
     Notification.requestPermission = async () => "granted"
     PushManager.prototype.subscribe = async () => ({
-      toJSON: () => ({ endpoint: "https://push.example.test/send/system-test", keys: { p256dh: "BPsystem", auth: "authsystem" } })
+      toJSON: () => ({ endpoint: "https://fcm.googleapis.com/fcm/send/system-test", keys: { p256dh: "BPsystem", auth: "authsystem" } })
     })
     PushManager.prototype.getSubscription = async () => null
   JS
@@ -33,7 +33,7 @@ class PushInvitationTest < ApplicationSystemTestCase
       assert_text I18n.t("communication.push_subscriptions.invitation.success")
     end
 
-    row = Orm::Communication::PushSubscription.find_by!(endpoint: "https://push.example.test/send/system-test")
+    row = Orm::Communication::PushSubscription.find_by!(endpoint: "https://fcm.googleapis.com/fcm/send/system-test")
     assert_equal @awa.id, row.user_id
     assert_not_nil row.session_id
 

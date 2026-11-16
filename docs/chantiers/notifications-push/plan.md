@@ -36,7 +36,7 @@ Contrats gelés au Lot 0, que les lots utilisent sans les changer :
 - `Entities::Communication::PushMessage.for(candidate)` : les six gabarits (clés de `fr.yml` posées au Lot 0).
 - `Entities::Communication::SendingWindow` : fenêtres d'Abidjan, `open?(time)`, `next_open_at(time)`.
 - Seuil « interros / devoirs » : la constante `DEVOIRS_FROM = 3` remonte dans une entité partagée (`Entities::Classroom::SheetKind`), lue par l'écran « Ma classe » et par le Lot C.
-- Chemins : `POST /push_subscriptions`, `DELETE /push_subscriptions/:id`, `PATCH /push_preference` (`turn_off`, `turn_on`, `postpone`).
+- Chemins : `POST /push_subscriptions`, `PATCH /push_preference` (`turn_off`, `turn_on`, `postpone`).
 
 ---
 

@@ -28,7 +28,8 @@ module Identity
     def reset
       UseCases::Identity::ResetPinWithCode.new(
         users: Repositories::Identity::UserRepository.new, pin_recoveries: Repositories::Identity::PinRecoveryRepository.new,
-        sessions: Repositories::Identity::SessionRepository.new, login_attempts: Repositories::Identity::LoginAttemptRepository.new,
+        sessions: Repositories::Identity::SessionRepository.new,
+        push_subscriptions: Repositories::Communication::PushSubscriptionRepository.new, login_attempts: Repositories::Identity::LoginAttemptRepository.new,
         audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,
         digest_key: secret_digest_key, clock: Time.zone
       )

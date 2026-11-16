@@ -108,10 +108,12 @@ module UseCases
         assert_equal 1, @transaction.calls
       end
 
-      test "the push subscriptions of the sessions it closes are deleted, never the new session's" do
+      test "the push subscription of the current session follows the new one, every other of the student is deleted" do
         change
 
-        assert_equal [ [ 7 ] ], @push.deleted_sessions
+        assert_equal [ 7, 42 ], @push.reattached
+        assert_equal 42, @push.kept_session
+        assert_equal [ 42 ], @push.for_user(user_id: 3).map(&:session_id)
       end
 
       test "a verified second factor stays verified on the new session" do

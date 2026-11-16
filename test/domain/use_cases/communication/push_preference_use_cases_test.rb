@@ -73,6 +73,16 @@ module UseCases
         assert_empty @preferences.calls
       end
 
+      test "the school management, a team member and a missing actor are refused by the three use cases" do
+        [ Entities::Identity::Actor.new(user_id: 7, role: :school_admin), Entities::Identity::Actor.new(user_id: 8, role: :team), nil ].each do |actor|
+          assert_equal :forbidden, TurnOffPush.new(**@deps, subscriptions: @subscriptions, clock: FakeClock.new).call(actor:, session_id: 9).code
+          assert_equal :forbidden, TurnOnPush.new(**@deps).call(actor:).code
+          assert_equal :forbidden, PostponePushInvitation.new(**@deps, clock: FakeClock.new).call(actor:).code
+        end
+        assert_empty @preferences.calls
+        assert_nil @subscriptions.deleted_sessions
+      end
+
       test "postponing hides the invitation for seven days" do
         assert_predicate PostponePushInvitation.new(**@deps, clock: FakeClock.new).call(actor: @actor), :success?
         assert_equal [ [ :postpone, 5, NOW + 7.days ] ], @preferences.calls

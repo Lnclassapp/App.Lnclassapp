@@ -12,7 +12,7 @@ module Queries
       def initialize(sources: SOURCES.map(&:new)) = @sources = sources
 
       # → [Entities::Communication::PushCandidate], tous motifs confondus ; chaque source lit son motif, rien d'autre.
-      def for(now:) = @sources.flat_map { it.for(now:) }
+      def for(now:, user_ids: nil) = @sources.flat_map { it.for(now:, user_ids:) }
     end
   end
 end

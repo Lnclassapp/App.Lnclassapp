@@ -37,6 +37,16 @@ module Queries
           assert_equal NOW - 3.hours + 24.hours, found.valid_until
         end
 
+        test "user_ids limits the candidates to the given students" do
+          other = create_student
+          create_push_subscription(user: other)
+          completed(NOW - 3.hours, received_at: NOW - 3.hours)
+          completed(NOW - 3.hours, student: other, received_at: NOW - 3.hours)
+
+          assert_equal 2, candidates.size
+          assert_equal [ other.id ], Result.new.for(now: NOW, user_ids: [ other.id ]).map(&:user_id)
+        end
+
         test "copie reçue à l'instant ou depuis plus de 24 h : rien pour la plus ancienne ; la copie fraîche est notifiée sans délai" do
           completed(NOW - 25.hours, received_at: NOW - 25.hours)
           fresh = completed(NOW - 5.minutes, received_at: NOW - 5.minutes)

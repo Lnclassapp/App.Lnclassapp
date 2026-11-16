@@ -4,7 +4,7 @@ module Factories
   module Push
     ActiveSupport::TestCase.include(self)
 
-    def create_push_subscription(user: create_student, session: nil, endpoint: "https://push.example.test/send/#{SecureRandom.hex(8)}",
+    def create_push_subscription(user: create_student, session: nil, endpoint: "https://fcm.googleapis.com/fcm/send/#{SecureRandom.hex(8)}",
                                  p256dh: "BP#{SecureRandom.urlsafe_base64(60)}", auth: SecureRandom.urlsafe_base64(16), **attributes)
       Orm::Communication::PushSubscription.create!(user:, session:, endpoint:, p256dh:, auth:, **attributes)
     end

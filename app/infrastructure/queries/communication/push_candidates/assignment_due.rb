@@ -5,19 +5,20 @@ module Queries
   module Communication
     class PushCandidates
       class AssignmentDue
-        Row = Data.define(:id, :public_id, :batch, :due_on, :material_name)
+        Row = Data.define(:id, :public_id, :batch, :due_on, :material_name, :level_id, :series_id)
 
         # Un nombre fixe de lectures : élèves abonnés, appartenances, assignations des envois dus demain, copies rendues.
         # → [Entities::Communication::PushCandidate]. Abidjan est à UTC+0 : la date UTC est la date d'Abidjan.
-        def for(now:)
+        def for(now:, user_ids: nil)
           today = now.utc.to_date
-          student_ids = subscribed_user_ids
+          student_ids = subscribed_user_ids(user_ids)
           memberships = student_ids.empty? ? [] : memberships(student_ids)
           return [] if memberships.empty?
 
           sheets = sheets_by_classroom(memberships.map(&:last).uniq, today + 1)
           handed_in = handed_in(student_ids, sheets.values.flatten.map(&:id))
-          memberships.flat_map { |student_id, classroom_id| candidates(student_id, sheets.fetch(classroom_id, []), handed_in, today) }
+          audiences = audiences(memberships, today)
+          memberships.flat_map { |student_id, classroom_id| candidates(student_id, sheets.fetch(classroom_id, []), handed_in, audiences[student_id], today) }
         end
 
         private
@@ -27,8 +28,11 @@ module Queries
         def motive = "assignment_due"
         def variables(material, _count) = { material: }
 
-        def candidates(student_id, sheets, handed_in, today)
+        # UDR-0013 : comme StudentAssignedSheetsQuery, rien d'un autre niveau que celui de l'élève.
+        def candidates(student_id, sheets, handed_in, audience, today)
           sheets.filter_map do |sheet|
+            sheet = sheet.select { |row| audience.any? { |level_id, series_id| row.level_id == level_id && [ nil, series_id ].include?(row.series_id) } }
+            next if sheet.empty?
             next unless Entities::Classroom::SheetKind.for(sheet.size) == kind
             next if sheet.all? { handed_in.include?([ student_id, it.id ]) }
 
@@ -41,11 +45,20 @@ module Queries
           end
         end
 
+        # { student_id => [[level_id, series_id]] } : règle de StudentAudienceQuery en deux lectures pour tous les élèves : les classes actives
+        # non quittées de l'année en cours ; sans aucune, le niveau de la classe principale (la dernière connue).
+        def audiences(memberships, today)
+          current = Orm::ClassroomStudent.joins(:classroom)
+                                         .where(student_id: memberships.map(&:first), left_at: nil, classrooms: { status: "active", school_year: Entities::Classroom::SchoolYear.current(today) })
+                                         .distinct.pluck(:student_id, "classrooms.level_id", "classrooms.series_id")
+                                         .group_by(&:first).transform_values { |rows| rows.map { it.drop(1) } }
+          own = Orm::Classroom.where(id: memberships.map(&:last)).pluck(:id, :level_id, :series_id).to_h { |id, level_id, series_id| [ id, [ [ level_id, series_id ] ] ] }
+          memberships.to_h { |student_id, classroom_id| [ student_id, current.fetch(student_id) { own.fetch(classroom_id) } ] }
+        end
+
         # Abonnés, non coupés, non anonymisés.
-        def subscribed_user_ids
-          Orm::Communication::PushSubscription.joins(:user).where(users: { anonymized_at: nil })
-                                              .where.not(user_id: Orm::Communication::PushPreference.where.not(turned_off_at: nil).select(:user_id))
-                                              .distinct.pluck(:user_id)
+        def subscribed_user_ids(user_ids)
+          Subscribers.scope(user_ids).distinct.pluck(:user_id)
         end
 
         # [[student_id, classroom_id]] : la classe principale active, jamais une classe quittée ou archivée.
@@ -69,7 +82,7 @@ module Queries
                         "WHERE due.status = 'active' AND due.due_on = ?)", tomorrow)
                  .order("classroom_assignments.id")
                  .pluck("classroom_assignments.classroom_id", "classroom_assignments.id", "classroom_assignments.public_id",
-                        "classroom_assignments.batch_public_id", "classroom_assignments.due_on", "materials.name")
+                        "classroom_assignments.batch_public_id", "classroom_assignments.due_on", "materials.name", "courses.level_id", "courses.series_id")
           rows.group_by(&:first).transform_values do |classroom_rows|
             classroom_rows.map { |_, *values| Row.new(*values) }.group_by { it.batch || it.public_id }.values
                           .select { |sheet| sheet.filter_map(&:due_on).min == tomorrow }

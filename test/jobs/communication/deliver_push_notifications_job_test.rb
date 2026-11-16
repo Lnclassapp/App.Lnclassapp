@@ -8,7 +8,7 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
   setup do
     @student = create_student
     create_push_subscription(user: @student)
-    create_exercise_session(student: @student).update_columns(started_at: WEDNESDAY_NOON - 3.days, completed_at: nil)
+    create_exercise_session(student: @student, status: "completed").update_columns(started_at: WEDNESDAY_NOON - 3.days - 10.minutes, completed_at: WEDNESDAY_NOON - 3.days)
   end
 
   def run_job(env = {})
@@ -69,5 +69,20 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
 
     assert_includes log, "[Communication::DeliverPushNotificationsJob] push notifications by status: {\"disabled\" => 1}"
     assert_includes log, "[Communication::DeliverPushNotificationsJob] push notifications by status: {}"
+  end
+
+  test "un seul passage à la fois : la concurrence est limitée à 1 sous une clé fixe" do
+    assert_equal 1, Communication::DeliverPushNotificationsJob.concurrency_limit
+    assert_includes Communication::DeliverPushNotificationsJob.new.concurrency_key, "Communication::DeliverPushNotificationsJob"
+  end
+
+  test "des clés VAPID absentes sont signalées une fois par passage" do
+    log = capture_log do
+      with_env("PUSH_DELIVERY_ENABLED" => "true", "VAPID_PUBLIC_KEY" => nil, "VAPID_PRIVATE_KEY" => nil, "VAPID_SUBJECT" => nil) do
+        travel_to(WEDNESDAY_NOON) { Communication::DeliverPushNotificationsJob.perform_now }
+      end
+    end
+
+    assert_includes log, "1 student(s) not notified: VAPID keys are missing"
   end
 end

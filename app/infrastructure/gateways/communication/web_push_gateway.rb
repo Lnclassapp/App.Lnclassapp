@@ -1,5 +1,5 @@
 # 🔌 INFRA · Gateways::Communication::WebPushGateway
-# Rôle : envoie une notification à un navigateur par Web Push (gem web-push, VAPID) ; ne lève jamais, répond par un symbole du port
+# Rôle : envoie une notification à un navigateur par Web Push (gem web-push, VAPID) ; répond par un symbole du port pour tout échec de réseau ou de service ; un bug (autre exception) lève
 # ADR  : XXXX-notifications-web-push-aux-eleves (§4.2, §4.3) · adaptateur de Ports::Communication::PushGatewayPort
 module Gateways
   module Communication
@@ -28,15 +28,35 @@ module Gateways
 
         request(subscription, message, vapid).perform
         :delivered
-      rescue WebPush::ExpiredSubscription, WebPush::InvalidSubscription
+      rescue WebPush::ExpiredSubscription, WebPush::InvalidSubscription => error
+        log(:info, :gone, subscription, error)
         :gone
-      rescue StandardError => error
-        # Ni charge ni clé dans le journal : la classe de l'erreur suffit à diagnostiquer.
-        Rails.logger.warn("[#{self.class.name}] retry: #{error.class.name}")
+      rescue WebPush::Unauthorized => error
+        # 401/403 : les clés VAPID sont suspectes, jamais un abonnement mort ; l'abonnement reste, l'équipe doit le voir.
+        log(:error, :retry, subscription, error)
+        :retry
+      rescue WebPush::PayloadTooLarge, ArgumentError, OpenSSL::PKey::PKeyError => error
+        # 413 et clés d'abonnement illisibles : cet abonnement ne marchera jamais.
+        log(:warn, :gone, subscription, error)
+        :gone
+      rescue WebPush::ResponseError => error
+        # 400 : requête refusée par le service, abonnement inutilisable ; toute autre réponse inattendue : à retenter.
+        status = error.response.code == "400" ? :gone : :retry
+        log(:warn, status, subscription, error)
+        status
+      rescue WebPush::Error, Net::OpenTimeout, Net::ReadTimeout, SocketError, SystemCallError, OpenSSL::SSL::SSLError => error
+        log(:warn, :retry, subscription, error)
         :retry
       end
 
       private
+
+      # Ni charge, ni clé, ni adresse entière : l'identifiant de l'abonnement, la classe de l'erreur, le code HTTP et l'hôte du service.
+      def log(level, status, subscription, error)
+        host = subscription.endpoint[%r{\Ahttps://([^/:?#]+)}, 1].to_s
+        Rails.logger.public_send(level, "[#{self.class.name}] #{status}: #{error.class.name} subscription=#{subscription.id} " \
+                                        "code=#{error.try(:response)&.code || '-'} host=#{host}")
+      end
 
       def vapid_options
         options = { public_key: ENV["VAPID_PUBLIC_KEY"], private_key: ENV["VAPID_PRIVATE_KEY"], subject: ENV["VAPID_SUBJECT"] }

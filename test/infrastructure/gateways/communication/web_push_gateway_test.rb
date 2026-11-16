@@ -1,7 +1,7 @@
 require "test_helper"
 
 # ADR-XXXX-notifications-web-push-aux-eleves §4.2 et §4.3 : l'adaptateur Web Push (gem web-push, VAPID) ne lève jamais :
-# 201 → delivered, 404/410 → gone, 429/5xx/réseau → retry, clés absentes → not_configured. Aucun appel réseau : Net::HTTP est remplacé ;
+# 201 → delivered, 404/410/400/413 et clés illisibles → gone, 429/5xx/réseau → retry (401/403 : retry, journal error), un bug lève, clés absentes → not_configured. Aucun appel réseau : Net::HTTP est remplacé ;
 # les clés sont une paire éphémère générée en mémoire.
 module Gateways
   module Communication
@@ -39,6 +39,18 @@ module Gateways
         with_env(env) do
           stub_method(Net::HTTP, :new, ->(*) { http }) { WebPushGateway.new.deliver(subscription: @subscription, message: @message) }
         end
+      end
+
+      # Comme capture_log, avec le niveau devant chaque ligne.
+      def capture_leveled_log
+        io = StringIO.new
+        logger = ActiveSupport::Logger.new(io)
+        logger.formatter = ->(severity, _, _, message) { "#{severity} #{message}\n" }
+        Rails.logger.broadcast_to(logger)
+        yield
+        io.string
+      ensure
+        Rails.logger.stop_broadcasting_to(logger)
       end
 
       def with_env(values)
@@ -81,24 +93,66 @@ module Gateways
         end
       end
 
-      test "429, 5xx, refus d'authentification, charge refusée ou réponse inattendue : retry" do
+      test "429, 5xx ou réponse inattendue : retry, journal warn avec l'identifiant, le code et l'hôte" do
         [ reply(Net::HTTPTooManyRequests, "429", "Too Many"), reply(Net::HTTPInternalServerError, "500", "Boom"),
-          reply(Net::HTTPServiceUnavailable, "503", "Down"), reply(Net::HTTPUnauthorized, "401", "No"),
-          reply(Net::HTTPPayloadTooLarge, "413", "Big"), reply(Net::HTTPBadRequest, "400", "Bad") ].each do |response|
-          assert_equal :retry, deliver(FakeHttp.new(response:)), response.code
+          reply(Net::HTTPServiceUnavailable, "503", "Down"), reply(Net::HTTPFound, "302", "Moved") ].each do |response|
+          log = capture_leveled_log { assert_equal :retry, deliver(FakeHttp.new(response:)), response.code }
+
+          assert_includes log, "WARN"
+          assert_includes log, "subscription=1 code=#{response.code} host=push.example.test"
         end
       end
 
-      test "délai dépassé ou erreur réseau : retry, sans lever" do
+      test "401 et 403 : retry, mais journal error (clés VAPID suspectes), abonnement conservé" do
+        [ reply(Net::HTTPUnauthorized, "401", "No"), reply(Net::HTTPForbidden, "403", "Forbidden") ].each do |response|
+          log = capture_leveled_log { assert_equal :retry, deliver(FakeHttp.new(response:)), response.code }
+
+          assert_match(/ERROR.*WebPushGateway\] retry: WebPush::Unauthorized subscription=1 code=#{response.code} host=push.example.test/, log)
+        end
+      end
+
+      test "400 et 413 : gone" do
+        [ reply(Net::HTTPBadRequest, "400", "Bad"), reply(Net::HTTPPayloadTooLarge, "413", "Big") ].each do |response|
+          assert_equal :gone, deliver(FakeHttp.new(response:)), response.code
+        end
+      end
+
+      test "400 UnauthorizedRegistration (FCM) : retry, journal error" do
+        log = capture_leveled_log { assert_equal :retry, deliver(FakeHttp.new(response: reply(Net::HTTPBadRequest, "400", "UnauthorizedRegistration"))) }
+
+        assert_match(/ERROR.*Unauthorized/, log)
+      end
+
+      test "le journal ne porte jamais l'adresse entière, ni la clé, ni la charge" do
+        log = capture_log { deliver(FakeHttp.new(response: reply(Net::HTTPInternalServerError, "500", "Boom"))) }
+
+        assert_not_includes log, "/send/abc"
+        assert_not_includes log, @subscription.p256dh
+        assert_not_includes log, "Ta classe avance"
+      end
+
+      test "délai dépassé ou erreur réseau : retry, sans lever, journal warn" do
         [ Net::ReadTimeout.new, Net::OpenTimeout.new, SocketError.new("dns"), Errno::ECONNRESET.new, OpenSSL::SSL::SSLError.new ].each do |error|
-          assert_equal :retry, deliver(FakeHttp.new(error:)), error.class.name
+          log = capture_log { assert_equal :retry, deliver(FakeHttp.new(error:)), error.class.name }
+
+          assert_includes log, "code=- host=push.example.test"
         end
       end
 
-      test "des clés d'abonnement inutilisables : retry, sans lever" do
+      test "une erreur de la gem sans réponse (configuration) : retry" do
+        assert_equal :retry, deliver(FakeHttp.new(error: WebPush::ConfigurationError.new("vapid")))
+      end
+
+      test "des clés d'abonnement illisibles : gone" do
         @subscription = @subscription.with(p256dh: "pas-une-clé")
 
-        assert_equal :retry, deliver(FakeHttp.new(response: reply(Net::HTTPCreated, "201", "Created")))
+        assert_equal :gone, deliver(FakeHttp.new(response: reply(Net::HTTPCreated, "201", "Created")))
+        assert_equal :gone, deliver(FakeHttp.new(error: OpenSSL::PKey::PKeyError.new("bad point")))
+      end
+
+      test "toute autre exception est un bug : elle lève" do
+        assert_raises(NoMethodError) { deliver(FakeHttp.new(error: NoMethodError.new("bug"))) }
+        assert_raises(RuntimeError) { deliver(FakeHttp.new(error: RuntimeError.new("bug"))) }
       end
 
       test "clés VAPID absentes ou vides : not_configured, sans appel réseau" do
