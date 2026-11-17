@@ -32,7 +32,12 @@ export class RailsApp extends DurableObject {
     this.starting ??= this.startAndWaitForPort().finally(() => {
       this.starting = undefined;
     });
-    await this.starting;
+    try {
+      await this.starting;
+    } catch (error) {
+      console.error("Rails is not ready:", error);
+      return new Response("Service indisponible", { status: 503, headers: { "Retry-After": "30" } });
+    }
 
     // Keep the public host: Rails checks it against APP_HOSTS (config.hosts). Cloudflare terminated TLS.
     const url = new URL(request.url);
@@ -62,6 +67,10 @@ export class RailsApp extends DurableObject {
     const deadline = Date.now() + READINESS_DEADLINE_MS;
     let lastError;
     while (Date.now() < deadline) {
+      // bin/docker-entrypoint exits when db:prepare or db:seed fails: say so now, not after the deadline.
+      if (!container.running) {
+        throw new Error("Rails container exited during startup (db:prepare or db:seed?)", { cause: lastError });
+      }
       try {
         const response = await port.fetch("http://localhost/up", { signal: AbortSignal.timeout(2000) });
         await response.body?.cancel();
@@ -72,6 +81,8 @@ export class RailsApp extends DurableObject {
       }
       await scheduler.wait(500);
     }
+    // A running but stuck Rails would never reach the inactivity timeout (the cron keeps it busy): replace it.
+    await container.destroy();
     throw new Error(`Rails did not answer /up on port ${PORT}`, { cause: lastError });
   }
 
@@ -106,17 +117,24 @@ function railsApp(env) {
 
 export default {
   fetch(request, env) {
+    // Rails trusts X-Forwarded-Proto: https (assume_ssl), so force_ssl never sees plain HTTP: redirect it here, as
+    // Railway's edge did, before a sign-in form is served in clear.
+    const url = new URL(request.url);
+    if (url.protocol === "http:") {
+      url.protocol = "https:";
+      return Response.redirect(url.toString(), 301);
+    }
     return railsApp(env).fetch(request);
   },
 
   // Keeps the container awake so that Solid Queue runs the recurring jobs (config/recurring.yml).
-  async scheduled(_event, env, ctx) {
-    ctx.waitUntil(
-      railsApp(env)
-        .fetch(new Request("http://localhost/up"))
-        .then((response) => {
-          if (!response.ok) console.error(`Keep-alive: /up returned ${response.status}`);
-        }),
-    );
+  // A failed ping fails the cron run, so the dashboard shows it.
+  async scheduled(_event, env) {
+    const response = await railsApp(env).fetch(new Request("https://localhost/up"));
+    await response.body?.cancel();
+    if (!response.ok) {
+      console.error(`Keep-alive: /up returned ${response.status}`);
+      throw new Error(`Keep-alive: /up returned ${response.status}`);
+    }
   },
 };

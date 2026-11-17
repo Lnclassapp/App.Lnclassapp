@@ -11,11 +11,24 @@
 #   SOURCE_BUCKET_{ENDPOINT,NAME,ACCESS_KEY_ID,SECRET_ACCESS_KEY,REGION}
 #   CIBLE_BUCKET_{ENDPOINT,NAME,ACCESS_KEY_ID,SECRET_ACCESS_KEY}   (R2 : région « auto »)
 require "open3"
+require "tmpdir"
+require "uri"
 
 def env!(name) = ENV.fetch(name) { abort "Variable manquante : #{name}" }
 
+# Credentials go to the child process through libpq variables, never as arguments (visible in `ps`).
+def pg_env(url)
+  uri = URI.parse(url)
+  {
+    "PGHOST" => uri.host, "PGPORT" => (uri.port || 5432).to_s, "PGDATABASE" => uri.path.delete_prefix("/"),
+    "PGUSER" => URI.decode_www_form_component(uri.user.to_s),
+    "PGPASSWORD" => URI.decode_www_form_component(uri.password.to_s),
+    "PGSSLMODE" => URI.decode_www_form(uri.query.to_s).to_h.fetch("sslmode", "prefer")
+  }
+end
+
 def psql(url, sql)
-  out, err, status = Open3.capture3("psql", url, "--no-psqlrc", "--tuples-only", "--no-align", "-v", "ON_ERROR_STOP=1",
+  out, err, status = Open3.capture3(pg_env(url), "psql", "--no-psqlrc", "--tuples-only", "--no-align", "-v", "ON_ERROR_STOP=1",
                                     "-c", sql)
   abort "psql a échoué : #{err.strip}" unless status.success?
   out
@@ -48,24 +61,32 @@ end
 def copy_database
   source = env!("SOURCE_DATABASE_URL")
   target = env!("CIBLE_DATABASE_URL")
-  abort "La base cible n'est pas vide (#{tables(target).size} tables) : rien copié." unless tables(target).empty?
+  existing = tables(target).size
+  abort "La base cible a déjà #{existing} tables (copie antérieure ?) : rien copié cette fois." unless existing.zero?
 
-  dump = "tmp/bascule-#{Time.now.utc.strftime('%Y%m%dT%H%M%SZ')}.dump"
-  system("pg_dump", "--format=custom", "--no-owner", "--no-acl", "--file", dump, source, exception: true)
-  system("pg_restore", "--no-owner", "--no-acl", "--exit-on-error", "--dbname", target, dump, exception: true)
-  puts "Base copiée (#{tables(target).size} tables). Sauvegarde locale : #{dump}"
+  # The dump holds every pupil's data: owner-only, outside the repository, deleted once restored.
+  Dir.mktmpdir("bascule") do |dir|
+    dump = File.join(dir, "production.dump")
+    File.umask(0o077)
+    system(pg_env(source), "pg_dump", "--format=custom", "--no-owner", "--no-acl", "--file", dump, exception: true)
+    # One transaction: a failed restore leaves the target empty, never half copied.
+    system(pg_env(target), "pg_restore", "--no-owner", "--no-acl", "--single-transaction", "--exit-on-error",
+           "--dbname", pg_env(target)["PGDATABASE"], dump, exception: true)
+  end
+  puts "Base copiée (#{tables(target).size} tables)."
 end
 
 def copy_files
   source, source_name = bucket("SOURCE")
   target, target_name = bucket("CIBLE")
   present = objects(target, target_name)
-  pending = objects(source, source_name).reject { |key, size| present[key] == size }
+  source_objects = objects(source, source_name)
+  pending = source_objects.reject { |key, size| present[key] == size }
   pending.each_key do |key|
     body = source.get_object(bucket: source_name, key: key).body
     target.put_object(bucket: target_name, key: key, body: body)
   end
-  puts "Fichiers copiés : #{pending.size} (déjà présents : #{present.size})."
+  puts "Fichiers copiés : #{pending.size} (déjà identiques : #{source_objects.size - pending.size})."
 end
 
 def verify
@@ -77,7 +98,10 @@ def verify
   source_objects = objects(*bucket("SOURCE"))
   target_objects = objects(*bucket("CIBLE"))
   missing = source_objects.reject { |key, size| target_objects[key] == size }
-  puts "Objets manquants dans R2 : #{missing.size}" unless missing.empty?
+  unless missing.empty?
+    puts "Objets manquants ou différents dans R2 : #{missing.size}, dont :"
+    missing.keys.first(20).each { |key| puts "  #{key}" }
+  end
 
   if gaps.empty? && missing.empty?
     puts "Bascule vérifiée : #{source.size} tables et #{source_objects.size} objets identiques."

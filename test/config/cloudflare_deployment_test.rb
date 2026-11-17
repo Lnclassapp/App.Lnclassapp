@@ -32,4 +32,13 @@ class CloudflareDeploymentTest < ActiveSupport::TestCase
     assert_includes worker, "env.PORT = String(PORT);"
     assert_no_match(/headers\.delete\("host"\)/, worker)
   end
+
+  test "the Worker redirects plain HTTP before Rails, which trusts X-Forwarded-Proto: https" do
+    entry = WORKER.read[/^export default \{.*?^\};/m]
+
+    redirect = entry.index('if (url.protocol === "http:")')
+    assert redirect, "the Worker must redirect http:// to https://"
+    assert_includes entry, "Response.redirect(url.toString(), 301)"
+    assert_operator redirect, :<, entry.index("railsApp(env).fetch(request)")
+  end
 end
