@@ -231,7 +231,11 @@ def bascule(compose_path, profile):
 
 
 def send(project, compose_path, env):
-    result = hostinger("/docker", {"project_name": project, "content": open(compose_path).read(),
+    content = open(compose_path).read()
+    # Hostinger refuses a compose file over 8192 characters with a bare 422: say which file and by how much.
+    if len(content) > 8192:
+        sys.exit(f"{compose_path}: {len(content)} caractères, Hostinger en accepte 8192 au plus")
+    result = hostinger("/docker", {"project_name": project, "content": content,
                                    "environment": "\n".join(f"{k}={quote(v)}" for k, v in env.items()) + "\n"}, "POST")
     print("Hostinger:", {k: result.get(k) for k in ("id", "name", "state") if k in result})
     wait_for_action(result["id"])
