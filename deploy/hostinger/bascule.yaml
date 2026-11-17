@@ -1,0 +1,82 @@
+# Chantier hebergement-cloudflare (amendement Hostinger) : copie de la production Railway vers le VPS, projet Docker
+# « lnclass-bascule », lancé à part du projet « lnclass ». Lecture seule sur Railway.
+#   fichiers : objets du bucket Railway -> R2 (rejouable : ne recopie que ce qui manque ou diffère)
+#   base     : pg_dump Railway (proxy TCP) -> Postgres du VPS, l'application arrêtée (APP_REPLICAS=0), puis
+#              comptage des lignes de chaque table des deux côtés
+# Les accès sont dans le .env du projet, envoyé par l'API sans être affiché.
+name: lnclass-bascule
+
+services:
+  fichiers:
+    image: rclone/rclone:1.71
+    restart: "no"
+    profiles: ["fichiers", "tout"]
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      RCLONE_CONFIG_SRC_TYPE: s3
+      RCLONE_CONFIG_SRC_PROVIDER: Other
+      RCLONE_CONFIG_SRC_FORCE_PATH_STYLE: "true"
+      RCLONE_CONFIG_DST_TYPE: s3
+      RCLONE_CONFIG_DST_PROVIDER: Cloudflare
+      RCLONE_CONFIG_DST_REGION: auto
+      RCLONE_CONFIG_DST_NO_CHECK_BUCKET: "true"
+    entrypoint: ["sh", "-c"]
+    command:
+      - >-
+        rclone copy "src:$${SOURCE_BUCKET_NAME}" "dst:$${BUCKET_NAME}" --size-only --transfers 8 --stats-one-line --stats 30s &&
+        rclone check "src:$${SOURCE_BUCKET_NAME}" "dst:$${BUCKET_NAME}" --one-way --size-only &&
+        echo "FICHIERS OK"
+
+  base:
+    image: postgres:18
+    restart: "no"
+    profiles: ["base", "tout"]
+    env_file:
+      - path: .env
+        required: false
+    networks: [lnclass]
+    volumes:
+      - lnclass_secrets:/secrets:ro
+    configs:
+      - source: copie_base
+        target: /usr/local/bin/copie-base
+    entrypoint: ["sh", "/usr/local/bin/copie-base"]
+
+configs:
+  copie_base:
+    content: |
+      #!/bin/sh
+      set -eu
+      [ "$${CONFIRMER_REMPLACEMENT:-}" = "base-du-vps" ] || { echo "CONFIRMER_REMPLACEMENT manquant : rien fait"; exit 1; }
+      export PGPASSWORD="$$(cat /secrets/db_password)"
+      local_psql() { psql -h db -U lnclass -d lnclass_production -v ON_ERROR_STOP=1 -tA "$$@"; }
+      admin_psql() { psql -h db -U lnclass -d postgres -v ON_ERROR_STOP=1 -tA "$$@"; }
+      busy=$$(admin_psql -c "SELECT count(*) FROM pg_stat_activity WHERE datname = 'lnclass_production'")
+      [ "$$busy" = "0" ] || { echo "$$busy connexions ouvertes sur la base du VPS : arrêter l'application d'abord"; exit 1; }
+      umask 077
+      pg_dump "$$SOURCE_DATABASE_URL" --format=custom --no-owner --no-acl --file /tmp/production.dump
+      # The VPS base only holds what the first boot created (db:prepare): recreated empty, then restored in one
+      # transaction (a failed restore leaves it empty, never half copied).
+      admin_psql -c "DROP DATABASE lnclass_production"
+      admin_psql -c "CREATE DATABASE lnclass_production OWNER lnclass"
+      pg_restore -h db -U lnclass -d lnclass_production --no-owner --no-acl --single-transaction --exit-on-error /tmp/production.dump
+      rm -f /tmp/production.dump
+      ecarts=0
+      for t in $$(psql "$$SOURCE_DATABASE_URL" -tAc "SELECT tablename FROM pg_tables WHERE schemaname = 'public' ORDER BY 1"); do
+        s=$$(psql "$$SOURCE_DATABASE_URL" -tAc "SELECT count(*) FROM public.\"$$t\"")
+        c=$$(local_psql -c "SELECT count(*) FROM public.\"$$t\"")
+        [ "$$s" = "$$c" ] || { echo "ECART $$t : source $$s, cible $$c"; ecarts=$$((ecarts + 1)); }
+      done
+      [ "$$ecarts" = "0" ] && echo "BASE OK" || { echo "BASE EN ECART ($$ecarts tables)"; exit 1; }
+
+networks:
+  lnclass:
+    external: true
+    name: lnclass_default
+
+volumes:
+  lnclass_secrets:
+    external: true
+    name: lnclass_secrets
