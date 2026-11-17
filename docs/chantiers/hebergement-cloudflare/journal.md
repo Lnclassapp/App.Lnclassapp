@@ -9,11 +9,14 @@
 
 ## À trancher
 
+- [ ] 2026-11-17 · hebergement-cloudflare · Activer l'offre Workers Paid, R2 et créer la base PlanetScale PS-5 (europe-west4) — engagent un paiement : réservé au porteur, dans le tableau de bord. Rien appliqué.
+- [ ] 2026-11-17 · hebergement-cloudflare · Enregistrements DNS d'avant l'incident autres que ceux de Railway (MX de contact@lnclass.com, SPF, vérifications) — appliqué : aucun, faute de trace ; à remettre par le porteur s'ils existaient.
 - [ ] 2026-11-17 · hebergement-cloudflare · Branche de production de Workers Builds pour `app-lnclassapp` — appliqué : aucune, la PR ne la change pas ; autres : `main` (comme Railway), `Develop` ; recommandé : `main`.
 
 ## Ce qui a dérapé
 
-- 2026-11-17 : un premier déploiement a rattaché lnclass.com au Worker de démarrage (« Hello world ») et retiré les domaines de Railway. Production coupée. Domaines remis sur Railway par l'agent ; les enregistrements DNS (CNAME vers Railway, TXT de vérification) et le retrait du domaine du Worker restent à faire dans le tableau de bord (jeton de la session en lecture seule sur les Workers).
+- 2026-11-17 : un premier déploiement a rattaché lnclass.com au Worker de démarrage (« Hello world ») et retiré les domaines de Railway. Production coupée. Domaines remis sur Railway par l'agent.
+- 2026-11-17 (16 h 35 UTC) : la zone lnclass.com s'est retrouvée sans aucun enregistrement DNS ; production, Staging et Develop injoignables. L'agent a recréé par l'API Cloudflare les CNAME (proxifiés) vers Railway de `lnclass.com`, `www`, `staging`, `app-staging`, `develop`, `app-develop` et les deux TXT `_railway-verify`, puis mis le port cible des domaines de production à 8080, comme Staging et Develop. `/up` répond 200 partout à 16 h 41 UTC. Les journaux d'audit ne sont pas lisibles avec le jeton : tout autre enregistrement d'avant (MX, SPF, vérifications de services) est perdu et doit être remis par le porteur s'il existait.
 - 2026-11-17 : Workers Builds a échoué (« Could not detect a directory containing static files ») : le dépôt n'avait pas de `wrangler.jsonc`, Wrangler cherchait un site statique.
 
 ## Ce qu'on a appris sur la codebase
