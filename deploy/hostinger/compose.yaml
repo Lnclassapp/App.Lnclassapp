@@ -41,9 +41,9 @@ services:
 
   app:
     <<: *app-env
-    build:
-      context: https://x-access-token:${GH_DEPLOY_TOKEN}@github.com/lnclassapp/App.Lnclassapp.git#${APP_REVISION:-main}
-    image: lnclass-app:${APP_REVISION:-main}
+    # Built on the server beforehand by deploy/hostinger/construction.yaml: Hostinger's Docker manager never builds.
+    image: lnclass-app:${APP_REVISION:?APP_REVISION manquant}
+    pull_policy: never
     restart: unless-stopped
     # 0 during the cutover copy (deploy/hostinger/bascule.yaml): nothing writes to the base while it is replaced.
     deploy:
