@@ -95,7 +95,7 @@ services:
       - caddy_data:/data
       - caddy_config:/config
 
-  # Every night at 03:15 (Paris): pg_dump to R2 under backups/postgres/, kept 7 days by an R2 lifecycle rule
+  # Every night at 03:15 (Paris): pg_dump to R2 under backups/postgres/, kept 7 days by the script (prune)
   # (owner's decision, 2026-11-17).
   backup:
     image: postgres:18
@@ -163,6 +163,22 @@ configs:
       until apt-get update -qq && apt-get install -y -qq awscli >/dev/null; do echo "BACKUP FAILED: installation d'awscli, nouvel essai dans 5 min" >&2; sleep 300; done
       export AWS_ACCESS_KEY_ID="$$BUCKET_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$$BUCKET_SECRET_ACCESS_KEY" AWS_DEFAULT_REGION=auto
       PGPASSWORD="$$(cat /secrets/db_password)"; [ -n "$$PGPASSWORD" ]; export PGPASSWORD
+      # Keeps 7 days (owner's decision, 2026-11-17): only after a successful backup, only our own dump names, dated
+      # by their name. The session's Cloudflare token cannot write an R2 lifecycle rule, so the script does it.
+      prune() {
+        cutoff=$$(date -d '7 days ago' +%Y%m%d)
+        listing=$$(aws s3 ls "s3://$$BUCKET_NAME/backups/postgres/" --endpoint-url "$$BUCKET_ENDPOINT") ||
+          { echo "BACKUP PRUNE FAILED: liste illisible" >&2; return 0; }
+        echo "$$listing" | awk '{print $$4}' | while read -r name; do
+          case "$$name" in lnclass-[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9].dump) ;; *) continue ;; esac
+          [ "$$(echo "$$name" | cut -c9-16)" -lt "$$cutoff" ] || continue
+          if aws s3 rm "s3://$$BUCKET_NAME/backups/postgres/$$name" --endpoint-url "$$BUCKET_ENDPOINT" --only-show-errors; then
+            echo "backup pruned $$name"
+          else
+            echo "BACKUP PRUNE FAILED $$name" >&2
+          fi
+        done
+      }
       backup() {
         file=/tmp/lnclass-$$(date +%Y%m%d-%H%M).dump
         key="backups/postgres/$$(basename "$$file")"
@@ -171,6 +187,7 @@ configs:
            aws s3 ls "s3://$$BUCKET_NAME/$$key" --endpoint-url "$$BUCKET_ENDPOINT" >/dev/null; then
           date +%s > /tmp/last_ok
           echo "backup ok $$key"
+          prune
         else
           echo "BACKUP FAILED $$(date)" >&2
         fi
