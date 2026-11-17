@@ -11,7 +11,7 @@ problematique: La facture Railway monte alors que la production ne consomme pres
 | **Date** | 2026-11-17 |
 | **Chantier** | `docs/chantiers/hebergement-cloudflare` |
 | **Remplace** | — *(amende ADR-0052 pour la production seule)* |
-| **Remplacé par** | ADR-XXXX-hebergement-hostinger |
+| **Remplacé par** | ADR-0140 |
 
 ---
 

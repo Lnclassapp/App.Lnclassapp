@@ -149,6 +149,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0137](./0137-couverture-des-fichiers-touches-au-niveau-pr.md) | Couverture des fichiers touchés au niveau pr | Accepté | 2026-11-15 | Le seuil de couverture de branches (ADR-0024) n'est contrôlé qu'au train ; une PR vers Develop ne voit jamais ses branches non jouées, qui arrêtent ensuite la promotion. |
 | [0138](./0138-adoption-par-les-classes-lue-sur-les-tables.md) | Adoption par les classes, lue sur les tables | Accepté | 2026-11-16 | comment savoir où la chaîne enseignant → classe → élèves casse, sans table ni traceur |
 | [0139](./0139-hebergement-cloudflare.md) | Production sur Cloudflare Containers, base PlanetScale, fichiers R2 | Remplacé | 2026-11-17 | La facture Railway monte alors que la production ne consomme presque rien. |
+| [0140](./0140-hebergement-hostinger.md) | Production sur un VPS Hostinger (Docker), Cloudflare devant, fichiers et sauvegardes sur R2 | Accepté | 2026-11-17 | PlanetScale refuse les cartes prépayées ; il faut un hébergement bon marché payable par le porteur. |
 <!-- index:end -->
 
 ---

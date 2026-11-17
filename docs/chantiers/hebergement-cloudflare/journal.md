@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 2026-11-17 | Production seule sur Cloudflare ; base PlanetScale via Cloudflare ; Synape-ci et N8N intouchés | Choix du porteur | ADR-0139 |
 | 2026-11-17 | Politique `durable_object` (bêta) pour une instance de 1/4 vCPU et 1,5 Gio | La politique `default` impose 1 vCPU et 3 Gio au moins par instance sur mesure, environ 20 $ de mémoire par mois | idem |
-| 2026-11-17 | **Revirement** : la production va sur un VPS Hostinger KVM 2 (Paris, Ubuntu 26.04 avec Docker), Rails, Postgres 18 et Caddy dans un projet Docker (`deploy/hostinger/compose.yaml`) ; Cloudflare reste devant (DNS, proxy, HTTPS) et R2 garde les fichiers et les sauvegardes de la base | PlanetScale refuse les cartes prépayées (17 $/mois) ; choix du porteur : Hostinger, KVM 2, Ubuntu 26.04 | ADR-XXXX-hebergement-hostinger |
+| 2026-11-17 | **Revirement** : la production va sur un VPS Hostinger KVM 2 (Paris, Ubuntu 26.04 avec Docker), Rails, Postgres 18 et Caddy dans un projet Docker (`deploy/hostinger/compose.yaml`) ; Cloudflare reste devant (DNS, proxy, HTTPS) et R2 garde les fichiers et les sauvegardes de la base | PlanetScale refuse les cartes prépayées (17 $/mois) ; choix du porteur : Hostinger, KVM 2, Ubuntu 26.04 | ADR-0140 |
 | 2026-11-17 | Configuration du VPS par l'API Hostinger seulement (script d'installation, pare-feu, gestionnaire Docker) | La session d'agent ne sort qu'en HTTPS : pas de SSH | idem |
 | 2026-11-17 | Les secrets passent de Railway (variables du service et variables partagées) au `.env` du projet par un script qui n'en affiche aucun ; le mot de passe Postgres est tiré sur le serveur et n'en sort pas | Règle « jamais de secret dans le chat » | idem |
 
