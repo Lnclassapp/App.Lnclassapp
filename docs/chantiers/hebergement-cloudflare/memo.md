@@ -41,5 +41,5 @@ Décision du porteur du 2026-11-17 : migrer la production seule, base sur Planet
 
 1. Variables et secrets du Worker (`app-lnclassapp` → Settings → Variables and Secrets) : `DATABASE_URL` (PlanetScale), `RAILS_MASTER_KEY`, `BUCKET_ENDPOINT` (`https://<compte>.r2.cloudflarestorage.com`), `BUCKET_NAME`, `BUCKET_ACCESS_KEY_ID`, `BUCKET_SECRET_ACCESS_KEY`, `BUCKET_REGION=auto`, `APP_HOSTS`, `CANONICAL_HOST`, `OPENROUTER_*`, `ANDROID_*`, `TEAM_BOOTSTRAP_CONTACT`, comme sur Railway.
 2. Vérifier l'app sur l'adresse `*.workers.dev` (ajoutée à `APP_HOSTS` le temps de la vérification).
-3. Coupure : `pg_dump` Railway → `pg_restore` PlanetScale ; `rclone sync` du bucket Railway vers R2.
+3. Coupure : `script/cloudflare/bascule base` (`pg_dump` Railway → `pg_restore` PlanetScale, refuse une cible non vide), `script/cloudflare/bascule fichiers` (bucket Railway → R2), puis `script/cloudflare/bascule verifier` (lignes par table et objets identiques des deux côtés). Les accès passent par l'environnement (`SOURCE_*`, `CIBLE_*`, en tête du script).
 4. Rattacher lnclass.com et www.lnclass.com au Worker ; garder Railway arrêté mais intact 7 jours.

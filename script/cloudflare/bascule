@@ -1,0 +1,94 @@
+#!/usr/bin/env ruby
+# Chantier hebergement-cloudflare : copie de la production Railway vers Cloudflare au moment de la bascule (memo,
+# étape 3), pendant la coupure. Ne touche jamais à la source : lecture seule sur Railway.
+#
+#   script/cloudflare/bascule base       # pg_dump Railway -> pg_restore PlanetScale (refuse une cible non vide)
+#   script/cloudflare/bascule fichiers   # copie les objets du bucket Railway vers R2 (saute ceux déjà copiés)
+#   script/cloudflare/bascule verifier   # compte les lignes par table et les objets, des deux côtés
+#
+# Les accès viennent de l'environnement, jamais de la ligne de commande ni d'un fichier :
+#   SOURCE_DATABASE_URL, CIBLE_DATABASE_URL
+#   SOURCE_BUCKET_{ENDPOINT,NAME,ACCESS_KEY_ID,SECRET_ACCESS_KEY,REGION}
+#   CIBLE_BUCKET_{ENDPOINT,NAME,ACCESS_KEY_ID,SECRET_ACCESS_KEY}   (R2 : région « auto »)
+require "open3"
+
+def env!(name) = ENV.fetch(name) { abort "Variable manquante : #{name}" }
+
+def psql(url, sql)
+  out, err, status = Open3.capture3("psql", url, "--no-psqlrc", "--tuples-only", "--no-align", "-v", "ON_ERROR_STOP=1",
+                                    "-c", sql)
+  abort "psql a échoué : #{err.strip}" unless status.success?
+  out
+end
+
+TABLES_SQL = "SELECT tablename FROM pg_tables WHERE schemaname = 'public' ORDER BY tablename"
+
+def tables(url) = psql(url, TABLES_SQL).split("\n").map(&:strip).reject(&:empty?)
+
+def row_counts(url)
+  tables(url).to_h { |table| [ table, Integer(psql(url, %(SELECT count(*) FROM public."#{table}")).strip) ] }
+end
+
+def bucket(prefix)
+  require "aws-sdk-s3"
+  client = Aws::S3::Client.new(
+    endpoint: env!("#{prefix}_BUCKET_ENDPOINT"),
+    access_key_id: env!("#{prefix}_BUCKET_ACCESS_KEY_ID"),
+    secret_access_key: env!("#{prefix}_BUCKET_SECRET_ACCESS_KEY"),
+    region: ENV.fetch("#{prefix}_BUCKET_REGION", "auto"),
+    force_path_style: true,
+  )
+  [ client, env!("#{prefix}_BUCKET_NAME") ]
+end
+
+def objects(client, name)
+  client.list_objects_v2(bucket: name).each_page.flat_map(&:contents).to_h { |object| [ object.key, object.size ] }
+end
+
+def copy_database
+  source = env!("SOURCE_DATABASE_URL")
+  target = env!("CIBLE_DATABASE_URL")
+  abort "La base cible n'est pas vide (#{tables(target).size} tables) : rien copié." unless tables(target).empty?
+
+  dump = "tmp/bascule-#{Time.now.utc.strftime('%Y%m%dT%H%M%SZ')}.dump"
+  system("pg_dump", "--format=custom", "--no-owner", "--no-acl", "--file", dump, source, exception: true)
+  system("pg_restore", "--no-owner", "--no-acl", "--exit-on-error", "--dbname", target, dump, exception: true)
+  puts "Base copiée (#{tables(target).size} tables). Sauvegarde locale : #{dump}"
+end
+
+def copy_files
+  source, source_name = bucket("SOURCE")
+  target, target_name = bucket("CIBLE")
+  present = objects(target, target_name)
+  pending = objects(source, source_name).reject { |key, size| present[key] == size }
+  pending.each_key do |key|
+    body = source.get_object(bucket: source_name, key: key).body
+    target.put_object(bucket: target_name, key: key, body: body)
+  end
+  puts "Fichiers copiés : #{pending.size} (déjà présents : #{present.size})."
+end
+
+def verify
+  source = row_counts(env!("SOURCE_DATABASE_URL"))
+  target = row_counts(env!("CIBLE_DATABASE_URL"))
+  gaps = (source.keys | target.keys).reject { |table| source[table] == target[table] }
+  gaps.each { |table| puts "Écart #{table} : source #{source[table].inspect}, cible #{target[table].inspect}" }
+
+  source_objects = objects(*bucket("SOURCE"))
+  target_objects = objects(*bucket("CIBLE"))
+  missing = source_objects.reject { |key, size| target_objects[key] == size }
+  puts "Objets manquants dans R2 : #{missing.size}" unless missing.empty?
+
+  if gaps.empty? && missing.empty?
+    puts "Bascule vérifiée : #{source.size} tables et #{source_objects.size} objets identiques."
+  else
+    exit 1
+  end
+end
+
+case ARGV.first
+when "base" then copy_database
+when "fichiers" then copy_files
+when "verifier" then verify
+else abort File.read(__FILE__).lines[1..7].map { |line| line.sub(/^# ?/, "") }.join
+end
