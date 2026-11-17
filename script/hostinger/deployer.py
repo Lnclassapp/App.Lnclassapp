@@ -1,27 +1,48 @@
-# Deploys deploy/hostinger/compose.yaml as the Docker project "lnclass" on the Hostinger VPS, with the production
-# variables read from Railway (app service + shared variables). Prints names and statuses only, never a value.
-# Usage: python3 -I script/hostinger/deployer.py deploy/hostinger/compose.yaml <sha>   (APP_REPLICAS=0 to stop the app)
+# Deploys the Lnclass environments on the Hostinger VPS (ADR-0140). Prints names and statuses only, never a value.
+# Usage: python3 -I script/hostinger/deployer.py deploy/hostinger/compose.yaml <sha>          production ("lnclass")
+#        python3 -I script/hostinger/deployer.py test deploy/hostinger/test.yaml staging|develop <sha>
 #        python3 -I script/hostinger/deployer.py construction deploy/hostinger/construction.yaml <sha>
-#        python3 -I script/hostinger/deployer.py bascule deploy/hostinger/bascule.yaml fichiers|base [--remplacer-la-base-du-vps] [--dry-run]
-# <sha>: a full commit of origin/main. One-off projects (construction, bascule) are deleted from the VPS once their
-# container has finished, so the tokens of their .env do not stay on the server.
-# Needs RAILWAY_API_TOKEN (variables read from Railway production) and a Hostinger API token injected by the proxy.
+#        python3 -I script/hostinger/deployer.py bascule deploy/hostinger/bascule.yaml fichiers|base [--remplacer-la-base-du-vps]
+#        --dry-run on any of them: prints the variable names, sends nothing.
+# Where the variables come from, first found wins:
+#   1. the session's environment, for the secrets: LNCLASS_RAILS_MASTER_KEY, LNCLASS_R2_ACCESS_KEY_ID,
+#      LNCLASS_R2_SECRET_ACCESS_KEY, LNCLASS_CLAUDE_AGENTAI_SECRET, GH_DEPLOY_TOKEN (variables of the Claude Code
+#      environment, set by the owner);
+#   2. the .env the project already has on the VPS (read back through the Hostinger API): a redeploy keeps it;
+#   3. Railway, only to create a project that is not on the VPS yet (and for "bascule"), while Railway exists.
+# <sha>: a full commit of origin/main (production), origin/Staging or origin/Develop. One-off projects (construction,
+# bascule) are deleted from the VPS once their container has finished.
 import json, os, re, subprocess, sys, time, urllib.parse, urllib.request, urllib.error
 
 VM = 2172236
 API = f"https://developers.hostinger.com/api/vps/v1/virtual-machines/{VM}"
 PROJECT = "e2d4616e-2a72-4f93-a55b-d233c7502d1b"
-ENV_PROD = "2169ce6a-54a4-4150-9d12-bdb6cb98f54c"
 APP_SERVICE = "c37094d3-f5dd-4aae-9f05-ade0d6e831d8"
 POSTGRES_SERVICE = "d4042db9-45ae-4cad-ad13-0a2eff0f6236"
 TEST_HOST = "srv2172236.hstgr.cloud"
 R2_ENDPOINT = "https://52eb657a0814d7799bf3eb3e735109ad.r2.cloudflarestorage.com"
 
-COPIED = ["RAILS_MASTER_KEY", "MASTER_KEY", "ANDROID_CERT_FINGERPRINTS", "CANONICAL_HOST", "TEAM_BOOTSTRAP_CONTACT",
+ENVIRONMENTS = {
+    "production": {"project": "lnclass", "branch": "main", "railway": "2169ce6a-54a4-4150-9d12-bdb6cb98f54c"},
+    "staging": {"project": "lnclass-staging", "branch": "Staging", "railway": "5b9f0f3c-63d5-4633-b911-df9478759a05",
+                "alias": "staging-app", "sites": ["staging.lnclass.com", "app-staging.lnclass.com"]},
+    "develop": {"project": "lnclass-develop", "branch": "Develop", "railway": "cda56ffe-3773-4614-a1ea-01b021734b9b",
+                "alias": "develop-app", "sites": ["develop.lnclass.com", "app-develop.lnclass.com"]},
+}
+ENV_PROD = ENVIRONMENTS["production"]["railway"]
+COPIED = ["RAILS_MASTER_KEY", "MASTER_KEY", "ANDROID_CERT_FINGERPRINTS", "ANDROID_PACKAGE_NAME",
+          "ANDROID_TEACHER_PACKAGE_NAME", "CANONICAL_HOST", "APP_HOSTS", "TEAM_BOOTSTRAP_CONTACT",
           "CLAUDE_AGENTAI_CONTACT", "CLAUDE_AGENTAI_SECRET", "RAILWAY_ENVIRONMENT_NAME"]
+# Secrets the owner keeps in the Claude Code environment (2026-11-17), so that Railway can go.
+SESSION_SECRETS = {"RAILS_MASTER_KEY": "LNCLASS_RAILS_MASTER_KEY", "MASTER_KEY": "LNCLASS_RAILS_MASTER_KEY",
+                   "CLAUDE_AGENTAI_SECRET": "LNCLASS_CLAUDE_AGENTAI_SECRET"}
+R2_SECRETS = {"BUCKET_ACCESS_KEY_ID": "LNCLASS_R2_ACCESS_KEY_ID", "BUCKET_SECRET_ACCESS_KEY": "LNCLASS_R2_SECRET_ACCESS_KEY"}
 
 
 def railway_vars(service_id=None, environment_id=ENV_PROD):
+    if not os.environ.get("RAILWAY_API_TOKEN"):
+        sys.exit("Railway n'est plus joignable (RAILWAY_API_TOKEN absent) et la variable cherchée n'est ni dans la "
+                 "session ni sur le VPS")
     args = f'projectId: "{PROJECT}", environmentId: "{environment_id}"'
     if service_id:
         args += f', serviceId: "{service_id}"'
@@ -36,7 +57,7 @@ def railway_vars(service_id=None, environment_id=ENV_PROD):
     return data["data"]["variables"]
 
 
-def hostinger(path, payload=None, method="GET"):
+def hostinger(path, payload=None, method="GET", missing_ok=False):
     data = json.dumps(payload).encode() if payload is not None else None
     req = urllib.request.Request(API + path, data, {"content-type": "application/json", "User-Agent": "curl/8.5.0"},
                                  method=method)
@@ -44,6 +65,8 @@ def hostinger(path, payload=None, method="GET"):
         with urllib.request.urlopen(req, timeout=120) as r:
             return json.load(r)
     except urllib.error.HTTPError as error:
+        if missing_ok and error.code == 404:
+            return None
         # Only the message: the body of a refused request could echo the .env sent.
         try:
             body = json.load(error)
@@ -64,13 +87,39 @@ def quote(value):
     return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-# Only a full commit already on main goes to production: a branch name would reuse a stale image tag.
-def checked_revision(sha):
+def unquote(value):
+    if len(value) >= 2 and value[0] == value[-1] == "'":
+        return value[1:-1]
+    if len(value) >= 2 and value[0] == value[-1] == '"':
+        return re.sub(r'\\(["\\])', r"\1", value[1:-1])
+    return value
+
+
+# The .env a project has on the VPS, or None when the project is not there.
+def vps_env(project):
+    found = hostinger(f"/docker/{project}", missing_ok=True)
+    # An absent project answers 200 with an empty compose file and no environment.
+    if found is None or (isinstance(found, dict) and not found.get("content") and found.get("environment") is None):
+        return None
+    if not isinstance(found, dict) or not isinstance(found.get("environment"), str):
+        sys.exit(f"Hostinger : .env du projet {project} illisible, rien envoyé")
+    pairs = (line.split("=", 1) for line in found["environment"].splitlines() if "=" in line)
+    return {key.strip(): unquote(value.strip()) for key, value in pairs}
+
+
+def overlay_session_secrets(env, names):
+    for name, variable in names.items():
+        if os.environ.get(variable):
+            env[name] = os.environ[variable]
+
+
+# Only a full commit already on the environment's branch: a branch name would reuse a stale image tag.
+def checked_revision(sha, branch):
     if not re.fullmatch(r"[0-9a-f]{40}", sha):
-        sys.exit("révision : le SHA complet (40 caractères) d'un commit de main est attendu")
-    subprocess.run(["git", "fetch", "-q", "origin", "main"], check=True)
+        sys.exit(f"révision : le SHA complet (40 caractères) d'un commit de {branch} est attendu")
+    subprocess.run(["git", "fetch", "-q", "origin", branch], check=True)
     if subprocess.run(["git", "merge-base", "--is-ancestor", sha, "FETCH_HEAD"]).returncode != 0:
-        sys.exit("révision absente de origin/main : rien envoyé")
+        sys.exit(f"révision absente de origin/{branch} : rien envoyé")
     return sha
 
 
@@ -78,34 +127,71 @@ def main():
     if sys.argv[1] == "bascule":
         return bascule(sys.argv[2], sys.argv[3])
     if sys.argv[1] == "construction":
-        env = {"APP_REVISION": checked_revision(sys.argv[3]), "GH_DEPLOY_TOKEN": railway_vars()["GH_DEPLOY_TOKEN"]}
-        return run_once("lnclass-construction", sys.argv[2], env, "CONSTRUCTION OK", "CONSTRUCTION ECHEC", 3600)
-    compose_path, revision = sys.argv[1], checked_revision(sys.argv[2])
-    app = railway_vars(APP_SERVICE)
-    shared = railway_vars()
-    env = {name: app[name] for name in COPIED if app.get(name)}
-    env["APP_REPLICAS"] = os.environ.get("APP_REPLICAS", "1")
-    env["SITE_ADDRESSES"] = os.environ.get("SITE_ADDRESSES", "lnclass.com, www.lnclass.com")
+        return construction(sys.argv[2], sys.argv[3])
+    if sys.argv[1] == "test":
+        return deploy_test(sys.argv[2], sys.argv[3], sys.argv[4])
+    return deploy_production(sys.argv[1], sys.argv[2])
+
+
+def construction(compose_path, sha):
+    branches = [e["branch"] for e in ENVIRONMENTS.values()]
+    on_branch = lambda b: (subprocess.run(["git", "fetch", "-q", "origin", b]).returncode == 0 and
+                           subprocess.run(["git", "merge-base", "--is-ancestor", sha, "FETCH_HEAD"]).returncode == 0)
+    if not re.fullmatch(r"[0-9a-f]{40}", sha) or not any(on_branch(b) for b in branches):
+        sys.exit(f"révision : SHA complet d'un commit de {', '.join(branches)} attendu")
+    token = os.environ.get("GH_DEPLOY_TOKEN") or railway_vars()["GH_DEPLOY_TOKEN"]
+    env = {"APP_REVISION": sha, "GH_DEPLOY_TOKEN": token}
+    if "--dry-run" in sys.argv:
+        return print("variables:", ", ".join(sorted(env)))
+    run_once("lnclass-construction", compose_path, env, "CONSTRUCTION OK", "CONSTRUCTION ECHEC", 3600)
+
+
+def deploy_production(compose_path, sha):
+    revision = checked_revision(sha, "main")
+    env = vps_env("lnclass")
+    if env is None:
+        app, shared = railway_vars(APP_SERVICE), railway_vars()
+        env = {name: app[name] for name in COPIED if app.get(name)}
+        env.update({"BUCKET_ACCESS_KEY_ID": shared["CIBLE_BUCKET_ACCESS_KEY_ID"],
+                    "BUCKET_SECRET_ACCESS_KEY": shared["CIBLE_BUCKET_SECRET_ACCESS_KEY"]})
+    overlay_session_secrets(env, {**SESSION_SECRETS, **R2_SECRETS})
+    env.update({"BUCKET_ENDPOINT": R2_ENDPOINT, "BUCKET_NAME": "lnclass-production", "BUCKET_REGION": "auto",
+                "APP_REVISION": revision})
+    env["APP_REPLICAS"] = os.environ.get("APP_REPLICAS") or env.get("APP_REPLICAS") or "1"
+    env["SITE_ADDRESSES"] = os.environ.get("SITE_ADDRESSES") or env.get("SITE_ADDRESSES") or "lnclass.com, www.lnclass.com"
     sites = [h.strip() for h in env["SITE_ADDRESSES"].split(",") if h.strip()]
-    hosts = [h.strip() for h in app.get("APP_HOSTS", "").split(",") if h.strip()]
     # The server's own name is only allowed while a test serves it (it is behind the Cloudflare-only firewall).
+    hosts = [h for h in env.get("APP_HOSTS", "").split(",") if h and h != TEST_HOST]
     env["APP_HOSTS"] = ",".join(hosts + ([TEST_HOST] if TEST_HOST in sites else []))
-    env["BUCKET_ENDPOINT"] = R2_ENDPOINT
-    env["BUCKET_NAME"] = "lnclass-production"
-    env["BUCKET_REGION"] = "auto"
-    env["BUCKET_ACCESS_KEY_ID"] = shared["CIBLE_BUCKET_ACCESS_KEY_ID"]
-    env["BUCKET_SECRET_ACCESS_KEY"] = shared["CIBLE_BUCKET_SECRET_ACCESS_KEY"]
-    env["APP_REVISION"] = revision
-    missing = [name for name in COPIED if name not in env]
-    print("variables:", ", ".join(sorted(env)), "| absentes de Railway:", missing or "aucune")
+    check_and_send("lnclass", compose_path, env, sites)
+
+
+def deploy_test(compose_path, name, sha):
+    if name not in ("staging", "develop"):
+        sys.exit(f"environnement inconnu : {name} (staging ou develop)")
+    spec = ENVIRONMENTS[name]
+    revision = checked_revision(sha, spec["branch"])
+    env = vps_env(spec["project"])
+    if env is None:
+        # Created from Railway, with a new base (db:seed fills the standard set); the Railway bucket stays in the .env
+        # for images older than ACTIVE_STORAGE_SERVICE.
+        app = railway_vars(APP_SERVICE, spec["railway"])
+        env = {key: app[key] for key in COPIED + list(R2_SECRETS) + ["BUCKET_NAME", "BUCKET_ENDPOINT", "BUCKET_REGION"]
+               if app.get(key)}
+    overlay_session_secrets(env, {k: v for k, v in SESSION_SECRETS.items() if k != "CLAUDE_AGENTAI_SECRET"})
+    env.update({"APP_REVISION": revision, "WEB_ALIAS": spec["alias"]})
+    check_and_send(spec["project"], compose_path, env, spec["sites"])
+
+
+def check_and_send(project, compose_path, env, sites):
+    print(f"{project} — variables:", ", ".join(sorted(env)))
     if "RAILS_MASTER_KEY" not in env and "MASTER_KEY" not in env:
-        sys.exit("ni RAILS_MASTER_KEY ni MASTER_KEY dans Railway : l'application ne démarrerait pas")
-    uncovered = [h for h in sites if h not in env["APP_HOSTS"].split(",")]
+        sys.exit("ni RAILS_MASTER_KEY ni MASTER_KEY : l'application ne démarrerait pas")
+    uncovered = [h for h in sites if h not in env.get("APP_HOSTS", "").split(",")]
     if uncovered:
         sys.exit(f"hôtes servis par Caddy absents d'APP_HOSTS (Rails les refuserait) : {uncovered}")
-    if "--dry-run" in sys.argv:
-        return
-    send("lnclass", compose_path, env)
+    if "--dry-run" not in sys.argv:
+        send(project, compose_path, env)
 
 
 # "fichiers": any time, replayable. "base": once, the application stopped first (APP_REPLICAS=0); the copy script
