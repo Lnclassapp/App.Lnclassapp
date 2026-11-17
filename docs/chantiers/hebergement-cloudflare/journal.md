@@ -18,6 +18,7 @@
 - [ ] 2026-11-17 · hebergement-cloudflare · Branche de production de Workers Builds pour `app-lnclassapp` — appliqué : aucune, la PR ne la change pas ; autres : `main` (comme Railway), `Develop` ; recommandé : `main`. Sans objet depuis le passage à Hostinger : le Worker et l'offre Workers Paid (5 $/mois) peuvent être retirés par le porteur.
 - [ ] 2026-11-17 · hebergement-cloudflare · Où tourne Rails avec le VPS — appliqué : tout sur le VPS (la base n'est publiée sur aucun port) ; autre : base seule sur le VPS, Rails dans un conteneur Cloudflare (base ouverte sur Internet, Workers Paid en plus). Recommandé : tel quel.
 - [ ] 2026-11-17 · hebergement-cloudflare · Accès SSH au VPS — appliqué : port 22 ouvert, mot de passe root aléatoire tiré par Hostinger (réinitialisable dans hPanel), fail2ban (5 essais, banni un jour) ; autre : clé SSH du porteur et mots de passe refusés. Recommandé : ajouter la clé du porteur puis couper les mots de passe.
+- [ ] 2026-11-17 · hebergement-cloudflare · Proxy TCP du Postgres de Staging (ouvert pour la répétition de la copie de la base) — appliqué : laissé ouvert, le porteur a refusé deux fois sa suppression (demande mal comprise) ; mot de passe fort, SSL. Recommandé : le supprimer (Railway, Staging, Postgres, Settings, TCP Proxy), 30 s de redémarrage de la base de Staging.
 
 ## Ce qui a dérapé
 
@@ -27,7 +28,13 @@
 - 2026-11-17 : revues sécurité et pannes silencieuses : redirection HTTP → HTTPS dans le Worker (Rails fait confiance à `X-Forwarded-Proto`), conteneur bloqué remplacé, démarrage raté en 503 au lieu d'une attente de 3 minutes, cron en échec visible ; script de bascule sans identifiants en argument, dump en 0600 hors du dépôt et supprimé, restauration en une transaction.
 - 2026-11-17 : Workers Builds a échoué (« Could not detect a directory containing static files ») : le dépôt n'avait pas de `wrangler.jsonc`, Wrangler cherchait un site statique.
 
+- 2026-11-17 : le gestionnaire Docker de Hostinger ne construit pas les images (il tire tout, puis « up » sans construction) : premier déploiement en échec. L'image est construite sur le serveur par un projet à part (`deploy/hostinger/construction.yaml`), environ 10 minutes.
+
 ## Ce qu'on a appris sur la codebase
+
+- Répétition de la bascule (2026-11-17) : fichiers Railway → R2, 466 objets, 0 écart ; base de Staging → Postgres du VPS en une minute, comptage identique table par table ; application `main` démarrée sur `srv2172236.hstgr.cloud` (`/up`, `/`, `/login` en 200).
+- Créer le proxy TCP du Postgres de production redémarre la base de production : on le fait dans le créneau de bascule, l'application déjà arrêtée.
+- Seules sorties de l'application vers l'extérieur : OpenRouter (CRM, à la demande) ; les tâches récurrentes restent internes. Pas de SMTP.
 
 - Railway prépare la base par son `preDeploy` ; Cloudflare n'a pas d'équivalent : `bin/docker-entrypoint` le fait quand `PREPARE_DATABASE=1`.
 - Solid Queue tourne dans Puma et une tâche récurrente passe toutes les 5 minutes : le conteneur doit rester allumé (cron du Worker).
