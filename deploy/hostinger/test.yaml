@@ -54,14 +54,15 @@ services:
     environment:
       RAILS_ENV: production
       HTTP_PORT: "8080"
-      PREPARE_DATABASE: "1"
       # Files on the volume below (config/environments/production.rb); an image older than that line ignores it and
       # keeps the bucket of the .env.
       ACTIVE_STORAGE_SERVICE: local
+    # db:seed here, not through PREPARE_DATABASE: the image of a branch older than that variable (Staging before its
+    # train) would never seed, and its base would stay empty, without the team invitation nor the standard set.
     entrypoint:
       - sh
       - -c
-      - 'pw=$$(cat /secrets/db_password) && [ -n "$$pw" ] || { echo "mot de passe de la base illisible" >&2; exit 1; }; export DATABASE_URL="postgres://lnclass:$$pw@db:5432/lnclass_production"; exec /rails/bin/docker-entrypoint "$$@"'
+      - 'pw=$$(cat /secrets/db_password) && [ -n "$$pw" ] || { echo "mot de passe de la base illisible" >&2; exit 1; }; export DATABASE_URL="postgres://lnclass:$$pw@db:5432/lnclass_production"; ./bin/rails db:prepare db:seed || exit 1; exec /rails/bin/docker-entrypoint "$$@"'
       - sh
     command: ["./bin/thrust", "./bin/rails", "server"]
     volumes:
