@@ -59,7 +59,7 @@ configs:
       pg_dump "$$SOURCE_DATABASE_URL" --format=custom --no-owner --no-acl --file /tmp/production.dump
       # The VPS base only holds what the first boot created (db:prepare): recreated empty, then restored in one
       # transaction (a failed restore leaves it empty, never half copied).
-      admin_psql -c "DROP DATABASE lnclass_production"
+      admin_psql -c "DROP DATABASE lnclass_production WITH (FORCE)"
       admin_psql -c "CREATE DATABASE lnclass_production OWNER lnclass"
       pg_restore -h db -U lnclass -d lnclass_production --no-owner --no-acl --single-transaction --exit-on-error /tmp/production.dump
       rm -f /tmp/production.dump
