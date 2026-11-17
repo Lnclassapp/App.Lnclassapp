@@ -5,4 +5,11 @@ if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
 fi
 
+# Chantier hebergement-cloudflare: Cloudflare Containers has no pre-deploy command, so the Worker sets
+# PREPARE_DATABASE=1 and the container runs what Railway's preDeploy runs (.railway/railway.ts) before serving.
+# Railway does not set it: its deploys are unchanged.
+if [ "${PREPARE_DATABASE}" == "1" ]; then
+  ./bin/rails db:prepare db:seed
+fi
+
 exec "${@}"
