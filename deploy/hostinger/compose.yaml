@@ -1,6 +1,5 @@
-# Chantier hebergement-cloudflare (amendement Hostinger) : la production sur le VPS Hostinger KVM 2 (Paris).
-# Projet « lnclass » du gestionnaire Docker de Hostinger. Les secrets sont dans le .env du projet, saisi dans hPanel,
-# jamais ici. Postgres n'est publié sur aucun port : seul Caddy écoute, derrière Cloudflare.
+# ADR-0140 : la production sur le VPS Hostinger. Secrets dans le .env du projet, jamais ici.
+# Hostinger refuse plus de 8 192 caractères : commentaires courts. Postgres n'est publié sur aucun port.
 name: lnclass
 
 x-app-env: &app-env
@@ -55,8 +54,7 @@ services:
       RAILS_ENV: production
       # Thruster listens here and forwards to Puma.
       HTTP_PORT: "8080"
-      # Railway's pre-deploy command (db:prepare db:seed), run by bin/docker-entrypoint where the code has it;
-      # older code still runs db:prepare, because the command ends with "./bin/rails server".
+      # db:prepare db:seed at boot (bin/docker-entrypoint).
       PREPARE_DATABASE: "1"
     entrypoint:
       - sh
@@ -66,8 +64,7 @@ services:
     command: ["./bin/thrust", "./bin/rails", "server"]
     volumes:
       - secrets:/secrets:ro
-    # Caddy also joins lnclass_web, where each test application answers to "app" too: the production is reached by
-    # this name only, which no test project uses.
+    # Caddy reaches the production by this name only; test apps sit on lnclass_web.
     networks:
       default:
         aliases: [prod-app]
@@ -116,8 +113,7 @@ services:
     volumes:
       - secrets:/secrets:ro
     entrypoint: ["sh", "/usr/local/bin/lnclass-backup"]
-    # Unhealthy when the last successful backup is older than 26 hours (one is taken at start, then every night):
-    # a failing backup shows in the Docker manager instead of only in the logs.
+    # Unhealthy when no backup succeeded in 26 hours: visible in the Docker manager.
     healthcheck:
       test: ["CMD-SHELL", "[ -f /tmp/last_ok ] && [ $$(( $$(date +%s) - $$(cat /tmp/last_ok) )) -lt 93600 ]"]
       interval: 10m
@@ -163,8 +159,7 @@ configs:
       until apt-get update -qq && apt-get install -y -qq awscli >/dev/null; do echo "BACKUP FAILED: installation d'awscli, nouvel essai dans 5 min" >&2; sleep 300; done
       export AWS_ACCESS_KEY_ID="$$BUCKET_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$$BUCKET_SECRET_ACCESS_KEY" AWS_DEFAULT_REGION=auto
       PGPASSWORD="$$(cat /secrets/db_password)"; [ -n "$$PGPASSWORD" ]; export PGPASSWORD
-      # Keeps 7 days (owner's decision, 2026-11-17): only after a successful backup, only our own dump names, dated
-      # by their name. The session's Cloudflare token cannot write an R2 lifecycle rule, so the script does it.
+      # 7 days, after a successful backup only, our dump names only (no R2 lifecycle rule: read-only token).
       prune() {
         cutoff=$$(date -d '7 days ago' +%Y%m%d)
         listing=$$(aws s3 ls "s3://$$BUCKET_NAME/backups/postgres/" --endpoint-url "$$BUCKET_ENDPOINT") ||
