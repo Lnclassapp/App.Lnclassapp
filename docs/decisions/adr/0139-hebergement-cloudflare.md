@@ -1,17 +1,17 @@
 # ADR-0139 : La production tourne sur Cloudflare Containers, la base sur PlanetScale
 <!-- index
 titre: Production sur Cloudflare Containers, base PlanetScale, fichiers R2
-statut: Accepté
+statut: Remplacé
 problematique: La facture Railway monte alors que la production ne consomme presque rien.
 -->
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Remplacé |
 | **Date** | 2026-11-17 |
 | **Chantier** | `docs/chantiers/hebergement-cloudflare` |
 | **Remplace** | — *(amende ADR-0052 pour la production seule)* |
-| **Remplacé par** | — |
+| **Remplacé par** | ADR-XXXX-hebergement-hostinger |
 
 ---
 
