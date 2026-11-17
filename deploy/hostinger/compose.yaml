@@ -6,7 +6,7 @@ name: lnclass
 x-app-env: &app-env
   env_file:
     - path: .env
-      required: false
+      required: true
 
 services:
   # Generates the database password once, inside a volume: nobody types it, it never leaves the server.
@@ -61,7 +61,7 @@ services:
     entrypoint:
       - sh
       - -c
-      - 'export DATABASE_URL="postgres://lnclass:$$(cat /secrets/db_password)@db:5432/lnclass_production"; exec /rails/bin/docker-entrypoint "$$@"'
+      - 'pw=$$(cat /secrets/db_password) && [ -n "$$pw" ] || { echo "mot de passe de la base illisible" >&2; exit 1; }; export DATABASE_URL="postgres://lnclass:$$pw@db:5432/lnclass_production"; exec /rails/bin/docker-entrypoint "$$@"'
       - sh
     command: ["./bin/thrust", "./bin/rails", "server"]
     volumes:
@@ -88,22 +88,34 @@ services:
       - caddy_data:/data
       - caddy_config:/config
 
-  # Every night at 03:15 (Paris): pg_dump to R2 under backups/postgres/, kept 30 days by an R2 lifecycle rule.
+  # Every night at 03:15 (Paris): pg_dump to R2 under backups/postgres/, kept 7 days by an R2 lifecycle rule
+  # (owner's decision, 2026-11-17).
   backup:
-    <<: *app-env
     image: postgres:18
     restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
+    # Only what the backup needs, not the application's whole .env (master key, agent secret).
     environment:
       TZ: Europe/Paris
+      BUCKET_NAME: ${BUCKET_NAME:?BUCKET_NAME manquant}
+      BUCKET_ENDPOINT: ${BUCKET_ENDPOINT:?BUCKET_ENDPOINT manquant}
+      BUCKET_ACCESS_KEY_ID: ${BUCKET_ACCESS_KEY_ID:?BUCKET_ACCESS_KEY_ID manquant}
+      BUCKET_SECRET_ACCESS_KEY: ${BUCKET_SECRET_ACCESS_KEY:?BUCKET_SECRET_ACCESS_KEY manquant}
     configs:
       - source: backup_script
         target: /usr/local/bin/lnclass-backup
     volumes:
       - secrets:/secrets:ro
     entrypoint: ["sh", "/usr/local/bin/lnclass-backup"]
+    # Unhealthy when the last successful backup is older than 26 hours (one is taken at start, then every night):
+    # a failing backup shows in the Docker manager instead of only in the logs.
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /tmp/last_ok ] && [ $$(( $$(date +%s) - $$(cat /tmp/last_ok) )) -lt 93600 ]"]
+      interval: 10m
+      start_period: 15m
+      retries: 1
 
 configs:
   caddyfile:
@@ -112,31 +124,47 @@ configs:
         servers {
           trusted_proxies static 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22
           client_ip_headers CF-Connecting-IP X-Forwarded-For
+          trusted_proxies_strict
         }
       }
       {$$SITE_ADDRESSES} {
         encode zstd gzip
-        reverse_proxy app:8080
+        # Rails reads the client from X-Forwarded-For: only the visitor's address (CF-Connecting-IP, read from a
+        # Cloudflare relay) goes there, else every visitor behind one relay would share its rate limits (ADR-0050).
+        # X-Forwarded-Host is dropped: the Host header is the name Cloudflare was asked for.
+        reverse_proxy app:8080 {
+          header_up X-Forwarded-For {client_ip}
+          header_up -X-Forwarded-Host
+        }
       }
   backup_script:
     content: |
       #!/bin/sh
       set -eu
-      apt-get update -qq && apt-get install -y -qq awscli >/dev/null
+      : "$${BUCKET_NAME:?BUCKET_NAME manquant}" "$${BUCKET_ENDPOINT:?BUCKET_ENDPOINT manquant}"
+      : "$${BUCKET_ACCESS_KEY_ID:?}" "$${BUCKET_SECRET_ACCESS_KEY:?}"
+      until apt-get update -qq && apt-get install -y -qq awscli >/dev/null; do echo "BACKUP FAILED: installation d'awscli, nouvel essai dans 5 min" >&2; sleep 300; done
       export AWS_ACCESS_KEY_ID="$$BUCKET_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$$BUCKET_SECRET_ACCESS_KEY" AWS_DEFAULT_REGION=auto
-      export PGPASSWORD="$$(cat /secrets/db_password)"
-      while true; do
-        now=$$(date +%s); next=$$(date -d 'tomorrow 03:15' +%s)
-        [ "$$(date +%H%M)" -lt 0315 ] && next=$$(date -d 'today 03:15' +%s)
-        sleep $$((next - now))
+      PGPASSWORD="$$(cat /secrets/db_password)"; [ -n "$$PGPASSWORD" ]; export PGPASSWORD
+      backup() {
         file=/tmp/lnclass-$$(date +%Y%m%d-%H%M).dump
+        key="backups/postgres/$$(basename "$$file")"
         if pg_dump -h db -U lnclass -d lnclass_production --format=custom --file "$$file" &&
-           aws s3 cp "$$file" "s3://$$BUCKET_NAME/backups/postgres/$$(basename "$$file")" --endpoint-url "$$BUCKET_ENDPOINT" --only-show-errors; then
-          echo "backup ok $$(basename "$$file")"
+           aws s3 cp "$$file" "s3://$$BUCKET_NAME/$$key" --endpoint-url "$$BUCKET_ENDPOINT" --only-show-errors &&
+           aws s3 ls "s3://$$BUCKET_NAME/$$key" --endpoint-url "$$BUCKET_ENDPOINT" >/dev/null; then
+          date +%s > /tmp/last_ok
+          echo "backup ok $$key"
         else
           echo "BACKUP FAILED $$(date)" >&2
         fi
         rm -f "$$file"
+      }
+      backup
+      while true; do
+        now=$$(date +%s); next=$$(date -d 'tomorrow 03:15' +%s)
+        [ "$$(date +%H%M)" -lt 0315 ] && next=$$(date -d 'today 03:15' +%s)
+        sleep $$((next - now))
+        backup
       done
 
 volumes:

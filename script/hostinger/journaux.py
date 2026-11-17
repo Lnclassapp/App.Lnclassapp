@@ -9,16 +9,13 @@ req = urllib.request.Request(f"https://developers.hostinger.com/api/vps/v1/virtu
                              headers={"User-Agent": "curl/8.5.0"})
 with urllib.request.urlopen(req, timeout=60) as r:
     data = json.load(r)
-entries = data if isinstance(data, list) else data.get("data") or data.get("logs") or []
-lines = []
-for entry in entries:
-    if isinstance(entry, dict) and "entries" in entry:
-        lines += [f"[{entry.get('service')}] {e.get('line', '')}" for e in entry["entries"]]
-    elif isinstance(entry, dict):
-        lines.append(f"[{entry.get('service', '?')}] {entry.get('line') or entry.get('message') or json.dumps(entry)}")
-    else:
-        lines.append(str(entry))
-redact = lambda s: re.sub(r"github_pat_\S+|ghp_\S+|x-access-token:[^@\s]+@", "[masqué]", s)
+# Expected: [{service, entries: [{timestamp, line}]}]. Anything else stops here rather than printing raw data.
+if not isinstance(data, list) or not all(isinstance(s, dict) and isinstance(s.get("entries"), list) for s in data):
+    sys.exit("réponse Hostinger inattendue : forme des journaux inconnue, rien affiché")
+entries = data
+lines = [f"[{s.get('service')}] {e.get('line', '')}" for s in data for e in s["entries"]]
+# Tokens and credentials inside URLs (postgres://user:pass@, https://x-access-token:...@).
+redact = lambda s: re.sub(r"github_pat_\S+|ghp_\S+|\w+://[^:/\s]+:[^@\s]+@", "[masqué]", s)
 lines = [redact(l) for l in lines if not pattern or pattern.search(l)]
 print(f"{len(entries)} entrées")
 print("\n".join(l[:300] for l in lines[-count:]))

@@ -19,11 +19,14 @@ services:
     command:
       - >-
         set -eu;
+        trap '[ "$$?" = 0 ] || echo "CONSTRUCTION ECHEC"' EXIT;
         [ -n "$${APP_REVISION:-}" ] || { echo "APP_REVISION manquant"; exit 1; };
         if docker image inspect "lnclass-app:$${APP_REVISION}" >/dev/null 2>&1; then echo "CONSTRUCTION OK (déjà là) lnclass-app:$${APP_REVISION}"; exit 0; fi;
         apk add --no-cache -q curl;
         mkdir -p /src && cd /src;
-        curl -fsSL -H "Authorization: Bearer $${GH_DEPLOY_TOKEN}" -H "Accept: application/vnd.github+json"
-        "https://api.github.com/repos/lnclassapp/App.Lnclassapp/tarball/$${APP_REVISION}" | tar xz --strip-components=1;
+        printf 'header = "Authorization: Bearer %s"\n' "$${GH_DEPLOY_TOKEN}" |
+        curl -fsSL -K - -o /tmp/source.tgz -H "Accept: application/vnd.github+json"
+        "https://api.github.com/repos/lnclassapp/App.Lnclassapp/tarball/$${APP_REVISION}" || { echo "CONSTRUCTION ECHEC : archive GitHub illisible"; exit 1; };
+        tar xzf /tmp/source.tgz --strip-components=1;
         docker build --progress=plain -t "lnclass-app:$${APP_REVISION}" . &&
         echo "CONSTRUCTION OK lnclass-app:$${APP_REVISION}" || { echo "CONSTRUCTION ECHEC"; exit 1; }
