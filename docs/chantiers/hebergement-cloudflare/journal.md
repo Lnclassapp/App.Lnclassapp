@@ -4,7 +4,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-17 | Production seule sur Cloudflare ; base PlanetScale via Cloudflare ; Synape-ci et N8N intouchés | Choix du porteur | ADR-XXXX-hebergement-cloudflare |
+| 2026-11-17 | Production seule sur Cloudflare ; base PlanetScale via Cloudflare ; Synape-ci et N8N intouchés | Choix du porteur | ADR-0139 |
 | 2026-11-17 | Politique `durable_object` (bêta) pour une instance de 1/4 vCPU et 1,5 Gio | La politique `default` impose 1 vCPU et 3 Gio au moins par instance sur mesure, environ 20 $ de mémoire par mois | idem |
 
 ## À trancher
