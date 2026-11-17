@@ -1,7 +1,8 @@
 # Chantier hebergement-cloudflare (ADR-0140) : un environnement de test (Staging ou Develop) sur le VPS de la production,
 # projet Docker « lnclass-staging » ou « lnclass-develop ». Sa base et ses fichiers lui sont propres ; seule son
 # application rejoint le réseau « lnclass_web », où le Caddy de la production la sert sous ses noms. Mémoire et CPU
-# plafonnés : un environnement de test ne prive jamais la production. Base neuve à la création, remplie du jeu standard
+# plafonnés (les deux environnements ensemble : un cœur sur deux au plus, servis après la production). Le disque, lui,
+# est partagé : voir « À trancher » du journal (accès Cloudflare). Base neuve à la création, remplie du jeu standard
 # par db:seed (RAILWAY_ENVIRONMENT_NAME = Staging ou Develop). Secrets dans le .env du projet, jamais ici.
 
 x-app-env: &app-env
@@ -34,7 +35,9 @@ services:
       - pgdata:/var/lib/postgresql
       - secrets:/secrets:ro
     mem_limit: 512m
-    cpus: 0.5
+    # Both test environments together stay under one core of the two, and yield to the production when it is busy.
+    cpus: 0.1
+    cpu_shares: 256
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "lnclass", "-d", "lnclass_production"]
       interval: 10s
@@ -70,7 +73,8 @@ services:
       web:
         aliases: ["${WEB_ALIAS:?WEB_ALIAS manquant}"]
     mem_limit: 1g
-    cpus: 0.75
+    cpus: 0.4
+    cpu_shares: 256
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:8080/up"]
       interval: 15s
