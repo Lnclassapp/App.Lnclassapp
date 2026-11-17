@@ -1,0 +1,88 @@
+# Chantier hebergement-cloudflare (ADR-0140) : un environnement de test (Staging ou Develop) sur le VPS de la production,
+# projet Docker « lnclass-staging » ou « lnclass-develop ». Sa base et ses fichiers lui sont propres ; seule son
+# application rejoint le réseau « lnclass_web », où le Caddy de la production la sert sous ses noms. Mémoire et CPU
+# plafonnés : un environnement de test ne prive jamais la production. Base neuve à la création, remplie du jeu standard
+# par db:seed (RAILWAY_ENVIRONMENT_NAME = Staging ou Develop). Secrets dans le .env du projet, jamais ici.
+
+x-app-env: &app-env
+  env_file:
+    - path: .env
+      required: true
+
+services:
+  secrets:
+    image: alpine:3.22
+    restart: "no"
+    command:
+      - sh
+      - -c
+      - '[ -s /secrets/db_password ] || (tr -dc A-Za-z0-9 </dev/urandom | head -c 40 > /secrets/db_password); chmod 444 /secrets/db_password'
+    volumes:
+      - secrets:/secrets
+
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    depends_on:
+      secrets:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_USER: lnclass
+      POSTGRES_DB: lnclass_production
+      POSTGRES_PASSWORD_FILE: /secrets/db_password
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - secrets:/secrets:ro
+    mem_limit: 512m
+    cpus: 0.5
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "lnclass", "-d", "lnclass_production"]
+      interval: 10s
+      retries: 6
+
+  app:
+    <<: *app-env
+    image: lnclass-app:${APP_REVISION:?APP_REVISION manquant}
+    pull_policy: never
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RAILS_ENV: production
+      HTTP_PORT: "8080"
+      PREPARE_DATABASE: "1"
+      # Files on the volume below (config/environments/production.rb); an image older than that line ignores it and
+      # keeps the bucket of the .env.
+      ACTIVE_STORAGE_SERVICE: local
+    entrypoint:
+      - sh
+      - -c
+      - 'pw=$$(cat /secrets/db_password) && [ -n "$$pw" ] || { echo "mot de passe de la base illisible" >&2; exit 1; }; export DATABASE_URL="postgres://lnclass:$$pw@db:5432/lnclass_production"; exec /rails/bin/docker-entrypoint "$$@"'
+      - sh
+    command: ["./bin/thrust", "./bin/rails", "server"]
+    volumes:
+      - secrets:/secrets:ro
+      - storage:/rails/storage
+    networks:
+      default: {}
+      # The production's Caddy reaches this application by this name only (staging-app or develop-app).
+      web:
+        aliases: ["${WEB_ALIAS:?WEB_ALIAS manquant}"]
+    mem_limit: 1g
+    cpus: 0.75
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/up"]
+      interval: 15s
+      start_period: 300s
+      retries: 4
+
+networks:
+  web:
+    external: true
+    name: lnclass_web
+
+volumes:
+  secrets:
+  pgdata:
+  storage:

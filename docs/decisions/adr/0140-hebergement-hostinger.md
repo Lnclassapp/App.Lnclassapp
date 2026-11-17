@@ -39,9 +39,9 @@ L'ADR-0139 mettait l'application dans un conteneur Cloudflare et la base sur Pla
 - VPS Hostinger KVM 2 (2 vCPU, 8 Go, Paris), Ubuntu 26.04 avec Docker ; mises à jour de sécurité automatiques, fail2ban, pare-feu Hostinger : SSH ouvert, 80 et 443 aux seules plages de Cloudflare.
 - Projet Docker `lnclass` (`deploy/hostinger/compose.yaml`) : Rails (Thruster, Puma, Solid Queue), Postgres 18 sur aucun port publié (mot de passe tiré sur le serveur), Caddy pour HTTPS (Let's Encrypt, IP réelle lue dans `CF-Connecting-IP`), sauvegarde `pg_dump` chaque nuit à 3 h 15 vers R2 (`backups/postgres/`).
 - Le gestionnaire Docker de Hostinger ne construit pas d'image : `deploy/hostinger/construction.yaml` construit `lnclass-app:<sha>` sur le serveur depuis l'archive GitHub (jeton en lecture seule), puis `lnclass` démarre cette image.
-- Les secrets viennent des variables de la production Railway et vont dans le `.env` du projet par `script/hostinger/deployer.py`, qui n'en affiche aucun.
+- Les secrets vont dans le `.env` de chaque projet par `script/hostinger/deployer.py`, qui n'en affiche aucun. Un redéploiement garde le `.env` du VPS (relu par l'API Hostinger) ; les secrets de reconstruction sont aussi dans les variables de l'environnement Claude Code (`LNCLASS_RAILS_MASTER_KEY`, `LNCLASS_R2_ACCESS_KEY_ID`, `LNCLASS_R2_SECRET_ACCESS_KEY`, `LNCLASS_CLAUDE_AGENTAI_SECRET`, `GH_DEPLOY_TOKEN`), qui priment. Railway ne sert plus qu'à créer un projet absent, tant qu'il existe.
 - Les fichiers sont sur R2 (`lnclass-production`). La bascule (`deploy/hostinger/bascule.yaml`) copie fichiers et base, puis compare les deux côtés.
-- Staging, Develop et les environnements de PR restent sur Railway.
+- **Amendement du 2026-11-17 (décision du porteur, « 1A 2A ») :** Staging et Develop quittent Railway pour le même VPS, projets `lnclass-staging` et `lnclass-develop` (`deploy/hostinger/test.yaml`) : base neuve remplie du jeu standard, fichiers sur un volume Docker (`ACTIVE_STORAGE_SERVICE=local`), mémoire et CPU plafonnés, application seule sur le réseau `lnclass_web`, servie par le Caddy de la production sous ses noms. Les environnements de PR disparaissent avec Railway : une PR se teste en local (`bin/tester-pr`).
 
 ## 5. Conséquences
 
@@ -53,5 +53,6 @@ L'ADR-0139 mettait l'application dans un conteneur Cloudflare et la base sur Pla
 ### 🔴 Coûts consentis
 
 - Le serveur est à nous : mises à jour, disque et sauvegardes à surveiller.
-- Déployer demande deux appels (construction, puis démarrage) : pas encore de déploiement automatique à la fusion sur `main`.
+- Déployer demande deux appels (construction, puis démarrage) : pas encore de déploiement automatique à la fusion sur `main`, `Staging` ou `Develop`.
+- Staging et Develop partagent le serveur de la production : plafonnés, ils ne peuvent pas la priver de mémoire, mais une construction d'image prend du CPU au serveur.
 - Les scripts et skills qui citent Railway pour la production sont à reprendre.

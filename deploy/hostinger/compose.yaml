@@ -66,6 +66,11 @@ services:
     command: ["./bin/thrust", "./bin/rails", "server"]
     volumes:
       - secrets:/secrets:ro
+    # Caddy also joins lnclass_web, where each test application answers to "app" too: the production is reached by
+    # this name only, which no test project uses.
+    networks:
+      default:
+        aliases: [prod-app]
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:8080/up"]
       interval: 15s
@@ -81,6 +86,8 @@ services:
       - "443:443"
     environment:
       SITE_ADDRESSES: ${SITE_ADDRESSES:-srv2172236.hstgr.cloud}
+    # lnclass_web: the test environments (deploy/hostinger/test.yaml), served under their own names below.
+    networks: [default, web]
     configs:
       - source: caddyfile
         target: /etc/caddy/Caddyfile
@@ -127,15 +134,25 @@ configs:
           trusted_proxies_strict
         }
       }
-      {$$SITE_ADDRESSES} {
+      # Rails reads the client from X-Forwarded-For: only the visitor's address (CF-Connecting-IP, read from a
+      # Cloudflare relay) goes there, else every visitor behind one relay would share its rate limits (ADR-0050).
+      # X-Forwarded-Host is dropped: the Host header is the name Cloudflare was asked for.
+      (vers) {
         encode zstd gzip
-        # Rails reads the client from X-Forwarded-For: only the visitor's address (CF-Connecting-IP, read from a
-        # Cloudflare relay) goes there, else every visitor behind one relay would share its rate limits (ADR-0050).
-        # X-Forwarded-Host is dropped: the Host header is the name Cloudflare was asked for.
-        reverse_proxy app:8080 {
+        reverse_proxy {args[0]} {
           header_up X-Forwarded-For {client_ip}
           header_up -X-Forwarded-Host
         }
+      }
+      {$$SITE_ADDRESSES} {
+        import vers prod-app:8080
+      }
+      # Test environments: a 502 while their project is not running, nothing else is affected.
+      staging.lnclass.com, app-staging.lnclass.com {
+        import vers staging-app:8080
+      }
+      develop.lnclass.com, app-develop.lnclass.com {
+        import vers develop-app:8080
       }
   backup_script:
     content: |
@@ -166,6 +183,10 @@ configs:
         sleep $$((next - now))
         backup
       done
+
+networks:
+  web:
+    name: lnclass_web
 
 volumes:
   secrets:
