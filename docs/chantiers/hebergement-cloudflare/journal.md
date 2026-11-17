@@ -12,7 +12,9 @@
 - [ ] 2026-11-17 · hebergement-cloudflare · Activer l'offre Workers Paid, R2 et créer la base PlanetScale PS-5 (europe-west4) — engagent un paiement : réservé au porteur, dans le tableau de bord. Rien appliqué.
 - [ ] 2026-11-17 · hebergement-cloudflare · Enregistrements DNS d'avant l'incident autres que ceux de Railway (MX de contact@lnclass.com, SPF, vérifications) — appliqué : aucun, faute de trace ; à remettre par le porteur s'ils existaient.
 - [ ] 2026-11-17 · hebergement-cloudflare · Échec de `db:prepare` ou `db:seed` au démarrage du conteneur — appliqué : le Worker répond 503 (« Service indisponible », `Retry-After: 30`) et relance au prochain appel ; sur Railway, le `preDeploy` refusait le déploiement et l'ancienne version servait. Autre : migrations lancées par Workers Builds avant `wrangler deploy` (accès base depuis la construction). Recommandé : garder tel quel, migrations rétrocompatibles comme aujourd'hui.
-- [ ] 2026-11-17 · hebergement-cloudflare · Branche de production de Workers Builds pour `app-lnclassapp` — appliqué : aucune, la PR ne la change pas ; autres : `main` (comme Railway), `Develop` ; recommandé : `main`.
+- [ ] 2026-11-17 · hebergement-cloudflare · Branche de production de Workers Builds pour `app-lnclassapp` — appliqué : aucune, la PR ne la change pas ; autres : `main` (comme Railway), `Develop` ; recommandé : `main`. Sans objet depuis le passage à Hostinger : le Worker et l'offre Workers Paid (5 $/mois) peuvent être retirés par le porteur.
+- [ ] 2026-11-17 · hebergement-cloudflare · Où tourne Rails avec le VPS — appliqué : tout sur le VPS (la base n'est publiée sur aucun port) ; autre : base seule sur le VPS, Rails dans un conteneur Cloudflare (base ouverte sur Internet, Workers Paid en plus). Recommandé : tel quel.
+- [ ] 2026-11-17 · hebergement-cloudflare · Accès SSH au VPS — appliqué : port 22 ouvert, mot de passe root aléatoire tiré par Hostinger (réinitialisable dans hPanel), fail2ban (5 essais, banni un jour) ; autre : clé SSH du porteur et mots de passe refusés. Recommandé : ajouter la clé du porteur puis couper les mots de passe.
 
 ## Ce qui a dérapé
 

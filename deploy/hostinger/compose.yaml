@@ -1,0 +1,145 @@
+# Chantier hebergement-cloudflare (amendement Hostinger) : la production sur le VPS Hostinger KVM 2 (Paris).
+# Projet « lnclass » du gestionnaire Docker de Hostinger. Les secrets sont dans le .env du projet, saisi dans hPanel,
+# jamais ici. Postgres n'est publié sur aucun port : seul Caddy écoute, derrière Cloudflare.
+name: lnclass
+
+x-app-env: &app-env
+  env_file:
+    - path: .env
+      required: false
+
+services:
+  # Generates the database password once, inside a volume: nobody types it, it never leaves the server.
+  secrets:
+    image: alpine:3.22
+    restart: "no"
+    command:
+      - sh
+      - -c
+      - '[ -s /secrets/db_password ] || (tr -dc A-Za-z0-9 </dev/urandom | head -c 40 > /secrets/db_password); chmod 444 /secrets/db_password'
+    volumes:
+      - secrets:/secrets
+
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    depends_on:
+      secrets:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_USER: lnclass
+      POSTGRES_DB: lnclass_production
+      POSTGRES_PASSWORD_FILE: /secrets/db_password
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - secrets:/secrets:ro
+    shm_size: 256mb
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "lnclass", "-d", "lnclass_production"]
+      interval: 10s
+      retries: 6
+
+  app:
+    <<: *app-env
+    build:
+      context: https://x-access-token:${GH_DEPLOY_TOKEN}@github.com/lnclassapp/App.Lnclassapp.git#${APP_REVISION:-main}
+    image: lnclass-app:${APP_REVISION:-main}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RAILS_ENV: production
+      # Thruster listens here and forwards to Puma.
+      HTTP_PORT: "8080"
+      # Railway's pre-deploy command (db:prepare db:seed), run by bin/docker-entrypoint where the code has it;
+      # older code still runs db:prepare, because the command ends with "./bin/rails server".
+      PREPARE_DATABASE: "1"
+    entrypoint:
+      - sh
+      - -c
+      - 'export DATABASE_URL="postgres://lnclass:$$(cat /secrets/db_password)@db:5432/lnclass_production"; exec /rails/bin/docker-entrypoint "$$@"'
+      - sh
+    command: ["./bin/thrust", "./bin/rails", "server"]
+    volumes:
+      - secrets:/secrets:ro
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/up"]
+      interval: 15s
+      start_period: 180s
+      retries: 4
+
+  # TLS (Let's Encrypt, HTTP-01 through Cloudflare) and the real client IP from Cloudflare.
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_ADDRESSES: ${SITE_ADDRESSES:-srv2172236.hstgr.cloud}
+    configs:
+      - source: caddyfile
+        target: /etc/caddy/Caddyfile
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+  # Every night at 03:15 (Paris): pg_dump to R2 under backups/postgres/, kept 30 days by an R2 lifecycle rule.
+  backup:
+    <<: *app-env
+    image: postgres:18
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      TZ: Europe/Paris
+    configs:
+      - source: backup_script
+        target: /usr/local/bin/lnclass-backup
+    volumes:
+      - secrets:/secrets:ro
+    entrypoint: ["sh", "/usr/local/bin/lnclass-backup"]
+
+configs:
+  caddyfile:
+    content: |
+      {
+        servers {
+          trusted_proxies static 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22
+          client_ip_headers CF-Connecting-IP X-Forwarded-For
+        }
+      }
+      {$$SITE_ADDRESSES} {
+        encode zstd gzip
+        reverse_proxy app:8080
+      }
+  backup_script:
+    content: |
+      #!/bin/sh
+      set -eu
+      apt-get update -qq && apt-get install -y -qq awscli >/dev/null
+      export AWS_ACCESS_KEY_ID="$$BUCKET_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$$BUCKET_SECRET_ACCESS_KEY" AWS_DEFAULT_REGION=auto
+      export PGPASSWORD="$$(cat /secrets/db_password)"
+      while true; do
+        now=$$(date +%s); next=$$(date -d 'tomorrow 03:15' +%s)
+        [ "$$(date +%H%M)" -lt 0315 ] && next=$$(date -d 'today 03:15' +%s)
+        sleep $$((next - now))
+        file=/tmp/lnclass-$$(date +%Y%m%d-%H%M).dump
+        if pg_dump -h db -U lnclass -d lnclass_production --format=custom --file "$$file" &&
+           aws s3 cp "$$file" "s3://$$BUCKET_NAME/backups/postgres/$$(basename "$$file")" --endpoint-url "$$BUCKET_ENDPOINT" --only-show-errors; then
+          echo "backup ok $$(basename "$$file")"
+        else
+          echo "BACKUP FAILED $$(date)" >&2
+        fi
+        rm -f "$$file"
+      done
+
+volumes:
+  secrets:
+  pgdata:
+  caddy_data:
+  caddy_config:
