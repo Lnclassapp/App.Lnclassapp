@@ -48,6 +48,14 @@ module UseCases
         def destroy_all_for(user_id:) = @destroyed_for = user_id
       end
 
+      class FakePush
+        include Ports::Communication::PushSubscriptionRepositoryPort
+
+        attr_reader :deleted_for
+
+        def delete_for_user(user_id:) = @deleted_for = user_id
+      end
+
       class FakeAttempts
         include Ports::Identity::LoginAttemptRepositoryPort
 
@@ -83,6 +91,7 @@ module UseCases
       setup do
         @users = FakeUsers.new
         @sessions = FakeSessions.new
+        @push = FakePush.new
         @attempts = FakeAttempts.new
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
@@ -91,7 +100,7 @@ module UseCases
 
       def reset(code: "12345678", contact: "0701020304", pin: "1357", pin_confirmation: pin)
         dto = Dtos::Identity::PinResetInput.new(contact:, code:, pin:, pin_confirmation:, ip: "1.2.3.4")
-        ResetPinWithCode.new(users: @users, pin_recoveries: @recoveries, sessions: @sessions, login_attempts: @attempts,
+        ResetPinWithCode.new(users: @users, pin_recoveries: @recoveries, sessions: @sessions, push_subscriptions: @push, login_attempts: @attempts,
                              audit_log: @audit, transaction: @transaction, digest_key: "key", clock: Clock.new(NOW)).call(dto:)
       end
 
@@ -103,6 +112,16 @@ module UseCases
         assert_equal "0701020304", @attempts.cleared
         assert_equal [ "pin.reset" ], @audit.actions
         assert @transaction.opened
+      end
+
+      test "a right code deletes every push subscription of the student" do
+        assert reset.success?
+        assert_equal 1, @push.deleted_for
+      end
+
+      test "a wrong code deletes no push subscription" do
+        reset(code: "87654321")
+        assert_nil @push.deleted_for
       end
 
       test "unknown number, missing, revoked or wrong code: the same invalid" do

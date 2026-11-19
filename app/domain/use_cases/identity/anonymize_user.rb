@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Identity::AnonymizeUser
 # Rôle : l'équipe traite une demande de suppression : compte anonymisé, résultats effacés et demande close en une transaction,
 #        demande datée au journal
-# ADR  : 0026, 0028, 0036 (§4, amendement 2), 0037, 0040, 0060
+# ADR  : 0026, 0028, 0036 (§4, amendement 2), 0037, 0040, 0060, XXXX-notifications-web-push-aux-eleves
 module UseCases
   module Identity
     class AnonymizeUser
@@ -14,7 +14,7 @@ module UseCases
       Anonymized = Data.define(:user, :requested_on)
 
       def initialize(users:, sessions:, second_factors:, pin_recoveries:, login_attempts:, invitations:, memberships:, photos:, audit_log:,
-                     learning_data:, transaction:, policy:, clock:, deletion_requests:)
+                     learning_data:, push_data:, transaction:, policy:, clock:, deletion_requests:)
         @users = users
         @sessions = sessions
         @second_factors = second_factors
@@ -25,6 +25,7 @@ module UseCases
         @invitations = invitations
         @audit_log = audit_log
         @learning_data = learning_data
+        @push_data = push_data
         @transaction = transaction
         @policy = policy
         @clock = clock
@@ -71,6 +72,8 @@ module UseCases
         @pin_recoveries.destroy_all_for(user_id: target.id)
         @memberships.leave_all(student_id: target.id, at: now)
         @learning_data.erase_for(student_id: target.id)
+        # Abonnements, préférence et envois push : aucune ligne ne survit (ADR-XXXX §4.3).
+        @push_data.erase_for(user_id: target.id)
         # ADR-0036, amendement 2 : la demande enregistrée à sa réception, s'il y en a une, est traitée avec le compte.
         @deletion_requests.close(user_id: target.id, status: Entities::Identity::DeletionRequest::PROCESSED,
                                  closed_by_id: actor.user_id, at: now)

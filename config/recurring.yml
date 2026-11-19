@@ -48,3 +48,14 @@ production:
     class: Crm::FailStaleGenerationsJob
     queue: default
     schedule: every 15 minutes
+  # notifications-push (ADR-XXXX-notifications-web-push-aux-eleves §3.2) : lit les six motifs, applique les fenêtres d'Abidjan
+  # et le garde-fou anti-rafale, puis envoie. Un passage hors fenêtre ne fait rien.
+  deliver_push_notifications:
+    class: Communication::DeliverPushNotificationsJob
+    queue: default
+    schedule: every 15 minutes
+  # §4.1 : abonnements sans envoi réussi depuis 60 jours et envois de plus de 90 jours.
+  purge_push_data:
+    class: Communication::PurgePushDataJob
+    queue: default
+    schedule: every day at 5am

@@ -6,5 +6,7 @@
 Rails.application.config.filter_parameters += [
   :passw, :contact, /\Apin/, :email, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn, :cvv, :cvc,
   # PIN, recovery and backup codes, second factor, invitation token, join code (ADR-0031, 0032, 0038, 0041, 0050).
-  :pin, :pin_confirmation, :new_pin, :code, :backup_code
+  :pin, :pin_confirmation, :new_pin, :code, :backup_code,
+  # Web Push subscription: the address and the keys identify a browser (notifications-push). Anchored: `auth` would match `author`.
+  /\Aendpoint\z/, /\Ap256dh\z/, /\Aauth\z/
 ]

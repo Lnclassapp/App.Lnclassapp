@@ -1,6 +1,6 @@
 // ⚡ FRONT · pwa/service-worker — réseau d'abord ; garde les pages que le serveur marque « Lnclass-Offline: keep », par clé d'appareil
-// Rôle : page « Pas de connexion », assets digérés, pages de compte déjà ouvertes (60 par clé, 30 jours) servies si le réseau échoue ; oubli de la clé (forget)
-// ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, §4.3, menace P1, P2, P3, P6), 0082 (§4.2 amendé), 0049, 0076
+// Rôle : page « Pas de connexion », assets digérés, pages de compte déjà ouvertes (60 par clé, 30 jours) servies si le réseau échoue ; oubli de la clé (forget) ; notifications Web Push (push, notificationclick)
+// ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, §4.3, menace P1, P2, P3, P6), 0082 (§4.2 amendé), 0049, 0076, XXXX-notifications-web-push-aux-eleves (§4.4)
 // <N> augmente à chaque modification de public/offline.html ou de public/offline.css (ADR-0082 §4.2).
 const CACHE = "lnclass-offline-v3"
 const ASSETS = "lnclass-assets-v1"
@@ -194,4 +194,46 @@ async function assetFirst(event) {
     event.waitUntil(cache.put(request.url, response.clone()).then(() => trim(cache, MAX_ASSETS)).catch((error) => console.error("lnclass: asset non gardé", error)))
   }
   return response
+}
+
+// Notifications Web Push (notifications-push, ADR §4.4) : le serveur envoie { title, body, url, tag } ; le texte vient d'un gabarit fermé.
+self.addEventListener("push", (event) => {
+  const data = pushPayload(event)
+  if (!data) return
+
+  const options = { body: data.body, icon: "/icon-192.png", tag: data.tag, data: { url: sameOriginUrl(data.url) || self.location.origin + "/" } }
+  event.waitUntil(self.registration.showNotification(data.title, options))
+})
+
+function pushPayload(event) {
+  try {
+    const data = event.data?.json()
+    return typeof data?.title === "string" && typeof data.body === "string" ? data : null
+  } catch {
+    return null
+  }
+}
+
+// Un toucher ferme la notification ; il n'ouvre que la même origine, et reprend l'onglet déjà ouvert sur cette URL.
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close()
+  const target = sameOriginUrl(event.notification.data?.url)
+  if (target) event.waitUntil(focusOrOpen(target))
+})
+
+async function focusOrOpen(target) {
+  const open = (await self.clients.matchAll({ type: "window", includeUncontrolled: true })).find((client) => client.url === target)
+  return open ? open.focus() : self.clients.openWindow(target)
+}
+
+// → l'URL absolue si elle est de la même origine que le programme, sinon null (jamais d'autre origine, ni « javascript: »).
+function sameOriginUrl(value) {
+  if (typeof value !== "string") return null
+
+  try {
+    const url = new URL(value, self.location.origin)
+    return url.origin === self.location.origin ? url.href : null
+  } catch {
+    return null
+  }
 }

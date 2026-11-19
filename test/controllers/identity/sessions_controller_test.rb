@@ -202,6 +202,18 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Connexion réussie", flash[:notice]
   end
 
+  test "signing out deletes the push subscription of the device" do
+    student = create_student
+    sign_in_as student
+    mine = create_push_subscription(user: student, session: Orm::Session.where(user: student).last)
+    other = create_push_subscription(user: student, session: create_login_session(user: student))
+
+    delete session_path
+
+    assert_not Orm::Communication::PushSubscription.exists?(mine.id)
+    assert Orm::Communication::PushSubscription.exists?(other.id)
+  end
+
   test "a malformed PIN is shown under its field" do
     post session_path, params: { session: { contact: "0700000000", pin: "12" } }
 
