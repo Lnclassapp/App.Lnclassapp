@@ -83,7 +83,7 @@ class DueDateHelperTest < ActionView::TestCase
     assert_equal "mardi 29 sept.", I18n.l(Date.new(2026, 9, 29), format: :due_long)
   end
 
-  test "due_text : le texte seul de l'échéance, rien sans date (UDR XXXX écrans minimalistes style Wave §3)" do
+  test "due_text : le texte seul de l'échéance, rien sans date (UDR-0173 écrans minimalistes style Wave §3)" do
     today = Date.new(2026, 11, 14)
 
     assert_nil due_text(nil, today:)

@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_lesson_tile — la tuile d'une leçon de la vue d'une matière : pastille pastel et pictogramme, libellé court, « Leçon n », coche si faite %>
 <%# Rôle : toute la tuile mène à la leçon (≥ 48 px) ; le pictogramme est calculé du titre (Catalog::LessonTileHelper), jamais saisi ; le nom entier est lu aux lecteurs d'écran et en title %>
-<%# ADR  : 0113 (§4.3 : pas de préchargement, l'ouverture retient les lectures) · UDR : XXXX écrans minimalistes style Wave §3 (matière) · locals: (course:) -%>
+<%# ADR  : 0113 (§4.3 : pas de préchargement, l'ouverture retient les lectures) · UDR : 0173 §3 (matière) · locals: (course:) -%>
 <% number = lesson_number(course.subtitle) %>
 <li id="course_<%= course.slug %>">
   <%= link_to course_path(course.slug), title: course.name, data: { turbo_prefetch: false },

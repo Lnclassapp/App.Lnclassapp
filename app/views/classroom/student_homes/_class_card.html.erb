@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/_class_card — la carte de la classe, à cheval sur la jonction bleu → blanc de l'accueil %>
 <%# Rôle : « Ta classe », son nom, l'établissement, son sigle en pastille ronde (celui de la base, sinon les initiales du nom), le logo Lnclass en bas à droite et « Entrer en classe » vers Ma classe %>
-<%# UDR  : XXXX écrans minimalistes style Wave §3 (accueil, carte de classe), 0132 accueil élève §3.1 · locals: (home:, overlap: true) — overlap : la carte remonte sur le bandeau (faux dans la coque Android, qui n'en a pas) -%>
+<%# UDR  : 0173 §3 (accueil, carte de classe), 0132 accueil élève §3.1 · locals: (home:, overlap: true) — overlap : la carte remonte sur le bandeau (faux dans la coque Android, qui n'en a pas) -%>
 <%= tag.section id: "student_class_card", "aria-labelledby": "student_class_title",
                 class: class_names("relative z-10 mx-5 rounded-card bg-white p-5 shadow-lift lg:mx-0", { "max-lg:-top-wave-card max-lg:-mb-wave-card" => local_assigns.fetch(:overlap, true) }) do %>
   <div class="flex items-center gap-3">

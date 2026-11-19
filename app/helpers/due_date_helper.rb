@@ -31,7 +31,7 @@ module DueDateHelper
     date.end_with?(".") ? date : "#{date}."
   end
 
-  # Le texte seul de l'échéance (« Demain », « Samedi », « Lun. 12 oct. », « En retard · … »), pour une ligne plate (UDR XXXX
+  # Le texte seul de l'échéance (« Demain », « Samedi », « Lun. 12 oct. », « En retard · … »), pour une ligne plate (UDR-0173
   # écrans minimalistes style Wave §3) ; nil sans échéance.
   def due_text(due_on, today: Time.zone.today)
     return if due_on.nil?

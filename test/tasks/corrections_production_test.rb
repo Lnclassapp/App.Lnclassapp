@@ -1,6 +1,5 @@
 require "test_helper"
 require "rake"
-require Rails.root.join("lib/contenus/corrections_production")
 
 # Chantier corrections-production : le script reporte les corrections par les use cases « Modifier le texte », jamais par SQL, et ne force
 # jamais une valeur qui n'est pas l'« Avant ».

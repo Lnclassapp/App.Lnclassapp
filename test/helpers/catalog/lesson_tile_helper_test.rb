@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR XXXX écrans minimalistes style Wave §3 : l'icône d'une leçon est calculée (jamais saisie) par des règles de mots-clés,
+# UDR-0173 écrans minimalistes style Wave §3 : l'icône d'une leçon est calculée (jamais saisie) par des règles de mots-clés,
 # l'icône de la matière en repli ; chaque règle cite un pictogramme du jeu ; les leçons importées sont couvertes.
 class Catalog::LessonTileHelperTest < ActionView::TestCase
   include ComponentsHelper

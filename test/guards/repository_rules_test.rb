@@ -26,14 +26,69 @@ class RepositoryRulesTest < Minitest::Test
     assert_empty offenders, "« # :nocov: » est interdit (ADR-0024) : #{offenders.join(', ')}"
   end
 
-  # `bin/rails test` without a file loads every rake file (test:prepare) before SimpleCov starts: a code file required at the top of one
-  # is loaded outside the measure and counts as 0 % even though its test passes (chantier couverture-locale-et-train-divergent).
-  def test_no_rake_file_requires_the_code_of_the_app_at_its_top_level
-    offenders = ruby_files("lib/tasks/**/*.rake").select do |file|
-      File.foreach(File.join(ROOT, file)).any? { it.match?(/\A(require|require_relative|load)\b.*(Rails\.root|\.\.\/)/) }
-    end
+  # Zeitwerk autoloads every .rb under app/ (except assets, javascript, views) and under lib/ (except assets and tasks): config/application.rb
+  # `autoload_lib(ignore: %w[assets tasks])`. Loading such a file by hand is never needed, and it hides code from the coverage measure:
+  # a `require` at the top of a .rake file ran before SimpleCov started and took 118 lines and 51 branches out of the measure while the CI
+  # showed 100 % (chantier couverture-locale-et-train-divergent, conventions.md §7 « Ne pas charger à la main… »).
+  AUTOLOADED_ROOTS = %w[app lib].freeze
+  NOT_AUTOLOADED = %w[app/assets app/javascript app/views lib/assets lib/tasks].freeze
+  MANUAL_LOAD = /\A\s*(?:require|require_relative|load)\b[\s(]*(.*)/
+  # Everything that runs inside the Rails process. `script/` and `docs/` hold standalone Ruby (no Rails, so no Zeitwerk): they load the
+  # pure domain by hand on purpose (e.g. script/contenus/valider.rb) and are out of the rule.
+  SCANNED = %w[app/**/*.rb lib/**/*.{rb,rake} config/**/*.rb db/**/*.rb test/**/*.rb Rakefile config.ru bin/*].freeze
+  SKIPPED_DIRS = %r{\A(node_modules|vendor|tmp|log|storage|public|android)/}
 
-    assert_empty offenders, "Un fichier .rake ne charge pas de code en tête (le require va dans la tâche) : #{offenders.join(', ')}"
+  def scanned_files
+    ruby_files(*SCANNED).uniq.reject { |file| file.match?(SKIPPED_DIRS) || !File.file?(File.join(ROOT, file)) }
+  end
+
+  def autoloaded?(relative)
+    return false unless relative.end_with?(".rb") && AUTOLOADED_ROOTS.any? { relative.start_with?("#{it}/") }
+
+    NOT_AUTOLOADED.none? { relative.start_with?("#{it}/") }
+  end
+
+  # The repo-relative file a manual load would resolve to, or nil when the argument is not a literal path.
+  def hand_loaded_path(file, line)
+    argument = line[MANUAL_LOAD, 1] or return
+    literal = argument[/["']([^"']+)["']/, 1] or return
+    root_based = argument.include?("Rails.root") || argument.include?("File.expand_path")
+    base = line.start_with?(/\s*require_relative/) ? File.dirname(file) : nil
+    candidates = base ? [ File.join(base, literal) ] : (root_based ? [ literal ] : [ "lib/#{literal}" ] + Dir[File.join(ROOT, "app/*")].map { "app/#{File.basename(it)}/#{literal}" })
+    candidates.map { File.expand_path(it, ROOT).delete_prefix("#{ROOT}/").then { |path| path.end_with?(".rb") ? path : "#{path}.rb" } }
+              .find { |path| File.file?(File.join(ROOT, path)) }
+  end
+
+  def hand_loaded_autoloaded_code
+    scanned_files.flat_map do |file|
+      File.foreach(File.join(ROOT, file)).filter_map do |line|
+        target = hand_loaded_path(file, line)
+        "#{file} → #{target}" if target && autoloaded?(target)
+      end
+    end
+  end
+
+  def test_no_file_loads_by_hand_the_code_zeitwerk_autoloads
+    assert_operator scanned_files.size, :>, 500, "la garde ne balaie presque rien : le motif de fichiers est cassé"
+    assert_empty hand_loaded_autoloaded_code, "Zeitwerk autocharge app/ et lib/ (hors assets et tasks) : pas de require/load à la main, la constante suffit (conventions.md §7)"
+  end
+
+  def test_the_manual_load_guard_sees_every_way_of_writing_it
+    {
+      %(require "contenus/corrections_production") => true,
+      %(require Rails.root.join("lib/contenus/corrections_production")) => true,
+      %(require Rails.root.join("lib/contenus/corrections_production").to_s) => true,
+      %(require_relative "../../lib/contenus/corrections_production") => true,
+      %(  load Rails.root.join("lib/contenus/corrections_production.rb")) => true,
+      %(require "json") => false,
+      %(require "test_helper") => false,
+      %(require Rails.root.join("db/migrate/20260928140100_fill_classroom_plan_entries").to_s) => false,
+      %(require Rails.root.join("script/ci/scope").to_s) => false
+    }.each do |line, offence|
+      target = hand_loaded_path("test/tasks/example_test.rb", line)
+
+      assert_equal offence, !target.nil? && autoloaded?(target), "mal classé : #{line}"
+    end
   end
 
   # ADR-0052 §4, amended by ADR-0108 §4: the only condition allowed on the worker is a PR environment.
@@ -74,8 +129,8 @@ class RepositoryRulesTest < Minitest::Test
   AUDIT_EXCEPTIONS = {
     # braces <= 3.0.3 (GHSA-vfj7-8cjw-p6xm), stack exhaustion on deeply nested patterns; build-time only
     # (@tailwindcss/cli -> @parcel/watcher, fast-glob -> micromatch), no patched version published on 2026-10-03 nor on
-    # 2026-10-19 nor on 2026-11-01 (latest: 3.0.3).
-    "1240992" => Date.new(2026, 11, 15)
+    # 2026-10-19 nor on 2026-11-01 nor on 2026-11-16 (latest: 3.0.3).
+    "1240992" => Date.new(2026, 11, 30)
   }.freeze
 
   def test_every_ignored_yarn_advisory_is_registered_with_a_review_date

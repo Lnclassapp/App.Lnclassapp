@@ -821,7 +821,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "title", text: "Génétique et évolution · Élève · Lnclass"
-    # UDR XXXX écrans minimalistes style Wave §3 : ni barre ni menu, une flèche vers la matière, le titre, « Leçon n · Matière · Niveau ».
+    # UDR-0173 écrans minimalistes style Wave §3 : ni barre ni menu, une flèche vers la matière, le titre, « Leçon n · Matière · Niveau ».
     assert_select "header.sticky, aside, nav", 0
     assert_select "#student_lesson a#inner_back[href=?]", courses_path(material: @svt.slug)
     assert_select "#student_lesson h1", text: "Génétique et évolution"
@@ -1333,7 +1333,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @student
   end
 
-  test "CA-1 (UDR XXXX écrans minimalistes style Wave §3): the subject view has no « Prochain exercice » card, and no navigation bar" do
+  test "CA-1 (UDR-0173 écrans minimalistes style Wave §3): the subject view has no « Prochain exercice » card, and no navigation bar" do
     with_exercises
 
     get courses_path(material: @svt.slug)
@@ -1345,7 +1345,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  # Audit O-C01 : la vue d'une matière lit la page du catalogue une fois (UDR XXXX écrans minimalistes style Wave §3 : une seule vue, sans fiches).
+  # Audit O-C01 : la vue d'une matière lit la page du catalogue une fois (UDR-0173 écrans minimalistes style Wave §3 : une seule vue, sans fiches).
   test "the subject view reads the catalog page once and the tiles carry no revision sheets" do
     with_exercises
     reads = []

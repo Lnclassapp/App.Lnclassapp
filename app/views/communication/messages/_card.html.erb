@@ -1,7 +1,7 @@
 <%# 🌐 UI · communication/messages/_card — une annonce dans son thème : signature, titre, texte, illustration ou image, audio %>
 <%# Rôle : locaux card: (InboxQuery::MessageCard), context: (:carousel, :list, :moderation), dismissible: (croix) ; jamais un lien %>
-<%# ADR  : 0078, 0081 · UDR : 0005, 0071 (§3.2, §3.4, amendements du 2026-10-30), 0075 (§3.1, §3.2), XXXX écrans minimalistes style Wave §3 (accueil : bannière aux coins de carte) %>
-<%# UDR XXXX §3 : dans le carrousel de l'accueil élève, la carte est une bannière Wave (coins de carte, audio et croix gardés). %>
+<%# ADR  : 0078, 0081 · UDR : 0005, 0071 (§3.2, §3.4, amendements du 2026-10-30), 0075 (§3.1, §3.2), 0173 §3 (accueil : bannière aux coins de carte) %>
+<%# UDR-0173 §3 : dans le carrousel de l'accueil élève, la carte est une bannière Wave (coins de carte, audio et croix gardés). %>
 <% wave = context == :carousel && current_actor&.student? %>
 <% dom_id = "announcement_#{card.public_id}" %>
 <%# UDR-0075 §3.1 : le thème redéfinit les tokens de la carte ; fond, texte, signature, badge, croix et dessins le suivent. %>

@@ -81,3 +81,4 @@ Pourquoi plutôt qu'un onglet ou une barre du bas : la valeur de l'écran est di
 - « Voir plus (n) » ne fait aucune requête : les lignes en trop sont déjà dans la page, masquées (`hidden`), et révélées par `reveal` (même limite et même contrôleur que l'UDR-0057 R3).
 - Les écrans enseignant, direction et équipe ne changent pas : la barre et la carte d'accueil de l'enseignant restent celles de l'UDR enseignant.
 - La charte `lnclass-design-system` (skill hors dépôt) impose encore la carte « Prochain exercice » : elle est périmée sur ce point, voir le journal du chantier.
+- **Amendement du 2026-11-16 (chantier `activation-eleve`, UDR-0174)** : sur l'accueil, la carte revient sous le libellé « Ton premier exercice », tant que l'élève n'a réussi aucun exercice ; l'historique liste aussi les copies en cours et propose « Refaire » sur toute copie terminée hors pause.

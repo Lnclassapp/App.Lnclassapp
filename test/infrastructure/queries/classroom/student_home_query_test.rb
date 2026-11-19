@@ -223,23 +223,50 @@ module Queries
       end
 
       # Lues seules par le cadre différé de l'activité, avec leur matière (pastille illustrée, UDR-0084 §3.8).
-      test "the 10 last completed sessions, newest first, with their score and their subject" do
+      # Activation-eleve, CA-11 : l'historique est ce que l'élève a touché, les copies en cours comprises (dernière activité :
+      # la fin d'une copie terminée, le début d'une copie en cours) ; une copie abandonnée n'y est pas.
+      test "the 10 last sessions touched, completed or in progress, by last activity, with their score and their subject" do
         exercise = create_exercise(essential: @essential, title: "Méiose")
         11.times do |index|
           create_exercise_session(student: @student, exercise:, status: "completed", score_percent: index * 5,
                                   completed_at: (20 - index).hours.ago)
         end
-        create_exercise_session(student: @student, exercise:)
+        in_progress = create_exercise_session(student: @student, exercise:, started_at: 30.minutes.ago, answered_count: 1)
+        create_exercise_session(student: @student, exercise:, status: "abandoned", started_at: 1.minute.ago)
         create_exercise_session(exercise:, status: "completed")
 
         sessions = StudentHomeQuery.new.recent_sessions(student_id: @student.id)
 
         assert_equal 10, sessions.size
-        assert_equal (1..10).map { it * 5 }.reverse, sessions.map(&:score_percent)
+        assert_equal [ nil, *(2..10).map { it * 5 }.reverse ], sessions.map(&:score_percent)
+        assert_equal [ in_progress.public_id, "started", 1, 2, nil ],
+                     sessions.first.to_h.values_at(:public_id, :status, :answered_count, :question_count, :medal)
+        assert_equal in_progress.started_at.to_i, sessions.first.last_at.to_i
+        assert_equal [ "completed", 2, 2 ], sessions.second.to_h.values_at(:status, :answered_count, :question_count)
         assert_equal [ [ "Méiose", "SVT", "svt" ] ],
                      sessions.map { it.to_h.values_at(:exercise_title, :material_name, :material_slug) }.uniq
-        assert_equal Orm::ExerciseSession.find_by(score_percent: 50, student: @student).public_id, sessions.first.public_id
+        assert_equal Orm::ExerciseSession.find_by(score_percent: 50, student: @student).public_id, sessions.second.public_id
         assert_empty StudentHomeQuery.new.recent_sessions(student_id: create_student.id)
+      end
+
+      test "a copy in progress of an exercise no longer published is not offered again; a completed one stays" do
+        draft = create_exercise(essential: @essential, title: "Retiré")
+        create_exercise_session(student: @student, exercise: draft)
+        done = create_exercise_session(student: @student, exercise: draft, status: "completed", score_percent: 60, completed_at: 1.hour.ago)
+        draft.update_columns(status: "draft")
+
+        assert_equal [ done.public_id ], StudentHomeQuery.new.recent_sessions(student_id: @student.id).map(&:public_id)
+      end
+
+      test "a copy in progress of an archived exercise or of an unpublished lesson is not offered again" do
+        archived = create_exercise(essential: @essential, title: "Archivé")
+        create_exercise_session(student: @student, exercise: archived)
+        archived.update_columns(archived_at: Time.current)
+        hidden = create_course(material: @svt, level: @classroom.level)
+        create_exercise_session(student: @student, exercise: create_exercise(course: hidden, title: "Leçon retirée"))
+        hidden.update_columns(status: "draft")
+
+        assert_empty StudentHomeQuery.new.recent_sessions(student_id: @student.id)
       end
 
       # Chantier accueil-eleve, PRD §7 : la page ne lit plus l'activité, que le cadre différé demande à part.

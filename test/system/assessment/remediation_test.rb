@@ -25,7 +25,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     play(correct: 0)
     assert_selector "#session_gap_outcome", text: "Cette notion passe à revoir."
 
-    # UDR XXXX écrans minimalistes style Wave §3 : l'accueil ne propose plus la fiche à revoir ; la leçon porte la notion et l'exercice proposé (CA-25).
+    # UDR-0173 écrans minimalistes style Wave §3 : l'accueil ne propose plus la fiche à revoir ; la leçon porte la notion et l'exercice proposé (CA-25).
     visit course_path(course.slug)
     assert_current_path course_path(course.slug)
     # La case de la notion est là ; sa feuille porte l'exercice proposé (« Exercice 3 ») ; la copie de remédiation se joue sur sa page.

@@ -102,6 +102,8 @@ class StaffRestoreConcurrencyTest < ActiveSupport::TestCase
       wait_until_a_backend_waits_on_a_lock
     ensure
       commit << true
+      # Joint même si l'attente a échoué : un fil qui écrit en base après la fin du test fabrique un échec dans un autre test.
+      purger&.join
     end
 
     assert_equal :restored, restorer.value

@@ -35,3 +35,7 @@ Option 1 : ignorer temporairement cet avis, et lui seul, avec une date de réexa
 
 - Remplacer `@tailwindcss/cli` ou forcer une autre version de `micromatch` : aucune version sûre n'existe à ce jour.
 - Toute autre dérogation d'audit.
+
+## Réexamens
+
+- 2026-11-16 : `braces` 3.0.3 reste la dernière version publiée (`npm view braces`) ; aucun correctif. Date de réexamen repoussée au **2026-11-30** (`AUDIT_EXCEPTIONS`, `.yarnrc.yml`). Décision du porteur du 2026-10-03 inchangée : cet avis seul est ignoré.

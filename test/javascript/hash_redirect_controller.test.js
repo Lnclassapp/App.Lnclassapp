@@ -1,7 +1,7 @@
-// Règle « contrôleur Stimulus borné » (docs/guide/conventions.md §7) : hash-redirect remplace l'adresse une seule fois par paire d'adresses.
+// Règle « contrôleur Stimulus borné » (docs/guide/conventions.md §7) : hash-redirect ne remplace pas deux fois la même paire d'adresses dans la fenêtre de 10 s (marqueur daté), mais redirige de nouveau après.
 // Constat : issue #635 (un 301 resté en cache rebouclait : /fiche → 301 → page#ancre → replace → /fiche → …).
 // Lancer : node --test test/javascript/hash_redirect_controller.test.js (aucun navigateur : window et sessionStorage sont simulés).
-import { test, beforeEach } from "node:test"
+import { test, mock, beforeEach, afterEach } from "node:test"
 import assert from "node:assert/strict"
 import HashRedirectController from "../../app/javascript/controllers/hash_redirect_controller.js"
 
@@ -29,7 +29,8 @@ function connect(values = {}) {
   controller.connect()
 }
 
-beforeEach(() => { delete globalThis.window })
+beforeEach(() => { delete globalThis.window; mock.timers.enable({ apis: ["Date"], now: 1_000_000 }) })
+afterEach(() => mock.timers.reset())
 
 test("replaces the visit once when the address ends with the anchor", () => {
   const replaced = setWindow()
@@ -37,10 +38,33 @@ test("replaces the visit once when the address ends with the anchor", () => {
   assert.deepEqual(replaced, [URL_VALUE])
 })
 
-test("two successive connects on the same pair of addresses replace only once (cached 301 loop)", () => {
+test("successive connects inside the window replace only once (cached 301 loop is instantaneous)", () => {
   const replaced = setWindow()
   connect()
+  mock.timers.tick(30)
   connect()
+  mock.timers.tick(30)
+  connect()
+  assert.deepEqual(replaced, [URL_VALUE])
+})
+
+test("a legitimate second visit once the window has elapsed replaces again", () => {
+  const replaced = setWindow()
+  connect()
+  mock.timers.tick(9_999)
+  connect()
+  assert.deepEqual(replaced, [URL_VALUE], "encore dans la fenêtre")
+  mock.timers.tick(1)
+  connect()
+  assert.deepEqual(replaced, [URL_VALUE, URL_VALUE], "fenêtre écoulée : redirige de nouveau")
+  connect()
+  assert.deepEqual(replaced, [URL_VALUE, URL_VALUE], "et la nouvelle fenêtre protège de nouveau")
+})
+
+test("a clock that goes backwards counts as recent: no replacement", () => {
+  const replaced = setWindow()
+  connect()
+  mock.timers.setTime(500_000)
   connect()
   assert.deepEqual(replaced, [URL_VALUE])
 })

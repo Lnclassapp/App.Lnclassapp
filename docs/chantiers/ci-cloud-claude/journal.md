@@ -32,3 +32,16 @@
 |---|---|---|
 | Deux tests système instables sous charge | Hors périmètre : le chantier n'a pas touché aux tests | [`tests-instables`](../tests-instables/) |
 | Publier aussi la preuve d'arbre (`script/ci/prove`) depuis la routine | Décision du porteur (ADR-0069 §8) | — |
+
+## 2026-11-15 · Le pilote assorti est déjà dans le conteneur
+
+Une session a rendu une ligne de preuve rouge sur 83 tests système, tous en `SessionNotCreatedError` : chromedriver 147 pour un Chrome 153, et « je n'ai pas pu télécharger un driver assorti ». Il n'y avait rien à télécharger. Le conteneur porte les deux, et c'est le `PATH` qui trompe :
+
+```
+/opt/node22/bin/chromedriver        → 147 (celui du PATH, installé par npm)
+/opt/chromedriver-153.0.8010.12/    → 153 (assorti à google-chrome)
+```
+
+`export PATH=/opt/chromedriver-153.0.8010.12:$PATH` suffit, et les 83 runs passent (864 + 166 assertions, 0 échec). Deux précautions qui vont avec : dans un worktree détaché, les assets doivent être recompilés **depuis la branche** (`yarn build && yarn build:css`), sinon les tests système jouent le JS de `Develop` ; et la base de test porte le nom du répertoire (`app_lnclassapp_test_<suffixe>`), donc chaque worktree a besoin de son `bin/rails db:test:prepare`.
+
+Une ligne de preuve rouge pour une raison d'environnement n'est pas une preuve rouge : elle n'est pas une preuve du tout. La session a eu raison de le dire au lieu de l'arrondir.

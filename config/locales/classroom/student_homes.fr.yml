@@ -7,7 +7,7 @@ fr:
         # IL-14 : le bandeau d'accueil, une fois après un retrait (UDR-0081 §3.5).
         removed: "Tu ne fais plus partie de cette classe. Choisis ta classe."
       # Le bandeau bleu de l'accueil (shared/navigation/_home_band) porte ses propres clés : shared.navigation.home_band.
-      # UDR accueil élève §3.2, §3.3 : la carte du prochain exercice (code conservé pour le guidage d'activation, hors des écrans élève).
+      # UDR accueil élève §3.2, §3.3 : l'ancienne carte du prochain exercice, non affichée ; l'activation (UDR-0174) réutilise catalog.courses.next_exercise.
       next_step:
         # « 3E B · CM1T › » : le sigle de l'établissement, ou son nom ; mis en majuscules par la mise en page.
         class_link: "%{classroom} · %{school}"
@@ -64,7 +64,7 @@ fr:
           tomorrow: "Demain : %{subject}"
           none: "Rien à te proposer aujourd'hui."
       # UDR accueil élève §3.3 état 6 : l'élève sans classe active (archivée, ou retiré) ; le code, ou la cascade.
-      # UDR XXXX écrans minimalistes style Wave §3 : la carte de la classe (class_card), à cheval sur la jonction bleu → blanc.
+      # UDR-0173 écrans minimalistes style Wave §3 : la carte de la classe (class_card), à cheval sur la jonction bleu → blanc.
       class_card:
         label: "Ta classe"
         enter: "Entrer en classe"
@@ -77,7 +77,7 @@ fr:
         submit: "Rejoindre"
         no_code: "Je n'ai pas de code"
         archive: "Voir mon historique"
-      # UDR XXXX écrans minimalistes style Wave §3 : « À faire », les exercices assignés non commencés ; la section n'existe pas s'il n'y en a aucun.
+      # UDR-0173 écrans minimalistes style Wave §3 : « À faire », les exercices assignés non commencés ; la section n'existe pas s'il n'y en a aucun.
       to_do:
         title: "À faire"
       # UDR accueil élève §3.4 : la grille de « Mes matières », sans case « Inviter ».
@@ -92,7 +92,7 @@ fr:
           physique-chimie: "PC"
           histoire-geographie: "HG"
           philosophie: "Philo"
-      # UDR accueil élève §3.5 : l'Historique, dans le cadre différé.
+      # UDR accueil élève §3.5 : l'Historique, dans le cadre différé ; UDR-0174 §3 : copies en cours comprises.
       history:
         title: "Historique"
         today: "Aujourd'hui"
@@ -100,6 +100,9 @@ fr:
         more: "Voir plus (%{count})"
         redo: "Refaire"
         redo_label: "Refaire l'exercice « %{title} »"
+        # UDR-0174 §3 : une copie en cours, que la ligne reprend.
+        in_progress: "En cours · %{answered}/%{total}"
+        resume_label: "Reprendre l'exercice « %{title} »"
       # UDR-0084 §3.6, ADR-0089 §4.3 : « Ma classe » (état « sans enseignant »), la grille de l'accueil et la carte du jour ;
       # partage WhatsApp.
       invite_teacher:
@@ -107,7 +110,7 @@ fr:
         action: "Inviter mon enseignant"
         # UDR-0086 §3.7 : le nom du bouton seul de « Ma classe » (standalone), qui commence par le texte visible.
         action_label: "Inviter mon enseignant sur WhatsApp"
-        # UDR XXXX écrans minimalistes style Wave §3 : la bannière de l'accueil (invite_banner), masquable sur l'appareil.
+        # UDR-0173 écrans minimalistes style Wave §3 : la bannière de l'accueil (invite_banner), masquable sur l'appareil.
         banner_hint: "Invite-le en 10 secondes"
         banner_action: "Inviter"
         banner_dismiss: "Masquer l'invitation"
