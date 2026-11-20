@@ -6,9 +6,9 @@ class Classroom::SchoolPostersControllerTest < ActionDispatch::IntegrationTest
     @school = create_school(name: "Lycée Classique d'Abidjan")
     @sixth = create_level(name: "Niveau A", position: 901)
     @third = create_level(name: "Niveau B", position: 904)
-    create_classroom(school: @school, level: @third, name: "3e 1")
-    create_classroom(school: @school, level: @sixth, name: "6e 2")
-    create_classroom(school: @school, level: @sixth, name: "6e 1")
+    @open_classrooms = [ create_classroom(school: @school, level: @third, name: "3e 1"),
+                         create_classroom(school: @school, level: @sixth, name: "6e 2"),
+                         create_classroom(school: @school, level: @sixth, name: "6e 1") ]
     create_classroom(school: @school, level: @sixth, name: "6e 0", status: "archived")
     create_classroom(school: @school, level: @sixth, name: "6e 9", school_year: "2020-2021")
   end
@@ -23,6 +23,23 @@ class Classroom::SchoolPostersControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "6e 1", "6e 2", "3e 1" ], css_select("article h2").map { it.text.strip }
     assert_select "figure[role=img] svg", 3
     assert_select "button[data-action='print#print']"
+    @open_classrooms.each { |classroom| assert_includes response.body, join_qr_svg_for(classroom.reload.link_token) }
+  end
+
+  test "un enseignant de l'établissement reçoit 404" do
+    sign_in_as create_teacher(school: @school, classrooms: [ create_classroom(school: @school, name: "5e 1") ])
+
+    get school_posters_path(@school.public_id)
+
+    assert_response :not_found
+  end
+
+  test "un élève est refusé sur la route sans identifiant" do
+    sign_in_as create_student(classroom: create_classroom(school: @school, name: "2nde 1"))
+
+    get school_admin_posters_path
+
+    assert_response :forbidden
   end
 
   test "la direction d'un autre établissement reçoit 404" do

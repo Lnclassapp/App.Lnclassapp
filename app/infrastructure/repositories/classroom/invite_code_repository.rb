@@ -21,6 +21,7 @@ module Repositories
           raced = Orm::StudentInviteCode.find_by(student_id:)&.code
           return ::Shared::Result.success(raced) if raced
         end
+        Rails.logger.error("InviteCodeRepository: code unavailable for student_id=#{student_id}")
         ::Shared::Result.failure(:unavailable)
       end
 

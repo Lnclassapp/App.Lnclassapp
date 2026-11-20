@@ -47,4 +47,22 @@ class Classroom::ClassInvitesControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
     assert_equal 0, Orm::StudentInviteCode.count
   end
+
+  test "after three collisions: 503, nothing created, and the log names only the student" do
+    other = create_student
+    taken = Repositories::Classroom::InviteCodeRepository.new.code_for(student_id: other.id).value
+    sign_in_as(@student)
+    logged = []
+
+    stub_method(Entities::Classroom::InviteCode, :generate, -> { taken }) do
+      stub_method(Rails.logger, :error, ->(message = nil, &block) { logged << (message || block&.call) }) do
+        post class_invite_path
+      end
+    end
+
+    assert_response :service_unavailable
+    assert_equal 0, Orm::StudentInviteCode.where(student_id: @student.id).count
+    assert_equal [ "InviteCodeRepository: code unavailable for student_id=#{@student.id}" ], logged.grep(/InviteCodeRepository/)
+    assert_not_includes logged.join, taken
+  end
 end

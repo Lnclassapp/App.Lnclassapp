@@ -751,6 +751,12 @@ end
     end
   end
 
+  test "attribution: an unknown invite code (no s) writes « teacher_link » and no inviter" do
+    register(link_token: @classroom.reload.link_token, invite_code: "zzzzzzzz")
+
+    assert_equal [ "teacher_link", nil ], [ attribution.source, attribution.inviter_id ]
+  end
+
   test "attribution: a link send with a camarade's invite code writes « student_invite » and the inviter" do
     inviter = create_student
     code = invite_code_of(inviter)
@@ -764,7 +770,7 @@ end
     register(link_token: @classroom.reload.link_token, invite_code: "zzzzzzzz", arrival_source: "qr")
 
     assert_redirected_to student_home_path
-    assert_equal "qr", attribution.source
+    assert_equal [ "qr", nil, @classroom.id ], [ attribution.source, attribution.inviter_id, attribution.classroom_id ]
   end
 
   test "attribution: a refused sign-up (number taken) writes nothing and the form keeps s and i" do

@@ -17,6 +17,7 @@ class Classroom::PostersControllerTest < ActionDispatch::IntegrationTest
     assert_select "h2", text: "3e 2"
     assert_select "article", text: /Lycée Classique d'Abidjan/
     assert_select "figure[role=img] svg"
+    assert_includes response.body, join_qr_svg_for(@classroom.reload.link_token)
     assert_select "ol li", 3
     assert_select "[class~='print:hidden']"
   end

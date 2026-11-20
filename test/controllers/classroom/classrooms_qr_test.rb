@@ -15,6 +15,7 @@ class Classroom::ClassroomsQrTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#classroom_link button", text: /QR code/
     assert_select "dialog#classroom-qr figure#classroom_qr[role='img'] svg", 1
+    assert_includes response.body, join_qr_svg_for(@classroom.reload.link_token)
   end
 
   test "la fenêtre du QR propose d'imprimer l'affiche de la classe" do

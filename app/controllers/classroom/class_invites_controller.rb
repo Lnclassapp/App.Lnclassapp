@@ -8,6 +8,7 @@ module Classroom
     def create
       result = invite.call(actor: current_actor, classroom: Queries::Classroom::StudentHomeQuery.new.active_classroom(student_id: current_actor.user_id))
       return redirect_to(student_home_path, status: :see_other) if result.code == :not_found
+      return head(:service_unavailable) if result.code == :unavailable # code introuvable après 3 collisions : pas de formulaire à re-rendre
 
       render_result result, success: ->(invitation) { redirect_to helpers.whatsapp_share_url(message(invitation)), allow_other_host: true, status: :see_other }
     end
