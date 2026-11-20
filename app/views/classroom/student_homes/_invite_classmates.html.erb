@@ -1,0 +1,14 @@
+<%# 🌐 UI · classroom/student_homes/_invite_classmates — « Invite tes camarades » : l'élève envoie le lien de sa classe sur WhatsApp %>
+<%# Rôle : bannière sans croix (action du jour J) ; le bouton envoie un POST vers la porte serveur, qui répond 303 vers WhatsApp, dans un nouvel onglet %>
+<%# ADR  : attribution-des-inscriptions-eleves (§4.3) · UDR : partage-de-classe-qr-affiche-invitation (§3.3), 0173 §3 · locals: (home:) -%>
+<% scope = "classroom.student_homes.invite_classmates" %>
+<%= tag.section id: "student_invite_classmates", "aria-labelledby": "student_invite_classmates_title",
+                class: "flex items-center gap-3 rounded-card bg-brand-soft p-4" do %>
+  <span class="grid size-10 shrink-0 place-items-center rounded-full bg-white text-brand-strong" aria-hidden="true"><%= ui_icon "user-group" %></span>
+  <div class="min-w-0 flex-1 space-y-1">
+    <h2 id="student_invite_classmates_title" class="text-base leading-snug font-medium text-ink"><%= t("#{scope}.title") %></h2>
+    <p class="text-sm text-mute"><%= t("#{scope}.hint", classroom: home.classroom_name) %></p>
+    <%= button_to t("#{scope}.action"), class_invite_path, method: :post, class: "ui-button ui-button-primary ui-button-sm mt-1 min-h-tap",
+                  form: { target: "_blank", data: { turbo: false } }, "aria-label": t("#{scope}.action_label", classroom: home.classroom_name) %>
+  </div>
+<% end %>
