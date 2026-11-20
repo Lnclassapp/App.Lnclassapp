@@ -258,6 +258,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`rapports-de-classe`](rapports-de-classe/memo.md) | livré en PR | feature | 2026-10-16 | Rapports de classe : la fiche d'un élève et ce qui reste du suivi enseignant |
 | [`rapports-exercices`](rapports-exercices/memo.md) | livré | feature | 2026-10-04 | Comprendre où en est la classe sur un exercice |
 | [`recette-v1-defauts`](recette-v1-defauts/memo.md) | livré | bugfix | 2026-09-28 | Défauts de la recette V1 |
+| [`recherche-etablissement`](recherche-etablissement/memo.md) | livré | feature | 2026-11-20 | Chercher son établissement en tapant son nom |
 | [`refaire-ou-continuer`](refaire-ou-continuer/memo.md) | livré | feature | 2026-11-04 | Refaire ou continuer depuis la correction |
 | [`refonte-application`](refonte-application/memo.md) | décision | programme | 2026-09-18 | Refonte de l'application dans un nouveau projet Rails |
 | [`refonte-contenus-maths`](refonte-contenus-maths/memo.md) | livré | feature | 2026-10-29 | Refonte des contenus de mathématiques |

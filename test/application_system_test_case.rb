@@ -74,6 +74,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("classroom.classroom_students.manage.issue_code")
   end
 
+  # ADR-XXXX-recherche-etablissement, UDR-XXXX-champ-etablissement: a few letters in « Ton établissement », then the school
+  # chosen in the list of results (each one a radio with its DRENA).
+  def choose_school(name, search: name)
+    fill_in "school_q", with: search
+    within("turbo-frame#school_results") { choose name }
+  end
+
   # The « Suivi » block of a school page (crm-ecoles) is made of lazy frames that load as they come into view, above the
   # rest of the page. A frame that finishes loading after the test scrolled a button into view moves the page under it
   # and the click lands on the bottom bar. Bring each frame into view, wait until every one is complete, then go back up.

@@ -184,8 +184,7 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
 
     click_on I18n.t("#{FORM}.no_code")
     assert_no_field "student_registration[join_code]"
-    select "Abidjan 1", from: "student_registration[drena_public_id]"
-    select "Collège Moderne 1 de Tiassalé", from: "student_registration[school_public_id]"
+    choose_school "Collège Moderne 1 de Tiassalé", search: "moderne tiassale"
     within("turbo-frame#picker_levels") { choose "3ème" }
     within("turbo-frame#picker_classrooms") { choose "3e C" }
 

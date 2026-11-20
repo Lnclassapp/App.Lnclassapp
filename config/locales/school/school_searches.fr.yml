@@ -1,0 +1,32 @@
+# Champ « Ton établissement » : recherche des établissements actifs pendant la frappe, élève (tu) et enseignant (vous) — ADR-XXXX-recherche-etablissement, UDR-XXXX-champ-etablissement
+fr:
+  school:
+    school_searches:
+      field:
+        label:
+          tu: "Ton établissement"
+          vous: "Votre établissement"
+        placeholder: "Ex. Notre-Dame Tiassalé"
+        hint:
+          tu: "Tape au moins 2 lettres du nom de ton école, ou ta ville."
+          vous: "Tapez au moins 2 lettres du nom de votre établissement, ou la ville."
+        search: "Chercher"
+        load_error: "La liste n'a pas pu se charger."
+        load_error_message: "Vérifie ta connexion, puis réessaie."
+        retry: "Réessayer"
+      index:
+        page_title: "Établissements"
+        found:
+          one: "1 établissement trouvé."
+          other: "%{count} établissements trouvés."
+        drena: "DRENA %{name}"
+        more:
+          tu: "Plus de 20 établissements : ajoute un mot pour affiner."
+          vous: "Plus de 20 établissements : ajoutez un mot pour affiner."
+        not_found_title: "Aucun établissement trouvé"
+        not_found_description:
+          tu: "Vérifie l'orthographe, ou tape un autre mot du nom ou ta ville."
+          vous: "Vérifiez l'orthographe, ou tapez un autre mot du nom ou la ville."
+        load_error: "La liste n'a pas pu se charger."
+        rate_limited: "Trop de recherches depuis cette connexion. Attends un instant puis réessaie."
+        retry: "Réessayer"

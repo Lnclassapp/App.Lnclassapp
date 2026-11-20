@@ -7,7 +7,6 @@
 <%= form_with model: @form, scope: :student_registration, url: student_registrations_path, id: "student-registration-form",
               class: "flex-1 space-y-6", html: { novalidate: true },
               data: { action: "keydown.enter->classroom--signup-steps#enter", controller: "classroom--class-picker identity--phone-digits identity--pin-match",
-                      "classroom--class-picker-schools-url-value": drena_schools_path("__drena__", scope: :student_registration),
                       "classroom--class-picker-levels-url-value": school_picker_levels_path("__school__", scope: :student_registration),
                       "classroom--class-picker-classrooms-url-value": school_picker_classrooms_path("__school__", "__level__",
                                                                                                    scope: :student_registration),
@@ -40,7 +39,7 @@
       <div class="space-y-4"
            data-action="change-><%= steps %>#cascadeChanged">
         <div id="signup-cascade" data-<%= steps %>-target="cascade">
-          <%= render "classroom/student_registrations/class_picker", form:, scope: :student_registration, after_drena: have_code, **class_picker_lists %>
+          <%= render "classroom/student_registrations/class_picker", form:, scope: :student_registration, after_school: have_code, **class_picker_lists %>
         </div>
 
         <div id="signup-code-field" class="space-y-2" data-<%= steps %>-target="codeField">

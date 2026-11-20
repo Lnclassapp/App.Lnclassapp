@@ -28,7 +28,9 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#teacher_school_#{@a.public_id} dialog", 0, "CA-H5 : le seul établissement n'a pas de bouton"
     assert_select "#teacher_school_#{@a.public_id} button", 0
     assert_select "#add_school form#school-join-form[action='#{teacher_schools_path}']"
-    assert_select "#add_school select[name='school_join[drena_public_id]'] option", text: "DRENA Abidjan 1"
+    assert_select "#add_school input#school_q[form=school-join-search]"
+    assert_select "#add_school form#school-join-search[action='#{teacher_schools_path}'][method=get]"
+    assert_select "#add_school select", 0
   end
 
   test "ME-02: joining B from the page: secondary, the session moves to B, on to the classrooms of B" do
@@ -182,11 +184,12 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "meta[name=turbo-visit-control]", 0
   end
 
-  test "the DRENA chosen without JavaScript comes back in GET and lists its schools" do
+  test "the search without JavaScript comes back in GET and lists its schools, each with its DRENA" do
     sign_in_as @teacher
-    get teacher_schools_path, params: { school_join: { drena_public_id: @drena.public_id } }
+    get teacher_schools_path, params: { school_q: "notre dame" }
 
-    assert_select "#add_school select[name='school_join[school_public_id]'] option", text: "Collège Notre-Dame"
+    assert_select "#add_school turbo-frame#school_results input[type=radio][name='school_join[school_public_id]']", 1
+    assert_select "#add_school turbo-frame#school_results label", text: /Collège Notre-Dame\s+DRENA DRENA Abidjan 1/
   end
 
   test "beyond 10 joins a minute: the error state, nothing is read" do

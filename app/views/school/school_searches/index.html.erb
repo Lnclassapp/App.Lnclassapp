@@ -1,0 +1,44 @@
+<%# 🌐 UI · school/school_searches/index — frame « school_results » : les établissements trouvés, chacun avec sa DRENA, en boutons radio %>
+<%# Rôle : servi seul pendant la frappe, ou rendu dans le champ (repli GET, re-rendu 422) ; vide, introuvable, erreur, liste ou l'établissement choisi seul %>
+<%# ADR  : XXXX-recherche-etablissement · UDR : XXXX-champ-etablissement (§3 Liste de résultats, États) %>
+<%# locals: (scope:, chosen:, result:, rate_limited: false) -%>
+<% page_title t(".page_title") %>
+<% register = School::SchoolSearchesController.register(scope) %>
+<%# Une recherche faite montre ses résultats (le choisi coché s'il y est) ; sans recherche, le choisi seul. %>
+<% rows = result ? result.rows : Array(chosen) %>
+<%= turbo_frame_tag "school_results", class: "block transition-opacity aria-busy:opacity-50", "aria-live": "polite",
+                                      data: { "school--school-search-target": "frame",
+                                              action: "turbo:frame-missing->school--school-search#missing " \
+                                                      "turbo:fetch-request-error->school--school-search#missing" } do -%>
+  <% if rate_limited %>
+    <div class="mt-2">
+      <%= ui_error_state title: t(".load_error"), message: t(".rate_limited"), retry_href: request.fullpath, retry_label: t(".retry") %>
+    </div>
+  <% elsif result && rows.empty? %>
+    <div class="mt-2">
+      <%= ui_empty_state title: t(".not_found_title"), description: t(".not_found_description.#{register}"), icon: "magnifying-glass" %>
+    </div>
+  <% elsif rows.any? %>
+    <fieldset class="mt-2 min-w-0">
+      <legend class="sr-only"><%= t(".found", count: rows.size) %></legend>
+      <ul class="divide-y divide-line overflow-hidden rounded-ln border border-line bg-white">
+        <% rows.each do |row| %>
+          <% id = "#{scope}_school_public_id_#{row.public_id}" %>
+          <li class="has-checked:bg-brand-soft" data-school--school-search-target="option">
+            <label for="<%= id %>" class="relative flex min-h-12 items-center gap-3 px-4 py-3">
+              <%= radio_button_tag "#{scope}[school_public_id]", row.public_id, chosen&.public_id == row.public_id, id:, required: true,
+                                   class: "peer absolute inset-0 size-full cursor-pointer appearance-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand",
+                                   data: { action: "change->school--school-search#pick" } %>
+              <span class="min-w-0 flex-1 font-medium text-ink"><%= row.name %></span>
+              <span class="max-w-[45%] shrink-0 text-right text-xs text-mute"><%= t(".drena", name: row.drena_name) %></span>
+              <%= ui_icon "check-circle", variant: :mini, class: "hidden shrink-0 text-brand peer-checked:block" %>
+            </label>
+          </li>
+        <% end %>
+      </ul>
+    </fieldset>
+    <% if result&.more %>
+      <p class="mt-2 text-sm text-mute" data-school--school-search-target="more"><%= t(".more.#{register}") %></p>
+    <% end %>
+  <% end %>
+<% end %>

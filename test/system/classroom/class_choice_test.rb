@@ -1,9 +1,9 @@
 require "application_system_test_case"
 
 # UDR-0091 (CA-1 to CA-4, CA-7), in a real browser: « Choisis ta classe » in three numbered steps. The school of the last
-# classroom is folded in one line with « Changer »; the levels are pills, the classrooms boxes, two per row on a phone and
-# four from 700 px, a full one disabled; « Rejoindre cette classe » waits for a box. The pills answer the arrow keys.
-# « Changer » opens the DRENA and school lists, without leaving the page, and empties steps 2 and 3.
+# classroom is checked, alone, under « Ton établissement » (UDR-XXXX-champ-etablissement); the levels are pills, the
+# classrooms boxes, two per row on a phone and four from 700 px, a full one disabled; « Rejoindre cette classe » waits for
+# a box. The pills answer the arrow keys. A new search, without leaving the page, drops the school and empties steps 2 and 3.
 class Classroom::ClassChoiceTest < ApplicationSystemTestCase
   PAGE = "classroom.student_classroom_choices.new".freeze
   PICKER = "classroom.student_registrations.class_picker".freeze
@@ -26,11 +26,12 @@ class Classroom::ClassChoiceTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit new_student_classroom_choice_path
 
-      within("#class-picker-school-summary") do
-        assert_text "Lycée Classique d'Abidjan"
-        assert_text "Abidjan 1"
-        assert_selector "a[aria-label=\"#{I18n.t("#{PICKER}.change_label")}\"]", text: I18n.t("#{PICKER}.change")
+      within("turbo-frame#school_results") do
+        assert_selector "label", count: 1
+        assert_selector "label", text: /Lycée Classique d'Abidjan\s+DRENA Abidjan 1/
+        assert_checked_field "Lycée Classique d'Abidjan"
       end
+      assert_field "school_q", with: ""
       assert_no_selector "select"
       assert_text I18n.t("#{PICKER}.level_first")
       assert_button I18n.t("#{PAGE}.submit"), disabled: true
@@ -53,7 +54,7 @@ class Classroom::ClassChoiceTest < ApplicationSystemTestCase
     assert_equal [ @b.id ], Orm::ClassroomStudent.where(student: @student, left_at: nil).pluck(:classroom_id)
   end
 
-  test "CA-2, CA-7 at 820 px: four boxes in a row, pills by arrow keys; another pill or « Changer » drops the checked classroom" do
+  test "CA-2, CA-7 at 820 px: four boxes in a row, pills by arrow keys; another pill or a new search drops the checked classroom" do
     with_mobile_viewport([ 820, 1180 ]) do
       visit new_student_classroom_choice_path
 
@@ -77,17 +78,13 @@ class Classroom::ClassChoiceTest < ApplicationSystemTestCase
       assert_button I18n.t("#{PAGE}.submit"), disabled: false
 
       assert_no_page_reload do
-        find("a[aria-label=\"#{I18n.t("#{PICKER}.change_label")}\"]").click
+        fill_in "school_q", with: "classique"
 
-        assert_no_selector "#class-picker-school-summary"
-        assert_selector :select, "student_classroom_choice[drena_public_id]", selected: "Abidjan 1"
-        assert_selector :select, "student_classroom_choice[school_public_id]", selected: I18n.t("#{PICKER}.school_prompt")
-        assert_equal "student_classroom_choice[drena_public_id]", page.evaluate_script("document.activeElement.name")
         assert_no_selector "turbo-frame#picker_levels input, turbo-frame#picker_classrooms input"
-        assert_text I18n.t("#{PICKER}.school_first")
         assert_button I18n.t("#{PAGE}.submit"), disabled: true
+        within("turbo-frame#school_results") { assert_field "Lycée Classique d'Abidjan", checked: false }
 
-        select "Lycée Classique d'Abidjan", from: "student_classroom_choice[school_public_id]"
+        within("turbo-frame#school_results") { choose "Lycée Classique d'Abidjan" }
         within("turbo-frame#picker_levels") { assert_field "3ème", checked: false }
       end
       assert_current_path new_student_classroom_choice_path

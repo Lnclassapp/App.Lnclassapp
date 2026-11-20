@@ -1,8 +1,10 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
-# Rôle : inscription enseignant publique, DRENA → établissement ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
-# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103 · UDR : 0024, 0050, 0079, 0099 (§3.4), 0134 (§3.9), 0176-entree-eleve-unique (§3.7 : « Êtes-vous bien enseignant ? »)
+# Rôle : inscription enseignant publique, établissement cherché (DRENA déduite) ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
+# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103, XXXX-recherche-etablissement · UDR : 0050, 0079, 0099 (§3.4), 0134 (§3.9), XXXX-champ-etablissement, 0176-entree-eleve-unique (§3.7 : « Êtes-vous bien enseignant ? »)
 module Identity
   class TeacherRegistrationsController < ApplicationController
+    include SchoolSearchField
+
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id
                 material_slug invite_token].freeze
 
@@ -11,17 +13,17 @@ module Identity
     # Le lien d'invitation a son propre compteur, comme l'ancien /e/<code> (ADR-0083 §4.1) ; au-delà, rien n'est révélé.
     rate_limit to: 10, within: 1.minute, only: :invite, name: "invite_link", by: -> { request.remote_ip },
                with: -> { refuse_too_many }
-    helper_method :material_options, :drena_options, :school_options
+    helper_method :material_options
 
-    # Sans JavaScript, la DRENA choisie revient ici en GET (formulaire teacher-signup-drena) et liste ses établissements.
-    # D1 du porteur (UDR-0176 §3.7) : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant ? » ;
-    # « Oui » revient ici avec ?confirmed=1, « Non, je suis élève » mène à l'entrée élève. La DRENA renvoyée en GET (sans
-    # JavaScript) vient d'un formulaire déjà ouvert : pas de question.
+    # Sans JavaScript, la recherche revient ici en GET (formulaire teacher-signup-school, school_q) et liste ses résultats.
+    # D1 du porteur (UDR-0176 §3.7) : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant ? » ; « Oui » revient ici
+    # avec ?confirmed=1, « Non, je suis élève » mène à l'entrée élève. Une recherche renvoyée en GET (sans JavaScript) vient
+    # d'un formulaire déjà ouvert : pas de question.
     def new
       return redirect_to_home if authenticated?
-      return render(:confirm) unless params[:confirmed] == "1" || drena_param.present?
+      return render(:confirm) unless params[:confirmed] == "1" || params[:school_q].present?
 
-      @form = Dtos::Identity::TeacherRegistrationInput.new(drena_public_id: drena_param)
+      @form = Dtos::Identity::TeacherRegistrationInput.new
     end
 
     # /i/<jeton> : le même formulaire, l'établissement déjà choisi ; le jeton voyage dans un champ caché, sans cookie ni
@@ -31,8 +33,8 @@ module Identity
       return redirect_to teacher_school_join_path(params[:token].to_s) if current_actor&.teacher? && current_actor.school_id
       return redirect_to_home if authenticated?
 
-      # Le lien de parrainage (ADR-0094 §11) garde la liste des établissements : sans JavaScript, la DRENA revient ici en GET.
-      @form = Dtos::Identity::TeacherRegistrationInput.new(invite_token: params[:token], drena_public_id: drena_param)
+      # Le lien de parrainage (ADR-0094 §11) garde la recherche d'établissement : sans JavaScript, elle revient ici en GET.
+      @form = Dtos::Identity::TeacherRegistrationInput.new(invite_token: params[:token])
       show_invite
       # Ouvert par son adresse, un lien sans établissement ni parrain est invalide, même mal formé (oublié par le DTO).
       @invite_invalid = @preview.nil? && @sponsor.nil?
@@ -61,8 +63,6 @@ module Identity
       @invite_invalid = @form.invite_token.present? && @preview.nil? && @sponsor.nil?
     end
 
-    def drena_param = params.permit(teacher_registration: :drena_public_id).dig(:teacher_registration, :drena_public_id)
-
     def refuse_too_many_posts
       @form = form_input
       show_invite
@@ -75,20 +75,11 @@ module Identity
     end
 
     def form_input
-      Dtos::Identity::TeacherRegistrationInput.new(**params.expect(teacher_registration: FIELDS).to_h.symbolize_keys)
+      Dtos::Identity::TeacherRegistrationInput.new(**with_school_drena(params.expect(teacher_registration: FIELDS).to_h.symbolize_keys))
     end
 
     def invite_links = Repositories::Identity::InviteLinkRepository.new
-    def options = @options ||= Queries::School::SchoolOptionsQuery.new
     def material_options = Queries::Catalog::ReferentialOptionsQuery.new.call.materials.map { [ it.name, it.slug ] }
-    def drena_options = options.drenas.map { [ it.name, it.public_id ] }
-
-    # Seule une DRENA connue est cherchée (comme School::DrenaSchoolsController) : un identifiant forgé ne touche pas la base.
-    def school_options
-      return [] unless options.drenas.any? { it.public_id == @form.drena_public_id }
-
-      options.schools_for(drena_public_id: @form.drena_public_id)
-    end
 
     def register
       UseCases::Identity::RegisterTeacher.new(

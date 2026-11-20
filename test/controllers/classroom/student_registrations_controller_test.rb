@@ -67,9 +67,10 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "#student_registration_join_code_hint", text: I18n.t("#{STEPS}.code_hint")
     assert_select "#signup-code-checking[hidden]", text: I18n.t("#{STEPS}.checking")
     assert_select "turbo-frame#classroom_code_preview[aria-live=polite]"
-    # UDR-0135 §3.2: the cascade comes first and open; « J'ai le code de ma classe » is under the DRENA, « Je n'ai pas de code » under the code.
+    # UDR-0135 §3.2: the cascade comes first and open; « J'ai le code de ma classe » is under the school search, « Je n'ai pas de code » under the code.
     assert_select "main[data-classroom--signup-steps-code-open-value=false]"
-    assert_select "#signup-cascade select[name='student_registration[drena_public_id]']"
+    assert_select "#signup-cascade input[type=search]#school_q[name=school_q]"
+    assert_select "#signup-cascade select", 0
     assert_select "#signup-cascade a#signup-have-code[href='#signup-code-field']", text: /#{Regexp.escape(I18n.t("#{STEPS}.have_code"))}/
     assert_select "#signup-code-field a#signup-no-code[href='#signup-cascade']", text: /#{Regexp.escape(I18n.t("#{STEPS}.no_code"))}/
     assert_select "input[type=checkbox]#signup-no-code", 0
@@ -315,26 +316,22 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
   end
 
   test "IL-04 without JavaScript: each choice sent in GET lists the next step in the page" do
-    create_school(drena: @drena, name: "Lycée fermé", status: "inactive")
+    create_school(drena: @drena, name: "Lycée Moderne fermé", status: "inactive")
 
-    get new_student_registration_path, params: { student_registration: { drena_public_id: @drena.public_id } }
+    get new_student_registration_path, params: { school_q: "lycee moderne" }
 
     assert_response :success
-    assert_select "select[name='student_registration[drena_public_id]'] option[selected][value='#{@drena.public_id}']"
-    assert_select "turbo-frame#picker_schools select[name='student_registration[school_public_id]']" \
-                  "[data-action='change->classroom--class-picker#loadLevels'] option[value='#{@school.public_id}']",
-                  text: "Lycée Moderne de Cocody"
-    assert_no_match(/Lycée fermé/, response.body)
+    assert_select "input#school_q[value='lycee moderne']"
+    assert_select "turbo-frame#school_results input[type=radio][name='student_registration[school_public_id]']" \
+                  "[data-action='change->school--school-search#pick'][value='#{@school.public_id}']:not([checked])"
+    assert_select "turbo-frame#school_results label", text: /Lycée Moderne de Cocody\s+DRENA Abidjan 1/
+    assert_no_match(/Lycée Moderne fermé/, response.body)
     assert_select "turbo-frame#picker_levels *", 0
 
-    get new_student_registration_path,
-        params: { student_registration: { drena_public_id: @drena.public_id, school_public_id: @school.public_id } }
+    get new_student_registration_path, params: { student_registration: { school_public_id: @school.public_id } }
 
-    assert_select "turbo-frame#picker_schools option[selected][value='#{@school.public_id}']"
-    assert_select "#class-picker-school-summary", text: /Lycée Moderne de Cocody/
-    # « Changer » sans JavaScript : la DRENA seule revient ; nom, prénoms et contact sont perdus (dette, journal).
-    assert_select "#class-picker-school-summary a[href='#{new_student_registration_path(student_registration: { drena_public_id: @drena.public_id })}']",
-                  text: I18n.t("#{PICKER}.change")
+    assert_select "turbo-frame#school_results input[type=radio][checked][value='#{@school.public_id}']"
+    assert_select "turbo-frame#school_results input[type=radio]", 1
     assert_select "turbo-frame#picker_levels input[type=radio][name='student_registration[level_slug]']" \
                   "[data-action='change->classroom--class-picker#loadClassrooms'][value='#{@level.slug}']"
     assert_select "turbo-frame#picker_levels label", text: "3ème"
@@ -357,18 +354,25 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
 
   test "a choice that does not belong to its parent empties the lists after it" do
     other = create_school(drena: create_drena)
+    closed = create_school(drena: @drena, status: "inactive")
 
-    get new_student_registration_path,
-        params: { student_registration: registration_params(school_public_id: other.public_id) }
+    [ other.public_id, closed.public_id, "sch-inconnu" ].each do |school_public_id|
+      get new_student_registration_path, params: { student_registration: registration_params(school_public_id:) }
 
-    assert_response :success
-    assert_select "turbo-frame#picker_schools option[selected]", 0
+      assert_response :success
+      assert_select "turbo-frame#school_results input[checked]", (school_public_id == other.public_id ? 1 : 0)
+      assert_select "turbo-frame#picker_levels input[value='#{@level.slug}']", 0
+      assert_select "turbo-frame#picker_classrooms *", 0
+    end
+  end
+
+  # ADR-XXXX-recherche-etablissement : une recherche qui ne contient plus l'établissement envoyé le retire, et ses niveaux avec.
+  test "without JavaScript, a new search drops the school it no longer lists, and its levels" do
+    get new_student_registration_path, params: { school_q: "korhogo", student_registration: registration_params(classroom_public_id: nil) }
+
+    assert_select "turbo-frame#school_results", text: /Aucun établissement trouvé/
     assert_select "turbo-frame#picker_levels *", 0
     assert_select "turbo-frame#picker_classrooms *", 0
-
-    get new_student_registration_path, params: { student_registration: { drena_public_id: "drn-inconnue" } }
-
-    assert_select "turbo-frame#picker_schools *", 0
   end
 
   # Relecture sécurité de la PR 203 : une chaîne à la place des choix ne lève plus d'exception (500) ; elle est ignorée.
@@ -376,7 +380,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     get new_student_registration_path, params: { student_registration: "x" }
 
     assert_response :success
-    %w[picker_schools picker_levels picker_classrooms].each { assert_select "turbo-frame##{it} *", 0 }
+    %w[school_results picker_levels picker_classrooms].each { assert_select "turbo-frame##{it} *", 0 }
   end
 
   test "IL-05: a full classroom is listed, disabled, with « Complète » in its label" do
@@ -391,20 +395,19 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     end
   end
 
-  test "IL-06: a school without an active classroom, or a DRENA without an active school, says it is not on Lnclass yet" do
+  test "IL-06: a school without an active classroom says it is not on Lnclass yet; a search without result says so" do
     empty = create_school(drena: @drena, name: "Collège sans classe")
 
-    get new_student_registration_path,
-        params: { student_registration: { drena_public_id: @drena.public_id, school_public_id: empty.public_id } }
+    get new_student_registration_path, params: { student_registration: { school_public_id: empty.public_id } }
 
     assert_select "turbo-frame#picker_levels", text: /#{Regexp.escape(I18n.t("#{PICKER}.not_found_title"))}/
     assert_select "turbo-frame#picker_levels", text: /#{Regexp.escape(I18n.t("#{PICKER}.not_found_description"))}/
     assert_select "turbo-frame#picker_levels input", 0
 
-    get new_student_registration_path, params: { student_registration: { drena_public_id: create_drena.public_id } }
+    get new_student_registration_path, params: { school_q: "zzz introuvable" }
 
-    assert_select "turbo-frame#picker_schools", text: /#{Regexp.escape(I18n.t("#{PICKER}.not_found_title"))}/
-    assert_select "turbo-frame#picker_schools select", 0
+    assert_select "turbo-frame#school_results", text: /Aucun établissement trouvé/
+    assert_select "turbo-frame#school_results input", 0
   end
 
   test "IL-01: a standard sign-up enters the classroom at once, way « standard », signed in and welcomed" do
@@ -469,8 +472,7 @@ end
     assert_select "input[name='student_registration[last_name]'][value='KOUASSI']"
     assert_select "input[name='student_registration[gender]'][value=female][checked]"
     assert_select "input[name='student_registration[pin]'][value]", count: 0
-    assert_select "select[name='student_registration[drena_public_id]'] option[selected][value='#{@drena.public_id}']"
-    assert_select "turbo-frame#picker_schools option[selected][value='#{@school.public_id}']"
+    assert_select "turbo-frame#school_results input[type=radio][checked][value='#{@school.public_id}']"
     assert_select "turbo-frame#picker_levels input[type=radio][checked][value='#{@level.slug}']"
     assert_select "turbo-frame#picker_classrooms input[type=radio][checked][value='#{@classroom.public_id}']"
 
@@ -551,7 +553,7 @@ end
     assert_select "#student-registration-section-you a#other-classroom", text: I18n.t("#{FORM}.other_classroom")
     assert_select "input[type=hidden][name='student_registration[link_token]'][value='#{token}']"
     assert_select "a#other-classroom[href='#{new_student_registration_path}']"
-    assert_select "select[name='student_registration[drena_public_id]'], turbo-frame#picker_schools", 0
+    assert_select "input#school_q, turbo-frame#school_results", 0
     assert_select "#classroom-link-invalid", 0
     assert_select "input[name='student_registration[pin]'][value]", count: 0
   end
@@ -571,7 +573,7 @@ end
 
     assert_refused :classroom_public_id, I18n.t("#{ERRORS}.classroom_public_id.blank")
     assert_select "fieldset[data-step='1'] #classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
-    assert_select "select[name='student_registration[drena_public_id]']"
+    assert_select "input#school_q"
     assert_select "input[name='student_registration[link_token]'], #signup-classroom-recap:not([hidden])", 0
   end
 
