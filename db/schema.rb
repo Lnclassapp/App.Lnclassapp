@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_20_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -980,6 +980,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "signup_attributions", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "classroom_id", null: false
+    t.string "source", null: false
+    t.bigint "inviter_id"
+    t.datetime "created_at", default: -> { "now()" }, null: false
+    t.index ["classroom_id"], name: "index_signup_attributions_on_classroom_id"
+    t.index ["created_at"], name: "index_signup_attributions_on_created_at"
+    t.index ["inviter_id"], name: "index_signup_attributions_on_inviter_id", where: "(inviter_id IS NOT NULL)"
+    t.index ["student_id"], name: "index_signup_attributions_on_student_id", unique: true
+    t.check_constraint "inviter_id IS NULL OR inviter_id <> student_id", name: "signup_attributions_inviter_not_self"
+    t.check_constraint "inviter_id IS NULL OR source::text = 'student_invite'::text", name: "signup_attributions_inviter_only_for_invite"
+    t.check_constraint "source::text = ANY (ARRAY['qr'::character varying, 'student_invite'::character varying, 'teacher_link'::character varying, 'code'::character varying, 'cold'::character varying]::text[])", name: "signup_attributions_source_known"
+  end
+
   create_table "solid_cable_messages", force: :cascade do |t|
     t.binary "channel", null: false
     t.binary "payload", null: false
@@ -1149,6 +1164,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
     t.index ["expires_at"], name: "index_solid_queue_semaphores_on_expires_at"
     t.index ["key", "value"], name: "index_solid_queue_semaphores_on_key_and_value"
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
+  end
+
+  create_table "student_invite_codes", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.string "code", limit: 8, null: false
+    t.datetime "created_at", default: -> { "now()" }, null: false
+    t.index ["code"], name: "index_student_invite_codes_on_code", unique: true
+    t.index ["student_id"], name: "index_student_invite_codes_on_student_id", unique: true
+    t.check_constraint "code::text ~ '^[a-hjkmnp-z2-9]{8}$'::text", name: "student_invite_codes_code_format"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -1370,6 +1394,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
   add_foreign_key "schools", "drenas", on_delete: :restrict
   add_foreign_key "sessions", "schools", column: "current_school_id", on_delete: :nullify
   add_foreign_key "sessions", "users", on_delete: :cascade
+  add_foreign_key "signup_attributions", "classrooms"
+  add_foreign_key "signup_attributions", "users", column: "inviter_id", on_delete: :nullify
+  add_foreign_key "signup_attributions", "users", column: "student_id", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
@@ -1378,6 +1405,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_140000) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "student_invite_codes", "users", column: "student_id", on_delete: :cascade
   add_foreign_key "subjects", "courses", on_delete: :restrict
   add_foreign_key "teacher_classrooms", "classrooms", on_delete: :restrict
   add_foreign_key "teacher_classrooms", "users", column: "teacher_id", on_delete: :restrict

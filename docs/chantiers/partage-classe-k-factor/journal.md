@@ -35,7 +35,8 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- Lot 0 : `db/schema.rb` régénéré par un PostgreSQL local d'une autre version réécrit toutes les contraintes CHECK (`::character varying::text`) ; le lot n'ajoute à la main que ses deux tables, ses clés étrangères et la version.
+- Lot 0 : `Shared::Result` s'écrit `::Shared::Result` dans `Repositories::Classroom` (sinon `Repositories::Shared`).
 
 ## Dette laissée derrière
 
