@@ -1,0 +1,19 @@
+<%# 🌐 UI · classroom/school_posters/show — kit d'affiches d'un établissement : une A4 par classe ouverte (layout print) %>
+<%# Rôle : barre d'outils masquée à l'impression ; sans classe ouverte, le dit sans bouton Imprimer %>
+<%# ADR  : partage-classe-k-factor · UDR : partage-de-classe (§3.2) %>
+<% page_title t(".title", school: @school.name) %>
+<h1 class="sr-only"><%= t(".heading", school: @school.name) %></h1>
+<% back = current_actor.team? ? school_path(@school.public_id) : school_admin_school_path %>
+<div data-controller="print" class="mb-6 flex flex-wrap items-center gap-3 print:hidden">
+  <% if @posters.any? %>
+    <button type="button" data-action="print#print" class="inline-flex min-h-tap items-center gap-2 rounded-ln bg-brand px-5 font-medium text-on-brand">
+      <%= ui_icon "printer", size: :sm %><%= t(".print", count: @posters.size) %>
+    </button>
+  <% end %>
+  <%= link_to t(".back"), back, class: "text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+</div>
+<% if @posters.empty? %>
+  <p class="text-mute"><%= t(".empty") %></p>
+<% else %>
+  <%= render partial: "classroom/posters/poster", collection: @posters, as: :poster %>
+<% end %>
