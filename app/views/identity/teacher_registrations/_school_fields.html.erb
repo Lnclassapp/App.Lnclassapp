@@ -6,5 +6,5 @@
     remplacement du cadre des résultats. Jamais sur `change` : la saisie elle-même en émet un en perdant le focus. %>
 <div class="flex min-w-0 flex-col" data-action="school--school-search:picked->classroom--signup-steps#go" data-classroom--signup-steps-step-param="2">
   <%= render "school/school_searches/field", scope: :teacher_registration, **school_search_locals(@form.school_public_id),
-                                             error: @form.errors[:school_public_id].first, search_form: "teacher-signup-school" %>
+                                             error: school_error(@form.errors), search_form: "teacher-signup-school", label_hidden: true %>
 </div>

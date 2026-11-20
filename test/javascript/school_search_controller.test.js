@@ -29,12 +29,13 @@ function fakeFrame({ checked = null, options = [] } = {}) {
   return frame
 }
 
-function connect({ value = "", frame = fakeFrame() } = {}) {
+function connect({ value = "", frame = fakeFrame(), error = null } = {}) {
   const controller = Object.create(SchoolSearchController.prototype)
   const dispatched = []
   Object.defineProperties(controller, {
     inputTarget: { value: { value } },
     frameTarget: { value: frame },
+    errorTarget: { value: error },
     urlValue: { value: URL_VALUE },
     delayValue: { value: 300 },
     dispatch: { value: (name, options = {}) => dispatched.push([ name, options.detail ]) },
@@ -116,4 +117,37 @@ test("un résultat coché replie la liste sur lui, retire « Plus de 20 » et é
   assert.deepEqual(options.map((o) => o.removed), [ true, false, true ])
   assert.ok(frame.more.removed)
   assert.deepEqual(dispatched, [[ "picked", { publicId: "sch_abc123" } ]])
+})
+
+test("Entrée après un choix le retire aussi : les hôtes vident niveaux et classes", () => {
+  const radio = { checked: true }
+  const { controller, dispatched } = connect({ value: "lycee", frame: fakeFrame({ checked: radio }) })
+  controller.now({ preventDefault() {} })
+  assert.equal(radio.checked, false)
+  assert.deepEqual(dispatched, [[ "cleared", undefined ]])
+})
+
+test("un frame qui ne revient pas : le choix se retire, l'état d'erreur s'affiche, « Réessayer » relance la même recherche", () => {
+  const radio = { checked: true }
+  const link = { href: null, setAttribute(name, value) { this[name] = value } }
+  const content = { querySelectorAll: () => [ link ] }
+  const error = { content: { cloneNode: () => content } }
+  const frame = fakeFrame({ checked: radio })
+  frame.src = "https://lnclass.test/schools/search?q=paix"
+  const { controller, dispatched } = connect({ frame, error })
+  let prevented = false
+  controller.missing({ preventDefault: () => { prevented = true } })
+  assert.ok(prevented)
+  assert.equal(radio.checked, false)
+  assert.deepEqual(dispatched, [[ "cleared", undefined ]])
+  assert.equal(link.href, "https://lnclass.test/schools/search?q=paix")
+  assert.deepEqual(frame.children, [ content ])
+})
+
+test("disconnect annule la recherche en attente", () => {
+  const { controller, frame } = connect({ value: "lycee" })
+  controller.queue()
+  controller.disconnect()
+  mock.timers.tick(300)
+  assert.equal(frame.src, undefined)
 })

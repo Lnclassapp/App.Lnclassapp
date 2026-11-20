@@ -6,7 +6,7 @@ module Identity
     include SchoolSearchField
     include JoinsSchool
 
-    FIELDS = %i[drena_public_id school_public_id].freeze
+    FIELDS = %i[school_public_id].freeze
 
     skip_before_action :hold_pending_teacher
     rate_limit to: 10, within: 1.minute, by: -> { request.remote_ip }, with: -> { refuse_too_many }

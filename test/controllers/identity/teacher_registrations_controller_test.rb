@@ -16,7 +16,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
   def registration_params(**overrides)
     { last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821", pin_confirmation: "4821",
-      drena_public_id: @drena.public_id, school_public_id: @school.public_id, material_slug: @material.slug, **overrides }
+      school_public_id: @school.public_id, material_slug: @material.slug, **overrides }
   end
 
   def referral_token_of(teacher) = Orm::TeacherProfile.find_by!(user: teacher).referral_token
@@ -62,7 +62,9 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "input#school_q[form=teacher-signup-school][type=search]"
     assert_select "noscript button[form=teacher-signup-school][type=submit]", text: /Chercher/
     assert_select "form#teacher-signup-school input, form#teacher-signup-school select", 0
-    assert_select "label[for=school_q]", text: /Votre établissement/
+    # Revue sécurité : seul le champ de recherche (et le bouton « Chercher ») appartient au formulaire GET, jamais le code secret.
+    assert_equal [ "school_q" ], css_select("[form=teacher-signup-school]").reject { it.name == "button" }.map { it["id"] }
+    assert_select "label.sr-only[for=school_q]", text: /Votre établissement/
     assert_select "select[name*=drena_public_id]", 0
     assert_select "form#teacher-registration-form[action='#{teacher_registrations_path}']" \
                   "[data-controller='identity--phone-digits identity--pin-match']" do
@@ -226,10 +228,22 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "CA-8: the DRENA comes from the school chosen, whatever DRENA is sent, or none" do
     elsewhere = create_school(drena: create_drena(name: "Tiassalé"), name: "Collège Notre-Dame de la Paix")
 
-    post teacher_registrations_path, params: { teacher_registration: registration_params(drena_public_id: nil, school_public_id: elsewhere.public_id) }
+    post teacher_registrations_path, params: { teacher_registration: registration_params(drena_public_id: @drena.public_id, school_public_id: elsewhere.public_id) }
 
     assert_redirected_to teacher_home_path
     assert_equal [ elsewhere.id ], Orm::TeacherSchool.where(teacher: new_teacher).pluck(:school_id)
+  end
+
+  # Revue des échecs silencieux : un établissement devenu inactif entre la recherche et l'envoi ne rend pas un 422 muet.
+  test "CA-8: a school gone inactive before the sending is refused under the field, with the neutral message" do
+    @school.update_column(:status, "inactive")
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params }
+
+    assert_response :unprocessable_entity
+    assert_select "#teacher_registration_school_public_id_error", text: /Cet établissement n'accepte pas d'inscription/
+    assert_select "input#school_q[aria-invalid=true]"
+    assert_select "turbo-frame#school_results input[type=radio]", 0
   end
 
   test "IE-11: a school still active comes back checked after a 422, alone in the list" do

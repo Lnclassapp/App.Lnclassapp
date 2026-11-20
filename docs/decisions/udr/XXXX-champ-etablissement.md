@@ -28,12 +28,12 @@ Un champ de texte et, dessous, une liste d'au plus 20 établissements, chacun av
 
 ## 3. Règles d'implémentation
 
-**Structure** — partial `app/views/school/school_searches/_field.html.erb`, locals `(scope:, label:, chosen:, result:, term:, error: nil, search_form: nil, fallback_url: nil)` :
+**Structure** — partial `app/views/school/school_searches/_field.html.erb`, locals `(scope:, chosen:, result:, term:, error: nil, search_form: nil, fallback_url: nil, label_hidden: false)` :
 
 1. `div[data-controller="school--school-search"]`, `data-school--school-search-url-value` = `school_search_path(scope:)`.
-2. Libellé `label[for=school_q]` (`text-sm font-medium text-ink`, astérisque `text-error`) : « Ton établissement » (élève) ou « Votre établissement » (enseignant).
+2. Libellé `label[for=school_q]` (`text-sm font-medium text-ink`, astérisque `text-error`) : « Ton établissement » (élève) ou « Votre établissement » (enseignant). `label_hidden: true` (`sr-only`) quand l'hôte titre déjà son étape du même mot : cascade élève et inscription enseignant ; visible dans « Mes établissements » et l'écran d'attente.
 3. `input#school_q[type=search][name=school_q]`, classes de `ui_field` (`FIELD_INPUT`, `min-h-tap`, état invalide si `error`), `autocomplete=off`, `autocapitalize=none`, `spellcheck=false`, `enterkeyhint=search`, `placeholder` « Ex. Notre-Dame Tiassalé », `aria-controls=school_results`, `aria-describedby` = aide (+ erreur), `form=<search_form>` si donné. Actions : `input->school--school-search#queue`, `keydown.enter->school--school-search#now`.
-4. Aide `p#school_q_hint.text-sm.text-mute` : « Tape au moins 2 lettres du nom de ton école, ou ta ville. » (vouvoyée chez l'enseignant).
+4. Aide `p#school_q_hint.text-sm.text-mute` : « Tape au moins 2 lettres du nom de ton école ou de ta DRENA. » (vouvoyée chez l'enseignant). Pas la ville : elle n'est pas dans les données (memo, hors périmètre).
 5. Erreur `p#school_q_error` (icône `exclamation-circle`, `text-error`) : la première erreur de `school_public_id`.
 6. `noscript` : bouton secondaire `sm` « Chercher » (icône `magnifying-glass`), `type=submit`, `formaction=fallback_url formmethod=get formnovalidate` ou `form=<search_form>`.
 7. Le cadre `turbo-frame#school_results` (`block transition-opacity aria-busy:opacity-50`, `aria-live=polite`), contenu = template `school/school_searches/index`.
@@ -55,14 +55,14 @@ Un champ de texte et, dessous, une liste d'au plus 20 établissements, chacun av
 - `pick` : retire les autres résultats et la ligne « Plus de 20 », garde le coché, émet `school--school-search:picked` (`detail.publicId`).
 - `turbo:frame-missing` / `turbo:fetch-request-error` du cadre → l'état d'erreur, « Réessayer » relance la recherche.
 - Hôtes : la cascade élève écoute `picked` → `classroom--class-picker#loadLevels`, `cleared` → `#clearSchool` ; l'inscription enseignant écoute `picked` → `classroom--signup-steps#go` (étape 2).
-- Sans JavaScript : « Chercher » renvoie la page en GET avec `school_q` ; élève : tout le formulaire de la cascade (comme le « Continuer » existant) ; enseignant et rattachement : un formulaire GET distinct qui ne porte que `school_q` (et le jeton du lien de parrainage).
+- Sans JavaScript : « Chercher » renvoie la page en GET avec `school_q` ; inscription élève, inscription enseignant et rattachement : un formulaire GET distinct (`student-signup-school`, `teacher-signup-school`, `school-join-search`) qui ne porte que `school_q`, jamais le code secret ; « Choisis ta classe » et « Changer de classe », sans code secret : le formulaire hôte en GET vers `fallback_url`.
 
 **États obligatoires** (dans le cadre) :
 
 - Vide : rien (cadre vide), l'aide sous le champ suffit.
 - Chargement : `aria-busy` posé par Turbo → opacité 50 %.
 - Erreur : `ui_error_state` ; 429 « Trop de recherches depuis cette connexion. Attends un instant puis réessaie. ».
-- Introuvable : `ui_empty_state` icône `magnifying-glass`, « Aucun établissement trouvé », « Vérifie l'orthographe, ou tape un autre mot du nom ou ta ville. ».
+- Introuvable : `ui_empty_state` icône `magnifying-glass`, « Aucun établissement trouvé », « Vérifie l'orthographe, ou tape un autre mot du nom ou ta DRENA. ».
 - Succès : la liste.
 
 **Accessibilité** — cibles de 48 px (`min-h-12`), focus visible sur chaque radio, les flèches parcourent la liste (un seul groupe de radios), annonce polie du nombre de résultats, le champ relié à son aide et son erreur.

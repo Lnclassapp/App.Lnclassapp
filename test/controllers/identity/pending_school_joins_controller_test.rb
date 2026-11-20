@@ -16,7 +16,8 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
 
   def t(key, **) = I18n.t("identity.pending_accounts.show.#{key}", **)
 
-  def join(school, drena: @abidjan)
+  # Le vrai formulaire n'envoie plus de DRENA : une DRENA envoyée quand même est ignorée (ADR-XXXX-recherche-etablissement §4.4).
+  def join(school, drena: nil)
     post pending_school_join_path, params: { school_join: { drena_public_id: drena&.public_id, school_public_id: school&.public_id } }
   end
 
@@ -68,7 +69,7 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
     elsewhere = create_school(name: "Lycée de Bouaké")
     sign_in_as @teacher
 
-    join(elsewhere, drena: nil)
+    join(elsewhere, drena: @abidjan)
 
     assert_redirected_to teacher_home_path
     assert_equal [ elsewhere.id ], Orm::TeacherSchool.where(teacher: @teacher).pluck(:school_id)

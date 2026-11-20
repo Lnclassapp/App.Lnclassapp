@@ -70,6 +70,11 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     # UDR-0135 §3.2: the cascade comes first and open; « J'ai le code de ma classe » is under the school search, « Je n'ai pas de code » under the code.
     assert_select "main[data-classroom--signup-steps-code-open-value=false]"
     assert_select "#signup-cascade input[type=search]#school_q[name=school_q]"
+    # Revue sécurité : sans JavaScript, « Chercher » n'envoie que la saisie, par son formulaire GET ; jamais le code secret.
+    assert_select "form#student-signup-school[action='#{new_student_registration_path}'][method=get]"
+    assert_equal [ "school_q" ], css_select("[form=student-signup-school]").reject { it.name == "button" }.map { it["id"] }
+    assert_select "noscript button[form=student-signup-school][type=submit]", text: /Chercher/
+    assert_select "#student-registration-form noscript button[formmethod=get]", text: /Chercher/, count: 0
     assert_select "#signup-cascade select", 0
     assert_select "#signup-cascade a#signup-have-code[href='#signup-code-field']", text: /#{Regexp.escape(I18n.t("#{STEPS}.have_code"))}/
     assert_select "#signup-code-field a#signup-no-code[href='#signup-cascade']", text: /#{Regexp.escape(I18n.t("#{STEPS}.no_code"))}/

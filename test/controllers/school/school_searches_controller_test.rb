@@ -66,7 +66,7 @@ class School::SchoolSearchesControllerTest < ActionDispatch::IntegrationTest
 
   test "CA-6 : 40 élèves d'une même adresse, 6 recherches chacun, aucune refusée ; la 301e reçoit 429 et l'état d'erreur" do
     240.times do |i|
-      get school_search_path(q: "tiassale #{i % 6}"[0, 8])
+      get school_search_path(q: %w[tiassale paix notre nd college ecole][i % 6])
 
       assert_response :success
     end
@@ -78,5 +78,10 @@ class School::SchoolSearchesControllerTest < ActionDispatch::IntegrationTest
     assert_response :too_many_requests
     assert_select "turbo-frame#school_results [role=alert]", text: /Trop de recherches depuis cette connexion/
     assert_select "turbo-frame#school_results a[href*='q=paix']", text: /Réessayer/
+
+    # Par adresse : une autre connexion n'est pas freinée par celle-ci.
+    get school_search_path(q: "paix"), headers: { "REMOTE_ADDR" => "10.0.0.2" }
+
+    assert_response :success
   end
 end

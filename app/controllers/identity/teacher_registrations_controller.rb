@@ -5,7 +5,7 @@ module Identity
   class TeacherRegistrationsController < ApplicationController
     include SchoolSearchField
 
-    FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id
+    FIELDS = %i[last_name first_name gender contact pin pin_confirmation school_public_id
                 material_slug invite_token].freeze
 
     allow_unauthenticated_access

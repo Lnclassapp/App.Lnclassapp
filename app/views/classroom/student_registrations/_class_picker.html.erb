@@ -1,7 +1,7 @@
 <%# 🌐 UI · classroom/student_registrations/_class_picker — la cascade en trois étapes numérotées : établissement, niveau, classe %>
 <%# Rôle : établissement cherché en tapant (champ commun, DRENA à côté de chaque résultat) ; niveaux en pastilles, classes en cases ; lien optionnel sous le champ ; repli GET %>
 <%# ADR  : 0062, 0085, 0095, XXXX-recherche-etablissement · UDR : 0081 (§3.3), 0091, 0102 (§3.1), 0135 (§3.2), XXXX-champ-etablissement %>
-<%# locals: (form:, search:, levels:, classrooms:, scope:, framed: false, current_classroom_public_id: nil, after_school: nil) -%>
+<%# locals: (form:, search:, levels:, classrooms:, scope:, framed: false, current_classroom_public_id: nil, after_school: nil, search_form: nil) -%>
 <%# Partagé par l'inscription et par « Choisis ta classe » (UDR-0081 §3.5, UDR-0091 §3.4) : levels, classrooms valent nil tant que
     leur parent n'est pas choisi ; search, les locals du champ établissement (SchoolSearchField). Le formulaire hôte porte le
     contrôleur, ses deux adresses et la cible submit. framed : chaque étape dans sa carte (« Choisis ta classe ») ; sans, les
@@ -35,7 +35,7 @@
                 data: { action: "school--school-search:picked->classroom--class-picker#loadLevels " \
                                 "school--school-search:cleared->classroom--class-picker#clearSchool" } do %>
       <%= render "school/school_searches/field", scope:, **search, error: registration.errors[:school_public_id].first,
-                                                 fallback_url: url_for(action: :new) %>
+                                                 search_form:, fallback_url: url_for(action: :new), label_hidden: true %>
     <% end %>
     <%# Sans JavaScript, l'établissement coché part avec « Continuer » et la page revient avec ses niveaux. %>
     <%= continue_button.call if search[:chosen] || search[:result]&.rows.present? %>

@@ -25,6 +25,7 @@ export default class extends Controller {
   now(event) {
     event.preventDefault()
     clearTimeout(this.timeout)
+    this.release()
     this.search()
   }
 
@@ -48,6 +49,7 @@ export default class extends Controller {
   // Réponse sans son frame (404, 500) ou réseau coupé : l'état d'erreur, « Réessayer » relance la même recherche.
   missing(event) {
     event.preventDefault?.()
+    this.release()
     const error = this.errorTarget.content.cloneNode(true)
     error.querySelectorAll("a").forEach((link) => {
       link.setAttribute("href", this.frameTarget.getAttribute("src") || "")

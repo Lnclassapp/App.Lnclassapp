@@ -9,8 +9,9 @@ fr:
       models:
         dtos/school/school_join_input:
           attributes:
+            # La DRENA est déduite de l'établissement (ADR-XXXX-recherche-etablissement §4.4) : elle ne manque que s'il est introuvable.
             drena_public_id:
-              blank: "Choisissez votre DRENA."
+              blank: "Cet établissement ne peut pas être rejoint."
             school_public_id:
               blank: "Choisissez votre établissement."
               inclusion: "Cet établissement ne peut pas être rejoint."

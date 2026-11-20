@@ -1,16 +1,17 @@
 <%# 🌐 UI · school/school_searches/_field — le champ « Ton établissement » : on tape quelques lettres, on coche un résultat %>
 <%# Rôle : composant commun (cascade élève, inscription et rattachement enseignant) ; Stimulus school--school-search ; repli sans JavaScript en GET (« Chercher ») %>
 <%# ADR  : XXXX-recherche-etablissement · UDR : XXXX-champ-etablissement (§3), amende 0024 (§2.4), 0081 (§3.3), 0091 (§3.2), 0099 (§3.2) %>
-<%# locals: (scope:, chosen:, result:, term:, error: nil, search_form: nil, fallback_url: nil) -%>
-<%# search_form : l'id d'un formulaire GET distinct (enseignant : jamais le code secret dans l'adresse) ; sinon, le bouton
-    « Chercher » renvoie le formulaire hôte en GET vers fallback_url, comme le « Continuer » de la cascade élève. %>
+<%# locals: (scope:, chosen:, result:, term:, error: nil, search_form: nil, fallback_url: nil, label_hidden: false) -%>
+<%# search_form : l'id d'un formulaire GET distinct, obligatoire dès que l'hôte porte un code secret (inscriptions, rattachement) :
+    jamais le PIN dans l'adresse. Sinon (« Choisis ta classe », « Changer de classe »), « Chercher » renvoie l'hôte en GET vers fallback_url. %>
 <% register = School::SchoolSearchesController.register(scope) %>
 <%# L'erreur porte l'id du champ envoyé (<scope>_school_public_id_error), comme ui_field. %>
 <% error_id = "#{scope}_school_public_id_error" %>
 <% described_by = [ "school_q_hint", (error_id if error) ].compact.join(" ") %>
 <%= tag.div class: "flex min-w-0 flex-col", data: { controller: "school--school-search",
                                                   "school--school-search-url-value": school_search_path(scope:) } do %>
-  <label for="school_q" class="mb-1.5 block text-sm font-medium text-ink">
+  <%# label_hidden : l'hôte titre déjà son étape du même mot ; le libellé reste lu par les lecteurs d'écran. %>
+  <label for="school_q" class="<%= label_hidden ? "sr-only" : "mb-1.5 block text-sm font-medium text-ink" %>">
     <%= t(".label.#{register}") %><span class="text-error" aria-hidden="true"> *</span>
   </label>
   <%= search_field_tag :school_q, term, id: "school_q", form: search_form, autocomplete: "off", autocapitalize: "none",

@@ -58,6 +58,7 @@ module Queries
           assert_nil @query.call(term: nil)
         end
         assert_equal [], @query.call(term: "x" * 500).rows
+        assert_equal [ "x" * 80 ], SchoolSearchQuery.words("x" * 500)
         assert_equal %w[ab cd ef gh ij kl], SchoolSearchQuery.words("ab cd ef gh ij kl mn")
         assert_kind_of SchoolSearchQuery::Result, @query.call(term: "ab cd ef gh ij kl mn")
       end

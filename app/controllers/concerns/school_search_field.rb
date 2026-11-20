@@ -4,7 +4,7 @@
 module SchoolSearchField
   extend ActiveSupport::Concern
 
-  included { helper_method :school_search_locals }
+  included { helper_method :school_search_locals, :school_error }
 
   private
 
@@ -20,11 +20,15 @@ module SchoolSearchField
     end
   end
 
-  # La DRENA de l'établissement envoyé, s'il est actif ; sinon les attributs tels quels, et le use case refuse l'établissement.
+  # La DRENA de l'établissement envoyé, s'il est actif ; sinon aucune (jamais celle du client) : le DTO la dit manquante, et
+  # school_error porte ce refus sur le champ établissement, sous le message neutre de la DRENA (locales des DTO).
   def with_school_drena(attributes)
     school = school_search.find(public_id: attributes[:school_public_id])
-    school ? attributes.merge(drena_public_id: school.drena_public_id) : attributes
+    attributes.merge(drena_public_id: school&.drena_public_id)
   end
+
+  # L'erreur affichée sous le champ : celle de l'établissement, sinon celle de la DRENA déduite (établissement introuvable).
+  def school_error(errors) = errors[:school_public_id].first || errors[:drena_public_id].first
 
   def school_search = @school_search ||= Queries::School::SchoolSearchQuery.new
 end

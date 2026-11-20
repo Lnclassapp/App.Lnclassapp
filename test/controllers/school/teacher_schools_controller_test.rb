@@ -12,7 +12,7 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def t(key, **) = I18n.t(key, **)
-  def join(school) = post teacher_schools_path, params: { school_join: { drena_public_id: @drena.public_id, school_public_id: school.public_id } }
+  def join(school) = post teacher_schools_path, params: { school_join: { school_public_id: school.public_id } }
   def attached = Orm::TeacherSchool.where(teacher: @teacher).order(:created_at, :id).pluck(:school_id, :primary)
 
   test "one school: its line with « En cours », no « Retirer » button, and the card to add one" do

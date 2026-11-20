@@ -32,6 +32,12 @@
 
 - Ruby 3.4.9 introuvable sur le miroir (403) : construit depuis le dépôt git. Une heure perdue avant le premier test.
 - 33 tests contrôleur et une dizaine de tests système vérifiaient les deux listes : tous réécrits, aucun n'a été supprimé.
+- Revues sur le diff final, trois constats corrigés dans la PR :
+  - sécurité : sans JavaScript, « Chercher » de l'inscription élève renvoyait tout le formulaire en GET, code secret compris → formulaire GET distinct `student-signup-school` ;
+  - échec silencieux : un établissement devenu inactif avant l'envoi rendait côté enseignant un 422 sans message (seule l'erreur de DRENA, sans champ) → la DRENA vient toujours de l'établissement (jamais du client), et son erreur s'affiche sous le champ avec le message neutre ;
+  - Entrée ou erreur réseau après un choix laissaient niveaux et classes de l'ancien établissement → `release()` aussi dans `now()` et `missing()`.
+- Les tests contrôleur envoyaient encore une DRENA valide : ils prouvaient le refus neutre dans un cas que le vrai formulaire ne produit plus. Les aides de test n'envoient plus de DRENA.
+- L'aide promettait « ou ta ville » : la ville n'est pas dans les données. Remplacé par « ou de ta DRENA », que la recherche couvre.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -45,6 +51,7 @@
 |---|---|---|
 | Rendu HTML de `/drenas/:id/schools` (frames « schools » et « picker_schools ») plus utilisé par aucun écran | La route sert encore en JSON (API v1) ; retirer le HTML change un contrat public | à ouvrir (`/refactor`) |
 | Clés I18n `drena_public_id` des DTO enseignant et rattachement, jamais affichées | Le domaine valide toujours la DRENA | même chantier |
+| Sans JavaScript, le « Continuer » de la cascade élève (antérieur au chantier) renvoie tout le formulaire en GET, code secret compris s'il a été tapé | Défaut antérieur, hors du sélecteur ; le corriger touche l'entrée de l'inscription élève (`entree-eleve-unifiee`) | à ouvrir (`/bugfix`), proposé en tâche |
 | Ville de l'établissement dans les résultats | Donnée absente de l'import des écoles | hors périmètre (memo) |
 
 ## Clôture

@@ -35,9 +35,10 @@ fr:
               invalid: "Le code secret compte 4 chiffres."
             pin_confirmation:
               confirmation: "Les deux codes secrets ne sont pas identiques."
+            # La DRENA est déduite de l'établissement (ADR-XXXX-recherche-etablissement §4.4) : elle ne manque que s'il est introuvable.
             drena_public_id:
-              blank: "Choisissez votre DRENA."
-              inclusion: "Cette DRENA n'existe pas. Choisissez-en une autre."
+              blank: "Cet établissement n'accepte pas d'inscription. Choisissez-en un autre."
+              inclusion: "Cet établissement n'accepte pas d'inscription. Choisissez-en un autre."
             school_public_id:
               blank: "Choisissez votre établissement."
               inclusion: "Cet établissement n'accepte pas d'inscription. Choisissez-en un autre."

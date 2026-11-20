@@ -12,6 +12,6 @@
     </div>
   <% end %>
   <%= render "school/school_searches/field", scope: :school_join, **school_search_locals(school_join.school_public_id),
-                                             error: school_join.errors[:school_public_id].first, search_form: "school-join-search" %>
+                                             error: school_error(school_join.errors), search_form: "school-join-search" %>
   <%= ui_button submit_label, type: :submit, variant: :primary, full: true %>
 <% end %>
