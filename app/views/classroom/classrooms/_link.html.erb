@@ -17,6 +17,21 @@
     <%= ui_button t(".whatsapp"), href: whatsapp_share_url(t(".whatsapp_message", classroom: classroom.name, url:)),
                                   target: "_blank", rel: "noopener", id: "classroom_whatsapp_share" %>
     <%= ui_copy_button url, label: t(".copy"), aria_label: t(".copy_label"), icon: "link", copied: t(".copied"), size: :md %>
+    <%= ui_modal title: t(".qr_title", classroom: classroom.name), id: "classroom-qr", size: :sm,
+                 trigger: t(".qr"), trigger_variant: :secondary, trigger_icon: "qr-code" do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".poster"), href: classroom_poster_path(classroom.public_id), target: "_blank", rel: "noopener",
+                                    icon: "printer", variant: :primary %>
+        <%= ui_button t(".close"), variant: :secondary, data: { action: "modal#close" } %>
+      <% end %>
+      <div class="space-y-4 text-center">
+        <figure id="classroom_qr" class="mx-auto aspect-square w-full max-w-72" role="img"
+                aria-label="<%= t(".qr_label", classroom: classroom.name) %>">
+          <%= class_join_qr_svg(classroom.link_token) %>
+        </figure>
+        <p class="text-center text-sm text-mute"><%= t(".qr_hint") %></p>
+      </div>
+    <% end %>
   </div>
   <%= ui_modal title: t(".change_title"), id: "change-classroom-link", size: :sm do |modal| %>
     <% modal.footer do %>
