@@ -54,3 +54,4 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+- [ ] 2026-11-20 · partage-classe-k-factor lot D · `bin/system-changed` n'a pas pu tourner (téléchargement de Chrome refusé par le proxy du bac à sable) — appliqué : tests contrôleur, design et i18n verts ; à rejouer par le vérificateur
