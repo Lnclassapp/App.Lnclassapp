@@ -49,7 +49,8 @@ class Classroom::JoinCapacityTest < ActiveSupport::TestCase
       school_public_id: @classroom.school.public_id, level_slug: @level.slug, classroom_public_id: @classroom.public_id
     )
     UseCases::Classroom::RegisterStudent.new(
-      classrooms:, schools: Repositories::School::SchoolRepository.new, taxonomy: Repositories::Catalog::TaxonomyRepository.new,
+      attributions: Repositories::Classroom::SignupAttributionRepository.new,
+      invite_codes: Repositories::Classroom::InviteCodeRepository.new, classrooms:, schools: Repositories::School::SchoolRepository.new, taxonomy: Repositories::Catalog::TaxonomyRepository.new,
       registrations: Repositories::Identity::RegistrationRepository.new, memberships:,
       sessions: Repositories::Identity::SessionRepository.new, policy: Policies::Classroom::JoinPolicy.new,
       transaction: Repositories::Shared::Transaction.new, digest_key: KEY, clock: Time.zone

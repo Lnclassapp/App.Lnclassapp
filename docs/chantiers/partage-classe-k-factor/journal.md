@@ -19,6 +19,7 @@
 - [ ] 2026-11-20 · partage-classe-k-factor · L'invitation de l'enseignant reste-t-elle sur l'accueil quand la classe a déjà un enseignant ? — appliqué : non, seulement si la classe n'a aucun enseignant (règle Wave « une porte par écran ») ; autres : les deux bannières ; recommandé : appliqué
 - [ ] 2026-11-20 · partage-classe-k-factor · L'enseignant et la direction voient-ils le k de leurs classes ? — appliqué : non (équipe seulement, V1) ; autres : un chiffre par classe sur la page de la classe ; recommandé : appliqué, à rouvrir après le premier lancement
 - [ ] 2026-11-20 · partage-classe-k-factor lot E · « Mesuré depuis le » : première attribution de toute la base, ou de la période affichée ? — appliqué : de toute la base (date de début de la mesure, stable d'une période à l'autre) ; autres : première attribution de la période ; recommandé : appliqué
+- [ ] 2026-11-20 · partage-classe-k-factor (lot C) · Un `?i=` valide sur un lien qui retombe sur le code de classe ou la cascade compte-t-il comme invitation ? — appliqué : non, l'invitant n'est résolu que sur la voie du lien (ADR §4.2), la source est `code` ou `cold` ; autres : `student_invite` quand même ; recommandé : appliqué
 
 ## Retouches
 

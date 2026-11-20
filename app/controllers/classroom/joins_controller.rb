@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::JoinsController
 # Rôle : /c/<jeton> ouvre l'inscription élève, la classe déjà choisie, ou l'entrée de l'élève sans classe ; tout autre paramètre (ancien code compris), la voie standard avec l'alerte
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095 · UDR : 0081, 0083, 0102
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095, attribution-des-inscriptions-eleves · UDR : 0081, 0083, 0102
 module Classroom
   class JoinsController < ApplicationController
     allow_unauthenticated_access
@@ -27,7 +27,7 @@ module Classroom
         return redirect_to(new_student_registration_path, flash: { link_invalid: true }, status: :see_other)
       end
 
-      @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:)
+      @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:, arrival_source: params[:s], invite_code: params[:i])
       render "classroom/student_registrations/new" unless current_actor || @link_full
     end
 

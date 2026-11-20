@@ -94,7 +94,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
       assert_select "button#student-registration-submit:not([disabled])"
     end
     assert_select "select[name='student_registration[drena_public_id]'], turbo-frame#picker_schools, #classroom-link-invalid", 0
-    assert_select "[name*=code]", 0
+    assert_select "[name*=code]:not([name$='[invite_code]'])", 0
     [ "Yao", "Konan", "Bamba", "Issa", teacher.public_id, @classroom.public_id, "/ 80" ].each do |secret|
       assert_not_includes response.body, secret
     end
@@ -288,5 +288,21 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
   def join_params(**overrides)
     { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821",
       pin_confirmation: "4821", **overrides }
+  end
+
+  test "attribution: /c/<token>?s=qr&i=<code> carries both in hidden fields of the sign-up form" do
+    get join_classroom_path(@classroom.reload.link_token, s: "qr", i: "K7M4Q2ZX")
+
+    assert_select "input[type=hidden][name='student_registration[arrival_source]'][value=qr]"
+    assert_select "input[type=hidden][name='student_registration[invite_code]'][value=k7m4q2zx]"
+  end
+
+  test "attribution: any other s, a malformed i or a bare link leave both hidden fields empty" do
+    [ { s: "whatsapp", i: "nope" }, {} ].each do |extra|
+      get join_classroom_path(@classroom.reload.link_token, **extra)
+
+      assert_select "input[name='student_registration[arrival_source]'][value]", 0
+      assert_select "input[name='student_registration[invite_code]'][value]", 0
+    end
   end
 end

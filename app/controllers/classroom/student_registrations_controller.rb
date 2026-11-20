@@ -1,12 +1,12 @@
 # 🌐 DELIVERY · Classroom::StudentRegistrationsController
 # Rôle : inscription élève publique en trois étapes : classe donnée par son code, par le jeton d'un lien ou choisie dans la cascade ; succès : session, accueil élève
-# ADR  : 0026, 0028, 0050, 0062, 0085, 0109 (§4.5, §4.6, §4.7) · UDR : 0079, 0081, 0135
+# ADR  : 0026, 0028, 0050, 0062, 0085, 0109, attribution-des-inscriptions-eleves (§4.5, §4.6, §4.7) · UDR : 0079, 0081, 0135
 module Classroom
   class StudentRegistrationsController < ApplicationController
     include ClassPicker
 
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id level_slug
-                classroom_public_id link_token join_code].freeze
+                classroom_public_id link_token join_code arrival_source invite_code].freeze
     # Repli sans JavaScript (UDR-0081 §3.3) : les choix reviennent en GET ; jamais les PIN, qui n'y sont pas relus.
     PICKER_FIELDS = %i[last_name first_name gender contact drena_public_id school_public_id level_slug
                        classroom_public_id].freeze
@@ -96,7 +96,8 @@ module Classroom
         taxonomy: Repositories::Catalog::TaxonomyRepository.new, registrations: Repositories::Identity::RegistrationRepository.new,
         memberships: Repositories::Classroom::MembershipRepository.new, sessions: Repositories::Identity::SessionRepository.new,
         policy: Policies::Classroom::JoinPolicy.new, transaction: Repositories::Shared::Transaction.new,
-        digest_key: secret_digest_key, clock: Time.zone
+        digest_key: secret_digest_key, clock: Time.zone,
+        attributions: Repositories::Classroom::SignupAttributionRepository.new, invite_codes: Repositories::Classroom::InviteCodeRepository.new
       )
     end
   end
