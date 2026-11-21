@@ -704,6 +704,45 @@ end
     assert_not Orm::User.exists?(contact: "0701020304")
   end
 
+  test "revue sécurité: after the entry, sends carrying a join_code keep the guessing limit (5 per minute: signup applies before the 10 of the code)" do
+    enter_as_new_student(nil)
+    5.times do
+      register(join_code: "zzzzzz", pin_confirmation: "1357")
+      assert_not_equal 429, response.status
+    end
+
+    register(join_code: "zzzzzz")
+
+    assert_response :too_many_requests
+    assert_not Orm::User.exists?(contact: "0701020304")
+  end
+
+  test "an entry confirmed by a link whose token then changes does not loop: the standard way opens with the alert" do
+    enter_as_new_student(@classroom.reload.link_token)
+    @classroom.update!(link_token: "ffffffffffff")
+
+    get new_student_registration_path
+    redirects = 0
+    while response.redirect?
+      redirects += 1
+      assert_operator redirects, :<=, 2, "redirect loop"
+      follow_redirect!
+    end
+
+    assert_response :success
+    assert_select "#signup-entry-number"
+    assert_select "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
+  end
+
+  test "a send without entry_mode (old three-step tab) keeps what is posted and forgets the entry" do
+    enter_as_new_student(nil)
+
+    register(contact: "0709090909", pin: "1357", pin_confirmation: "1357", classroom_public_id: @classroom.public_id)
+
+    assert Orm::User.exists?(contact: "0709090909")
+    assert_not Orm::User.exists?(contact: "0701020304")
+  end
+
   test "IL-23: past the limit, a valid code does not show the class recap" do
     code = @classroom.reload.join_code
     10.times { register(join_code: code, pin_confirmation: "1357") }

@@ -9,6 +9,7 @@
 | 2026-11-20 | Débit de l'entrée 120/min (et non 60) et 600/h par adresse ; inscription qui suit : son compteur, 60/min | Un nouvel élève envoie deux fois à l'entrée ; 40 élèves sur un wifi en une minute = 80 envois | Oui, ADR-XXXX §4.2 |
 | 2026-11-20 | Numéro et code gardés en session chiffrée 30 min, plus de champ code dans l'inscription | Ni dans l'adresse, ni dans la page ; survit au repli GET sans JS | Oui, ADR-XXXX §4.3 |
 | 2026-11-21 | Code secret : exactement 4 chiffres, aussi dans le navigateur (`pattern`, `minlength`) | Demande du porteur en cours de session | Non (règle existante `Pin::FORMAT`) |
+| 2026-11-21 | Compteur des codes faux à l'entrée, 10/min par adresse | Revue sécurité : 120/min sur tout rôle contournait le débit de /login | Oui, ADR-XXXX §4.2 |
 | 2026-11-21 | `data-turbo-prefetch="false"` sur les liens GET qui changent l'entrée | Turbo préchargeait « Ce n'est pas mon numéro » au survol et effaçait l'entrée | UDR §3.5, §3.6 |
 
 ## À trancher
@@ -37,6 +38,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - Partager le compteur de l'entrée avec l'inscription aurait bloqué une classe (trois envois par nouvel élève) : compteurs séparés.
 - « Ce n'est pas ta classe ? » en mode entrée bouclait vers le lien gardé : `other_classroom=1` oublie le lien.
 - Un test système perdait l'entrée sans raison visible : préchargement Turbo au survol d'un lien GET qui la remet à zéro.
+- Boucle de redirections : entrée confirmée par un lien, puis lien changé ou classe archivée. `/c/<jeton>` renvoyait à `/student-signup`, qui renvoyait à `/c/<jeton>` (jeton gardé dans l'entrée). Corrigé : un lien invalide pour un visiteur est oublié de l'entrée (numéro, code et confirmation gardés).
 - Session coupée par la limite de 5 h ; reprise sur l'arbre de travail intact.
 
 ## Ce qu'on a appris sur la codebase

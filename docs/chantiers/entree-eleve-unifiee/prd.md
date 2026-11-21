@@ -33,6 +33,7 @@ Pas de policy : l'acteur n'existe pas encore (ADR-0028, comme `Authenticate` et 
 | Code secret qui n'a pas exactement 4 chiffres | « Le code secret compte 4 chiffres », rien n'est cherché |
 | Numéro inscrit, mauvais code | « Code secret incorrect », lien « Code secret oublié ? » ; l'échec compte pour le verrouillage du numéro |
 | Numéro verrouillé | Message de verrouillage de `/login` |
+| Plus de 10 codes faux en une minute depuis une adresse | « Trop de tentatives », même avec un bon code |
 | Confirmation du code différente | « Les deux codes secrets ne sont pas identiques », on reste sur l'écran |
 | « Corriger mon numéro » | Retour au formulaire, numéro pré-rempli, code vide |
 | Lien de classe `/c/<jeton>`, visiteur | L'entrée, avec le bandeau de la classe ; nouveau : l'inscription saute « Ta classe » ; inscrit (élève) : retour au lien |

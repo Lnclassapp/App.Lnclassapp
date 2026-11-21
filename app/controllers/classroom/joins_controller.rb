@@ -26,6 +26,7 @@ module Classroom
       # IL-09 : le visiteur du lien d'une classe archivée retombe sur la voie standard, comme pour un lien changé ; rien
       # de la classe ne lui est révélé (l'élève connecté, lui, lit le bandeau « archivée », ADR-0088).
       if current_actor.nil? && @preview.archived
+        drop_entry_link
         return redirect_to(new_student_registration_path, flash: { link_invalid: true }, status: :see_other)
       end
 
@@ -102,8 +103,16 @@ module Classroom
       @preview = link_token && Queries::Classroom::JoinPreviewQuery.new.link(token: link_token)
       return @link_full = @preview.full if @preview
 
+      drop_entry_link unless current_actor
       target = current_actor ? new_student_classroom_choice_path : new_student_registration_path
       redirect_to target, flash: { link_invalid: true }, status: :see_other
+    end
+
+    # Le lien d'une entrée confirmée est mort : l'entrée l'oublie (numéro et code gardés), sinon /student-signup renverrait
+    # ici, et ici à /student-signup, sans fin.
+    def drop_entry_link
+      entry = confirmed_student_entry
+      keep_student_entry(contact: entry.contact, pin: entry.pin, confirmed: true, link_token: nil) if entry&.link_token
     end
 
     # Un refus de JoinPolicy nomme sa raison : la page la montre, en 403.

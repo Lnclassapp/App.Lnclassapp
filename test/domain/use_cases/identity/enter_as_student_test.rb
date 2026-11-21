@@ -116,6 +116,8 @@ module UseCases
 
         assert_equal :invalid, result.code
         assert_equal [ :confirmation ], result.errors[:pin_confirmation]
+        assert_empty @attempts.records
+        assert_nil @sessions.created
       end
 
       test "un numéro inscrit l'emporte sur une confirmation : jamais de second compte" do

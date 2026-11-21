@@ -46,7 +46,7 @@ Deux autres contraintes : une classe s'inscrit ensemble derrière une seule adre
 > **Nous révélons, à l'entrée élève seulement, si un numéro est inscrit, et nous bornons ce que cela coûte.**
 
 1. **Révélation.** Sur un numéro inscrit, un code faux reçoit « Code secret incorrect » (erreur du champ code) et le lien « Code secret oublié ? ». Un numéro inconnu reçoit « Ce numéro n'a pas encore de compte », le numéro affiché, et la confirmation du code. Rien d'autre n'est révélé : ni nom, ni rôle, ni classe. `/login` garde son message unique.
-2. **Débit.** `POST /student` : 120 envois par minute et 600 par heure, par adresse (un nouvel élève envoie deux fois : numéro et code, puis confirmation). L'inscription qui suit l'entrée, sans code de classe, a son compteur (60 par minute et par adresse) à la place des 10 et 5 par minute de la voie directe ; avec un code de classe, la devinette de codes garde ses limites. Le code d'un compte reste gardé par le verrouillage par numéro d'ADR-0050 : l'entrée passe par `UseCases::Identity::Authenticate`, qui compte chaque échec.
+2. **Débit.** `POST /student` : 120 envois par minute et 600 par heure, par adresse (un nouvel élève envoie deux fois : numéro et code, puis confirmation). L'inscription qui suit l'entrée, sans code de classe, a son compteur (60 par minute et par adresse) à la place des 10 et 5 par minute de la voie directe ; avec un code de classe, la devinette de codes garde ses limites. Le code d'un compte reste gardé par le verrouillage par numéro d'ADR-0050 : l'entrée passe par `UseCases::Identity::Authenticate`, qui compte chaque échec. Les codes faux sont en outre comptés par adresse : 10 par minute ; au-delà, même un bon code est refusé (« Trop de tentatives »), car un essai par numéro sur beaucoup de numéros échappe au verrouillage par numéro, et 120 envois par minute sur tout rôle contournaient le débit de `/login` (5 par minute).
 3. **Garde du code.** Numéro, code, état (confirmé ou non) et jeton du lien de classe vivent dans la session Rails (cookie chiffré et authentifié, HttpOnly), 30 minutes au plus ; `start_session` la remet à zéro à la connexion ou à la création du compte. Le formulaire d'inscription n'envoie plus ni numéro ni code : le contrôleur les reprend de la session.
 4. **Jamais de second compte.** Un numéro inscrit passe toujours par la connexion, même s'il porte une confirmation ; un numéro pris entre l'entrée et la fin de l'inscription est refusé par l'index unique (`RegistrationRepository`, `:conflict`).
 5. **Tout rôle.** Un compte enseignant, direction ou équipe qui passe par l'entrée est connecté comme à `/login`, coque Android comprise (ADR-0086 §4.5).
@@ -61,6 +61,7 @@ Deux autres contraintes : une classe s'inscrit ensemble derrière une seule adre
 ### 🔴 Coûts consentis
 
 - **Énumération** : depuis une adresse, 600 numéros par heure peuvent être testés (14 400 par jour) ; un attaquant à plusieurs adresses va plus vite. Un numéro ivoirien inscrit devient une information devinable. Le porteur l'assume (D2) ; aucune donnée du compte n'est révélée.
+- Une classe qui se trompe beaucoup de codes depuis une adresse (plus de 10 en une minute) attend une minute avant de pouvoir entrer, même avec le bon code.
 - **Code en clair dans le cookie de session**, chiffré (AES-256-GCM), pendant 30 minutes au plus. Un téléphone partagé garde l'entrée tant que la session vit ; le cookie ne se lit pas sans la clé du serveur.
 - Une école entière derrière une adresse qui dépasse 600 entrées dans l'heure lit « Trop de tentatives » : le plafond horaire se relève si la mesure le montre.
 
@@ -77,6 +78,7 @@ return entered(:new_number, dto) unless dto.confirming?
 RATE_LIMIT = { to: 120, within: 1.minute, scope: "identity/student_entries" }.freeze
 HOURLY_RATE_LIMIT = { to: 600, within: 1.hour, scope: "identity/student_entries_hourly" }.freeze
 REGISTRATION_RATE_LIMIT = { to: 60, within: 1.minute, scope: "identity/student_entry_registrations" }.freeze
+WRONG_PIN_LIMIT = { to: 10, within: 1.minute }.freeze
 ```
 
 ```ruby

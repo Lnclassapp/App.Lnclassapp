@@ -57,8 +57,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
 
     enter(contact: "0501020304", pin: "2468")
 
-    assert_response :see_other
-    assert_not_equal new_student_entry_path, URI(response.location).path
+    assert_redirected_to teacher_home_path
     follow_redirect!
     assert_no_match "Je suis élève", response.body
   end
@@ -165,6 +164,10 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     enter(contact: "0701020304", pin: "2468", link_token: token)
 
     assert_redirected_to join_classroom_path(token)
+    follow_redirect!
+    assert_response :success
+    get student_home_path
+    assert_response :success
   end
 
   test "CA-10 : une classe de 60 nouveaux élèves (deux envois chacun) passe l'entrée depuis une adresse ; le 121e envoi reçoit 429" do
@@ -179,20 +182,74 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student-entry-alert[role=alert]", text: I18n.t("errors.codes.rate_limited")
   end
 
+  test "CA-10 : 10 codes faux sur 10 numéros inscrits depuis une adresse passent en 422 ; le 11e, même avec le bon code, reçoit 429" do
+    11.times { |i| create_student(contact: format("07%08d", i), classroom: @classroom) }
+    10.times do |i|
+      enter(contact: format("07%08d", i), pin: "1111")
+      assert_response :unprocessable_entity, "wrong code #{i + 1} was not a 422 (#{response.status})"
+    end
+
+    enter(contact: format("07%08d", 10), pin: "2468")
+
+    assert_response :too_many_requests
+    assert_select "#student-entry-alert[role=alert]", text: I18n.t("errors.codes.rate_limited")
+    get student_home_path
+    assert_response :redirect
+    assert_not_equal student_home_path, URI(response.location).path
+  end
+
+  test "CA-10 : un numéro inconnu n'est pas un code faux : 11 numéros inconnus ne déclenchent pas ce compteur" do
+    11.times do |i|
+      enter(contact: format("01%08d", i), pin: "1357")
+      assert_response :see_other, "unknown number #{i + 1} was refused (#{response.status})"
+    end
+  end
+
   test "CA-10 : après l'entrée, 12 inscriptions par la liste depuis une adresse en une minute passent (pas 5 par minute)" do
     @classroom.update!(max_students: 60)
-    12.times do |i|
-      enter(contact: format("01%08d", i), pin: "1357")
-      confirm("1357")
-      finish_registration
-      assert_redirected_to student_home_path, "registration #{i + 1} was refused (#{response.status})"
-      sign_out
+    freeze_time do
+      12.times do |i|
+        enter(contact: format("01%08d", i), pin: "1357")
+        confirm("1357")
+        finish_registration
+        assert_redirected_to student_home_path, "registration #{i + 1} was refused (#{response.status})"
+        sign_out
+      end
     end
+  end
+
+  test "un numéro verrouillé reçoit 429 et l'heure de déverrouillage" do
+    student = create_student(contact: "0701020304", classroom: @classroom)
+    5.times { create_login_attempt(contact: student.contact) }
+
+    enter(contact: "0701020304", pin: "2468")
+
+    assert_response :too_many_requests
+    assert_select "[role=alert]", text: /Réessayez à/
+    assert_equal 0, Orm::Session.count
+  end
+
+  test "dans l'app élèves, le compte d'un enseignant est renvoyé à son app, sans session" do
+    create_teacher(contact: "0501020304")
+    agent = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
+            "Hotwire Native Android; LnclassStudentAndroid/1.0"
+
+    post student_entries_path, params: { student_entry: { contact: "0501020304", pin: "2468" } }, headers: { "User-Agent" => agent }
+
+    assert_response :unprocessable_entity
+    assert_select "[role=alert]", text: I18n.t("identity.student_entries.create.wrong_app")
+    assert_equal 0, Orm::Session.count
+    assert_empty cookies[:session_token].to_s
   end
 
   test "CA-11 : une entrée de plus de 30 minutes est oubliée ; le formulaire du mode entrée renvoie à l'entrée sans rien créer" do
     enter(contact: "0101020304", pin: "1357")
     confirm("1357")
+
+    travel 29.minutes do
+      get new_student_registration_path
+      assert_select "#signup-entry-number"
+    end
 
     travel 31.minutes do
       get new_student_registration_path

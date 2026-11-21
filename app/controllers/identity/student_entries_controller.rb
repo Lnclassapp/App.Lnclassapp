@@ -12,6 +12,9 @@ module Identity
     RATE_LIMIT = { to: 120, within: 1.minute, scope: "identity/student_entries" }.freeze
     HOURLY_RATE_LIMIT = { to: 600, within: 1.hour, scope: "identity/student_entries_hourly" }.freeze
     REGISTRATION_RATE_LIMIT = { to: 60, within: 1.minute, scope: "identity/student_entry_registrations" }.freeze
+    # Revue sécurité : l'entrée connecte tout rôle ; 120 envois par minute laissaient tester un code courant sur beaucoup de
+    # numéros (un essai par numéro échappe au verrouillage). Seuls les codes faux comptent, par adresse ; au-delà, même un bon code est refusé.
+    WRONG_PIN_LIMIT = { to: 10, within: 1.minute }.freeze
 
     allow_unauthenticated_access only: %i[new create]
     rate_limit **RATE_LIMIT, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many }
@@ -32,11 +35,13 @@ module Identity
 
     def create
       return redirect_to_home if authenticated?
+      return refuse_too_many if wrong_pin_limit_reached?
 
       @form = form_input
       return redirect_to(new_student_entry_path, alert: t(".expired"), status: :see_other) unless @form
 
       result = enter.call(dto: @form)
+      count_wrong_pin if result.failure? && result.errors[:pin]&.include?(:wrong_pin)
       return render_failure(result) if result.failure?
 
       entered(result.value)
@@ -54,9 +59,11 @@ module Identity
       when :new_number
         keep_student_entry(contact: value.contact, pin: @form.pin, confirmed: false, link_token: @link_token)
         redirect_to new_student_entry_path, status: :see_other
-      else
+      when :confirmed
         keep_student_entry(contact: value.contact, pin: @form.pin, confirmed: true, link_token: @link_token)
         redirect_to registration_path(@link_token), status: :see_other
+      else
+        raise ArgumentError, "outcome inconnu : #{value.outcome}"
       end
     end
 
@@ -74,6 +81,15 @@ module Identity
       @form.errors.add(:base, t(".wrong_app"))
       @stage = :credentials
       render :new, status: :unprocessable_entity
+    end
+
+    def wrong_pin_key = "identity/student_entries/wrong_pin:#{request.remote_ip}"
+
+    def wrong_pin_limit_reached? = Rails.cache.read(wrong_pin_key).to_i >= WRONG_PIN_LIMIT[:to]
+
+    def count_wrong_pin
+      Rails.cache.write(wrong_pin_key, 0, expires_in: WRONG_PIN_LIMIT[:within], unless_exist: true)
+      Rails.cache.increment(wrong_pin_key)
     end
 
     def refuse_too_many

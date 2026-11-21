@@ -107,7 +107,13 @@ module Classroom
     # En mode entrée, numéro et code viennent de l'entrée gardée, jamais du formulaire (UDR-XXXX §3.6).
     def form_input
       attributes = params.expect(student_registration: FIELDS).to_h.symbolize_keys
-      attributes.merge!(contact: @entry.contact, pin: @entry.pin, pin_confirmation: @entry.pin) if @entry
+      if @entry && entry_form?
+        attributes.merge!(contact: @entry.contact, pin: @entry.pin, pin_confirmation: @entry.pin)
+      elsif @entry
+        # Ancien onglet en trois étapes : ce qui est posté fait foi, l'entrée gardée est oubliée.
+        forget_student_entry
+        @entry = nil
+      end
       Dtos::Classroom::StudentRegistrationInput.new(**attributes)
     end
 
