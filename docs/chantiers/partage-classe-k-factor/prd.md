@@ -174,8 +174,8 @@ Scénario: les autres rôles ne voient pas la mesure
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-attribution-des-inscriptions-eleves — table d'attribution, code d'invitation opaque, étiquette `s=qr`.
-- UDR-XXXX-partage-de-classe-qr-affiche-invitation — QR, affiche A4, kit, bannière d'invitation élève, section k de la page Croissance.
+- ADR-0143 — table d'attribution, code d'invitation opaque, étiquette `s=qr`.
+- UDR-0178 — QR, affiche A4, kit, bannière d'invitation élève, section k de la page Croissance.
 
 ## 7. Mesures
 

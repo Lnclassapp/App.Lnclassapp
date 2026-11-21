@@ -152,6 +152,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0140](./0140-hebergement-hostinger.md) | Production sur un VPS Hostinger (Docker), Cloudflare devant, fichiers et sauvegardes sur R2 | Accepté | 2026-11-17 | PlanetScale refuse les cartes prépayées ; il faut un hébergement bon marché payable par le porteur. |
 | [0141](./0141-entree-eleve-revele-un-numero-inscrit.md) | Entrée élève unique : un numéro inscrit se révèle | Accepté | 2026-11-20 | une seule entrée numéro + code pour l'élève doit dire si le numéro a un compte, ce que la connexion cachait |
 | [0142](./0142-recherche-etablissement.md) | Recherche d'établissement publique et bornée | Accepté | 2026-11-20 | Les deux listes DRENA puis établissement font se tromper les élèves ; comment trouver son établissement en tapant, sans exposer plus et sans changer les use cases ? |
+| [0143](./0143-attribution-des-inscriptions-eleves.md) | Attribution des inscriptions élèves (k-factor) | Accepté | 2026-11-20 | mesurer qui a fait venir chaque élève (QR, camarade, lien, code, à froid) sans exposer l'invitant ni réécrire la voie d'arrivée |
 <!-- index:end -->
 
 ---

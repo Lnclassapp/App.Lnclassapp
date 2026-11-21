@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> PRD : [`prd.md`](prd.md) · ADR-XXXX-attribution-des-inscriptions-eleves · UDR-XXXX-partage-de-classe-qr-affiche-invitation.
+> PRD : [`prd.md`](prd.md) · ADR-0143 · UDR-0178.
 
 ## Graphe
 

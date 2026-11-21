@@ -1,8 +1,8 @@
-# UDR-XXXX : Partage de la classe — QR, affiche A4, kit d'établissement, « Invite tes camarades », k-factor de l'équipe
+# UDR-0178 : Partage de la classe — QR, affiche A4, kit d'établissement, « Invite tes camarades », k-factor de l'équipe
 <!-- index
 titre: Partage de classe (QR, affiche, invitation élève, k-factor)
 statut: Accepté
-adr-lie: [XXXX](../adr/XXXX-attribution-des-inscriptions-eleves.md)
+adr-lie: [0143](../adr/0143-attribution-des-inscriptions-eleves.md)
 problematique: faire venir une classe entière et ses absents (QR au tableau, affiche, invitation WhatsApp) et lire le k-factor, sans section en double ni donnée d'élève exposée
 -->
 
@@ -11,7 +11,7 @@ problematique: faire venir une classe entière et ses absents (QR au tableau, af
 | **Statut** | Accepté |
 | **Date** | 2026-11-20 |
 | **Chantier** | `docs/chantiers/partage-classe-k-factor` |
-| **ADR lié** | ADR-XXXX-attribution-des-inscriptions-eleves |
+| **ADR lié** | ADR-0143 |
 | **Remplacé par** | — |
 
 ---

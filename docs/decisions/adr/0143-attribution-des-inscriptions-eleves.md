@@ -1,4 +1,4 @@
-# ADR-XXXX : Chaque inscription élève garde sa source et son invitant, dans une table écrite une fois
+# ADR-0143 : Chaque inscription élève garde sa source et son invitant, dans une table écrite une fois
 <!-- index
 titre: Attribution des inscriptions élèves (k-factor)
 statut: Accepté

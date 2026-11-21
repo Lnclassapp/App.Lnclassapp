@@ -6,8 +6,8 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-20 | Attribution dans une table à part, écrite une fois ; `joined_via` inchangé | `joined_via` est réécrit au retour dans une classe et lu par l'entonnoir | ADR-XXXX-attribution-des-inscriptions-eleves |
-| 2026-11-20 | Invitant désigné par un code opaque de 8 caractères, créé au premier envoi (POST) | Ne pas faire circuler l'identifiant public d'un élève dans WhatsApp | ADR-XXXX-attribution-des-inscriptions-eleves |
+| 2026-11-20 | Attribution dans une table à part, écrite une fois ; `joined_via` inchangé | `joined_via` est réécrit au retour dans une classe et lu par l'entonnoir | ADR-0143 |
+| 2026-11-20 | Invitant désigné par un code opaque de 8 caractères, créé au premier envoi (POST) | Ne pas faire circuler l'identifiant public d'un élève dans WhatsApp | ADR-0143 |
 | 2026-11-20 | Le cadrage enchaîne sur l'exécution sans demander « Je lance les lots ? » (étape 6 de la skill `feature`) | Le porteur a demandé la livraison (PR prête) et le contrat de session interdit de finir sur une question | non |
 
 ## À trancher
@@ -61,5 +61,5 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|
 | **Livré le** | 2026-11-21 |
 | **PR** | |
-| **ADR produits** | ADR-XXXX-attribution-des-inscriptions-eleves |
-| **UDR produits** | UDR-XXXX-partage-de-classe-qr-affiche-invitation |
+| **ADR produits** | ADR-0143 |
+| **UDR produits** | UDR-0178 |
