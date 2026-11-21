@@ -37,6 +37,16 @@ class Classroom::StudentFirstExercisesControllerTest < ActionDispatch::Integrati
     assert_select "turbo-frame##{FRAME}", 0
   end
 
+  test "CA-13: the exercise page itself does not carry the frame" do
+    exercise = create_exercise(essential: @essential, title: "Les étapes de la méiose")
+    sign_in_as @student
+
+    get exercise_path(exercise.public_id)
+
+    assert_response :success
+    assert_select "turbo-frame##{FRAME}", 0
+  end
+
   test "CA-13: the frame holds an open window with the first exercise, one tap to start (out of the frame), a way to close" do
     exercise = create_exercise(essential: @essential, title: "Les étapes de la méiose")
     sign_in_as @student

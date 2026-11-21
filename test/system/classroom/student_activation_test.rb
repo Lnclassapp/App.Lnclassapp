@@ -37,8 +37,6 @@ class Classroom::StudentActivationTest < ApplicationSystemTestCase
     within("#student_to_do") { click_on "Angles opposés" }
 
     assert_current_path %r{\A/exercises/}
-    # La fenêtre se rouvre à chaque écran (« Plus tard » n'écrit rien) : on la ferme, puis « Faire l'exercice » du devoir.
-    find("#student_first_exercise_later").click
     click_on I18n.t("assessment.exercises.show.start")
     assert_current_path %r{\A/sessions/}
     student = Orm::User.find_by!(contact: "0701020399", role: "student")

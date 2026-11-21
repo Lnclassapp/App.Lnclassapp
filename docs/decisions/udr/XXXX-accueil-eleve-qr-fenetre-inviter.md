@@ -42,6 +42,7 @@ Pourquoi une fenêtre différée plutôt que rendue dans la page : elle doit viv
 
 **Où** : dans `layouts/shell`, juste après `</main>`, si `first_exercise_prompt?` (helper de contrôleur) : rôle `student`, pas `focus`, et la session ne porte pas `:first_exercise_done`. Alors :
 `turbo_frame_tag "student_first_exercise_prompt", src: student_first_exercise_path, loading: :eager, data: { turbo_permanent: false }`.
+Jamais non plus sur la page d'un exercice (`assessment/exercises#show`), ni sur la copie : ces contrôleurs rendent `first_exercise_prompt?` faux.
 
 **La page** (`GET /students/first-exercise`, `allow_roles :student`, Turbo Frame seul, `layout false` ou partial) :
 - L'élève a rendu au moins une copie (`status: completed`) → pose `session[:first_exercise_done] = true` et rend le cadre **vide**.
