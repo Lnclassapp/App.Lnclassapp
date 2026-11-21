@@ -35,9 +35,10 @@ fr:
               invalid: "Le code secret compte 4 chiffres."
             pin_confirmation:
               confirmation: "Les deux codes secrets ne sont pas identiques."
+            # La DRENA est déduite de l'établissement (ADR-0142 §4.4) : elle ne manque que s'il est introuvable.
             drena_public_id:
-              blank: "Choisissez votre DRENA."
-              inclusion: "Cette DRENA n'existe pas. Choisissez-en une autre."
+              blank: "Cet établissement n'accepte pas d'inscription. Choisissez-en un autre."
+              inclusion: "Cet établissement n'accepte pas d'inscription. Choisissez-en un autre."
             school_public_id:
               blank: "Choisissez votre établissement."
               inclusion: "Cet établissement n'accepte pas d'inscription. Choisissez-en un autre."
@@ -70,15 +71,12 @@ fr:
         label: "Votre établissement"
         drena: "DRENA : %{drena}"
         other_school: "Ce n'est pas votre établissement ?"
-      school_fields:
-        drena_prompt: "Choisissez votre DRENA"
-        show_schools: "Afficher les établissements"
       form:
         # Étape 1.
         school: "Votre établissement"
         school_hint: "Vous passez à la suite dès que l'établissement est choisi."
         # ADR-0094 §11 : le lien de parrainage d'un collègue, sans établissement
-        sponsor: "%{name} vous invite sur Lnclass. Choisissez votre DRENA, puis votre établissement."
+        sponsor: "%{name} vous invite sur Lnclass. Cherchez votre établissement."
         # Étape 2.
         you: "Vous"
         you_hint: "Vous passez à la suite dès que tout est rempli."

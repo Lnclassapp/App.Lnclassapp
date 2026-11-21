@@ -1,15 +1,14 @@
-// ⚡ FRONT · classroom/class_picker_controller — cascade DRENA → établissement → niveau → classe de l'inscription élève
-// Rôle : chaque choix pose le src du frame suivant et vide ceux d'après ; « Changer » rouvre les listes ; l'envoi attend une classe cochée ; liste absente → erreur
-// ADR  : 0051, 0085 · UDR : 0081 (§3.3), 0091 (§3.2 : action change), sur le modèle de school/drena_schools_controller
+// ⚡ FRONT · classroom/class_picker_controller — cascade établissement → niveau → classe de l'inscription élève
+// Rôle : l'établissement trouvé (school--school-search:picked) pose le src des niveaux, chaque choix vide ce qui suit ; l'envoi attend une classe cochée ; liste absente → erreur
+// ADR  : 0051, 0085, 0142-recherche-etablissement · UDR : 0081 (§3.3), 0177-champ-etablissement
 import { Controller } from "@hotwired/stimulus"
 
-const DRENA = "__drena__"
 const SCHOOL = "__school__"
 const LEVEL = "__level__"
 
 export default class extends Controller {
-  static targets = ["schools", "levels", "classrooms", "submit", "loadError", "schoolSummary", "schoolFields"]
-  static values = { schoolsUrl: String, levelsUrl: String, classroomsUrl: String }
+  static targets = ["levels", "classrooms", "submit", "loadError"]
+  static values = { levelsUrl: String, classroomsUrl: String }
 
   // Un re-rendu 422 est un morphing : il remet le bouton du serveur (actif) sans reconnecter le contrôleur.
   connect() {
@@ -23,41 +22,21 @@ export default class extends Controller {
 
   refresh = () => this.sync()
 
-  loadSchools({ target: { value } }) {
-    this.clear(this.levelsTarget, this.classroomsTarget)
-    if (!value) return this.clear(this.schoolsTarget)
-
-    this.show(this.schoolsTarget, this.schoolsUrlValue.replace(DRENA, encodeURIComponent(value)))
-  }
-
-  // Changer d'établissement efface le niveau et la classe.
-  loadLevels({ target: { value } }) {
+  // Un établissement coché dans la recherche (UDR champ établissement) : ses niveaux ; le niveau et la classe se vident.
+  loadLevels({ detail: { publicId } }) {
     this.clear(this.classroomsTarget)
-    if (!value) return this.clear(this.levelsTarget)
+    if (!publicId) return this.clear(this.levelsTarget)
 
-    this.show(this.levelsTarget, this.levelsUrlValue.replace(SCHOOL, encodeURIComponent(value)))
+    this.show(this.levelsTarget, this.levelsUrlValue.replace(SCHOOL, encodeURIComponent(publicId)))
   }
 
-  // UDR-0091 §3.2 : « Changer » (un lien, pour le repli sans JavaScript) remplace la ligne repliée par la DRENA et
-  // l'établissement, celui-ci à choisir de nouveau ; le niveau et la classe se vident, le focus va à la DRENA.
-  change(event) {
-    if (!this.hasSchoolFieldsTarget) return
-
-    event.preventDefault()
-    if (this.hasSchoolSummaryTarget) this.schoolSummaryTarget.hidden = true
-    this.schoolFieldsTarget.hidden = false
-    const school = this.schoolsTarget.querySelector("select")
-    if (school) {
-      // Rails n'écrit l'invite que sans établissement choisi : elle revient ici, d'après data-prompt.
-      if (!school.querySelector("option[value='']")) school.prepend(new Option(school.dataset.prompt || "", ""))
-      school.value = ""
-    }
+  // Une nouvelle saisie a retiré l'établissement : plus de niveau ni de classe.
+  clearSchool() {
     this.clear(this.levelsTarget, this.classroomsTarget)
-    this.schoolFieldsTarget.querySelector("select")?.focus()
   }
 
   loadClassrooms({ target: { value } }) {
-    const school = this.schoolsTarget.querySelector("select")?.value
+    const school = this.element.querySelector("input[name$='[school_public_id]']:checked")?.value
     if (!value || !school) return this.clear(this.classroomsTarget)
 
     const url = this.classroomsUrlValue.replace(SCHOOL, encodeURIComponent(school)).replace(LEVEL, encodeURIComponent(value))

@@ -28,8 +28,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     visit new_student_registration_path
 
     # IL-06 : un établissement sans classe le dit, et on reste à l'étape 1 tant qu'aucune classe n'est touchée.
-    select "Abidjan 1", from: "student_registration[drena_public_id]"
-    select "Collège sans classe", from: "student_registration[school_public_id]"
+    choose_school "Collège sans classe"
     within("turbo-frame#picker_levels") { assert_text I18n.t("classroom.student_registrations.class_picker.not_found_title") }
     assert_step 1
     choose_classroom "6ème 1"
@@ -49,7 +48,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
       pass_student_entry
       assert_step 2, entry: true
       assert_selector "#signup-classroom-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
-      assert_no_selector "select[name='student_registration[drena_public_id]']", visible: :all
+      assert_no_selector "input#school_q", visible: :all
       assert_no_text "6ème 2"
       fill_in_the_name
       click_on I18n.t("#{FORM}.submit")
@@ -141,7 +140,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_current_path new_student_registration_path
     assert_selector "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
     assert_step 1
-    assert_selector "select[name='student_registration[drena_public_id]']"
+    assert_selector "input#school_q"
     assert_selector "input[name='student_registration[join_code]']", visible: :all
     assert_no_selector "input[name='student_registration[link_token]']", visible: :all
   end
@@ -170,8 +169,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
   # Each step of the cascade arrives in its frame once its parent is chosen (UDR-0081 §3.3); the level is a pill, the
   # classroom a box, both real radios (UDR-0091 §3.1).
   def choose_classroom(name)
-    select "Abidjan 1", from: "student_registration[drena_public_id]"
-    select "Lycée Classique d'Abidjan", from: "student_registration[school_public_id]"
+    choose_school "Lycée Classique d'Abidjan"
     within("turbo-frame#picker_levels") { choose "6ème" }
     within("turbo-frame#picker_classrooms") { choose name }
   end

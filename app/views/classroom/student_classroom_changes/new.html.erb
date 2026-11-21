@@ -11,7 +11,6 @@
   <%= form_with model: @form, scope: :student_classroom_change, url: confirm_student_classroom_change_path, method: :get,
                 id: "student-classroom-change-form", class: "space-y-4",
                 data: { controller: "classroom--class-picker",
-                        "classroom--class-picker-schools-url-value": drena_schools_path("__drena__", scope: :student_classroom_change),
                         "classroom--class-picker-levels-url-value": school_picker_levels_path("__school__", scope: :student_classroom_change),
                         "classroom--class-picker-classrooms-url-value": school_picker_classrooms_path("__school__", "__level__",
                                                                                                      scope: :student_classroom_change,

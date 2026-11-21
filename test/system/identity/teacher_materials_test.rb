@@ -16,8 +16,7 @@ class Identity::TeacherMaterialsTest < ApplicationSystemTestCase
 
   test "sign up with one subject, then add two more in the profile" do
     visit new_teacher_registration_path(confirmed: 1)
-    select "Abidjan 1", from: "teacher_registration[drena_public_id]"
-    select "Lycée Moderne de Cocody", from: "teacher_registration[school_public_id]"
+    choose_school "Lycée Moderne de Cocody"
     select "Physique-Chimie", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Yao"

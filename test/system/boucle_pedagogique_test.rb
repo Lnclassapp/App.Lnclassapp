@@ -252,8 +252,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   def teacher_signs_up_and_assigns_the_exercise
     visit new_teacher_registration_path(confirmed: 1)
     assert_no_page_reload do
-      select "Abidjan 1", from: "teacher_registration[drena_public_id]"
-      select SCHOOL, from: "teacher_registration[school_public_id]"
+      choose_school SCHOOL
       select "SVT", from: "teacher_registration[material_slug]"
       fill_in "teacher_registration[last_name]", with: "YAO"
       fill_in "teacher_registration[first_name]", with: "Koffi"
