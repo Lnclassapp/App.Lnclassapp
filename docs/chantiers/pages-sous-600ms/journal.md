@@ -31,7 +31,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- Garde de requêtes (lot B) : le cache de requêtes survit d'une visite à l'autre dans un test d'intégration (compte faussé à 0), d'où `clear_query_cache` avant la visite comptée ; vérifiée en ajoutant 5 requêtes distinctes par devoir dans `StudentAssignedSheetsQuery#exercises` (« Ma classe » 53 pour un budget de 48, échec constaté, modification retirée) ; une seule requête par devoir (+3) ou un appel dupliqué à l'identique (mis en cache) passent sous la marge de 25 %.
 
 ## Dette laissée derrière
 
