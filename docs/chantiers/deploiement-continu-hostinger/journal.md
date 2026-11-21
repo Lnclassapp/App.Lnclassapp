@@ -44,5 +44,5 @@
 |---|---|
 | **Livré le** | |
 | **PR** | |
-| **ADR produits** | ADR-XXXX-deploiement-continu-hostinger |
+| **ADR produits** | ADR-0144 |
 | **UDR produits** | — |

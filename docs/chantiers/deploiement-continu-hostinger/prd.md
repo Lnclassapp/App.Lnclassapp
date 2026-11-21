@@ -2,7 +2,7 @@
 
 ## 1. Contexte
 
-Memo et [ADR-XXXX-deploiement-continu-hostinger](../../decisions/adr/XXXX-deploiement-continu-hostinger.md). Pas d'écran, pas de règle métier : un workflow GitHub, deux retouches de `deployer.py`, un garde-fou.
+Memo et [ADR-0144](../../decisions/adr/0144-deploiement-continu-hostinger.md). Pas d'écran, pas de règle métier : un workflow GitHub, deux retouches de `deployer.py`, un garde-fou.
 
 ## 2. Acteurs et permissions
 
@@ -62,7 +62,7 @@ Aucune table, aucun port.
 
 ## 6. Décisions rattachées
 
-- [ADR-XXXX-deploiement-continu-hostinger](../../decisions/adr/XXXX-deploiement-continu-hostinger.md). Pas d'UDR : aucune vue.
+- [ADR-0144](../../decisions/adr/0144-deploiement-continu-hostinger.md). Pas d'UDR : aucune vue.
 
 ## 7. Mesures
 

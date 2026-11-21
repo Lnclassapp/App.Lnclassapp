@@ -29,7 +29,7 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 
 ---
 
-### Déploiement — `deploiement.yml` (ADR-XXXX-deploiement-continu-hostinger)
+### Déploiement — `deploiement.yml` (ADR-0144)
 
 Ces secrets ne vont **pas** dans *Repository secrets*. Créer trois Environments (*Settings › Environments*), chacun limité à sa branche (*Deployment branches › Selected branches and tags*, une règle de type **Branch**, au nom exact, sans joker ni règle de type *Tag*) :
 
@@ -89,7 +89,7 @@ La commande de pré-déploiement est `bin/rails db:prepare db:seed` (`.railway/r
 
 ### Déploiement automatique
 
-Railway n'existe plus : un push sur `Develop`, `Staging` ou `main` déploie l'environnement de la branche sur le VPS Hostinger (`.github/workflows/deploiement.yml`, ADR-0140 et ADR-XXXX-deploiement-continu-hostinger). Un push qui ne touche que de la documentation (hors `docs/contenus/`) ne déploie pas.
+Railway n'existe plus : un push sur `Develop`, `Staging` ou `main` déploie l'environnement de la branche sur le VPS Hostinger (`.github/workflows/deploiement.yml`, ADR-0140 et ADR-0144). Un push qui ne touche que de la documentation (hors `docs/contenus/`) ne déploie pas.
 
 - **Preuve de l'arbre** : pour `Staging` et `main`, le job vérifie d'abord que l'arbre a eu son `ci` vert (`script/ci/tested_tree`). Sans preuve, il échoue avant tout appel à Hostinger. `Develop` n'a pas cette garde.
 - **Où regarder** : onglet *Actions*, workflow *Déploiement*, un run par push. Le dernier pas, `/up`, doit être vert.

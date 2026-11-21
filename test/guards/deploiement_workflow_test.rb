@@ -1,4 +1,4 @@
-# Pure Ruby, no Rails boot: the rules that keep the Hostinger token away from pull requests (ADR-XXXX-deploiement-continu-hostinger,
+# Pure Ruby, no Rails boot: the rules that keep the Hostinger token away from pull requests (ADR-0144,
 # threat M1 to M9). A workflow that breaks one of them fails here, in the lint group, before it can leak a secret.
 require "minitest/autorun"
 require "yaml"

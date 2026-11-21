@@ -1,7 +1,7 @@
 # Retour arrière
 
 > Comment revenir à la version précédente de l'application sur le VPS Hostinger, quand c'est sans risque, quand c'est impossible, et que faire quand un déploiement n'est pas parti.
-> Les trois environnements tournent sur le VPS depuis l'[ADR-0140](../decisions/adr/0140-hebergement-hostinger.md) ; GitHub les déploie à chaque push ([ADR-XXXX-deploiement-continu-hostinger](../decisions/adr/XXXX-deploiement-continu-hostinger.md)). Railway n'existe plus.
+> Les trois environnements tournent sur le VPS depuis l'[ADR-0140](../decisions/adr/0140-hebergement-hostinger.md) ; GitHub les déploie à chaque push ([ADR-0144](../decisions/adr/0144-deploiement-continu-hostinger.md)). Railway n'existe plus.
 
 ---
 
