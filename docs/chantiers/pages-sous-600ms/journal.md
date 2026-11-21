@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-11-21 | Lot C : `PrepareSheetsQuery#call(only:)` ne construit (questions, copies, devoirs dus) que les exercices demandés ; numéro = rang dans la feuille entière ; seul `StudentAssignedSheetsQuery` le passe. | « Ma classe », médiane de 3 exécutions de `script/mesure/pages` (rôle élève) : allocations 114 963 → 54 483 (-52,6 %), p50 164,3 → 124,3 ms, p95 200,1 → 175,6 ms, SQL 91 → 91 (inchangé). Seuil de -30 % atteint. | Non |
 
 ## À trancher
 
