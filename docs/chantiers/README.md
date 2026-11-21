@@ -242,6 +242,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`ouverture-remediation`](ouverture-remediation/memo.md) | livré | feature | 2026-11-09 | La fiche s'ouvre sous l'Or |
 | [`page-d-accueil-photo`](page-d-accueil-photo/memo.md) | cadrage | feature | 2026-10-14 | Page d'accueil publique en photo plein écran |
 | [`parcours-matiere-exercice`](parcours-matiere-exercice/memo.md) | livré | optimisation | 2026-10-30 | Parcours matière → exercice |
+| [`partage-classe-k-factor`](partage-classe-k-factor/memo.md) | planifié | feature | 2026-11-20 | Partage de la classe et mesure du k-factor élève |
 | [`pentest-develop`](pentest-develop/) | pas de memo | — | — | — |
 | [`pentest-strix`](pentest-strix/memo.md) | cadrage | feature | 2026-09-28 | Pentest automatisé de la recette avant la mise en ligne |
 | [`photo-de-profil`](photo-de-profil/memo.md) | en cours | feature | 2026-09-28 | Photo de profil |

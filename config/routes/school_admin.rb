@@ -17,6 +17,8 @@ scope "school-admin", module: "school_admin", as: "school_admin" do
   get "teachers/:public_id/removal", to: "teachers#removal", as: :teacher_removal
   post "teachers/:public_id/reinstatement", to: "teacher_reinstatements#create", as: :teacher_reinstatement
   resource :school, only: :show
+  # Lot D partage-classe-k-factor : le kit d'affiches de son établissement, sans identifiant (l'établissement vient du compte).
+  get "posters", to: "/classroom/school_posters#show", as: :posters
   # Sous /school-admin/school, sans le préfixe de nom « school_ » (UDR-0056 §3.0 : school_admin_level_classrooms_path).
   scope "school" do
     resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id

@@ -112,7 +112,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
       assert_select "button#student-registration-submit:not([disabled])"
     end
     assert_select "select[name='student_registration[drena_public_id]'], turbo-frame#picker_schools, #classroom-link-invalid", 0
-    assert_select "[name*=code]", 0
+    assert_select "[name*=code]:not([name$='[invite_code]'])", 0
     [ "Yao", "Konan", "Bamba", "Issa", teacher.public_id, @classroom.public_id, "/ 80" ].each do |secret|
       assert_not_includes response.body, secret
     end
@@ -307,6 +307,52 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
   def join_params(**overrides)
     { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821",
       pin_confirmation: "4821", **overrides }
+  end
+
+  # Le visiteur passe par l'entrée (numéro inconnu confirmé) puis arrive sur la page du lien, sans paramètres : l'attribution suit.
+  def enter_unknown_number(token, **query)
+    get join_classroom_path(token, **query)
+    enter_as_new_student(token)
+    get join_classroom_path(token)
+  end
+
+  test "attribution: /c/<token>?s=qr&i=<code> survives the entry and lands in hidden fields of the sign-up form" do
+    enter_unknown_number(@classroom.reload.link_token, s: "qr", i: "K7M4Q2ZX")
+
+    assert_select "input[type=hidden][name='student_registration[arrival_source]'][value=qr]"
+    assert_select "input[type=hidden][name='student_registration[invite_code]'][value=k7m4q2zx]"
+  end
+
+  test "attribution: any other s, a malformed i or a bare link leave both hidden fields empty" do
+    [ { s: "whatsapp", i: "nope" }, {} ].each do |extra|
+      reset!
+      enter_unknown_number(@classroom.reload.link_token, **extra)
+
+      assert_select "input[name='student_registration[arrival_source]'][value]", 0
+      assert_select "input[name='student_registration[invite_code]'][value]", 0
+    end
+  end
+
+  test "attribution: forgotten after 30 minutes, even when the entry is newer" do
+    token = @classroom.reload.link_token
+    get join_classroom_path(token, s: "qr")
+
+    travel(20.minutes) { enter_as_new_student(token) }
+    travel(35.minutes) do
+      get join_classroom_path(token)
+
+      assert_select "#student-registration-form"
+      assert_select "input[name='student_registration[arrival_source]'][value]", 0
+    end
+  end
+
+  test "attribution: kept for the link it came with only" do
+    token = @classroom.reload.link_token
+    enter_unknown_number(token, s: "qr")
+    other = create_classroom(school: @school, level: create_level(name: "5ème"), name: "5ème 1")
+    get join_classroom_path(other.link_token)
+
+    assert_select "input[name='student_registration[arrival_source]'][value]", 0
   end
 
   test "le visiteur au numéro inconnu, qui rouvre le lien, retrouve l'étape de confirmation et son numéro" do

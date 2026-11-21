@@ -27,6 +27,9 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
   def register(**overrides) = post(student_registrations_path, params: { student_registration: registration_params(**overrides) })
   def new_student = Orm::User.find_by!(contact: "0701020304")
   def memberships = Orm::ClassroomStudent.where(student: new_student)
+  def attribution = Orm::SignupAttribution.find_by(student_id: new_student.id)
+
+  def invite_code_of(student) = Repositories::Classroom::InviteCodeRepository.new.code_for(student_id: student.id).value
 
   def assert_refused(attribute, message, status: :unprocessable_entity)
     assert_response status
@@ -821,5 +824,54 @@ end
       assert_select "form[action=?] button", exercise_sessions_path(first.public_id)
     end
     assert_select "#student_to_do", text: /Angles opposés/
+  end
+
+  test "attribution: a link send with s=qr writes « qr », a bare link « teacher_link », the cascade « cold », the code « code »" do
+    token = @classroom.reload.link_token
+    {
+      "0701020301" => [ { link_token: token, arrival_source: "qr" }, "qr" ],
+      "0701020302" => [ { link_token: token }, "teacher_link" ],
+      "0701020303" => [ {}, "cold" ],
+      "0701020304" => [ { join_code: @classroom.join_code }, "code" ]
+    }.each do |contact, (params, source)|
+      register(contact:, **params)
+
+      assert_equal source, Orm::SignupAttribution.find_by!(student_id: Orm::User.find_by!(contact:).id).source
+      sign_out
+    end
+  end
+
+  test "attribution: an unknown invite code (no s) writes « teacher_link » and no inviter" do
+    register(link_token: @classroom.reload.link_token, invite_code: "zzzzzzzz")
+
+    assert_equal [ "teacher_link", nil ], [ attribution.source, attribution.inviter_id ]
+  end
+
+  test "attribution: a link send with a camarade's invite code writes « student_invite » and the inviter" do
+    inviter = create_student
+    code = invite_code_of(inviter)
+
+    register(link_token: @classroom.reload.link_token, invite_code: code)
+
+    assert_equal [ "student_invite", inviter.id ], [ attribution.source, attribution.inviter_id ]
+  end
+
+  test "attribution: an unknown invite code never refuses the sign-up" do
+    register(link_token: @classroom.reload.link_token, invite_code: "zzzzzzzz", arrival_source: "qr")
+
+    assert_redirected_to student_home_path
+    assert_equal [ "qr", nil, @classroom.id ], [ attribution.source, attribution.inviter_id, attribution.classroom_id ]
+  end
+
+  test "attribution: a refused sign-up (number taken) writes nothing and the form keeps s and i" do
+    create_student(contact: "0701020304")
+    before = Orm::SignupAttribution.count
+
+    register(link_token: @classroom.reload.link_token, arrival_source: "qr", invite_code: "k7m4q2zx")
+
+    assert_response :unprocessable_entity
+    assert_equal before, Orm::SignupAttribution.count
+    assert_select "input[type=hidden][name='student_registration[arrival_source]'][value=qr]"
+    assert_select "input[type=hidden][name='student_registration[invite_code]'][value=k7m4q2zx]"
   end
 end

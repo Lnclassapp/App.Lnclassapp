@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::JoinsController
 # Rôle : /c/<jeton> ouvre au visiteur l'entrée élève (numéro et code secret), puis l'inscription la classe déjà choisie ; à l'élève sans classe, la carte ; tout autre paramètre (ancien code compris), la voie standard avec l'alerte
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095, 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0081, 0083, 0102, 0176-entree-eleve-unique (§3.4)
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095, 0141-entree-eleve-revele-un-numero-inscrit, attribution-des-inscriptions-eleves · UDR : 0081, 0083, 0102, 0176-entree-eleve-unique (§3.4)
 module Classroom
   class JoinsController < ApplicationController
     include StudentEntrySession
@@ -11,6 +11,7 @@ module Classroom
     # (StudentRegistrationsController) comptent dans le même compteur.
     # ADR-0085 §4.7 : le lien d'une classe a son compteur, large (60 par minute et par adresse) : une classe entière s'inscrit
     # derrière une seule adresse. LINK_RATE_LIMIT (10) reste celui de la devinette de codes et de la voie standard.
+    ATTRIBUTION_KEY = :signup_attribution
     LINK_RATE_LIMIT = { to: 10, within: 1.minute, scope: "classroom/joins" }.freeze
     CLASS_LINK_RATE_LIMIT = { to: 60, within: 1.minute, scope: "classroom/links" }.freeze
     rate_limit **CLASS_LINK_RATE_LIMIT, by: -> { request.remote_ip }, with: -> { refuse_too_many }
@@ -30,6 +31,7 @@ module Classroom
         return redirect_to(new_student_registration_path, flash: { link_invalid: true }, status: :see_other)
       end
 
+      remember_attribution
       return render_visitor_page unless current_actor || @link_full
 
       @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:)
@@ -57,8 +59,29 @@ module Classroom
       @entry = confirmed_student_entry
       return render_entry unless @entry
 
-      @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:, contact: @entry.contact)
+      @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:, contact: @entry.contact, **kept_attribution)
       render "classroom/student_registrations/new"
+    end
+
+    # ADR attribution-des-inscriptions-eleves §4.2 : ?s= et ?i= arrivent sur le lien, mais l'inscription se fait après l'entrée,
+    # sur une page du lien sans paramètres. Ils sont gardés en session (30 minutes, pour ce jeton), déclaratifs, jamais un droit :
+    # le DTO ne garde que « qr » et un code bien formé.
+    def remember_attribution
+      return if current_actor
+
+      incoming = Dtos::Classroom::StudentRegistrationInput.new(arrival_source: params[:s], invite_code: params[:i])
+      return unless incoming.arrival_source || incoming.invite_code
+
+      session[ATTRIBUTION_KEY] = { "link_token" => link_token, "s" => incoming.arrival_source, "i" => incoming.invite_code,
+                                   "at" => Time.current.to_i }
+    end
+
+    def kept_attribution
+      data = session[ATTRIBUTION_KEY]
+      return {} unless data.is_a?(Hash) && data["link_token"] == link_token
+      return {} if Time.current.to_i - data["at"].to_i > StudentEntrySession::TTL.to_i
+
+      { arrival_source: data["s"], invite_code: data["i"] }
     end
 
     def render_entry

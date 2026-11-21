@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_registrations/_form — le formulaire d'inscription élève, un seul, découpé en trois fieldset par signup_steps_controller %>
 <%# Rôle : 1 Ta classe (cascade d'abord, code derrière « J'ai le code de ma classe »), 2 Toi (rappel de classe, nom, prénoms, genre, numéro), 3 Ton code secret ; sans JavaScript les trois restent visibles ; 422/403/429 re-rendus %>
-<%# ADR  : 0037, 0050, 0083, 0085, 0109 · UDR : 0009, 0054, 0079, 0081 (§3.2), 0135 (§3.1 à §3.8, §3.5 bis), 0176-entree-eleve-unique (§3.6 : @entry, sans numéro ni code, deux étapes) %>
+<%# ADR  : 0037, 0050, 0083, 0085, 0109, attribution-des-inscriptions-eleves · UDR : 0009, 0054, 0079, 0081 (§3.2), 0135 (§3.1 à §3.8, §3.5 bis), 0176-entree-eleve-unique (§3.6 : @entry, sans numéro ni code, deux étapes) %>
 <%# start : l'étape ouverte ; floor : la première étape qui existe (2 par un lien) ; recap : [classe, établissement] ou nil %>
 <%# locals: (start:, floor:, recap:) -%>
 <% steps = "classroom--signup-steps" %>
@@ -15,6 +15,9 @@
                       "identity--pin-match-ok-value": t(".pin_match.ok"), "identity--pin-match-ko-value": t(".pin_match.ko") } do |form| %>
   <% if @preview %>
     <%= form.hidden_field :link_token %>
+    <%# ADR attribution : l'étiquette du lien et le code d'un camarade suivent l'envoi, et le ré-affichage. %>
+    <%= form.hidden_field :arrival_source %>
+    <%= form.hidden_field :invite_code %>
   <% end %>
   <%# Une légende est le titre de l'étape : focalisable (tabindex -1), le contrôleur y remet le focus à chaque changement d'étape. %>
   <% legend = lambda do |key, hint|

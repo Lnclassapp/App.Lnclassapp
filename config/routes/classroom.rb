@@ -55,3 +55,7 @@ post "classrooms/:classroom_public_id/assignment_batches", to: "classroom/assign
 get "classrooms/:classroom_public_id/session_days/edit", to: "classroom/session_days#edit", as: :edit_classroom_session_days
 patch "classrooms/:classroom_public_id/session_days", to: "classroom/session_days#update", as: :classroom_session_days
 patch "assignments/:public_id/archive", to: "classroom/assignments#archive", as: :archive_assignment
+# partage-classe-k-factor, Lot 0 : affiche A4 d'une classe et kit d'établissement (contrôleurs du Lot D), invitation des camarades (Lot B).
+get "classrooms/:public_id/poster", to: "classroom/posters#show", as: :classroom_poster
+get "schools/:school_public_id/posters", to: "classroom/school_posters#show", as: :school_posters
+post "students/class-invite", to: "classroom/class_invites#create", as: :class_invite
