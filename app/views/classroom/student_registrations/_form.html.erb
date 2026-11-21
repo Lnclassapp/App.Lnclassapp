@@ -4,11 +4,13 @@
 <%# start : l'étape ouverte ; floor : la première étape qui existe (2 par un lien) ; recap : [classe, établissement] ou nil %>
 <%# locals: (start:, floor:, recap:) -%>
 <% steps = "classroom--signup-steps" %>
+<%# Avec @entry, ni champ du numéro ni code secret : leurs contrôleurs n'ont pas de cible et ne sont pas posés. %>
+<% form_controllers = @entry ? "classroom--class-picker" : "classroom--class-picker identity--phone-digits identity--pin-match" %>
 <%# Sans JavaScript, « Chercher » n'envoie que la saisie de l'établissement : jamais le code secret dans l'adresse (ADR-0050). %>
 <form id="student-signup-school" action="<%= new_student_registration_path %>" method="get"></form>
 <%= form_with model: @form, scope: :student_registration, url: student_registrations_path, id: "student-registration-form",
               class: "flex-1 space-y-6", html: { novalidate: true },
-              data: { action: "keydown.enter->classroom--signup-steps#enter", controller: "classroom--class-picker identity--phone-digits identity--pin-match",
+              data: { action: "keydown.enter->classroom--signup-steps#enter", controller: form_controllers,
                       "classroom--class-picker-levels-url-value": school_picker_levels_path("__school__", scope: :student_registration),
                       "classroom--class-picker-classrooms-url-value": school_picker_classrooms_path("__school__", "__level__",
                                                                                                    scope: :student_registration),

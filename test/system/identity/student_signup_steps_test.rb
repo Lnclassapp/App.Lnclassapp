@@ -123,7 +123,7 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
 
     assert_step 2
     assert_selector "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.taken")
-    assert_selector "#signup-panel #signup-panel-recap", text: /3e B/
+    # Sans code de classe, le serveur ne rappelle pas la classe choisie dans la cascade (le rappel ne vient que d'un lien).
     assert_field "student_registration[last_name]", with: "KOUASSI"
   end
 

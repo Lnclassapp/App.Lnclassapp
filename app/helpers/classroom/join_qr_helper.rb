@@ -10,10 +10,11 @@ module Classroom
                      .html_safe
     end
 
-    # L'adresse de l'établissement ne porte ni élève, ni classe, ni jeton (M2) ; en cache par hôte et identifiant.
+    # L'adresse de l'établissement ne porte ni élève, ni classe, ni jeton (M2) ; en cache par URL (l'hôte et l'identifiant y sont ; pas de `request`, nil hors requête).
     def school_signup_qr_svg(school_public_id)
-      Rails.cache.fetch([ "school-signup-qr", request.host, school_public_id ]) do
-        RQRCode::QRCode.new(school_signup_link_url(school_public_id), level: :m)
+      url = school_signup_link_url(school_public_id)
+      Rails.cache.fetch([ "school-signup-qr", url ]) do
+        RQRCode::QRCode.new(url, level: :m)
                        .as_svg(module_size: 6, use_path: true, viewbox: true, standalone: true, color: "000", fill: "fff")
       end.html_safe
     end

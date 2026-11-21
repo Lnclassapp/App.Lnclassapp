@@ -141,7 +141,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_selector "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
     assert_step 1
     assert_selector "input#school_q"
-    assert_selector "input[name='student_registration[join_code]']", visible: :all
+    assert_no_selector "input[name='student_registration[join_code]']", visible: :all
     assert_no_selector "input[name='student_registration[link_token]']", visible: :all
   end
 

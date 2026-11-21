@@ -372,10 +372,13 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_current_path student_home_path
 
     assert_selector "#student_class_card", text: /Tle D 1/i
-    # Activation-eleve (UDR-0174) : amené par le lien de sa classe, son devoir est la carte
-    # « Ton premier exercice », qu'un tap ouvre ; il n'est plus aussi dans « À faire ».
-    assert_no_selector "#student_to_do"
-    within("#student_first_exercise") { click_on t("catalog.courses.next_exercise.start") }
+    # Activation-eleve (UDR-0174) puis accueil-eleve-qr-fenetre-inviter §3.2 : amené par le lien de sa classe, son devoir est
+    # dans la fenêtre « Ton premier exercice », qu'un tap ouvre ; « À faire » reçoit aussi tous les devoirs.
+    assert_selector "#student_to_do", text: EXERCISE
+    within("#student_first_exercise_modal") do
+      assert_text EXERCISE
+      click_on t("catalog.courses.next_exercise.start")
+    end
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_selector "a", text: EXERCISE
 

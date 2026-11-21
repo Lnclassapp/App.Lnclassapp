@@ -102,4 +102,22 @@ class StudentEntryPinPadTest < ApplicationSystemTestCase
     end
     assert_no_js_errors
   end
+
+  private
+
+  def assert_no_horizontal_scroll
+    assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=,
+                    page.evaluate_script("document.documentElement.clientWidth")
+  end
+
+  # Un 422 attendu est journalisé par Chrome comme ressource en échec, pas comme erreur JavaScript.
+  def assert_no_js_errors
+    errors = browser_errors.reject { it.include?("Failed to load resource") }
+
+    assert_empty errors, "erreurs JavaScript :\n#{errors.join("\n")}"
+  end
+
+  def browser_errors
+    page.driver.browser.logs.get(:browser).select { it.level == "SEVERE" }.map(&:message)
+  end
 end

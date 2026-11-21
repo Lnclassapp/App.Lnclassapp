@@ -27,14 +27,19 @@ class Classroom::StudentActivationTest < ApplicationSystemTestCase
     click_on I18n.t("#{FORM}.submit")
 
     assert_current_path student_home_path
-    # Lot D (entree-et-accueil-eleve-allegees) : le premier exercice est dans la fenêtre du shell.
+    # Choisie dans la cascade (« standard »), la classe ne donne pas la fenêtre : elle propose le programme ; le devoir est dans « À faire ».
     within "#student_first_exercise_modal" do
       assert_text I18n.t("catalog.courses.next_exercise.first")
-      assert_text "Angles opposés"
-      assert_text "Mathématiques · #{I18n.t('catalog.courses.next_exercise.assigned')}"
-      click_on I18n.t("catalog.courses.next_exercise.start")
+      assert_text "Mesurer un angle"
+      find("#student_first_exercise_later").click
     end
+    assert_selector "#student_to_do", text: "Angles opposés"
+    within("#student_to_do") { click_on "Angles opposés" }
 
+    assert_current_path %r{\A/exercises/}
+    # La fenêtre se rouvre à chaque écran (« Plus tard » n'écrit rien) : on la ferme, puis « Faire l'exercice » du devoir.
+    find("#student_first_exercise_later").click
+    click_on I18n.t("assessment.exercises.show.start")
     assert_current_path %r{\A/sessions/}
     student = Orm::User.find_by!(contact: "0701020399", role: "student")
     assert_current_path exercise_session_path(Orm::ExerciseSession.find_by!(student:, exercise: @homework).public_id)
