@@ -44,6 +44,15 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student-entry-forgot-pin", 0
   end
 
+  test "une entrée fraîche sans entrée en session ouvre le champ numéro vide" do
+    get new_student_entry_path(fresh: 1)
+
+    assert_response :success
+    assert_select "input[name='student_entry[contact]']" do |inputs|
+      assert_predicate inputs.first["value"], :blank?
+    end
+  end
+
   test "CA-2 : un élève inscrit et son code arrivent sur l'accueil élève" do
     create_student(contact: "0701020304", classroom: @classroom)
 

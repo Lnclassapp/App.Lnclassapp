@@ -120,6 +120,14 @@ module UseCases
         assert_nil @sessions.created
       end
 
+      test "une confirmation vide sur un numéro inconnu est refusée comme obligatoire" do
+        result = enter(contact: "0101020304", pin: "1357", pin_confirmation: "")
+
+        assert_equal :invalid, result.code
+        assert_not_empty result.errors[:pin_confirmation]
+        assert_nil @sessions.created
+      end
+
       test "un numéro inscrit l'emporte sur une confirmation : jamais de second compte" do
         result = enter(contact: "0701020304", pin: "2468", pin_confirmation: "2468")
 

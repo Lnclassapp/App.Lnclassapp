@@ -717,6 +717,22 @@ end
     assert_not Orm::User.exists?(contact: "0701020304")
   end
 
+  test "ADR entree-eleve §4.2: after the entry, without a code, 60 sends a minute from one address pass and the 61st receives 429" do
+    freeze_time do
+      enter_as_new_student(nil)
+      60.times do |i|
+        post student_registrations_path, params: { entry_mode: 1, student_registration: { last_name: "KOUAME#{i}" } }
+        assert_not_equal 429, response.status, "send #{i + 1} was limited"
+      end
+
+      post student_registrations_path, params: { entry_mode: 1, student_registration: { last_name: "KOUAME" } }
+
+      assert_response :too_many_requests
+      assert_select "#signup-rate-limited[role=alert]", text: I18n.t("#{FORM}.rate_limited")
+      assert_not Orm::User.exists?(contact: "0701020304")
+    end
+  end
+
   test "an entry confirmed by a link whose token then changes does not loop: the standard way opens with the alert" do
     enter_as_new_student(@classroom.reload.link_token)
     @classroom.update!(link_token: "ffffffffffff")
