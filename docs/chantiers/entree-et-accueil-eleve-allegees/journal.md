@@ -23,6 +23,8 @@
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees · Le QR : simple image, ou agrandi au toucher — appliqué : image de 96 px, sans agrandissement ; autres : toucher pour l'agrandir en plein écran ; recommandé : image seule, agrandir si la recette montre que les téléphones peinent à le lire
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees · Les inscriptions par le QR de l'établissement comptent comme « standard » dans l'attribution (ADR-0143) — appliqué : « standard » ; autres : une étiquette `school_qr` ; recommandé : une étiquette, dans un chantier suivant
 
+- [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot D) · L'invitation à installer ne s'ouvre qu'une fois le drapeau « copie rendue » posé : un élève qui n'a rien à se voir proposer (pas d'exercice à son niveau) garde le cadre vide sans drapeau, donc n'a plus l'invitation sur l'accueil — appliqué : « seulement si la fenêtre ne peut pas s'ouvrir » = drapeau posé ; autres : poser aussi le drapeau « rien à proposer » pour la session, ou rendre l'invitation quand le cadre revient vide ; recommandé : rendre l'invitation quand le cadre revient vide (dans un chantier suivant)
+
 ## Retouches
 
 > Les retouches de ce chantier après sa livraison ([`retouche.md`](../../workflows/retouche.md)) : `- AAAA-MM-JJ · #<PR> · <ce qui change>`
@@ -33,7 +35,7 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Lot D : les tests système (`student_first_exercise_prompt_test`, `student_activation_test`, `student_home_test`) n'ont pas pu être joués dans la session du lot : Chrome 153 installé, ChromeDriver 147 seulement (`session not created`). Écrits à la lecture du composant `modal`, à rejouer par `bin/system-changed` avant la fusion.
 
 ## Ce qu'on a appris sur la codebase
 

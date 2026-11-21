@@ -11,7 +11,7 @@ class PageTitlesTest < ActiveSupport::TestCase
   # Le suivi commercial des écoles (crm) : sous-blocs paresseux de la fiche établissement, carte de l'Accueil équipe, modale de dictée.
   CRM_FRAMES = %w[accounts/show assistants/show contacts/index dictations/new follow_ups/school generations/show home_follow_ups/show
                   interactions/index stages/show usages/show].map { "teams/crm/#{it}.html.erb" }.freeze
-  NOT_PAGES = (%w[design/frame.html.erb school/drena_schools/index.html.erb classroom/classroom_codes/show.html.erb] + CRM_FRAMES).freeze
+  NOT_PAGES = (%w[design/frame.html.erb school/drena_schools/index.html.erb classroom/classroom_codes/show.html.erb classroom/student_first_exercises/show.html.erb] + CRM_FRAMES).freeze
 
   ERB_CODE = /<%(?!#)=?(.*?)-?%>/m
   RENDERED_TEMPLATE = /\A\s*render\s*\(?\s*template:\s*["']([^"']+)["']/

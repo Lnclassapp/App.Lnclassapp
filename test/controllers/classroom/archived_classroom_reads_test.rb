@@ -36,15 +36,15 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     sign_in_as @student
     get student_home_path
     assert_select "#student_class_card", text: /Tle D 1/
-    # Activation-eleve : le seul exercice de son niveau est la carte « Ton premier exercice », il sort de « À faire ».
-    assert_select "#student_first_exercise", text: /Méiose, les étapes/
+    # Lot D : « Ton premier exercice » est une fenêtre du shell, plus une carte de l'accueil.
+    assert_select "#student_first_exercise", 0
 
     archive!
     get student_home_path
 
     assert_response :success
     assert_select "#student_choose_class", text: /#{Regexp.escape(tl("student_homes.no_classroom.title"))}/
-    assert_select "#student_history, #student_first_exercise", 0
+    assert_select "#student_history", 0
     assert_select "#student_subjects"
     assert_no_match "Tle D 1", response.body
     assert_select "#student_choose_class_title", text: tl("student_homes.no_classroom.title")
