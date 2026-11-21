@@ -89,4 +89,12 @@ class Classroom::SchoolPostersControllerTest < ActionDispatch::IntegrationTest
     get school_admin_posters_path
     assert_response :not_found
   end
+
+  test "un établissement inconnu reçoit 404" do
+    sign_in_as create_team_member
+
+    get school_posters_path("inconnu")
+
+    assert_response :not_found
+  end
 end

@@ -60,6 +60,19 @@ module Repositories
           assert_equal :unavailable, result.code
         end
       end
+
+      test "a concurrent insertion for the same student returns the code that won the race" do
+        winner = "abcdefgh"
+        racing = lambda do |*|
+          Orm::StudentInviteCode.create!(student_id: @student.id, code: winner)
+          []
+        end
+
+        stub_method(Orm::StudentInviteCode, :insert, racing) do
+          assert_equal winner, @repository.code_for(student_id: @student.id).value
+        end
+        assert_equal 1, Orm::StudentInviteCode.where(student_id: @student.id).count
+      end
     end
   end
 end

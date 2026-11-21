@@ -57,4 +57,12 @@ class Classroom::PostersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
   end
+
+  test "une classe inconnue reçoit 404" do
+    sign_in_as @teacher
+
+    get classroom_poster_path("inconnue")
+
+    assert_response :not_found
+  end
 end
