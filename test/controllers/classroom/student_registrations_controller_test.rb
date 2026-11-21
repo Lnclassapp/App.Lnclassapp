@@ -42,6 +42,12 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
 
   def start_step = css_select(SIGNUP).first["data-classroom--signup-steps-start-value"].to_i
 
+  # Chantier entree-eleve-unifiee : le visiteur d'un lien passe d'abord par l'entrée élève (numéro inconnu, code confirmé).
+  def enter_as_new_student(link_token, contact: "0701020304", pin: "4821")
+    post student_entries_path, params: { student_entry: { contact:, pin:, link_token: } }
+    post student_entries_path, params: { student_entry: { pin_confirmation: pin, link_token: } }
+  end
+
   # CA-C1, UDR « inscription élève en trois étapes » §3.1, §3.2: three fieldsets in order, the code field first, the cascade
   # behind « Je n'ai pas de code », « Étape 1 sur 3 », the welcome card, and no « Continuer » button outside the no-JS fallback.
   test "CA-C1: step 1 of 3 opens on the class code, with the welcome card and no « Continuer » button" do
@@ -121,13 +127,13 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     delay = Rails.configuration.x.signup_steps_delay_ms
     get new_student_registration_path
     assert_select "#student-signup[data-classroom--signup-steps-delay-value='100']"
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
     assert_select "#teacher-signup[data-classroom--signup-steps-delay-value='100']"
 
     Rails.configuration.x.signup_steps_delay_ms = nil
     get new_student_registration_path
     assert_select "#student-signup[data-controller='classroom--signup-steps']:not([data-classroom--signup-steps-delay-value])"
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
     assert_select "#teacher-signup[data-controller='classroom--signup-steps']:not([data-classroom--signup-steps-delay-value])"
   ensure
     Rails.configuration.x.signup_steps_delay_ms = delay
@@ -152,7 +158,8 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
   end
 
   test "CA-C8: a link arrives at step 2, the panel marks step 2 and step 1 done" do
-    get join_classroom_path(@classroom.reload.link_token)
+    enter_as_new_student(@classroom.reload.link_token)
+    get join_classroom_path(@classroom.link_token)
 
     assert_select "#signup-panel ol li[aria-current=step]", 1
     assert_select "#signup-panel ol li[data-step='2'][aria-current=step]"
@@ -162,10 +169,11 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
   # CA-C9: the class found is shown in the panel, under step 1, with « Ce n'est pas ta classe ? ›»; the recap above the form is kept
   # for the phone and hidden from lg up.
   test "CA-C9: the link's class is in the panel under step 1, and the recap above the form is hidden from lg up" do
-    get join_classroom_path(@classroom.reload.link_token)
+    enter_as_new_student(@classroom.reload.link_token)
+    get join_classroom_path(@classroom.link_token)
 
     assert_select "#signup-panel ol li[data-step='1'] #signup-panel-recap:not([hidden])", text: /3e 2.*Lycée Moderne de Cocody/m
-    assert_select "#signup-panel #panel-other-classroom[href=?]", new_student_registration_path
+    assert_select "#signup-panel #panel-other-classroom[href=?]", new_student_registration_path(other_classroom: 1)
     assert_select "#signup-classroom-recap.lg\\:hidden"
   end
 
@@ -177,15 +185,21 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
   end
 
   test "CA-C3: a valid classroom link opens at step 2 with the recap and the welcome card, no step 1, no « Retour »" do
-    get join_classroom_path(@classroom.reload.link_token)
+    enter_as_new_student(@classroom.reload.link_token)
+    get join_classroom_path(@classroom.link_token)
 
     assert_response :success
     assert_equal 2, start_step
-    assert_select "#signup-step-counter", text: I18n.t("#{STEPS}.step_counter", n: 2)
+    # Chantier entree-eleve-unifiee : après l'entrée, numéro et code sont choisis : l'étape « Toi » est la dernière.
+    assert_select "#signup-step-counter", text: I18n.t("#{STEPS}.step_counter_entry", n: 2)
     assert_select "fieldset[data-step='1']", 0
-    assert_select "fieldset[data-step]", 2
+    assert_select "fieldset[data-step]", 1
     assert_select "#signup-classroom-recap", text: /3e 2.*Lycée Moderne de Cocody/m
-    assert_select "#signup-classroom-recap a#other-classroom[href=?]", new_student_registration_path
+    assert_select "#signup-classroom-recap a#other-classroom[href=?]", new_student_registration_path(other_classroom: 1)
+    # Ces liens changent l'entrée gardée en session : Turbo ne doit pas les précharger au survol.
+    assert_select "a#other-classroom[data-turbo-prefetch=false]"
+    assert_select "a#panel-other-classroom[data-turbo-prefetch=false]"
+    assert_select "a#signup-entry-fix-number[data-turbo-prefetch=false]"
     assert_select "#signup-back[hidden]"
     assert_select "#signup-welcome", text: /Bienvenue sur Lnclass/
     assert_select "input[name='student_registration[join_code]']", 0
@@ -690,6 +704,75 @@ end
     register(link_token: "abcdef012345", join_code: "zzzzzz")
 
     assert_response :too_many_requests
+    assert_not Orm::User.exists?(contact: "0701020304")
+  end
+
+  test "revue sécurité: after the entry, sends carrying a join_code keep the guessing limit (5 per minute: signup applies before the 10 of the code)" do
+    enter_as_new_student(nil)
+    5.times do
+      register(join_code: "zzzzzz", pin_confirmation: "1357")
+      assert_not_equal 429, response.status
+    end
+
+    register(join_code: "zzzzzz")
+
+    assert_response :too_many_requests
+    assert_not Orm::User.exists?(contact: "0701020304")
+  end
+
+  test "ADR entree-eleve §4.2: after the entry, without a code, 60 sends a minute from one address pass and the 61st receives 429" do
+    freeze_time do
+      enter_as_new_student(nil)
+      60.times do |i|
+        post student_registrations_path, params: { entry_mode: 1, student_registration: { last_name: "KOUAME#{i}" } }
+        assert_not_equal 429, response.status, "send #{i + 1} was limited"
+      end
+
+      post student_registrations_path, params: { entry_mode: 1, student_registration: { last_name: "KOUAME" } }
+
+      assert_response :too_many_requests
+      assert_select "#signup-rate-limited[role=alert]", text: I18n.t("#{FORM}.rate_limited")
+      assert_not Orm::User.exists?(contact: "0701020304")
+    end
+  end
+
+  test "revue sécurité: with an entry kept, sends without entry_mode and without a code keep the 5 per minute limit" do
+    freeze_time do
+      enter_as_new_student(nil)
+      5.times do |i|
+        register(contact: "070909090#{i}", pin: "1357", pin_confirmation: "0000")
+        assert_not_equal 429, response.status, "send #{i + 1} was limited"
+      end
+
+      register(contact: "0709090909", pin: "1357", pin_confirmation: "0000")
+
+      assert_response :too_many_requests
+    end
+  end
+
+  test "an entry confirmed by a link whose token then changes does not loop: the standard way opens with the alert" do
+    enter_as_new_student(@classroom.reload.link_token)
+    @classroom.update!(link_token: "ffffffffffff")
+
+    get new_student_registration_path
+    redirects = 0
+    while response.redirect?
+      redirects += 1
+      assert_operator redirects, :<=, 2, "redirect loop"
+      follow_redirect!
+    end
+
+    assert_response :success
+    assert_select "#signup-entry-number"
+    assert_select "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
+  end
+
+  test "a send without entry_mode (old three-step tab) keeps what is posted and forgets the entry" do
+    enter_as_new_student(nil)
+
+    register(contact: "0709090909", pin: "1357", pin_confirmation: "1357", classroom_public_id: @classroom.public_id)
+
+    assert Orm::User.exists?(contact: "0709090909")
     assert_not Orm::User.exists?(contact: "0701020304")
   end
 

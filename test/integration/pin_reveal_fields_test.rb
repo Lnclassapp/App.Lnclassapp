@@ -36,7 +36,7 @@ class PinRevealFieldsTest < ActionDispatch::IntegrationTest
   end
 
   test "teacher sign-up: the PIN and its confirmation" do
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
 
     assert_revealable "teacher_registration[pin]", autocomplete: "new-password"
     assert_revealable "teacher_registration[pin_confirmation]", autocomplete: "new-password"

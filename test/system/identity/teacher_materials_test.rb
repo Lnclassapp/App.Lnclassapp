@@ -15,7 +15,7 @@ class Identity::TeacherMaterialsTest < ApplicationSystemTestCase
   def t(key, **) = I18n.t(key, **)
 
   test "sign up with one subject, then add two more in the profile" do
-    visit new_teacher_registration_path
+    visit new_teacher_registration_path(confirmed: 1)
     select "Abidjan 1", from: "teacher_registration[drena_public_id]"
     select "Lycée Moderne de Cocody", from: "teacher_registration[school_public_id]"
     select "Physique-Chimie", from: "teacher_registration[material_slug]"

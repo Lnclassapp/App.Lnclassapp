@@ -50,7 +50,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
 
   test "CA-J1, CA-J3, CA-J4: without a link, step 1 moves on by itself, step 2 asks for one subject, the account is created" do
     with_mobile_viewport do
-      visit new_teacher_registration_path
+      visit new_teacher_registration_path(confirmed: 1)
 
       assert_step 1
       assert_selector "#signup-welcome", text: t("#{PAGE}.welcome")
@@ -138,7 +138,7 @@ class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
   end
 
   test "the whole sign-up without JavaScript" do
-    visit new_teacher_registration_path
+    visit new_teacher_registration_path(confirmed: 1)
 
     select "Abidjan 1", from: "teacher_registration[drena_public_id]"
     click_on I18n.t("identity.teacher_registrations.school_fields.show_schools")
