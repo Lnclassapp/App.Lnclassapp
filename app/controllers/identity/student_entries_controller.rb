@@ -87,7 +87,7 @@ module Identity
 
     def count_wrong_pin
       Rails.cache.write(wrong_pin_key, 0, expires_in: WRONG_PIN_LIMIT[:within], unless_exist: true)
-      Rails.cache.increment(wrong_pin_key)
+      Rails.cache.increment(wrong_pin_key, 1, expires_in: WRONG_PIN_LIMIT[:within])
     end
 
     def refuse_too_many

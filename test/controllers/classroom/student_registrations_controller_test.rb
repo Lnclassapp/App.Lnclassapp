@@ -733,6 +733,20 @@ end
     end
   end
 
+  test "revue sécurité: with an entry kept, sends without entry_mode and without a code keep the 5 per minute limit" do
+    freeze_time do
+      enter_as_new_student(nil)
+      5.times do |i|
+        register(contact: "070909090#{i}", pin: "1357", pin_confirmation: "0000")
+        assert_not_equal 429, response.status, "send #{i + 1} was limited"
+      end
+
+      register(contact: "0709090909", pin: "1357", pin_confirmation: "0000")
+
+      assert_response :too_many_requests
+    end
+  end
+
   test "an entry confirmed by a link whose token then changes does not loop: the standard way opens with the alert" do
     enter_as_new_student(@classroom.reload.link_token)
     @classroom.update!(link_token: "ffffffffffff")

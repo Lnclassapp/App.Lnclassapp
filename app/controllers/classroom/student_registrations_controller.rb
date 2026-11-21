@@ -122,10 +122,11 @@ module Classroom
     # Le champ caché entry_mode, hors du scope du formulaire, marque un formulaire du mode entrée.
     def entry_form? = params[:entry_mode] == "1"
 
-    # Après l'entrée, sans code de classe : le compteur de l'entrée ; avec un code, la devinette de codes reste limitée.
+    # Vrai envoi du mode entrée (entrée gardée, entry_mode, sans code de classe) : le compteur de l'entrée. Tout autre envoi,
+    # ancien onglet compris, garde les plafonds du lien et des 5 par minute ; la fusion de l'entrée (form_input) suit la même condition.
     def entry_send?
       posted = params.permit(student_registration: %i[join_code])[:student_registration]
-      confirmed_student_entry.present? && posted.to_h[:join_code].blank?
+      confirmed_student_entry.present? && entry_form? && posted.to_h[:join_code].blank?
     end
 
     def wide_send? = link_send? || entry_send?

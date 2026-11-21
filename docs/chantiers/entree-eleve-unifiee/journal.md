@@ -37,6 +37,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - Ruby 3.4.9 absent du conteneur et `cache.ruby-lang.org` refusé (403) : compilé depuis l'étiquette `v3_4_9` du dépôt GitHub `ruby/ruby` (choix du porteur), avec Ruby 3.3.6 comme `baseruby`.
 - Partager le compteur de l'entrée avec l'inscription aurait bloqué une classe (trois envois par nouvel élève) : compteurs séparés.
 - « Ce n'est pas ta classe ? » en mode entrée bouclait vers le lien gardé : `other_classroom=1` oublie le lien.
+- La première correction (form_input sans entry_mode) laissait le débit large de l'entrée : un envoi sans entry_mode échappait aux 5 par minute ; débit et fusion suivent désormais la même condition (entry_send? exige entry_mode).
 - Un test système perdait l'entrée sans raison visible : préchargement Turbo au survol d'un lien GET qui la remet à zéro.
 - Boucle de redirections : entrée confirmée par un lien, puis lien changé ou classe archivée. `/c/<jeton>` renvoyait à `/student-signup`, qui renvoyait à `/c/<jeton>` (jeton gardé dans l'entrée). Corrigé : un lien invalide pour un visiteur est oublié de l'entrée (numéro, code et confirmation gardés).
 - Session coupée par la limite de 5 h ; reprise sur l'arbre de travail intact.
