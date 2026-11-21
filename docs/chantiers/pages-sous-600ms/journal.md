@@ -15,7 +15,7 @@
 > Décisions laissées ouvertes ou tranchées par défaut par un agent, en attente du porteur. Relevées chaque jour à 12 h par la boîte de décisions (`docs/workflows/contrat-de-session.md`). Le porteur coche `[x]` et écrit sa réponse à la suite.
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
 
-- [ ] 2026-11-21 · pages-sous-600ms · Relever les plafonds CPU de Develop et Staging (`deploy/hostinger/test.yaml` : base `cpus: 0.1`, application `cpus: 0.4`) ? Le VPS est à 4 % de CPU en moyenne ; `cpu_shares: 256` donne déjà la priorité à la production — appliqué : rien (infrastructure hors de ce chantier, PR à part) ; autres : base 0,5 et application 1,0 en gardant `cpu_shares: 256` ; recommandé : base 0,5 et application 1,0 (sous plafonds actuels, les pages coûtent 2 à 6 fois plus : catalogue de l'élève 49 → 298 ms p95)
+- [x] 2026-11-21 · pages-sous-600ms · Relever les plafonds CPU de Develop et Staging (`deploy/hostinger/test.yaml` : base `cpus: 0.1`, application `cpus: 0.4`) ? Le VPS est à 4 % de CPU en moyenne ; `cpu_shares: 256` donne déjà la priorité à la production — appliqué : rien (infrastructure hors de ce chantier, PR à part) ; autres : base 0,5 et application 1,0 en gardant `cpu_shares: 256` ; recommandé : base 0,5 et application 1,0 (sous plafonds actuels, les pages coûtent 2 à 6 fois plus : catalogue de l'élève 49 → 298 ms p95) — tranché par le porteur, 2026-11-21 : base 0,5, application 1,0
 - [ ] 2026-11-21 · pages-sous-600ms · Raccourcir le démarrage de Develop (16 min 36 s de 502 après le déploiement du 2026-11-21 : `db:prepare db:seed` avec chargement automatique des leçons et jeu standard, puis un second `db:prepare` par `bin/docker-entrypoint`, sous les plafonds) ? — appliqué : rien (constat seulement) ; autres : semer en tâche de fond après le démarrage de Puma, ou ne rejouer leçons et jeu qu'au changement de leur empreinte ; recommandé : chantier `demarrage-develop` à part, mesuré
 - [ ] 2026-11-21 · pages-sous-600ms · Mesurer depuis Abidjan (commandes du memo, § « Commandes pour le porteur ») : le serveur de production répond en ~30 ms, la lenteur ressentie sur lnclass.com est entre le téléphone et le serveur — appliqué : commandes écrites ; recommandé : le porteur les lance et colle les chiffres dans ce journal
 
@@ -23,7 +23,7 @@
 
 > Les retouches de ce chantier après sa livraison ([`retouche.md`](../../workflows/retouche.md)) : `- AAAA-MM-JJ · #<PR> · <ce qui change>`
 
-- …
+- 2026-11-21 · #671 · plafonds CPU de Develop et Staging : base 0,1 → 0,5, application 0,4 → 1,0 (`cpu_shares` inchangé)
 
 ## Ce qui a dérapé
 
