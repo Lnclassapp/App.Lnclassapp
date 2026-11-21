@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours — mesure avant et diagnostic faits ; garde (lot B) à livrer |
+| **Statut** | livré (PR vers Develop) — cible tenue ; constats d'hébergement dans « À trancher » du journal |
 | **Ouvert le** | 2026-11-21 |
 | **Branche** | `perf/pages-sous-600ms` |
 
@@ -102,12 +102,51 @@ Ko : HTML non compressé (Caddy le compresse en zstd/gzip devant l'application).
 | direction | établissement | 25.6 | 37.3 | 98.6 | 14 | 22447 | 82.0 |
 | direction | annonces | 13.5 | 18.1 | 65.7 | 8 | 8488 | 25.3 |
 
-### Navigateur, 390 px (avant)
+### Navigateur, 390 px
 
-Chromium headless, production locale servie par Puma sans compression, médiane de 3 passes. La première page d'une
-passe charge les assets (cache vide) ; en production, JS 62 Ko et CSS 20 Ko compressés.
+Chromium headless, production locale servie par Puma **sans compression** (Ko = HTML brut ; Caddy compresse en
+production), médiane de 3 passes, après le lot C. La première page d'une passe charge les assets (cache vide) ; en
+production, JS 62 Ko et CSS 20 Ko compressés. Avant le lot C, une seule passe : « Ma classe » à 593 ms
+DOMContentLoaded (227 ms après).
 
-TABLEAU_NAVIGATEUR
+| Rôle | Page | Ko transférés | Requêtes réseau | DOMContentLoaded ms | load ms |
+|---|---|--:|--:|--:|--:|
+| visiteur | accueil public (cache vide) | 432 | 6 | 71 | 71 |
+| visiteur | entrée élève | 17.1 | 1 | 67 | 68 |
+| visiteur | connexion | 18.3 | 1 | 42 | 44 |
+| eleve | accueil (cache vide) | 508.8 | 15 | 130 | 131 |
+| eleve | ma classe | 76.8 | 1 | 227 | 227 |
+| eleve | archive | 42.1 | 1 | 59 | 61 |
+| eleve | menu | 28.8 | 1 | 49 | 51 |
+| eleve | annonces | 25.3 | 1 | 58 | 59 |
+| eleve | catalogue | 85.7 | 1 | 79 | 82 |
+| eleve | matière | 13.9 | 1 | 58 | 60 |
+| eleve | profil | 32.9 | 1 | 54 | 56 |
+| eleve | leçon | 22.8 | 1 | 102 | 102 |
+| eleve | exercice | 35.7 | 1 | 80 | 81 |
+| enseignant | accueil (cache vide) | 761.7 | 10 | 221 | 229 |
+| enseignant | mes classes | 84.3 | 1 | 90 | 91 |
+| enseignant | menu | 35.3 | 1 | 50 | 52 |
+| enseignant | classe | 132.3 | 1 | 123 | 130 |
+| enseignant | jours de séance | 33.5 | 1 | 79 | 81 |
+| enseignant | annonces | 28.2 | 1 | 73 | 74 |
+| enseignant | catalogue | 115.3 | 1 | 94 | 95 |
+| enseignant | profil | 34.8 | 1 | 61 | 62 |
+| enseignant | assigner (modale) | 33.6 | 1 | 60 | 62 |
+| enseignant | élève de la classe | 58.3 | 1 | 82 | 82 |
+| enseignant | leçon de la classe | 84.4 | 1 | 128 | 137 |
+| enseignant | suivi d'un devoir | 50.5 | 1 | 84 | 87 |
+| direction | activité (cache vide) | 12.8 | 1 | 32 | 32 |
+| direction | classes | 492.8 | 14 | 102 | 111 |
+| direction | classe | 268.8 | 1 | 201 | 204 |
+| direction | niveau | 61.4 | 1 | 86 | 87 |
+| direction | enseignants | 41.7 | 1 | 60 | 64 |
+| direction | chercher un élève | 43.9 | 1 | 62 | 64 |
+| direction | élèves partis | 28.2 | 1 | 49 | 51 |
+| direction | enseignants partis | 25.2 | 1 | 54 | 54 |
+| direction | établissement | 86.4 | 1 | 85 | 86 |
+| direction | annonces | 25.8 | 1 | 53 | 56 |
+
 
 ## Cause
 
@@ -152,4 +191,56 @@ réseau, pas dans l'application.
 
 ## Mesure après
 
-Voir le [plan](plan.md) : lots fermés (cible tenue avant), garde livrée par le lot B.
+Même machine, même volume, même méthode ; 3 exécutions de 20 passes, médiane (10 passes sous plafonds, élève).
+
+| Métrique | Avant | Cible | **Après** | Tenu ? |
+|---|--:|--:|--:|:-:|
+| Pire page, p95, production locale (élève · ma classe) | 200 ms | < 600 ms | **167 ms** | oui |
+| « Ma classe », p95 sous les plafonds de Develop | 608 ms | < 600 ms | **514 ms** | oui |
+| « Ma classe », allocations | 114 957 | −30 % | **54 480 (−53 %)** | oui |
+| « Ma classe », requêtes SQL | 91 | — | 91 | — |
+| Pire page sous plafonds de Develop, tous rôles | 608 ms | < 600 ms | **514 ms** (élève) ; enseignant 363 ms avant, non rejoué | oui |
+| Garde : budget de requêtes par page (15 pages, 3 rôles) | aucune | un test | `test/integration/budget_requetes_pages_test.rb` | oui |
+
+Page par page (les autres pages ne changent pas : aucun autre code touché, écarts dans le bruit de mesure) :
+
+| Rôle | Page | p95 avant | p95 après | Dev. p95 avant | Dev. p95 après | SQL avant → après | Allocations avant → après |
+|---|---|--:|--:|--:|--:|--:|--:|
+| visiteur | accueil public | 21.4 | 27.6 | 71.5 | 89.3 | 1 → 1 | 3856 → 3847 |
+| visiteur | entrée élève | 33.5 | 32.1 | 93.7 | 91.1 | 1 → 1 | 4176 → 4182 |
+| visiteur | connexion | 17.0 | 24.1 | 72.7 | 86.9 | 1 → 1 | 4257 → 4254 |
+| eleve | accueil | 64.6 | 54.2 | 222.7 | 192.4 | 26 → 26 | 17341 → 17338 |
+| eleve | accueil (historique différé) | 21.9 | 17.8 | 76.1 | 76.7 | 7 → 7 | 5209 → 5218 |
+| eleve | ma classe | 199.7 | 166.8 | 608.5 | 514.3 | 91 → 91 | 114957 → 54480 |
+| eleve | archive | 28.2 | 32.8 | 85.5 | 87.9 | 9 → 9 | 14565 → 14553 |
+| eleve | menu | 15.9 | 17.9 | 77.1 | 76.8 | 6 → 6 | 7667 → 7670 |
+| eleve | annonces | 24.2 | 22.4 | 90.4 | 74.0 | 9 → 9 | 8615 → 8609 |
+| eleve | catalogue | 49.7 | 48.9 | 305.0 | 297.8 | 15 → 15 | 24951 → 24955 |
+| eleve | matière | 23.4 | 26.0 | 94.5 | 100.9 | 13 → 13 | 8969 → 8980 |
+| eleve | profil | 16.0 | 16.4 | 74.8 | 73.4 | 8 → 8 | 9192 → 9192 |
+| eleve | leçon | 75.6 | 75.4 | 203.8 | 185.0 | 39 → 39 | 31188 → 31191 |
+| eleve | exercice | 46.7 | 39.0 | 109.1 | 105.8 | 23 → 23 | 14044 → 14048 |
+| enseignant | accueil | 134.2 | 128.7 | 362.7 | — | 30 → 30 | 99647 → 99641 |
+| enseignant | mes classes | 77.9 | 34.2 | 102.2 | — | 12 → 12 | 19336 → 19340 |
+| enseignant | menu | 17.5 | 16.9 | 77.6 | — | 8 → 8 | 10092 → 10092 |
+| enseignant | classe | 91.2 | 86.3 | 299.0 | — | 30 → 30 | 65346 → 65349 |
+| enseignant | jours de séance | 22.5 | 26.1 | 71.9 | — | 12 → 12 | 10101 → 10107 |
+| enseignant | annonces | 21.5 | 21.3 | 69.9 | — | 10 → 10 | 9770 → 9779 |
+| enseignant | catalogue | 50.7 | 46.3 | 105.1 | — | 15 → 15 | 31861 → 31854 |
+| enseignant | profil | 22.8 | 24.0 | 78.0 | — | 11 → 11 | 11806 → 11816 |
+| enseignant | assigner (modale) | 24.9 | 25.9 | 74.4 | — | 14 → 14 | 10727 → 10718 |
+| enseignant | élève de la classe | 42.2 | 40.0 | 184.7 | — | 22 → 22 | 19536 → 19548 |
+| enseignant | leçon de la classe | 62.4 | 67.4 | 169.1 | — | 26 → 26 | 43698 → 43704 |
+| enseignant | suivi d'un devoir | 47.8 | 44.7 | 175.2 | — | 23 → 23 | 20168 → 20170 |
+| direction | activité | 16.2 | 17.2 | 68.6 | — | 6 → 6 | 6465 → 6483 |
+| direction | classes | 23.0 | 23.3 | 77.2 | — | 10 → 10 | 12602 → 12616 |
+| direction | classe | 93.8 | 79.7 | 189.4 | — | 18 → 18 | 71008 → 71003 |
+| direction | niveau | 33.9 | 31.9 | 94.2 | — | 14 → 14 | 17172 → 17175 |
+| direction | enseignants | 21.9 | 21.4 | 69.3 | — | 10 → 10 | 12296 → 12299 |
+| direction | chercher un élève | 27.4 | 24.3 | 172.0 | — | 7 → 7 | 11960 → 11966 |
+| direction | élèves partis | 21.7 | 20.2 | 76.4 | — | 8 → 8 | 8560 → 8554 |
+| direction | enseignants partis | 18.5 | 18.5 | 71.9 | — | 9 → 9 | 7856 → 7850 |
+| direction | établissement | 37.3 | 33.9 | 98.6 | — | 14 → 14 | 22447 → 22453 |
+| direction | annonces | 18.1 | 16.3 | 65.7 | — | 8 → 8 | 8488 → 8490 |
+
+« — » : rôle non rejoué sous plafonds après le lot C (seul « Ma classe » de l'élève a changé).

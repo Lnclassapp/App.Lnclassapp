@@ -38,9 +38,19 @@ async function signIn(context, contact) {
   if (response.status() !== 303 && response.status() !== 302) throw new Error(`connexion refusée pour ${contact} : ${response.status()}`)
 }
 
-async function passFor(browser, role, rows) {
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true })
-  if (role !== "visiteur") await signIn(context, data.accounts[role])
+// Une connexion par rôle (la connexion est limitée à 5 par minute et par adresse) ; chaque passe repart de ses cookies,
+// dans un contexte neuf, donc sans cache.
+async function sessionFor(browser, role) {
+  if (role === "visiteur") return undefined
+  const context = await browser.newContext()
+  await signIn(context, data.accounts[role])
+  const state = await context.storageState()
+  await context.close()
+  return state
+}
+
+async function passFor(browser, rows, storageState) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true, storageState })
   const page = await context.newPage()
   const out = {}
   for (const row of rows) {
@@ -60,7 +70,8 @@ async function passFor(browser, role, rows) {
     // Un cadre Turbo (en-tête Turbo-Frame) n'est pas une page : il n'est pas ouvert dans le navigateur.
     const rows = data.rows.filter((row) => row.role === role && !Object.keys(row.headers || {}).length)
     const runs = []
-    for (let i = 0; i < passes; i++) runs.push(await passFor(browser, role, rows))
+    const state = await sessionFor(browser, role)
+    for (let i = 0; i < passes; i++) runs.push(await passFor(browser, rows, state))
     rows.forEach((row, index) => {
       const pick = (key) => median(runs.map((run) => run[row.page][key]))
       results.push({ role, page: row.page, froid: index === 0, ko: Math.round(pick("bytes") / 102.4) / 10, requetes: pick("requests"), dcl: Math.round(pick("dcl")), load: Math.round(pick("load")) })

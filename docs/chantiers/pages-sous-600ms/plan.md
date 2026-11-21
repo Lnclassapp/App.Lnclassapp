@@ -19,7 +19,7 @@ p95) : seul le lot C se rouvre. Le lot B garde le résultat.
 - **Fichiers** : `script/mesure/pages`, `script/mesure/pages.rb`, `script/mesure/pages_navigateur.cjs`
 - **Done quand** : le tableau avant du memo sort de l'outil, rejouable par un autre (protocole du memo). Fait.
 
-## Lot B — Garde : budget de requêtes SQL par page
+## Lot B — Garde : budget de requêtes SQL par page · livré
 
 - **Couche** : tests (aucun code applicatif)
 - **Fichiers** : `test/integration/budget_requetes_pages_test.rb`
@@ -35,7 +35,7 @@ p95) : seul le lot C se rouvre. Le lot B garde le résultat.
 - **Done quand** : le test passe ; il échoue si on ajoute une requête par devoir à « Ma classe » (vérifié à la main en
   dupliquant un appel, puis retiré) ; durée du fichier < 10 s.
 
-## Lot C — « Ma classe » : ne construire que les exercices assignés · rouvert
+## Lot C — « Ma classe » : ne construire que les exercices assignés · livré (608 → 514 ms p95 sous plafonds)
 
 `StudentAssignedSheetsQuery#exercises` relit toute la feuille d'une leçon (`PrepareSheetsQuery`) pour chaque leçon
 assignée, et construit chaque exercice de la leçon (questions, choix, copies) pour n'en garder que les assignés :
@@ -80,12 +80,12 @@ Aucun fichier des vues de /student, /students et de l'inscription (session `entr
 - [x] Explorer coût rendu : où part réellement le temps (pas une hypothèse)
 - [x] ADR écrit si un contrat change — aucun contrat changé
 - [x] Bench versionné, produisant la valeur avant
-- [ ] Tests de non-régression fonctionnelle verts **avant** le premier levier
+- [x] Tests de non-régression fonctionnelle verts **avant** le premier levier
 - [x] Un lot = un levier = un chiffre
 - [x] Chaque levier sans gain mesuré a été **annulé**, pas conservé — lots C et D fermés avant d'être joués
-- [ ] Bench après : même machine, même volume, même méthode, ≥ 3 exécutions, médiane
-- [ ] Tableau `Mesures` complété (Avant / Cible / Après)
+- [x] Bench après : même machine, même volume, même méthode, ≥ 3 exécutions, médiane
+- [x] Tableau `Mesures` complété (Avant / Cible / Après)
 - [ ] **Challenger a relancé le bench lui-même** et obtenu le gain annoncé
 - [x] Résultat fonctionnel strictement identique (aucun écran, aucune sortie modifiés)
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] `journal.md` : leviers abandonnés et pourquoi
+- [x] `journal.md` : leviers abandonnés et pourquoi
