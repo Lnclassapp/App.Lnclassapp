@@ -308,4 +308,15 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821",
       pin_confirmation: "4821", **overrides }
   end
+
+  test "le visiteur au numéro inconnu, qui rouvre le lien, retrouve l'étape de confirmation et son numéro" do
+    token = @classroom.reload.link_token
+    post student_entries_path, params: { student_entry: { contact: "0101020304", pin: "1357", link_token: token } }
+
+    get join_classroom_path(token)
+
+    assert_response :success
+    assert_select "#student-entry-number", text: /01 01 02 03 04/
+    assert_select "input[name='student_entry[pin_confirmation]']"
+  end
 end

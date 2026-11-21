@@ -284,4 +284,39 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to student_home_path
   end
+
+  test "une entrée confirmée renvoie l'entrée à l'inscription, sans reposer le numéro" do
+    enter(contact: "0101020304", pin: "1357")
+    confirm("1357")
+
+    get new_student_entry_path
+
+    assert_redirected_to new_student_registration_path
+  end
+
+  test "un connecté qui envoie l'entrée retrouve son accueil, sans nouvelle session" do
+    sign_in_as create_student(classroom: @classroom)
+
+    enter(contact: "0101020304", pin: "1357")
+
+    assert_redirected_to student_home_path
+    assert_not Orm::User.exists?(contact: "0101020304")
+  end
+
+  test "un lien de classe inconnu est oublié : l'entrée s'ouvre sans bandeau ni jeton" do
+    get new_student_entry_path(link: "abcdef012345")
+
+    assert_response :success
+    assert_select "#student-entry-classroom", 0
+    assert_select "input[name='student_entry[link_token]']", 0
+  end
+
+  test "le lien d'une classe ouverte passé à l'entrée en montre le bandeau et garde le jeton" do
+    token = @classroom.reload.link_token
+
+    get new_student_entry_path(link: token)
+
+    assert_select "#student-entry-classroom", text: /6e 1/
+    assert_select "input[type=hidden][name='student_entry[link_token]'][value=?]", token
+  end
 end

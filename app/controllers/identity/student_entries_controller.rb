@@ -59,11 +59,9 @@ module Identity
       when :new_number
         keep_student_entry(contact: value.contact, pin: @form.pin, confirmed: false, link_token: @link_token)
         redirect_to new_student_entry_path, status: :see_other
-      when :confirmed
+      else # :confirmed (EnterAsStudent ne rend que ces trois issues)
         keep_student_entry(contact: value.contact, pin: @form.pin, confirmed: true, link_token: @link_token)
         redirect_to registration_path(@link_token), status: :see_other
-      else
-        raise ArgumentError, "outcome inconnu : #{value.outcome}"
       end
     end
 
