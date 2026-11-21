@@ -42,6 +42,16 @@ Le déploiement continu (ADR-0144, 2026-11-21) fait d'un démarrage long une cou
 
 Protocole après : `python3 -I script/mesure/demarrage lnclass-develop` (puis `lnclass-staging`) après chaque
 déploiement ; le script lit le repère `[démarrage] conteneur démarré` et la première `/up` 200. Médiane de 3 déploiements.
+**À lancer dans l'heure qui suit le déploiement** : l'API ne garde que les 300 dernières lignes par service, et la
+sonde `/up` de toutes les 15 s les remplit en ~75 min.
+
+## Mesure après
+
+| Déploiement | `/up` 200 après le repère | Semis fini après | Source |
+|---|---|---|---|
+| `0ffd82b` (fusion de #673), conteneur démarré 2026-11-21 19:26:19 UTC | non lu : lignes sorties de la fenêtre de l'API à la lecture (22:54) ; conteneur `healthy` | — | `script/mesure/demarrage`, conteneurs Hostinger |
+| prochain déploiement de Develop | à lire dans l'heure | | |
+| déploiement de Staging (train) | à lire dans l'heure | | |
 
 ## Cause
 
