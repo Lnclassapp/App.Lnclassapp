@@ -1,0 +1,106 @@
+# Point d’entrée proposé à intégrer côté LMS, depuis un commit de contrôle approuvé.
+name: Déploiement HQ
+on:
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: Révision à livrer
+        type: string
+        required: true
+      target:
+        description: Environnement approuvé
+        type: choice
+        options: [develop, staging, production]
+      continuous:
+        description: Refuser si la tête de branche a changé
+        type: boolean
+        default: false
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: deploiement-${{ inputs.target == 'production' && 'main' || inputs.target == 'staging' && 'Staging' || 'Develop' }}
+  cancel-in-progress: false
+jobs:
+  deployment:
+    if: >-
+      github.repository == 'Lnclassapp/App.Lnclassapp' &&
+      startsWith(github.ref, 'refs/tags/hq-deploy-v') &&
+      contains(fromJSON('["develop","staging","production"]'), inputs.target)
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    environment: ${{ inputs.target }}
+    env:
+      REVISION: ${{ inputs.sha }}
+      CONTINUOUS: ${{ inputs.continuous }}
+      TARGET: ${{ inputs.target }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Cible
+        id: target
+        shell: bash
+        run: |
+          case "$TARGET" in
+            production) branch=main; site=lnclass.com ;;
+            staging) branch=Staging; site=staging.lnclass.com ;;
+            develop) branch=Develop; site=develop.lnclass.com ;;
+            *) exit 1 ;;
+          esac
+          [[ "$REVISION" =~ ^[0-9a-f]{40}$ ]]
+          git merge-base --is-ancestor "$REVISION" "refs/remotes/origin/$branch"
+          if [[ "$CONTINUOUS" == true ]]; then
+            [[ "$(git rev-parse "refs/remotes/origin/$branch")" == "$REVISION" ]]
+          fi
+          printf 'site=%s\n' "$site" >> "$GITHUB_OUTPUT"
+      - name: Preuve de l’arbre
+        id: proof
+        if: (inputs.target != 'develop' || inputs.continuous)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ruby script/ci/tested_tree "$REVISION"
+      - name: Refus sans preuve
+        if: (inputs.target != 'develop' || inputs.continuous) && steps.proof.outputs.tested != 'true'
+        run: exit 1
+      - name: Vérifier la voie active
+        if: inputs.continuous
+        env:
+          HQ_MANAGED_CONTINUOUS: ${{ vars.HQ_MANAGED_CONTINUOUS }}
+        run: test "$HQ_MANAGED_CONTINUOUS" = true
+      - name: Vérifier l’accès au fournisseur
+        env:
+          HOSTINGER_API_TOKEN: ${{ secrets.HOSTINGER_API_TOKEN }}
+          GH_DEPLOY_TOKEN: ${{ secrets.GH_DEPLOY_TOKEN }}
+        run: test -n "$HOSTINGER_API_TOKEN" && test -n "$GH_DEPLOY_TOKEN"
+      - name: Construction
+        env:
+          HOSTINGER_API_TOKEN: ${{ secrets.HOSTINGER_API_TOKEN }}
+          GH_DEPLOY_TOKEN: ${{ secrets.GH_DEPLOY_TOKEN }}
+          REVISION: ${{ inputs.sha }}
+        run: python3 -I script/hostinger/deployer.py construction deploy/hostinger/construction.yaml "$REVISION"
+
+      - name: Déploiement
+        env:
+          HOSTINGER_API_TOKEN: ${{ secrets.HOSTINGER_API_TOKEN }}
+          GH_DEPLOY_TOKEN: ${{ secrets.GH_DEPLOY_TOKEN }}
+          LNCLASS_RAILS_MASTER_KEY: ${{ secrets.LNCLASS_RAILS_MASTER_KEY }}
+          LNCLASS_R2_ACCESS_KEY_ID: ${{ secrets.LNCLASS_R2_ACCESS_KEY_ID }}
+          LNCLASS_R2_SECRET_ACCESS_KEY: ${{ secrets.LNCLASS_R2_SECRET_ACCESS_KEY }}
+          LNCLASS_CLAUDE_AGENTAI_SECRET: ${{ secrets.LNCLASS_CLAUDE_AGENTAI_SECRET }}
+          REVISION: ${{ inputs.sha }}
+          ENVIRONNEMENT: ${{ inputs.target }}
+        run: |
+          if [ "$ENVIRONNEMENT" = production ]; then
+            python3 -I script/hostinger/deployer.py deploy/hostinger/compose.yaml "$REVISION"
+          else
+            python3 -I script/hostinger/deployer.py test deploy/hostinger/test.yaml "$ENVIRONNEMENT" "$REVISION"
+          fi
+
+      - name: /up
+        env:
+          SITE: ${{ steps.target.outputs.site }}
+        run: curl -fsS -o /dev/null --retry 10 --retry-delay 15 --retry-all-errors --max-time 20 "https://$SITE/up"
