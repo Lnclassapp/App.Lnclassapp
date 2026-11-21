@@ -13,6 +13,9 @@ end
 get "account/pending", to: "identity/pending_accounts#show", as: :pending_account
 # ADR-0071, ADR-0083 §4.3 : un enseignant sans établissement (retiré, demande refusée) choisit DRENA puis établissement.
 post "account/pending/school", to: "identity/pending_school_joins#create", as: :pending_school_join
+# ADR-XXXX-entree-eleve-revele-un-numero-inscrit : « Je suis élève », l'entrée unique (numéro et code secret), limitée en débit.
+get "student", to: "identity/student_entries#new", as: :new_student_entry
+post "student", to: "identity/student_entries#create", as: :student_entries
 get "teacher-signup", to: "identity/teacher_registrations#new", as: :new_teacher_registration
 post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher_registrations
 # ADR-0077 : la direction s'inscrit seule avec le code d'établissement (plafond de 3 par le code).

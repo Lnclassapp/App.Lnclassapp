@@ -30,6 +30,7 @@ Pas de policy : l'acteur n'existe pas encore (ADR-0028, comme `Authenticate` et 
 
 | Situation | Comportement attendu |
 |---|---|
+| Code secret qui n'a pas exactement 4 chiffres | « Le code secret compte 4 chiffres », rien n'est cherché |
 | Numéro inscrit, mauvais code | « Code secret incorrect », lien « Code secret oublié ? » ; l'échec compte pour le verrouillage du numéro |
 | Numéro verrouillé | Message de verrouillage de `/login` |
 | Confirmation du code différente | « Les deux codes secrets ne sont pas identiques », on reste sur l'écran |
@@ -38,7 +39,7 @@ Pas de policy : l'acteur n'existe pas encore (ADR-0028, comme `Authenticate` et 
 | Compte non élève par l'entrée | Connecté, envoyé vers son accueil |
 | Entrée expirée (30 min) ou absente à l'envoi de l'inscription en mode entrée | Retour à l'entrée |
 | Numéro pris entre l'entrée et l'inscription | Refus de l'inscription, aucun compte créé |
-| Trop d'envois (60/min ou 600/h par adresse) | « Trop de tentatives », rien n'est révélé |
+| Trop d'envois (120/min ou 600/h par adresse à l'entrée ; 60/min pour l'inscription qui suit) | « Trop de tentatives », rien n'est révélé |
 | `/teacher-signup` | « Êtes-vous bien enseignant ? » : « Oui » ouvre le formulaire, « Non, je suis élève » l'entrée élève |
 
 ## 4. Critères d'acceptation
@@ -96,7 +97,7 @@ Scénario: CA-9 Élève inscrit par le lien de classe
 Scénario: CA-10 Une classe sur un même wifi
   Quand 40 élèves passent par l'entrée en une minute depuis la même adresse
   Alors aucun ne lit « Trop de tentatives »
-  Et le 61e envoi de la minute est refusé
+  Et le 121e envoi de la minute à l'entrée est refusé
 
 Scénario: CA-11 Entrée expirée
   Étant donné une entrée confirmée il y a plus de 30 minutes

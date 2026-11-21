@@ -12,6 +12,12 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     @classroom = create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1")
   end
 
+  # Chantier entree-eleve-unifiee : le visiteur d'un lien passe d'abord par l'entrée élève (numéro inconnu, code confirmé).
+  def enter_as_new_student(link_token, contact: "0701020304", pin: "4821")
+    post student_entries_path, params: { student_entry: { contact:, pin:, link_token: } }
+    post student_entries_path, params: { student_entry: { pin_confirmation: pin, link_token: } }
+  end
+
   test "IL-02: /join, the former entry by code, leads to /student-signup; nothing is posted there any more" do
     get "/join"
 
@@ -74,11 +80,23 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "IL-08: a visitor opening the link sees the sign-up page, the classroom, its school and level already chosen" do
+  test "IL-08: a visitor opening the link sees the student entry with the classroom, then the sign-up page, the classroom already chosen" do
     teacher = create_teacher(classrooms: [ @classroom ], last_name: "Yao", first_name: "Konan")
     create_student(classroom: @classroom, last_name: "Bamba", first_name: "Issa")
     token = link_token
 
+    get join_classroom_path(token.upcase)
+
+    # Chantier entree-eleve-unifiee (CA-8) : d'abord l'entrée, numéro et code, la classe du lien au-dessus.
+    assert_response :success
+    assert_select "h1", text: "Je suis élève"
+    assert_select "#student-entry-classroom", text: /6ème 1.*Lycée Classique d'Abidjan/m
+    assert_select "form#student-entry-form input[type=hidden][name='student_entry[link_token]'][value='#{token}']"
+    [ "Yao", "Konan", "Bamba", "Issa", teacher.public_id, @classroom.public_id, "/ 80" ].each do |secret|
+      assert_not_includes response.body, secret
+    end
+
+    enter_as_new_student(token)
     get join_classroom_path(token.upcase)
 
     assert_response :success
@@ -88,7 +106,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
       assert_select "fieldset[data-step='1']", 0
       assert_select "#signup-classroom-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
       assert_select "input[type=hidden][name='student_registration[link_token]'][value='#{token}']"
-      assert_select "a#other-classroom[href='#{new_student_registration_path}']",
+      assert_select "a#other-classroom[href='#{new_student_registration_path(other_classroom: 1)}']",
                     text: I18n.t("classroom.student_registrations.form.other_classroom")
       assert_select "input[name='student_registration[last_name]']"
       assert_select "button#student-registration-submit:not([disabled])"
@@ -101,6 +119,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "IL-10: « Ce n'est pas ta classe ? » opens the standard page without the alert" do
+    enter_as_new_student(link_token)
     get join_classroom_path(link_token)
     get css_select("a#other-classroom").first["href"]
 

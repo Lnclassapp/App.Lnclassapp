@@ -1,0 +1,46 @@
+# Entrée élève unique : numéro et code secret, puis « pas encore de compte » — ADR-XXXX-entree-eleve-revele-un-numero-inscrit,
+# UDR-XXXX-entree-eleve-unique (au « tu » : l'entrée s'adresse à l'élève)
+fr:
+  identity:
+    student_entries:
+      new:
+        page_title: "Je suis élève"
+        welcome: "Bienvenue sur Lnclass"
+        welcome_text: "Ton numéro et ton code secret : on te connecte, ou on crée ton compte."
+        title: "Je suis élève"
+        lead: "Pas encore de compte ? Tape ton numéro et choisis un code secret : on le crée ensemble."
+        classroom_label: "Tu rejoins"
+        contact_placeholder: "07 00 00 00 00"
+        contact_hint: "10 chiffres, par ex. 0701020304."
+        pin_hint: "4 chiffres."
+        submit: "Continuer"
+        submitting: "Un instant…"
+        forgot_pin: "Code secret oublié ?"
+        confirm_title: "Nouveau sur Lnclass"
+        confirm_lead: "Ce numéro n'a pas encore de compte :"
+        confirm_hint: "Retape ton code secret pour être sûr de t'en souvenir."
+        confirm_submit: "Créer mon compte"
+        not_my_number: "Ce n'est pas mon numéro"
+      create:
+        expired: "Ton entrée a expiré. Tape de nouveau ton numéro et ton code secret."
+        wrong_app: "Ce compte n'est pas un compte élève : ouvre lnclass.com dans le navigateur pour te connecter."
+  activemodel:
+    attributes:
+      dtos/identity/student_entry_input:
+        contact: "Numéro de téléphone"
+        pin: "Code secret"
+        pin_confirmation: "Confirme ton code secret"
+    errors:
+      models:
+        dtos/identity/student_entry_input:
+          attributes:
+            contact:
+              blank: "Tape ton numéro de téléphone."
+              invalid: "Le numéro compte 10 chiffres et commence par 01, 05 ou 07."
+            pin:
+              blank: "Tape ton code secret."
+              invalid: "Le code secret compte 4 chiffres."
+              wrong_pin: "Code secret incorrect."
+            pin_confirmation:
+              blank: "Retape ton code secret."
+              confirmation: "Les deux codes secrets ne sont pas identiques."

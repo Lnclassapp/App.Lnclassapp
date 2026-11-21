@@ -250,7 +250,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
   # → the link of the declared classroom, as the teacher copies it on its page (ADR-0085 §4.1).
   def teacher_signs_up_and_assigns_the_exercise
-    visit new_teacher_registration_path
+    visit new_teacher_registration_path(confirmed: 1)
     assert_no_page_reload do
       select "Abidjan 1", from: "teacher_registration[drena_public_id]"
       select SCHOOL, from: "teacher_registration[school_public_id]"
@@ -362,16 +362,12 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # → the finished session, whose result the teacher opens.
   def student_joins_and_wins_the_diamond(link)
     visit URI(link).path
+    # Entrée élève (entree-eleve-unifiee) : numéro et code d'abord, puis le nom ; la classe du lien est gardée.
+    pass_student_entry(contact: STUDENT_CONTACT, pin: "2468")
     assert_selector "#signup-classroom-recap", text: /Tle D 1.*#{SCHOOL}/m
-    assert_no_page_reload do
-      fill_in "student_registration[last_name]", with: "Kouassi"
-      fill_in "student_registration[first_name]", with: "Aya"
-      choose t("genders.female")
-      fill_in "student_registration[contact]", with: STUDENT_CONTACT
-      # Step 2 moves on to the secret code (step 3) a second after the last key.
-      fill_in "student_registration[pin]", with: "2468"
-      fill_in "student_registration[pin_confirmation]", with: "2468"
-    end
+    fill_in "student_registration[last_name]", with: "Kouassi"
+    fill_in "student_registration[first_name]", with: "Aya"
+    choose t("genders.female")
     click_on t("classroom.student_registrations.form.submit")
     assert_toast t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path

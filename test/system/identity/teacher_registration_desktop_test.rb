@@ -17,7 +17,7 @@ class Identity::TeacherRegistrationDesktopTest < ApplicationSystemTestCase
 
   test "CA-J5: two equal columns, one welcome on the left, the steps on 28 rem at most" do
     page.current_window.resize_to(1280, 900)
-    visit new_teacher_registration_path
+    visit new_teacher_registration_path(confirmed: 1)
 
     assert_selector "#signup-panel", text: I18n.t("#{PAGE}.welcome"), count: 1
     assert_text I18n.t("#{PAGE}.welcome"), count: 1
@@ -34,7 +34,7 @@ class Identity::TeacherRegistrationDesktopTest < ApplicationSystemTestCase
   test "CA-G12: from lg the top bar is above the columns, with one help and no avatar, and the page does not overflow" do
     [ [ 1280, 900 ], [ 1024, 768 ] ].each do |size|
       page.current_window.resize_to(*size)
-      visit new_teacher_registration_path
+      visit new_teacher_registration_path(confirmed: 1)
 
       within("header") do
         assert_selector "div.bg-teacher.h-1", visible: true
@@ -54,7 +54,7 @@ class Identity::TeacherRegistrationDesktopTest < ApplicationSystemTestCase
 
   test "CA-G12: at 390 px the registration keeps its own logo and help, without the top bar" do
     with_mobile_viewport do
-      visit new_teacher_registration_path
+      visit new_teacher_registration_path(confirmed: 1)
 
       assert_no_selector "header", visible: true
       within("#signup-header") do

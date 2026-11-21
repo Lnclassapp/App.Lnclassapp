@@ -61,6 +61,12 @@ fr:
       form:
         step_counter: "Étape %{n} sur 3"
         step_announce: "Étape %{n} sur 3 : %{title}"
+        # UDR-XXXX-entree-eleve-unique §3.6 : après l'entrée, numéro et code sont déjà choisis : deux étapes.
+        step_counter_entry: "Étape %{n} sur 2"
+        step_announce_entry: "Étape %{n} sur 2 : %{title}"
+        you_hint_entry: "Dernière étape : qui es-tu ?"
+        entry_number_label: "Ton numéro"
+        entry_not_my_number: "Ce n'est pas ton numéro ?"
         back: "Retour"
         link_invalid: "Ce lien n'est plus valable. Choisis ta classe."
         # Étape 1.
@@ -128,6 +134,7 @@ fr:
         retry: "Réessayer"
       create:
         welcome: "Bienvenue dans ta classe !"
+        entry_expired: "Ton entrée a expiré. Tape de nouveau ton numéro et ton code secret."
   school:
     school_levels:
       index:

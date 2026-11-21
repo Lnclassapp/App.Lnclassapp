@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
 # Rôle : inscription enseignant publique, DRENA → établissement ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
-# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103 · UDR : 0024, 0050, 0079, 0099 (§3.4), 0134 (§3.9)
+# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103 · UDR : 0024, 0050, 0079, 0099 (§3.4), 0134 (§3.9), XXXX-entree-eleve-unique (§3.7 : « Êtes-vous bien enseignant ? »)
 module Identity
   class TeacherRegistrationsController < ApplicationController
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id
@@ -14,8 +14,12 @@ module Identity
     helper_method :material_options, :drena_options, :school_options
 
     # Sans JavaScript, la DRENA choisie revient ici en GET (formulaire teacher-signup-drena) et liste ses établissements.
+    # D1 du porteur (UDR-XXXX-entree-eleve-unique §3.7) : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant ? » ;
+    # « Oui » revient ici avec ?confirmed=1, « Non, je suis élève » mène à l'entrée élève. La DRENA renvoyée en GET (sans
+    # JavaScript) vient d'un formulaire déjà ouvert : pas de question.
     def new
       return redirect_to_home if authenticated?
+      return render(:confirm) unless params[:confirmed] == "1" || drena_param.present?
 
       @form = Dtos::Identity::TeacherRegistrationInput.new(drena_public_id: drena_param)
     end

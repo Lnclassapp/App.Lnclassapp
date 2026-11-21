@@ -160,9 +160,11 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
 
   test "CA-C3: the classroom link lands on step 2 with the recap, the welcome card and no « Retour »" do
     visit join_classroom_path(@classroom.reload.link_token)
+    pass_student_entry
 
-    assert_step 2
-    assert_panel_step 2
+    # Chantier entree-eleve-unifiee : après l'entrée, « Toi » est la dernière des deux étapes.
+    assert_selector "#signup-step-counter", text: I18n.t("#{FORM}.step_counter_entry", n: 2)
+    assert_panel_step 2, entry: true
     assert_selector "#signup-panel #signup-panel-recap", text: /3e B/
     assert_no_selector "#signup-classroom-recap", visible: :visible
     assert_selector "#signup-back", visible: :hidden
@@ -265,10 +267,15 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
   private
 
   # CA-C8: the panel says the same at every step; only the step in progress (aria-current) moves.
-  def assert_panel_step(number)
+  # entry: after the student entry, the number is known to have no account: no « Déjà un compte ? ».
+  def assert_panel_step(number, entry: false)
     assert_selector "#signup-panel", text: "Bienvenue sur Lnclass"
-    assert_selector "#signup-panel", text: I18n.t("classroom.student_registrations.new.have_account")
-    assert_selector "#signup-panel a", text: I18n.t("classroom.student_registrations.new.sign_in")
+    if entry
+      assert_no_selector "#signup-panel", text: I18n.t("classroom.student_registrations.new.have_account")
+    else
+      assert_selector "#signup-panel", text: I18n.t("classroom.student_registrations.new.have_account")
+      assert_selector "#signup-panel a", text: I18n.t("classroom.student_registrations.new.sign_in")
+    end
     assert_equal [ number ], page.all("#signup-panel [aria-current=step]").map { it["data-step"].to_i }
   end
 

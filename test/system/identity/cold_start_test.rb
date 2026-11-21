@@ -14,7 +14,7 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
   end
 
   def sign_up(shot:, desktop: true)
-    visit new_teacher_registration_path
+    visit new_teacher_registration_path(confirmed: 1)
     yield if block_given?
     select "Abidjan 1", from: "teacher_registration[drena_public_id]"
     select "Lycée Classique d'Abidjan", from: "teacher_registration[school_public_id]"

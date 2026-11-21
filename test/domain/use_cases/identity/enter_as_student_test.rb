@@ -100,6 +100,17 @@ module UseCases
         assert_equal "0101020304", result.value.contact
       end
 
+      # Le code secret compte exactement 4 chiffres (décision du porteur, 2026-11-20) : rien n'est cherché sinon.
+      test "un code secret qui n'a pas exactement 4 chiffres est refusé, sans rien chercher" do
+        [ "123", "12345", "12a4", "" ].each do |pin|
+          result = enter(contact: "0101020304", pin:)
+
+          assert_equal :invalid, result.code, pin
+          assert_equal 1, result.errors[:pin].size, pin
+        end
+        assert_empty @attempts.records
+      end
+
       test "CA-6 : une confirmation différente est refusée" do
         result = enter(contact: "0101020304", pin: "1357", pin_confirmation: "1358")
 
@@ -114,9 +125,9 @@ module UseCases
       end
 
       test "un numéro hors format ou un code mal formé ne cherche rien" do
-        assert_equal [ :invalid ], enter(contact: "0901020304", pin: "1357").errors[:contact]
-        assert_equal [ :blank ], enter(contact: "", pin: "1357").errors[:contact]
-        assert_equal [ :invalid ], enter(contact: "0101020304", pin: "13").errors[:pin]
+        assert_equal [ :contact ], enter(contact: "0901020304", pin: "1357").errors.keys
+        assert_equal [ "Tape ton numéro de téléphone." ], enter(contact: "", pin: "1357").errors[:contact]
+        assert_equal [ :pin ], enter(contact: "0101020304", pin: "13").errors.keys
       end
 
       test "la coque Android d'un autre rôle refuse comme à la connexion" do

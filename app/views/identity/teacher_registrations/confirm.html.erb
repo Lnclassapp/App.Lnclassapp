@@ -1,0 +1,26 @@
+<%# 🌐 UI · identity/teacher_registrations/confirm — « Êtes-vous bien enseignant(e) ? », avant l'inscription enseignant publique %>
+<%# Rôle : même cadre que la connexion (accueil bleu, carte) ; « Oui » ouvre le formulaire (?confirmed=1), « Non, je suis élève » l'entrée élève ; deux liens, sans JavaScript %>
+<%# UDR  : 0054, 0088, XXXX-entree-eleve-unique (§3.7) %>
+<% page_title t(".page_title") %>
+<div class="grid min-h-dvh grid-cols-1 bg-paper lg:grid-cols-2">
+  <%= render "shared/auth_welcome", variant: :panel, title: t(".welcome") %>
+
+  <div class="flex min-w-0 flex-col">
+    <%= render "shared/auth_help" %>
+    <main class="flex flex-1 flex-col items-center px-gutter pt-2 pb-10 lg:justify-center lg:pb-16">
+      <div class="w-full max-w-110 space-y-4">
+        <%= render "shared/auth_welcome", variant: :card, title: t(".welcome") %>
+
+        <%= ui_card title: t(".title"), heading: :h1, padding: :lg do %>
+          <p class="-mt-2 text-sm leading-relaxed text-mute"><%= t(".lead") %></p>
+          <div id="teacher-signup-confirm" class="mt-5 flex flex-col gap-3">
+            <%= ui_button t(".yes"), href: new_teacher_registration_path(confirmed: 1), variant: :primary, size: :lg, full: true,
+                                     id: "teacher-signup-confirm-yes" %>
+            <%= ui_button t(".no"), href: new_student_entry_path, variant: :secondary, size: :lg, full: true,
+                                    id: "teacher-signup-confirm-no" %>
+          </div>
+        <% end %>
+      </div>
+    </main>
+  </div>
+</div>
