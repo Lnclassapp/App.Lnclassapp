@@ -145,12 +145,14 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
         click_on I18n.t("teams.schools.edit.submit")
       end
       assert_toast I18n.t("teams.schools.update.done", name: "Lycée Moderne")
+      dismiss_toasts
       assert_selector "#school_#{unused.public_id}", text: I18n.t("school_types.mixed")
 
       click_menu_action("#school_#{used.public_id}", I18n.t("#{row_scope}.delete"))
       within("turbo-frame#modal dialog#delete-school-#{used.public_id}[open]") { click_on I18n.t("teams.schools.deletion.confirm") }
 
       assert_toast I18n.t("teams.schools.destroy.referenced")
+      dismiss_toasts
       assert_selector "#school_#{used.public_id}", text: "Lycée Classique"
       assert_no_selector "turbo-frame#modal dialog[open]"
 
@@ -158,6 +160,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       within("turbo-frame#modal dialog#deactivate-school-#{used.public_id}[open]") { click_on I18n.t("teams.schools.deactivation.confirm") }
 
       assert_toast I18n.t("teams.schools.deactivate.done", name: "Lycée Classique")
+      dismiss_toasts
       assert_selector "#school_#{used.public_id}", text: I18n.t("school_statuses.inactive")
 
       click_menu_action("#school_#{unused.public_id}", I18n.t("#{row_scope}.delete"))

@@ -124,7 +124,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     get css_select("a#other-classroom").first["href"]
 
     assert_response :success
-    assert_select "select[name='student_registration[drena_public_id]']"
+    assert_select "input#school_q"
     assert_select "#student-signup[data-classroom--signup-steps-start-value='1']"
     assert_select "#classroom-link-invalid, #signup-classroom-recap:not([hidden])", 0
   end

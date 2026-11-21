@@ -51,20 +51,16 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#pending_account" do
       assert_select "h1", text: t("no_school.title")
       assert_select "p", text: t("no_school.description")
-      assert_select "form#school-join-drena[action='#{pending_account_path}'][method=get]"
-      assert_select "form#school-join-form[action='#{pending_school_join_path}'][method=post]" \
-                    "[data-controller~='school--drena-schools']" do
-        assert_select "label[for=school_join_drena_public_id]", text: /DRENA/
-        assert_select "select#school_join_drena_public_id[name='school_join[drena_public_id]'][form=school-join-drena]" \
-                      "[data-action='change->school--drena-schools#load']" do
-          assert_select "option[value='']", text: t("drena_prompt")
-          assert_select "option[value=?]", abidjan.public_id, text: "Abidjan 1"
-        end
-        assert_select "noscript", text: /#{t('show_schools')}/
-        assert_select "turbo-frame#schools" do
-          assert_select "select#school_join_school_public_id[name='school_join[school_public_id]'][disabled][required]"
-          assert_select "#school_join_school_public_id_hint", text: "Choisissez d'abord votre DRENA."
-        end
+      assert_select "form#school-join-search[action='#{pending_account_path}'][method=get]"
+      assert_select "form#school-join-form[action='#{pending_school_join_path}'][method=post]" do
+        assert_select "label[for=school_q]", text: /Votre établissement/
+        assert_select "input#school_q[type=search][name=school_q][form=school-join-search]" \
+                      "[data-action='input->school--school-search#queue keydown.enter->school--school-search#now']"
+        assert_select "[data-controller='school--school-search'][data-school--school-search-url-value=?]",
+                      school_search_path(scope: :school_join)
+        assert_select "noscript button[form=school-join-search]", text: /Chercher/
+        assert_select "turbo-frame#school_results:empty"
+        assert_select "select", 0
         assert_select "button[type=submit].w-full", text: t("join")
       end
       assert_select "a[href='#{session_path}'][data-turbo-method=delete]", text: /Se déconnecter/
@@ -74,43 +70,32 @@ class Identity::PendingAccountsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#join_request_rejected", 0
   end
 
-  test "IE-18: without JavaScript, the chosen DRENA comes back by GET and lists its active schools" do
+  test "IE-18: without JavaScript, the search comes back by GET and lists the active schools, each with its DRENA" do
     abidjan = create_drena(name: "Abidjan 1")
     classique = create_school(drena: abidjan, name: "Lycée Classique d'Abidjan")
-    create_school(drena: abidjan, name: "Lycée fermé", status: "inactive")
+    create_school(drena: abidjan, name: "Lycée Classique fermé", status: "inactive")
     create_school(name: "Lycée de Bouaké")
     sign_in_as create_teacher(school: nil)
 
-    get pending_account_path(school_join: { drena_public_id: abidjan.public_id })
+    get pending_account_path(school_q: "classique")
 
     assert_response :success
-    assert_select "select#school_join_drena_public_id option[selected][value=?]", abidjan.public_id
-    assert_select "turbo-frame#schools" do
-      assert_select "input[type=hidden][name='school_join[drena_public_id]'][value=?]", abidjan.public_id
-      assert_select "select#school_join_school_public_id:not([disabled]) option[value]:not([value=''])", 1
-      assert_select "select#school_join_school_public_id option[value=?]", classique.public_id, text: "Lycée Classique d'Abidjan"
+    assert_select "input#school_q[value=classique]"
+    assert_select "turbo-frame#school_results" do
+      assert_select "input[type=radio][name='school_join[school_public_id]']", 1
+      assert_select "input[type=radio][value=?]", classique.public_id
+      assert_select "label", text: /Lycée Classique d'Abidjan\s+DRENA Abidjan 1/
     end
     assert_select "#school_join_school_public_id_error", 0
   end
 
-  # ADR-0083 §4.5: /drenas/:drena_public_id/schools is again the source of the list, in the scope of the join form.
-  test "IE-18: the frame of the schools is fed by /drenas/:id/schools, in the school_join scope" do
+  test "IE-18: a school code in the address pre-fills nothing; a search as an array is ignored" do
     sign_in_as create_teacher(school: nil)
 
-    get pending_account_path
-
-    url = drena_schools_path("__drena__", scope: "school_join")
-    assert_equal "/drenas/__drena__/schools?scope=school_join", url
-    assert_select "form#school-join-form[data-school--drena-schools-url-value=?]", url
-  end
-
-  test "IE-18: an unknown DRENA lists nothing; a school code in the address pre-fills nothing" do
-    sign_in_as create_teacher(school: nil)
-
-    get pending_account_path(school_join: { drena_public_id: "inconnue" }, school_code: "k7m4qz")
+    get pending_account_path(school_q: [ "abidjan" ], school_code: "k7m4qz")
 
     assert_response :success
-    assert_select "select#school_join_school_public_id[disabled]"
+    assert_select "turbo-frame#school_results *", 0
     assert_select "input[name*=school_code]", 0
     assert_select "#pending_account", text: /K7M-4QZ/i, count: 0
   end

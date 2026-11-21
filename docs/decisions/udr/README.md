@@ -185,6 +185,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0174](./0174-activation-premier-exercice.md) | Carte « Ton premier exercice » et historique de reprise | Accepté | 2026-11-16 | — | l'élève qui vient de s'inscrire n'a aucun exercice sous les yeux, et celui qui revient ne retrouve pas ce qu'il a commencé |
 | [0175](./0175-entonnoir-aarrr.md) | Page Croissance : entonnoir AARRR des élèves (acquisition, activation, rétention, referral, revenu, non mesuré) | Accepté | 2026-11-16 | [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md) | L'équipe ne sait pas où les élèves décrochent ; cinq étages AARRR en nombres et en parts, seul contre amené par sa classe, cohortes J1/J7/J30, revenu en bêta, et ce qu'on ne peut pas mesurer, sur la page Croissance existante. Prolonge UDR-0050 |
 | [0176](./0176-entree-eleve-unique.md) | Entrée élève unique et question enseignant | Accepté | 2026-11-21 | 0141-entree-eleve-revele-un-numero-inscrit | l'élève choisissait entre « se connecter » et « créer un compte » avant tout geste, et prenait le mauvais chemin |
+| [0177](./0177-champ-etablissement.md) | Champ établissement avec recherche | Accepté | 2026-11-20 | XXXX (recherche-etablissement) | Comment l'élève et l'enseignant trouvent leur établissement en un seul champ, sur téléphone, avec ou sans JavaScript ? |
 <!-- index:end -->
 
 ---
