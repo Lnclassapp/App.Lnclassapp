@@ -25,6 +25,9 @@
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot B) · Un ancien formulaire en cache qui poste `join_code` avec un code inconnu : l'erreur `join_code` n'a plus de champ où s'afficher (l'étape 1 s'ouvre sans message sur ce point) — appliqué : le serveur refuse (422) et garde FIELDS comme le veut l'UDR §3.3, sans message dédié ; autres : afficher l'erreur dans le cadre de la cascade ; recommandé : laisser tel quel (cas résiduel, un rechargement règle)
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot B) · Tests système du lot (`student_signup_steps_test`, `student_activation_test`, `join_test`) réécrits sur la cascade mais non exécutés : Chrome (153) et chromedriver (147) sont incompatibles dans l'environnement de l'agent — appliqué : réécriture soignée, contrôleurs verts ; recommandé : le vérificateur les rejoue (`bin/system-changed`)
 
+- [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot A) · Où montrer « Les deux codes sont différents. » quand le champ natif est caché — appliqué : un bloc `#student-entry-mismatch` (`role=alert`) rendu `hidden` au-dessus du champ, dévoilé par le contrôleur du pavé ; sans JavaScript, le message reste sous le champ (une seule occurrence visible dans chaque cas) ; autres : déplacer le message dans `base_errors` pour tous les cas ; recommandé : l'appliqué
+- [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot A) · Fichiers hors fiche du Lot A modifiés pour ne pas casser des tests existants : `test/support/student_entry_helper.rb` (la confirmation se tape au pavé) et `test/system/identity/pin_reveal_test.rb` (plus de révélation du champ de confirmation) — appliqué : modification minimale de ces deux lignes ; le Lot B reprend la dernière ligne du helper (`#signup-entry-number`) : conflit de fusion à résoudre à la main ; recommandé : l'appliqué
+
 ## Retouches
 
 > Les retouches de ce chantier après sa livraison ([`retouche.md`](../../workflows/retouche.md)) : `- AAAA-MM-JJ · #<PR> · <ce qui change>`
@@ -36,6 +39,7 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - Lot C : le test existant `test/controllers/classroom/student_homes_controller_test.rb` (« the class card … sigle », l. 140-159) vérifie encore `#student_school_sigle`, qui n'est plus sur la carte ; fichier partagé, laissé au Lot D (à remplacer par le QR, `#student_school_qr`). Les tests système du Lot C n'ont pas pu tourner dans la session (ChromeDriver 147 pour Chrome 153) : à jouer par le vérificateur.
+- Lot A : les tests système (Chrome 153 installé, chromedriver 147 seul disponible, téléchargement d'un autre refusé) n'ont pas pu tourner dans l'environnement du lot ; ils sont écrits mais à jouer par le vérificateur (`test/system/student_entry_pin_pad_test.rb`, tous les tests système qui passent par `pass_student_entry`).
 
 ## Ce qu'on a appris sur la codebase
 
