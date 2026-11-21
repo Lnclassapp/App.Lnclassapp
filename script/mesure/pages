@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Mesure des pages par rôle en production locale (chantier pages-sous-600ms) : temps serveur p50/p95, requêtes SQL,
+# allocations et poids, sur le grand établissement du jeu standard (bin/jeu-standard d'abord), pour l'élève,
+# l'enseignant et la direction. Lecture seule, hors sessions de connexion.
+#
+#   script/mesure/pages                          # 20 passes par page après 2 de chauffe
+#   MESURE_PASSES=40 MESURE_ROLE=eleve script/mesure/pages
+#   script/mesure/pages --navigateur             # puis les mêmes pages dans Chromium à 390 px (assets précompilés)
+#
+# Production locale : RAILS_ENV=production (chargement complet, gabarits compilés, Solid Cache), sur la base de
+# développement locale. Refusé si DATABASE_URL est déjà posée ou si l'hôte de la base n'est pas local.
+set -euo pipefail
+cd "$(dirname "$0")/../.."
+
+if [ -n "${DATABASE_URL:-}" ] || [ -n "${RAILWAY_ENVIRONMENT_NAME:-}" ]; then
+  echo "[mesure-pages] refusé : DATABASE_URL ou RAILWAY_ENVIRONMENT_NAME est posée (base distante possible). Rien n'est visité." >&2; exit 1
+fi
+
+database="$(RAILS_ENV=development bin/rails runner 'c = ActiveRecord::Base.connection_db_config; h = c.host.to_s
+  abort("hôte non local : #{h}") unless h.empty? || h.start_with?("/") || %w[localhost 127.0.0.1 ::1].include?(h)
+  puts c.database' 2>/dev/null)" || { echo "[mesure-pages] refusé : base de développement absente ou non locale." >&2; exit 1; }
+user="$(RAILS_ENV=development bin/rails runner 'puts ActiveRecord::Base.connection_db_config.configuration_hash.values_at(:username, :password).join(":")' 2>/dev/null)"
+
+export RAILS_ENV=production SECRET_KEY_BASE_DUMMY=1 RAILS_LOG_LEVEL="${RAILS_LOG_LEVEL:-warn}" ACTIVE_STORAGE_SERVICE=local
+export DATABASE_URL="postgres://${user}@localhost:5432/${database}"
+
+bin/rails runner script/mesure/pages.rb
+
+if [ "${1:-}" = "--navigateur" ]; then
+  [ -f public/assets/.manifest.json ] || bin/rails assets:precompile >/dev/null
+  PORT="${MESURE_PORT:-3999}"
+  bin/rails server -p "$PORT" -b 127.0.0.1 >tmp/mesure-serveur.log 2>&1 &
+  server=$!
+  trap 'kill $server 2>/dev/null || true' EXIT
+  for _ in $(seq 1 60); do curl -fsS "http://127.0.0.1:$PORT/up" >/dev/null 2>&1 && break; sleep 1; done
+  NODE_PATH="$(npm root -g)" node script/mesure/pages_navigateur.cjs "http://localhost:$PORT"
+fi
