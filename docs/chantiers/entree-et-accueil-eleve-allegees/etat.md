@@ -21,10 +21,10 @@ Ouvertes : `script/docs/a_trancher`, et les sections `## À trancher` des journa
 
 ## Prochaine action
 
-Jouer `bin/system-changed` et `script/ci/record_timings` sur une machine au ChromeDriver assorti (bloqué dans la session), puis fusion par l'orchestrateur ; à la fusion, `script/docs/build_index --number` pour l'ADR et les deux UDR.
+Fusion par l'orchestrateur (CI locale verte, tests système compris) ; à la fusion, `script/docs/build_index --number` pour l'ADR et les deux UDR.
 
 ## Prompt de reprise
 
 ```
-Orchestrateur de entree-et-accueil-eleve-allegees. Lis docs/chantiers/entree-et-accueil-eleve-allegees/etat.md, vérifie sur GitHub les PR qu'il cite, puis : fais jouer les tests système de la PR et fusionne-la si verts.
+Orchestrateur de entree-et-accueil-eleve-allegees. Lis docs/chantiers/entree-et-accueil-eleve-allegees/etat.md, vérifie sur GitHub les PR qu'il cite, puis : vérifie la ligne de preuve sur le SHA de tête et fusionne.
 ```
