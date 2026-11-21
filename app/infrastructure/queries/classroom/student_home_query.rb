@@ -8,7 +8,8 @@ module Queries
       # §3.3, UDR-0076 §3.1) ; subjects : les matières qui ont un cours publié de son niveau. L'activité récente n'y est plus :
       # seul le cadre différé la lit, par recent_sessions (chantier accueil-eleve, PRD §7).
       # school_sigle : le sigle de l'établissement pour l'en-tête de la carte, nil s'il n'en a pas ; next_step : NextStep.
-      Row = Data.define(:school_name, :school_sigle, :level_name, :classroom_name, :classmates_count,
+      # school_public_id : l'identifiant public de l'établissement, que le QR de la carte de classe encode (/e/<id>).
+      Row = Data.define(:school_name, :school_sigle, :school_public_id, :level_name, :classroom_name, :classmates_count,
                         :assigned_exercises, :pending_gaps, :late_material_slugs, :subjects, :next_step, :has_teacher)
       # has_teacher : la classe a au moins un enseignant (teacher_classrooms) ; sinon l'accueil garde « Invite ton enseignant ».
       # ActiveClassroom : la classe principale active de l'élève, pour « Invite tes camarades » (partage-classe-k-factor, Lot B).
@@ -50,7 +51,7 @@ module Queries
       LAST_FIRST = Arel.sql("classroom_students.left_at DESC NULLS FIRST, classroom_students.joined_at DESC, classroom_students.id DESC")
       # L'ordre du programme (ADR-0090 §4.2) : le rang de la matière, puis son nom ; une matière sans rang suit, par nom.
       PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name" ].freeze
-      HEADER_COLUMNS = [ "classrooms.id", "schools.name", "schools.sigle", "levels.name", "classrooms.name" ].freeze
+      HEADER_COLUMNS = [ "classrooms.id", "schools.name", "schools.sigle", "schools.public_id", "levels.name", "classrooms.name" ].freeze
       # Un exercice de toute la leçon n'a pas de notion : il suit celles de sa leçon, et le tri Ruby ne compare jamais nil.
       COALESCE_NOTION_POSITION = Arel.sql("COALESCE(essentials.position, 2147483647)")
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
@@ -59,14 +60,14 @@ module Queries
       # today : la date d'Abidjan (Time.zone), qui dit si une échéance est passée.
       # → Row | nil (aucune classe principale active : l'élève n'a pas d'accueil)
       def call(student_id:, today: Time.zone.today)
-        classroom_id, school_name, school_sigle, level_name, classroom_name =
+        classroom_id, school_name, school_sigle, school_public_id, level_name, classroom_name =
           Orm::ClassroomStudent.joins(classroom: %i[school level])
                                .where(student_id:, primary: true, left_at: nil, classrooms: { status: "active" })
                                .pick(*HEADER_COLUMNS)
         return if classroom_id.nil?
 
         exercises = assigned_with_slugs(classroom_id, student_id)
-        Row.new(school_name:, school_sigle: school_sigle.presence, level_name:, classroom_name:,
+        Row.new(school_name:, school_sigle: school_sigle.presence, school_public_id:, level_name:, classroom_name:,
                 classmates_count: Orm::ClassroomStudent.where(classroom_id:, left_at: nil).count,
                 assigned_exercises: exercises.map(&:last), pending_gaps: pending_gaps(student_id:),
                 late_material_slugs: late_material_slugs(exercises, today), subjects: subjects(student_id),

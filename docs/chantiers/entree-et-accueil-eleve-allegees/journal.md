@@ -33,7 +33,7 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Lot C : le test existant `test/controllers/classroom/student_homes_controller_test.rb` (« the class card … sigle », l. 140-159) vérifie encore `#student_school_sigle`, qui n'est plus sur la carte ; fichier partagé, laissé au Lot D (à remplacer par le QR, `#student_school_qr`). Les tests système du Lot C n'ont pas pu tourner dans la session (ChromeDriver 147 pour Chrome 153) : à jouer par le vérificateur.
 
 ## Ce qu'on a appris sur la codebase
 

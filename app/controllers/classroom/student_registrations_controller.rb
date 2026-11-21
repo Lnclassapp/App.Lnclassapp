@@ -1,7 +1,7 @@
 # 🌐 DELIVERY · Classroom::StudentRegistrationsController
 # Rôle : inscription élève publique : classe donnée par son code, par le jeton d'un lien ou choisie dans la cascade ; succès : session, accueil élève.
 #        Après l'entrée élève (mode entrée) : numéro et code viennent de l'entrée gardée en session, deux étapes ; sans elle, trois étapes.
-# ADR  : 0026, 0028, 0050, 0062, 0085, 0109 (§4.5, §4.6, §4.7), attribution-des-inscriptions-eleves, 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0079, 0081, 0135, 0176-entree-eleve-unique
+# ADR  : 0026, 0028, 0050, 0062, 0085, 0109 (§4.5, §4.6, §4.7), attribution-des-inscriptions-eleves, 0141-entree-eleve-revele-un-numero-inscrit, adresse-publique-etablissement · UDR : 0079, 0081, 0135, 0176-entree-eleve-unique
 module Classroom
   class StudentRegistrationsController < ApplicationController
     include ClassPicker
@@ -45,6 +45,8 @@ module Classroom
       end
 
       @form = Dtos::Classroom::StudentRegistrationInput.new(**picker_params)
+      # Le QR de l'établissement (/e/<id>) préchoisit l'établissement, en mode entrée seulement, si la requête n'en porte pas.
+      @form.school_public_id = entry_school_public_id if @entry && @form.school_public_id.blank?
       @form.contact = @entry.contact if @entry
       # Posé par /c/<jeton> quand le lien n'est plus valable (UDR-0081 §3.4) ; lu une fois.
       @link_invalid = flash[:link_invalid].present?
