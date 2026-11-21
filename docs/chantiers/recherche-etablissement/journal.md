@@ -37,6 +37,7 @@
   - échec silencieux : un établissement devenu inactif avant l'envoi rendait côté enseignant un 422 sans message (seule l'erreur de DRENA, sans champ) → la DRENA vient toujours de l'établissement (jamais du client), et son erreur s'affiche sous le champ avec le message neutre ;
   - Entrée ou erreur réseau après un choix laissaient niveaux et classes de l'ancien établissement → `release()` aussi dans `now()` et `missing()`.
 - Les tests contrôleur envoyaient encore une DRENA valide : ils prouvaient le refus neutre dans un cas que le vrai formulaire ne produit plus. Les aides de test n'envoient plus de DRENA.
+- Après rebase, `bin/ci-quiet` (niveau train : le harnais de test change) rouge deux fois sur `Teams::SchoolsTest` SC-06/SC-07, hors périmètre : le toast de l'action précédente recouvrait le bouton ⋮ suivant (clic intercepté). Le test ferme désormais chaque toast (`dismiss_toasts`) avant le clic suivant. Un échec isolé de `FigurePlateSystemTest`, vert seul, n'a pas été touché.
 - L'aide promettait « ou ta ville » : la ville n'est pas dans les données. Remplacé par « ou de ta DRENA », que la recherche couvre.
 
 ## Ce qu'on a appris sur la codebase
