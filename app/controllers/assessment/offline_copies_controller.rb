@@ -24,6 +24,9 @@ module Assessment
 
     private
 
+    # UDR accueil-eleve-qr-fenetre-inviter §3.2 (CA-13) : jamais de fenêtre « Ton premier exercice » sur la copie hors ligne.
+    def first_exercise_prompt? = false
+
     # Le même accès que le démarrage d'une copie (ADR-0126 §4.6).
     def blocked? = Queries::Billing::StudentAccessQuery.new.call(student_id: current_actor.user_id, at: Time.zone.now).blocked?
   end

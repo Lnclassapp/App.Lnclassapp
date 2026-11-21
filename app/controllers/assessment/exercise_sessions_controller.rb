@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::ExerciseSessionsController
 # Rôle : l'élève démarre (exercice de son niveau), reprend ou recommence un exercice, puis remplit sa copie ; terminée → résultat
-# ADR  : 0026, 0028, 0043, 0048, 0054, 0112, 0115, 0126 (contexte billing, §4.6) · UDR : 0022, 0138 §3.2
+# ADR  : 0026, 0028, 0043, 0048, 0054, 0112, 0115, 0126 (contexte billing, §4.6) · UDR : 0022, 0138 §3.2, accueil-eleve-qr-fenetre-inviter §3.2
 module Assessment
   class ExerciseSessionsController < AuthenticatedController
     include ReadsOwnLevel
@@ -33,6 +33,9 @@ module Assessment
     end
 
     private
+
+    # UDR accueil-eleve-qr-fenetre-inviter §3.2 (CA-13) : jamais de fenêtre « Ton premier exercice » sur l'écran d'exercice.
+    def first_exercise_prompt? = false
 
     # ADR-0115 : pause de « Recommencer » ; retour à l'exercice, dont la page dit seule l'heure de reprise (pas de message en double).
     # Tout autre refus passe par render_result.

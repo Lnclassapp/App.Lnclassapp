@@ -1,6 +1,6 @@
-# 🌐 UI · Classroom::JoinQrHelper — le QR du lien de classe
-# Rôle : SVG du lien /c/<jeton>?s=qr, sans autre secret que le lien de classe
-# ADR  : attribution-des-inscriptions-eleves (§4.4)
+# 🌐 UI · Classroom::JoinQrHelper — les QR : lien de classe, adresse d'établissement
+# Rôle : SVG du lien /c/<jeton>?s=qr (sans autre secret que le lien de classe) ; SVG de /ecole/<identifiant public> de l'établissement
+# ADR  : attribution-des-inscriptions-eleves (§4.4), adresse-publique-etablissement (§4)
 module Classroom
   module JoinQrHelper
     def class_join_qr_svg(link_token)
@@ -8,6 +8,15 @@ module Classroom
       RQRCode::QRCode.new(url, level: :m)
                      .as_svg(module_size: 6, use_path: true, viewbox: true, standalone: true, color: "000", fill: "fff")
                      .html_safe
+    end
+
+    # L'adresse de l'établissement ne porte ni élève, ni classe, ni jeton (M2) ; en cache par URL (l'hôte et l'identifiant y sont ; pas de `request`, nil hors requête).
+    def school_signup_qr_svg(school_public_id)
+      url = school_signup_link_url(school_public_id)
+      Rails.cache.fetch([ "school-signup-qr", url ]) do
+        RQRCode::QRCode.new(url, level: :m)
+                       .as_svg(module_size: 6, use_path: true, viewbox: true, standalone: true, color: "000", fill: "fff")
+      end.html_safe
     end
   end
 end

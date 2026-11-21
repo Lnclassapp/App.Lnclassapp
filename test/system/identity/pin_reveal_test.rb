@@ -29,13 +29,13 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
   end
 
   # Chantier entree-eleve-unifiee : le lien de classe ouvre l'entrée élève ; le code s'y tape, puis s'y confirme.
-  test "student entry by link: show then hide the PIN, then its confirmation" do
+  test "student entry by link: show then hide the PIN, then the confirmation pad" do
     visit join_classroom_path(@classroom.reload.link_token)
     show_then_hide "student_entry[pin]"
     fill_in "student_entry[contact]", with: "07 01 02 03 04"
     fill_in "student_entry[pin]", with: "4821"
     click_on I18n.t("identity.student_entries.new.submit")
-    show_then_hide "student_entry[pin_confirmation]"
+    assert_selector "#student-entry-keypad" # la confirmation se tape au pavé (UDR pavé §3.2), plus au champ
     assert_no_js_errors
   end
 

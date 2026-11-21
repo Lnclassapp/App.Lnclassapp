@@ -35,7 +35,11 @@ class AppAndroidShellTest < ActionDispatch::IntegrationTest
 
   # UDR-0084 §3.3 (accueil-eleve): in a browser, the student has no bottom bar any more; the margin it needed goes.
   test "CA-1 — the same page in a browser keeps header, sidebar and install pop-up, without bridge element" do
-    sign_in_as create_student(classroom: create_classroom)
+    # Lot D (entree-et-accueil-eleve-allegees) : l'invitation attend tant que la fenêtre « Ton premier exercice » peut s'ouvrir ; ici la copie est rendue.
+    student = create_student(classroom: create_classroom)
+    create_exercise_session(student:, exercise: create_exercise, status: "completed", score_percent: 80)
+    sign_in_as student
+    get student_first_exercise_path, headers: { "Turbo-Frame" => "student_first_exercise_prompt" }
 
     get student_home_path
 

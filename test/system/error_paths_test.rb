@@ -61,7 +61,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
     create_assignment(classroom:, assignable: exercise)
 
     sign_in_as student
-    within("#student_first_exercise") { click_on t("catalog.courses.next_exercise.start") }
+    within("#student_first_exercise_modal") { find("#student_first_exercise_start").click }
     assert_selector "#copy-form"
     assert_equal 0, Orm::QuestionAttempt.count
 

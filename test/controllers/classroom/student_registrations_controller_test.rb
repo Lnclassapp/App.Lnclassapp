@@ -65,13 +65,10 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_equal [ I18n.t("#{STEPS}.classroom"), I18n.t("#{STEPS}.you"), I18n.t("#{STEPS}.security") ],
                  css_select("fieldset[data-classroom--signup-steps-target=step] > legend").map { it.text.squish }
     assert_select "fieldset[data-classroom--signup-steps-target=step]", 3
-    assert_select "input#student_registration_join_code[maxlength='6'][autocomplete=off][inputmode=text]" \
-                  "[autocapitalize=characters].font-mono[data-classroom--signup-steps-target=code]"
-    assert_select "#student_registration_join_code_hint", text: I18n.t("#{STEPS}.code_hint")
-    assert_select "#signup-code-checking[hidden]", text: I18n.t("#{STEPS}.checking")
-    assert_select "turbo-frame#classroom_code_preview[aria-live=polite]"
-    # UDR-0135 §3.2: the cascade comes first and open; « J'ai le code de ma classe » is under the school search, « Je n'ai pas de code » under the code.
-    assert_select "main[data-classroom--signup-steps-code-open-value=false]"
+    # CA-6: the class code has no field, no link, no check frame on the signup.
+    assert_select "#student_registration_join_code", 0
+    assert_select "#signup-have-code, #signup-code-field, #signup-no-code, #signup-code-checking, turbo-frame#classroom_code_preview", 0
+    assert_select "main[data-classroom--signup-steps-code-open-value]", 0
     assert_select "#signup-cascade input[type=search]#school_q[name=school_q]"
     # Revue sécurité : sans JavaScript, « Chercher » n'envoie que la saisie, par son formulaire GET ; jamais le code secret.
     assert_select "form#student-signup-school[action='#{new_student_registration_path}'][method=get]"
@@ -79,10 +76,6 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "noscript button[form=student-signup-school][type=submit]", text: /Chercher/
     assert_select "#student-registration-form noscript button[formmethod=get]", text: /Chercher/, count: 0
     assert_select "#signup-cascade select", 0
-    assert_select "#signup-cascade a#signup-have-code[href='#signup-code-field']", text: /#{Regexp.escape(I18n.t("#{STEPS}.have_code"))}/
-    assert_select "#signup-code-field a#signup-no-code[href='#signup-cascade']", text: /#{Regexp.escape(I18n.t("#{STEPS}.no_code"))}/
-    assert_select "input[type=checkbox]#signup-no-code", 0
-    assert_operator response.body.index("signup-cascade"), :<, response.body.index("signup-code-field")
     visible_buttons = css_select("form button").reject { it.ancestors("noscript").any? }
     assert_empty visible_buttons.select { it.text.squish == I18n.t("#{PICKER}.continue") }
     assert_equal 1, visible_buttons.count { it["type"] == "submit" }
@@ -205,7 +198,8 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     # Ces liens changent l'entrée gardée en session : Turbo ne doit pas les précharger au survol.
     assert_select "a#other-classroom[data-turbo-prefetch=false]"
     assert_select "a#panel-other-classroom[data-turbo-prefetch=false]"
-    assert_select "a#signup-entry-fix-number[data-turbo-prefetch=false]"
+    # CA-7: the number is not asked again; its block only shows on an error.
+    assert_select "#signup-entry-number", 0
     assert_select "#signup-back[hidden]"
     assert_select "#signup-welcome", text: /Bienvenue sur Lnclass/
     assert_select "input[name='student_registration[join_code]']", 0
@@ -229,14 +223,15 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_equal [ "code" ], memberships.pluck(:joined_via)
   end
 
-  test "CA-B3, CA-C6: an unknown code is refused under the code field and reopens step 1, the other entries kept" do
+  # CA-6: the form no longer has the field, but an old cached form can still post join_code: the server refuses, nothing is created.
+  test "CA-B3, CA-6: an unknown code posted by an old form is refused and reopens step 1, the other entries kept" do
     register(join_code: "zzzzzz", classroom_public_id: nil)
 
-    assert_refused :join_code, I18n.t("#{ERRORS}.join_code.unknown")
+    assert_response :unprocessable_entity
+    assert_not Orm::User.exists?(contact: "0701020304")
     assert_equal 1, start_step
     assert_select "input[name='student_registration[last_name]'][value='KOUASSI']"
-    assert_select "input#student_registration_join_code[aria-invalid=true][value='zzzzzz']"
-    assert_select "main[data-classroom--signup-steps-code-open-value=true]"
+    assert_select "#student_registration_join_code", 0
   end
 
   test "CA-B3: the code of an archived classroom is refused like an unknown code, no account" do
@@ -244,7 +239,8 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
 
     register(join_code: archived.reload.join_code, classroom_public_id: nil)
 
-    assert_refused :join_code, I18n.t("#{ERRORS}.join_code.unknown")
+    assert_response :unprocessable_entity
+    assert_not Orm::User.exists?(contact: "0701020304")
     assert_equal 1, start_step
   end
 
@@ -262,7 +258,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_equal 2, start_step, "the first step that holds an error opens"
   end
 
-  test "CA-C6: after a code accepted and an error on the number, step 2 opens with the class recap" do
+  test "CA-C6: after an old form's code accepted and an error on the number, step 2 opens with the class recap, without the code field" do
     code = @classroom.reload.join_code
     register(join_code: code, contact: "070102030")
 
@@ -270,15 +266,13 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_equal 2, start_step
     assert_select "#signup-classroom-recap", text: /3e 2.*Lycée Moderne de Cocody/m
     assert_select "#signup-classroom-recap a#other-classroom[data-action='click->classroom--signup-steps#restart']"
-    assert_select "input#student_registration_join_code[value='#{code}']"
-    assert_select "main[data-classroom--signup-steps-code-open-value=true]"
+    assert_select "#student_registration_join_code", 0
     assert_select "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.invalid")
   end
 
-  test "UDR §3.2: after a cascade choice and an error elsewhere, the cascade stays the open way" do
+  test "UDR §3.2: after a cascade choice and an error elsewhere, the cascade keeps the choice" do
     register(pin_confirmation: "1357")
 
-    assert_select "main[data-classroom--signup-steps-code-open-value=false]"
     assert_select "turbo-frame#picker_classrooms input[type=radio][checked][value='#{@classroom.public_id}']"
   end
 
@@ -770,7 +764,7 @@ end
     end
 
     assert_response :success
-    assert_select "#signup-entry-number"
+    assert_select "input[name=entry_mode]"
     assert_select "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
   end
 
@@ -819,11 +813,13 @@ end
     assert_equal [ "standard" ], memberships.pluck(:joined_via)
     follow_redirect!
 
-    assert_select "section#student_first_exercise" do
-      assert_select "h2", text: "Mesurer un angle"
-      assert_select "form[action=?] button", exercise_sessions_path(first.public_id)
-    end
+    # Lot D : le premier exercice est dans la fenêtre du shell, que l'accueil demande en cadre différé.
+    assert_select "section#student_first_exercise", 0
+    assert_select "turbo-frame#student_first_exercise_prompt[src=?]", student_first_exercise_path
     assert_select "#student_to_do", text: /Angles opposés/
+    get student_first_exercise_path, headers: { "Turbo-Frame" => "student_first_exercise_prompt" }
+    assert_select "dialog h3", text: "Mesurer un angle"
+    assert_select "form[action=?] button", exercise_sessions_path(first.public_id)
   end
 
   test "attribution: a link send with s=qr writes « qr », a bare link « teacher_link », the cascade « cold », the code « code »" do

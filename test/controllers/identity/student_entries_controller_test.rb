@@ -84,6 +84,45 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test "CA-1 (pavé) : l'entrée ne porte plus les deux phrases d'explication" do
+    get new_student_entry_path
+
+    assert_response :success
+    assert_no_match "Ton numéro et ton code secret : on te connecte, ou on crée ton compte.", response.body
+    assert_no_match "Pas encore de compte ? Tape ton numéro et choisis un code secret", response.body
+    assert_select "#auth-welcome-card", text: /Bienvenue sur Lnclass/
+  end
+
+  test "pavé : un numéro inconnu reçoit le pavé, masqué sans JavaScript, et jamais le premier code dans la page" do
+    enter(contact: "0101020304", pin: "1357")
+    follow_redirect!
+
+    assert_select "form#student-entry-confirm-form[data-controller='identity--pin-pad']" do
+      assert_select "#student-entry-pin-field input[name='student_entry[pin_confirmation]']"
+      assert_select "#student-entry-pin-pad[hidden]" do
+        assert_select "[data-identity--pin-pad-target='box']", 4
+        assert_select "#student-entry-keypad button[data-digit]", 10
+        assert_select "#student-entry-keypad button[aria-label=?]", "Effacer"
+        assert_select "#student-entry-pin-offline[hidden][role=alert][data-identity--pin-pad-target=offline]", text: "Pas de connexion. Réessaie."
+      end
+      assert_select "#student-entry-confirm-submit:not([disabled])"
+    end
+    assert_no_match "1357", response.body
+  end
+
+  test "CA-5 : sans JavaScript, 1111 pour 2468 est refusé en 422, 2468 renvoie à l'inscription" do
+    enter(contact: "0101020304", pin: "2468")
+
+    confirm("1111")
+
+    assert_response :unprocessable_entity
+    assert_select "#student_entry_pin_confirmation_error", text: "Les deux codes sont différents."
+    assert_select "#student-entry-mismatch[role=alert][hidden]", text: "Les deux codes sont différents."
+
+    confirm("2468")
+    assert_redirected_to new_student_registration_path
+  end
+
   test "CA-5 : un numéro inconnu confirme son code puis s'inscrit sans retaper numéro ni code" do
     enter(contact: "0101020304", pin: "1357")
     assert_redirected_to new_student_entry_path
@@ -98,7 +137,9 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     confirm("1357")
     assert_redirected_to new_student_registration_path
     follow_redirect!
-    assert_select "#signup-entry-number", text: /01 01 02 03 04/
+    # CA-7: the number is neither shown nor asked again after the entry.
+    assert_select "#signup-entry-number", 0
+    assert_select "input[name=entry_mode]"
     assert_select "input[name='student_registration[contact]']", 0
     assert_select "input[name='student_registration[pin]']", 0
     assert_select "#signup-step-counter", text: "Étape 1 sur 2"
@@ -118,9 +159,9 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     confirm("7531")
 
     assert_response :unprocessable_entity
-    assert_select "#student_entry_pin_confirmation_error", text: "Les deux codes secrets ne sont pas identiques."
+    assert_select "#student_entry_pin_confirmation_error", text: "Les deux codes sont différents."
     get new_student_registration_path
-    assert_select "#signup-entry-number", 0
+    assert_select "input[name=entry_mode]", 0
   end
 
   test "« Ce n'est pas mon numéro » oublie l'entrée et remet le numéro dans le champ" do
@@ -142,6 +183,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :unprocessable_entity
     assert_select "#signup-entry-number-error", text: "Ce numéro est déjà utilisé."
+    assert_select "#signup-entry-number a#signup-entry-fix-number[href=?]", new_student_entry_path(fresh: 1)
   end
 
   test "CA-8 : par le lien de classe, l'entrée montre la classe ; nouveau, il s'inscrit dans cette classe à l'étape « Toi »" do
@@ -257,12 +299,12 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
 
     travel 29.minutes do
       get new_student_registration_path
-      assert_select "#signup-entry-number"
+      assert_select "input[name=entry_mode]"
     end
 
     travel 31.minutes do
       get new_student_registration_path
-      assert_select "#signup-entry-number", 0
+      assert_select "input[name=entry_mode]", 0
 
       assert_no_difference -> { Orm::User.count } do
         finish_registration
