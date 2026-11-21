@@ -23,7 +23,7 @@
 
 > Les retouches de ce chantier après sa livraison ([`retouche.md`](../../workflows/retouche.md)) : `- AAAA-MM-JJ · #<PR> · <ce qui change>`
 
-- 2026-11-21 · #PR · plafonds CPU de Develop et Staging : base 0,1 → 0,5, application 0,4 → 1,0 (`cpu_shares` inchangé)
+- 2026-11-21 · #671 · plafonds CPU de Develop et Staging : base 0,1 → 0,5, application 0,4 → 1,0 (`cpu_shares` inchangé)
 
 ## Ce qui a dérapé
 
