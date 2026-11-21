@@ -24,6 +24,17 @@ module Queries
       def finish(learner, exercise, score) = create_exercise_session(student: learner, exercise:, status: "completed", score_percent: score,
                                                                      completed_at: Time.current)
 
+      # Chantier entree-et-accueil-eleve-allegees, CA-14 : la fenêtre s'arrête à la première copie rendue, quelle qu'en soit la note.
+      test "a copy handed in, whatever the mark, counts; a copy started or abandoned does not" do
+        learner = student
+        create_exercise_session(student: learner, exercise: @first, status: "abandoned")
+        create_exercise_session(student: learner, exercise: @second, answered_count: 1)
+        assert_not ActivationQuery.new.submitted_copy?(student_id: learner.id)
+
+        finish(learner, @physics, 0)
+        assert ActivationQuery.new.submitted_copy?(student_id: learner.id)
+      end
+
       test "CA-1: no copy at all: the first exercise of the first subject, in the program order, to start" do
         row = call(student)
 

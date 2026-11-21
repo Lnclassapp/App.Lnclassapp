@@ -28,6 +28,8 @@
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot A) · Où montrer « Les deux codes sont différents. » quand le champ natif est caché — appliqué : un bloc `#student-entry-mismatch` (`role=alert`) rendu `hidden` au-dessus du champ, dévoilé par le contrôleur du pavé ; sans JavaScript, le message reste sous le champ (une seule occurrence visible dans chaque cas) ; autres : déplacer le message dans `base_errors` pour tous les cas ; recommandé : l'appliqué
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot A) · Fichiers hors fiche du Lot A modifiés pour ne pas casser des tests existants : `test/support/student_entry_helper.rb` (la confirmation se tape au pavé) et `test/system/identity/pin_reveal_test.rb` (plus de révélation du champ de confirmation) — appliqué : modification minimale de ces deux lignes ; le Lot B reprend la dernière ligne du helper (`#signup-entry-number`) : conflit de fusion à résoudre à la main ; recommandé : l'appliqué
 
+- [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot D) · L'invitation à installer ne s'ouvre qu'une fois le drapeau « copie rendue » posé : un élève qui n'a rien à se voir proposer (pas d'exercice à son niveau) garde le cadre vide sans drapeau, donc n'a plus l'invitation sur l'accueil — appliqué : « seulement si la fenêtre ne peut pas s'ouvrir » = drapeau posé ; autres : poser aussi le drapeau « rien à proposer » pour la session, ou rendre l'invitation quand le cadre revient vide ; recommandé : rendre l'invitation quand le cadre revient vide (dans un chantier suivant)
+
 ## Retouches
 
 > Les retouches de ce chantier après sa livraison ([`retouche.md`](../../workflows/retouche.md)) : `- AAAA-MM-JJ · #<PR> · <ce qui change>`
@@ -40,6 +42,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - Lot C : le test existant `test/controllers/classroom/student_homes_controller_test.rb` (« the class card … sigle », l. 140-159) vérifie encore `#student_school_sigle`, qui n'est plus sur la carte ; fichier partagé, laissé au Lot D (à remplacer par le QR, `#student_school_qr`). Les tests système du Lot C n'ont pas pu tourner dans la session (ChromeDriver 147 pour Chrome 153) : à jouer par le vérificateur.
 - Lot A : les tests système (Chrome 153 installé, chromedriver 147 seul disponible, téléchargement d'un autre refusé) n'ont pas pu tourner dans l'environnement du lot ; ils sont écrits mais à jouer par le vérificateur (`test/system/student_entry_pin_pad_test.rb`, tous les tests système qui passent par `pass_student_entry`).
+- Lot D : les tests système (`student_first_exercise_prompt_test`, `student_activation_test`, `student_home_test`) n'ont pas pu être joués dans la session du lot : Chrome 153 installé, ChromeDriver 147 seulement (`session not created`). Écrits à la lecture du composant `modal`, à rejouer par `bin/system-changed` avant la fusion.
 
 ## Ce qu'on a appris sur la codebase
 

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# Lot B (partage-classe-k-factor), UDR partage-de-classe §3.3: the banners of the student home.
+# Lot B (partage-classe-k-factor), UDR partage-de-classe §3.3: the invitations of the student home (the classmates banner became a tile, chantier entree-et-accueil-eleve-allegees Lot D).
 class Classroom::StudentHomesInviteTest < ActionDispatch::IntegrationTest
   setup do
     @classroom = create_classroom(name: "3e B", school: create_school(name: "Collège Moderne"))
@@ -8,13 +8,13 @@ class Classroom::StudentHomesInviteTest < ActionDispatch::IntegrationTest
     sign_in_as(@student)
   end
 
-  test "the classmates banner is there, without a cross, and opens WhatsApp in a new tab" do
+  test "the classmates tile is there, titled, and opens WhatsApp in a new tab; no banner any more" do
     get student_home_path
 
-    assert_select "section#student_invite_classmates_title, section[aria-labelledby=student_invite_classmates_title]" do
+    assert_select "section#student_invite_classmates[aria-labelledby=student_invite_classmates_title]" do
       assert_select "h2#student_invite_classmates_title", text: "Invite tes camarades"
       assert_select "form[action=?][target=_blank][data-turbo=false]", class_invite_path
-      assert_select "button[data-action*=dismissible]", count: 0
+      assert_select "button[data-action*=dismissible], p", count: 0
     end
   end
 

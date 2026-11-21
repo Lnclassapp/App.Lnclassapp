@@ -80,4 +80,4 @@ Dans le bloc, `t(".clé")` se résout sur la partial du groupe : utilise des cl�
 
 ## Hors périmètre
 
-La carte « Prochain exercice » n'apparaît plus sur la matière ni la leçon. Sur l'accueil, elle n'existe que sous la forme « Ton premier exercice », tant que l'élève n'a réussi aucun exercice (UDR « activation-premier-exercice », chantier `activation-eleve`) ; son exercice sort alors de « À faire », et sa copie en cours de l'historique. Ne la réaffiche ailleurs sans nouvelle décision.
+La carte « Prochain exercice » n'apparaît plus sur la matière ni la leçon, ni sur l'accueil. « Ton premier exercice » y est une fenêtre (cadre différé du shell, ouverte sur chaque écran de l'élève hors mode exercice, tant qu'il n'a rendu aucune copie ; UDR « accueil-eleve-qr-fenetre-inviter » §3.2, chantier `entree-et-accueil-eleve-allegees`) : plus de carte `#student_first_exercise` sur l'accueil, et « À faire » comme l'historique ne retirent plus rien. « Invite tes camarades » est une tuile « Inviter » sous « Mes matières » (même format que les matières), plus une bannière. Ne réaffiche pas la carte ailleurs sans nouvelle décision.

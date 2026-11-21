@@ -27,8 +27,9 @@ class Classroom::StudentActivationTest < ApplicationSystemTestCase
     click_on I18n.t("#{FORM}.submit")
 
     assert_current_path student_home_path
-    within "#student_first_exercise" do
-      assert_text I18n.t("catalog.courses.next_exercise.first").upcase
+    # Lot D (entree-et-accueil-eleve-allegees) : le premier exercice est dans la fenêtre du shell.
+    within "#student_first_exercise_modal" do
+      assert_text I18n.t("catalog.courses.next_exercise.first")
       assert_text "Angles opposés"
       assert_text "Mathématiques · #{I18n.t('catalog.courses.next_exercise.assigned')}"
       click_on I18n.t("catalog.courses.next_exercise.start")
@@ -44,7 +45,7 @@ class Classroom::StudentActivationTest < ApplicationSystemTestCase
     sign_in_as student
 
     visit student_home_path
-    within "#student_first_exercise" do
+    within "#student_first_exercise_modal" do
       assert_text "Mesurer un angle"
       assert_text "Mathématiques · Les angles"
       click_on I18n.t("catalog.courses.next_exercise.start")

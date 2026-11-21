@@ -1,6 +1,6 @@
-<%# 🌐 UI · classroom/student_homes/show — accueil élève, style Wave : bandeau, carte de la classe, grille des matières, annonces, « À faire », historique, invitation %>
-<%# Rôle : le bandeau bleu (hors de la colonne, sous lg), puis le blanc à coins arrondis qui commence à 159 px ; « Ton premier exercice » tant qu'aucun n'est réussi ; chaque section vide est absente ; sans classe, « Choisis ta classe », la grille de son dernier niveau et les annonces %>
-<%# ADR  : attribution-des-inscriptions-eleves, 0033, 0043, 0078, 0085, 0089, 0126 (contexte billing, §4.5) · UDR : partage-de-classe (§3.3), 0173 §3, 0071 §3.5, 0081 §3.5, 0132 accueil élève (§3.1 structure, amendement eleve-sans-prof), 0158 (§3 bandeau, masqué en bêta : UDR acces-beta), hors-connexion-bandeau-copie-provisoire-et-file §3.6 · titre « Accueil · Élève · Lnclass » %>
+<%# 🌐 UI · classroom/student_homes/show — accueil élève, style Wave : bandeau, carte de la classe, grille des matières, annonces, « À faire », historique, tuile « Inviter » %>
+<%# Rôle : le bandeau bleu (hors de la colonne, sous lg), puis le blanc à coins arrondis qui commence à 159 px ; chaque section vide est absente ; sans classe, « Choisis ta classe », la grille de son dernier niveau et les annonces %>
+<%# ADR  : attribution-des-inscriptions-eleves, 0033, 0043, 0078, 0085, 0089, 0126 (contexte billing, §4.5) · UDR : partage-de-classe (§3.3), 0173 §3, 0071 §3.5, 0081 §3.5, 0132 accueil élève (§3.1 structure, amendement eleve-sans-prof), 0158 (§3 bandeau, masqué en bêta : UDR acces-beta), accueil-eleve-qr-fenetre-inviter (§3.2, §3.3), hors-connexion-bandeau-copie-provisoire-et-file §3.6 · titre « Accueil · Élève · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# UDR-0084 §3.5 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
 <h1 class="sr-only"><%= t(".page_title") %></h1>
@@ -18,15 +18,11 @@
   <div class="<%= class_names("bg-white lg:bg-transparent", "-mt-wave-lap rounded-t-wave lg:mt-0 lg:rounded-none" => !lnclass_app?) %>">
     <% if @home %>
       <%= render "class_card", home: @home, overlap: !lnclass_app? %>
-      <%# UDR-0174 §3 : tant qu'aucun exercice n'est réussi, son premier exercice, avant la grille ; sinon rien. %>
-      <% if @first_exercise %>
-        <div class="px-5 pt-6 lg:px-0 lg:pt-8">
-          <%= render "catalog/courses/next_exercise", next_exercise: @first_exercise, scope: :home, id: "student_first_exercise" %>
-        </div>
-      <% end %>
       <div class="px-5 pt-6 pb-6 lg:px-0 lg:pt-8 lg:pb-0">
         <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs %>
       </div>
+      <%# UDR accueil-eleve-qr-fenetre-inviter §3.3 : « Invite tes camarades », une tuile au format des matières, sous « Mes matières ». %>
+      <div class="px-5 pb-6 lg:px-0 lg:pb-0"><%= render "invite_tile", home: @home %></div>
     <% else %>
       <%= render "choose_class", form: @form, archived: @archived, overlap: !lnclass_app? %>
       <% if @subjects.present? %>
@@ -55,11 +51,11 @@
                           target: "_top", class: "block min-h-px" %>
     </div>
     <div class="space-y-3 px-5 pt-6 lg:p-0">
-      <%= render "invite_classmates", home: @home %>
       <%# UDR partage-de-classe §3.3 : l'invitation de l'enseignant seulement si la classe n'en a aucun. %>
       <%= render "invite_banner", invite_href: invite_href unless @home.has_teacher %>
     </div>
   <% end %>
 </div>
 <%# UDR-0078, amendement du 2026-10-07 : l'invitation à installer l'app, en pop-up, sur l'accueil seulement ; en dernier. %>
-<%= render "shared/navigation/install_banner", role: "student" %>
+<%# Accueil-eleve-qr-fenetre-inviter §3.2 : seulement si la fenêtre « Ton premier exercice » ne peut pas s'ouvrir (copie déjà rendue) : jamais deux fenêtres. %>
+<%= render "shared/navigation/install_banner", role: "student" unless first_exercise_prompt? %>

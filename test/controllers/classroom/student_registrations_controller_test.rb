@@ -813,11 +813,13 @@ end
     assert_equal [ "standard" ], memberships.pluck(:joined_via)
     follow_redirect!
 
-    assert_select "section#student_first_exercise" do
-      assert_select "h2", text: "Mesurer un angle"
-      assert_select "form[action=?] button", exercise_sessions_path(first.public_id)
-    end
+    # Lot D : le premier exercice est dans la fenêtre du shell, que l'accueil demande en cadre différé.
+    assert_select "section#student_first_exercise", 0
+    assert_select "turbo-frame#student_first_exercise_prompt[src=?]", student_first_exercise_path
     assert_select "#student_to_do", text: /Angles opposés/
+    get student_first_exercise_path, headers: { "Turbo-Frame" => "student_first_exercise_prompt" }
+    assert_select "dialog h3", text: "Mesurer un angle"
+    assert_select "form[action=?] button", exercise_sessions_path(first.public_id)
   end
 
   test "attribution: a link send with s=qr writes « qr », a bare link « teacher_link », the cascade « cold », the code « code »" do
