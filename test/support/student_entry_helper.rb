@@ -11,8 +11,8 @@ module StudentEntryHelper
     fill_in "student_entry[pin]", with: pin
     click_on I18n.t("#{ENTRY}.submit")
     assert_selector "h1", text: I18n.t("#{ENTRY}.confirm_title")
-    fill_in "student_entry[pin_confirmation]", with: pin
-    click_on I18n.t("#{ENTRY}.confirm_submit")
+    # Pavé numérique (UDR pavé §3.2) : au 4e chiffre l'envoi part seul.
+    pin.each_char { |key| find("#student-entry-keypad button[data-digit='#{key}']").click }
     assert_selector "#signup-entry-number"
   end
 end

@@ -1,14 +1,12 @@
 # Entrée élève unique : numéro et code secret, puis « pas encore de compte » — ADR-0141,
-# UDR-0176 (au « tu » : l'entrée s'adresse à l'élève)
+# UDR-0176 (au « tu » : l'entrée s'adresse à l'élève), pavé numérique de la confirmation
 fr:
   identity:
     student_entries:
       new:
         page_title: "Je suis élève"
         welcome: "Bienvenue sur Lnclass"
-        welcome_text: "Ton numéro et ton code secret : on te connecte, ou on crée ton compte."
         title: "Je suis élève"
-        lead: "Pas encore de compte ? Tape ton numéro et choisis un code secret : on le crée ensemble."
         classroom_label: "Tu rejoins"
         contact_placeholder: "07 00 00 00 00"
         contact_hint: "10 chiffres, par ex. 0701020304."
@@ -21,6 +19,11 @@ fr:
         confirm_hint: "Retape ton code secret pour être sûr de t'en souvenir."
         confirm_submit: "Créer mon compte"
         not_my_number: "Ce n'est pas mon numéro"
+        pin_pad:
+          keypad_label: "Pavé numérique"
+          erase: "Effacer"
+          progress: "%{count} chiffres sur 4"
+          match: "Les deux codes sont identiques."
       create:
         expired: "Ton entrée a expiré. Tape de nouveau ton numéro et ton code secret."
         wrong_app: "Ce compte n'est pas un compte élève : ouvre lnclass.com dans le navigateur pour te connecter."
@@ -43,4 +46,4 @@ fr:
               wrong_pin: "Code secret incorrect."
             pin_confirmation:
               blank: "Retape ton code secret."
-              confirmation: "Les deux codes secrets ne sont pas identiques."
+              confirmation: "Les deux codes sont différents."

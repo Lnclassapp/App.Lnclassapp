@@ -23,6 +23,9 @@
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees · Le QR : simple image, ou agrandi au toucher — appliqué : image de 96 px, sans agrandissement ; autres : toucher pour l'agrandir en plein écran ; recommandé : image seule, agrandir si la recette montre que les téléphones peinent à le lire
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees · Les inscriptions par le QR de l'établissement comptent comme « standard » dans l'attribution (ADR-0143) — appliqué : « standard » ; autres : une étiquette `school_qr` ; recommandé : une étiquette, dans un chantier suivant
 
+- [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot A) · Où montrer « Les deux codes sont différents. » quand le champ natif est caché — appliqué : un bloc `#student-entry-mismatch` (`role=alert`) rendu `hidden` au-dessus du champ, dévoilé par le contrôleur du pavé ; sans JavaScript, le message reste sous le champ (une seule occurrence visible dans chaque cas) ; autres : déplacer le message dans `base_errors` pour tous les cas ; recommandé : l'appliqué
+- [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot A) · Fichiers hors fiche du Lot A modifiés pour ne pas casser des tests existants : `test/support/student_entry_helper.rb` (la confirmation se tape au pavé) et `test/system/identity/pin_reveal_test.rb` (plus de révélation du champ de confirmation) — appliqué : modification minimale de ces deux lignes ; le Lot B reprend la dernière ligne du helper (`#signup-entry-number`) : conflit de fusion à résoudre à la main ; recommandé : l'appliqué
+
 ## Retouches
 
 > Les retouches de ce chantier après sa livraison ([`retouche.md`](../../workflows/retouche.md)) : `- AAAA-MM-JJ · #<PR> · <ce qui change>`
@@ -33,7 +36,7 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Lot A : les tests système (Chrome 153 installé, chromedriver 147 seul disponible, téléchargement d'un autre refusé) n'ont pas pu tourner dans l'environnement du lot ; ils sont écrits mais à jouer par le vérificateur (`test/system/student_entry_pin_pad_test.rb`, tous les tests système qui passent par `pass_student_entry`).
 
 ## Ce qu'on a appris sur la codebase
 
