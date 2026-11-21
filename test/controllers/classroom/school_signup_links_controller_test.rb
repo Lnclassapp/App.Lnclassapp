@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-9 (ADR adresse-publique-etablissement §4, M1 à M5) : /e/<identifiant public> garde l'établissement actif en session et
+# CA-9 (ADR adresse-publique-etablissement §4, M1 à M5) : /ecole/<identifiant public> garde l'établissement actif en session et
 # mène à l'entrée élève ; inconnu, inactif ou en brouillon : la même redirection, rien gardé ; un connecté va à son accueil ;
 # la 61e ouverture d'une minute reçoit 429.
 class Classroom::SchoolSignupLinksControllerTest < ActionDispatch::IntegrationTest

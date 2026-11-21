@@ -1,5 +1,5 @@
 # 🌐 UI · Classroom::JoinQrHelper — les QR : lien de classe, adresse d'établissement
-# Rôle : SVG du lien /c/<jeton>?s=qr (sans autre secret que le lien de classe) ; SVG de /e/<identifiant public> de l'établissement
+# Rôle : SVG du lien /c/<jeton>?s=qr (sans autre secret que le lien de classe) ; SVG de /ecole/<identifiant public> de l'établissement
 # ADR  : attribution-des-inscriptions-eleves (§4.4), adresse-publique-etablissement (§4)
 module Classroom
   module JoinQrHelper

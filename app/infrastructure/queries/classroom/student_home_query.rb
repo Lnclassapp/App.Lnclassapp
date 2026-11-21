@@ -8,7 +8,7 @@ module Queries
       # §3.3, UDR-0076 §3.1) ; subjects : les matières qui ont un cours publié de son niveau. L'activité récente n'y est plus :
       # seul le cadre différé la lit, par recent_sessions (chantier accueil-eleve, PRD §7).
       # school_sigle : le sigle de l'établissement pour l'en-tête de la carte, nil s'il n'en a pas ; next_step : NextStep.
-      # school_public_id : l'identifiant public de l'établissement, que le QR de la carte de classe encode (/e/<id>).
+      # school_public_id : l'identifiant public de l'établissement, que le QR de la carte de classe encode (/ecole/<id>).
       Row = Data.define(:school_name, :school_sigle, :school_public_id, :level_name, :classroom_name, :classmates_count,
                         :assigned_exercises, :pending_gaps, :late_material_slugs, :subjects, :next_step, :has_teacher)
       # has_teacher : la classe a au moins un enseignant (teacher_classrooms) ; sinon l'accueil garde « Invite ton enseignant ».

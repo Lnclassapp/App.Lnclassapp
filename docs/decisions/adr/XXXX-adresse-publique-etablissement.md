@@ -43,13 +43,14 @@ L'entrée élève (ADR-0141) est la porte unique de l'élève : numéro et code 
 
 | Option | Pourquoi elle tenait la route | Pourquoi elle a été écartée |
 |---|---|---|
-| A — `/e/<identifiant public>` → entrée élève, établissement gardé en session | Aucun identifiant nouveau ; courte ; passe par l'entrée | — retenue |
+| A — `/ecole/<identifiant public>` → entrée élève, établissement gardé en session | Aucun identifiant nouveau ; courte ; passe par l'entrée | — retenue |
+| A′ — même chose sous `/e/` | Deux caractères de moins | `/e/<code>` est l'ancien lien de code enseignant, retiré en 404 (IE-02, ADR-0083) : le réutiliser enverrait un enseignant à l'entrée élève |
 | B — `/student-signup?…school_public_id=…` directement | Rien à coder | Adresse longue (QR dense) ; sans l'entrée, numéro et code redemandés |
 | C — un jeton d'établissement dédié, révocable | Révocable | Une colonne, une migration, une rotation : pour une donnée déjà publique |
 
 ## 4. Décision
 
-> **Nous exposons `GET /e/:school_public_id` (public, 60 par minute et par adresse IP). Un établissement actif est gardé en session (30 minutes, à côté de l'entrée élève), puis l'inscription s'ouvre, après la confirmation du code, l'établissement préchoisi. Un identifiant inconnu, inactif ou en brouillon donne la même redirection vers `/student`, sans rien garder. Un connecté est renvoyé à son accueil. Le QR de l'accueil élève encode cette adresse, en URL absolue.**
+> **Nous exposons `GET /ecole/:school_public_id` (public, 60 par minute et par adresse IP, identifiant contraint à 14 caractères base58 ; tout autre format est 404 comme une adresse inconnue du site). Un établissement actif est gardé en session (30 minutes, à côté de l'entrée élève), puis l'inscription s'ouvre, après la confirmation du code, l'établissement préchoisi. Un identifiant inconnu, inactif ou en brouillon donne la même redirection vers `/student`, sans rien garder. Un connecté est renvoyé à son accueil. Le QR de l'accueil élève encode cette adresse, en URL absolue.**
 
 ## 5. Conséquences
 
@@ -68,7 +69,8 @@ L'entrée élève (ADR-0141) est la porte unique de l'élève : numéro et code 
 
 ```ruby
 # config/routes/classroom.rb
-get "e/:school_public_id", to: "classroom/school_signup_links#show", as: :school_signup_link
+get "ecole/:school_public_id", to: "classroom/school_signup_links#show", as: :school_signup_link,
+                               constraints: { school_public_id: /[1-9A-HJ-NP-Za-km-z]{14}/ }
 
 # app/controllers/concerns/student_entry_session.rb — une clé de session à part, posée avant l'entrée :
 # l'entrée (numéro, code) n'existe pas encore quand le QR est scanné.

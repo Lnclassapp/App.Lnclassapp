@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Classroom::SchoolSignupLinksController
-# Rôle : /e/<identifiant public> (le QR de la carte de classe) garde l'établissement actif 30 minutes en session et mène à l'entrée élève ; connecté, à son accueil
+# Rôle : /ecole/<identifiant public> (le QR de la carte de classe) garde l'établissement actif 30 minutes en session et mène à l'entrée élève ; connecté, à son accueil
 # ADR  : adresse-publique-etablissement (§4), 0141-entree-eleve-revele-un-numero-inscrit · UDR : accueil-eleve-qr-fenetre-inviter (§3.1)
 module Classroom
   class SchoolSignupLinksController < ApplicationController

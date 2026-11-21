@@ -7,7 +7,7 @@
 ## Graphe
 
 ```
-Lot 0 — SOCLE (orchestrateur du chantier, fait) : routes /e/:school_public_id et /students/first-exercise, clé qr_label
+Lot 0 — SOCLE (orchestrateur du chantier, fait) : routes /ecole/:school_public_id et /students/first-exercise, clé qr_label
   ↓
   ├─► Lot A  entrée : textes retirés + pavé numérique          ┐
   ├─► Lot B  inscription : sans code de classe ni bloc numéro   ├─ en parallèle, worktrees isolés
@@ -53,7 +53,7 @@ Lot 0 — SOCLE (orchestrateur du chantier, fait) : routes /e/:school_public_id 
 - **Fichiers**     : `app/controllers/classroom/school_signup_links_controller.rb` (nouveau) · `app/controllers/concerns/student_entry_session.rb` · `app/controllers/classroom/student_registrations_controller.rb` (préchoix en mode entrée seulement) · requête d'établissement actif par identifiant public (une requête `Queries::School::…` existante ; sinon une méthode bornée ajoutée à `school_preview_query.rb` ou équivalent) · `app/infrastructure/queries/classroom/student_home_query.rb` (colonne `school_public_id` de la ligne, rien d'autre) · `app/helpers/classroom/join_qr_helper.rb` (helper `school_signup_qr_svg`) · `app/views/classroom/student_homes/_class_card.html.erb` · nouveaux tests : `test/controllers/classroom/school_signup_links_controller_test.rb`, `test/system/school_signup_link_test.rb` ; test existant de la carte de classe / de la requête d'accueil si l'un vérifie le sigle
 - **Dépend de**    : Lot 0
 - **Test associé** : CA-9, CA-10, CA-11 ; ADR-XXXX-adresse-publique-etablissement §1 (menaces M1 à M5), §7
-- **Done quand**   : `/e/<id>` actif garde l'établissement 30 min et mène à `/student` ; inactif, brouillon, inconnu → même réponse, rien gardé ; connecté → accueil ; 61e appel/min → 429 ; après l'entrée, l'inscription s'ouvre établissement choisi ; la carte de classe montre le QR de cette adresse, plus le sigle
+- **Done quand**   : `/ecole/<id>` actif garde l'établissement 30 min et mène à `/student` ; inactif, brouillon, inconnu → même réponse, rien gardé ; connecté → accueil ; 61e appel/min → 429 ; après l'entrée, l'inscription s'ouvre établissement choisi ; la carte de classe montre le QR de cette adresse, plus le sigle
 
 ---
 

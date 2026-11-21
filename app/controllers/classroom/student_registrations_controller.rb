@@ -45,7 +45,7 @@ module Classroom
       end
 
       @form = Dtos::Classroom::StudentRegistrationInput.new(**picker_params)
-      # Le QR de l'établissement (/e/<id>) préchoisit l'établissement, en mode entrée seulement, si la requête n'en porte pas.
+      # Le QR de l'établissement (/ecole/<id>) préchoisit l'établissement, en mode entrée seulement, si la requête n'en porte pas.
       @form.school_public_id = entry_school_public_id if @entry && @form.school_public_id.blank?
       @form.contact = @entry.contact if @entry
       # Posé par /c/<jeton> quand le lien n'est plus valable (UDR-0081 §3.4) ; lu une fois.

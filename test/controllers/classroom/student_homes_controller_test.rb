@@ -137,7 +137,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/paiement|abonnement/i, css_select("#main").text)
   end
 
-  test "the class card: « Entrer en classe » opens Ma classe; the sigle of the school in a round, else the initials of its name" do
+  test "the class card: « Entrer en classe » opens Ma classe; the QR of the school replaces its sigle" do
     @classroom.school.update!(sigle: "CM1T")
     sign_in_as @student
 
@@ -147,15 +147,12 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "p", text: tl("class_card.label")
       assert_select "h2#student_class_title", text: "Tle D 1"
       assert_select "p", text: "Lycée Classique"
-      assert_select "span#student_school_sigle.rounded-full", text: "CM1T"
+      assert_select "div#student_school_qr[role=img] svg"
+      assert_select "#student_school_sigle", false
       assert_select "a#student_class_enter[href=?]", student_classroom_path, text: tl("class_card.enter")
       assert_select "img[alt='']"
     end
 
-    @classroom.school.update!(sigle: nil)
-    get student_home_path
-
-    assert_select "span#student_school_sigle", text: "LC"
   end
 
   test "CA-D7: no classroom: « Choisis ta classe », the code field, « Rejoindre », « Je n'ai pas de code »; grid, announcements, history hidden" do

@@ -26,7 +26,7 @@ class Classroom::StudentHomeClassCardQrTest < ActionDispatch::IntegrationTest
   test "CA-11: the QR encodes the school address only, no class token and no student identifier" do
     url = school_signup_link_url(@classroom.school.public_id, host: "www.example.com")
 
-    assert_match %r{/e/#{@classroom.school.public_id}\z}, url
+    assert_match %r{/ecole/#{@classroom.school.public_id}\z}, url
     assert_not_includes url, @classroom.link_token.to_s
     assert_not_includes url, @student.public_id.to_s
     assert_includes school_signup_qr_svg(@classroom.school.public_id), "<svg"

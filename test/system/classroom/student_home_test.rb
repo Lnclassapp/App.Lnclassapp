@@ -38,12 +38,12 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_no_selector "header.sticky", visible: :visible
       assert_equal 187, find("header.student-band").rect.height.round
 
-      # UDR-0173 §3 : le blanc commence à 159 px, la carte de la classe chevauche la jonction, le sigle est en pastille ronde.
+      # UDR-0173 §3 : le blanc commence à 159 px, la carte de la classe chevauche la jonction, le QR de l'établissement remplace le sigle.
       assert_equal 159, first("#student_home > div").rect.y.round
       card = find("#student_class_card")
       assert_operator card.rect.y, :<, 159
       assert_operator card.rect.y + card.rect.height, :>, 159
-      assert_selector "#student_school_sigle", text: "LCA"
+      assert_selector "#student_school_qr svg"
       assert_link tl("class_card.enter"), href: student_classroom_path
       assert_equal 1, all("#student_home .ui-button-primary").size
 

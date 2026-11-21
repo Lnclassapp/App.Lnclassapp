@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# CA-10 (ADR adresse-publique-etablissement §4) : du QR de l'établissement au compte créé. L'adresse /e/<id> ouvre l'entrée
+# CA-10 (ADR adresse-publique-etablissement §4) : du QR de l'établissement au compte créé. L'adresse /ecole/<id> ouvre l'entrée
 # élève ; numéro inconnu, code et confirmation : l'inscription s'ouvre, l'établissement choisi et ses niveaux proposés ; l'élève
 # choisit niveau et classe, et son compte est créé dans cette classe.
 class SchoolSignupLinkTest < ApplicationSystemTestCase
@@ -13,7 +13,7 @@ class SchoolSignupLinkTest < ApplicationSystemTestCase
     create_school(name: "Collège Moderne de Cocody")
   end
 
-  test "CA-10: from /e/<id> to the account created in the chosen classroom, the school already chosen" do
+  test "CA-10: from /ecole/<id> to the account created in the chosen classroom, the school already chosen" do
     visit school_signup_link_path(@school.public_id)
 
     assert_current_path new_student_entry_path

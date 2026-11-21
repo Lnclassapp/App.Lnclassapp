@@ -11,6 +11,18 @@ export default class extends Controller {
   static targets = ["field", "fieldBlock", "pad", "box", "status", "check", "submit", "mismatch", "key"]
 
   connect() {
+    this.setup()
+    this.onKeydown = this.onKeydown.bind(this)
+    this.onSubmitEnd = this.onSubmitEnd.bind(this)
+    this.onRender = this.setup.bind(this)
+    document.addEventListener("keydown", this.onKeydown)
+    // Le re-rendu 422 se fait par morphing : l'élément est gardé, le contrôleur ne se reconnecte pas, et le morphing
+    // remet le champ natif visible et le pavé caché. On refait la mise en place après chaque rendu.
+    document.addEventListener("turbo:render", this.onRender)
+    this.element.addEventListener("turbo:submit-end", this.onSubmitEnd)
+  }
+
+  setup() {
     this.digits = ""
     this.fieldBlockTarget.hidden = true
     this.fieldTarget.removeAttribute("autofocus")
@@ -19,16 +31,14 @@ export default class extends Controller {
     this.padTarget.removeAttribute("aria-busy")
     // Le message d'écart du serveur (422) reste visible au-dessus du pavé ; il est rendu caché pour le cas sans JavaScript.
     if (this.hasMismatchTarget) this.mismatchTarget.hidden = false
+    if (this.hasCheckTarget) this.checkTarget.hidden = true
     this.render()
-    this.onKeydown = this.onKeydown.bind(this)
-    this.onSubmitEnd = this.onSubmitEnd.bind(this)
-    document.addEventListener("keydown", this.onKeydown)
-    this.element.addEventListener("turbo:submit-end", this.onSubmitEnd)
     if (this.hasKeyTarget) this.keyTargets[0].focus({ preventScroll: true })
   }
 
   disconnect() {
     document.removeEventListener("keydown", this.onKeydown)
+    document.removeEventListener("turbo:render", this.onRender)
     this.element.removeEventListener("turbo:submit-end", this.onSubmitEnd)
   }
 

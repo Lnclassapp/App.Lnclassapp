@@ -7,7 +7,7 @@ module StudentEntrySession
   KEY = :student_entry
   # Le temps d'une inscription en classe ; au-delà, l'élève repasse par l'entrée.
   TTL = 30.minutes
-  # L'établissement du QR (/e/<id>), gardé avant l'entrée : une clé à part, car l'entrée n'existe pas encore au scan.
+  # L'établissement du QR (/ecole/<id>), gardé avant l'entrée : une clé à part, car l'entrée n'existe pas encore au scan.
   SCHOOL_KEY = :student_entry_school
   Entry = Data.define(:contact, :pin, :confirmed, :link_token)
 

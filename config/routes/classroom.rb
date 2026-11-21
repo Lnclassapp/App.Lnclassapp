@@ -5,7 +5,8 @@
 get "join", to: redirect("/student-signup")
 get "c/:code", to: "classroom/joins#new", as: :join_classroom
 # ADR adresse-publique-etablissement : le QR de l'accueil élève ; l'établissement actif est gardé, puis l'entrée élève.
-get "e/:school_public_id", to: "classroom/school_signup_links#show", as: :school_signup_link
+get "ecole/:school_public_id", to: "classroom/school_signup_links#show", as: :school_signup_link,
+                               constraints: { school_public_id: /[1-9A-HJ-NP-Za-km-z]{14}/ }
 post "c/:code", to: "classroom/joins#create"
 # ADR-0109 (§4.4) : le code de six caractères revient à côté du lien ; sa vérification est une page
 # (Turbo Frame), jamais du JSON, au débit `classroom/joins`. Nom et chemin gelés par le Lot 0 ; le contrôleur est celui du Lot A.
