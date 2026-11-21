@@ -59,10 +59,15 @@ services:
       ACTIVE_STORAGE_SERVICE: local
     # db:seed here, not through PREPARE_DATABASE: the image of a branch older than that variable (Staging before its
     # train) would never seed, and its base would stay empty, without the team invitation nor the standard set.
+    # Chantier demarrage-develop: bin/docker-entrypoint alone runs db:prepare (migrations, and the seeds of a new base)
+    # before Puma; db:seed (lessons, standard set, activity) runs in the background once /up answers, so a deploy no
+    # longer shows 502 while lessons reload (16 min 36 s on 2026-11-21). A failed seed is logged and the site stays up.
+    # The "[démarrage]" lines time the start (script/mesure/demarrage). The production (compose.yaml) keeps its own
+    # entrypoint, unchanged (test/config/hostinger_demarrage_test.rb).
     entrypoint:
       - sh
       - -c
-      - 'pw=$$(cat /secrets/db_password) && [ -n "$$pw" ] || { echo "mot de passe de la base illisible" >&2; exit 1; }; export DATABASE_URL="postgres://lnclass:$$pw@db:5432/lnclass_production"; ./bin/rails db:prepare db:seed || exit 1; exec /rails/bin/docker-entrypoint "$$@"'
+      - 'pw=$$(cat /secrets/db_password) && [ -n "$$pw" ] || { echo "mot de passe de la base illisible" >&2; exit 1; }; export DATABASE_URL="postgres://lnclass:$$pw@db:5432/lnclass_production"; echo "[démarrage] conteneur démarré $$(date -u +%FT%TZ)"; ( until curl -fsS -o /dev/null http://localhost:8080/up; do sleep 5; done; echo "[démarrage] /up répond $$(date -u +%FT%TZ), semis en tâche de fond"; if ./bin/rails db:seed; then echo "[démarrage] semis terminé $$(date -u +%FT%TZ)"; else echo "[démarrage] semis en échec (code $$?) : leçons et jeu standard non mis à jour" >&2; fi ) & exec /rails/bin/docker-entrypoint "$$@"'
       - sh
     command: ["./bin/thrust", "./bin/rails", "server"]
     volumes:
