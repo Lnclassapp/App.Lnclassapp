@@ -61,6 +61,12 @@ fr:
       form:
         step_counter: "Étape %{n} sur 3"
         step_announce: "Étape %{n} sur 3 : %{title}"
+        # UDR-0176 §3.6 : après l'entrée, numéro et code sont déjà choisis : deux étapes.
+        step_counter_entry: "Étape %{n} sur 2"
+        step_announce_entry: "Étape %{n} sur 2 : %{title}"
+        you_hint_entry: "Dernière étape : qui es-tu ?"
+        entry_number_label: "Ton numéro"
+        entry_not_my_number: "Ce n'est pas ton numéro ?"
         back: "Retour"
         link_invalid: "Ce lien n'est plus valable. Choisis ta classe."
         # Étape 1.
@@ -99,14 +105,11 @@ fr:
         terms_link: "conditions d'utilisation"
         privacy_link: "protection des données"
       # UDR-0081 §3.3 : la cascade, partagée par l'inscription et par « Choisis ta classe » ; ses trois listes y puisent leurs textes.
-      # UDR-0091 : trois étapes numérotées, l'établissement replié avec « Changer », les niveaux en pastilles, les classes en cases.
+      # UDR-0091 : trois étapes numérotées, les niveaux en pastilles, les classes en cases ; l'établissement se cherche (UDR-0177).
       class_picker:
         step_school: "Ton établissement"
         step_level: "Ton niveau"
         step_classroom: "Ta classe"
-        change: "Changer"
-        change_label: "Changer d'établissement"
-        drena_name: "DRENA %{name}"
         school_first: "Choisis d'abord ton établissement."
         level_first: "Choisis d'abord ton niveau."
         levels_found:
@@ -115,8 +118,6 @@ fr:
         classrooms_found:
           one: "1 classe trouvée."
           other: "%{count} classes trouvées."
-        drena: "DRENA"
-        drena_prompt: "Choisis ta DRENA"
         continue: "Continuer"
         school_prompt: "Choisis ton établissement"
         full: "Complète"
@@ -128,6 +129,7 @@ fr:
         retry: "Réessayer"
       create:
         welcome: "Bienvenue dans ta classe !"
+        entry_expired: "Ton entrée a expiré. Tape de nouveau ton numéro et ton code secret."
   school:
     school_levels:
       index:

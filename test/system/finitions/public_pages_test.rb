@@ -52,10 +52,10 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
   end
 
   test "FU-19: /c/<token> and /teacher-signup leave the focus to the browser" do
-    [ join_classroom_path(@classroom.reload.link_token), new_teacher_registration_path ].each do |path|
+    [ join_classroom_path(@classroom.reload.link_token), new_teacher_registration_path(confirmed: 1) ].each do |path|
       visit path
-      # The eye of the PIN field is shown by its controller: Stimulus is connected, the autofocus controller too. (The student
-      # sign-up shows one step at a time: its PIN is on step 3, hidden, so the eye is looked for in the whole page.)
+      # The eye of the PIN field is shown by its controller: Stimulus is connected, the autofocus controller too. (/c/<token>
+      # opens the student entry, number and secret code, under the class banner that the keyboard must not hide.)
       assert_selector "[data-password-reveal-target=toggle]:not([hidden])", minimum: 1, visible: :all
 
       assert_equal "BODY", page.evaluate_script("document.activeElement.tagName"), path
@@ -64,14 +64,10 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
 
   test "FU-17: /c/<token> sent without a first name comes back in 422 with the focus on the field in error" do
     visit join_classroom_path(@classroom.reload.link_token)
+    pass_student_entry
     without_browser_validation("#student-registration-form")
     fill_in "student_registration[last_name]", with: "KOUASSI"
     choose I18n.t("genders.female")
-    fill_in "student_registration[contact]", with: "07 01 02 03 04"
-    # Step 2 is not complete (no first name): it stays open, so the secret code of step 3 is reached by the way back.
-    page.execute_script("document.querySelector('fieldset[data-step=\"3\"]').hidden = false")
-    fill_in "student_registration[pin]", with: "4821"
-    fill_in "student_registration[pin_confirmation]", with: "4821"
     click_on I18n.t("classroom.student_registrations.form.submit")
 
     assert_selector "#student_registration_first_name_error"

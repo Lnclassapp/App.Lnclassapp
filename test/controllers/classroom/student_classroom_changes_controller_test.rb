@@ -42,7 +42,7 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
                   "[data-controller='classroom--class-picker']" \
                   "[data-classroom--class-picker-classrooms-url-value='" \
                   "#{school_picker_classrooms_path('__school__', '__level__', scope: :student_classroom_change, current: @a.public_id)}']" do
-      assert_select "#class-picker-school-summary", text: /Lycée Moderne de Cocody/
+      assert_select "turbo-frame#school_results label:has(input[checked])", text: /Lycée Moderne de Cocody/
       assert_select "turbo-frame#picker_levels input[type=radio][name='student_classroom_change[level_slug]']"
       assert_select "button#student-classroom-change-submit[type=submit]", text: I18n.t("#{NEW}.submit")
     end
@@ -168,7 +168,7 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
 
     assert_response :forbidden
     assert_select "[role=alert]", text: refusal_message(:removed_from_classroom)
-    assert_select "#class-picker-school-summary", text: /Collège Saint-Viateur/
+    assert_select "turbo-frame#school_results label:has(input[checked])", text: /Collège Saint-Viateur/
 
     send_change(link_token: @c.link_token)
 
@@ -202,7 +202,7 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
 
     assert_response :forbidden
     assert_select "[role=alert]", text: refusal_message(:classroom_full)
-    assert_select "#class-picker-school-summary", text: /Collège Saint-Viateur/
+    assert_select "turbo-frame#school_results label:has(input[checked])", text: /Collège Saint-Viateur/
     assert_equal [ [ @a.id, "standard" ] ], open_memberships
     assert_empty moves
   end

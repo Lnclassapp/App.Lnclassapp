@@ -69,6 +69,8 @@ fr:
         label: "Ta classe"
         enter: "Entrer en classe"
         enter_label: "Entrer en classe, %{classroom}"
+        # UDR accueil-eleve-qr-fenetre-inviter §3.1 : le QR de l'adresse publique de l'établissement, à la place du sigle.
+        qr_label: "QR code de %{school} : à scanner pour s'inscrire"
       # UDR accueil élève §3.3 état 6 : l'élève sans classe active (archivée, ou retiré) ; le code, ou la cascade.
       no_classroom:
         title: "Choisis ta classe"
@@ -103,6 +105,12 @@ fr:
         # UDR-0174 §3 : une copie en cours, que la ligne reprend.
         in_progress: "En cours · %{answered}/%{total}"
         resume_label: "Reprendre l'exercice « %{title} »"
+      # Chantier partage-classe-k-factor, Lot B : « Invite tes camarades », sans croix (UDR partage-de-classe §3.3).
+      invite_classmates:
+        title: "Invite tes camarades"
+        hint: "Envoie le lien de la %{classroom} sur WhatsApp : ils arrivent directement dans ta classe."
+        action: "Inviter"
+        action_label: "Inviter mes camarades de la %{classroom} sur WhatsApp"
       # UDR-0084 §3.6, ADR-0089 §4.3 : « Ma classe » (état « sans enseignant »), la grille de l'accueil et la carte du jour ;
       # partage WhatsApp.
       invite_teacher:

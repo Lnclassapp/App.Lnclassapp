@@ -50,16 +50,16 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
 
   test "CA-J1, CA-J3, CA-J4: without a link, step 1 moves on by itself, step 2 asks for one subject, the account is created" do
     with_mobile_viewport do
-      visit new_teacher_registration_path
+      visit new_teacher_registration_path(confirmed: 1)
 
       assert_step 1
       assert_selector "#signup-welcome", text: t("#{PAGE}.welcome")
       assert_selector "#signup-back", visible: :hidden
       assert_no_button "Continuer"
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"), "la page déborde en largeur"
-      select "Abidjan 1", from: "teacher_registration[drena_public_id]"
+      fill_in "school_q", with: "cocody"
       assert_step 1
-      select "Lycée Moderne de Cocody", from: "teacher_registration[school_public_id]"
+      within("turbo-frame#school_results") { choose "Lycée Moderne de Cocody" }
 
       assert_step 2
       assert_selector "#signup-live", text: t("#{PAGE}.step_announce", n: 2, title: t("#{FORM}.you")), visible: :all
@@ -95,7 +95,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     visit teacher_invite_link_path("cccccccccccc")
     assert_step 1
     assert_selector "#invite-link-invalid", text: t("#{PAGE}.invite_invalid")
-    assert_field "teacher_registration[drena_public_id]"
+    assert_field "school_q"
 
     with_mobile_viewport do
       visit teacher_invite_link_path(token)
@@ -108,7 +108,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
         assert_text "Abidjan 1"
         assert_link t("identity.teacher_registrations.school_preview.other_school"), href: new_teacher_registration_path
       end
-      assert_no_field "teacher_registration[drena_public_id]"
+      assert_no_field "school_q"
       fill_person(contact: "+225 07 01 02 03 04")
 
       assert_step 3
@@ -122,7 +122,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
   end
 end
 
-# IE-17, IE-19 and UDR-0079 §2.4: without JavaScript, the DRENA is sent by its own GET form, the server cleans the number
+# IE-17, IE-19 and UDR-0079 §2.4: without JavaScript, the school search is sent by its own GET form, the server cleans the number
 # and refuses different codes. Chrome runs with scripts disabled.
 class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
   driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ], options: { name: :chrome_without_javascript } do |options|
@@ -138,11 +138,11 @@ class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
   end
 
   test "the whole sign-up without JavaScript" do
-    visit new_teacher_registration_path
+    visit new_teacher_registration_path(confirmed: 1)
 
-    select "Abidjan 1", from: "teacher_registration[drena_public_id]"
-    click_on I18n.t("identity.teacher_registrations.school_fields.show_schools")
-    select "Lycée Moderne de Cocody", from: "teacher_registration[school_public_id]"
+    fill_in "school_q", with: "cocody"
+    click_on I18n.t("school.school_searches.field.search")
+    choose "Lycée Moderne de Cocody"
     select "SVT", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Aya Marie"

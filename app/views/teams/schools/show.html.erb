@@ -6,6 +6,7 @@
 <%# Hors de #school_header : les streams qui remplacent l'en-tête (modification, désactivation, code) gardent ce retour. %>
 <%= ui_back_link t(".back"), href: back_href(schools_path, from: schools_path) %>
 <%= render "header", school: @school %>
+<div class="mb-6"><%= ui_button t(".posters"), href: school_posters_path(@school.public_id), target: "_blank", rel: "noopener", icon: "printer", variant: :secondary %></div>
 <%# UDR-0162 (bloc « Suivi ») : juste sous l'en-tête, chargé à la demande ; rien n'est rendu pour `content` (CA-01). %>
 <% if @can_manage_crm %>
   <%= turbo_frame_tag "school_crm", src: teams_school_follow_up_path(@school.public_id), loading: :lazy do %>

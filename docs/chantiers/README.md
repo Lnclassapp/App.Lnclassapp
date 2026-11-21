@@ -49,6 +49,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`acces-beta`](acces-beta/memo.md) | livré | feature | 2026-11-12 | Accès complet gratuit pendant la bêta |
 | [`accueil-direction`](accueil-direction/memo.md) | livré | feature | 2026-10-04 | Accueil de la direction : établissement, niveaux, annonces, activité |
 | [`accueil-eleve`](accueil-eleve/memo.md) | planification | feature | 2026-10-15 | Accueil élève aux couleurs Wave et Djamo |
+| [`acquisition-classes`](acquisition-classes/memo.md) | planifié | feature | 2026-11-16 | Faire entrer des classes entières |
 | [`acteurs-fantomes-parent-examsubject`](acteurs-fantomes-parent-examsubject/memo.md) | abandonné | bugfix | 2026-09-18 | `Parent` et `ExamSubject` : déclarés partout, persistés nulle part |
 | [`actions-en-menu`](actions-en-menu/memo.md) | livré | feature | 2026-09-28 | Actions d'un objet dans un menu ⋮ |
 | [`activation-eleve`](activation-eleve/memo.md) | livré | feature | 2026-11-16 | Activation de l'élève : de l'inscription au premier exercice réussi |
@@ -156,6 +157,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`crm-ecoles`](crm-ecoles/memo.md) | planifié | feature | 2026-11-04 | CRM des écoles |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | feature | 2026-09-28 | Croissance par parrainage entre enseignants, démarrage à froid et mesure du k-factor |
 | [`cycles-en-radio`](cycles-en-radio/memo.md) | livré | feature | 2026-09-28 | Cycles en boutons radio |
+| [`deploiement-continu-hostinger`](deploiement-continu-hostinger/memo.md) | planifié | feature | 2026-11-21 | Déploiement continu GitHub → VPS Hostinger |
 | [`deploiement-seeds-variantes`](deploiement-seeds-variantes/memo.md) | livré | bugfix | 2026-09-29 | Seeds joués deux fois au déploiement, `image_processing` réclamé au démarrage |
 | [`dette-contrats-ports-et-injection`](dette-contrats-ports-et-injection/memo.md) | abandonné | refactoring | 2026-09-18 | Contrats de ports et injection de dépendances non respectés |
 | [`dettes-reorganisation`](dettes-reorganisation/memo.md) | livré | bugfix | 2026-10-04 | Dettes du chantier « réorganisation équipe / enseignant » |
@@ -168,6 +170,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`enrolement-secret-stable`](enrolement-secret-stable/memo.md) | livré | bugfix | 2026-09-30 | Le QR code d'enrôlement reste valable quand la page est rouverte |
 | [`enseignant-plusieurs-matieres`](enseignant-plusieurs-matieres/memo.md) | exécution | feature | 2026-10-16 | Un enseignant qui enseigne plusieurs matières |
 | [`entonnoir-aarrr`](entonnoir-aarrr/memo.md) | livré | feature | 2026-11-16 | Entonnoir AARRR des élèves |
+| [`entree-eleve-unifiee`](entree-eleve-unifiee/memo.md) | livré | feature | 2026-11-20 | Une seule entrée pour l'élève : numéro et code secret |
 | [`environnements-de-pr`](environnements-de-pr/memo.md) | livré | feature | 2026-10-21 | Environnements de PR sur Railway |
 | [`epuration-contenus`](epuration-contenus/memo.md) | livré | feature | — | Épuration des en-têtes de contenu et « Tout publier » |
 | [`espace-direction`](espace-direction/memo.md) | exécution | feature | 2026-10-16 | Espace direction, ce qui reste de la V2 |
@@ -185,6 +188,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`formules-apres-soumission`](formules-apres-soumission/memo.md) | livré | bugfix | 2026-11-14 | Formules LaTeX brutes après « Vérifier » |
 | [`generer-classes`](generer-classes/memo.md) | livré | feature | 2026-09-28 | Générer les classes manquantes des établissements |
 | [`gestion-etablissement-direction`](gestion-etablissement-direction/memo.md) | planifié | feature | 2026-10-01 | La direction gère son établissement |
+| [`hebergement-cloudflare`](hebergement-cloudflare/memo.md) | en cours | refactoring | 2026-11-17 | Héberger la production sur Cloudflare |
 | [`historique-eleve`](historique-eleve/memo.md) | livré | feature | 2026-10-15 | Historique de l'élève aux couleurs Wave et Djamo |
 | [`hitl-refs-adr-obsoletes`](hitl-refs-adr-obsoletes/memo.md) | abandonné | refactoring | 2026-09-18 | En-têtes HITL citant des numéros d'ADR périmés |
 | [`hors-connexion`](hors-connexion/memo.md) | planifié | feature | 2026-11-12 | Lnclass hors connexion |
@@ -239,6 +243,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`ouverture-remediation`](ouverture-remediation/memo.md) | livré | feature | 2026-11-09 | La fiche s'ouvre sous l'Or |
 | [`page-d-accueil-photo`](page-d-accueil-photo/memo.md) | cadrage | feature | 2026-10-14 | Page d'accueil publique en photo plein écran |
 | [`parcours-matiere-exercice`](parcours-matiere-exercice/memo.md) | livré | optimisation | 2026-10-30 | Parcours matière → exercice |
+| [`partage-classe-k-factor`](partage-classe-k-factor/memo.md) | planifié | feature | 2026-11-20 | Partage de la classe et mesure du k-factor élève |
 | [`pentest-develop`](pentest-develop/) | pas de memo | — | — | — |
 | [`pentest-strix`](pentest-strix/memo.md) | cadrage | feature | 2026-09-28 | Pentest automatisé de la recette avant la mise en ligne |
 | [`photo-de-profil`](photo-de-profil/memo.md) | en cours | feature | 2026-09-28 | Photo de profil |
@@ -255,6 +260,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`rapports-de-classe`](rapports-de-classe/memo.md) | livré en PR | feature | 2026-10-16 | Rapports de classe : la fiche d'un élève et ce qui reste du suivi enseignant |
 | [`rapports-exercices`](rapports-exercices/memo.md) | livré | feature | 2026-10-04 | Comprendre où en est la classe sur un exercice |
 | [`recette-v1-defauts`](recette-v1-defauts/memo.md) | livré | bugfix | 2026-09-28 | Défauts de la recette V1 |
+| [`recherche-etablissement`](recherche-etablissement/memo.md) | livré | feature | 2026-11-20 | Chercher son établissement en tapant son nom |
 | [`refaire-ou-continuer`](refaire-ou-continuer/memo.md) | livré | feature | 2026-11-04 | Refaire ou continuer depuis la correction |
 | [`refonte-application`](refonte-application/memo.md) | décision | programme | 2026-09-18 | Refonte de l'application dans un nouveau projet Rails |
 | [`refonte-contenus-maths`](refonte-contenus-maths/memo.md) | livré | feature | 2026-10-29 | Refonte des contenus de mathématiques |
@@ -269,6 +275,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`reserves-revue-train`](reserves-revue-train/memo.md) | en revue | correction | 2026-11-15 | Réserves basses de la revue du train du 2026-11-15 |
 | [`retention-ip-audit`](retention-ip-audit/memo.md) | livré | feature | 2026-10-05 | Rétention de l'adresse IP du journal d'audit |
 | [`retouches`](retouches/memo.md) | permanent | retouche | 2026-11-06 | Retouches sans chantier parent |
+| [`retours-terrain-tiassale`](retours-terrain-tiassale/memo.md) | cadré | programme | 2026-11-20 | Retours de terrain de Tiassalé (programme) |
 | [`retrait-debugbar`](retrait-debugbar/memo.md) | livré | bugfix | 2026-10-03 | Retrait de debugbar |
 | [`revision-eleve`](revision-eleve/memo.md) | en pause | feature | 2026-10-15 | Révision de l'élève (fiche de révision) aux couleurs Wave et Djamo |
 | [`routage-modeles`](routage-modeles/memo.md) | livré | refactoring | 2026-10-19 | Routage des modèles par rôle |

@@ -12,6 +12,7 @@ module UseCases
       KEY = "k" * 32
       TOKEN = "0a1b2c3d4e5f".freeze
       CODE = "k7m4q2".freeze
+      INVITE = "k7m4q2zx".freeze
       Clock = Data.define(:now)
 
       # Toutes les écritures des faux repositories vont dans un même journal : la transaction le restaure si
@@ -122,6 +123,36 @@ module UseCases
         end
       end
 
+      class FakeAttributions
+        include Ports::Classroom::SignupAttributionRepositoryPort
+
+        def initialize(journal, fail:)
+          @journal = journal
+          @fail = fail
+        end
+
+        def record(student_id:, classroom_id:, source:, inviter_id:, at:)
+          return Shared::Result.failure(:conflict) if @fail
+
+          @journal << [ :attribution, student_id, classroom_id, source, inviter_id, at ]
+          Shared::Result.success
+        end
+      end
+
+      class FakeInviteCodes
+        include Ports::Classroom::InviteCodeRepositoryPort
+
+        attr_reader :asked
+
+        def initialize(known) = (@known = known
+                                 @asked = [])
+
+        def inviter_for(code:)
+          @asked << code
+          @known[code]
+        end
+      end
+
       setup do
         @journal = []
         @transaction = JournalTransaction.new(@journal)
@@ -134,14 +165,17 @@ module UseCases
                                            link_token: TOKEN, join_code: CODE, teacher_ids: [ 5 ], active_students_count: 12, **overrides)
       end
 
-      def register(actor: nil, classrooms: [ classroom ], schools: [ @school ], taken: [], refuse_membership: false, **attributes)
+      def register(actor: nil, classrooms: [ classroom ], schools: [ @school ], taken: [], refuse_membership: false, refuse_attribution: false,
+                   invite_codes: { INVITE => 55 }, **attributes)
         @registrations = FakeRegistrations.new(@journal, taken:)
         dto = Dtos::Classroom::StudentRegistrationInput.new(
           last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821",
           pin_confirmation: "4821", drena_public_id: "drn-1", school_public_id: "sch-3", level_slug: "3eme", classroom_public_id: "cls-7",
           **attributes
         )
+        @invite_codes = FakeInviteCodes.new(invite_codes)
         RegisterStudent.new(
+          attributions: FakeAttributions.new(@journal, fail: refuse_attribution), invite_codes: @invite_codes,
           classrooms: FakeClassrooms.new(@journal, classrooms), schools: FakeSchools.new(*schools),
           taxonomy: FakeTaxonomy.new(@level), registrations: @registrations,
           memberships: FakeMemberships.new(@journal, refuse: refuse_membership), sessions: FakeSessions.new(@journal),
@@ -150,6 +184,7 @@ module UseCases
       end
 
       def membership = @journal.find { it.first == :membership }
+      def attribution = @journal.find { it.first == :attribution }
 
       test "IL-01: creates the student, enters the chosen classroom at once, way « standard », and opens the session" do
         result = register
@@ -162,6 +197,7 @@ module UseCases
         assert_equal [ [ :lock, "cls-7" ],
                        [ :user, "0701020304", "student" ],
                        [ :membership, 7, 41, "standard", NOW ],
+                       [ :attribution, 41, 7, "cold", nil, NOW ],
                        [ :session, 41, Entities::Identity::SecretDigest.hmac(token, key: KEY), "1.2.3.4", "Chrome", NOW ] ],
                      @journal
         assert_equal [ "KOUASSI", "Aya Marie", "female", "4821" ],
@@ -332,6 +368,81 @@ module UseCases
 
         assert_equal [ :conflict, { contact: [ :taken ] } ], [ result.code, result.errors ]
         assert_equal [ [ :lock, "cls-7" ] ], @journal
+      end
+
+      test "attribution: a link with s=qr is « qr », with no inviter" do
+        register(link_token: TOKEN, arrival_source: "qr")
+
+        assert_equal [ :attribution, 41, 7, "qr", nil, NOW ], attribution
+        assert_empty @invite_codes.asked
+      end
+
+      test "attribution: a link with an invite code is « student_invite », with the inviter" do
+        register(link_token: TOKEN, invite_code: INVITE.upcase)
+
+        assert_equal [ :attribution, 41, 7, "student_invite", 55, NOW ], attribution
+      end
+
+      test "attribution: the invite code prevails over s=qr" do
+        register(link_token: TOKEN, arrival_source: "qr", invite_code: INVITE)
+
+        assert_equal "student_invite", attribution[3]
+      end
+
+      test "attribution: a bare link is « teacher_link »" do
+        register(link_token: TOKEN)
+
+        assert_equal [ "teacher_link", nil ], attribution.values_at(3, 4)
+      end
+
+      test "attribution: any s other than qr is ignored" do
+        register(link_token: TOKEN, arrival_source: "whatsapp")
+
+        assert_equal "teacher_link", attribution[3]
+      end
+
+      test "attribution: the class code is « code », and no inviter is looked up" do
+        register(join_code: CODE, invite_code: INVITE)
+
+        assert_equal [ "code", nil ], attribution.values_at(3, 4)
+        assert_empty @invite_codes.asked
+      end
+
+      test "attribution: the cascade is « cold »" do
+        register(invite_code: INVITE, arrival_source: "qr")
+
+        assert_equal [ "cold", nil ], attribution.values_at(3, 4)
+      end
+
+      test "attribution: a dead link that falls back to the cascade is « cold », whatever s and i" do
+        register(link_token: "cccccccccccc", invite_code: INVITE, arrival_source: "qr")
+
+        assert_equal [ "cold", nil ], attribution.values_at(3, 4)
+      end
+
+      test "attribution: an unknown or anonymised inviter code never fails the sign-up, it is « teacher_link » (« qr » with s=qr)" do
+        assert register(link_token: TOKEN, invite_code: "zzzzzzzz", invite_codes: {}).success?
+        assert_equal [ "teacher_link", nil ], attribution.values_at(3, 4)
+
+        @journal.clear
+        assert register(link_token: TOKEN, invite_code: "zzzzzzzz", arrival_source: "qr", invite_codes: {}).success?
+        assert_equal "qr", attribution[3]
+      end
+
+      test "attribution: a malformed invite code is dropped before any lookup" do
+        assert register(link_token: TOKEN, invite_code: "  ").success?
+        assert_empty @invite_codes.asked
+        assert_equal "teacher_link", attribution[3]
+      end
+
+      test "attribution: a refused sign-up writes none; a failed write cancels the account and the membership" do
+        register(taken: [ "0701020304" ])
+        assert_nil attribution
+
+        @journal.clear
+        result = register(refuse_attribution: true)
+        assert_equal :conflict, result.code
+        assert_empty @journal
       end
 
       test "atomicity: if the membership fails, the account created is cancelled with it" do

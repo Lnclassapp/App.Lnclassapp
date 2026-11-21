@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Classroom::StudentRegistrationInput
 # Rôle : forme de l'inscription élève : nom et prénoms (ADR-0037), classe donnée par le code de classe, par le jeton d'un lien ou choisie dans la cascade
-# ADR  : 0026, 0037, 0050, 0083, 0085, 0109 · UDR : 0081
+# ADR  : 0026, 0037, 0050, 0083, 0085, 0109, attribution-des-inscriptions-eleves · UDR : 0081
 module Dtos
   module Classroom
     class StudentRegistrationInput < Identity::PersonNameInput
@@ -21,6 +21,11 @@ module Dtos
       attribute :link_token, :string
       # Le code de classe tapé (ADR code-de-classe §4.6) : normalisé, jamais jugé ici ; le use case dit s'il est inconnu.
       attribute :join_code, :string
+
+      # ADR attribution-des-inscriptions-eleves : l'étiquette du lien (?s=) et le code d'invitation d'un camarade (?i=), portés par
+      # des champs cachés ; déclaratifs, jamais un droit. Seule l'étiquette « qr » est gardée, un code mal formé est oublié.
+      attribute :arrival_source, :string
+      attribute :invite_code, :string
 
       attr_reader :raw_contact
 
@@ -49,6 +54,15 @@ module Dtos
       # coupée à deux fois la longueur d'un code : une saisie démesurée n'est jamais gardée.
       def join_code=(raw)
         super(Entities::Classroom::JoinCode.normalize(raw).first(Entities::Classroom::JoinCode::LENGTH * 2).presence)
+      end
+
+      def arrival_source=(raw)
+        super(raw.to_s == Entities::Classroom::SignupSource::QR_TAG ? Entities::Classroom::SignupSource::QR_TAG : nil)
+      end
+
+      def invite_code=(raw)
+        code = Entities::Classroom::InviteCode.normalize(raw)
+        super((code if Entities::Classroom::InviteCode.valid?(code)))
       end
 
       def drena_public_id = public_id_or_nil(super)

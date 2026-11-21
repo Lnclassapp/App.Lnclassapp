@@ -60,9 +60,9 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     get new_session_path
 
     assert_select "#session-form + #session-sign-up.border-t", text: /Pas encore de compte \?/ do
-      assert_select "a[href=?].min-h-tap", new_student_registration_path, text: "Créer mon compte élève"
+      assert_select "a[href=?].min-h-tap", new_student_entry_path, text: "Créer mon compte élève"
     end
-    assert_operator response.body.index(new_identity_pin_reset_path), :<, response.body.index(new_student_registration_path)
+    assert_operator response.body.index(new_identity_pin_reset_path), :<, response.body.index("href=\"#{new_student_entry_path}\"")
   end
 
   # CA-3: the sign-in serves every role, so its own words say « vous », never « tu ».
@@ -106,7 +106,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_select "#auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?"
       assert_select "dialog#help-sheet", 1
-      assert_select "#session-sign-up a[href=?]", new_student_registration_path, text: "Créer mon compte élève"
+      assert_select "#session-sign-up a[href=?]", new_student_entry_path, text: "Créer mon compte élève"
     end
   end
 

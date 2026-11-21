@@ -1,0 +1,32 @@
+# Chantier hebergement-cloudflare (amendement Hostinger) : construit l'image lnclass-app:<révision> sur le VPS.
+# Le gestionnaire Docker de Hostinger ne construit pas (il lance « up » sans construction) : ce projet à usage
+# unique, « lnclass-construction », télécharge l'archive du dépôt à la révision voulue (jeton GitHub en lecture
+# seule, dans le .env du projet) et la construit avec le Docker du serveur. Le projet « lnclass » démarre ensuite
+# cette image.
+name: lnclass-construction
+
+services:
+  construction:
+    image: docker:28-cli
+    restart: "no"
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      # The server's Docker builds the image; nothing else is done with it.
+      - /var/run/docker.sock:/var/run/docker.sock
+    entrypoint: ["sh", "-c"]
+    command:
+      - >-
+        set -eu;
+        trap '[ "$$?" = 0 ] || echo "CONSTRUCTION ECHEC"' EXIT;
+        [ -n "$${APP_REVISION:-}" ] || { echo "APP_REVISION manquant"; exit 1; };
+        if docker image inspect "lnclass-app:$${APP_REVISION}" >/dev/null 2>&1; then echo "CONSTRUCTION OK (déjà là) lnclass-app:$${APP_REVISION}"; exit 0; fi;
+        apk add --no-cache -q curl;
+        mkdir -p /src && cd /src;
+        printf 'header = "Authorization: Bearer %s"\n' "$${GH_DEPLOY_TOKEN}" |
+        curl -fsSL -K - -o /tmp/source.tgz -H "Accept: application/vnd.github+json"
+        "https://api.github.com/repos/lnclassapp/App.Lnclassapp/tarball/$${APP_REVISION}" || { echo "CONSTRUCTION ECHEC : archive GitHub illisible"; exit 1; };
+        tar xzf /tmp/source.tgz --strip-components=1;
+        docker build --progress=plain -t "lnclass-app:$${APP_REVISION}" . &&
+        echo "CONSTRUCTION OK lnclass-app:$${APP_REVISION}" || { echo "CONSTRUCTION ECHEC"; exit 1; }
