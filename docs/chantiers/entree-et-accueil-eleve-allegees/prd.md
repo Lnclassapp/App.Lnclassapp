@@ -157,6 +157,6 @@ Et l'ancienne bannière « Invite tes camarades » n'y est plus
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-adresse-publique-etablissement — l'adresse du QR de l'établissement et sa menace
-- UDR-XXXX-pave-numerique-confirmation-code — entrée et inscription allégées, pavé numérique
-- UDR-XXXX-accueil-eleve-qr-fenetre-inviter — QR, fenêtre « Ton premier exercice », tuile « Inviter » (remplace UDR-0174 §3 sur la place de la carte)
+- ADR-0145 — l'adresse du QR de l'établissement et sa menace
+- UDR-0180 — entrée et inscription allégées, pavé numérique
+- UDR-0179 — QR, fenêtre « Ton premier exercice », tuile « Inviter » (remplace UDR-0174 §3 sur la place de la carte)

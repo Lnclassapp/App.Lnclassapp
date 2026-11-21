@@ -14,7 +14,7 @@
 
 Prises :
 
-- 2026-11-21 · Adresse du QR `/ecole/:school_public_id` (identifiant public existant) — par la session du chantier (ADR-XXXX-adresse-publique-etablissement)
+- 2026-11-21 · Adresse du QR `/ecole/:school_public_id` (identifiant public existant) — par la session du chantier (ADR-0145)
 - 2026-11-21 · Fenêtre du premier exercice : une fois par écran chargé, éteinte à la première copie rendue — par l'orchestrateur
 
 Ouvertes : `script/docs/a_trancher`, et les sections `## À trancher` des journaux des chantiers de la vague.

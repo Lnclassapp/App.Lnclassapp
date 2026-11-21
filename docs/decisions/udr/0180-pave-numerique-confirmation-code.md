@@ -1,4 +1,4 @@
-# UDR-XXXX : Entrée et inscription de l'élève allégées — pavé numérique pour confirmer le code secret
+# UDR-0180 : Entrée et inscription de l'élève allégées — pavé numérique pour confirmer le code secret
 <!-- index
 titre: Pavé numérique de « Nouveau sur Lnclass », entrée et inscription allégées
 statut: Accepté
@@ -11,7 +11,7 @@ problematique: l'élève retape son code secret dans un champ ordinaire, sans sa
 | **Statut** | Accepté |
 | **Date** | 2026-11-21 |
 | **Chantier** | `docs/chantiers/entree-et-accueil-eleve-allegees` |
-| **ADR lié** | ADR-0141 (inchangé), ADR-XXXX-adresse-publique-etablissement |
+| **ADR lié** | ADR-0141 (inchangé), ADR-0145 |
 | **Amende** | UDR-0176 §3.1, §3.2, §3.6 · UDR-0135 §3.2 (le code de classe quitte l'inscription) |
 | **Remplacé par** | — |
 
@@ -29,7 +29,7 @@ Retours terrain (porteur, 2026-11-21). Sur `/student`, deux phrases d'explicatio
 4. Sans JavaScript : le champ et le bouton actuels, actifs ; le serveur juge, même message.
 5. L'inscription perd le lien « J'ai le code de ma classe › » **et** le champ du code (sinon visible sans JavaScript). Le lien `/c/<jeton>` et la recherche d'établissement restent.
 6. Après l'entrée, l'étape « Toi » n'a plus le bloc « Ton numéro » ; il ne revient qu'en état d'erreur (numéro pris entre-temps).
-7. L'établissement gardé par l'adresse du QR (ADR-XXXX-adresse-publique-etablissement) est préchoisi à l'étape « Ta classe ».
+7. L'établissement gardé par l'adresse du QR (ADR-0145) est préchoisi à l'étape « Ta classe ».
 
 Pourquoi un pavé à l'écran plutôt que le clavier du téléphone : 10 grandes touches fixes, aucune lettre, l'écran ne saute pas ; c'est le geste que l'élève connaît des applications de paiement.
 

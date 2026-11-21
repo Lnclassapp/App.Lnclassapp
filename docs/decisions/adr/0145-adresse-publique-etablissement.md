@@ -1,4 +1,4 @@
-# ADR-XXXX : L'adresse publique d'un établissement mène à l'entrée élève, par son identifiant public existant
+# ADR-0145 : L'adresse publique d'un établissement mène à l'entrée élève, par son identifiant public existant
 <!-- index
 titre: Adresse publique d'un établissement (QR de l'accueil élève)
 statut: Accepté

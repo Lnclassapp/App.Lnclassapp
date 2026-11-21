@@ -154,6 +154,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0142](./0142-recherche-etablissement.md) | Recherche d'établissement publique et bornée | Accepté | 2026-11-20 | Les deux listes DRENA puis établissement font se tromper les élèves ; comment trouver son établissement en tapant, sans exposer plus et sans changer les use cases ? |
 | [0143](./0143-attribution-des-inscriptions-eleves.md) | Attribution des inscriptions élèves (k-factor) | Accepté | 2026-11-20 | mesurer qui a fait venir chaque élève (QR, camarade, lien, code, à froid) sans exposer l'invitant ni réécrire la voie d'arrivée |
 | [0144](./0144-deploiement-continu-hostinger.md) | Déploiement continu GitHub → VPS Hostinger (Develop, Staging, production), secrets dans des Environments GitHub | Accepté | 2026-11-21 | Depuis le départ de Railway, aucun déploiement n'est automatique ; le jeton Hostinger qui l'automatise ouvre tout le VPS. |
+| [0145](./0145-adresse-publique-etablissement.md) | Adresse publique d'un établissement (QR de l'accueil élève) | Accepté | 2026-11-21 | le QR de l'accueil élève doit mener à l'inscription dans un établissement, sans identifiant devinable ni donnée d'élève, ni nouvel oracle d'énumération |
 <!-- index:end -->
 
 ---

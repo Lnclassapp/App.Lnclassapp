@@ -1,8 +1,8 @@
-# UDR-XXXX : Accueil de l'élève — QR de l'établissement, fenêtre « Ton premier exercice », tuile « Inviter »
+# UDR-0179 : Accueil de l'élève — QR de l'établissement, fenêtre « Ton premier exercice », tuile « Inviter »
 <!-- index
 titre: Accueil élève : QR de l'établissement, fenêtre du premier exercice, tuile « Inviter »
 statut: Accepté
-adr-lie: [XXXX](../adr/XXXX-adresse-publique-etablissement.md)
+adr-lie: [0145](../adr/0145-adresse-publique-etablissement.md)
 problematique: la carte du premier exercice pousse la classe hors de l'accueil, le sigle ne sert à rien, et inviter un camarade est au bas de l'écran
 -->
 
@@ -11,7 +11,7 @@ problematique: la carte du premier exercice pousse la classe hors de l'accueil, 
 | **Statut** | Accepté |
 | **Date** | 2026-11-21 |
 | **Chantier** | `docs/chantiers/entree-et-accueil-eleve-allegees` |
-| **ADR lié** | ADR-XXXX-adresse-publique-etablissement |
+| **ADR lié** | ADR-0145 |
 | **Amende** | UDR-0173 §3 (carte de classe, grille) · UDR-0174 §2.1, §2.3 et §3 « Structure » (la carte devient une fenêtre) · UDR-0178 §3.3 (la bannière devient une tuile) · UDR-0078 (l'invitation à installer attend) |
 | **Remplacé par** | — |
 
