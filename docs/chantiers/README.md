@@ -242,6 +242,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`outils-ci-budgets`](outils-ci-budgets/memo.md) | livré | correction | 2026-10-28 | Deux outils de CI en retard sur leurs règles |
 | [`ouverture-remediation`](ouverture-remediation/memo.md) | livré | feature | 2026-11-09 | La fiche s'ouvre sous l'Or |
 | [`page-d-accueil-photo`](page-d-accueil-photo/memo.md) | cadrage | feature | 2026-10-14 | Page d'accueil publique en photo plein écran |
+| [`pages-sous-600ms`](pages-sous-600ms/memo.md) | livré | optimisation | 2026-11-21 | Aucune page au-dessus de 600 ms côté serveur |
 | [`parcours-matiere-exercice`](parcours-matiere-exercice/memo.md) | livré | optimisation | 2026-10-30 | Parcours matière → exercice |
 | [`partage-classe-k-factor`](partage-classe-k-factor/memo.md) | planifié | feature | 2026-11-20 | Partage de la classe et mesure du k-factor élève |
 | [`pentest-develop`](pentest-develop/) | pas de memo | — | — | — |

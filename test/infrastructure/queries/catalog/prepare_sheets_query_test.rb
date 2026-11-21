@@ -351,6 +351,30 @@ module Queries
         assert_nil prepare.sheet_of("inconnu")
       end
 
+      # pages-sous-600ms, lot C : `only:` ne construit que les exercices demandés, au numéro qu'ils ont dans la feuille entière.
+      test "only : l'exercice demandé est identique, au même numéro ; ceux qui ne le sont pas n'y sont pas, ni leurs questions ni leur copie" do
+        student = create_student
+        subject = create_subject(course: @course, title: "Sujet A", notions: "Thalès")
+        create_exercise(subject:, course: @course, title: "S1", position: 30)
+        s2 = create_exercise(subject:, course: @course, title: "S2", position: 31)
+        extra = create_exercise(essential: @n1, title: "Ex 1 bis", position: 40)
+        done = create_exercise_session(student:, exercise: extra, status: "completed", score_percent: 100)
+        create_attempt(session: done)
+        actor = student_actor(student)
+        full = call(actor)
+
+        partial = PrepareSheetsQuery.new.call(course_slug: @course.slug, actor:, only: [ extra.public_id, s2.public_id, "inconnu" ])
+
+        assert_equal [ extra.public_id, s2.public_id ].map { full.exercise(it) }, [ extra.public_id, s2.public_id ].map { partial.exercise(it) }
+        assert_equal [ 2, 2 ], [ partial.exercise(extra.public_id).number, partial.exercise(s2.public_id).number ]
+        assert_equal done.public_id, partial.exercise(extra.public_id).copy.session_public_id
+        assert_nil partial.exercise(@e1.public_id)
+        assert_nil partial.exercise("inconnu")
+        assert_equal full.interros.map(&:dom_id), partial.interros.map(&:dom_id)
+        assert_equal [ [ extra.public_id ], [ s2.public_id ] ], [ partial.interros.first, partial.devoirs.first ].map { |sheet| sheet.exercises.map(&:public_id) }
+        assert_equal [], PrepareSheetsQuery.new.call(course_slug: @course.slug, actor:, only: []).sheets.flat_map(&:exercises)
+      end
+
       # sujet-avant-de-commencer : la page d'une feuille choisit sa feuille par son ancre (le dom_id), parmi celles que le rôle lit.
       test "on retrouve une feuille par son ancre : notion, toute la leçon, sujet ; une ancre inconnue ou retirée rend nil" do
         subject = create_subject(course: @course, title: "Sujet A", notions: "Thalès")
