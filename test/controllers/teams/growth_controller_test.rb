@@ -172,6 +172,8 @@ class Teams::GrowthControllerTest < ActionDispatch::IntegrationTest
       assert_equal %w[10 4 2 3 0 1 0,6], rows.first.css("td").map { it.text.squish }
     end
     assert_select "#growth_signup_k", text: /Mesuré depuis le/
+    assert_select "#growth_signup_k_value", text: "0,6"
+    assert_select "#growth_signup_k", text: /Seuil 0,5 à J\+14/
     assert_no_match(/Zoumana|Secretnom/, response.body)
   end
 
