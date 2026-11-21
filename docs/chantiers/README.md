@@ -271,6 +271,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`reserves-revue-train`](reserves-revue-train/memo.md) | en revue | correction | 2026-11-15 | Réserves basses de la revue du train du 2026-11-15 |
 | [`retention-ip-audit`](retention-ip-audit/memo.md) | livré | feature | 2026-10-05 | Rétention de l'adresse IP du journal d'audit |
 | [`retouches`](retouches/memo.md) | permanent | retouche | 2026-11-06 | Retouches sans chantier parent |
+| [`retours-terrain-tiassale`](retours-terrain-tiassale/memo.md) | cadré | programme | 2026-11-20 | Retours de terrain de Tiassalé (programme) |
 | [`retrait-debugbar`](retrait-debugbar/memo.md) | livré | bugfix | 2026-10-03 | Retrait de debugbar |
 | [`revision-eleve`](revision-eleve/memo.md) | en pause | feature | 2026-10-15 | Révision de l'élève (fiche de révision) aux couleurs Wave et Djamo |
 | [`routage-modeles`](routage-modeles/memo.md) | livré | refactoring | 2026-10-19 | Routage des modèles par rôle |
