@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · ClassPicker — la cascade établissement (recherche) → niveau → classe, pour le partial _class_picker
 # Rôle : niveaux seulement pour un établissement actif choisi, classes seulement pour un niveau de cet établissement ; partagé par l'inscription élève, « Choisis ta classe » et « Changer de classe »
-# ADR  : 0062, 0085 (§4.2), XXXX-recherche-etablissement · UDR : 0081 (§3.3, §3.5), XXXX-champ-etablissement
+# ADR  : 0062, 0085 (§4.2), 0142-recherche-etablissement · UDR : 0081 (§3.3, §3.5), 0177-champ-etablissement
 module ClassPicker
   extend ActiveSupport::Concern
   include SchoolSearchField

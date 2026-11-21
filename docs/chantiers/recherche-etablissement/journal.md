@@ -60,5 +60,5 @@
 |---|---|
 | **Livré le** | 2026-11-20 |
 | **PR** | #665 |
-| **ADR produits** | ADR-XXXX-recherche-etablissement |
-| **UDR produits** | UDR-XXXX-champ-etablissement |
+| **ADR produits** | ADR-0142 |
+| **UDR produits** | UDR-0177 |

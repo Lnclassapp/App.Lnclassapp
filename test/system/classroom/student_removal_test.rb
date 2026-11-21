@@ -95,7 +95,7 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
     assert_selector "#classroom_roster_count", text: "1"
   end
 
-  # UDR-0091 §3.1, UDR-XXXX-champ-etablissement : l'établissement de la dernière classe, coché ; le niveau en pastille, la classe en case.
+  # UDR-0091 §3.1, UDR-0177 : l'établissement de la dernière classe, coché ; le niveau en pastille, la classe en case.
   def choose_classroom(name)
     within("turbo-frame#school_results") { assert_checked_field "Lycée Classique d'Abidjan" }
     within("turbo-frame#picker_levels") { choose "3ème" }

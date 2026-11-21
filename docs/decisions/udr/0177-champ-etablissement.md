@@ -1,4 +1,4 @@
-# UDR-XXXX : Le champ « Ton établissement » et sa liste de résultats
+# UDR-0177 : Le champ « Ton établissement » et sa liste de résultats
 <!-- index
 titre: Champ établissement avec recherche
 statut: Accepté
@@ -11,7 +11,7 @@ problematique: Comment l'élève et l'enseignant trouvent leur établissement en
 | **Statut** | Accepté |
 | **Date** | 2026-11-20 |
 | **Chantier** | `docs/chantiers/recherche-etablissement` |
-| **ADR lié** | ADR-XXXX-recherche-etablissement |
+| **ADR lié** | ADR-0142 |
 | **Remplacé par** | — |
 
 Amende : UDR-0024 §2.4 (repli des listes DRENA), UDR-0081 §3.3 et UDR-0091 §3.2 (étape 1 de la cascade élève : la ligne repliée et « Changer » disparaissent), UDR-0079 et UDR-0099 §3.2 (rattachement enseignant).

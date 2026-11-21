@@ -1,6 +1,6 @@
 // ⚡ FRONT · classroom/class_picker_controller — cascade établissement → niveau → classe de l'inscription élève
 // Rôle : l'établissement trouvé (school--school-search:picked) pose le src des niveaux, chaque choix vide ce qui suit ; l'envoi attend une classe cochée ; liste absente → erreur
-// ADR  : 0051, 0085, XXXX-recherche-etablissement · UDR : 0081 (§3.3), XXXX-champ-etablissement
+// ADR  : 0051, 0085, 0142-recherche-etablissement · UDR : 0081 (§3.3), 0177-champ-etablissement
 import { Controller } from "@hotwired/stimulus"
 
 const SCHOOL = "__school__"

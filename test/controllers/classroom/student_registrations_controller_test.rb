@@ -371,7 +371,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     end
   end
 
-  # ADR-XXXX-recherche-etablissement : une recherche qui ne contient plus l'établissement envoyé le retire, et ses niveaux avec.
+  # ADR-0142 : une recherche qui ne contient plus l'établissement envoyé le retire, et ses niveaux avec.
   test "without JavaScript, a new search drops the school it no longer lists, and its levels" do
     get new_student_registration_path, params: { school_q: "korhogo", student_registration: registration_params(classroom_public_id: nil) }
 

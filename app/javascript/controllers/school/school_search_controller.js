@@ -1,6 +1,6 @@
 // ⚡ FRONT · school/school_search_controller — le champ « Ton établissement » : recherche pendant la frappe dans le frame « school_results »
 // Rôle : 300 ms après la frappe, 2 lettres au moins, pose le src du frame ; le résultat coché replie la liste et émet « picked » ; une nouvelle saisie émet « cleared »
-// ADR  : XXXX-recherche-etablissement · UDR : XXXX-champ-etablissement (§3 Comportement), sur le modèle de search_controller
+// ADR  : 0142-recherche-etablissement · UDR : 0177-champ-etablissement (§3 Comportement), sur le modèle de search_controller
 import { Controller } from "@hotwired/stimulus"
 
 // Comme Queries::School::SchoolSearchQuery.words : la saisie compte sans ses espaces ni sa ponctuation.

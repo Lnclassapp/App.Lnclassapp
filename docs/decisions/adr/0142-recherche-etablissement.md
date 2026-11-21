@@ -1,4 +1,4 @@
-# ADR-XXXX : Une recherche publique bornée remplace les listes DRENA puis établissement
+# ADR-0142 : Une recherche publique bornée remplace les listes DRENA puis établissement
 <!-- index
 titre: Recherche d'établissement publique et bornée
 statut: Accepté

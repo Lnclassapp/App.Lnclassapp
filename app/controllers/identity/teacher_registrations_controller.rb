@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
 # Rôle : inscription enseignant publique, établissement cherché (DRENA déduite) ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
-# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103, XXXX-recherche-etablissement · UDR : 0050, 0079, 0099 (§3.4), 0134 (§3.9), XXXX-champ-etablissement, 0176-entree-eleve-unique (§3.7 : « Êtes-vous bien enseignant ? »)
+# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103, 0142-recherche-etablissement · UDR : 0050, 0079, 0099 (§3.4), 0134 (§3.9), 0177-champ-etablissement, 0176-entree-eleve-unique (§3.7 : « Êtes-vous bien enseignant ? »)
 module Identity
   class TeacherRegistrationsController < ApplicationController
     include SchoolSearchField

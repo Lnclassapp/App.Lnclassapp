@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/teacher_registrations/_school_fields — l'établissement de la voie standard : le champ de recherche commun %>
 <%# Rôle : « Votre établissement » cherché en tapant (DRENA à côté de chaque résultat) ; la recherche sans JavaScript part du formulaire GET teacher-signup-school ; l'établissement coché ouvre l'étape 2 %>
-<%# ADR  : 0030, 0083, XXXX-recherche-etablissement · UDR : 0079, 0134 (§3.9), XXXX-champ-etablissement %>
+<%# ADR  : 0030, 0083, 0142-recherche-etablissement · UDR : 0079, 0134 (§3.9), 0177-champ-etablissement %>
 <%# locals: (form:) -%>
 <%# L'établissement coché fait passer à l'étape 2 (signup_steps_controller#go) : l'écouteur est sur ce conteneur, qui survit au
     remplacement du cadre des résultats. Jamais sur `change` : la saisie elle-même en émet un en perdant le focus. %>

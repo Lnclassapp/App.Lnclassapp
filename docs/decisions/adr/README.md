@@ -151,6 +151,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0139](./0139-hebergement-cloudflare.md) | Production sur Cloudflare Containers, base PlanetScale, fichiers R2 | Remplacé | 2026-11-17 | La facture Railway monte alors que la production ne consomme presque rien. |
 | [0140](./0140-hebergement-hostinger.md) | Production sur un VPS Hostinger (Docker), Cloudflare devant, fichiers et sauvegardes sur R2 | Accepté | 2026-11-17 | PlanetScale refuse les cartes prépayées ; il faut un hébergement bon marché payable par le porteur. |
 | [0141](./0141-entree-eleve-revele-un-numero-inscrit.md) | Entrée élève unique : un numéro inscrit se révèle | Accepté | 2026-11-20 | une seule entrée numéro + code pour l'élève doit dire si le numéro a un compte, ce que la connexion cachait |
+| [0142](./0142-recherche-etablissement.md) | Recherche d'établissement publique et bornée | Accepté | 2026-11-20 | Les deux listes DRENA puis établissement font se tromper les élèves ; comment trouver son établissement en tapant, sans exposer plus et sans changer les use cases ? |
 <!-- index:end -->
 
 ---

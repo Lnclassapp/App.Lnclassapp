@@ -1,4 +1,4 @@
-// ADR-XXXX-recherche-etablissement, UDR-XXXX-champ-etablissement (§3 Comportement) : le champ « Ton établissement » cherche
+// ADR-0142, UDR-0177 (§3 Comportement) : le champ « Ton établissement » cherche
 // 300 ms après la dernière frappe, jamais sous 2 lettres ni chiffres ; Entrée cherche tout de suite sans envoyer le formulaire ;
 // une nouvelle frappe retire le choix fait (« cleared ») ; un résultat coché replie la liste sur lui et émet « picked ».
 // Lancer : node --test test/javascript/school_search_controller.test.js (aucun navigateur : le frame et ses options sont simulés).

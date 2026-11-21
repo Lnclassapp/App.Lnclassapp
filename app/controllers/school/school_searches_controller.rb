@@ -1,11 +1,11 @@
 # 🌐 DELIVERY · School::SchoolSearchesController
 # Rôle : recherche publique des établissements actifs pendant la frappe, 20 au plus, limitée en débit : frame « school_results »
-# ADR  : 0029, 0050, XXXX-recherche-etablissement · UDR : XXXX-champ-etablissement
+# ADR  : 0029, 0050, 0142-recherche-etablissement · UDR : 0177-champ-etablissement
 module School
   class SchoolSearchesController < ApplicationController
     # Les formulaires qui demandent un établissement : le nom de leurs champs ; toute autre valeur → le premier.
     SCOPES = %w[student_registration student_classroom_choice student_classroom_change teacher_registration school_join].freeze
-    # Une classe de 40 élèves derrière une même adresse cherche environ 6 fois chacun (ADR-XXXX-recherche-etablissement §4.3).
+    # Une classe de 40 élèves derrière une même adresse cherche environ 6 fois chacun (ADR-0142 §4.3).
     RATE_LIMIT = { to: 300, within: 1.minute, scope: "school/search" }.freeze
 
     allow_unauthenticated_access

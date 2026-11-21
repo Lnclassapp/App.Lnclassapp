@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · School::TeacherSchoolsController
 # Rôle : « Mes établissements » de l'enseignant : la liste, « Ajouter un établissement » (recherche) et « Quitter »
-# ADR  : 0028, 0083, 0094, XXXX-recherche-etablissement · UDR : 0098 (§3.1), 0099 (§3.1 à §3.3) · l'enseignant est celui de la session, jamais un paramètre
+# ADR  : 0028, 0083, 0094, 0142-recherche-etablissement · UDR : 0098 (§3.1), 0099 (§3.1 à §3.3) · l'enseignant est celui de la session, jamais un paramètre
 module School
   class TeacherSchoolsController < AuthenticatedController
     include SchoolSearchField

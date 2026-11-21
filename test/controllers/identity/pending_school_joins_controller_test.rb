@@ -16,7 +16,7 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
 
   def t(key, **) = I18n.t("identity.pending_accounts.show.#{key}", **)
 
-  # Le vrai formulaire n'envoie plus de DRENA : une DRENA envoyée quand même est ignorée (ADR-XXXX-recherche-etablissement §4.4).
+  # Le vrai formulaire n'envoie plus de DRENA : une DRENA envoyée quand même est ignorée (ADR-0142 §4.4).
   def join(school, drena: nil)
     post pending_school_join_path, params: { school_join: { drena_public_id: drena&.public_id, school_public_id: school&.public_id } }
   end
@@ -64,7 +64,7 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
     assert_empty Orm::TeacherSchool.where(teacher: @teacher)
   end
 
-  # CA-9 (ADR-XXXX-recherche-etablissement §4.4) : la DRENA n'est plus envoyée ; elle vient de l'établissement choisi.
+  # CA-9 (ADR-0142 §4.4) : la DRENA n'est plus envoyée ; elle vient de l'établissement choisi.
   test "CA-9 : un établissement cherché se rejoint sans DRENA envoyée, ou avec une autre" do
     elsewhere = create_school(name: "Lycée de Bouaké")
     sign_in_as @teacher

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolSearchQuery
 # Rôle : chercher un établissement actif en tapant (nom, sigle, DRENA, initiales), 20 au plus, avec sa DRENA ; retrouver le choisi
-# ADR  : 0029, 0067, XXXX-recherche-etablissement · UDR : XXXX-champ-etablissement · public : rien de plus que la liste par DRENA
+# ADR  : 0029, 0067, 0142-recherche-etablissement · UDR : 0177-champ-etablissement · public : rien de plus que la liste par DRENA
 module Queries
   module School
     class SchoolSearchQuery

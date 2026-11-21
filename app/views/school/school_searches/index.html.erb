@@ -1,6 +1,6 @@
 <%# 🌐 UI · school/school_searches/index — frame « school_results » : les établissements trouvés, chacun avec sa DRENA, en boutons radio %>
 <%# Rôle : servi seul pendant la frappe, ou rendu dans le champ (repli GET, re-rendu 422) ; vide, introuvable, erreur, liste ou l'établissement choisi seul %>
-<%# ADR  : XXXX-recherche-etablissement · UDR : XXXX-champ-etablissement (§3 Liste de résultats, États) %>
+<%# ADR  : 0142-recherche-etablissement · UDR : 0177-champ-etablissement (§3 Liste de résultats, États) %>
 <%# locals: (scope:, chosen:, result:, rate_limited: false) -%>
 <% page_title t(".page_title") %>
 <% register = School::SchoolSearchesController.register(scope) %>

@@ -101,8 +101,8 @@ Et pour l'enseignant, le formulaire GET de la recherche ne contient aucun champ 
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-recherche-etablissement — une recherche publique bornée remplace les deux listes ; la DRENA déduite de l'établissement.
-- UDR-XXXX-champ-etablissement — le champ « Ton établissement » et sa liste de résultats.
+- ADR-0142 — une recherche publique bornée remplace les deux listes ; la DRENA déduite de l'établissement.
+- UDR-0177 — le champ « Ton établissement » et sa liste de résultats.
 - Amende sans les remplacer : UDR-0024 (§2.4, repli des listes), UDR-0081 §3.3 et UDR-0091 §3.2 (étape 1 de la cascade), UDR-0079 (rattachement).
 
 ## 7. Mesures

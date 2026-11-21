@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 # UDR-0091 (CA-1 to CA-4, CA-7), in a real browser: « Choisis ta classe » in three numbered steps. The school of the last
-# classroom is checked, alone, under « Ton établissement » (UDR-XXXX-champ-etablissement); the levels are pills, the
+# classroom is checked, alone, under « Ton établissement » (UDR-0177); the levels are pills, the
 # classrooms boxes, two per row on a phone and four from 700 px, a full one disabled; « Rejoindre cette classe » waits for
 # a box. The pills answer the arrow keys. A new search, without leaving the page, drops the school and empties steps 2 and 3.
 class Classroom::ClassChoiceTest < ApplicationSystemTestCase

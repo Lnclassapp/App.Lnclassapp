@@ -1,6 +1,6 @@
 <%# 🌐 UI · school/school_searches/_field — le champ « Ton établissement » : on tape quelques lettres, on coche un résultat %>
 <%# Rôle : composant commun (cascade élève, inscription et rattachement enseignant) ; Stimulus school--school-search ; repli sans JavaScript en GET (« Chercher ») %>
-<%# ADR  : XXXX-recherche-etablissement · UDR : XXXX-champ-etablissement (§3), amende 0024 (§2.4), 0081 (§3.3), 0091 (§3.2), 0099 (§3.2) %>
+<%# ADR  : 0142-recherche-etablissement · UDR : 0177-champ-etablissement (§3), amende 0024 (§2.4), 0081 (§3.3), 0091 (§3.2), 0099 (§3.2) %>
 <%# locals: (scope:, chosen:, result:, term:, error: nil, search_form: nil, fallback_url: nil, label_hidden: false) -%>
 <%# search_form : l'id d'un formulaire GET distinct, obligatoire dès que l'hôte porte un code secret (inscriptions, rattachement) :
     jamais le PIN dans l'adresse. Sinon (« Choisis ta classe », « Changer de classe »), « Chercher » renvoie l'hôte en GET vers fallback_url. %>

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · SchoolSearchField — le champ « Ton établissement » d'un formulaire hôte : saisie relue, résultats, établissement choisi
 # Rôle : rend au partial school/school_searches/_field ses locals ; déduit la DRENA de l'établissement choisi avant le DTO (les use cases la gardent)
-# ADR  : XXXX-recherche-etablissement (§4.4, §4.5) · UDR : XXXX-champ-etablissement
+# ADR  : 0142-recherche-etablissement (§4.4, §4.5) · UDR : 0177-champ-etablissement
 module SchoolSearchField
   extend ActiveSupport::Concern
 

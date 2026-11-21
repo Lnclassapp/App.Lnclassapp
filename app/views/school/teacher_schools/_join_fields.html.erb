@@ -1,6 +1,6 @@
 <%# 🌐 UI · school/teacher_schools/_join_fields — rejoindre un établissement cherché en tapant (écran d'attente et « Mes établissements ») %>
 <%# Rôle : un seul formulaire de rattachement pour les deux écrans (UDR-0099 §3.2) ; le champ établissement commun ; repli sans JavaScript en GET vers get_url %>
-<%# ADR  : 0083, 0094, XXXX-recherche-etablissement · UDR : 0079 (§3.9), 0099 (§3.2), XXXX-champ-etablissement · Stimulus : school--school-search %>
+<%# ADR  : 0083, 0094, 0142-recherche-etablissement · UDR : 0079 (§3.9), 0099 (§3.2), 0177-champ-etablissement · Stimulus : school--school-search %>
 <%# locals: (school_join:, get_url:, post_url:, submit_label:) -%>
 <%# Repli sans JavaScript : la recherche revient en GET (school_q) et liste ses résultats, cochés puis envoyés par « Rejoindre ». %>
 <form id="school-join-search" action="<%= get_url %>" method="get"></form>

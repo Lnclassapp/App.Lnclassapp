@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-recherche-etablissement, UDR-XXXX-champ-etablissement : la recherche publique des établissements actifs, le cadre
+# ADR-0142, UDR-0177 : la recherche publique des établissements actifs, le cadre
 # « school_results » en boutons radio du formulaire demandé, 20 au plus, limitée à 300 par minute et par adresse.
 class School::SchoolSearchesControllerTest < ActionDispatch::IntegrationTest
   setup do

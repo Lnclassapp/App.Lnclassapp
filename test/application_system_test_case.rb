@@ -74,7 +74,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("classroom.classroom_students.manage.issue_code")
   end
 
-  # ADR-XXXX-recherche-etablissement, UDR-XXXX-champ-etablissement: a few letters in « Ton établissement », then the school
+  # ADR-0142, UDR-0177: a few letters in « Ton établissement », then the school
   # chosen in the list of results (each one a radio with its DRENA).
   def choose_school(name, search: name)
     fill_in "school_q", with: search
