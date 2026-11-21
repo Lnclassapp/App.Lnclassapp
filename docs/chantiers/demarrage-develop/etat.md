@@ -2,7 +2,7 @@
 
 > Tenu par l'orchestrateur ([`docs/workflows/orchestrateur.md`](../../workflows/orchestrateur.md)). Mis à jour une fois, en fin de session ; toute session d'orchestration commence par le lire. Ni secret, ni identifiant.
 
-**Mis à jour le** : 2026-11-21 · **Vague** : unique · **Où on en est** : lot A fusionné (#673, `0ffd82b`), déployé sur Develop ; mesure après pas encore lue (fenêtre de l'API dépassée)
+**Mis à jour le** : 2026-11-21 · **Vague** : unique · **Où on en est** : lot A fusionné (#673, `0ffd82b`), déployé sur Develop ; retouche #675 fusionnée ; Develop : /up en 16 s au plus puis 5 s ; reste le déploiement de Staging au train
 
 ## Lots
 
