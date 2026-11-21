@@ -7,7 +7,8 @@
 # Where the variables come from, first found wins:
 #   1. the session's environment, for the secrets: LNCLASS_RAILS_MASTER_KEY, LNCLASS_R2_ACCESS_KEY_ID,
 #      LNCLASS_R2_SECRET_ACCESS_KEY, LNCLASS_CLAUDE_AGENTAI_SECRET, GH_DEPLOY_TOKEN (variables of the Claude Code
-#      environment, set by the owner);
+#      environment, set by the owner, or secrets of the GitHub Environments, .github/workflows/deploiement.yml),
+#      plus HOSTINGER_API_TOKEN (the Hostinger API token, sent as a Bearer header when set);
 #   2. the .env the project already has on the VPS (read back through the Hostinger API): a redeploy keeps it;
 #   3. Railway, only to create a project that is not on the VPS yet (and for "bascule"), while Railway exists.
 # <sha>: a full commit of origin/main (production), origin/Staging or origin/Develop. One-off projects (construction,
@@ -59,8 +60,11 @@ def railway_vars(service_id=None, environment_id=ENV_PROD):
 
 def hostinger(path, payload=None, method="GET", missing_ok=False):
     data = json.dumps(payload).encode() if payload is not None else None
-    req = urllib.request.Request(API + path, data, {"content-type": "application/json", "User-Agent": "curl/8.5.0"},
-                                 method=method)
+    headers = {"content-type": "application/json", "User-Agent": "curl/8.5.0"}
+    # In a Claude Code session the proxy adds the token; in GitHub Actions it is the secret of the Environment.
+    if os.environ.get("HOSTINGER_API_TOKEN"):
+        headers["Authorization"] = "Bearer " + os.environ["HOSTINGER_API_TOKEN"]
+    req = urllib.request.Request(API + path, data, headers, method=method)
     try:
         with urllib.request.urlopen(req, timeout=120) as r:
             return json.load(r)
@@ -259,12 +263,28 @@ def wait_for_action(action_id, timeout=900):
 # A one-off project: started, followed in its logs until its OK or ECHEC line, then deleted from the VPS
 # (containers and .env), whatever the outcome.
 def run_once(project, compose_path, env, ok, failed, timeout):
+    # Another environment's build holds the same project name: wait for it to be gone, 20 min at most.
+    waited = 0
+    while vps_env(project) is not None:
+        if waited >= 1200:
+            sys.exit(f"{project} toujours sur le VPS après 20 min : un autre déploiement construit, ou un projet "
+                     f"orphelin à supprimer (script/hostinger/journaux.py {project})")
+        print(f"{project} déjà sur le VPS : attente ({waited // 60} min)")
+        time.sleep(20)
+        waited += 20
     send(project, compose_path, env)
     deadline, outcome, lines = time.time() + timeout, None, []
+    # The verdict must name this revision: two deployments of other branches may start in the same 20 s.
+    revision = env.get("APP_REVISION", "")
     while outcome is None and time.time() < deadline:
         time.sleep(20)
+        current = vps_env(project) or {}
+        if current.get("APP_REVISION", "") != revision:
+            # Another deployment replaced this project: it is its build now, left running.
+            sys.exit(f"{project} remplacé sur le VPS par un autre déploiement : rien supprimé, relancer ce run")
         lines = [e.get("line", "") for s in hostinger(f"/docker/{project}/logs") for e in s.get("entries", [])]
-        outcome = failed if any(failed in l for l in lines) else ok if any(ok in l for l in lines) else None
+        outcome = (failed if any(failed in l for l in lines) else
+                   ok if any(ok in l and revision in l for l in lines) else None)
     result = hostinger(f"/docker/{project}/down", method="DELETE")
     if result.get("id"):
         wait_for_action(result["id"])
