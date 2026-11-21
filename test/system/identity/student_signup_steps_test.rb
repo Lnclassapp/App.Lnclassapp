@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 # CA-C1 to CA-C6, CA-C8, CA-C9 (UDR « inscription élève en trois étapes »), in a real browser (1400 px wide: the computer layout,
 # the blue panel of §3.5 bis; the phone has its own case at 390 px): one form cut in three steps in the page.
-# The class code opens step 1 and moves on by itself once it is recognised; the link lands on step 2; the cascade (« Je n'ai
-# pas de code ») moves on when a classroom is touched; step 2 moves on a delay after the last key (1 s in production, 100 ms here), announced in an
+# Step 1 is the school search cascade only (no class code, chantier entree-et-accueil-eleve-allegees CA-6): it moves on when a
+# classroom is touched; the link lands on step 2; step 2 moves on a delay after the last key (1 s in production, 100 ms here), announced in an
 # aria-live region; « ‹ Retour » loses nothing; a server error reopens the step that holds it. There is no « Continuer ».
 class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
   FORM = "classroom.student_registrations.form".freeze
@@ -13,10 +13,9 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     drena = create_drena(name: "Abidjan 1")
     @school = create_school(drena:, name: "Collège Moderne 1 de Tiassalé")
     @classroom = create_classroom(school: @school, level: create_level(name: "3ème"), name: "3e B")
-    @code = @classroom.reload.join_code
   end
 
-  test "CA-C1, CA-C2: the code opens step 1, a recognised code moves to step 2 with the class recap, and « Ce n'est pas ta classe ? » comes back" do
+  test "CA-C1, CA-6: step 1 is the cascade only, with no class code field nor link; a classroom touched moves to step 2, « Retour » comes back" do
     visit new_student_registration_path
 
     assert_step 1
@@ -28,91 +27,28 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     assert_selector "#signup-back", visible: :hidden
     assert_no_button "Continuer"
     assert_selector "fieldset[data-step='2']", visible: :hidden
-    # La cascade est ouverte d'abord, la DRENA en premier ; le lien du code est sous la DRENA.
     assert_selector "#signup-cascade", visible: :visible
+    # CA-6: neither the link nor the field of the class code.
+    assert_no_selector "#signup-have-code", visible: :all
+    assert_no_selector "#signup-code-field", visible: :all
     assert_no_field "student_registration[join_code]"
-    assert_selector "#signup-cascade #signup-have-code", visible: :visible
 
-    open_code
-    assert_no_selector "#signup-cascade", visible: :visible
-    assert_equal "student_registration_join_code", page.evaluate_script("document.activeElement.id")
-    assert_selector "#signup-live", text: I18n.t("#{FORM}.announce_code"), visible: :all
-    assert_selector "#signup-no-code", visible: :visible
-    fill_in "student_registration[join_code]", with: @code.downcase
-
+    pick_classroom
     assert_step 2
-    # CA-C9: the class found is in the panel under step 1, and not repeated above the form.
     assert_panel_step 2
-    assert_selector "#signup-panel li[data-step='1'] #signup-panel-recap", text: /3e B.*Collège Moderne 1 de Tiassalé/m
-    assert_no_selector "#signup-classroom-recap", visible: :visible
     assert_selector "#signup-live", text: I18n.t("#{FORM}.step_announce", n: 2, title: I18n.t("#{FORM}.you")), visible: :all
     assert_selector "legend", text: I18n.t("#{FORM}.you"), obscured: false
     assert_equal "legend", page.evaluate_script("document.activeElement.tagName").downcase
     assert_selector "#signup-back", visible: :visible
 
-    click_on I18n.t("#{FORM}.other_classroom")
-
+    click_on I18n.t("#{FORM}.back")
     assert_step 1
-    # « Ce n'est pas ta classe ? » rouvre la cascade, le code est vidé.
     assert_selector "#signup-cascade", visible: :visible
-    assert_no_field "student_registration[join_code]"
-    open_code
-    assert_field "student_registration[join_code]", with: ""
   end
 
-  test "CA-B3: an unknown code stays on step 1 with the message under the field" do
+  test "CA-C4, CA-C5: step 2 moves on a delay after the last key, « Retour » keeps the fields, and the account is created with way « standard »" do
     visit new_student_registration_path
-    open_code
-    fill_in "student_registration[join_code]", with: "zzzzzz"
-
-    assert_selector "#classroom-code-unknown", text: I18n.t("classroom.classroom_codes.show.unknown")
-    assert_step 1
-    assert_selector "#student_registration_join_code[aria-invalid=true]"
-
-    open_code
-    fill_in "student_registration[join_code]", with: "zzzzz"
-    assert_no_selector "#classroom-code-unknown"
-  end
-
-  # Review of #295: a cut network (fetch rejected) or a 5xx without the frame must not leave « Vérification… » on screen for ever,
-  # nor replace the signup page by the error page; typing again checks again.
-  test "a failed code check (network, then 500) stays on step 1 with a short message, and a new typing checks again" do
-    visit new_student_registration_path
-    execute_script(<<~JS)
-      const original = window.fetch
-      window.codeCheckMode = "network"
-      window.fetch = (input, init) => {
-        if (!String(input?.url || input).includes("/classroom-codes/")) return original(input, init)
-        return window.codeCheckMode === "network" ? Promise.reject(new TypeError("Failed to fetch"))
-          : window.codeCheckMode === "error" ? Promise.resolve(new Response("<html><body>Erreur</body></html>", { status: 500, headers: { "Content-Type": "text/html" } }))
-          : original(input, init)
-      }
-    JS
-
-    { "network" => "zzzzzz", "error" => "zzzzzy" }.each do |mode, code|
-      execute_script("window.codeCheckMode = '#{mode}'")
-      open_code
-      fill_in "student_registration[join_code]", with: code
-
-      assert_selector "#classroom-code-check-failed", text: I18n.t("#{FORM}.check_failed")
-      assert_no_selector "#signup-code-checking", visible: :visible
-      assert_no_selector "turbo-frame#classroom_code_preview[src]"
-      assert_selector "#student_registration_join_code[aria-describedby~=classroom_code_preview]"
-      assert_current_path new_student_registration_path
-      assert_step 1
-    end
-
-    execute_script("window.codeCheckMode = 'ok'")
-    open_code
-    fill_in "student_registration[join_code]", with: @code
-
-    assert_step 2
-  end
-
-  test "CA-C4, CA-C5: step 2 moves on a delay after the last key, « Retour » keeps the fields, and the account is created with way « code »" do
-    visit new_student_registration_path
-    open_code
-    fill_in "student_registration[join_code]", with: @code
+    pick_classroom
     assert_step 2
 
     fill_in "student_registration[last_name]", with: "KOUASSI"
@@ -141,13 +77,12 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     assert_toast I18n.t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path
     student = Orm::User.find_by!(contact: "0701020305", role: "student")
-    assert_equal [ [ @classroom.id, "code" ] ], Orm::ClassroomStudent.where(student:).pluck(:classroom_id, :joined_via)
+    assert_equal [ [ @classroom.id, "standard" ] ], Orm::ClassroomStudent.where(student:).pluck(:classroom_id, :joined_via)
   end
 
   test "CA-C4: the move does not happen while a field is incomplete, nor in the middle of a typing" do
     visit new_student_registration_path
-    open_code
-    fill_in "student_registration[join_code]", with: @code
+    pick_classroom
     assert_step 2
 
     fill_in "student_registration[last_name]", with: "KOUASSI"
@@ -172,43 +107,10 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     assert_link I18n.t("#{FORM}.other_classroom")
   end
 
-  # One journey for both: the cascade itself, and the code typed before it, which must not win once the box is checked.
-  test "UDR §3.2: a valid code for class X, then « Je n'ai pas de code »: the code is gone, class Y touched moves to step 2, the student enters Y, way « standard »" do
-    other = create_classroom(school: @school, level: @classroom.level, name: "3e C")
-    visit new_student_registration_path
-    open_code
-    fill_in "student_registration[join_code]", with: @code
-    assert_step 2
-    click_on I18n.t("#{FORM}.back")
-    assert_step 1
-
-    click_on I18n.t("#{FORM}.no_code")
-    assert_no_field "student_registration[join_code]"
-    choose_school "Collège Moderne 1 de Tiassalé", search: "moderne tiassale"
-    within("turbo-frame#picker_levels") { choose "3ème" }
-    within("turbo-frame#picker_classrooms") { choose "3e C" }
-
-    assert_step 2
-    assert_no_selector "#signup-classroom-recap", visible: :visible
-    fill_in "student_registration[last_name]", with: "KOUASSI"
-    fill_in "student_registration[first_name]", with: "Aya Marie"
-    choose I18n.t("genders.female")
-    fill_in "student_registration[contact]", with: "0701020304"
-    assert_step 3
-    fill_in "student_registration[pin]", with: "4821"
-    fill_in "student_registration[pin_confirmation]", with: "4821"
-    click_on I18n.t("#{FORM}.submit")
-
-    assert_current_path student_home_path
-    student = Orm::User.find_by!(contact: "0701020304")
-    assert_equal [ [ other.id, "standard" ] ], Orm::ClassroomStudent.where(student:).pluck(:classroom_id, :joined_via)
-  end
-
   test "CA-C6: a number already used reopens step 2 with the error under the field" do
     create_student(contact: "0701020304", classroom: @classroom)
     visit new_student_registration_path
-    open_code
-    fill_in "student_registration[join_code]", with: @code
+    pick_classroom
     assert_step 2
     fill_in "student_registration[last_name]", with: "KOUASSI"
     fill_in "student_registration[first_name]", with: "Aya Marie"
@@ -233,8 +135,7 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
       create_student(contact: "0701020304", classroom: @classroom)
       visit new_student_registration_path
       assert_no_selector "[data-classroom--signup-steps-delay-value]", visible: :all
-      open_code
-      fill_in "student_registration[join_code]", with: @code
+      pick_classroom
       assert_step 2
       fill_in "student_registration[last_name]", with: "KOUASSI"
       fill_in "student_registration[first_name]", with: "Aya Marie"
@@ -256,14 +157,18 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
       visit new_student_registration_path
       assert_step 1
       assert_operator evaluate_script("document.documentElement.scrollWidth"), :<=, 390
-      %w[#signup-have-code].each do |selector|
-        assert_operator evaluate_script("document.querySelector('#{selector}').getBoundingClientRect().height"), :>=, 44
-      end
       assert_equal [ true, false, false ], page.all("#signup-progress li", visible: :all).map { it[:class].include?("bg-brand") }
     end
   end
 
   private
+
+  # CA-6: the cascade is the only way in; the school, the level, then the classroom touched.
+  def pick_classroom(name = "3e B")
+    choose_school "Collège Moderne 1 de Tiassalé", search: "moderne tiassale"
+    within("turbo-frame#picker_levels") { choose "3ème" }
+    within("turbo-frame#picker_classrooms") { choose name }
+  end
 
   # CA-C8: the panel says the same at every step; only the step in progress (aria-current) moves.
   # entry: after the student entry, the number is known to have no account: no « Déjà un compte ? ».

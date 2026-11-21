@@ -98,7 +98,9 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     confirm("1357")
     assert_redirected_to new_student_registration_path
     follow_redirect!
-    assert_select "#signup-entry-number", text: /01 01 02 03 04/
+    # CA-7: the number is neither shown nor asked again after the entry.
+    assert_select "#signup-entry-number", 0
+    assert_select "input[name=entry_mode]"
     assert_select "input[name='student_registration[contact]']", 0
     assert_select "input[name='student_registration[pin]']", 0
     assert_select "#signup-step-counter", text: "Étape 1 sur 2"
@@ -120,7 +122,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "#student_entry_pin_confirmation_error", text: "Les deux codes secrets ne sont pas identiques."
     get new_student_registration_path
-    assert_select "#signup-entry-number", 0
+    assert_select "input[name=entry_mode]", 0
   end
 
   test "« Ce n'est pas mon numéro » oublie l'entrée et remet le numéro dans le champ" do
@@ -142,6 +144,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :unprocessable_entity
     assert_select "#signup-entry-number-error", text: "Ce numéro est déjà utilisé."
+    assert_select "#signup-entry-number a#signup-entry-fix-number[href=?]", new_student_entry_path(fresh: 1)
   end
 
   test "CA-8 : par le lien de classe, l'entrée montre la classe ; nouveau, il s'inscrit dans cette classe à l'étape « Toi »" do
@@ -257,12 +260,12 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
 
     travel 29.minutes do
       get new_student_registration_path
-      assert_select "#signup-entry-number"
+      assert_select "input[name=entry_mode]"
     end
 
     travel 31.minutes do
       get new_student_registration_path
-      assert_select "#signup-entry-number", 0
+      assert_select "input[name=entry_mode]", 0
 
       assert_no_difference -> { Orm::User.count } do
         finish_registration

@@ -22,6 +22,8 @@
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees · L'invitation à installer l'application et la fenêtre du premier exercice sur l'accueil — appliqué : l'invitation attend tant que la fenêtre peut s'ouvrir ; autres : les deux ; recommandé : l'invitation attend
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees · Le QR : simple image, ou agrandi au toucher — appliqué : image de 96 px, sans agrandissement ; autres : toucher pour l'agrandir en plein écran ; recommandé : image seule, agrandir si la recette montre que les téléphones peinent à le lire
 - [ ] 2026-11-21 · entree-et-accueil-eleve-allegees · Les inscriptions par le QR de l'établissement comptent comme « standard » dans l'attribution (ADR-0143) — appliqué : « standard » ; autres : une étiquette `school_qr` ; recommandé : une étiquette, dans un chantier suivant
+- [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot B) · Un ancien formulaire en cache qui poste `join_code` avec un code inconnu : l'erreur `join_code` n'a plus de champ où s'afficher (l'étape 1 s'ouvre sans message sur ce point) — appliqué : le serveur refuse (422) et garde FIELDS comme le veut l'UDR §3.3, sans message dédié ; autres : afficher l'erreur dans le cadre de la cascade ; recommandé : laisser tel quel (cas résiduel, un rechargement règle)
+- [ ] 2026-11-21 · entree-et-accueil-eleve-allegees (Lot B) · Tests système du lot (`student_signup_steps_test`, `student_activation_test`, `join_test`) réécrits sur la cascade mais non exécutés : Chrome (153) et chromedriver (147) sont incompatibles dans l'environnement de l'agent — appliqué : réécriture soignée, contrôleurs verts ; recommandé : le vérificateur les rejoue (`bin/system-changed`)
 
 ## Retouches
 

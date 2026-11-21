@@ -96,7 +96,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
       within("#student-registration-section-you") do
         assert_selector "#signup-classroom-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
         assert_link I18n.t("#{FORM}.other_classroom")
-        assert_selector "#signup-entry-number", text: "07 01 02 03 04"
+        assert_no_selector "#signup-entry-number"
         assert_no_field "student_registration[contact]"
       end
       choose I18n.t("genders.female")
