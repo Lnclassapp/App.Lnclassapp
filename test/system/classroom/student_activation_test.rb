@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 # Chantier activation-eleve, PRD CA-10 (UDR-0174) : de l'inscription au premier exercice, en un tap
-# depuis l'accueil. L'élève amené par sa classe (son code) reçoit le devoir de sa classe ; l'élève seul, le programme.
+# depuis l'accueil. L'élève qui a choisi sa classe reçoit le devoir de sa classe ; l'élève seul, le programme.
 class Classroom::StudentActivationTest < ApplicationSystemTestCase
   FORM = "classroom.student_registrations.form".freeze
 
@@ -12,11 +12,12 @@ class Classroom::StudentActivationTest < ApplicationSystemTestCase
     @homework = create_exercise(course:, lesson_wide: true, title: "Angles opposés")
   end
 
-  test "CA-10, CA-3, CA-9: brought by the class code, the home offers the assignment; one tap opens the copy" do
+  test "CA-10, CA-3, CA-9: brought by the class (picked in the cascade), the home offers the assignment; one tap opens the copy" do
     create_assignment(classroom: @classroom, assignable: @homework)
     visit new_student_registration_path
-    find("#signup-have-code").click
-    fill_in "student_registration[join_code]", with: @classroom.reload.join_code
+    choose_school "Collège Moderne 1 de Tiassalé", search: "moderne tiassale"
+    within("turbo-frame#picker_levels") { choose "3ème" }
+    within("turbo-frame#picker_classrooms") { choose "3e B" }
     fill_in "student_registration[last_name]", with: "KOUASSI"
     fill_in "student_registration[first_name]", with: "Aya"
     choose I18n.t("genders.female")

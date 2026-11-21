@@ -10,18 +10,12 @@
 <% step_of = { join_code: 1, classroom_public_id: 1, drena_public_id: 1, school_public_id: 1, level_slug: 1, link_token: 1,
                last_name: 2, first_name: 2, gender: 2, contact: 2, pin: 3, pin_confirmation: 3 } %>
 <% start = [ @form.errors.attribute_names.filter_map { step_of[it] }.min || floor, floor ].max %>
-<%# UDR §3.2 : la cascade d'abord ; le code est rouvert s'il porte l'erreur, ou s'il est déjà saisi (sa classe est celle du rappel). %>
-<% code_open = @form.join_code.present? || @form.errors[:join_code].any? %>
 <%# Un compte-rendu de classe pour l'étape 2 : le lien (nom de l'établissement), ou le code reconnu (sigle ou nom). %>
 <% recap = if @preview then [ @preview.classroom_name, @preview.school_name ] elsif @code_preview then [ @code_preview.classroom_name, @code_preview.school_label ] end %>
 <main id="student-signup" class="mx-auto flex min-h-dvh w-full max-w-md flex-col px-gutter pb-10 lg:max-w-240 lg:px-8"
       data-controller="classroom--signup-steps" data-classroom--signup-steps-start-value="<%= start %>"
       data-classroom--signup-steps-counter-value="<%= t("classroom.student_registrations.form.#{counter_key}", n: "%{n}") %>"
       data-classroom--signup-steps-announce-value="<%= t("classroom.student_registrations.form.#{@entry ? "step_announce_entry" : "step_announce"}", n: "%{n}", title: "%{title}") %>"
-      data-classroom--signup-steps-code-open-value="<%= code_open %>"
-      data-classroom--signup-steps-announce-code-value="<%= t("classroom.student_registrations.form.announce_code") %>"
-      data-classroom--signup-steps-announce-cascade-value="<%= t("classroom.student_registrations.form.announce_cascade") %>"
-      data-classroom--signup-steps-code-url-value="<%= classroom_code_path("__code__") %>"
       <%= tag.attributes("data-classroom--signup-steps-delay-value": Rails.configuration.x.signup_steps_delay_ms) %>>
   <div id="signup-header" class="flex min-h-bar items-center justify-between">
     <%= link_to root_path, "aria-label": t("shared.auth_welcome.logo_home"),

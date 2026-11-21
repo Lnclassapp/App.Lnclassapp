@@ -13,6 +13,6 @@ module StudentEntryHelper
     assert_selector "h1", text: I18n.t("#{ENTRY}.confirm_title")
     fill_in "student_entry[pin_confirmation]", with: pin
     click_on I18n.t("#{ENTRY}.confirm_submit")
-    assert_selector "#signup-entry-number"
+    assert_selector "#student-registration-form input[name=entry_mode]", visible: :all
   end
 end
