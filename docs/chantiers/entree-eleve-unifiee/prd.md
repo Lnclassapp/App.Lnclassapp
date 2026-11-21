@@ -125,6 +125,6 @@ Scénario: CA-12 Confirmation enseignant
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-entree-eleve-revele-un-numero-inscrit — l'entrée révèle si un numéro est inscrit, débit et garde du code en session.
-- UDR-XXXX-entree-eleve-unique — l'écran d'entrée, l'écran « pas encore de compte », l'inscription en mode entrée, la question enseignant.
+- ADR-0141 — l'entrée révèle si un numéro est inscrit, débit et garde du code en session.
+- UDR-0176 — l'écran d'entrée, l'écran « pas encore de compte », l'inscription en mode entrée, la question enseignant.
 - Pas de nouveau port : `EnterAsStudent` compose `Authenticate` et `users#find_by_contact`.

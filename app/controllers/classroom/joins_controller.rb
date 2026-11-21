@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::JoinsController
 # Rôle : /c/<jeton> ouvre au visiteur l'entrée élève (numéro et code secret), puis l'inscription la classe déjà choisie ; à l'élève sans classe, la carte ; tout autre paramètre (ancien code compris), la voie standard avec l'alerte
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095, XXXX-entree-eleve-revele-un-numero-inscrit · UDR : 0081, 0083, 0102, XXXX-entree-eleve-unique (§3.4)
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095, 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0081, 0083, 0102, 0176-entree-eleve-unique (§3.4)
 module Classroom
   class JoinsController < ApplicationController
     include StudentEntrySession
@@ -51,7 +51,7 @@ module Classroom
 
     private
 
-    # UDR-XXXX-entree-eleve-unique §3.4 : le visiteur passe d'abord par l'entrée, le bandeau de la classe au-dessus ; son entrée
+    # UDR-0176 §3.4 : le visiteur passe d'abord par l'entrée, le bandeau de la classe au-dessus ; son entrée
     # confirmée (numéro inconnu), il s'inscrit ici, à l'étape « Toi », numéro et code gardés.
     def render_visitor_page
       @entry = confirmed_student_entry

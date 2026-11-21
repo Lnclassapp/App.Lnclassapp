@@ -16,7 +16,7 @@ Un seul lot : aucun port, aucune table, aucune migration ; les vues touchées (e
 | Fichier | Chantier en parallèle | Risque | Parade |
 |---|---|---|---|
 | `classroom/student_registrations/_form.html.erb`, `new.html.erb` | `recherche-etablissement` (sélecteur DRENA → établissement) | Conflit de texte | Le sélecteur n'est pas touché ; seuls l'étape « Toi », le compteur et le panneau changent. Fusion de cette PR en premier (ordre de l'orchestrateur). |
-| `classroom/student_registrations_controller.rb` (débits) | `inscription-classe-meme-wifi` (livré) | Débit d'une classe sur un wifi | Compteur propre à l'inscription qui suit l'entrée (60/min), ADR-XXXX §4.2 |
+| `classroom/student_registrations_controller.rb` (débits) | `inscription-classe-meme-wifi` (livré) | Débit d'une classe sur un wifi | Compteur propre à l'inscription qui suit l'entrée (60/min), ADR-0141 §4.2 |
 
 ## Portes de sortie
 

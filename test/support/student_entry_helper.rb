@@ -1,5 +1,5 @@
 # Chantier entree-eleve-unifiee : « Je suis élève » passe d'abord par l'entrée (numéro et code secret). Un nouveau numéro
-# confirme son code puis arrive sur l'inscription, numéro et code gardés (ADR-XXXX-entree-eleve-revele-un-numero-inscrit).
+# confirme son code puis arrive sur l'inscription, numéro et code gardés (ADR-0141).
 module StudentEntryHelper
   ActionDispatch::SystemTestCase.include(self)
 

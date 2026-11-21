@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · StudentEntrySession — l'entrée élève gardée en session entre l'entrée et la fin de l'inscription
 # Rôle : numéro et code secret saisis à l'entrée, confirmés ou non, et le jeton du lien de classe ; 30 minutes, jamais dans l'adresse ni dans la page
-# ADR  : XXXX-entree-eleve-revele-un-numero-inscrit (§4.3) · UDR : XXXX-entree-eleve-unique
+# ADR  : 0141-entree-eleve-revele-un-numero-inscrit (§4.3) · UDR : 0176-entree-eleve-unique
 module StudentEntrySession
   extend ActiveSupport::Concern
 

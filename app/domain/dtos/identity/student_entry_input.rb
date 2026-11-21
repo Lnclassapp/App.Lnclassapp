@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Identity::StudentEntryInput
 # Rôle : forme de l'entrée élève unique : numéro et code secret, puis la confirmation du code quand le numéro n'a pas de compte
-# ADR  : 0050, XXXX-entree-eleve-revele-un-numero-inscrit · UDR : XXXX-entree-eleve-unique
+# ADR  : 0050, 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0176-entree-eleve-unique
 module Dtos
   module Identity
     class StudentEntryInput < CredentialsInput

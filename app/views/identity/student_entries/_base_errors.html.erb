@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/student_entries/_base_errors — l'alerte générale de l'entrée élève (trop de tentatives, verrouillage, autre app) %>
 <%# Rôle : role="alert" en tête du formulaire ; les erreurs de champ restent sous leur champ (ui_field) %>
-<%# UDR  : XXXX-entree-eleve-unique (§3.5) %>
+<%# UDR  : 0176-entree-eleve-unique (§3.5) %>
 <% if @form.errors[:base].any? %>
   <div id="student-entry-alert" role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
     <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>

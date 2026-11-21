@@ -6,10 +6,10 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-20 | Débit de l'entrée 120/min (et non 60) et 600/h par adresse ; inscription qui suit : son compteur, 60/min | Un nouvel élève envoie deux fois à l'entrée ; 40 élèves sur un wifi en une minute = 80 envois | Oui, ADR-XXXX §4.2 |
-| 2026-11-20 | Numéro et code gardés en session chiffrée 30 min, plus de champ code dans l'inscription | Ni dans l'adresse, ni dans la page ; survit au repli GET sans JS | Oui, ADR-XXXX §4.3 |
+| 2026-11-20 | Débit de l'entrée 120/min (et non 60) et 600/h par adresse ; inscription qui suit : son compteur, 60/min | Un nouvel élève envoie deux fois à l'entrée ; 40 élèves sur un wifi en une minute = 80 envois | Oui, ADR-0141 §4.2 |
+| 2026-11-20 | Numéro et code gardés en session chiffrée 30 min, plus de champ code dans l'inscription | Ni dans l'adresse, ni dans la page ; survit au repli GET sans JS | Oui, ADR-0141 §4.3 |
 | 2026-11-21 | Code secret : exactement 4 chiffres, aussi dans le navigateur (`pattern`, `minlength`) | Demande du porteur en cours de session | Non (règle existante `Pin::FORMAT`) |
-| 2026-11-21 | Compteur des codes faux à l'entrée, 10/min par adresse | Revue sécurité : 120/min sur tout rôle contournait le débit de /login | Oui, ADR-XXXX §4.2 |
+| 2026-11-21 | Compteur des codes faux à l'entrée, 10/min par adresse | Revue sécurité : 120/min sur tout rôle contournait le débit de /login | Oui, ADR-0141 §4.2 |
 | 2026-11-21 | `data-turbo-prefetch="false"` sur les liens GET qui changent l'entrée | Turbo préchargeait « Ce n'est pas mon numéro » au survol et effaçait l'entrée | UDR §3.5, §3.6 |
 
 ## À trancher
@@ -17,12 +17,12 @@
 > Décisions laissées ouvertes ou tranchées par défaut par un agent, en attente du porteur. Relevées chaque jour à 12 h par la boîte de décisions (`docs/workflows/contrat-de-session.md`). Le porteur coche `[x]` et écrit sa réponse à la suite.
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
 
-- [ ] 2026-11-21 · entree-eleve-unifiee · `/student-signup` direct (pages d'établissement) garde ses trois étapes et « Déjà un compte ? » — appliqué : inchangé ; autres : le faire passer aussi par l'entrée ; recommandé : le faire passer par l'entrée dans une retouche, après `recherche-etablissement`
-- [ ] 2026-11-21 · entree-eleve-unifiee · Invitation enseignant `/i/<jeton>` et inscription direction sans la question « Êtes-vous bien enseignant(e) ? » — appliqué : sans question ; autres : la poser partout ; recommandé : sans question (le lien vise déjà un enseignant)
-- [ ] 2026-11-21 · entree-eleve-unifiee · « Je suis élève » sur l'accueil : un lien vers une page, plus une fenêtre — appliqué : page ; autres : formulaire dans la fenêtre ; recommandé : page (survit au 422 et au retour arrière)
-- [ ] 2026-11-21 · entree-eleve-unifiee · Question enseignant : « Oui » primaire en premier, « Non, je suis élève » secondaire dessous — appliqué : cet ordre ; autres : inverser ; recommandé : cet ordre
-- [ ] 2026-11-21 · entree-eleve-unifiee · Sur `/c/<jeton>`, pas de focus automatique sur le numéro (convention FU-19) — appliqué : pas de focus ; autres : focus sur le numéro ; recommandé : pas de focus (le clavier cacherait la classe)
-- [ ] 2026-11-21 · entree-eleve-unifiee · Plafond horaire 600 entrées/heure par adresse — appliqué : 600 ; autres : 1 200 ; recommandé : 600, à relever si la mesure montre une école bloquée
+- [x] 2026-11-21 · entree-eleve-unifiee · `/student-signup` direct (pages d'établissement) garde ses trois étapes et « Déjà un compte ? » — appliqué : inchangé ; autres : le faire passer aussi par l'entrée ; recommandé : le faire passer par l'entrée dans une retouche, après `recherche-etablissement` → tranché par l'orchestrateur, 2026-11-21 : inchangé
+- [x] 2026-11-21 · entree-eleve-unifiee · Invitation enseignant `/i/<jeton>` et inscription direction sans la question « Êtes-vous bien enseignant(e) ? » — appliqué : sans question ; autres : la poser partout ; recommandé : sans question (le lien vise déjà un enseignant) → tranché par l'orchestrateur, 2026-11-21 : sans question
+- [x] 2026-11-21 · entree-eleve-unifiee · « Je suis élève » sur l'accueil : un lien vers une page, plus une fenêtre — appliqué : page ; autres : formulaire dans la fenêtre ; recommandé : page (survit au 422 et au retour arrière) → tranché par l'orchestrateur, 2026-11-21 : page
+- [x] 2026-11-21 · entree-eleve-unifiee · Question enseignant : « Oui » primaire en premier, « Non, je suis élève » secondaire dessous — appliqué : cet ordre ; autres : inverser ; recommandé : cet ordre → tranché par l'orchestrateur, 2026-11-21 : cet ordre
+- [x] 2026-11-21 · entree-eleve-unifiee · Sur `/c/<jeton>`, pas de focus automatique sur le numéro (convention FU-19) — appliqué : pas de focus ; autres : focus sur le numéro ; recommandé : pas de focus (le clavier cacherait la classe) → tranché par l'orchestrateur, 2026-11-21 : pas de focus
+- [x] 2026-11-21 · entree-eleve-unifiee · Plafond horaire 600 entrées/heure par adresse — appliqué : 600 ; autres : 1 200 ; recommandé : 600, à relever si la mesure montre une école bloquée → tranché par l'orchestrateur, 2026-11-21 : 600
 
 ## Retouches
 
@@ -64,5 +64,5 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|
 | **Livré le** | 2026-11-21 |
 | **PR** | |
-| **ADR produits** | ADR-XXXX-entree-eleve-revele-un-numero-inscrit |
-| **UDR produits** | UDR-XXXX-entree-eleve-unique |
+| **ADR produits** | ADR-0141 |
+| **UDR produits** | UDR-0176 |

@@ -1,4 +1,4 @@
-# ADR-XXXX : L'entrée élève révèle si un numéro est inscrit
+# ADR-0141 : L'entrée élève révèle si un numéro est inscrit
 <!-- index
 titre: Entrée élève unique : un numéro inscrit se révèle
 statut: Accepté

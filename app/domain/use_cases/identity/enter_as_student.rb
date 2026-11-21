@@ -1,12 +1,12 @@
 # 🧠 DOMAINE · UseCases::Identity::EnterAsStudent
 # Rôle : l'entrée élève unique : un numéro inscrit se connecte (tout rôle, par Authenticate) ; un numéro inconnu confirme son code avant de créer son compte
-# ADR  : 0028 (exempté de policy : l'acteur n'existe pas encore), 0050, XXXX-entree-eleve-revele-un-numero-inscrit
+# ADR  : 0028 (exempté de policy : l'acteur n'existe pas encore), 0050, 0141-entree-eleve-revele-un-numero-inscrit
 module UseCases
   module Identity
     class EnterAsStudent
       # outcome : :signed_in (user, token) · :new_number (contact) · :confirmed (contact)
       Entered = Data.define(:outcome, :contact, :user, :token)
-      # ADR-XXXX-entree-eleve-revele-un-numero-inscrit : sur un numéro inscrit, le refus nomme le code, pas le couple.
+      # ADR-0141 : sur un numéro inscrit, le refus nomme le code, pas le couple.
       WRONG_PIN = { pin: [ :wrong_pin ] }.freeze
 
       def initialize(users:, login_attempts:, sessions:, audit_log:, digest_key:, clock:)

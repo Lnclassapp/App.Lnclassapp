@@ -31,7 +31,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_not Orm::User.exists?(contact: "0501020304")
   end
 
-  # Chantier entree-eleve-unifiee, D1 (PRD CA-12, UDR-XXXX-entree-eleve-unique §3.7).
+  # Chantier entree-eleve-unifiee, D1 (PRD CA-12, UDR-0176 §3.7).
   test "CA-12 : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant(e) ? », sans formulaire" do
     get new_teacher_registration_path
 

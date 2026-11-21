@@ -1,11 +1,11 @@
 # 🌐 DELIVERY · Identity::StudentEntriesController
 # Rôle : « Je suis élève » : numéro et code secret ; inscrit → connecté (tout rôle) ; inconnu → confirmer le code, puis l'inscription élève, numéro et code gardés
-# ADR  : 0050, 0085 (§4.7), XXXX-entree-eleve-revele-un-numero-inscrit · UDR : XXXX-entree-eleve-unique
+# ADR  : 0050, 0085 (§4.7), 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0176-entree-eleve-unique
 module Identity
   class StudentEntriesController < ApplicationController
     include StudentEntrySession
 
-    # ADR-XXXX §4.2 : une classe entre ensemble derrière une seule adresse (le wifi de l'école) ; un nouvel élève envoie
+    # ADR-0141 §4.2 : une classe entre ensemble derrière une seule adresse (le wifi de l'école) ; un nouvel élève envoie
     # deux fois (numéro et code, puis confirmation) : 120 par minute. Le plafond horaire borne qui teste des numéros. Le code
     # d'un compte reste protégé par le verrouillage par numéro (ADR-0050). L'inscription qui suit l'entrée a son compteur,
     # REGISTRATION_RATE_LIMIT (Classroom::StudentRegistrationsController).

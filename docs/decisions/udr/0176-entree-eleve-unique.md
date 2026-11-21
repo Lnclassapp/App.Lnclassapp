@@ -1,8 +1,8 @@
-# UDR-XXXX : Entrée élève unique — numéro et code secret, puis « pas encore de compte »
+# UDR-0176 : Entrée élève unique — numéro et code secret, puis « pas encore de compte »
 <!-- index
 titre: Entrée élève unique et question enseignant
 statut: Accepté
-adr-lie: XXXX-entree-eleve-revele-un-numero-inscrit
+adr-lie: 0141-entree-eleve-revele-un-numero-inscrit
 problematique: l'élève choisissait entre « se connecter » et « créer un compte » avant tout geste, et prenait le mauvais chemin
 -->
 
@@ -11,7 +11,7 @@ problematique: l'élève choisissait entre « se connecter » et « créer un co
 | **Statut** | Accepté |
 | **Date** | 2026-11-21 |
 | **Chantier** | `docs/chantiers/entree-eleve-unifiee` |
-| **ADR lié** | ADR-XXXX-entree-eleve-revele-un-numero-inscrit |
+| **ADR lié** | ADR-0141 |
 | **Remplacé par** | — |
 
 ---

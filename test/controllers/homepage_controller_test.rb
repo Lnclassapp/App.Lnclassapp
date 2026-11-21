@@ -36,7 +36,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
       assert_select "span[aria-hidden='true']", text: /Je prépare mes\s*interros\s*et devoirs\s*à la maison\./
       assert_equal [ "interros", "et devoirs" ], css_select("span.font-extrabold.text-ink").map { it.text.squish }
     end
-    # Chantier entree-eleve-unifiee (UDR-XXXX-entree-eleve-unique §3.1) : « Je suis élève » est un lien droit vers l'entrée.
+    # Chantier entree-eleve-unifiee (UDR-0176 §3.1) : « Je suis élève » est un lien droit vers l'entrée.
     assert_select "main a#role-entry-student-entry[href='#{new_student_entry_path}'].ui-button-lg.w-full", text: "Je suis élève"
     assert_select "main button[aria-haspopup='dialog'].ui-button-lg.w-full", text: "Enseignant(e)", count: 1
   end

@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_registrations/_form — le formulaire d'inscription élève, un seul, découpé en trois fieldset par signup_steps_controller %>
 <%# Rôle : 1 Ta classe (cascade d'abord, code derrière « J'ai le code de ma classe »), 2 Toi (rappel de classe, nom, prénoms, genre, numéro), 3 Ton code secret ; sans JavaScript les trois restent visibles ; 422/403/429 re-rendus %>
-<%# ADR  : 0037, 0050, 0083, 0085, 0109 · UDR : 0009, 0054, 0079, 0081 (§3.2), 0135 (§3.1 à §3.8, §3.5 bis), XXXX-entree-eleve-unique (§3.6 : @entry, sans numéro ni code, deux étapes) %>
+<%# ADR  : 0037, 0050, 0083, 0085, 0109 · UDR : 0009, 0054, 0079, 0081 (§3.2), 0135 (§3.1 à §3.8, §3.5 bis), 0176-entree-eleve-unique (§3.6 : @entry, sans numéro ni code, deux étapes) %>
 <%# start : l'étape ouverte ; floor : la première étape qui existe (2 par un lien) ; recap : [classe, établissement] ou nil %>
 <%# locals: (start:, floor:, recap:) -%>
 <% steps = "classroom--signup-steps" %>
@@ -106,7 +106,7 @@
       <% end %>
     </fieldset>
     <% if @entry %>
-      <%# UDR-XXXX-entree-eleve-unique §3.6 : après l'entrée, le numéro est rappelé, jamais redemandé ; le code non plus.
+      <%# UDR-0176 §3.6 : après l'entrée, le numéro est rappelé, jamais redemandé ; le code non plus.
           Une erreur du numéro (pris entre-temps) se dit ici. « Ce n'est pas mon numéro » rouvre l'entrée. %>
       <%= hidden_field_tag :entry_mode, 1, id: nil %>
       <% contact_error = @form.errors[:contact].first %>

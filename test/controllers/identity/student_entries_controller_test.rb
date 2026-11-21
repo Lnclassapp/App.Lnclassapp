@@ -1,6 +1,6 @@
 require "test_helper"
 
-# Chantier entree-eleve-unifiee (PRD §4, ADR-XXXX-entree-eleve-revele-un-numero-inscrit, UDR-XXXX-entree-eleve-unique) :
+# Chantier entree-eleve-unifiee (PRD §4, ADR-0141, UDR-0176) :
 # « Je suis élève » ouvre une seule entrée, numéro et code secret ; inscrit → connecté ; inconnu → confirmer le code, puis
 # l'inscription sans retaper ni l'un ni l'autre ; code faux → « Code secret incorrect » et « Code secret oublié ? ».
 class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest

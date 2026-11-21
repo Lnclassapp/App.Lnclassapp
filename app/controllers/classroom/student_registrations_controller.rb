@@ -1,7 +1,7 @@
 # 🌐 DELIVERY · Classroom::StudentRegistrationsController
 # Rôle : inscription élève publique : classe donnée par son code, par le jeton d'un lien ou choisie dans la cascade ; succès : session, accueil élève.
 #        Après l'entrée élève (mode entrée) : numéro et code viennent de l'entrée gardée en session, deux étapes ; sans elle, trois étapes.
-# ADR  : 0026, 0028, 0050, 0062, 0085, 0109 (§4.5, §4.6, §4.7), XXXX-entree-eleve-revele-un-numero-inscrit · UDR : 0079, 0081, 0135, XXXX-entree-eleve-unique
+# ADR  : 0026, 0028, 0050, 0062, 0085, 0109 (§4.5, §4.6, §4.7), 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0079, 0081, 0135, 0176-entree-eleve-unique
 module Classroom
   class StudentRegistrationsController < ApplicationController
     include ClassPicker
@@ -27,7 +27,7 @@ module Classroom
                                                               with: -> { refuse_too_many_posts }
     rate_limit to: 5, within: 1.minute, only: :create, name: "signup", unless: :wide_send?, by: -> { request.remote_ip },
                                                          with: -> { refuse_too_many_posts }
-    # ADR-XXXX-entree-eleve-revele-un-numero-inscrit §4.2 : après l'entrée, sans code de classe, l'envoi a son compteur (60 par
+    # ADR-0141 §4.2 : après l'entrée, sans code de classe, l'envoi a son compteur (60 par
     # minute et par adresse) : une classe qui choisit sa classe dans la cascade s'inscrit derrière un wifi.
     rate_limit **Identity::StudentEntriesController::REGISTRATION_RATE_LIMIT, only: :create, if: :entry_send?, by: -> { request.remote_ip },
                                                                  with: -> { refuse_too_many_posts }
@@ -104,7 +104,7 @@ module Classroom
       Dtos::Classroom::StudentRegistrationInput.normalize_link_token(posted[:link_token]).present?
     end
 
-    # En mode entrée, numéro et code viennent de l'entrée gardée, jamais du formulaire (UDR-XXXX §3.6).
+    # En mode entrée, numéro et code viennent de l'entrée gardée, jamais du formulaire (UDR-0176 §3.6).
     def form_input
       attributes = params.expect(student_registration: FIELDS).to_h.symbolize_keys
       if @entry && entry_form?
