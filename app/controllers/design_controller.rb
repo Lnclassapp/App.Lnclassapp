@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · DesignController — guide de style vivant (/design), dessiné hors production seulement
 # Rôle : rend chaque composant dans ses variantes et états, le shell de chaque rôle, et un CRUD Hotwire de démonstration
-# UDR  : 0005, 0006, 0054
+# UDR  : 0005, 0006, 0054, accueil-eleve-qr-fenetre-inviter (§3.2 : pas de fenêtre ici)
 class DesignController < ApplicationController
   # Formulaire d'exemple : fournit au composant champ un objet avec et sans erreurs, sans toucher au domaine.
   class Sample
@@ -30,7 +30,7 @@ class DesignController < ApplicationController
 
   # Le guide de style (hors production) reste ouvert : il ne montre aucune donnée.
   allow_unauthenticated_access
-  helper_method :shell_user, :teacher_schools
+  helper_method :shell_user, :teacher_schools, :first_exercise_prompt?
 
   def index
     @sample = Sample.new
@@ -80,6 +80,9 @@ class DesignController < ApplicationController
   end
 
   private
+
+  # Le guide de style montre un shell fictif : jamais la fenêtre « Ton premier exercice » (le layout la demande).
+  def first_exercise_prompt? = false
 
   def shell_user
     NavigationHelper::ShellUser.new(name: t("design.shell.names.#{@role}"), role: @role, detail: t("design.shell.details.#{@role}"))

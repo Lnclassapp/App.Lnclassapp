@@ -103,6 +103,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
         assert_select "[data-identity--pin-pad-target='box']", 4
         assert_select "#student-entry-keypad button[data-digit]", 10
         assert_select "#student-entry-keypad button[aria-label=?]", "Effacer"
+        assert_select "#student-entry-pin-offline[hidden][role=alert][data-identity--pin-pad-target=offline]", text: "Pas de connexion. Réessaie."
       end
       assert_select "#student-entry-confirm-submit:not([disabled])"
     end

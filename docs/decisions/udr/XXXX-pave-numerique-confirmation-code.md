@@ -60,7 +60,7 @@ Dans `#student-entry-confirm-form`, `data-controller="identity--pin-pad"`, dans 
 - `connect` : cache `field`, montre `pad`, vide la valeur, `disabled` sur `submit`, écoute `keydown` sur `document` (chiffres 0-9 et `Backspace`, ignorés si une touche de modification est enfoncée), écoute `turbo:submit-end` sur le formulaire.
 - `press` / touche chiffre : si moins de 4, ajoute le chiffre, met à jour cases, statut et bouton ; au 4e, `submit.disabled = false` puis `form.requestSubmit(submit)`, et le pavé est verrouillé (`aria-busy="true"` sur `pad`) jusqu'à la réponse.
 - `erase` / `Backspace` : retire le dernier chiffre.
-- `turbo:submit-end` : `detail.success` → montrer `check`, garder le pavé verrouillé (la redirection suit) ; échec → la page est re-rendue par le serveur (422), le contrôleur se reconnecte vide.
+- `turbo:submit-end` : `detail.success` → montrer `check`, garder le pavé verrouillé (la redirection suit) ; échec → la page est re-rendue par le serveur (422), le contrôleur se reconnecte vide ; échec **sans re-rendu serveur** (`detail.error`, ou pas de `fetchResponse` : hors ligne) → montrer `#student-entry-pin-offline` (`role="alert"`, rendu `hidden`, `pin_pad.offline` « Pas de connexion. Réessaie. », `text-sm text-error`), garder les 4 chiffres, déverrouiller le pavé et réactiver le bouton pour renvoyer ; le message se cache à la frappe suivante et au renvoi.
 - `disconnect` : retire les écouteurs.
 
 **Serveur** : inchangé, sauf le message `activemodel.errors.models.dtos/identity/student_entry_input.attributes.pin_confirmation.confirmation` → « Les deux codes sont différents. ». Le 422 rend la page avec ce message dans `base_errors` ou sous le champ (là où il s'affiche aujourd'hui) **et** le contrôleur le laisse visible au-dessus du pavé : si le message est sous le champ caché, le déplacer dans `base_errors` pour ce cas (`role="alert"`).
@@ -79,7 +79,7 @@ Dans `#student-entry-confirm-form`, `data-controller="identity--pin-pad"`, dans 
 
 - Vide : 4 cases vides, bouton gris.
 - Chargement : 4 chiffres, pavé verrouillé (`aria-busy`), bouton « Un instant… » (`turbo_submits_with`).
-- Erreur : « Les deux codes sont différents. » (`role="alert"`), cases vides, bouton gris ; entrée expirée : retour à l'entrée (inchangé).
+- Erreur : « Les deux codes sont différents. » (`role="alert"`), cases vides, bouton gris ; entrée expirée : retour à l'entrée (inchangé). Hors ligne : « Pas de connexion. Réessaie. » (`role="alert"`), les 4 chiffres gardés, pavé déverrouillé, bouton actif pour renvoyer.
 - Succès : coche verte + « Les deux codes sont identiques. », puis l'inscription.
 
 ### Accessibilité

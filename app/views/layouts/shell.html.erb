@@ -55,7 +55,7 @@
   </main>
   <%# UDR accueil-eleve-qr-fenetre-inviter §3.2 : la fenêtre « Ton premier exercice » sur chaque écran de l'élève, hors mode concentré,
       tant qu'il n'a rendu aucune copie ; un cadre différé, vide quand il n'y a rien à dire, qui ne montre rien en cas d'échec. %>
-  <% if !focus && respond_to?(:first_exercise_prompt?) && first_exercise_prompt? %>
+  <% if !focus && first_exercise_prompt? %>
     <%= turbo_frame_tag FirstExercisePrompt::FRAME, src: student_first_exercise_path, loading: :eager,
                         data: { controller: "classroom--first-exercise-prompt", action: "turbo:frame-missing->classroom--first-exercise-prompt#missing" } %>
   <% end %>

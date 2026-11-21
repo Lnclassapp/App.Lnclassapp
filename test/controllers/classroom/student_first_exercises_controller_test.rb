@@ -112,14 +112,29 @@ class Classroom::StudentFirstExercisesControllerTest < ActionDispatch::Integrati
     assert_select "turbo-frame##{FRAME}[src]"
   end
 
-  test "CA-15: a teacher is refused, a visitor is sent to sign in" do
+  test "CA-15: a teacher and a school director are refused, a visitor is sent to the sign-in page" do
     sign_in_as create_teacher(classrooms: [ @classroom ])
     get student_first_exercise_path, headers: HEADERS
     assert_response :forbidden
 
     reset!
+    sign_in_as create_school_admin(school: @classroom.school)
     get student_first_exercise_path, headers: HEADERS
-    assert_response :redirect
+    assert_response :forbidden
+
+    reset!
+    get student_first_exercise_path, headers: HEADERS
+    assert_redirected_to new_session_path
+  end
+
+  test "CA-13: the focused exercise screen carries no window" do
+    copy = create_exercise_session(student: @student, exercise: create_exercise(essential: @essential, questions: 3), answered_count: 1)
+    sign_in_as @student
+
+    get exercise_session_path(copy.public_id)
+
+    assert_response :success
+    assert_select "turbo-frame##{FRAME}", 0
   end
 
   test "the install invitation waits while the window can open, and comes back once a copy is handed in" do

@@ -1,9 +1,10 @@
 # 🌐 DELIVERY · Communication::HelpController — « Questions fréquentes » (/aide), page statique lisible sans connexion
 # Rôle : rend la FAQ ; un compte connecté la lit dans son shell, un visiteur sur le motif des écrans d'entrée
-# UDR  : 0061 (FAQ ; amendement du 2026-10-06, shell une fois connecté), 0057, 0060, 0062 §4 (« En retard »)
+# UDR  : 0061 (FAQ ; amendement du 2026-10-06, shell une fois connecté), 0057, 0060, 0062 §4 (« En retard »), accueil-eleve-qr-fenetre-inviter §3.2 (fenêtre du premier exercice)
 module Communication
   class HelpController < ApplicationController
     include ShellLayout
+    include FirstExercisePrompt
 
     allow_unauthenticated_access
     # UDR-0061, amendement du 2026-10-06 : connecté, l'élève garde sa navigation ; le visiteur (« PIN oublié ») et

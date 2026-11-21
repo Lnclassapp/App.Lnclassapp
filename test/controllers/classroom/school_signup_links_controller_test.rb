@@ -26,6 +26,18 @@ class Classroom::SchoolSignupLinksControllerTest < ActionDispatch::IntegrationTe
     assert_select "input[type=radio][name='student_registration[school_public_id]'][value=?][checked]", @school.public_id
   end
 
+  test "CA-9: the kept school expires after 30 minutes: the sign-up opens with no school chosen" do
+    get school_signup_link_path(@school.public_id)
+
+    travel 31.minutes do
+      enter_as_new_student
+      get new_student_registration_path
+
+      assert_response :success
+      assert_select "input[name='student_registration[school_public_id]'][checked]", false
+    end
+  end
+
   test "CA-9: an explicit school in the request wins over the kept one" do
     other = create_school(name: "Collège Moderne de Cocody")
     get school_signup_link_path(@school.public_id)
@@ -47,6 +59,7 @@ class Classroom::SchoolSignupLinksControllerTest < ActionDispatch::IntegrationTe
       kept << response.headers["Location"]
       enter_as_new_student
       get new_student_registration_path
+      assert_select "input[name=entry_mode]"
       assert_select "input[name='student_registration[school_public_id]'][checked]", false
       reset!
     end

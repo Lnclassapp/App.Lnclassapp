@@ -44,9 +44,26 @@ class StudentEntryPinPadTest < ApplicationSystemTestCase
 
     tap_digits 2, 4, 6, 8
 
+    assert_selector "#student-entry-pin-check", text: "Les deux codes sont identiques.", visible: :all, wait: 10
     assert_selector "#signup-step-counter", wait: 10
     assert_current_path new_student_registration_path
     assert_no_js_errors
+  end
+
+  test "hors ligne : message d'alerte, les 4 chiffres gardés, le pavé rendu, le renvoi passe" do
+    reach_confirmation
+    page.execute_script("window.__fetch = window.fetch; window.fetch = () => Promise.reject(new TypeError('offline'))")
+
+    tap_digits 2, 4, 6, 8
+
+    assert_selector "#student-entry-pin-offline[role=alert]", text: "Pas de connexion. Réessaie.", visible: :visible
+    assert_selector "#student-entry-pin-boxes span", text: "●", count: 4
+    assert_selector "#student-entry-pin-pad:not([aria-busy])"
+    assert_button I18n.t("#{ENTRY}.confirm_submit"), disabled: false
+
+    page.execute_script("window.fetch = window.__fetch")
+    click_on I18n.t("#{ENTRY}.confirm_submit")
+    assert_current_path new_student_registration_path, wait: 10
   end
 
   test "CA-4 : 1111 pour 2468, message d'écart visible, cases vides, bouton gris" do

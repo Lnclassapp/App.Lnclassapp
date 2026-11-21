@@ -39,6 +39,7 @@ class StudentFirstExercisePromptTest < ApplicationSystemTestCase
     create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 0)
     visit courses_path
     assert_no_selector MODAL
+    assert_selector "turbo-frame#student_first_exercise_prompt[complete]", visible: :all
     visit student_home_path
     assert_no_selector "turbo-frame#student_first_exercise_prompt"
   end
