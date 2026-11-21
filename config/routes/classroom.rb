@@ -1,9 +1,11 @@
 # 🌐 DELIVERY · routes du contexte classroom
 # Rôle : inscription de l'élève, adhésion par lien, lien d'une classe, fiche et retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, envois de plusieurs exercices, jours de séance et suivi
-# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, sujets-de-devoir (ajout du 2026-10-30), 0084, 0085, 0086, 0095, 0097, 0109
+# ADR  : adresse-publique-etablissement, 0030, 0036, 0040, 0041, 0048, 0072, sujets-de-devoir (ajout du 2026-10-30), 0084, 0085, 0086, 0095, 0097, 0109
 # IL-02 (ADR-0085, Lot F) : l'ancienne entrée « join » mène à l'inscription élève (le code revient, voir classroom-codes plus bas).
 get "join", to: redirect("/student-signup")
 get "c/:code", to: "classroom/joins#new", as: :join_classroom
+# ADR adresse-publique-etablissement : le QR de l'accueil élève ; l'établissement actif est gardé, puis l'entrée élève.
+get "e/:school_public_id", to: "classroom/school_signup_links#show", as: :school_signup_link
 post "c/:code", to: "classroom/joins#create"
 # ADR-0109 (§4.4) : le code de six caractères revient à côté du lien ; sa vérification est une page
 # (Turbo Frame), jamais du JSON, au débit `classroom/joins`. Nom et chemin gelés par le Lot 0 ; le contrôleur est celui du Lot A.
@@ -20,6 +22,8 @@ get "students/classroom/change/confirm", to: "classroom/student_classroom_change
 post "students/classroom/change", to: "classroom/student_classroom_changes#create", as: :student_classroom_change
 
 get "students", to: "classroom/student_homes#show", as: :student_home                       # gelé
+# entree-et-accueil-eleve-allegees (UDR accueil-eleve-qr-fenetre-inviter §3.2) : la fenêtre « Ton premier exercice », cadre différé du shell.
+get "students/first-exercise", to: "classroom/student_first_exercises#show", as: :student_first_exercise
 get "students/classroom", to: "classroom/student_classrooms#show", as: :student_classroom   # gelé
 get "students/classroom/devoirs/:sheet", to: "classroom/student_assigned_sheets#show", as: :student_assigned_sheet
 get "students/classroom/devoirs/:sheet/remplir", to: "classroom/student_assigned_sheets#fill", as: :fill_student_assigned_sheet
