@@ -4,7 +4,7 @@ class CreateSignupAttributionsAndStudentInviteCodes < ActiveRecord::Migration[8.
   def change
     create_table :signup_attributions do |t|
       t.references :student, null: false, foreign_key: { to_table: :users, on_delete: :cascade }, index: { unique: true }
-      t.references :classroom, null: false, foreign_key: true
+      t.references :classroom, null: false, foreign_key: { on_delete: :restrict }
       t.string :source, null: false
       t.references :inviter, null: true, foreign_key: { to_table: :users, on_delete: :nullify }, index: { where: "inviter_id IS NOT NULL" }
       t.datetime :created_at, null: false, default: -> { "now()" }

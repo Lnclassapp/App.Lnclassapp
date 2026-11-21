@@ -1394,7 +1394,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_100000) do
   add_foreign_key "schools", "drenas", on_delete: :restrict
   add_foreign_key "sessions", "schools", column: "current_school_id", on_delete: :nullify
   add_foreign_key "sessions", "users", on_delete: :cascade
-  add_foreign_key "signup_attributions", "classrooms"
+  add_foreign_key "signup_attributions", "classrooms", on_delete: :restrict
   add_foreign_key "signup_attributions", "users", column: "inviter_id", on_delete: :nullify
   add_foreign_key "signup_attributions", "users", column: "student_id", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade
