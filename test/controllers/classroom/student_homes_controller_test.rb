@@ -152,7 +152,6 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a#student_class_enter[href=?]", student_classroom_path, text: tl("class_card.enter")
       assert_select "img[alt='']"
     end
-
   end
 
   test "CA-D7: no classroom: « Choisis ta classe », the code field, « Rejoindre », « Je n'ai pas de code »; grid, announcements, history hidden" do
