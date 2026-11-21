@@ -29,8 +29,8 @@ L'élève d'abord (/student, /students, matière, leçon, exercice), puis l'ense
 
 | Métrique | Contexte / volume | Valeur avant | Cible | Comment mesurée |
 |---|---|---|---|---|
-| Temps serveur p95, pire page, 3 rôles | jeu standard, grand établissement (Groupe Scolaire Modèle Savane, 42 classes), production locale (`RAILS_ENV=production`, assets précompilés, Solid Cache), machine de la session (4 cœurs) | **199 ms** (élève · ma classe) | < 600 ms | `script/mesure/pages` (20 passes après 2 de chauffe) |
-| Même mesure, plafonds CPU de Develop simulés (base 0,1 CPU, application 0,4 CPU, `deploy/hostinger/test.yaml`) | même volume, cgroups `cpu.cfs_quota_us` | **496 ms** (élève · ma classe) | < 600 ms | `script/mesure/pages`, processus Ruby et PostgreSQL dans des cgroups plafonnés |
+| Temps serveur p95, pire page, 3 rôles | jeu standard, grand établissement (Groupe Scolaire Modèle Savane, 42 classes), production locale (`RAILS_ENV=production`, assets précompilés, Solid Cache), machine de la session (4 cœurs) | **200 ms** (élève · ma classe) | < 600 ms | `script/mesure/pages` (20 passes après 2 de chauffe) |
+| Même mesure, plafonds CPU de Develop simulés (base 0,1 CPU, application 0,4 CPU, `deploy/hostinger/test.yaml`) | même volume, cgroups `cpu.cfs_quota_us` | **608 ms** (élève · ma classe) ; accueil enseignant 363 ms | < 600 ms | `script/mesure/pages`, processus Ruby et PostgreSQL dans des cgroups plafonnés |
 | Démarrage de Develop après un déploiement (site en 502 pendant ce temps) | develop.lnclass.com, déploiement du 2026-11-21 | **16 min 36 s** (conteneur démarré 18:02:57, Puma à l'écoute 18:19:33) | — (constat d'hébergement) | journaux du projet `lnclass-develop` (API Hostinger, lecture seule) |
 | Temps serveur des pages publiques en production | lnclass.com, journaux du 2026-11-21 17:28–18:20 | **26–30 ms** (dont ~25 ms de base de données pour 1 à 4 requêtes) | — | ligne `Completed` et `dur` de Thruster, API Hostinger |
 | Occupation du VPS | 2 vCPU, 8 Go, 2026-11-18 → 21 | CPU **4 %** en moyenne horaire, pointes horaires 12–15 % aux constructions d'image ; RAM 2,3 Go (pointe 3,0) | — | `GET /virtual-machines/{id}/metrics` |
@@ -59,10 +59,48 @@ sh -c 'echo $$ > /sys/fs/cgroup/cpu/simapp/tasks; exec script/mesure/pages'
 
 ### Page par page (avant)
 
-Production locale, médiane et p95 de 20 passes ; « Dev. p95 » : même mesure sous les plafonds de Develop (5 passes).
+Production locale, 20 passes par page, médiane de 3 exécutions ; « Dev. p95 » : même mesure sous les plafonds de
+Develop (10 passes). Base locale après chargement des leçons de Develop (463 leçons du manifeste, comme develop.lnclass.com).
 Ko : HTML non compressé (Caddy le compresse en zstd/gzip devant l'application).
 
-TABLEAU_AVANT
+| Rôle | Page | p50 ms | p95 ms | Dev. p95 ms | SQL | Allocations | Ko |
+|---|---|--:|--:|--:|--:|--:|--:|
+| visiteur | accueil public | 10.6 | 21.4 | 71.5 | 1 | 3856 | 15.8 |
+| visiteur | entrée élève | 11.8 | 33.5 | 93.7 | 1 | 4176 | 16.4 |
+| visiteur | connexion | 5.7 | 17.0 | 72.7 | 1 | 4257 | 17.7 |
+| eleve | accueil | 44.7 | 64.6 | 222.7 | 26 | 17341 | 38.9 |
+| eleve | accueil (historique différé) | 13.8 | 21.9 | 76.1 | 7 | 5209 | 6.6 |
+| eleve | ma classe | 160.1 | 199.7 | 608.5 | 91 | 114957 | 76.2 |
+| eleve | archive | 18.5 | 28.2 | 85.5 | 9 | 14565 | 41.5 |
+| eleve | menu | 9.9 | 15.9 | 77.1 | 6 | 7667 | 28.1 |
+| eleve | annonces | 15.3 | 24.2 | 90.4 | 9 | 8615 | 24.7 |
+| eleve | catalogue | 35.6 | 49.7 | 305.0 | 15 | 24951 | 84.0 |
+| eleve | matière | 18.1 | 23.4 | 94.5 | 13 | 8969 | 12.8 |
+| eleve | profil | 12.1 | 16.0 | 74.8 | 8 | 9192 | 32.3 |
+| eleve | leçon | 60.4 | 75.6 | 203.8 | 39 | 31188 | 22.4 |
+| eleve | exercice | 30.5 | 46.7 | 109.1 | 23 | 14044 | 34.9 |
+| enseignant | accueil | 107.9 | 134.2 | 362.7 | 30 | 99647 | 313.5 |
+| enseignant | mes classes | 27.2 | 77.9 | 102.2 | 12 | 19336 | 77.8 |
+| enseignant | menu | 13.5 | 17.5 | 77.6 | 8 | 10092 | 34.5 |
+| enseignant | classe | 77.1 | 91.2 | 299.0 | 30 | 65346 | 131.7 |
+| enseignant | jours de séance | 16.6 | 22.5 | 71.9 | 12 | 10101 | 32.8 |
+| enseignant | annonces | 17.4 | 21.5 | 69.9 | 10 | 9770 | 27.5 |
+| enseignant | catalogue | 39.8 | 50.7 | 105.1 | 15 | 31861 | 114.7 |
+| enseignant | profil | 17.3 | 22.8 | 78.0 | 11 | 11806 | 34.2 |
+| enseignant | assigner (modale) | 18.2 | 24.9 | 74.4 | 14 | 10727 | 32.8 |
+| enseignant | élève de la classe | 34.0 | 42.2 | 184.7 | 22 | 19536 | 57.4 |
+| enseignant | leçon de la classe | 52.1 | 62.4 | 169.1 | 26 | 43698 | 83.1 |
+| enseignant | suivi d'un devoir | 38.6 | 47.8 | 175.2 | 23 | 20168 | 49.9 |
+| direction | activité | 10.4 | 16.2 | 68.6 | 6 | 6465 | 12.5 |
+| direction | classes | 17.7 | 23.0 | 77.2 | 10 | 12602 | 40.1 |
+| direction | classe | 65.1 | 93.8 | 189.4 | 18 | 71008 | 263.4 |
+| direction | niveau | 28.4 | 33.9 | 94.2 | 14 | 17172 | 60.4 |
+| direction | enseignants | 18.5 | 21.9 | 69.3 | 10 | 12296 | 41.2 |
+| direction | chercher un élève | 23.7 | 27.4 | 172.0 | 7 | 11960 | 43.4 |
+| direction | élèves partis | 16.0 | 21.7 | 76.4 | 8 | 8560 | 27.7 |
+| direction | enseignants partis | 15.1 | 18.5 | 71.9 | 9 | 7856 | 24.7 |
+| direction | établissement | 25.6 | 37.3 | 98.6 | 14 | 22447 | 82.0 |
+| direction | annonces | 13.5 | 18.1 | 65.7 | 8 | 8488 | 25.3 |
 
 ### Navigateur, 390 px (avant)
 
@@ -73,12 +111,12 @@ TABLEAU_NAVIGATEUR
 
 ## Cause
 
-1. **Le code n'est pas en cause en production locale** : pire page à 199 ms p95. Les pages les plus coûteuses sont « Ma
+1. **Le code n'est pas en cause en production locale** : pire page à 200 ms p95. Les pages les plus coûteuses sont « Ma
    classe » de l'élève (91 requêtes, 115 000 allocations : la feuille de chaque leçon assignée est relue,
    `StudentAssignedSheetsQuery#exercises` → `PrepareSheetsQuery`, ×6) et l'accueil de l'enseignant (102 000 allocations,
    318 Ko de HTML).
 2. **Develop est plafonné à 0,1 CPU pour sa base et 0,4 CPU pour l'application** (`deploy/hostinger/test.yaml`). Simulé,
-   le plafond multiplie le temps des pages par 2 à 3 (« ma classe » 177 → 468 ms p50 ; accueil enseignant 116 → 300 ms)
+   le plafond multiplie le temps des pages par 2 à 6 (p95 : « ma classe » 200 → 608 ms ; catalogue de l'élève 50 → 305 ms ; accueil enseignant 134 → 363 ms)
    et ajoute des pointes de throttling (une page à 30 ms monte à 75 ms p95, quota de 10 ms par période de 100 ms).
 3. **Develop est indisponible ~16 min à chaque déploiement** : `db:prepare db:seed` (chargement automatique des leçons et
    jeu standard) puis un second `db:prepare` et le démarrage de Puma, sous ces mêmes plafonds. Avec le déploiement

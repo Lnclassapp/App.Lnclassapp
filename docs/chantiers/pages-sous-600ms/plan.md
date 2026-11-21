@@ -3,7 +3,8 @@
 > Cycle optimisation : un lot = un levier = un chiffre ; on s'arrête dès que la cible est atteinte. Mesure : [memo](memo.md).
 
 **La cible (aucune page au-dessus de 600 ms p95 côté serveur, production locale, jeu standard, 3 rôles) est tenue dès la
-mesure avant** (pire page : 199 ms). Les leviers de code sont donc fermés ; reste la garde, pour que ça le reste.
+mesure avant** (pire page : 200 ms p95). Sous les plafonds CPU de Develop, une page la dépasse (« Ma classe », 608 ms
+p95) : seul le lot C se rouvre. Le lot B garde le résultat.
 
 ## Contrat d'exécution
 
@@ -34,11 +35,24 @@ mesure avant** (pire page : 199 ms). Les leviers de code sont donc fermés ; res
 - **Done quand** : le test passe ; il échoue si on ajoute une requête par devoir à « Ma classe » (vérifié à la main en
   dupliquant un appel, puis retiré) ; durée du fichier < 10 s.
 
-## Lot C — « Ma classe » : une lecture de feuille par leçon assignée · fermé
+## Lot C — « Ma classe » : ne construire que les exercices assignés · rouvert
 
-`StudentAssignedSheetsQuery#exercises` relit toute la feuille d'une leçon (`PrepareSheetsQuery`, ~14 requêtes) pour chaque
-leçon assignée : 91 requêtes, 177 ms p50 en production locale, 468 ms sous les plafonds de Develop. Sous la cible :
-**fermé**. À rouvrir si une mesure de Develop ou de la production dépasse 600 ms sur cette page.
+`StudentAssignedSheetsQuery#exercises` relit toute la feuille d'une leçon (`PrepareSheetsQuery`) pour chaque leçon
+assignée, et construit chaque exercice de la leçon (questions, choix, copies) pour n'en garder que les assignés :
+91 requêtes, 115 000 allocations, 160 ms p50 / 200 ms p95 en production locale, **608 ms p95 sous les plafonds de
+Develop** (au-dessus de la cible : le lot se rouvre, comme prévu).
+
+- **Couche** : infrastructure (queries) ; aucune vue.
+- **Fichiers** : `app/infrastructure/queries/catalog/prepare_sheets_query.rb`,
+  `app/infrastructure/queries/classroom/student_assigned_sheets_query.rb`, leurs tests.
+- **Levier (un seul)** : `PrepareSheetsQuery` construit seulement les exercices demandés (`only:` liste de public_id),
+  sans changer leur numéro (rang dans leur feuille, calculé sur toutes les lignes de la leçon). Les autres appelants
+  ne passent rien : sortie inchangée.
+- **Test associé** : équivalence stricte — pour les mêmes données, chaque `Sheet` de `StudentAssignedSheetsQuery`
+  est égal (`==` des `Data`) avant et après ; plus le budget du lot B.
+- **Done quand** : « Ma classe » passe sous 600 ms p95 sous les plafonds de Develop et descend d'au moins 30 % en
+  allocations en production locale, mesuré par `script/mesure/pages` (même volume, 3 exécutions, médiane). Gain
+  inférieur → le pas est annulé.
 
 ## Lot D — Leçon : lectures de notion en lot · fermé
 
