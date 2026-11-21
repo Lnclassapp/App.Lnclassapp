@@ -31,8 +31,28 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_not Orm::User.exists?(contact: "0501020304")
   end
 
-  test "CA-J1, IE-02, IE-03: without a link the form opens on step 1; three steps in order, the DRENA then the list, Nom then Prénom(s)" do
+  # Chantier entree-eleve-unifiee, D1 (PRD CA-12, UDR-0176 §3.7).
+  test "CA-12 : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant(e) ? », sans formulaire" do
     get new_teacher_registration_path
+
+    assert_response :success
+    assert_select "h1", text: "Êtes-vous bien enseignant(e) ?"
+    assert_select "form#teacher-registration-form", 0
+    assert_select "a#teacher-signup-confirm-yes[href=?]", new_teacher_registration_path(confirmed: 1), text: "Oui, je suis enseignant(e)"
+    assert_select "a#teacher-signup-confirm-no[href=?]", new_student_entry_path, text: "Non, je suis élève"
+  end
+
+  test "CA-12 : « Oui » ouvre le formulaire ; la DRENA renvoyée sans JavaScript et le lien d'invitation ne reposent pas la question" do
+    get new_teacher_registration_path(confirmed: 1)
+    assert_select "form#teacher-registration-form"
+
+    get new_teacher_registration_path, params: { teacher_registration: { drena_public_id: @drena.public_id } }
+    assert_select "#teacher-signup-confirm", 0
+    assert_select "form#teacher-registration-form"
+  end
+
+  test "CA-J1, IE-02, IE-03: without a link the form opens on step 1; three steps in order, the DRENA then the list, Nom then Prénom(s)" do
+    get new_teacher_registration_path(confirmed: 1)
 
     assert_response :success
     assert_select "h1", text: I18n.t("#{PAGE}.title")
@@ -69,7 +89,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
   # CA-J4 (UDR §3.9): « Créer mon compte » on step 3, then the terms line under the button.
   test "CA-J4: step 3 holds the button « Créer mon compte » with the terms line under it" do
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
 
     assert_select "fieldset[data-step='3']" do
       assert_select "button[type=submit]#teacher-registration-submit", text: I18n.t("#{FORM}.submit")
@@ -79,7 +99,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   test "the gender pills read « M. » and « Mme » (UDR enseignant §3.9)" do
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
 
     assert_select "#teacher-registration-gender label", count: 2 do |pills|
       assert_equal [ "M.", "Mme" ], pills.map { it.text.squish }
@@ -116,7 +136,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   # CA-J3 (UDR §3.9, ADR-0103 §4.4 amendé): one subject, with the help line; « Autre matière (facultatif) » is gone.
   test "CA-J3: step 2 asks for a single subject with its help line; a forged second subject is ignored" do
     pc = create_material(name: "Physique-Chimie", shortname: "PC")
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
 
     assert_select "fieldset[data-step='2'] select[name='teacher_registration[material_slug]'][required]", 1
     assert_select "select[name='teacher_registration[second_material_slug]']", 0
@@ -431,7 +451,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "IE-13: a signed-in person who opens the page is sent home, a teacher who opens a link is asked to join; a POST is refused" do
     sign_in_as create_teacher
 
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
     assert_redirected_to teacher_home_path
 
     get teacher_invite_link_path(@school.team_invite_token)
@@ -474,7 +494,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_not_includes response.body, "Lycée Moderne de Cocody"
     assert_select "form#teacher-registration-form", 0
 
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
     assert_response :success
   end
 end

@@ -1,8 +1,10 @@
 # 🌐 DELIVERY · Classroom::JoinsController
-# Rôle : /c/<jeton> ouvre l'inscription élève, la classe déjà choisie, ou l'entrée de l'élève sans classe ; tout autre paramètre (ancien code compris), la voie standard avec l'alerte
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095 · UDR : 0081, 0083, 0102
+# Rôle : /c/<jeton> ouvre au visiteur l'entrée élève (numéro et code secret), puis l'inscription la classe déjà choisie ; à l'élève sans classe, la carte ; tout autre paramètre (ancien code compris), la voie standard avec l'alerte
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095, 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0081, 0083, 0102, 0176-entree-eleve-unique (§3.4)
 module Classroom
   class JoinsController < ApplicationController
+    include StudentEntrySession
+
     allow_unauthenticated_access
     # ADR-0041, ADR-0085 §4.1 : l'aperçu et l'entrée partagent le compteur ; au-delà, rien n'est révélé. La confirmation
     # d'un changement par lien (StudentClassroomChangesController) et l'envoi d'une inscription qui porte un jeton de lien
@@ -24,11 +26,13 @@ module Classroom
       # IL-09 : le visiteur du lien d'une classe archivée retombe sur la voie standard, comme pour un lien changé ; rien
       # de la classe ne lui est révélé (l'élève connecté, lui, lit le bandeau « archivée », ADR-0088).
       if current_actor.nil? && @preview.archived
+        drop_entry_link
         return redirect_to(new_student_registration_path, flash: { link_invalid: true }, status: :see_other)
       end
 
+      return render_visitor_page unless current_actor || @link_full
+
       @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:)
-      render "classroom/student_registrations/new" unless current_actor || @link_full
     end
 
     # Le visiteur d'un lien s'inscrit par le formulaire de /student-signup : un envoi ici le ramène à la page du lien.
@@ -46,6 +50,24 @@ module Classroom
     end
 
     private
+
+    # UDR-0176 §3.4 : le visiteur passe d'abord par l'entrée, le bandeau de la classe au-dessus ; son entrée
+    # confirmée (numéro inconnu), il s'inscrit ici, à l'étape « Toi », numéro et code gardés.
+    def render_visitor_page
+      @entry = confirmed_student_entry
+      return render_entry unless @entry
+
+      @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:, contact: @entry.contact)
+      render "classroom/student_registrations/new"
+    end
+
+    def render_entry
+      pending = student_entry
+      @link_token = link_token
+      @stage = pending&.pin ? :confirm : :credentials
+      @form = Dtos::Identity::StudentEntryInput.new(contact: pending&.contact)
+      render "identity/student_entries/new"
+    end
 
     # Seul un jeton de 12 caractères hexadécimaux ouvre une classe (UDR-0081 §3.4) ; un ancien code de classe n'est
     # jamais cherché.
@@ -81,8 +103,16 @@ module Classroom
       @preview = link_token && Queries::Classroom::JoinPreviewQuery.new.link(token: link_token)
       return @link_full = @preview.full if @preview
 
+      drop_entry_link unless current_actor
       target = current_actor ? new_student_classroom_choice_path : new_student_registration_path
       redirect_to target, flash: { link_invalid: true }, status: :see_other
+    end
+
+    # Le lien d'une entrée confirmée est mort : l'entrée l'oublie (numéro et code gardés), sinon /student-signup renverrait
+    # ici, et ici à /student-signup, sans fin.
+    def drop_entry_link
+      entry = confirmed_student_entry
+      keep_student_entry(contact: entry.contact, pin: entry.pin, confirmed: true, link_token: nil) if entry&.link_token
     end
 
     # Un refus de JoinPolicy nomme sa raison : la page la montre, en 403.

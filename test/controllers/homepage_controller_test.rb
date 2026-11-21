@@ -36,9 +36,9 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
       assert_select "span[aria-hidden='true']", text: /Je prépare mes\s*interros\s*et devoirs\s*à la maison\./
       assert_equal [ "interros", "et devoirs" ], css_select("span.font-extrabold.text-ink").map { it.text.squish }
     end
-    assert_select "main button[aria-haspopup='dialog']", text: "Je suis élève"
-    assert_select "main button[aria-haspopup='dialog']", text: "Enseignant(e)"
-    assert_select "main button[aria-haspopup='dialog'].ui-button-lg.w-full", 2
+    # Chantier entree-eleve-unifiee (UDR-0176 §3.1) : « Je suis élève » est un lien droit vers l'entrée.
+    assert_select "main a#role-entry-student-entry[href='#{new_student_entry_path}'].ui-button-lg.w-full", text: "Je suis élève"
+    assert_select "main button[aria-haspopup='dialog'].ui-button-lg.w-full", text: "Enseignant(e)", count: 1
   end
 
   test "CA-A3: no header, no footer, no section to scroll to: the page is a single screen" do
@@ -47,29 +47,28 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "header, footer, nav", 0
     assert_select "section", 0
     assert_select "a[href^='#']", 0
-    # « Se connecter » n'existe que dans les deux fenêtres de rôle : la page n'a pas de lien propre.
-    assert_select "a[href='#{new_session_path}']", 2
-    assert_select "dialog a[href='#{new_session_path}']", 2
+    # « Se connecter » n'existe que dans la fenêtre de l'enseignant : la page n'a pas de lien propre, l'élève passe par l'entrée.
+    assert_select "a[href='#{new_session_path}']", 1
+    assert_select "dialog a[href='#{new_session_path}']", 1
   end
 
   test "the visitor sees the student and teacher entries, once each" do
     get root_url
 
-    assert_select "button[aria-haspopup='dialog']", text: "Je suis élève", count: 1
+    assert_select "a[href='#{new_student_entry_path}']", text: "Je suis élève", count: 1
     assert_select "button[aria-haspopup='dialog']", text: "Enseignant(e)", count: 1
     assert_select "a, button", text: "Commencer", count: 0
-    assert_select "dialog[id^='role-modal-']", 2
-    assert_select "dialog#role-modal-student-entry", 1
+    assert_select "dialog[id^='role-modal-']", 1
+    assert_select "dialog#role-modal-student-entry", 0
     assert_select "dialog#role-modal-teacher-entry", 1
   end
 
-  test "the student modal offers to sign in or to create an account" do
+  # Chantier entree-eleve-unifiee (D2) : plus de choix « Se connecter » / « Créer mon compte » pour l'élève.
+  test "the student entry leads straight to the number and secret code, without a modal" do
     get root_url
 
-    assert_select "dialog#role-modal-student-entry" do
-      assert_select "a[href='#{new_session_path}']", text: "Se connecter"
-      assert_select "a[href='#{new_student_registration_path}']", text: "Créer mon compte"
-    end
+    assert_select "a[href='#{new_student_entry_path}']", text: "Je suis élève"
+    assert_select "a[href='#{new_student_registration_path}']", 0
     assert_no_match(/Rejoindre ma classe/, response.body)
   end
 
@@ -86,7 +85,6 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
   test "RH-02: each role modal names the tab by its own title while it is open" do
     get root_url
 
-    assert_select "[data-controller=modal][data-modal-document-title-value='Tu es élève ? · Lnclass'] dialog#role-modal-student-entry"
     assert_select "[data-controller=modal][data-modal-document-title-value='Vous êtes enseignant ? · Lnclass'] dialog#role-modal-teacher-entry"
     assert_select "title", text: "Accueil · Lnclass"
   end
@@ -179,7 +177,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_no_match(/Espace établissement/i, response.body)
-    assert_select "dialog[id^='role-modal-']", 2
+    assert_select "dialog[id^='role-modal-']", 1
     assert_select "dialog#role-modal-school-entry", 0
     assert_select "a[href='#{new_school_staff_registration_path}']", 0
     assert_select "button[aria-controls='role-modal-school-entry']", 0
@@ -191,7 +189,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "button[aria-haspopup='dialog'][aria-controls='role-modal-school-entry']", text: "Espace établissement"
-    assert_select "dialog[id^='role-modal-']", 3
+    assert_select "dialog[id^='role-modal-']", 2
     assert_select "[data-controller=modal][data-modal-document-title-value='Espace établissement · Lnclass'] dialog#role-modal-school-entry"
     assert_select "dialog#role-modal-school-entry" do
       assert_select "a[href='#{new_session_path}']", text: "Se connecter"
