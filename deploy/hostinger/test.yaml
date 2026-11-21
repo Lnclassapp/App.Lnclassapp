@@ -35,8 +35,8 @@ services:
       - pgdata:/var/lib/postgresql
       - secrets:/secrets:ro
     mem_limit: 512m
-    # Both test environments together stay under one core of the two, and yield to the production when it is busy.
-    cpus: 0.1
+    # Ceilings only: cpu_shares 256 makes both test environments yield to the production when the CPU is busy.
+    cpus: 0.5
     cpu_shares: 256
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "lnclass", "-d", "lnclass_production"]
@@ -74,7 +74,7 @@ services:
       web:
         aliases: ["${WEB_ALIAS:?WEB_ALIAS manquant}"]
     mem_limit: 1g
-    cpus: 0.4
+    cpus: 1.0
     cpu_shares: 256
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:8080/up"]
