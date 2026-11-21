@@ -33,7 +33,7 @@ class HostingerDemarrageTest < ActiveSupport::TestCase
       script = app_service(TEST_YAML).fetch("entrypoint")[2].gsub("$$", "$")
                                      .gsub("/secrets/", "#{dir}/secrets/").gsub("/rails/bin/docker-entrypoint", ENTRYPOINT.to_s)
 
-      _out, err, status = Open3.capture3({ "PATH" => "#{dir}/path:#{ENV.fetch('PATH')}" }, "sh", "-c", script, "sh",
+      out, err, status = Open3.capture3({ "PATH" => "#{dir}/path:#{ENV.fetch('PATH')}" }, "sh", "-c", script, "sh",
                                          "./bin/thrust", "./bin/rails", "server", chdir: dir)
       wait_for { File.exist?(File.join(dir, "seeded")) }
 
@@ -41,6 +41,8 @@ class HostingerDemarrageTest < ActiveSupport::TestCase
       lines = File.readlines(log, chomp: true)
       assert_equal 1, lines.count("rails db:prepare"), lines.inspect
       assert_equal [ "rails db:prepare", "server", "curl ok", "rails db:seed" ], lines - [ "curl refused" ]
+      stamp = /\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ/
+      assert_match(/\[démarrage\] semis terminé #{stamp} \(conteneur démarré #{stamp}, \/up répond #{stamp}\)/, out)
     end
   end
 

@@ -50,7 +50,8 @@ sonde `/up` de toutes les 15 s les remplit en ~75 min.
 | Déploiement | `/up` 200 après le repère | Semis fini après | Source |
 |---|---|---|---|
 | `0ffd82b` (fusion de #673), conteneur démarré 2026-11-21 19:26:19 UTC | non lu : lignes sorties de la fenêtre de l'API à la lecture (22:54) ; conteneur `healthy` | — | `script/mesure/demarrage`, conteneurs Hostinger |
-| prochain déploiement de Develop | à lire dans l'heure | | |
+| `f5ce2c8` (fusion de #671, plafonds relevés à 0,5 / 1,0 CPU), conteneur démarré 23:01:28 UTC | **≤ 16 s** : le semis ne part qu'après `/up` 200 et finit à 23:01:44 ; repère de départ chassé de la fenêtre par les ~470 lignes du semis | **16 s** | ligne « [build] … app-1 Started » (heure du VPS, UTC+1) et `[démarrage] semis terminé` |
+| prochain déploiement de Develop | lecture directe par la dernière ligne `[démarrage]` (départ et `/up` repris, retouche `fix/retouche-mesure-demarrage`) | | `script/mesure/demarrage` |
 | déploiement de Staging (train) | à lire dans l'heure | | |
 
 ## Cause

@@ -37,6 +37,12 @@ def first(pattern):
 
 up = first(r'"path":"/up","status":200')
 seeded = first(r"\[démarrage\] semis (terminé|en échec)")
+# The last line of the seed repeats the start and /up times: the seed's own lines push the first ones out of the window.
+summary = [re.search(r"semis terminé (\S+) \(conteneur démarré (\S+), /up répond (\S+)\)", line) for _, line in app]
+summary = [m for m in summary if m]
+if summary:
+    seeded, start, up = (when(t.replace("Z", "")) for t in summary[-1].groups())
+    label = "dernière ligne [démarrage]"
 print(f"{project} · départ {start:%Y-%m-%d %H:%M:%S} UTC ({label})")
 print(f"  /up 200 après : {f'{(up - start).total_seconds():.0f} s' if up else 'pas encore (502 ou démarrage en cours)'}")
 print(f"  semis fini après : {f'{(seeded - start).total_seconds():.0f} s' if seeded else '—'}")
