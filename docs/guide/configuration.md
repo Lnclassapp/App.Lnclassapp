@@ -29,6 +29,29 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 
 ---
 
+### Déploiement — `deploiement.yml` (ADR-XXXX-deploiement-continu-hostinger)
+
+Ces secrets ne vont **pas** dans *Repository secrets*. Créer trois Environments (*Settings › Environments*), chacun limité à sa branche (*Deployment branches › Selected branches and tags*, une règle de type **Branch**, au nom exact, sans joker ni règle de type *Tag*) :
+
+| Environment | Branche autorisée |
+|---|---|
+| `develop` | `Develop` seule |
+| `staging` | `Staging` seule |
+| `production` | `main` seule |
+
+| Secret | Environment(s) | Rôle | Si absent |
+|---|---|---|---|
+| `HOSTINGER_API_TOKEN` | les trois (un jeton distinct par Environment, recommandé) | Jeton de l'API Hostinger, accès à tout le VPS | Le workflow échoue avant tout envoi, en nommant le secret |
+| `GH_DEPLOY_TOKEN` | les trois | Jeton GitHub en lecture seule du dépôt (contenu), pour construire l'image | Idem |
+| `LNCLASS_RAILS_MASTER_KEY` | `production` seule, facultatif | Clé maîtresse Rails | Le `.env` du VPS la garde ; posée, elle prime |
+| `LNCLASS_R2_ACCESS_KEY_ID` | `production` seule, facultatif | Accès au stockage R2 | Idem |
+| `LNCLASS_R2_SECRET_ACCESS_KEY` | `production` seule, facultatif | Accès au stockage R2 | Idem |
+| `LNCLASS_CLAUDE_AGENTAI_SECRET` | `production` seule, facultatif | Secret du contact Claude AgentAI | Idem |
+
+**Jamais au niveau du dépôt (*Repository secrets*)** : toute branche de chantier pourrait alors lire le jeton Hostinger. Sans Environments (offre GitHub Free, dépôt privé), ne rien poser : le déploiement reste manuel (`script/hostinger/deployer.py`, depuis une session Claude Code).
+
+---
+
 ## 2. Variables d'environnement de production
 
 ### Obligatoires
@@ -66,9 +89,11 @@ La commande de pré-déploiement est `bin/rails db:prepare db:seed` (`.railway/r
 
 ### Déploiement automatique
 
-Chaque environnement Railway déploie seul la branche qu'il suit : Develop ← `Develop`, Staging ← `Staging`, production ← `main`. Après un merge, un déploiement doit apparaître dans la minute. Sinon, lancer « Deploy latest commit » au tableau de bord, puis reconnecter la source : *Settings › Source*, déconnecter puis reconnecter le dépôt sur la même branche.
+Railway n'existe plus : un push sur `Develop`, `Staging` ou `main` déploie l'environnement de la branche sur le VPS Hostinger (`.github/workflows/deploiement.yml`, ADR-0140 et ADR-XXXX-deploiement-continu-hostinger). Un push qui ne touche que de la documentation (hors `docs/contenus/`) ne déploie pas.
 
-**Les réglages d'un service de Staging ou de production (région, source, répertoire racine) se changent au tableau de bord, jamais par l'API ni par un agent** : une modification validée par l'API réécrit les déclencheurs GitHub du service sans autorisation GitHub, et les merges ne déploient plus (journal de `politique-cache`, 2026-10-07).
+- **Preuve de l'arbre** : pour `Staging` et `main`, le job vérifie d'abord que l'arbre a eu son `ci` vert (`script/ci/tested_tree`). Sans preuve, il échoue avant tout appel à Hostinger. `Develop` n'a pas cette garde.
+- **Où regarder** : onglet *Actions*, workflow *Déploiement*, un run par push. Le dernier pas, `/up`, doit être vert.
+- **Relancer** : *Actions › Déploiement › Run workflow*, depuis la branche de l'environnement, avec le SHA complet à déployer ([`retour-arriere.md`](retour-arriere.md) §2).
 
 ### Environnements de PR (Railway)
 

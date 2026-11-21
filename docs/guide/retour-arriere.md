@@ -1,19 +1,18 @@
 # Retour arrière
 
-> Comment revenir à la version précédente de l'application, quand c'est sans risque, quand c'est impossible, et que faire quand Railway ne déploie plus.
-> Chantier [`acceleration-du-flux`](../chantiers/acceleration-du-flux/memo.md). Les règles de déploiement viennent de l'[ADR-0052](../decisions/adr/0052-chaine-de-livraison-versionnee-et-worker-dans-puma.md) et de [`.railway/railway.ts`](../../.railway/railway.ts) (`railway.json` jusqu'au 2026-10-23).
->
-> ⚠️ **Les gestes Railway marqués « à vérifier par le porteur » viennent de la documentation de Railway, pas d'un essai sur nos projets.** Le premier retour arrière en recette (`Staging`) les confirme ou les corrige, et cette page est mise à jour à ce moment-là.
+> Comment revenir à la version précédente de l'application sur le VPS Hostinger, quand c'est sans risque, quand c'est impossible, et que faire quand un déploiement n'est pas parti.
+> Les trois environnements tournent sur le VPS depuis l'[ADR-0140](../decisions/adr/0140-hebergement-hostinger.md) ; GitHub les déploie à chaque push ([ADR-XXXX-deploiement-continu-hostinger](../decisions/adr/XXXX-deploiement-continu-hostinger.md)). Railway n'existe plus.
 
 ---
 
 ## 1. Ce qui se passe à un déploiement
 
-Chaque environnement Railway déploie seul la branche qu'il suit ([`configuration.md`](configuration.md) §2) : `Staging` → recette, `main` → production. Pour chaque déploiement, la configuration du service (`.railway/railway.ts`) fixe l'ordre suivant :
+Chaque push sur `Develop`, `Staging` ou `main` lance le workflow *Déploiement* ([`configuration.md`](configuration.md) §2) : `Develop` → develop, `Staging` → staging, `main` → production. Dans l'ordre :
 
-1. **Construction** de l'image depuis le `Dockerfile`.
-2. **Pré-déploiement** : `bin/rails db:prepare db:seed`. Les migrations sont jouées sur la base de l'environnement **avant** que la nouvelle image reçoive du trafic. Pendant ce temps, l'ancienne image sert toujours, donc sur la base déjà migrée.
-3. **Démarrage**, puis contrôle de santé sur `/up` (120 s au plus). Railway ne bascule le trafic qu'après une réponse 200. Une image qui ne démarre pas ne reçoit jamais de trafic, et l'ancienne continue de servir (ADR-0052 §5).
+1. **Preuve de l'arbre** (`Staging` et `main`) : le `ci` vert de l'arbre, sinon rien n'est envoyé.
+2. **Construction** de l'image `lnclass-app:<sha>` sur le VPS (`deployer.py construction`). Une image déjà construite pour ce SHA est réutilisée (« déjà là »).
+3. **Démarrage** du projet de l'environnement avec cette image. Au démarrage, le conteneur joue `bin/rails db:prepare db:seed` : les migrations passent sur la base de l'environnement.
+4. **Contrôle** de `/up` sur le site de l'environnement, jusqu'à un 200.
 
 Il en découle la seule règle à retenir :
 
@@ -21,14 +20,14 @@ Il en découle la seule règle à retenir :
 
 ## 2. Revenir à l'image précédente
 
-**Au tableau de bord** (documentation Railway, *Deployment Actions › Rollback*) : service de l'environnement › onglet *Deployments* › les trois points au bout du déploiement précédent › *Rollback*, puis confirmer. Railway restaure l'image et les variables de ce déploiement. — *à vérifier par le porteur.*
+1. Relever le SHA précédent : l'historique des runs du workflow (onglet *Actions › Déploiement*), ou `git log --first-parent origin/main` pour la production.
+2. *Actions › Déploiement › Run workflow* : choisir la branche de l'environnement (`main` pour la production) et coller le SHA complet dans `sha`. Un run manuel qui attend derrière un déploiement en cours est remplacé si un push arrive entre-temps (règle de `concurrency` de GitHub) : vérifier qu'il est bien parti, sinon le relancer.
 
-Points ouverts, *à vérifier par le porteur* au premier essai en recette :
+L'image `lnclass-app:<sha>` est encore sur le VPS : la construction répond « déjà là » et le démarrage est rapide. Le workflow a toujours le code de déploiement de la tête de la branche ; seule la révision déployée est celle du SHA.
 
-- Un *Rollback* rejoue-t-il le pré-déploiement (`db:prepare db:seed`) ? S'il le rejoue, c'est sans effet : `db:migrate` ignore les migrations de la base que l'ancien code ne connaît pas, et `db:seed` ne fait rien quand l'équipe a déjà un membre (`test/config/railway_deployment_test.rb`).
-- La CLI n'offre pas de commande de retour arrière documentée : `railway redeploy` reconstruit **la même** source, et `railway restart` relance **la même** image. Le retour arrière passe par le tableau de bord.
+Preuve expirée (arbre testé il y a plus de 30 jours, `Staging` et `main`) : le workflow refuse. Lancer alors `python3 -I script/hostinger/deployer.py …` à la main, depuis une session Claude Code (usage en tête du script).
 
-Après un retour arrière, la branche suivie (`main` ou `Staging`) porte toujours le code fautif : le prochain déploiement le remettrait en ligne. Le correctif suit le chemin normal, `Develop` → `Staging` → `main` ([`conventions.md`](conventions.md) §3).
+Après un retour arrière, la branche porte toujours le code fautif : **le prochain push la redéploie**. Le correctif suit le chemin normal, `Develop` → `Staging` → `main` ([`conventions.md`](conventions.md) §3).
 
 ## 3. Quand c'est sans risque
 
@@ -51,32 +50,24 @@ La garde `test/guards/migration_rules_test.rb` empêche le cas le plus dangereux
 Si la suppression est déjà jouée et que l'ancien code est indispensable :
 
 1. **Corriger en avant**, c'est-à-dire livrer un correctif sur le code actuel. C'est la voie par défaut.
-2. **Restaurer la base** depuis une sauvegarde Railway (documentation Railway, *Back Up and Restore Postgres* : onglet *Backups* du service PostgreSQL › *Restore* › relire le changement préparé › *Deploy*). Toutes les écritures faites depuis la sauvegarde sont perdues. — *à vérifier par le porteur : les sauvegardes sont-elles activées sur la base de production, et à quelle fréquence ?*
+2. **Restaurer la base** depuis une sauvegarde de la base (voir ADR-0140 pour les sauvegardes du VPS). Toutes les écritures faites depuis la sauvegarde sont perdues.
 
 `down` dans une migration ne sert pas de retour arrière en production : aucune commande du déploiement ne le joue, et il ne rend pas les données supprimées (`RemoveMaterialIdFromTeacherProfiles#down` rajoute la colonne, mais la remplit par déduction).
 
 ## 5. Quand Railway met les déploiements en pause
 
-Le 2026-10-20, Railway a suspendu les nouveaux déploiements. Dans ce cas :
-
-1. **Ce qui tourne continue de tourner.** Une pause bloque les nouveaux déploiements, pas l'image en ligne. — *à vérifier par le porteur, sur la page d'état de Railway au moment de la pause.*
-2. **Ne rien promouvoir.** Pas de fusion vers `Staging` ni vers `main` pendant la pause : les déploiements s'accumuleraient et partiraient tous à la reprise, sans recette entre eux. Le travail continue sur les branches et sur `Develop`.
-3. **Pas de retour arrière non plus**, puisqu'un *Rollback* est un déploiement. — *à vérifier par le porteur.* Si la production est cassée pendant la pause, il n'existe aujourd'hui **aucune voie de secours** : Lnclass n'a ni second hébergeur ni image prête ailleurs. En choisir une est une décision du porteur, qui demande un ADR.
-4. **À la reprise**, promouvoir une seule fois, puis vérifier le déploiement : le pré-déploiement réussi, `/up` à 200 et une page connectée qui répond.
+Historique : Railway n'héberge plus Lnclass depuis le 2026-11-17 ; plus de pause de déploiement à gérer.
 
 ## 6. Quand une fusion ne déclenche aucun déploiement
 
-Le 2026-11-04, la fusion du train dans `main` (#474, `c015125d`) n'a lancé **aucun déploiement Railway**, ni en production ni sur Demo. Les deux déploiements de ce commit ont été lancés à la main, plus de dix minutes après la fusion (chantier [`ci-train-rapide`](../chantiers/ci-train-rapide/memo.md), lot C). Rien n'échoue dans ce cas : la branche porte le nouveau code, l'image en ligne reste l'ancienne, et aucune alerte ne le signale.
+Un push sur `Develop`, `Staging` ou `main` déploie, sauf s'il ne touche que de la documentation hors `docs/contenus/`. Après chaque fusion dans `Staging` ou `main` :
 
-Après chaque fusion dans `Staging` ou `main` :
-
-1. **Vérifier que le déploiement part** dans les minutes qui suivent : onglet *Deployments* du service, pour chaque environnement qui suit la branche (`main` → production et Demo, `Staging` → recette), un déploiement dont le commit est celui de la fusion.
-2. **S'il n'est pas parti**, le lancer à la main sur le bon commit (tableau de bord : *Deploy* sur la branche suivie, ou `railway redeploy` s'il s'agit de reconstruire la même source), puis vérifier le pré-déploiement et `/up` à 200 (§1).
-3. **Chercher la cause** — *action du porteur* : dans GitHub, *Settings › Webhooks*, le webhook vers Railway › *Recent Deliveries* : une livraison absente ou en erreur pour le *push* de la fusion dit si GitHub n'a pas prévenu Railway ou si Railway a refusé. Une session d'agent n'a pas accès à ces réglages.
+1. **Vérifier le run** *Déploiement* dans l'onglet *Actions* : vert jusqu'au pas `/up`.
+2. **S'il est rouge**, lire l'étape en échec. Sans preuve de l'arbre, la raison est écrite dans le journal et rien n'a été envoyé au VPS. Pour un secret manquant, voir [`configuration.md`](configuration.md) §1.
+3. **S'il n'est pas parti**, le lancer à la main : *Run workflow* avec le SHA de la fusion (§2).
 
 ## 7. Avant chaque promotion vers `main`
 
 - [ ] Les migrations de la livraison sont additives, ou chaque suppression porte sur une colonne que l'image en ligne ne lit plus (`bin/rails test test/guards/migration_rules_test.rb`).
-- [ ] Le numéro du déploiement en ligne est noté : c'est la cible du *Rollback* en cas de problème.
-- [ ] Railway déploie normalement : pas de pause en cours.
-- [ ] Après la fusion : le déploiement de production **et** celui de Demo sont partis sur le commit de la fusion (§6).
+- [ ] Le SHA en ligne est noté (dernier run vert du workflow *Déploiement* sur `main`) : c'est la cible du retour arrière en cas de problème.
+- [ ] Après la fusion : le run *Déploiement* de `main` est vert, `/up` compris (§6).
