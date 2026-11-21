@@ -8,7 +8,7 @@
   <div class="min-w-0 flex-1 space-y-1">
     <h2 id="student_invite_classmates_title" class="text-base leading-snug font-medium text-ink"><%= t("#{scope}.title") %></h2>
     <p class="text-sm text-mute"><%= t("#{scope}.hint", classroom: home.classroom_name) %></p>
-    <%= button_to t("#{scope}.action"), class_invite_path, method: :post, class: "ui-button ui-button-primary ui-button-sm mt-1 min-h-tap",
+    <%= button_to t("#{scope}.action"), class_invite_path, method: :post, class: "ui-button ui-button-secondary ui-button-sm mt-1 min-h-tap",
                   form: { target: "_blank", data: { turbo: false } }, "aria-label": t("#{scope}.action_label", classroom: home.classroom_name) %>
   </div>
 <% end %>

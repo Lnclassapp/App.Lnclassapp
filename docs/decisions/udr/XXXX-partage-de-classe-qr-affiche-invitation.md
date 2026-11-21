@@ -85,7 +85,7 @@ Jour J du playbook de lancement d'une ville : en salle, souvent sans projecteur,
 - Même gabarit que `_invite_banner` (bannière `rounded-card bg-brand-soft`, pastille `user-group`, titre `h2`, phrase, bouton), **sans croix** (c'est une action du jour J, pas une suggestion) :
   - `h2#student_invite_classmates_title` : `t(".title")` = « Invite tes camarades »
   - `p` : `t(".hint", classroom: home.classroom_name)` = « Envoie le lien de la <classe> sur WhatsApp : ils arrivent directement dans ta classe. »
-  - bouton : `button_to t(".action"), class_invite_path, method: :post, form: { target: "_blank", data: { turbo: false } }` rendu avec les classes de `ui_button size: :sm` primaire, `aria-label` = `t(".action_label", classroom: home.classroom_name)`.
+  - bouton : `button_to t(".action"), class_invite_path, method: :post, form: { target: "_blank", data: { turbo: false } }` rendu avec les classes de `ui_button size: :sm` **variante secondaire (un seul bouton principal par écran élève : « Entrer »)**, `aria-label` = `t(".action_label", classroom: home.classroom_name)`.
 - Le serveur répond 303 vers `whatsapp_share_url(message)` (`allow_other_host: true`), message = `t("classroom.class_invites.message", classroom:, school:, link: join_classroom_url(token, i: code))` = « Rejoins la classe %{classroom} de %{school} sur Lnclass : %{link} ». **Aucun prénom ni nom** dans le message.
 - `_invite_banner` (enseignant) n'est rendu, juste après, **que si la classe n'a aucun enseignant** (`home.has_teacher` faux) ; sinon il disparaît.
 - Sans classe active : ni l'une ni l'autre (l'existant pour l'enseignant, le nouveau pour les camarades).

@@ -45,10 +45,10 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_operator card.rect.y + card.rect.height, :>, 159
       assert_selector "#student_school_sigle", text: "LCA"
       assert_link tl("class_card.enter"), href: student_classroom_path
-      assert_equal 1, all("#student_home .ui-button-primary:not(#student_invite_classmates *)").size
+      assert_equal 1, all("#student_home .ui-button-primary").size
 
-      # UDR partage-de-classe §3.3 : la bannière « Invite tes camarades » porte son propre bouton principal, une fois.
-      assert_selector "#student_invite_classmates .ui-button-primary", count: 1
+      # UDR partage-de-classe §3.3 : la bannière « Invite tes camarades » porte son bouton secondaire, une fois.
+      assert_selector "#student_invite_classmates .ui-button-secondary", count: 1
 
       # The grid: four columns, a dot on the subject that is late (CA-D8), no « Inviter » tile.
       assert_selector "nav#student_subjects a#subject_svt .bg-warning-dot", visible: :all
