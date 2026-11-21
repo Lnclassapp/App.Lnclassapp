@@ -33,5 +33,5 @@ if [ "${1:-}" = "--navigateur" ]; then
   server=$!
   trap 'kill $server 2>/dev/null || true' EXIT
   for _ in $(seq 1 60); do curl -fsS "http://127.0.0.1:$PORT/up" >/dev/null 2>&1 && break; sleep 1; done
-  NODE_PATH="$(npm root -g)" node script/mesure/pages_navigateur.cjs "http://localhost:$PORT"
+  NODE_PATH="${NODE_PATH:-$(npm root -g)}" node script/mesure/pages_navigateur.cjs "http://localhost:$PORT"
 fi

@@ -25,17 +25,23 @@ async function timing(page) {
   })
 }
 
-async function signIn(page, contact) {
-  await page.goto(`${base}/login`)
-  await page.fill("input[name='session[contact]']", contact)
-  await page.fill("input[name='session[pin]']", data.pin)
-  await Promise.all([page.waitForURL((url) => !url.pathname.startsWith("/login")), page.press("input[name='session[pin]']", "Enter")])
+// Connexion par une requête HTTP qui partage les cookies du contexte : en production locale servie en HTTP, Rails se
+// croit en HTTPS (assume_ssl) et refuserait l'origine http:// d'un formulaire, que Chromium ne laisse pas réécrire.
+async function signIn(context, contact) {
+  const login = await context.request.get(`${base}/login`)
+  const token = (await login.text()).match(/name="authenticity_token" value="([^"]+)"/)[1]
+  const response = await context.request.post(`${base}/session`, {
+    form: { authenticity_token: token, "session[contact]": contact, "session[pin]": data.pin },
+    headers: { origin: base.replace(/^http:/, "https:") },
+    maxRedirects: 0
+  })
+  if (response.status() !== 303 && response.status() !== 302) throw new Error(`connexion refusée pour ${contact} : ${response.status()}`)
 }
 
 async function passFor(browser, role, rows) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true })
+  if (role !== "visiteur") await signIn(context, data.accounts[role])
   const page = await context.newPage()
-  if (role !== "visiteur") await signIn(page, data.accounts[role])
   const out = {}
   for (const row of rows) {
     await page.goto(`${base}${row.path}`, { waitUntil: "load" })

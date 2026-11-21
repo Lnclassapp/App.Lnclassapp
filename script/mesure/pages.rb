@@ -119,6 +119,8 @@ module MesurePages
     school = Orm::School.find_by(name:) or abort("[mesure-pages] établissement introuvable : #{name.inspect} (bin/jeu-standard d'abord).")
     roles = ENV["MESURE_ROLE"].presence&.split(",") || %w[eleve enseignant direction]
     ActiveRecord::Base.connection.execute("ANALYZE")
+    # La connexion se fait sans lire de formulaire : la protection CSRF ne mesure rien ici.
+    ActionController::Base.allow_forgery_protection = false
     runner = Runner.new(school:, roles:, runs: Integer(ENV.fetch("MESURE_PASSES", "20")), warmup: Integer(ENV.fetch("MESURE_CHAUFFE", "2"))).call
     puts "#{school.name} (#{Orm::Classroom.where(school_id: school.id).count} classes) — RAILS_ENV=#{Rails.env}, cache #{Rails.cache.class.name.demodulize}, " \
          "#{ENV.fetch('MESURE_PASSES', '20')} passes par page après chauffe, temps serveur sans réseau."
@@ -126,7 +128,9 @@ module MesurePages
     runner.notes.each { puts it }
     runner.rows.select { it[:repeated] > 2 }.each { puts "\n#{it[:role]} · #{it[:page]} : ×#{it[:repeated]} #{it[:repeated_sql]}" }
     File.write(Rails.root.join("tmp/mesure-pages.json"), JSON.pretty_generate(accounts: runner.accounts, pin: PIN, rows: runner.rows))
-    exit 1 if runner.notes.any? || runner.rows.any? { it[:status] != 200 }
+    # exit! : un SystemExit levé dans l'exécuteur de `rails runner` produit une trace parasite.
+    $stdout.flush
+    exit!(1) if runner.notes.any? || runner.rows.any? { it[:status] != 200 }
   end
 end
 
