@@ -47,6 +47,16 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     browser.instance_variable_set(:@install_prompt_ignored, true)
   end
 
+  # UDR accueil-eleve-qr-fenetre-inviter §3.2: an élève without a copy handed in gets the « Ton premier exercice » window on every
+  # shell screen but the ones where he answers; it would cover the clicks of a test. « Plus tard » closes it for the current page.
+  # Returns once the dialog is closed, or at once when it does not open within 5 s.
+  def dismiss_first_exercise_prompt
+    return unless page.has_css?("#student_first_exercise_later", wait: 5)
+
+    find("#student_first_exercise_later").click
+    assert_no_selector "#student_first_exercise_modal[open]", wait: 5
+  end
+
   MOBILE_VIEWPORT = [ 390, 844 ].freeze
 
   # The same journey on a phone: the window shrinks for the block, then returns to its size.

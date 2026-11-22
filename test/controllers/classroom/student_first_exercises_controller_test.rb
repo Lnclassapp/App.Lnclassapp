@@ -167,4 +167,14 @@ class Classroom::StudentFirstExercisesControllerTest < ActionDispatch::Integrati
     get student_home_path
     assert_select "#install_banner", 1
   end
+
+  test "a student without a classroom has no home: an empty frame, no flag" do
+    sign_in_as create_student(classroom: nil)
+
+    get student_first_exercise_path, headers: HEADERS
+
+    assert_response :success
+    assert_select "turbo-frame##{FRAME}"
+    assert_select "dialog", 0
+  end
 end

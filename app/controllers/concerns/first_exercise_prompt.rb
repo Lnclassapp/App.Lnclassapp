@@ -15,5 +15,5 @@ module FirstExercisePrompt
   private
 
   # Vrai pour un élève dont la session ne porte pas encore le drapeau. Le mode concentré (content_for :focus) est écarté par le shell.
-  def first_exercise_prompt? = current_actor&.student? == true && !session[SESSION_KEY]
+  def first_exercise_prompt? = current_actor.present? && current_actor.student? && !session[SESSION_KEY]
 end
