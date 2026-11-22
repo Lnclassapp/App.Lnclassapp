@@ -70,7 +70,8 @@ Jour 2, vague 1 : Lot E                       → 1 agent
                      `app/views/catalog/courses/show.html.erb` · `app/views/catalog/courses/_student_lesson.html.erb` · `app/views/catalog/courses/_prepare_sheets.html.erb` · `app/views/catalog/revision_sheets/_todo.html.erb` *(parties de compte tues en rendu neutre)*
                      `app/controllers/assessment/question_images_controller.rb` *(aucun changement de cache attendu ; seulement si un en-tête manque)*
                      `app/views/pwa/service-worker.js`
-                     `public/offline-access-ended.html`
+                     `public/offline-access-ended.html` · `public/offline.html` *(consigne du premier lancement)*
+                     `app/views/identity/` *(texte de l'invitation à installer : garder l'application ouverte jusqu'à la fin du téléchargement ; fichier exact relevé au départ du lot)*
                      `app/javascript/offline/download.js`
                      `app/javascript/offline/controllers/download_controller.js`
                      `app/javascript/offline/controllers.js` · `app/javascript/offline/lazy_controllers.js` *(enregistrement de `offline-download`)*
@@ -80,7 +81,7 @@ Jour 2, vague 1 : Lot E                       → 1 agent
                      `app/controllers/classroom/student_offlines_controller.rb` · `app/views/classroom/student_offlines/show.html.erb`
                      `app/views/shared/navigation/_avatar_menu.html.erb` *(ligne « Hors connexion »)*
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/integration/offline/catalog_list_test.rb` (CA-1, CA-2, CA-3) ; `test/integration/offline/neutral_pages_test.rb` (CA-4) ; `test/javascript/offline/download.test.js` (CA-5, CA-6, CA-7) ; `test/javascript/offline/page_cache.test.js` étendu (CA-8 à CA-12) ; `test/integration/offline/media_test.rb` (CA-18) ; `test/system/offline/download_card_test.rb` (parcours de la carte, 390 px)
+- **Test associé** : `test/integration/offline/catalog_list_test.rb` (CA-1, CA-2, CA-3, CA-26, CA-27) ; `test/system/offline/first_launch_test.rb` (CA-28) ; `test/integration/offline/neutral_pages_test.rb` (CA-4) ; `test/javascript/offline/download.test.js` (CA-5, CA-6, CA-7) ; `test/javascript/offline/page_cache.test.js` étendu (CA-8 à CA-12) ; `test/integration/offline/media_test.rb` (CA-18) ; `test/system/offline/download_card_test.rb` (parcours de la carte, 390 px)
 - **Done quand**   : dans l'application installée simulée, un élève de 3e télécharge son niveau depuis la carte de l'accueil, coupe le réseau et ouvre une leçon jamais visitée avec ses images. Un second compte sans accès voit « Pas de connexion » sur une leçon payante.
 
 > Le Lot A appelle `fetchPacks` (`offline/packs.js`, contrat du Lot 0) pour chaque leçon téléchargée. Tant que le Lot B n'est pas fusionné, l'appel rend `{}` et le téléchargement des pages marche seul.
@@ -97,10 +98,10 @@ Jour 2, vague 1 : Lot E                       → 1 agent
                      `app/controllers/assessment/offline_packs_controller.rb` *(`create` en lot ; `show` enregistre la version)*
                      `app/jobs/assessment/purge_exercise_versions_job.rb` · `config/recurring.yml`
                      `app/javascript/offline/packs.js` *(implémentation du contrat)*
-                     `app/views/shared/offline/_pending_copies.html.erb` *(motif `version_expired` à la place de `stale`)*
+                     `app/views/shared/offline/_pending_copies.html.erb` *(motifs `version_expired` à la place de `stale`, et `account_inactive`)*
                      `app/views/assessment/session_results/` *(mention « Corrigé disponible sur l'appareil de l'élève »)*
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/domain/use_cases/assessment/issue_offline_packs_test.rb` (CA-13) ; `test/domain/use_cases/assessment/sync_offline_copy_test.rb` amendé (CA-14, CA-15, CA-16) ; `test/infrastructure/repositories/assessment/exercise_version_repository_test.rb` ; `test/javascript/offline/packs.test.js`
+- **Test associé** : `test/domain/use_cases/assessment/issue_offline_packs_test.rb` (CA-13) ; `test/domain/use_cases/assessment/sync_offline_copy_test.rb` amendé (CA-14, CA-15, CA-16, CA-26 refus `account_inactive`) ; `test/infrastructure/repositories/assessment/exercise_version_repository_test.rb` ; `test/javascript/offline/packs.test.js`
 - **Done quand**   : une copie hors ligne faite sur une version d'exercice modifiée depuis 3 jours est envoyée et comptée, et une copie sur une version remplacée depuis 31 jours est refusée « version expirée ».
 
 ---
@@ -127,6 +128,7 @@ Jour 2, vague 1 : Lot E                       → 1 agent
                      `app/controllers/classroom/classroom_students_controller.rb`
                      `app/controllers/classroom/assignment_follow_ups_controller.rb`
                      `app/controllers/assessment/session_results_controller.rb` *(`keep_offline only: :show` sur les cinq)*
+                     `app/controllers/classroom/assignments_controller.rb` *(`keep_offline only: :new`)* · `app/controllers/classroom/session_days_controller.rb` *(`keep_offline only: :edit`)*
                      `app/views/layouts/` **non** : la coque porte déjà `offline-session` et `offline-status`
                      `test/integration/offline/keepable_pages_test.rb`
 - **Dépend de**    : Lot 0
@@ -149,7 +151,7 @@ Jour 2, vague 1 : Lot E                       → 1 agent
                      `app/views/shared/offline/_pending_copies.html.erb` → `_pending_queue.html.erb` *(renommage, `kind:`)*
                      `app/views/classroom/teacher_homes/show.html.erb` · `app/views/classroom/classrooms/show.html.erb` *(file, boutons désactivés hors ligne)*
                      `app/views/classroom/assignment_follow_ups/show.html.erb` *(mention « Donné hors connexion le …, arrivé le … »)*
-                     `app/views/classroom/assignments/new.html.erb` · `app/views/classroom/session_days/edit.html.erb` *(formulaires marqués `data-offline-action`)*
+                     `app/views/classroom/assignments/new.html.erb` · `app/views/classroom/session_days/edit.html.erb` *(formulaires marqués `data-offline-action` ; leurs contrôleurs sont au Lot D)*
 - **Dépend de**    : Lot 0, Lot D
 - **Test associé** : `test/domain/use_cases/classroom/sync_offline_action_test.rb` (CA-20, CA-21, CA-22, CA-25) ; `test/integration/offline/offline_actions_test.rb` ; `test/javascript/offline/actions.test.js` (CA-23) ; `test/system/offline/teacher_offline_test.rb` (CA-24)
 - **Done quand**   : hors ligne, un enseignant donne un devoir et règle ses jours de cours ; au retour du réseau, le devoir existe une seule fois avec « Donné hors connexion le …, arrivé le … », et un devoir donné sur une classe archivée entre-temps est montré « non envoyé ».
@@ -163,13 +165,17 @@ Toutes tranchées par le porteur le 2026-11-22 (memo, Q1 à Q8). Restent, réver
 - [x] Seuil « Wi-Fi » : réseau inconnu (Safari) traité comme données mobiles — prudent pour le forfait.
 - [x] 2 demandes à la fois par appareil pendant le téléchargement — prudent pour le serveur.
 - [x] Marque « corrigé reçu » renommée « Corrigé disponible sur l'appareil de l'élève » — vraie, pas cachée.
+- [ ] Grill Q12 : l'enseignant ne donne hors ligne que depuis une page de choix déjà ouverte (appliqué) ; recommandé : télécharger le catalogue de ses niveaux. Si le porteur choisit l'extension, elle s'ajoute au Lot E sans rouvrir le Lot 0 (même liste, filtre « enseignant », sans corrigé).
+- [ ] Grill Q13 : premier lancement sans réseau — consigne dans « Pas de connexion » (appliqué).
+- [ ] Grill Q14 : annonces, progression, archive, « Mon compte » — hors périmètre (appliqué) ; recommandé : chantier de suivi `hors-connexion-ecrans-eleve`.
+- [ ] Grill arrêté à Q14 par le porteur : angles restants (enseignant dans deux établissements, quota iPhone, charge un jour de rentrée) à reprendre avant le départ du Lot 0.
 
 ## Couverture des critères d'acceptation
 
 | CA | Lot |
 |---|---|
-| CA-1, CA-2, CA-3, CA-4, CA-5, CA-6, CA-7, CA-8, CA-9, CA-10, CA-11, CA-12, CA-18 | A |
-| CA-13, CA-14, CA-15, CA-16 | B |
+| CA-1 à CA-12, CA-18, CA-26 (purge), CA-27, CA-28 | A |
+| CA-13 à CA-16, CA-26 (refus de la copie) | B |
 | CA-17 | C |
 | CA-19 | D |
 | CA-20, CA-21, CA-22, CA-23, CA-24, CA-25 | E |
@@ -196,6 +202,7 @@ Aucun critère orphelin.
 | `app/controllers/assessment/session_results_controller.rb` | Lot D (contrôleur) ; Lot B ne touche que ses vues |
 | `test/integration/offline/keepable_pages_test.rb` | Lot D |
 | `app/javascript/offline/store.js` · `sync.js` | Lot E |
+| `app/controllers/classroom/assignments_controller.rb` · `session_days_controller.rb` | Lot D (contrôleurs) ; Lot E ne touche que leurs vues |
 
 Contrôle mécanique (`awk … | sort | uniq -d`) : à relancer après toute modification du plan. Les doublons attendus sont les deux fichiers séquentiels du tableau.
 
@@ -222,3 +229,4 @@ Contrôle mécanique (`awk … | sort | uniq -d`) : à relancer après toute mod
 ## Chantiers de suivi
 
 - `hors-connexion-android` : programme d'arrière-plan dans le WebView des apps Hotwire Native, recette sur un vrai appareil.
+- `hors-connexion-ecrans-eleve` : annonces, progression, archive, « Mon compte » (si le porteur le décide, Q14).

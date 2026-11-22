@@ -52,6 +52,12 @@ Règles d'autorisation, **rejouées par le serveur à la réception** : `StartSe
 | Devoir donné hors ligne sur une classe archivée ou une classe que l'enseignant ne tient plus | Refusé à la réception ; montré « non envoyé » avec son motif, gardé 30 jours |
 | Même action envoyée deux fois | Exécutée une fois ; le second envoi rend le premier résultat |
 | Retirer un élève ou changer le lien hors ligne | Le bouton est désactivé hors ligne, avec « Disponible avec du réseau » |
+| Compte désactivé, supprimé ou session révoquée pendant qu'il est hors ligne | Hors ligne, rien ne change ; au premier contact avec le serveur, tout ce qui est propre au compte est effacé et ses copies en attente sont refusées (`account_inactive`) |
+| Leçons de son niveau modifiées ou publiées | Au retour du réseau, retéléchargées même en données mobiles ; les autres niveaux attendent le Wi-Fi |
+| Liste du catalogue inchangée | Le serveur répond 304 ; rien n'est retéléchargé |
+| Premier lancement sans réseau, rien de téléchargé | « Pas de connexion », avec la consigne « Ouvre l'application une fois avec du réseau pour télécharger tes leçons. » |
+| Enseignant hors ligne sur une page de choix de devoir jamais ouverte | « Pas de connexion » ; seules les pages de choix déjà ouvertes en ligne permettent de donner un devoir |
+| Annonces, progression, archive, « Mon compte » hors ligne | « Pas de connexion » (hors périmètre) |
 
 ## 4. Critères d'acceptation
 
@@ -161,7 +167,7 @@ Et une image non publiée (no-store), une photo de profil ou un fichier de messa
 
 # CA-19 Pages de l'enseignant gardées
 Étant donné un enseignant connecté
-Quand il ouvre son accueil, une classe, la fiche d'un élève, le suivi d'un devoir ou le résultat d'une copie
+Quand il ouvre son accueil, une classe, la fiche d'un élève, le suivi d'un devoir, le résultat d'une copie, la page « Donner un devoir » ou ses jours de cours
 Alors la page porte Lnclass-Offline: keep
 Et aucune autre page de l'enseignant ne le porte
 
@@ -195,6 +201,26 @@ Alors « Retirer de la classe » et « Changer le lien » sont désactivés avec
 Étant donné un enseignant hors ligne qui règle ses jours de cours deux fois
 Quand la file part
 Alors les deux actions sont rejouées dans l'ordre et le dernier réglage est celui gardé
+
+# CA-26 Compte désactivé au retour du réseau
+Étant donné un élève désactivé pendant que son appareil était hors ligne, avec une copie en attente et son niveau téléchargé
+Quand l'appareil retrouve le réseau
+Alors la liste du catalogue répond 401 et l'appareil oublie la clé du compte
+Et ses corrigés, pages de compte et liste sont effacés
+Et sa copie est refusée avec le motif account_inactive
+Et les leçons communes restent si un autre compte de l'appareil y a droit
+
+# CA-27 Mises à jour légères
+Étant donné un élève dont le niveau est téléchargé
+Quand la liste n'a pas changé depuis le dernier relevé
+Alors le serveur répond 304 et aucune leçon n'est redemandée
+Et quand une leçon de son niveau change, elle est retéléchargée même en données mobiles
+Et une leçon d'un autre niveau qui change n'est retéléchargée qu'en Wi-Fi
+
+# CA-28 Premier lancement sans réseau
+Étant donné une application installée jamais ouverte avec du réseau
+Quand l'élève l'ouvre sans réseau
+Alors la page « Pas de connexion » porte la consigne d'ouvrir l'application une fois avec du réseau
 ```
 
 ## 5. Modélisation préliminaire

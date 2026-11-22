@@ -2,7 +2,7 @@
 
 > Tenu par l'orchestrateur ([`docs/workflows/orchestrateur.md`](../../workflows/orchestrateur.md)). Mis à jour une fois, en fin de session ; toute session d'orchestration commence par le lire. Ni secret, ni identifiant.
 
-**Mis à jour le** : 2026-11-22 · **Vague** : jour 1 (Lot 0 → A ‖ B ‖ C ‖ D), jour 2 (E) · **Où on en est** : cadrage et plan écrits, en attente du départ du porteur
+**Mis à jour le** : 2026-11-22 · **Vague** : jour 1 (Lot 0 → A ‖ B ‖ C ‖ D), jour 2 (E) · **Où on en est** : grill arrêté à Q14 par le porteur ; cadrage et plan à jour ; pas de code, en attente du départ
 
 ## Lots
 
@@ -19,7 +19,8 @@
 
 Prises :
 
-- 2026-11-22 · tout le catalogue auquel le compte a droit, son niveau d'abord, le reste en Wi-Fi ou sur demande ; élève + enseignant avec écriture (devoirs, archivage, jours de cours) ; enseignant sans téléchargement d'avance ; corrigé de l'entraînement sur l'appareil ; images des leçons gardées ; leçons communes non purgées à la déconnexion ; copie corrigée sur la version reçue (30 jours) ; PWA seulement — par le porteur
+- 2026-11-22 · tout le catalogue auquel le compte a droit, son niveau d'abord, le reste en Wi-Fi ou sur demande ; élève + enseignant avec écriture (devoirs, archivage, jours de cours) ; enseignant sans téléchargement d'avance ; corrigé de l'entraînement sur l'appareil ; images des leçons gardées ; leçons communes non purgées à la déconnexion ; copie corrigée sur la version reçue (30 jours) ; PWA seulement ; compte désactivé effacé au retour du réseau ; niveau mis à jour même en données mobiles, le reste en Wi-Fi ; un élève n'a qu'un niveau — par le porteur
+- 2026-11-22 · Q12, Q13, Q14 sans préférence : options prudentes appliquées, en `## À trancher` du journal — par l'orchestrateur
 
 Ouvertes : `script/docs/a_trancher`, et les sections `## À trancher` des journaux des chantiers de la vague.
 

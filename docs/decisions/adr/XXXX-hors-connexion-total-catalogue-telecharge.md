@@ -79,6 +79,8 @@ Menace : [`menace.md`](../../chantiers/hors-connexion-total/menace.md).
   - `priority` vaut 0 pour le niveau de l'élève, et 1 pour le reste.
   - `version` est l'empreinte du contenu de la leçon, exercices compris.
   - `bytes` est une estimation : la taille HTML de la dernière rendue, ou à défaut la taille du JSON source fois 1,5.
+- **Légèreté** : la réponse porte un `ETag` (empreinte des versions) ; `If-None-Match` égal → 304. Les leçons de priorité 0 qui changent sont retéléchargées même en données mobiles, sans redemander l'accord ; les autres en Wi-Fi seulement.
+- **Compte inactif** : un compte désactivé, supprimé ou à la session révoquée reçoit 401 avec `Lnclass-Offline: forget` ; le programme oublie la clé (même purge que la déconnexion). `SyncOfflineCopy` refuse alors `:account_inactive`.
 - **Filtre d'accès** : `StudentAccessPort` à l'heure de la demande. `blocked?` ⇒ seulement les leçons gratuites. Sinon tout ce qui est publié.
 - **`access_ends_on`** : nouvelle méthode `Entities::Billing::Access#ends_on`. Elle vaut `subscribed_until` pour un abonné, la fin des jours gratuits pour l'essai, et `BETA_ENDS_ON` pour la bêta.
 - **Gratuit ou payant** : la règle existante de l'accès ne distingue pas encore les leçons. Une leçon est `paid: true` dès que l'ouvrir exige un accès non bloqué. Le Lot 0 fige cette règle dans la query et la teste.
@@ -103,7 +105,7 @@ Menace : [`menace.md`](../../chantiers/hors-connexion-total/menace.md).
 - **Lecture hors ligne d'une page HTML** (réseau en échec), dans cet ordre :
   1. la page de compte gardée (`lnclass-pages-<clé>`, ADR-0133) ;
   2. sinon, la page commune, si l'URL est dans la liste de la clé courante et, pour une entrée `paid`, si `access_ends_on` n'est pas passé. Une entrée `paid` dont la date est passée donne une page statique `/offline-access-ended.html` ;
-  3. sinon `/offline.html`.
+  3. sinon `/offline.html`, qui porte la consigne « Ouvre l'application une fois avec du réseau pour télécharger tes leçons. »
   
   Sans clé courante, on ne sert que `/offline.html`.
 - **Téléchargement** : piloté par la page (`offline-download`, Stimulus), pas par le programme. La page n'a pas d'API d'arrière-plan fiable sur Safari.
@@ -149,7 +151,7 @@ Menace : [`menace.md`](../../chantiers/hors-connexion-total/menace.md).
 
 ### 4.7 Enseignant (amende ADR-0133 §4.6)
 
-- **Lecture** : `keep_offline` sur l'accueil enseignant, la page de classe, la fiche d'un élève, le suivi d'un devoir et le résultat d'une copie. Rien n'est téléchargé d'avance.
+- **Lecture** : `keep_offline` sur l'accueil enseignant, la page de classe, la fiche d'un élève, le suivi d'un devoir, le résultat d'une copie, la page « Donner un devoir » (`assignments#new`) et ses jours de cours (`session_days#edit`). Rien n'est téléchargé d'avance : il ne donne hors ligne que depuis une page de choix déjà ouverte (grill Q12, à trancher).
 - **Écritures**, file IndexedDB `actions` dans `lnclass-offline-<clé>` : `{ client_action_id (UUID v4), kind, payload, made_at, status, reason }`. Les types possibles :
   - `assign` (payload de `AssignmentInput`) ;
   - `assign_batch` (`AssignExerciseBatch`, 10 exercices au plus) ;
@@ -213,7 +215,9 @@ const servableFromCatalog = (list, url, now) =>
   - CA-8 à CA-12 ;
   - une page commune n'est jamais servie quand le réseau répond ;
   - sans clé, seule `/offline.html` est servie.
-- `test/javascript/offline/download.test.js` : CA-5 à CA-7.
+- `test/javascript/offline/download.test.js` : CA-5 à CA-7, CA-27.
+- `test/integration/offline/catalog_list_test.rb` : CA-26 (401 + `forget`), CA-27 (304).
+- `test/system/offline/first_launch_test.rb` : CA-28.
 - `test/domain/use_cases/assessment/issue_offline_packs_test.rb` : CA-13.
 - `test/domain/use_cases/assessment/sync_offline_copy_test.rb` (amendé) : CA-14 à CA-16.
 - `offline_grading_parity_test.rb` et `grader.test.js` (étendus aux types de l'entraînement) : CA-17.
