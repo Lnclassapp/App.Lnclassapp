@@ -119,7 +119,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
       assert_blocks_above_fold "main > div > *", max: 2
       assert_operator rect("#auth-welcome-card")["bottom"], :<=, rect("#session-form")["top"]
       assert_text "code secret à 4 chiffres"
-      assert_link I18n.t("identity.sessions.new.sign_up"), href: new_student_registration_path
+      assert_link I18n.t("identity.sessions.new.sign_up"), href: new_student_entry_path
       help = find("#auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?")
       assert_operator rect("#auth-help [aria-controls=help-sheet]")["right"], :>, 390 - 40
       help.click

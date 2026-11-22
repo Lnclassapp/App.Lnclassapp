@@ -9,6 +9,7 @@ class UseCasePoliciesTest < ActiveSupport::TestCase
   # The only exemptions (ADR-0028): no actor exists yet when they run.
   EXEMPT = {
     "UseCases::Identity::Authenticate" => "connexion : l'acteur n'existe pas encore",
+    "UseCases::Identity::EnterAsStudent" => "entrée élève : le visiteur n'est pas connecté, l'acteur naît de l'entrée ; débit, plafond des codes faux et verrouillage par numéro (ADR-0028, ADR-0141)",
     "UseCases::Identity::ResetPinWithCode" => "PIN oublié : la personne n'est pas connectée",
     "UseCases::Identity::AcceptInvitation" => "invitation : le compte n'existe pas encore",
     "UseCases::Communication::PublishScheduledMessages" => "job sans acteur : droit vérifié à la programmation, exposition bornée par la date de fin, retrait possible (ADR-0078 §6)",

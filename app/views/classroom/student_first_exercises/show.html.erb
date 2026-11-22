@@ -1,0 +1,31 @@
+<%# 🌐 UI · classroom/student_first_exercises/show — le cadre de la fenêtre « Ton premier exercice » %>
+<%# Rôle : une fenêtre ouverte (titre de l'exercice, « Commencer » ou « Reprendre », « Plus tard »), ou le cadre vide ; « Commencer » sort du cadre (_top) %>
+<%# UDR  : accueil-eleve-qr-fenetre-inviter §3.2, 0174 activation-premier-exercice §2.2 · locals: aucune (@exercise : ActivationQuery::Row | nil) -%>
+<%= turbo_frame_tag FirstExercisePrompt::FRAME do %>
+  <% if @exercise %>
+    <% resume = @exercise.kind == :resume %>
+    <% start_label = t(resume ? "catalog.courses.next_exercise.resume" : "catalog.courses.next_exercise.start", number: @exercise.resume_number) %>
+    <% start_aria = t(resume ? "catalog.courses.next_exercise.resume_aria" : "catalog.courses.next_exercise.start_aria",
+                      title: @exercise.title, number: @exercise.resume_number) %>
+    <% start_data = { turbo_frame: "_top", autofocus_target: "fallback" } %>
+    <%= ui_modal title: t("catalog.courses.next_exercise.first"), id: "student_first_exercise_modal", open: true, size: :sm, placement: :center do |modal| %>
+      <h3 class="line-clamp-2 font-display text-base font-medium text-ink"><%= @exercise.title %></h3>
+      <p class="mt-1 text-sm text-mute">
+        <%= [ @exercise.material_name, @exercise.assigned ? t("catalog.courses.next_exercise.assigned") : @exercise.lesson_name ].join(" · ") %>
+      </p>
+      <% modal.footer do %>
+        <%= ui_button t(".later"), variant: :ghost, id: "student_first_exercise_later", class: "min-h-tap", data: { action: "modal#close" } %>
+        <% if @exercise.session_public_id %>
+          <%= ui_button start_label, href: exercise_session_path(@exercise.session_public_id), variant: :primary, icon: "arrow-path",
+                        id: "student_first_exercise_start", class: "min-h-tap", "aria-label": start_aria, data: start_data %>
+        <% else %>
+          <%= button_to exercise_sessions_path(@exercise.exercise_public_id), id: "student_first_exercise_start", form_class: "contents",
+                        form: { data: { turbo_frame: "_top" } }, data: { autofocus_target: "fallback" }, "aria-label": start_aria,
+                        class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:md], ComponentsHelper::BUTTON_VARIANTS[:primary], "min-h-tap") do %>
+            <%= ui_icon "play", size: :sm %><%= start_label %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

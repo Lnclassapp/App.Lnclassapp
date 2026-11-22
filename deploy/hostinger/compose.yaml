@@ -1,0 +1,207 @@
+# ADR-0140 : la production sur le VPS Hostinger. Secrets dans le .env du projet, jamais ici.
+# Hostinger refuse plus de 8 192 caractères : commentaires courts. Postgres n'est publié sur aucun port.
+name: lnclass
+
+x-app-env: &app-env
+  env_file:
+    - path: .env
+      required: true
+
+services:
+  # Generates the database password once, inside a volume: nobody types it, it never leaves the server.
+  secrets:
+    image: alpine:3.22
+    restart: "no"
+    command:
+      - sh
+      - -c
+      - '[ -s /secrets/db_password ] || (tr -dc A-Za-z0-9 </dev/urandom | head -c 40 > /secrets/db_password); chmod 444 /secrets/db_password'
+    volumes:
+      - secrets:/secrets
+
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    depends_on:
+      secrets:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_USER: lnclass
+      POSTGRES_DB: lnclass_production
+      POSTGRES_PASSWORD_FILE: /secrets/db_password
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - secrets:/secrets:ro
+    shm_size: 256mb
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "lnclass", "-d", "lnclass_production"]
+      interval: 10s
+      retries: 6
+
+  app:
+    <<: *app-env
+    # Built on the server beforehand by deploy/hostinger/construction.yaml: Hostinger's Docker manager never builds.
+    image: lnclass-app:${APP_REVISION:?APP_REVISION manquant}
+    pull_policy: never
+    restart: unless-stopped
+    # 0 during the cutover copy (deploy/hostinger/bascule.yaml): nothing writes to the base while it is replaced.
+    deploy:
+      replicas: ${APP_REPLICAS:-1}
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RAILS_ENV: production
+      # Thruster listens here and forwards to Puma.
+      HTTP_PORT: "8080"
+      # db:prepare db:seed at boot (bin/docker-entrypoint).
+      PREPARE_DATABASE: "1"
+    entrypoint:
+      - sh
+      - -c
+      - 'pw=$$(cat /secrets/db_password) && [ -n "$$pw" ] || { echo "mot de passe de la base illisible" >&2; exit 1; }; export DATABASE_URL="postgres://lnclass:$$pw@db:5432/lnclass_production"; exec /rails/bin/docker-entrypoint "$$@"'
+      - sh
+    command: ["./bin/thrust", "./bin/rails", "server"]
+    volumes:
+      - secrets:/secrets:ro
+    # Caddy reaches the production by this name only; test apps sit on lnclass_web.
+    networks:
+      default:
+        aliases: [prod-app]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/up"]
+      interval: 15s
+      start_period: 180s
+      retries: 4
+
+  # TLS (Let's Encrypt, HTTP-01 through Cloudflare) and the real client IP from Cloudflare.
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_ADDRESSES: ${SITE_ADDRESSES:-srv2172236.hstgr.cloud}
+    # lnclass_web: the test environments (deploy/hostinger/test.yaml), served under their own names below.
+    networks: [default, web]
+    configs:
+      - source: caddyfile
+        target: /etc/caddy/Caddyfile
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+  # Every night at 03:15 (Paris): pg_dump to R2 under backups/postgres/, kept 7 days by the script (prune)
+  # (owner's decision, 2026-11-17).
+  backup:
+    image: postgres:18
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    # Only what the backup needs, not the application's whole .env (master key, agent secret).
+    environment:
+      TZ: Europe/Paris
+      BUCKET_NAME: ${BUCKET_NAME:?BUCKET_NAME manquant}
+      BUCKET_ENDPOINT: ${BUCKET_ENDPOINT:?BUCKET_ENDPOINT manquant}
+      BUCKET_ACCESS_KEY_ID: ${BUCKET_ACCESS_KEY_ID:?BUCKET_ACCESS_KEY_ID manquant}
+      BUCKET_SECRET_ACCESS_KEY: ${BUCKET_SECRET_ACCESS_KEY:?BUCKET_SECRET_ACCESS_KEY manquant}
+    configs:
+      - source: backup_script
+        target: /usr/local/bin/lnclass-backup
+    volumes:
+      - secrets:/secrets:ro
+    entrypoint: ["sh", "/usr/local/bin/lnclass-backup"]
+    # Unhealthy when no backup succeeded in 26 hours: visible in the Docker manager.
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /tmp/last_ok ] && [ $$(( $$(date +%s) - $$(cat /tmp/last_ok) )) -lt 93600 ]"]
+      interval: 10m
+      start_period: 15m
+      retries: 1
+
+configs:
+  caddyfile:
+    content: |
+      {
+        servers {
+          trusted_proxies static 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22
+          client_ip_headers CF-Connecting-IP X-Forwarded-For
+          trusted_proxies_strict
+        }
+      }
+      # Rails reads the client from X-Forwarded-For: only the visitor's address (CF-Connecting-IP, read from a
+      # Cloudflare relay) goes there, else every visitor behind one relay would share its rate limits (ADR-0050).
+      # X-Forwarded-Host is dropped: the Host header is the name Cloudflare was asked for.
+      (vers) {
+        encode zstd gzip
+        reverse_proxy {args[0]} {
+          header_up X-Forwarded-For {client_ip}
+          header_up -X-Forwarded-Host
+        }
+      }
+      {$$SITE_ADDRESSES} {
+        import vers prod-app:8080
+      }
+      # Test environments: a 502 while their project is not running, nothing else is affected.
+      staging.lnclass.com, app-staging.lnclass.com {
+        import vers staging-app:8080
+      }
+      develop.lnclass.com, app-develop.lnclass.com {
+        import vers develop-app:8080
+      }
+  backup_script:
+    content: |
+      #!/bin/sh
+      set -eu
+      : "$${BUCKET_NAME:?BUCKET_NAME manquant}" "$${BUCKET_ENDPOINT:?BUCKET_ENDPOINT manquant}"
+      : "$${BUCKET_ACCESS_KEY_ID:?}" "$${BUCKET_SECRET_ACCESS_KEY:?}"
+      until apt-get update -qq && apt-get install -y -qq awscli >/dev/null; do echo "BACKUP FAILED: installation d'awscli, nouvel essai dans 5 min" >&2; sleep 300; done
+      export AWS_ACCESS_KEY_ID="$$BUCKET_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$$BUCKET_SECRET_ACCESS_KEY" AWS_DEFAULT_REGION=auto
+      PGPASSWORD="$$(cat /secrets/db_password)"; [ -n "$$PGPASSWORD" ]; export PGPASSWORD
+      # 7 days, after a successful backup only, our dump names only (no R2 lifecycle rule: read-only token).
+      prune() {
+        cutoff=$$(date -d '7 days ago' +%Y%m%d)
+        listing=$$(aws s3 ls "s3://$$BUCKET_NAME/backups/postgres/" --endpoint-url "$$BUCKET_ENDPOINT") ||
+          { echo "BACKUP PRUNE FAILED: liste illisible" >&2; return 0; }
+        echo "$$listing" | awk '{print $$4}' | while read -r name; do
+          case "$$name" in lnclass-[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9].dump) ;; *) continue ;; esac
+          [ "$$(echo "$$name" | cut -c9-16)" -lt "$$cutoff" ] || continue
+          if aws s3 rm "s3://$$BUCKET_NAME/backups/postgres/$$name" --endpoint-url "$$BUCKET_ENDPOINT" --only-show-errors; then
+            echo "backup pruned $$name"
+          else
+            echo "BACKUP PRUNE FAILED $$name" >&2
+          fi
+        done
+      }
+      backup() {
+        file=/tmp/lnclass-$$(date +%Y%m%d-%H%M).dump
+        key="backups/postgres/$$(basename "$$file")"
+        if pg_dump -h db -U lnclass -d lnclass_production --format=custom --file "$$file" &&
+           aws s3 cp "$$file" "s3://$$BUCKET_NAME/$$key" --endpoint-url "$$BUCKET_ENDPOINT" --only-show-errors &&
+           aws s3 ls "s3://$$BUCKET_NAME/$$key" --endpoint-url "$$BUCKET_ENDPOINT" >/dev/null; then
+          date +%s > /tmp/last_ok
+          echo "backup ok $$key"
+          prune
+        else
+          echo "BACKUP FAILED $$(date)" >&2
+        fi
+        rm -f "$$file"
+      }
+      backup
+      while true; do
+        now=$$(date +%s); next=$$(date -d 'tomorrow 03:15' +%s)
+        [ "$$(date +%H%M)" -lt 0315 ] && next=$$(date -d 'today 03:15' +%s)
+        sleep $$((next - now))
+        backup
+      done
+
+networks:
+  web:
+    name: lnclass_web
+
+volumes:
+  secrets:
+  pgdata:
+  caddy_data:
+  caddy_config:

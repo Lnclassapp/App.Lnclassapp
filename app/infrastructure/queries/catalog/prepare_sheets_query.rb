@@ -54,7 +54,9 @@ module Queries
       EMPTY = Prepare.new(interros: [], devoirs: [], targets: nil, bare: [], course_name: nil, material_name: nil, level_name: nil)
 
       # → Prepare. Un cours inconnu rend des listes vides ; la lecture d'un brouillon est l'affaire de ReadPublishedPolicy, en amont.
-      def call(course_slug:, actor:, classroom_public_id: nil)
+      # only : les public_id des seuls exercices à construire (questions, copies, devoirs dus) ; leur numéro reste leur rang dans la feuille
+      # entière, les autres exercices n'y figurent pas. nil : tous (le comportement de toutes les pages sauf « Ma classe »).
+      def call(course_slug:, actor:, classroom_public_id: nil, only: nil)
         course = Orm::Course.joins(:material, :level).where(slug: course_slug)
                             .pick("courses.id", "courses.name", "courses.figures", "materials.name", "levels.name")
         return EMPTY if course.nil?
@@ -62,7 +64,7 @@ module Queries
         course_id, course_name, figures, material_name, level_name = course
         team = actor&.team? || false
         rows = exercises(course_id, team)
-        built = build_exercises(rows, figures, actor)
+        built = build_exercises(only ? rows.select { only.include?(it[1]) } : rows, figures, actor)
         Prepare.new(interros: interros(course_id, rows, built), devoirs: devoirs(course_id, rows, built),
                     targets: targets(course_slug, actor, rows, classroom_public_id), bare: bare(course_id, rows, team), course_name:, material_name:, level_name:)
       end
@@ -121,7 +123,7 @@ module Queries
       end
 
       def sheet(kind, dom_id, title, note, number, total, rows, built)
-        exercises = rows.each_with_index.map { |row, index| built.fetch(row.first).with(number: index + 1) }
+        exercises = rows.each_with_index.filter_map { |row, index| built[row.first]&.with(number: index + 1) }
         Sheet.new(kind:, dom_id:, title:, note: note.presence, number:, total:, exercises:)
       end
 

@@ -7,6 +7,7 @@
 <% unless @school.active? %>
   <p id="school_inactive_notice" class="-mt-2 mb-6 text-sm text-warning"><%= t(".inactive") %></p>
 <% end %>
+<div class="mb-6"><%= ui_button t(".posters"), href: school_admin_posters_path, target: "_blank", rel: "noopener", icon: "printer", variant: :secondary %></div>
 <%= render "school_admin/shared/rank_note", note: @rank_note %>
 
 <div class="space-y-8">

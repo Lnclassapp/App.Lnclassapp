@@ -36,7 +36,8 @@ module Dtos
       end
 
       test "les messages : choix manquants et établissement refusé, neutre" do
-        assert_equal [ "Choisissez votre DRENA." ], errors(school_public_id: "sch-1").messages_for(:drena_public_id)
+        # La DRENA est déduite de l'établissement : elle ne manque que s'il est introuvable, et le refus reste neutre.
+        assert_equal [ "Cet établissement ne peut pas être rejoint." ], errors(school_public_id: "sch-1").messages_for(:drena_public_id)
         assert_equal [ "Choisissez votre établissement." ], errors(drena_public_id: "drena-1").messages_for(:school_public_id)
         assert_equal "Cet établissement ne peut pas être rejoint.",
                      input.errors.generate_message(:school_public_id, :inclusion)

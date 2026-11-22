@@ -1,8 +1,9 @@
 # 🌐 DELIVERY · AuthenticatedController
 # Rôle : parent des espaces connectés ; rend le shell (personne connectée : ShellLayout), retient l'enseignant en attente
-# ADR  : 0026, 0049, 0055, 0060, 0063 · UDR : 0006, 0047, 0050
+# ADR  : 0026, 0049, 0055, 0060, 0063 · UDR : 0006, 0047, 0050, accueil-eleve-qr-fenetre-inviter (§3.2)
 class AuthenticatedController < ApplicationController
   include ShellLayout
+  include FirstExercisePrompt
 
   # Une requête de frame (modale, re-rendu 422) garde le layout minimal de turbo-rails : le shell en ferait une page
   # complète, et Turbo y prendrait le frame vide du layout application. Sauf la page atteinte par Turbo juste après un

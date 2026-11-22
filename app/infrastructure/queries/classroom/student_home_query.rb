@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
 # Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, lacunes, l'état de la carte du prochain exercice ; l'historique, à part (cadre différé) ; sans classe, la dernière, un retrait récent et les matières du dernier niveau
-# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085, 0089, 0090, médailles lues à la clôture · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5), 0084 (§3.8), XXXX accueil élève (§3.3 : les états de la carte)
+# ADR  : attribution-des-inscriptions-eleves (has_teacher, active_classroom), 0026, 0033, 0035, 0043, 0048, 0072, 0085, 0089, 0090, médailles lues à la clôture · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5), 0084 (§3.8), XXXX accueil élève (§3.3 : les états de la carte)
 module Queries
   module Classroom
     class StudentHomeQuery
@@ -8,8 +8,12 @@ module Queries
       # §3.3, UDR-0076 §3.1) ; subjects : les matières qui ont un cours publié de son niveau. L'activité récente n'y est plus :
       # seul le cadre différé la lit, par recent_sessions (chantier accueil-eleve, PRD §7).
       # school_sigle : le sigle de l'établissement pour l'en-tête de la carte, nil s'il n'en a pas ; next_step : NextStep.
-      Row = Data.define(:school_name, :school_sigle, :level_name, :classroom_name, :classmates_count,
-                        :assigned_exercises, :pending_gaps, :late_material_slugs, :subjects, :next_step)
+      # school_public_id : l'identifiant public de l'établissement, que le QR de la carte de classe encode (/ecole/<id>).
+      Row = Data.define(:school_name, :school_sigle, :school_public_id, :level_name, :classroom_name, :classmates_count,
+                        :assigned_exercises, :pending_gaps, :late_material_slugs, :subjects, :next_step, :has_teacher)
+      # has_teacher : la classe a au moins un enseignant (teacher_classrooms) ; sinon l'accueil garde « Invite ton enseignant ».
+      # ActiveClassroom : la classe principale active de l'élève, pour « Invite tes camarades » (partage-classe-k-factor, Lot B).
+      ActiveClassroom = Data.define(:name, :school_name, :link_token)
       # UDR accueil élève §3.3, la carte de l'accueil. state : :late, :due, :review, :all_done ou :unassigned (« sans classe » est
       # l'absence de Row) ; exercise : l'ExerciseRow à faire (:late, :due) ; other_late_count : les autres en retard ; review : la fiche
       # à revoir (:review) ; done_count et total_count : l'assigné fait, sur l'assigné ; assigner : qui l'a donné (:late, :due).
@@ -47,7 +51,7 @@ module Queries
       LAST_FIRST = Arel.sql("classroom_students.left_at DESC NULLS FIRST, classroom_students.joined_at DESC, classroom_students.id DESC")
       # L'ordre du programme (ADR-0090 §4.2) : le rang de la matière, puis son nom ; une matière sans rang suit, par nom.
       PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name" ].freeze
-      HEADER_COLUMNS = [ "classrooms.id", "schools.name", "schools.sigle", "levels.name", "classrooms.name" ].freeze
+      HEADER_COLUMNS = [ "classrooms.id", "schools.name", "schools.sigle", "schools.public_id", "levels.name", "classrooms.name" ].freeze
       # Un exercice de toute la leçon n'a pas de notion : il suit celles de sa leçon, et le tri Ruby ne compare jamais nil.
       COALESCE_NOTION_POSITION = Arel.sql("COALESCE(essentials.position, 2147483647)")
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
@@ -56,18 +60,28 @@ module Queries
       # today : la date d'Abidjan (Time.zone), qui dit si une échéance est passée.
       # → Row | nil (aucune classe principale active : l'élève n'a pas d'accueil)
       def call(student_id:, today: Time.zone.today)
-        classroom_id, school_name, school_sigle, level_name, classroom_name =
+        classroom_id, school_name, school_sigle, school_public_id, level_name, classroom_name =
           Orm::ClassroomStudent.joins(classroom: %i[school level])
                                .where(student_id:, primary: true, left_at: nil, classrooms: { status: "active" })
                                .pick(*HEADER_COLUMNS)
         return if classroom_id.nil?
 
         exercises = assigned_with_slugs(classroom_id, student_id)
-        Row.new(school_name:, school_sigle: school_sigle.presence, level_name:, classroom_name:,
+        Row.new(school_name:, school_sigle: school_sigle.presence, school_public_id:, level_name:, classroom_name:,
                 classmates_count: Orm::ClassroomStudent.where(classroom_id:, left_at: nil).count,
                 assigned_exercises: exercises.map(&:last), pending_gaps: pending_gaps(student_id:),
                 late_material_slugs: late_material_slugs(exercises, today), subjects: subjects(student_id),
-                next_step: next_step(exercises.map(&:last), classroom_id, student_id, today))
+                next_step: next_step(exercises.map(&:last), classroom_id, student_id, today),
+                has_teacher: Orm::TeacherClassroom.exists?(classroom_id:))
+      end
+
+      # → ActiveClassroom | nil (aucune classe principale active)
+      def active_classroom(student_id:)
+        name, school_name, link_token =
+          Orm::ClassroomStudent.joins(classroom: :school)
+                               .where(student_id:, primary: true, left_at: nil, classrooms: { status: "active" })
+                               .pick("classrooms.name", "schools.name", "classrooms.link_token")
+        ActiveClassroom.new(name:, school_name:, link_token:) if link_token
       end
 
       # Une lacune dont la fiche n'est plus publiée n'a plus de page à ouvrir : elle n'est pas proposée.

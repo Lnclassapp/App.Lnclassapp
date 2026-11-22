@@ -203,6 +203,38 @@ module Queries
         assert_empty sheets
       end
 
+      # pages-sous-600ms, lot C : « Ma classe » ne construit que les exercices assignés, et le résultat reste celui de toute la feuille lue
+      # (le numéro affiché est le rang dans l'envoi ; celui de la feuille de leçon est vérifié dans PrepareSheetsQueryTest).
+      test "les exercices assignés gardent leur copie, leurs questions et le numéro de l'envoi, sur deux leçons" do
+        other = create_course(name: "Fonctions", level: @course.level, series: @course.series)
+        fonctions = create_essential(course: other, name: "Affine", position: 1)
+        skipped = create_exercise(essential: @thales, title: "T1", position: 1, questions: 1)
+        picked = create_exercise(essential: @thales, title: "T2", position: 2, questions: 2)
+        last = create_exercise(essential: @thales, title: "T3", position: 3, questions: 1)
+        subject = create_subject(course: @course, title: "Sujet A", notions: "Thalès")
+        create_exercise(subject:, course: @course, title: "S1", position: 4, questions: 1)
+        only_subject = create_exercise(subject:, course: @course, title: "S2", position: 6, questions: 1)
+        fn_first = create_exercise(essential: fonctions, title: "F1", position: 1, questions: 1)
+        fn_second = create_exercise(essential: fonctions, title: "F2", position: 2, questions: 1)
+        send_batch([ picked, only_subject, fn_second ], at: 2.hours.ago)
+        handed = send_batch([ last, fn_first ], at: 1.hour.ago)
+        copy = create_exercise_session(student: @student, exercise: last, status: "completed", score_percent: 100, classroom_assignment_id: handed.first.id)
+        create_attempt(session: copy)
+
+        recent, older = sheets
+
+        assert_equal [ [ last.public_id, 1, "T3" ], [ fn_first.public_id, 2, "F1" ] ], recent.exercises.map { [ it.public_id, it.number, it.title ] }
+        assert_equal [ copy.public_id, true ], [ recent.exercises.first.copy.session_public_id, recent.exercises.first.copy.passed ]
+        assert_nil recent.exercises.last.copy
+        assert_equal [ [ picked.public_id, 1, 2 ], [ only_subject.public_id, 2, 1 ], [ fn_second.public_id, 3, 1 ] ],
+                     older.exercises.map { [ it.public_id, it.number, it.questions.size ] }
+        assert_equal [ [ 1, 2 ], [ 1 ] ], older.exercises.first(2).map { |exercise| exercise.questions.map(&:number) }
+        assert_equal [ [ 1 ] ], recent.exercises.first.questions.map { [ it.number ] }
+        assert_equal [ :correct ], recent.exercises.first.questions.map(&:verdict)
+        assert_equal [ [ "Thalès", "Fonctions" ], [ "Thalès", "Fonctions" ] ], [ recent.courses, older.courses ]
+        refute_includes (recent.exercises + older.exercises).map(&:public_id), skipped.public_id
+      end
+
       test "un envoi de deux leçons : les deux sont nommées, chaque exercice est lu" do
         other = create_course(name: "Fonctions", level: @course.level, series: @course.series)
         send_batch([ create_exercise(essential: @thales, questions: 1), create_exercise(essential: create_essential(course: other), questions: 1),

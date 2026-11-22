@@ -24,6 +24,7 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
 
   test "case du devoir, lecture, Commencer, Rendre à l'enseignant, retour à la feuille du devoir, puis « Rendu » sur la case" do
     visit student_classroom_path
+    dismiss_first_exercise_prompt
     assert_selector "#student_classroom_assigned a.ps-card", count: 2
     assert_no_selector "#student_classroom_assigned .ps-sheet"
     assert_no_button "Rendre à l'enseignant"
@@ -59,6 +60,7 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
   test "on a 390 px screen the cards and the reading page do not overflow and « Commencer » is 48 px high" do
     with_mobile_viewport do
       visit student_classroom_path
+      dismiss_first_exercise_prompt
       assert_selector "a.ps-card", count: 2
       assert_operator page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth"), :<=, 0
 

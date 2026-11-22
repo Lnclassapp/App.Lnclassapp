@@ -1,0 +1,45 @@
+<%# 🌐 UI · school/school_searches/_field — le champ « Ton établissement » : on tape quelques lettres, on coche un résultat %>
+<%# Rôle : composant commun (cascade élève, inscription et rattachement enseignant) ; Stimulus school--school-search ; repli sans JavaScript en GET (« Chercher ») %>
+<%# ADR  : 0142-recherche-etablissement · UDR : 0177-champ-etablissement (§3), amende 0024 (§2.4), 0081 (§3.3), 0091 (§3.2), 0099 (§3.2) %>
+<%# locals: (scope:, chosen:, result:, term:, error: nil, search_form: nil, fallback_url: nil, label_hidden: false) -%>
+<%# search_form : l'id d'un formulaire GET distinct, obligatoire dès que l'hôte porte un code secret (inscriptions, rattachement) :
+    jamais le PIN dans l'adresse. Sinon (« Choisis ta classe », « Changer de classe »), « Chercher » renvoie l'hôte en GET vers fallback_url. %>
+<% register = School::SchoolSearchesController.register(scope) %>
+<%# L'erreur porte l'id du champ envoyé (<scope>_school_public_id_error), comme ui_field. %>
+<% error_id = "#{scope}_school_public_id_error" %>
+<% described_by = [ "school_q_hint", (error_id if error) ].compact.join(" ") %>
+<%= tag.div class: "flex min-w-0 flex-col", data: { controller: "school--school-search",
+                                                  "school--school-search-url-value": school_search_path(scope:) } do %>
+  <%# label_hidden : l'hôte titre déjà son étape du même mot ; le libellé reste lu par les lecteurs d'écran. %>
+  <label for="school_q" class="<%= label_hidden ? "sr-only" : "mb-1.5 block text-sm font-medium text-ink" %>">
+    <%= t(".label.#{register}") %><span class="text-error" aria-hidden="true"> *</span>
+  </label>
+  <%= search_field_tag :school_q, term, id: "school_q", form: search_form, autocomplete: "off", autocapitalize: "none",
+                                        spellcheck: false, enterkeyhint: "search", maxlength: Queries::School::SchoolSearchQuery::MAX_LENGTH,
+                                        placeholder: t(".placeholder"), class: field_classes(:search, error, nil),
+                                        "aria-controls": "school_results", "aria-describedby": described_by, "aria-invalid": ("true" if error),
+                                        data: { "school--school-search-target": "input",
+                                                action: "input->school--school-search#queue keydown.enter->school--school-search#now" } %>
+  <p id="school_q_hint" class="mt-1.5 text-sm text-mute"><%= t(".hint.#{register}") %></p>
+  <% if error %>
+    <p id="<%= error_id %>" class="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+    </p>
+  <% end %>
+  <%# Avec JavaScript, Chrome rend le <noscript> inline : dans une colonne flex, il ne laisse pas de ligne vide. %>
+  <noscript>
+    <% if search_form %>
+      <%= ui_button t(".search"), type: :submit, variant: :secondary, size: :sm, icon: "magnifying-glass", class: "mt-2", form: search_form %>
+    <% else %>
+      <%= ui_button t(".search"), type: :submit, variant: :secondary, size: :sm, icon: "magnifying-glass", class: "mt-2",
+                                  formaction: fallback_url, formmethod: :get, formnovalidate: true %>
+    <% end %>
+  </noscript>
+  <%= render template: "school/school_searches/index", locals: { scope:, chosen:, result: } %>
+  <%# Une liste qui n'arrive pas (réseau, réponse sans son frame) : le contrôleur pose cet état dans le frame, la recherche en reprise. %>
+  <template data-school--school-search-target="error">
+    <div class="mt-2">
+      <%= ui_error_state title: t(".load_error"), message: t(".load_error_message"), retry_href: "#", retry_label: t(".retry") %>
+    </div>
+  </template>
+<% end %>

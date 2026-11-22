@@ -1,6 +1,6 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
 <%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile, direction et équipe seulement) ; coque Android ou mode concentré : le contenu seul %>
-<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), 0134 écrans enseignant §3.3, 0132 accueil élève §3.1 (content_for :home_band, fond mist dès lg), hors-connexion §3.1, 0173 §3 (content_for :inner, :wave_home) · ADR : 0084 (§4.2), 0086 (§4.2), hors-connexion (§4.2) ; exige helper_method :shell_user %>
+<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), 0134 écrans enseignant §3.3, 0132 accueil élève §3.1 (content_for :home_band, fond mist dès lg), hors-connexion §3.1, 0173 §3 (content_for :inner, :wave_home), accueil-eleve-qr-fenetre-inviter §3.2 (cadre de la fenêtre) · ADR : 0084 (§4.2), 0086 (§4.2), hors-connexion (§4.2) ; exige helper_method :shell_user %>
 <% in_app = lnclass_app? %>
 <%# UDR-0087 §3.2 : une page qui pose content_for :focus (la séance d'exercice) n'a ni en-tête, ni menus, ni barre du bas,
     pour tous les rôles ; elle rend elle-même tout son cadre, sans le conteneur de page. %>
@@ -53,6 +53,12 @@
       <% end %>
     <% end %>
   </main>
+  <%# UDR accueil-eleve-qr-fenetre-inviter §3.2 : la fenêtre « Ton premier exercice » sur chaque écran de l'élève, hors mode concentré et hors feuille à remplir (content_for :no_first_exercise_prompt),
+      tant qu'il n'a rendu aucune copie ; un cadre différé, vide quand il n'y a rien à dire, qui ne montre rien en cas d'échec. %>
+  <% if !focus && !content_for?(:no_first_exercise_prompt) && first_exercise_prompt? %>
+    <%= turbo_frame_tag FirstExercisePrompt::FRAME, src: student_first_exercise_path, loading: :eager,
+                        data: { controller: "classroom--first-exercise-prompt", action: "turbo:frame-missing->classroom--first-exercise-prompt#missing" } %>
+  <% end %>
   <%= render "shared/navigation/bottom_bar", user: shell_user if bottom_bar %>
 <% end %>
 <%= render template: "layouts/application" %>

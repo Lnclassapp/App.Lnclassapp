@@ -1,10 +1,10 @@
 <%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école ou en attente %>
-<%# Rôle : écran de sortie, sans redirection ; issues : choisir sa classe ou voir son historique (élève), DRENA puis établissement (enseignant) %>
+<%# Rôle : écran de sortie, sans redirection ; issues : choisir sa classe ou voir son historique (élève), établissement cherché (enseignant) %>
 <%# ADR  : 0030, 0036, 0040, 0063, 0071, 0083, 0085, 0094 · UDR : 0006, 0050, 0054, 0056, 0079 (§3.9), 0099 (§3.2 : formulaire partagé) %>
 <% page_title t(".page_title") %>
 <div id="pending_account">
   <% if @school_join %>
-    <%# Enseignant sans établissement ni demande en attente (retiré, ou demande refusée) : DRENA puis établissement, sans code. %>
+    <%# Enseignant sans établissement ni demande en attente (retiré, ou demande refusée) : établissement cherché, sans code. %>
     <div class="flex flex-col gap-6">
       <% if @join_request&.status == "rejected" %>
         <div id="join_request_rejected" class="rounded-card border border-line bg-white/60 p-4 text-sm">
@@ -17,8 +17,7 @@
       <% if @rate_limited %>
         <%= ui_error_state title: t(".rate_limited.title"), message: t(".rate_limited.message") %>
       <% else %>
-        <%= render "school/teacher_schools/join_fields", school_join: @school_join, drena_options: @drena_options,
-                                                         school_options: @school_options, get_url: pending_account_path,
+        <%= render "school/teacher_schools/join_fields", school_join: @school_join, get_url: pending_account_path,
                                                          post_url: pending_school_join_path, submit_label: t(".join") %>
       <% end %>
       <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary, full: true %>

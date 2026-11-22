@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/student_homes/_class_card — la carte de la classe, à cheval sur la jonction bleu → blanc de l'accueil %>
-<%# Rôle : « Ta classe », son nom, l'établissement, son sigle en pastille ronde (celui de la base, sinon les initiales du nom), le logo Lnclass en bas à droite et « Entrer en classe » vers Ma classe %>
+<%# Rôle : « Ta classe », son nom, l'établissement, le QR de l'adresse de l'établissement à la place du sigle, le logo Lnclass en bas à droite et « Entrer en classe » vers Ma classe %>
 <%# UDR  : 0173 §3 (accueil, carte de classe), 0132 accueil élève §3.1 · locals: (home:, overlap: true) — overlap : la carte remonte sur le bandeau (faux dans la coque Android, qui n'en a pas) -%>
 <%= tag.section id: "student_class_card", "aria-labelledby": "student_class_title",
                 class: class_names("relative z-10 mx-5 rounded-card bg-white p-5 shadow-lift lg:mx-0", { "max-lg:-top-wave-card max-lg:-mb-wave-card" => local_assigns.fetch(:overlap, true) }) do %>
@@ -9,10 +9,11 @@
       <h2 id="student_class_title" class="mt-1 text-2xl leading-tight font-bold text-balance text-ink"><%= home.classroom_name %></h2>
       <p class="mt-1 text-sm text-mute"><%= home.school_name %></p>
     </div>
-    <span id="student_school_sigle" aria-hidden="true"
-          class="grid size-20 shrink-0 place-items-center rounded-full bg-brand-soft text-2xl font-extrabold tracking-tight text-brand-strong inset-ring-3 inset-ring-white ring-2 ring-brand/20">
-      <%= school_sigle(sigle: home.school_sigle, name: home.school_name) %>
-    </span>
+    <%# Le QR de l'adresse de l'établissement (ADR adresse-publique-etablissement) : ni élève, ni classe, ni jeton. %>
+    <div id="student_school_qr" class="size-24 shrink-0 overflow-hidden rounded-ln bg-white p-1 ring-2 ring-brand/20" role="img"
+         aria-label="<%= t(".qr_label", school: home.school_name) %>">
+      <%= school_signup_qr_svg(home.school_public_id) %>
+    </div>
   </div>
   <div class="mt-4 flex items-center justify-between gap-3">
     <%= ui_button t(".enter"), href: student_classroom_path, id: "student_class_enter", icon_end: "arrow-right",

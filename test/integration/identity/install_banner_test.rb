@@ -7,7 +7,11 @@ class Identity::InstallBannerMarkupTest < ActionDispatch::IntegrationTest
   def tb(key) = I18n.t("shared.navigation.install_banner.#{key}")
 
   test "CA-9 — the student's page carries the banner, hidden, in their words" do
-    sign_in_as create_student(classroom: create_classroom)
+    # Lot D (entree-et-accueil-eleve-allegees) : l'invitation attend tant que la fenêtre « Ton premier exercice » peut s'ouvrir ; ici la copie est rendue.
+    student = create_student(classroom: create_classroom)
+    create_exercise_session(student:, exercise: create_exercise, status: "completed", score_percent: 80)
+    sign_in_as student
+    get student_first_exercise_path, headers: { "Turbo-Frame" => "student_first_exercise_prompt" }
     get student_home_path
 
     assert_response :ok

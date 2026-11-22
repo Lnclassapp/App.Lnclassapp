@@ -1,0 +1,116 @@
+<%# 🌐 UI · identity/student_entries/new — « Je suis élève » : numéro et code secret, puis « Ce numéro n'a pas encore de compte » %>
+<%# Rôle : même cadre que la connexion (accueil bleu, carte) ; @stage :credentials ou :confirm ; @preview : bandeau de la classe du lien /c/<jeton> ; 422/429 re-rendus %>
+<%# ADR  : 0050, 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0054, 0088, 0176-entree-eleve-unique (§3.1 à §3.6), pave-numerique-confirmation-code (§3.1, §3.2) %>
+<% page_title t("identity.student_entries.new.page_title") %>
+<% scope = "identity.student_entries.new" %>
+<% link_class = "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+<div class="grid min-h-dvh grid-cols-1 bg-paper lg:grid-cols-2">
+  <%= render "shared/auth_welcome", variant: :panel, title: t("#{scope}.welcome") %>
+
+  <div class="flex min-w-0 flex-col">
+    <%= render "shared/auth_help" %>
+    <main class="flex flex-1 flex-col items-center px-gutter pt-2 pb-10 lg:justify-center lg:pb-16">
+      <div class="w-full max-w-110 space-y-4">
+        <%= render "shared/auth_welcome", variant: :card, title: t("#{scope}.welcome") %>
+
+        <% if @preview %>
+          <%# UDR §3.4 : la classe du lien, rappelée au-dessus du formulaire. %>
+          <div id="student-entry-classroom" class="rounded-ln border border-brand/30 bg-brand-soft px-4 py-3">
+            <p class="text-xs tracking-wider text-mute uppercase"><%= t("#{scope}.classroom_label") %></p>
+            <p class="text-base font-medium text-ink"><%= @preview.classroom_name %> · <%= @preview.school_name %></p>
+          </div>
+        <% end %>
+
+        <% if @stage == :confirm %>
+          <%= ui_card title: t("#{scope}.confirm_title"), heading: :h1, padding: :lg do %>
+            <%= form_with model: @form, scope: :student_entry, url: student_entries_path, id: "student-entry-confirm-form", class: "space-y-5",
+                          data: { controller: "identity--pin-pad" } do |form| %>
+              <% if @link_token %><%= hidden_field_tag "student_entry[link_token]", @link_token, id: nil %><% end %>
+              <%= render "identity/student_entries/base_errors" %>
+              <div id="student-entry-number" class="rounded-ln bg-paper px-4 py-3">
+                <p class="text-sm text-mute"><%= t("#{scope}.confirm_lead") %></p>
+                <p class="mt-1 font-mono text-xl font-medium tracking-wider text-ink"><%= @form.contact.to_s.scan(/\d{2}/).join(" ") %></p>
+              </div>
+              <%# UDR pavé §3.2 : message d'écart visible au-dessus du pavé ; caché sans JavaScript (le champ montre déjà l'erreur). %>
+              <% if @form.errors.of_kind?(:pin_confirmation, :confirmation) %>
+                <div id="student-entry-mismatch" role="alert" hidden data-identity--pin-pad-target="mismatch"
+                     class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+                  <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+                  <p><%= @form.errors.messages_for(:pin_confirmation).first %></p>
+                </div>
+              <% end %>
+              <div id="student-entry-pin-field" data-identity--pin-pad-target="fieldBlock">
+                <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, minlength: 4, maxlength: 4, pattern: "[0-9]{4}", inputmode: "numeric",
+                             autocomplete: "new-password", autofocus: true, placeholder: "****", hint: t("#{scope}.confirm_hint"),
+                             data: { identity__pin_pad_target: "field" } %>
+              </div>
+              <div id="student-entry-pin-pad" hidden data-identity--pin-pad-target="pad" class="space-y-4">
+                <p class="text-center text-sm text-mute"><%= t("#{scope}.confirm_hint") %></p>
+                <div id="student-entry-pin-boxes" aria-hidden="true" class="flex justify-center gap-3">
+                  <% 4.times do %>
+                    <span data-identity--pin-pad-target="box"
+                          class="grid size-14 place-items-center rounded-ln border-2 border-line bg-white text-2xl text-ink"></span>
+                  <% end %>
+                </div>
+                <p id="student-entry-pin-status" class="sr-only" aria-live="polite" data-identity--pin-pad-target="status"
+                   data-template="<%= t("#{scope}.pin_pad.progress", count: "%{count}") %>"></p>
+                <p id="student-entry-pin-check" hidden role="status" data-identity--pin-pad-target="check"
+                   class="flex items-center justify-center gap-2 text-sm font-medium text-success">
+                  <%= ui_icon "check-circle", size: :lg, class: "text-success" %>
+                  <span><%= t("#{scope}.pin_pad.match") %></span>
+                </p>
+                <p id="student-entry-pin-offline" hidden role="alert" data-identity--pin-pad-target="offline"
+                   class="text-center text-sm text-error"><%= t("#{scope}.pin_pad.offline") %></p>
+                <div id="student-entry-keypad" role="group" aria-label="<%= t("#{scope}.pin_pad.keypad_label") %>" class="grid grid-cols-3 gap-3">
+                  <% key_class = "min-h-14 rounded-ln bg-mist text-2xl font-medium text-ink active:bg-line focus-visible:outline-2 focus-visible:outline-brand" %>
+                  <% [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ].each do |number| %>
+                    <button type="button" class="<%= key_class %>" data-digit="<%= number %>" data-action="identity--pin-pad#press"
+                            data-identity--pin-pad-target="key"><%= number %></button>
+                  <% end %>
+                  <span aria-hidden="true"></span>
+                  <button type="button" class="<%= key_class %>" data-digit="0" data-action="identity--pin-pad#press"
+                          data-identity--pin-pad-target="key">0</button>
+                  <button type="button" class="<%= key_class %> grid place-items-center" aria-label="<%= t("#{scope}.pin_pad.erase") %>"
+                          data-action="identity--pin-pad#erase">
+                    <%= ui_icon "backspace", size: :lg %>
+                  </button>
+                </div>
+              </div>
+              <%= ui_button t("#{scope}.confirm_submit"), type: :submit, variant: :primary, size: :lg, full: true, id: "student-entry-confirm-submit",
+                            data: { turbo_submits_with: t("#{scope}.submitting"), identity__pin_pad_target: "submit" } %>
+            <% end %>
+            <p class="mt-4 text-center text-sm">
+              <%= link_to t("#{scope}.not_my_number"), new_student_entry_path(fresh: 1, link: @link_token), id: "student-entry-fix-number", class: link_class,
+                          data: { turbo_prefetch: false } %>
+            </p>
+          <% end %>
+        <% else %>
+          <%= ui_card title: t("#{scope}.title"), heading: :h1, padding: :lg do %>
+            <%= form_with model: @form, scope: :student_entry, url: student_entries_path, id: "student-entry-form", class: "space-y-5",
+                          data: { controller: "identity--phone-digits" } do |form| %>
+              <% if @link_token %><%= hidden_field_tag "student_entry[link_token]", @link_token, id: nil %><% end %>
+              <%= render "identity/student_entries/base_errors" %>
+              <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact.presence || @form.contact,
+                           maxlength: 20, placeholder: t("#{scope}.contact_placeholder"), inputmode: "numeric", autocomplete: "username",
+                           autofocus: @link_token.nil? && @form.contact.blank?, hint: t("#{scope}.contact_hint"),
+                           data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
+              <div>
+                <%= ui_field form, :pin, as: :password, reveal: true, required: true, minlength: 4, maxlength: 4, pattern: "[0-9]{4}", inputmode: "numeric",
+                             autocomplete: "current-password", autofocus: @form.contact.present? && @form.errors.empty?, placeholder: "****",
+                             hint: t("#{scope}.pin_hint") %>
+                <% if @form.errors.of_kind?(:pin, :wrong_pin) %>
+                  <%# UDR §3.3 : « Code secret oublié ? » sous l'erreur du code, seulement quand le numéro a un compte. %>
+                  <p class="mt-1 text-sm">
+                    <%= link_to t("#{scope}.forgot_pin"), new_identity_pin_reset_path, id: "student-entry-forgot-pin", class: link_class %>
+                  </p>
+                <% end %>
+              </div>
+              <%= ui_button t("#{scope}.submit"), type: :submit, variant: :primary, size: :lg, full: true, id: "student-entry-submit",
+                            data: { turbo_submits_with: t("#{scope}.submitting") } %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </main>
+  </div>
+</div>

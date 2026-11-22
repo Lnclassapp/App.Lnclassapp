@@ -27,6 +27,11 @@ module Queries
         !best.nil? && Entities::Assessment::Grading.reaches?(best, Entities::Assessment::Grading::PASS_THRESHOLD)
       end
 
+      # Une copie rendue (terminée), quelle que soit la note : la fenêtre « Ton premier exercice » n'a plus lieu d'être.
+      def submitted_copy?(student_id:)
+        Orm::ExerciseSession.exists?(student_id:, status: "completed")
+      end
+
       # La copie de la carte, que l'historique ne montre pas une seconde fois (une porte par action) ; nil si l'élève est
       # activé ou n'a pas de copie en cours.
       def resume_session_public_id(student_id:)

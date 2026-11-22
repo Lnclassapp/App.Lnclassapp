@@ -47,6 +47,16 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     browser.instance_variable_set(:@install_prompt_ignored, true)
   end
 
+  # UDR accueil-eleve-qr-fenetre-inviter §3.2: an élève without a copy handed in gets the « Ton premier exercice » window on every
+  # shell screen but the ones where he answers; it would cover the clicks of a test. « Plus tard » closes it for the current page.
+  # Returns once the dialog is closed, or at once when it does not open within 5 s.
+  def dismiss_first_exercise_prompt
+    return unless page.has_css?("#student_first_exercise_later", wait: 5)
+
+    find("#student_first_exercise_later").click
+    assert_no_selector "#student_first_exercise_modal[open]", wait: 5
+  end
+
   MOBILE_VIEWPORT = [ 390, 844 ].freeze
 
   # The same journey on a phone: the window shrinks for the block, then returns to its size.
@@ -72,6 +82,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def issue_recovery_code_from_roster(row)
     within(row) { find("a[href*='/students/']").click }
     click_on I18n.t("classroom.classroom_students.manage.issue_code")
+  end
+
+  # ADR-0142, UDR-0177: a few letters in « Ton établissement », then the school
+  # chosen in the list of results (each one a radio with its DRENA).
+  def choose_school(name, search: name)
+    fill_in "school_q", with: search
+    within("turbo-frame#school_results") { choose name }
   end
 
   # The « Suivi » block of a school page (crm-ecoles) is made of lazy frames that load as they come into view, above the
