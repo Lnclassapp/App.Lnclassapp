@@ -33,6 +33,7 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
   test "« Ma classe » : une case par envoi, « Prépare devoirs » dès 3 exercices et « Prépare interros » pour 1 ou 2 ; la feuille, sans rien à corriger avant de rendre" do
     with_mobile_viewport do
       visit student_classroom_path
+      dismiss_first_exercise_prompt
 
       within "#student_classroom_assigned" do
         assert_selector "a.ps-card", count: 2

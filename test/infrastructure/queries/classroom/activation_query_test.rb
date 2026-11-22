@@ -115,6 +115,12 @@ module Queries
         assert_equal copy.public_id, ActivationQuery.new.resume_session_public_id(student_id: learner.id)
       end
 
+      test "CA-6: no copy in progress: nothing for the card to resume" do
+        learner = student
+
+        assert_nil ActivationQuery.new.resume_session_public_id(student_id: learner.id)
+      end
+
       test "CA-7: a level without a published exercise: no card; a subject without exercise is skipped" do
         empty = create_classroom(level: create_level)
         create_course(level: empty.level, material: @maths)

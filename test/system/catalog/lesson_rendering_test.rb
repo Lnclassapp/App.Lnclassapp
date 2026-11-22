@@ -178,6 +178,7 @@ module LessonRendering
       # La leçon s'arrête après « Prépare devoirs » ; la fiche est sur sa propre page (UDR-0173 §3, leçon).
       visit course_path(course.slug)
       assert_selector "h1", text: course.name, wait: 20
+      dismiss_first_exercise_prompt
       visit course_fiche_path(course.slug)
       assert_selector "#student_revision h1", text: I18n.t("catalog.courses.show.revision_title"), wait: 20
       dismiss_first_exercise_prompt
@@ -185,6 +186,7 @@ module LessonRendering
       seen = measure_page(lesson)
       visit course_path(course.slug)
       assert_selector "h1", text: course.name, wait: 20
+      dismiss_first_exercise_prompt
       defects = []
       defects << "page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
       defects << "** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
@@ -228,15 +230,6 @@ module LessonRendering
         previous = seen["formulas"]
         sleep 0.25
       end
-    end
-
-    # L'élève de la vérification n'a rendu aucune copie : la fenêtre « Ton premier exercice » s'ouvre sur chaque écran
-    # (UDR-0179 §3.2) et couvrirait « Voir plus ». « Plus tard » la ferme pour la page courante.
-    def dismiss_first_exercise_prompt
-      return unless page.has_css?("#student_first_exercise_later", wait: 5)
-
-      find("#student_first_exercise_later").click
-      assert_no_selector "#student_first_exercise_modal[open]", wait: 5
     end
 
     # La fiche de révision est coupée après 50 mots : « Voir plus » montre les notions suivantes, et leurs figures.

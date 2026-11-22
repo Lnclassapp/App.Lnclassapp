@@ -25,6 +25,7 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
 
   test "case, lecture, Commencer, vérifier, retour à la feuille, puis « Continuer » et le progrès sur la case" do
     visit course_path(@course.slug)
+    dismiss_first_exercise_prompt
     assert_selector "#prepare-devoirs li a", count: 1
     assert_no_selector ".ps-sheet"
     assert_no_button "Vérifier ma réponse"
