@@ -1,4 +1,4 @@
-# UDR-XXXX : Accueil élève — le QR de l'établissement en grand, avec le partage WhatsApp
+# UDR-0182 : Accueil élève — le QR de l'établissement en grand, avec le partage WhatsApp
 <!-- index
 titre: Accueil élève, QR en grand et partage WhatsApp
 statut: Accepté

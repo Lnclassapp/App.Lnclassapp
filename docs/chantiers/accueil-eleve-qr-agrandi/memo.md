@@ -10,4 +10,4 @@
 
 **Hors périmètre** : un scanner dans l'application ; le QR de l'enseignant ou de la direction.
 
-Décision d'interface : [UDR-XXXX accueil-eleve-qr-agrandi](../../decisions/udr/XXXX-accueil-eleve-qr-agrandi.md).
+Décision d'interface : [UDR-XXXX accueil-eleve-qr-agrandi](../../decisions/udr/0182-accueil-eleve-qr-agrandi.md).

@@ -1,6 +1,6 @@
 # PRD — Accueil élève : le QR en grand, avec le partage WhatsApp
 
-Règles : [UDR-XXXX accueil-eleve-qr-agrandi](../../decisions/udr/XXXX-accueil-eleve-qr-agrandi.md). Un seul lot (vue, placement, CSS, I18n, tests).
+Règles : [UDR-XXXX accueil-eleve-qr-agrandi](../../decisions/udr/0182-accueil-eleve-qr-agrandi.md). Un seul lot (vue, placement, CSS, I18n, tests).
 
 ## Critères d'acceptation
 
