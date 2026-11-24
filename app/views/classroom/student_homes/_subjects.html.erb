@@ -31,7 +31,7 @@
     <%# UDR accueil-eleve-grille-plus §3 : « Inviter » (avec une classe seulement), puis « Plus » ; la feuille vit dans la case : son déclencheur doit être dans le contrôleur modal. %>
     <% if home %>
       <li id="student_invite_cell">
-        <%= button_to class_invite_path, method: :post, id: "student_invite_tile", class: tile, form_class: "contents",
+        <%= button_to class_invite_path, method: :post, id: "student_invite_tile", class: class_names(tile, "w-full cursor-pointer"), form_class: "contents",
                       form: { target: "_blank", data: { turbo: false } }, "aria-label": t("classroom.student_homes.invite_tile.action_label", classroom: home.classroom_name) do %>
           <span class="grid size-14 place-items-center rounded-full bg-brand-soft text-brand-strong transition group-active:scale-95" aria-hidden="true"><%= ui_icon "user-plus" %></span>
           <span class="break-words" aria-hidden="true"><%= t("classroom.student_homes.invite_tile.action") %></span>

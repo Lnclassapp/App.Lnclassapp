@@ -735,7 +735,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav#student_subjects ul.lg\\:grid-cols-8 > li", 3
     assert_select "#student_invite_classmates, #student_invite_classmates_title", 0
     assert_select "li#student_invite_cell form[action=?][method=post][target=_blank][data-turbo=false]", class_invite_path do
-      assert_select "button#student_invite_tile[aria-label=?]", tl("invite_tile.action_label", classroom: "Tle D 1") do
+      assert_select "button#student_invite_tile.w-full[aria-label=?]", tl("invite_tile.action_label", classroom: "Tle D 1") do
         assert_select "span.size-14.rounded-full.bg-brand-soft.text-brand-strong svg"
         assert_select "span", text: tl("invite_tile.action")
       end
