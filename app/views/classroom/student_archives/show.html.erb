@@ -1,7 +1,8 @@
-<%# 🌐 UI · classroom/student_archives/show — « Mon historique » de l'élève, même sans classe active, redessiné (historique-eleve) %>
-<%# Rôle : carte bleue du total, exercices terminés par mois (3 lignes puis « Voir plus » par 10), puis ses classes ; deux colonnes dès 1 024 px %>
-<%# ADR  : 0036, 0040, 0095 · UDR : 0006, 0057, 0084, 0090, 0103 · aucune ligne n'est un lien (UDR-0013), aucun filtre %>
+<%# 🌐 UI · classroom/student_archives/show — « Mon historique » de l'élève, même sans classe active, écran intérieur style Wave (ecrans-wave-ma-classe-historique) %>
+<%# Rôle : flèche retour et titre, carte bleue du total, exercices terminés par mois (3 lignes puis « Voir plus » par 10), puis ses classes ; groupes en cartes blanches sur fond gris, une colonne ; une liste vide est masquée %>
+<%# ADR  : 0036, 0040, 0095 · UDR : 0173 §3 (écrans intérieurs style Wave), 0006, 0057, 0084, 0090, 0103 · aucune ligne n'est un lien (UDR-0013), aucun filtre %>
 <% page_title t(".page_title") %>
+<% content_for :inner, "1" %>
 <%# UDR-0103 §3.2 : « 12 oct. », avec l'année quand elle n'est pas l'année en cours ; « depuis le … » ou « du … au … ». %>
 <% day = ->(time) { l(time.to_date, format: t(".classrooms.#{time.year == Time.zone.today.year ? :day : :day_year}")) } %>
 <% archive_period = lambda do |row|
@@ -9,77 +10,71 @@
    end %>
 <% count = @archive.completed_count %>
 
-<%# UDR-0090 §3.4 : une colonne pleine, puis 720 px centrés dès 700 px ; dès 1 024 px, toute la largeur, sur trois tiers. %>
-<div id="student_archive" class="mx-auto w-full max-w-180 lg:max-w-none">
-  <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: student_home_path } %>
+<div id="student_archive" class="mx-auto w-full max-w-180 space-y-6 pb-6">
+  <%= render "shared/screens/inner_header", title: t(".title"), back_href: student_home_path %>
 
-  <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue ne peut plus élargir la colonne, ni la page. %>
-  <div class="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:items-start">
-    <%# Aplat brand, texte on-brand (5,52:1) dans les deux thèmes, comme la carte « Ma classe » (UDR-0171). %>
-    <div id="student_archive_summary"
-         class="flex items-center gap-4 rounded-card bg-brand p-5 text-on-brand shadow-pop sm:p-6 lg:col-span-3">
-      <span class="grid size-14 shrink-0 place-items-center rounded-card bg-white text-brand-strong" aria-hidden="true">
-        <%= ui_icon "check-circle", size: :xl %>
-      </span>
-      <div class="min-w-0">
-        <% if count.zero? %>
-          <p class="font-display text-xl leading-tight font-medium"><%= t(".summary.none") %></p>
-        <% else %>
-          <p class="flex flex-wrap items-baseline gap-x-2">
-            <span class="font-display text-4xl leading-none font-medium tabular-nums"><%= number_with_delimiter(count) %></span>
-            <span class="font-display text-lg font-medium"><%= t(".summary.count", count:) %></span>
-          </p>
-        <% end %>
-        <p class="mt-1 text-sm"><%= t(".summary.note") %></p>
-      </div>
+  <%# Aplat brand, texte on-brand (5,52:1) dans les deux thèmes, comme la carte « Ma classe » (UDR-0171). %>
+  <div id="student_archive_summary" class="flex items-center gap-4 rounded-card bg-brand p-5 text-on-brand">
+    <span class="grid size-12 shrink-0 place-items-center rounded-card bg-white text-brand-strong" aria-hidden="true">
+      <%= ui_icon "check-circle", size: :lg %>
+    </span>
+    <div class="min-w-0">
+      <% if count.zero? %>
+        <p class="font-display text-xl leading-tight font-medium"><%= t(".summary.none") %></p>
+      <% else %>
+        <p class="flex flex-wrap items-baseline gap-x-2">
+          <span class="font-display text-4xl leading-none font-medium tabular-nums"><%= number_with_delimiter(count) %></span>
+          <span class="font-display text-lg font-medium"><%= t(".summary.count", count:) %></span>
+        </p>
+      <% end %>
+      <p class="mt-1 text-sm"><%= t(".summary.note") %></p>
     </div>
-
-    <%= ui_card title: t(".results.title"), id: "student_archive_results", class: "lg:col-span-2" do %>
-      <% if @archive.results.empty? %>
-        <%= ui_empty_state title: t(".results.empty"), description: t(".results.empty_description"), icon: "clipboard-document-check" %>
-      <% else %>
-        <%= tag.div(class: "space-y-3", data: ui_reveal_data(step: 10)) do %>
-          <%# Du plus récent au plus ancien : une section par mois, l'index de chaque ligne compté sur toute la liste. %>
-          <% months = @archive.results.each_with_index.slice_when { |(a, _), (b, _)| a.completed_at.beginning_of_month != b.completed_at.beginning_of_month } %>
-          <div class="space-y-2">
-            <% months.each do |rows| %>
-              <%= render "month", month: rows.first.first.completed_at.to_date, rows: %>
-            <% end %>
-          </div>
-          <%= ui_reveal_more @archive.results.size %>
-        <% end %>
-      <% end %>
-    <% end %>
-
-    <%= ui_card title: t(".classrooms.title"), id: "student_archive_classrooms" do %>
-      <% if @archive.classrooms.empty? %>
-        <%= ui_empty_state title: t(".classrooms.empty"), description: t(".classrooms.empty_description"), icon: "academic-cap" %>
-      <% else %>
-        <%= tag.div(class: "space-y-3", data: ui_reveal_data) do %>
-          <ul class="divide-y divide-line">
-            <% @archive.classrooms.each_with_index do |classroom, index| %>
-              <%= tag.li class: "flex items-center gap-3 py-3", **ui_reveal_item(index) do %>
-                <span class="grid size-11 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong" aria-hidden="true">
-                  <%= ui_icon "academic-cap", size: :md %>
-                </span>
-                <div class="min-w-0 flex-1">
-                  <%# UDR-0103 §3.2 : nom, badge « Actuelle », période à droite ; au téléphone, la période passe à la ligne plutôt que de tronquer le nom. %>
-                  <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                    <p class="min-w-0 font-display font-medium break-words text-ink"><%= classroom.name %></p>
-                    <% if classroom.current %>
-                      <%= ui_badge t(".classrooms.current"), tone: :brand, size: :sm %>
-                    <% end %>
-                    <span class="ml-auto shrink-0 text-sm text-mute tabular-nums"><%= archive_period.(classroom) %></span>
-                  </div>
-                  <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail_html", level: classroom.level_name, school: classroom.school_name,
-                                                                                              year: tag.span(classroom.school_year, class: "whitespace-nowrap")) %></p>
-                </div>
-              <% end %>
-            <% end %>
-          </ul>
-          <%= ui_reveal_more @archive.classrooms.size %>
-        <% end %>
-      <% end %>
-    <% end %>
   </div>
+
+  <%# UDR-0173 règle 2 : une liste vide est masquée, titre compris ; la carte bleue dit déjà « Aucun exercice terminé ». %>
+  <% if @archive.results.any? %>
+    <section id="student_archive_results" aria-labelledby="student_archive_results_title">
+      <h2 id="student_archive_results_title" class="px-1 pb-2 text-sm font-medium text-mute"><%= t(".results.title") %></h2>
+      <%= tag.div(class: "rounded-card bg-white px-4 py-3", data: ui_reveal_data(step: 10)) do %>
+        <%# Du plus récent au plus ancien : une section par mois, l'index de chaque ligne compté sur toute la liste. %>
+        <% months = @archive.results.each_with_index.slice_when { |(a, _), (b, _)| a.completed_at.beginning_of_month != b.completed_at.beginning_of_month } %>
+        <div class="space-y-2">
+          <% months.each do |rows| %>
+            <%= render "month", month: rows.first.first.completed_at.to_date, rows: %>
+          <% end %>
+        </div>
+        <%= ui_reveal_more @archive.results.size %>
+      <% end %>
+    </section>
+  <% end %>
+
+  <% if @archive.classrooms.any? %>
+    <section id="student_archive_classrooms" aria-labelledby="student_archive_classrooms_title">
+      <h2 id="student_archive_classrooms_title" class="px-1 pb-2 text-sm font-medium text-mute"><%= t(".classrooms.title") %></h2>
+      <%= tag.div(class: "rounded-card bg-white px-4 py-1", data: ui_reveal_data) do %>
+        <ul class="divide-y divide-line">
+          <% @archive.classrooms.each_with_index do |classroom, index| %>
+            <%= tag.li class: "flex items-center gap-3 py-3", **ui_reveal_item(index) do %>
+              <span class="grid size-10 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong" aria-hidden="true">
+                <%= ui_icon "academic-cap", size: :md %>
+              </span>
+              <div class="min-w-0 flex-1">
+                <%# UDR-0103 §3.2 : nom, badge « Actuelle », période à droite ; au téléphone, la période passe à la ligne plutôt que de tronquer le nom. %>
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                  <p class="min-w-0 font-medium break-words text-ink"><%= classroom.name %></p>
+                  <% if classroom.current %>
+                    <%= ui_badge t(".classrooms.current"), tone: :brand, size: :sm %>
+                  <% end %>
+                  <span class="ml-auto shrink-0 text-sm text-mute tabular-nums"><%= archive_period.(classroom) %></span>
+                </div>
+                <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail_html", level: classroom.level_name, school: classroom.school_name,
+                                                                                            year: tag.span(classroom.school_year, class: "whitespace-nowrap")) %></p>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
+        <%= ui_reveal_more @archive.classrooms.size %>
+      <% end %>
+    </section>
+  <% end %>
 </div>

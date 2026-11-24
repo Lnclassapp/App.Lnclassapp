@@ -29,6 +29,9 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "title", /Mon historique/
     assert_select "h1", "Mon historique"
+    # UDR-0173 §3 (écran intérieur) : ni en-tête ni menu, la flèche retour vers l'accueil.
+    assert_select "#main a#inner_back[href=?]", student_home_path
+    assert_select "header.h-bar, #main nav", 0
     assert_select "#student_archive_classrooms li", 1 do
       assert_select "p", "3ème 4"
       # UDR-0103 §3.2 : l'année passe dans le détail ; à droite, la période ; une classe archivée non quittée, sans badge.
@@ -138,8 +141,8 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     get student_archive_path
     assert_response :success
     assert_select "#student_archive_summary", text: /Aucun exercice terminé pour l'instant/
-    assert_select "#student_archive_classrooms", text: /Aucune classe pour l'instant/
-    assert_select "#student_archive_results", text: /Aucun exercice terminé/
+    # UDR-0173 règle 2 : une liste vide est masquée, titre compris ; la carte bleue dit déjà ce qu'il en est.
+    assert_select "#student_archive_classrooms, #student_archive_results", 0
   end
 
   test "a list shows 3 lines, then « Voir plus »" do

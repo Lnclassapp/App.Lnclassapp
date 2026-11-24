@@ -1,6 +1,7 @@
 <%# 🌐 UI · shared/screens/_row — une ligne plate d'un groupe : pastille d'icône, titre, détail, valeur alignée à droite %>
 <%# Rôle : toute la ligne est le lien (≥ 48 px) ; la valeur (« 0/4 ») reste à droite ; masquée (folded) au-delà de 3 lignes, révélée par « Voir plus (n) » %>
-<%# UDR  : 0173 §3 (composants, règle 7) · locals: (title:, href:, icon: nil, tint: "bg-brand-soft", detail: nil, value: nil, folded: false, id: nil, link_title: false) -%>
+<%# UDR  : 0173 §3 (composants, règle 7) · locals: (title:, href:, icon: nil, tint: "bg-brand-soft", detail: nil, value: nil, trailing: nil, folded: false, id: nil, link_title: false) -%>
+<%# trailing : du HTML déjà rendu à droite (une médaille), à la place d'une valeur texte. %>
 <% tint = local_assigns.fetch(:tint, "bg-brand-soft") %>
 <%= tag.li id: local_assigns[:id], hidden: local_assigns.fetch(:folded, false), data: { reveal_target: "item" } do %>
   <%= link_to href, data: { turbo_prefetch: false },
@@ -11,6 +12,7 @@
       <% if local_assigns[:detail].present? %><span class="block text-sm text-mute"><%= detail %></span><% end %>
     </span>
     <%# Une valeur courte (« 0/4 ») reste en 16 px ; une valeur longue (une échéance) passe en 14 px, sur 112 px au plus, pour ne pas écraser le titre. %>
+    <% if local_assigns[:trailing].present? %><span class="shrink-0 text-sm"><%= trailing %></span><% end %>
     <% if local_assigns[:value].present? %><span class="<%= value.to_s.length > 6 ? "max-w-28 text-sm leading-snug text-mute" : "shrink-0 text-base font-bold text-ink tabular-nums" %> text-right"><%= value %></span><% end %>
   <% end %>
 <% end %>

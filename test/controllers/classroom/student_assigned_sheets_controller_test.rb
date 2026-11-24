@@ -124,15 +124,15 @@ class Classroom::StudentAssignedSheetsControllerTest < ActionDispatch::Integrati
     sign_in_as @student
     get student_classroom_path
     due = I18n.t("classroom.student_classrooms.assigned_sheet.due_on", date: I18n.l(Date.current + 3, format: :due_long))
-    assert_select "a.ps-card##{@sheet} .ps-card-meta", text: due
+    assert_select "li##{@sheet}", text: /#{Regexp.escape(due)}/
 
     @exercises.zip(@assignments) do |exercise, assignment|
       create_exercise_session(student: @student, exercise:, status: "completed", classroom_assignment_id: assignment.id)
     end
     get student_classroom_path
 
-    assert_select "a.ps-card##{@sheet} .ps-card-meta", text: "Rendu"
-    assert_select "a.ps-card##{@sheet} .ps-card-meta", text: due, count: 0
+    assert_select "li##{@sheet}", text: /Rendu/
+    assert_select "li##{@sheet}", text: /#{Regexp.escape(due)}/, count: 0
   end
 
   test "the window « Ton premier exercice » never opens on the received assignment, read or to fill" do

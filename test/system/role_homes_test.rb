@@ -42,7 +42,8 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_selector "h1.sr-only", text: I18n.t("classroom.student_homes.show.page_title"), visible: :all
     assert_selector "#student_class_card", text: /Tle D 1/i
     within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
-    assert_navigation active: { home: student_home_path, courses: courses_path, classroom: student_classroom_path }
+    # UDR-0173 §3 : « Ma classe » est un écran intérieur, sans menu ; sa flèche retour ramène à l'accueil.
+    assert_navigation active: { home: student_home_path, courses: courses_path }, inner: { classroom: student_classroom_path }
     assert_signs_out_from_avatar_menu
   end
 
@@ -174,12 +175,22 @@ class RoleHomesTest < ApplicationSystemTestCase
   MAIN_SIDEBAR_NAV = "aside nav:not(#sidebar_secondary)".freeze
 
   # Each active destination is a real link, clicked from the navigation; the page it opens marks it current. An inactive
-  # one has no href and aria-disabled. The logo, from the last page, leads back home.
-  def assert_navigation(active: {}, inactive: [], nav: MAIN_SIDEBAR_NAV)
+  # one has no href and aria-disabled. The logo, from the last page, leads back home. An inner destination (UDR-0173 §3)
+  # has no navigation: its back arrow leads home.
+  def assert_navigation(active: {}, inactive: [], inner: {}, nav: MAIN_SIDEBAR_NAV)
     within(nav) do
-      assert_selector "a[href]", count: active.size
+      assert_selector "a[href]", count: active.size + inner.size
       assert_selector "a[aria-disabled='true']:not([href])", count: inactive.size
       inactive.each { |key| assert_selector "a[aria-disabled='true']:not([href])", text: tn(key) }
+    end
+    inner.each do |key, path|
+      home = page.current_path
+      within(nav) { click_link tn(key) }
+
+      assert_current_path path
+      assert_no_selector nav
+      find("a#inner_back").click
+      assert_current_path home
     end
     active.each do |key, path|
       within(nav) { click_link tn(key) }

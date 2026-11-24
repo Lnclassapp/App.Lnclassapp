@@ -24,7 +24,6 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
     record_medal(create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80))
   end
 
-  def tn(key) = I18n.t("shared.navigation.#{key}")
   def rect(id) = page.evaluate_script("document.getElementById(#{id.to_json}).getBoundingClientRect().toJSON()")
 
   # CA-1, CA-5 : à 390 px, depuis la carte de l'accueil (Lot D : le bandeau remplace l'en-tête) ; « Ma classe » en surbrillance, ni retour « Accueil » ni barre du bas.
@@ -47,13 +46,12 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
         assert_current_path student_classroom_path
       end
 
-      assert_no_selector "#main nav[aria-label='#{I18n.t('components.back_link.label')}']"
+      # UDR-0173 §3 : écran intérieur, ni en-tête ni barre ; la flèche retour et le grand titre, la classe en sous-titre.
+      assert_no_selector "header.h-bar"
       assert_no_selector "nav.bottom-0"
-
-      within "#student_classroom_header" do
-        assert_selector "h2", text: "Tle D 1"
-        assert_no_selector "[id*=join_code]"
-      end
+      assert_selector "a#inner_back[href='#{student_home_path}']"
+      assert_selector "#inner_subtitle", text: "Tle D 1 · Tle · D · Lycée Classique"
+      assert_no_selector "[id*=join_code]"
       within("#student_classroom_courses") { assert_link "Génétique et évolution", href: course_path(@course.slug) }
       within "#student_classroom_treated" do
         assert_link "Méiose, le bilan"
@@ -61,33 +59,33 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
         assert_no_text "16/20"
       end
       assert_single_primary_action
-      assert_list_capped "#student_classroom_treated ul"
       # prepare-interros-cahier, Lot F puis sujet-avant-de-commencer, Lot B : chaque exercice assigné seul est un envoi d'un exercice, une case
       # « Prépare interros » ; la feuille à rendre est sur sa page.
       within "#student_classroom_assigned" do
-        assert_selector "a.ps-card", count: 7
+        # UDR-0173 règle 8 : 3 lignes, puis « Voir plus (4) ».
+        assert_selector "li a", count: 3
         assert_no_selector ".ps-sheet"
         assert_no_button I18n.t("catalog.courses.sheets.hand_in")
-        assert_no_button I18n.t("components.reveal.more")
+        assert_no_page_reload { click_on I18n.t("shared.screens.more", count: 4) }
+        assert_selector "li a", count: 7
       end
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
     end
   end
 
-  # CA-7, CA-E11 : à 1 440 px, « Exercices assignés » (2/3) et « Exercices traités » (1/3) côte à côte, « Ma classe » actif à gauche.
-  test "at 1 440 px, the assigned exercises at 2/3 and the treated ones at 1/3, « Ma classe » active in the left menu" do
+  # UDR-0173 §3 : à 1 440 px aussi, un écran intérieur : une colonne de 720 px au plus, à faire d'abord, sans menu de gauche.
+  test "at 1 440 px, one column of 720 px at most, the assigned exercises above the treated ones, without the left menu" do
     sign_in_as @student
 
     with_mobile_viewport(DESKTOP_VIEWPORT) do
       visit student_classroom_path
 
-      assert_selector "aside a[aria-current=page][href='#{student_classroom_path}']", text: tn(:classroom), visible: true
+      assert_no_selector "aside a[href='#{student_classroom_path}']"
       assigned = rect("student_classroom_assigned")
       treated = rect("student_classroom_treated")
-      assert_in_delta assigned["top"], treated["top"], 1, "les deux listes ne sont pas sur la même ligne"
-      assert_operator treated["left"], :>=, assigned["right"], "« Exercices traités » n'est pas à droite"
-      assert_in_delta assigned["width"], 2 * treated["width"] + 24, 2, "les colonnes ne sont pas 2/3 – 1/3"
-      assert_operator rect("student_classroom")["width"], :<=, 960
+      assert_operator assigned["bottom"], :<=, treated["top"], "« Exercices traités » n'est pas sous les assignés"
+      assert_in_delta assigned["width"], treated["width"], 1
+      assert_operator rect("student_classroom")["width"], :<=, 720
     end
   end
 end
