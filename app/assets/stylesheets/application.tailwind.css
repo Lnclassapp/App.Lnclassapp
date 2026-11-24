@@ -600,6 +600,39 @@
   }
 }
 
+/* UDR accueil-eleve-qr-agrandi — `ui_modal placement: :phone_full` : sous 700 px (palier du téléphone, UDR-0086 §3.5), la
+   fenêtre prend tout l'écran, sans coins ; son contenu (le dernier enfant, sans pied) est centré en hauteur, et le vide
+   autour est la <dialog> elle-même : un clic hors du contenu la ferme (modal#backdrop). Dès 700 px, la modale centrée. */
+@media (max-width: 43.74rem) {
+  dialog.dialog-phone-full {
+    margin: 0;
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    overflow-y: auto;
+    border-radius: 0;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  dialog.dialog-phone-full[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  dialog.dialog-phone-full[open] > :last-child {
+    margin-block: auto;
+  }
+}
+
+/* UDR accueil-eleve-qr-agrandi — la carte du QR en grand : fond de marque à motif de points clairs, comme une carte. */
+.qr-card-pattern {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-white) 18%, transparent) 1.5px, transparent 1.5px);
+  background-size: 1rem 1rem;
+}
+
 /* UDR-0080 §3.2 — `ui_modal placement: :drawer` : un panneau ancré à gauche, sur toute la hauteur, à toutes les
    largeurs ; il glisse depuis la gauche, en mouvement autorisé seulement. Hors couche, comme la feuille ci-dessus. */
 dialog.dialog-drawer {

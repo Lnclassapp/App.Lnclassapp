@@ -190,6 +190,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0179](./0179-accueil-eleve-qr-fenetre-inviter.md) | Accueil élève : QR de l'établissement, fenêtre du premier exercice, tuile « Inviter » | Accepté | 2026-11-21 | [0145](../adr/0145-adresse-publique-etablissement.md) | la carte du premier exercice pousse la classe hors de l'accueil, le sigle ne sert à rien, et inviter un camarade est au bas de l'écran |
 | [0180](./0180-pave-numerique-confirmation-code.md) | Pavé numérique de « Nouveau sur Lnclass », entrée et inscription allégées | Accepté | 2026-11-21 | [0141](../adr/0141-entree-eleve-revele-un-numero-inscrit.md) | l'élève retape son code secret dans un champ ordinaire, sans savoir s'il a bien tapé, et lit des phrases qui n'aident pas |
 | [0181](./0181-accueil-eleve-grille-plus.md) | Accueil élève, grille « Inviter » et « Plus » | Accepté | 2026-11-24 | — | Où placer l'invitation et les entrées secondaires de l'élève sans ajouter de section à l'accueil |
+| [0182](./0182-accueil-eleve-qr-agrandi.md) | Accueil élève, QR en grand et partage WhatsApp | Accepté | 2026-11-24 | [0145](../adr/0145-adresse-publique-etablissement.md) | Le QR de la carte de classe est trop petit pour être scanné de loin, et l'adresse de l'établissement ne se partage pas à distance |
 <!-- index:end -->
 
 ---

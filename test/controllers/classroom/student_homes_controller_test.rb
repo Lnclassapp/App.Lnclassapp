@@ -80,7 +80,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[target=_blank][rel~=noopener][href^='https://wa.me/?text=']", text: tl("invite_teacher.banner_action")
       assert_select "button[data-action='dismissible#hide'][aria-label=?]", tl("invite_teacher.banner_dismiss")
     end
-    assert_select "#student_home a[href^='https://wa.me/']", 1
+    # Le partage du QR de l'établissement (UDR accueil-eleve-qr-agrandi) n'invite pas l'enseignant : il est hors du compte.
+    assert_select "#student_home a[href^='https://wa.me/']:not(#student_school_qr_whatsapp)", 1
   end
 
   test "the page of another role keeps its header on every size: only the pages with a band hide it under lg" do
@@ -151,7 +152,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "p", text: tl("class_card.label")
       assert_select "h2#student_class_title", text: "Tle D 1"
       assert_select "p", text: "Lycée Classique"
-      assert_select "div#student_school_qr[role=img] svg"
+      assert_select "button#student_school_qr_button #student_school_qr svg"
       assert_select "#student_school_sigle", false
       assert_select "a#student_class_enter[href=?]", student_classroom_path, text: tl("class_card.enter")
       assert_select "img[alt='']"
