@@ -212,6 +212,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`je-m-entraine-dans-la-fiche`](je-m-entraine-dans-la-fiche/memo.md) | livré | feature | 2026-10-30 | « Je m’entraîne » dans la fiche de révision |
 | [`lecons-1ere-2nde-debut`](lecons-1ere-2nde-debut/memo.md) | livré | feature | 2026-11-12 | Les trois premières leçons de 1ère et de 2nde, comme Thalès |
 | [`lecons-2nde-4-5`](lecons-2nde-4-5/) | pas de memo | — | — | — |
+| [`lecons-2nde-6-a-10`](lecons-2nde-6-a-10/) | pas de memo | — | — | — |
 | [`lecons-3eme-comme-thales`](lecons-3eme-comme-thales/memo.md) | PR prête | feature | 2026-11-05 | Les leçons de 3ème préparées comme Thalès |
 | [`lecons-4eme`](lecons-4eme/) | pas de memo | — | — | — |
 | [`lecons-5eme`](lecons-5eme/) | pas de memo | — | — | — |
