@@ -47,9 +47,20 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_link tl("class_card.enter"), href: student_classroom_path
       assert_equal 1, all("#student_home .ui-button-primary").size
 
-      # UDR accueil-eleve-qr-fenetre-inviter §3.3 : « Invite tes camarades » est une tuile « Inviter », pas une bannière.
-      assert_selector "#student_invite_classmates #student_invite_tile", text: tl("invite_tile.action")
-      assert_no_selector "#student_invite_classmates .ui-button-secondary"
+      # UDR accueil-eleve-qr-agrandi CA-1, CA-2 : au téléphone, le QR s'ouvre en plein écran ; Échap ferme et rend le focus au QR.
+      find("#student_school_qr_button").click
+      dialog = find("dialog#student_school_qr_dialog[open]")
+      settle(dialog)
+      assert_equal [ 0, 0, 390 ], [ dialog.rect.x.round, dialog.rect.y.round, dialog.rect.width.round ]
+      assert_equal page.evaluate_script("window.innerHeight"), dialog.rect.height.round
+      assert_link tl("class_card.qr_dialog.whatsapp"), href: /\Ahttps:\/\/wa\.me\/\?text=/
+      send_keys :escape
+      assert_no_selector "dialog#student_school_qr_dialog[open]"
+      assert_equal "student_school_qr_button", page.evaluate_script("document.activeElement.id")
+
+      # UDR accueil-eleve-grille-plus §3 : « Inviter » est une case de la grille « Mes matières », pas une bannière ni une section.
+      assert_selector "#student_subjects li#student_invite_cell #student_invite_tile", text: tl("invite_tile.action")
+      assert_no_selector "#student_invite_cell .ui-button-secondary"
 
       # The grid: four columns, a dot on the subject that is late (CA-D8), no « Inviter » tile.
       assert_selector "nav#student_subjects a#subject_svt .bg-warning-dot", visible: :all
@@ -104,6 +115,15 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_equal 8, page.evaluate_script("getComputedStyle(document.querySelector('#student_subjects ul')).gridTemplateColumns.split(' ').length")
       assert_selector "#student_subjects h2", text: I18n.t("classroom.student_homes.subjects.label"), visible: :visible
 
+      # UDR accueil-eleve-qr-agrandi CA-2 : sur ordinateur, une fenêtre centrée ; un clic sur le fond la ferme.
+      find("#student_school_qr_button").click
+      dialog = find("dialog#student_school_qr_dialog[open]")
+      settle(dialog)
+      assert_operator dialog.rect.width, :<=, 384
+      assert_in_delta 720, dialog.rect.x + dialog.rect.width / 2, 2
+      page.driver.browser.action.move_to_location(20, 20).click.perform
+      assert_no_selector "dialog#student_school_qr_dialog[open]"
+
       track = find("#student_home_announcements ul")
       cards = all("#student_home_announcements li").map { it.rect }
       assert_equal 2, cards.count { it.x + it.width <= track.rect.x + track.rect.width + 1 }, "deux annonces visibles"
@@ -112,5 +132,12 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
     end
+  end
+
+  private
+
+  # La fenêtre glisse à l'ouverture (mouvement autorisé) : on la mesure une fois ses animations finies.
+  def settle(element)
+    page.evaluate_async_script("Promise.all(arguments[0].getAnimations().map(a => a.finished)).then(() => arguments[1]())", element)
   end
 end

@@ -388,6 +388,17 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "a[href='/exercises/1'][aria-label='Quitter la session'][aria-controls=quit][data-action='modal#open']", text: ""
   end
 
+  # Chantier accueil-eleve-grille-plus : un déclencheur au format libre (une tuile de grille) vit dans le périmètre du contrôleur `modal`.
+  test "ui_modal with an opener renders it inside its modal controller, and no default trigger" do
+    opener = tag.button("Plus", type: "button", id: "tile", data: { action: "modal#open" })
+    show ui_modal(title: "Plus", id: "sheet", opener:)
+
+    assert_select "button#tile[data-action='modal#open']"
+    assert_select "dialog button#tile", 0
+    assert_select "button[aria-haspopup]", 0
+    assert_select "dialog#sheet"
+  end
+
   test "ui_modal without trigger nor block keeps an explicit id" do
     show ui_modal(title: "Info", id: "info")
 
