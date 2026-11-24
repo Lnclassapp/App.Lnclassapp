@@ -255,6 +255,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`pilotage-equipe`](pilotage-equipe/memo.md) | livré | feature | 2026-09-28 | Pilotage de l'équipe |
 | [`politique-cache`](politique-cache/memo.md) | en cours | optimisation | 2026-10-03 | Politique de cache : ce qui rend les pages lentes, et ce qu'un cache peut y changer |
 | [`prepare-interros-cahier`](prepare-interros-cahier/memo.md) | livré | feature | 2026-10-30 | « Prépare interros » et « Prépare devoirs » à l'identique des maquettes cahier |
+| [`preuve-arbre-documents-seuls`](preuve-arbre-documents-seuls/memo.md) | livré | bugfix | 2026-11-24 | Preuve de l'arbre pour une promotion de documents seuls |
 | [`profil-eleve`](profil-eleve/memo.md) | lots 0 | feature | 2026-10-15 | Profil de l'élève aux couleurs Wave et Djamo |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | feature | 2026-09-27 | Page profil de chaque utilisateur |
 | [`progres-eleve`](progres-eleve/memo.md) | livré | feature | 2026-10-04 | L'élève voit son propre progrès |

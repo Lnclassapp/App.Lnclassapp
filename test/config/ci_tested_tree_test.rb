@@ -15,13 +15,20 @@ class CiTestedTreeTest < ActiveSupport::TestCase
   def artifacts(list) = { "repos/#{REPOSITORY}/actions/artifacts?name=ci-tree-#{TREE}&per_page=100" => { "artifacts" => list } }
 
   RUN_ID = 42
+  HEAD_SHA = "beef"
 
   def green_artifact(**over) = { "name" => "ci-tree-#{TREE}", "expired" => false, "workflow_run" => { "id" => RUN_ID, "head_branch" => "Develop" } }.merge(over)
 
   def ci_run(name: "CI", event: "pull_request", head: "Develop", base: "Staging", repository: REPOSITORY, pull_requests: nil)
     pulls = pull_requests || [ { "head" => { "ref" => head }, "base" => { "ref" => base } } ]
-    { "repos/#{REPOSITORY}/actions/runs/#{RUN_ID}" => { "name" => name, "event" => event, "head_branch" => head,
+    { "repos/#{REPOSITORY}/actions/runs/#{RUN_ID}" => { "name" => name, "event" => event, "head_branch" => head, "head_sha" => HEAD_SHA,
                                                          "head_repository" => { "full_name" => repository }, "pull_requests" => pulls } }
+  end
+
+  def commit_pulls(list, head: "Develop") = { "repos/#{REPOSITORY}/pulls?state=all&head=Lnclassapp:#{head}&per_page=100" => list }
+
+  def merged_pull(base: "Staging", head: "Develop", sha: HEAD_SHA, repository: REPOSITORY)
+    { "base" => { "ref" => base }, "head" => { "ref" => head, "sha" => sha, "repo" => { "full_name" => repository } } }
   end
 
   def proof(responses, local_proof: false) = TestedTree.new(repository: REPOSITORY, api: api(responses), local_proof:)
@@ -47,7 +54,7 @@ class CiTestedTreeTest < ActiveSupport::TestCase
       "another workflow" => ci_run(name: "Deploy"),
       "another event" => ci_run(event: "push"),
       "a fork" => ci_run(repository: "intrus/App.Lnclassapp"),
-      "no pull request" => ci_run(pull_requests: []),
+      "no pull request" => ci_run(pull_requests: []).merge(commit_pulls([])),
       "head branch differing" => ci_run(pull_requests: [ { "head" => { "ref" => "autre" }, "base" => { "ref" => "main" } } ])
     }.each do |label, responses|
       refute proof(commit.merge(artifacts([ green_artifact ])).merge(responses)).tested?(SHA), label
@@ -62,6 +69,35 @@ class CiTestedTreeTest < ActiveSupport::TestCase
 
   test "a pull request into main counts" do
     assert proof(commit.merge(artifacts([ green_artifact("workflow_run" => { "id" => RUN_ID, "head_branch" => "Staging" }) ])).merge(ci_run(head: "Staging", base: "main"))).tested?(SHA)
+  end
+
+  # Train #682 : GitHub vide pull_requests du run dès la fusion ; la PR se retrouve par la branche de tête du run, au même commit.
+  test "a merged promotion still proves its tree through the pull requests of the run's head branch" do
+    responses = commit.merge(artifacts([ green_artifact ])).merge(ci_run(pull_requests: []))
+
+    assert proof(responses.merge(commit_pulls([ merged_pull ]))).tested?(SHA)
+  end
+
+  test "the pull requests of the head branch prove nothing when into Develop, from a fork, moved on, or unreadable" do
+    responses = commit.merge(artifacts([ green_artifact ])).merge(ci_run(pull_requests: []))
+
+    {
+      "base Develop" => commit_pulls([ merged_pull(base: "Develop") ]),
+      "a fork" => commit_pulls([ merged_pull(repository: "intrus/App.Lnclassapp") ]),
+      "head moved on" => commit_pulls([ merged_pull(sha: "autre") ]),
+      "another head branch" => commit_pulls([ merged_pull(head: "autre") ]),
+      "API error" => commit_pulls(nil),
+      "not a list" => commit_pulls({ "message" => "Not Found" })
+    }.each do |label, pulls|
+      refute proof(responses.merge(pulls)).tested?(SHA), label
+    end
+  end
+
+  test "a run without head commit and without pull requests proves nothing" do
+    run = ci_run(pull_requests: [])
+    run.values.first.delete("head_sha")
+
+    refute proof(commit.merge(artifacts([ green_artifact ])).merge(run)).tested?(SHA)
   end
 
   test "an artifact of another tree proves nothing" do
