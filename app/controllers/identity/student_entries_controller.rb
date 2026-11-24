@@ -4,6 +4,7 @@
 module Identity
   class StudentEntriesController < ApplicationController
     include StudentEntrySession
+    include WrongPinLimit
 
     # ADR-0141 §4.2 : une classe entre ensemble derrière une seule adresse (le wifi de l'école) ; un nouvel élève envoie
     # deux fois (numéro et code, puis confirmation) : 120 par minute. Le plafond horaire borne qui teste des numéros. Le code
@@ -12,9 +13,7 @@ module Identity
     RATE_LIMIT = { to: 120, within: 1.minute, scope: "identity/student_entries" }.freeze
     HOURLY_RATE_LIMIT = { to: 600, within: 1.hour, scope: "identity/student_entries_hourly" }.freeze
     REGISTRATION_RATE_LIMIT = { to: 60, within: 1.minute, scope: "identity/student_entry_registrations" }.freeze
-    # Revue sécurité : l'entrée connecte tout rôle ; 120 envois par minute laissaient tester un code courant sur beaucoup de
-    # numéros (un essai par numéro échappe au verrouillage). Seuls les codes faux comptent, par adresse ; au-delà, même un bon code est refusé.
-    WRONG_PIN_LIMIT = { to: 10, within: 1.minute }.freeze
+    # Les codes faux comptent avec ceux de /login (WrongPinLimit, ADR-0050) : 5 par minute et par adresse, entrées confondues.
 
     allow_unauthenticated_access only: %i[new create]
     rate_limit **RATE_LIMIT, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many }
@@ -79,15 +78,6 @@ module Identity
       @form.errors.add(:base, t(".wrong_app"))
       @stage = :credentials
       render :new, status: :unprocessable_entity
-    end
-
-    def wrong_pin_key = "identity/student_entries/wrong_pin:#{request.remote_ip}"
-
-    def wrong_pin_limit_reached? = Rails.cache.read(wrong_pin_key).to_i >= WRONG_PIN_LIMIT[:to]
-
-    def count_wrong_pin
-      Rails.cache.write(wrong_pin_key, 0, expires_in: WRONG_PIN_LIMIT[:within], unless_exist: true)
-      Rails.cache.increment(wrong_pin_key, 1, expires_in: WRONG_PIN_LIMIT[:within])
     end
 
     def refuse_too_many
