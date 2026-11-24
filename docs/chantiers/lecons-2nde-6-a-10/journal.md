@@ -107,3 +107,7 @@ Aucun point ouvert. Décisions du validateur pédagogique, Français (PR Lnclass
 
 
 ## Clôture
+
+## 2026-11-24 — Copie retirée du dépôt de l'application (décision du porteur)
+
+Le porteur demande que les contenus vivent dans le dépôt dédié `App.Lnclassapp-contenus`, et non dans `Develop`. Les 10 leçons y sont déjà, identiques octet pour octet, sur `main` (PR #5, `86b3a88`). La synchronisation `df007d06b` est annulée : les 10 fichiers sont retirés de `docs/contenus/lecons-traitees/`, et `docs/contenus/VERSION` revient à `1b69fc1` (463 fichiers). `synchroniser.rb --verifier` passe.

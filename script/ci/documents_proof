@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+# Tells whether the tree a promotion of documents alone tests differs from an already proven tree by documents only
+# (chantier preuve-arbre-documents-seuls, constat du 2026-11-24 : PR #692, run 45403364756). Such a run plays no test
+# job, yet the deployment of Staging and main wants the proof of its tree (ADR-0069, ADR-0107, ADR-0144).
+#
+# The tree tested is the merge commit GitHub builds for the pull request; its first parent is the head of the base
+# (Staging or main). The run may prove its own tree when both hold:
+#   - git diff between that parent and the merge commit names documents only (docs/, *.md), renames under both names;
+#   - script/ci/tested_tree proves the parent's tree: an artifact of the « CI » workflow of a pull request into Staging
+#     or main, never a cloud session's proof (revue sécurité du 2026-11-24).
+# The code of the tree is then, byte for byte, the code of a tree whose every test job was green.
+#
+#   script/ci/documents_proof          # in the checkout (fetch-depth 2); writes proven=true|false to GITHUB_OUTPUT
+#
+# Any doubt (no parent, unreadable diff, API error) answers false: the workflow then plays the whole suite.
+require "open3"
+load File.expand_path("tested_tree", __dir__) unless defined?(TestedTree)
+
+class DocumentsProof
+  DOCUMENTS = %r{\Adocs/|\.md\z}
+
+  # git: a callable taking git arguments and returning its standard output, or nil when git failed.
+  # proof: an object answering tested?(sha), a TestedTree without local proof.
+  def initialize(git:, proof:)
+    @git = git
+    @proof = proof
+  end
+
+  def base
+    sha = @git.call("rev-parse", "--verify", "--quiet", "HEAD^1^{commit}").to_s.strip
+    sha.empty? ? nil : sha
+  end
+
+  def proven?
+    parent = base or return false
+    changed = @git.call("diff", "--name-only", "--no-renames", "-z", parent, "HEAD") or return false
+
+    changed.split("\0").all? { DOCUMENTS.match?(it) } && @proof.tested?(parent)
+  end
+end
+
+if $PROGRAM_NAME == __FILE__
+  git = lambda do |*args|
+    out, status = Open3.capture2("git", *args, err: File::NULL)
+    status.success? ? out : nil
+  end
+  proof = DocumentsProof.new(git:, proof: TestedTree.new(repository: ENV.fetch("GITHUB_REPOSITORY", "Lnclassapp/App.Lnclassapp"),
+                                                         api: TestedTree::GH_API))
+  proven = proof.proven?
+  puts "#{proof.base || 'sans parent'} : #{proven ? 'documents seuls sur un arbre prouvé, la preuve sera publiée' : 'pas de preuve héritée, la suite tourne'}"
+  File.write(ENV["GITHUB_OUTPUT"], "proven=#{proven}\n", mode: "a") if ENV["GITHUB_OUTPUT"]
+end
