@@ -24,11 +24,11 @@ module Identity
     end
 
     def create
-      return render_rate_limited(:new) if wrong_pin_limit_reached?
-
       @form = form_input
+      return render_rate_limited(:new) unless claim_pin_attempt
+
       result = authenticate.call(dto: @form)
-      count_wrong_pin if result.failure? && result.errors == UseCases::Identity::Authenticate::INVALID
+      release_pin_attempt unless result.failure? && result.errors == UseCases::Identity::Authenticate::INVALID
       return render_wrong_app(result.errors[:app].first) if wrong_app?(result)
 
       render_result result, form: :new, success: lambda { |authenticated|

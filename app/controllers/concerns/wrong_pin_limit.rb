@@ -10,10 +10,15 @@ module WrongPinLimit
 
   def wrong_pin_key = "identity/wrong_pin:#{request.remote_ip}"
 
-  def wrong_pin_limit_reached? = Rails.cache.read(wrong_pin_key).to_i >= WRONG_PIN_LIMIT[:to]
-
-  def count_wrong_pin
+  # Réserve une place avant l'essai (atomique : des envois simultanés ne lisent pas tous 0). Refusée au-delà du plafond.
+  def claim_pin_attempt
     Rails.cache.write(wrong_pin_key, 0, expires_in: WRONG_PIN_LIMIT[:within], unless_exist: true)
-    Rails.cache.increment(wrong_pin_key, 1, expires_in: WRONG_PIN_LIMIT[:within])
+    return true if Rails.cache.increment(wrong_pin_key, 1, expires_in: WRONG_PIN_LIMIT[:within]).to_i <= WRONG_PIN_LIMIT[:to]
+
+    release_pin_attempt
+    false
   end
+
+  # Rend la place quand l'essai n'était pas un code faux.
+  def release_pin_attempt = Rails.cache.decrement(wrong_pin_key, 1, expires_in: WRONG_PIN_LIMIT[:within])
 end

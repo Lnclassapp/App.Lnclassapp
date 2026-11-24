@@ -34,13 +34,13 @@ module Identity
 
     def create
       return redirect_to_home if authenticated?
-      return refuse_too_many if wrong_pin_limit_reached?
-
       @form = form_input
       return redirect_to(new_student_entry_path, alert: t(".expired"), status: :see_other) unless @form
 
+      return refuse_too_many unless claim_pin_attempt
+
       result = enter.call(dto: @form)
-      count_wrong_pin if result.failure? && result.errors[:pin]&.include?(:wrong_pin)
+      release_pin_attempt unless result.failure? && result.errors[:pin]&.include?(:wrong_pin)
       return render_failure(result) if result.failure?
 
       entered(result.value)
