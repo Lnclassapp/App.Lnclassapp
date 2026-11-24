@@ -23,3 +23,8 @@ Develop n'est pas concernée (« plan » ne tourne que vers Staging/main).
 
 - Option prudente appliquée : base sans preuve → suite entière (`code=true`) plutôt qu'un vert sans preuve. Réversible.
 - Les `*.md` hors de `docs/` comptent comme documents, comme la règle existante et le filtre de `deploiement.yml`.
+- Revue sécurité (basse) : une promotion de leçons seules hérite la preuve sans jouer l'étape `seeds`, alors que `db:seed`
+  importe ces leçons au démarrage de Develop et Staging (pas en production). Retenu tel que demandé (« leçons v3 vertes si
+  présentes ») : `synchroniser.rb --verifier` et le job `lecons` les contrôlent. Option plus stricte : `lessons=true` → `code=true`.
+- ADR-0069 §8 dit qu'une promotion vers Staging rejoue toute la suite ; des documents seuls ne la rejouaient déjà pas. À écrire
+  dans l'ADR à sa prochaine révision.
