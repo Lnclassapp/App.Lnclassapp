@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/_class_card — la carte de la classe, à cheval sur la jonction bleu → blanc de l'accueil %>
-<%# Rôle : « Ta classe », son nom, l'établissement, le QR de l'adresse de l'établissement à la place du sigle, « Scanner » sous le QR, le logo Lnclass en bas à droite et « Entrer en classe » vers Ma classe %>
-<%# UDR  : 0173 §3 (accueil, carte de classe), 0132 accueil élève §3.1 · locals: (home:, overlap: true) — overlap : la carte remonte sur le bandeau (faux dans la coque Android, qui n'en a pas) -%>
+<%# Rôle : « Ta classe », son nom, l'établissement, le QR de l'adresse de l'établissement à la place du sigle (bouton : le QR en grand + WhatsApp), « Scanner » sous le QR, le logo Lnclass en bas à droite et « Entrer en classe » vers Ma classe %>
+<%# UDR  : 0173 §3 (accueil, carte de classe), accueil-eleve-qr-agrandi, 0132 accueil élève §3.1 · locals: (home:, overlap: true) — overlap : la carte remonte sur le bandeau (faux dans la coque Android, qui n'en a pas) -%>
 <%= tag.section id: "student_class_card", "aria-labelledby": "student_class_title",
                 class: class_names("relative z-10 mx-12 rounded-card bg-white p-5 shadow-lift lg:mx-0", { "max-lg:-top-wave-card max-lg:-mb-wave-card" => local_assigns.fetch(:overlap, true) }) do %>
   <div class="flex items-center gap-3">
@@ -10,14 +10,39 @@
       <p class="mt-1 text-sm text-mute"><%= home.school_name %></p>
     </div>
     <%# Le QR de l'adresse de l'établissement (ADR adresse-publique-etablissement) : ni élève, ni classe, ni jeton. %>
-    <%# « Scanner » est dans le cadre du QR, en bas, avant la bordure (choix du porteur, 2026-11-24) : une indication, pas un bouton ;
-        décorative, le nom du QR dit déjà « à scanner ». %>
-    <div class="flex w-24 shrink-0 flex-col items-center gap-0.5 overflow-hidden rounded-ln bg-white p-1 ring-2 ring-brand/20">
-      <div id="student_school_qr" class="size-22" role="img" aria-label="<%= t(".qr_label", school: home.school_name) %>">
-        <%= school_signup_qr_svg(home.school_public_id) %>
+    <%# « Scanner » est dans le cadre du QR, en bas, avant la bordure (choix du porteur, 2026-11-24) : une indication, décorative.
+        UDR accueil-eleve-qr-agrandi : le cadre est un bouton qui ouvre le QR en grand (plein écran au téléphone, fenêtre
+        au-delà), avec le partage WhatsApp de l'adresse de l'établissement. %>
+    <% school_url = school_signup_link_url(home.school_public_id) %>
+    <%= ui_modal title: t(".qr_dialog.title"), id: "student_school_qr_dialog", size: :sm, placement: :phone_full,
+                 described_by: "student_school_qr_dialog_hint",
+                 opener: tag.button(type: "button", id: "student_school_qr_button", data: { action: "modal#open" },
+                                    "aria-haspopup": "dialog", "aria-controls": "student_school_qr_dialog",
+                                    "aria-label": t(".qr_open_label", school: home.school_name),
+                                    class: "flex w-24 shrink-0 cursor-pointer flex-col items-center gap-0.5 overflow-hidden rounded-ln bg-white p-1 ring-2 ring-brand/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand") {
+                                      safe_join([ tag.span(school_signup_qr_svg(home.school_public_id), id: "student_school_qr", class: "block size-22", "aria-hidden": "true"),
+                                                  tag.span(safe_join([ ui_icon("camera", size: :sm), t(".scan") ]), id: "student_school_qr_hint",
+                                                           class: "flex items-center gap-1 text-xs font-bold text-ink", "aria-hidden": "true") ])
+                                    } do %>
+      <div class="qr-card-pattern mx-auto flex max-w-80 flex-col gap-4 rounded-sheet bg-brand p-5">
+        <div class="rounded-card bg-white p-4">
+          <div id="student_school_qr_large" class="mx-auto aspect-square w-full max-w-60" role="img"
+               aria-label="<%= t(".qr_label", school: home.school_name) %>">
+            <%= school_signup_qr_svg(home.school_public_id) %>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-white"><%= image_tag brand_logo, alt: "", class: "size-6" %></span>
+          <p class="min-w-0 truncate text-sm font-semibold text-white"><%= home.school_name %></p>
+        </div>
       </div>
-      <p id="student_school_qr_hint" class="flex items-center gap-1 text-xs font-bold text-ink" aria-hidden="true"><%= ui_icon "camera", size: :sm %><%= t(".scan") %></p>
-    </div>
+      <p id="student_school_qr_dialog_hint" class="mx-auto mt-4 max-w-80 text-center text-sm text-mute"><%= t(".qr_dialog.hint") %></p>
+      <div class="mx-auto mt-4 max-w-80">
+        <%= ui_button t(".qr_dialog.whatsapp"), href: whatsapp_share_url(t(".qr_dialog.whatsapp_message", school: home.school_name, url: school_url)),
+                      id: "student_school_qr_whatsapp", variant: :primary, icon: "chat-bubble-left-right", full: true,
+                      target: "_blank", rel: "noopener" %>
+      </div>
+    <% end %>
   </div>
   <div class="mt-4 flex items-center justify-between gap-3">
     <%= ui_button t(".enter"), href: student_classroom_path, id: "student_class_enter", icon_end: "arrow-right",
