@@ -112,7 +112,7 @@ class DesignTokensTest < ActiveSupport::TestCase
     app/views/shared/screens/_group.html.erb app/views/shared/screens/_row.html.erb app/views/shared/screens/_inner_header.html.erb
     app/views/classroom/student_homes/_class_card.html.erb app/views/classroom/student_homes/_history.html.erb
     app/views/classroom/student_homes/_subjects.html.erb app/views/classroom/student_homes/_invite_banner.html.erb
-    app/views/classroom/student_homes/_invite_tile.html.erb
+    app/views/classroom/student_homes/_more_sheet.html.erb
     app/views/catalog/courses/material.html.erb app/views/communication/messages/_card.html.erb
   ].freeze
   WEIGHT_SOURCES = Rails.root.glob("app/{views,helpers}/**/*.{erb,rb}").reject do |path|

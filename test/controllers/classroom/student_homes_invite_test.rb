@@ -8,11 +8,11 @@ class Classroom::StudentHomesInviteTest < ActionDispatch::IntegrationTest
     sign_in_as(@student)
   end
 
-  test "the classmates tile is there, titled, and opens WhatsApp in a new tab; no banner any more" do
+  test "the classmates tile is in the grid and opens WhatsApp in a new tab; no section, no banner any more" do
     get student_home_path
 
-    assert_select "section#student_invite_classmates[aria-labelledby=student_invite_classmates_title]" do
-      assert_select "h2#student_invite_classmates_title", text: "Invite tes camarades"
+    assert_select "#student_invite_classmates", count: 0
+    assert_select "li#student_invite_cell" do
       assert_select "form[action=?][target=_blank][data-turbo=false]", class_invite_path
       assert_select "button[data-action*=dismissible], p", count: 0
     end
@@ -29,13 +29,13 @@ class Classroom::StudentHomesInviteTest < ActionDispatch::IntegrationTest
     get student_home_path
 
     assert_select "section#student_invite_banner", count: 0
-    assert_select "h2#student_invite_classmates_title"
+    assert_select "li#student_invite_cell"
   end
 
   test "a student without a classroom sees neither" do
     Orm::ClassroomStudent.where(student_id: @student.id).update_all(left_at: Time.current)
     get student_home_path
 
-    assert_select "#student_invite_classmates_title", count: 0
+    assert_select "#student_invite_cell", count: 0
   end
 end
