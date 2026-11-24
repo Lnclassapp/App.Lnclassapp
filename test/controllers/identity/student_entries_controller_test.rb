@@ -233,20 +233,56 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student-entry-alert[role=alert]", text: I18n.t("errors.codes.rate_limited")
   end
 
-  test "CA-10 : 10 codes faux sur 10 numéros inscrits depuis une adresse passent en 422 ; le 11e, même avec le bon code, reçoit 429" do
-    11.times { |i| create_student(contact: format("07%08d", i), classroom: @classroom) }
-    10.times do |i|
+  test "CA-10 : 5 codes faux sur 5 numéros inscrits depuis une adresse passent en 422 ; le 6e, même avec le bon code, reçoit 429" do
+    6.times { |i| create_student(contact: format("07%08d", i), classroom: @classroom) }
+    5.times do |i|
       enter(contact: format("07%08d", i), pin: "1111")
       assert_response :unprocessable_entity, "wrong code #{i + 1} was not a 422 (#{response.status})"
     end
 
-    enter(contact: format("07%08d", 10), pin: "2468")
+    enter(contact: format("07%08d", 5), pin: "2468")
 
     assert_response :too_many_requests
     assert_select "#student-entry-alert[role=alert]", text: I18n.t("errors.codes.rate_limited")
     get student_home_path
     assert_response :redirect
     assert_not_equal student_home_path, URI(response.location).path
+  end
+
+  # Revue sécurité du 2026-11-24 (ADR-0050) : 5 codes faux au plus par compte, 5 par minute et par adresse, les deux entrées confondues.
+  test "3 codes faux sur /login puis 2 sur /student verrouillent le même compte" do
+    student = create_student(contact: "0701020304", classroom: @classroom)
+    3.times { post session_path, params: { session: { contact: student.contact, pin: "1111" } } }
+    2.times do
+      travel 61.seconds
+      enter(contact: student.contact, pin: "1111")
+    end
+    travel 61.seconds
+
+    enter(contact: student.contact, pin: "2468")
+
+    assert_response :too_many_requests
+    assert_select "[role=alert]", text: I18n.t("errors.locked.until_recovery")
+    assert_equal 0, Orm::Session.count
+  end
+
+  test "6 envois sur /login puis /student depuis une adresse : le plafond de codes faux est commun" do
+    11.times { |i| create_student(contact: format("07%08d", i), classroom: @classroom) }
+    6.times { |i| post session_path, params: { session: { contact: format("07%08d", i), pin: "1111" } } }
+    assert_response :too_many_requests
+
+    enter(contact: format("07%08d", 6), pin: "2468")
+
+    assert_response :too_many_requests
+  end
+
+  test "5 codes faux sur /student puis /login depuis une adresse : /login est refusé en 429, même avec le bon code" do
+    6.times { |i| create_student(contact: format("07%08d", i), classroom: @classroom) }
+    5.times { |i| enter(contact: format("07%08d", i), pin: "1111") }
+
+    post session_path, params: { session: { contact: format("07%08d", 5), pin: "2468" } }
+
+    assert_response :too_many_requests
   end
 
   test "CA-10 : un numéro inconnu n'est pas un code faux : 11 numéros inconnus ne déclenchent pas ce compteur" do
@@ -276,7 +312,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     enter(contact: "0701020304", pin: "2468")
 
     assert_response :too_many_requests
-    assert_select "[role=alert]", text: /Réessayez à/
+    assert_select "[role=alert]", text: I18n.t("errors.locked.until_recovery")
     assert_equal 0, Orm::Session.count
   end
 
