@@ -191,6 +191,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0180](./0180-pave-numerique-confirmation-code.md) | Pavé numérique de « Nouveau sur Lnclass », entrée et inscription allégées | Accepté | 2026-11-21 | [0141](../adr/0141-entree-eleve-revele-un-numero-inscrit.md) | l'élève retape son code secret dans un champ ordinaire, sans savoir s'il a bien tapé, et lit des phrases qui n'aident pas |
 | [0181](./0181-accueil-eleve-grille-plus.md) | Accueil élève, grille « Inviter » et « Plus » | Accepté | 2026-11-24 | — | Où placer l'invitation et les entrées secondaires de l'élève sans ajouter de section à l'accueil |
 | [0182](./0182-accueil-eleve-qr-agrandi.md) | Accueil élève, QR en grand et partage WhatsApp | Accepté | 2026-11-24 | [0145](../adr/0145-adresse-publique-etablissement.md) | Le QR de la carte de classe est trop petit pour être scanné de loin, et l'adresse de l'établissement ne se partage pas à distance |
+| [0183](./0183-premier-exercice-formules-soumission.md) | Liste en formule — lettres dans le menu, propositions rendues | Accepté | 2026-11-24 | [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) | une option de menu natif ne peut pas rendre une formule KaTeX, l'élève lisait du LaTeX brut |
 <!-- index:end -->
 
 ---
