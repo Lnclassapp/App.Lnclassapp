@@ -60,7 +60,7 @@ module Assessment
     # La note sur 20 au-dessus de la médaille-récompense, alignées à droite d'une ligne. Une copie vide (sans médaille) n'a pas
     # de note : « Pas encore » seul, jamais « 0/20 ».
     def grade_and_medal(score, level)
-      grade = tag.span(grade_label(score), class: "text-base font-bold text-ink tabular-nums", data: { grade: true }) if score && level
+      grade = tag.span(grade_label(score), class: "text-base font-medium text-ink tabular-nums", data: { grade: true }) if score && level
       tag.span(safe_join([ grade, medal_reward_tag(level) ].compact, " "), class: "flex flex-col items-end gap-1")
     end
 

@@ -39,7 +39,7 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
     visit student_classroom_path
     within "#student_classroom_treated" do
       assert_text "Médaille Or"
-      assert_no_text "16/20"
+      assert_selector "[data-grade]", text: "16/20"
       # UDR-0173 règle 7 : toute la ligne mène à la copie.
       find("li a").click
     end
