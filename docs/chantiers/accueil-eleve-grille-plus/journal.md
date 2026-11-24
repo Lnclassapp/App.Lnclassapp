@@ -13,6 +13,9 @@
 > Décisions laissées ouvertes ou tranchées par défaut par un agent, en attente du porteur. Relevées chaque jour à 12 h par la boîte de décisions (`docs/workflows/contrat-de-session.md`). Le porteur coche `[x]` et écrit sa réponse à la suite.
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
 
+- [ ] 2026-11-24 · fix/retouche-accueil-eleve-matieres-annonces · « Retire aussi ma matière » : aucun libellé « Ma matière » n'existe — appliqué : le titre « Mes matières » de la grille de l'accueil est retiré de l'écran (gardé pour les lecteurs d'écran) ; autres : retirer une matière de la grille ; recommandé : le titre
+- [ ] 2026-11-24 · fix/retouche-accueil-eleve-matieres-annonces · « Pattes » de l'annonce — appliqué : les points du carrousel sous les annonces de l'accueil élève ; autres : la croix de masquage, la signature seule ; recommandé : les points
+- [ ] 2026-11-24 · fix/retouche-accueil-eleve-matieres-annonces · Sans signature, une annonce officielle perd son badge visible sur l'accueil élève (le mot « officielle » reste lu aux lecteurs d'écran) — appliqué : plus de badge ; autres : garder le badge seul ; recommandé : garder le badge seul si l'origine compte pour l'élève
 - …
 
 ## Retouches

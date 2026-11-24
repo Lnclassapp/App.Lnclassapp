@@ -92,12 +92,13 @@ class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
     assert_current_path student_home_path
     assert_equal [ "Devoirs communs", "Nouvelles fiches" ], carousel_titles
     within(card(@devoirs)) do
-      assert_text "Mme Kamaté · Direction"
+      # Retouche accueil-eleve-matieres-annonces : pas de signature sur la bannière de l'accueil élève ; « officielle » reste lu.
+      assert_no_text "Mme Kamaté · Direction"
       assert_selector ".sr-only", text: tc("card.official"), visible: :all
       assert_no_selector "button[aria-label^='Masquer']"
     end
     within(card(fiches)) do
-      assert_text "M. Kouassi · SVT"
+      assert_no_text "M. Kouassi · SVT"
       assert_selector "button[data-state=new][aria-label='#{tc('audio.labels.new')}']"
       assert_selector "audio[preload=none][src='#{announcement_file_path(fiches.public_id, kind: 'audio')}']", visible: :all
     end
@@ -113,7 +114,10 @@ class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
     within("#student_home_announcements") { assert_no_link "Toutes les annonces" }
     visit announcements_path
 
-    within(card(fiches)) { assert_text tc("card.dismissed") }
+    within(card(fiches)) do
+      assert_text "M. Kouassi · SVT"
+      assert_text tc("card.dismissed")
+    end
     sign_out
     fiches
   end
