@@ -1,4 +1,4 @@
-# UDR-XXXX : Accueil élève — « Inviter » et « Plus » dans la grille, feuille « Plus », entrées dans le menu de gauche
+# UDR-0181 : Accueil élève — « Inviter » et « Plus » dans la grille, feuille « Plus », entrées dans le menu de gauche
 <!-- index
 titre: Accueil élève, grille « Inviter » et « Plus »
 statut: Accepté
@@ -8,7 +8,7 @@ problematique: Où placer l'invitation et les entrées secondaires de l'élève 
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-11-24 |
 | **Chantier** | `docs/chantiers/accueil-eleve-grille-plus` |
 | **ADR lié** | — |
@@ -60,7 +60,7 @@ Une seule grille de 4 colonnes : les matières (6 au plus selon le niveau), « I
 - **Chargement** : aucun (rien n'est chargé).
 - **Erreur** : aucune requête ; « S'abonner » mène à une page qui gère ses propres erreurs.
 - **Succès** : 390 px → matières, « Inviter », « Plus » en 4 colonnes ; 1440 px → matières et « Inviter » en 8 colonnes, entrées dans le menu de gauche.
-- **Sans classe** : matières du dernier niveau, puis « Plus » ; pas d'« Inviter ».
+- **Sans classe** : matières du dernier niveau, puis « Plus » ; pas d'« Inviter ». Sans classe **et** sans dernier niveau connu (jamais inscrit) : pas de grille, donc pas de « Plus » au téléphone ; « Choisis ta classe » reste seule (chantier eleve-sans-prof, CA-3).
 
 **Accessibilité**
 - Cibles ≥ 48 px (`min-h-tap`) pour chaque case, entrée et la croix.

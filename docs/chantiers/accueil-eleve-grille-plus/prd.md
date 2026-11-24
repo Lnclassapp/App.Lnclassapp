@@ -94,7 +94,7 @@ Alors la feuille « Plus » et le menu de gauche montrent les mêmes entrées, d
 ## 6. Décisions rattachées
 
 - Pas d'ADR : ni port, ni table, ni dépendance, ni contrat ne change (vues et helper seulement).
-- UDR-XXXX-accueil-eleve-grille-plus (`docs/decisions/udr/XXXX-accueil-eleve-grille-plus.md`) — amende UDR-0173 §3 (accueil, « Mes matières ») et UDR-0179 accueil-eleve-qr-fenetre-inviter §3.3 (la tuile « Inviter » entre dans la grille).
+- UDR-0181 (`docs/decisions/udr/0181-accueil-eleve-grille-plus.md`) — amende UDR-0173 §3 (accueil, « Mes matières ») et UDR-0179 accueil-eleve-qr-fenetre-inviter §3.3 (la tuile « Inviter » entre dans la grille).
 
 ## 7. Mesures
 
