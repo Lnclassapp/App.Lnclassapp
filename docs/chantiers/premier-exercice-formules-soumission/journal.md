@@ -4,7 +4,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-24 | Une liste dont une proposition est une formule : le menu propose des lettres, les propositions se lisent rendues et lettrées sous la phrase | Une `<option>` n'est que du texte : KaTeX ne peut pas y rendre. Garde le `select` natif d'UDR-0140 (sans JavaScript, plein écran au téléphone) | UDR-XXXX-premier-exercice-formules-soumission |
+| 2026-11-24 | Une liste dont une proposition est une formule : le menu propose des lettres, les propositions se lisent rendues et lettrées sous la phrase | Une `<option>` n'est que du texte : KaTeX ne peut pas y rendre. Garde le `select` natif d'UDR-0140 (sans JavaScript, plein écran au téléphone) | UDR-0183 |
 | 2026-11-24 | Une liste sans formule ne change pas | Le cas courant (« alignés », « parallèles ») se lit déjà dans le menu | — |
 
 ## À trancher
@@ -46,6 +46,6 @@ Reformulation sans les mots du symptôme : la vue confiait du LaTeX à un élém
 | | |
 |---|---|
 | **Livré le** | 2026-11-24 |
-| **PR** | (à remplir) |
+| **PR** | #700 |
 | **ADR produits** | — |
-| **UDR produits** | UDR-XXXX-premier-exercice-formules-soumission |
+| **UDR produits** | UDR-0183 |

@@ -6,7 +6,7 @@
 
 | Lot | Session | Branche | PR | SHA de tête vérifié | État |
 |---|---|---|---|---|---|
-| 0 — liste en formule lisible | session_01Q2c4doGZwKFnCtJKbdjf5r | `fix/premier-exercice-formules-soumission` | (à remplir) | (ligne bin/ci-quiet de la PR) | PR prête |
+| 0 — liste en formule lisible | session_01Q2c4doGZwKFnCtJKbdjf5r | `fix/premier-exercice-formules-soumission` | #700 | (ligne bin/ci-quiet de la PR) | PR prête |
 
 ## Décisions
 

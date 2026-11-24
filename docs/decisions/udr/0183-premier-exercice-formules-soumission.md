@@ -1,4 +1,4 @@
-# UDR-XXXX : Choix dans une liste dont une proposition est une formule
+# UDR-0183 : Choix dans une liste dont une proposition est une formule
 <!-- index
 titre: Liste en formule — lettres dans le menu, propositions rendues
 statut: Accepté
