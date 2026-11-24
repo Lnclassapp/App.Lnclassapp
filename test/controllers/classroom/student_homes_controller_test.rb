@@ -105,6 +105,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "ul.grid-cols-4.lg\\:grid-cols-8"
     end
     assert_select "section#student_home_announcements.bg-mist.lg\\:bg-transparent"
+    # Retouche accueil-eleve-annonces-wave : 8 px de marge, la carte suivante dépasse ; image de 96 px ; libellés alignés sur les lignes.
+    assert_select "section#student_home_announcements ul.px-2.scroll-pl-2"
+    assert_select "section#student_home_announcements article .w-28 svg.size-24, section#student_home_announcements article .w-28 img.size-24"
     # The mist background and the sidebar are the shell's, for every student page; carte-profil-eleve (UDR-0132 §3.1, amended):
     # the profile card opens the sidebar, as the teacher's.
     assert_select "body > div.fixed.hidden.lg\\:block.bg-mist[aria-hidden=true]"
@@ -471,7 +474,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_select "section#student_to_do h2", text: tl("to_do.title")
+    assert_select "section#student_to_do h2.px-4", text: tl("to_do.title")
     assert_equal %w[Un Deux Trois Quatre Cinq], css_select("#student_to_do li a span.text-brand-strong.font-semibold.leading-snug").map { it.text.strip }
     assert_select "#student_to_do li:not([hidden])", 3
     assert_select "#student_to_do li[hidden]", 2
