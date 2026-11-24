@@ -241,7 +241,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a#subject_histoire-geographie span[aria-hidden=true]", text: "HG"
       assert_select "a#subject_mathematiques span[aria-hidden=true]", text: "Maths"
       assert_select "a#subject_svt", text: "SVT"
-      assert_select "a#subject_svt .bg-tint-green.size-16 img[src*='subjects/svt']"
+      assert_select "a#subject_svt .bg-tint-green.size-14 img[src*='subjects/svt']"
     end
     assert_no_match(/subject_francais|subject_philosophie|Paiement/, response.body)
   end
@@ -728,11 +728,13 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     ids = css_select("#student_home [id]").map { it["id"] } & %w[student_subjects student_invite_classmates]
     assert_equal %w[student_subjects student_invite_classmates], ids
+    # Retouche accueil-eleve-marges-wave : dès lg, « Invite tes camarades » ne colle plus au libellé des matières.
+    assert_select "div[class~='lg:pt-6'] > section#student_invite_classmates"
     assert_select "section#student_invite_classmates[aria-labelledby=student_invite_classmates_title]" do
       assert_select "h2#student_invite_classmates_title", text: tl("invite_tile.title")
       assert_select "form[action=?][method=post][target=_blank][data-turbo=false]", class_invite_path do
         assert_select "button#student_invite_tile[aria-label=?]", tl("invite_tile.action_label", classroom: "Tle D 1") do
-          assert_select "span.size-16.rounded-full.bg-brand-soft.text-brand-strong svg"
+          assert_select "span.size-14.rounded-full.bg-brand-soft.text-brand-strong svg"
           assert_select "span", text: tl("invite_tile.action")
         end
       end

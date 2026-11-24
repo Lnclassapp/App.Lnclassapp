@@ -2,16 +2,16 @@
 <%# Rôle : une matière de son niveau, vers le catalogue filtré, nom court (le nom entier lu aux lecteurs d'écran) ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; plus de case « Inviter » (la bannière est la seule porte) %>
 <%# UDR  : 0173 §3 (accueil, Mes matières), 0132 accueil élève §3.4, 0062 §3.3 : jamais de compteur ; le point est dit par un suffixe lu aux lecteurs d'écran %>
 <%# locals: (subjects:, late_slugs:) -%>
-<% tile = "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-meta leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+<% tile = "group flex min-h-tap flex-col items-center gap-2.5 rounded-ln px-0.5 text-center text-sm leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
 <nav id="student_subjects" aria-labelledby="student_subjects_title">
-  <h2 id="student_subjects_title" class="px-1 pb-3 text-sm font-semibold text-mute"><%= t(".label") %></h2>
+  <h2 id="student_subjects_title" class="px-4 pb-3 text-sm font-semibold text-mute lg:px-1"><%= t(".label") %></h2>
   <ul class="grid grid-cols-4 gap-y-4 lg:grid-cols-8 lg:gap-x-2">
     <% subjects.first(Classroom::StudentHomesController::MAX_SUBJECTS).each do |subject| %>
       <% late = late_slugs.include?(subject.slug) %>
       <% illustration = subject_illustration(subject.slug) %>
       <li>
         <%= link_to courses_path(material: subject.slug), id: "subject_#{subject.slug}", class: tile do %>
-          <span class="<%= class_names("relative grid size-16 place-items-center rounded-full transition group-active:scale-95", illustration.tint) %>">
+          <span class="<%= class_names("relative grid size-14 place-items-center rounded-full transition group-active:scale-95", illustration.tint) %>">
             <%= image_tag illustration.path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
             <%# UDR §3.4 : le point ambre, décoratif ; sa phrase est lue après le nom (suffixe sr-only). %>
             <% if late %><span class="absolute top-0 right-0 size-2.5 rounded-full bg-warning-dot ring-2 ring-white" aria-hidden="true"></span><% end %>
