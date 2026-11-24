@@ -303,4 +303,27 @@ class NavigationHelperTest < ActionView::TestCase
     assert_nil student_detail(about.())
     assert_nil student_detail(NavigationHelper::ShellUser.new(name: "Awa Koné", role: :student))
   end
+
+  # UDR accueil-eleve-grille-plus §3 : la liste des entrées de « Plus », lue par la feuille (téléphone) et le menu de gauche (lg).
+  test "the student more list keeps its five entries, in order, with one route" do
+    more = NavigationHelper::STUDENT_MORE
+
+    assert_predicate more, :frozen?
+    assert_equal %i[subscribe study_room littera composa homework_ci], more.map(&:key)
+    assert_equal :billing_subscription_path, more.first.route
+    assert_equal [ nil ] * 4, more.drop(1).map(&:route)
+    assert_equal %w[credit-card light-bulb language pencil-square clipboard-document-check], more.map(&:icon)
+    assert_equal %w[bg-tint-indigo bg-tint-yellow bg-tint-lilac bg-tint-green bg-tint-lavender], more.map(&:tint)
+  end
+
+  test "every more entry has an existing route, an existing icon and a french label" do
+    NavigationHelper::STUDENT_MORE.each do |entry|
+      assert Rails.application.routes.url_helpers.respond_to?(entry.route), entry.key.to_s if entry.route
+      assert Rails.root.join("vendor/heroicons/24/outline/#{entry.icon}.svg").exist?, entry.icon
+      assert I18n.exists?("shared.navigation.more.entries.#{entry.key}", :fr), entry.key.to_s
+    end
+    assert_equal "Bientôt disponible", I18n.t("shared.navigation.more.soon")
+    assert_equal "Plus", I18n.t("shared.navigation.more.title")
+    assert_equal "Plus", I18n.t("shared.navigation.sidebar.secondary_label.student")
+  end
 end

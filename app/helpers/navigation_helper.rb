@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : XXXX (pipeline et relances), 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1), 0159 (§2), XXXX (écrans enseignant et élève sans répétition, §3.1 à §3.4)
+# UDR  : XXXX (pipeline et relances), 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1), 0159 (§2), XXXX (accueil-eleve-grille-plus §3), XXXX (écrans enseignant et élève sans répétition, §3.1 à §3.4)
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -40,6 +40,17 @@ module NavigationHelper
     team: [ [ :referential, :teams_referential_path, "squares-2x2" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
             [ :billing, :teams_billing_cashbox_path, "banknotes" ], [ :announcements, :my_announcements_path, "megaphone" ] ]
   }.freeze
+  # UDR accueil-eleve-grille-plus §3 : les entrées de « Plus » de l'élève, dans cet ordre, lues par la feuille « Plus » du téléphone
+  # et par le menu de gauche (lg). route : nom de route, ou nil tant que l'écran n'existe pas (l'entrée dit « Bientôt disponible »).
+  # Ajouter une entrée = une ligne ici + une clé `shared.navigation.more.entries.<clé>` ; donner un écran = remplacer nil par la route.
+  MoreEntry = Data.define(:key, :route, :icon, :tint)
+  STUDENT_MORE = [
+    MoreEntry.new(key: :subscribe, route: :billing_subscription_path, icon: "credit-card", tint: "bg-tint-indigo"),
+    MoreEntry.new(key: :study_room, route: nil, icon: "light-bulb", tint: "bg-tint-yellow"),
+    MoreEntry.new(key: :littera, route: nil, icon: "language", tint: "bg-tint-lilac"),
+    MoreEntry.new(key: :composa, route: nil, icon: "pencil-square", tint: "bg-tint-green"),
+    MoreEntry.new(key: :homework_ci, route: nil, icon: "clipboard-document-check", tint: "bg-tint-lavender")
+  ].freeze
   # UDR-XXXX (pipeline et relances) : « Relances », avant « Annonces », pour `admin` et `field` seulement (ManageCrmPolicy).
   CRM_DESTINATION = [ :follow_ups, :teams_follow_ups_path, "bell-alert" ].freeze
   # UDR enseignant §3.4 (lot P0) : le Turbo Frame du panneau « Mon compte » ; dès lg, les écrans de retrait (« Mes matières »,

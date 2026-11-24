@@ -68,6 +68,9 @@ class DesignTokensTest < ActiveSupport::TestCase
 
     COLD_PALETTE.each { |token, value| assert_includes theme, "--color-#{token}: #{value};", token }
     assert_includes theme, "--text-meta: 0.8125rem;"
+    # UDR accueil-eleve-grille-plus §3 : hauteur de la feuille « Plus » (au moins un quart, au plus la moitié de l'écran)
+    assert_includes theme, "--spacing-sheet-quarter: 25dvh;"
+    assert_includes theme, "--spacing-sheet-half: 50dvh;"
   end
 
   test "the new tokens have their dark value in both dark blocks" do
