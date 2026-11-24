@@ -14,12 +14,22 @@ class CiTestedTreeTest < ActiveSupport::TestCase
 
   def artifacts(list) = { "repos/#{REPOSITORY}/actions/artifacts?name=ci-tree-#{TREE}&per_page=100" => { "artifacts" => list } }
 
+  RUN_ID = 42
+
+  def green_artifact(**over) = { "name" => "ci-tree-#{TREE}", "expired" => false, "workflow_run" => { "id" => RUN_ID, "head_branch" => "Develop" } }.merge(over)
+
+  def ci_run(name: "CI", event: "pull_request", head: "Develop", base: "Staging", repository: REPOSITORY, pull_requests: nil)
+    pulls = pull_requests || [ { "head" => { "ref" => head }, "base" => { "ref" => base } } ]
+    { "repos/#{REPOSITORY}/actions/runs/#{RUN_ID}" => { "name" => name, "event" => event, "head_branch" => head,
+                                                         "head_repository" => { "full_name" => repository }, "pull_requests" => pulls } }
+  end
+
   def proof(responses, local_proof: false) = TestedTree.new(repository: REPOSITORY, api: api(responses), local_proof:)
 
   def cloud(answer) = { "repos/#{REPOSITORY}/contents/arbres/#{TREE}?ref=ci/preuves" => answer }
 
   test "a tree that got a green ci is tested, and the artifact is named after the tree" do
-    subject = proof(commit.merge(artifacts([ { "name" => "ci-tree-#{TREE}", "expired" => false } ])))
+    subject = proof(commit.merge(artifacts([ green_artifact ])).merge(ci_run))
 
     assert_equal "ci-tree-#{TREE}", subject.artifact_name(SHA)
     assert subject.tested?(SHA)
@@ -27,11 +37,35 @@ class CiTestedTreeTest < ActiveSupport::TestCase
 
   test "a tree never tested, or only by an expired proof, is not tested" do
     refute proof(commit.merge(artifacts([]))).tested?(SHA)
-    refute proof(commit.merge(artifacts([ { "name" => "ci-tree-#{TREE}", "expired" => true } ]))).tested?(SHA)
+    refute proof(commit.merge(artifacts([ green_artifact("expired" => true) ])).merge(ci_run)).tested?(SHA)
+  end
+
+  # Revue sécurité du 2026-11-24 : l'artefact ne prouve rien s'il ne vient pas du workflow « CI » d'une PR vers Staging ou main.
+  test "the artifact of a pull request into Develop, another workflow, another event or a fork proves nothing" do
+    {
+      "base Develop" => ci_run(base: "Develop", head: "feature/x"),
+      "another workflow" => ci_run(name: "Deploy"),
+      "another event" => ci_run(event: "push"),
+      "a fork" => ci_run(repository: "intrus/App.Lnclassapp"),
+      "no pull request" => ci_run(pull_requests: []),
+      "head branch differing" => ci_run(pull_requests: [ { "head" => { "ref" => "autre" }, "base" => { "ref" => "main" } } ])
+    }.each do |label, responses|
+      refute proof(commit.merge(artifacts([ green_artifact ])).merge(responses)).tested?(SHA), label
+    end
+  end
+
+  test "an artifact without a run, or whose run cannot be read, proves nothing" do
+    refute proof(commit.merge(artifacts([ green_artifact("workflow_run" => nil) ]))).tested?(SHA)
+    refute proof(commit.merge(artifacts([ green_artifact ])).merge("repos/#{REPOSITORY}/actions/runs/#{RUN_ID}" => nil)).tested?(SHA)
+    refute proof(commit.merge(artifacts([ green_artifact("workflow_run" => { "id" => RUN_ID, "head_branch" => "autre" }) ])).merge(ci_run)).tested?(SHA)
+  end
+
+  test "a pull request into main counts" do
+    assert proof(commit.merge(artifacts([ green_artifact("workflow_run" => { "id" => RUN_ID, "head_branch" => "Staging" }) ])).merge(ci_run(head: "Staging", base: "main"))).tested?(SHA)
   end
 
   test "an artifact of another tree proves nothing" do
-    refute proof(commit.merge(artifacts([ { "name" => "ci-tree-#{TREE}0", "expired" => false } ]))).tested?(SHA)
+    refute proof(commit.merge(artifacts([ green_artifact("name" => "ci-tree-#{TREE}0") ]))).tested?(SHA)
   end
 
   test "an unreadable commit or a failed API call answers false instead of raising" do
