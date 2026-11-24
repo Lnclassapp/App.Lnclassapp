@@ -53,6 +53,6 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | | |
 |---|---|
 | **Livré le** | 2026-11-24 |
-| **PR** | |
+| **PR** | #704 |
 | **ADR produits** | |
 | **UDR produits** | — (UDR-0183 §4 étendue à la fiche) |
