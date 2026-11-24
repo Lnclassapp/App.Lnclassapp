@@ -63,9 +63,24 @@ class TestedTree
     return false unless run.is_a?(Hash) && run["name"] == WORKFLOW && run["event"] == EVENT
     return false unless run.dig("head_repository", "full_name") == @repository && artifact.dig("workflow_run", "head_branch") == run["head_branch"]
 
-    Array(run["pull_requests"]).any? do |pull|
+    pull_requests(run).any? do |pull|
       PROMOTED_BRANCHES.include?(pull.dig("base", "ref")) && pull.dig("head", "ref") == run["head_branch"]
     end
+  end
+
+  # GitHub empties the run's pull_requests once its pull request is merged: the proof of a merged promotion would be
+  # lost right when its deployment reads it (train #682, 2026-11-24). The pull requests of the run's head branch then
+  # answer, kept only when they come from this repository and their head is still the run's commit.
+  def pull_requests(run)
+    listed = Array(run["pull_requests"])
+    return listed if listed.any?
+
+    sha = run["head_sha"] or return []
+    owner = @repository.split("/").first
+    pulls = @api.call("repos/#{@repository}/pulls?state=all&head=#{owner}:#{run['head_branch']}&per_page=100")
+    return [] unless pulls.is_a?(Array)
+
+    pulls.select { |pull| pull.dig("head", "sha") == sha && pull.dig("head", "repo", "full_name") == @repository }
   end
 
   # The file exists on ci/preuves: the contents API answers it; a 404 (no proof, no branch) fails the call.
