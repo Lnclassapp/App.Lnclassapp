@@ -484,6 +484,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     get student_home_path
 
     assert_select "section#student_to_do h2.px-4", text: tl("to_do.title")
+    # Porteur, 2026-11-24 : plus de compte « répondu/total » sur les lignes de « À faire ».
+    assert_select "#student_to_do li", text: %r{\d+\s*/\s*\d+}, count: 0
     assert_equal %w[Un Deux Trois Quatre Cinq], css_select("#student_to_do li a span.text-brand-strong.font-semibold.leading-snug").map { it.text.strip }
     assert_select "#student_to_do li:not([hidden])", 3
     assert_select "#student_to_do li[hidden]", 2
