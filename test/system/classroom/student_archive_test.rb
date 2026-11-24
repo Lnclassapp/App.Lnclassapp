@@ -67,7 +67,7 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
         assert_selector "h3", text: /février 2026/i
         assert_selector "li", text: "Médaille Bronze", count: 4
         assert_selector "li", text: "Médaille Or", count: 1
-        assert_no_text "/20"
+        assert_selector "li [data-grade]", text: %r{\A\d+/20\z}, count: 5
       end
       assert_no_horizontal_scroll
     end

@@ -44,7 +44,7 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
       assert_select "p", "Fractions"
       assert_select "p", "Mathématiques · 12 mars"
       assert_select "[data-medal]", text: /Argent/
-      assert_select "[data-medal]", text: %r{/20|%}, count: 0
+      assert_select "[data-medal] [data-grade]", "15/20"
     end
     assert_select "#student_archive_results a", 0
   end
@@ -92,9 +92,9 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_archive_results li img[alt='']", 3
   end
 
-  # UDR médailles : la ligne montre la médaille de la session (Bronze dès une réponse, « Pas encore » pour une copie vide), jamais
-  # une note ; aucune ligne n'est un lien (UDR-0013).
-  test "a row shows its medal, never a grade, never red, and no row is a link" do
+  # La ligne montre la note sur 20 et la médaille de la session (Bronze dès une réponse) ; une copie vide : « Pas encore », sans
+  # note (porteur, 2026-11-24) ; aucune ligne n'est un lien (UDR-0013).
+  test "a row shows its grade and medal, a blank copy « Pas encore » alone, never red, and no row is a link" do
     { 70 => 14, 60 => 13, 68 => 11, 100 => 10, 30 => 9 }.each do |score, day|
       create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: score,
                               completed_at: Time.zone.local(2026, 3, day, 9)).tap { create_attempt(session: it) }
@@ -106,8 +106,9 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     get student_archive_path
 
     medals = css_select("#student_archive_results [data-medal]").map { it.text.squish }
-    assert_equal({ "Argent Médaille Argent" => 3, "Diamant Médaille Diamant" => 1, "Bronze Médaille Bronze" => 2, "Pas encore" => 1 }, medals.tally)
-    assert_select "#student_archive_results", text: %r{\d+\s*/\s*20|%|sur 20}, count: 0
+    assert_equal({ "14/20 Argent Médaille Argent" => 2, "15/20 Argent Médaille Argent" => 1, "20/20 Diamant Médaille Diamant" => 1,
+                   "12/20 Bronze Médaille Bronze" => 1, "6/20 Bronze Médaille Bronze" => 1, "Pas encore" => 1 }, medals.tally)
+    assert_select "#student_archive_results", text: %r{%|sur 20}, count: 0
     assert_select "#student_archive_results [class*=error], #student_archive_results [class*=danger]", 0
     assert_select "#student_archive_results a", 0
   end

@@ -56,7 +56,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
       within "#student_classroom_treated" do
         assert_link "Méiose, le bilan"
         assert_text "Médaille Or"
-        assert_no_text "16/20"
+        assert_selector "[data-grade]", text: "16/20"
       end
       assert_single_primary_action
       # prepare-interros-cahier, Lot F puis sujet-avant-de-commencer, Lot B : chaque exercice assigné seul est un envoi d'un exercice, une case

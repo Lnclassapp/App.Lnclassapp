@@ -284,15 +284,16 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
       assert_select "li:first-child a[href=?]", exercise_session_result_path(last.public_id), text: including("Refait")
       assert_select "li:first-child", text: including("Or")
       assert_select "li:first-child", text: including("SVT · ")
-      assert_select "#student_classroom_treated", text: %r{\d+\s*/\s*20|%}, count: 0
+      assert_select "li:first-child [data-grade]", "16/20"
+      assert_select "#student_classroom_treated", text: /%/, count: 0
       assert_select "button[data-action='reveal#more']"
     end
     assert_no_match "Autre élève", response.body
   end
 
   # CA-6 (UDR-0086 §3.4, amendé par l'UDR médailles) : la médaille enregistrée de chaque exercice traité, Bronze dès une réponse,
-  # « Pas encore » pour des copies vides seulement, jamais de note ni de rouge.
-  test "each treated exercise shows its medal, Bronze at least, never a grade or red" do
+  # « Pas encore » pour des copies vides seulement, sans note ; la note sur 20 au-dessus de la médaille (porteur, 2026-11-24) ; jamais de rouge.
+  test "each treated exercise shows its grade and medal, Bronze at least, never red" do
     genetics = course_named("Génétique")
     complete(create_exercise(essential: create_essential(course: genetics), title: "Réussi"), 75, at: 2.hours.ago)
     complete(create_exercise(essential: create_essential(course: genetics), title: "À revoir"), 45, at: 1.hour.ago)
@@ -305,12 +306,15 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     get student_classroom_path
 
     assert_select "#student_classroom_treated" do
-      assert_select "li:nth-child(1)", text: including("Bronze Médaille Bronze")
+      assert_select "li:nth-child(1)", text: including("9/20 Bronze Médaille Bronze")
       assert_select "li", text: including("Argent Médaille Argent"), count: 2
+      assert_select "li", text: including("14/20 Argent"), count: 1
+      assert_select "li", text: including("13/20 Bronze"), count: 1
       assert_select "li", text: including("Bronze Médaille Bronze"), count: 2
       # Une copie vide n'a pas de médaille : « Pas encore », comme son résultat.
       assert_select "li", text: including("Pas encore"), count: 1
-      assert_select "li", text: %r{\d+\s*/\s*20|%|Acquis|Fragile|difficulté}, count: 0
+      assert_select "li", text: including("0/20"), count: 0
+      assert_select "li", text: %r{%|Acquis|Fragile|difficulté}, count: 0
     end
     assert_select "#student_classroom_treated [class*=red], #student_classroom_treated [class*=error], #student_classroom_treated [class*=danger]", 0
   end

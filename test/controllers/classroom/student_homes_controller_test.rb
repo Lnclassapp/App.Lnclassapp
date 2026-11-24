@@ -299,7 +299,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{exercise_session_result_path(session.public_id)}']", text: including("Méiose")
       assert_select "a[href='#{exercise_session_result_path(session.public_id)}'] img[src*='subjects/svt'][alt='']", 1
       assert_select "[data-medal]", text: including("Or")
-      assert_select "*", text: %r{\d+\s*/\s*20|%}, count: 0
+      assert_select "[data-medal] [data-grade]", "18/20"
+      assert_select "*", text: /%/, count: 0
       assert_select "a#student_history_more", 0
     end
   end
@@ -322,7 +323,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # Activation-eleve, CA-12 : « Refaire » sur toute copie terminée, plus seulement sous l'Argent (hors pause, ADR-0115).
-  test "the history shows a medal per line, never a grade or red; « Refaire » starts the exercise again, whatever the medal" do
+  test "the history shows a grade and a medal per line, never red; « Refaire » starts the exercise again, whatever the medal" do
     exercise = create_exercise(essential: @essential, title: "Méiose")
     # Les trois dernières copies ne tiennent pas dans 30 minutes : pas de pause, le bouton reste.
     [ 70, 65, 20, 68 ].zip([ 1, 2, 40, 50 ]).each { |score, minutes| complete(exercise, score:).update!(completed_at: minutes.minutes.ago) }
@@ -331,8 +332,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
 
     medals = css_select("turbo-frame#student_home_recent_activity li [data-medal]")
-    assert_equal [ "Argent Médaille Argent", "Bronze Médaille Bronze", "Bronze Médaille Bronze" ], medals.map { it.text.squish }
-    assert_select "turbo-frame#student_home_recent_activity", text: %r{\d+\s*/\s*20|%}, count: 0
+    assert_equal [ "14/20 Argent Médaille Argent", "13/20 Bronze Médaille Bronze", "4/20 Bronze Médaille Bronze" ], medals.map { it.text.squish }
+    assert_select "turbo-frame#student_home_recent_activity", text: /%/, count: 0
     assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=bg-warning]", 0
     assert_select "turbo-frame#student_home_recent_activity form[action=?] button.ui-button-secondary", exercise_sessions_path(exercise.public_id),
                   text: tl("history.redo"), count: 3

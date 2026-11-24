@@ -41,6 +41,29 @@ module Assessment
                class: "inline-flex items-center gap-1 font-display font-medium text-ink")
     end
 
+    # Écrans de l'élève (porteur, 2026-11-24) : la médaille se montre comme une récompense, pastille teintée à sa couleur,
+    # trophée sur un rond blanc ; nil → « Pas encore », sans pastille.
+    MEDAL_REWARD_TINTS = { bronze: "bg-gold/10", silver: "bg-mist ring-1 ring-line", gold: "bg-gold/25", diamond: "bg-info-soft" }.freeze
+
+    def medal_reward_tag(level)
+      level = level&.to_sym
+      return tag.span(badge_label(nil), class: "text-sm text-mute") unless level
+
+      trophy = tag.span(comprehension_trophy(ComprehensionHelper::BADGE_ICON_CLASSES.fetch(level), size: "size-4"),
+                        class: "grid size-6 place-items-center rounded-full bg-white", "aria-hidden": "true")
+      tag.span(safe_join([ trophy, tag.span(badge_label(level), "aria-hidden": "true"),
+                           tag.span(t("assessment.session_results.badge.label", level: badge_label(level)), class: "sr-only") ], " "),
+               class: class_names("inline-flex items-center gap-1.5 rounded-full py-0.5 pr-2.5 pl-0.5 font-display text-sm font-medium text-ink",
+                                  MEDAL_REWARD_TINTS.fetch(level)))
+    end
+
+    # La note sur 20 au-dessus de la médaille-récompense, alignées à droite d'une ligne. Une copie vide (sans médaille) n'a pas
+    # de note : « Pas encore » seul, jamais « 0/20 ».
+    def grade_and_medal(score, level)
+      grade = tag.span(grade_label(score), class: "text-base font-bold text-ink tabular-nums", data: { grade: true }) if score && level
+      tag.span(safe_join([ grade, medal_reward_tag(level) ].compact, " "), class: "flex flex-col items-end gap-1")
+    end
+
     # La médaille au-dessus de `level`, ou nil au Diamant.
     def next_medal(level)
       order = Entities::Assessment::Grading::BADGE_ORDER
