@@ -43,13 +43,15 @@ class Classroom::StudentHomeMoreTest < ApplicationSystemTestCase
     end
   end
 
-  test "CA-4: « S'abonner » leads to the subscription page" do
-    with_mobile_viewport do
-      visit student_home_path
-      find("#student_more_button").click
-      click_link more("entries.subscribe")
+  test "CA-4: once the beta is over, « S'abonner » leads to the subscription page" do
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+      with_mobile_viewport do
+        visit student_home_path
+        find("#student_more_button").click
+        click_link more("entries.subscribe")
 
-      assert_current_path billing_subscription_path
+        assert_current_path billing_subscription_path
+      end
     end
   end
 
