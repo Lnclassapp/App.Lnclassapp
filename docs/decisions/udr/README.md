@@ -189,6 +189,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0178](./0178-partage-de-classe-qr-affiche-invitation.md) | Partage de classe (QR, affiche, invitation élève, k-factor) | Accepté | 2026-11-20 | [0143](../adr/0143-attribution-des-inscriptions-eleves.md) | faire venir une classe entière et ses absents (QR au tableau, affiche, invitation WhatsApp) et lire le k-factor, sans section en double ni donnée d'élève exposée |
 | [0179](./0179-accueil-eleve-qr-fenetre-inviter.md) | Accueil élève : QR de l'établissement, fenêtre du premier exercice, tuile « Inviter » | Accepté | 2026-11-21 | [0145](../adr/0145-adresse-publique-etablissement.md) | la carte du premier exercice pousse la classe hors de l'accueil, le sigle ne sert à rien, et inviter un camarade est au bas de l'écran |
 | [0180](./0180-pave-numerique-confirmation-code.md) | Pavé numérique de « Nouveau sur Lnclass », entrée et inscription allégées | Accepté | 2026-11-21 | [0141](../adr/0141-entree-eleve-revele-un-numero-inscrit.md) | l'élève retape son code secret dans un champ ordinaire, sans savoir s'il a bien tapé, et lit des phrases qui n'aident pas |
+| [0181](./0181-accueil-eleve-grille-plus.md) | Accueil élève, grille « Inviter » et « Plus » | Accepté | 2026-11-24 | — | Où placer l'invitation et les entrées secondaires de l'élève sans ajouter de section à l'accueil |
 <!-- index:end -->
 
 ---

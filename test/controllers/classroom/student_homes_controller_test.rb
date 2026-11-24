@@ -132,7 +132,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_select "nav#student_subjects li", 7
+    assert_select "nav#student_subjects ul.lg\\:grid-cols-8 > li", 9
+    assert_select "nav#student_subjects a[id^=subject_]", 7
     assert_select "#subject_invite", 0
     assert_no_match(/paiement|abonnement/i, css_select("#main").text)
   end
@@ -230,7 +231,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    ids = css_select("#student_subjects li a").map { it["id"] }
+    ids = css_select("#student_subjects a[id^=subject_]").map { it["id"] }
     assert_equal %w[subject_histoire-geographie subject_mathematiques subject_physique-chimie subject_svt], ids.sort
     assert_select "nav#student_subjects[aria-labelledby=student_subjects_title]" do
       assert_select "h2#student_subjects_title", text: tl("subjects.label")
@@ -251,7 +252,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_select "nav#student_subjects li", 0
+    assert_select "nav#student_subjects a[id^=subject_]", 0
     assert_select "nav#student_subjects a#subject_invite", 0
     assert_select "nav#student_subjects", text: including(tl("subjects.empty"))
   end
@@ -715,31 +716,116 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_class_card student_first_exercise student_subjects student_invite_classmates]
-    assert_equal %w[student_class_card student_subjects student_invite_classmates], ids
+    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_class_card student_first_exercise student_subjects student_invite_cell]
+    assert_equal %w[student_class_card student_subjects student_invite_cell], ids
     assert_select FIRST, 0
     assert_select "turbo-frame#student_first_exercise_prompt[src=?]", student_first_exercise_path
   end
 
-  test "CA-16: the « Inviter » tile follows « Mes matières », in the format of its tiles, and sends to the class share" do
+  MORE_SHEET = "dialog#student_more_sheet".freeze
+
+  # Chantier accueil-eleve-grille-plus (UDR accueil-eleve-grille-plus §3), CA-1 : « Inviter » puis « Plus » terminent la grille.
+  test "CA-1: the grid ends with the subjects, then « Inviter », then « Plus »; no « Invite tes camarades » section any more" do
     sign_in_as @student
 
     get student_home_path
 
-    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_subjects student_invite_classmates]
-    assert_equal %w[student_subjects student_invite_classmates], ids
-    # Retouche accueil-eleve-marges-wave : dès lg, « Invite tes camarades » ne colle plus au libellé des matières.
-    assert_select "div[class~='lg:pt-6'] > section#student_invite_classmates"
-    assert_select "section#student_invite_classmates[aria-labelledby=student_invite_classmates_title]" do
-      assert_select "h2#student_invite_classmates_title", text: tl("invite_tile.title")
-      assert_select "form[action=?][method=post][target=_blank][data-turbo=false]", class_invite_path do
-        assert_select "button#student_invite_tile[aria-label=?]", tl("invite_tile.action_label", classroom: "Tle D 1") do
-          assert_select "span.size-14.rounded-full.bg-brand-soft.text-brand-strong svg"
-          assert_select "span", text: tl("invite_tile.action")
-        end
+    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_subjects subject_svt student_invite_cell student_more_cell]
+    assert_equal %w[student_subjects subject_svt student_invite_cell student_more_cell], ids
+    assert_select "nav#student_subjects ul.lg\\:grid-cols-8 > li", 3
+    assert_select "#student_invite_classmates, #student_invite_classmates_title", 0
+    assert_select "li#student_invite_cell form[action=?][method=post][target=_blank][data-turbo=false]", class_invite_path do
+      assert_select "button#student_invite_tile.w-full[aria-label=?]", tl("invite_tile.action_label", classroom: "Tle D 1") do
+        assert_select "span.size-14.rounded-full.bg-brand-soft.text-brand-strong svg"
+        assert_select "span", text: tl("invite_tile.action")
       end
-      assert_select "section .ui-button-secondary", 0
     end
+    assert_select "li#student_more_cell.lg\\:hidden button#student_more_button[type=button][aria-haspopup=dialog][aria-controls=student_more_sheet]" do
+      assert_select "span.size-14.rounded-full.bg-line.text-ink svg"
+      assert_select "span", text: I18n.t("shared.navigation.more.title")
+    end
+  end
+
+  test "CA-1: with no subject, « Inviter » and « Plus » stay and the empty sentence stays under the grid" do
+    sign_in_as create_student(classroom: create_classroom(level: create_level))
+
+    get student_home_path
+
+    assert_select "nav#student_subjects li#student_invite_cell"
+    assert_select "nav#student_subjects li#student_more_cell"
+    assert_select "nav#student_subjects > p", text: tl("subjects.empty")
+  end
+
+  test "CA-2: without a classroom, « Plus » is there and « Inviter » is not" do
+    remove(@student, @classroom, at: 10.days.ago)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "nav#student_subjects a#subject_svt"
+    assert_select "nav#student_subjects li#student_more_cell #student_more_button"
+    assert_select "#student_invite_cell, #student_invite_tile", 0
+    assert_select MORE_SHEET
+  end
+
+  test "CA-3: the « Plus » sheet is a phone sheet named « Plus », rendered once, with the five entries in four columns, at least a quarter high" do
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select MORE_SHEET, 1
+    assert_select "#{MORE_SHEET}.dialog-phone-sheet[aria-labelledby=student_more_sheet-title]"
+    assert_select "#student_more_sheet-title", text: I18n.t("shared.navigation.more.title")
+    assert_select "#{MORE_SHEET} .min-h-sheet-quarter.max-h-sheet-half.overflow-y-auto ul.grid.grid-cols-4.gap-y-4 > li", NavigationHelper::STUDENT_MORE.size
+    assert_select "#{MORE_SHEET} ul.grid li span.size-14.rounded-full svg"
+  end
+
+  test "CA-4: once the beta is over, « S'abonner » is a link to the subscription page, inside the top frame" do
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+      sign_in_as @student
+
+      get student_home_path
+
+      assert_select "#{MORE_SHEET} a[href=?][data-turbo-frame=_top]", billing_subscription_path, text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.subscribe"))}/
+    end
+  end
+
+  # UDR-0169 acces-beta : pendant la bêta, aucun lien vers l'abonnement sur l'accueil.
+  test "CA-4: during the beta, « S'abonner » says « Bientôt disponible »; no link to the subscription page" do
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#{MORE_SHEET} a[href=?]", billing_subscription_path, 0
+    assert_select "#{MORE_SHEET} button[type=button][data-action='soon#say']", text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.subscribe"))}/
+  end
+
+  test "CA-5: the entries without a screen are buttons that say « Bientôt disponible » in a polite status; no link" do
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+      sign_in_as @student
+      get student_home_path
+    end
+
+    soon = NavigationHelper::STUDENT_MORE.reject(&:route)
+    assert_equal 4, soon.size
+    assert_select "#{MORE_SHEET} [data-controller=soon][data-soon-message-value=?]", I18n.t("shared.navigation.more.soon") do
+      assert_select "button[type=button][data-action='soon#say']", 4
+      assert_select "a", 1
+      assert_select "p#student_more_status[role=status][aria-live=polite][data-soon-target=status]", text: ""
+    end
+    soon.each do |entry|
+      assert_select "#{MORE_SHEET} button[data-action='soon#say']", text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.#{entry.key}"))}/
+    end
+  end
+
+  test "CA-8: the sheet lists the entries of NavigationHelper::STUDENT_MORE, in that order" do
+    sign_in_as @student
+
+    get student_home_path
+
+    expected = NavigationHelper::STUDENT_MORE.map { I18n.t("shared.navigation.more.entries.#{it.key}") }
+    labels = css_select("#{MORE_SHEET} ul.grid > li").map { it.text.squish }
+    assert_equal expected, labels
   end
 
   test "activation CA-9: the assignment stays in « À faire », whoever the student, whichever the first exercise" do

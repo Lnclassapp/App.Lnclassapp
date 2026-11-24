@@ -29,8 +29,54 @@ module Shared
             assert_select "a", 0 # the card is not a link: « Mon compte » opens from the header's avatar
           end
           assert_select "#{CARD} + nav.mt-4[aria-label='#{t('shared.navigation.sidebar.label')}'] a", 3
-          assert_select "nav#sidebar_secondary", 0
+          assert_select "nav#sidebar_secondary", 1
         end
+      end
+
+      # UDR accueil-eleve-grille-plus §3 : la 2e carte « Plus » du menu de gauche de l'élève.
+      test "CA-7: after the beta, « S'abonner » is a link and the four others are « soon » buttons" do
+        stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+          render partial: "shared/navigation/sidebar", locals: { user: student }
+        end
+
+        assert_select "nav#sidebar_secondary" do
+          assert_select "a", 1
+          assert_select "a[href='#{billing_subscription_path}']", text: t("shared.navigation.more.entries.subscribe")
+          assert_select "button[type=button][data-action='soon#say'].min-h-tap", 4
+        end
+      end
+
+      test "CA-7: during the beta, the student gets a « Plus » card of five « soon » buttons, never links" do
+        render partial: "shared/navigation/sidebar", locals: { user: student }
+
+        assert_select "nav#sidebar_secondary[aria-labelledby=sidebar_secondary_title]" do
+          assert_select "#sidebar_secondary_title", text: t("shared.navigation.sidebar.secondary_label.student")
+          assert_select "a", 0
+          assert_select "button[type=button][data-action='soon#say'].min-h-tap", 5
+        end
+        assert_select "[data-controller=soon][data-soon-message-value='#{t('shared.navigation.more.soon')}']" do
+          assert_select "nav#sidebar_secondary"
+          assert_select "p[role=status][aria-live=polite][data-soon-target=status].text-sm.text-mute"
+        end
+      end
+
+      test "CA-8: the entries follow STUDENT_MORE, in order" do
+        render partial: "shared/navigation/sidebar", locals: { user: student }
+
+        expected = NavigationHelper::STUDENT_MORE.map { |entry| t("shared.navigation.more.entries.#{entry.key}") }
+        assert_equal expected, css_select("nav#sidebar_secondary li").map { |li| li.text.squish }
+      end
+
+      test "the teacher and the team keep their sidebar: no « Plus » buttons, no soon controller" do
+        view.define_singleton_method(:teacher_schools) { [] }
+        render partial: "shared/navigation/sidebar", locals: { user: NavigationHelper::ShellUser.new(name: "Ali", role: :teacher) }
+        assert_select "nav#sidebar_secondary", 0
+        assert_select "[data-controller=soon]", 0
+
+        render partial: "shared/navigation/sidebar", locals: { user: NavigationHelper::ShellUser.new(name: "Ali", role: :team) }
+        assert_select "nav#sidebar_secondary a", minimum: 1
+        assert_select "nav#sidebar_secondary button", 0
+        assert_select "[data-controller=soon]", 0
       end
 
       test "CA-2: a student without a classroom reads « Pas encore de classe », never an empty line" do

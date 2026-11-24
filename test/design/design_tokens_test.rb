@@ -68,6 +68,9 @@ class DesignTokensTest < ActiveSupport::TestCase
 
     COLD_PALETTE.each { |token, value| assert_includes theme, "--color-#{token}: #{value};", token }
     assert_includes theme, "--text-meta: 0.8125rem;"
+    # UDR accueil-eleve-grille-plus §3 : hauteur de la feuille « Plus » (au moins un quart, au plus la moitié de l'écran)
+    assert_includes theme, "--spacing-sheet-quarter: 25dvh;"
+    assert_includes theme, "--spacing-sheet-half: 50dvh;"
   end
 
   test "the new tokens have their dark value in both dark blocks" do
@@ -109,7 +112,7 @@ class DesignTokensTest < ActiveSupport::TestCase
     app/views/shared/screens/_group.html.erb app/views/shared/screens/_row.html.erb app/views/shared/screens/_inner_header.html.erb
     app/views/classroom/student_homes/_class_card.html.erb app/views/classroom/student_homes/_history.html.erb
     app/views/classroom/student_homes/_subjects.html.erb app/views/classroom/student_homes/_invite_banner.html.erb
-    app/views/classroom/student_homes/_invite_tile.html.erb
+    app/views/classroom/student_homes/_more_sheet.html.erb
     app/views/catalog/courses/material.html.erb app/views/communication/messages/_card.html.erb
   ].freeze
   WEIGHT_SOURCES = Rails.root.glob("app/{views,helpers}/**/*.{erb,rb}").reject do |path|
