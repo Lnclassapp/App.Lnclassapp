@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/student_classrooms/_assigned_sheets — « Exercices assignés » de « Ma classe » : un envoi de l'enseignant, une ligne %>
-<%# Rôle : la plus récente en haut ; titre (la notion, ou « Devoir du … »), détail « Prépare interros n°1 · À rendre le … » ou « Rendu », réussis à droite (« 0/1 ») ; la ligne mène au sujet en lecture ; l'id de la ligne est l'ancre de la feuille ; masquée sans envoi %>
+<%# Rôle : la plus récente en haut ; titre (la notion, ou « Devoir du … »), détail « Prépare interros n°1 · À rendre le … » ou « Rendu », sans compte des réussis (porteur, 2026-11-24) ; la ligne mène au sujet en lecture ; l'id de la ligne est l'ancre de la feuille ; masquée sans envoi %>
 <%# ADR  : 0121, 0072 · UDR : 0173 §3 (règles 5, 7, 8), feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 · memo Q12, Q13, Q17 %>
 <%# locals: (sheets:) -%>
 <% if sheets.any? %>
@@ -10,11 +10,10 @@
       <% note = if rendered then t("classroom.student_classrooms.assigned_sheet.rendered")
                 elsif sheet.due_on then t("classroom.student_classrooms.assigned_sheet.due_on", date: l(sheet.due_on, format: :due_long)) end %>
       <% kind = t("catalog.courses.sheets.numbered_title.#{sheet.kind}", number: sheet.number) %>
-      <% passed = sheet.exercises.count { it.copy&.passed } %>
       <%= render "shared/screens/row", id: sheet.dom_id, title: (sheet.kind == :devoirs ? dated : sheet.notion || dated),
                                        href: student_assigned_sheet_path(sheet.dom_id), detail: [ kind, note ].compact.join(" · "),
                                        icon: ui_icon(rendered ? "check-circle" : "clipboard-document-list"), tint: (rendered ? "bg-mist" : "bg-brand-soft"),
-                                       value: "#{passed}/#{sheet.exercises.size}", folded: index >= ComponentsHelper::REVEAL_LIMIT %>
+                                       folded: index >= ComponentsHelper::REVEAL_LIMIT %>
     <% end %>
   <% end %>
 <% end %>

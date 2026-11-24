@@ -5,7 +5,7 @@ Demande du porteur (2026-11-24, captures au téléphone) : « Ma classe » et «
 ## Ce qui change
 
 - **Les deux écrans deviennent des écrans intérieurs** (`content_for :inner`) : ni en-tête, ni menu, à toute largeur ; flèche retour vers l'accueil et grand titre (`shared/screens/_inner_header`), fond gris, une colonne de 720 px au plus.
-- **Ma classe** : la classe passe en sous-titre (nom · niveau · établissement · année) ; la carte bleue disparaît. D'abord ce qui est à faire : « Exercices assignés » (une ligne par envoi : notion, « Prépare interros n°1 · À rendre le … », réussis à droite), « Notions à revoir », « Fiches de cours » (lignes au lieu du carrousel), « Exercices traités » (lignes, médaille à droite, toute la ligne mène à la copie). Chaque groupe : carte blanche, 3 lignes puis « Voir plus (n) ». Une section vide est masquée ; sans rien du tout, une seule phrase.
+- **Ma classe** : la classe passe en sous-titre (nom · niveau · établissement · année) ; la carte bleue disparaît. D'abord ce qui est à faire : « Exercices assignés » (une ligne par envoi : notion, « Prépare interros n°1 · À rendre le … » ; plus de compte des réussis, demande du porteur du 2026-11-24), « Notions à revoir », « Fiches de cours » (lignes au lieu du carrousel), « Exercices traités » (lignes, médaille à droite, toute la ligne mène à la copie). Chaque groupe : carte blanche, 3 lignes puis « Voir plus (n) ». Une section vide est masquée ; sans rien du tout, une seule phrase.
 - **Mon historique** : carte bleue du total gardée, puis « Mes exercices terminés » et « Mes classes » en cartes blanches, l'une sous l'autre ; une liste vide est masquée.
 - `shared/screens/_row` prend un `trailing:` (HTML à droite, la médaille).
 

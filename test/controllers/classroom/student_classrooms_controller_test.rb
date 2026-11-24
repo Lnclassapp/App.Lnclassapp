@@ -208,8 +208,10 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_equal %w[devoir-batchtwoxxxxxx devoir-batchthreexxxx], rows.map { it["id"] }
     assert_equal [ student_assigned_sheet_path("devoir-batchtwoxxxxxx"), student_assigned_sheet_path("devoir-batchthreexxxx") ],
                  rows.map { it.at_css("a")["href"] }
-    assert_match(/La méiose\s*Prépare interros n°1\s*0\/2/, rows.first.text.squish)
-    assert_match(%r{DEVOIR DU .*Prépare devoirs n°1\s*0/3}, rows.last.text.squish)
+    assert_equal "La méiose Prépare interros n°1", rows.first.text.squish
+    # Porteur, 2026-11-24 : plus de compte des exercices réussis sur la ligne.
+    assert_select "#student_classroom_assigned li", text: %r{\d+\s*/\s*\d+}, count: 0
+    assert_match(/\ADEVOIR DU .* Prépare devoirs n°1\z/, rows.last.text.squish)
 
     # La lecture est une épreuve (sans « À retenir » ni « Notions mobilisées »), la feuille à remplir garde les siens.
     get student_assigned_sheet_path("devoir-batchtwoxxxxxx")

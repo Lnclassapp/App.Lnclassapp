@@ -54,7 +54,8 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
     visit student_assigned_sheet_path(@sheet)
     assert_selector "a.ps-start", text: "Commencer l'exercice"
     visit student_classroom_path
-    assert_selector "li##{@sheet}", text: %r{1/3\z}
+    assert_selector "li##{@sheet}", text: /Prépare devoirs n°1/
+    assert_no_selector "li##{@sheet}", text: %r{\d+\s*/\s*\d+}
   end
 
   test "on a 390 px screen the cards and the reading page do not overflow and « Commencer » is 48 px high" do
