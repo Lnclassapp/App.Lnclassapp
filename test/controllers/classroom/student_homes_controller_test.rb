@@ -94,7 +94,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # CA-D10 (Lot O1): the wide page is the same markup with lg rules; nothing changes under lg.
-  test "CA-D10: on a computer the column is 720 px at most, « Mes matières » is titled and has eight columns, the announcements show two cards" do
+  test "CA-D10: on a computer the column is 720 px at most, « Mes matières » is titled for screen readers and has eight columns, the announcements show two cards" do
     create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
     sign_in_as @student
 
@@ -109,6 +109,14 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     # Retouche accueil-eleve-annonces-wave : 8 px de marge, la carte suivante dépasse ; image de 96 px ; libellés alignés sur les lignes.
     assert_select "section#student_home_announcements ul.px-2.scroll-pl-2"
     assert_select "section#student_home_announcements article .w-28 svg.size-24, section#student_home_announcements article .w-28 img.size-24"
+    # Retouche accueil-eleve-matieres-annonces : titre « Mes matières » pour les seuls lecteurs d'écran ; libellés noirs en 600 ;
+    # annonce aux coins rounded-ln, plus haute, sans signature ni points.
+    assert_select "nav#student_subjects h2.sr-only", text: tl("subjects.label")
+    assert_select "nav#student_subjects a#subject_svt.font-semibold.text-ink"
+    assert_select "section#student_home_announcements article.rounded-ln.min-h-40" do
+      assert_select "p.text-xs.font-medium", false
+    end
+    assert_select "section#student_home_announcements [data-communication--carousel-target=pager]", false
     # The mist background and the sidebar are the shell's, for every student page; carte-profil-eleve (UDR-0132 §3.1, amended):
     # the profile card opens the sidebar, as the teacher's.
     assert_select "body > div.fixed.hidden.lg\\:block.bg-mist[aria-hidden=true]"
