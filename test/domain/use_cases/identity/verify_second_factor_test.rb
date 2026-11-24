@@ -117,7 +117,7 @@ module UseCases
         result = verify("123456", failures: 5)
 
         assert_equal :locked, result.code
-        assert_equal 14.minutes, result.errors[:retry_after]
+        assert_equal :until_recovery, result.errors[:retry_after]
         assert_empty @attempts.records
       end
 

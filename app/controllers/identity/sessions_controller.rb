@@ -3,6 +3,8 @@
 # ADR  : 0026, 0050, 0084 (§4.5), 0086 (§4.5), hors-connexion (§4.2) · UDR : 0019, 0054 (§3.8 : numéro pré-rempli après une invitation, à usage unique), 0080, 0082 (§3.4)
 module Identity
   class SessionsController < ApplicationController
+    include WrongPinLimit
+
     # Lien du refus : la fiche Play Store de l'app proposée quand elle est publiée, sinon le site (ADR-0086 §4.5).
     STORE_APPS = { android_student: :student, android_teacher: :teacher }.freeze
     SITE_URL = "https://lnclass.com".freeze
@@ -23,7 +25,10 @@ module Identity
 
     def create
       @form = form_input
+      return render_rate_limited(:new) unless claim_pin_attempt
+
       result = authenticate.call(dto: @form)
+      release_pin_attempt unless result.failure? && result.errors == UseCases::Identity::Authenticate::INVALID
       return render_wrong_app(result.errors[:app].first) if wrong_app?(result)
 
       render_result result, form: :new, success: lambda { |authenticated|

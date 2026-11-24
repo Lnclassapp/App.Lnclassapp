@@ -83,27 +83,28 @@ module UseCases
       test "the wrong PIN that reaches the threshold locks the account and writes it in the audit log" do
         result = verify("1357", failures: 4, last_failed_at: NOW - 1.hour)
 
-        assert_equal [ :locked, { retry_after: 15.minutes } ], [ result.code, result.errors ]
+        assert_equal [ :locked, { retry_after: :until_recovery } ], [ result.code, result.errors ]
         assert_equal [ false ], @attempts.records.map { it[:succeeded] }
         assert_equal [ [ "login.locked", "User", 3, { kind: "pin", failures: 5 } ] ],
                      @audit.entries.map { it.values_at(:action, :subject_type, :subject_id, :metadata) }
       end
 
-      test "the twentieth failure locks until recovery" do
+      test "the lockout lasts until recovery, however long ago the last failure" do
         assert_equal :until_recovery, verify("1357", failures: 19, last_failed_at: NOW - 2.hours).errors[:retry_after]
+        assert_equal :until_recovery, verify("2468", failures: 5, last_failed_at: NOW - 1.year).errors[:retry_after]
       end
 
-      test "a failure after an elapsed lockout locks again, as the sign-in does, without a new audit entry" do
+      test "a locked account stays locked after 16 minutes, without a new audit entry" do
         result = verify("1357", failures: 6, last_failed_at: NOW - 16.minutes)
 
-        assert_equal [ :locked, { retry_after: 15.minutes } ], [ result.code, result.errors ]
+        assert_equal [ :locked, { retry_after: :until_recovery } ], [ result.code, result.errors ]
         assert_empty @audit.entries
       end
 
       test "an account already locked is refused without checking the PIN, even a right one" do
         result = verify("2468", failures: 5, last_failed_at: NOW - 1.minute)
 
-        assert_equal [ :locked, { retry_after: 14.minutes } ], [ result.code, result.errors ]
+        assert_equal [ :locked, { retry_after: :until_recovery } ], [ result.code, result.errors ]
         assert_equal 0, @users.checked
         assert_empty @attempts.records
       end

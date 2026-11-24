@@ -284,6 +284,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`revision-eleve`](revision-eleve/memo.md) | en pause | feature | 2026-10-15 | Révision de l'élève (fiche de révision) aux couleurs Wave et Djamo |
 | [`routage-modeles`](routage-modeles/memo.md) | livré | refactoring | 2026-10-19 | Routage des modèles par rôle |
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré | bugfix | 2026-09-29 | Secrets à usage unique hors de tout cache |
+| [`securite-correctifs-mineurs`](securite-correctifs-mineurs/memo.md) | en cours | bugfix | 2026-11-24 | Correctifs mineurs de la revue de sécurité du passage Staging → main |
 | [`seeds-premiere-serie-a`](seeds-premiere-serie-a/memo.md) | abandonné | feature | 2026-10-11 | Référentiel de développement : séries de la 1ère (abandonné, hypothèse « A, C et D » réfutée) |
 | [`selection-par-carte-de-couverture`](selection-par-carte-de-couverture/memo.md) | cadrage | optimisation | 2026-10-03 | Ne jouer que les tests système que les fichiers touchés concernent (carte de couverture) |
 | [`seuil-remediation`](seuil-remediation/memo.md) | livré | feature | 2026-11-09 | Une seule échelle : la remédiation suit la médaille |

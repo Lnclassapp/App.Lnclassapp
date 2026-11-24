@@ -2,7 +2,9 @@
 # Tells whether the content a CI run is about to test already got a green « ci » (ADR-0069, chantier ci-quota).
 # The proof is the tree of the commit, not the commit: a merge commit or a new message changes the commit, never
 # the files. Two proofs count:
-#   - a green « ci » on GitHub publishes an empty artifact named ci-tree-<tree>, looked up by name;
+#   - a green « ci » on GitHub publishes an empty artifact named ci-tree-<tree>, looked up by name; it counts only when
+#     its run is the « CI » workflow of a pull request of this repository into Staging or main (revue du 2026-11-24 :
+#     a pull request into Develop, or from a fork, must not prove a tree for a promotion);
 #   - a green bin/ci in a Claude cloud session, published by script/ci/prove as the file arbres/<tree> of the branch
 #     ci/preuves. It counts only when LOCAL_PROOF=true: the workflow allows it for a pull request into Develop only
 #     (ADR-0069 §8, decided by the owner on 2026-10-02).
@@ -17,6 +19,9 @@ require "open3"
 class TestedTree
   PREFIX = "ci-tree-"
   PROOF_BRANCH = "ci/preuves"
+  WORKFLOW = "CI"
+  EVENT = "pull_request"
+  PROMOTED_BRANCHES = %w[Staging main].freeze
 
   # api: a callable taking a GitHub API path and returning the parsed JSON, or nil when the call failed.
   def initialize(repository:, api:, local_proof: false)
@@ -47,7 +52,20 @@ class TestedTree
     artifacts = @api.call("repos/#{@repository}/actions/artifacts?name=#{name}&per_page=100")&.fetch("artifacts", nil)
     return false unless artifacts.is_a?(Array)
 
-    artifacts.any? { |artifact| artifact["name"] == name && artifact["expired"] == false }
+    artifacts.any? { |artifact| artifact["name"] == name && artifact["expired"] == false && promotion_run?(artifact) }
+  end
+
+  # The run that published the artifact: workflow « CI », event pull_request, same repository, and a pull request whose
+  # head is the run's head_branch and whose base is Staging or main. Any missing piece answers false.
+  def promotion_run?(artifact)
+    run_id = artifact.dig("workflow_run", "id") or return false
+    run = @api.call("repos/#{@repository}/actions/runs/#{run_id}")
+    return false unless run.is_a?(Hash) && run["name"] == WORKFLOW && run["event"] == EVENT
+    return false unless run.dig("head_repository", "full_name") == @repository && artifact.dig("workflow_run", "head_branch") == run["head_branch"]
+
+    Array(run["pull_requests"]).any? do |pull|
+      PROMOTED_BRANCHES.include?(pull.dig("base", "ref")) && pull.dig("head", "ref") == run["head_branch"]
+    end
   end
 
   # The file exists on ci/preuves: the contents API answers it; a 404 (no proof, no branch) fails the call.

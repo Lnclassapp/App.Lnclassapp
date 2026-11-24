@@ -107,8 +107,23 @@ def vps_env(project):
         return None
     if not isinstance(found, dict) or not isinstance(found.get("environment"), str):
         sys.exit(f"Hostinger : .env du projet {project} illisible, rien envoyé")
-    pairs = (line.split("=", 1) for line in found["environment"].splitlines() if "=" in line)
+    return parse_env(found["environment"])
+
+
+# Blank lines and comments (# …) are not variables, whatever they contain.
+def parse_env(text):
+    lines = (line.strip() for line in text.splitlines())
+    pairs = (line.split("=", 1) for line in lines if line and not line.startswith("#") and "=" in line)
     return {key.strip(): unquote(value.strip()) for key, value in pairs}
+
+
+# GitHub tokens: fine-grained (github_pat_), personal (ghp_), server (ghs_), OAuth (gho_), user (ghu_), refresh (ghr_);
+# and credentials inside URLs (postgres://user:pass@).
+MASK = re.compile(r"\w+://[^:/\s]+:[^@\s]+@|github_pat_\S+|gh[psourh]_\S+")
+
+
+def mask(line):
+    return MASK.sub("[masqué]", line)
 
 
 def overlay_session_secrets(env, names):
@@ -291,9 +306,10 @@ def run_once(project, compose_path, env, ok, failed, timeout):
     print(f"projet {project} supprimé du VPS")
     if outcome != ok:
         # The logs leave with the project: the end is printed here, secrets masked.
-        print("\n".join(re.sub(r"\w+://[^:/\s]+:[^@\s]+@|github_pat_\S+|ghp_\S+", "[masqué]", l)[:300] for l in lines[-30:]))
+        print("\n".join(mask(l)[:300] for l in lines[-30:]))
         sys.exit(f"{project} : {outcome or 'aucun verdict après ' + str(timeout) + ' s'}")
     print(outcome)
 
 
-main()
+if __name__ == "__main__":
+    main()
