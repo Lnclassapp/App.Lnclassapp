@@ -35,6 +35,8 @@
         </li>
       <% end %>
     </ul>
+    <%# Retouche accueil-eleve-matieres-annonces : pas de points sous les annonces de l'accueil élève (l'annonce suivante dépasse déjà). %>
+    <% unless student %>
     <div class="hidden justify-center gap-1.5 pt-2" aria-hidden="true" data-communication--carousel-target="pager">
       <% carousel.cards.each_index do |index| %>
         <%# Les deux états sont écrits en entier : Tailwind ne compile que ce qu'il lit (le contrôleur les échange). %>
@@ -42,5 +44,6 @@
               data-communication--carousel-target="dot"></span>
       <% end %>
     </div>
+    <% end %>
   <% end %>
 <% end %>

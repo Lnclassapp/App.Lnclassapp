@@ -1,13 +1,19 @@
 <%# 🌐 UI · communication/messages/_card — une annonce dans son thème : signature, titre, texte, illustration ou image, audio %>
 <%# Rôle : locaux card: (InboxQuery::MessageCard), context: (:carousel, :list, :moderation), dismissible: (croix) ; jamais un lien %>
 <%# ADR  : 0078, 0081 · UDR : 0005, 0071 (§3.2, §3.4, amendements du 2026-10-30), 0075 (§3.1, §3.2), 0173 §3 (accueil : bannière aux coins de carte) %>
-<%# UDR-0173 §3 : dans le carrousel de l'accueil élève, la carte est une bannière Wave (coins de carte, audio et croix gardés). %>
+<%# UDR-0173 §3 : dans le carrousel de l'accueil élève, la carte est une bannière Wave (audio et croix gardés).
+    Retouche accueil-eleve-matieres-annonces : coins rounded-ln (plus rectangulaire), plus haute, sans signature (le caractère
+    officiel reste dit aux lecteurs d'écran). %>
 <% wave = context == :carousel && current_actor&.student? %>
 <% dom_id = "announcement_#{card.public_id}" %>
 <%# UDR-0075 §3.1 : le thème redéfinit les tokens de la carte ; fond, texte, signature, badge, croix et dessins le suivent. %>
 <%= tag.article id: dom_id, "aria-labelledby": "#{dom_id}_title", data: { announcement_theme: card.theme },
-                class: "relative flex min-h-32 gap-2 #{wave ? "rounded-card" : "rounded-ln"} bg-brand-soft py-2 pr-2 pl-4 text-school" do %>
+                class: (wave ? "relative flex min-h-40 gap-2 rounded-ln bg-brand-soft py-4 pr-2 pl-5 text-school"
+                             : "relative flex min-h-32 gap-2 rounded-ln bg-brand-soft py-2 pr-2 pl-4 text-school") do %>
   <div class="flex min-w-0 flex-1 flex-col justify-center gap-1">
+    <% if wave %>
+      <% if card.official? %><span class="sr-only"><%= t("communication.card.official") %></span><% end %>
+    <% else %>
     <p class="flex min-w-0 items-center gap-1.5 text-xs font-medium text-school/80">
       <% if card.author_role == :team %>
         <%# Le logo du lecteur : orange pour un enseignant, bleu pour tout autre (amendement du 2026-10-30, second). %>
@@ -23,7 +29,8 @@
         <% end %>
       <% end %>
     </p>
-    <h3 id="<%= dom_id %>_title" class="<%= wave ? "text-base leading-snug font-bold" : "text-base leading-snug font-medium" %>"><%= card.title %></h3>
+    <% end %>
+    <h3 id="<%= dom_id %>_title" class="<%= wave ? "text-lg leading-snug font-bold" : "text-base leading-snug font-medium" %>"><%= card.title %></h3>
     <%# Texte simple de l'auteur, toujours échappé (AN-20) : jamais raw ni html_safe. %>
     <%# Dix mots au plus, sur deux lignes au plus (amendement du 2026-10-30, second). %>
     <p class="line-clamp-2 text-sm"><%= announcement_excerpt(card.body) %></p>

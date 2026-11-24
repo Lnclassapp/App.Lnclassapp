@@ -1,10 +1,11 @@
 <%# 🌐 UI · classroom/student_homes/_subjects — « Mes matières » de l'accueil élève : un rond teinté par matière, 4 colonnes %>
-<%# Rôle (home est nil sans classe : pas de case « Inviter ») : une matière de son niveau, vers le catalogue filtré, nom court (le nom entier lu aux lecteurs d'écran) ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; puis la case « Inviter » (avec une classe, un POST vers la porte serveur du partage, nouvel onglet) et la case « Plus » (sous lg) qui ouvre la feuille %>
+<%# Rôle (titre « Mes matières » lu aux seuls lecteurs d'écran ; libellés noirs en 600) (home est nil sans classe : pas de case « Inviter ») : une matière de son niveau, vers le catalogue filtré, nom court (le nom entier lu aux lecteurs d'écran) ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; puis la case « Inviter » (avec une classe, un POST vers la porte serveur du partage, nouvel onglet) et la case « Plus » (sous lg) qui ouvre la feuille %>
 <%# ADR  : attribution-des-inscriptions-eleves (§4.3) · UDR : accueil-eleve-grille-plus (§3, amende 0173 §3 et accueil-eleve-qr-fenetre-inviter §3.3), 0132 accueil élève §3.4, 0062 §3.3 : jamais de compteur ; le point est dit par un suffixe lu aux lecteurs d'écran %>
 <%# locals: (subjects:, late_slugs:, home:) -%>
-<% tile = "group flex min-h-tap flex-col items-center gap-2.5 rounded-ln px-0.5 text-center text-sm leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+<% tile = "group flex min-h-tap flex-col items-center gap-2.5 rounded-ln px-0.5 text-center text-sm leading-tight font-semibold text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
 <nav id="student_subjects" aria-labelledby="student_subjects_title">
-  <h2 id="student_subjects_title" class="px-4 pb-3 text-sm font-semibold text-mute lg:px-1"><%= t(".label") %></h2>
+  <%# Retouche accueil-eleve-matieres-annonces : comme chez Wave, la grille n'a pas de titre visible ; il reste lu aux lecteurs d'écran. %>
+  <h2 id="student_subjects_title" class="sr-only"><%= t(".label") %></h2>
   <ul class="grid grid-cols-4 gap-y-4 lg:grid-cols-8 lg:gap-x-2">
     <% subjects.first(Classroom::StudentHomesController::MAX_SUBJECTS).each do |subject| %>
       <% late = late_slugs.include?(subject.slug) %>

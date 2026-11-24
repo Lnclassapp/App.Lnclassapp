@@ -113,7 +113,7 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       tops = %w[#student_class_card #student_subjects #student_home_announcements #student_to_do].map { find(it).rect.y }
       assert_equal tops.sort, tops, "les sections s'empilent dans l'ordre"
       assert_equal 8, page.evaluate_script("getComputedStyle(document.querySelector('#student_subjects ul')).gridTemplateColumns.split(' ').length")
-      assert_selector "#student_subjects h2", text: I18n.t("classroom.student_homes.subjects.label"), visible: :visible
+      assert_selector "#student_subjects h2.sr-only", text: I18n.t("classroom.student_homes.subjects.label"), visible: :all
 
       # UDR accueil-eleve-qr-agrandi CA-2 : sur ordinateur, une fenêtre centrée ; un clic sur le fond la ferme.
       find("#student_school_qr_button").click
