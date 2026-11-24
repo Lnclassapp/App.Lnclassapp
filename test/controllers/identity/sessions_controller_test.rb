@@ -216,7 +216,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     post session_path, params: { session: { contact: student.contact, pin: "2468" } }
 
     assert_response :too_many_requests
-    assert_select "[role=alert]", text: /Réessayez à/
+    assert_select "[role=alert]", text: I18n.t("errors.locked.until_recovery")
   end
 
   test "a sixth attempt in a minute from the same address receives 429" do

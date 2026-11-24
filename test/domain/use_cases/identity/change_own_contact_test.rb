@@ -168,7 +168,7 @@ module UseCases
       test "the wrong PIN that reaches the threshold locks the account" do
         result = change(input(current_pin: "1357"), failures: 4, last_failed_at: NOW - 1.hour)
 
-        assert_equal [ :locked, { retry_after: 15.minutes } ], [ result.code, result.errors ]
+        assert_equal [ :locked, { retry_after: :until_recovery } ], [ result.code, result.errors ]
         assert_equal [ "login.locked" ], @audit.entries.map { it[:action] }
         assert_nothing_written
       end

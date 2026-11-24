@@ -262,7 +262,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     enter(contact: student.contact, pin: "2468")
 
     assert_response :too_many_requests
-    assert_select "[role=alert]", text: /Réessayez à/
+    assert_select "[role=alert]", text: I18n.t("errors.locked.until_recovery")
     assert_equal 0, Orm::Session.count
   end
 
@@ -312,7 +312,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     enter(contact: "0701020304", pin: "2468")
 
     assert_response :too_many_requests
-    assert_select "[role=alert]", text: /Réessayez à/
+    assert_select "[role=alert]", text: I18n.t("errors.locked.until_recovery")
     assert_equal 0, Orm::Session.count
   end
 

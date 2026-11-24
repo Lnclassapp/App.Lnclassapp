@@ -118,17 +118,17 @@ module UseCases
         result = authenticate(attempts: FakeAttempts.new(count: 5, last_failed_at: NOW - 1.minute))
 
         assert_equal :locked, result.code
-        assert_equal 14.minutes, result.errors[:retry_after]
+        assert_equal :until_recovery, result.errors[:retry_after]
         assert_empty @attempts.records
       end
 
-      test "tiers 10 and 20" do
-        assert_equal 1.hour, authenticate(attempts: FakeAttempts.new(count: 10, last_failed_at: NOW)).errors[:retry_after]
-        assert_equal :until_recovery, authenticate(attempts: FakeAttempts.new(count: 20, last_failed_at: NOW - 1.year)).errors[:retry_after]
+      test "the lockout lasts until recovery, however long ago the last failure" do
+        assert_equal :until_recovery, authenticate(attempts: FakeAttempts.new(count: 10, last_failed_at: NOW)).errors[:retry_after]
+        assert_equal :until_recovery, authenticate(attempts: FakeAttempts.new(count: 5, last_failed_at: NOW - 1.year)).errors[:retry_after]
       end
 
-      test "an elapsed lockout lets the account in again" do
-        assert authenticate(attempts: FakeAttempts.new(count: 5, last_failed_at: NOW - 16.minutes)).success?
+      test "4 failures do not lock, even right after the last one" do
+        assert authenticate(attempts: FakeAttempts.new(count: 4, last_failed_at: NOW)).success?
       end
 
       # ADR-0084 §4.5, ADR-0086 §4.5, CA-3, CA-T3: in an Android shell, the role is checked only once the PIN is right; the

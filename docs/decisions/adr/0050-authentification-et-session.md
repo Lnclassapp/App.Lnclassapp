@@ -56,9 +56,9 @@ Expiration : 30 jours d'inactivité ; 12 h d'ancienneté pour `team` et `school_
 **Limitation et verrouillage** :
 
 - `rate_limit to: 5, within: 1.minute` par IP sur la connexion.
-- **Amendement du 2026-11-24 (revue du passage Staging → main)** : 5 codes faux au plus par compte et 5 par minute et par adresse, **tous points d'entrée confondus** (`/login` et l'entrée élève `/student`). Le compteur par compte (`login_attempts`, clé `attempt_key`) était déjà commun ; la clé de débit des codes faux l'est désormais aussi (`WrongPinLimit`). Le 5ᵉ code faux verrouille le compte 15 min, quelle que soit l'entrée.
+- **Amendement du 2026-11-24 (revue du passage Staging → main)** : 5 codes faux au plus par compte et 5 par minute et par adresse, **tous points d'entrée confondus** (`/login` et l'entrée élève `/student`). Le compteur par compte (`login_attempts`, clé `attempt_key`) était déjà commun ; la clé de débit des codes faux l'est désormais aussi (`WrongPinLimit`). Décision du porteur (2026-11-24) : le 5ᵉ code faux consécutif verrouille le compte **jusqu'à récupération assistée** (ADR-0032), quelle que soit l'entrée ; les paliers 15 min et 1 h sont supprimés. Une récupération (`clear_failures`) remet le compteur à zéro.
 - Table `login_attempts` : `contact` normalisé ou brut, `user_id NULL`, `ip_address`, `succeeded`, `kind` (`pin` ou `second_factor`), `created_at`. Index `(contact, created_at)`.
-- Les échecs **consécutifs** depuis le dernier succès du contact verrouillent : 5 échecs → 15 min ; 10 → 1 h ; 20 → verrouillé jusqu'à récupération assistée (ADR-0032).
+- Les échecs **consécutifs** depuis le dernier succès du contact verrouillent : 5 échecs → verrouillé jusqu'à récupération assistée (ADR-0032) *(amendé le 2026-11-24 ; avant : 5 → 15 min, 10 → 1 h, 20 → récupération)*.
 - La 6ᵉ tentative, même juste, est refusée par `:locked`.
 
 **Journal d'audit** : table `audit_events` (contexte `identity`) avec `actor_id` (FK `users` `NULL`), `action` (liste fermée dans `Entities::Identity::AuditAction`), `subject_type`, `subject_id`, `metadata` (`jsonb`, sans secret), `ip_address`, `created_at`. Index `(subject_type, subject_id)` et `(actor_id, created_at)`. Écrit par `Ports::Identity::AuditLogPort`. Action propre à cet ADR : `login.locked`.

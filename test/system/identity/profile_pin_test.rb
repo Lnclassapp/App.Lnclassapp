@@ -66,7 +66,7 @@ class Identity::ProfilePinTest < ApplicationSystemTestCase
 
     assert_selector "#session-form", wait: SIGN_IN_WAIT
     assert_current_path new_session_path
-    assert_toast "Trop de tentatives. Réessayez à"
+    assert_toast "Trop de tentatives. Demandez un code de récupération"
     visit teacher_home_path
     assert_current_path new_session_path
   end

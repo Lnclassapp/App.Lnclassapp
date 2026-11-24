@@ -135,7 +135,7 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
     assert_response :see_other
-    assert_match(/\ATrop de tentatives\. Réessayez à \d\d h \d\d\.\z/, flash[:alert])
+    assert_equal I18n.t("errors.locked.until_recovery"), flash[:alert]
     assert flash[Authentication::RELOAD_FLASH]
     assert_equal [ other.id ], Orm::Session.where(user: @teacher).pluck(:id)
     assert Orm::AuditEvent.exists?(action: "login.locked", subject_id: @teacher.id)

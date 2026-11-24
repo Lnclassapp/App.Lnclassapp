@@ -2,8 +2,11 @@
 
 ## À trancher
 
-- [ ] 2026-11-24 · securite-correctifs-mineurs · Durée du verrou au 5ᵉ code faux — appliqué : paliers existants (15 min, 1 h à 10, jusqu'à récupération à 20) ; autre : verrou jusqu'à récupération dès le 5ᵉ échec ; recommandé : paliers existants.
 - [ ] 2026-11-24 · securite-correctifs-mineurs · Plafond commun à 5 faux codes par minute et par adresse (10 avant sur /student) : une classe derrière un wifi peut être bloquée une minute par 5 fautes de frappe — appliqué : 5 (décision du porteur) ; autre : 10 ; recommandé : 5, à confirmer.
+
+## Décisions
+
+- 2026-11-24, porteur (relayée par l'orchestrateur) : au 5ᵉ code secret faux par compte, `/login` et `/student` confondus, le compte est bloqué jusqu'à récupération (`Entities::Identity::Lockout::TIERS = { 5 => :until_recovery }`). Remplace les paliers 15 min / 1 h / récupération. Touche aussi les verrous du second facteur, du changement de code et de contact, qui partagent `Lockout`.
 
 ## Constats
 

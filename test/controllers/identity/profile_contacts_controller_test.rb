@@ -129,7 +129,7 @@ class Identity::ProfileContactsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
     assert_response :see_other
-    assert_match(/\ATrop de tentatives\. Réessayez à/, flash[:alert])
+    assert_equal I18n.t("errors.locked.until_recovery"), flash[:alert]
     assert_equal 0, Orm::Session.where(user: @student).count
     assert_empty cookies[:session_token].to_s
     assert_nothing_written
