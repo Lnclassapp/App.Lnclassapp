@@ -1,0 +1,15 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_select_propositions — les propositions lettrées d'un choix dans une liste dont une proposition est une formule %>
+<%# Rôle : une option de menu n'est que du texte, KaTeX ne peut pas y rendre `$…$` : la proposition se lit ici, rendue (math de la carte), et le menu propose sa lettre %>
+<%# UDR  : 0140 §3, UDR-XXXX-premier-exercice-formules-soumission · chantier premier-exercice-formules-soumission %>
+<%# locals: (answers:, caption:) -%>
+<div class="space-y-2" data-select-propositions>
+  <p class="text-sm text-mute"><%= caption %></p>
+  <ol class="grid gap-2 sm:grid-cols-2" aria-label="<%= caption %>">
+    <% answers.each_with_index do |answer, rank| %>
+      <li class="flex min-h-tap items-center gap-3 rounded-ln border border-line bg-white px-3 py-2" data-option-value="<%= answer.index %>">
+        <span class="grid size-8 shrink-0 place-items-center rounded-full border border-line bg-paper text-sm font-medium text-ink"><%= ("A".ord + rank).chr %></span>
+        <span class="min-w-0 flex-1 overflow-x-auto overflow-y-hidden font-medium text-ink"><%= answer.content %></span>
+      </li>
+    <% end %>
+  </ol>
+</div>
