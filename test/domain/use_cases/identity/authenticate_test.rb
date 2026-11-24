@@ -109,7 +109,7 @@ module UseCases
       end
 
       test "the lockout of an unknown number is logged without a subject" do
-        authenticate(contact: "0501020304", attempts: FakeAttempts.new(count: 9, last_failed_at: NOW - 2.hours))
+        authenticate(contact: "0501020304", attempts: FakeAttempts.new(count: 4, last_failed_at: NOW - 2.hours))
 
         assert_nil @audit.entries.first[:subject_id]
       end
