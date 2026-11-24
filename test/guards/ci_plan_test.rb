@@ -195,7 +195,7 @@ class CiPlanTest < Minitest::Test
     verdict = steps("ci").find { it["id"] == "verdict" }["run"]
     assert_match(/\[ "\$UNIT" = success \] && \[ "\$COVERAGE" = success \] && \[ "\$SYSTEM" = success \]/, verdict, "la preuve attend les jobs de test verts")
     publish = steps("ci").find { it.dig("with", "name").to_s.start_with?("ci-tree-") }
-    assert_equal "steps.verdict.outputs.proof == 'true'", publish["if"]
+    assert_equal "steps.verdict.outputs.proof == 'true' && (github.base_ref == 'Staging' || github.base_ref == 'main')", publish["if"]
     assert_equal "ci-tree-${{ needs.plan.outputs.tree }}", publish.dig("with", "name")
     TEST_JOBS.each do |name|
       refute steps(name).any? { it.dig("with", "name").to_s.start_with?("ci-tree-") }, "« #{name} » ne publie pas de preuve"

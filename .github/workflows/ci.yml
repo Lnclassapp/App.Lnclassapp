@@ -394,8 +394,9 @@ jobs:
             exit 1
           fi
 
+      # Seule une PR vers Staging ou main prouve un arbre pour une promotion (revue du 2026-11-24, ADR-0107).
       - name: Publish the proof of the tested tree
-        if: steps.verdict.outputs.proof == 'true'
+        if: steps.verdict.outputs.proof == 'true' && (github.base_ref == 'Staging' || github.base_ref == 'main')
         uses: actions/upload-artifact@v7
         with:
           name: ci-tree-${{ needs.plan.outputs.tree }}
