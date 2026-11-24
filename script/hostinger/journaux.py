@@ -15,7 +15,7 @@ if not isinstance(data, list) or not all(isinstance(s, dict) and isinstance(s.ge
 entries = data
 lines = [f"[{s.get('service')}] {e.get('line', '')}" for s in data for e in s["entries"]]
 # Tokens and credentials inside URLs (postgres://user:pass@, https://x-access-token:...@).
-redact = lambda s: re.sub(r"github_pat_\S+|ghp_\S+|\w+://[^:/\s]+:[^@\s]+@", "[masqué]", s)
+redact = lambda s: re.sub(r"github_pat_\S+|gh[psourh]_\S+|\w+://[^:/\s]+:[^@\s]+@", "[masqué]", s)
 lines = [redact(l) for l in lines if not pattern or pattern.search(l)]
 print(f"{len(entries)} entrées")
 print("\n".join(l[:300] for l in lines[-count:]))
