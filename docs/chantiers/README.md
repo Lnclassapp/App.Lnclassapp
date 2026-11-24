@@ -49,6 +49,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`acces-beta`](acces-beta/memo.md) | livré | feature | 2026-11-12 | Accès complet gratuit pendant la bêta |
 | [`accueil-direction`](accueil-direction/memo.md) | livré | feature | 2026-10-04 | Accueil de la direction : établissement, niveaux, annonces, activité |
 | [`accueil-eleve`](accueil-eleve/memo.md) | planification | feature | 2026-10-15 | Accueil élève aux couleurs Wave et Djamo |
+| [`accueil-eleve-grille-plus`](accueil-eleve-grille-plus/memo.md) | cadrage | feature | 2026-11-24 | Accueil élève : « Inviter » et « Plus » dans la grille |
 | [`acquisition-classes`](acquisition-classes/memo.md) | planifié | feature | 2026-11-16 | Faire entrer des classes entières |
 | [`acteurs-fantomes-parent-examsubject`](acteurs-fantomes-parent-examsubject/memo.md) | abandonné | bugfix | 2026-09-18 | `Parent` et `ExamSubject` : déclarés partout, persistés nulle part |
 | [`actions-en-menu`](actions-en-menu/memo.md) | livré | feature | 2026-09-28 | Actions d'un objet dans un menu ⋮ |
