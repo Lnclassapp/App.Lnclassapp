@@ -184,7 +184,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`exercices-en-cartes`](exercices-en-cartes/memo.md) | livré | feature | 2026-10-30 | Les exercices en cartes |
 | [`feuille-pleine-largeur`](feuille-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La feuille remplit l'écran du téléphone |
 | [`feuilles-rendues`](feuilles-rendues/memo.md) | livré | bugfix | 2026-11-06 | Les feuilles d'exercices vérifiées et lisibles sur chaque leçon |
-| [`fiche-listes-formules`](fiche-listes-formules/memo.md) | cadrage | bugfix | 2026-11-24 | Fiche : formules dans les listes de l'entraînement |
+| [`fiche-listes-formules`](fiche-listes-formules/memo.md) | prouvé | bugfix | 2026-11-24 | Fiche : formules dans les listes de l'entraînement |
 | [`fiche-revision-coupe-50-mots`](fiche-revision-coupe-50-mots/memo.md) | livré | feature | 2026-10-31 | La fiche de révision coupée à 50 mots |
 | [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | bugfix | 2026-09-28 | Finitions de la génération des classes et du menu ⋮ au téléphone |
 | [`finitions-ux`](finitions-ux/memo.md) | livré | feature | 2026-09-29 | Finitions UX |

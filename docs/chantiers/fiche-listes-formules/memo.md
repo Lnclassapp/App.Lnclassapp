@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | prouvé |
 | **Ouvert le** | 2026-11-24 |
 | **Branche** | `fix/fiche-listes-formules` |
 | **Programme** | — |
@@ -44,15 +44,15 @@ Dans la fiche d'une leçon, bloc « Je m'entraîne » : le menu d'une question �
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
 - [x] Bug reproduit **à la main** dans l'application avant toute ligne de code
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test
-- [ ] Test de reproduction écrit **avant** le correctif
-- [ ] Test lancé et **rouge**, pour la bonne raison (message vérifié)
-- [ ] Correctif appliqué dans la couche de la **cause**, pas du symptôme
-- [ ] Test au vert · suite du contexte borné au vert
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
-- [ ] Données déjà corrompues : réparées, ou dette explicitement notée au journal
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
-- [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] Test de reproduction écrit **avant** le correctif
+- [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
+- [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
+- [x] Test au vert · suite du contexte borné au vert
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
 ## Contrat d'exécution (lot unique)
 

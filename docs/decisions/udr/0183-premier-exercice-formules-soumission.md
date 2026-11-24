@@ -42,4 +42,4 @@ Quand au moins une proposition d'une liste contient une formule (`$`), le menu p
 
 ## 4. Conséquences
 
-Toute nouvelle vue qui met une proposition dans une `<option>` applique la même règle. La fiche « Je m'entraîne » suit en chantier de suivi.
+Toute nouvelle vue qui met une proposition dans une `<option>` applique la même règle. La fiche « Je m'entraîne » l'applique depuis le chantier `fiche-listes-formules` (liste, remettre dans l'ordre, relier).
