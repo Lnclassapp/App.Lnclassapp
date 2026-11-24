@@ -49,3 +49,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+
+## À trancher
+
+- 2026-11-24 · Hauteur de la feuille « Plus » : 25 % au moins, jusqu'à la moitié puis défilement (option prudente appliquée dans l'UDR, réversible).
+- 2026-11-24 · Pictogrammes des entrées : icônes du jeu existant sur pastille pastel, en attendant des illustrations (option prudente, réversible).
