@@ -39,14 +39,16 @@
     <%# Message d'échec de l'audio (UDR-0071 §3.4), annoncé ; vide par défaut. %>
     <p class="text-xs text-school/80" aria-live="polite" data-communication--audio-target="status"></p>
   </div>
-  <div class="flex w-24 shrink-0 flex-col items-center justify-end gap-1.5">
+  <%# Retouche accueil-eleve-annonces-wave : sur la bannière de l'accueil élève, l'image passe à 96 px, comme chez Wave. %>
+  <% art = wave ? "size-24" : "size-16" %>
+  <div class="<%= class_names("flex shrink-0 flex-col items-center justify-end gap-1.5", wave ? "w-28" : "w-24") %>">
     <% if card.image? %>
       <%# L'image téléversée remplace l'illustration ; décorative, son contenu est redit par le texte ou l'audio. %>
       <%= image_tag announcement_file_path(card.public_id, kind: "image"), alt: "", loading: "lazy", decoding: "async",
-                    class: "size-16 rounded-ln object-cover" %>
+                    class: "#{art} rounded-ln object-cover" %>
     <% else %>
       <%# Une clé de base, ou un dessin de l'équipe reconstruit d'une seule couleur, retiré ou non (UDR-0075 §3.2). %>
-      <%= announcement_illustration card.illustration, class: "size-16" %>
+      <%= announcement_illustration card.illustration, class: art %>
     <% end %>
     <% if card.audio? %>
       <%# Rien n'est téléchargé avant l'appui sur ▶ (preload="none"). %>
