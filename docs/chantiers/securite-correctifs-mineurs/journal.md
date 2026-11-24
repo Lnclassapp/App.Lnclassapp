@@ -2,7 +2,7 @@
 
 ## À trancher
 
-- [ ] 2026-11-24 · securite-correctifs-mineurs · Plafond commun à 5 faux codes par minute et par adresse (10 avant sur /student) : une classe derrière un wifi peut être bloquée une minute par 5 fautes de frappe — appliqué : 5 (décision du porteur) ; autre : 10 ; recommandé : 5, à confirmer.
+- [x] 2026-11-24 · securite-correctifs-mineurs · Plafond commun à 5 faux codes par minute et par adresse (10 avant sur /student) : une classe derrière un wifi peut être bloquée une minute par 5 fautes de frappe — appliqué : 5 (décision du porteur) ; autre : 10 ; recommandé : 5, à confirmer. Porteur, 2026-11-24 : garde 5.
 
 ## Décisions
 
