@@ -1,0 +1,34 @@
+<%# 🌐 UI · classroom/student_homes/_more_sheet — la case « Plus » de la grille et sa feuille basse : les entrées secondaires de l'élève %>
+<%# Rôle : le bouton (une tuile de matière) ouvre une feuille de 4 colonnes ; une entrée avec écran est un lien, une entrée sans écran dit « Bientôt disponible » dans une zone annoncée (contrôleur soon) %>
+<%# UDR  : accueil-eleve-grille-plus (§3, amende 0173 §3) · Stimulus : modal, soon · `tile` : la classe d'une tuile de la grille %>
+<%# locals: (tile:) -%>
+<% opener = tag.button(type: "button", id: "student_more_button", class: "#{tile} w-full cursor-pointer",
+                       data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": "student_more_sheet") do %>
+  <span class="grid size-14 place-items-center rounded-full bg-line text-ink transition group-active:scale-95" aria-hidden="true"><%= ui_icon "squares-plus" %></span>
+  <span class="break-words"><%= t("shared.navigation.more.title") %></span>
+<% end %>
+<%# Le panneau de la feuille est la <dialog> de ui_modal (déjà 25 dvh au moins, 90 dvh au plus) : la hauteur de l'UDR (un quart au moins,
+    la moitié au plus, puis défilement) est portée par le corps. %>
+<%= ui_modal title: t("shared.navigation.more.title"), id: "student_more_sheet", placement: :phone_sheet, size: :sm, opener: opener do %>
+  <div class="min-h-sheet-quarter max-h-sheet-half overflow-y-auto pb-6" data-controller="soon" data-soon-message-value="<%= t("shared.navigation.more.soon") %>">
+    <ul class="grid grid-cols-4 gap-y-4">
+      <% NavigationHelper::STUDENT_MORE.each do |entry| %>
+        <% label = t("shared.navigation.more.entries.#{entry.key}") %>
+        <li>
+          <% content = capture do %>
+            <span class="<%= class_names("grid size-14 place-items-center rounded-full transition group-active:scale-95", entry.tint) %>" aria-hidden="true">
+              <%= ui_icon entry.icon, class: "size-6 text-brand-strong" %>
+            </span>
+            <span class="line-clamp-2 break-words text-sm text-ink"><%= label %></span>
+          <% end %>
+          <% if (route = more_entry_route(entry)) %>
+            <%= link_to public_send(route), id: "student_more_#{entry.key}", class: "#{tile} w-full", data: { turbo_frame: "_top" } do %><%= content %><% end %>
+          <% else %>
+            <%= tag.button content, type: "button", id: "student_more_#{entry.key}", class: "#{tile} w-full cursor-pointer", data: { action: "soon#say" } %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <p id="student_more_status" class="mt-4 text-center text-sm text-mute" role="status" aria-live="polite" data-soon-target="status"></p>
+  </div>
+<% end %>
