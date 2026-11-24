@@ -20,20 +20,11 @@ class HomepageTest < ApplicationSystemTestCase
     assert page.evaluate_script("typeof window.Turbo !== 'undefined'"), "Turbo n'a pas démarré : JavaScript bloqué ou absent"
   end
 
-  test "a visitor opens the student then the teacher modal, and follows « Créer mon compte »" do
+  # Chantier entree-eleve-unifiee (CA-1) : « Je suis élève » mène droit à l'entrée ; l'enseignant garde sa fenêtre.
+  test "a visitor opens the teacher modal, then « Je suis élève » leads straight to the number and secret code" do
     visit root_path
 
     assert_no_page_reload do
-      click_on "Je suis élève"
-      within("dialog#role-modal-student-entry[open]") do
-        assert_title "Tu es élève ? · Lnclass"
-        assert_link "Se connecter", href: new_session_path
-        assert_link "Créer mon compte", href: new_student_registration_path
-        find("button[aria-label='Fermer']").click
-      end
-      assert_no_selector "dialog[open]"
-      assert_title "Accueil · Lnclass"
-
       click_on "Enseignant(e)"
       within("dialog#role-modal-teacher-entry[open]") do
         assert_title "Vous êtes enseignant ? · Lnclass"
@@ -42,11 +33,12 @@ class HomepageTest < ApplicationSystemTestCase
         find("button[aria-label='Fermer']").click
       end
       assert_no_selector "dialog[open]"
-
-      click_on "Je suis élève"
-      within("dialog#role-modal-student-entry[open]") { click_on "Créer mon compte" }
-      assert_current_path new_student_registration_path
     end
+
+    click_on "Je suis élève"
+    assert_current_path new_student_entry_path
+    assert_field "student_entry[contact]"
+    assert_field "student_entry[pin]"
   end
 
   # CA-A1 : à 390 px et à 320 × 568, photo, slogan, vague, pastille et deux entrées tiennent sans défiler, sans déborder.
@@ -58,7 +50,8 @@ class HomepageTest < ApplicationSystemTestCase
       with_device_viewport(width, height) do
         visit root_path
 
-        assert_selector "button[aria-haspopup=dialog]", count: 3
+        assert_selector "button[aria-haspopup=dialog]", count: 2
+        assert_selector "a[id^=role-entry-student]", count: 1
         fit = page.evaluate_script(<<~JS)
           (() => {
             const bottom = (selector) => Math.round(document.querySelector(selector).getBoundingClientRect().bottom)
@@ -66,7 +59,7 @@ class HomepageTest < ApplicationSystemTestCase
               height: window.innerHeight,
               scrollHeight: document.documentElement.scrollHeight,
               overflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-              entries: Array.from(document.querySelectorAll("button[aria-haspopup=dialog]")).map((b) => Math.round(b.getBoundingClientRect().bottom)),
+              entries: Array.from(document.querySelectorAll("button[aria-haspopup=dialog], a[id^=role-entry-student]")).map((b) => Math.round(b.getBoundingClientRect().bottom)),
               photoHeight: Math.round(document.querySelector("main img").getBoundingClientRect().height),
               pill: bottom("[role=note]"), title: bottom("h1")
             }
@@ -109,8 +102,8 @@ class HomepageTest < ApplicationSystemTestCase
       assert_operator layout["scrollHeight"], :<=, layout["height"], "la page défile sur ordinateur"
       assert_selector "#matieres", visible: :visible
       assert_no_selector "header, footer", visible: :all
-      click_on "Je suis élève"
-      assert_selector "dialog#role-modal-student-entry[open]"
+      click_on "Enseignant(e)"
+      assert_selector "dialog#role-modal-teacher-entry[open]"
     end
   end
 

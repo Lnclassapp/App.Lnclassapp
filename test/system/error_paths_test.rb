@@ -34,7 +34,10 @@ class ErrorPathsTest < ApplicationSystemTestCase
     users = Orm::User.count
 
     visit join_classroom_path(classroom.reload.link_token)
-    fill_in_student_signup(contact: "07 11 22 33 44")
+    pass_student_entry(contact: "07 11 22 33 44")
+    fill_in "student_registration[last_name]", with: "KOUASSI"
+    fill_in "student_registration[first_name]", with: "Aya Marie"
+    choose t("genders.female")
     create_student(classroom:)
     click_on t("classroom.student_registrations.form.submit")
 
@@ -58,7 +61,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
     create_assignment(classroom:, assignable: exercise)
 
     sign_in_as student
-    within("#student_first_exercise") { click_on t("catalog.courses.next_exercise.start") }
+    within("#student_first_exercise_modal") { find("#student_first_exercise_start").click }
     assert_selector "#copy-form"
     assert_equal 0, Orm::QuestionAttempt.count
 
@@ -239,14 +242,6 @@ class ErrorPathsTest < ApplicationSystemTestCase
     t("activemodel.errors.models.dtos/catalog/import_upload_input.attributes.kind.already_running")
   end
 
-  def fill_in_student_signup(contact:)
-    fill_in "student_registration[last_name]", with: "KOUASSI"
-    fill_in "student_registration[first_name]", with: "Aya Marie"
-    choose t("genders.female")
-    fill_in "student_registration[contact]", with: contact
-    fill_in "student_registration[pin]", with: "4821"
-    fill_in "student_registration[pin_confirmation]", with: "4821"
-  end
 
   def sign_in_with(contact, pin)
     fill_in "session[contact]", with: contact

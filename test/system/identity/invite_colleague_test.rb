@@ -62,7 +62,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
       assert_text "Lycée Moderne de Cocody"
       assert_text "Abidjan 1"
     end
-    assert_no_field "teacher_registration[drena_public_id]"
+    assert_no_field "school_q"
     assert_no_field "teacher_registration[school_code]"
     select "SVT", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KOUASSI"

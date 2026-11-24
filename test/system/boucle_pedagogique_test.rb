@@ -250,10 +250,9 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
   # → the link of the declared classroom, as the teacher copies it on its page (ADR-0085 §4.1).
   def teacher_signs_up_and_assigns_the_exercise
-    visit new_teacher_registration_path
+    visit new_teacher_registration_path(confirmed: 1)
     assert_no_page_reload do
-      select "Abidjan 1", from: "teacher_registration[drena_public_id]"
-      select SCHOOL, from: "teacher_registration[school_public_id]"
+      choose_school SCHOOL
       select "SVT", from: "teacher_registration[material_slug]"
       fill_in "teacher_registration[last_name]", with: "YAO"
       fill_in "teacher_registration[first_name]", with: "Koffi"
@@ -362,25 +361,24 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # → the finished session, whose result the teacher opens.
   def student_joins_and_wins_the_diamond(link)
     visit URI(link).path
+    # Entrée élève (entree-eleve-unifiee) : numéro et code d'abord, puis le nom ; la classe du lien est gardée.
+    pass_student_entry(contact: STUDENT_CONTACT, pin: "2468")
     assert_selector "#signup-classroom-recap", text: /Tle D 1.*#{SCHOOL}/m
-    assert_no_page_reload do
-      fill_in "student_registration[last_name]", with: "Kouassi"
-      fill_in "student_registration[first_name]", with: "Aya"
-      choose t("genders.female")
-      fill_in "student_registration[contact]", with: STUDENT_CONTACT
-      # Step 2 moves on to the secret code (step 3) a second after the last key.
-      fill_in "student_registration[pin]", with: "2468"
-      fill_in "student_registration[pin_confirmation]", with: "2468"
-    end
+    fill_in "student_registration[last_name]", with: "Kouassi"
+    fill_in "student_registration[first_name]", with: "Aya"
+    choose t("genders.female")
     click_on t("classroom.student_registrations.form.submit")
     assert_toast t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path
 
     assert_selector "#student_class_card", text: /Tle D 1/i
-    # Activation-eleve (UDR-0174) : amené par le lien de sa classe, son devoir est la carte
-    # « Ton premier exercice », qu'un tap ouvre ; il n'est plus aussi dans « À faire ».
-    assert_no_selector "#student_to_do"
-    within("#student_first_exercise") { click_on t("catalog.courses.next_exercise.start") }
+    # Activation-eleve (UDR-0174) puis accueil-eleve-qr-fenetre-inviter §3.2 : amené par le lien de sa classe, son devoir est
+    # dans la fenêtre « Ton premier exercice », qu'un tap ouvre ; « À faire » reçoit aussi tous les devoirs.
+    assert_selector "#student_to_do", text: EXERCISE
+    within("#student_first_exercise_modal") do
+      assert_text EXERCISE
+      click_on t("catalog.courses.next_exercise.start")
+    end
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_selector "a", text: EXERCISE
 

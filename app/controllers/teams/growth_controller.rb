@@ -12,6 +12,7 @@ module Teams
         to = Time.current
         @metrics = Queries::Identity::GrowthMetricsQuery.new.call(from: to - @period.days, to:)
         @funnel = Queries::Identity::StudentFunnelQuery.new.call(from: to - @period.days, to:, now: to)
+        @signup_k = Queries::Classroom::SignupKFactorQuery.new.call(from: to - @period.days, to:)
       }
     end
 

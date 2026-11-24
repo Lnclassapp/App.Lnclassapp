@@ -1,0 +1,14 @@
+<%# 🌐 UI · classroom/student_homes/_invite_tile — « Invite tes camarades » : une tuile « Inviter », au format de celles de « Mes matières » %>
+<%# Rôle : un POST vers la porte serveur du partage de classe, qui répond 303 vers WhatsApp, dans un nouvel onglet ; remplace la bannière %>
+<%# ADR  : attribution-des-inscriptions-eleves (§4.3) · UDR : accueil-eleve-qr-fenetre-inviter (§3.3), partage-de-classe-qr-affiche-invitation (§3.3) · locals: (home:) -%>
+<% tile = "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-meta leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+<section id="student_invite_classmates" aria-labelledby="student_invite_classmates_title">
+  <h2 id="student_invite_classmates_title" class="px-1 pb-3 text-sm font-semibold text-mute"><%= t(".title") %></h2>
+  <div class="grid grid-cols-4 gap-y-4 lg:grid-cols-8 lg:gap-x-2">
+    <%= button_to class_invite_path, method: :post, id: "student_invite_tile", class: tile, form_class: "contents",
+                  form: { target: "_blank", data: { turbo: false } }, "aria-label": t(".action_label", classroom: home.classroom_name) do %>
+      <span class="grid size-16 place-items-center rounded-full bg-brand-soft text-brand-strong transition group-active:scale-95" aria-hidden="true"><%= ui_icon "user-plus" %></span>
+      <span class="break-words" aria-hidden="true"><%= t(".action") %></span>
+    <% end %>
+  </div>
+</section>

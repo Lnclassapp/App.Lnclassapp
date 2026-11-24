@@ -22,7 +22,12 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
   def tb(key) = I18n.t("shared.navigation.install_banner.#{key}")
 
   test "CA-5, CA-6 — on Android, the student's home opens the pop-up; « Plus tard » or Escape silence it 3 days, « Installer » opens the browser's window" do
-    sign_in_as create_student(classroom: create_classroom)
+    # Lot D (entree-et-accueil-eleve-allegees) : l'invitation attend tant que la fenêtre « Ton premier exercice » peut s'ouvrir ;
+    # l'élève a rendu une copie, et le cadre de la fenêtre l'a constaté (drapeau de session).
+    student = create_student(classroom: create_classroom)
+    create_exercise_session(student:, exercise: create_exercise, status: "completed", score_percent: 80)
+    sign_in_as student
+    visit student_first_exercise_path
     open_home student_home_path
     offer_install
     assert_no_selector BANNER # écran ≥ lg : jamais de pop-up

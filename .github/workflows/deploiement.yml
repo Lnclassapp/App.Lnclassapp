@@ -1,0 +1,137 @@
+# Deploys the three environments on the Hostinger VPS at each push (ADR-0144).
+# No pull request trigger, ever: the VPS token lives in the GitHub Environments develop, staging and production,
+# each limited to its branch (docs/guide/configuration.md §1). test/guards/deploiement_workflow_test.rb holds the rules.
+name: Déploiement
+
+on:
+  push:
+    branches: [ Develop, Staging, main ]
+    # Documentation alone does not deploy, except the frozen lessons.
+    paths: [ '**', '!docs/**', '!**.md', 'docs/contenus/**' ]
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: "SHA complet (40 caractères) à redéployer, présent sur la branche choisie"
+        required: true
+        type: string
+
+permissions: {}
+
+# Never cancel: a job killed during the build leaves lnclass-construction on the VPS.
+concurrency:
+  group: deploiement-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploiement:
+    name: deploiement ${{ github.ref_name }}
+    if: github.repository == 'Lnclassapp/App.Lnclassapp' && contains(fromJSON('["refs/heads/Develop","refs/heads/Staging","refs/heads/main"]'), github.ref)
+    runs-on: ubuntu-latest
+    # deployer.py: up to 20 min waiting for another build, 60 min of build, 15 min of start. Not a CI job (ADR-0107).
+    timeout-minutes: 100
+    # github.ref, not ref_name: a tag named « main » must never reach production.
+    environment: ${{ github.ref == 'refs/heads/main' && 'production' || github.ref == 'refs/heads/Staging' && 'staging' || 'develop' }}
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      # Always the branch head: the deployment code is the head's, only the revision to deploy may be older.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      # Inputs reach the shell through env only, never through ${{ }} in a run.
+      - name: Cible
+        id: cible
+        env:
+          INPUT_SHA: ${{ inputs.sha }}
+          PUSHED_SHA: ${{ github.sha }}
+          REF: ${{ github.ref }}
+        run: |
+          revision="${INPUT_SHA:-$PUSHED_SHA}"
+          if ! printf '%s' "$revision" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "::error::La révision doit être un SHA complet de 40 caractères hexadécimaux."
+            exit 1
+          fi
+          case "$REF" in
+            refs/heads/main) environnement=production; site=lnclass.com ;;
+            refs/heads/Staging) environnement=staging; site=staging.lnclass.com ;;
+            refs/heads/Develop) environnement=develop; site=develop.lnclass.com ;;
+            *) echo "::error::Branche sans environnement : $REF"; exit 1 ;;
+          esac
+          {
+            echo "revision=$revision"
+            echo "environnement=$environnement"
+            echo "site=$site"
+          } >> "$GITHUB_OUTPUT"
+          echo "Déploiement de $revision vers $environnement ($site)"
+
+      # Staging and production only: the tree must have its green « ci » (ADR-0069, ADR-0107).
+      - name: Preuve de l'arbre
+        id: preuve
+        if: github.ref != 'refs/heads/Develop'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVISION: ${{ steps.cible.outputs.revision }}
+        run: ruby script/ci/tested_tree "$REVISION"
+
+      - name: Refus sans preuve
+        if: github.ref != 'refs/heads/Develop' && steps.preuve.outputs.tested != 'true'
+        run: |
+          echo "::error::Arbre sans ci vert (CI coupée, base déplacée entre le test et la fusion, ou preuve expirée après 30 jours). Rien n'est envoyé au VPS."
+          exit 1
+
+      - name: Dry-run
+        env:
+          HOSTINGER_API_TOKEN: ${{ secrets.HOSTINGER_API_TOKEN }}
+          GH_DEPLOY_TOKEN: ${{ secrets.GH_DEPLOY_TOKEN }}
+          LNCLASS_RAILS_MASTER_KEY: ${{ secrets.LNCLASS_RAILS_MASTER_KEY }}
+          LNCLASS_R2_ACCESS_KEY_ID: ${{ secrets.LNCLASS_R2_ACCESS_KEY_ID }}
+          LNCLASS_R2_SECRET_ACCESS_KEY: ${{ secrets.LNCLASS_R2_SECRET_ACCESS_KEY }}
+          LNCLASS_CLAUDE_AGENTAI_SECRET: ${{ secrets.LNCLASS_CLAUDE_AGENTAI_SECRET }}
+          REVISION: ${{ steps.cible.outputs.revision }}
+          ENVIRONNEMENT: ${{ steps.cible.outputs.environnement }}
+        run: |
+          # Without them deployer.py would fall back to Railway, which no longer exists.
+          for name in HOSTINGER_API_TOKEN GH_DEPLOY_TOKEN; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Le secret $name manque dans l'Environment $ENVIRONNEMENT (Settings > Environments)."
+              exit 1
+            fi
+          done
+          python3 -I script/hostinger/deployer.py construction deploy/hostinger/construction.yaml "$REVISION" --dry-run
+          if [ "$ENVIRONNEMENT" = production ]; then
+            python3 -I script/hostinger/deployer.py deploy/hostinger/compose.yaml "$REVISION" --dry-run
+          else
+            python3 -I script/hostinger/deployer.py test deploy/hostinger/test.yaml "$ENVIRONNEMENT" "$REVISION" --dry-run
+          fi
+
+      # construction() reads these two only.
+      - name: Construction
+        env:
+          HOSTINGER_API_TOKEN: ${{ secrets.HOSTINGER_API_TOKEN }}
+          GH_DEPLOY_TOKEN: ${{ secrets.GH_DEPLOY_TOKEN }}
+          REVISION: ${{ steps.cible.outputs.revision }}
+        run: python3 -I script/hostinger/deployer.py construction deploy/hostinger/construction.yaml "$REVISION"
+
+      - name: Déploiement
+        env:
+          HOSTINGER_API_TOKEN: ${{ secrets.HOSTINGER_API_TOKEN }}
+          GH_DEPLOY_TOKEN: ${{ secrets.GH_DEPLOY_TOKEN }}
+          LNCLASS_RAILS_MASTER_KEY: ${{ secrets.LNCLASS_RAILS_MASTER_KEY }}
+          LNCLASS_R2_ACCESS_KEY_ID: ${{ secrets.LNCLASS_R2_ACCESS_KEY_ID }}
+          LNCLASS_R2_SECRET_ACCESS_KEY: ${{ secrets.LNCLASS_R2_SECRET_ACCESS_KEY }}
+          LNCLASS_CLAUDE_AGENTAI_SECRET: ${{ secrets.LNCLASS_CLAUDE_AGENTAI_SECRET }}
+          REVISION: ${{ steps.cible.outputs.revision }}
+          ENVIRONNEMENT: ${{ steps.cible.outputs.environnement }}
+        run: |
+          if [ "$ENVIRONNEMENT" = production ]; then
+            python3 -I script/hostinger/deployer.py deploy/hostinger/compose.yaml "$REVISION"
+          else
+            python3 -I script/hostinger/deployer.py test deploy/hostinger/test.yaml "$ENVIRONNEMENT" "$REVISION"
+          fi
+
+      - name: /up
+        env:
+          SITE: ${{ steps.cible.outputs.site }}
+        run: curl -fsS -o /dev/null --retry 10 --retry-delay 15 --retry-all-errors --max-time 20 "https://$SITE/up"

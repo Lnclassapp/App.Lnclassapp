@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require_relative "../storage_service"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -21,8 +22,9 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
-  # ADR-0047 : files live on the Railway bucket of the environment (F-25 : the container disk is ephemeral).
-  config.active_storage.service = :railway
+  # ADR-0047 : files live on the bucket of the environment (F-25 : the container disk is ephemeral). Staging and Develop
+  # on the VPS (ADR-0140) keep theirs on a Docker volume instead: ACTIVE_STORAGE_SERVICE=local.
+  config.active_storage.service = StorageService.for
 
   # ADR-0052 : HTTPS is enforced. Railway terminates SSL in front of the app.
   config.assume_ssl = true

@@ -178,12 +178,15 @@ module LessonRendering
       # La leçon s'arrête après « Prépare devoirs » ; la fiche est sur sa propre page (UDR-0173 §3, leçon).
       visit course_path(course.slug)
       assert_selector "h1", text: course.name, wait: 20
+      dismiss_first_exercise_prompt
       visit course_fiche_path(course.slug)
       assert_selector "#student_revision h1", text: I18n.t("catalog.courses.show.revision_title"), wait: 20
+      dismiss_first_exercise_prompt
       reveal_revision_sheet
       seen = measure_page(lesson)
       visit course_path(course.slug)
       assert_selector "h1", text: course.name, wait: 20
+      dismiss_first_exercise_prompt
       defects = []
       defects << "page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
       defects << "** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]

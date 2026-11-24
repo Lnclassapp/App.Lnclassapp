@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+# Chantier demarrage-develop : durée entre le démarrage du conteneur d'application d'un environnement de test du VPS et
+# la première réponse 200 de /up, lue dans les journaux réels (API Hostinger, lecture seule ; jeton injecté par le proxy
+# de la session). Repère de départ : la ligne « [démarrage] conteneur démarré <UTC> » de deploy/hostinger/test.yaml ;
+# sans elle (image d'avant le chantier), la première ligne de l'application, marquée « approximatif ».
+# Usage : python3 -I script/mesure/demarrage [lnclass-develop|lnclass-staging]
+import datetime as dt, json, re, sys, urllib.request
+
+project = sys.argv[1] if len(sys.argv) > 1 else "lnclass-develop"
+req = urllib.request.Request(f"https://developers.hostinger.com/api/vps/v1/virtual-machines/2172236/docker/{project}/logs",
+                             headers={"User-Agent": "curl/8.5.0"})
+with urllib.request.urlopen(req, timeout=60) as r:
+    data = json.load(r)
+if not isinstance(data, list) or not all(isinstance(s, dict) and isinstance(s.get("entries"), list) for s in data):
+    sys.exit("réponse Hostinger inattendue : forme des journaux inconnue")
+
+def when(text):
+    return dt.datetime.fromisoformat(text[:26].rstrip("Z") + "+00:00")
+
+app = sorted((e.get("timestamp", ""), e.get("line", "")) for s in data if s.get("service") == "app-1" for e in s["entries"])
+if not app:
+    sys.exit(f"{project} : aucune ligne de l'application dans les journaux")
+
+starts = [(i, re.search(r"conteneur démarré (\S+)", line).group(1)) for i, (_, line) in enumerate(app) if "[démarrage] conteneur démarré" in line]
+if starts:
+    index, start_text = starts[-1]
+    start, label = when(start_text.replace("Z", "")), "repère [démarrage]"
+else:
+    index, start, label = 0, when(app[0][0]), "approximatif : première ligne gardée par l'API (300 au plus)"
+
+def first(pattern):
+    for stamp, line in app[index:]:
+        if re.search(pattern, line):
+            inner = re.search(r'"time":"([^"]+)"', line)
+            return when(inner.group(1) if inner else stamp)
+    return None
+
+up = first(r'"path":"/up","status":200')
+seeded = first(r"\[démarrage\] semis (terminé|en échec)")
+# The last line of the seed repeats the start and /up times: the seed's own lines push the first ones out of the window.
+summary = [re.search(r"semis terminé (\S+) \(conteneur démarré (\S+), /up répond (\S+)\)", line) for _, line in app]
+summary = [m for m in summary if m]
+if summary:
+    seeded, start, up = (when(t.replace("Z", "")) for t in summary[-1].groups())
+    label = "dernière ligne [démarrage]"
+print(f"{project} · départ {start:%Y-%m-%d %H:%M:%S} UTC ({label})")
+print(f"  /up 200 après : {f'{(up - start).total_seconds():.0f} s' if up else 'pas encore (502 ou démarrage en cours)'}")
+print(f"  semis fini après : {f'{(seeded - start).total_seconds():.0f} s' if seeded else '—'}")

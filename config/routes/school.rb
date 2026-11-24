@@ -17,3 +17,4 @@ get "teachers/schools/join/:token", to: "school/teacher_school_joins#new", as: :
 post "teachers/schools/join/:token", to: "school/teacher_school_joins#create"
 # CA-E10 (UDR écrans élève sans répétition §3.6 bis) : l'élève lit l'établissement de sa classe, déduit de son compte (aucun identifiant).
 get "students/school", to: "school/student_schools#show", as: :student_school
+get "schools/search", to: "school/school_searches#index", as: :school_search

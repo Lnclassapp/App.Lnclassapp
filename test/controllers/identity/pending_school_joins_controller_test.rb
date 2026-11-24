@@ -1,8 +1,8 @@
 require "test_helper"
 
 # IE-18 (ADR-0083 §4.3, UDR-0079 §3.9) on GD-23 to GD-26 (ADR-0071 §4.3): from the waiting screen, a teacher without a
-# school chooses a DRENA, then an active school of it, and lands on their home; the school that detached them, an inactive
-# school and a school of another DRENA read the same neutral error; ten tries a minute; a pending request is refused.
+# school searches an active school (its DRENA deduced), and lands on their home; the school that detached them and an
+# inactive school read the same neutral error; ten tries a minute; a pending request is refused.
 class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTest
   NEUTRAL = "Cet établissement ne peut pas être rejoint.".freeze
 
@@ -16,7 +16,8 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
 
   def t(key, **) = I18n.t("identity.pending_accounts.show.#{key}", **)
 
-  def join(school, drena: @abidjan)
+  # Le vrai formulaire n'envoie plus de DRENA : une DRENA envoyée quand même est ignorée (ADR-0142 §4.4).
+  def join(school, drena: nil)
     post pending_school_join_path, params: { school_join: { drena_public_id: drena&.public_id, school_public_id: school&.public_id } }
   end
 
@@ -44,25 +45,34 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
     assert_redirected_to teacher_home_path
   end
 
-  test "IE-18 : l'établissement qui l'a retiré, un inactif, un d'une autre DRENA : 422, la même erreur neutre, rien de rejoint" do
+  test "IE-18 : l'établissement qui l'a retiré, un inactif : 422, la même erreur neutre sous la recherche, rien de rejoint" do
     inactive = create_school(drena: @abidjan, name: "Lycée fermé", status: "inactive")
-    elsewhere = create_school(name: "Lycée de Bouaké")
     sign_in_as @teacher
 
-    [ @a, inactive, elsewhere ].each do |school|
+    [ @a, inactive ].each do |school|
       join(school)
 
       assert_response :unprocessable_entity
       assert_select "h1", text: t("no_school.title")
       assert_select "form#school-join-form[action='#{pending_school_join_path}']" do
         assert_select "#school_join_school_public_id_error", text: NEUTRAL
-        assert_select "select#school_join_school_public_id[aria-invalid=true]"
-        assert_select "input[type=hidden][name='school_join[drena_public_id]'][value=?]", @abidjan.public_id
+        assert_select "input#school_q[aria-invalid=true]"
+        assert_select "input[name='school_join[drena_public_id]']", 0
       end
-      assert_select "select#school_join_drena_public_id option[selected][value=?]", @abidjan.public_id
       assert_select "input[name*=school_code]", 0
     end
     assert_empty Orm::TeacherSchool.where(teacher: @teacher)
+  end
+
+  # CA-9 (ADR-0142 §4.4) : la DRENA n'est plus envoyée ; elle vient de l'établissement choisi.
+  test "CA-9 : un établissement cherché se rejoint sans DRENA envoyée, ou avec une autre" do
+    elsewhere = create_school(name: "Lycée de Bouaké")
+    sign_in_as @teacher
+
+    join(elsewhere, drena: @abidjan)
+
+    assert_redirected_to teacher_home_path
+    assert_equal [ elsewhere.id ], Orm::TeacherSchool.where(teacher: @teacher).pluck(:school_id)
   end
 
   test "un établissement choisi garde son choix au re-rendu" do
@@ -70,16 +80,15 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
 
     join(@a)
 
-    assert_select "select#school_join_school_public_id option[selected][value=?]", @a.public_id
+    assert_select "turbo-frame#school_results input[type=radio][checked][value=?]", @a.public_id
   end
 
-  test "sans DRENA ni établissement : 422, chaque motif sous son champ" do
+  test "sans établissement : 422, le motif sous la recherche" do
     sign_in_as @teacher
 
     post pending_school_join_path
 
     assert_response :unprocessable_entity
-    assert_select "#school_join_drena_public_id_error", text: "Choisissez votre DRENA."
     assert_select "#school_join_school_public_id_error", text: "Choisissez votre établissement."
     assert_empty Orm::TeacherSchool.where(teacher: @teacher)
   end

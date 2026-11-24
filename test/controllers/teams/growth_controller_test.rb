@@ -150,4 +150,48 @@ class Teams::GrowthControllerTest < ActionDispatch::IntegrationTest
       assert_select "#growth_funnel_revenue", text: /#{I18n.t("#{FUNNEL}.beta")}/, count: 0
     end
   end
+
+  test "lot E: the page reads the student k by classroom and school, without any student name" do
+    classroom = create_classroom(school: @school, name: "3e B")
+    attribute = ->(source, student) { Orm::SignupAttribution.create!(student:, classroom:, source:, created_at: 2.days.ago) }
+    4.times { attribute.call("qr", create_student(first_name: "Zoumana", last_name: "Secretnom")) }
+    2.times { attribute.call("student_invite", create_student(first_name: "Zoumana", last_name: "Secretnom")) }
+    3.times { attribute.call("teacher_link", create_student) }
+    attribute.call("cold", create_student)
+    sign_in_as @member
+
+    get teams_growth_path
+
+    assert_response :success
+    assert_select "#growth_signup_k"
+    assert_select "#growth_signup_k_classrooms tbody tr", 1 do |rows|
+      assert_equal "3e B", rows.first.at_css("th").children.first.text.squish
+      assert_equal %w[10 4 2 3 0 1 0,6], rows.first.css("td").map { it.text.squish }
+    end
+    assert_select "#growth_signup_k_schools tbody tr", 1 do |rows|
+      assert_equal %w[10 4 2 3 0 1 0,6], rows.first.css("td").map { it.text.squish }
+    end
+    assert_select "#growth_signup_k", text: /Mesuré depuis le/
+    assert_select "#growth_signup_k_value", text: "0,6"
+    assert_select "#growth_signup_k", text: /Seuil 0,5 à J\+14/
+    assert_no_match(/Zoumana|Secretnom/, response.body)
+  end
+
+  test "lot E: an empty period says so" do
+    sign_in_as @member
+
+    get teams_growth_path
+
+    assert_select "#growth_signup_k", text: /Aucune inscription attribuée sur la période\./
+    assert_select "#growth_signup_k table", 0
+  end
+
+  test "lot E: more than 20 classrooms read « et N autres »" do
+    22.times { |i| Orm::SignupAttribution.create!(student: create_student, classroom: create_classroom(name: "C#{i}"), source: "cold", created_at: 1.day.ago) }
+    sign_in_as @member
+
+    get teams_growth_path
+
+    assert_select "#growth_signup_k", text: /et 2 autres/
+  end
 end

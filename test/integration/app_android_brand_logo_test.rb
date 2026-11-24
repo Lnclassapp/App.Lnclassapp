@@ -19,7 +19,7 @@ class AppAndroidBrandLogoTest < ActionDispatch::IntegrationTest
   end
 
   test "the teacher sign-up shows the teachers' logo, even in a browser" do
-    get new_teacher_registration_path
+    get new_teacher_registration_path(confirmed: 1)
 
     assert_equal [ "lnclass-teacher" ], logos
   end

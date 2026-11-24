@@ -1,7 +1,7 @@
 # 🌐 DELIVERY · Assessment::ExercisesController
 # Rôle : le sujet d'un exercice (AS-02), feuille mélangée de la graine de l'exercice ; propositions correctes pour l'équipe et l'enseignant, jamais pour l'élève (AS-39) ;
 #        bascules d'assignation de l'enseignant vers ses classes du niveau du cours (RE-22)
-# ADR  : 0026, 0028, 0054, 0072, 0094, 0112, 0113, 0115, hors-connexion (§4.1) · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · sécurité n° 29
+# ADR  : 0026, 0028, 0054, 0072, 0094, 0112, 0113, 0115, hors-connexion (§4.1) · UDR : 0006, 0007, 0021, 0069, 0138 §3.1, accueil-eleve-qr-fenetre-inviter §3.2 · sécurité n° 29
 module Assessment
   class ExercisesController < AuthenticatedController
     include ReadsOwnLevel
@@ -17,6 +17,9 @@ module Assessment
     end
 
     private
+
+    # UDR accueil-eleve-qr-fenetre-inviter §3.2 : jamais de fenêtre « Ton premier exercice » sur la page d'un exercice.
+    def first_exercise_prompt? = false
 
     # L'entité porte les propositions correctes : elle ne sert qu'aux policies, et au panneau de statut de l'équipe.
     # La vue lit la query, qui ne sélectionne answers.correct que si RevealAnswersPolicy l'accorde.

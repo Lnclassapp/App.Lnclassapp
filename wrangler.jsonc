@@ -1,0 +1,34 @@
+// Chantier hebergement-cloudflare: production on Cloudflare Containers (the Rails image of ./Dockerfile, unchanged),
+// behind this Worker. Workers Builds runs `npx wrangler deploy` at the repository root on each push to the
+// production branch. Staging and Develop stay on Railway (.railway/railway.ts).
+//
+// No route and no custom domain here on purpose: the app is first checked on the workers.dev URL, and lnclass.com is
+// moved to this Worker only at the cutover (journal of the chantier), after the database and the files are copied.
+// The runtime variables and secrets (DATABASE_URL, RAILS_MASTER_KEY, BUCKET_*, APP_HOSTS, ...) are set in the
+// dashboard (Settings > Variables and Secrets): cloudflare/worker.js passes every text binding to the container.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "app-lnclassapp",
+  "main": "cloudflare/worker.js",
+  "compatibility_date": "2026-11-12",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  // Wakes the container every 5 minutes: Solid Queue runs inside Puma, and recurring jobs run every 5 minutes.
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "containers": [
+    {
+      "class_name": "RailsApp",
+      // The durable_object policy allows an instance below 1 vCPU (1/4 vCPU, 1.5 GiB): see cloudflare/worker.js.
+      "scheduling_policy": "durable_object",
+      "images": {
+        "rails": { "dockerfile": "./Dockerfile", "build_context": "." }
+      }
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "RAILS_APP", "class_name": "RailsApp" }]
+  },
+  "exports": {
+    "RailsApp": { "type": "durable-object", "storage": "sqlite" }
+  }
+}
