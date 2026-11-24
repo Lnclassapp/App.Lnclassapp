@@ -7,13 +7,10 @@ module Entities
       UNTIL_RECOVERY = :until_recovery
       TIERS = { 5 => UNTIL_RECOVERY }.freeze
 
-      # nil si la tentative est permise ; sinon le temps restant, ou :until_recovery.
-      def self.retry_after(failures:, last_failed_at:, now:)
-        duration = TIERS.find { |threshold, _| failures >= threshold }&.last
-        return duration if duration.nil? || duration == UNTIL_RECOVERY
-
-        remaining = (last_failed_at + duration - now).ceil
-        ActiveSupport::Duration.build(remaining) if remaining.positive?
+      # nil si la tentative est permise ; sinon :until_recovery. Le verrou ne tombe qu'à la récupération assistée :
+      # l'heure du dernier échec n'y change rien (paramètres gardés pour les appelants).
+      def self.retry_after(failures:, last_failed_at: nil, now: nil)
+        TIERS.find { |threshold, _| failures >= threshold }&.last
       end
 
       # Vrai quand ce nombre d'échecs vient de franchir un palier (audit `login.locked`).
