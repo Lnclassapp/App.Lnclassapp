@@ -780,18 +780,31 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{MORE_SHEET} ul.grid li span.size-14.rounded-full svg"
   end
 
-  test "CA-4: « S'abonner » is a link to the subscription page, inside the top frame" do
+  test "CA-4: once the beta is over, « S'abonner » is a link to the subscription page, inside the top frame" do
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+      sign_in_as @student
+
+      get student_home_path
+
+      assert_select "#{MORE_SHEET} a[href=?][data-turbo-frame=_top]", billing_subscription_path, text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.subscribe"))}/
+    end
+  end
+
+  # UDR-0169 acces-beta : pendant la bêta, aucun lien vers l'abonnement sur l'accueil.
+  test "CA-4: during the beta, « S'abonner » says « Bientôt disponible »; no link to the subscription page" do
     sign_in_as @student
 
     get student_home_path
 
-    assert_select "#{MORE_SHEET} a[href=?][data-turbo-frame=_top]", billing_subscription_path, text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.subscribe"))}/
+    assert_select "#{MORE_SHEET} a[href=?]", billing_subscription_path, 0
+    assert_select "#{MORE_SHEET} button[type=button][data-action='soon#say']", text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.subscribe"))}/
   end
 
   test "CA-5: the entries without a screen are buttons that say « Bientôt disponible » in a polite status; no link" do
-    sign_in_as @student
-
-    get student_home_path
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+      sign_in_as @student
+      get student_home_path
+    end
 
     soon = NavigationHelper::STUDENT_MORE.reject(&:route)
     assert_equal 4, soon.size

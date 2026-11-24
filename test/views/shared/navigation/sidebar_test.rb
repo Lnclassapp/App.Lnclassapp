@@ -34,14 +34,25 @@ module Shared
       end
 
       # UDR accueil-eleve-grille-plus §3 : la 2e carte « Plus » du menu de gauche de l'élève.
-      test "CA-7: the student gets a « Plus » card: « S'abonner » is a link, the four others are « soon » buttons, never links" do
+      test "CA-7: after the beta, « S'abonner » is a link and the four others are « soon » buttons" do
+        stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+          render partial: "shared/navigation/sidebar", locals: { user: student }
+        end
+
+        assert_select "nav#sidebar_secondary" do
+          assert_select "a", 1
+          assert_select "a[href='#{billing_subscription_path}']", text: t("shared.navigation.more.entries.subscribe")
+          assert_select "button[type=button][data-action='soon#say'].min-h-tap", 4
+        end
+      end
+
+      test "CA-7: during the beta, the student gets a « Plus » card of five « soon » buttons, never links" do
         render partial: "shared/navigation/sidebar", locals: { user: student }
 
         assert_select "nav#sidebar_secondary[aria-labelledby=sidebar_secondary_title]" do
           assert_select "#sidebar_secondary_title", text: t("shared.navigation.sidebar.secondary_label.student")
-          assert_select "a", 1
-          assert_select "a[href='#{billing_subscription_path}']", text: t("shared.navigation.more.entries.subscribe")
-          assert_select "button[type=button][data-action='soon#say'].min-h-tap", 4
+          assert_select "a", 0
+          assert_select "button[type=button][data-action='soon#say'].min-h-tap", 5
         end
         assert_select "[data-controller=soon][data-soon-message-value='#{t('shared.navigation.more.soon')}']" do
           assert_select "nav#sidebar_secondary"

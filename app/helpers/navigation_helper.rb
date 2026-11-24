@@ -51,6 +51,19 @@ module NavigationHelper
     MoreEntry.new(key: :composa, route: nil, icon: "pencil-square", tint: "bg-tint-green"),
     MoreEntry.new(key: :homework_ci, route: nil, icon: "clipboard-document-check", tint: "bg-tint-lavender")
   ].freeze
+
+  # La route d'une entrée de « Plus », ou nil (« Bientôt disponible »). UDR-0169 acces-beta §3 : pendant la bêta, aucun lien
+  # vers Mon abonnement sur l'accueil ; « S'abonner » dit donc « Bientôt disponible » jusqu'à la fin de la bêta.
+  def more_entry_route(entry)
+    return nil if entry.route == :billing_subscription_path && billing_beta_open?
+
+    entry.route
+  end
+
+  def billing_beta_open?(on: Date.current)
+    ends_on = Entities::Billing::Offer::BETA_ENDS_ON
+    ends_on.nil? || on < ends_on
+  end
   # UDR-XXXX (pipeline et relances) : « Relances », avant « Annonces », pour `admin` et `field` seulement (ManageCrmPolicy).
   CRM_DESTINATION = [ :follow_ups, :teams_follow_ups_path, "bell-alert" ].freeze
   # UDR enseignant §3.4 (lot P0) : le Turbo Frame du panneau « Mon compte » ; dès lg, les écrans de retrait (« Mes matières »,

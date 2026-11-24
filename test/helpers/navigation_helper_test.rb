@@ -316,6 +316,18 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal %w[bg-tint-indigo bg-tint-yellow bg-tint-lilac bg-tint-green bg-tint-lavender], more.map(&:tint)
   end
 
+  # UDR-0169 acces-beta : pendant la bêta, l'entrée « S'abonner » n'a pas de destination (« Bientôt disponible »).
+  test "more_entry_route hides the subscription route while the beta is open" do
+    subscribe, study_room = NavigationHelper::STUDENT_MORE.first(2)
+
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, nil) { assert_nil more_entry_route(subscribe) }
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.current + 1) { assert_nil more_entry_route(subscribe) }
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.current) do
+      assert_equal :billing_subscription_path, more_entry_route(subscribe)
+    end
+    assert_nil more_entry_route(study_room)
+  end
+
   test "every more entry has an existing route, an existing icon and a french label" do
     NavigationHelper::STUDENT_MORE.each do |entry|
       assert Rails.application.routes.url_helpers.respond_to?(entry.route), entry.key.to_s if entry.route

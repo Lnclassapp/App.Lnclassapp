@@ -21,8 +21,8 @@
             </span>
             <span class="line-clamp-2 break-words text-sm text-ink"><%= label %></span>
           <% end %>
-          <% if entry.route %>
-            <%= link_to public_send(entry.route), id: "student_more_#{entry.key}", class: "#{tile} w-full", data: { turbo_frame: "_top" } do %><%= content %><% end %>
+          <% if (route = more_entry_route(entry)) %>
+            <%= link_to public_send(route), id: "student_more_#{entry.key}", class: "#{tile} w-full", data: { turbo_frame: "_top" } do %><%= content %><% end %>
           <% else %>
             <%= tag.button content, type: "button", id: "student_more_#{entry.key}", class: "#{tile} w-full cursor-pointer", data: { action: "soon#say" } %>
           <% end %>

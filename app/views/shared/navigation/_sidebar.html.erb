@@ -44,8 +44,8 @@
           <% NavigationHelper::STUDENT_MORE.each do |entry| %>
             <% label = t("shared.navigation.more.entries.#{entry.key}") %>
             <li>
-              <% if entry.route %>
-                <% path = public_send(entry.route) %>
+              <% if (route = more_entry_route(entry)) %>
+                <% path = public_send(route) %>
                 <% active = current_page?(path) %>
                 <%= link_to path, "aria-current": ("page" if active), class: class_names(base, active ? NavigationHelper::NAV_STYLES.dig(:sidebar, :active) : NavigationHelper::NAV_STYLES.dig(:sidebar, :idle)) do %>
                   <span class="<%= "text-brand-strong" if active %>"><%= ui_icon entry.icon, variant: (active ? :solid : :outline) %></span>
