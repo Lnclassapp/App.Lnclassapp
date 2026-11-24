@@ -20,6 +20,10 @@ class Classroom::StudentHomeClassCardQrTest < ActionDispatch::IntegrationTest
       assert_select "#student_school_qr svg"
       assert_select "#student_school_qr[role=img][aria-label=?]", I18n.t("classroom.student_homes.class_card.qr_label", school: @classroom.school.name)
       assert_select "#student_school_sigle", false
+      # Retouche accueil-eleve-scanner-qr : « Scanner » et l'appareil photo dans le cadre du QR, en bas ; une indication cachée aux lecteurs d'écran.
+      assert_select "div.ring-2 > #student_school_qr + p#student_school_qr_hint[aria-hidden=true]", text: I18n.t("classroom.student_homes.class_card.scan") do
+        assert_select "svg"
+      end
     end
   end
 
