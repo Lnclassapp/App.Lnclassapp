@@ -6,8 +6,8 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-25 | La fenêtre ne s'ouvre que sur l'accueil ; « Plus tard » ou Échap la taisent jusqu'à la fin de la visite (onglet). | Le porteur la trouve envahissante ; l'accueil est l'écran où l'élève choisit quoi faire. | Non — UDR `XXXX-premier-exercice-ux` §3.1 |
-| 2026-11-25 | Une saisie illisible se dit sous le champ ; l'envoi ramène au champ avant tout dialogue « sans réponse ». La copie juge elle-même à l'envoi (`noValidate` posé par JavaScript). | La bulle du navigateur s'affichait hors de vue et le dialogue parlait de « question sans réponse » à un élève qui avait répondu. | Non — UDR `XXXX-premier-exercice-ux` §3.2 |
+| 2026-11-25 | La fenêtre ne s'ouvre que sur l'accueil ; « Plus tard » ou Échap la taisent jusqu'à la fin de la visite (onglet). | Le porteur la trouve envahissante ; l'accueil est l'écran où l'élève choisit quoi faire. | Non — UDR-0185 §3.1 |
+| 2026-11-25 | Une saisie illisible se dit sous le champ ; l'envoi ramène au champ avant tout dialogue « sans réponse ». La copie juge elle-même à l'envoi (`noValidate` posé par JavaScript). | La bulle du navigateur s'affichait hors de vue et le dialogue parlait de « question sans réponse » à un élève qui avait répondu. | Non — UDR-0185 §3.2 |
 
 ## À trancher
 
@@ -57,6 +57,6 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | | |
 |---|---|
 | **Livré le** | 2026-11-25 |
-| **PR** | |
+| **PR** | #710 |
 | **ADR produits** | |
-| **UDR produits** | UDR `XXXX-premier-exercice-ux` (amende UDR-0179 §3.2) |
+| **UDR produits** | UDR-0185 (amende UDR-0179 §3.2) |

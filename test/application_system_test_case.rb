@@ -32,7 +32,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   setup { ignore_browser_install_prompt }
 
   # Capybara's reset empties cookies and localStorage, not the tab's sessionStorage: « Plus tard » on the window « Ton premier
-  # exercice » (UDR XXXX-premier-exercice-ux §3.1) would silence it for the next test. Emptied while the page is still on the app:
+  # exercice » (UDR-0185 §3.1) would silence it for the next test. Emptied while the page is still on the app:
   # before_teardown, since the `teardown` callbacks run after Capybara's reset.
   def before_teardown
     page.execute_script("try { window.sessionStorage.clear() } catch (error) {}") if page.current_url.to_s.start_with?("http")
@@ -58,7 +58,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     browser.instance_variable_set(:@install_prompt_ignored, true)
   end
 
-  # UDR XXXX-premier-exercice-ux §3.1: a student without a copy handed in gets the « Ton premier exercice » window on the home only;
+  # UDR-0185 §3.1: a student without a copy handed in gets the « Ton premier exercice » window on the home only;
   # it would cover the clicks of a test. « Plus tard » silences it for the visit. Returns at once on a page without its frame,
   # once the dialog is closed, or when it does not open within 5 s.
   def dismiss_first_exercise_prompt

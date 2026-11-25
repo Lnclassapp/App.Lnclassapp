@@ -1,7 +1,7 @@
 // ⚡ FRONT · classroom/first_exercise_prompt_controller — le cadre différé de la fenêtre « Ton premier exercice » (accueil élève)
 // Rôle : une réponse sans le cadre (session expirée, erreur) laisse le cadre vide (turbo:frame-missing) ; « Plus tard » ou Échap
 //        taisent la fenêtre jusqu'à la fin de la visite (sessionStorage de l'onglet) : le cadre se charge encore, n'affiche plus rien
-// UDR  : accueil-eleve-qr-fenetre-inviter (§3.2, états : erreur), XXXX-premier-exercice-ux §3.1
+// UDR  : accueil-eleve-qr-fenetre-inviter (§3.2, états : erreur), 0185 §3.1
 import { Controller } from "@hotwired/stimulus"
 
 const KEY = "lnclass:first-exercise-later"

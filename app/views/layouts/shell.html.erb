@@ -53,7 +53,7 @@
       <% end %>
     <% end %>
   </main>
-  <%# UDR XXXX-premier-exercice-ux §3.1 (amende accueil-eleve-qr-fenetre-inviter §3.2) : la fenêtre « Ton premier exercice » sur l'accueil seulement
+  <%# UDR-0185 §3.1 (amende accueil-eleve-qr-fenetre-inviter §3.2) : la fenêtre « Ton premier exercice » sur l'accueil seulement
       (content_for :first_exercise_prompt), hors mode concentré, tant que l'élève n'a rendu aucune copie ; « Plus tard » la tait pour la visite.
       Un cadre différé, vide quand il n'y a rien à dire, qui ne montre rien en cas d'échec. %>
   <% if !focus && content_for?(:first_exercise_prompt) && first_exercise_prompt? %>

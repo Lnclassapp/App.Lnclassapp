@@ -37,7 +37,7 @@ Le porteur, en testant le premier exercice (2026-11-25) : « Il nous suit sur to
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| Quel document dit le comportement ? | UDR-0179 §3.2 : la fenêtre sur chaque écran — c'est la règle que le porteur remet en cause | UDR `XXXX-premier-exercice-ux` amende §3.2 |
+| Quel document dit le comportement ? | UDR-0179 §3.2 : la fenêtre sur chaque écran — c'est la règle que le porteur remet en cause | UDR-0185 amende §3.2 |
 | Le refus d'une saisie illisible est-il voulu ? | Oui (UDR-0087 §3.4, ADR-0091 §4.3) ; c'est sa présentation qui est fautive | On garde le refus, on le dit sous le champ |
 | Données à réparer ? | Non | Un seul lot |
 

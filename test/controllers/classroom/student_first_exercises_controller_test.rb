@@ -25,7 +25,7 @@ class Classroom::StudentFirstExercisesControllerTest < ActionDispatch::Integrati
     assert_select "#student_first_exercise", 0
   end
 
-  # Chantier premier-exercice-ux (UDR XXXX-premier-exercice-ux §3.1) : la fenêtre ne suit plus l'élève hors de l'accueil.
+  # Chantier premier-exercice-ux (UDR-0185 §3.1) : la fenêtre ne suit plus l'élève hors de l'accueil.
   test "no other screen of the student carries the frame; nor does a teacher's home" do
     create_exercise(essential: @essential)
     sign_in_as @student

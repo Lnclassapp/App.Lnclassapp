@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# Chantier premier-exercice-ux (UDR-XXXX-premier-exercice-ux, amende UDR accueil-eleve-qr-fenetre-inviter §3.2) : la fenêtre
+# Chantier premier-exercice-ux (UDR-0185, amende UDR accueil-eleve-qr-fenetre-inviter §3.2) : la fenêtre
 # « Ton premier exercice » s'ouvre sur l'accueil seulement ; « Plus tard » ou Échap la taisent jusqu'à la fin de la visite ;
 # une copie rendue la clôt pour de bon ; jamais en mode exercice.
 class StudentFirstExercisePromptTest < ApplicationSystemTestCase

@@ -1,7 +1,7 @@
 // ⚡ FRONT · assessment/numeric_controller — réponse en nombre : bouton « ± » et refus d'une saisie illisible
 // Rôle : « ± » ajoute ou retire le moins (le clavier Android n'en a pas toujours) ; un nombre illisible rend le champ invalide,
 //        virgule ou point, moins ASCII ou Unicode, espaces des milliers ; le refus s'écrit sous le champ, à sa sortie et à l'envoi
-// UDR  : 0087 §3.4, §3.10, XXXX-premier-exercice-ux §3.2 · ADR : 0091 §4.3 (Numeric.parse, la même lecture côté serveur) · sans JavaScript, un champ simple
+// UDR  : 0087 §3.4, §3.10, 0185 §3.2 · ADR : 0091 §4.3 (Numeric.parse, la même lecture côté serveur) · sans JavaScript, un champ simple
 import { Controller } from "@hotwired/stimulus"
 
 const NUMBER = /^-?\d+(?:\.\d+)?$/

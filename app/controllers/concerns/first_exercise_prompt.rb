@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · FirstExercisePrompt — la fenêtre « Ton premier exercice » : l'élève qui n'a rendu aucune copie la voit sur l'accueil
 # Rôle : first_exercise_prompt? dit si le shell porte le cadre différé de la fenêtre ; le drapeau de session tombe dès la première copie rendue
-# ADR  : — · UDR : accueil-eleve-qr-fenetre-inviter §3.2, XXXX-premier-exercice-ux §3.1 · chantiers entree-et-accueil-eleve-allegees, premier-exercice-ux
+# ADR  : — · UDR : accueil-eleve-qr-fenetre-inviter §3.2, 0185 §3.1 · chantiers entree-et-accueil-eleve-allegees, premier-exercice-ux
 module FirstExercisePrompt
   extend ActiveSupport::Concern
 
