@@ -57,14 +57,14 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
     assert_select "#help_questions details", count: Communication::HelpController::QUESTIONS.size
   end
 
-  # Chantier entree-et-accueil-eleve-allegees : la fenêtre « Ton premier exercice » suit l'élève jusque sur /aide.
-  test "a signed-in student without a submitted copy gets the first-exercise window on the FAQ" do
+  # Chantier premier-exercice-ux : la fenêtre « Ton premier exercice » ne vit que sur l'accueil, plus sur /aide.
+  test "a signed-in student without a submitted copy has no first-exercise window on the FAQ" do
     sign_in_as create_student(classroom: create_classroom)
 
     get help_path
 
     assert_response :success
-    assert_select "turbo-frame#student_first_exercise_prompt"
+    assert_select "turbo-frame#student_first_exercise_prompt", 0
   end
 
   test "a visitor on the FAQ has no first-exercise window and the page still answers" do

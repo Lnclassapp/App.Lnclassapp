@@ -10,8 +10,6 @@
 <% page_title t("catalog.courses.sheets.page_title", title: number, course: course.name) %>
 <% content_for :nav_key, "courses" %>
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
-<%# UDR accueil-eleve-qr-fenetre-inviter §3.2 : l'élève répond ici, la fenêtre « Ton premier exercice » ne s'ouvre pas %>
-<% content_for :no_first_exercise_prompt, true %>
 <% @primary_assign_taken = false %>
 <div data-turbo-prefetch="false"><%= ui_back_link course.name, href: course_path(course.slug, anchor: @sheet.dom_id) %></div>
 <% if targets && classrooms.empty? %>

@@ -262,10 +262,11 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
   test "the window « Ton premier exercice » never opens on the pages where the student answers" do
     sign_in_as @student
 
-    get course_path(@course.slug)
+    # Chantier premier-exercice-ux : la fenêtre ne vit plus que sur l'accueil.
+    get student_home_path
     assert_select "turbo-frame#student_first_exercise_prompt[src]"
 
-    [ course_sheet_path(@course.slug, @devoir_sheet), fill_course_sheet_path(@course.slug, @devoir_sheet),
+    [ course_path(@course.slug), course_sheet_path(@course.slug, @devoir_sheet), fill_course_sheet_path(@course.slug, @devoir_sheet),
       course_sheet_path(@course.slug, @notion_sheet), fill_course_sheet_path(@course.slug, @notion_sheet) ].each do |path|
       get path
       assert_response :success
