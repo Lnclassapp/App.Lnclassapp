@@ -31,6 +31,17 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   JS
   setup { ignore_browser_install_prompt }
 
+  # Capybara's reset empties cookies and localStorage, not the tab's sessionStorage: « Plus tard » on the window « Ton premier
+  # exercice » (UDR XXXX-premier-exercice-ux §3.1) would silence it for the next test. Emptied while the page is still on the app:
+  # before_teardown, since the `teardown` callbacks run after Capybara's reset.
+  def before_teardown
+    page.execute_script("try { window.sessionStorage.clear() } catch (error) {}") if page.current_url.to_s.start_with?("http")
+  rescue Selenium::WebDriver::Error::WebDriverError
+    nil # a browser already gone has no storage to empty
+  ensure
+    super
+  end
+
   # Each browser of a test (using_session opens another one) gets the script once.
   def using_session(name, &block)
     super(name) do |*args|
@@ -47,10 +58,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     browser.instance_variable_set(:@install_prompt_ignored, true)
   end
 
-  # UDR accueil-eleve-qr-fenetre-inviter §3.2: an élève without a copy handed in gets the « Ton premier exercice » window on every
-  # shell screen but the ones where he answers; it would cover the clicks of a test. « Plus tard » closes it for the current page.
-  # Returns once the dialog is closed, or at once when it does not open within 5 s.
+  # UDR XXXX-premier-exercice-ux §3.1: a student without a copy handed in gets the « Ton premier exercice » window on the home only;
+  # it would cover the clicks of a test. « Plus tard » silences it for the visit. Returns at once on a page without its frame,
+  # once the dialog is closed, or when it does not open within 5 s.
   def dismiss_first_exercise_prompt
+    return unless page.has_css?("turbo-frame#student_first_exercise_prompt", visible: :all, wait: 0)
     return unless page.has_css?("#student_first_exercise_later", wait: 5)
 
     find("#student_first_exercise_later").click

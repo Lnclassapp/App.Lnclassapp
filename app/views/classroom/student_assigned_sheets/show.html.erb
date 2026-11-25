@@ -4,8 +4,6 @@
 <% number = t("catalog.courses.sheets.numbered_title.#{@sheet.kind}", number: @sheet.number) %>
 <% page_title t("catalog.courses.sheets.page_title", title: number, course: @sheet.courses.join(" · ")) %>
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
-<%# UDR accueil-eleve-qr-fenetre-inviter §3.2 : l'élève répond ici, la fenêtre « Ton premier exercice » ne s'ouvre pas %>
-<% content_for :no_first_exercise_prompt, true %>
 <div data-turbo-prefetch="false"><%= ui_back_link t("classroom.student_assigned_sheets.back"), href: student_classroom_path(anchor: @sheet.dom_id) %></div>
 <div class="ps-page">
   <%= render "classroom/student_assigned_sheets/sheet", sheet: @sheet, mode: :reading, heading: :h1 %>

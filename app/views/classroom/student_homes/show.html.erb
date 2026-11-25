@@ -8,6 +8,8 @@
     :wave_home : la page rend elle-même sa colonne (UDR-0173 §3). %>
 <% content_for :home_band, render("band", user: shell_user) %>
 <% content_for :wave_home, "1" %>
+<%# UDR XXXX-premier-exercice-ux §3.1 : la fenêtre « Ton premier exercice » ne s'ouvre qu'ici (le shell porte son cadre). %>
+<% content_for :first_exercise_prompt, true %>
 
 <%# Le message du partage WhatsApp : la bannière d'invitation est sa seule porte (ADR-0089 §4.3). %>
 <% invite_href = whatsapp_share_url(t("classroom.student_homes.invite_teacher.message", classroom: @home&.classroom_name, school: @home&.school_name,

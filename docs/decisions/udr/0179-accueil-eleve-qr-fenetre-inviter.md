@@ -40,6 +40,8 @@ Pourquoi une fenêtre différée plutôt que rendue dans la page : elle doit viv
 
 ### 3.2 Fenêtre — cadre dans `layouts/shell`, page `classroom/student_first_exercises#show`
 
+> **Amendé par UDR-XXXX-premier-exercice-ux §3.1 (2026-11-25)** : le cadre n'est posé que sur l'accueil élève, et « Plus tard » tait la fenêtre jusqu'à la fin de la visite.
+
 **Où** : dans `layouts/shell`, juste après `</main>`, si `first_exercise_prompt?` (helper de contrôleur) : rôle `student`, pas `focus`, et la session ne porte pas `:first_exercise_done`. Alors :
 `turbo_frame_tag "student_first_exercise_prompt", src: student_first_exercise_path, loading: :eager, data: { turbo_permanent: false }`.
 Jamais non plus sur la page d'un exercice (`assessment/exercises#show`), ni sur la copie : ces contrôleurs rendent `first_exercise_prompt?` faux.
