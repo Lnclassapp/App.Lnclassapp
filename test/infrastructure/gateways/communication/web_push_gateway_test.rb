@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §4.2 et §4.3 : l'adaptateur Web Push (gem web-push, VAPID) ne lève jamais :
+# ADR-0146 §4.2 et §4.3 : l'adaptateur Web Push (gem web-push, VAPID) ne lève jamais :
 # 201 → delivered, 404/410/400/413 et clés illisibles → gone, 429/5xx/réseau → retry (401/403 : retry, journal error), un bug lève, clés absentes → not_configured. Aucun appel réseau : Net::HTTP est remplacé ;
 # les clés sont une paire éphémère générée en mémoire.
 module Gateways

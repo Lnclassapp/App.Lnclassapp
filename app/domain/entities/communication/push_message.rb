@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::PushMessage
 # Rôle : le texte d'une notification, issu d'un gabarit fermé par motif : ni nom, ni note, ni titre d'annonce
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2) · PRD §3.1, §4
+# ADR  : 0146 (§4.2) · PRD §3.1, §4
 module Entities
   module Communication
     # title, body : le texte de l'écran verrouillé ; url : où mène un toucher ; tag : un seul affichage par motif.

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Communication::PushPreferencesController
 # Rôle : PATCH /push_preference, `intent` = turn_off | turn_on | postpone : « Couper », « Réactiver » (ligne du profil) et « Plus tard » (carte d'invitation)
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2) · UDR : XXXX-notifications-eleve (§3.1, §3.2) · Turbo Stream, repli HTML par redirection, JSON sans corps
+# ADR  : 0146 (§4.2) · UDR : 0186 (§3.1, §3.2) · Turbo Stream, repli HTML par redirection, JSON sans corps
 module Communication
   class PushPreferencesController < AuthenticatedController
     allow_roles :student

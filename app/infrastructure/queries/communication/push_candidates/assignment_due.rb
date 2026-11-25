@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::AssignmentDue
 # Rôle : candidats du motif assignment_due : feuille de 3 exercices ou plus de la classe principale de l'élève, à rendre demain (date d'Abidjan), pas encore rendue
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2) · 0121 (§4) · PRD §3.1
+# ADR  : 0146 (§3.2) · 0121 (§4) · PRD §3.1
 module Queries
   module Communication
     class PushCandidates

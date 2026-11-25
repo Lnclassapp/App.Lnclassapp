@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::RegisterPushSubscription
 # Rôle : l'élève enregistre l'abonnement Web Push de son navigateur, rattaché à sa session courante (jamais à un identifiant du client) ; une adresse connue change de propriétaire
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2, §4.3)
+# ADR  : 0146 (§4.2, §4.3)
 module UseCases
   module Communication
     class RegisterPushSubscription

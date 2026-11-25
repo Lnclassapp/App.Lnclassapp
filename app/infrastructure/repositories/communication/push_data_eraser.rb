@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::PushDataEraser
 # Rôle : efface les abonnements, la préférence et les envois push d'un élève anonymisé (push_subscriptions, push_preferences, push_deliveries)
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.3), 0036 (amendement) · adaptateur de Ports::Communication::PushDataEraserPort
+# ADR  : 0146 (§4.3), 0036 (amendement) · adaptateur de Ports::Communication::PushDataEraserPort
 module Repositories
   module Communication
     class PushDataEraser

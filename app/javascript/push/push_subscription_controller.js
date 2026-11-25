@@ -1,6 +1,6 @@
 // ⚡ FRONT · push/push_subscription_controller.js — abonnement Web Push de l'élève : la carte d'invitation et la ligne « Notifications » du profil
 // Rôle : [chargé à la demande, ADR-0051] montre la carte si le navigateur sait s'abonner ; la demande de permission n'a lieu qu'au clic « Oui » ; envoie l'abonnement (CSRF) ; sur le profil, accorde l'état du navigateur à celui du serveur
-// ADR  : XXXX-notifications-web-push-aux-eleves · UDR : XXXX-notifications-eleve (§3.1, §3.2) · la clé publique VAPID vient du serveur, jamais d'une constante
+// ADR  : 0146 · UDR : 0186 (§3.1, §3.2) · la clé publique VAPID vient du serveur, jamais d'une constante
 import { Controller } from "@hotwired/stimulus"
 
 const csrfToken = () => document.querySelector("meta[name=csrf-token]")?.content || ""

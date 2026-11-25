@@ -92,7 +92,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   # ADR-0090 §4.1 : the reads of an essential go with it (never its student, who is erased first, ADR-0036).
   ESSENTIAL_CASCADES = %w[essential_reads].freeze
   # ADR-0094 §4.1 : the current school of a session is only a display choice; a deleted school puts it back on the primary.
-  # ADR-XXXX-notifications-web-push-aux-eleves §4.1 : une session supprimée ou expirée garde l'abonnement, qui perd seulement sa session.
+  # ADR-0146 §4.1 : une session supprimée ou expirée garde l'abonnement, qui perd seulement sa session.
   # signup_attributions.inviter_id: the attribution outlives the inviter's deletion (ADR attribution-des-inscriptions-eleves).
   NULLIFIES = [ %w[sessions current_school_id], %w[push_subscriptions session_id], %w[signup_attributions inviter_id] ].freeze
   FRAMEWORK_TABLES = /\A(active_storage_|action_text_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/

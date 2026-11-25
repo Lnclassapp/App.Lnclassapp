@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §4.1 : un envoi par élève, motif et clé ; delivered, gone et failed sont définitifs,
+# ADR-0146 §4.1 : un envoi par élève, motif et clé ; delivered, gone et failed sont définitifs,
 # disabled, not_configured et retry sont remplacés ; 90 jours de mémoire.
 module Repositories
   module Communication

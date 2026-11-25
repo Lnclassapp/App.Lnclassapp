@@ -1,6 +1,6 @@
 # 🔌 INFRASTRUCTURE · Communication::DeliverPushNotificationsJob
 # Rôle : toutes les 15 minutes, un passage d'envoi des notifications Web Push aux élèves, sur les adaptateurs réels
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2, §4.3)
+# ADR  : 0146 (§3.2, §4.3)
 module Communication
   class DeliverPushNotificationsJob < ApplicationJob
     DEFAULT_MIN_INTERVAL_HOURS = 4

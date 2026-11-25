@@ -48,7 +48,7 @@ production:
     class: Crm::FailStaleGenerationsJob
     queue: default
     schedule: every 15 minutes
-  # notifications-push (ADR-XXXX-notifications-web-push-aux-eleves §3.2) : lit les six motifs, applique les fenêtres d'Abidjan
+  # notifications-push (ADR-0146 §3.2) : lit les six motifs, applique les fenêtres d'Abidjan
   # et le garde-fou anti-rafale, puis envoie. Un passage hors fenêtre ne fait rien.
   deliver_push_notifications:
     class: Communication::DeliverPushNotificationsJob

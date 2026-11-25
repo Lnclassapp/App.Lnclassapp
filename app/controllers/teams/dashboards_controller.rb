@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::DashboardsController
 # Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs par période et DRENA, établissements de la DRENA ; recherche de compte (TR-11)
-# ADR  : 0028, 0038, 0049, 0062, XXXX-notifications-web-push-aux-eleves · UDR : 0006, 0049, 0068, XXXX-notifications-eleve
+# ADR  : 0028, 0038, 0049, 0062, 0146 · UDR : 0006, 0049, 0068, 0186
 module Teams
   class DashboardsController < BaseController
     SEARCH_FRAME = "team_dashboard_search".freeze

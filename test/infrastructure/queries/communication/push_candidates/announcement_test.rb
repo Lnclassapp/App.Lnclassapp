@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §3.2 ; PRD §3.1 « annonce de l'équipe » : publiée par un compte de l'équipe, depuis moins de
+# ADR-0146 §3.2 ; PRD §3.1 « annonce de l'équipe » : publiée par un compte de l'équipe, depuis moins de
 # 48 h, ni retirée ni terminée, lue par l'élève (ADR-0078 §4.3) et non masquée ; élèves abonnés, non coupés, non anonymisés.
 module Queries
   module Communication

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::PushGatewayPort
 # Rôle : envoie une notification déjà rédigée à un abonnement ; ne connaît ni l'élève ni le motif
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2)
+# ADR  : 0146 (§4.2)
 module Ports
   module Communication
     module PushGatewayPort

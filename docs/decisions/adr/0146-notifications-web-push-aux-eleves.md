@@ -1,4 +1,4 @@
-# ADR-XXXX : Notifications aux élèves par Web Push — clés VAPID en environnement, un port d'envoi, des abonnements à durée de vie bornée
+# ADR-0146 : Notifications aux élèves par Web Push — clés VAPID en environnement, un port d'envoi, des abonnements à durée de vie bornée
 <!-- index
 titre: Notifications Web Push aux élèves — VAPID, port d'envoi, abonnements bornés, programme d'arrière-plan partagé
 statut: Proposé

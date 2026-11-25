@@ -1,4 +1,4 @@
-# notifications-push, Lot 0 (ADR-XXXX-notifications-web-push-aux-eleves §4.1) : abonnements Web Push, préférence, envois.
+# notifications-push, Lot 0 (ADR-0146 §4.1) : abonnements Web Push, préférence, envois.
 # Tables neuves : l'image précédente les ignore. Rien n'est gardé au-delà de ce qu'il faut pour envoyer.
 class CreatePushTables < ActiveRecord::Migration[8.1]
   def change

@@ -229,8 +229,8 @@ Alors il lit « 3 élèves abonnés · 4 abonnements » et les envois de la sema
 
 ## 6. Décisions rattachées
 
-- **ADR-XXXX-notifications-web-push-aux-eleves** : choix du Web Push, clés VAPID, ce qu'on stocke et sa durée de vie, port et adaptateur, cohabitation avec le programme d'arrière-plan de `hors-connexion`. Exigé par l'ADR-0049 pour tout nouvel outil. Amende l'ADR-0045 (« Hors périmètre : notifications ») et l'ADR-0036 (ce que l'anonymisation efface).
-- **UDR-XXXX-notifications-eleve** : carte d'invitation, ligne du profil, texte des notifications, tuile du pilotage.
+- **ADR-0146** : choix du Web Push, clés VAPID, ce qu'on stocke et sa durée de vie, port et adaptateur, cohabitation avec le programme d'arrière-plan de `hors-connexion`. Exigé par l'ADR-0049 pour tout nouvel outil. Amende l'ADR-0045 (« Hors périmètre : notifications ») et l'ADR-0036 (ce que l'anonymisation efface).
+- **UDR-0186** : carte d'invitation, ligne du profil, texte des notifications, tuile du pilotage.
 
 ## 7. Mesures
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::ResetPinWithCode
 # Rôle : nouveau PIN par code de récupération ; coupe toutes les sessions et lève le verrouillage
-# ADR  : XXXX-notifications-web-push-aux-eleves, 0028 (exempté de policy : le visiteur n'est pas connecté), 0032, 0050
+# ADR  : 0146, 0028 (exempté de policy : le visiteur n'est pas connecté), 0032, 0050
 module UseCases
   module Identity
     class ResetPinWithCode

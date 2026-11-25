@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::PushDeliveryRepository
 # Rôle : envois de notifications en base (push_deliveries, une ligne par élève, motif et clé d'objet) : anti-doublon, intervalle, purge à 90 jours
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1, §4.2) · adaptateur de Ports::Communication::PushDeliveryRepositoryPort
+# ADR  : 0146 (§4.1, §4.2) · adaptateur de Ports::Communication::PushDeliveryRepositoryPort
 module Repositories
   module Communication
     class PushDeliveryRepository

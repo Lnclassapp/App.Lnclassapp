@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §3.2 ; PRD §3.1 « devoir à rendre » et « préparer une interro » : la feuille de la classe
+# ADR-0146 §3.2 ; PRD §3.1 « devoir à rendre » et « préparer une interro » : la feuille de la classe
 # principale active, échéance demain (date d'Abidjan), au moins un exercice non rendu ; 1-2 exercices = interro, 3 ou plus = devoir.
 module Queries
   module Communication

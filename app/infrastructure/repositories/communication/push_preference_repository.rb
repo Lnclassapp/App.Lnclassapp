@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::PushPreferenceRepository
 # Rôle : préférence de l'élève en base (push_preferences, une ligne par compte) : interrupteur « coupé » et report de la carte d'invitation
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1, §4.2) · adaptateur de Ports::Communication::PushPreferenceRepositoryPort
+# ADR  : 0146 (§4.1, §4.2) · adaptateur de Ports::Communication::PushPreferenceRepositoryPort
 module Repositories
   module Communication
     class PushPreferenceRepository

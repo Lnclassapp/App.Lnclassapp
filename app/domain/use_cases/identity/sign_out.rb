@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::SignOut
 # Rôle : détruit la session serveur d'un jeton ; idempotent
-# ADR  : 0028, 0050, XXXX-notifications-web-push-aux-eleves
+# ADR  : 0028, 0050, 0146
 module UseCases
   module Identity
     class SignOut

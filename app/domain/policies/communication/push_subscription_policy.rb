@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Communication::PushSubscriptionPolicy
 # Rôle : seul un élève non anonymisé agit sur ses propres notifications (abonnement, interrupteur, report de la carte)
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.3)
+# ADR  : 0146 (§4.3)
 module Policies
   module Communication
     class PushSubscriptionPolicy

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §3.2 ; PRD §3.1 « résultat » : copie rendue hors ligne reçue depuis moins de 24 h, ou médaille
+# ADR-0146 §3.2 ; PRD §3.1 « résultat » : copie rendue hors ligne reçue depuis moins de 24 h, ou médaille
 # obtenue depuis 2 h à 24 h, pour un élève non revenu depuis ; une seule notification par session.
 module Queries
   module Communication

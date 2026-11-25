@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentAssignedSheetsQuery
 # Rôle : les devoirs reçus de « Ma classe » : les assignations actives de la classe principale de l'élève, une feuille par envoi, la plus récente d'abord ; avant le rendu, ni copie ni correction
-# ADR  : 0121 (§4), 0048, 0072, XXXX-notifications-web-push-aux-eleves · UDR : 0149 §3 (devoirs reçus par l'élève), CA-13, 14, 16
+# ADR  : 0121 (§4), 0048, 0072, 0146 · UDR : 0149 §3 (devoirs reçus par l'élève), CA-13, 14, 16
 module Queries
   module Classroom
     class StudentAssignedSheetsQuery

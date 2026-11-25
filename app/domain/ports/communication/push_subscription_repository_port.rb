@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::PushSubscriptionRepositoryPort
 # Rôle : contrat des abonnements Web Push : enregistrer, lire, supprimer, noter un envoi
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2)
+# ADR  : 0146 (§4.2)
 module Ports
   module Communication
     module PushSubscriptionRepositoryPort

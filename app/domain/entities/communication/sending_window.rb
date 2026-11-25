@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::SendingWindow
 # Rôle : les fenêtres d'envoi à l'heure d'Abidjan : lundi-samedi 12 h-14 h et 17 h-20 h, dimanche 9 h-20 h
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2) · PRD §3.1
+# ADR  : 0146 (§3.2) · PRD §3.1
 module Entities
   module Communication
     # Abidjan est à UTC+0 toute l'année, sans heure d'été : l'heure UTC est l'heure d'Abidjan. Les fenêtres sont [début, fin) en heures.

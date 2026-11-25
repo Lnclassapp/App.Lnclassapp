@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Communication::PushSubscriptionsController
 # Rôle : le navigateur de l'élève envoie (create) son abonnement Web Push, en JSON ; l'abonnement est rattaché à la session courante
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2, §4.3) · UDR : XXXX-notifications-eleve (§3.1) · jamais d'identifiant d'élève lu des paramètres
+# ADR  : 0146 (§4.2, §4.3) · UDR : 0186 (§3.1) · jamais d'identifiant d'élève lu des paramètres
 module Communication
   class PushSubscriptionsController < AuthenticatedController
     allow_roles :student

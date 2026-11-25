@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §3.2 ; PRD §3.1 « préparer une interro » : 1 ou 2 exercices dus demain, non rendus.
+# ADR-0146 §3.2 ; PRD §3.1 « préparer une interro » : 1 ou 2 exercices dus demain, non rendus.
 # La lecture est celle de AssignmentDue (testée dans assignment_due_test.rb) ; ici le motif, les variables et le seuil.
 module Queries
   module Communication

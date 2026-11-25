@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::Unfinished
 # Rôle : candidats du motif unfinished : session d'exercice ouverte depuis plus de 24 h, sans réponse depuis 24 h, commencée il y a moins de 7 jours
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2) · PRD §3.1
+# ADR  : 0146 (§3.2) · PRD §3.1
 module Queries
   module Communication
     class PushCandidates

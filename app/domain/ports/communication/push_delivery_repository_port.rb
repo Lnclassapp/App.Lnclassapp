@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::PushDeliveryRepositoryPort
 # Rôle : contrat des envois : anti-doublon par clé d'objet, dernier envoi (intervalle), purge à 90 jours
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2)
+# ADR  : 0146 (§4.2)
 module Ports
   module Communication
     module PushDeliveryRepositoryPort

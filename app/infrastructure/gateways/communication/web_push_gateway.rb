@@ -1,6 +1,6 @@
 # 🔌 INFRA · Gateways::Communication::WebPushGateway
 # Rôle : envoie une notification à un navigateur par Web Push (gem web-push, VAPID) ; répond par un symbole du port pour tout échec de réseau ou de service ; un bug (autre exception) lève
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2, §4.3) · adaptateur de Ports::Communication::PushGatewayPort
+# ADR  : 0146 (§4.2, §4.3) · adaptateur de Ports::Communication::PushGatewayPort
 module Gateways
   module Communication
     class WebPushGateway

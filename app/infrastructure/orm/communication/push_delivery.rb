@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Communication::PushDelivery
 # Rôle : table push_deliveries : un envoi par élève, motif et clé d'objet (anti-doublon, intervalle, pilotage), gardé 90 jours
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1)
+# ADR  : 0146 (§4.1)
 module Orm
   module Communication
     class PushDelivery < ApplicationRecord

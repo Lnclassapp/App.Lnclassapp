@@ -33,7 +33,7 @@ scope module: "communication" do
   get "announcements/:public_id/:kind", to: "message_files#show", as: :announcement_file, constraints: { kind: /image|audio/ }
 end
 
-# notifications-push (ADR-XXXX-notifications-web-push-aux-eleves) : les abonnements Web Push de l'élève et son interrupteur.
+# notifications-push (ADR-0146) : les abonnements Web Push de l'élève et son interrupteur.
 # L'abonnement se rattache à la session courante ; PATCH /push_preference reçoit `intent` : turn_off, turn_on ou postpone.
 scope module: "communication" do
   resources :push_subscriptions, only: :create

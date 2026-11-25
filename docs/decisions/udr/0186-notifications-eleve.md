@@ -1,8 +1,8 @@
-# UDR-XXXX : Notifications de l'élève — la carte d'invitation après la première réussite, la ligne du profil, le texte des notifications, la tuile du pilotage
+# UDR-0186 : Notifications de l'élève — la carte d'invitation après la première réussite, la ligne du profil, le texte des notifications, la tuile du pilotage
 <!-- index
 titre: Notifications de l'élève — invitation, profil, textes, pilotage
 statut: Proposé
-adr-lie: XXXX-notifications-web-push-aux-eleves
+adr-lie: 0146
 problematique: proposer les notifications au bon moment, sans demande de permission à froid, laisser l'élève les couper dans l'application, et ne rien montrer de personnel sur un écran verrouillé
 -->
 
@@ -11,7 +11,7 @@ problematique: proposer les notifications au bon moment, sans demande de permiss
 | **Statut** | Proposé |
 | **Date** | 2026-11-16 |
 | **Chantier** | `docs/chantiers/notifications-push` |
-| **ADR lié** | ADR-XXXX-notifications-web-push-aux-eleves |
+| **ADR lié** | ADR-0146 |
 | **Amende** | écrans de résultat d'exercice (une carte de plus, une seule fois) · « Mes informations » du profil (une ligne de plus) |
 | **Remplacé par** | — |
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::PushCandidate
 # Rôle : un motif prêt pour un élève, lu au moment de l'envoi par une requête de candidats
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1, §6)
+# ADR  : 0146 (§4.1, §6)
 module Entities
   module Communication
     # Contrat gelé au Lot 0. object_key : interdit le doublon (PRD §3.1) ; url : chemin de la même origine ;

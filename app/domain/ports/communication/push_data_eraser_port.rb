@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::PushDataEraserPort
 # Rôle : contrat de l'effacement des données push d'un élève dont le compte est supprimé sur demande
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.3), 0036 (amendement)
+# ADR  : 0146 (§4.3), 0036 (amendement)
 module Ports
   module Communication
     module PushDataEraserPort

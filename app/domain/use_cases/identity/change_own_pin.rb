@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::ChangeOwnPin
 # Rôle : change son propre PIN sous PIN actuel ; une nouvelle session remplace toutes les autres ; « pin.changed » sans donnée
-# ADR  : 0025, 0028, 0050, 0055, XXXX-notifications-web-push-aux-eleves · UDR : 0041
+# ADR  : 0025, 0028, 0050, 0055, 0146 · UDR : 0041
 module UseCases
   module Identity
     class ChangeOwnPin

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::Announcement
 # Rôle : candidats du motif announcement : annonce publiée par l'équipe depuis moins de 48 h, ni retirée ni terminée, que l'élève lit et n'a pas masquée
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2) · 0078 (§4.3 : règle de lecture) · 0045 · PRD §3.1
+# ADR  : 0146 (§3.2) · 0078 (§4.3 : règle de lecture) · 0045 · PRD §3.1
 module Queries
   module Communication
     class PushCandidates

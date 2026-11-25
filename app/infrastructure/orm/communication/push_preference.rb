@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Communication::PushPreference
 # Rôle : table push_preferences : l'interrupteur de l'élève (coupé) et le report de la carte d'invitation
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1)
+# ADR  : 0146 (§4.1)
 module Orm
   module Communication
     class PushPreference < ApplicationRecord

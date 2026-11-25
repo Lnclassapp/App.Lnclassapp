@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::LastActivity
 # Rôle : la dernière activité de chaque élève (définition de l'entonnoir) ; lue par les motifs « inactif » et « résultat »
-# ADR  : XXXX-notifications-web-push-aux-eleves · 0126 (entonnoir) · PRD §3.1
+# ADR  : 0146 · 0126 (entonnoir) · PRD §3.1
 module Queries
   module Communication
     class PushCandidates

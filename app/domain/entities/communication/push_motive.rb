@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::PushMotive
 # Rôle : les six motifs de notification, leur priorité quand plusieurs sont prêts
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2) · PRD §3.1
+# ADR  : 0146 (§3.2) · PRD §3.1
 module Entities
   module Communication
     module PushMotive

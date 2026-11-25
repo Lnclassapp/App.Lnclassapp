@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates
 # Rôle : les candidats des six motifs, réunis ; chaque motif a sa requête, remplie par son lot
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2, §6)
+# ADR  : 0146 (§3.2, §6)
 module Queries
   module Communication
     class PushCandidates

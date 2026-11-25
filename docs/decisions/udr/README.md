@@ -194,6 +194,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0183](./0183-premier-exercice-formules-soumission.md) | Liste en formule — lettres dans le menu, propositions rendues | Accepté | 2026-11-24 | [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md) | une option de menu natif ne peut pas rendre une formule KaTeX, l'élève lisait du LaTeX brut |
 | [0184](./0184-note-sur-20-et-medaille-recompense-chez-l-eleve.md) | Note sur 20 et médaille-récompense dans les listes de l'élève | Accepté | 2026-11-25 | [0106](../adr/0106-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md) | l'élève ne voyait plus que la médaille ; le porteur veut aussi la note sur 20, la médaille étant montrée comme une récompense |
 | [0185](./0185-premier-exercice-ux.md) | Premier exercice : fenêtre sur l'accueil seulement, nombre illisible dit sous le champ | Accepté | 2026-11-25 | — | la fenêtre « Ton premier exercice » suivait l'élève sur chaque écran, et une réponse en nombre illisible était comptée « sans réponse » puis refusée par une bulle hors de vue |
+| [0186](./0186-notifications-eleve.md) | Notifications de l'élève — invitation, profil, textes, pilotage | Proposé | 2026-11-16 | 0146 | proposer les notifications au bon moment, sans demande de permission à froid, laisser l'élève les couper dans l'application, et ne rien montrer de personnel sur un écran verrouillé |
 <!-- index:end -->
 
 ---

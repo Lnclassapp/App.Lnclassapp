@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::PushSubscriptionRepository
 # Rôle : abonnements Web Push en base (push_subscriptions), uniques par adresse : une adresse connue change de propriétaire
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1, §4.2) · adaptateur de Ports::Communication::PushSubscriptionRepositoryPort
+# ADR  : 0146 (§4.1, §4.2) · adaptateur de Ports::Communication::PushSubscriptionRepositoryPort
 module Repositories
   module Communication
     class PushSubscriptionRepository

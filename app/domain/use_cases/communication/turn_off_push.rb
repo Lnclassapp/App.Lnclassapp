@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::TurnOffPush
 # Rôle : l'élève coupe les notifications : l'interrupteur est posé pour tous ses navigateurs, l'abonnement de la session courante est supprimé
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2)
+# ADR  : 0146 (§4.2)
 module UseCases
   module Communication
     class TurnOffPush

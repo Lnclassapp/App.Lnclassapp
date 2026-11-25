@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §3.2 ; PRD §3.1 « exercice commencé » : session ouverte depuis plus de 24 h, sans réponse
+# ADR-0146 §3.2 ; PRD §3.1 « exercice commencé » : session ouverte depuis plus de 24 h, sans réponse
 # depuis 24 h, commencée il y a moins de 7 jours, non close ; élèves abonnés, non coupés, non anonymisés.
 module Queries
   module Communication

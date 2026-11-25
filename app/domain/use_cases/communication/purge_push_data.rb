@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::PurgePushData
 # Rôle : supprime les abonnements sans envoi réussi depuis 60 jours et les envois de plus de 90 jours
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1) · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
+# ADR  : 0146 (§4.1) · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
 module UseCases
   module Communication
     class PurgePushData

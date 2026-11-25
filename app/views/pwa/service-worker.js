@@ -1,6 +1,6 @@
 // ⚡ FRONT · pwa/service-worker — réseau d'abord ; garde les pages que le serveur marque « Lnclass-Offline: keep », par clé d'appareil
 // Rôle : page « Pas de connexion », assets digérés, pages de compte déjà ouvertes (60 par clé, 30 jours) servies si le réseau échoue ; oubli de la clé (forget) ; notifications Web Push (push, notificationclick)
-// ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, §4.3, menace P1, P2, P3, P6), 0082 (§4.2 amendé), 0049, 0076, XXXX-notifications-web-push-aux-eleves (§4.4)
+// ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, §4.3, menace P1, P2, P3, P6), 0082 (§4.2 amendé), 0049, 0076, 0146 (§4.4)
 // <N> augmente à chaque modification de public/offline.html ou de public/offline.css (ADR-0082 §4.2).
 const CACHE = "lnclass-offline-v3"
 const ASSETS = "lnclass-assets-v1"

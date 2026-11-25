@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::PostponePushInvitation
 # Rôle : « Plus tard » sur la carte d'invitation : elle ne revient pas avant 7 jours (date gardée côté serveur)
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2)
+# ADR  : 0146 (§4.2)
 module UseCases
   module Communication
     class PostponePushInvitation

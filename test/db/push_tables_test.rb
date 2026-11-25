@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §4.1 : ce que la base impose.
+# ADR-0146 §4.1 : ce que la base impose.
 class PushTablesTest < ActiveSupport::TestCase
   test "les trois fabriques écrivent une ligne valide" do
     assert create_push_subscription.persisted?

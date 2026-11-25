@@ -1,4 +1,4 @@
-# Web Push subscriptions, preferences and deliveries (notifications-push, ADR-XXXX-notifications-web-push-aux-eleves §4.1),
+# Web Push subscriptions, preferences and deliveries (notifications-push, ADR-0146 §4.1),
 # written as the repositories write them. Shared by every lot of the chantier.
 module Factories
   module Push

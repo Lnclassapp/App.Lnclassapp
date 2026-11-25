@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::Subscribers
 # Rôle : les abonnements des élèves qui peuvent être notifiés (non anonymisés, non coupés), limités à `user_ids` si donnés (relecture avant envoi)
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.7)
+# ADR  : 0146 (§3.7)
 module Queries
   module Communication
     class PushCandidates

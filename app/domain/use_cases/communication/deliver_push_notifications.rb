@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::DeliverPushNotifications
 # Rôle : un passage d'envoi des notifications : fenêtre d'Abidjan, un seul motif par élève (le plus urgent), pas de doublon, 4 h entre deux envois, une ligne par navigateur
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2, §4) · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
+# ADR  : 0146 (§3.2, §4) · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
 module UseCases
   module Communication
     class DeliverPushNotifications

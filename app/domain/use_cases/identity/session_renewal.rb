@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::SessionRenewal
 # Rôle : après un changement de numéro ou de PIN, une nouvelle session remplace toutes les autres, celle en cours comprise
-# ADR  : 0049, 0055, XXXX-notifications-web-push-aux-eleves
+# ADR  : 0049, 0055, 0146
 module UseCases
   module Identity
     # Partagé par ChangeOwnContact et ChangeOwnPin, qui fournissent @sessions, @push_subscriptions et @digest_key. Le second facteur vérifié

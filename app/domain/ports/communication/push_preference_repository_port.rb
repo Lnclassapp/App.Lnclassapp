@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::PushPreferenceRepositoryPort
 # Rôle : contrat de la préférence de l'élève : interrupteur « coupé » et report de la carte d'invitation
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2)
+# ADR  : 0146 (§4.2)
 module Ports
   module Communication
     module PushPreferenceRepositoryPort

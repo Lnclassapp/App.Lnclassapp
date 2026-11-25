@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::TurnOnPush
 # Rôle : l'élève réactive les notifications : l'interrupteur « coupé » est effacé (le navigateur se réabonne ensuite)
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.2)
+# ADR  : 0146 (§4.2)
 module UseCases
   module Communication
     class TurnOnPush

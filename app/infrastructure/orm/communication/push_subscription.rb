@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Communication::PushSubscription
 # Rôle : table push_subscriptions : un abonnement Web Push d'un navigateur d'élève (adresse et deux clés, rien d'autre)
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1)
+# ADR  : 0146 (§4.1)
 module Orm
   module Communication
     class PushSubscription < ApplicationRecord

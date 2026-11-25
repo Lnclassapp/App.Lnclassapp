@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §3.2 et §4 ; PRD §3 et §4 « Envoi : conditions » : un passage lit les candidats,
+# ADR-0146 §3.2 et §4 ; PRD §3 et §4 « Envoi : conditions » : un passage lit les candidats,
 # applique fenêtre, coupure, doublon, priorité et intervalle, puis envoie une ligne par navigateur abonné.
 module UseCases
   module Communication

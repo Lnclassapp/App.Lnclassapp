@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::QuizPrep
 # Rôle : candidats du motif quiz_prep : feuille « interro » (1 ou 2 exercices) de la classe principale de l'élève, à rendre demain, pas encore rendue ; même lecture que assignment_due
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2) · 0121 (§4) · PRD §3.1
+# ADR  : 0146 (§3.2) · 0121 (§4) · PRD §3.1
 module Queries
   module Communication
     class PushCandidates

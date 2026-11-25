@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/push_subscriptions/_invitation — la carte « Être prévenu de tes devoirs et de tes interros ? » sous un résultat réussi %>
 <%# Rôle : rendue seulement si le serveur le décide (PushInvitationQuery#show?) ; cachée jusqu'à ce que le navigateur sache s'abonner ; la boîte de permission n'apparaît qu'au clic « Oui » %>
-<%# ADR  : XXXX-notifications-web-push-aux-eleves · UDR : XXXX-notifications-eleve (§3.1) · Stimulus : push-subscription · locals : score_percent %>
+<%# ADR  : 0146 · UDR : 0186 (§3.1) · Stimulus : push-subscription · locals : score_percent %>
 <%# locals: (score_percent:) -%>
 <% vapid_key = ENV["VAPID_PUBLIC_KEY"].presence %>
 <% if vapid_key && current_actor.student? && Queries::Communication::PushInvitationQuery.new.show?(student_id: current_actor.user_id, score_percent:, shell: lnclass_app?) %>

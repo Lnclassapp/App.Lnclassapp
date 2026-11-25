@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §4.1 : abonnements sans envoi réussi depuis 60 jours, envois de plus de 90 jours.
+# ADR-0146 §4.1 : abonnements sans envoi réussi depuis 60 jours, envois de plus de 90 jours.
 module UseCases
   module Communication
     class PurgePushDataTest < ActiveSupport::TestCase

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::ChangeOwnContact
 # Rôle : change son propre numéro sous PIN actuel ; ferme les autres sessions et renouvelle la sienne
-# ADR  : 0028, 0050, 0055, XXXX-notifications-web-push-aux-eleves · UDR : 0041
+# ADR  : 0028, 0050, 0055, 0146 · UDR : 0041
 module UseCases
   module Identity
     class ChangeOwnContact

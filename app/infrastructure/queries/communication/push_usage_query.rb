@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushUsageQuery
 # Rôle : l'usage des notifications pour le pilotage de l'équipe : élèves abonnés, abonnements, retraits, envois de la semaine par motif
-# ADR  : XXXX-notifications-web-push-aux-eleves · UDR : XXXX-notifications-eleve (§3.4) · trois requêtes, aucun nom
+# ADR  : 0146 · UDR : 0186 (§3.4) · trois requêtes, aucun nom
 module Queries
   module Communication
     class PushUsageQuery

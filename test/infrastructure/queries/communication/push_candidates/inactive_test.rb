@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §3.2 ; PRD §3.1 « inactif » : relance aux paliers 3, 7 et 14 jours (date d'Abidjan)
+# ADR-0146 §3.2 ; PRD §3.1 « inactif » : relance aux paliers 3, 7 et 14 jours (date d'Abidjan)
 # après la dernière activité, une par palier, puis plus rien sans nouvelle activité ; élèves abonnés, non coupés, non anonymisés.
 module Queries
   module Communication

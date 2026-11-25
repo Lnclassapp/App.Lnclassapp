@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX-notifications-web-push-aux-eleves §3.2 et §4.3 : toutes les 15 minutes, sur les adaptateurs réels ; l'interrupteur
+# ADR-0146 §3.2 et §4.3 : toutes les 15 minutes, sur les adaptateurs réels ; l'interrupteur
 # PUSH_DELIVERY_ENABLED est faux par défaut ; PUSH_MIN_INTERVAL_HOURS vaut 4 par défaut.
 class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
   WEDNESDAY_NOON = Time.utc(2026, 11, 18, 12, 30)

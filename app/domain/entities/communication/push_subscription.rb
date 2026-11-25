@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::PushSubscription
 # Rôle : un abonnement Web Push d'un navigateur : adresse et deux clés, rien d'autre
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.1)
+# ADR  : 0146 (§4.1)
 module Entities
   module Communication
     PushSubscription = Data.define(:id, :user_id, :session_id, :endpoint, :p256dh, :auth, :last_success_at, :failure_count) do

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::Inactive
 # Rôle : candidats du motif inactive : élève abonné sans activité depuis 3, 7 ou 14 jours (dates d'Abidjan), une relance par palier
-# ADR  : XXXX-notifications-web-push-aux-eleves (§3.2) · PRD §3.1
+# ADR  : 0146 (§3.2) · PRD §3.1
 module Queries
   module Communication
     class PushCandidates

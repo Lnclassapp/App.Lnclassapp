@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Identity::AnonymizeUser
 # Rôle : l'équipe traite une demande de suppression : compte anonymisé, résultats effacés et demande close en une transaction,
 #        demande datée au journal
-# ADR  : 0026, 0028, 0036 (§4, amendement 2), 0037, 0040, 0060, XXXX-notifications-web-push-aux-eleves
+# ADR  : 0026, 0028, 0036 (§4, amendement 2), 0037, 0040, 0060, 0146
 module UseCases
   module Identity
     class AnonymizeUser

@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/_push_row — la ligne « Notifications » de « Mes informations » (id profile_notifications_row) %>
 <%# Rôle : visible seulement après un premier « Oui » (abonnement ou interrupteur) ; Activées + « Couper », Coupées + « Réactiver » ; le navigateur précise « autre appareil » et « bloquées » %>
-<%# ADR  : XXXX-notifications-web-push-aux-eleves · UDR : XXXX-notifications-eleve (§3.2) · Stimulus : push-subscription · locals : state (:on | :off, sinon lu) %>
+<%# ADR  : 0146 · UDR : 0186 (§3.2) · Stimulus : push-subscription · locals : state (:on | :off, sinon lu) %>
 <%# locals: (state: nil) -%>
 <% vapid_key = ENV["VAPID_PUBLIC_KEY"].presence %>
 <% state ||= Queries::Communication::PushInvitationQuery.new.profile_state(student_id: current_actor.user_id, shell: lnclass_app?) %>

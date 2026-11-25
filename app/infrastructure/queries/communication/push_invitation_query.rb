@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::PushInvitationQuery
 # Rôle : lecture de la carte d'invitation (sous un résultat réussi) et de l'état de la ligne « Notifications » du profil
-# ADR  : XXXX-notifications-web-push-aux-eleves (§4.4) · UDR : XXXX-notifications-eleve (§3.1, §3.2)
+# ADR  : 0146 (§4.4) · UDR : 0186 (§3.1, §3.2)
 module Queries
   module Communication
     class PushInvitationQuery
