@@ -14,6 +14,9 @@ problematique: Premier envoi sortant de l'application. Web Push (VAPID, gem `web
 | **Remplace** | — |
 | **Remplacé par** | — |
 
+
+> **Amendé par l'ADR « envois de notifications : règles par l'équipe »** ([chantier `parametrage-notifications`](../../chantiers/parametrage-notifications/memo.md)) : §3.2 et §4 ne valent plus que pour le contenu et la fenêtre d'envoi. L'ouverture d'un motif se règle désormais par l'équipe (case « Automatique », validation du jour, annonce « Prévenir les élèves »), un élève reçoit au plus **dix** notifications par jour d'Abidjan, un motif par passage, et la règle des 4 h entre deux envois (`PUSH_MIN_INTERVAL_HOURS`) disparaît.
+
 ---
 
 ## 1. Contexte et problématique

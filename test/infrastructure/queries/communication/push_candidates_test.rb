@@ -3,8 +3,8 @@ require "test_helper"
 module Queries
   module Communication
     class PushCandidatesTest < ActiveSupport::TestCase
-      test "les six requêtes sont vides tant que leur lot ne les remplit pas, et le composite les réunit" do
-        assert_equal 6, PushCandidates::SOURCES.size
+      test "les sept requêtes sont vides tant que leur lot ne les remplit pas, et le composite les réunit" do
+        assert_equal 7, PushCandidates::SOURCES.size
         PushCandidates::SOURCES.each { assert_equal [], it.new.for(now: Time.current) }
         assert_equal [], PushCandidates.new.for(now: Time.current)
       end
