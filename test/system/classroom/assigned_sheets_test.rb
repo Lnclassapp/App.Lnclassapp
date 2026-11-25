@@ -36,12 +36,12 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
       dismiss_first_exercise_prompt
 
       within "#student_classroom_assigned" do
-        assert_selector "a.ps-card", count: 2
-        within("a.ps-card:first-child") do
-          assert_selector ".ps-card-kind", text: "PRÉPARE INTERROS N°1"
-          assert_selector ".ps-card-title", text: "La propriété de Thalès"
+        assert_selector "li a", count: 2
+        within("li:first-child") do
+          assert_text "Prépare interros n°1"
+          assert_text "La propriété de Thalès"
         end
-        within("a.ps-card:last-child") { assert_selector ".ps-card-kind", text: "PRÉPARE DEVOIRS N°1" }
+        within("li:last-child") { assert_text "Prépare devoirs n°1" }
       end
 
       visit fill_student_assigned_sheet_path("devoir-batchdevoirxxx")

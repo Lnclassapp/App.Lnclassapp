@@ -5,28 +5,14 @@ fr:
       show:
         page_title: "Ma classe"
         title: "Ma classe"
-        courses_title: "Fiches de cours assignées"
-        courses_count:
-          one: "%{count} fiche de cours"
-          other: "%{count} fiches de cours"
-        courses_empty: "Aucune fiche de cours assignée pour l'instant"
-        courses_empty_description: "Les fiches de cours des exercices que tes enseignants assignent à ta classe apparaîtront ici."
+        courses_title: "Fiches de cours"
         assigned_title: "Exercices assignés"
         assigned_empty: "Rien à faire pour l'instant"
         assigned_empty_description: "Les exercices que tes enseignants assignent à ta classe apparaîtront ici."
         treated_title: "Exercices traités"
-        treated_empty: "Aucun exercice traité pour l'instant"
-        treated_empty_description: "Termine un exercice pour retrouver ici ta meilleure médaille."
       # CA-E3 (mvp-teacher-student) : « Fiches à revoir », juste après « Exercices assignés ».
       pending_gaps:
         title: "Notions à revoir"
-        subtitle: "Relis-les, puis refais un de leurs exercices."
-        redo_label: "Refaire un exercice sur %{essential}"
-      # UDR-0086 §3.1 : plus de retour « Accueil » ; §3.2 : la carte de la classe, en dégradé.
-      classroom_card:
-        level: "Niveau"
-        school: "Établissement"
-        school_year: "Année scolaire"
       # UDR-0086 §3.3 : seulement quand la classe n'a aucun enseignant sur Lnclass ; le message vient de l'accueil
       # (classroom.student_homes.invite_teacher, ADR-0089 §4.3).
       no_teacher:
@@ -36,8 +22,6 @@ fr:
         assigned:
           one: "1 exercice assigné"
           other: "%{count} exercices assignés"
-      treated_exercise:
-        best: "Meilleur score"
       # Devoirs reçus en feuilles (Lot F) : une feuille par envoi, la plus récente en haut.
       assigned_sheet:
         title: "DEVOIR DU %{date}"
