@@ -36,6 +36,15 @@ module Repositories
         assert_equal @staff.id, @repository.for_date(on_date: @day).sole.approved_by_id
       end
 
+      test "une autre violation d'unicité n'est pas prise pour « déjà validé »" do
+        other = ActiveRecord::RecordNotUnique.new('duplicate key value violates unique constraint "index_push_approval_recipients_unique"')
+
+        assert_raises(ActiveRecord::RecordNotUnique) do
+          stub_method(Orm::Communication::PushApprovalRecipient, :insert_all!, ->(*) { raise other }) { create }
+        end
+        assert_equal 0, Orm::Communication::PushApproval.count
+      end
+
       test "le lendemain, le même motif se valide à nouveau" do
         create
 

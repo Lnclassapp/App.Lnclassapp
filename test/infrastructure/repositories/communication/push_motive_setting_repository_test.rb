@@ -47,6 +47,17 @@ module Repositories
         assert_equal [ [ "assignment_due", true, @admin.id, @at ], [ "assignment_due", false, @admin.id, @at + 1.hour ] ], changes
       end
 
+      test "tout ou rien : si l'historique échoue, le réglage n'a pas changé" do
+        update(automatic: false)
+
+        stub_method(Orm::Communication::PushMotiveSettingChange, :create!, ->(*, **) { raise ActiveRecord::StatementInvalid, "boom" }) do
+          assert_raises(ActiveRecord::StatementInvalid) { update(automatic: true, at: @at + 1.hour) }
+        end
+
+        assert_equal false, @repository.all.sole.automatic
+        assert_equal 1, Orm::Communication::PushMotiveSettingChange.count
+      end
+
       test "la base refuse un motif qui n'est pas automatisable" do
         assert_raises(ActiveRecord::StatementInvalid) { update(motive: "inactive") }
         assert_empty @repository.all

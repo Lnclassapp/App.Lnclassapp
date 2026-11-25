@@ -12,7 +12,7 @@ module Repositories
 
       # Le réglage et sa ligne d'historique entrent ensemble ou pas du tout.
       def update(motive:, automatic:, by:, at:)
-        Orm::Communication::PushMotiveSetting.transaction do
+        Orm::Communication::PushMotiveSetting.transaction(requires_new: true) do
           Orm::Communication::PushMotiveSetting.upsert({ motive:, automatic:, updated_by_id: by, updated_at: at }, unique_by: :motive)
           Orm::Communication::PushMotiveSettingChange.create!(motive:, automatic:, changed_by_id: by, changed_at: at)
         end

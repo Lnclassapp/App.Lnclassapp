@@ -417,6 +417,32 @@ module UseCases
       ensure
         Rails.error.unsubscribe(subscriber)
       end
+
+      test "second passage : le motif le plus urgent déjà envoyé, le suivant part" do
+        urgent = candidate(motive: "assignment_due", key: "due")
+        later = candidate(motive: "quiz_prep", key: "quiz")
+        first, = run_pass(candidates: [ urgent, later ], deliveries: Deliveries.new, now: WEDNESDAY_NOON)
+        second, _, deliveries, gateway = run_pass(candidates: [ urgent, later ], deliveries: Deliveries.new(sent: [ [ 1, "assignment_due", "due" ] ]),
+                                                  now: WEDNESDAY_NOON + 15.minutes)
+
+        assert_equal({ "delivered" => 1 }, first.value)
+        assert_equal({ "delivered" => 1 }, second.value)
+        assert_equal [ [ 1, "quiz_prep", "quiz", "delivered" ] ], deliveries.rows
+        assert_equal 1, gateway.calls.size
+      end
+
+      test "le lendemain, le plafond se compte par jour : 10 hier, 0 aujourd'hui, l'envoi part" do
+        by_date = Class.new(Deliveries) do
+          def sent_count(user_id:, on_date:)
+            super
+            { Date.new(2026, 11, 17) => 10 }.fetch(on_date, 0)
+          end
+        end.new
+        _, _, deliveries, = run_pass(deliveries: by_date, now: WEDNESDAY_NOON)
+
+        assert_equal [ [ 1, Date.new(2026, 11, 18) ] ], by_date.counted
+        assert_equal [ [ 1, "quiz_prep", "k", "delivered" ] ], deliveries.rows
+      end
     end
   end
 end

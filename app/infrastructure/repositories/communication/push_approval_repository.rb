@@ -6,6 +6,9 @@ module Repositories
     class PushApprovalRepository
       include Ports::Communication::PushApprovalRepositoryPort
 
+      # Seule cette contrainte dit « déjà validé » ; toute autre violation d'unicité est une vraie erreur.
+      APPROVAL_INDEX = "index_push_approvals_on_on_date_and_motive".freeze
+
       def approved_keys(on_date:)
         Orm::Communication::PushApprovalRecipient.joins(:push_approval).where(push_approvals: { on_date: })
                                                  .pluck(:user_id, "push_approvals.motive", :object_key).to_set
@@ -22,16 +25,16 @@ module Repositories
           Orm::Communication::PushApprovalRecipient.insert_all!(rows) if rows.any?
         end
         :created
-      rescue ActiveRecord::RecordNotUnique
+      rescue ActiveRecord::RecordNotUnique => error
+        raise unless error.message.include?(APPROVAL_INDEX)
+
         :already_approved
       end
 
       def history(since:) = Orm::Communication::PushApproval.where(approved_at: since..).order(approved_at: :desc).map { to_entity(it) }
 
       def purge_before(before:)
-        scope = Orm::Communication::PushApproval.where(approved_at: ...before)
-        Orm::Communication::PushApprovalRecipient.where(push_approval_id: scope.select(:id)).delete_all
-        scope.delete_all
+        Orm::Communication::PushApproval.where(approved_at: ...before).delete_all
       end
 
       private

@@ -59,6 +59,16 @@ class Teams::PushPlansControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "the notification text is shown and no student name appears" do
+    student = create_student(first_name: "Eleve", last_name: "Secret")
+    entry = Query::Entry.new(motive: "inactive", students: 1, text: "Ta classe avance. Un exercice t'attend sur Lnclass.", more_texts: 0, schools: [ [ "Lycée Alpha", 1 ] ], approval: nil)
+    sign_in_as @team
+    plan_of([ entry ])
+
+    assert_select "#push_plan_inactive", text: /Ta classe avance\. Un exercice t'attend sur Lnclass\./
+    assert_no_match(/#{student.first_name}|#{student.last_name}/, response.body)
+  end
+
   test "an approved motive shows the badge, the author and the recorded count instead of the button" do
     entry = Query::Entry.new(motive: "inactive", students: 5, text: "x", more_texts: 0, schools: [],
                                                                   approval: Query::Approval.new(by_name: "Awa K.", at: NOW - 1.hour, count: 42))

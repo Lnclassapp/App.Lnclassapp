@@ -115,6 +115,16 @@ class Teams::PushSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Secret|Eleve/, response.body)
   end
 
+  test "the history shows the time of each entry, in Abidjan time" do
+    awa = create_team_member(first_name: "Awa", last_name: "Koné")
+    at = Time.utc(2026, 11, 25, 9, 12)
+    Orm::Communication::PushMotiveSettingChange.create!(motive: "assignment_due", automatic: true, changed_by: awa, changed_at: at)
+    sign_in_as @admin
+    travel_to(Time.utc(2026, 11, 25, 12)) { get teams_push_settings_path }
+
+    assert_select "#push_history_list li", text: /25 nov\. 9 h 12 · Awa K\./
+  end
+
   test "an empty history shows its empty state" do
     sign_in_as @admin
     get teams_push_settings_path

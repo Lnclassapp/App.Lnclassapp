@@ -68,3 +68,5 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+- Lot R : refus d'un compte d'équipe désactivé non testé : aucun motif existant dans les tests d'équipe (pas de colonne de statut sur `users`).
