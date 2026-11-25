@@ -35,7 +35,9 @@ fr:
         more: "Voir plus (%{count})"
         empty:
           title: "Aucun réglage ni envoi validé ces 14 derniers jours"
-        approval: "%{at} · %{name} a validé %{motive} — %{count} élèves"
+        approval:
+          one: "%{at} · %{name} a validé %{motive} — %{count} élève"
+          other: "%{at} · %{name} a validé %{motive} — %{count} élèves"
         setting_on: "%{at} · %{name} a rendu %{motive} automatique"
         setting_off: "%{at} · %{name} a décoché %{motive}"
     push_motive_settings:

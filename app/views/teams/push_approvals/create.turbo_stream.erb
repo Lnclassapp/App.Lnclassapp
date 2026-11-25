@@ -7,7 +7,8 @@
 <% end %>
 <% if @approval && @entry&.approval %>
   <%= turbo_stream.prepend "push_history_list" do %>
-    <li class="py-2"><%= t("teams.push_settings.history.approval", at: l(@approval.approved_at, format: "%-d %b %H h %M"), name: @entry.approval.by_name,
-                                                                    motive: t("teams.push_settings.motives.#{@approval.motive}"), count: @approval.recipients_count) %></li>
+    <%= render "teams/push_settings/history_entry", entry: Queries::Communication::PushSettingsQuery::Entry.new(
+          kind: :approval, at: @approval.approved_at, by_name: @entry.approval.by_name, motive: @approval.motive, count: @approval.recipients_count
+        ) %>
   <% end %>
 <% end %>
