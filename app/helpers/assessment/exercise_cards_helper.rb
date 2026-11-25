@@ -12,7 +12,8 @@ module Assessment
 
     # « Ma classe », traités : StudentClassroomQuery::TreatedRow. La couleur de la note ne porte jamais seule le sens : le texte reste.
     def exercise_card_for_treated(row)
-      status = medal_tag(row.badge_level)
+      # La note sur 20 et la médaille-récompense (porteur, 2026-11-24) ; une copie vide : « Pas encore », sans note.
+      status = grade_and_medal(row.best_score_percent, row.badge_level)
       Card.new(dom_id: nil, href: exercise_session_result_path(row.last_session_public_id), title: row.title,
                material_name: row.material_name, material_slug: row.material_slug, type_label: exercise_type_label(row.exercise_type),
                meta: nil, status:, action: card_t(:view_copy), progress: nil)

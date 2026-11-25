@@ -24,13 +24,14 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
 
   test "case du devoir, lecture, Commencer, Rendre à l'enseignant, retour à la feuille du devoir, puis « Rendu » sur la case" do
     visit student_classroom_path
-    assert_selector "#student_classroom_assigned a.ps-card", count: 2
+    dismiss_first_exercise_prompt
+    assert_selector "#student_classroom_assigned li a", count: 2
     assert_no_selector "#student_classroom_assigned .ps-sheet"
     assert_no_button "Rendre à l'enseignant"
-    assert_selector "a.ps-card:first-child .ps-card-kind", text: "PRÉPARE INTERROS N°1"
-    assert_selector "a.ps-card##{@sheet}", text: /À rendre le/
+    assert_selector "#student_classroom_assigned li:first-child", text: "Prépare interros n°1"
+    assert_selector "li##{@sheet}", text: /À rendre le/
 
-    find("a.ps-card##{@sheet}").click
+    find("li##{@sheet} a").click
     assert_current_path student_assigned_sheet_path(@sheet)
     assert_selector "h1.ps-paper-heading", text: /\AÉPREUVE DE /
     assert_selector ".ps-paper-exercise", count: 3
@@ -53,13 +54,15 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
     visit student_assigned_sheet_path(@sheet)
     assert_selector "a.ps-start", text: "Commencer l'exercice"
     visit student_classroom_path
-    assert_selector "a.ps-card##{@sheet} .ps-card-meta", text: "1 / 3 exercice réussi"
+    assert_selector "li##{@sheet}", text: /Prépare devoirs n°1/
+    assert_no_selector "li##{@sheet}", text: %r{\d+\s*/\s*\d+}
   end
 
   test "on a 390 px screen the cards and the reading page do not overflow and « Commencer » is 48 px high" do
     with_mobile_viewport do
       visit student_classroom_path
-      assert_selector "a.ps-card", count: 2
+      dismiss_first_exercise_prompt
+      assert_selector "#student_classroom_assigned li a", count: 2
       assert_operator page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth"), :<=, 0
 
       visit student_assigned_sheet_path(@sheet)

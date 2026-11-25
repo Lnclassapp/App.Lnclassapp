@@ -25,7 +25,7 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
   def click_at_center(element) = page.driver.browser.action.move_to(element.native).click.perform
 
   # prepare-interros-cahier, Lot F : l'exercice à faire n'est plus une carte mais une feuille (CA-13) ; la carte traitée reste.
-  test "CA-1, CA-3 : « Ma classe » : l'exercice à faire est une feuille à rendre, la carte traitée dit la médaille Or et Voir ma copie" do
+  test "CA-1, CA-3 : « Ma classe » : l'exercice à faire est une feuille à rendre, la ligne traitée dit la médaille Or et mène à la copie" do
     visit student_classroom_path
 
     # sujet-avant-de-commencer, Lot B : l'exercice à faire est une case ; sa feuille se lit puis se commence.
@@ -39,8 +39,9 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
     visit student_classroom_path
     within "#student_classroom_treated" do
       assert_text "Médaille Or"
-      assert_no_text "16/20"
-      click_at_center(find("span", text: "Voir ma copie"))
+      assert_selector "[data-grade]", text: "16/20"
+      # UDR-0173 règle 7 : toute la ligne mène à la copie.
+      find("li a").click
     end
     assert_current_path exercise_session_result_path(@copy.public_id)
   end

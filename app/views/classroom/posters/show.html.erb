@@ -1,0 +1,12 @@
+<%# 🌐 UI · classroom/posters/show — affiche A4 d'une classe (layout print) %>
+<%# Rôle : barre d'outils masquée à l'impression (Imprimer, retour à la classe), puis la feuille %>
+<%# ADR  : partage-classe-k-factor · UDR : partage-de-classe (§3.2) %>
+<% page_title t(".title", classroom: @poster.classroom_name) %>
+<h1 class="sr-only"><%= t(".heading", classroom: @poster.classroom_name) %></h1>
+<div data-controller="print" class="mb-6 flex flex-wrap items-center gap-3 print:hidden">
+  <button type="button" data-action="print#print" class="inline-flex min-h-tap items-center gap-2 rounded-ln bg-brand px-5 font-medium text-on-brand">
+    <%= ui_icon "printer", size: :sm %><%= t(".print") %>
+  </button>
+  <%= link_to t(".back"), classroom_path(@classroom_public_id), class: "text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+</div>
+<%= render "classroom/posters/poster", poster: @poster %>

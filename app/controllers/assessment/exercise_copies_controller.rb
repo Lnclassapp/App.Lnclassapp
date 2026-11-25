@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::ExerciseCopiesController
 # Rôle : l'élève rend sa copie d'un seul envoi : 303 vers le résultat, 422 avec ses réponses réaffichées, retrait de l'exercice vers la leçon
-# ADR  : 0026, 0054, 0091 (§4.4 : texte ou indices d'affichage), 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : params blanks) · UDR : 0138 §3.3 · sécurité : copy[answers][<id>] lu champ par champ
+# ADR  : 0026, 0054, 0091 (§4.4 : texte ou indices d'affichage), 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : params blanks) · UDR : 0138 §3.3, accueil-eleve-qr-fenetre-inviter §3.2 · sécurité : copy[answers][<id>] lu champ par champ
 module Assessment
   class ExerciseCopiesController < AuthenticatedController
     include ReadsOwnLevel
@@ -25,6 +25,9 @@ module Assessment
     end
 
     private
+
+    # UDR accueil-eleve-qr-fenetre-inviter §3.2 (CA-13) : jamais de fenêtre « Ton premier exercice » sur l'écran d'exercice.
+    def first_exercise_prompt? = false
 
     def own_session?
       Repositories::Assessment::ExerciseSessionRepository.new.find_by_public_id(public_id: params[:public_id])&.student_id ==

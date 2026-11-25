@@ -38,14 +38,29 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_no_selector "header.sticky", visible: :visible
       assert_equal 187, find("header.student-band").rect.height.round
 
-      # UDR-0173 §3 : le blanc commence à 159 px, la carte de la classe chevauche la jonction, le sigle est en pastille ronde.
+      # UDR-0173 §3 : le blanc commence à 159 px, la carte de la classe chevauche la jonction, le QR de l'établissement remplace le sigle.
       assert_equal 159, first("#student_home > div").rect.y.round
       card = find("#student_class_card")
       assert_operator card.rect.y, :<, 159
       assert_operator card.rect.y + card.rect.height, :>, 159
-      assert_selector "#student_school_sigle", text: "LCA"
+      assert_selector "#student_school_qr svg"
       assert_link tl("class_card.enter"), href: student_classroom_path
       assert_equal 1, all("#student_home .ui-button-primary").size
+
+      # UDR accueil-eleve-qr-agrandi CA-1, CA-2 : au téléphone, le QR s'ouvre en plein écran ; Échap ferme et rend le focus au QR.
+      find("#student_school_qr_button").click
+      dialog = find("dialog#student_school_qr_dialog[open]")
+      settle(dialog)
+      assert_equal [ 0, 0, 390 ], [ dialog.rect.x.round, dialog.rect.y.round, dialog.rect.width.round ]
+      assert_equal page.evaluate_script("window.innerHeight"), dialog.rect.height.round
+      assert_link tl("class_card.qr_dialog.whatsapp"), href: /\Ahttps:\/\/wa\.me\/\?text=/
+      send_keys :escape
+      assert_no_selector "dialog#student_school_qr_dialog[open]"
+      assert_equal "student_school_qr_button", page.evaluate_script("document.activeElement.id")
+
+      # UDR accueil-eleve-grille-plus §3 : « Inviter » est une case de la grille « Mes matières », pas une bannière ni une section.
+      assert_selector "#student_subjects li#student_invite_cell #student_invite_tile", text: tl("invite_tile.action")
+      assert_no_selector "#student_invite_cell .ui-button-secondary"
 
       # The grid: four columns, a dot on the subject that is late (CA-D8), no « Inviter » tile.
       assert_selector "nav#student_subjects a#subject_svt .bg-warning-dot", visible: :all
@@ -98,7 +113,16 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       tops = %w[#student_class_card #student_subjects #student_home_announcements #student_to_do].map { find(it).rect.y }
       assert_equal tops.sort, tops, "les sections s'empilent dans l'ordre"
       assert_equal 8, page.evaluate_script("getComputedStyle(document.querySelector('#student_subjects ul')).gridTemplateColumns.split(' ').length")
-      assert_selector "#student_subjects h2", text: I18n.t("classroom.student_homes.subjects.label"), visible: :visible
+      assert_selector "#student_subjects h2.sr-only", text: I18n.t("classroom.student_homes.subjects.label"), visible: :all
+
+      # UDR accueil-eleve-qr-agrandi CA-2 : sur ordinateur, une fenêtre centrée ; un clic sur le fond la ferme.
+      find("#student_school_qr_button").click
+      dialog = find("dialog#student_school_qr_dialog[open]")
+      settle(dialog)
+      assert_operator dialog.rect.width, :<=, 384
+      assert_in_delta 720, dialog.rect.x + dialog.rect.width / 2, 2
+      page.driver.browser.action.move_to_location(20, 20).click.perform
+      assert_no_selector "dialog#student_school_qr_dialog[open]"
 
       track = find("#student_home_announcements ul")
       cards = all("#student_home_announcements li").map { it.rect }
@@ -108,5 +132,12 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
     end
+  end
+
+  private
+
+  # La fenêtre glisse à l'ouverture (mouvement autorisé) : on la mesure une fois ses animations finies.
+  def settle(element)
+    page.evaluate_async_script("Promise.all(arguments[0].getAnimations().map(a => a.finished)).then(() => arguments[1]())", element)
   end
 end

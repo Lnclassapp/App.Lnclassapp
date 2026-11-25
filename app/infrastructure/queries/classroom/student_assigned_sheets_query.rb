@@ -68,10 +68,10 @@ module Queries
       end
 
       # { exercise_public_id => SheetExercise } : la feuille de la leçon lit chaque exercice (questions, indice, figure, dernière copie) ;
-      # une lecture par leçon de l'envoi.
+      # une lecture par leçon de l'envoi, qui ne construit que les exercices assignés (`only:`).
       def exercises(rows, actor)
         rows.group_by(&:course_slug).each_with_object({}) do |(slug, course_rows), found|
-          prepare = Queries::Catalog::PrepareSheetsQuery.new.call(course_slug: slug, actor:)
+          prepare = Queries::Catalog::PrepareSheetsQuery.new.call(course_slug: slug, actor:, only: course_rows.map(&:exercise_public_id))
           course_rows.each { |row| found[row.exercise_public_id] = prepare.exercise(row.exercise_public_id) }
         end.compact
       end

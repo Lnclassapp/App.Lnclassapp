@@ -1,6 +1,6 @@
 <%# 🌐 UI · shared/navigation/_sidebar — navigation bureau (lg et plus) %>
-<%# Rôle : carte de profil, destinations du rôle dans une carte blanche, 2e carte « Configuration » %>
-<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6), 0084 (§3.4), 0132 §3.1 (amendée : carte de profil de l'élève), 0134 §3.14 (bloc de profil en tête, entrée active bleue) · ADR : 0076 (§4.2) %>
+<%# Rôle : carte de profil, destinations du rôle dans une carte blanche, 2e carte « Configuration » (équipe) ou « Plus » (élève) %>
+<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6), 0084 (§3.4), 0132 §3.1 (amendée : carte de profil de l'élève), 0134 §3.14 (bloc de profil en tête, entrée active bleue) · accueil-eleve-grille-plus §3 (carte « Plus ») · ADR : 0076 (§4.2) %>
 <% secondary = secondary_navigation_for(user.role) %>
 <% student = user.role.to_sym == :student %>
 <% teacher = user.role.to_sym == :teacher %>
@@ -33,5 +33,35 @@
         <% end %>
       </ul>
     </nav>
+  <% end %>
+  <% if student %>
+    <%# UDR accueil-eleve-grille-plus §3 : « Plus » — une entrée avec écran est un lien, sans écran un bouton « Bientôt disponible » (contrôleur soon). %>
+    <% base = NavigationHelper::NAV_STYLES.dig(:sidebar, :base) %>
+    <div data-controller="soon" data-soon-message-value="<%= t("shared.navigation.more.soon") %>">
+      <nav id="sidebar_secondary" aria-labelledby="sidebar_secondary_title" class="mt-4 rounded-card border border-line bg-white p-2 shadow-card">
+        <p id="sidebar_secondary_title" class="px-4 pt-2 pb-1 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".secondary_label.student") %></p>
+        <ul class="space-y-1">
+          <% NavigationHelper::STUDENT_MORE.each do |entry| %>
+            <% label = t("shared.navigation.more.entries.#{entry.key}") %>
+            <li>
+              <% if (route = more_entry_route(entry)) %>
+                <% path = public_send(route) %>
+                <% active = current_page?(path) %>
+                <%= link_to path, "aria-current": ("page" if active), class: class_names(base, active ? NavigationHelper::NAV_STYLES.dig(:sidebar, :active) : NavigationHelper::NAV_STYLES.dig(:sidebar, :idle)) do %>
+                  <span class="<%= "text-brand-strong" if active %>"><%= ui_icon entry.icon, variant: (active ? :solid : :outline) %></span>
+                  <span><%= label %></span>
+                <% end %>
+              <% else %>
+                <button type="button" data-action="soon#say" class="<%= base %> w-full text-left <%= NavigationHelper::NAV_STYLES.dig(:sidebar, :idle) %>">
+                  <span><%= ui_icon entry.icon, variant: :outline %></span>
+                  <span><%= label %></span>
+                </button>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+      <p role="status" aria-live="polite" data-soon-target="status" class="mt-2 px-4 text-sm text-mute"></p>
+    </div>
   <% end %>
 </aside>

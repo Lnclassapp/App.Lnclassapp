@@ -121,6 +121,10 @@
   --spacing-wave-band: 11.6875rem;
   --spacing-wave-lap: 1.75rem;
   --spacing-wave-card: 4.5625rem;
+  /* UDR accueil-eleve-grille-plus §3 : hauteur de la feuille « Plus » du téléphone, au moins un quart (min-h-sheet-quarter), au plus
+     la moitié (max-h-sheet-half) de l'écran */
+  --spacing-sheet-quarter: 25dvh;
+  --spacing-sheet-half: 50dvh;
   /* Décalage collant sous la barre : la barre (4rem) + 1,5 rem (`top-sticky-below-bar`) */
   --spacing-sticky-below-bar: calc(var(--spacing-bar) + 1.5rem);
 
@@ -594,6 +598,39 @@
     border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
     padding-bottom: env(safe-area-inset-bottom);
   }
+}
+
+/* UDR accueil-eleve-qr-agrandi — `ui_modal placement: :phone_full` : sous 700 px (palier du téléphone, UDR-0086 §3.5), la
+   fenêtre prend tout l'écran, sans coins ; son contenu (le dernier enfant, sans pied) est centré en hauteur, et le vide
+   autour est la <dialog> elle-même : un clic hors du contenu la ferme (modal#backdrop). Dès 700 px, la modale centrée. */
+@media (max-width: 43.74rem) {
+  dialog.dialog-phone-full {
+    margin: 0;
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    overflow-y: auto;
+    border-radius: 0;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  dialog.dialog-phone-full[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  dialog.dialog-phone-full[open] > :last-child {
+    margin-block: auto;
+  }
+}
+
+/* UDR accueil-eleve-qr-agrandi — la carte du QR en grand : fond de marque à motif de points clairs, comme une carte. */
+.qr-card-pattern {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-white) 18%, transparent) 1.5px, transparent 1.5px);
+  background-size: 1rem 1rem;
 }
 
 /* UDR-0080 §3.2 — `ui_modal placement: :drawer` : un panneau ancré à gauche, sur toute la hauteur, à toutes les

@@ -27,7 +27,7 @@
   <%# Toutes masquées : ni bande ni points. %>
   <% if carousel.cards.any? %>
     <%# Dès lg : pas d'écart entre les cartes, chacune porte sa demi-gouttière, pour que deux cartes tiennent exactement dans la bande. %>
-    <ul class="<%= class_names("scrollbar-none flex snap-x snap-mandatory gap-2 overflow-x-auto motion-safe:scroll-smooth lg:-mx-1.5 lg:gap-0", "scroll-pl-5 px-5 lg:px-0" => student) %>"
+    <ul class="<%= class_names("scrollbar-none flex snap-x snap-mandatory gap-2 overflow-x-auto motion-safe:scroll-smooth lg:-mx-1.5 lg:gap-0", "scroll-pl-2 px-2 lg:px-0" => student) %>"
         data-communication--carousel-target="track">
       <% carousel.cards.each do |card| %>
         <li class="shrink-0 basis-11/12 snap-start sm:basis-1/2 lg:px-1.5">
@@ -35,6 +35,8 @@
         </li>
       <% end %>
     </ul>
+    <%# Retouche accueil-eleve-matieres-annonces : pas de points sous les annonces de l'accueil élève (l'annonce suivante dépasse déjà). %>
+    <% unless student %>
     <div class="hidden justify-center gap-1.5 pt-2" aria-hidden="true" data-communication--carousel-target="pager">
       <% carousel.cards.each_index do |index| %>
         <%# Les deux états sont écrits en entier : Tailwind ne compile que ce qu'il lit (le contrôleur les échange). %>
@@ -42,5 +44,6 @@
               data-communication--carousel-target="dot"></span>
       <% end %>
     </div>
+    <% end %>
   <% end %>
 <% end %>

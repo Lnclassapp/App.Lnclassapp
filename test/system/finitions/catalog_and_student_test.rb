@@ -49,6 +49,7 @@ module Finitions
       with_mobile_viewport do
         sign_in_as @student
         visit courses_path
+        dismiss_first_exercise_prompt
         assert_selector "#courses_groups li", count: 3
         assert_no_button tc("filters.submit")
         before = history_length
@@ -94,6 +95,7 @@ module Finitions
     test "FU-14 (UDR-0173 écrans minimalistes style Wave §3) : sur la page d'une leçon, le seul retour est la flèche, vers la matière" do
       sign_in_as @student
       visit course_path(@course.slug)
+      dismiss_first_exercise_prompt
 
       assert_title "Génétique et évolution · Élève · Lnclass"
       within "main" do

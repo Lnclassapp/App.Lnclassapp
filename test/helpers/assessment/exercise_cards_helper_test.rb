@@ -21,19 +21,19 @@ module Assessment
 
     def text(html) = Nokogiri::HTML.fragment(html.to_s).text.squish
 
-    test "traité : la médaille de la meilleure copie, sans note ni maîtrise ; Voir ma copie vers le résultat (CA-3)" do
+    test "traité : la note sur 20 et la médaille de la meilleure copie, sans maîtrise ; Voir ma copie vers le résultat (CA-3)" do
       card = exercise_card_for_treated(treated(80, :gold))
 
       assert_nil card.dom_id
       assert_equal exercise_session_result_path("sess9"), card.href
       assert_equal "Voir ma copie", card.action
-      assert_equal "Or Médaille Or", text(card.status)
+      assert_equal "16/20 Or Médaille Or", text(card.status)
       assert_equal [ "Maths", "maths", "Évaluation" ], [ card.material_name, card.material_slug, card.type_label ]
     end
 
-    test "traité sous 10/20 : la médaille enregistrée, Bronze, jamais un chiffre ; copies vides seulement : « Pas encore »" do
-      assert_equal "Bronze Médaille Bronze", text(exercise_card_for_treated(treated(20, :bronze)).status)
-      assert_equal "Argent Médaille Argent", text(exercise_card_for_treated(treated(70, :silver)).status)
+    test "traité sous 10/20 : la note et la médaille enregistrée, Bronze ; copies vides seulement : « Pas encore », sans note" do
+      assert_equal "4/20 Bronze Médaille Bronze", text(exercise_card_for_treated(treated(20, :bronze)).status)
+      assert_equal "14/20 Argent Médaille Argent", text(exercise_card_for_treated(treated(70, :silver)).status)
       assert_equal "Pas encore", text(exercise_card_for_treated(treated(0, nil)).status)
     end
 

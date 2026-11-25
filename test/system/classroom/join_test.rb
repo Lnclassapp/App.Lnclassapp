@@ -28,8 +28,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     visit new_student_registration_path
 
     # IL-06 : un établissement sans classe le dit, et on reste à l'étape 1 tant qu'aucune classe n'est touchée.
-    select "Abidjan 1", from: "student_registration[drena_public_id]"
-    select "Collège sans classe", from: "student_registration[school_public_id]"
+    choose_school "Collège sans classe"
     within("turbo-frame#picker_levels") { assert_text I18n.t("classroom.student_registrations.class_picker.not_found_title") }
     assert_step 1
     choose_classroom "6ème 1"
@@ -39,15 +38,23 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_equal [ [ @classroom.id, "standard" ] ], memberships_of_the_new_student
   end
 
+  # Chantier entree-eleve-unifiee (CA-8) : le lien ouvre l'entrée, la classe au-dessus ; nouveau, l'élève confirme son code et
+  # s'inscrit à l'étape « Toi », la dernière.
   test "IL-08: the link shows the classroom already chosen, and the student lands in it, way « link », at 390 px" do
     with_mobile_viewport do
       visit join_classroom_path(@classroom.reload.link_token)
 
-      assert_step 2
+      assert_selector "#student-entry-classroom", text: /6ème 1.*Lycée Classique d'Abidjan/m
+      pass_student_entry
+      assert_step 2, entry: true
       assert_selector "#signup-classroom-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
-      assert_no_selector "select[name='student_registration[drena_public_id]']", visible: :all
+      assert_no_selector "input#school_q", visible: :all
       assert_no_text "6ème 2"
-      sign_up_after_a_wrong_confirmation
+      fill_in_the_name
+      click_on I18n.t("#{FORM}.submit")
+
+      assert_toast I18n.t("classroom.student_registrations.create.welcome")
+      assert_current_path student_home_path
     end
 
     assert_equal [ [ @classroom.id, "link" ] ], memberships_of_the_new_student
@@ -72,35 +79,32 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_equal 0, Orm::User.where(role: "student", contact: "0701020304").count
   end
 
-  # UDR-0088 §3.4, UDR inscription en trois étapes §3.3, §3.5 at 390 px: the link's recap on step 2, the gender as a pill, a
-  # number refused by the server under the number with the focus on it, on step 2 reopened.
-  test "CA-C3, CA-C6 at 390 px: the link's recap on step 2, a number the server refuses reopens step 2 with the error and the focus on it" do
+  # UDR-0088 §3.4 at 390 px, chantier entree-eleve-unifiee : un numéro que le serveur refuse se dit à l'entrée ; après l'entrée,
+  # le rappel de la classe et le numéro gardé à l'étape « Toi », le genre en pastilles.
+  test "CA-C3, CA-C6 at 390 px: a number the server refuses stays at the entry; then the link's recap and the kept number on step 2" do
     with_mobile_viewport do
       visit join_classroom_path(@classroom.reload.link_token)
+      # Dix chiffres passent le navigateur, pas le serveur (un numéro ivoirien commence par 01, 05 ou 07).
+      fill_in "student_entry[contact]", with: "0201020304"
+      fill_in "student_entry[pin]", with: "4821"
+      click_on I18n.t("identity.student_entries.new.submit")
+      assert_selector "#student_entry_contact_error"
+      assert_selector "#student-entry-classroom", text: /6ème 1/
 
+      pass_student_entry
       assert_selector "#signup-welcome", text: "Bienvenue sur Lnclass"
       within("#student-registration-section-you") do
         assert_selector "#signup-classroom-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
         assert_link I18n.t("#{FORM}.other_classroom")
+        assert_no_selector "#signup-entry-number"
+        assert_no_field "student_registration[contact]"
       end
-      fill_in "student_registration[last_name]", with: "KOUASSI"
-      fill_in "student_registration[first_name]", with: "Aya Marie"
       choose I18n.t("genders.female")
       assert_selector "#student-registration-gender label:has(input:checked)", text: I18n.t("genders.female")
       # UDR-0088 §3.4, §3.7 : de vraies radios, 44 px de haut ; la flèche du clavier passe à l'autre pastille.
       assert_equal [ 44 ], all("#student-registration-gender label").map { evaluate_script("arguments[0].getBoundingClientRect().height", it).round }.uniq
       find_field(I18n.t("genders.female")).send_keys(:right)
       assert_checked_field I18n.t("genders.male")
-      # Les quatre champs valides : le passage à l'étape 3 se fait seul. Dix chiffres passent le navigateur, pas le serveur (un numéro ivoirien commence par 01, 05 ou 07) : étape 3, puis 422.
-      fill_in "student_registration[contact]", with: "0201020304"
-      assert_step 3
-      fill_in "student_registration[pin]", with: "4821"
-      fill_in "student_registration[pin_confirmation]", with: "4821"
-      click_on I18n.t("#{FORM}.submit")
-
-      assert_step 2
-      assert_selector "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.invalid")
-      assert_selector "#student_registration_contact[aria-invalid=true]:focus"
     end
     assert_equal 0, Orm::User.where(role: "student").count
   end
@@ -108,15 +112,19 @@ class Classroom::JoinTest < ApplicationSystemTestCase
   # CA-C9 on a computer (1400 px): the class of the link is in the blue panel under step 1, not above the form.
   test "IL-10: « Ce n'est pas ta classe ? » goes back to the cascade, and the student lands in the other classroom" do
     visit join_classroom_path(@classroom.reload.link_token)
+    pass_student_entry
     assert_selector "#signup-panel li[data-step='1'] #signup-panel-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
     assert_no_selector "#signup-classroom-recap", visible: :visible
     click_on I18n.t("#{FORM}.other_classroom")
 
-    assert_current_path new_student_registration_path
+    assert_current_path new_student_registration_path, ignore_query: true
     assert_no_selector "#classroom-link-invalid"
-    assert_step 1
+    assert_step 1, entry: true
     choose_classroom "6ème 2"
-    sign_up
+    assert_step 2, entry: true
+    fill_in_the_name
+    click_on I18n.t("#{FORM}.submit")
+    assert_toast I18n.t("classroom.student_registrations.create.welcome")
 
     assert_equal [ [ @other.id, "standard" ] ], memberships_of_the_new_student
   end
@@ -132,8 +140,8 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_current_path new_student_registration_path
     assert_selector "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
     assert_step 1
-    assert_selector "select[name='student_registration[drena_public_id]']"
-    assert_selector "input[name='student_registration[join_code]']", visible: :all
+    assert_selector "input#school_q"
+    assert_no_selector "input[name='student_registration[join_code]']", visible: :all
     assert_no_selector "input[name='student_registration[link_token]']", visible: :all
   end
 
@@ -161,8 +169,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
   # Each step of the cascade arrives in its frame once its parent is chosen (UDR-0081 §3.3); the level is a pill, the
   # classroom a box, both real radios (UDR-0091 §3.1).
   def choose_classroom(name)
-    select "Abidjan 1", from: "student_registration[drena_public_id]"
-    select "Lycée Classique d'Abidjan", from: "student_registration[school_public_id]"
+    choose_school "Lycée Classique d'Abidjan"
     within("turbo-frame#picker_levels") { choose "6ème" }
     within("turbo-frame#picker_classrooms") { choose name }
   end
@@ -175,6 +182,12 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     fill_in "student_registration[pin_confirmation]", with: pin_confirmation
   end
 
+  def fill_in_the_name
+    fill_in "student_registration[last_name]", with: "KOUASSI"
+    fill_in "student_registration[first_name]", with: "Aya Marie"
+    choose I18n.t("genders.female")
+  end
+
   def fill_in_step_two
     fill_in "student_registration[last_name]", with: "KOUASSI"
     fill_in "student_registration[first_name]", with: "Aya Marie"
@@ -184,9 +197,10 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_field "student_registration[contact]", with: "0701020304"
   end
 
-  def assert_step(number, settle: nil)
+  # entry: après l'entrée élève, deux étapes (chantier entree-eleve-unifiee).
+  def assert_step(number, settle: nil, entry: false)
     sleep settle if settle
-    assert_selector "#signup-step-counter", text: I18n.t("#{FORM}.step_counter", n: number)
+    assert_selector "#signup-step-counter", text: I18n.t("#{FORM}.#{entry ? "step_counter_entry" : "step_counter"}", n: number)
     assert_equal [ number ], page.all("fieldset[data-classroom--signup-steps-target=step]", visible: :visible).map { it["data-step"].to_i }
   end
 

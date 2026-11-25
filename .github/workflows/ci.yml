@@ -57,10 +57,14 @@ jobs:
       lecons_files: ${{ steps.changes.outputs.lecons_files }}
       lecons_parts: ${{ steps.changes.outputs.lecons_parts }}
       lecons_n: ${{ steps.changes.outputs.lecons_n }}
+      documents_proven: ${{ steps.changes.outputs.documents_proven }}
       tree: ${{ steps.tree.outputs.sha }}
 
     steps:
+      # Two commits: the merge commit tested and its first parent, the head of the base (script/ci/documents_proof).
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
 
       # ADR-0134 §4.5 : the lessons are a frozen copy of Lnclassapp/App.Lnclassapp-contenus. A lesson changed by hand (without
       # docs/contenus/VERSION, written by script/contenus/synchroniser.rb) fails here, before any other job: a pull request of
@@ -147,7 +151,22 @@ jobs:
           # Décision du porteur du 2026-11-12 : 5 leçons au plus, tirées au hasard parmi les choisies, en une seule part.
           lecons_files=$(echo "$lecons_files" | tr ',' '\n' | shuf -n 5 | sort | paste -sd, -)
           echo "Leçons rendues (5 au plus, au hasard) : $lecons_files"
+          # Chantier preuve-arbre-documents-seuls : des documents seuls prouvent leur arbre quand ils ne diffèrent que par des
+          # documents d'un arbre déjà prouvé par une PR vers Staging ou main (script/ci/documents_proof). Sinon, ou au moindre
+          # doute, la suite entière tourne : sans preuve, le déploiement de Staging et de main refuse l'arbre.
+          documents_proven=false
+          if [ "$code" = false ]; then
+            script_output="$RUNNER_TEMP/documents-proof"
+            GITHUB_OUTPUT="$script_output" script/ci/documents_proof || true
+            if grep -qx 'proven=true' "$script_output" 2>/dev/null; then
+              documents_proven=true
+            else
+              code=true
+              echo "Documents seuls sur un arbre sans preuve : la suite entière tourne et prouvera l'arbre."
+            fi
+          fi
           parts=1
+          echo "documents_proven=$documents_proven" | tee -a "$GITHUB_OUTPUT"
           echo "code=$code" | tee -a "$GITHUB_OUTPUT"
           echo "lessons=$lessons" | tee -a "$GITHUB_OUTPUT"
           echo "lecons_files=$lecons_files" | tee -a "$GITHUB_OUTPUT"
@@ -352,8 +371,8 @@ jobs:
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
 
-  # The verdict the branches wait for. Green when nothing had to be replayed (a proven tree, documentation alone),
-  # or when every test job is green (« unit » and « system » stand for all their parts, « coverage » for the threshold): only then does the run prove its tree, ci-tree-<tree>, kept 30 days, so that a
+  # The verdict the branches wait for. Green when nothing had to be replayed (a proven tree, documentation alone over a
+  # proven tree, which proves its own tree too), or when every test job is green (« unit » and « system » stand for all their parts, « coverage » for the threshold): only then does the run prove its tree, ci-tree-<tree>, kept 30 days, so that a
   # later promotion of the same files is green in about two minutes. A draft (« plan » skipped) gets no verdict.
   ci:
     name: ci
@@ -374,6 +393,7 @@ jobs:
           SYSTEM: ${{ needs.system.result }}
           LESSONS: ${{ needs.plan.outputs.lessons }}
           LECONS: ${{ needs.lecons.result }}
+          DOCUMENTS_PROVEN: ${{ needs.plan.outputs.documents_proven }}
         run: |
           echo "plan=$PLAN code=$CODE unit=$UNIT coverage=$COVERAGE system=$SYSTEM lessons=$LESSONS lecons=$LECONS"
           [ "$PLAN" = success ] || { echo "::error::« plan » n'a pas abouti"; exit 1; }
@@ -383,7 +403,14 @@ jobs:
               echo "::error::lecons : $LECONS"
               exit 1
             fi
-            echo "Rien à rejouer : arbre déjà prouvé, ou documents seulement."
+            # Chantier preuve-arbre-documents-seuls : le code est celui d'un arbre déjà prouvé (« plan ») ; l'arbre se prouve.
+            if [ "$DOCUMENTS_PROVEN" = true ]; then
+              : > "$RUNNER_TEMP/ci-tree"
+              echo "proof=true" >> "$GITHUB_OUTPUT"
+              echo "Documents seuls sur un arbre prouvé : la preuve de l'arbre est publiée."
+              exit 0
+            fi
+            echo "Rien à rejouer : arbre déjà prouvé."
             exit 0
           fi
           if [ "$UNIT" = success ] && [ "$COVERAGE" = success ] && [ "$SYSTEM" = success ] && [ "$LECONS" = success ]; then
@@ -394,8 +421,9 @@ jobs:
             exit 1
           fi
 
+      # Seule une PR vers Staging ou main prouve un arbre pour une promotion (revue du 2026-11-24, ADR-0107).
       - name: Publish the proof of the tested tree
-        if: steps.verdict.outputs.proof == 'true'
+        if: steps.verdict.outputs.proof == 'true' && (github.base_ref == 'Staging' || github.base_ref == 'main')
         uses: actions/upload-artifact@v7
         with:
           name: ci-tree-${{ needs.plan.outputs.tree }}

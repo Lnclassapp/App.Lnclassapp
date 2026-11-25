@@ -28,21 +28,22 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     assert_no_js_errors
   end
 
-  # IL-08 (ADR-0085): the student sign-up, opened by a classroom link, the classroom already chosen.
-  test "student sign-up by link: the PIN is masked again before a failed submit and comes back masked in 422" do
+  # Chantier entree-eleve-unifiee : le lien de classe ouvre l'entrée élève ; le code s'y tape, puis s'y confirme.
+  test "student entry by link: show then hide the PIN, then the confirmation pad" do
     visit join_classroom_path(@classroom.reload.link_token)
-    reach_the_secret_code_step
-    failed_sign_up_masks_again
+    show_then_hide "student_entry[pin]"
+    fill_in "student_entry[contact]", with: "07 01 02 03 04"
+    fill_in "student_entry[pin]", with: "4821"
+    click_on I18n.t("identity.student_entries.new.submit")
+    assert_selector "#student-entry-keypad" # la confirmation se tape au pavé (UDR pavé §3.2), plus au champ
     assert_no_js_errors
   end
 
-  test "student sign-up by link at 390 px" do
+  test "student entry by link at 390 px" do
     with_mobile_viewport do
       visit join_classroom_path(@classroom.reload.link_token)
-      reach_the_secret_code_step
-      assert_button_inside_field "student_registration[pin_confirmation]"
-      show_then_hide "student_registration[pin]"
-      failed_sign_up_masks_again
+      assert_button_inside_field "student_entry[pin]"
+      show_then_hide "student_entry[pin]"
       assert_no_horizontal_scroll
     end
     assert_no_js_errors
@@ -122,40 +123,6 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     JS
 
     assert_equal [ 4, 4 ], caret
-  end
-
-  # The sign-up is cut in three steps: the name, the gender and the number (step 2) move on to the secret code (step 3) by themselves.
-  def reach_the_secret_code_step
-    fill_in "student_registration[last_name]", with: "KOUASSI"
-    fill_in "student_registration[first_name]", with: "Aya"
-    choose I18n.t("genders.female")
-    fill_in "student_registration[contact]", with: "07 01 02 03 04"
-    assert_selector "fieldset[data-step='3']", visible: :visible
-  end
-
-  def failed_sign_up_masks_again
-    fill_in "student_registration[pin]", with: "4821"
-    fill_in "student_registration[pin_confirmation]", with: "1357"
-    toggle_for("student_registration[pin]").click
-    toggle_for("student_registration[pin_confirmation]").click
-    assert_revealed "student_registration[pin]"
-    # Turbo stops the submit event at the document; turbo:submit-start follows it, before the request leaves.
-    page.execute_script(<<~JS)
-      document.addEventListener("turbo:submit-start", () => {
-        window.pinTypesAtSubmit = [...document.querySelectorAll("[data-password-reveal-target=input]")].map((input) => input.type)
-      }, { once: true })
-    JS
-
-    assert_no_page_reload do
-      click_on I18n.t("classroom.student_registrations.form.submit")
-      assert_selector "#student_registration_pin_confirmation_error"
-    end
-
-    assert_equal %w[password password], page.evaluate_script("window.pinTypesAtSubmit")
-    %w[student_registration[pin] student_registration[pin_confirmation]].each do |name|
-      assert_masked name
-      assert_field name, with: ""
-    end
   end
 
   def profile_pin_fields_one_by_one

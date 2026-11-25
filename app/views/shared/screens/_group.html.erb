@@ -3,7 +3,7 @@
 <%# UDR  : 0173 §3 (composants, règles 5 et 8), 0057 R3 · locals: (id:, title:, total:) -%>
 <% limit = ComponentsHelper::REVEAL_LIMIT %>
 <%= tag.section id: id, "aria-labelledby": "#{id}_title", data: { turbo_prefetch: false } do %>
-  <h2 id="<%= id %>_title" class="px-1 pb-2 text-sm font-semibold text-mute"><%= title %></h2>
+  <h2 id="<%= id %>_title" class="px-4 pb-2 text-sm font-semibold text-mute"><%= title %></h2>
   <%= tag.div class: "overflow-hidden rounded-card bg-white py-1", data: ui_reveal_data do %>
     <ul><%= yield %></ul>
     <% if total > limit %>

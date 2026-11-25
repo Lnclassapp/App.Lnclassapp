@@ -80,7 +80,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[target=_blank][rel~=noopener][href^='https://wa.me/?text=']", text: tl("invite_teacher.banner_action")
       assert_select "button[data-action='dismissible#hide'][aria-label=?]", tl("invite_teacher.banner_dismiss")
     end
-    assert_select "#student_home a[href^='https://wa.me/']", 1
+    # Le partage du QR de l'établissement (UDR accueil-eleve-qr-agrandi) n'invite pas l'enseignant : il est hors du compte.
+    assert_select "#student_home a[href^='https://wa.me/']:not(#student_school_qr_whatsapp)", 1
   end
 
   test "the page of another role keeps its header on every size: only the pages with a band hide it under lg" do
@@ -93,7 +94,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # CA-D10 (Lot O1): the wide page is the same markup with lg rules; nothing changes under lg.
-  test "CA-D10: on a computer the column is 720 px at most, « Mes matières » is titled and has eight columns, the announcements show two cards" do
+  test "CA-D10: on a computer the column is 720 px at most, « Mes matières » is titled for screen readers and has eight columns, the announcements show two cards" do
     create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
     sign_in_as @student
 
@@ -105,6 +106,17 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "ul.grid-cols-4.lg\\:grid-cols-8"
     end
     assert_select "section#student_home_announcements.bg-mist.lg\\:bg-transparent"
+    # Retouche accueil-eleve-annonces-wave : 8 px de marge, la carte suivante dépasse ; image de 96 px ; libellés alignés sur les lignes.
+    assert_select "section#student_home_announcements ul.px-2.scroll-pl-2"
+    assert_select "section#student_home_announcements article .w-28 svg.size-24, section#student_home_announcements article .w-28 img.size-24"
+    # Retouche accueil-eleve-matieres-annonces : titre « Mes matières » pour les seuls lecteurs d'écran ; libellés noirs en 600 ;
+    # annonce aux coins rounded-ln, plus haute, sans signature ni points.
+    assert_select "nav#student_subjects h2.sr-only", text: tl("subjects.label")
+    assert_select "nav#student_subjects a#subject_svt.font-semibold.text-ink"
+    assert_select "section#student_home_announcements article.rounded-ln.min-h-40" do
+      assert_select "p.text-xs.font-medium", false
+    end
+    assert_select "section#student_home_announcements [data-communication--carousel-target=pager]", false
     # The mist background and the sidebar are the shell's, for every student page; carte-profil-eleve (UDR-0132 §3.1, amended):
     # the profile card opens the sidebar, as the teacher's.
     assert_select "body > div.fixed.hidden.lg\\:block.bg-mist[aria-hidden=true]"
@@ -132,12 +144,13 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_select "nav#student_subjects li", 7
+    assert_select "nav#student_subjects ul.lg\\:grid-cols-8 > li", 9
+    assert_select "nav#student_subjects a[id^=subject_]", 7
     assert_select "#subject_invite", 0
     assert_no_match(/paiement|abonnement/i, css_select("#main").text)
   end
 
-  test "the class card: « Entrer en classe » opens Ma classe; the sigle of the school in a round, else the initials of its name" do
+  test "the class card: « Entrer en classe » opens Ma classe; the QR of the school replaces its sigle" do
     @classroom.school.update!(sigle: "CM1T")
     sign_in_as @student
 
@@ -147,15 +160,11 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "p", text: tl("class_card.label")
       assert_select "h2#student_class_title", text: "Tle D 1"
       assert_select "p", text: "Lycée Classique"
-      assert_select "span#student_school_sigle.rounded-full", text: "CM1T"
+      assert_select "button#student_school_qr_button #student_school_qr svg"
+      assert_select "#student_school_sigle", false
       assert_select "a#student_class_enter[href=?]", student_classroom_path, text: tl("class_card.enter")
       assert_select "img[alt='']"
     end
-
-    @classroom.school.update!(sigle: nil)
-    get student_home_path
-
-    assert_select "span#student_school_sigle", text: "LC"
   end
 
   test "CA-D7: no classroom: « Choisis ta classe », the code field, « Rejoindre », « Je n'ai pas de code »; grid, announcements, history hidden" do
@@ -234,7 +243,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    ids = css_select("#student_subjects li a").map { it["id"] }
+    ids = css_select("#student_subjects a[id^=subject_]").map { it["id"] }
     assert_equal %w[subject_histoire-geographie subject_mathematiques subject_physique-chimie subject_svt], ids.sort
     assert_select "nav#student_subjects[aria-labelledby=student_subjects_title]" do
       assert_select "h2#student_subjects_title", text: tl("subjects.label")
@@ -245,7 +254,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a#subject_histoire-geographie span[aria-hidden=true]", text: "HG"
       assert_select "a#subject_mathematiques span[aria-hidden=true]", text: "Maths"
       assert_select "a#subject_svt", text: "SVT"
-      assert_select "a#subject_svt .bg-tint-green.size-16 img[src*='subjects/svt']"
+      assert_select "a#subject_svt .bg-tint-green.size-14 img[src*='subjects/svt']"
     end
     assert_no_match(/subject_francais|subject_philosophie|Paiement/, response.body)
   end
@@ -255,7 +264,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_select "nav#student_subjects li", 0
+    assert_select "nav#student_subjects a[id^=subject_]", 0
     assert_select "nav#student_subjects a#subject_invite", 0
     assert_select "nav#student_subjects", text: including(tl("subjects.empty"))
   end
@@ -290,7 +299,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{exercise_session_result_path(session.public_id)}']", text: including("Méiose")
       assert_select "a[href='#{exercise_session_result_path(session.public_id)}'] img[src*='subjects/svt'][alt='']", 1
       assert_select "[data-medal]", text: including("Or")
-      assert_select "*", text: %r{\d+\s*/\s*20|%}, count: 0
+      assert_select "[data-medal] [data-grade]", "18/20"
+      assert_select "*", text: /%/, count: 0
       assert_select "a#student_history_more", 0
     end
   end
@@ -313,7 +323,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # Activation-eleve, CA-12 : « Refaire » sur toute copie terminée, plus seulement sous l'Argent (hors pause, ADR-0115).
-  test "the history shows a medal per line, never a grade or red; « Refaire » starts the exercise again, whatever the medal" do
+  test "the history shows a grade and a medal per line, never red; « Refaire » starts the exercise again, whatever the medal" do
     exercise = create_exercise(essential: @essential, title: "Méiose")
     # Les trois dernières copies ne tiennent pas dans 30 minutes : pas de pause, le bouton reste.
     [ 70, 65, 20, 68 ].zip([ 1, 2, 40, 50 ]).each { |score, minutes| complete(exercise, score:).update!(completed_at: minutes.minutes.ago) }
@@ -322,8 +332,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
 
     medals = css_select("turbo-frame#student_home_recent_activity li [data-medal]")
-    assert_equal [ "Argent Médaille Argent", "Bronze Médaille Bronze", "Bronze Médaille Bronze" ], medals.map { it.text.squish }
-    assert_select "turbo-frame#student_home_recent_activity", text: %r{\d+\s*/\s*20|%}, count: 0
+    assert_equal [ "14/20 Argent Médaille Argent", "13/20 Bronze Médaille Bronze", "4/20 Bronze Médaille Bronze" ], medals.map { it.text.squish }
+    assert_select "turbo-frame#student_home_recent_activity", text: /%/, count: 0
     assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=bg-warning]", 0
     assert_select "turbo-frame#student_home_recent_activity form[action=?] button.ui-button-secondary", exercise_sessions_path(exercise.public_id),
                   text: tl("history.redo"), count: 3
@@ -474,7 +484,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_select "section#student_to_do h2", text: tl("to_do.title")
+    assert_select "section#student_to_do h2.px-4", text: tl("to_do.title")
+    # Porteur, 2026-11-24 : plus de compte « répondu/total » sur les lignes de « À faire ».
+    assert_select "#student_to_do li", text: %r{\d+\s*/\s*\d+}, count: 0
     assert_equal %w[Un Deux Trois Quatre Cinq], css_select("#student_to_do li a span.text-brand-strong.font-semibold.leading-snug").map { it.text.strip }
     assert_select "#student_to_do li:not([hidden])", 3
     assert_select "#student_to_do li[hidden]", 2
@@ -709,77 +721,138 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 5, announcement_titles.size
   end
 
-  # Chantier activation-eleve (UDR-0174) : tant qu'aucun exercice n'est réussi, son premier exercice.
-  FIRST = "section#student_first_exercise".freeze
+  # Chantier entree-et-accueil-eleve-allegees, Lot D (UDR accueil-eleve-qr-fenetre-inviter §3.2) : « Ton premier exercice » est une
+  # fenêtre du shell (StudentFirstExercisesControllerTest) ; l'accueil n'en garde plus la carte, et ne retire plus rien de ses listes.
+  FIRST = "#student_first_exercise".freeze
 
-  def tc(key, **) = I18n.t("catalog.courses.next_exercise.#{key}", **)
-
-  test "activation CA-8: not activated, « Ton premier exercice » follows the class card, before the grid; one tap starts it" do
-    exercise = create_exercise(essential: @essential, title: "Les étapes de la méiose")
+  test "CA-12: not activated, the home has no « Ton premier exercice » card, only the deferred frame of the window" do
+    create_exercise(essential: @essential, title: "Les étapes de la méiose")
     sign_in_as @student
 
     get student_home_path
 
-    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_class_card student_first_exercise student_subjects]
-    assert_equal %w[student_class_card student_first_exercise student_subjects], ids
-    assert_select FIRST, 1 do
-      assert_select "p", text: tc("first")
-      assert_select "h2#student_first_exercise_title", text: "Les étapes de la méiose"
-      assert_select "p", text: "SVT · Génétique"
-      assert_select "form[action=?][method=post] button[aria-label=?]", exercise_sessions_path(exercise.public_id),
-                    tc("start_aria", title: "Les étapes de la méiose"), text: including(tc("start"))
+    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_class_card student_first_exercise student_subjects student_invite_cell]
+    assert_equal %w[student_class_card student_subjects student_invite_cell], ids
+    assert_select FIRST, 0
+    assert_select "turbo-frame#student_first_exercise_prompt[src=?]", student_first_exercise_path
+  end
+
+  MORE_SHEET = "dialog#student_more_sheet".freeze
+
+  # Chantier accueil-eleve-grille-plus (UDR accueil-eleve-grille-plus §3), CA-1 : « Inviter » puis « Plus » terminent la grille.
+  test "CA-1: the grid ends with the subjects, then « Inviter », then « Plus »; no « Invite tes camarades » section any more" do
+    sign_in_as @student
+
+    get student_home_path
+
+    ids = css_select("#student_home [id]").map { it["id"] } & %w[student_subjects subject_svt student_invite_cell student_more_cell]
+    assert_equal %w[student_subjects subject_svt student_invite_cell student_more_cell], ids
+    assert_select "nav#student_subjects ul.lg\\:grid-cols-8 > li", 3
+    assert_select "#student_invite_classmates, #student_invite_classmates_title", 0
+    assert_select "li#student_invite_cell form[action=?][method=post][target=_blank][data-turbo=false]", class_invite_path do
+      assert_select "button#student_invite_tile.w-full[aria-label=?]", tl("invite_tile.action_label", classroom: "Tle D 1") do
+        assert_select "span.size-14.rounded-full.bg-brand-soft.text-brand-strong svg"
+        assert_select "span", text: tl("invite_tile.action")
+      end
+    end
+    assert_select "li#student_more_cell.lg\\:hidden button#student_more_button[type=button][aria-haspopup=dialog][aria-controls=student_more_sheet]" do
+      assert_select "span.size-14.rounded-full.bg-line.text-ink svg"
+      assert_select "span", text: I18n.t("shared.navigation.more.title")
     end
   end
 
-  test "activation CA-2: a copy in progress is resumed from the card, at the next question" do
-    exercise = create_exercise(essential: @essential, title: "Les étapes de la méiose", questions: 3)
-    copy = create_exercise_session(student: @student, exercise:, answered_count: 1)
+  test "CA-1: with no subject, « Inviter » and « Plus » stay and the empty sentence stays under the grid" do
+    sign_in_as create_student(classroom: create_classroom(level: create_level))
+
+    get student_home_path
+
+    assert_select "nav#student_subjects li#student_invite_cell"
+    assert_select "nav#student_subjects li#student_more_cell"
+    assert_select "nav#student_subjects > p", text: tl("subjects.empty")
+  end
+
+  test "CA-2: without a classroom, « Plus » is there and « Inviter » is not" do
+    remove(@student, @classroom, at: 10.days.ago)
     sign_in_as @student
 
     get student_home_path
 
-    assert_select "#{FIRST} a[href=?]", exercise_session_path(copy.public_id), text: including(tc("resume", number: 2))
+    assert_select "nav#student_subjects a#subject_svt"
+    assert_select "nav#student_subjects li#student_more_cell #student_more_button"
+    assert_select "#student_invite_cell, #student_invite_tile", 0
+    assert_select MORE_SHEET
   end
 
-  test "activation CA-9: brought by the class code, the card is the assignment, given by the class; « À faire » is gone when it was the only one" do
+  test "CA-3: the « Plus » sheet is a phone sheet named « Plus », rendered once, with the five entries in four columns, at least a quarter high" do
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select MORE_SHEET, 1
+    assert_select "#{MORE_SHEET}.dialog-phone-sheet[aria-labelledby=student_more_sheet-title]"
+    assert_select "#student_more_sheet-title", text: I18n.t("shared.navigation.more.title")
+    assert_select "#{MORE_SHEET} .min-h-sheet-quarter.max-h-sheet-half.overflow-y-auto ul.grid.grid-cols-4.gap-y-4 > li", NavigationHelper::STUDENT_MORE.size
+    assert_select "#{MORE_SHEET} ul.grid li span.size-14.rounded-full svg"
+  end
+
+  test "CA-4: once the beta is over, « S'abonner » is a link to the subscription page, inside the top frame" do
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+      sign_in_as @student
+
+      get student_home_path
+
+      assert_select "#{MORE_SHEET} a[href=?][data-turbo-frame=_top]", billing_subscription_path, text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.subscribe"))}/
+    end
+  end
+
+  # UDR-0169 acces-beta : pendant la bêta, aucun lien vers l'abonnement sur l'accueil.
+  test "CA-4: during the beta, « S'abonner » says « Bientôt disponible »; no link to the subscription page" do
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#{MORE_SHEET} a[href=?]", billing_subscription_path, 0
+    assert_select "#{MORE_SHEET} button[type=button][data-action='soon#say']", text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.subscribe"))}/
+  end
+
+  test "CA-5: the entries without a screen are buttons that say « Bientôt disponible » in a polite status; no link" do
+    stub_const(Entities::Billing::Offer, :BETA_ENDS_ON, Date.new(2026, 1, 1)) do
+      sign_in_as @student
+      get student_home_path
+    end
+
+    soon = NavigationHelper::STUDENT_MORE.reject(&:route)
+    assert_equal 4, soon.size
+    assert_select "#{MORE_SHEET} [data-controller=soon][data-soon-message-value=?]", I18n.t("shared.navigation.more.soon") do
+      assert_select "button[type=button][data-action='soon#say']", 4
+      assert_select "a", 1
+      assert_select "p#student_more_status[role=status][aria-live=polite][data-soon-target=status]", text: ""
+    end
+    soon.each do |entry|
+      assert_select "#{MORE_SHEET} button[data-action='soon#say']", text: /#{Regexp.escape(I18n.t("shared.navigation.more.entries.#{entry.key}"))}/
+    end
+  end
+
+  test "CA-8: the sheet lists the entries of NavigationHelper::STUDENT_MORE, in that order" do
+    sign_in_as @student
+
+    get student_home_path
+
+    expected = NavigationHelper::STUDENT_MORE.map { I18n.t("shared.navigation.more.entries.#{it.key}") }
+    labels = css_select("#{MORE_SHEET} ul.grid > li").map { it.text.squish }
+    assert_equal expected, labels
+  end
+
+  test "activation CA-9: the assignment stays in « À faire », whoever the student, whichever the first exercise" do
     brought = create_student(classroom: @classroom, joined_via: "code")
     @student = brought
     assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
+    assign_exercise("Mitose", due_on: Date.current + 3)
     sign_in_as brought
 
     get student_home_path
 
-    assert_select "#{FIRST} h2", text: "Méiose, les étapes"
-    assert_select "#{FIRST} p", text: "SVT · #{tc('assigned')}"
-    assert_select "#student_to_do", 0
-  end
-
-  test "activation CA-9: the card's exercise leaves « À faire », the others stay" do
-    assign_exercise("Méiose, les étapes", due_on: Date.current + 2)
-    assign_exercise("Mitose", due_on: Date.current + 3)
-    sign_in_as @student
-
-    get student_home_path
-
-    card = css_select("#{FIRST} h2").first.text.strip
-    rows = css_select("#student_to_do li").map(&:text).join
-    assert_not_includes rows, card
-    assert_select "#student_to_do", 1
-  end
-
-  test "activation CA-5: a copy completed at 10/20 or more: no card any more; nothing to propose: no card either" do
-    complete(create_exercise(essential: @essential), score: 50)
-    create_exercise(essential: @essential)
-    sign_in_as @student
-
-    get student_home_path
-
-    assert_select FIRST, 0
-    assert_select "section#student_class_card", 1
-
-    other = create_student(classroom: create_classroom(level: create_level))
-    sign_in_as other
-    get student_home_path
+    assert_select "#student_to_do li", 2
     assert_select FIRST, 0
   end
 
@@ -812,17 +885,15 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
                   text: tl("history.redo")
   end
 
-  test "activation CA-13: not activated, the copy in progress is on the card, not in the history" do
+  test "activation CA-13 (Lot D): the card is gone, so the copy in progress is in the history like any other" do
     copy = create_exercise_session(student: @student, exercise: create_exercise(essential: @essential, title: "Mitose"), answered_count: 1)
     complete(create_exercise(essential: @essential, title: "Méiose"), score: 20)
     sign_in_as @student
 
-    get student_home_path
-    assert_select "#student_first_exercise a[href=?]", exercise_session_path(copy.public_id)
-
     history
-    assert_select "a[href=?]", exercise_session_path(copy.public_id), 0
-    assert_select "turbo-frame#student_home_recent_activity li", 1
+
+    assert_select "a[href=?]", exercise_session_path(copy.public_id)
+    assert_select "turbo-frame#student_home_recent_activity li", 2
   end
 
   test "activation CA-14: neither completed nor in progress (an abandoned copy only): no history" do

@@ -49,6 +49,9 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`acces-beta`](acces-beta/memo.md) | livré | feature | 2026-11-12 | Accès complet gratuit pendant la bêta |
 | [`accueil-direction`](accueil-direction/memo.md) | livré | feature | 2026-10-04 | Accueil de la direction : établissement, niveaux, annonces, activité |
 | [`accueil-eleve`](accueil-eleve/memo.md) | planification | feature | 2026-10-15 | Accueil élève aux couleurs Wave et Djamo |
+| [`accueil-eleve-grille-plus`](accueil-eleve-grille-plus/memo.md) | planifié | feature | 2026-11-24 | Accueil élève : « Inviter » et « Plus » dans la grille |
+| [`accueil-eleve-qr-agrandi`](accueil-eleve-qr-agrandi/memo.md) | — | — | — | Accueil élève : le QR en grand, avec le partage WhatsApp |
+| [`acquisition-classes`](acquisition-classes/memo.md) | planifié | feature | 2026-11-16 | Faire entrer des classes entières |
 | [`acteurs-fantomes-parent-examsubject`](acteurs-fantomes-parent-examsubject/memo.md) | abandonné | bugfix | 2026-09-18 | `Parent` et `ExamSubject` : déclarés partout, persistés nulle part |
 | [`actions-en-menu`](actions-en-menu/memo.md) | livré | feature | 2026-09-28 | Actions d'un objet dans un menu ⋮ |
 | [`activation-eleve`](activation-eleve/memo.md) | livré | feature | 2026-11-16 | Activation de l'élève : de l'inscription au premier exercice réussi |
@@ -156,18 +159,23 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`crm-ecoles`](crm-ecoles/memo.md) | planifié | feature | 2026-11-04 | CRM des écoles |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | feature | 2026-09-28 | Croissance par parrainage entre enseignants, démarrage à froid et mesure du k-factor |
 | [`cycles-en-radio`](cycles-en-radio/memo.md) | livré | feature | 2026-09-28 | Cycles en boutons radio |
+| [`demarrage-develop`](demarrage-develop/memo.md) | en cours | optimisation | 2026-11-21 | Démarrage de Develop et Staging en moins de 2 minutes |
+| [`deploiement-continu-hostinger`](deploiement-continu-hostinger/memo.md) | planifié | feature | 2026-11-21 | Déploiement continu GitHub → VPS Hostinger |
 | [`deploiement-seeds-variantes`](deploiement-seeds-variantes/memo.md) | livré | bugfix | 2026-09-29 | Seeds joués deux fois au déploiement, `image_processing` réclamé au démarrage |
 | [`dette-contrats-ports-et-injection`](dette-contrats-ports-et-injection/memo.md) | abandonné | refactoring | 2026-09-18 | Contrats de ports et injection de dépendances non respectés |
 | [`dettes-reorganisation`](dettes-reorganisation/memo.md) | livré | bugfix | 2026-10-04 | Dettes du chantier « réorganisation équipe / enseignant » |
 | [`develop-rouge-medailles`](develop-rouge-medailles/memo.md) | livré | bugfix | 2026-11-09 | Develop rouge après les médailles |
 | [`dockerfile-docker-hub-429`](dockerfile-docker-hub-429/memo.md) | en cours | bugfix | 2026-10-09 | Dockerfile et limite de Docker Hub (429) |
 | [`ecrans-direction-lents`](ecrans-direction-lents/memo.md) | livré | optimisation | 2026-10-04 | Écrans de la direction dans leur budget |
+| [`ecrans-wave-ma-classe-historique`](ecrans-wave-ma-classe-historique/) | pas de memo | — | — | — |
 | [`edition-lecon-equipe`](edition-lecon-equipe/memo.md) | livré | bugfix | 2026-11-14 | Édition d'une leçon par l'équipe |
 | [`edition-texte-lecon`](edition-texte-lecon/memo.md) | livré | feature | 2026-11-14 | Corriger le texte d'une leçon à l'écran |
 | [`eleve-sans-prof`](eleve-sans-prof/memo.md) | livré | feature | 2026-11-12 | L'élève sans enseignant a quelque chose à faire dès l'accueil |
 | [`enrolement-secret-stable`](enrolement-secret-stable/memo.md) | livré | bugfix | 2026-09-30 | Le QR code d'enrôlement reste valable quand la page est rouverte |
 | [`enseignant-plusieurs-matieres`](enseignant-plusieurs-matieres/memo.md) | exécution | feature | 2026-10-16 | Un enseignant qui enseigne plusieurs matières |
 | [`entonnoir-aarrr`](entonnoir-aarrr/memo.md) | livré | feature | 2026-11-16 | Entonnoir AARRR des élèves |
+| [`entree-eleve-unifiee`](entree-eleve-unifiee/memo.md) | livré | feature | 2026-11-20 | Une seule entrée pour l'élève : numéro et code secret |
+| [`entree-et-accueil-eleve-allegees`](entree-et-accueil-eleve-allegees/memo.md) | planifié | feature | 2026-11-21 | Entrée et accueil de l'élève allégés |
 | [`environnements-de-pr`](environnements-de-pr/memo.md) | livré | feature | 2026-10-21 | Environnements de PR sur Railway |
 | [`epuration-contenus`](epuration-contenus/memo.md) | livré | feature | — | Épuration des en-têtes de contenu et « Tout publier » |
 | [`espace-direction`](espace-direction/memo.md) | exécution | feature | 2026-10-16 | Espace direction, ce qui reste de la V2 |
@@ -177,6 +185,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`exercices-en-cartes`](exercices-en-cartes/memo.md) | livré | feature | 2026-10-30 | Les exercices en cartes |
 | [`feuille-pleine-largeur`](feuille-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La feuille remplit l'écran du téléphone |
 | [`feuilles-rendues`](feuilles-rendues/memo.md) | livré | bugfix | 2026-11-06 | Les feuilles d'exercices vérifiées et lisibles sur chaque leçon |
+| [`fiche-listes-formules`](fiche-listes-formules/memo.md) | prouvé | bugfix | 2026-11-24 | Fiche : formules dans les listes de l'entraînement |
 | [`fiche-revision-coupe-50-mots`](fiche-revision-coupe-50-mots/memo.md) | livré | feature | 2026-10-31 | La fiche de révision coupée à 50 mots |
 | [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | bugfix | 2026-09-28 | Finitions de la génération des classes et du menu ⋮ au téléphone |
 | [`finitions-ux`](finitions-ux/memo.md) | livré | feature | 2026-09-29 | Finitions UX |
@@ -185,6 +194,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`formules-apres-soumission`](formules-apres-soumission/memo.md) | livré | bugfix | 2026-11-14 | Formules LaTeX brutes après « Vérifier » |
 | [`generer-classes`](generer-classes/memo.md) | livré | feature | 2026-09-28 | Générer les classes manquantes des établissements |
 | [`gestion-etablissement-direction`](gestion-etablissement-direction/memo.md) | planifié | feature | 2026-10-01 | La direction gère son établissement |
+| [`hebergement-cloudflare`](hebergement-cloudflare/memo.md) | en cours | refactoring | 2026-11-17 | Héberger la production sur Cloudflare |
 | [`historique-eleve`](historique-eleve/memo.md) | livré | feature | 2026-10-15 | Historique de l'élève aux couleurs Wave et Djamo |
 | [`hitl-refs-adr-obsoletes`](hitl-refs-adr-obsoletes/memo.md) | abandonné | refactoring | 2026-09-18 | En-têtes HITL citant des numéros d'ADR périmés |
 | [`hors-connexion`](hors-connexion/memo.md) | planifié | feature | 2026-11-12 | Lnclass hors connexion |
@@ -198,6 +208,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`inscription-eleve-sans-code`](inscription-eleve-sans-code/memo.md) | planifié | feature | 2026-10-07 | Inscription des élèves sans code de classe |
 | [`inscription-enseignant`](inscription-enseignant/memo.md) | livré | feature | 2026-10-07 | Amélioration du parcours d'inscription des enseignants |
 | [`inscription-test-course`](inscription-test-course/memo.md) | livré | bugfix | 2026-10-30 | Le test d'inscription enseignant rouge sous charge |
+| [`installation-avant-inscription`](installation-avant-inscription/memo.md) | prouvé | bugfix | 2026-11-25 | Installation proposée avant l'inscription, par le navigateur |
 | [`installation-pwa`](installation-pwa/memo.md) | livré | feature | 2026-10-07 | Installer Lnclass sur le téléphone (PWA) |
 | [`interface-eleve-organisation`](interface-eleve-organisation/memo.md) | livré | feature | 2026-10-05 | Organisation des écrans élève : accueil, « Ma classe » et rythme d'une session |
 | [`interface-enseignant-organisation`](interface-enseignant-organisation/memo.md) | livré | feature | 2026-10-05 | Organisation des écrans enseignant : accueil, catalogue, fiche et page d'une classe |
@@ -206,6 +217,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`je-m-entraine-dans-la-fiche`](je-m-entraine-dans-la-fiche/memo.md) | livré | feature | 2026-10-30 | « Je m’entraîne » dans la fiche de révision |
 | [`lecons-1ere-2nde-debut`](lecons-1ere-2nde-debut/memo.md) | livré | feature | 2026-11-12 | Les trois premières leçons de 1ère et de 2nde, comme Thalès |
 | [`lecons-2nde-4-5`](lecons-2nde-4-5/) | pas de memo | — | — | — |
+| [`lecons-2nde-6-a-10`](lecons-2nde-6-a-10/) | pas de memo | — | — | — |
 | [`lecons-3eme-comme-thales`](lecons-3eme-comme-thales/memo.md) | PR prête | feature | 2026-11-05 | Les leçons de 3ème préparées comme Thalès |
 | [`lecons-4eme`](lecons-4eme/) | pas de memo | — | — | — |
 | [`lecons-5eme`](lecons-5eme/) | pas de memo | — | — | — |
@@ -239,13 +251,18 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`outils-ci-budgets`](outils-ci-budgets/memo.md) | livré | correction | 2026-10-28 | Deux outils de CI en retard sur leurs règles |
 | [`ouverture-remediation`](ouverture-remediation/memo.md) | livré | feature | 2026-11-09 | La fiche s'ouvre sous l'Or |
 | [`page-d-accueil-photo`](page-d-accueil-photo/memo.md) | cadrage | feature | 2026-10-14 | Page d'accueil publique en photo plein écran |
+| [`pages-sous-600ms`](pages-sous-600ms/memo.md) | livré | optimisation | 2026-11-21 | Aucune page au-dessus de 600 ms côté serveur |
 | [`parcours-matiere-exercice`](parcours-matiere-exercice/memo.md) | livré | optimisation | 2026-10-30 | Parcours matière → exercice |
+| [`partage-classe-k-factor`](partage-classe-k-factor/memo.md) | planifié | feature | 2026-11-20 | Partage de la classe et mesure du k-factor élève |
 | [`pentest-develop`](pentest-develop/) | pas de memo | — | — | — |
 | [`pentest-strix`](pentest-strix/memo.md) | cadrage | feature | 2026-09-28 | Pentest automatisé de la recette avant la mise en ligne |
 | [`photo-de-profil`](photo-de-profil/memo.md) | en cours | feature | 2026-09-28 | Photo de profil |
 | [`pilotage-equipe`](pilotage-equipe/memo.md) | livré | feature | 2026-09-28 | Pilotage de l'équipe |
 | [`politique-cache`](politique-cache/memo.md) | en cours | optimisation | 2026-10-03 | Politique de cache : ce qui rend les pages lentes, et ce qu'un cache peut y changer |
+| [`premier-exercice-formules-soumission`](premier-exercice-formules-soumission/memo.md) | livré | bugfix | 2026-11-24 | Premier exercice : formules des listes et envoi de la copie |
+| [`premier-exercice-ux`](premier-exercice-ux/memo.md) | prouvé | bugfix | 2026-11-25 | Premier exercice : la fenêtre qui suit partout, la réponse en nombre refusée sans le dire |
 | [`prepare-interros-cahier`](prepare-interros-cahier/memo.md) | livré | feature | 2026-10-30 | « Prépare interros » et « Prépare devoirs » à l'identique des maquettes cahier |
+| [`preuve-arbre-documents-seuls`](preuve-arbre-documents-seuls/memo.md) | livré | bugfix | 2026-11-24 | Preuve de l'arbre pour une promotion de documents seuls |
 | [`profil-eleve`](profil-eleve/memo.md) | lots 0 | feature | 2026-10-15 | Profil de l'élève aux couleurs Wave et Djamo |
 | [`profil-utilisateur`](profil-utilisateur/memo.md) | livré | feature | 2026-09-27 | Page profil de chaque utilisateur |
 | [`progres-eleve`](progres-eleve/memo.md) | livré | feature | 2026-10-04 | L'élève voit son propre progrès |
@@ -256,6 +273,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`rapports-de-classe`](rapports-de-classe/memo.md) | livré en PR | feature | 2026-10-16 | Rapports de classe : la fiche d'un élève et ce qui reste du suivi enseignant |
 | [`rapports-exercices`](rapports-exercices/memo.md) | livré | feature | 2026-10-04 | Comprendre où en est la classe sur un exercice |
 | [`recette-v1-defauts`](recette-v1-defauts/memo.md) | livré | bugfix | 2026-09-28 | Défauts de la recette V1 |
+| [`recherche-etablissement`](recherche-etablissement/memo.md) | livré | feature | 2026-11-20 | Chercher son établissement en tapant son nom |
 | [`refaire-ou-continuer`](refaire-ou-continuer/memo.md) | livré | feature | 2026-11-04 | Refaire ou continuer depuis la correction |
 | [`refonte-application`](refonte-application/memo.md) | décision | programme | 2026-09-18 | Refonte de l'application dans un nouveau projet Rails |
 | [`refonte-contenus-maths`](refonte-contenus-maths/memo.md) | livré | feature | 2026-10-29 | Refonte des contenus de mathématiques |
@@ -270,10 +288,12 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`reserves-revue-train`](reserves-revue-train/memo.md) | en revue | correction | 2026-11-15 | Réserves basses de la revue du train du 2026-11-15 |
 | [`retention-ip-audit`](retention-ip-audit/memo.md) | livré | feature | 2026-10-05 | Rétention de l'adresse IP du journal d'audit |
 | [`retouches`](retouches/memo.md) | permanent | retouche | 2026-11-06 | Retouches sans chantier parent |
+| [`retours-terrain-tiassale`](retours-terrain-tiassale/memo.md) | cadré | programme | 2026-11-20 | Retours de terrain de Tiassalé (programme) |
 | [`retrait-debugbar`](retrait-debugbar/memo.md) | livré | bugfix | 2026-10-03 | Retrait de debugbar |
 | [`revision-eleve`](revision-eleve/memo.md) | en pause | feature | 2026-10-15 | Révision de l'élève (fiche de révision) aux couleurs Wave et Djamo |
 | [`routage-modeles`](routage-modeles/memo.md) | livré | refactoring | 2026-10-19 | Routage des modèles par rôle |
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré | bugfix | 2026-09-29 | Secrets à usage unique hors de tout cache |
+| [`securite-correctifs-mineurs`](securite-correctifs-mineurs/memo.md) | en cours | bugfix | 2026-11-24 | Correctifs mineurs de la revue de sécurité du passage Staging → main |
 | [`seeds-premiere-serie-a`](seeds-premiere-serie-a/memo.md) | abandonné | feature | 2026-10-11 | Référentiel de développement : séries de la 1ère (abandonné, hypothèse « A, C et D » réfutée) |
 | [`selection-par-carte-de-couverture`](selection-par-carte-de-couverture/memo.md) | cadrage | optimisation | 2026-10-03 | Ne jouer que les tests système que les fichiers touchés concernent (carte de couverture) |
 | [`seuil-remediation`](seuil-remediation/memo.md) | livré | feature | 2026-11-09 | Une seule échelle : la remédiation suit la médaille |

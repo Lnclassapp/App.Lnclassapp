@@ -46,7 +46,8 @@ class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
 
     assert_current_path student_home_path
     assert_equal [ "Devoirs communs", "Nouvelles fiches", "Rentrée numérique" ], carousel_titles
-    assert_selector "#student_home_announcements [data-communication--carousel-target=pager].flex", visible: :visible
+    # Retouche accueil-eleve-matieres-annonces : plus de points sous les annonces de l'accueil élève.
+    assert_no_selector "#student_home_announcements [data-communication--carousel-target=pager]", visible: :all
 
     assert_no_page_reload do
       within("#student_home_announcements") { find(cross(@fiches)).click }
@@ -130,7 +131,7 @@ class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
     within(card(@fiches)) { assert_selector "button[data-state=played][aria-label='#{tc('audio.labels.played')}']" }
   end
 
-  test "AN-10, AN-12 — on a phone, the band scrolls by itself, its dots follow the card in view; the list stacks its cards" do
+  test "AN-10, AN-12 — on a phone, the band scrolls by itself, without dots; the list stacks its cards" do
     sign_in_as @awa
 
     with_mobile_viewport do
@@ -138,10 +139,10 @@ class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
 
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
-      assert_match(/\bw-4\b/, dot_classes.first)
-      page.execute_script("document.querySelector('[data-communication--carousel-target=track]').scrollLeft = 10000")
-      assert_selector "[data-communication--carousel-target=dot]:last-child.w-4.bg-brand"
-      assert_match(/\bw-1\.5\b/, dot_classes.first)
+      assert_empty dot_classes
+      # La bande défile en douceur (motion-safe) : on saute sans animation pour lire la position tout de suite.
+      page.execute_script("const t = document.querySelector('[data-communication--carousel-target=track]'); t.style.scrollBehavior = 'auto'; t.scrollLeft = 10000")
+      assert_operator page.evaluate_script("document.querySelector('[data-communication--carousel-target=track]').scrollLeft"), :>, 0
 
       within("#student_home_announcements") { find(cross(@rentree)).click }
       assert_toast tc("dismissal.title")

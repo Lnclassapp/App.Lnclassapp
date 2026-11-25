@@ -31,6 +31,17 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   JS
   setup { ignore_browser_install_prompt }
 
+  # Capybara's reset empties cookies and localStorage, not the tab's sessionStorage: « Plus tard » on the window « Ton premier
+  # exercice » (UDR-0185 §3.1) would silence it for the next test. Emptied while the page is still on the app:
+  # before_teardown, since the `teardown` callbacks run after Capybara's reset.
+  def before_teardown
+    page.execute_script("try { window.sessionStorage.clear() } catch (error) {}") if page.current_url.to_s.start_with?("http")
+  rescue Selenium::WebDriver::Error::WebDriverError
+    nil # a browser already gone has no storage to empty
+  ensure
+    super
+  end
+
   # Each browser of a test (using_session opens another one) gets the script once.
   def using_session(name, &block)
     super(name) do |*args|
@@ -45,6 +56,17 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     browser.execute_cdp("Page.addScriptToEvaluateOnNewDocument", source: IGNORE_BROWSER_INSTALL_PROMPT)
     browser.instance_variable_set(:@install_prompt_ignored, true)
+  end
+
+  # UDR-0185 §3.1: a student without a copy handed in gets the « Ton premier exercice » window on the home only;
+  # it would cover the clicks of a test. « Plus tard » silences it for the visit. Returns at once on a page without its frame,
+  # once the dialog is closed, or when it does not open within 5 s.
+  def dismiss_first_exercise_prompt
+    return unless page.has_css?("turbo-frame#student_first_exercise_prompt", visible: :all, wait: 0)
+    return unless page.has_css?("#student_first_exercise_later", wait: 5)
+
+    find("#student_first_exercise_later").click
+    assert_no_selector "#student_first_exercise_modal[open]", wait: 5
   end
 
   MOBILE_VIEWPORT = [ 390, 844 ].freeze
@@ -72,6 +94,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def issue_recovery_code_from_roster(row)
     within(row) { find("a[href*='/students/']").click }
     click_on I18n.t("classroom.classroom_students.manage.issue_code")
+  end
+
+  # ADR-0142, UDR-0177: a few letters in « Ton établissement », then the school
+  # chosen in the list of results (each one a radio with its DRENA).
+  def choose_school(name, search: name)
+    fill_in "school_q", with: search
+    within("turbo-frame#school_results") { choose name }
   end
 
   # The « Suivi » block of a school page (crm-ecoles) is made of lazy frames that load as they come into view, above the

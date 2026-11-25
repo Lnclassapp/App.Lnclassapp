@@ -1,0 +1,15 @@
+<%# 🌐 UI · catalog/practice_checks/_propositions — les propositions lettrées d'un menu de « Je m'entraîne » dont une proposition est une formule %>
+<%# Rôle : `entries` = [lettre, valeur de l'option, texte] ; la proposition se lit ici, rendue (math de la fiche), et le menu propose sa lettre %>
+<%# UDR  : 0147 §3.3, UDR-0183 · chantier fiche-listes-formules %>
+<%# locals: (id:, caption:, entries:) -%>
+<div class="sheet-practice-propositions">
+  <p class="sheet-muted" id="<%= id %>-caption"><%= caption %></p>
+  <ol class="sheet-practice-choices" id="<%= id %>" aria-labelledby="<%= id %>-caption">
+    <% entries.each do |shown, value, text| %>
+      <li class="sheet-practice-choice" data-option-value="<%= value %>">
+        <span class="sheet-practice-letter"><%= shown %></span>
+        <span class="sheet-text"><%= sheet_text(text) %></span>
+      </li>
+    <% end %>
+  </ol>
+</div>

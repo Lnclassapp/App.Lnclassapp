@@ -25,26 +25,20 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     assert_response :success
     assert_select "title", text: including(tl("show.page_title"))
+    # UDR-0173 §3 (écran intérieur) : ni en-tête ni menu ; la flèche retour vers l'accueil et le grand titre.
+    assert_select "#main a#inner_back[href=?][aria-label]", student_home_path
     assert_select "h1", text: tl("show.title")
-    assert_select "h1 + p", 0
-    # CA-1 (UDR-0086 §3.1): no « Accueil » back link above the title any more; the header and the menus lead home.
-    assert_select "#main nav[aria-label=?]", I18n.t("components.back_link.label"), 0
-    # CA-2 (UDR-0086 §3.2): the classroom card on the blue gradient, without the count or the list of its students.
-    assert_select "section#student_classroom_header.bg-brand.text-on-brand" do
-      assert_select "h2", text: "Tle D 1"
-      assert_select "*", text: "Tle · D"
-      assert_select "*", text: "Lycée Classique"
-      assert_select "*", text: "2026-2027"
-      # IL-02, UDR-0081 §3.8 : plus de code de classe, sans rien à la place.
-      assert_select "[id*=join_code]", 0
-    end
+    assert_select "header.h-bar, #main nav", 0
+    # La classe tient dans le sous-titre, sans effectif ni liste de ses élèves.
+    assert_select "#inner_subtitle", text: "Tle D 1 · Tle · D · Lycée Classique · 2026-2027"
+    # IL-02, UDR-0081 §3.8 : plus de code de classe, sans rien à la place.
+    assert_select "[id*=join_code]", 0
     assert_no_match(/Code de la classe/, response.body)
-    assert_select "#student_classroom_header", text: /élève/, count: 0
+    assert_select "#student_classroom", text: /élève/, count: 0
     # Ni effectif nu : deux élèves dans la classe, aucun « 2 » isolé (l'année « 2026-2027 » n'en est pas un).
-    assert_no_match(/(?<![\d-])2(?![\d-])/, css_select("#student_classroom_header").text)
+    assert_no_match(/(?<![\d-])2(?![\d-])/, css_select("#inner_subtitle").text)
     assert_no_match "Yapo", response.body
     assert_no_match "Koffi", response.body
-    assert_select "a[href='#{student_classroom_path}'][aria-current=page]"
   end
 
   def course_named(name, material: svt)
@@ -75,7 +69,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     # sujet-avant-de-commencer, Lot B : « Ma classe » ne porte qu'une case ; la feuille est sur sa page à remplir.
     get student_classroom_path
     assert_select "#student_classroom_assigned .ps-sheet", 0
-    assert_select "#student_classroom_assigned a.ps-card", 1
+    assert_select "#student_classroom_assigned li a", 1
 
     get fill_student_assigned_sheet_path("devoir-#{Orm::ClassroomAssignment.sole.public_id.downcase}")
 
@@ -91,25 +85,24 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
   def sections = css_select("#student_classroom [id^=student_classroom_]:not([id$=_title])").map { it["id"] }
 
-  # UDR-0076 §3.2, UDR-0086 §3.4 : la classe, puis « Cours assignés », « Exercices assignés », « Exercices traités », les
-  # deux listes dans une grille qui les met côte à côte dès 1 024 px.
-  test "below the classroom: the assigned courses, the assigned exercises, then the treated exercises" do
+  # UDR-0173 §3 (règle 1) : d'abord ce qui est à faire, « Exercices assignés », puis « Fiches de cours », puis « Exercices
+  # traités », en une colonne, chacune en carte blanche.
+  test "what to do first: the assigned exercises, then the courses, then the treated exercises" do
     create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+    exercise = assign("Méiose", course: course_named("Génétique"))
+    complete(exercise, 80, at: 1.minute.ago)
     sign_in_as @student
 
     get student_classroom_path
 
-    assert_equal %w[student_classroom_header student_classroom_courses student_classroom_assigned student_classroom_treated],
-                 sections
-    # CA-E11 (UDR écrans élève §3.6 bis) : dès 1 024 px, les assignés dans la colonne de gauche (2/3), les traités à droite (1/3).
-    assert_select "#student_classroom .lg\\:grid-cols-3 > .lg\\:col-span-2 > #student_classroom_assigned"
-    assert_select "#student_classroom .lg\\:grid-cols-3 > #student_classroom_treated"
-    assert_select "#student_classroom .lg\\:grid-cols-2", 0
+    assert_equal %w[student_classroom_assigned student_classroom_courses student_classroom_treated], sections
+    assert_select "#student_classroom section > div.rounded-card.bg-white", 3
+    assert_select "#student_classroom [class*='lg:grid-cols']", 0
   end
 
   # CA-E3 (mvp-teacher-student, option A) : avec une fiche à revoir, la section vient juste après « Exercices assignés »,
   # dans la même colonne, une ligne par fiche vers la fiche de cours ; sans fiche à revoir, rien.
-  test "CA-E3: « Fiches à revoir » sits right after the assigned exercises, one link per sheet to review" do
+  test "CA-E3: « Notions à revoir » comes before the treated exercises, one link per sheet to review" do
     create_teacher(school: @classroom.school, classrooms: [ @classroom ])
     course = course_named("Génétique")
     gap = create_gap(student: @student, essential: create_essential(course:, name: "La méiose"))
@@ -117,9 +110,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    assert_equal %w[student_classroom_header student_classroom_courses student_classroom_assigned student_classroom_gaps
-                    student_classroom_treated], sections
-    assert_select "#student_classroom_assigned + #student_classroom_gaps" do
+    assert_equal %w[student_classroom_gaps student_classroom_treated], sections
+    assert_select "#student_classroom_gaps" do
       assert_select "h2, h3", text: tl("pending_gaps.title")
       # suivi-classe-lecon CA-9 : le seul exercice publié de la fiche est celui de la copie ratée ; c'est lui qui est proposé.
       sheet = course_sheet_path(course.slug, "notion-#{gap.essential.slug}", anchor: "sheet-exercise-#{gap.source_session.exercise.public_id}")
@@ -145,8 +137,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    assert_equal %w[student_classroom_header student_classroom_no_teacher student_classroom_courses student_classroom_assigned
-                    student_classroom_treated], sections
+    assert_equal %w[student_classroom_no_teacher], sections
     message = I18n.t("classroom.student_homes.invite_teacher.message", classroom: "Tle D 1", school: "Lycée Classique",
                                                                       link: new_teacher_registration_url)
     assert_select "section#student_classroom_no_teacher[aria-labelledby=student_classroom_no_teacher_title]" do
@@ -177,8 +168,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select PRIMARY_ACTION, 0
   end
 
-  # CA-4 : les cours des exercices assignés, en bande défilante, chacun vers sa page ; un cours sans exercice assigné n'y est pas.
-  test "the assigned courses in a carousel band: one card per course of an assigned exercise, to the course page" do
+  # CA-4 : les cours des exercices assignés, une ligne chacun vers sa page ; un cours sans exercice assigné n'y est pas.
+  test "the assigned courses: one line per course of an assigned exercise, to the course page" do
     genetics = course_named("Génétique")
     functions = course_named("Fonctions", material: create_material(name: "Mathématiques"))
     assign("Méiose", course: genetics, at: 2.hours.ago)
@@ -190,12 +181,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     assert_select "#student_classroom_courses" do
       assert_select "h2", text: tl("show.courses_title")
-      assert_select "[data-controller='communication--carousel'] ul[data-communication--carousel-target=track][aria-label=?]",
-                    tl("show.courses_title")
       assert_select "li a[href=?]", course_path(functions.slug), text: including("Fonctions")
-      assert_select "li a[href=?]", course_path(genetics.slug), text: including(tl("course_card.assigned", count: 1))
-      assert_select "[data-communication--carousel-target=dot]", 2
-      assert_select "*", text: tl("show.courses_count", count: 2)
+      assert_select "li a[href=?]", course_path(genetics.slug), text: including("SVT · #{tl("course_card.assigned", count: 1)}")
     end
     assert_equal [ "course_#{functions.slug}", "course_#{genetics.slug}" ], css_select("#student_classroom_courses li[id]").map { it["id"] }
     assert_no_match "Sans exercice", response.body
@@ -217,19 +204,14 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    cards = css_select("#student_classroom_assigned a.ps-card")
-    assert_equal [ "Prépare interros n°1", "Prépare devoirs n°1" ], cards.map { it.at_css(".ps-card-kind").text }
+    rows = css_select("#student_classroom_assigned li")
+    assert_equal %w[devoir-batchtwoxxxxxx devoir-batchthreexxxx], rows.map { it["id"] }
     assert_equal [ student_assigned_sheet_path("devoir-batchtwoxxxxxx"), student_assigned_sheet_path("devoir-batchthreexxxx") ],
-                 cards.map { it["href"] }
-    assert_select "#student_classroom_assigned a.ps-card:first-child" do
-      assert_select ".ps-card-title", text: "La méiose"
-      assert_select ".ps-card-meta", text: "2 exercices"
-    end
-    assert_select "#student_classroom_assigned a.ps-card:last-child" do
-      assert_select ".ps-card-title", text: /\ADEVOIR DU /
-      assert_select ".ps-card-meta", text: "3 exercices"
-      assert_select ".ps-card-meta", text: /\A0 \/ 3 /
-    end
+                 rows.map { it.at_css("a")["href"] }
+    assert_equal "La méiose Prépare interros n°1", rows.first.text.squish
+    # Porteur, 2026-11-24 : plus de compte des exercices réussis sur la ligne.
+    assert_select "#student_classroom_assigned li", text: %r{\d+\s*/\s*\d+}, count: 0
+    assert_match(/\ADEVOIR DU .* Prépare devoirs n°1\z/, rows.last.text.squish)
 
     # La lecture est une épreuve (sans « À retenir » ni « Notions mobilisées »), la feuille à remplir garde les siens.
     get student_assigned_sheet_path("devoir-batchtwoxxxxxx")
@@ -250,7 +232,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select ".ps-subject", text: /\ADEVOIR DU /
     assert_select ".ps-remember", text: including("Notions mobilisées :")
     assert_select ".ps-exercise", three.size
-    assert_select "#student_classroom_assigned[data-controller=reveal]", 0
+    assert_select "#student_classroom_assigned button[data-action='reveal#more']", 0
   end
 
   test "CA-14: two exercises of different notions: no « À retenir »" do
@@ -263,7 +245,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    assert_select "#student_classroom_assigned .ps-card-kind", text: "Prépare interros n°1"
+    assert_select "#student_classroom_assigned li", text: including("Prépare interros n°1")
     get student_assigned_sheet_path("devoir-batchmixedxxxx")
     assert_select ".ps-header-title", text: "PRÉPARE INTERROS", match: :first
     assert_select ".ps-remember", 0
@@ -278,7 +260,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    assert_select "#student_classroom_assigned .ps-sheet, #student_classroom_assigned a.ps-card", 0
+    assert_select "#student_classroom_assigned", 0
     assert_no_match "Secret", response.body
   end
 
@@ -295,22 +277,23 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    assert_select "#student_classroom_treated[data-controller=reveal]" do
+    assert_select "#student_classroom_treated [data-controller=reveal]" do
       assert_select "li", 4
       assert_select "li:not([hidden])", 3
-      # UDR-0145 : la carte entière mène au résultat ; la médaille et « Voir ma copie » y sont écrits.
-      assert_select "li:first-child a[href=?]", exercise_session_result_path(last.public_id), text: "Refait"
+      # UDR-0173 règle 7 : toute la ligne mène au résultat (la copie) ; la médaille à droite.
+      assert_select "li:first-child a[href=?]", exercise_session_result_path(last.public_id), text: including("Refait")
       assert_select "li:first-child", text: including("Or")
-      assert_select "#student_classroom_treated", text: %r{\d+\s*/\s*20|%}, count: 0
-      assert_select "li:first-child", text: including("Voir ma copie")
+      assert_select "li:first-child", text: including("SVT · ")
+      assert_select "li:first-child [data-grade]", "16/20"
+      assert_select "#student_classroom_treated", text: /%/, count: 0
       assert_select "button[data-action='reveal#more']"
     end
     assert_no_match "Autre élève", response.body
   end
 
   # CA-6 (UDR-0086 §3.4, amendé par l'UDR médailles) : la médaille enregistrée de chaque exercice traité, Bronze dès une réponse,
-  # « Pas encore » pour des copies vides seulement, jamais de note ni de rouge.
-  test "each treated exercise shows its medal, Bronze at least, never a grade or red" do
+  # « Pas encore » pour des copies vides seulement, sans note ; la note sur 20 au-dessus de la médaille (porteur, 2026-11-24) ; jamais de rouge.
+  test "each treated exercise shows its grade and medal, Bronze at least, never red" do
     genetics = course_named("Génétique")
     complete(create_exercise(essential: create_essential(course: genetics), title: "Réussi"), 75, at: 2.hours.ago)
     complete(create_exercise(essential: create_essential(course: genetics), title: "À revoir"), 45, at: 1.hour.ago)
@@ -323,12 +306,15 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     get student_classroom_path
 
     assert_select "#student_classroom_treated" do
-      assert_select "li:nth-child(1)", text: including("Bronze Médaille Bronze")
+      assert_select "li:nth-child(1)", text: including("9/20 Bronze Médaille Bronze")
       assert_select "li", text: including("Argent Médaille Argent"), count: 2
+      assert_select "li", text: including("14/20 Argent"), count: 1
+      assert_select "li", text: including("13/20 Bronze"), count: 1
       assert_select "li", text: including("Bronze Médaille Bronze"), count: 2
       # Une copie vide n'a pas de médaille : « Pas encore », comme son résultat.
       assert_select "li", text: including("Pas encore"), count: 1
-      assert_select "li", text: %r{\d+\s*/\s*20|%|Acquis|Fragile|difficulté}, count: 0
+      assert_select "li", text: including("0/20"), count: 0
+      assert_select "li", text: %r{%|Acquis|Fragile|difficulté}, count: 0
     end
     assert_select "#student_classroom_treated [class*=red], #student_classroom_treated [class*=error], #student_classroom_treated [class*=danger]", 0
   end
@@ -342,20 +328,20 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     get student_classroom_path
 
     due = I18n.t("classroom.student_classrooms.assigned_sheet.due_on", date: I18n.l(Date.current + 2, format: :due_long))
-    assert_select "#student_classroom_assigned a.ps-card .ps-card-meta", text: due
+    assert_select "#student_classroom_assigned li", text: including(due)
     # sujet-comme-une-epreuve : la lecture n'a pas de sous-titre ; l'échéance reste sous le titre de la feuille à remplir.
     get fill_student_assigned_sheet_path("devoir-#{Orm::ClassroomAssignment.sole.public_id.downcase}")
     assert_select ".ps-title-block", text: including(due)
   end
 
-  test "nothing assigned, nothing treated: the empty state of each section" do
+  # UDR-0173 règle 2 : aucune section vide n'est rendue ; sans rien du tout, une seule phrase dit ce qui viendra.
+  test "nothing assigned, nothing treated: no empty section, one sentence" do
     sign_in_as @student
 
     get student_classroom_path
 
-    assert_select "#student_classroom_courses", text: including(tl("show.courses_empty"))
-    assert_select "#student_classroom_assigned", text: including(tl("show.assigned_empty"))
-    assert_select "#student_classroom_treated", text: including(tl("show.treated_empty"))
+    assert_select "#student_classroom_courses, #student_classroom_assigned, #student_classroom_treated, #student_classroom_gaps", 0
+    assert_select "#student_classroom", text: including(tl("show.assigned_empty_description"))
     assert_select "#main [data-controller=reveal]", 0
   end
 
@@ -397,8 +383,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    assert_select "#student_classroom_header", text: including("6ème")
-    assert_select "#student_classroom_header", text: including(" · "), count: 0
+    assert_select "#inner_subtitle", text: /\A#{Regexp.escape(classroom.name)} · 6ème · /
+    assert_select "#inner_subtitle", text: /6ème · 6ème|· ·/, count: 0
   end
 
   test "CL-10: the student receives 403 on the teacher page of their own classroom" do

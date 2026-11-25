@@ -20,6 +20,10 @@
      verdict = verdicts[blank]
      verdict ? { "aria-describedby": "#{base_id}-verdict-#{blank}", "aria-invalid": ([ :wrong, :blank ].include?(verdict) ? "true" : nil) }.compact : {}
    } %>
+<%# UDR-0183 : une option de menu n'est que du texte, KaTeX n'y rend pas `$…$`. Dès qu'une proposition d'un menu est une formule, le menu propose
+    des lettres et les propositions se lisent rendues dans une liste lettrée ; les valeurs postées ne changent pas. %>
+<% letter = ->(rank) { ("A".ord + rank).chr } %>
+<% formula = ->(texts) { texts.any? { it.to_s.include?("$") } } %>
 <% label_for = ->(blank) { question.unit.present? ? t("#{scope}.blank_label_unit", index: blank + 1, number:, unit: question.unit) : t("#{scope}.blank_label", index: blank + 1, number:) } %>
 <%= tag.li id: base_id do %>
   <fieldset class="sheet-practice-question">
@@ -28,6 +32,9 @@
     <% when "numeric", "fill_blank", "select" %>
       <% segments = blank_segments(question.content) %>
       <% segments += [ [ :blank, 0 ] ] unless segments.any? { |type, _| type == :blank } %>
+      <% blanks = segments.filter_map { |type, value| value if type == :blank } %>
+      <% choices = kind == "select" ? blanks.to_h { |blank| [ blank, question.answers.each_with_index.select { |answer, _| answer.blank == blank } ] } : {} %>
+      <% lettered = choices.select { |_, pairs| formula.(pairs.map { |answer, _| answer.content }) }.keys %>
       <p class="sheet-practice-line">
         <% segments.each do |type, value| %>
           <% if type == :text %>
@@ -38,7 +45,7 @@
             <% attrs = { id: "#{base_id}-blank-#{value}", "aria-label": label_for.(value), **state_for.(value) } %>
             <span class="sheet-practice-blank">
               <% if kind == "select" %>
-                <% options = question.answers.each_with_index.select { |answer, _| answer.blank == value }.map { |answer, at| [ answer.content, at ] } %>
+                <% options = choices[value].each_with_index.map { |(answer, at), rank| [ lettered.include?(value) ? letter.(rank) : answer.content, at ] } %>
                 <%= select_tag name, options_for_select(options, saved), include_blank: t("#{scope}.choose"), class: "sheet-input", **attrs %>
               <% elsif kind == "numeric" %>
                 <%= text_field_tag name, saved, class: "sheet-input", inputmode: "decimal", autocomplete: "off", maxlength: 200, **attrs %>
@@ -51,6 +58,11 @@
           <% end %>
         <% end %>
       </p>
+      <% lettered.each do |blank| %>
+        <%= render "catalog/practice_checks/propositions", id: "#{base_id}-blank-#{blank}-propositions",
+                   caption: (blanks.size > 1 ? t("#{scope}.blank_propositions", index: blank + 1) : t("#{scope}.propositions")),
+                   entries: choices[blank].each_with_index.map { |(answer, at), rank| [ letter.(rank), at, answer.content ] } %>
+      <% end %>
     <% when "choice" %>
       <p class="sheet-text"><%= sheet_text(question.content) %></p>
       <% multiple = question.question_type.start_with?("multiple") %>
@@ -72,11 +84,17 @@
       <% order = Array(given["order"]).map(&:to_s) %>
       <% rows = question.answers.sort_by(&:position) %>
       <% items = kind == "ordering" ? question.answers.map(&:content) : question.answers.map(&:match_content) %>
+      <% items_lettered = formula.(items) %>
+      <% if items_lettered %>
+        <%= render "catalog/practice_checks/propositions", id: "#{base_id}-order-propositions", caption: t("#{scope}.propositions"),
+                   entries: items.each_with_index.map { |item, at| [ letter.(at), at, item ] } %>
+      <% end %>
+      <% item_options = items.each_with_index.map { |item, at| [ items_lettered ? letter.(at) : item, at ] } %>
       <div class="sheet-practice-rows">
         <% rows.each_with_index do |row, rank| %>
           <div class="sheet-practice-row">
             <%= label_tag "#{base_id}-order-#{rank}", (kind == "ordering" ? t("assessment.exercise_sessions.kinds.ordering.rank", n: rank + 1) : row.content), class: "sheet-text" %>
-            <%= select_tag "#{field}[order][]", options_for_select(items.each_with_index.to_a, order[rank]), include_blank: t("#{scope}.choose"),
+            <%= select_tag "#{field}[order][]", options_for_select(item_options, order[rank]), include_blank: t("#{scope}.choose"),
                            id: "#{base_id}-order-#{rank}", class: "sheet-input", **state_for.(0) %>
           </div>
         <% end %>

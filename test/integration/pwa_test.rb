@@ -47,9 +47,16 @@ class PwaTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CA-1 — a public page declares the manifest in its head" do
-    get root_path
+  # Chantier installation-avant-inscription (amende ADR-0082 §4.1) : avant l'inscription, aucune page ne se dit installable,
+  # pour qu'aucun navigateur (Chrome, Samsung Internet, Opera, Edge…) n'invite à installer ; le compte connecté la déclare.
+  test "CA-1 — a page seen by a visitor declares no manifest; a signed-in page does" do
+    [ root_path, new_session_path, new_student_registration_path ].each do |path|
+      get path
+      assert_select "head link[rel=manifest]", 0, path
+    end
 
+    sign_in_as create_student(classroom: create_classroom)
+    get student_home_path
     assert_select "head link[rel=manifest][href='/manifest.json']", count: 1
   end
 

@@ -1,0 +1,65 @@
+<%# 🌐 UI · teams/growth/_signup_k — « Partage entre élèves (k) » : k élève par établissement et par classe, sur la période %>
+<%# Rôle : lecture seule (Queries::Classroom::SignupKFactorQuery::Result) ; agrégats seulement, aucun nom d'élève %>
+<%# UDR  : partage-de-classe-qr-affiche-invitation (§3.4) · ADR : attribution-des-inscriptions-eleves %>
+<% number = ->(value) { value.nil? ? "—" : number_with_precision(value, precision: 1, strip_insignificant_zeros: true) } %>
+<% total = k.total %>
+<% threshold = 0.5 %>
+<% tables = [ [ :school, k.schools, k.schools_more ], [ :classroom, k.classrooms, k.classrooms_more ] ] %>
+
+<section id="growth_signup_k" aria-labelledby="growth_signup_k_title" class="mb-5">
+  <%= ui_card do %>
+    <div class="flex flex-wrap items-center gap-x-1">
+      <h2 id="growth_signup_k_title" class="text-xs font-medium tracking-wider text-mute uppercase"><%= t(".title") %></h2>
+      <%= ui_info_tip t(".tip"), label: t(".title") %>
+    </div>
+    <div class="mt-2 flex flex-wrap items-end gap-x-6 gap-y-3">
+      <p id="growth_signup_k_value" class="font-display text-5xl font-medium text-ink tabular-nums"><%= number.call(total.k) %></p>
+      <% if total.k %>
+        <div class="pb-2"><%= ui_badge t(".threshold", threshold: number.call(threshold)), tone: total.k >= threshold ? :success : :warning, dot: true %></div>
+      <% end %>
+      <% if k.since %>
+        <p class="pb-2 text-sm text-mute"><%= t(".since", date: l(k.since.to_date, format: :long)) %></p>
+      <% end %>
+    </div>
+
+    <% if total.signups.zero? %>
+      <p class="mt-4 text-sm text-mute"><%= t(".empty") %></p>
+    <% else %>
+      <% tables.each do |kind, lines, more| %>
+        <div id="growth_signup_k_<%= kind %>s" class="mt-5">
+          <h3 class="text-sm font-medium text-ink"><%= t(".by_#{kind == :school ? 'school' : 'classroom'}") %></h3>
+          <div class="mt-2 overflow-x-auto">
+            <table class="w-full min-w-md text-left text-sm">
+              <caption class="sr-only"><%= t(".caption_#{kind}") %></caption>
+              <thead class="text-xs text-mute">
+                <tr class="border-b border-line">
+                  <th scope="col" class="py-2 pr-3 font-medium"><%= t(".columns.#{kind}") %></th>
+                  <% %i[signups qr student_invite teacher_link code cold k].each do |column| %>
+                    <th scope="col" class="px-3 py-2 text-right font-medium"><%= t(".columns.#{column}") %></th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-line">
+                <% lines.each do |line| %>
+                  <tr>
+                    <th scope="row" class="py-2 pr-3 font-normal text-ink">
+                      <%= line.name %>
+                      <% if line.school_name %><span class="block text-xs text-mute"><%= line.school_name %></span><% end %>
+                    </th>
+                    <% %i[signups qr student_invite teacher_link code cold].each do |column| %>
+                      <td class="px-3 py-2 text-right tabular-nums"><%= line.public_send(column) %></td>
+                    <% end %>
+                    <td class="px-3 py-2 text-right font-medium tabular-nums"><%= number.call(line.k) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <% if more.positive? %>
+            <p class="mt-2 text-xs text-mute"><%= t(".more", count: more) %></p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>

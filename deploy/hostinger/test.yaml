@@ -1,0 +1,99 @@
+# Chantier hebergement-cloudflare (ADR-0140) : un environnement de test (Staging ou Develop) sur le VPS de la production,
+# projet Docker « lnclass-staging » ou « lnclass-develop ». Sa base et ses fichiers lui sont propres ; seule son
+# application rejoint le réseau « lnclass_web », où le Caddy de la production la sert sous ses noms. Mémoire et CPU
+# plafonnés (les deux environnements ensemble : un cœur sur deux au plus, servis après la production). Le disque, lui,
+# est partagé : voir « À trancher » du journal (accès Cloudflare). Base neuve à la création, remplie du jeu standard
+# par db:seed (RAILWAY_ENVIRONMENT_NAME = Staging ou Develop). Secrets dans le .env du projet, jamais ici.
+
+x-app-env: &app-env
+  env_file:
+    - path: .env
+      required: true
+
+services:
+  secrets:
+    image: alpine:3.22
+    restart: "no"
+    command:
+      - sh
+      - -c
+      - '[ -s /secrets/db_password ] || (tr -dc A-Za-z0-9 </dev/urandom | head -c 40 > /secrets/db_password); chmod 444 /secrets/db_password'
+    volumes:
+      - secrets:/secrets
+
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    depends_on:
+      secrets:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_USER: lnclass
+      POSTGRES_DB: lnclass_production
+      POSTGRES_PASSWORD_FILE: /secrets/db_password
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - secrets:/secrets:ro
+    mem_limit: 512m
+    # Ceilings only: cpu_shares 256 makes both test environments yield to the production when the CPU is busy.
+    cpus: 0.5
+    cpu_shares: 256
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "lnclass", "-d", "lnclass_production"]
+      interval: 10s
+      retries: 6
+
+  app:
+    <<: *app-env
+    image: lnclass-app:${APP_REVISION:?APP_REVISION manquant}
+    pull_policy: never
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RAILS_ENV: production
+      HTTP_PORT: "8080"
+      # Files on the volume below (config/environments/production.rb); an image older than that line ignores it and
+      # keeps the bucket of the .env.
+      ACTIVE_STORAGE_SERVICE: local
+    # db:seed here, not through PREPARE_DATABASE: the image of a branch older than that variable (Staging before its
+    # train) would never seed, and its base would stay empty, without the team invitation nor the standard set.
+    # Chantier demarrage-develop: bin/docker-entrypoint alone runs db:prepare (migrations, and the seeds of a new base)
+    # before Puma; db:seed (lessons, standard set, activity) runs in the background once /up answers, so a deploy no
+    # longer shows 502 while lessons reload (16 min 36 s on 2026-11-21). A failed seed is logged and the site stays up.
+    # The "[démarrage]" lines time the start (script/mesure/demarrage); the last one repeats the start and /up times,
+    # since the ~470 lines of the seed push the first ones out of the 300 lines the Hostinger API keeps. The production
+    # (compose.yaml) keeps its own entrypoint, unchanged (test/config/hostinger_demarrage_test.rb).
+    entrypoint:
+      - sh
+      - -c
+      - 'pw=$$(cat /secrets/db_password) && [ -n "$$pw" ] || { echo "mot de passe de la base illisible" >&2; exit 1; }; export DATABASE_URL="postgres://lnclass:$$pw@db:5432/lnclass_production"; started=$$(date -u +%FT%TZ); echo "[démarrage] conteneur démarré $$started"; ( until curl -fsS -o /dev/null http://localhost:8080/up; do sleep 5; done; up=$$(date -u +%FT%TZ); echo "[démarrage] /up répond $$up, semis en tâche de fond"; if ./bin/rails db:seed; then echo "[démarrage] semis terminé $$(date -u +%FT%TZ) (conteneur démarré $$started, /up répond $$up)"; else echo "[démarrage] semis en échec (code $$?) : leçons et jeu standard non mis à jour" >&2; fi ) & exec /rails/bin/docker-entrypoint "$$@"'
+      - sh
+    command: ["./bin/thrust", "./bin/rails", "server"]
+    volumes:
+      - secrets:/secrets:ro
+      - storage:/rails/storage
+    networks:
+      default: {}
+      # The production's Caddy reaches this application by this name only (staging-app or develop-app).
+      web:
+        aliases: ["${WEB_ALIAS:?WEB_ALIAS manquant}"]
+    mem_limit: 1g
+    cpus: 1.0
+    cpu_shares: 256
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/up"]
+      interval: 15s
+      start_period: 300s
+      retries: 4
+
+networks:
+  web:
+    external: true
+    name: lnclass_web
+
+volumes:
+  secrets:
+  pgdata:
+  storage:

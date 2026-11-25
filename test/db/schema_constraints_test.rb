@@ -87,11 +87,14 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   MESSAGE_CASCADES = %w[message_classrooms message_dismissals].freeze
   # ADR-XXXX (contexte crm) §4 : une école supprimée emporte son suivi ; seules les clés vers `schools` cascadent.
   CRM_CASCADES = %w[crm_accounts crm_contacts crm_interactions crm_follow_ups crm_generations].freeze
+  # ADR attribution-des-inscriptions-eleves : the invite code and the attribution of a student go with the student.
+  INVITE_CODE_CASCADES = %w[student_invite_codes signup_attributions].freeze
   # ADR-0090 §4.1 : the reads of an essential go with it (never its student, who is erased first, ADR-0036).
   ESSENTIAL_CASCADES = %w[essential_reads].freeze
   # ADR-0094 §4.1 : the current school of a session is only a display choice; a deleted school puts it back on the primary.
   # ADR-XXXX-notifications-web-push-aux-eleves §4.1 : une session supprimée ou expirée garde l'abonnement, qui perd seulement sa session.
-  NULLIFIES = [ %w[sessions current_school_id], %w[push_subscriptions session_id] ].freeze
+  # signup_attributions.inviter_id: the attribution outlives the inviter's deletion (ADR attribution-des-inscriptions-eleves).
+  NULLIFIES = [ %w[sessions current_school_id], %w[push_subscriptions session_id], %w[signup_attributions inviter_id] ].freeze
   FRAMEWORK_TABLES = /\A(active_storage_|action_text_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/
 
   def connection = ActiveRecord::Base.connection
@@ -586,6 +589,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
         cascade = (CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id") ||
                   (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages") ||
                   (ESSENTIAL_CASCADES.include?(table) && foreign_key.to_table == "essentials") ||
+                  (INVITE_CODE_CASCADES.include?(table) && foreign_key.column == "student_id") ||
                   (CRM_CASCADES.include?(table) && foreign_key.to_table == "schools")
         expected = cascade ? :cascade : :restrict
         expected = :nullify if NULLIFIES.include?([ table, foreign_key.column ])

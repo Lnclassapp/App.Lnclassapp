@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::RegisterStudent
 # Rôle : un visiteur crée son compte élève (rôle imposé) et entre tout de suite dans la classe de son lien, de son code ou choisie, en une transaction
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085, 0109 · UDR : 0081
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085, 0109, attribution-des-inscriptions-eleves · UDR : 0081
 module UseCases
   module Classroom
     class RegisterStudent
@@ -19,7 +19,7 @@ module UseCases
       end
 
       def initialize(classrooms:, schools:, taxonomy:, registrations:, memberships:, sessions:, policy:, transaction:,
-                     digest_key:, clock:)
+                     digest_key:, clock:, attributions:, invite_codes:)
         @designation = ClassroomDesignation.new(classrooms:, schools:, taxonomy:, clock:)
         @registrations = registrations
         @memberships = memberships
@@ -27,6 +27,8 @@ module UseCases
         @policy = policy
         @transaction = transaction
         @digest_key = digest_key
+        @attributions = attributions
+        @invite_codes = invite_codes
         @clock = clock
       end
 
@@ -60,15 +62,27 @@ module UseCases
         created = @registrations.create_student(user: user_from(dto), pin: dto.pin)
         return created if created.failure?
 
-        enroll(created.value, destination, ip, user_agent)
+        enroll(created.value, dto, destination, ip, user_agent)
       end
 
-      def enroll(user, destination, ip, user_agent)
+      def enroll(user, dto, destination, ip, user_agent)
         now = @clock.now
         added = @memberships.add_primary(classroom_id: destination.classroom.id, student_id: user.id, via: destination.via, at: now)
         raise Aborted, added if added.failure?
 
+        attributed = @attributions.record(student_id: user.id, classroom_id: destination.classroom.id, at: now, **source_of(dto, destination))
+        raise Aborted, attributed if attributed.failure?
+
         Shared::Result.success(Registered.new(user:, classroom: destination.classroom, token: open_session(user, ip, user_agent, now)))
+      end
+
+      # ADR attribution §4.2 : l'invitant n'est cherché que sur la voie du lien ; un code inconnu ou d'un élève anonymisé ne désigne
+      # personne et l'inscription reste ce qu'elle était (lien de l'enseignant, ou QR).
+      def source_of(dto, destination)
+        inviter_id = (@invite_codes.inviter_for(code: dto.invite_code) if destination.via == ClassroomDesignation::LINK && dto.invite_code)
+        { source: Entities::Classroom::SignupSource.resolve(via: destination.via, qr: dto.arrival_source == Entities::Classroom::SignupSource::QR_TAG,
+                                                            inviter_id:),
+          inviter_id: }
       end
 
       def user_from(dto)

@@ -1,19 +1,16 @@
 # 🧠 DOMAINE · Entities::Identity::Lockout
-# Rôle : verrouillage progressif après des échecs consécutifs depuis le dernier succès
+# Rôle : verrouillage jusqu'à récupération au 5e échec consécutif depuis le dernier succès (décision du porteur, 2026-11-24)
 # ADR  : 0050, 0032
 module Entities
   module Identity
     module Lockout
       UNTIL_RECOVERY = :until_recovery
-      TIERS = { 20 => UNTIL_RECOVERY, 10 => 1.hour, 5 => 15.minutes }.freeze
+      TIERS = { 5 => UNTIL_RECOVERY }.freeze
 
-      # nil si la tentative est permise ; sinon le temps restant, ou :until_recovery.
-      def self.retry_after(failures:, last_failed_at:, now:)
-        duration = TIERS.find { |threshold, _| failures >= threshold }&.last
-        return duration if duration.nil? || duration == UNTIL_RECOVERY
-
-        remaining = (last_failed_at + duration - now).ceil
-        ActiveSupport::Duration.build(remaining) if remaining.positive?
+      # nil si la tentative est permise ; sinon :until_recovery. Le verrou ne tombe qu'à la récupération assistée :
+      # l'heure du dernier échec n'y change rien (paramètres gardés pour les appelants).
+      def self.retry_after(failures:, last_failed_at: nil, now: nil)
+        TIERS.find { |threshold, _| failures >= threshold }&.last
       end
 
       # Vrai quand ce nombre d'échecs vient de franchir un palier (audit `login.locked`).

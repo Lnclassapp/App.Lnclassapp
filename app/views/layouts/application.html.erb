@@ -26,8 +26,9 @@
     <%= yield :head %>
 
     <%# ADR-0082 §4.1 : fiche d'application (installation) ; barre d'état au bleu de marque, pour tous les rôles %>
-    <%# Chemin littéral, gelé par le Lot 0 : une page d'erreur rendue sous un jeu de routes réduit le déclare aussi %>
-    <%= tag.link rel: "manifest", href: "/manifest.json" %>
+    <%# Chantier installation-avant-inscription : déclarée au seul compte connecté, sinon chaque navigateur invite à installer
+        dès la page d'entrée. Chemin littéral : une page d'erreur rendue sous un jeu de routes réduit la déclare aussi. %>
+    <%= tag.link rel: "manifest", href: "/manifest.json" if respond_to?(:authenticated?) && authenticated? %>
     <%= tag.meta name: "theme-color", content: Rails.configuration.x.pwa[:theme_color] %>
 
     <%# Icônes générées depuis app/assets/images/logo/lnclass.jpeg %>

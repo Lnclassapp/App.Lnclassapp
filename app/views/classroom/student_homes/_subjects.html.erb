@@ -1,17 +1,18 @@
 <%# 🌐 UI · classroom/student_homes/_subjects — « Mes matières » de l'accueil élève : un rond teinté par matière, 4 colonnes %>
-<%# Rôle : une matière de son niveau, vers le catalogue filtré, nom court (le nom entier lu aux lecteurs d'écran) ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; plus de case « Inviter » (la bannière est la seule porte) %>
-<%# UDR  : 0173 §3 (accueil, Mes matières), 0132 accueil élève §3.4, 0062 §3.3 : jamais de compteur ; le point est dit par un suffixe lu aux lecteurs d'écran %>
-<%# locals: (subjects:, late_slugs:) -%>
-<% tile = "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-meta leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+<%# Rôle (titre « Mes matières » lu aux seuls lecteurs d'écran ; libellés noirs en 600) (home est nil sans classe : pas de case « Inviter ») : une matière de son niveau, vers le catalogue filtré, nom court (le nom entier lu aux lecteurs d'écran) ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; puis la case « Inviter » (avec une classe, un POST vers la porte serveur du partage, nouvel onglet) et la case « Plus » (sous lg) qui ouvre la feuille %>
+<%# ADR  : attribution-des-inscriptions-eleves (§4.3) · UDR : accueil-eleve-grille-plus (§3, amende 0173 §3 et accueil-eleve-qr-fenetre-inviter §3.3), 0132 accueil élève §3.4, 0062 §3.3 : jamais de compteur ; le point est dit par un suffixe lu aux lecteurs d'écran %>
+<%# locals: (subjects:, late_slugs:, home:) -%>
+<% tile = "group flex min-h-tap flex-col items-center gap-2.5 rounded-ln px-0.5 text-center text-sm leading-tight font-semibold text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
 <nav id="student_subjects" aria-labelledby="student_subjects_title">
-  <h2 id="student_subjects_title" class="px-1 pb-3 text-sm font-semibold text-mute"><%= t(".label") %></h2>
+  <%# Retouche accueil-eleve-matieres-annonces : comme chez Wave, la grille n'a pas de titre visible ; il reste lu aux lecteurs d'écran. %>
+  <h2 id="student_subjects_title" class="sr-only"><%= t(".label") %></h2>
   <ul class="grid grid-cols-4 gap-y-4 lg:grid-cols-8 lg:gap-x-2">
     <% subjects.first(Classroom::StudentHomesController::MAX_SUBJECTS).each do |subject| %>
       <% late = late_slugs.include?(subject.slug) %>
       <% illustration = subject_illustration(subject.slug) %>
       <li>
         <%= link_to courses_path(material: subject.slug), id: "subject_#{subject.slug}", class: tile do %>
-          <span class="<%= class_names("relative grid size-16 place-items-center rounded-full transition group-active:scale-95", illustration.tint) %>">
+          <span class="<%= class_names("relative grid size-14 place-items-center rounded-full transition group-active:scale-95", illustration.tint) %>">
             <%= image_tag illustration.path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
             <%# UDR §3.4 : le point ambre, décoratif ; sa phrase est lue après le nom (suffixe sr-only). %>
             <% if late %><span class="absolute top-0 right-0 size-2.5 rounded-full bg-warning-dot ring-2 ring-white" aria-hidden="true"></span><% end %>
@@ -28,6 +29,17 @@
         <% end %>
       </li>
     <% end %>
+    <%# UDR accueil-eleve-grille-plus §3 : « Inviter » (avec une classe seulement), puis « Plus » ; la feuille vit dans la case : son déclencheur doit être dans le contrôleur modal. %>
+    <% if home %>
+      <li id="student_invite_cell">
+        <%= button_to class_invite_path, method: :post, id: "student_invite_tile", class: class_names(tile, "w-full cursor-pointer"), form_class: "contents",
+                      form: { target: "_blank", data: { turbo: false } }, "aria-label": t("classroom.student_homes.invite_tile.action_label", classroom: home.classroom_name) do %>
+          <span class="grid size-14 place-items-center rounded-full bg-brand-soft text-brand-strong transition group-active:scale-95" aria-hidden="true"><%= ui_icon "user-plus" %></span>
+          <span class="break-words" aria-hidden="true"><%= t("classroom.student_homes.invite_tile.action") %></span>
+        <% end %>
+      </li>
+    <% end %>
+    <li id="student_more_cell" class="lg:hidden"><%= render "classroom/student_homes/more_sheet", tile: tile %></li>
   </ul>
   <% if subjects.empty? %><p class="mt-3 text-center text-meta text-mute"><%= t("classroom.student_homes.subjects.empty") %></p><% end %>
 </nav>
