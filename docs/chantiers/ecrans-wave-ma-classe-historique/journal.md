@@ -15,4 +15,8 @@ Demande du porteur (2026-11-24, captures au téléphone) : « Ma classe » et «
 - **Ma classe sans la carte bleue de la classe** (UDR-0086 §3.2, UDR-0171) : la classe tient dans le sous-titre, pour mettre les exercices à faire en haut. Réversible : remettre `_classroom_card` (supprimée).
 - **Les envois de l'enseignant en lignes plates, plus en cases « cahier »** (UDR feuilles-en-cases-lues-avant-de-commencer §3, qui citait « Ma classe ») : les cases restent sur la leçon. Réversible.
 - **« Ma classe » n'a plus le menu de gauche sur ordinateur** (écran intérieur à toute largeur, comme la matière) : on y entre par la carte de l'accueil ou le menu, on en sort par la flèche.
-- **La note sur 20 revient à l'écran de l'élève** (UDR-0167 l'interdisait : « la médaille remplace la note ») : décision du porteur, appliquée aux trois listes de l'élève seulement ; les écrans enseignant et direction ne changent pas. À formaliser par une UDR qui amende l'UDR-0167 à la fusion. Réversible : `grade_and_medal` → `medal_reward_tag`.
+- **La note sur 20 revient à l'écran de l'élève** (UDR-0167 l'interdisait : « la médaille remplace la note ») : décision du porteur, appliquée aux trois listes de l'élève seulement ; les écrans enseignant et direction ne changent pas. Formalisé par l'UDR-0184 (fusion de la PR #707, 2026-11-25). Réversible : `grade_and_medal` → `medal_reward_tag`.
+
+## Clôture
+
+- PR #707 fusionnée dans `Develop` le 2026-11-25 (`b3f49db20`).
