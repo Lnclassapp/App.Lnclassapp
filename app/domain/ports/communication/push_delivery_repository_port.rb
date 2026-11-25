@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Communication::PushDeliveryRepositoryPort
-# Rôle : contrat des envois : anti-doublon par clé d'objet, dernier envoi (intervalle), purge à 90 jours
-# ADR  : 0146 (§4.2)
+# Rôle : contrat des envois : anti-doublon par clé d'objet, dernier envoi, nombre d'envois du jour, purge à 90 jours
+# ADR  : 0146 (§4.2) · XXXX envois de notifications (§4.2, `sent_count`)
 module Ports
   module Communication
     module PushDeliveryRepositoryPort
@@ -19,6 +19,11 @@ module Ports
       # → Time | nil : le dernier envoi réellement parti (statut `delivered`)
       def last_sent_at(user_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #last_sent_at"
+      end
+
+      # → Integer : les envois `delivered` de ce jour d'Abidjan (= jour UTC), pour le plafond de dix par jour. Additif.
+      def sent_count(user_id:, on_date:)
+        raise NotImplementedError, "#{self.class} doit implémenter #sent_count"
       end
 
       # → nombre supprimé

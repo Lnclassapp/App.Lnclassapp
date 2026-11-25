@@ -91,6 +91,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   INVITE_CODE_CASCADES = %w[student_invite_codes signup_attributions].freeze
   # ADR-0090 §4.1 : the reads of an essential go with it (never its student, who is erased first, ADR-0036).
   ESSENTIAL_CASCADES = %w[essential_reads].freeze
+  # ADR-XXXX (envois de notifications) §4.1 : les destinataires figés partent avec leur validation et avec l'élève (anonymisation).
+  PUSH_APPROVAL_CASCADES = %w[push_approval_recipients].freeze
   # ADR-0094 §4.1 : the current school of a session is only a display choice; a deleted school puts it back on the primary.
   # ADR-0146 §4.1 : une session supprimée ou expirée garde l'abonnement, qui perd seulement sa session.
   # signup_attributions.inviter_id: the attribution outlives the inviter's deletion (ADR attribution-des-inscriptions-eleves).
@@ -589,6 +591,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
         cascade = (CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id") ||
                   (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages") ||
                   (ESSENTIAL_CASCADES.include?(table) && foreign_key.to_table == "essentials") ||
+                  (PUSH_APPROVAL_CASCADES.include?(table) && %w[users push_approvals].include?(foreign_key.to_table)) ||
                   (INVITE_CODE_CASCADES.include?(table) && foreign_key.column == "student_id") ||
                   (CRM_CASCADES.include?(table) && foreign_key.to_table == "schools")
         expected = cascade ? :cascade : :restrict

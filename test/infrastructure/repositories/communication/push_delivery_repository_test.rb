@@ -17,6 +17,19 @@ module Repositories
 
       def sent?(key: "k", motive: "inactive") = @repository.sent?(user_id: @student.id, motive:, object_key: key)
 
+      test "sent_count compte les envois delivered du jour, pas les autres statuts ni les autres jours" do
+        record("delivered", key: "a", at: Time.utc(2026, 11, 18, 8))
+        record("delivered", key: "b", at: Time.utc(2026, 11, 18, 23, 59))
+        record("failed", key: "c", at: Time.utc(2026, 11, 18, 9))
+        record("retry", key: "d", at: Time.utc(2026, 11, 18, 9))
+        record("delivered", key: "e", at: Time.utc(2026, 11, 19, 0, 1))
+        record("delivered", key: "f", at: Time.utc(2026, 11, 17, 23, 59))
+        create_push_delivery(user: create_student, object_key: "autre", sent_at: Time.utc(2026, 11, 18, 9))
+
+        assert_equal 2, @repository.sent_count(user_id: @student.id, on_date: Date.new(2026, 11, 18))
+        assert_equal 0, @repository.sent_count(user_id: @student.id, on_date: Date.new(2026, 11, 20))
+      end
+
       test "un envoi nouveau est enregistré" do
         assert record("delivered")
         assert_equal [ [ "inactive", "k", "delivered" ] ], Orm::Communication::PushDelivery.pluck(:motive, :object_key, :status)
