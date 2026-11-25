@@ -10,6 +10,10 @@
 
 ## À trancher
 
+- [ ] 2026-11-25 · parametrage-notifications · Grill 2 sans réponse : un motif validé part-il vers les élèves devenus concernés après la validation ? — appliqué : non, liste figée à la validation (ce que l'équipe a vu = ce qui part), relue avant l'envoi ; autres : motif ouvert toute la journée, revalidation d'un complément ; recommandé : appliqué.
+- [ ] 2026-11-25 · parametrage-notifications · Grill 7 sans réponse : l'équipe valide le motif entier, par établissement, ou élève par élève ? — appliqué : motif entier, avec la répartition par établissement affichée ; autres : case par établissement, élève par élève ; recommandé : appliqué.
+- [ ] 2026-11-25 · parametrage-notifications · Heure limite de validation — appliqué : jusqu'à la fermeture de la dernière fenêtre du jour (20 h) ; après, refus ; autres : midi ; recommandé : appliqué.
+- [ ] 2026-11-25 · parametrage-notifications · La règle « 4 h entre deux envois » (`PUSH_MIN_INTERVAL_HOURS`) — appliqué : remplacée par « une par jour d'Abidjan », la variable n'est plus lue ; recommandé : appliqué.
 - [x] 2026-11-25 · parametrage-notifications · Grill 5 : qu'est-ce qui distingue « À valider » d'« Automatique » une fois que les motifs non validés partent seuls à 17 h ? — appliqué : « À valider » apparaît le matin dans le plan du jour, l'équipe le valide (départ 12 h) ou le retire, sans geste il part à 17 h ; autres : revenir sur 17 h (rien ne part sans geste), deux modes seulement (Automatique retirable, Coupé) ; recommandé : appliqué. → Porteur : un motif est automatique tant que sa case est cochée dans l'administration.
 > Décisions laissées ouvertes ou tranchées par défaut par un agent, en attente du porteur. Relevées chaque jour à 12 h par la boîte de décisions (`docs/workflows/contrat-de-session.md`). Le porteur coche `[x]` et écrit sa réponse à la suite.
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
