@@ -208,6 +208,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`inscription-eleve-sans-code`](inscription-eleve-sans-code/memo.md) | planifié | feature | 2026-10-07 | Inscription des élèves sans code de classe |
 | [`inscription-enseignant`](inscription-enseignant/memo.md) | livré | feature | 2026-10-07 | Amélioration du parcours d'inscription des enseignants |
 | [`inscription-test-course`](inscription-test-course/memo.md) | livré | bugfix | 2026-10-30 | Le test d'inscription enseignant rouge sous charge |
+| [`installation-avant-inscription`](installation-avant-inscription/memo.md) | prouvé | bugfix | 2026-11-25 | Installation proposée avant l'inscription, par le navigateur |
 | [`installation-pwa`](installation-pwa/memo.md) | livré | feature | 2026-10-07 | Installer Lnclass sur le téléphone (PWA) |
 | [`interface-eleve-organisation`](interface-eleve-organisation/memo.md) | livré | feature | 2026-10-05 | Organisation des écrans élève : accueil, « Ma classe » et rythme d'une session |
 | [`interface-enseignant-organisation`](interface-enseignant-organisation/memo.md) | livré | feature | 2026-10-05 | Organisation des écrans enseignant : accueil, catalogue, fiche et page d'une classe |
