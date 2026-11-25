@@ -1,5 +1,5 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::Announcement
-# Rôle : candidats du motif announcement : annonce publiée par l'équipe depuis moins de 48 h, ni retirée ni terminée, que l'élève lit et n'a pas masquée
+# Rôle : candidats du motif announcement : annonce publiée par l'équipe avec « Prévenir les élèves » depuis moins de 48 h, ni retirée ni terminée, que l'élève lit et n'a pas masquée
 # ADR  : 0146 (§3.2) · 0078 (§4.3 : règle de lecture) · 0045 · PRD §3.1
 module Queries
   module Communication
@@ -36,7 +36,7 @@ module Queries
         # L'annonce de l'équipe, publiée dans les 48 h, encore en cours, pour les élèves (tous, élèves, ou classes ciblées).
         def messages(now)
           Orm::Message.joins(:author).where(users: { role: "team" }, status: "published", published_at: (now - WINDOW)..now)
-                      .where("messages.ends_at > ?", now).where(audience: %w[all students classrooms]).order(:id)
+                      .where("messages.ends_at > ?", now).where(audience: %w[all students classrooms], push_requested: true).order(:id)
                       .select(:id, :public_id, :audience, :school_id, :published_at).to_a
         end
 

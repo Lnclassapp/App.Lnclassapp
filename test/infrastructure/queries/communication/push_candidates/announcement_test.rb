@@ -19,7 +19,7 @@ module Queries
           create_student(classroom:).tap { |student| create_push_subscription(user: student) if subscribed }
         end
 
-        def announce(author: @team, **) = create_message(author:, published_at: NOW - 1.hour, **)
+        def announce(author: @team, push_requested: true, **) = create_message(author:, published_at: NOW - 1.hour, push_requested:, **)
         def candidates = Announcement.new.for(now: NOW)
 
         test "annonce nationale de l'équipe pour les élèves : un candidat avec sa clé, /announcements, aucune variable, valable 48 h" do
@@ -34,6 +34,12 @@ module Queries
           assert_equal({}, found.variables)
           assert_equal NOW - 1.hour + 48.hours, found.valid_until
           assert_not_includes found.to_h.values.map(&:to_s).join, "Maintenance"
+        end
+
+        test "une annonce sans « Prévenir les élèves » : aucun candidat" do
+          announce(push_requested: false)
+
+          assert_empty candidates
         end
 
         test "user_ids limits the candidates to the given students" do
