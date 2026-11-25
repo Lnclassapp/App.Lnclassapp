@@ -11,6 +11,7 @@
 | 2026-11-16 | « Exercice commencé » = session ouverte depuis 24 h sans réponse, moins de 7 jours | Une seule session ouverte par élève et par exercice : la clé d'objet est naturelle | Non (PRD §3.1) |
 | 2026-11-16 | Les motifs sont lus par une tâche récurrente, pas émis par les use cases | Aucun bus d'événements ; ne pas toucher `CloseExerciseSession` ni les annonces | Oui (ADR §3.2) |
 | 2026-11-16 | Une session expirée garde son abonnement (`ON DELETE SET NULL`) ; une fermeture volontaire le supprime | Règle `app-android` Q11 : l'élève décroché reste joignable | Oui (ADR §4.1) |
+| 2026-11-25 | Clés VAPID posées dans le `.env` des projets Hostinger `lnclass-develop`, `lnclass-staging` et `lnclass` (une paire par environnement, `PUSH_DELIVERY_ENABLED=false`), pas dans `credentials.yml.enc` | Les trois environnements tournent en `RAILS_ENV=production` : un seul fichier `credentials` leur donnerait la même paire ; le `.env` est la convention des secrets du VPS (ADR-0140). Décision du porteur, production redémarrée à sa demande | Non |
 
 ## À trancher
 
@@ -50,6 +51,7 @@
 - [ ] 2026-11-16 · notifications-push · Corrections : passerelle — 400 et 413 valent `:gone` (comme demandé), 400 `UnauthorizedRegistration` (FCM) reste `:retry` en journal `error` avec 401/403 ; une exception inattendue lève, et le passage la signale par élève (`Rails.error.report`) ; le journal « clés VAPID absentes » est écrit par la tâche, pas par le domaine — appliqué.
 - [ ] 2026-11-16 · notifications-push · Corrections : relecture avant envoi — si la clé choisie a disparu, rien ne part et rien n'est écrit, sans tenter le motif suivant avant le passage suivant (15 min) ; l'envoi parti est consigné dans un `ensure` même si une écriture suivante échoue ; `record` faux après un envoi parti est journalisé en `warn` — appliqué.
 - [ ] 2026-11-16 · notifications-push · Corrections : en dehors de « denied », une demande de permission fermée (« default ») ne montre plus « bloquées » et laisse le bouton actif — appliqué.
+- [ ] 2026-11-25 · #652 · `VAPID_SUBJECT` vaut `https://lnclass.com` sur les trois environnements — appliqué : l'adresse du site ; autres : `mailto:` d'une adresse de l'équipe ; recommandé : une adresse `mailto:` lue par l'équipe si les services push doivent pouvoir la joindre.
 
 ## Retouches
 
