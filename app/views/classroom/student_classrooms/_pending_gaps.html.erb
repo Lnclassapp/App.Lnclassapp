@@ -11,7 +11,7 @@
               else
                 course_path(gap.course_slug, anchor: "notion-#{gap.essential_slug}")
               end %>
-    <%= render "shared/screens/row", title: gap.essential_name, href:,
+    <%= render "shared/screens/row", title: gap.essential_name, href:, aria_label: t("classroom.student_classrooms.pending_gaps.redo_label", essential: gap.essential_name),
                                      icon: ui_icon("light-bulb"), folded: index >= ComponentsHelper::REVEAL_LIMIT %>
   <% end %>
 <% end %>
