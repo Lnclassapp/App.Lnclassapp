@@ -132,6 +132,21 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
   end
 
   # The browser announces the site is installable: what Chrome Android fires on its own.
+  # Chantier installation-avant-inscription : avant l'inscription, sur la page d'entrée et l'inscription, Chrome Android affichait
+  # sa propre invitation (mini-barre « Ajouter à l'écran d'accueil ») : personne ne retenait `beforeinstallprompt` hors de
+  # l'accueil connecté. L'événement est retenu sur toute page, et l'invitation garde son seul endroit, l'accueil connecté.
+  test "before the sign-up, the browser's own install invitation is held back on the entry page and the sign-up" do
+    with_mobile_viewport do
+      [ root_path, new_session_path, new_student_registration_path ].each do |path|
+        visit path
+        page.execute_script("window.installHeld = null; const event = new Event('beforeinstallprompt', { cancelable: true }); " \
+                            "window.dispatchEvent(event); window.installHeld = event.defaultPrevented")
+        assert evaluate_script("window.installHeld"), "#{path} : l'invitation du navigateur n'est pas retenue"
+        assert_no_selector BANNER
+      end
+    end
+  end
+
   def offer_install(outcome: "accepted")
     page.execute_script(<<~JS, outcome)
       window.installPrompts = 0
