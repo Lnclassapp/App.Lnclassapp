@@ -21,6 +21,17 @@ module Repositories
           assert_equal 1, model.where(user_id: other.id).count
         end
       end
+
+      test "erases the approval recipients of the user, keeps the approval and the other recipients" do
+        student = create_student
+        other = create_student
+        approval = create_push_approval(motive: "unfinished", recipients: [ [ student.id, "unfinished:a" ], [ other.id, "unfinished:b" ] ])
+
+        PushDataEraser.new.erase_for(user_id: student.id)
+
+        assert_equal [ other.id ], approval.recipients.pluck(:user_id)
+        assert Orm::Communication::PushApproval.exists?(approval.id)
+      end
     end
   end
 end

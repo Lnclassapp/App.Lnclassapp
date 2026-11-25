@@ -1,17 +1,20 @@
 # 🧠 DOMAINE · UseCases::Communication::DeliverPushNotifications
-# Rôle : un passage d'envoi des notifications : fenêtre d'Abidjan, un seul motif par élève (le plus urgent), pas de doublon, 4 h entre deux envois, une ligne par navigateur
-# ADR  : 0146 (§3.2, §4) · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
+# Rôle : un passage d'envoi des notifications : fenêtre d'Abidjan, motifs ouverts seulement (réglage, validation, annonce), un motif par élève (le plus urgent), dix par jour, pas de doublon
+# ADR  : 0146 (§3.2, §4) · XXXX envois de notifications (§4.3) · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
 module UseCases
   module Communication
     class DeliverPushNotifications
       # Au troisième échec passager d'un navigateur, l'envoi est abandonné (statut `failed`).
       MAX_FAILURES = 3
+      # Plafond de notifications reçues par un élève sur un jour d'Abidjan (= jour UTC).
+      DAILY_LIMIT = 10
       # Du statut le plus significatif au moins significatif quand plusieurs navigateurs répondent différemment.
       STATUS_ORDER = %w[delivered retry failed not_configured gone].freeze
 
       # candidates : PushCandidatesPort ; subscriptions, preferences, deliveries : les ports de dépôt ; gateway : PushGatewayPort ;
-      # delivery_enabled : l'interrupteur PUSH_DELIVERY_ENABLED ; min_interval : durée minimale entre deux envois partis.
-      def initialize(candidates:, subscriptions:, preferences:, deliveries:, gateway:, clock:, delivery_enabled:, min_interval:)
+      # settings : PushMotiveSettingRepositoryPort ; approvals : PushApprovalRepositoryPort ;
+      # delivery_enabled : l'interrupteur PUSH_DELIVERY_ENABLED, au-dessus de toutes les règles.
+      def initialize(candidates:, subscriptions:, preferences:, deliveries:, gateway:, clock:, delivery_enabled:, settings:, approvals:)
         @candidates = candidates
         @subscriptions = subscriptions
         @preferences = preferences
@@ -19,7 +22,8 @@ module UseCases
         @gateway = gateway
         @clock = clock
         @delivery_enabled = delivery_enabled
-        @min_interval = min_interval
+        @settings = settings
+        @approvals = approvals
       end
 
       # → success({ "delivered" => n, … }) : le nombre d'élèves traités par statut noté ; vide hors fenêtre.
@@ -27,12 +31,21 @@ module UseCases
         now = @clock.now
         return Shared::Result.success({}) unless Entities::Communication::SendingWindow.open?(now)
 
-        ready = @candidates.for(now:).reject { it.expired?(now) }.group_by(&:user_id)
+        automatic = @settings.automatic_motives
+        approved = @approvals.approved_keys(on_date: now.utc.to_date)
+        ready = @candidates.for(now:).reject { it.expired?(now) }.select { open?(it, automatic, approved) }.group_by(&:user_id)
         statuses = ready.filter_map { |user_id, list| deliver_to_safely(user_id, list, now) }
         Shared::Result.success(statuses.tally)
       end
 
       private
+
+      # Un motif part s'il est automatique, validé pour cet élève et cet objet (liste figée), ou s'il est une annonce (la requête ne lit que les `push_requested`).
+      def open?(candidate, automatic, approved)
+        return true if candidate.motive == "announcement"
+
+        automatic.include?(candidate.motive) || approved.include?([ candidate.user_id, candidate.motive, candidate.object_key ])
+      end
 
       # Un élève dont le dépôt échoue ne bloque pas les suivants : l'erreur est signalée, le passage continue.
       def deliver_to_safely(user_id, candidates, now)
@@ -44,10 +57,10 @@ module UseCases
 
       # → le statut noté, ou nil si rien n'a été fait pour cet élève.
       def deliver_to(user_id, candidates, now)
-        return if @preferences.turned_off?(user_id:)
+        return if @preferences.turned_off?(user_id:) || daily_limit_reached?(user_id, now)
 
         candidate = next_candidate(user_id, candidates)
-        return if candidate.nil? || too_soon?(user_id, now)
+        return if candidate.nil?
 
         subscriptions = @subscriptions.for_user(user_id:)
         return if subscriptions.empty?
@@ -90,10 +103,7 @@ module UseCases
         candidates.reject { @deliveries.sent?(user_id:, motive: it.motive, object_key: it.object_key) }.min_by(&:priority)
       end
 
-      def too_soon?(user_id, now)
-        last = @deliveries.last_sent_at(user_id:)
-        !last.nil? && last > now - @min_interval
-      end
+      def daily_limit_reached?(user_id, now) = @deliveries.sent_count(user_id:, on_date: now.utc.to_date) >= DAILY_LIMIT
 
       def push(subscriptions, candidate, now, statuses)
         message = Entities::Communication::PushMessage.for(candidate)
