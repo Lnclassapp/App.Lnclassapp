@@ -1,5 +1,6 @@
 // ⚡ FRONT · install_controller — pop-up d'installation : « Installer » sur Android, mode d'emploi sur Safari iPhone
-// Rôle : ouvre la feuille (contrôleur modal) sur l'accueil, téléphone seulement ; fermée sans installer, elle se tait 3 jours sur ce téléphone (localStorage, jamais le serveur)
+// Rôle : ouvre la feuille (contrôleur modal) sur l'accueil, téléphone seulement ; fermée sans installer, elle se tait 3 jours sur ce téléphone (localStorage, jamais le serveur) ;
+//        ailleurs, l'annonce du navigateur est retenue sans rien montrer
 // UDR  : 0078 (amendement du 2026-10-07) · ADR : 0082, 0049
 import { Controller } from "@hotwired/stimulus"
 
@@ -10,6 +11,15 @@ const COMPUTER = "(min-width: 64rem)"
 
 // Le navigateur n'annonce l'installation qu'une fois par document : gardée ici, elle sert encore après une visite Turbo.
 let deferred = null
+
+// Chantier installation-avant-inscription : retenue sur toute page dès le chargement, sinon Chrome et les navigateurs qui le
+// suivent (Samsung Internet, Opera, Edge) montrent leur propre invitation ; seule la pop-up de l'accueil la propose.
+if (typeof window !== "undefined") {
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault()
+    deferred = event
+  })
+}
 
 export default class extends Controller {
   static targets = ["android", "ios"]
