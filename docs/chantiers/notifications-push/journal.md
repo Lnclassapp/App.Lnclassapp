@@ -12,6 +12,7 @@
 | 2026-11-16 | Les motifs sont lus par une tâche récurrente, pas émis par les use cases | Aucun bus d'événements ; ne pas toucher `CloseExerciseSession` ni les annonces | Oui (ADR §3.2) |
 | 2026-11-16 | Une session expirée garde son abonnement (`ON DELETE SET NULL`) ; une fermeture volontaire le supprime | Règle `app-android` Q11 : l'élève décroché reste joignable | Oui (ADR §4.1) |
 | 2026-11-25 | Clés VAPID posées dans le `.env` des projets Hostinger `lnclass-develop`, `lnclass-staging` et `lnclass` (une paire par environnement, `PUSH_DELIVERY_ENABLED=false`), pas dans `credentials.yml.enc` | Les trois environnements tournent en `RAILS_ENV=production` : un seul fichier `credentials` leur donnerait la même paire ; le `.env` est la convention des secrets du VPS (ADR-0140). Décision du porteur, production redémarrée à sa demande | Non |
+| 2026-11-25 | Aucun envoi automatique : l'équipe confirme chaque envoi de motif, piloté depuis un futur paramétrage des notifications ; `PUSH_DELIVERY_ENABLED` reste `false` sur Develop, Staging et production (activé quelques minutes sur Develop et Staging, puis recoupé) | Décision du porteur : éviter plusieurs notifications le même jour pour un élève. Le code fusionné (#652) envoie seul dès l'interrupteur ouvert : un chantier suivant doit ajouter la confirmation par l'équipe avant toute activation | À faire (chantier suivant) |
 
 ## À trancher
 
