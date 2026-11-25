@@ -1,6 +1,6 @@
-<%# 🌐 UI · classroom/student_archives/_result_row — un exercice terminé : illustration de la matière, titre, matière · date, médaille %>
+<%# 🌐 UI · classroom/student_archives/_result_row — un exercice terminé : illustration de la matière, titre, matière · date, note sur 20 et médaille-récompense %>
 <%# Rôle : ligne en lecture seule, jamais un lien (UDR-0013) ; masquée au-delà de la 3e, révélée par « Voir plus » %>
-<%# UDR  : 0057 (R3), 0069 §3.3, 0090 §3.2, §3.6 · la médaille de la session (UDR médailles), jamais de note %>
+<%# UDR  : 0057 (R3), 0069 §3.3, 0090 §3.2, §3.6 · la médaille de la session et sa note (porteur, 2026-11-24, revient sur UDR-0167 à l'écran de l'élève) %>
 <%# locals: (result:, index:) -%>
 <% illustration = subject_illustration(result.material_slug) %>
 <%= tag.li class: "flex items-center gap-3 py-3", **ui_reveal_item(index) do %>
@@ -12,5 +12,5 @@
     <p class="line-clamp-2 font-medium break-words text-ink"><%= result.exercise_title %></p>
     <p class="mt-0.5 text-sm text-mute"><%= t(".detail", material: result.material_name, date: l(result.completed_at.to_date, format: t(".date_format"))) %></p>
   </div>
-  <span data-medal class="shrink-0 rounded-full border border-line bg-mist px-3 py-1.5 text-sm"><%= medal_tag(result.medal) %></span>
+  <span data-medal class="shrink-0"><%= grade_and_medal(result.score_percent, result.medal) %></span>
 <% end %>

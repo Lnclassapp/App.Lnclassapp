@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/student_homes/_history — contenu du frame différé de l'Historique de l'accueil %>
-<%# Rôle : le titre et les 3 dernières copies touchées, groupées par jour de dernière activité (rond de la matière, titre, matière) ; en cours : la ligne reprend la copie, « En cours · 2/5 » ; terminée : la médaille et « Refaire » hors pause ; « Voir plus (n) » mène à Mon historique ; aucune copie : rien, ni titre ni phrase %>
+<%# Rôle : le titre et les 3 dernières copies touchées, groupées par jour de dernière activité (rond de la matière, titre, matière) ; en cours : la ligne reprend la copie, « En cours · 2/5 » ; terminée : la note sur 20, la médaille-récompense et « Refaire » hors pause ; « Voir plus (n) » mène à Mon historique ; aucune copie : rien, ni titre ni phrase %>
 <%# UDR  : 0173 §3 (accueil, règle 2 : jamais de section vide), 0132 accueil élève §3.5, §3.7, 0174 activation-premier-exercice §3 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
 <%# locals: (sessions:, paused_exercise_ids:) -%>
 <% shown = 3 %>
@@ -36,7 +36,7 @@
                     <%= t("classroom.student_homes.history.in_progress", answered: session.answered_count, total: session.question_count) %>
                   </span>
                 <% else %>
-                  <span data-medal class="shrink-0 text-sm"><%= medal_tag(session.medal) %></span>
+                  <span data-medal class="shrink-0"><%= grade_and_medal(session.score_percent, session.medal) %></span>
                 <% end %>
               <% end %>
               <%# Toute copie terminée se refait (UDR-0174 §3) ; pendant la pause de « Recommencer » (ADR-0115),

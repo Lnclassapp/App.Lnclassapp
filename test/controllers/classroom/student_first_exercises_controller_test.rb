@@ -25,12 +25,13 @@ class Classroom::StudentFirstExercisesControllerTest < ActionDispatch::Integrati
     assert_select "#student_first_exercise", 0
   end
 
-  test "CA-13: any other screen of the student carries the frame too; a teacher does not" do
+  # Chantier premier-exercice-ux (UDR-0185 §3.1) : la fenêtre ne suit plus l'élève hors de l'accueil.
+  test "no other screen of the student carries the frame; nor does a teacher's home" do
     create_exercise(essential: @essential)
     sign_in_as @student
 
     get courses_path
-    assert_select "turbo-frame##{FRAME}[src=?]", student_first_exercise_path
+    assert_select "turbo-frame##{FRAME}", 0
 
     sign_in_as create_teacher(classrooms: [ @classroom ])
     get teacher_home_path

@@ -1,46 +1,45 @@
-<%# 🌐 UI · classroom/student_classrooms/show — « Ma classe » de l'élève (CL-22, CL-10 volet élève), redessinée (chantier ma-classe-eleve) %>
-<%# Rôle : une colonne (pleine, 720 px dès 700 px, 960 px au plus dès 1 024 px) : classe en aplat bleu, invitation sans enseignant, cours, puis devoirs reçus en feuilles et fiches à revoir (2/3), traités (1/3) dès 1 024 px %>
-<%# ADR  : 0028, 0048, 0072, 0076, 0089 §4.3 · UDR : 0011, 0057, 0062, 0071 §3.5, 0076 §3.2, 0081 §3.8, 0084, 0086, 0133 écrans élève sans répétition §3.6 bis, CA-E3 (mvp-teacher-student), feuilles-prepare-interros-et-devoirs §3 (devoirs reçus), 0145 (§3.2 : grilles de cartes ; les traités restent sur une colonne dès 1 024 px, tiers de largeur) · sans lien « Accueil », sans nom d'élève %>
+<%# 🌐 UI · classroom/student_classrooms/show — « Ma classe » de l'élève, écran intérieur style Wave (chantier ecrans-wave-ma-classe-historique) %>
+<%# Rôle : flèche retour, « Ma classe » et la classe en sous-titre ; puis, d'abord ce qui est à faire : exercices assignés, notions à revoir, fiches de cours, exercices traités (note sur 20 et médaille-récompense), chacun en carte blanche, lignes plates, 3 puis « Voir plus (n) » ; une section vide est masquée %>
+<%# ADR  : 0028, 0072, 0089 §4.3 · UDR : 0173 (écrans minimalistes style Wave §3, règles 1 à 8), 0011, 0057, 0076 §3.2, 0145 · sans nom d'élève %>
 <% page_title t(".page_title") %>
+<% content_for :inner, "1" %>
+<% classroom = @classroom %>
+<% sheets = @assigned_sheets %>
+<% pending_gaps = classroom.pending_gaps %>
+<% treated = classroom.treated_exercises %>
+<% courses = classroom.courses %>
+<% level = [ classroom.level_name, classroom.series_name ].compact.join(" · ") %>
+<% subtitle = [ classroom.classroom_name, (level unless level == classroom.classroom_name), classroom.school_name, classroom.school_year ].compact_blank.join(" · ") %>
 
-<%# max-w-180 (720 px) ne borne rien sous 700 px, où la colonne prend toute la largeur moins les marges (UDR-0086 §3.5). %>
-<div id="student_classroom" class="mx-auto w-full max-w-180 lg:max-w-240">
-  <%# UDR-0086 §3.1 : plus de retour « Accueil », l'en-tête et le menu de l'avatar y mènent (UDR-0084). %>
-  <%= ui_page_header title: t(".title") %>
+<div id="student_classroom" class="mx-auto w-full max-w-180 space-y-6 pb-6">
+  <%= render "shared/screens/inner_header", title: t(".title"), back_href: student_home_path, subtitle: %>
 
-  <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
-  <div class="grid grid-cols-1 gap-6">
-    <%= render "classroom_card", classroom: @classroom %>
+  <% unless classroom.has_teacher %>
+    <%= render "no_teacher", classroom: %>
+  <% end %>
 
-    <% unless @classroom.has_teacher %>
-      <%= render "no_teacher", classroom: @classroom %>
-    <% end %>
+  <%= render "assigned_sheets", sheets: %>
 
-    <%= render "courses", courses: @classroom.courses %>
+  <% if pending_gaps.any? %>
+    <%= render "pending_gaps", gaps: pending_gaps, proposals: @remediation_proposals %>
+  <% end %>
 
-    <%# UDR écrans élève §3.6 bis (CA-E11) : dès 1 024 px, 2/3 – 1/3 ; items-start garde à chaque carte sa hauteur. %>
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-start">
-      <%# CA-E3 : « Fiches à revoir » juste après « Exercices assignés », dans la colonne de gauche ; « traités » reste à droite. %>
-      <div class="grid grid-cols-1 gap-6 lg:col-span-2">
-        <%= render "assigned_sheets", sheets: @assigned_sheets %>
+  <%= render "courses", courses: %>
 
-        <% pending_gaps = @classroom.pending_gaps %>
-        <%= render "pending_gaps", gaps: pending_gaps, proposals: @remediation_proposals if pending_gaps.any? %>
-      </div>
-
-      <% treated = @classroom.treated_exercises %>
-      <%= ui_card title: t(".treated_title"), id: "student_classroom_treated", data: (ui_reveal_data if treated.any?) do %>
-        <% if treated.empty? %>
-          <%= ui_empty_state title: t(".treated_empty"), description: t(".treated_empty_description"), icon: "check-circle" %>
-        <% else %>
-          <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            <% treated.each_with_index do |exercise, index| %>
-              <%= render "treated_exercise", exercise:, index: %>
-            <% end %>
-          </ul>
-          <%= ui_reveal_more treated.size %>
-        <% end %>
+  <% if treated.any? %>
+    <%= render layout: "shared/screens/group", locals: { id: "student_classroom_treated", title: t("classroom.student_classrooms.show.treated_title"), total: treated.size } do %>
+      <% treated.each_with_index do |exercise, index| %>
+        <% card = exercise_card_for_treated(exercise) %>
+        <% illustration = subject_illustration(card.material_slug) %>
+        <%= render "shared/screens/row", title: card.title, href: card.href, detail: "#{card.material_name} · #{card.type_label}",
+                                         icon: image_tag(illustration.path, alt: "", class: "size-7", loading: "lazy"), tint: illustration.tint,
+                                         trailing: card.status, folded: index >= ComponentsHelper::REVEAL_LIMIT %>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
+
+  <%# Rien du tout : une seule phrase, qui dit ce qui viendra (règle 2 : aucune section vide n'est rendue). %>
+  <% if sheets.empty? && pending_gaps.empty? && treated.empty? && courses.empty? %>
+    <%= ui_empty_state title: t(".assigned_empty"), description: t(".assigned_empty_description"), icon: "clipboard-document-check" %>
+  <% end %>
 </div>

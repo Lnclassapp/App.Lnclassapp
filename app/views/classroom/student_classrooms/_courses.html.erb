@@ -1,30 +1,15 @@
-<%# 🌐 UI · classroom/student_classrooms/_courses — « Cours assignés » de « Ma classe » : titre, compteur, bande qui défile %>
-<%# Rôle : les cours des exercices assignés à la classe, 1 carte et le début de la suivante, 2 et demie dès 700 px, 4 dès 1 024 px %>
-<%# ADR  : 0072 · UDR : 0071 §3.5 (bande et points du carrousel d'annonces), 0076 §3.2, 0086 §3.4, §3.5 %>
+<%# 🌐 UI · classroom/student_classrooms/_courses — « Fiches de cours » de « Ma classe » : une ligne par cours d'un exercice assigné %>
+<%# Rôle : pastille de la matière, nom du cours, « Matière · n exercices assignés » ; la ligne mène au cours ; 3 puis « Voir plus (n) » ; masquée sans cours %>
+<%# ADR  : 0072 · UDR : 0173 §3 (règles 5, 7, 8), 0076 §3.2 %>
 <%# locals: (courses:) -%>
-<section id="student_classroom_courses" aria-labelledby="student_classroom_courses_title" class="space-y-4">
-  <div class="flex items-center justify-between gap-3">
-    <h2 id="student_classroom_courses_title" class="font-display text-lg leading-tight font-medium"><%= t("classroom.student_classrooms.show.courses_title") %></h2>
-    <% if courses.any? %>
-      <%= ui_badge t("classroom.student_classrooms.show.courses_count", count: courses.size), tone: :brand, size: :sm %>
+<% if courses.any? %>
+  <%= render layout: "shared/screens/group", locals: { id: "student_classroom_courses", title: t("classroom.student_classrooms.show.courses_title"), total: courses.size } do %>
+    <% courses.each_with_index do |course, index| %>
+      <% illustration = subject_illustration(course.material_slug) %>
+      <%= render "shared/screens/row", id: "course_#{course.slug}", title: course.name, href: course_path(course.slug),
+                                       detail: "#{course.material_name} · #{t("classroom.student_classrooms.course_card.assigned", count: course.assigned_count)}",
+                                       icon: image_tag(illustration.path, alt: "", class: "size-7", loading: "lazy"), tint: illustration.tint,
+                                       folded: index >= ComponentsHelper::REVEAL_LIMIT %>
     <% end %>
-  </div>
-  <% if courses.empty? %>
-    <%= ui_empty_state title: t("classroom.student_classrooms.show.courses_empty"),
-                       description: t("classroom.student_classrooms.show.courses_empty_description"), icon: "book-open" %>
-  <% else %>
-    <%# Sans JavaScript, la bande défile, sans points. %>
-    <div data-controller="communication--carousel">
-      <ul class="scrollbar-none flex snap-x snap-mandatory gap-3 overflow-x-auto motion-safe:scroll-smooth lg:-mx-1.5 lg:gap-0"
-          aria-label="<%= t("classroom.student_classrooms.show.courses_title") %>" data-communication--carousel-target="track">
-        <%= render partial: "classroom/student_classrooms/course_card", collection: courses, as: :course %>
-      </ul>
-      <div class="hidden justify-center gap-1.5 pt-3" aria-hidden="true" data-communication--carousel-target="pager">
-        <% courses.each_index do |index| %>
-          <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand" : "h-1.5 w-1.5 rounded-full bg-line" %>"
-                data-communication--carousel-target="dot"></span>
-        <% end %>
-      </div>
-    </div>
   <% end %>
-</section>
+<% end %>
