@@ -1,0 +1,11 @@
+<%# 🌐 UI · teams/push_settings/_modes — carte « Réglages » : une ligne par motif, dans l'ordre de priorité %>
+<%# Rôle : les trois motifs automatisables ont leur case ; les autres un badge qui dit quand ils partent %>
+<%# ADR  : XXXX envois de notifications · UDR : XXXX écran notifications de l'équipe (§3.3) %>
+<%# locals: (modes:, can_manage:) -%>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "adjustments-horizontal", id: "push_settings_modes" do %>
+  <ul class="divide-y divide-line">
+    <% modes.each do |mode| %>
+      <%= render "teams/push_settings/mode", mode:, can_manage: %>
+    <% end %>
+  </ul>
+<% end %>

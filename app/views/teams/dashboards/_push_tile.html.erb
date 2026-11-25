@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/dashboards/_push_tile — tuile « Notifications » : élèves abonnés, abonnements, retraits, envois de la semaine par motif %>
 <%# Rôle : lecture seule, aucun nom ; « 0 élève abonné » sans liste quand personne n'est abonné %>
-<%# ADR  : 0146 · UDR : 0186 (§3.4) %>
+<%# ADR  : 0146 · UDR : 0186 (§3.4), XXXX écran notifications de l'équipe (§3.1 : lien « Paramétrer ») %>
 <%# locals: (usage:) -%>
 <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "bell", id: "team_dashboard_push" do %>
   <div class="rounded-ln bg-mist px-3 py-4">
@@ -20,5 +20,8 @@
         </ul>
       <% end %>
     <% end %>
+  </div>
+  <div class="mt-3">
+    <%= ui_button t(".configure"), variant: :ghost, size: :sm, href: teams_push_settings_path, icon: "adjustments-horizontal" %>
   </div>
 <% end %>
