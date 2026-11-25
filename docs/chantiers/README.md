@@ -245,6 +245,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`multi-etablissements-enseignant`](multi-etablissements-enseignant/memo.md) | PR prête | feature | 2026-10-16 | Un enseignant dans plusieurs établissements |
 | [`mvp-teacher-student`](mvp-teacher-student/memo.md) | replanifié élève d'abord | feature | 2026-10-22 | MVP Lnclass Teacher & Student — pilote du 27 octobre |
 | [`note-sur-20-partout`](note-sur-20-partout/memo.md) | PR prête | feature | 2026-10-19 | La note sur 20 décide partout |
+| [`notifications-push`](notifications-push/memo.md) | planifié | feature | 2026-11-16 | Notifications poussées aux élèves (Web Push) |
 | [`orchestrateur-court-et-index`](orchestrateur-court-et-index/memo.md) | livré | refactoring | 2026-11-05 | Orchestrateurs courts et index des chantiers généré |
 | [`ordre-lecons-progression`](ordre-lecons-progression/memo.md) | livré | bugfix | 2026-10-29 | Les leçons dans l'ordre de la progression |
 | [`outils-ci-budgets`](outils-ci-budgets/memo.md) | livré | correction | 2026-10-28 | Deux outils de CI en retard sur leurs règles |

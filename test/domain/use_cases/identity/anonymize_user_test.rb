@@ -99,6 +99,15 @@ module UseCases
         def erase_for(student_id:) = (@erased_for ||= []) << [ student_id, @transaction.open? ]
       end
 
+      class FakePushData
+        include Ports::Communication::PushDataEraserPort
+
+        attr_reader :erased_for
+
+        def initialize(transaction) = @transaction = transaction
+        def erase_for(user_id:) = (@erased_for ||= []) << [ user_id, @transaction.open? ]
+      end
+
       # ADR-0036, amendment (2): the pending request of the account, if any, is closed as processed, inside the transaction.
       class FakeDeletionRequests
         include Ports::Identity::DeletionRequestRepositoryPort
@@ -129,10 +138,11 @@ module UseCases
         @audit = FakeAuditLog.new
         @transaction = TrackingTransaction.new
         @learning_data = FakeLearningData.new(@transaction)
+        @push_data = FakePushData.new(@transaction)
         @deletion_requests = FakeDeletionRequests.new(transaction: @transaction, pending:)
         AnonymizeUser.new(users: @users, sessions: @sessions, second_factors: @second_factors, pin_recoveries: @pin_recoveries,
                           login_attempts: @login_attempts, invitations: @invitations, memberships: @memberships, photos: @photos, audit_log: @audit,
-                          learning_data: @learning_data, transaction: @transaction,
+                          learning_data: @learning_data, push_data: @push_data, transaction: @transaction,
                           policy: Policies::Identity::DeleteUserPolicy.new, clock: Clock.new(NOW), deletion_requests: @deletion_requests)
                      .call(actor:, target_public_id: target, dto: Dtos::Identity::DeletionRequestInput.new(requested_on:))
       end
@@ -144,6 +154,7 @@ module UseCases
         assert_nil @invitations.destroyed_for
         assert_nil @memberships.left
         assert_nil @learning_data.erased_for
+        assert_nil @push_data.erased_for
         assert_empty @photos.writes
         assert_empty @audit.events
         assert_empty @deletion_requests.closed
@@ -172,6 +183,12 @@ module UseCases
 
         assert_equal [ [ 8, true ] ], @learning_data.erased_for
         assert_not @transaction.open?
+      end
+
+      test "its push subscriptions, preferences and deliveries are erased inside the transaction" do
+        assert anonymize.success?
+
+        assert_equal [ [ 8, true ] ], @push_data.erased_for
       end
 
       test "the journal keeps the team member and the date of the request, never the erased data" do

@@ -1,0 +1,35 @@
+<%# 🌐 UI · identity/profiles/_push_row — la ligne « Notifications » de « Mes informations » (id profile_notifications_row) %>
+<%# Rôle : visible seulement après un premier « Oui » (abonnement ou interrupteur) ; Activées + « Couper », Coupées + « Réactiver » ; le navigateur précise « autre appareil » et « bloquées » %>
+<%# ADR  : 0146 · UDR : 0186 (§3.2) · Stimulus : push-subscription · locals : state (:on | :off, sinon lu) %>
+<%# locals: (state: nil) -%>
+<% vapid_key = ENV["VAPID_PUBLIC_KEY"].presence %>
+<% state ||= Queries::Communication::PushInvitationQuery.new.profile_state(student_id: current_actor.user_id, shell: lnclass_app?) %>
+<% if vapid_key && state != :hidden %>
+  <%= tag.li id: "profile_notifications_row",
+             data: { controller: "push-subscription", push_subscription_vapid_key_value: vapid_key,
+                     push_subscription_preference_url_value: push_preference_path,
+                     push_subscription_subscriptions_url_value: push_subscriptions_path,
+                     push_subscription_mode_value: "row", push_subscription_state_value: state,
+                     push_subscription_messages_value: { loading: t(".loading"), error: t(".error"), activated: t(".activated"), other_device: t(".other_device"),
+                                                         blocked: t(".blocked"), blocked_detail: t(".blocked_detail") } } do %>
+    <div class="flex min-h-tap items-center gap-3 py-3">
+      <span class="grid size-10 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong" aria-hidden="true"><%= ui_icon "bell" %></span>
+      <span class="min-w-0 flex-1">
+        <span class="block text-sm text-mute"><%= t(".label") %></span>
+        <span class="block font-medium break-words text-ink" data-push-subscription-target="value"><%= state == :off ? t(".cut") : t(".activated") %></span>
+        <span class="block text-xs text-mute empty:hidden" data-push-subscription-target="status" role="status" aria-live="polite"></span>
+      </span>
+      <% if state == :off %>
+        <%= button_to t(".turn_on"), push_preference_path, method: :patch, params: { intent: "turn_on" },
+                      class: "min-h-tap shrink-0 px-2 text-sm font-medium text-brand-strong",
+                      form: { data: { action: "submit->push-subscription#reactivate" } } %>
+      <% else %>
+        <%= ui_button t(".activate_here"), variant: :ghost, hidden: true, class: "shrink-0",
+                      data: { action: "push-subscription#accept", push_subscription_target: "accept" } %>
+        <%= button_to t(".turn_off"), push_preference_path, method: :patch, params: { intent: "turn_off" },
+                      class: "min-h-tap shrink-0 px-2 text-sm font-medium text-brand-strong",
+                      form: { data: { push_subscription_target: "cut" } } %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

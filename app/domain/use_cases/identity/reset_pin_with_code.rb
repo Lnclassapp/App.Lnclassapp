@@ -1,16 +1,17 @@
 # 🧠 DOMAINE · UseCases::Identity::ResetPinWithCode
 # Rôle : nouveau PIN par code de récupération ; coupe toutes les sessions et lève le verrouillage
-# ADR  : 0028 (exempté de policy : le visiteur n'est pas connecté), 0032, 0050
+# ADR  : 0146, 0028 (exempté de policy : le visiteur n'est pas connecté), 0032, 0050
 module UseCases
   module Identity
     class ResetPinWithCode
       # Contact inconnu, code absent, révoqué ou faux : le même message.
       INVALID = { base: [ :invalid_recovery ] }.freeze
 
-      def initialize(users:, pin_recoveries:, sessions:, login_attempts:, audit_log:, transaction:, digest_key:, clock:)
+      def initialize(users:, pin_recoveries:, sessions:, push_subscriptions:, login_attempts:, audit_log:, transaction:, digest_key:, clock:)
         @users = users
         @pin_recoveries = pin_recoveries
         @sessions = sessions
+        @push_subscriptions = push_subscriptions
         @login_attempts = login_attempts
         @audit_log = audit_log
         @transaction = transaction
@@ -53,6 +54,7 @@ module UseCases
       def apply(user, code, dto, now)
         @users.update_pin(user_id: user.id, pin: dto.pin)
         @pin_recoveries.consume(id: code.id, at: now)
+        @push_subscriptions.delete_for_user(user_id: user.id)
         @sessions.destroy_all_for(user_id: user.id)
         @login_attempts.clear_failures(contact: dto.contact)
         @audit_log.record(action: "pin.reset", actor_id: user.id, subject_type: "User", subject_id: user.id, ip: dto.ip, at: now)

@@ -1,0 +1,34 @@
+<%# 🌐 UI · communication/push_subscriptions/_invitation — la carte « Être prévenu de tes devoirs et de tes interros ? » sous un résultat réussi %>
+<%# Rôle : rendue seulement si le serveur le décide (PushInvitationQuery#show?) ; cachée jusqu'à ce que le navigateur sache s'abonner ; la boîte de permission n'apparaît qu'au clic « Oui » %>
+<%# ADR  : 0146 · UDR : 0186 (§3.1) · Stimulus : push-subscription · locals : score_percent %>
+<%# locals: (score_percent:) -%>
+<% vapid_key = ENV["VAPID_PUBLIC_KEY"].presence %>
+<% if vapid_key && current_actor.student? && Queries::Communication::PushInvitationQuery.new.show?(student_id: current_actor.user_id, score_percent:, shell: lnclass_app?) %>
+  <%= tag.section id: "push_invitation", class: "rounded-card border border-line bg-white p-5 shadow-card", hidden: true,
+                  "aria-labelledby": "push_invitation_title",
+                  data: { controller: "push-subscription", push_subscription_vapid_key_value: vapid_key,
+                          push_subscription_preference_url_value: push_preference_path,
+                          push_subscription_subscriptions_url_value: push_subscriptions_path,
+                          push_subscription_mode_value: "card",
+                          push_subscription_messages_value: { loading: t(".loading"), error: t(".error"), blocked: t(".blocked") } } do %>
+    <div data-push-subscription-target="content">
+      <h2 id="push_invitation_title" class="text-lg font-medium text-ink"><%= t(".title") %></h2>
+      <p class="mt-1 text-sm text-mute"><%= t(".body") %></p>
+      <ul class="mt-3 space-y-1 text-sm text-ink">
+        <% t(".bullets").each do |bullet| %>
+          <li class="flex items-start gap-2"><%= ui_icon "check", size: :sm, class: "mt-0.5 text-brand-strong" %><span><%= bullet %></span></li>
+        <% end %>
+      </ul>
+      <div class="mt-4 flex flex-col gap-2 sm:flex-row">
+        <%= ui_button t(".accept"), data: { action: "push-subscription#accept", push_subscription_target: "accept" } %>
+        <%= button_to t(".later"), push_preference_path, method: :patch, params: { intent: "postpone" },
+                      class: "min-h-tap px-3 text-sm font-medium text-brand-strong" %>
+      </div>
+    </div>
+    <p class="flex items-center gap-2 text-sm text-ink" data-push-subscription-target="success" hidden>
+      <%= ui_icon "check-circle", variant: :solid, size: :sm, class: "text-success" %>
+      <span><%= t(".success") %></span>
+    </p>
+    <p class="mt-3 text-xs text-mute empty:hidden" data-push-subscription-target="status" role="status" aria-live="polite"></p>
+  <% end %>
+<% end %>

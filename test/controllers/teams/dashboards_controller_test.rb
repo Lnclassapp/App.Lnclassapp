@@ -58,6 +58,46 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "the notifications tile reads the subscribed students, the withdrawals and this week's sends by motive, with no name" do
+    student = create_student(first_name: "Awa", last_name: "Zongo")
+    2.times { create_push_subscription(user: student) }
+    create_push_preference(user: student, turned_off_at: 1.day.ago)
+    create_push_delivery(user: student, motive: "result", status: "delivered", sent_at: 1.hour.ago)
+    create_push_delivery(user: student, motive: "inactive", status: "failed", sent_at: 1.hour.ago)
+    sign_in_as @member
+
+    get team_dashboard_path
+
+    assert_select "#team_dashboard_push" do
+      assert_select "#push_students", text: tl("push_tile.students", count: 1)
+      assert_select "#push_counts", text: tl("push_tile.counts", subscriptions: 2, turned_off: 1)
+      assert_select "#push_week", text: tl("push_tile.week", sent: 1, failed: 1)
+      assert_select "#push_by_motive li", 1
+      assert_select "#push_by_motive li", text: /#{tl("push_tile.motives.result")}\s+1/
+    end
+    assert_no_match(/Zongo/, css_select("#team_dashboard_push").to_s)
+  end
+
+  test "the notifications tile reads « 0 élève abonné » without any list when nobody is subscribed" do
+    sign_in_as @member
+
+    get team_dashboard_path
+
+    assert_select "#team_dashboard_push #push_students", text: tl("push_tile.students", count: 0)
+    assert_select "#team_dashboard_push #push_counts", 0
+    assert_select "#team_dashboard_push ul", 0
+  end
+
+  test "a subscribed student with nothing sent this week has no motive list" do
+    create_push_subscription
+    sign_in_as @member
+
+    get team_dashboard_path
+
+    assert_select "#push_week", text: tl("push_tile.week", sent: 0, failed: 0)
+    assert_select "#push_by_motive", 0
+  end
+
   test "the key figures of the period and of the moment, national by default over 7 days" do
     classroom = create_classroom(level: create_level(name: "Tle", position: 7))
     student = create_student(classroom:)
