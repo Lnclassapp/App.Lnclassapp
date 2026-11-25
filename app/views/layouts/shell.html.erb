@@ -53,11 +53,13 @@
       <% end %>
     <% end %>
   </main>
-  <%# UDR accueil-eleve-qr-fenetre-inviter §3.2 : la fenêtre « Ton premier exercice » sur chaque écran de l'élève, hors mode concentré et hors feuille à remplir (content_for :no_first_exercise_prompt),
-      tant qu'il n'a rendu aucune copie ; un cadre différé, vide quand il n'y a rien à dire, qui ne montre rien en cas d'échec. %>
-  <% if !focus && !content_for?(:no_first_exercise_prompt) && first_exercise_prompt? %>
+  <%# UDR XXXX-premier-exercice-ux §3.1 (amende accueil-eleve-qr-fenetre-inviter §3.2) : la fenêtre « Ton premier exercice » sur l'accueil seulement
+      (content_for :first_exercise_prompt), hors mode concentré, tant que l'élève n'a rendu aucune copie ; « Plus tard » la tait pour la visite.
+      Un cadre différé, vide quand il n'y a rien à dire, qui ne montre rien en cas d'échec. %>
+  <% if !focus && content_for?(:first_exercise_prompt) && first_exercise_prompt? %>
     <%= turbo_frame_tag FirstExercisePrompt::FRAME, src: student_first_exercise_path, loading: :eager,
-                        data: { controller: "classroom--first-exercise-prompt", action: "turbo:frame-missing->classroom--first-exercise-prompt#missing" } %>
+                        data: { controller: "classroom--first-exercise-prompt",
+                                action: "turbo:frame-missing->classroom--first-exercise-prompt#missing turbo:before-frame-render->classroom--first-exercise-prompt#render" } %>
   <% end %>
   <%= render "shared/navigation/bottom_bar", user: shell_user if bottom_bar %>
 <% end %>

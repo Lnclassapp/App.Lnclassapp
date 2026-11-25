@@ -1,12 +1,16 @@
 // ⚡ FRONT · lib/assessment/copy_sheet — la logique de la copie de l'élève, chargée à la demande par assessment/copy_controller
-// Rôle : brouillon dans `localStorage[key]`, compteur des questions répondues, confirmation « Vérifier ta copie ? » des questions vides
-// UDR  : 0138 §3.2 · ADR : 0051 (import dynamique), 0112 §4.5 · le contrôleur Stimulus lui prête ses cibles et ses valeurs
+// Rôle : brouillon dans `localStorage[key]`, compteur des questions répondues, confirmation « Vérifier ta copie ? » des questions vides ;
+//        une saisie illisible arrête l'envoi et ramène l'élève à son champ, avant toute confirmation
+// UDR  : 0138 §3.2, XXXX-premier-exercice-ux §3.2 · ADR : 0051 (import dynamique), 0112 §4.5 · le contrôleur Stimulus lui prête ses cibles et ses valeurs
 const ANSWER_FIELDS = /^copy\[answers\]/
 
 export class CopySheet {
   constructor(controller) {
     this.c = controller
     this.confirmed = false
+    // La copie juge elle-même les saisies à l'envoi (submit) : la bulle du navigateur, loin du champ, ne s'affiche plus.
+    const form = this.c.element.matches("form") ? this.c.element : this.c.element.querySelector("form#copy-form")
+    if (form) form.noValidate = true
     this.restore()
     this.update()
     if (this.c.hasErrorsTarget) this.c.errorsTarget.focus()
@@ -90,7 +94,7 @@ export class CopySheet {
     const fields = [...question.querySelectorAll("input, select")].filter((field) => ANSWER_FIELDS.test(field.name))
     if (fields.some((field) => field.type === "radio")) return fields.some((field) => field.checked)
 
-    return fields.length > 0 && fields.every((field) => field.value.trim() !== "" && field.checkValidity())
+    return fields.length > 0 && fields.every((field) => field.value.trim() !== "" && field.validity.valid)
   }
 
   emptyQuestions() {
@@ -105,6 +109,17 @@ export class CopySheet {
   }
 
   submit(event) {
+    // Une saisie illisible d'abord : checkValidity() envoie « invalid » au champ, qui écrit son message ; l'élève y est ramené.
+    const invalid = this.fields().find((field) => !field.validity.valid)
+    if (invalid) {
+      event.preventDefault()
+      this.confirmed = false
+      invalid.checkValidity()
+      invalid.scrollIntoView({ block: "center" })
+      invalid.focus({ preventScroll: true })
+      return
+    }
+
     const empty = this.emptyQuestions()
     if (this.confirmed || empty.length === 0 || !this.dialog) return
 

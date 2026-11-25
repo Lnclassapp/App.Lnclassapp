@@ -1,6 +1,6 @@
-# 🌐 DELIVERY · FirstExercisePrompt — la fenêtre « Ton premier exercice » : l'élève qui n'a rendu aucune copie la voit sur chaque écran
+# 🌐 DELIVERY · FirstExercisePrompt — la fenêtre « Ton premier exercice » : l'élève qui n'a rendu aucune copie la voit sur l'accueil
 # Rôle : first_exercise_prompt? dit si le shell porte le cadre différé de la fenêtre ; le drapeau de session tombe dès la première copie rendue
-# ADR  : — · UDR : accueil-eleve-qr-fenetre-inviter §3.2 · chantier entree-et-accueil-eleve-allegees
+# ADR  : — · UDR : accueil-eleve-qr-fenetre-inviter §3.2, XXXX-premier-exercice-ux §3.1 · chantiers entree-et-accueil-eleve-allegees, premier-exercice-ux
 module FirstExercisePrompt
   extend ActiveSupport::Concern
 
@@ -14,6 +14,6 @@ module FirstExercisePrompt
 
   private
 
-  # Vrai pour un élève dont la session ne porte pas encore le drapeau. Le mode concentré (content_for :focus) est écarté par le shell.
+  # Vrai pour un élève dont la session ne porte pas encore le drapeau. Le shell ne pose le cadre que sur l'accueil (content_for :first_exercise_prompt), hors mode concentré.
   def first_exercise_prompt? = current_actor.present? && current_actor.student? && !session[SESSION_KEY]
 end
