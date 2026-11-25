@@ -53,6 +53,8 @@ Pour l'indicateur :
 
 ### 4.1 Manifeste
 
+> **Amendement du 2026-11-25** (chantier [`installation-avant-inscription`](../../chantiers/installation-avant-inscription/memo.md), demande du porteur) : le `<link rel="manifest">` n'est déclaré qu'au compte connecté. Avant l'inscription, aucun navigateur n'invite à installer ; l'annonce `beforeinstallprompt` est aussi retenue sur toute page, seule la pop-up de l'accueil la propose (UDR-0078).
+
 Servi par `Rails::PwaController` (`GET /manifest.json`, route `pwa_manifest`), déclaré par `<link rel="manifest">` dans `layouts/application` :
 
 | Clé | Valeur |
