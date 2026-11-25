@@ -97,7 +97,7 @@ Les exemples sont rendus par `PushMessage.for` avec la matière « Maths » et l
 
 ### 3.6 Case « Prévenir les élèves » du formulaire d'annonce
 
-- Dans `communication/authored_messages/_form`, branche `when :team` seulement, **après** le choix d'audience : `ui_field f, :push_requested, as: :checkbox, label: "Prévenir les élèves par notification", hint: "Une notification part dans la prochaine fenêtre, une seule par élève et par jour."`.
+- Dans `communication/authored_messages/_form`, branche `when :team` seulement, **après** le choix d'audience : `ui_field f, :push_requested, as: :checkbox, label: "Prévenir les élèves par notification", hint: "Une notification part dans la prochaine fenêtre, dans la limite de dix par élève et par jour."`.
 - Contrôleur Stimulus `push-request` sur le formulaire : la case est `disabled` et décochée quand l'audience est « Enseignants » ou « Directions » ; réactivée pour « Tous » ou « Élèves ». Sans JS, le serveur ignore la case pour ces audiences.
 - Branches `school_admin` et enseignant : rien n'est rendu ; le paramètre est filtré par le contrôleur.
 - Ligne de l'annonce (`_row`) : si `push_requested`, une icône `bell` `size-4 text-mute` avec `aria-label="Élèves prévenus par notification"`.

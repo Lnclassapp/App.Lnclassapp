@@ -9,7 +9,7 @@
 ```
 Lot 0 — SOCLE (séquentiel) : tables, entités, ports gelés, dépôts, routes, textes, navigation
   ↓
-  ├─► Lot A « l'envoi n'ouvre que les motifs réglés ou validés, une par jour » ┐
+  ├─► Lot A « l'envoi n'ouvre que les motifs réglés ou validés, dix par jour » ┐
   ├─► Lot B « un admin règle les motifs automatiques (page Notifications) »     │
   ├─► Lot C « l'équipe valide le plan du jour »                                 ├─ en parallèle
   └─► Lot D « une annonce prévient les élèves »                                 ┘
@@ -29,6 +29,7 @@ Les dépôts des deux nouveaux ports sont au Lot 0 : A les lit, B et C les écri
                      `app/domain/entities/communication/push_motive.rb` (`assignment_new` en 3e priorité, `AUTOMATABLE`, `PLANNABLE`)
                      `app/domain/entities/communication/push_motive_setting.rb` · `app/domain/entities/communication/push_approval.rb`
                      `app/domain/ports/communication/push_motive_setting_repository_port.rb` · `app/domain/ports/communication/push_approval_repository_port.rb` (contrats ADR §4.2, gelés)
+                     `app/domain/ports/communication/push_delivery_repository_port.rb` · `app/infrastructure/repositories/communication/push_delivery_repository.rb` (`sent_count`, additif)
                      `app/infrastructure/repositories/communication/push_motive_setting_repository.rb` · `app/infrastructure/repositories/communication/push_approval_repository.rb`
                      `config/routes/teams.rb` (`GET teams/notifications`, `GET teams/notifications/plan`, `PATCH teams/notifications/motives/:motive`, `POST teams/notifications/approvals`)
                      `config/locales/teams/push_settings.fr.yml` (tous les textes de l'UDR §3.10) · `config/locales/communication/push.fr.yml` (texte `assignment_new`)
@@ -43,10 +44,10 @@ Les dépôts des deux nouveaux ports sont au Lot 0 : A les lit, B et C les écri
 
 ---
 
-## Lot A — L'envoi n'ouvre que les motifs réglés ou validés, une par jour
+## Lot A — L'envoi n'ouvre que les motifs réglés ou validés, dix par jour
 
 - **Couche**       : domaine + infrastructure (job, requête)
-- **Fichiers**     : `app/domain/use_cases/communication/deliver_push_notifications.rb` (filtre d'ouverture ADR §4.3, une par jour d'Abidjan, `min_interval:` retiré)
+- **Fichiers**     : `app/domain/use_cases/communication/deliver_push_notifications.rb` (filtre d'ouverture ADR §4.3, plafond de 10 par jour d'Abidjan, `min_interval:` retiré)
                      `app/jobs/communication/deliver_push_notifications_job.rb` (dépôts des réglages et validations ; plus de `PUSH_MIN_INTERVAL_HOURS`)
                      `app/infrastructure/queries/communication/push_candidates/assignment_new.rb` (nouveau motif, sur le modèle d'`AssignmentDue`)
                      `app/infrastructure/queries/communication/push_candidates.rb` (ajout de la source `AssignmentNew`)
@@ -54,8 +55,8 @@ Les dépôts des deux nouveaux ports sont au Lot 0 : A les lit, B et C les écri
                      `app/domain/use_cases/communication/purge_push_data.rb` · `app/jobs/communication/purge_push_data_job.rb` (validations et historique de plus de 90 jours)
                      `docs/decisions/adr/0146-notifications-web-push-aux-eleves.md` (bandeau « amendé par » en tête, §3.2 et §4)
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/domain/use_cases/communication/deliver_push_notifications_test.rb` (rien sans réglage ni validation ; motif automatique ; liste figée ; une par jour, la plus urgente ; le lendemain le motif repart) · `test/infrastructure/queries/communication/push_candidates/assignment_new_test.rb` (24 h, rendu, niveau) · `test/domain/use_cases/communication/purge_push_data_test.rb` · `test/jobs/communication/deliver_push_notifications_job_test.rb`
-- **Done quand**   : sur Develop en local, avec l'interrupteur ouvert et des clés de test, un passage de la tâche n'envoie rien tant qu'aucune case n'est cochée ni aucun motif validé ; après avoir coché « Nouveaux exercices » dans la console et assigné 3 exercices, l'élève reçoit « Ton prof de … t'a donné 3 exercices. » et rien d'autre ce jour-là
+- **Test associé** : `test/domain/use_cases/communication/deliver_push_notifications_test.rb` (rien sans réglage ni validation ; motif automatique ; liste figée ; un motif par passage, le plus urgent d'abord ; 10 par jour au plus ; le lendemain le motif repart) · `test/infrastructure/queries/communication/push_candidates/assignment_new_test.rb` (24 h, rendu, niveau) · `test/domain/use_cases/communication/purge_push_data_test.rb` · `test/jobs/communication/deliver_push_notifications_job_test.rb`
+- **Done quand**   : sur Develop en local, avec l'interrupteur ouvert et des clés de test, un passage de la tâche n'envoie rien tant qu'aucune case n'est cochée ni aucun motif validé ; après avoir coché « Nouveaux exercices » dans la console et assigné 3 exercices, l'élève reçoit « Ton prof de … t'a donné 3 exercices. » et rien d'autre au même passage
 
 ---
 
@@ -115,7 +116,8 @@ Les dépôts des deux nouveaux ports sont au Lot 0 : A les lit, B et C les écri
 | rien ne part sans réglage ni validation | A |
 | un motif automatique part seul | A |
 | une relance validée part, figée à la validation | A (envoi) + C (enregistrement de la liste) |
-| une par jour et par élève, la plus urgente | A |
+| un motif par passage, le plus urgent d'abord | A |
+| dix notifications au plus par jour et par élève | A |
 | le lendemain, le motif encore valable repart | A |
 | nouveaux exercices assignés · déjà rendus ou trop anciens | A |
 | un rôle non admin ne change pas un réglage | B |
@@ -200,7 +202,7 @@ Aucune ne bloque le lancement : les trois points laissés sans réponse au grill
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 
-Parcours à rejouer : (1) un admin coche « Nouveaux exercices », un enseignant assigne 3 exercices, la tâche passe → une seule notification ; (2) un compte `content` tente de cocher une case → refus ; (3) validation d'« Élève inactif » après 20 h → refus. Captures à 390 px et sur ordinateur de la page « Notifications » et du formulaire d'annonce, envoyées au porteur, jamais commitées.
+Parcours à rejouer : (1) un admin coche « Nouveaux exercices », un enseignant assigne 3 exercices, la tâche passe → la notification part au passage suivant ; (2) un compte `content` tente de cocher une case → refus ; (3) validation d'« Élève inactif » après 20 h → refus. Captures à 390 px et sur ordinateur de la page « Notifications » et du formulaire d'annonce, envoyées au porteur, jamais commitées.
 
 ## Après la fusion (hors chantier)
 

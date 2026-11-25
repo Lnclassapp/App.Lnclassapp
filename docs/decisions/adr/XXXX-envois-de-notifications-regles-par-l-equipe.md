@@ -1,4 +1,4 @@
-# ADR-XXXX : Les notifications aux élèves ne partent que sur un réglage ou une validation de l'équipe, une par jour et par élève
+# ADR-XXXX : Les notifications aux élèves ne partent que sur un réglage ou une validation de l'équipe, dix par jour et par élève au plus
 <!-- index
 titre: Notifications réglées et validées par l'équipe
 statut: Accepté
@@ -25,7 +25,7 @@ Le grill du chantier `parametrage-notifications` a fixé le modèle (memo, répo
 - **interro demain**, **devoir à rendre** et **nouveaux exercices** peuvent être mis en automatique par un admin (une case, décochée au départ) ;
 - **exercice commencé**, **résultat ou médaille**, **élève inactif**, et les deux précédents quand leur case est décochée, ne partent que si l'équipe les valide dans le plan du jour ;
 - **annonce** part seulement si l'équipe coche « Prévenir les élèves » en la publiant ;
-- une notification par jour d'Abidjan et par élève, la plus urgente.
+- dix notifications au plus par jour d'Abidjan et par élève ; un motif par passage de la tâche, le plus urgent d'abord (porteur, après présentation du plan : il a refusé « dix par jour »).
 
 ## 2. Moteurs de décision
 
@@ -55,12 +55,13 @@ Le grill du chantier `parametrage-notifications` a fixé le modèle (memo, répo
 
 | Option | Pourquoi elle tenait la route | Pourquoi elle a été écartée |
 |---|---|---|
-| A — Garder 4 h entre deux envois | Déjà en place | Deux notifications possibles le même jour : c'est ce que le porteur refuse |
-| B — **Une par jour d'Abidjan** (UTC, sans heure d'été) | Lisible pour l'équipe et l'élève ; `last_sent_at` du port existant suffit | Retenue. `PUSH_MIN_INTERVAL_HOURS` n'est plus lue |
+| A — Garder 4 h entre deux envois | Déjà en place | Avec les fenêtres de 12 h–14 h et 17 h–20 h, plafonne de fait à deux par jour, en dessous de ce que veut le porteur |
+| B — Une par jour d'Abidjan | Lisible, aucune fatigue | Refusée par le porteur |
+| C — **Dix par jour d'Abidjan, un motif par passage (15 min)** | Le plafond du porteur ; l'écart minimal de 15 min vient du rythme de la tâche, sans réglage de plus | Retenue. `PUSH_MIN_INTERVAL_HOURS` n'est plus lue ; le port d'envois gagne `sent_count(user_id:, on_date:)` (additif) |
 
 ## 4. Décision
 
-> **Nous n'envoyons un motif à un élève que si le motif est ouvert pour lui aujourd'hui : case « Automatique » cochée (interro demain, devoir à rendre, nouveaux exercices seulement), validation du jour qui le contient (élève × objet figés à la validation), ou annonce publiée avec « Prévenir les élèves ». Le use case d'envoi applique ce filtre aux candidats des sept requêtes, puis n'envoie qu'une notification par élève et par jour d'Abidjan, la plus urgente. L'interrupteur `PUSH_DELIVERY_ENABLED` reste un coupe-tout au-dessus de ces règles.**
+> **Nous n'envoyons un motif à un élève que si le motif est ouvert pour lui aujourd'hui : case « Automatique » cochée (interro demain, devoir à rendre, nouveaux exercices seulement), validation du jour qui le contient (élève × objet figés à la validation), ou annonce publiée avec « Prévenir les élèves ». Le use case d'envoi applique ce filtre aux candidats des sept requêtes, puis envoie à chaque élève, à chaque passage, le plus urgent de ses motifs ouverts, tant qu'il a reçu moins de dix notifications ce jour d'Abidjan. L'interrupteur `PUSH_DELIVERY_ENABLED` reste un coupe-tout au-dessus de ces règles.**
 
 ### 4.1 Ce qu'on stocke
 
@@ -76,6 +77,8 @@ Le grill du chantier `parametrage-notifications` a fixé le modèle (memo, répo
 Les clés étrangères vers `users` sont `ON DELETE RESTRICT` (comme `push_deliveries`), sauf `push_approval_recipients.user_id`, `ON DELETE CASCADE` : l'anonymisation d'un élève (ADR-0146 §4.5) supprime ses lignes via le port d'effacement existant.
 
 ### 4.2 Ports
+
+`PushDeliveryRepositoryPort` gagne `sent_count(user_id:, on_date:)` (nombre d'envois `delivered` de ce jour), changement additif.
 
 ```ruby
 # app/domain/ports/communication/push_motive_setting_repository_port.rb
@@ -102,9 +105,10 @@ def open?(candidate, automatic, approved)
   end
 end
 
-def already_today?(user_id, now)
-  last = @deliveries.last_sent_at(user_id:)
-  !last.nil? && last.to_date == now.to_date # jour d'Abidjan = jour UTC
+DAILY_LIMIT = 10
+
+def daily_limit_reached?(user_id, now)
+  @deliveries.sent_count(user_id:, on_date: now.utc.to_date) >= DAILY_LIMIT # jour d'Abidjan = jour UTC
 end
 ```
 
@@ -127,7 +131,7 @@ Une query de lecture (`PushDailyPlanQuery`) appelle `PushCandidates#for(now:)`, 
 - Le plan du jour relance les six requêtes à chaque affichage (une dizaine de lectures par motif) ; acceptable pour un écran ouvert quelques fois par jour par l'équipe.
 - Un motif validé à 10 h ne touche pas l'élève devenu concerné à 11 h : il attend le plan du lendemain, et les motifs d'un jour (interro demain, inactif au palier) sont alors perdus pour lui.
 - Si personne ne valide, les relances ne partent pas : la rétention dépend de la présence de l'équipe.
-- Un élève concerné par deux motifs perd le moins urgent pour la journée ; s'il expire, il est perdu.
+- Dix notifications par jour, à 15 minutes d'écart au plus court, est un plafond haut : un élève concerné par beaucoup de motifs peut en recevoir plusieurs en une heure. Les chiffres « ont coupé » de la tuile du Pilotage sont à suivre dès l'ouverture.
 
 ## 6. Notes d'implémentation
 
@@ -139,6 +143,6 @@ Une query de lecture (`PushDailyPlanQuery`) appelle `PushCandidates#for(now:)`, 
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `test/domain/use_cases/communication/deliver_push_notifications_test.rb` : « rien ne part sans réglage ni validation », « une par jour », « liste figée ».
+- `test/domain/use_cases/communication/deliver_push_notifications_test.rb` : « rien ne part sans réglage ni validation », « dix par jour », « liste figée ».
 - Contraintes de base : `push_motive_settings_motive_check` refuse `inactive` ; index unique (`on_date`, `motive`).
 - `grep -rn PUSH_MIN_INTERVAL_HOURS app config` ne rend rien.

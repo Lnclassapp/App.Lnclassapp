@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-Le chantier `notifications-push` (PR #652) envoie seul six motifs (un septième, « nouveaux exercices », s'ajoute ici) de notification aux élèves dès que l'interrupteur d'environnement est ouvert. Le porteur veut que l'équipe décide de ce qui part : deux motifs liés à une échéance peuvent être mis en automatique par un admin, les autres partent seulement si l'équipe les valide, et aucun élève ne reçoit plus d'une notification par jour. Voir le [memo](memo.md).
+Le chantier `notifications-push` (PR #652) envoie seul six motifs (un septième, « nouveaux exercices », s'ajoute ici) de notification aux élèves dès que l'interrupteur d'environnement est ouvert. Le porteur veut que l'équipe décide de ce qui part : deux motifs liés à une échéance peuvent être mis en automatique par un admin, les autres partent seulement si l'équipe les valide, et aucun élève ne reçoit plus de dix notifications par jour. Voir le [memo](memo.md).
 
 ## 2. Acteurs et permissions
 
@@ -13,7 +13,7 @@ Le chantier `notifications-push` (PR #652) envoie seul six motifs (un septième,
 | Team `admin` | Voir l'écran « Notifications » ; cocher ou décocher « Automatique » pour **interro demain**, **devoir à rendre** et **nouveaux exercices** ; valider un motif du plan du jour ; cocher « Prévenir les élèves » sur une annonce | Rendre automatique une relance (commencé, résultat, inactif) ou l'annonce ; valider après la fermeture de la dernière fenêtre du jour |
 | Team `content`, `field` | Voir l'écran ; valider un motif du plan du jour ; cocher « Prévenir les élèves » sur une annonce | Changer une case « Automatique » |
 | Teacher, SchoolStaff, Parent | — | Voir l'écran ; voir ou cocher « Prévenir les élèves » (absente de leur formulaire d'annonce) |
-| Student | Reçoit au plus une notification par jour d'Abidjan | — |
+| Student | Reçoit au plus 10 notifications par jour d'Abidjan, une par passage de la tâche | — |
 
 Deux règles d'accès du contexte `communication` : **régler les motifs** (équipe `admin`) et **valider le plan du jour** (toute l'équipe). « Prévenir les élèves » suit la règle de publication existante (équipe seulement, audience `all` ou `students`).
 
@@ -38,8 +38,8 @@ Deux règles d'accès du contexte `communication` : **régler les motifs** (équ
 | Validation après 20 h (dimanche aussi : dernière fenêtre close) | Refus : « Les envois du jour sont terminés. » ; rien n'est enregistré |
 | Deux validations simultanées du même motif | Une seule est enregistrée ; la seconde reçoit « Déjà validé par <nom> à <heure> » |
 | Un `content` ou `field` envoie un réglage forgé | 403, rien ne change |
-| Un élève concerné par deux motifs ouverts (automatique, validé ou annonce) | Il reçoit le plus urgent (ordre des motifs du chantier `notifications-push`) ; le reste n'est pas noté envoyé et reste candidat tant qu'il n'a pas expiré |
-| L'élève a déjà reçu une notification aujourd'hui | Rien ne part avant le lendemain |
+| Un élève concerné par deux motifs ouverts (automatique, validé ou annonce) | Un motif par passage, le plus urgent d'abord (ordre des motifs) ; les suivants partent aux passages suivants, dans la limite de 10 par jour |
+| L'élève a déjà reçu 10 notifications aujourd'hui | Rien ne part avant le lendemain |
 | Objet retiré après la validation (devoir, annonce) | Relu avant l'envoi : rien ne part pour lui |
 | Élève devenu concerné après la validation | Ne reçoit rien de ce motif aujourd'hui (liste figée) ; il figure au plan du lendemain si le motif vaut encore |
 | Interrupteur `PUSH_DELIVERY_ENABLED` fermé | Bandeau « L'envoi est coupé sur cet environnement : rien ne part. » ; réglages et validations s'enregistrent ; envois notés `disabled` comme aujourd'hui |
@@ -72,11 +72,17 @@ Fonctionnalité: régler et valider les notifications
     Alors les 2 premiers élèves reçoivent la notification
     Et le 3e ne reçoit rien
 
-  Scénario: une notification par jour et par élève, la plus urgente
+  Scénario: un motif par passage, le plus urgent d'abord
     Étant donné que « Devoir à rendre » est automatique et « Élève inactif » validé aujourd'hui
     Et qu'un élève est concerné par les deux
-    Quand la tâche passe à 12 h puis à 17 h
-    Alors l'élève reçoit une seule notification, celle du devoir
+    Quand la tâche passe à 12 h puis à 12 h 15
+    Alors l'élève reçoit la notification du devoir à 12 h, puis celle d'inactivité à 12 h 15
+
+  Scénario: dix notifications au plus par jour et par élève
+    Étant donné qu'un élève a reçu 10 notifications aujourd'hui
+    Et qu'un motif ouvert le concerne encore
+    Quand la tâche passe dans une fenêtre ouverte
+    Alors rien ne part pour lui avant le lendemain
 
   Scénario: le lendemain, le motif encore valable repart
     Étant donné qu'un élève a reçu « Devoir à rendre » hier et qu'un exercice commencé lui reste
@@ -158,14 +164,14 @@ Fonctionnalité: régler et valider les notifications
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | Entité `PushMotiveSetting` (motif, automatique, par qui, quand) ; entité `PushApproval` (date, motif, validé par, quand, couples élève × objet) ; `PushMotive` gagne le motif `assignment_new` (priorité 3), `AUTOMATABLE = %w[quiz_prep assignment_due assignment_new]` et `PLANNABLE` (tous sauf `announcement`) ; ports `PushMotiveSettingRepositoryPort`, `PushApprovalRepositoryPort` ; use cases `UpdatePushMotiveSetting`, `ApprovePushMotive` ; `DeliverPushNotifications` filtre les candidats ouverts (automatique, validé, annonce demandée) et applique une par jour ; policies `ManagePushSettingsPolicy` (admin), `ApprovePushPolicy` (équipe) ; `PushDeliveryRepositoryPort#last_sent_at` reste, la règle devient « même jour d'Abidjan » |
+| Domaine | Entité `PushMotiveSetting` (motif, automatique, par qui, quand) ; entité `PushApproval` (date, motif, validé par, quand, couples élève × objet) ; `PushMotive` gagne le motif `assignment_new` (priorité 3), `AUTOMATABLE = %w[quiz_prep assignment_due assignment_new]` et `PLANNABLE` (tous sauf `announcement`) ; ports `PushMotiveSettingRepositoryPort`, `PushApprovalRepositoryPort` ; use cases `UpdatePushMotiveSetting`, `ApprovePushMotive` ; `DeliverPushNotifications` filtre les candidats ouverts (automatique, validé, annonce demandée) et applique le plafond de 10 par jour ; policies `ManagePushSettingsPolicy` (admin), `ApprovePushPolicy` (équipe) ; `PushDeliveryRepositoryPort#last_sent_at` reste, la règle devient « même jour d'Abidjan » |
 | Infrastructure | Migrations : `push_motive_settings` (motif unique, `automatic`, `updated_by_id`), `push_approvals` (`on_date`, motif, `approved_by_id`, `approved_at`, unique `on_date`+motif), `push_approval_recipients` (approbation, `user_id`, `object_key`, unique), `messages.push_requested` (booléen, faux par défaut), contrainte de motif de `push_deliveries` élargie à `assignment_new` ; requête `PushCandidates::AssignmentNew` ; repositories des deux ports ; query `PushDailyPlanQuery` (candidats du jour par motif, comptes par établissement, déjà envoyés exclus) ; `PushCandidates::Announcement` ne retient que `push_requested` ; job : plus de `PUSH_MIN_INTERVAL_HOURS` |
 | Delivery | `teams/push_settings#show`, `teams/push_motive_settings#update`, `teams/push_approvals#create` ; paramètre `push_requested` du formulaire d'annonce (équipe seulement) |
 | UI | `teams/push_settings/show` et ses partials (réglages, plan du jour, historique, bandeau) ; case « Prévenir les élèves » du formulaire d'annonce ; entrée « Notifications » du menu « Plus » de l'équipe ; lien « Paramétrer » de la tuile Notifications du Pilotage |
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-envois-de-notifications-regles-par-l-equipe ([fichier](../../decisions/adr/XXXX-envois-de-notifications-regles-par-l-equipe.md)) — amende ADR-0146 §3.2 et §4 (déclenchement, garde-fou une par jour)
+- ADR-XXXX-envois-de-notifications-regles-par-l-equipe ([fichier](../../decisions/adr/XXXX-envois-de-notifications-regles-par-l-equipe.md)) — amende ADR-0146 §3.2 et §4 (déclenchement, plafond de dix par jour)
 - UDR-XXXX-ecran-notifications-de-l-equipe ([fichier](../../decisions/udr/XXXX-ecran-notifications-de-l-equipe.md)) — écran « Notifications » de l'équipe, case « Prévenir les élèves »
 - ADR-0146, UDR-0186 — chantier `notifications-push`
 
@@ -173,7 +179,7 @@ Fonctionnalité: régler et valider les notifications
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Notifications reçues par élève et par jour (max) | jusqu'à 2 (4 h d'écart) | 1 | |
+| Notifications reçues par élève et par jour (max) | jusqu'à 2 (4 h d'écart) | 10 au plus | |
 | Élèves prévenus le jour où leur enseignant assigne des exercices | 0 | suivi après ouverture | |
 | Envois partis sans réglage ni validation de l'équipe | tous | 0 | |
 | Jours avec plan validé, sur les 14 premiers jours d'ouverture | — | suivi (pas de cible) | |
