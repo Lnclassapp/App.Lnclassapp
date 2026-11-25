@@ -353,7 +353,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     assert_match(/private|no-store/, response.headers["Cache-Control"])
     assert_no_match(/public/, response.headers["Cache-Control"])
-    assert_select "turbo-frame[src]:not(#student_first_exercise_prompt)", 0
+    assert_select "turbo-frame[src]", 0
   end
 
   def count_queries(&)
