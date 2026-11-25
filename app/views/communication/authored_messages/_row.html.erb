@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/authored_messages/_row — une annonce de « Mes annonces » (Queries::Communication::AuthoredMessagesQuery::Row) %>
 <%# Rôle : vignette (image, illustration de base ou de l'équipe), pastille du thème, titre, « destinataires · dates », statut ; menu Modifier / Archiver %>
-<%# ADR  : 0078, 0081 · UDR : 0005, 0042, 0071 (§3.7), 0075 (§3.1) · Stimulus : dropdown, modal %>
+<%# ADR  : 0078, 0081, XXXX · UDR : 0005, 0042, 0071 (§3.7), 0075 (§3.1), XXXX (§3.6) · Stimulus : dropdown, modal %>
 <% tones = { "draft" => :neutral, "scheduled" => :info, "published" => :success, "ended" => :neutral, "archived" => :neutral,
              "withdrawn" => :error } %>
 <% place = row.school_name || t("communication.scopes.national") %>
@@ -28,6 +28,10 @@
     </div>
     <p class="truncate text-sm text-mute"><%= t(".line", recipients:, dates:) %></p>
   </div>
+  <%# UDR-XXXX §3.6 : les élèves seront prévenus par notification. %>
+  <% if row.push_requested %>
+    <%= ui_icon "bell", variant: :mini, size: :sm, class: "text-mute", label: t(".push_requested") %>
+  <% end %>
   <%= ui_badge t("communication.statuses.#{row.status}"), tone: tones.fetch(row.status) %>
   <% if row.manageable? %>
     <%= ui_dropdown label: t(".actions", title: row.title), id: "my-announcement-actions-#{row.public_id}" do %>

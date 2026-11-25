@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/authored_messages/_form — le formulaire d'annonce, page entière (nouvelle ou modifiée) %>
 <%# Rôle : titre et texte décomptés, destinataires, thème, illustration (base puis équipe), image, audio, parution, encadré du plafond ; 422 sous les champs %>
-<%# ADR  : 0045, 0078, 0081 · UDR : 0005, 0067, 0071 (§3.8, amendement du 2026-10-30), 0075 (§3.3) · locaux : form:, message: (nil pour une nouvelle), url:, method: %>
+<%# ADR  : 0045, 0078, 0081, XXXX · UDR : 0005, 0067, 0071 (§3.8, amendement du 2026-10-30), 0075 (§3.3), XXXX (§3.6) · Stimulus : push-request · locaux : form:, message: (nil pour une nouvelle), url:, method: %>
 <% caps = Entities::Communication::Message %>
 <% published = message&.status == "published" %>
 <% reselect = form.errors.any? ? " #{t('.reselect')}" : "" %>
@@ -11,7 +11,8 @@
 <% counting = { "communication--character-count-target": "input", action: "input->communication--character-count#update" } %>
 <% option = "flex min-h-tap cursor-pointer flex-col items-center gap-1 rounded-ln border border-line bg-white p-2 text-xs font-medium " \
             "has-checked:border-brand has-checked:bg-brand-soft has-focus-visible:outline-2 has-focus-visible:outline-brand" %>
-<%= form_with model: form, scope: :announcement, url:, method:, multipart: true, id: "announcement-form", class: "grid max-w-form gap-5" do |f| %>
+<%= form_with model: form, scope: :announcement, url:, method:, multipart: true, id: "announcement-form", class: "grid max-w-form gap-5",
+                                 data: ({ controller: "push-request", action: "change->push-request#sync" } if current_actor.team?) do |f| %>
   <% if published %>
     <div class="rounded-ln bg-info-soft p-4 text-sm text-info"><%= t(".published_notice") %></div>
   <% end %>
@@ -39,6 +40,9 @@
     <% end %>
     <%= ui_radio_group f, :audience, choices: %w[all students teachers school_admins].map { [ t("communication.audiences.#{it}"), it ] },
                                      columns: 2, required: true %>
+    <%# UDR-XXXX §3.6 : la case, après l'audience ; push-request la désactive pour « Enseignants » et « Directions ». %>
+    <%= ui_field f, :push_requested, as: :checkbox, label: t(".push_requested.label"), hint: t(".push_requested.hint"),
+                                     data: { push_request_target: "box" } %>
   <% when :school_admin %>
     <p class="text-sm text-mute"><%= t(".for_school", school: form_school&.name) %></p>
     <%= ui_radio_group f, :audience, choices: %w[students teachers school_admins].map { [ t("communication.audiences.#{it}"), it ] },

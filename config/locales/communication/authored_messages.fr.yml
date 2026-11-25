@@ -15,6 +15,7 @@ fr:
         remove_image: "Retirer l'image"
         remove_audio: "Retirer l'audio"
         published_at: "Publier le"
+        push_requested: "Prévenir les élèves"
     errors:
       models:
         dtos/communication/message_input:
@@ -83,6 +84,7 @@ fr:
         cancel: "Annuler"
         # UDR-0075 §3.1 : la pastille du thème, pour un lecteur d'écran
         theme: "Thème : %{theme}"
+        push_requested: "Élèves prévenus par notification"
         recipients: "%{place} · %{audience}"
         line: "%{recipients} · %{dates}"
         dates:
@@ -110,6 +112,10 @@ fr:
           audio: "MP3 ou M4A, 10 secondes et 1 Mo au plus. Un enregistrement de téléphone convient."
           published_at: "Laissez vide pour publier dès l'envoi."
         lasts: "L'annonce reste visible 30 jours."
+        # UDR-XXXX §3.6 : la case de l'équipe, après le choix des destinataires
+        push_requested:
+          label: "Prévenir les élèves par notification"
+          hint: "Une notification part dans la prochaine fenêtre, dans la limite de dix par élève et par jour."
         # UDR-0075 §3.3 : le décompte (contrôleur communication--character-count de l'UDR-0067) ; %{count} et %{max}
         # de near et full sont remplacés par le contrôleur
         counter:

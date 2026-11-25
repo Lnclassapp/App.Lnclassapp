@@ -9,11 +9,11 @@ module Entities
     # illustration de l'équipe (illustration_id, la clé est alors nil) ; la base impose exactement l'une des deux.
     Message = Data.define(:id, :public_id, :author_id, :title, :body, :audience, :school_id, :classroom_ids,
                           :illustration, :status, :published_at, :ends_at, :edited_at, :withdrawn_at, :withdrawn_by_id,
-                          :theme, :illustration_id) do
+                          :theme, :illustration_id, :push_requested) do
       # Une annonce à créer n'a ni id ni public_id ; une annonce par rôle n'a aucune classe ; sans thème, « Ciel ».
       def initialize(author_id:, title:, body:, audience:, illustration:, status:, id: nil, public_id: nil, school_id: nil,
                      classroom_ids: [], published_at: nil, ends_at: nil, edited_at: nil, withdrawn_at: nil,
-                     withdrawn_by_id: nil, theme: Message::DEFAULT_THEME, illustration_id: nil)
+                     withdrawn_by_id: nil, theme: Message::DEFAULT_THEME, illustration_id: nil, push_requested: false)
         super
       end
 
@@ -25,6 +25,10 @@ module Entities
       # chaque établissement étant un espace autonome ; par auteur pour les autres. → Integer | nil (tout l'auteur)
       def cap_school_id = self.class.cap_school_id(audience:, school_id:)
       def self.cap_school_id(audience:, school_id:) = (school_id if audience == "classrooms")
+
+      # ADR « envois de notifications » §4.1 : seule l'équipe prévient les élèves, et seulement par une annonce qui les
+      # vise (« Tous » ou « Élèves »). Faux pour tout autre auteur ou audience, même demandé.
+      def self.push_allowed?(author_role:, audience:) = author_role == :team && Message::PUSH_AUDIENCES.include?(audience)
 
       # Officielle = écrite par une direction ; rien ne le stocke (ADR-0078 §4.2).
       def official?(author_role:) = author_role == :school_admin
@@ -40,6 +44,7 @@ module Entities
       end
     end
     Message::AUDIENCES = %w[all students teachers school_admins classrooms].freeze
+    Message::PUSH_AUDIENCES = %w[all students].freeze
     Message::STATUSES = %w[draft scheduled published archived withdrawn].freeze
     Message::ILLUSTRATIONS = %w[info calendar homework sheets exam meeting celebration holidays].freeze # UDR-0071 §3.3
     Message::TITLE_MAX = 60
