@@ -8,6 +8,7 @@
 |---|---|---|---|
 | 2026-11-26 | Le code de la classe revient dans « Inscrire vos élèves » | Il n'était plus que sur la carte du carrousel, que le chantier retire | non (UDR §3.5) |
 | 2026-11-26 | Liste des élèves : 10 par page au lieu de 30 | « Voir plus (n) au-delà de quelques lignes » (porteur) ; le mécanisme de pagination d'ADR-0097 §4.7 ne change pas | non |
+| 2026-11-26 | « Mon compte » en page reçoit « ‹ Accueil » ; les modales servies en page (matières, jours de séance) n'en reçoivent pas | Elles ont « Annuler » ; un retour en plus ferait deux sorties | non (UDR §3.4) |
 | 2026-11-26 | « Personne n'a fait le devoir » : le bouton de relance est l'action de l'état vide | Pas de « Prochain geste » dans cet état ; c'est pourtant là qu'il y a le plus à relancer | non |
 
 ## À trancher
@@ -23,6 +24,8 @@
 
 ## Ce qui a dérapé
 
+- Huit tests (contrôleur et système) lisaient la barre du haut ou son panneau sur une page intérieure : réécrits pour l'accueil ou le retour.
+- `script/docs/build_index` échoue sous une locale US-ASCII : `LANG=C.UTF-8` dans le conteneur.
 - Ruby 3.4.13 absent du conteneur : compilé avec ruby-build (définition ajoutée à la main), environ 6 minutes.
 
 ## Ce qu'on a appris sur la codebase

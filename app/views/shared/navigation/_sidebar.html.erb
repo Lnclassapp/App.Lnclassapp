@@ -1,11 +1,13 @@
 <%# 🌐 UI · shared/navigation/_sidebar — navigation bureau (lg et plus) %>
 <%# Rôle : carte de profil, destinations du rôle dans une carte blanche, 2e carte « Configuration » (équipe) ou « Plus » (élève) %>
 <%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6), 0084 (§3.4), 0132 §3.1 (amendée : carte de profil de l'élève), 0134 §3.14 (bloc de profil en tête, entrée active bleue) · accueil-eleve-grille-plus §3 (carte « Plus ») · ADR : 0076 (§4.2) %>
+<%# header : la barre du haut est rendue au-dessus (sinon la barre latérale part du haut, UDR accueil-enseignant-actions §3.4). %>
+<%# locals: (user:, header: true) -%>
 <% secondary = secondary_navigation_for(user.role) %>
 <% student = user.role.to_sym == :student %>
 <% teacher = user.role.to_sym == :teacher %>
 <% style = teacher ? :sidebar_teacher : :sidebar %>
-<aside class="fixed top-bar bottom-0 left-0 hidden w-rail overflow-y-auto border-r border-line bg-paper p-4 lg:block">
+<aside class="fixed <%= header ? "top-bar" : "top-0" %> bottom-0 left-0 hidden w-rail overflow-y-auto border-r border-line bg-paper p-4 lg:block">
   <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
     <%# UDR-0084 §3.4 : la couleur des initiales de l'élève suit son identifiant public, celle de l'avatar de l'en-tête. %>
     <%= ui_avatar user.name, src: user.avatar_url, tone_seed: (user.public_id if student) %>

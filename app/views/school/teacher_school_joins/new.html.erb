@@ -3,6 +3,8 @@
 <%# ADR  : 0083, 0094 · UDR : 0006, 0054, 0099 (§3.4) · Queries::School::InviteJoinQuery::Row %>
 <% page_title t(".page_title") %>
 <div class="mx-auto max-w-lg">
+  <%# UDR accueil-enseignant-actions §3.4 : sans barre du haut, le retour en tête de page. %>
+  <%= ui_back_link t(".back"), href: teacher_home_path %>
   <% case @invite.state %>
   <% when :confirm %>
     <%= ui_card id: "join_school", padding: :md do %>

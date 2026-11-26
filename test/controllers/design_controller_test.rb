@@ -15,8 +15,9 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
       get design_shell_path(role:)
 
       assert_response :success
-      assert_select "body > header"
-      assert_select "nav", minimum: 2
+      # UDR accueil-enseignant-actions §3.4 : l'enseignant n'a la barre du haut que sur son accueil.
+      assert_select "body > header", { count: role == "teacher" ? 0 : 1 }
+      assert_select "nav", minimum: role == "teacher" ? 1 : 2
       assert_select "main#main h1"
     end
   end

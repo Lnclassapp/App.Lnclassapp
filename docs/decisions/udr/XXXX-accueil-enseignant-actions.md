@@ -75,7 +75,9 @@ section#teacher_home_classrooms  (lg:col-span-2)
 
 - Pour le rôle `teacher`, `shared/navigation/_header` n'est rendu que si la page pose `content_for :home_band` (l'accueil enseignant). Ailleurs : ni barre du haut, à aucune largeur. L'inscription (utilisateur nil) ne change pas.
 - La barre latérale (`_sidebar`) reste dès lg, inchangée. Pas de barre basse (inchangé).
-- Chaque page enseignant commence par un retour : `ui_back_link` ou `ui_page_header(back:)`. Ajoutés : « Reçues » (`communication/inboxes/show`, « ‹ Accueil » pour l'enseignant), « Mes annonces » (`communication/authored_messages/index`, idem), « Rejoindre un établissement » (`school/teacher_school_joins/new`, « ‹ Accueil »).
+- Chaque page enseignant commence par un retour : `ui_back_link` ou `ui_page_header(back:)`. Ajoutés : « Reçues » (`communication/inboxes/show`, « ‹ Accueil » pour l'enseignant), « Mes annonces » (`communication/authored_messages/index`, idem), « Rejoindre un établissement » (`school/teacher_school_joins/new`, « ‹ Accueil »), « Mon compte » en page (`classroom/teacher_menus/show`, « ‹ Accueil »). Les modales servies en page sans JavaScript (« Mes matières » en édition, jours de séance) gardent leur « Annuler » et n'en ont pas.
+- Le panneau « Mon compte » (la `<dialog>` de l'en-tête) ne s'ouvre donc plus que depuis l'accueil, dès lg ; sous lg, l'avatar du bandeau mène à `/teachers/menu` (inchangé). Hors accueil, « Mon compte » reste à un retour.
+- La barre latérale part du haut (`top-0`) quand la barre du haut est absente.
 - Direction, équipe, élève : inchangés.
 
 ### 3.5 Page de la classe — code (`classroom/classrooms/_link`, amende UDR-0134 §3.5)

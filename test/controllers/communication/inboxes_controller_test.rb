@@ -246,8 +246,8 @@ module Communication
       assert_select "nav#announcement-tabs", 0
       assert_equal [ "Conseil de classe", "Formation" ], css_select("ul#announcements article h3").map(&:text).sort
       assert_select "article form", 0
-      # « Annonces » is in the teacher's navigation: a destination of the navigation has no back link (UDR-0054).
-      assert_select "nav[aria-label=?]", I18n.t("components.back_link.label"), 0
+      # UDR accueil-enseignant-actions §3.4 (amends UDR-0054 for the teacher): no top bar outside the home, so a way back.
+      assert_select "nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), teacher_home_path, 1
     end
 
     test "AN-02 — the direction reads in « Reçues » what is for directions; empty, the adult text" do

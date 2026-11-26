@@ -241,7 +241,7 @@ class RoleHomesTest < ApplicationSystemTestCase
   end
 
   # UDR-0080 §3.2, UDR-0082 §3.2: the student's and the teacher's « Mon profil » and « Se déconnecter » live in the
-  # account panel opened by the avatar.
+  # account panel opened by the avatar, on the home only for the teacher (UDR accueil-enseignant-actions §3.4).
   def assert_signs_out_from_panel
     with_account_panel { assert_selector "nav a:not([aria-current])", text: tn(:profile) }
     find("dialog#account_panel[open] nav a[href='#{profile_path}']", text: tn(:profile)).click
@@ -249,12 +249,20 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path profile_path
     assert_selector "aside nav"
     assert_selector "h1", text: I18n.t("identity.profiles.show.title")
-    with_account_panel { assert_selector "nav a[aria-current='page'][href='#{profile_path}']", text: tn(:profile) }
-    find("dialog#account_panel[open] button", text: tn(:sign_out)).click
+    # UDR accueil-enseignant-actions §3.4 : hors accueil, plus de barre du haut ni de panneau ; le retour ramène à l'accueil.
+    assert_no_selector "dialog#account_panel", visible: :all
+    find("main nav[aria-label='#{I18n.t('components.back_link.label')}'] a", text: tn(:home)).click
+    assert_current_path teacher_home_path
+    find_trigger_and_sign_out
 
     assert_current_path root_path
     visit student_home_path
     assert_current_path new_session_path
+  end
+
+  def find_trigger_and_sign_out
+    with_account_panel { assert_selector "nav a[href='#{profile_path}']", text: tn(:profile) }
+    find("dialog#account_panel[open] button", text: tn(:sign_out)).click
   end
 
   # The student's « Mon profil » and « Se déconnecter » live in « Mon compte », opened by the avatar (lot E1).
