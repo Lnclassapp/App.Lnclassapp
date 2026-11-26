@@ -70,6 +70,19 @@ class Teams::PushMotiveSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Communication::PushMotiveSetting.count
   end
 
+  test "without JavaScript a refusal is the 403 page for a content member and a redirect with an alert for a forged motive" do
+    sign_in_as create_team_member(team_role: "content")
+    patch teams_push_motive_setting_path("assignment_due"), params: { automatic: "1" }
+    assert_response :forbidden
+    sign_out
+
+    sign_in_as @admin
+    patch teams_push_motive_setting_path("nope"), params: { automatic: "1" }
+    assert_redirected_to teams_push_settings_path
+    assert_equal I18n.t("teams.push_motive_settings.update.failed"), flash[:alert]
+    assert_equal 0, Orm::Communication::PushMotiveSetting.count
+  end
+
   test "a teacher, a student and a visitor cannot change a setting" do
     [ create_teacher, create_student ].each do |user|
       sign_in_as user
