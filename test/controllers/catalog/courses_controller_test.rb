@@ -587,6 +587,22 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   # ── Catalogue de l'enseignant et téléphone (UDR-0077 §3.2) ───────────────
 
+  test "CA-5 bis: two courses with the same title name their level and series on the teacher's cards, the others do not" do
+    maths = create_material(name: "Mathématiques", shortname: "Maths")
+    d = @course.series
+    twin_d = create_course(name: "Équations", level: @tle, series: d, material: maths)
+    twin_c = create_course(name: "Équations", level: @tle, material: maths)
+    alone = create_course(name: "Probabilités", level: @tle, series: d, material: maths)
+    link_level_series(level: @tle, series: d)
+    sign_in_as create_teacher(material: maths, classrooms: [ create_classroom(level: @tle, series: d) ])
+
+    get courses_path
+
+    assert_select "#course_#{twin_d.slug}", text: /Tle D/
+    assert_select "#course_#{twin_c.slug}", text: /Tle/
+    assert_select "#course_#{alone.slug}", text: /Tle/, count: 0
+  end
+
   test "CA-5: the teacher sees their subject at the levels and series of their classrooms, nothing else" do
     maths = create_material(name: "Mathématiques", shortname: "Maths")
     d = @course.series
@@ -620,7 +636,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     own = create_course(name: "Probabilités", level: @tle, series: d, material: maths, subtitle: "Leçon 1 · Progression DPFC 2026-2027")
     other_level = create_course(name: "Calcul littéral", level: @seconde, material: maths)
     link_level_series(level: @tle, series: d)
-    sign_in_as create_teacher(material: maths, classrooms: [ create_classroom(level: @tle, series: d), create_classroom(level: @seconde) ])
+    sign_in_as create_teacher(material: maths, classrooms: [ create_classroom(level: @tle, series: d) ])
 
     get courses_path(level: "tle", series: "d", material: "mathematiques")
 
