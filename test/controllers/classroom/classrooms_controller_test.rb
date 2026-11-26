@@ -28,7 +28,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Modifier la classe/, response.body)
   end
 
-  test "l'enseignant de la classe voit l'en-tête (titre, sigle et année), le bloc du lien et ses élèves, sans code ni « Cours assignés »" do
+  test "l'enseignant de la classe voit l'en-tête (titre, sigle et année), le bloc du lien et ses élèves, sans « Cours assignés » (le code est dans le bloc du lien, CA-7)" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", contact: "0102030405")
@@ -487,7 +487,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # accueil-enseignant-actions §3.5 : le code de la classe n'est plus sur la carte de l'accueil, il est ici, copiable.
-  test "CA-4 : la page de classe affiche le code de la classe avec son bouton « Copier »" do
+  test "CA-7 : la page de classe affiche le code de la classe avec son bouton « Copier »" do
     code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
     sign_in_as @teacher
 
@@ -518,7 +518,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match code, response.body
   end
 
-  test "CA-4 : après « Changer le lien », le bloc rendu porte le nouveau code" do
+  test "CA-7 : après « Changer le lien », le bloc rendu porte le nouveau code" do
     old_code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
     sign_in_as @teacher
 
@@ -630,7 +630,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   # CA-I2 (UDR enseignant §3.2, §3.5) : « Tous · Bronze · Argent · Or · Diamant · Pas encore », paramètre `badge=`.
   def roster_students(selector = "#classroom_roster_list li[id^=student_]") = css_select(selector).map { it["id"] }
 
-  test "CA-5 : la ligne d'un élève ne dit que son nom et son état ; les en retard d'abord, deux chiffres au-dessus" do
+  test "CA-8 : la ligne d'un élève ne dit que son nom et son état ; les en retard d'abord, deux chiffres au-dessus" do
     due = Date.new(2026, 10, 8)
     exercises = Array.new(3) do |index|
       travel_to(Time.zone.local(2026, 10, 5, 9)) do
@@ -658,13 +658,13 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster_list li[id^=student_].min-h-11", 3
   end
 
-  test "CA-5 : sans exercice assigné, ni chiffres ni état ; sans retard, seulement « à jour »" do
+  test "CA-8 : sans exercice assigné, ni chiffres ni état ; sans retard, seulement « à jour »" do
     student = create_student(classroom: @classroom)
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
-    assert_select "#classroom_roster_summary", 0
+    assert_select "#classroom_roster_summary p", 0
     assert_select "#state_#{student.public_id}", 0
 
     hand_in(create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, due_on: Date.current + 2), 90, student:)

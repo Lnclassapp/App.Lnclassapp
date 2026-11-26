@@ -428,10 +428,10 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     end
   end
 
-  # accueil-enseignant-actions §3.7 (CA-8) : « Relancer sur WhatsApp », un lien wa.me avec le message prêt ; Lnclass n'envoie rien.
+  # accueil-enseignant-actions §3.7 (CA-9) : « Relancer sur WhatsApp », un lien wa.me avec le message prêt ; Lnclass n'envoie rien.
   def remind_href = css_select("a#comprehension_remind").first&.[]("href")
 
-  test "CA-8 : the next step has « Relancer sur WhatsApp », a wa.me link with the assignment, its due date and the exercise link" do
+  test "CA-9 : the next step has « Relancer sur WhatsApp », a wa.me link with the assignment, its due date and the exercise link" do
     sign_in_as @teacher
 
     get follow_up_path
@@ -444,10 +444,12 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_equal I18n.t("assessment.comprehension.remind.message", classroom: "3ème B", exercise: "La méiose",
                                                                    due: I18n.l(DUE_ON, format: :due_short),
                                                                    link: exercise_url(@exercise.public_id)), message
+    assert_includes message, "3ème B"
+    assert_includes message, "La méiose"
     assert_no_match(/Zoé|Pas-Encore/, message)
   end
 
-  test "CA-8 : without a due date the message does not say « à rendre »" do
+  test "CA-9 : without a due date the message does not say « à rendre »" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential, title: "Sans date"), by: @teacher)
     hand_in(@on_time, Time.zone.local(2026, 10, 8, 18), assignment:)
     sign_in_as @teacher
@@ -459,7 +461,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_no_match(/à rendre/, message)
   end
 
-  test "CA-8 : nobody did it, the button is the action of the empty state" do
+  test "CA-9 : nobody did it, the button is the action of the empty state" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential), by: @teacher)
     sign_in_as @teacher
 
@@ -469,7 +471,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "#comprehension_next_step", 0
   end
 
-  test "CA-8 : everybody did it, no button" do
+  test "CA-9 : everybody did it, no button" do
     Orm::ClassroomStudent.where(student: @pending).update_all(left_at: Time.current)
     sign_in_as @teacher
 
@@ -479,7 +481,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "a#comprehension_remind", 0
   end
 
-  test "CA-8 : the team reads the report, with students left to remind, and has no button" do
+  test "CA-9 : the team reads the report, with students left to remind, and has no button" do
     sign_in_as create_team_member
 
     get follow_up_path

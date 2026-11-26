@@ -370,7 +370,7 @@ module Queries
       end
 
       # UDR accueil-enseignant-actions §3.6 : les en retard d'abord ; deux chiffres pour toute la classe, recherche ou non.
-      test "CA-5 : les élèves en retard passent avant les autres, et late_total / up_to_date_total comptent toute la classe" do
+      test "CA-8 : les élèves en retard passent avant les autres, et late_total / up_to_date_total comptent toute la classe" do
         assert_equal [ nil, nil ], overview.then { [ it.late_total, it.up_to_date_total ] }
         done = roster_of(1, last_name: "Aaa").first
         waiting = roster_of(12, last_name: "Zzz")
@@ -387,11 +387,21 @@ module Queries
         assert_equal done.public_id, overview(page: 2).students.last.public_id
       end
 
-      test "CA-5 : sans exercice échu, personne n'est en retard ; sans exercice assigné, pas de chiffres" do
+      test "CA-8 : sans exercice échu, personne n'est en retard ; sans exercice assigné, pas de chiffres" do
         roster_of(3)
         create_assignment(classroom: @classroom, assignable: create_exercise, due_on: Date.current + 2)
 
         assert_equal [ 0, 3 ], overview.then { [ it.late_total, it.up_to_date_total ] }
+      end
+
+      test "CA-8 : personne n'a rendu l'exercice échu, tous sont en retard et la liste reste triée par nom" do
+        roster_of(3)
+        create_assignment(classroom: @classroom, assignable: create_exercise, due_on: Date.current - 1, assigned_at: 3.days.ago)
+
+        result = overview
+        assert_equal [ 3, 0 ], [ result.late_total, result.up_to_date_total ]
+        assert_equal 3, result.students.size
+        assert(result.students.all? { it.late_count.positive? })
       end
 
       test "CL-15 : les nouveaux restent en tête de la première page" do

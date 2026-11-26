@@ -47,3 +47,8 @@
 | **PR** | |
 | **ADR produits** | aucun |
 | **UDR produits** | UDR-XXXX-accueil-enseignant-actions |
+
+## Revues après fusion (2026-11-26)
+
+- Sécurité (vues, logique), pannes silencieuses, tests : aucun constat exploitable ; manques de tests corrigés dans la PR de suite (retrait d'un élève, tri sans élève à jour, code vu par la direction, numéros de CA, assertions du message WhatsApp).
+- Tranché par défaut (réversible) : la direction lit le code de sa classe dans le bloc du lien (elle reçoit déjà le lien d'inscription : même accès) ; test CA-7 côté direction.

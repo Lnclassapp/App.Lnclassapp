@@ -79,7 +79,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "li#classroom_#{sixth.public_id}", text: including("1 élève")
       assert_select "li#add_classroom a[href='#{teacher_classrooms_path}']", text: tl("add_classroom_card.action")
     end
-    assert_select "[data-controller='communication--carousel'] #teacher_home_classrooms_track", 0
+    assert_select "[data-controller='communication--carousel']", 0
     assert_select "#teacher_home_to_follow", text: including("Copier"), count: 0
   end
 
