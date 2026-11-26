@@ -48,12 +48,21 @@ class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CA-T6: on « Mon profil », its line in the panel is marked current, « Inviter un collègue » is not in the panel" do
+  # UDR accueil-enseignant-actions §3.4 : hors accueil, ni barre du haut ni panneau ; « Mon profil » commence par son retour.
+  test "CA-T6: on « Mon profil », no top bar and no panel, a way back to the home" do
     sign_in_as create_teacher
 
     get profile_path
 
-    assert_select "dialog#account_panel nav a[href='#{profile_path}'][aria-current=page]"
+    assert_select "dialog#account_panel", 0
+    assert_select "main nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), teacher_home_path
+  end
+
+  test "CA-T6: on the home, « Inviter un collègue » is not in the panel" do
+    sign_in_as create_teacher
+
+    get teacher_home_path
+
     assert_select "dialog#account_panel nav a[href='#{teacher_invite_path}']", 0
   end
 

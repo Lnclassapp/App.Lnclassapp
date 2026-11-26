@@ -3,7 +3,8 @@
 <%# ADR  : 0078 · UDR : 0005, 0071 (§3.7) %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "announcements" %>
-<%= ui_page_header title: t("communication.tabs.label") do %>
+<%# UDR accueil-enseignant-actions §3.4 : l'enseignant n'a plus de barre du haut ici, le retour la remplace. %>
+<%= ui_page_header title: t("communication.tabs.label"), back: ({ label: t(".back"), href: teacher_home_path } if current_actor.teacher?) do %>
   <%= ui_button t(".new"), href: new_announcement_path, icon: "plus", variant: :primary %>
 <% end %>
 <%= render "communication/shared/tabs", current: :mine, role: current_actor.role %>

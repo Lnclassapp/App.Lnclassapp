@@ -13,7 +13,7 @@
       <% end %>
       <% if can_remove %>
         <%= ui_modal title: t(".remove_title", name: student.display_name), id: dialog, size: :sm, trigger: t(".remove"),
-                     trigger_variant: :danger, trigger_icon: "user-minus", trigger_class: "w-full sm:w-auto",
+                     trigger_variant: :secondary, trigger_icon: "user-minus", trigger_class: "w-full sm:w-auto !border-error/40 !text-error hover:!bg-error/5",
                      trigger_href: classroom_student_path(classroom.public_id, student.public_id, remove: 1),
                      open: params[:remove].present? do |modal| %>
           <% modal.footer do %>

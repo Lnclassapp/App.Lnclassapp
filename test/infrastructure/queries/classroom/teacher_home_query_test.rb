@@ -16,6 +16,8 @@ module Queries
 
       def home(teacher = @teacher, school: @school, **) = TeacherHomeQuery.new.call(teacher_id: teacher.id, school_id: school.id, **)
       def card(row = home) = row.classrooms.sole
+      # The table holds due_on 1 to 7 days after the day of assignment: assigned the day before its due date.
+      def due(days) = { due_on: Date.current + days, assigned_at: (Date.current + days - 1).in_time_zone.change(hour: 12) }
 
       test "the header: current school, subject and its category" do
         row = home
@@ -25,7 +27,7 @@ module Queries
         assert_not row.several_materials?
       end
 
-      test "a declared classroom: public id, name, level, present students and active assignments" do
+      test "a declared classroom: public id, name, level, present students, active assignments and lateness" do
         2.times { create_student(classroom: @classroom) }
         gone = create_student(classroom: @classroom)
         Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
@@ -34,75 +36,54 @@ module Queries
         create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, status: "archived")
 
         assert_equal({ public_id: @classroom.public_id, name: "Tle D 1", level_name: "Tle", active_students_count: 2,
-                       active_assignments_count: 2, join_code: Orm::Classroom.find(@classroom.id).join_code,
-                       badge_counts: { bronze: 0, silver: 0, gold: 0, diamond: 0 } }, card.to_h)
+                       active_assignments_count: 2, late_students_count: 0, late_assignments_count: 0 }, card.to_h)
       end
 
-      # CA-G2, CA-G3 (UDR enseignant §3.2) : un badge par élève présent, chaque élève une fois ; « Pas encore » ne se compte pas.
-      test "badge counts: one badge per present student, from the best score of each active assignment of the classroom" do
-        exercises = Array.new(2) { create_exercise(essential: create_essential(course: create_course(material: @svt))) }
-        assignments = exercises.map { create_assignment(classroom: @classroom, assignable: it, by: @teacher) }
-        archived = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, status: "archived")
-        elsewhere = create_assignment(classroom: create_classroom(school: @school), assignable: exercises.first, by: @teacher)
-        students = Array.new(7) { create_student(classroom: @classroom) }
+      # accueil-enseignant-actions (UDR §3.1, CA-1) : en retard = élève présent qui n'a pas terminé une assignation active échue.
+      test "late students: present students who did not complete an active assignment due before today, each counted once" do
+        students = Array.new(3) { create_student(classroom: @classroom) }
         gone = create_student(classroom: @classroom)
         Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
-        score = lambda do |student, assignment, percent|
-          create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
-                                  classroom_assignment: assignment, score_percent: percent).tap { record_medal(it) }
+        overdue = Array.new(2) { create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, **due(-1)) }
+        create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, **due(0))
+        create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+        create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, status: "archived", **due(-2))
+        overdue.each do |assignment|
+          create_exercise_session(student: students.first, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
+                                  classroom_assignment: assignment)
         end
-        # diamant : sans faute partout ; or : 90 et 80 ; argent : 70 (la meilleure session de l'exercice compte) ; bronze : 55 et 30 (tout exercice traité donne Bronze) ;
-        # pas encore : un élève sans rien ; un élève parti, une assignation archivée et une session non terminée ne comptent pas.
-        [ 100, 100 ].each_with_index { |percent, index| score.call(students[0], assignments[index], percent) }
-        [ 90, 80 ].each_with_index { |percent, index| score.call(students[1], assignments[index], percent) }
-        score.call(students[2], assignments[0], 40)
-        score.call(students[2], assignments[0], 70)
-        score.call(students[3], assignments[0], 55)
-        score.call(students[4], assignments[0], 30)
-        score.call(students[5], archived, 100)
-        create_exercise_session(student: students[5], exercise: exercises.first, classroom_assignment: assignments[1], score_percent: 100)
-        score.call(gone, assignments[0], 100)
-        score.call(students[6], elsewhere, 100)
+        create_exercise_session(student: students.second, exercise: Orm::Exercise.find(overdue.first.assignable_id), status: "started",
+                                classroom_assignment: overdue.first)
 
-        assert_equal({ bronze: 2, silver: 1, gold: 1, diamond: 1 }, card.badge_counts)
+        assert_equal [ 2, 2, 4 ], [ card.late_students_count, card.late_assignments_count, card.active_assignments_count ]
       end
 
-      # PRD §3 : une copie vide ne médaille pas ; une médaille gagnée par une session d'une autre classe ne compte pas ici
-      # (ADR-0097 §4.5) ; la carte compte les badges de la liste de la classe, élève par élève.
-      test "badge counts: blank copies or a medal won elsewhere count nothing; 30 % answered is Bronze; the classroom list agrees" do
-        assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: create_course(material: @svt))),
-                                       by: @teacher)
-        exercise = Orm::Exercise.find(assignment.assignable_id)
-        answered, blank, elsewhere = Array.new(3) { create_student(classroom: @classroom) }
-        record_medal(create_exercise_session(student: answered, exercise:, status: "completed", classroom_assignment: assignment, score_percent: 30))
-        [ blank, elsewhere ].each do |student|
-          create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, score_percent: 0)
-        end
-        other = create_classroom(school: @school, level: @tle, name: "Tle D 2")
-        Orm::ClassroomStudent.create!(classroom: other, student: elsewhere, primary: false, joined_at: Time.current, joined_via: "standard")
-        record_medal(create_exercise_session(student: elsewhere, exercise:, status: "completed", score_percent: 90,
-                                             classroom_assignment: create_assignment(classroom: other, assignable: exercise)))
-
-        assert_equal({ bronze: 1, silver: 0, gold: 0, diamond: 0 }, card.badge_counts)
-        list = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: true).students.filter_map(&:badge).tally
-        assert_equal card.badge_counts.reject { |_, count| count.zero? }, list
-      end
-
-      test "badge counts: a student of two classrooms counts once in each, with the assignments of that classroom only" do
-        other = create_classroom(school: @school, level: @tle, name: "Tle D 2")
-        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: other)
+      test "an overdue assignment everyone completed is not late" do
         student = create_student(classroom: @classroom)
-        Orm::ClassroomStudent.create!(classroom: other, student:, primary: false, joined_at: Time.current, joined_via: "standard")
-        exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
-        mine = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
-        create_assignment(classroom: other, assignable: exercise, by: @teacher)
-        record_medal(create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: mine, score_percent: 85))
+        assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, **due(-3))
+        create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed", classroom_assignment: assignment)
 
-        counts = home.classrooms.to_h { [ it.name, it.badge_counts.values.sum ] }
-
-        assert_equal({ "Tle D 1" => 1, "Tle D 2" => 0 }, counts)
+        assert_equal [ 0, 0 ], [ card.late_students_count, card.late_assignments_count ]
       end
 
+      # UDR §3.1 : « À suivre », les classes d'élèves en retard ou à exercice en cours, la plus urgente d'abord ; les autres
+      # gardent l'ordre des classes.
+      test "to follow: the most late students first, then the most active assignments; the others in the order of the classrooms" do
+        quiet, busy, late = [ "Tle D 2", "Tle D 3", "Tle D 4" ].map do |name|
+          create_classroom(school: @school, level: @tle, name:).tap { Orm::TeacherClassroom.create!(teacher: @teacher, classroom: it) }
+        end
+        [ quiet, busy, late, @classroom ].each { create_student(classroom: it) }
+        2.times { create_assignment(classroom: busy, assignable: create_exercise, by: @teacher) }
+        create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+        create_assignment(classroom: late, assignable: create_exercise, by: @teacher, **due(-1))
+        empty = create_classroom(school: @school, level: @tle, name: "Tle D 5")
+        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: empty)
+        create_assignment(classroom: empty, assignable: create_exercise, by: @teacher, **due(-1))
+
+        row = home
+        assert_equal [ "Tle D 4", "Tle D 3", "Tle D 1" ], row.to_follow.map(&:name)
+        assert_equal [ "Tle D 2", "Tle D 5" ], row.others.map(&:name)
+      end
       test "the school: its sigle, or nil without one" do
         assert_nil home.school_sigle
         @school.update!(sigle: "LCA")
@@ -187,6 +168,15 @@ module Queries
         assert_equal [ here.public_id, @classroom.public_id ], home.classrooms.map(&:public_id)
         assert_equal [ "Collège Saint-Michel", [ there.public_id ], [ "5ème" ] ],
                      [ in_other.school_name, in_other.classrooms.map(&:public_id), in_other.course_levels.map(&:label) ]
+      end
+
+      # UDR accueil-enseignant-actions §3.2 : le rond porte le nom court du niveau et de sa série.
+      test "course levels: the short name of each level and series, for its bubble" do
+        sixth = create_level(name: "6ème", position: 1)
+        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: create_classroom(school: @school, level: sixth, name: "6ème 1"))
+        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: create_classroom(school: @school, level: @tle, series: create_series(name: "D")))
+
+        assert_equal [ "6e", "Tle", "Tle D" ], home.course_levels.map(&:short_label)
       end
 
       test "course levels: none without a declared classroom" do

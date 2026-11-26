@@ -315,9 +315,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     within("[id='student_#{student.public_id}']") do
       assert_text "Aya Kouassi"
-      # Maquette 10 : la ligne dit ses exercices faits et la médaille de l'élève dans la classe (un 100 % sans faute : Diamant).
-      assert_text "1 fait sur 1"
-      assert_text "Diamant"
+      # accueil-enseignant-actions §3.6 : la ligne dit le nom et l'état (l'élève a tout rendu : « À jour »).
+      assert_text "À jour"
       assert_no_text "Moyenne"
     end
     assert_no_page_reload do

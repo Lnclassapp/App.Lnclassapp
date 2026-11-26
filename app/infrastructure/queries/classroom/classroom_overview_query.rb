@@ -1,5 +1,5 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
-# Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours de ses matières, élèves filtrés par badge de classe puis par trente, au numéro masqué (nouveaux, voie)
+# Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours de ses matières, élèves filtrés par badge de classe puis par dix, ceux en retard d'abord, au numéro masqué (nouveaux, voie)
 # ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.5, §4.7), 0103, médailles lues à la clôture · UDR : enseignant §3.2 et §3.5, 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108, 0127 (§3.1)
 module Queries
   module Classroom
@@ -8,12 +8,14 @@ module Queries
       # badge_filter : le filtre `badge=` demandé (une clé de BADGE_FILTERS), nil pour « Tous » ou un filtre inconnu.
       # students_total : les élèves du filtre qui répondent à la recherche, dont students ne rend que les
       # page × PER_PAGE premiers (ADR-0097 §4.7). Les deux : nil sans show_roster.
+      # late_total, up_to_date_total : les élèves en retard et à jour de toute la classe, quels que soient recherche et filtre
+      # (UDR accueil-enseignant-actions §3.6) ; nil sans show_roster et sans exercice assigné.
       # new_students_count : les nouveaux de toute la classe, quelle que soit la recherche ; nil sans show_roster.
       # session_days : jours (1 = lundi … 6 = samedi) de l'enseignant pour la classe, [] s'il ne les a pas renseignés ;
       # nil sans teacher_id (l'équipe n'a pas de jours, ADR-0072 §4.2).
       # school_sigle : « CSMT », sous le titre de la page (UDR enseignant §3.5) ; nil si l'établissement n'en a pas.
-      Overview = Data.define(:students, :students_total, :badge_filter, :new_students_count, :session_days,
-                             :assignments, :courses, :school_sigle)
+      Overview = Data.define(:students, :students_total, :badge_filter, :late_total, :up_to_date_total, :new_students_count,
+                             :session_days, :assignments, :courses, :school_sigle)
       # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
       # photo_version : nil sans photo (ADR-0060).
       # contact : toujours masqué (« 07 •• •• •• 04 »), pour tout lecteur ; le numéro complet ne quitte pas cette requête
@@ -48,9 +50,9 @@ module Queries
       # Le paramètre `badge=` de la liste (UDR enseignant §3.5) ; « none » : les élèves « Pas encore ».
       NO_BADGE = "none"
       BADGE_FILTERS = [ *Grading::BADGE_ORDER.map(&:to_s), NO_BADGE ].freeze
-      NO_ROSTER = { students: nil, students_total: nil, badge_filter: nil }.freeze
-      # ADR-0097 §4.7 : la liste des élèves se lit trente par trente, cumulativement, dans son groupe de note.
-      PER_PAGE = 30
+      NO_ROSTER = { students: nil, students_total: nil, badge_filter: nil, late_total: nil, up_to_date_total: nil }.freeze
+      # ADR-0097 §4.7 : la liste des élèves se lit dix par dix (UDR accueil-enseignant-actions §3.6), cumulativement, dans son groupe de note.
+      PER_PAGE = 10
       # Une classe a au plus MAX_STUDENTS_LIMIT élèves : au-delà de cette page, la liste est déjà entière. Un ?page= géant ne
       # déborde donc jamais le LIMIT (bigint) de PostgreSQL.
       MAX_PAGE = (Entities::Classroom::Classroom::MAX_STUDENTS_LIMIT / PER_PAGE.to_f).ceil
@@ -58,6 +60,8 @@ module Queries
       SELF_PRACTICE_DAYS = 7
       # UDR-0081 §3.7 : les nouveaux d'abord, du plus récent au plus ancien ; les autres (NULL) gardent l'ordre par nom.
       NEWCOMERS_FIRST = "CASE WHEN classroom_students.joined_at > ? THEN classroom_students.joined_at END DESC NULLS LAST".freeze
+      # UDR accueil-enseignant-actions §3.6 : un élève sans retard passe après ceux qui en ont.
+      LATE_FIRST = "CASE WHEN users.id IN (?) THEN 1 ELSE 0 END".freeze
       # « Awa Bamba » se trouve par « awa », « bamba » ou « awa bamba » (UDR-0054 §3.9).
       STUDENT_NAME = "concat_ws(' ', users.first_name, users.last_name)".freeze
       ASSIGNMENT_COLUMNS = %w[classroom_assignments.id classroom_assignments.public_id exercises.title materials.name
@@ -108,7 +112,24 @@ module Queries
         badge_filter = badge if BADGE_FILTERS.include?(badge)
         scope = Queries::Shared::TextSearch.apply(members, search, columns: [ STUDENT_NAME ])
         scope = badge_scope(scope, standings, badge_filter) if badge_filter
-        { students: students(scope, standings, totals, since, today, page), badge_filter:, students_total: scope.count }
+        up_to_date = up_to_date_ids(members, standings, totals)
+        { students: students(scope, standings, totals, since, today, page, up_to_date), badge_filter:, students_total: scope.count,
+          **lateness_totals(members.count, up_to_date, totals) }
+      end
+
+      # Les élèves de la classe sans retard : tous s'il n'y a aucun exercice échu, sinon ceux qui ont fait chaque exercice échu.
+      def up_to_date_ids(members, standings, totals)
+        member_ids = members.pluck(:student_id)
+        return member_ids if totals.overdue.zero?
+
+        member_ids & standings.select { |_, standing| standing.late.zero? }.keys
+      end
+
+      # UDR accueil-enseignant-actions §3.6 : « 38 en retard · 2 à jour », sans exercice assigné rien.
+      def lateness_totals(members_count, up_to_date, totals)
+        return { late_total: nil, up_to_date_total: nil } if totals.assigned.zero?
+
+        { late_total: members_count - up_to_date.size, up_to_date_total: up_to_date.size }
       end
 
       # Un élève sans exercice fait n'a pas de rang : il est « Pas encore », comme celui sous la moyenne de Bronze.
@@ -149,7 +170,9 @@ module Queries
         Orm::TeacherSchoolMaterial.where(teacher_id:, school_id:).in_order.pluck(:material_id) if teacher_id
       end
 
-      def students(scope, standings, totals, since, today, page)
+      # En retard d'abord (UDR accueil-enseignant-actions §3.6), puis les nouveaux (UDR-0081 §3.7), puis le nom.
+      def students(scope, standings, totals, since, today, page, up_to_date)
+        scope = scope.order(Arel.sql(Orm::ClassroomStudent.sanitize_sql_array([ LATE_FIRST, up_to_date ]))) unless totals.overdue.zero?
         rows = scope.order(Arel.sql(Orm::ClassroomStudent.sanitize_sql_array([ NEWCOMERS_FIRST, since ])), "users.last_name", "users.first_name")
                     .limit(PER_PAGE * (page.is_a?(Integer) && page.positive? ? [ page, MAX_PAGE ].min : 1))
                     .pluck(*STUDENT_COLUMNS)

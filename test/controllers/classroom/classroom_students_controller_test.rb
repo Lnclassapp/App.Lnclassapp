@@ -52,6 +52,17 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_equal 70, Orm::ExerciseSession.find(session.id).score_percent
   end
 
+  test "CA-8 : le retrait d'un élève en retard remplace les deux chiffres de la liste" do
+    create_assignment(classroom: @classroom, assignable: create_exercise, due_on: Date.current - 1, assigned_at: 3.days.ago)
+    sign_in_as @teacher
+
+    remove as: :turbo_stream
+
+    assert_select "turbo-stream[action=replace][target=classroom_roster_summary] template #classroom_roster_summary" do
+      assert_select "p", text: "#{tr('summary_late', count: 2)} · #{tr('summary_up_to_date', count: 0)}"
+    end
+  end
+
   test "IL-14 : après une recherche, le compte de la liste filtrée suit, l'effectif reste celui de la classe" do
     sign_in_as @teacher
 
@@ -61,21 +72,21 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "turbo-stream[action=replace][target=classroom_roster_title] template h2", text: /#{tr('title', count: 2)}/
   end
 
-  test "B-004 : classe de plus de 30 élèves, le compte de la liste reste « 30 sur N » après un retrait" do
+  test "B-004 : classe de plus de 10 élèves, le compte de la liste reste « 10 sur N » après un retrait" do
     32.times { |i| create_student(classroom: @classroom, first_name: "Eleve#{i}", last_name: "Zed#{i}") }
     sign_in_as @teacher
 
     remove @awa, as: :turbo_stream
 
     assert_select "turbo-stream[action=update][target=classroom_roster_count] template",
-                  text: tr("count_partial", shown: 30, total: 34)
+                  text: tr("count_partial", shown: 10, total: 34)
   end
 
-  test "B-004 : retiré depuis la page 2, la liste qui montre tous les élèves dit « 34 élèves », plus « 30 sur 34 »" do
+  test "B-004 : retiré depuis la page 4, la liste qui montre tous les élèves dit « 34 élèves », plus « 10 sur 34 »" do
     32.times { |i| create_student(classroom: @classroom, first_name: "Eleve#{i}", last_name: "Zed#{i}") }
     sign_in_as @teacher
 
-    remove @awa, params: { page: "2" }, as: :turbo_stream
+    remove @awa, params: { page: "4" }, as: :turbo_stream
 
     assert_select "turbo-stream[action=update][target=classroom_roster_count] template", text: tr("count", count: 34)
   end

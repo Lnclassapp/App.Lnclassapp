@@ -115,11 +115,12 @@ class Classroom::TeacherMenusControllerTest < ActionDispatch::IntegrationTest
     assert_select "main #account_schools li", 3
   end
 
-  test "CA-H1: on another page, the header avatar opens the same panel in a full-screen <dialog>" do
+  # UDR accueil-enseignant-actions §3.4 : la barre du haut, et donc son avatar, n'est plus que sur l'accueil.
+  test "CA-H1: on the home, the header avatar opens the same panel in a full-screen <dialog>" do
     sign_in_as create_teacher(school: create_school(name: "Lycée moderne 2", sigle: "LM2"), materials: [ maths ],
                               first_name: "Awa", last_name: "Traoré")
 
-    get teacher_classrooms_path
+    get teacher_home_path
 
     assert_response :success
     assert_select "header a[href='#{teacher_menu_path}'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=account_panel]" do

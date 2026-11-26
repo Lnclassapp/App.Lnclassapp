@@ -1,9 +1,11 @@
 <%# 🌐 UI · catalog/courses/_teacher_course — la carte d'une fiche de cours dans le Cours de l'enseignant %>
 <%# Rôle : « LEÇON 2 », titre et chevron, le tout lien vers la fiche de cours ; dessous, « Révisions de la leçon » et une ligne par fiche de révision publiée %>
 <%# ADR  : 0035 · UDR : 0134 écrans enseignant sans répétition §3.7 (amendement du 2026-10-24), 0130 (exception 2) %>
-<%# locals: (course:) -%>
+<%# locals: (course:, audience: false) -%>
 <%# « Progression DPFC 2026-2027 » est écrit une fois, sous la recherche ; la carte ne garde que la leçon. %>
 <% lesson = course.subtitle.to_s.split(/\s+[·–—-]\s+/).grep_v(/\AProgression DPFC/i).join(" · ").presence %>
+<%# Deux cours de même titre dans la liste (1ère A1 et A2) : le niveau et la série les distinguent ; sinon rien (UDR 0134). %>
+<% lesson = [ lesson, ([ course.level_name, course.series_name ].compact.join(" ").presence if audience) ].compact.join(" · ").presence %>
 <div class="overflow-hidden rounded-card border border-line bg-white shadow-card">
   <%= link_to course_path(course.slug),
               class: "group flex min-h-tap items-center gap-3 px-4 py-3 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>

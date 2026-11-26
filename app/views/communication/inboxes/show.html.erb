@@ -4,9 +4,11 @@
 <% audience = current_actor.student? ? "student" : "adult" %>
 <% page_title t(".page_title.#{audience}") %>
 <% content_for :nav_key, "announcements" %>
-<%# L'élève n'a pas d'onglet « Annonces » : sans retour, la page serait une impasse. %>
+<%# L'élève n'a pas d'onglet « Annonces » : sans retour, la page serait une impasse. L'enseignant n'a plus de barre du haut
+    ici (UDR accueil-enseignant-actions §3.4) : le retour la remplace. %>
+<% back_home = (student_home_path if current_actor.student?) || (teacher_home_path if current_actor.teacher?) %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle.#{audience}"),
-                   back: ({ label: t(".back"), href: student_home_path } if current_actor.student?) %>
+                   back: ({ label: t(".back"), href: back_home } if back_home) %>
 <%= render "communication/shared/tabs", role: current_actor.role, current: :received %>
 
 <% if @page.cards.empty? %>

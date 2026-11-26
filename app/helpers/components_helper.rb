@@ -379,11 +379,19 @@ module ComponentsHelper
 
   # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
   # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
+  # UDR accueil-enseignant-actions §3.2 : les teintes des ronds de niveaux, en rotation (jetons `tint-*`, clair et sombre).
+  LEVEL_TINTS = %w[bg-tint-indigo bg-tint-green bg-tint-yellow bg-tint-pink bg-tint-lilac bg-tint-red bg-tint-lavender].freeze
+
+  def level_tint(index) = LEVEL_TINTS[index % LEVEL_TINTS.size]
+
   # short_label : libellé seul visible (« PC »), à toutes les tailles (UDR-0084 §3.5) ; le nom entier reste lu et en title.
+  # text: + tint: (UDR accueil-enseignant-actions §3.2) : le rond porte ce texte (« Tle D ») sur cette teinte, sans illustration ;
+  # le libellé dessous n'est plus que lu, et en title.
   # link_html (UDR-0079 §3.7) : attributs ajoutés au lien (target, rel, data), vide par défaut : rendu inchangé sans lui.
-  def ui_subject_bubble(label:, href:, illustration:, short_label: nil, sr_suffix: nil, id: nil, signal: nil, link_html: {})
+  def ui_subject_bubble(label:, href:, illustration: nil, short_label: nil, sr_suffix: nil, id: nil, signal: nil, link_html: {},
+                        text: nil, tint: nil)
     dot = (option!(SIGNAL_DOTS, signal, "ui_subject_bubble signal") if signal)
-    render "components/subject_bubble", label:, short_label:, href:, illustration:, sr_suffix:, id:, dot:, link_html:
+    render "components/subject_bubble", label:, short_label:, href:, illustration:, sr_suffix:, id:, dot:, link_html:, text:, tint:
   end
 
   def ui_subject_badge(label, category:, size: :md)

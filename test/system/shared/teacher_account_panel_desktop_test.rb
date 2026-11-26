@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
-# CA-H7, CA-G11, CA-G12 (UDR « écrans enseignant sans répétition » §3.4, lot P0 de mvp-teacher-student). At 1280 px, the avatar
-# of the header opens « Mon compte » as a 400 px panel on the right; at 3 on 3, « Ajouter une matière » opens « Mes matières » in
+# CA-H7, CA-G11, CA-G12 (UDR « écrans enseignant sans répétition » §3.4, lot P0 de mvp-teacher-student). At 1280 px, on the home
+# (UDR accueil-enseignant-actions §3.4: the only teacher page with a top bar), the avatar of the header opens « Mon compte » as a 400 px panel on the right; at 3 on 3, « Ajouter une matière » opens « Mes matières » in
 # the same panel, without leaving the page below; a removal keeps the panel open on « 2 sur 3 »; « ‹ Mon compte » brings the
 # menu back. The top bar has the yellow strip, the logo, « Besoin d'aide ? » then the avatar; the sidebar starts with the profile
 # block (avatar, name, « Maths · PC · SVT · LM2 »), then the three entries, the active one light blue with blue text, without
@@ -25,7 +25,7 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
       visit courses_path
       assert_selector "aside nav a.bg-brand-soft.text-brand-strong", text: tn(:courses), count: 1
       assert_no_selector "aside .bg-teacher"
-      visit profile_path
+      visit teacher_home_path
 
       # CA-G12: the top bar, then the sidebar, which starts with the profile block.
       within("header") do
@@ -59,7 +59,7 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
         assert_no_selector "#teacher_material_svt"
         assert_text I18n.t("identity.profile_materials.show.count", count: 2, max: 3)
       end
-      assert_current_path profile_path
+      assert_current_path teacher_home_path
       assert_selector "#{PANEL}[open]", visible: true
 
       within(panel) { click_link I18n.t("identity.profile_materials.show.back") }
@@ -68,7 +68,7 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
         assert_text(/#{tn('account_panel.entries.add_material')}\s+#{tn('account_panel.counter.under', used: 2, max: 3)}/)
         assert_no_selector "h1"
       end
-      assert_current_path profile_path
+      assert_current_path teacher_home_path
 
       # The page below only follows when the panel closes: the sidebar block loses the removed subject.
       within("aside") { assert_text "Maths · PC · SVT · LM2" }
@@ -87,7 +87,7 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
     others = [ create_school(name: "Collège Saint-Michel", sigle: "CSM"), create_school(name: "Collège Notre-Dame", sigle: "CND") ]
     others.each { add_teacher_school(teacher, it) }
     with_mobile_viewport(DESKTOP_VIEWPORT) do
-      visit profile_path
+      visit teacher_home_path
       within("aside") { assert_text "LM2" }
       find(TRIGGER).click
       panel = find("#{PANEL}[open]", visible: true)
@@ -118,7 +118,7 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
     gone = create_school(name: "Collège Saint-Michel", sigle: "CSM")
     [ gone, create_school(name: "Collège Notre-Dame", sigle: "CND") ].each { add_teacher_school(teacher, it) }
     with_mobile_viewport(DESKTOP_VIEWPORT) do
-      visit profile_path
+      visit teacher_home_path
       find(TRIGGER).click
       within(find("#{PANEL}[open]", visible: true)) do
         click_link "#{tn('account_panel.entries.add_school')} #{tn('account_panel.counter.full.schools', used: 3, max: 3)}"
@@ -139,7 +139,7 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
     teacher = Orm::User.find_by!(first_name: "Awa")
     [ create_school(name: "Collège Saint-Michel", sigle: "CSM"), create_school(name: "Collège Notre-Dame", sigle: "CND") ].each { add_teacher_school(teacher, it) }
     with_mobile_viewport(DESKTOP_VIEWPORT) do
-      visit profile_path
+      visit teacher_home_path
       find(TRIGGER).click
       panel = find("#{PANEL}[open]", visible: true)
       execute_script(<<~JS)
@@ -226,7 +226,7 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
 
   test "at 1280 px, each screen of the panel takes the keyboard focus on its title, and the panel still closes back to the avatar" do
     with_mobile_viewport(DESKTOP_VIEWPORT) do
-      visit profile_path
+      visit teacher_home_path
       find(TRIGGER).click
       panel = find("#{PANEL}[open]", visible: true)
 
@@ -249,12 +249,10 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
 
   test "at 390 px, the entry at 3 sur 3 still leaves for the page « Mes matières »" do
     with_mobile_viewport do
-      visit profile_path
-      assert_no_selector "header div.bg-teacher", visible: true
-      assert_no_selector "header img[src*='logo']", visible: true
+      visit teacher_menu_path
+      assert_no_selector "header.sticky", visible: :visible
       assert_no_selector "aside", visible: true
-      find(TRIGGER).click
-      within("#{PANEL}[open]") do
+      within("#teacher_menu") do
         click_link "#{tn('account_panel.entries.add_material')} #{tn('account_panel.counter.full.materials', used: 3, max: 3)}"
       end
 
