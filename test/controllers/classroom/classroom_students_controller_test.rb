@@ -52,6 +52,17 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_equal 70, Orm::ExerciseSession.find(session.id).score_percent
   end
 
+  test "CA-8 : le retrait d'un élève en retard remplace les deux chiffres de la liste" do
+    create_assignment(classroom: @classroom, assignable: create_exercise, due_on: Date.current - 1, assigned_at: 3.days.ago)
+    sign_in_as @teacher
+
+    remove as: :turbo_stream
+
+    assert_select "turbo-stream[action=replace][target=classroom_roster_summary] template #classroom_roster_summary" do
+      assert_select "p", text: "#{tr('summary_late', count: 2)} · #{tr('summary_up_to_date', count: 0)}"
+    end
+  end
+
   test "IL-14 : après une recherche, le compte de la liste filtrée suit, l'effectif reste celui de la classe" do
     sign_in_as @teacher
 

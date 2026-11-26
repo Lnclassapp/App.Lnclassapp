@@ -8,6 +8,7 @@ class Entities::Classroom::FollowUpPriorityTest < ActiveSupport::TestCase
   test "a classroom with students and late students or active assignments is to follow" do
     assert Priority.to_follow?(students: 40, late_students: 38, active_assignments: 1)
     assert Priority.to_follow?(students: 12, late_students: 0, active_assignments: 4)
+    assert Priority.to_follow?(students: 12, late_students: 2, active_assignments: 0)
   end
 
   test "an empty classroom, or one with nothing assigned, is not to follow" do

@@ -50,6 +50,16 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # CA-12 (entrée), UDR suivi-de-la-classe-sur-une-lecon §3.6 : « Fiches à revoir » sur la page d'une classe de la direction.
+  # accueil-enseignant-actions §3.5 : le bloc du lien est celui de l'enseignant ; la direction, qui reçoit déjà le lien d'inscription
+  # de sa classe, y lit aussi le code (même accès, aucun droit de plus).
+  test "CA-7 : la direction lit le code de sa classe dans le bloc du lien" do
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_link #classroom_code p.select-all", text: Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
+  end
+
   test "CA-12 : la direction voit les fiches à revoir de sa classe, chaque ligne ouvre la leçon dans la classe" do
     course = create_course(level: @level, name: "Géométrie")
     thales = create_essential(course:, name: "Théorème de Thalès")
