@@ -10,7 +10,7 @@
       <% if student.contact %>
         <span title="<%= t(".contact_masked") %>"><%= t(".contact") %> <span class="font-mono whitespace-nowrap"><span aria-hidden="true"><%= student.contact %></span><span class="sr-only"><%= t(".contact_masked") %></span></span></span> ·
       <% end %>
-      <%= t(".arrived", date: l(student.joined_at.to_date, format: :arrived)) %>
+      <span class="whitespace-nowrap"><%= t(".arrived", date: l(student.joined_at.to_date, format: :arrived)) %></span>
     </p>
   </div>
 </div>

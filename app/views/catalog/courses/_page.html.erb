@@ -39,8 +39,10 @@
       <% end %>
     </div>
   <% else %>
+    <%# Deux cours de même titre (1ère A1 et A2) : leur carte nomme le niveau et la série. %>
+    <% homonyms = page.rows.group_by(&:name).select { |_, same| same.size > 1 }.keys %>
     <ul id="<%= nested ? "courses_list_page_#{page.page}" : "courses_list" %>" class="<%= class_names("grid gap-5 sm:grid-cols-2", teacher ? "lg:grid-cols-1" : "xl:grid-cols-3", "mt-5" => nested) %>">
-      <%= render partial: "catalog/courses/course_card", collection: page.rows, as: :course, locals: { show_status: team } %>
+      <%= render partial: "catalog/courses/course_card", collection: page.rows, as: :course, locals: { show_status: team, audience: homonyms } %>
     </ul>
   <% end %>
 <% end %>

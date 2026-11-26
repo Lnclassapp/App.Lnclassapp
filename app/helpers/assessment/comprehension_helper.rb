@@ -65,7 +65,7 @@ module Assessment
     # student : répond à display_name et public_id.
     def comprehension_student_name(student, classroom)
       link_to student.display_name, classroom_student_path(classroom.public_id, student.public_id), data: { turbo_frame: "_top" },
-              class: "min-w-0 truncate font-normal block py-1 text-ink underline-offset-4 hover:underline " \
+              class: "min-w-0 truncate font-normal block -my-1.5 py-2.5 text-ink underline-offset-4 hover:underline " \
                      "focus-visible:outline-2 focus-visible:outline-brand"
     end
 
