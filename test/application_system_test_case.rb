@@ -8,6 +8,27 @@ require "test_helper"
 # checks the browser before bin/ci runs these tests.
 Selenium::WebDriver::Chrome::Service.driver_path = ENV["CHROMEDRIVER_PATH"] if ENV["CHROMEDRIVER_PATH"].present?
 
+# Chrome 158 (ubuntu-latest from 2026-11-26) refuses the wildcard origin of `Storage.clearDataForOrigin`
+# (« * is not a valid URL »), which Capybara 3.40 sends at the end of every system test to empty cookies and
+# localStorage: every test then errors in its teardown. The same storage is emptied otherwise: cookies of every
+# origin by `Network.clearBrowserCookies`, the rest for the origin of the app under test, the only one a test writes
+# to. An older Chrome accepts the wildcard and keeps the original call.
+require "capybara/selenium/driver"
+module ChromeStorageReset
+  private
+
+  def execute_cdp(cmd, params = {})
+    super
+  rescue Selenium::WebDriver::Error::InvalidArgumentError
+    raise unless cmd == "Storage.clearDataForOrigin" && params[:origin] == "*"
+
+    super("Network.clearBrowserCookies")
+    origin = Capybara.current_session.server&.base_url
+    super(cmd, params.merge(origin:)) if origin
+  end
+end
+Capybara::Selenium::Driver::ChromeDriver.prepend(ChromeStorageReset)
+
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ] do |options|
     options.binary = ENV["CHROME_BIN"] if ENV["CHROME_BIN"].present?
