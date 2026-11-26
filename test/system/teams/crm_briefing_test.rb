@@ -25,6 +25,7 @@ class Teams::CrmBriefingTest < ApplicationSystemTestCase
   def open_assistants
     sign_in_as create_team_member(team_role: "field")
     visit school_path(@school.public_id)
+    wait_for_lazy_frames # the assistants card is a lazy frame: it loads once seen, and a loaded one above it moves the page
     within("turbo-frame#school_crm_assistants") { click_link I18n.t("teams.crm.assistants.card.briefing") }
   end
 
