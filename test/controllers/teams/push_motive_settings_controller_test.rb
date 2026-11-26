@@ -20,6 +20,7 @@ class Teams::PushMotiveSettingsControllerTest < ActionDispatch::IntegrationTest
                  Orm::Communication::PushMotiveSettingChange.pluck(:motive, :automatic, :changed_by_id)
     assert_select "turbo-stream[action=replace][target=push_motive_assignment_due]"
     assert_select "turbo-stream[action=replace][target=push_plan]"
+    assert_select "turbo-stream[action=replace][target=push_history] #push_history_list li", text: /a rendu Devoir à rendre demain automatique/
     assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(I18n.t("teams.push_motive_settings.update.saved"))}/
     assert_select "turbo-stream[target=push_motive_assignment_due] input[type=checkbox][checked]"
   end

@@ -25,7 +25,7 @@ class Teams::PushApprovalsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "an approval freezes the students and objects, replaces the motive line, prepends the history and toasts" do
+  test "an approval freezes the students and objects, replaces the motive line, replaces the history and toasts" do
     sign_in_as @awa
     assert_difference -> { Orm::Communication::PushApproval.count } => 1, -> { Orm::Communication::PushApprovalRecipient.count } => 2 do
       approve
@@ -36,7 +36,7 @@ class Teams::PushApprovalsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "inactive", Date.new(2026, 11, 25), @awa.id, 2 ], [ approval.motive, approval.on_date, approval.approved_by_id, approval.recipients_count ]
     assert_equal [ [ @ada.id, "inactive:7" ], [ @bob.id, "inactive:7" ] ], approval.recipients.order(:user_id).pluck(:user_id, :object_key)
     assert_select "turbo-stream[action=replace][target=push_plan_inactive]"
-    assert_select "turbo-stream[action=prepend][target=push_history_list]", text: /Awa K\. a validé Élève inactif \(3, 7, 14 jours\) — 2 élèves/
+    assert_select "turbo-stream[action=replace][target=push_history] #push_history_list li", text: /Awa K\. a validé Élève inactif \(3, 7, 14 jours\) — 2 élèves/
     assert_match I18n.t("teams.push_approvals.create.approved", count: 2), response.body
     assert_select "turbo-stream[target=push_plan_inactive] span", text: "Validé"
   end

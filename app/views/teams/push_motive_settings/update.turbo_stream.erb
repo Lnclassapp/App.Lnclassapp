@@ -1,10 +1,13 @@
 <%# 🌐 UI · teams/push_motive_settings/update — réponse au changement d'une case « Automatique » %>
-<%# Rôle : toast (succès, ou erreur si refusé) ; la ligne revient à l'état du serveur ; le plan du jour est relu (le motif y entre ou en sort) %>
+<%# Rôle : toast (succès, ou erreur si refusé) ; la ligne revient à l'état du serveur ; l'historique est relu ; le plan du jour est relu (le motif y entre ou en sort) %>
 <%# ADR  : XXXX envois de notifications · UDR : XXXX écran notifications de l'équipe (§3.3) %>
 <% if @refused %>
   <%= turbo_stream_toast t("teams.push_motive_settings.update.failed"), type: :error %>
 <% else %>
   <%= turbo_stream_toast t("teams.push_motive_settings.update.saved"), type: :success %>
+<% end %>
+<% unless @refused %>
+  <%= turbo_stream.replace "push_history", partial: "teams/push_settings/history", locals: { history: @page.history } %>
 <% end %>
 <% if @mode %>
   <%= turbo_stream.replace "push_motive_#{@mode.motive}", partial: "teams/push_settings/mode", locals: { mode: @mode, can_manage: @can_manage } %>

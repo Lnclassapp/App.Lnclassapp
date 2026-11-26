@@ -22,6 +22,7 @@ module Teams
       @closed = UseCases::Communication::ApprovePushMotive.closed?(now)
       @entry = Queries::Communication::PushDailyPlanQuery.new.call(now:).find { it.motive == @motive }
       @approval = approval
+      @history = Queries::Communication::PushSettingsQuery.new.call(now:).history if approval
       @toast_type = TOAST_TYPES.fetch(outcome)
       @toast = toast_message(outcome)
       respond_to do |format|

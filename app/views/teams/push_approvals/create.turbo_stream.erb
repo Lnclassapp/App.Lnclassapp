@@ -1,14 +1,10 @@
-<%# 🌐 UI · teams/push_approvals/create — « Valider l'envoi » : toast, ligne du motif remplacée, ligne ajoutée à l'historique %>
-<%# Rôle : l'état « Validé » vient du plan relu (auteur et nombre réels) ; la ligne d'historique n'est ajoutée qu'à la validation qui a réussi %>
+<%# 🌐 UI · teams/push_approvals/create — « Valider l'envoi » : toast, ligne du motif remplacée, historique relu %>
+<%# Rôle : l'état « Validé » vient du plan relu (auteur et nombre réels) ; l'historique n'est relu qu'après la validation qui a réussi %>
 <%# ADR  : XXXX envois de notifications (§4.4) · UDR : XXXX écran notifications de l'équipe (§3.4, §3.5) %>
 <%= turbo_stream_toast @toast, type: @toast_type %>
 <% if @entry %>
   <%= turbo_stream.replace "push_plan_#{@entry.motive}", partial: "teams/push_plans/motive", locals: { entry: @entry, closed: @closed } %>
 <% end %>
-<% if @approval && @entry&.approval %>
-  <%= turbo_stream.prepend "push_history_list" do %>
-    <%= render "teams/push_settings/history_entry", entry: Queries::Communication::PushSettingsQuery::Entry.new(
-          kind: :approval, at: @approval.approved_at, by_name: @entry.approval.by_name, motive: @approval.motive, count: @approval.recipients_count
-        ) %>
-  <% end %>
+<% if @history %>
+  <%= turbo_stream.replace "push_history", partial: "teams/push_settings/history", locals: { history: @history } %>
 <% end %>
