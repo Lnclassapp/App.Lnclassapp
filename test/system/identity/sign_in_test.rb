@@ -157,8 +157,11 @@ class Identity::SignInTest < ApplicationSystemTestCase
       card = rect("main .rounded-card:has(h1)")
       assert_in_delta evaluate_script("document.documentElement.clientWidth") / 2.0, panel["right"], 1
       assert_operator card["left"], :>=, panel["right"]
-      # Centred in the column under the help bar: the card's middle sits within 48 px of the screen's middle.
-      assert_in_delta evaluate_script("window.innerHeight") / 2.0, (card["top"] + card["bottom"]) / 2, 48
+      # Centred in the column under the help bar: the card's middle sits within 48 px of the middle of that column (<main>).
+      # Not of the window: a headless Chrome may give a window shorter than the page (innerHeight 600 for a 800 px window),
+      # and the page then grows past the window with the card still centred in its column.
+      main = rect("main")
+      assert_in_delta (main["top"] + main["bottom"]) / 2, (card["top"] + card["bottom"]) / 2, 48
     end
   end
 
