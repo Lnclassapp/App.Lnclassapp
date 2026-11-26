@@ -97,7 +97,7 @@ module UseCases
           { title: dto.title, body: dto.body, audience: targets.audience, school_id: targets.school_id,
             classroom_ids: targets.classroom_ids, theme: dto.theme, illustration: dto.base_illustration, illustration_id:,
             status: dto.status, published_at: dto.publication_time, ends_at: dto.ends_at,
-            push_requested: dto.push_requested? && Entities::Communication::Message.push_allowed?(author_role: actor&.role, audience: targets.audience) }
+            push_requested: dto.push_requested? && Entities::Communication::Message.push_allowed?(author_role: actor.role, audience: targets.audience) }
         end
 
         # Un fichier envoyé remplace le précédent ; sinon la case « Retirer » l'efface.
