@@ -46,71 +46,88 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#teacher_home_course_levels", 0
   end
 
-  test "CA-G2, CA-B8: the card of a classroom of 20, 2 active exercises: header, headcount, exercises, badges without zero, code and « Copier »" do
-    @school.update!(sigle: "CSMT")
-    exercises = Array.new(2) { create_exercise(essential: create_essential(course: create_course(material: @svt))) }
-    assignments = exercises.map { create_assignment(classroom: @classroom, assignable: it, by: @teacher) }
-    # 6 Bronze (55 %), 5 Argent, 3 Or, 1 Diamant, 5 Bronze (20 % avec une réponse : Bronze enregistré) = 11 Bronze, aucun « Pas encore »
-    { 55 => 6, 70 => 5, 85 => 3, 100 => 1, 20 => 5 }.each do |percent, count|
-      count.times do
-        student = create_student(classroom: @classroom)
-        record_medal(create_exercise_session(student:, exercise: exercises.first, status: "completed", classroom_assignment: assignments.first,
-                                             score_percent: percent))
-      end
-    end
-    code = Orm::Classroom.find(@classroom.id).join_code
+  # accueil-enseignant-actions (UDR §3.1, CA-1) : « À suivre » d'abord, la plus urgente en tête ; les autres classes repliées.
+  test "CA-1: « À suivre » lists the late classroom first, then the busy one, each a link; the quiet one is folded below" do
+    first = create_level(name: "1ère", position: 6)
+    busy = create_classroom(school: @school, level: first, series: create_series(name: "D"), name: "1ère D")
+    sixth = create_classroom(school: @school, level: create_level(name: "6ème", position: 1), name: "6ème 1")
+    [ busy, sixth ].each { Orm::TeacherClassroom.create!(teacher: @teacher, classroom: it) }
+    students = Array.new(3) { create_student(classroom: @classroom) }
+    create_student(classroom: busy)
+    create_student(classroom: sixth)
+    exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
+    late = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher, **due(-1))
+    create_exercise_session(student: students.first, exercise:, status: "completed", classroom_assignment: late)
+    2.times { create_assignment(classroom: busy, assignable: create_exercise, by: @teacher, **due(2)) }
     sign_in_as @teacher
 
     get teacher_home_path
 
-    assert_response :success
-    assert_select "#teacher_home_classrooms li#classroom_#{@classroom.public_id}" do
-      assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: including("Tle D 1 · CSMT")
-      assert_select "*", text: including(tl("classroom_card.students", count: 20))
-      assert_select "*", text: including(tl("classroom_card.assignments", count: 2))
-      assert_select "ul[aria-label] > li", 4
-      assert_select "li", text: /Bronze\s*11/
-      assert_select "li", text: /Argent\s*5/
-      assert_select "li", text: /Or\s*3/
-      assert_select "li", text: /Diamant\s*1/
-      assert_select "li .sr-only", text: I18n.t("assessment.comprehension.badge_box", count: 11, level: "Bronze")
-      assert_select "*", text: including("Pas encore"), count: 0
-      assert_select "#classroom_code_#{@classroom.public_id}", text: including(Entities::Classroom::JoinCode.display(code))
-      assert_select "[data-controller=clipboard][data-clipboard-text-value='#{Entities::Classroom::JoinCode.display(code)}']"
+    assert_select "#teacher_home_classrooms h2#teacher_home_classrooms_title", text: tl("to_follow.title")
+    assert_select "ul#teacher_home_to_follow > li", 2 do |items|
+      assert_equal [ "classroom_#{@classroom.public_id}", "classroom_#{busy.public_id}" ], items.map { it["id"] }
     end
+    assert_select "ul#teacher_home_to_follow li#classroom_#{@classroom.public_id}" do
+      assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: "Tle D 1"
+      assert_select "p.text-warning", text: "2 élèves en retard sur 1 exercice"
+    end
+    assert_select "ul#teacher_home_to_follow li#classroom_#{busy.public_id}", text: including("2 exercices en cours")
+    assert_select "ul#teacher_home_to_follow li#classroom_#{sixth.public_id}", 0
+    assert_select "details#teacher_home_other_classrooms" do
+      assert_select "summary", text: including("Voir mon autre classe")
+      assert_select "li#classroom_#{sixth.public_id} a[href='#{classroom_path(sixth.public_id)}']", text: "6ème 1"
+      assert_select "li#classroom_#{sixth.public_id}", text: including("1 élève")
+      assert_select "li#add_classroom a[href='#{teacher_classrooms_path}']", text: tl("add_classroom_card.action")
+    end
+    assert_select "[data-controller='communication--carousel'] #teacher_home_classrooms_track", 0
+    assert_select "#teacher_home_to_follow", text: including("Copier"), count: 0
   end
 
-  test "CA-B8: a teacher of another classroom does not see this code" do
-    other = create_teacher(school: @school, material: @svt, classrooms: [ create_classroom(school: @school, level: @tle, name: "Tle D 9") ])
-    code = Entities::Classroom::JoinCode.display(Orm::Classroom.find(@classroom.id).join_code)
-    sign_in_as other
-
-    get teacher_home_path
-
-    assert_not_includes response.body, code
-  end
-
-  test "an empty classroom, no assignment: « Aucun élève », the hint, no badge, the code stays" do
+  test "CA-1: every classroom to follow — no folded classrooms, « + Ajouter une classe » ends the list" do
+    create_student(classroom: @classroom)
+    create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, **due(1))
     sign_in_as @teacher
 
     get teacher_home_path
 
-    assert_select "li#classroom_#{@classroom.public_id}" do
-      assert_select "*", text: including(tl("classroom_card.students", count: 0))
-      assert_select "*", text: including(tl("classroom_card.empty_hint"))
-      assert_select "*", text: including(tl("classroom_card.assignments", count: 0)), count: 0
-      assert_select "ul[aria-label='#{tl('classroom_card.badges_label')}']", 0
-      assert_select "[data-controller=clipboard]", 1
-    end
+    assert_select "ul#teacher_home_to_follow > li", 2
+    assert_select "ul#teacher_home_to_follow > li:last-child#add_classroom"
+    assert_select "#teacher_home_other_classrooms", 0
+  end
+
+  # UDR §3.1, CA-2 : rien à suivre, jamais de section vide : « Mes classes », trois, puis les suivantes repliées.
+  test "CA-2: nothing to follow — « Mes classes », three classrooms, then « Voir mes N autres classes »" do
+    4.times { |index| Orm::TeacherClassroom.create!(teacher: @teacher, classroom: create_classroom(school: @school, level: @tle, name: "Tle D #{index + 2}")) }
+    create_student(classroom: @classroom)
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_select "h2#teacher_home_classrooms_title", text: tl("to_follow.title_all")
+    assert_select "ul#teacher_home_to_follow > li", 3
+    assert_select "ul#teacher_home_to_follow li#classroom_#{@classroom.public_id}", text: including("1 élève")
+    assert_select "details#teacher_home_other_classrooms summary", text: including("Voir mes 2 autres classes")
+    assert_select "details#teacher_home_other_classrooms li", 3
+  end
+
+  test "an empty classroom with an assignment is never to follow: « Aucun élève »" do
+    create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, **due(-1))
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_select "h2#teacher_home_classrooms_title", text: tl("to_follow.title_all")
+    assert_select "li#classroom_#{@classroom.public_id}", text: including("Aucun élève")
   end
 
   test "CA-G1: the band, the classrooms, the levels with « Inviter », the announcements, the week, the history; no greeting, no bottom bar" do
     create_message(author: create_team_member(second_factor: false), title: "Conseil de classe", audience: "teachers")
-    assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: create_course(material: @svt))),
-                                   by: @teacher, **due(-1))
+    exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher, **due(-1))
+    create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: create_course(material: @svt))),
+                      by: @teacher, **due(2))
     student = create_student(classroom: @classroom)
-    create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
-                            classroom_assignment: assignment, score_percent: 80)
+    create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, score_percent: 80)
     sign_in_as @teacher
 
     get teacher_home_path
@@ -131,44 +148,21 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "button", text: I18n.t("shared.navigation.bottom_bar.more"), count: 0
   end
 
-  test "CA-G4: the carousel ends with « + Ajouter une classe »" do
-    second = create_classroom(school: @school, level: @tle, name: "Tle D 2")
-    Orm::TeacherClassroom.create!(teacher: @teacher, classroom: second)
-    sign_in_as @teacher
-
-    get teacher_home_path
-
-    assert_select "#teacher_home_classrooms.min-w-0 [data-controller='communication--carousel']" do
-      assert_select "ul.overflow-x-auto.snap-x[data-communication--carousel-target=track][aria-label='Mes classes'] > li", 3 do |items|
-        assert_equal [ "classroom_#{@classroom.public_id}", "classroom_#{second.public_id}", "add_classroom" ], items.map { it["id"] }
-        items.each { assert_includes it["class"], "basis-5/6" }
-      end
-      assert_select "li#add_classroom a[href='#{teacher_classrooms_path}']", text: including(tl("add_classroom_card.action"))
-      assert_select "[data-communication--carousel-target=pager]" do
-        assert_select "[aria-hidden=true] [data-communication--carousel-target=dot]", 3
-        assert_select "button[aria-controls=teacher_home_classrooms_track].hidden.lg\\:grid", 2
-        assert_select "button[data-communication--carousel-target=previous][aria-disabled=true]", text: "Classes précédentes"
-        assert_select "button[data-communication--carousel-target=next][aria-disabled=false]", text: "Classes suivantes"
-      end
-    end
-    assert_select "#teacher-classrooms-menu", 0
-  end
-
-  test "CA-L1, CA-G4: without a classroom, the top card says « Ajoutez vos classes », a full-width primary button, and nothing else" do
+  test "CA-L1, CA-3: without a classroom, the card says « Ajoutez vos classes », a full-width primary button, and no list" do
     @school.update!(sigle: "CSMT")
     sign_in_as create_teacher(school: @school, material: @svt)
 
     get teacher_home_path
 
     assert_response :success
-    assert_select "#teacher_home_classrooms li", 1
-    assert_select "#teacher_home_classrooms li#add_classroom" do
+    assert_select "#teacher_home_to_follow", 0
+    assert_select "#teacher_home_classrooms div#add_classroom" do
       assert_select "*", text: including("CSMT")
       assert_select "*", text: including(tl("add_classroom_card.empty_title"))
       assert_select "*", text: including(tl("add_classroom_card.empty_description"))
       assert_select "a[href='#{teacher_classrooms_path}'].w-full", text: including(tl("add_classroom_card.action"))
     end
-    assert_select "#teacher_home_week", text: including(tl("follow_ups.empty"))
+    assert_select "#teacher_home_week", 0
     assert_select "#teacher_home_history", 0
   end
 
@@ -239,13 +233,14 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#teacher_home_history", 0
   end
 
-  test "CA-3: nothing to follow — the empty state, and no history section" do
+  # UDR accueil-enseignant-actions §3.3, CA-5 : jamais de section vide.
+  test "CA-5: no exercise this week — no « Cette semaine » section at all, and no history section" do
     sign_in_as @teacher
 
     get teacher_home_path
 
-    assert_select "#teacher_home_week", text: including(tl("follow_ups.empty"))
-    assert_select "#teacher_home_week li", 0
+    assert_select "#teacher_home_week", 0
+    assert_no_match(/Aucun exercice à suivre/, response.body)
     assert_select "#teacher_home_history", 0
   end
 
@@ -301,18 +296,23 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "header.teacher-band.bg-teacher"
   end
 
-  test "RE-13: one bubble per level and series taught, in order, with the Maths drawing, then « Inviter »" do
+  # RE-13 ; accueil-enseignant-actions (UDR §3.2, CA-4) : un titre visible, le nom court du niveau dans le rond, une teinte par rond.
+  test "RE-13, CA-4: « Fiches de cours · Mathématiques », one bubble per level and series taught, in order, its short name on its own tint" do
     sign_in_as maths_teacher
 
     get teacher_home_path
 
+    assert_select "h2#teacher_home_courses_title:not(.sr-only)", text: "Fiches de cours · Mathématiques"
     assert_select "nav#teacher_home_course_levels[aria-label='Vos niveaux et actions'] > ul.grid.grid-cols-4"
     assert_equal %w[course_level_3eme course_level_1ere_a course_level_tle_d course_level_invite], bubble_ids
-    { "3eme" => [ "3ème", courses_path(level: "3eme", material: "mathematiques") ],
-      "1ere_a" => [ "1ère A", courses_path(level: "1ere", series: "a", material: "mathematiques") ],
-      "tle_d" => [ "Tle D", courses_path(level: "tle", series: "d", material: "mathematiques") ] }.each do |key, (label, href)|
-      assert_select "a#course_level_#{key}[href='#{href}']", text: including(label) do
-        assert_select "img[src='#{illustration('maths')}'][alt='']"
+    { "3eme" => [ "3ème", "3e", "bg-tint-indigo", courses_path(level: "3eme", material: "mathematiques") ],
+      "1ere_a" => [ "1ère A", "1re A", "bg-tint-green", courses_path(level: "1ere", series: "a", material: "mathematiques") ],
+      "tle_d" => [ "Tle D", "Tle D", "bg-tint-yellow", courses_path(level: "tle", series: "d", material: "mathematiques") ] }
+      .each do |key, (label, short, tint, href)|
+      assert_select "a#course_level_#{key}[href='#{href}'][title='#{label}']" do
+        assert_select "span.#{tint} span[aria-hidden=true]", text: short
+        assert_select "img", 0
+        assert_select ".sr-only", text: label
         assert_select ".sr-only", text: ", fiches de cours de Mathématiques"
       end
     end
@@ -357,20 +357,21 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal %w[course_level_invite], bubble_ids
   end
 
-  test "RE-17: a subject without a drawing of its own gets the generic one" do
+  test "RE-17: a subject without a drawing of its own: the bubble carries the level, the title names the subject" do
     english = create_material(name: "Anglais", category: "literature")
     sign_in_as create_teacher(school: @school, material: english, classrooms: [ @classroom ])
 
     get teacher_home_path
 
+    assert_select "h2#teacher_home_courses_title", text: "Fiches de cours · Anglais"
     assert_select "a#course_level_tle[href='#{courses_path(level: 'tle', material: english.slug)}']" do
-      assert_select "img[src='#{illustration('generique')}']"
+      assert_select "span[aria-hidden=true]", text: "Tle"
       assert_select ".sr-only", text: ", fiches de cours de Anglais"
     end
   end
 
   # EPM-13, EPM-16 (UDR-0126 §3.2 to §3.4) : deux badges, des bulles génériques vers toutes ses matières, un badge par activité.
-  test "EPM-13: a teacher of two subjects reads both badges, generic bubbles to all his subjects, a badge on each activity" do
+  test "EPM-13: a teacher of two subjects reads both badges, bubbles to all his subjects, a badge on each activity" do
     pc = create_material(name: "Physique-Chimie", category: "science")
     teacher = create_teacher(school: @school, materials: [ pc, @svt ], classrooms: [ @classroom ])
     create_student(classroom: @classroom)
@@ -380,8 +381,9 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     get teacher_home_path
 
+    assert_select "h2#teacher_home_courses_title", text: "Fiches de cours"
     assert_select "a#course_level_tle[href='#{courses_path(level: 'tle')}']" do
-      assert_select "img[src='#{illustration('generique')}']"
+      assert_select "img", 0
       assert_select ".sr-only", text: ", fiches de cours de vos matières"
     end
     assert_select "#teacher_home_week li", text: /Physique-Chimie/
@@ -423,7 +425,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     get teacher_home_path
 
     assert_response :success
-    assert_select "#teacher_home_classrooms li#add_classroom"
+    assert_select "#teacher_home_classrooms #add_classroom"
   end
 
   test "a teacher without a primary school: one redirection, to the exit screen, which answers" do

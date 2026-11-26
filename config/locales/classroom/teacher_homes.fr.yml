@@ -6,15 +6,12 @@ fr:
     teacher_homes:
       show:
         page_title: "Accueil"
-        classrooms_title: "Mes classes"
-        # Chantier carrousel-classes-enseignant : les boutons du carrousel, dès lg ; le libellé ne se lit que par les lecteurs d'écran.
-        previous_classrooms: "Classes précédentes"
-        next_classrooms: "Classes suivantes"
+        # UDR accueil-enseignant-actions §3.2 : le titre visible au-dessus des ronds.
         courses_title: "Fiches de cours"
+        courses_title_material: "Fiches de cours · %{material}"
       # UDR enseignant §3.3 : « Cette semaine » ; le titre ne se lit que par les lecteurs d'écran.
       follow_ups:
         title: "Cette semaine"
-        empty: "Aucun exercice à suivre cette semaine."
         due: "%{classroom} · à rendre %{date}"
         no_due: "%{classroom} · sans date limite"
         done:
@@ -41,25 +38,27 @@ fr:
         invite: "Inviter"
         # UDR-0079 §3.7 : la bulle ouvre WhatsApp ; l'espace en tête sépare le suffixe du libellé lu « Inviter ».
         invite_sr: " sur WhatsApp"
-      # UDR enseignant §3.3 : la carte d'une classe ; l'en-tête se lit « Tle D 1 · CSMT ».
-      classroom_card:
-        header: "%{classroom} · %{school}"
-        header_label: "Ouvrir la classe %{classroom}"
+      # UDR accueil-enseignant-actions §3.1 : « À suivre », une ligne par classe ; les autres se déplient dessous.
+      to_follow:
+        title: "À suivre"
+        title_all: "Mes classes"
+        late_students:
+          one: "1 élève en retard sur %{assignments}"
+          other: "%{count} élèves en retard sur %{assignments}"
+        late_assignments:
+          one: "1 exercice"
+          other: "%{count} exercices"
+        assignments:
+          one: "1 exercice en cours"
+          other: "%{count} exercices en cours"
         students:
           zero: "Aucun élève"
           one: "1 élève"
           other: "%{count} élèves"
-        assignments:
-          zero: "Aucun exercice en cours"
-          one: "1 exercice en cours"
-          other: "%{count} exercices en cours"
-        empty_hint: "Donnez-leur le code, ou partagez le lien sur WhatsApp."
-        badges_label: "Élèves par médaille"
-        code_label: "Code de la classe"
-        copy: "Copier"
-        copy_label: "Copier le code de la classe %{classroom}"
-        copied: "Code copié."
-      # UDR enseignant §3.3, §3.13 : la dernière carte du carrousel, et la carte du haut d'un accueil sans classe.
+        others:
+          one: "Voir mon autre classe"
+          other: "Voir mes %{count} autres classes"
+      # UDR enseignant §3.13, accueil-enseignant-actions §3.1 : la dernière ligne des classes, et la carte d'un accueil sans classe.
       add_classroom_card:
         action: "+ Ajouter une classe"
         empty_title: "Ajoutez vos classes"

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::TeacherHomeQuery
-# Rôle : accueil enseignant (TR-05) : établissement courant et son sigle, ses matières, classes déclarées de l'année (code, badges), niveaux enseignés
-# ADR  : 0026, 0041, 0048, 0094, 0097 (§4.5), 0103, médailles lues à la clôture · UDR : 0026, 0069, 0098, 0126 (§3.2 à §3.4), écrans enseignant (§3.2 badges, §3.3 carte de classe)
+# Rôle : accueil enseignant (TR-05) : établissement courant et son sigle, ses matières, classes déclarées de l'année (élèves, exercices en cours, retard), « À suivre », niveaux enseignés
+# ADR  : 0026, 0041, 0048, 0094, 0103 · UDR : 0026, 0069, 0098, 0126 (§3.2 à §3.4), écrans enseignant (§3.3), accueil-enseignant-actions (§3.1, §3.2)
 module Queries
   module Classroom
     class TeacherHomeQuery
@@ -8,16 +8,35 @@ module Queries
       # d'une matière seule choisit l'illustration des bulles « Cours » (UDR-0069 §3.3, UDR-0126 §3.3).
       Row = Data.define(:school_name, :school_sigle, :materials, :classrooms, :course_levels) do
         def several_materials? = materials.size > 1
+
+        # UDR accueil-enseignant-actions §3.1 : les classes à suivre, la plus urgente d'abord (FollowUpPriority).
+        def to_follow
+          classrooms.each_with_index.select { |classroom, _| classroom.to_follow? }
+                    .sort_by { |classroom, position| classroom.rank(position) }.map(&:first)
+        end
+
+        # Les autres, dans l'ordre des classes.
+        def others = classrooms.reject(&:to_follow?)
       end
-      # join_code : le code de la classe, brut (6 caractères) ; badge_counts : { bronze:, silver:, gold:, diamond: } d'élèves,
-      # chaque élève présent une fois, « Pas encore » non compté (UDR enseignant §3.2).
+      # late_students_count : élèves présents qui n'ont pas terminé au moins une assignation active échue (avant today) ;
+      # late_assignments_count : ces assignations échues qu'au moins un élève présent n'a pas terminées.
       ClassroomRow = Data.define(:public_id, :name, :level_name, :active_students_count, :active_assignments_count,
-                                 :join_code, :badge_counts)
-      # Une bulle « Cours » : label « 3ème », « Tle D » ; series_slug nil pour une classe sans série.
-      CourseLevel = Data.define(:level_slug, :series_slug, :label)
+                                 :late_students_count, :late_assignments_count) do
+        def to_follow?
+          Entities::Classroom::FollowUpPriority.to_follow?(students: active_students_count, late_students: late_students_count,
+                                                          active_assignments: active_assignments_count)
+        end
+
+        def rank(position)
+          Entities::Classroom::FollowUpPriority.rank(late_students: late_students_count, active_assignments: active_assignments_count, position:)
+        end
+      end
+      # Une bulle « Cours » : label « 3ème », « Tle D » ; short_label « 3e », « Tle D » (le rond, UDR accueil-enseignant-actions
+      # §3.2) ; series_slug nil pour une classe sans série.
+      CourseLevel = Data.define(:level_slug, :series_slug, :label, :short_label)
 
       COLUMNS = [ "classrooms.id", "classrooms.public_id", "classrooms.name", "levels.name", "levels.position", "levels.slug",
-                  "series.slug", "series.name", "classrooms.join_code" ].freeze
+                  "series.slug", "series.name" ].freeze
 
       # school_id : l'établissement courant (actor.school_id, ADR-0094 §4.6) ; today : fixe l'année scolaire (ADR-0041).
       def call(teacher_id:, school_id:, today: Date.current)
@@ -25,7 +44,7 @@ module Queries
         rows = classroom_rows(teacher_id, school_id, today)
 
         school_name, school_sigle = Orm::School.where(id: school_id).pick(:name, :sigle)
-        Row.new(school_name:, school_sigle: school_sigle.presence, materials:, classrooms: classrooms(rows),
+        Row.new(school_name:, school_sigle: school_sigle.presence, materials:, classrooms: classrooms(rows, today),
                 course_levels: course_levels(rows))
       end
 
@@ -39,15 +58,32 @@ module Queries
                       .pluck(*COLUMNS)
       end
 
-      def classrooms(rows)
+      def classrooms(rows, today)
         ids = rows.map(&:first)
         members = Orm::ClassroomStudent.where(classroom_id: ids, left_at: nil).pluck(:classroom_id, :student_id)
-        assignments = Orm::ClassroomAssignment.where(classroom_id: ids, status: "active").group(:classroom_id).count
-        badges = badge_counts(members)
+        assignments = Orm::ClassroomAssignment.where(classroom_id: ids, status: "active").pluck(:id, :classroom_id, :due_on)
+        late = lateness(members, assignments, today)
 
-        rows.sort_by { |_, _, name, _, position| [ position, natural_key(name) ] }.map do |id, public_id, name, level_name, *, join_code|
+        rows.sort_by { |_, _, name, _, position| [ position, natural_key(name) ] }.map do |id, public_id, name, level_name, *|
+          late_students, late_assignments = late.fetch(id, [ 0, 0 ])
           ClassroomRow.new(public_id:, name:, level_name:, active_students_count: members.count { it.first == id },
-                           active_assignments_count: assignments.fetch(id, 0), join_code:, badge_counts: badges[id])
+                           active_assignments_count: assignments.count { it[1] == id },
+                           late_students_count: late_students, late_assignments_count: late_assignments)
+        end
+      end
+
+      # Une requête de plus : les couples (assignation échue, élève) terminés. Le reste en mémoire.
+      # → { classroom_id => [élèves en retard, assignations en retard] }
+      def lateness(members, assignments, today)
+        overdue = assignments.select { |_, _, due_on| due_on && due_on < today }
+        return {} if overdue.empty? || members.empty?
+
+        done = Orm::ExerciseSession.where(status: "completed", classroom_assignment_id: overdue.map(&:first))
+                                   .distinct.pluck(:classroom_assignment_id, :student_id).to_set
+        students = members.group_by(&:first).transform_values { it.map(&:last) }
+        overdue.group_by { it[1] }.to_h do |classroom_id, due|
+          missing = due.to_h { |id, *| [ id, students.fetch(classroom_id, []).reject { done.include?([ id, it ]) } ] }
+          [ classroom_id, [ missing.values.flatten.uniq.size, missing.count { |_, late| late.any? } ] ]
         end
       end
 
@@ -57,39 +93,9 @@ module Queries
         rows.map { it[3, 5] }.uniq # levels.name, levels.position, levels.slug, series.slug, series.name
             .sort_by { |_, position, _, _, series_name| [ position, series_name ? 1 : 0, series_name.to_s ] }
             .map do |level_name, _, level_slug, series_slug, series_name|
-              CourseLevel.new(level_slug:, series_slug:, label: [ level_name, series_name ].compact.join(" "))
+              CourseLevel.new(level_slug:, series_slug:, label: [ level_name, series_name ].compact.join(" "),
+                              short_label: Entities::Classroom::LevelShortName.for(level: level_name, series: series_name))
             end
-      end
-
-      # Une requête pour tous les élèves présents, puis l'agrégat en mémoire (UDR enseignant §3.2) : la meilleure session
-      # terminée de l'élève à chaque assignation active de sa classe, rangée par `Grading.class_badge_for`.
-      # → { classroom_id => { bronze:, silver:, gold:, diamond: } }
-      def badge_counts(members)
-        counts = Hash.new { |hash, classroom_id| hash[classroom_id] = Entities::Assessment::Grading::BADGE_ORDER.index_with(0) }
-        return counts if members.empty?
-
-        bests = Orm::ExerciseSession.joins(:classroom_assignment)
-                                    .where(status: "completed", student_id: members.map(&:last).uniq,
-                                           classroom_assignments: { classroom_id: members.map(&:first).uniq, status: "active" })
-                                    .group(:student_id, :classroom_assignment_id, "classroom_assignments.classroom_id")
-                                    .pluck(:student_id, "classroom_assignments.classroom_id", Arel.sql("MAX(exercise_sessions.score_percent)"))
-        scores = bests.group_by { |student_id, classroom_id, _| [ classroom_id, student_id ] }
-        medals = medal_holders(members)
-        members.each do |classroom_id, student_id|
-          best = scores.fetch([ classroom_id, student_id ], []).map(&:last)
-          badge = Entities::Assessment::Grading.class_badge_for(scores: best, all_perfect: best.all? { Entities::Assessment::Grading.perfect?(it) },
-                                                                    has_medal: medals.include?([ classroom_id, student_id ]))
-          counts[classroom_id][badge] += 1 if badge
-        end
-        counts
-      end
-
-      # Les médailles gagnées par une session d'une assignation active de la classe (ADR-0097 §4.5, Assessment::Medals) : la
-      # règle de la liste de la classe, deux requêtes. → Set de [classroom_id, student_id]
-      def medal_holders(members)
-        classrooms = Orm::ClassroomAssignment.where(classroom_id: members.map(&:first).uniq, status: "active").pluck(:id, :classroom_id).to_h
-        Queries::Assessment::Medals.by_assignment(assignment_ids: classrooms.keys, student_ids: members.map(&:last).uniq)
-                                   .flat_map { |id, students| students.keys.map { [ classrooms.fetch(id), it ] } }.to_set
       end
 
       # « 6ème 2 » avant « 6ème 10 », comme la déclaration des classes (TeachingSelectionQuery).

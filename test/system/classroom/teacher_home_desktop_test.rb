@@ -1,21 +1,22 @@
 require "application_system_test_case"
 
 # CA-G10 → Lot P1 (UDR enseignant §3.3, « Sur ordinateur »): at 1280 px the home is a page of 57 rem at most, with no yellow band
-# (only the top bar is a banner). The class cards are a one-line carousel of 16.5 rem cards, the fourth cut at the edge, « + Ajouter
-# une classe » last and the pager shown; the two announcements and the level bubbles are each on one line; « Cette semaine » and
-# « Historique » are side by side, their titles visible; the page never scrolls sideways.
+# (only the top bar is a banner). « À suivre » lists the classroom to follow, the others folded (accueil-enseignant-actions §3.1);
+# the two announcements and the level bubbles are each on one line; « Cette semaine » and « Historique » are side by side, their
+# titles visible; the page never scrolls sideways.
 class Classroom::TeacherHomeDesktopTest < ApplicationSystemTestCase
   setup { page.current_window.resize_to(1280, 900) }
   teardown { page.current_window.resize_to(1400, 1400) }
 
   def rect(selector) = page.evaluate_script("(() => { const r = document.querySelector(#{selector.to_json}).getBoundingClientRect(); return { top: r.top, left: r.left, right: r.right, bottom: r.bottom, width: r.width } })()")
 
-  test "1280 px: a 57 rem page without band, a carousel of 16.5 rem class cards with the fourth cut, two announcements, week and history side by side" do
+  test "1280 px: a 57 rem page without band, « À suivre » then the folded classrooms, two announcements, week and history side by side" do
     school = create_school(sigle: "LCA")
     svt = create_material(name: "SVT", category: "science")
     levels = [ create_level(name: "Tle", position: 9), create_level(name: "1ère", position: 8), create_level(name: "2nde", position: 7) ]
     classrooms = %w[A B C D].each_with_index.map { |suffix, index| create_classroom(school:, level: levels[index % 3], name: "Classe #{suffix}") }
     teacher = create_teacher(school:, material: svt, classrooms:)
+    classrooms.each { create_student(classroom: it) }
     exercise = create_exercise(title: "Respiration", essential: create_essential(course: create_course(material: svt)))
     create_assignment(classroom: classrooms.first, assignable: exercise, by: teacher,
                       due_on: Date.current + 2, assigned_at: (Date.current + 1).in_time_zone.change(hour: 12))
@@ -31,23 +32,15 @@ class Classroom::TeacherHomeDesktopTest < ApplicationSystemTestCase
 
     visit teacher_home_path
 
-    assert_selector "#teacher_home_classrooms li[id^=classroom_]", count: 4
+    assert_selector "#teacher_home_to_follow > li[id^=classroom_]", count: 1
+    assert_selector "#teacher_home_classrooms_title", text: "À suivre", visible: :visible
     page_box = rect("#teacher_home")
     assert_operator page_box["width"], :<=, 912.5, "la page dépasse 57 rem"
     assert_no_selector "#teacher_home_band, header.teacher-band", visible: :visible
     assert_selector "header", count: 1, visible: :visible # la seule bannière visible est la barre du haut, pas le bandeau jaune
-
-    track = "#teacher_home_classrooms ul[data-communication--carousel-target='track']"
-    cards = all("#{track} > li").map { it.rect }
-    assert_equal 5, cards.size
-    assert_equal [ cards[0].y ], cards.map(&:y).uniq, "les cartes ne sont pas sur une ligne"
-    assert_in_delta 264 + 12, cards[1].x - cards[0].x, 1, "les cartes n'ont pas 16,5 rem"
-    track_box = rect(track)
-    assert_operator cards[2].x + cards[2].width, :<=, track_box["right"] + 1, "la troisième carte est coupée"
-    assert_operator cards[3].x, :<, track_box["right"], "la quatrième carte n'est pas visible"
-    assert_operator cards[3].x + cards[3].width, :>, track_box["right"] + 1, "la quatrième carte n'est pas coupée au bord"
-    assert_selector "#teacher_home_classrooms ul > li:last-child#add_classroom"
-    assert_selector "#teacher_home_classrooms [data-communication--carousel-target='pager'].flex", visible: :visible
+    assert_no_selector "#teacher_home_other_classrooms li[id^=classroom_]", visible: :visible
+    find("#teacher_home_other_classrooms summary", text: "Voir mes 3 autres classes").click
+    assert_selector "#teacher_home_other_classrooms li[id^=classroom_]", count: 3, visible: :visible
 
     announcements = all("#student_home_announcements ul > li").map { it.rect }
     assert_equal 2, announcements.size
@@ -67,41 +60,5 @@ class Classroom::TeacherHomeDesktopTest < ApplicationSystemTestCase
 
     assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                  page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
-  end
-
-  # Chantier carrousel-classes-enseignant: with a mouse the track neither scrolls on the wheel nor shows a scrollbar, so the
-  # carousel needs « Classes précédentes » and « Classes suivantes », disabled (but announced) at each end; none on a phone.
-  test "1280 px: « Classes suivantes » then « Classes précédentes » bring the carousel back to the start; no button at 390 px" do
-    school = create_school(sigle: "LCA")
-    level = create_level(name: "Tle", position: 9)
-    classrooms = %w[A B C D E].map { create_classroom(school:, level:, name: "Classe #{it}") }
-    sign_in_as create_teacher(school:, material: create_material(name: "SVT", category: "science"), classrooms:)
-
-    visit teacher_home_path
-
-    scroll_left = -> { page.evaluate_script("document.querySelector('#teacher_home_classrooms ul').scrollLeft") }
-    previous = find("#teacher_home_classrooms button", text: "Classes précédentes")
-    following = find("#teacher_home_classrooms button", text: "Classes suivantes")
-    assert_equal "true", previous["aria-disabled"], "« précédentes » est actif au début"
-    assert_equal "false", following["aria-disabled"]
-    assert_equal "teacher_home_classrooms_track", previous["aria-controls"]
-
-    previous.click
-    assert_equal 0, scroll_left.call, "« précédentes » défile alors qu'on est au début"
-
-    6.times { following["aria-disabled"] == "true" ? break : (following.send_keys(:enter); sleep 0.4) }
-    assert_selector "#teacher_home_classrooms button[aria-disabled='true']", text: "Classes suivantes"
-    assert_operator scroll_left.call, :>, 0
-    assert_equal "false", previous["aria-disabled"]
-    assert_equal following, page.active_element, "le focus quitte « suivantes » au bout"
-
-    6.times { previous["aria-disabled"] == "true" ? break : (previous.send_keys(:enter); sleep 0.4) }
-    assert_selector "#teacher_home_classrooms button[aria-disabled='true']", text: "Classes précédentes"
-    assert_equal 0, scroll_left.call, "le carrousel ne revient pas au début"
-    assert_equal "false", following["aria-disabled"]
-
-    page.current_window.resize_to(390, 844)
-    assert_no_selector "#teacher_home_classrooms button", text: /Classes (précédentes|suivantes)/, visible: :visible
-    assert_selector "#teacher_home_classrooms [data-communication--carousel-target='dot']", visible: :visible
   end
 end
