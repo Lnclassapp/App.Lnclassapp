@@ -16,7 +16,7 @@ class Classroom::TeacherHomeDesktopTest < ApplicationSystemTestCase
     levels = [ create_level(name: "Tle", position: 9), create_level(name: "1ère", position: 8), create_level(name: "2nde", position: 7) ]
     classrooms = %w[A B C D].each_with_index.map { |suffix, index| create_classroom(school:, level: levels[index % 3], name: "Classe #{suffix}") }
     teacher = create_teacher(school:, material: svt, classrooms:)
-    classrooms.each { create_student(classroom: it) }
+    classrooms.drop(1).each { create_student(classroom: it) }
     exercise = create_exercise(title: "Respiration", essential: create_essential(course: create_course(material: svt)))
     create_assignment(classroom: classrooms.first, assignable: exercise, by: teacher,
                       due_on: Date.current + 2, assigned_at: (Date.current + 1).in_time_zone.change(hour: 12))

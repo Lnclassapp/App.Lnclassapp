@@ -32,6 +32,7 @@ class Identity::TeacherMaterialsTest < ApplicationSystemTestCase
     within("#profile_materials") { assert_text "Physique-Chimie" and assert_no_text "SVT" }
     # CA-H6 (lot M): no « Modifier » on the profile; « Ajouter une matière » of « Mon compte » opens the window.
     assert_no_selector "#profile_materials a"
+    visit teacher_home_path # la barre du haut n'est que sur l'accueil (UDR accueil-enseignant-actions §3.4)
     find("header a[aria-controls=account_panel]").click
     within("dialog#account_panel[open]") { click_link t("shared.navigation.account_panel.entries.add_material") }
     within("dialog#profile-materials-modal") do
@@ -45,10 +46,11 @@ class Identity::TeacherMaterialsTest < ApplicationSystemTestCase
       click_on t("identity.profile_materials.edit.submit")
     end
 
+    visit profile_path
     assert_toast t("identity.profile_materials.update.updated")
     assert_no_selector "dialog#profile-materials-modal"
-    visit profile_path
     assert_selector "#profile_materials dd", text: /Physique-Chimie\s*Mathématiques\s*SVT/
+    visit teacher_home_path
 
     assert_selector "dialog#account_panel p.text-mute", text: "PC · Maths · SVT · Lycée Moderne de Cocody", visible: :all, minimum: 1
   end
