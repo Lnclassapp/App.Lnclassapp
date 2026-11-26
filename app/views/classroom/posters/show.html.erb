@@ -7,6 +7,6 @@
   <button type="button" data-action="print#print" class="inline-flex min-h-tap items-center gap-2 rounded-ln bg-brand px-5 font-medium text-on-brand">
     <%= ui_icon "printer", size: :sm %><%= t(".print") %>
   </button>
-  <%= link_to t(".back"), classroom_path(@classroom_public_id), class: "text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+  <%= link_to t(".back"), classroom_path(@classroom_public_id), class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
 </div>
 <%= render "classroom/posters/poster", poster: @poster %>

@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : sur la page de sa classe, l'enseignant lit « Fait seul (7 j) ». À
 # l'ordinateur, une colonne à côté du dernier score, « — » pour 0 ; au téléphone (390 px), rien de tel (maquette 10 : la ligne
-# n'a que le nom, « N faits sur M » et le badge), sans défilement horizontal. Les comptes de l'exercice donné ne bougent pas.
+# n'a que le nom et l'état), sans défilement horizontal. Les comptes de l'exercice donné ne bougent pas.
 class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 
@@ -40,29 +40,30 @@ class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
     end
   end
 
-  # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7) et UDR enseignant §3.5 (Lot I) : la liste filtrée par badge, « Tous » ouvert ;
-  # trente élèves puis « Voir les suivants » sans recharger la page ; le nom ouvre la fiche.
-  test "CL-15 : un filtre par badge, trente par trente, puis la fiche d'un élève" do
-    64.times { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name: "Élève", joined_at: 1.month.ago) }
+  # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7), UDR enseignant §3.5 et accueil-enseignant-actions §3.6 : la liste filtrée par
+  # badge, « Tous » ouvert ; dix élèves puis « Voir plus (n) » sans recharger la page ; le nom ouvre la fiche.
+  test "CL-15 : un filtre par badge, dix par dix, puis la fiche d'un élève" do
+    24.times { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name: "Élève", joined_at: 1.month.ago) }
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id)
 
     assert_selector "#classroom_roster_badge_all[aria-current=true]", wait: SIGN_IN_WAIT
-    assert_selector "#classroom_roster_count", text: "30 sur 66"
+    assert_selector "#classroom_roster_count", text: "10 sur 26"
+    assert_selector "#classroom_roster_summary", text: "à jour"
 
     assert_no_page_reload do
       click_on "classroom_roster_badge_gold"
       assert_selector "#classroom_roster_list li[id^=student_]", count: 1
-      assert_selector "#student_#{@koffi.public_id}", text: "Or"
+      assert_selector "#student_#{@koffi.public_id}", text: "Koffi Yao"
       click_on "classroom_roster_badge_none"
-      assert_selector "#classroom_roster_count", text: "30 sur 65"
-      click_on I18n.t("classroom.classrooms.roster.more", count: 30)
-      assert_selector "#classroom_roster_count", text: "60 sur 65"
+      assert_selector "#classroom_roster_count", text: "10 sur 25"
+      click_on I18n.t("classroom.classrooms.roster.more", count: 15)
+      assert_selector "#classroom_roster_count", text: "20 sur 25"
       click_on I18n.t("classroom.classrooms.roster.more", count: 5)
       # Le cadre est remplacé : on attend son compteur complet, qui n'existe qu'après le remplacement, avant de compter les lignes.
-      assert_selector "#classroom_roster_count", text: "65 élèves", wait: SIGN_IN_WAIT
+      assert_selector "#classroom_roster_count", text: "25 élèves", wait: SIGN_IN_WAIT
       assert_no_selector "#classroom_roster_more"
-      assert_selector "#classroom_roster_list li[id^=student_]", count: 65
+      assert_selector "#classroom_roster_list li[id^=student_]", count: 25
     end
     with_mobile_viewport do
       assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=,

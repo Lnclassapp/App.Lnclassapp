@@ -1,0 +1,20 @@
+<%# 🌐 UI · classroom/teacher_homes/_to_follow_row — une classe dans « À suivre » ou « Mes classes » de l'accueil enseignant %>
+<%# Rôle : le nom (lien vers la classe, toute la ligne cliquable), dessous le retard (« 38 élèves en retard sur 1 exercice », text-warning), les exercices en cours, ou l'effectif ; chevron %>
+<%# ADR  : 0072 · UDR : accueil-enseignant-actions (§3.1), ecrans-wave · locals: (classroom: TeacherHomeQuery::ClassroomRow) -%>
+<li id="classroom_<%= classroom.public_id %>" class="relative flex min-h-14 items-center gap-3 px-4 py-3 active:bg-mist">
+  <div class="min-w-0 flex-1">
+    <%= link_to classroom.name, classroom_path(classroom.public_id),
+                class: "block truncate text-sm font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
+    <% if classroom.late_students_count.positive? %>
+      <p class="text-meta text-warning">
+        <%= t("classroom.teacher_homes.to_follow.late_students", count: classroom.late_students_count,
+              assignments: t("classroom.teacher_homes.to_follow.late_assignments", count: classroom.late_assignments_count)) %>
+      </p>
+    <% elsif classroom.active_students_count.positive? && classroom.active_assignments_count.positive? %>
+      <p class="text-meta text-mute"><%= t("classroom.teacher_homes.to_follow.assignments", count: classroom.active_assignments_count) %></p>
+    <% else %>
+      <p class="text-meta text-mute"><%= t("classroom.teacher_homes.to_follow.students", count: classroom.active_students_count) %></p>
+    <% end %>
+  </div>
+  <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute" %>
+</li>

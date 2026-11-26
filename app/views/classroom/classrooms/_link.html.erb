@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_link — carte « Inscrire vos élèves » : partager sur WhatsApp, copier le lien, changer (menu ⋮, confirmation) %>
-<%# Rôle : l'adresse /c/<jeton> n'est portée que par les boutons, jamais affichée ; aucun code de classe (il est sur la carte de l'accueil, CA-I1) ; vu par l'enseignant, la direction et l'équipe %>
-<%# ADR  : 0063, 0085 (§4.1) · UDR : enseignant §3.5, 0054 (§3.5), 0081 (§3.6) · classroom : public_id, name, link_token · rendu par qui l'accorde %>
+<%# Rôle : l'adresse /c/<jeton> n'est portée que par les boutons, jamais affichée ; le code de la classe (#classroom_code) y est, copiable (il n'est plus sur l'accueil) ; vu par l'enseignant, la direction et l'équipe %>
+<%# ADR  : 0063, 0085 (§4.1) · UDR : enseignant §3.5, 0054 (§3.5), 0081 (§3.6), accueil-enseignant-actions (§3.5) · classroom : public_id, name, link_token, join_code · rendu par qui l'accorde %>
 <%# locals: (classroom:) -%>
 <% url = join_classroom_url(classroom.link_token) %>
 <div id="classroom_link" class="rounded-card border border-line bg-white p-4 shadow-card">
@@ -13,6 +13,18 @@
     </div>
   </div>
   <p class="mt-1 text-sm text-mute"><%= t(".hint") %></p>
+  <% code = Entities::Classroom::JoinCode.display(classroom.join_code) %>
+  <% if code %>
+    <%# UDR accueil-enseignant-actions §3.5 : le code, qui n'est plus sur la carte de l'accueil, se lit et se copie ici. %>
+    <div id="classroom_code" class="mt-3 flex items-center justify-between gap-3 rounded-ln border border-dashed border-line-strong p-3">
+      <div class="min-w-0">
+        <p class="text-xs text-mute"><%= t(".code_label") %></p>
+        <p class="font-mono text-base font-medium tracking-widest text-ink select-all"><%= code %></p>
+      </div>
+      <%= ui_copy_button classroom.join_code.upcase, label: t(".copy_code"), aria_label: t(".copy_code_label"), icon: "clipboard-document",
+                                                     copied: t(".code_copied"), size: :md %>
+    </div>
+  <% end %>
   <div class="mt-4 flex flex-wrap gap-2" role="group" aria-labelledby="classroom_link_label">
     <%= ui_button t(".whatsapp"), href: whatsapp_share_url(t(".whatsapp_message", classroom: classroom.name, url:)),
                                   target: "_blank", rel: "noopener", id: "classroom_whatsapp_share" %>

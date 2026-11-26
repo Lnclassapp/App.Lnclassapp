@@ -28,7 +28,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Modifier la classe/, response.body)
   end
 
-  test "l'enseignant de la classe voit l'en-tête (titre, sigle et année), le bloc du lien et ses élèves, sans code ni « Cours assignés »" do
+  test "l'enseignant de la classe voit l'en-tête (titre, sigle et année), le bloc du lien et ses élèves, sans « Cours assignés » (le code est dans le bloc du lien, CA-7)" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", contact: "0102030405")
@@ -238,8 +238,13 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     get classroom_path(@classroom.public_id)
 
-    assert_select "#badge_#{student.public_id}", text: "Argent"
-    assert_select "#badge_#{student.public_id}.text-mute", 0
+    # UDR accueil-enseignant-actions §3.6 : la ligne n'a plus de médaille ; le filtre la lit toujours.
+    get classroom_path(@classroom.public_id, badge: "silver")
+
+    assert_equal [ "student_#{student.public_id}" ], roster_students
+    get classroom_path(@classroom.public_id, badge: "diamond")
+
+    assert_empty roster_students
   end
 
   # ADR-0079 §4.1 : une remédiation sur l'exercice assigné, c'est faire cet exercice ; hors de l'assignation, elle ne compte pas.
@@ -481,17 +486,19 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # CA-I1, CA-B8 (partie classe) : la ligne provisoire du code (CA-B7) a disparu de la page ; le code est sur la carte de l'accueil.
-  test "CA-I1 : la page de classe n'affiche ni le code de la classe ni son bouton « Copier »" do
+  # accueil-enseignant-actions §3.5 : le code de la classe n'est plus sur la carte de l'accueil, il est ici, copiable.
+  test "CA-7 : la page de classe affiche le code de la classe avec son bouton « Copier »" do
     code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
     assert_response :success
-    assert_select "#classroom_code, #classroom_code_value, #classroom_code_label", 0
-    assert_no_match code, response.body
-    assert_no_match(/Code de la classe/, response.body)
+    assert_select "#classroom_link #classroom_code" do
+      assert_select "p", text: "Code de la classe"
+      assert_select "p.select-all", text: code
+      assert_select "[data-clipboard-text-value='#{@classroom.join_code.upcase}'] button", text: "Copier"
+    end
     assert_select "#classroom_link" do
       assert_select "#classroom_link_label", text: "Inscrire vos élèves"
       assert_select "p", text: "Ils s'inscrivent avec le lien, classe déjà choisie."
@@ -511,14 +518,16 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match code, response.body
   end
 
-  test "CA-I1 : après « Changer le lien », le bloc rendu n'a toujours pas de code" do
+  test "CA-7 : après « Changer le lien », le bloc rendu porte le nouveau code" do
     old_code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
     sign_in_as @teacher
 
     patch classroom_link_path(@classroom.public_id), as: :turbo_stream
 
+    new_code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
+    assert_not_equal old_code, new_code
     assert_select "turbo-stream[action=replace][target=classroom_link] template" do
-      assert_select "#classroom_code_value, #classroom_code", 0
+      assert_select "#classroom_code p.select-all", text: new_code
     end
     assert_no_match old_code, response.body
   end
@@ -585,14 +594,14 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     Array.new(count) { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name: "Élève", joined_at: 1.month.ago) }
   end
 
-  test "CL-15 : 31 élèves, la liste en montre 30, « 30 sur 31 », et « Voir le dernier » vise la page 2 dans le cadre" do
-    students = roster_of(31)
+  test "CL-15 : 11 élèves, la liste en montre 10, « 10 sur 11 », et « Voir plus (1) » vise la page 2 dans le cadre" do
+    students = roster_of(11)
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
-    assert_select "#classroom_roster_list li[id^=student_]", 30
-    assert_select "#classroom_roster_count[aria-live=polite]", text: I18n.t("#{scope}.roster.count_partial", shown: 30, total: 31)
+    assert_select "#classroom_roster_list li[id^=student_]", 10
+    assert_select "#classroom_roster_count[aria-live=polite]", text: I18n.t("#{scope}.roster.count_partial", shown: 10, total: 11)
     assert_select "#classroom_roster_more a[href='#{classroom_path(@classroom.public_id, page: 2, anchor: 'classroom_roster')}']" \
                   "[data-turbo-frame=classroom_roster_list][data-turbo-action=replace]",
                   text: I18n.t("#{scope}.roster.more", count: 1)
@@ -600,16 +609,16 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     get classroom_path(@classroom.public_id, page: 2)
 
-    assert_select "#classroom_roster_list li[id^=student_]", 31
-    assert_select "#classroom_roster_count", text: I18n.t("#{scope}.roster.count", count: 31)
+    assert_select "#classroom_roster_list li[id^=student_]", 11
+    assert_select "#classroom_roster_count", text: I18n.t("#{scope}.roster.count", count: 11)
     assert_select "#classroom_roster_more", 0
     # UDR-0108 §3.3 : le focus va au lien de la première ligne ajoutée.
     assert_select "#student_#{students.last.public_id} a[data-controller=autofocus][data-autofocus-target=field]", 1
     assert_select "#classroom_roster_list [data-controller=autofocus]", 1
   end
 
-  test "CL-15 : « Voir les suivants » garde la recherche ; le formulaire de recherche ne transmet pas la page" do
-    roster_of(31)
+  test "CL-15 : « Voir plus » garde la recherche ; le formulaire de recherche ne transmet pas la page" do
+    roster_of(11)
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id, q: "élève")
@@ -621,32 +630,48 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   # CA-I2 (UDR enseignant §3.2, §3.5) : « Tous · Bronze · Argent · Or · Diamant · Pas encore », paramètre `badge=`.
   def roster_students(selector = "#classroom_roster_list li[id^=student_]") = css_select(selector).map { it["id"] }
 
-  test "CA-I2 : la ligne d'un élève dit « 2 faits sur 3 », son retard et sa médaille « Or » seule ; sous le seuil, Bronze (tout exercice traité) ; sans exercice fait, « Pas encore »" do
+  test "CA-8 : la ligne d'un élève ne dit que son nom et son état ; les en retard d'abord, deux chiffres au-dessus" do
     due = Date.new(2026, 10, 8)
     exercises = Array.new(3) do |index|
       travel_to(Time.zone.local(2026, 10, 5, 9)) do
         create_assignment(classroom: @classroom, assignable: create_exercise(title: "Ex #{index}"), by: @teacher, due_on: due)
       end
     end
-    gold = create_student(classroom: @classroom, first_name: "Aya", last_name: "Kouadio")
+    late = create_student(classroom: @classroom, first_name: "Aya", last_name: "Kouadio")
+    hand_in(exercises[0], 90, student: late, completed_at: Time.zone.local(2026, 10, 7, 10))
     waiting = create_student(classroom: @classroom, first_name: "Yann", last_name: "Gbagbo")
-    hand_in(exercises[0], 90, student: gold, completed_at: Time.zone.local(2026, 10, 7, 10))
-    hand_in(exercises[1], 80, student: gold, completed_at: Time.zone.local(2026, 10, 9, 10))
-    below = create_student(classroom: @classroom, first_name: "Paul", last_name: "Zadi")
-    hand_in(exercises[0], 30, student: below, completed_at: Time.zone.local(2026, 10, 7, 10))
+    up_to_date = create_student(classroom: @classroom, first_name: "Ange", last_name: "Aka")
+    exercises.each { hand_in(it, 80, student: up_to_date, completed_at: Time.zone.local(2026, 10, 7, 10)) }
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
-    assert_select "#progress_#{gold.public_id}", text: "2 faits sur 3 · 1 en retard"
-    assert_select "#progress_#{gold.public_id} .text-warning", text: /1 en retard/
-    assert_select "#badge_#{gold.public_id}", text: "Or"
-    assert_select "#badge_#{below.public_id}", text: "Bronze"
-    assert_select "#badge_#{below.public_id}.text-mute", 0
-    # Sans rien de fait, les trois exercices échus sont en retard.
-    assert_select "#progress_#{waiting.public_id}", text: "0 fait sur 3 · 3 en retard"
-    assert_select "#badge_#{waiting.public_id}.text-mute", text: "Pas encore"
-    assert_select "#grade_#{gold.public_id}", 0
+    assert_select "#classroom_roster_summary", text: "2 en retard · 1 à jour"
+    assert_select "#classroom_roster_summary .text-warning", text: "2 en retard"
+    assert_equal [ late, waiting ].map { "student_#{it.public_id}" }.sort, roster_students.first(2).sort
+    assert_equal "student_#{up_to_date.public_id}", roster_students.last
+    assert_select "#state_#{late.public_id}", text: "En retard"
+    assert_select "#state_#{waiting.public_id}", text: "En retard"
+    assert_select "#state_#{up_to_date.public_id}", text: "À jour"
+    assert_select "#progress_#{late.public_id}, #badge_#{late.public_id}, #grade_#{late.public_id}", 0
+    assert_no_match(/faits sur|Pas encore/, css_select("#classroom_roster_list ul").text)
+    assert_select "#classroom_roster_list li[id^=student_].min-h-11", 3
+  end
+
+  test "CA-8 : sans exercice assigné, ni chiffres ni état ; sans retard, seulement « à jour »" do
+    student = create_student(classroom: @classroom)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_roster_summary p", 0
+    assert_select "#state_#{student.public_id}", 0
+
+    hand_in(create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, due_on: Date.current + 2), 90, student:)
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_roster_summary", text: "#{Orm::ClassroomStudent.where(classroom: @classroom, left_at: nil).count} à jour"
+    assert_select "#state_#{student.public_id}", text: "À jour"
   end
 
   test "CA-I2 : un filtre par badge, un lien par puce ; « Tous » est la puce courante par défaut" do
@@ -692,7 +717,6 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     # PRD §3 : des copies vides seulement, c'est « Pas encore » aussi, note comprise.
     assert_equal [ waiting, blank ].map { "student_#{it.public_id}" }.sort, roster_students.sort
-    assert_select "#badge_#{blank.public_id}.text-mute", text: /Pas encore/
 
     get classroom_path(@classroom.public_id, badge: "bronze")
 
@@ -729,26 +753,26 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "CL-15 : une page nulle, négative ou qui n'est pas un nombre montre la première page" do
-    roster_of(31)
+    roster_of(11)
     sign_in_as @teacher
 
     %w[-1 abc 0 2x 1.5].each do |page|
       get classroom_path(@classroom.public_id, page:)
 
       assert_response :success
-      assert_select "#classroom_roster_list li[id^=student_]", 30, page
+      assert_select "#classroom_roster_list li[id^=student_]", 10, page
       assert_select "#classroom_roster_list [data-controller=autofocus]", 0
     end
   end
 
   test "CL-15 : une page géante ne déborde pas : la liste entière, sans erreur" do
-    roster_of(31)
+    roster_of(11)
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id, page: "99999999999999999999")
 
     assert_response :success
-    assert_select "#classroom_roster_list li[id^=student_]", 31
+    assert_select "#classroom_roster_list li[id^=student_]", 11
   end
 
   test "un élève, même de cette classe, reçoit 403 sans le code ni la liste" do

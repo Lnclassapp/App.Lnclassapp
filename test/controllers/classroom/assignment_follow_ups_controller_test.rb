@@ -428,6 +428,69 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     end
   end
 
+  # accueil-enseignant-actions §3.7 (CA-9) : « Relancer sur WhatsApp », un lien wa.me avec le message prêt ; Lnclass n'envoie rien.
+  def remind_href = css_select("a#comprehension_remind").first&.[]("href")
+
+  test "CA-9 : the next step has « Relancer sur WhatsApp », a wa.me link with the assignment, its due date and the exercise link" do
+    sign_in_as @teacher
+
+    get follow_up_path
+
+    assert_select "#comprehension_next_step a#comprehension_remind[target=_blank][rel=noopener]", text: I18n.t("assessment.comprehension.remind.action")
+    assert_select "a#comprehension_remind", 1
+    uri = URI.parse(remind_href)
+    assert_equal [ "https", "wa.me" ], [ uri.scheme, uri.host ]
+    message = CGI.parse(uri.query).fetch("text").first
+    assert_equal I18n.t("assessment.comprehension.remind.message", classroom: "3ème B", exercise: "La méiose",
+                                                                   due: I18n.l(DUE_ON, format: :due_short),
+                                                                   link: exercise_url(@exercise.public_id)), message
+    assert_includes message, "3ème B"
+    assert_includes message, "La méiose"
+    assert_no_match(/Zoé|Pas-Encore/, message)
+  end
+
+  test "CA-9 : without a due date the message does not say « à rendre »" do
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential, title: "Sans date"), by: @teacher)
+    hand_in(@on_time, Time.zone.local(2026, 10, 8, 18), assignment:)
+    sign_in_as @teacher
+
+    get follow_up_path(assignment)
+
+    message = CGI.parse(URI.parse(remind_href).query).fetch("text").first
+    assert_match(/Sans date/, message)
+    assert_no_match(/à rendre/, message)
+  end
+
+  test "CA-9 : nobody did it, the button is the action of the empty state" do
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential), by: @teacher)
+    sign_in_as @teacher
+
+    get follow_up_path(assignment)
+
+    assert_select "#comprehension_frame a#comprehension_remind", 1
+    assert_select "#comprehension_next_step", 0
+  end
+
+  test "CA-9 : everybody did it, no button" do
+    Orm::ClassroomStudent.where(student: @pending).update_all(left_at: Time.current)
+    sign_in_as @teacher
+
+    get follow_up_path
+
+    assert_response :success
+    assert_select "a#comprehension_remind", 0
+  end
+
+  test "CA-9 : the team reads the report, with students left to remind, and has no button" do
+    sign_in_as create_team_member
+
+    get follow_up_path
+
+    assert_response :success
+    assert_select "#comprehension_next_step", 1
+    assert_select "a#comprehension_remind", 0
+  end
+
   test "the students not done yet close the list, by last name then first name: a started session too, never one who left or was anonymized" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential), by: @teacher)
     hand_in(@on_time, 1.hour.ago, assignment:)

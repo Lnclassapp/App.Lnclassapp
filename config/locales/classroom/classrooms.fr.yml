@@ -17,6 +17,11 @@ fr:
         label: "Inscrire vos élèves"
         copy: "Copier le lien"
         copied: "Lien copié"
+        # UDR accueil-enseignant-actions §3.5 : le code de la classe.
+        code_label: "Code de la classe"
+        copy_code: "Copier"
+        copy_code_label: "Copier le code de la classe"
+        code_copied: "Code copié"
         copy_label: "Copier le lien de la classe"
         whatsapp: "Partager sur WhatsApp"
         whatsapp_message: "Rejoins la classe %{classroom} sur Lnclass : %{url}"
@@ -42,19 +47,18 @@ fr:
         count:
           one: "%{count} élève"
           other: "%{count} élèves"
-        # UDR-0108 §3.3 (ADR-0097 §4.7) : trente élèves, puis « Voir les 30 suivants ».
+        # UDR-0108 §3.3 (ADR-0097 §4.7), accueil-enseignant-actions §3.6 : dix élèves, puis « Voir plus (n) ».
         count_partial: "%{shown} sur %{total}"
         # UDR enseignant §3.2, §3.5 : les puces « Tous · Bronze · Argent · Or · Diamant · Pas encore » (`badge=`) et la ligne d'élève.
         badges_label: "Élèves par médaille"
         all: "Tous"
         empty_badge: "Aucun élève avec cette médaille"
-        done_of:
-          one: "%{count} fait sur %{assigned}"
-          other: "%{count} faits sur %{assigned}"
-        late: "%{count} en retard"
-        more:
-          one: "Voir le dernier"
-          other: "Voir les %{count} suivants"
+        # UDR accueil-enseignant-actions §3.6 : les deux chiffres du haut, l'état de chaque ligne, « Voir plus (n) ».
+        summary_late: "%{count} en retard"
+        summary_up_to_date: "%{count} à jour"
+        state_late: "En retard"
+        state_up_to_date: "À jour"
+        more: "Voir plus (%{count})"
         no_match: "Aucun élève ne correspond"
         clear_search: "Effacer la recherche"
         # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève. La liste de

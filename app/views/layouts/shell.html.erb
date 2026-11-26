@@ -1,6 +1,6 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
 <%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile, direction et équipe seulement) ; coque Android ou mode concentré : le contenu seul %>
-<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), 0134 écrans enseignant §3.3, 0132 accueil élève §3.1 (content_for :home_band, fond mist dès lg), hors-connexion §3.1, 0173 §3 (content_for :inner, :wave_home), accueil-eleve-qr-fenetre-inviter §3.2 (cadre de la fenêtre) · ADR : 0084 (§4.2), 0086 (§4.2), hors-connexion (§4.2) ; exige helper_method :shell_user %>
+<%# UDR  : 0006, accueil-enseignant-actions (§3.4 : en-tête de l'enseignant sur son accueil seulement), 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), 0134 écrans enseignant §3.3, 0132 accueil élève §3.1 (content_for :home_band, fond mist dès lg), hors-connexion §3.1, 0173 §3 (content_for :inner, :wave_home), accueil-eleve-qr-fenetre-inviter §3.2 (cadre de la fenêtre) · ADR : 0084 (§4.2), 0086 (§4.2), hors-connexion (§4.2) ; exige helper_method :shell_user %>
 <% in_app = lnclass_app? %>
 <%# UDR-0087 §3.2 : une page qui pose content_for :focus (la séance d'exercice) n'a ni en-tête, ni menus, ni barre du bas,
     pour tous les rôles ; elle rend elle-même tout son cadre, sans le conteneur de page. %>
@@ -10,6 +10,9 @@
 <%# UDR-0173 écrans minimalistes style Wave §3 : un écran intérieur (matière, leçon) n'a ni en-tête ni menu, à aucune largeur, et un
     fond gris ; l'accueil (:wave_home) rend sa propre colonne, bandeau bleu et feuille blanche comprises. %>
 <% inner = !focus && content_for?(:inner) %>
+<%# UDR accueil-enseignant-actions §3.4 : l'enseignant n'a la barre du haut que sur son accueil (la page à bandeau) ; ailleurs,
+    chaque page commence par son retour. La barre latérale reste dès lg. %>
+<% header = !inner && (shell_user.role.to_sym != :teacher || content_for?(:home_band)) %>
 <% wave = !focus && content_for?(:wave_home) %>
 <% content_for :body do %>
   <% if in_app %>
@@ -28,8 +31,8 @@
         pour qu'il couvre toute la fenêtre quelle que soit la hauteur du contenu. %>
     <% if shell_user.role.to_sym == :student %><div class="<%= class_names("fixed inset-0 -z-10 bg-mist", "hidden lg:block" => !inner) %>" aria-hidden="true"></div><% end %>
     <% unless inner %>
-      <%= render "shared/navigation/header", user: shell_user %>
-      <%= render "shared/navigation/sidebar", user: shell_user %>
+      <%= render "shared/navigation/header", user: shell_user if header %>
+      <%= render "shared/navigation/sidebar", user: shell_user, header: %>
     <% end %>
   <% end %>
   <%# ADR hors-connexion §4.2 : les contrôleurs d'arrière-plan (clé d'appareil, envoi des copies) ; Stimulus ignore un identifiant absent. %>

@@ -196,6 +196,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0185](./0185-premier-exercice-ux.md) | Premier exercice : fenêtre sur l'accueil seulement, nombre illisible dit sous le champ | Accepté | 2026-11-25 | — | la fenêtre « Ton premier exercice » suivait l'élève sur chaque écran, et une réponse en nombre illisible était comptée « sans réponse » puis refusée par une bulle hors de vue |
 | [0186](./0186-notifications-eleve.md) | Notifications de l'élève — invitation, profil, textes, pilotage | Proposé | 2026-11-16 | 0146 | proposer les notifications au bon moment, sans demande de permission à froid, laisser l'élève les couper dans l'application, et ne rien montrer de personnel sur un écran verrouillé |
 | [0187](./0187-ecran-notifications-de-l-equipe.md) | Écran Notifications de l'équipe | Accepté | 2026-11-25 | ADR-0147 | L'équipe doit régler quels motifs partent seuls, valider chaque jour les autres et décider à la publication si une annonce prévient les élèves, sans voir de nom d'élève. |
+| [0188](./0188-accueil-enseignant-actions.md) | Accueil enseignant « À suivre », ronds nommés, barre du haut sur l'accueil seulement, élèves par état, relance WhatsApp | Accepté | 2026-11-26 | — | L'accueil de l'enseignant cache la classe en retard (carrousel), ses ronds ne disent pas ce qu'ils ouvrent, ses pages répètent la barre du haut, la liste d'une classe répète une ligne par élève et la relance n'a pas de bouton. Amende UDR-0006, UDR-0082 §3.1, UDR-0134 §3.3, §3.5, §3.8, §3.14 |
 <!-- index:end -->
 
 ---

@@ -72,8 +72,8 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       assert_toast "Le bilan ajouté à Tle D 1, à rendre jeudi 8 oct."
       dismiss_toasts # le toast couvrirait l'« Assigner » de Tle D 2, en bas à droite
       # Constat du challenger : la page vient d'être rafraîchie par morphing (le « Assigner » du bilan est devenu un bouton) ;
-      # l'avatar de l'en-tête (le mode sombre est dans « Mon compte », plus de lune) doit rester visible.
-      assert_selector "header a[aria-controls=account_panel]", visible: true, wait: 1
+      # le retour de la page (plus de barre du haut hors accueil, UDR accueil-enseignant-actions §3.4) doit rester visible.
+      assert_selector "main nav[aria-label='#{I18n.t('components.back_link.label')}'] a", visible: true, wait: 1
       assert_no_selector DAYS_MODAL
       # Tle D 2 n'a pas encore ses jours : sa bascule ouvre toujours la modale.
       within(toggle(@tle_d2, @bilan)) { click_on "Assigner" }

@@ -45,6 +45,11 @@ fr:
         done_format: "%-d %b"
         pending: "Pas encore fait"
         late: "En retard"
+      # UDR accueil-enseignant-actions §3.7 : « Relancer sur WhatsApp » ; aucun nom d'élève dans le message.
+      remind:
+        action: "Relancer sur WhatsApp"
+        message: "%{classroom} : pensez au devoir « %{exercise} », à rendre le %{due}. Ouvrez-le ici : %{link}"
+        message_no_due: "%{classroom} : pensez au devoir « %{exercise} ». Ouvrez-le ici : %{link}"
       # AS-23 (ADR-0097 §4.6, UDR-0109 §3.3, UDR enseignant §3.8) : une phrase par cas, choisie par Entities::Assessment::NextStep,
       # dite en badges.
       next_step:
