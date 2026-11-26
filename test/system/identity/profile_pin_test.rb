@@ -46,10 +46,9 @@ class Identity::ProfilePinTest < ApplicationSystemTestCase
 
     sign_out
     visit new_session_path
-    fill_in "session[contact]", with: teacher.contact
-    fill_in "session[pin]", with: "2468"
+    enter_credentials teacher.contact, "2468"
     click_on I18n.t("identity.sessions.new.submit")
-    assert_selector "[role=alert]", text: "Numéro ou code secret incorrect."
+    assert_selector "#session_pin_error", text: "Code secret incorrect."
 
     sign_in_as teacher, pin: "1357"
     assert_current_path teacher_home_path

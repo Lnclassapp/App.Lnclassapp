@@ -86,7 +86,6 @@ class Classroom::JoinTest < ApplicationSystemTestCase
       visit join_classroom_path(@classroom.reload.link_token)
       # Dix chiffres passent le navigateur, pas le serveur (un numéro ivoirien commence par 01, 05 ou 07).
       fill_in "student_entry[contact]", with: "0201020304"
-      fill_in "student_entry[pin]", with: "4821"
       click_on I18n.t("identity.student_entries.new.submit")
       assert_selector "#student_entry_contact_error"
       assert_selector "#student-entry-classroom", text: /6ème 1/

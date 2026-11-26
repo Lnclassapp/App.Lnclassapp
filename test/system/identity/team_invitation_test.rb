@@ -56,10 +56,10 @@ class Identity::TeamInvitationTest < ApplicationSystemTestCase
       fill_in "invitation[pin_confirmation]", with: "4821"
       click_on "Créer mon compte"
 
-      assert_selector "#session-form", wait: SIGN_IN_WAIT
+      assert_selector "#session-pin-form", wait: SIGN_IN_WAIT
       assert_toast "Votre compte est créé."
-      # FU-31: the number is already there, the focus waits on the PIN.
-      assert_field "session[contact]", with: "0100000009"
+      # FU-31: the number is already there (connexion-numero-d-abord : rappelé à l'étape du code), the focus waits on the PIN.
+      assert_selector "#session-number", text: "01 00 00 00 09"
       assert_selector "#session_pin:focus"
       fill_in "session[pin]", with: "4821"
       click_on I18n.t("identity.sessions.new.submit")

@@ -191,7 +191,7 @@ module UseCases
         @invite_links = FakeInviteLinks.new
         dto = Dtos::Identity::TeacherRegistrationInput.new(
           last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821",
-          pin_confirmation: "4821", drena_public_id: "drn-abj1", school_public_id: "sch-lmc", material_slug: "svt", **attributes
+          drena_public_id: "drn-abj1", school_public_id: "sch-lmc", material_slug: "svt", **attributes
         )
         RegisterTeacher.new(
           registrations: @registrations, schools: FakeSchools.new(@journal, *@schools_list, refuse_attach:),
@@ -398,10 +398,10 @@ module UseCases
       end
 
       test "an invalid entry: :invalid with the errors of the form, nothing written" do
-        result = register(pin_confirmation: "1357", contact: "")
+        result = register(pin: "12", contact: "")
 
         assert_equal :invalid, result.code
-        assert_equal %i[pin_confirmation contact], result.errors.keys
+        assert_equal %i[pin contact], result.errors.keys
         assert_empty @journal
       end
 

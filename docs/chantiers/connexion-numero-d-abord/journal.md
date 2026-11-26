@@ -10,6 +10,8 @@
 | 2026-11-26 | Le numéro d'une invitation acceptée devient l'entrée gardée (30 min) et ouvre l'étape du code ; la clé d'invitation sert toujours une fois | L'étape du code a besoin du numéro côté serveur ; même durée que l'entrée élève (ADR-0141 §4.3) ; « Ce n'est pas mon numéro » l'efface | non |
 | 2026-11-26 | Un envoi groupé (numéro + code) refusé réaffiche numéro et code ensemble (`@stage = :both`) | Coques et gestionnaires de mots de passe ; garde le message unique d'ADR-0050 | ADR-XXXX §4.5 |
 | 2026-11-26 | `EnterAsStudent` devient `EnterByNumber`, utilisé par `/login` et `/student` | Un seul use case pour « le numéro décide de la suite » | ADR-XXXX §6 |
+| 2026-11-26 | Lot C : le numéro repris de `/login` est relu dans l'entrée gardée par le serveur, jamais dans un champ caché ; l'inscription réussie l'efface | Le numéro ne voyage pas dans la page ; une entrée expirée rouvre l'étape 1 avec « Saisissez votre numéro » | UDR-XXXX §3.5 |
+| 2026-11-26 | Lot C : seul un numéro **sans** compte est repris par l'inscription enseignant | Un numéro inscrit gardé par `/login` (étape du code) ne doit pas pré-remplir une inscription | non |
 
 ## À trancher
 
@@ -18,6 +20,7 @@
 
 - [ ] 2026-11-26 · connexion-numero-d-abord · Inscription enseignant ouverte directement : le numéro de l'étape 1 est-il vérifié tout de suite ? — appliqué : non, un numéro déjà inscrit est refusé à l'envoi final (« Ce numéro est déjà utilisé », étape 1) ; autres : envoi du numéro au serveur dès l'étape 1, comme `/login` ; recommandé : appliqué (les enseignants arrivent surtout par `/login`, qui vérifie)
 - [ ] 2026-11-26 · connexion-numero-d-abord · Libellé de l'étape 2 enseignant — appliqué : « Entrez votre code secret » (vouvoiement de l'enseignant) ; autres : « Entre ton code secret » mot pour mot ; recommandé : appliqué
+- [ ] 2026-11-26 · connexion-numero-d-abord · Inscription enseignant sans JavaScript : la recherche d'établissement (formulaire GET à part) est maintenant à l'étape 3, après numéro et code, qu'elle ne garde pas — appliqué : on cherche d'abord (test sans JavaScript dans cet ordre), rien d'autre ne change ; autres : remonter la recherche en tête de la page sans JavaScript ; recommandé : appliqué (le parcours sans JavaScript est rare, aucun envoi n'est perdu, seuls les champs déjà tapés)
 - [ ] 2026-11-26 · connexion-numero-d-abord · L'étape code de `/student` (numéro inscrit) utilise-t-elle le pavé ? — appliqué : non, champ simple comme `/login` (le pavé reste à la création) ; autres : le pavé partout ; recommandé : appliqué
 
 ## Retouches

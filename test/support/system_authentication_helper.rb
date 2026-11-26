@@ -9,9 +9,7 @@ module SystemAuthenticationHelper
 
   def sign_in_as(user, pin: "2468")
     visit new_session_path
-    fill_in "session[contact]", with: user.contact
-    click_on I18n.t("identity.sessions.new.continue")
-    fill_in "session[pin]", with: pin, wait: SIGN_IN_WAIT
+    enter_credentials(user.contact, pin)
     click_on I18n.t("identity.sessions.new.submit")
     assert_no_selector "#session-pin-form", wait: SIGN_IN_WAIT
     return unless user.respond_to?(:totp_secret)
@@ -19,6 +17,16 @@ module SystemAuthenticationHelper
     # The code leaves by itself at the sixth digit (UDR-0054 §3.6): a click on « Vérifier » could hit a page already gone.
     fill_in "second_factor[code]", with: ROTP::TOTP.new(user.totp_secret).now
     assert_no_selector "#second-factor-form", wait: SIGN_IN_WAIT
+  end
+
+  # /login: the number, « Continuer », then the PIN typed in its own step (not sent). A number kept from before (30 min)
+  # opens /login on the PIN step: « Ce n'est pas mon numéro » brings the number field back first.
+  def enter_credentials(contact, pin)
+    stage = find("#session-form, #session-pin-form", match: :first, wait: SIGN_IN_WAIT)
+    click_on I18n.t("identity.sessions.new.not_my_number") if stage[:id] == "session-pin-form"
+    fill_in "session[contact]", with: contact
+    click_on I18n.t("identity.sessions.new.continue")
+    fill_in "session[pin]", with: pin, wait: SIGN_IN_WAIT
   end
 
   # The same DELETE as the « Se déconnecter » entry of the shell, from whatever page is open.

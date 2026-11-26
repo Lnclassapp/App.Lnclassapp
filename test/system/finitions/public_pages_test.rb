@@ -54,9 +54,10 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
   test "FU-19: /c/<token> and /teacher-signup leave the focus to the browser" do
     [ join_classroom_path(@classroom.reload.link_token), new_teacher_registration_path(confirmed: 1) ].each do |path|
       visit path
-      # The eye of the PIN field is shown by its controller: Stimulus is connected, the autofocus controller too. (/c/<token>
-      # opens the student entry, number and secret code, under the class banner that the keyboard must not hide.)
-      assert_selector "[data-password-reveal-target=toggle]:not([hidden])", minimum: 1, visible: :all
+      # Stimulus is connected, the autofocus controller too (connexion-numero-d-abord: both pages open on the number alone, no
+      # PIN field whose eye would say so). /c/<token> opens the student entry under the class banner the keyboard must not hide.
+      assert_selector "body[data-controller~=autofocus]"
+      assert page.evaluate_script("!!window.Stimulus?.getControllerForElementAndIdentifier(document.body, 'autofocus')"), path
 
       assert_equal "BODY", page.evaluate_script("document.activeElement.tagName"), path
     end
@@ -83,9 +84,9 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
 
     accept_invitation
 
-    assert_selector "#session-form", wait: SIGN_IN_WAIT
+    assert_selector "#session-pin-form", wait: SIGN_IN_WAIT
     assert_toast "Votre compte est créé."
-    assert_field "session[contact]", with: "0100000009"
+    assert_selector "#session-number", text: "01 00 00 00 09"
     assert_field "session[pin]", with: ""
     assert_selector "#session_pin:focus"
     assert_no_match(/0100000009|01%2000/, page.current_url)
@@ -93,19 +94,22 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
     assert_equal 0, Orm::Session.count
   end
 
-  test "FU-32: a reload forgets the number; a school admin invitation also ends on the filled-in sign-in, then its home" do
+  # Chantier connexion-numero-d-abord : le numéro gardé tient 30 minutes ; « Ce n'est pas mon numéro » l'oublie.
+  test "FU-32: « Ce n'est pas mon numéro » forgets the number; a school admin invitation also ends on the code step, then its home" do
     visit invitation_path(@invitation.token)
     accept_invitation
-    assert_field "session[contact]", with: "0100000009", wait: SIGN_IN_WAIT
+    assert_selector "#session-number", text: "01 00 00 00 09", wait: SIGN_IN_WAIT
 
+    click_on I18n.t("identity.sessions.new.not_my_number")
+    assert_selector "#session_contact:focus", wait: SIGN_IN_WAIT
     visit new_session_path
     assert_field "session[contact]", with: ""
-    assert_selector "#session_contact:focus"
+    assert_no_selector "#session-number"
 
     school_invitation = create_invitation(kind: "school_staff", contact: "0500000007")
     visit invitation_path(school_invitation.token)
     accept_invitation
-    assert_field "session[contact]", with: "0500000007", wait: SIGN_IN_WAIT
+    assert_selector "#session-number", text: "05 00 00 00 07", wait: SIGN_IN_WAIT
     fill_in "session[pin]", with: "4821"
     click_on I18n.t("identity.sessions.new.submit")
 

@@ -16,14 +16,12 @@ class Identity::TeacherMaterialsTest < ApplicationSystemTestCase
 
   test "sign up with one subject, then add two more in the profile" do
     visit new_teacher_registration_path(confirmed: 1)
+    fill_teacher_number_and_code "0501020304", "4821"
     choose_school "Lycée Moderne de Cocody"
     select "Physique-Chimie", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Yao"
     choose t("identity.teacher_registrations.form.genders.male")
-    fill_in "teacher_registration[contact]", with: "0501020304"
-    fill_in "teacher_registration[pin]", with: "4821"
-    fill_in "teacher_registration[pin_confirmation]", with: "4821"
     click_on t("identity.teacher_registrations.form.submit")
 
     assert_current_path teacher_home_path, wait: 20
