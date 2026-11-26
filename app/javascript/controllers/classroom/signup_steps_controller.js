@@ -75,11 +75,12 @@ export default class extends Controller {
   }
 
   // « Continuer » : le premier champ invalide de l'étape dit pourquoi (bulle du navigateur) et garde le focus ; sinon, l'étape suivante.
+  // Sans data-invalid-message, un message de repli non vide : le numéro reste invalide (jamais une chaîne vide, qui le validerait).
   // Un numéro (type tel) n'a pas de pattern (collé sans JavaScript, le serveur le nettoie) : ses 10 chiffres se vérifient ici.
   continue() {
     const fields = [...(this.currentStep?.querySelectorAll("input, select") || [])].filter((field) => field.type !== "hidden")
     fields.filter((field) => field.type === "tel").forEach((field) => {
-      field.setCustomValidity(field.value === "" || PHONE.test(field.value) ? "" : field.dataset.invalidMessage || "")
+      field.setCustomValidity(field.value === "" || PHONE.test(field.value) ? "" : field.dataset.invalidMessage || field.title || "✕")
     })
     const invalid = fields.find((field) => !field.checkValidity())
     if (invalid) {

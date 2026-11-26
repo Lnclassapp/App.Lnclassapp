@@ -383,6 +383,23 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "un numéro inscrit gardé plus de 30 minutes : l'écran du numéro revient, et un code envoyé renvoie à l'entrée sans rien créer" do
+    student = create_student
+    send_number(contact: student.contact)
+
+    travel 31.minutes do
+      get new_student_entry_path
+      assert_select "input[name='student_entry[contact]']"
+      assert_select "input[name='student_entry[pin]']", 0
+
+      assert_no_difference -> { Orm::Session.count } do
+        send_pin("2468")
+      end
+      assert_redirected_to new_student_entry_path
+      assert_equal I18n.t("identity.student_entries.create.expired"), flash[:alert]
+    end
+  end
+
   test "un code sans entrée (expirée) renvoie à l'entrée" do
     send_pin("1357")
 

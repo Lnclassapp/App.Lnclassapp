@@ -9,13 +9,15 @@
      safe_join([ tag.legend(t(".#{key}"), tabindex: -1, class: "mb-1 block text-base font-medium text-ink outline-none"),
                  tag.p(hint, class: "mb-4 text-sm text-mute") ])
    end %>
-<%# Le refus général (403/422, ou 429 du formulaire) en haut de l'étape ouverte ; le lien devenu invalide, à la première étape. %>
+<%# Le refus général (403/422, ou 429 du formulaire) en haut de l'étape ouverte ; le lien devenu invalide, à la première étape.
+    Sans étape 1 (numéro repris de /login), le refus du numéro (pris entre-temps) s'y dit aussi. %>
+<% refusals = @form.errors[:base] + (floor == 2 ? @form.errors.messages_for(:contact) : []) %>
 <% alerts = lambda do |step|
      parts = []
-     if step == start && @form.errors[:base].any?
+     if step == start && refusals.any?
        parts << tag.div(id: "teacher-registration-refusal", role: "alert", tabindex: -1, data: { autofocus_target: "field" },
                         class: "flex scroll-mt-24 items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error outline-none") do
-         safe_join([ ui_icon("exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0"), tag.p(@form.errors[:base].to_sentence) ])
+         safe_join([ ui_icon("exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0"), tag.p(refusals.to_sentence) ])
        end
      end
      if step == floor && @invite_invalid

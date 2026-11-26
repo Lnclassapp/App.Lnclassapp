@@ -223,7 +223,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=alert]", text: I18n.t("errors.locked.until_recovery")
   end
 
-  test "a sixth attempt in a minute from the same address receives 429" do
+  test "a sixth wrong PIN in a minute, number and PIN sent together, receives 429" do
     5.times { post session_path, params: { session: { contact: "0700000000", pin: "1357" } } }
 
     post session_path, params: { session: { contact: "0700000000", pin: "1357" } }
@@ -316,21 +316,31 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "CA-6: five wrong PINs in a minute from an address, /student included, refuse even the right PIN" do
-    student = create_student
-    3.times { post student_entries_path, params: { student_entry: { contact: student.contact, pin: "1357" } } }
-    send_number student.contact
-    2.times { send_pin "1357" }
+    # Five different students: no number reaches its own lockout, only the address counter is full.
+    2.times { post student_entries_path, params: { student_entry: { contact: create_student.contact, pin: "1357" } } }
+    3.times do
+      send_number create_student.contact
+      send_pin "1357"
+      assert_response :unprocessable_entity
+    end
+    send_number create_student.contact
 
     send_pin "2468"
 
     assert_response :too_many_requests
-    assert_select "[role=alert]", text: /Trop de tentatives/
+    assert_select "[role=alert]", text: I18n.t("errors.codes.rate_limited")
     assert_equal 0, Orm::Session.count
   end
 
   test "CA-7: 120 numbers a minute from an address, /login and /student together, then 429" do
-    60.times { |index| send_number format("07%08d", index) }
-    60.times { |index| post student_entries_path, params: { student_entry: { contact: format("05%08d", index) } } }
+    60.times do |index|
+      send_number format("07%08d", index)
+      assert_response :see_other
+    end
+    60.times do |index|
+      post student_entries_path, params: { student_entry: { contact: format("05%08d", index) } }
+      assert_response :see_other
+    end
 
     send_number "0799999999"
 
@@ -353,11 +363,14 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "CA-8: number and PIN sent together keep the single message, the number known or not" do
-    post session_path, params: { session: { contact: create_student.contact, pin: "1357" } }
+    [ create_student.contact, "0799999999" ].each do |contact|
+      post session_path, params: { session: { contact:, pin: "1357" } }
 
-    assert_select "[role=alert]", text: "Numéro ou code secret incorrect."
-    assert_select "input[name='session[contact]']"
-    assert_select "input[name='session[pin]']"
+      assert_response :unprocessable_entity
+      assert_select "[role=alert]", text: "Numéro ou code secret incorrect."
+      assert_select "input[name='session[contact]']"
+      assert_select "input[name='session[pin]']"
+    end
   end
 
   test "CA-13: « Ce n'est pas mon numéro » forgets the kept number and puts it back in the field" do
@@ -439,6 +452,18 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_empty cookies[:session_token].to_s
     assert_select "input[name='session[contact]']:not([value])"
     assert_select "input[name='session[pin]']:not([value])"
+  end
+
+  test "a number kept more than 30 minutes: the number screen comes back, empty" do
+    post session_path, params: { session: { contact: create_student.contact } }
+
+    travel 31.minutes do
+      get new_session_path
+
+      assert_select "input[name='session[contact]']:not([value])"
+      assert_select "input[name='session[pin]']", 0
+      assert_select "#session-number", 0
+    end
   end
 
   test "number first in the students' app: a teacher's right code on the code step is refused, the number forgotten" do

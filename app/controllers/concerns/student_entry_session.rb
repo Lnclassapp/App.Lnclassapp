@@ -18,7 +18,8 @@ module StudentEntrySession
   def student_entry
     data = session[KEY]
     return unless data.is_a?(Hash)
-    return forget_student_entry if Time.current.to_i - data["at"].to_i > TTL.to_i
+    # Expirée : effacée, et rien n'est rendu ; l'écran du numéro revient, vide.
+    return session.delete(KEY) && nil if Time.current.to_i - data["at"].to_i > TTL.to_i
 
     Entry.new(contact: data["contact"], pin: data["pin"], confirmed: data["confirmed"] == true, link_token: data["link_token"],
               known: data["known"] == true)

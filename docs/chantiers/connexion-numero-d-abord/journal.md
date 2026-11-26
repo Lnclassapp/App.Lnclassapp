@@ -49,7 +49,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Messages d'expiration imprécis : numéro enseignant échu pendant le profil (retour à l'étape 1, « obligatoire ») ; « expiré » sur un code envoyé après « pas de compte » dans un autre onglet | Revue silent-failure-hunter, gravité basse, l'échec reste visible | à ouvrir |
+| `WrongPinLimit` (hors diff) : cache qui rend nil = plafond ouvert sans trace ; place non rendue après une exception | Hors périmètre du chantier | à ouvrir |
+| Tests : doubles du domaine qui ignorent `contact`/`kind` (`enter_by_number_test.rb`), pas de test dédié de `NumberEntryInput`, CA-3 et CA-13 testés jusqu'à la redirection | Revue pr-test-analyzer, lacunes faibles | à ouvrir |
 
 ## Clôture
 

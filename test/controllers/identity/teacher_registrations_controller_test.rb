@@ -525,6 +525,29 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_redirected_to new_session_path
   end
 
+  test "CA-4: a number from /login taken in the meantime is refused on the code step, with its message" do
+    arrive_from_login
+    create_student(contact: "0501020304")
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params.except(:contact) }
+
+    assert_response :unprocessable_entity
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='2']"
+    assert_select "fieldset[data-step='2'] #teacher-registration-refusal[role=alert]",
+                  text: I18n.t("activemodel.errors.models.dtos/identity/teacher_registration_input.attributes.contact.taken")
+  end
+
+  test "CA-4: a number from /login more than 30 minutes old is no longer taken over" do
+    arrive_from_login
+
+    travel 31.minutes do
+      get new_teacher_registration_path(confirmed: 1)
+
+      assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='1']"
+      assert_select "#teacher-registration-number", 0
+    end
+  end
+
   test "CA-4: from « pas de compte » on /login, the sign-up opens on the code, the number recalled, never asked again" do
     arrive_from_login
 
