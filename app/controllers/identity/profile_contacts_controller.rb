@@ -40,7 +40,8 @@ module Identity
 
     def change
       UseCases::Identity::ChangeOwnContact.new(
-        users:, sessions: Repositories::Identity::SessionRepository.new, login_attempts: Repositories::Identity::LoginAttemptRepository.new,
+        users:, sessions: Repositories::Identity::SessionRepository.new,
+        push_subscriptions: Repositories::Communication::PushSubscriptionRepository.new, login_attempts: Repositories::Identity::LoginAttemptRepository.new,
         audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,
         policy: Policies::Identity::UpdateSelfPolicy.new, digest_key: secret_digest_key, clock: Time.zone
       )

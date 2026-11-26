@@ -93,10 +93,11 @@ module UseCases
         end
 
         # Ce que la saisie écrit sur l'annonce, en création comme en modification.
-        def written(dto, targets, illustration_id)
+        def written(dto, targets, illustration_id, actor)
           { title: dto.title, body: dto.body, audience: targets.audience, school_id: targets.school_id,
             classroom_ids: targets.classroom_ids, theme: dto.theme, illustration: dto.base_illustration, illustration_id:,
-            status: dto.status, published_at: dto.publication_time, ends_at: dto.ends_at }
+            status: dto.status, published_at: dto.publication_time, ends_at: dto.ends_at,
+            push_requested: dto.push_requested? && Entities::Communication::Message.push_allowed?(author_role: actor.role, audience: targets.audience) }
         end
 
         # Un fichier envoyé remplace le précédent ; sinon la case « Retirer » l'efface.
@@ -155,7 +156,7 @@ module UseCases
         cap_school_id = Entities::Communication::Message.cap_school_id(audience: targets.audience, school_id: targets.school_id)
         archived = dto.status == "published" ? make_room(lock_author(actor.user_id, now, cap_school_id)) : []
         message = @messages.create(message: Entities::Communication::Message.new(
-          author_id: actor.user_id, **written(dto, targets, illustration_id)
+          author_id: actor.user_id, **written(dto, targets, illustration_id, actor)
         ))
         store_files(message.id, dto)
         journal_publication(message, now) if message.status == "published"

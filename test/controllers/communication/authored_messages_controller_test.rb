@@ -53,6 +53,60 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
   def created = Orm::Message.order(:id).last
   def field_error(field) = css_select("#announcement_#{field}_error").first&.text.to_s.strip
 
+  test "PN-D5 — the team form shows « Prévenir les élèves », after the audience; the box is wired to push-request" do
+    sign_in_as @fatou
+    get new_announcement_path
+
+    assert_response :success
+    assert_select "form#announcement-form[data-controller~='push-request']"
+    assert_select "input[type=checkbox][name='announcement[push_requested]'][data-push-request-target='box']", count: 1
+    assert_select "label", text: /Prévenir les élèves par notification/
+  end
+
+  test "PN-D6 — the box does not exist in the form of a direction or a teacher" do
+    [ @kamate, @kouassi ].each do |user|
+      sign_in_as user
+      get new_announcement_path
+
+      assert_response :success
+      assert_select "input[name='announcement[push_requested]']", count: 0
+      assert_select "label", text: /Prévenir les élèves/, count: 0
+      sign_out
+    end
+  end
+
+  test "PN-D7 — the team publishes to students with the box: saved, and the bell shows on its row" do
+    sign_in_as @fatou
+    publish(scope: "national", audience: "students", push_requested: "1")
+
+    assert_redirected_to my_announcements_path
+    assert created.push_requested
+    follow_redirect!
+    assert_select "li#my_announcement_#{created.public_id} svg[aria-label='Élèves prévenus par notification']"
+  end
+
+  test "PN-D8 — the team without the box, or for teachers, saves false and shows no bell" do
+    sign_in_as @fatou
+    publish(scope: "national", audience: "all")
+    assert_not created.push_requested
+    publish(scope: "national", audience: "teachers", push_requested: "1")
+    assert_not created.push_requested
+    get my_announcements_path
+
+    assert_select "svg[aria-label='Élèves prévenus par notification']", count: 0
+  end
+
+  test "PN-D9 — a teacher or a direction forging push_requested saves false" do
+    sign_in_as @kouassi
+    publish(classroom_public_ids: [ @b3.public_id ], push_requested: "1")
+    assert_not created.push_requested
+    sign_out
+    sign_in_as @kamate
+    publish(audience: "students", push_requested: "1")
+
+    assert_not created.push_requested
+  end
+
   test "a visitor is sent to sign in, and nothing is written" do
     get my_announcements_path
     assert_redirected_to new_session_path

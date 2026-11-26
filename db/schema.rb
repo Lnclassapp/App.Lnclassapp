@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_20_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_25_100100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -764,6 +764,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_100000) do
     t.datetime "updated_at", null: false
     t.string "theme", default: "ciel", null: false
     t.bigint "illustration_id"
+    t.boolean "push_requested", default: false, null: false
     t.index ["author_id", "created_at"], name: "index_messages_on_author_id_and_created_at"
     t.index ["illustration_id"], name: "index_messages_on_illustration_id"
     t.index ["public_id"], name: "index_messages_on_public_id", unique: true
@@ -805,6 +806,82 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_100000) do
     t.datetime "created_at", null: false
     t.index ["issued_by_id"], name: "index_pin_recovery_codes_on_issued_by_id"
     t.index ["user_id"], name: "index_pin_recovery_codes_one_active", unique: true, where: "((used_at IS NULL) AND (revoked_at IS NULL))"
+  end
+
+  create_table "push_approval_recipients", force: :cascade do |t|
+    t.bigint "push_approval_id", null: false
+    t.bigint "user_id", null: false
+    t.string "object_key", null: false
+    t.index ["push_approval_id", "user_id", "object_key"], name: "index_push_approval_recipients_unique", unique: true
+    t.index ["user_id"], name: "index_push_approval_recipients_on_user_id"
+  end
+
+  create_table "push_approvals", force: :cascade do |t|
+    t.date "on_date", null: false
+    t.string "motive", null: false
+    t.bigint "approved_by_id", null: false
+    t.datetime "approved_at", null: false
+    t.integer "recipients_count", default: 0, null: false
+    t.index ["approved_by_id"], name: "index_push_approvals_on_approved_by_id"
+    t.index ["on_date", "motive"], name: "index_push_approvals_on_on_date_and_motive", unique: true
+    t.check_constraint "motive::text = ANY (ARRAY['quiz_prep'::character varying, 'assignment_due'::character varying, 'assignment_new'::character varying, 'unfinished'::character varying, 'result'::character varying, 'inactive'::character varying]::text[])", name: "push_approvals_motive_check"
+  end
+
+  create_table "push_deliveries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "motive", null: false
+    t.string "object_key", null: false
+    t.datetime "sent_at", null: false
+    t.string "status", null: false
+    t.index ["sent_at"], name: "index_push_deliveries_on_sent_at"
+    t.index ["user_id", "motive", "object_key"], name: "index_push_deliveries_on_user_motive_object", unique: true
+    t.index ["user_id", "sent_at"], name: "index_push_deliveries_on_user_id_and_sent_at"
+    t.check_constraint "motive::text = ANY (ARRAY['inactive'::character varying, 'assignment_due'::character varying, 'assignment_new'::character varying, 'quiz_prep'::character varying, 'announcement'::character varying, 'result'::character varying, 'unfinished'::character varying]::text[])", name: "push_deliveries_motive_check"
+    t.check_constraint "status::text = ANY (ARRAY['delivered'::character varying, 'gone'::character varying, 'retry'::character varying, 'failed'::character varying, 'disabled'::character varying, 'not_configured'::character varying]::text[])", name: "push_deliveries_status_check"
+  end
+
+  create_table "push_motive_setting_changes", force: :cascade do |t|
+    t.string "motive", null: false
+    t.boolean "automatic", null: false
+    t.bigint "changed_by_id", null: false
+    t.datetime "changed_at", null: false
+    t.index ["changed_at"], name: "index_push_motive_setting_changes_on_changed_at"
+    t.index ["changed_by_id"], name: "index_push_motive_setting_changes_on_changed_by_id"
+    t.check_constraint "motive::text = ANY (ARRAY['quiz_prep'::character varying, 'assignment_due'::character varying, 'assignment_new'::character varying]::text[])", name: "push_motive_setting_changes_motive_check"
+  end
+
+  create_table "push_motive_settings", force: :cascade do |t|
+    t.string "motive", null: false
+    t.boolean "automatic", default: false, null: false
+    t.bigint "updated_by_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["motive"], name: "index_push_motive_settings_on_motive", unique: true
+    t.index ["updated_by_id"], name: "index_push_motive_settings_on_updated_by_id"
+    t.check_constraint "motive::text = ANY (ARRAY['quiz_prep'::character varying, 'assignment_due'::character varying, 'assignment_new'::character varying]::text[])", name: "push_motive_settings_motive_check"
+  end
+
+  create_table "push_preferences", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "turned_off_at"
+    t.datetime "invitation_postponed_until"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_push_preferences_on_user_id", unique: true
+  end
+
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "session_id"
+    t.text "endpoint", null: false
+    t.string "p256dh", null: false
+    t.string "auth", null: false
+    t.datetime "last_success_at"
+    t.integer "failure_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
+    t.index ["session_id"], name: "index_push_subscriptions_on_session_id"
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
   end
 
   create_table "question_attempts", force: :cascade do |t|
@@ -1376,6 +1453,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_100000) do
   add_foreign_key "offline_pack_deliveries", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", column: "issued_by_id", on_delete: :restrict
   add_foreign_key "pin_recovery_codes", "users", on_delete: :cascade
+  add_foreign_key "push_approval_recipients", "push_approvals", on_delete: :cascade
+  add_foreign_key "push_approval_recipients", "users", on_delete: :cascade
+  add_foreign_key "push_approvals", "users", column: "approved_by_id", on_delete: :restrict
+  add_foreign_key "push_deliveries", "users", on_delete: :restrict
+  add_foreign_key "push_motive_setting_changes", "users", column: "changed_by_id", on_delete: :restrict
+  add_foreign_key "push_motive_settings", "users", column: "updated_by_id", on_delete: :restrict
+  add_foreign_key "push_preferences", "users", on_delete: :restrict
+  add_foreign_key "push_subscriptions", "sessions", on_delete: :nullify
+  add_foreign_key "push_subscriptions", "users", on_delete: :restrict
   add_foreign_key "question_attempts", "exercise_sessions", on_delete: :restrict
   add_foreign_key "question_attempts", "questions", on_delete: :restrict
   add_foreign_key "question_images", "questions", on_delete: :restrict

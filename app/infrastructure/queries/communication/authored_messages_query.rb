@@ -10,7 +10,7 @@ module Queries
       # illustration : la clé de base, ou le dessin de l'équipe (Entities::Communication::Illustration, retiré ou non) ;
       # theme : la clé de son thème (UDR-0075 §3.1).
       Row = Data.define(:public_id, :title, :illustration, :image, :status, :audience, :school_name, :classroom_names, :at,
-                        :last_day, :theme) do
+                        :last_day, :theme, :push_requested) do
         # Modifier et archiver : ni terminée, ni archivée, ni retirée (UDR-0071 §3.7).
         def manageable? = %w[draft scheduled published].include?(status)
       end
@@ -26,7 +26,7 @@ module Queries
                        "AND files.record_id = messages.id AND files.name = 'image')").freeze
       COLUMNS = [ "messages.id", "messages.illustration_id", "messages.public_id", "messages.title", "messages.illustration",
                   IMAGE, "messages.status", "messages.audience", "schools.name", "messages.published_at", "messages.ends_at",
-                  "messages.updated_at", "messages.withdrawn_at", "messages.theme" ].freeze
+                  "messages.updated_at", "messages.withdrawn_at", "messages.theme", "messages.push_requested" ].freeze
 
       # Quatre requêtes, quel que soit le nombre d'annonces, de classes et de dessins : le compte, les lignes, leurs
       # classes, leurs dessins de l'équipe. school_id : l'établissement courant d'un enseignant (ADR-0094), nil sinon.
@@ -84,14 +84,14 @@ module Queries
 
       def row(values, classroom_names, drawing, now)
         public_id, title, illustration, image, status, audience, school_name, published_at, ends_at, updated_at, withdrawn_at,
-          theme = values
+          theme, push_requested = values
         status = "ended" if status == "published" && ends_at <= now
         at = { "scheduled" => published_at, "published" => published_at, "ended" => ends_at, "archived" => updated_at,
                "withdrawn" => withdrawn_at }[status]
         # La date de fin est le lendemain du dernier jour d'affichage, à 00:00 (UDR-0071 §3.8).
         last_day = (ends_at - 1).to_date if status == "published"
         Row.new(public_id:, title:, illustration: drawing || illustration, image:, status:, audience:, school_name:,
-                classroom_names:, at:, last_day:, theme:)
+                classroom_names:, at:, last_day:, theme:, push_requested:)
       end
 
       # → { message_id => [noms des classes, « 6ème 2 » avant « 6ème 10 »] }

@@ -8,7 +8,7 @@ module Repositories
 
       # Ce qu'une écriture pose sur la ligne ; l'auteur et le public_id ne changent qu'à la création.
       WRITTEN = %i[title body audience school_id illustration status published_at ends_at edited_at withdrawn_at
-                   withdrawn_by_id theme illustration_id].freeze
+                   withdrawn_by_id theme illustration_id push_requested].freeze
 
       def find_by_public_id(public_id:)
         record = Orm::Message.find_by(public_id:)
@@ -91,7 +91,7 @@ module Repositories
           audience: record.audience, school_id: record.school_id, classroom_ids:, illustration: record.illustration,
           status: record.status, published_at: record.published_at, ends_at: record.ends_at, edited_at: record.edited_at,
           withdrawn_at: record.withdrawn_at, withdrawn_by_id: record.withdrawn_by_id, theme: record.theme,
-          illustration_id: record.illustration_id
+          illustration_id: record.illustration_id, push_requested: record.push_requested
         )
       end
     end

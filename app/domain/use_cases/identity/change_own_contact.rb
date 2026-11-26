@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::ChangeOwnContact
 # Rôle : change son propre numéro sous PIN actuel ; ferme les autres sessions et renouvelle la sienne
-# ADR  : 0028, 0050, 0055 · UDR : 0041
+# ADR  : 0028, 0050, 0055, 0146 · UDR : 0041
 module UseCases
   module Identity
     class ChangeOwnContact
@@ -10,9 +10,10 @@ module UseCases
       Changed = Data.define(:token)
       UNCHANGED = { contact: [ :unchanged ] }.freeze
 
-      def initialize(users:, sessions:, login_attempts:, audit_log:, transaction:, policy:, digest_key:, clock:)
+      def initialize(users:, sessions:, push_subscriptions:, login_attempts:, audit_log:, transaction:, policy:, digest_key:, clock:)
         @users = users
         @sessions = sessions
+        @push_subscriptions = push_subscriptions
         @login_attempts = login_attempts
         @audit_log = audit_log
         @transaction = transaction

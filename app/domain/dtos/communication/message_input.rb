@@ -34,7 +34,7 @@ module Dtos
       # illustration : une clé de base, ou le public_id d'un dessin de l'équipe ; image, audio : tout objet qui répond à
       # size, read et rewind (fichier téléversé, StringIO), ou nil ; commit : "draft" (brouillon) ou "publish".
       attr_accessor :scope, :school_public_id, :audience, :illustration, :image, :audio, :remove_image, :remove_audio,
-                    :published_at, :commit
+                    :published_at, :commit, :push_requested
       attr_writer :title, :body, :classroom_public_ids, :theme
 
       validates :title, presence: true, length: { maximum: MESSAGE::TITLE_MAX }
@@ -58,7 +58,7 @@ module Dtos
       # d'un dessin de l'équipe devient la valeur de l'illustration.
       def self.for(message, school_public_id:, classroom_public_ids:, illustration_public_id:)
         new(title: message.title, body: message.body, scope: message.school_id ? "school" : "national", school_public_id:,
-            audience: message.audience, classroom_public_ids:, theme: message.theme,
+            audience: message.audience, classroom_public_ids:, theme: message.theme, push_requested: message.push_requested,
             illustration: illustration_public_id || message.illustration, published_at: message.published_at&.strftime(TIME_FORMAT))
       end
 
@@ -76,6 +76,9 @@ module Dtos
 
       # Vrai si la valeur a la forme du public_id d'un dessin de l'équipe ; le use case vérifie qu'il est offert (AV-10).
       def library_illustration? = base_illustration.nil? && LIBRARY_ID.match?(illustration.to_s)
+
+      # La case « Prévenir les élèves » ; le use case la confronte à l'auteur et à l'audience.
+      def push_requested? = BOOLEAN.cast(push_requested) == true
 
       def remove?(kind) = BOOLEAN.cast(public_send(:"remove_#{kind}")) == true
 

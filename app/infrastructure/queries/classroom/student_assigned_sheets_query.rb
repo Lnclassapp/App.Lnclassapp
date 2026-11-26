@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentAssignedSheetsQuery
 # Rôle : les devoirs reçus de « Ma classe » : les assignations actives de la classe principale de l'élève, une feuille par envoi, la plus récente d'abord ; avant le rendu, ni copie ni correction
-# ADR  : 0121 (§4), 0048, 0072 · UDR : 0149 §3 (devoirs reçus par l'élève), CA-13, 14, 16
+# ADR  : 0121 (§4), 0048, 0072, 0146 · UDR : 0149 §3 (devoirs reçus par l'élève), CA-13, 14, 16
 module Queries
   module Classroom
     class StudentAssignedSheetsQuery
@@ -22,7 +22,7 @@ module Queries
       Row = Data.define(:id, :public_id, :batch, :assigned_at, :due_on, :exercise_public_id, :course_slug, :course_name, :material_name,
                         :essential_id, :essential_name, :remember)
 
-      DEVOIRS_FROM = 3
+      DEVOIRS_FROM = Entities::Classroom::SheetKind::DEVOIRS_FROM
       COLUMNS = [ "classroom_assignments.id", "classroom_assignments.public_id", "classroom_assignments.batch_public_id",
                   "classroom_assignments.assigned_at", "classroom_assignments.due_on", "exercises.public_id", "courses.slug", "courses.name",
                   "materials.name", "essentials.id", "essentials.name", Arel.sql("essentials.sheet->>'remember'") ].freeze
@@ -97,7 +97,7 @@ module Queries
           exercise = exercises.fetch(row.exercise_public_id).with(number: index + 1, due: false)
           handed_in.include?(row.id) ? exercise : unanswered(exercise)
         end
-        Sheet.new(kind: batch.size >= DEVOIRS_FROM ? :devoirs : :interros, dom_id: "devoir-#{(batch.first.batch || batch.first.public_id).downcase}",
+        Sheet.new(kind: Entities::Classroom::SheetKind.for(batch.size), dom_id: "devoir-#{(batch.first.batch || batch.first.public_id).downcase}",
                   assigned_on: batch.map(&:assigned_at).min.to_date, due_on: batch.filter_map(&:due_on).min,
                   notion: common&.essential_name, remember: common&.remember.presence,
                   notions: batch.map { it.essential_name || it.course_name }.uniq, courses: batch.map(&:course_name).uniq,

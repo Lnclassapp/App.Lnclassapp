@@ -25,4 +25,12 @@ class ParameterFilteringTest < ActiveSupport::TestCase
 
     assert_equal({ "code" => "[FILTERED]", "secret" => "[FILTERED]", "secret_uri" => "[FILTERED]" }, filtered["second_factor"])
   end
+
+  test "the Web Push subscription address and keys are filtered, nested in keys too" do
+    filter = ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters)
+
+    filtered = filter.filter("endpoint" => "https://fcm.googleapis.com/x", "keys" => { "p256dh" => "BP", "auth" => "a" }, "author" => "Awa")
+
+    assert_equal({ "endpoint" => "[FILTERED]", "keys" => { "p256dh" => "[FILTERED]", "auth" => "[FILTERED]" }, "author" => "Awa" }, filtered)
+  end
 end

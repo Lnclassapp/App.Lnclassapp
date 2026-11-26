@@ -4,6 +4,8 @@
 import { application } from "./application"
 import controllers from "./**/*_controller.js"
 import { registerOfflineControllers } from "../offline/lazy_controllers.js"
+import { registerPushController } from "../push/lazy_controller.js"
 
 controllers.forEach((controller) => application.register(controller.name, controller.module.default))
 registerOfflineControllers(application)
+registerPushController(application)
