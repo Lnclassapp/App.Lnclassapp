@@ -114,7 +114,7 @@ Et l'équipe ne voit pas le bouton
 ## 6. Décisions rattachées
 
 - Pas d'ADR : aucun port, aucune table, aucun contrat nouveau ; deux lectures existantes gagnent des champs.
-- UDR-XXXX-accueil-enseignant-actions — accueil « À suivre », ronds nommés, barre du haut sur l'accueil seulement (amende UDR-0006, UDR-0082 §3.1, UDR-0134 §3.3, §3.5, §3.8, §3.14), liste des élèves par état, relance WhatsApp.
+- UDR-0188 — accueil « À suivre », ronds nommés, barre du haut sur l'accueil seulement (amende UDR-0006, UDR-0082 §3.1, UDR-0134 §3.3, §3.5, §3.8, §3.14), liste des élèves par état, relance WhatsApp.
 
 ## 7. Mesures
 

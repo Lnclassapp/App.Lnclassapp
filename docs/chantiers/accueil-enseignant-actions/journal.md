@@ -46,7 +46,7 @@
 | **Livré le** | |
 | **PR** | |
 | **ADR produits** | aucun |
-| **UDR produits** | UDR-XXXX-accueil-enseignant-actions |
+| **UDR produits** | UDR-0188 |
 
 ## Revues après fusion (2026-11-26)
 
