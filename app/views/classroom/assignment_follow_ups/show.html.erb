@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/assignment_follow_ups/show — rapport d'un exercice assigné, enseignant de la classe et équipe %>
 <%# Rôle : en-tête (rond de la matière, titre, « Maths · 10 questions · à rendre … »), puis le rapport (section) : « 20 / 27 faits », cases par médaille, questions, élèves dont ceux qui n'ont pas fait l'exercice %>
-<%# ADR  : 0072, 0079, 0097 (§4.9) · UDR : 0062 (§3.9), 0072 (§3.5 bis), 0109 (§3.1), enseignant (§3.8) · chaque nom mène à la fiche de l'élève ; classe archivée : 404 (ADR-0088) %>
+<%# ADR  : 0072, 0079, 0097 (§4.9) · UDR : 0062 (§3.9), 0072 (§3.5 bis), 0109 (§3.1), enseignant (§3.8), accueil-enseignant-actions (§3.7) · chaque nom mène à la fiche de l'élève ; classe archivée : 404 (ADR-0088) %>
 <% follow_up = @follow_up %>
 <% illustration = subject_illustration(follow_up.material_slug) %>
 <% due = follow_up.due_on ? t(".due", date: l(follow_up.due_on, format: :due_short)) : t(".no_due") %>
@@ -28,6 +28,11 @@
 
 <%# Une date limite passée (jour d'Abidjan) : « En retard » sous chaque élève qui n'a pas fait l'exercice, et la pastille « N en retard » les compte. %>
 <% overdue = follow_up.due_on.present? && follow_up.due_on < Time.zone.today %>
+<%# UDR accueil-enseignant-actions §3.7 : « Relancer sur WhatsApp » ouvre un message prêt ; seulement pour l'enseignant, et s'il reste des élèves à relancer. %>
+<% remind_url = whatsapp_share_url(t(follow_up.due_on ? "assessment.comprehension.remind.message" : "assessment.comprehension.remind.message_no_due",
+                                     classroom: @classroom.name, exercise: follow_up.exercise_title,
+                                     due: (l(follow_up.due_on, format: :due_short) if follow_up.due_on),
+                                     link: exercise_url(follow_up.exercise_public_id))) if current_actor.teacher? && follow_up.pending_students.any? %>
 <%= render "assessment/comprehension/section", comprehension: @comprehension, classroom: @classroom, assignment_public_id: follow_up.public_id,
                                                     late: (follow_up.pending_students.size if overdue), pending: follow_up.pending_students,
-                                                    overdue: overdue %>
+                                                    overdue: overdue, remind_url: %>

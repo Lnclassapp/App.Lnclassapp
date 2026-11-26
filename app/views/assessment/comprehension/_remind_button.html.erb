@@ -1,0 +1,6 @@
+<%# 🌐 UI · assessment/comprehension/_remind_button — « Relancer sur WhatsApp » du rapport d'un devoir %>
+<%# Rôle : lien sortant vers wa.me avec le message prêt (devoir, échéance, lien de l'exercice) ; l'enseignant l'envoie lui-même, Lnclass n'envoie rien %>
+<%# ADR  : 0063 · UDR : accueil-enseignant-actions (§3.7) %>
+<%# locals: (remind_url:, class: nil) -%>
+<%= ui_button t("assessment.comprehension.remind.action"), href: remind_url, target: "_blank", rel: "noopener", id: "comprehension_remind",
+                                                          variant: :primary, size: :sm, icon: "chat-bubble-left-right", class: local_assigns[:class] %>
