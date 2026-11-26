@@ -1,8 +1,8 @@
-# UDR-XXXX : Écran « Notifications » de l'équipe et case « Prévenir les élèves » des annonces
+# UDR-0187 : Écran « Notifications » de l'équipe et case « Prévenir les élèves » des annonces
 <!-- index
 titre: Écran Notifications de l'équipe
 statut: Accepté
-adr-lie: ADR-XXXX-envois-de-notifications-regles-par-l-equipe
+adr-lie: ADR-0147
 problematique: L'équipe doit régler quels motifs partent seuls, valider chaque jour les autres et décider à la publication si une annonce prévient les élèves, sans voir de nom d'élève.
 -->
 
@@ -11,7 +11,7 @@ problematique: L'équipe doit régler quels motifs partent seuls, valider chaque
 | **Statut** | Proposé |
 | **Date** | 2026-11-25 |
 | **Chantier** | `docs/chantiers/parametrage-notifications` |
-| **ADR lié** | ADR-XXXX-envois-de-notifications-regles-par-l-equipe · ADR-0146 · UDR-0186 (§3.4, tuile du Pilotage) |
+| **ADR lié** | ADR-0147 · ADR-0146 · UDR-0186 (§3.4, tuile du Pilotage) |
 | **Remplacé par** | — |
 
 ---

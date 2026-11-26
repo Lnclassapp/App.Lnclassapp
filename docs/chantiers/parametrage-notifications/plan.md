@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Entrées : [memo](memo.md) · [PRD](prd.md) · [ADR-XXXX-envois-de-notifications-regles-par-l-equipe](../../decisions/adr/XXXX-envois-de-notifications-regles-par-l-equipe.md) · [UDR-XXXX-ecran-notifications-de-l-equipe](../../decisions/udr/XXXX-ecran-notifications-de-l-equipe.md)
+> Entrées : [memo](memo.md) · [PRD](prd.md) · [ADR-0147](../../decisions/adr/0147-envois-de-notifications-regles-par-l-equipe.md) · [UDR-0187](../../decisions/udr/0187-ecran-notifications-de-l-equipe.md)
 
 ## Graphe
 

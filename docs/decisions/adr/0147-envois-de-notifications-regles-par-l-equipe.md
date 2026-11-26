@@ -1,4 +1,4 @@
-# ADR-XXXX : Les notifications aux élèves ne partent que sur un réglage ou une validation de l'équipe, dix par jour et par élève au plus
+# ADR-0147 : Les notifications aux élèves ne partent que sur un réglage ou une validation de l'équipe, dix par jour et par élève au plus
 <!-- index
 titre: Notifications réglées et validées par l'équipe
 statut: Accepté

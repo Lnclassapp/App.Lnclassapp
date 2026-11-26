@@ -171,8 +171,8 @@ Fonctionnalité: régler et valider les notifications
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-envois-de-notifications-regles-par-l-equipe ([fichier](../../decisions/adr/XXXX-envois-de-notifications-regles-par-l-equipe.md)) — amende ADR-0146 §3.2 et §4 (déclenchement, plafond de dix par jour)
-- UDR-XXXX-ecran-notifications-de-l-equipe ([fichier](../../decisions/udr/XXXX-ecran-notifications-de-l-equipe.md)) — écran « Notifications » de l'équipe, case « Prévenir les élèves »
+- ADR-0147 ([fichier](../../decisions/adr/0147-envois-de-notifications-regles-par-l-equipe.md)) — amende ADR-0146 §3.2 et §4 (déclenchement, plafond de dix par jour)
+- UDR-0187 ([fichier](../../decisions/udr/0187-ecran-notifications-de-l-equipe.md)) — écran « Notifications » de l'équipe, case « Prévenir les élèves »
 - ADR-0146, UDR-0186 — chantier `notifications-push`
 
 ## 7. Mesures
