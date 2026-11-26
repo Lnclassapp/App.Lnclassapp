@@ -13,10 +13,10 @@
 
 ## À trancher
 
-- [ ] 2026-11-26 · accueil-enseignant-actions · Garder la barre latérale de l'enseignant sur ordinateur hors accueil ? — appliqué : gardée ; autres : la retirer aussi (retour par « ‹ Accueil » seulement) ; recommandé : gardée
-- [ ] 2026-11-26 · accueil-enseignant-actions · « Voir mes N autres classes » : où ? « Mes classes » est une page de déclaration sans lien vers chaque classe — appliqué : les autres classes se déplient sur l'accueil (même ligne) ; autres : rendre « Mes classes » navigable et y mener ; recommandé : déplier sur l'accueil
-- [ ] 2026-11-26 · accueil-enseignant-actions · Ligne d'élève « nom et état » : garder la photo (ou les initiales) avant le nom ? — appliqué : gardée (repère visuel, même lien) ; autres : nom seul ; recommandé : gardée
-- [ ] 2026-11-26 · accueil-enseignant-actions · Sans barre du haut hors accueil, « Mon compte » et « Besoin d'aide ? » ne sont plus qu'à l'accueil (site) — appliqué : accepté tel quel ; autres : rendre le bloc de profil de la barre latérale cliquable vers « Mon compte » ; recommandé : tel quel pour le pilote
+- [x] 2026-11-26 · accueil-enseignant-actions · Garder la barre latérale de l'enseignant sur ordinateur hors accueil ? — appliqué : gardée ; autres : la retirer aussi (retour par « ‹ Accueil » seulement) ; recommandé : gardée — tranché par le porteur : recommandé gardé
+- [x] 2026-11-26 · accueil-enseignant-actions · « Voir mes N autres classes » : où ? « Mes classes » est une page de déclaration sans lien vers chaque classe — appliqué : les autres classes se déplient sur l'accueil (même ligne) ; autres : rendre « Mes classes » navigable et y mener ; recommandé : déplier sur l'accueil — tranché par le porteur : recommandé gardé
+- [x] 2026-11-26 · accueil-enseignant-actions · Ligne d'élève « nom et état » : garder la photo (ou les initiales) avant le nom ? — appliqué : gardée (repère visuel, même lien) ; autres : nom seul ; recommandé : gardée — tranché par le porteur : recommandé gardé
+- [x] 2026-11-26 · accueil-enseignant-actions · Sans barre du haut hors accueil, « Mon compte » et « Besoin d'aide ? » ne sont plus qu'à l'accueil (site) — appliqué : accepté tel quel ; autres : rendre le bloc de profil de la barre latérale cliquable vers « Mon compte » ; recommandé : tel quel pour le pilote — tranché par le porteur : recommandé gardé
 
 ## Retouches
 
