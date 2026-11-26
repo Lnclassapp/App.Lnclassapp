@@ -79,7 +79,10 @@ class PwaTest < ActionDispatch::IntegrationTest
     assert list, "constante OFFLINE_FILES introuvable"
     assert_equal OFFLINE_FILES, list.scan(/"([^"]*)"/).flatten
     assert_match(/addEventListener\("fetch"/, response.body, "Chrome n'installe qu'un site dont le programme répond aux navigations")
-    assert_no_match(/addEventListener\("(push|sync)"/, response.body)
+    # notifications-push (ADR §4.4) ajoute push et notificationclick ; la synchronisation en arrière-plan reste exclue.
+    assert_no_match(/addEventListener\("sync"/, response.body)
+    assert_match(/addEventListener\("push"/, response.body)
+    assert_match(/addEventListener\("notificationclick"/, response.body)
     assert_match(/"Lnclass-Offline"/, response.body, "une page n'est gardée que sur l'en-tête du serveur (hors-connexion §4.1)")
     assert_match(/=== "keep"/, response.body)
     assert_match(/no-store/, response.body, "une réponse no-store n'est jamais gardée")

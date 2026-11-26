@@ -20,7 +20,8 @@ module UseCases
                                                                         last_seen_at: nil, second_factor_verified_at: nil,
                                                                         second_factor_confirmed: false))
         @sessions = FakeSessions.new(session)
-        SignOut.new(sessions: @sessions, policy: Policies::Identity::SessionPolicy.new, digest_key: "key").call(token:)
+        @push = FakePushSubscriptions.new
+        SignOut.new(sessions: @sessions, push_subscriptions: @push, policy: Policies::Identity::SessionPolicy.new, digest_key: "key").call(token:)
       end
 
       test "destroys the session of the token" do
@@ -28,10 +29,17 @@ module UseCases
         assert_equal 5, @sessions.destroyed
       end
 
+      test "the push subscriptions of the closed session are deleted with it" do
+        sign_out("token")
+
+        assert_equal [ [ 5 ] ], @push.deleted_sessions
+      end
+
       test "is idempotent: an unknown or missing token succeeds without destroying anything" do
         assert sign_out("autre").success?
         assert sign_out(nil).success?
         assert_nil @sessions.destroyed
+        assert_empty @push.deleted_sessions
       end
     end
   end

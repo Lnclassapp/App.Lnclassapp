@@ -1,0 +1,18 @@
+<%# 🌐 UI · teams/push_settings/show — page « Notifications » de l'équipe : bandeau, Réglages, Plan du jour (frame paresseux), Historique %>
+<%# Rôle : toute l'équipe la lit ; seul un admin coche une case ; aucun nom d'élève ; entrée « Notifications » du menu « Plus » courante (nav_key) %>
+<%# ADR  : XXXX envois de notifications · UDR : XXXX écran notifications de l'équipe (§3.1 à §3.9) %>
+<% page_title t(".title") %>
+<% content_for :nav_key, "push_settings" %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
+
+<div class="grid max-w-3xl grid-cols-1 gap-5">
+  <%= render "teams/push_settings/banner", page: @page %>
+  <%= render "teams/push_settings/modes", modes: @page.modes, can_manage: @can_manage %>
+  <%# Le plan du jour est lu à part (Lot C, teams/push_plans#show) : un calcul lourd ne retient pas la page. %>
+  <%= turbo_frame_tag "push_plan", src: teams_push_plan_path, loading: :lazy, "aria-busy": "true" do %>
+    <%= ui_card title: t("teams.push_plans.show.title"), icon: "calendar-days" do %>
+      <%= ui_loading_state variant: :skeleton, lines: 3 %>
+    <% end %>
+  <% end %>
+  <%= render "teams/push_settings/history", history: @page.history %>
+</div>

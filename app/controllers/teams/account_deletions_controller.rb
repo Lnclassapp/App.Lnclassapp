@@ -47,6 +47,7 @@ module Teams
         invitations: Repositories::Identity::InvitationRepository.new,
         memberships: Repositories::Classroom::MembershipRepository.new, photos: Repositories::Identity::ProfilePhotoStore.new,
         audit_log: Repositories::Identity::AuditLogRepository.new, learning_data: Repositories::Assessment::LearningDataEraser.new,
+        push_data: Repositories::Communication::PushDataEraser.new,
         transaction: Repositories::Shared::Transaction.new, policy:, clock: Time.zone, deletion_requests:
       )
     end

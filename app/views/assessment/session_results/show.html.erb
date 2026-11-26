@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
 <%# Rôle : badge, appréciation (« Très bien » à « À retravailler »), note (verte dès 14/20), points, « À revoir », maîtrise, progrès, effet sur la fiche, « Refaire l'exercice » (caché au sans-faute, Grading.perfect?) ou l'heure de reprise, correction complète %>
-<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : 0157-sujets-cahier-noir-blanc (§3 : enveloppe noir et blanc), 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, 0153 refaire-ou-continuer §3, 0133 écrans élève sans répétition §3.5 et §3.6 bis, hors-connexion-bandeau-copie-provisoire-et-file §3.7 et §3.8 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : 0186 §3.1 (carte d'invitation), 0157-sujets-cahier-noir-blanc (§3 : enveloppe noir et blanc), 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, 0153 refaire-ou-continuer §3, 0133 écrans élève sans répétition §3.5 et §3.6 bis, hors-connexion-bandeau-copie-provisoire-et-file §3.7 et §3.8 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% content_for :head do %><%= stylesheet_link_tag "exam_sheet" %><% end %>
 <% result = @result %>
 <%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
@@ -142,6 +142,10 @@
       <% end %>
     <% end %>
     <%= ui_button back_label, href: back_href, variant: :secondary, size: :lg, full: true, data: { turbo_prefetch: false } %>
+    <%# notifications-push (UDR §3.1) : l'invitation aux notifications, à l'élève propriétaire seulement, sous les boutons ; le serveur décide. %>
+    <% if @owner %>
+      <%= render "communication/push_subscriptions/invitation", score_percent: result.score_percent %>
+    <% end %>
   </div>
 
   <%# ADR-0115, CA-25 : le sujet en blocs, rendu au-dessus de la correction pour la lire avec lui. %>

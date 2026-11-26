@@ -37,8 +37,10 @@ module NavigationHelper
   # basse de l'équipe garde ses 5 cases.
   SECONDARY_DESTINATIONS = {
     # UDR-0159 §2 : « Caisse » dans le menu « Plus » (la barre basse garde ses 5 cases), avant « Annonces ».
+    # UDR XXXX (écran Notifications) §3.1 : « Notifications » entre « Caisse » et « Annonces ».
     team: [ [ :referential, :teams_referential_path, "squares-2x2" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
-            [ :billing, :teams_billing_cashbox_path, "banknotes" ], [ :announcements, :my_announcements_path, "megaphone" ] ]
+            [ :billing, :teams_billing_cashbox_path, "banknotes" ], [ :push_settings, :teams_push_settings_path, "bell" ],
+            [ :announcements, :my_announcements_path, "megaphone" ] ]
   }.freeze
   # UDR accueil-eleve-grille-plus §3 : les entrées de « Plus » de l'élève, dans cet ordre, lues par la feuille « Plus » du téléphone
   # et par le menu de gauche (lg). route : nom de route, ou nil tant que l'écran n'existe pas (l'entrée dit « Bientôt disponible »).

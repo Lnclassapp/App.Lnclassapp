@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::ChangeOwnPin
 # Rôle : change son propre PIN sous PIN actuel ; une nouvelle session remplace toutes les autres ; « pin.changed » sans donnée
-# ADR  : 0025, 0028, 0050, 0055 · UDR : 0041
+# ADR  : 0025, 0028, 0050, 0055, 0146 · UDR : 0041
 module UseCases
   module Identity
     class ChangeOwnPin
@@ -10,9 +10,10 @@ module UseCases
       Changed = Data.define(:token)
       UNCHANGED = { pin: [ :unchanged ] }.freeze
 
-      def initialize(users:, sessions:, login_attempts:, audit_log:, transaction:, policy:, digest_key:, clock:)
+      def initialize(users:, sessions:, push_subscriptions:, login_attempts:, audit_log:, transaction:, policy:, digest_key:, clock:)
         @users = users
         @sessions = sessions
+        @push_subscriptions = push_subscriptions
         @login_attempts = login_attempts
         @audit_log = audit_log
         @transaction = transaction

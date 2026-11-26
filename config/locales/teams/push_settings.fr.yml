@@ -1,0 +1,76 @@
+# Écran « Notifications » de l'équipe (UDR XXXX-ecran-notifications-de-l-equipe §3.10, ADR XXXX envois de notifications).
+# Textes lus par les Lots B (réglages, historique) et C (plan du jour, validation). Aucun nom d'élève nulle part.
+fr:
+  teams:
+    push_settings:
+      show:
+        title: "Notifications"
+        subtitle: "Ce qui part aujourd'hui vers les élèves, et ce qui part seul."
+      banner:
+        switch_off: "L'envoi est coupé sur cet environnement : rien ne part, même validé."
+        not_configured: "L'envoi n'est pas configuré sur cet environnement : rien ne part."
+      modes:
+        title: "Réglages"
+        subtitle: "Une case cochée fait partir le motif seul, chaque jour."
+        automatic: "Automatique"
+        automatic_label: "%{motive} : automatique"
+        save: "Enregistrer"
+        state_on: "Automatique depuis le %{date}, par %{name}."
+        state_off: "Décoché : à valider chaque jour."
+        admin_only: "Seul un admin peut changer ce réglage."
+        badges:
+          announcement: "À la publication"
+          validate_daily: "À valider chaque jour"
+      motives:
+        quiz_prep: "Interro demain"
+        assignment_due: "Devoir à rendre demain"
+        assignment_new: "Nouveaux exercices"
+        announcement: "Annonce de l'équipe"
+        unfinished: "Exercice commencé"
+        result: "Résultat ou médaille"
+        inactive: "Élève inactif (3, 7, 14 jours)"
+      history:
+        title: "Historique"
+        subtitle: "14 derniers jours"
+        more: "Voir plus (%{count})"
+        empty:
+          title: "Aucun réglage ni envoi validé ces 14 derniers jours"
+        approval:
+          one: "%{at} · %{name} a validé %{motive} — %{count} élève"
+          other: "%{at} · %{name} a validé %{motive} — %{count} élèves"
+        setting_on: "%{at} · %{name} a rendu %{motive} automatique"
+        setting_off: "%{at} · %{name} a décoché %{motive}"
+    push_motive_settings:
+      update:
+        saved: "Réglage enregistré."
+        failed: "Ce réglage n'a pas été enregistré."
+    push_plans:
+      show:
+        title: "Plan du jour"
+        subtitle: "%{date} · part dans la prochaine fenêtre (12 h–14 h, 17 h–20 h ; dimanche 9 h–20 h)"
+        closed: "Les envois du jour sont terminés."
+        students:
+          zero: "aucun élève"
+          one: "%{count} élève"
+          other: "%{count} élèves"
+        more_materials:
+          one: "+ %{count} autre matière"
+          other: "+ %{count} autres matières"
+        by_school: "Par établissement"
+        more_schools: "Voir plus (%{count})"
+        school_line: "%{school} — %{count}"
+        none: "%{motive} — aucun élève concerné aujourd'hui"
+        approved: "Validé"
+        approved_by: "par %{name} à %{time} — %{count} élèves"
+        empty:
+          title: "Rien à valider aujourd'hui"
+          description: "Les motifs automatiques partent seuls ; aucun autre élève n'est concerné."
+        error:
+          message: "Le plan du jour n'a pas pu être calculé."
+    push_approvals:
+      create:
+        approve: "Valider l'envoi"
+        confirm: "Envoyer « %{motive} » à %{count} élèves aujourd'hui ?"
+        approved: "Envoi validé : %{count} élèves."
+        already_approved: "Déjà validé par %{name} à %{time}."
+        closed: "Les envois du jour sont terminés."

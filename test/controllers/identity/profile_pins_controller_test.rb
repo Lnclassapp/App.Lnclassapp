@@ -83,6 +83,19 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "the subscription of the current browser follows the new session, the others are deleted not just detached" do
+    sign_in_as @teacher
+    current = create_push_subscription(user: @teacher, session: Orm::Session.where(user: @teacher).last)
+    other = create_push_subscription(user: @teacher, session: create_login_session(user: @teacher))
+    expired = create_push_subscription(user: @teacher, session: nil)
+
+    change_pin
+
+    assert_not Orm::Communication::PushSubscription.exists?(other.id)
+    assert_not Orm::Communication::PushSubscription.exists?(expired.id)
+    assert_equal Orm::Session.where(user: @teacher).order(:id).last.id, current.reload.session_id
+  end
+
   test "a team member keeps the verified second factor of the current session" do
     member = create_team_member
     sign_in_as member
