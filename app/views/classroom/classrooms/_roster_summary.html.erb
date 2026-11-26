@@ -4,8 +4,8 @@
 <% if late_total %>
   <p id="classroom_roster_summary" class="mb-4 text-sm text-mute">
     <% if late_total.positive? %>
-      <span class="font-semibold text-warning"><%= t("classroom.classrooms.roster.summary_late", count: late_total) %></span> ·
+      <span class="font-medium text-warning"><%= t("classroom.classrooms.roster.summary_late", count: late_total) %></span> ·
     <% end %>
-    <span class="font-semibold text-ink"><%= t("classroom.classrooms.roster.summary_up_to_date", count: up_to_date_total) %></span>
+    <span class="font-medium text-ink"><%= t("classroom.classrooms.roster.summary_up_to_date", count: up_to_date_total) %></span>
   </p>
 <% end %>
