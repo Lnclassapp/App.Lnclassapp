@@ -1,0 +1,11 @@
+<%# 🌐 UI · classroom/classrooms/_roster_summary — « 38 en retard · 2 à jour », toute la classe %>
+<%# Rôle : les deux chiffres sous le titre de la liste ; rien sans exercice assigné (late_total nil) ; « 0 en retard » n'est jamais écrit ; rendu par la liste et par le stream du retrait d'un élève %>
+<%# ADR  : 0097 (§4.7) · UDR : accueil-enseignant-actions (§3.6) · locals: (late_total:, up_to_date_total:) -%>
+<% if late_total %>
+  <p id="classroom_roster_summary" class="mb-4 text-sm text-mute">
+    <% if late_total.positive? %>
+      <span class="font-semibold text-warning"><%= t("classroom.classrooms.roster.summary_late", count: late_total) %></span> ·
+    <% end %>
+    <span class="font-semibold text-ink"><%= t("classroom.classrooms.roster.summary_up_to_date", count: up_to_date_total) %></span>
+  </p>
+<% end %>

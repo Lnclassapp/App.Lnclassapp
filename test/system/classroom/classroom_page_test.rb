@@ -152,12 +152,13 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
       assert_selector "#classroom_session_days"
       assert_selector "#assignment_#{assignment.public_id}", text: "0 / 2 fait"
-      # UDR enseignant §3.5 : le badge de l'élève sur la ligne de son nom.
+      # UDR accueil-enseignant-actions §3.6 : l'état de l'élève sur la ligne de son nom, une ligne d'au moins 44 px.
       assert_no_selector "#classroom_courses"
       within("#student_#{@koffi.public_id}") do
         avatar = find(".ui-avatar", match: :first).rect
-        badge = find("#badge_#{@koffi.public_id}").rect
-        assert_in_delta avatar.y + (avatar.height / 2), badge.y + (badge.height / 2), 8, "le badge n'est pas sur la ligne de l'élève"
+        state = find("#state_#{@koffi.public_id}").rect
+        assert_in_delta avatar.y + (avatar.height / 2), state.y + (state.height / 2), 8, "l'état n'est pas sur la ligne de l'élève"
+        assert_operator page.evaluate_script("document.getElementById('student_#{@koffi.public_id}').getBoundingClientRect().height"), :>=, 44
         # « Aucune session terminée » ne doit pas écraser le nom.
         assert_selector "p", exact_text: "Koffi Yao"
         name = find("p", exact_text: "Koffi Yao")

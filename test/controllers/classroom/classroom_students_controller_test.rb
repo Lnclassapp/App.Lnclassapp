@@ -61,21 +61,21 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "turbo-stream[action=replace][target=classroom_roster_title] template h2", text: /#{tr('title', count: 2)}/
   end
 
-  test "B-004 : classe de plus de 30 élèves, le compte de la liste reste « 30 sur N » après un retrait" do
+  test "B-004 : classe de plus de 10 élèves, le compte de la liste reste « 10 sur N » après un retrait" do
     32.times { |i| create_student(classroom: @classroom, first_name: "Eleve#{i}", last_name: "Zed#{i}") }
     sign_in_as @teacher
 
     remove @awa, as: :turbo_stream
 
     assert_select "turbo-stream[action=update][target=classroom_roster_count] template",
-                  text: tr("count_partial", shown: 30, total: 34)
+                  text: tr("count_partial", shown: 10, total: 34)
   end
 
-  test "B-004 : retiré depuis la page 2, la liste qui montre tous les élèves dit « 34 élèves », plus « 30 sur 34 »" do
+  test "B-004 : retiré depuis la page 4, la liste qui montre tous les élèves dit « 34 élèves », plus « 10 sur 34 »" do
     32.times { |i| create_student(classroom: @classroom, first_name: "Eleve#{i}", last_name: "Zed#{i}") }
     sign_in_as @teacher
 
-    remove @awa, params: { page: "2" }, as: :turbo_stream
+    remove @awa, params: { page: "4" }, as: :turbo_stream
 
     assert_select "turbo-stream[action=update][target=classroom_roster_count] template", text: tr("count", count: 34)
   end
