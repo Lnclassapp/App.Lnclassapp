@@ -32,6 +32,11 @@ module Repositories
 
       def last_sent_at(user_id:) = Orm::Communication::PushDelivery.where(user_id:, status: "delivered").maximum(:sent_at)
 
+      # Le jour d'Abidjan est le jour UTC (GMT+0, sans heure d'été).
+      def sent_count(user_id:, on_date:)
+        Orm::Communication::PushDelivery.where(user_id:, status: "delivered", sent_at: on_date.in_time_zone("UTC").all_day).count
+      end
+
       def purge_before(before:) = Orm::Communication::PushDelivery.where(sent_at: ...before).delete_all
     end
   end

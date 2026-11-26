@@ -1,0 +1,12 @@
+<%# 🌐 UI · teams/push_settings/_banner — bandeau d'environnement : l'envoi est coupé ou non configuré %>
+<%# Rôle : un seul bandeau, le premier cas qui s'applique ; rien si l'envoi peut partir ; jamais la valeur d'une clé %>
+<%# ADR  : XXXX envois de notifications · UDR : XXXX écran notifications de l'équipe (§3.2) %>
+<%# locals: (page:) -%>
+<% banner = if !page.switch_on then [ "push_settings_switch_off", t(".switch_off") ]
+            elsif !page.configured then [ "push_settings_not_configured", t(".not_configured") ] end %>
+<% if banner %>
+  <div id="<%= banner.first %>" role="status" class="flex items-start gap-3 rounded-ln border border-line bg-mist px-4 py-3 text-sm text-ink">
+    <%= ui_icon "exclamation-triangle", class: "size-5 shrink-0 text-warning" %>
+    <p><%= banner.last %></p>
+  </div>
+<% end %>

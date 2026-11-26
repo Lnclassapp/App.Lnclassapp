@@ -93,6 +93,41 @@ module UseCases
 
       def published_events = Orm::AuditEvent.where(action: "message.published")
 
+      test "PN-D1 — the team asking to warn students, audience all or students, sets push_requested" do
+        %w[all students].each do |audience|
+          result = create(@fatou, scope: "national", audience:, push_requested: "1")
+
+          assert result.success?
+          assert Orm::Message.find(result.value.message.id).push_requested, audience
+        end
+      end
+
+      test "PN-D2 — without the box, push_requested stays false" do
+        result = create(@fatou, scope: "national", audience: "all")
+
+        assert result.success?
+        assert_not Orm::Message.find(result.value.message.id).push_requested
+      end
+
+      test "PN-D3 — the team asking for teachers or school admins gets false, even forged" do
+        %w[teachers school_admins].each do |audience|
+          result = create(@fatou, scope: "national", audience:, push_requested: "1")
+
+          assert result.success?
+          assert_not Orm::Message.find(result.value.message.id).push_requested, audience
+        end
+      end
+
+      test "PN-D4 — a direction or a teacher forging push_requested gets false" do
+        direction = create(@kamate, audience: "students", push_requested: "1")
+        teacher = create(@kouassi, audience: "classrooms", classroom_public_ids: [ @b3.public_id ], push_requested: "1")
+
+        assert direction.success?
+        assert teacher.success?
+        assert_not Orm::Message.find(direction.value.message.id).push_requested
+        assert_not Orm::Message.find(teacher.value.message.id).push_requested
+      end
+
       test "AN-01 — the team publishes now a national announcement for everyone, journaled with its author" do
         result = create(@fatou, scope: "national", audience: "all")
 

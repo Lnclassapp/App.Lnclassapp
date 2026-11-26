@@ -1,7 +1,7 @@
 require "test_helper"
 
-# ADR-0146 §3.2 et §4 ; PRD §3 et §4 « Envoi : conditions » : un passage lit les candidats,
-# applique fenêtre, coupure, doublon, priorité et intervalle, puis envoie une ligne par navigateur abonné.
+# ADR-0146 §3.2 et §4 ; ADR envois de notifications §4.3 ; PRD §3 et §4 « Envoi : conditions » : un passage lit les candidats,
+# applique fenêtre, coupure, doublon, priorité, ouverture du motif (réglage, validation, annonce) et plafond de dix par jour, puis envoie une ligne par navigateur abonné.
 module UseCases
   module Communication
     class DeliverPushNotificationsTest < ActiveSupport::TestCase
@@ -55,15 +55,32 @@ module UseCases
         def turned_off?(user_id:) = @off.include?(user_id)
       end
 
-      class Deliveries
-        attr_reader :rows, :last
+      class Settings
+        def initialize(automatic) = @automatic = automatic.to_set
+        def automatic_motives = @automatic
+      end
 
-        def initialize(sent: [], last: nil, recorded: true, raises_for: [])
+      class Approvals
+        attr_reader :asked
+
+        def initialize(keys) = (@keys, @asked = keys.to_set, [])
+
+        def approved_keys(on_date:)
+          @asked << on_date
+          @keys
+        end
+      end
+
+      class Deliveries
+        attr_reader :rows, :counted
+
+        def initialize(sent: [], count: 0, recorded: true, raises_for: [])
           @sent = sent
           @recorded = recorded
           @raises_for = raises_for
-          @last = last
+          @count = count
           @rows = []
+          @counted = []
         end
 
         def sent?(user_id:, motive:, object_key:)
@@ -71,7 +88,10 @@ module UseCases
 
           @sent.include?([ user_id, motive, object_key ])
         end
-        def last_sent_at(user_id:) = @last
+        def sent_count(user_id:, on_date:)
+          @counted << [ user_id, on_date ]
+          @count
+        end
         def record(user_id:, motive:, object_key:, status:, at:)
           @rows << [ user_id, motive, object_key, status ]
           @recorded
@@ -91,19 +111,22 @@ module UseCases
 
       WEDNESDAY_NOON = Time.utc(2026, 11, 18, 12, 30)
 
-      def candidate(user_id: 1, motive: "inactive", key: "k", valid_until: nil)
+      def candidate(user_id: 1, motive: "quiz_prep", key: "k", valid_until: nil)
         Candidate.new(user_id:, motive:, object_key: key, url: "/", variables: {}, valid_until:)
       end
 
       def sub(id, user_id: 1) = Subscription.new(id:, user_id:, endpoint: "https://push.test/#{id}", p256dh: "p", auth: "a")
 
       def run_pass(candidates: [ candidate ], subs: [ sub(10) ], off: [], deliveries: Deliveries.new, gateway: Gateway.new(:delivered),
-                   now: WEDNESDAY_NOON, enabled: true, failure_counts: {}, reread: nil, record_success_raises: false)
+                   now: WEDNESDAY_NOON, enabled: true, failure_counts: {}, reread: nil, record_success_raises: false,
+                   automatic: %w[quiz_prep assignment_due assignment_new], approved: [])
         subscriptions = Subscriptions.new(subs, failure_counts:, record_success_raises:)
         @candidates = Candidates.new(candidates, reread:)
+        approvals = Approvals.new(approved)
+        @approvals_asked = approvals.asked
         result = DeliverPushNotifications.new(candidates: @candidates, subscriptions:, preferences: Preferences.new(off),
                                               deliveries:, gateway:, clock: Struct.new(:now).new(now), delivery_enabled: enabled,
-                                              min_interval: 4.hours).call
+                                              settings: Settings.new(automatic), approvals:).call
         [ result, subscriptions, deliveries, gateway ]
       end
 
@@ -114,7 +137,7 @@ module UseCases
         assert_equal({ "delivered" => 1 }, result.value)
         assert_equal [ [ 10 ] ], gateway.calls.map { it.first(1) }
         assert_equal Entities::Communication::PushMessage.for(candidate), gateway.calls.first.last
-        assert_equal [ [ 1, "inactive", "k", "delivered" ] ], deliveries.rows
+        assert_equal [ [ 1, "quiz_prep", "k", "delivered" ] ], deliveries.rows
         assert_equal [ 10 ], subscriptions.successes
       end
 
@@ -139,7 +162,7 @@ module UseCases
         result, _, deliveries, gateway = run_pass(enabled: false)
 
         assert_empty gateway.calls
-        assert_equal [ [ 1, "inactive", "k", "disabled" ] ], deliveries.rows
+        assert_equal [ [ 1, "quiz_prep", "k", "disabled" ] ], deliveries.rows
         assert_equal({ "disabled" => 1 }, result.value)
       end
 
@@ -152,14 +175,15 @@ module UseCases
 
       test "un motif déjà envoyé n'est pas renvoyé, et laisse passer le suivant" do
         deliveries = Deliveries.new(sent: [ [ 1, "quiz_prep", "a" ] ])
-        _, _, deliveries, = run_pass(candidates: [ candidate(motive: "quiz_prep", key: "a"), candidate(key: "b") ], deliveries:)
+        _, _, deliveries, = run_pass(candidates: [ candidate(key: "a"), candidate(key: "b") ], deliveries:)
 
-        assert_equal [ [ 1, "inactive", "b", "delivered" ] ], deliveries.rows
+        assert_equal [ [ 1, "quiz_prep", "b", "delivered" ] ], deliveries.rows
       end
 
       test "un seul motif par élève et par passage : le plus prioritaire" do
         _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive: "inactive", key: "i"), candidate(motive: "quiz_prep", key: "q"),
-                                                           candidate(motive: "result", key: "r") ])
+                                                           candidate(motive: "result", key: "r") ],
+                                             approved: [ [ 1, "inactive", "i" ], [ 1, "result", "r" ] ])
 
         assert_equal 1, gateway.calls.size
         assert_equal [ [ 1, "quiz_prep", "q", "delivered" ] ], deliveries.rows
@@ -171,13 +195,21 @@ module UseCases
         assert_equal [ 1, 2 ], deliveries.rows.map(&:first)
       end
 
-      test "pas de nouvel envoi moins de 4 h après le dernier envoi réussi, un envoi plus ancien laisse passer" do
-        _, _, recent, gateway = run_pass(deliveries: Deliveries.new(last: WEDNESDAY_NOON - 3.hours - 59.minutes))
+      test "dix envois déjà partis ce jour d'Abidjan : plus rien ne part ; neuf : un dixième part" do
+        _, _, full, gateway = run_pass(deliveries: Deliveries.new(count: 10))
         assert_empty gateway.calls
-        assert_empty recent.rows
+        assert_empty full.rows
+        assert_equal [ [ 1, Date.new(2026, 11, 18) ] ], full.counted
 
-        _, _, old, = run_pass(deliveries: Deliveries.new(last: WEDNESDAY_NOON - 4.hours))
-        assert_equal 1, old.rows.size
+        _, _, nine, = run_pass(deliveries: Deliveries.new(count: 9))
+        assert_equal 1, nine.rows.size
+      end
+
+      test "le plafond se compte par élève et par jour : le lendemain, le motif repart" do
+        _, _, next_day, = run_pass(deliveries: Deliveries.new(count: 0), now: Time.utc(2026, 11, 19, 12, 30))
+
+        assert_equal [ [ 1, Date.new(2026, 11, 19) ] ], next_day.counted
+        assert_equal 1, next_day.rows.size
       end
 
       test "aucun abonnement : rien n'est envoyé ni noté" do
@@ -270,18 +302,56 @@ module UseCases
         assert_equal 1, reported.first[:context][:user_id]
       end
 
-      test "12 h 05 envoyé, 13 h bloqué par l'intervalle de 4 h, 17 h part" do
-        deliveries = Deliveries.new
-        run_pass(deliveries:, now: Time.utc(2026, 11, 18, 12, 5))
-        assert_equal 1, deliveries.rows.size
+      test "rien ne part sans réglage ni validation, quels que soient les motifs" do
+        %w[quiz_prep assignment_due assignment_new inactive unfinished result].each do |motive|
+          _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive:) ], automatic: [])
 
-        blocked = Deliveries.new(last: Time.utc(2026, 11, 18, 12, 5))
-        run_pass(deliveries: blocked, now: Time.utc(2026, 11, 18, 13))
-        assert_empty blocked.rows
+          assert_empty gateway.calls, motive
+          assert_empty deliveries.rows, motive
+        end
+      end
 
-        late = Deliveries.new(last: Time.utc(2026, 11, 18, 12, 5))
-        run_pass(deliveries: late, now: Time.utc(2026, 11, 18, 17))
-        assert_equal 1, late.rows.size
+      test "un motif automatique part pour tous les élèves ; une relance cochée par erreur ne s'ouvre pas à d'autres" do
+        _, _, deliveries, = run_pass(candidates: [ candidate(motive: "assignment_new", key: "n") ], automatic: %w[assignment_new])
+        assert_equal [ [ 1, "assignment_new", "n", "delivered" ] ], deliveries.rows
+
+        _, _, other, = run_pass(candidates: [ candidate(motive: "assignment_due", key: "d") ], automatic: %w[assignment_new])
+        assert_empty other.rows
+      end
+
+      test "liste figée : seul le couple élève, motif, objet validé part" do
+        candidates = [ candidate(user_id: 1, motive: "unfinished", key: "u1"), candidate(user_id: 2, motive: "unfinished", key: "u2"),
+                       candidate(user_id: 1, motive: "unfinished", key: "u3") ]
+        _, _, deliveries, = run_pass(candidates:, subs: [ sub(10), sub(11, user_id: 2) ], automatic: [], approved: [ [ 1, "unfinished", "u1" ] ])
+
+        assert_equal [ [ 1, "unfinished", "u1", "delivered" ] ], deliveries.rows
+      end
+
+      test "la validation lue est celle du jour d'Abidjan" do
+        run_pass(approved: [])
+
+        assert_equal [ Date.new(2026, 11, 18) ], @approvals_asked
+      end
+
+      test "l'annonce est ouverte sans réglage ni validation (la requête ne lit que les push_requested)" do
+        _, _, deliveries, = run_pass(candidates: [ candidate(motive: "announcement", key: "a") ], automatic: [])
+
+        assert_equal [ [ 1, "announcement", "a", "delivered" ] ], deliveries.rows
+      end
+
+      test "un motif validé passe devant un motif automatique moins urgent, un seul par passage" do
+        _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive: "assignment_new", key: "n"), candidate(motive: "quiz_prep", key: "q") ],
+                                             automatic: %w[assignment_new], approved: [ [ 1, "quiz_prep", "q" ] ])
+
+        assert_equal 1, gateway.calls.size
+        assert_equal [ [ 1, "quiz_prep", "q", "delivered" ] ], deliveries.rows
+      end
+
+      test "interrupteur fermé : un motif ouvert est noté disabled, jamais envoyé" do
+        _, _, deliveries, gateway = run_pass(enabled: false)
+
+        assert_empty gateway.calls
+        assert_equal [ "disabled" ], deliveries.rows.map(&:last)
       end
 
       test "assignment_due contre quiz_prep : seule l'interro part" do
@@ -314,7 +384,7 @@ module UseCases
         end
 
         assert_equal [ 2 ], deliveries.rows.map(&:first)
-        assert_equal [ { user_id: 1, motive: "inactive" } ], reported.map { it[:context] }
+        assert_equal [ { user_id: 1, motive: "quiz_prep" } ], reported.map { it[:context] }
       end
 
       test "l'écriture après le départ échoue : l'envoi est quand même noté (ensure), l'erreur est signalée" do
@@ -322,14 +392,14 @@ module UseCases
           _, _, @deliveries, = run_pass(record_success_raises: true)
         end
 
-        assert_equal [ [ 1, "inactive", "k", "delivered" ] ], @deliveries.rows
+        assert_equal [ [ 1, "quiz_prep", "k", "delivered" ] ], @deliveries.rows
         assert_equal 1, reported.size
       end
 
       test "un envoi parti dont l'écriture renvoie faux (déjà noté) est journalisé" do
         log = capture_log { run_pass(deliveries: Deliveries.new(recorded: false)) }
 
-        assert_includes log, "delivery already recorded after a sent push: user 1, motive inactive"
+        assert_includes log, "delivery already recorded after a sent push: user 1, motive quiz_prep"
       end
 
       test "un statut non delivered dont l'écriture renvoie faux n'est pas journalisé" do
@@ -346,6 +416,32 @@ module UseCases
         reports
       ensure
         Rails.error.unsubscribe(subscriber)
+      end
+
+      test "second passage : le motif le plus urgent déjà envoyé, le suivant part" do
+        urgent = candidate(motive: "assignment_due", key: "due")
+        later = candidate(motive: "quiz_prep", key: "quiz")
+        first, = run_pass(candidates: [ urgent, later ], deliveries: Deliveries.new, now: WEDNESDAY_NOON)
+        second, _, deliveries, gateway = run_pass(candidates: [ urgent, later ], deliveries: Deliveries.new(sent: [ [ 1, "assignment_due", "due" ] ]),
+                                                  now: WEDNESDAY_NOON + 15.minutes)
+
+        assert_equal({ "delivered" => 1 }, first.value)
+        assert_equal({ "delivered" => 1 }, second.value)
+        assert_equal [ [ 1, "quiz_prep", "quiz", "delivered" ] ], deliveries.rows
+        assert_equal 1, gateway.calls.size
+      end
+
+      test "le lendemain, le plafond se compte par jour : 10 hier, 0 aujourd'hui, l'envoi part" do
+        by_date = Class.new(Deliveries) do
+          def sent_count(user_id:, on_date:)
+            super
+            { Date.new(2026, 11, 17) => 10 }.fetch(on_date, 0)
+          end
+        end.new
+        _, _, deliveries, = run_pass(deliveries: by_date, now: WEDNESDAY_NOON)
+
+        assert_equal [ [ 1, Date.new(2026, 11, 18) ] ], by_date.counted
+        assert_equal [ [ 1, "quiz_prep", "k", "delivered" ] ], deliveries.rows
       end
     end
   end

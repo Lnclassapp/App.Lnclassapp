@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Communication::AuthoredMessagesController
 # Rôle : « Mes annonces » et le formulaire d'annonce (nouvelle, modifiée) de l'équipe, d'une direction ou d'un enseignant ; encadré et toast du plafond ; fermés à l'enseignant tant que le drapeau du pilote teacher_announcements_enabled est éteint
-# ADR  : 0026, 0028, 0045, 0078, 0081, 0094 · UDR : 0071 (§3.7, §3.8), 0075 (§3.3)
+# ADR  : 0026, 0028, 0045, 0078, 0081, 0094, XXXX (envois de notifications) · UDR : 0071 (§3.7, §3.8), 0075 (§3.3), XXXX (§3.6)
 module Communication
   class AuthoredMessagesController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team
@@ -11,6 +11,10 @@ module Communication
     # Aucune date de fin : elle est calculée (ADR-0081 §4.1), un visible_until forgé n'est pas lu.
     PERMITTED = [ :title, :body, :scope, :school_public_id, :audience, :theme, :illustration, :remove_image, :remove_audio,
                   :published_at, { classroom_public_ids: [] } ].freeze
+
+    # ADR « envois de notifications » §4.1 : la case « Prévenir les élèves » n'est lue que pour l'équipe ; ailleurs le
+    # paramètre n'est même pas permis (le use case le refuse aussi).
+    TEAM_PERMITTED = (PERMITTED + [ :push_requested ]).freeze
 
     def index
       @page = query.page(author_id: current_actor.user_id, page: params[:page], now: Time.zone.now, school_id: teacher_school_id)
@@ -89,7 +93,7 @@ module Communication
 
     # Seul un vrai fichier téléversé compte ; une chaîne dans le paramètre vaut une absence de fichier.
     def form_input
-      values = params.expect(announcement: PERMITTED).to_h.symbolize_keys
+      values = params.expect(announcement: current_actor.team? ? TEAM_PERMITTED : PERMITTED).to_h.symbolize_keys
       Dtos::Communication::MessageInput.new(**values, image: uploaded(:image), audio: uploaded(:audio), commit: params[:commit])
     end
 

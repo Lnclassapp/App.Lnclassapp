@@ -16,7 +16,7 @@ module Entities
 
       test "porte chaque champ du contrat gelé, dans l'ordre de l'ADR ; le thème et l'illustration de l'équipe à la fin" do
         assert_equal %i[id public_id author_id title body audience school_id classroom_ids illustration status published_at
-                        ends_at edited_at withdrawn_at withdrawn_by_id theme illustration_id], Message.members
+                        ends_at edited_at withdrawn_at withdrawn_by_id theme illustration_id push_requested], Message.members
         assert_equal [ 11, 12 ], announcement.classroom_ids
       end
 

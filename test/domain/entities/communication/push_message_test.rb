@@ -11,13 +11,14 @@ module Entities
       CASES = {
         "inactive" => {},
         "assignment_due" => { material: "Maths" },
+        "assignment_new" => { material: "Maths", count: 3 },
         "quiz_prep" => { material: "Maths", count: 2 },
         "announcement" => {},
         "result" => { material: "Maths", kind: "copy" },
         "unfinished" => { material: "Maths" }
       }.freeze
 
-      test "les six gabarits existent et portent le lien et l'étiquette du motif" do
+      test "les sept gabarits existent et portent le lien et l'étiquette du motif" do
         assert_equal PushMotive::ALL.sort, CASES.keys.sort
         CASES.each do |motive, variables|
           message = PushMessage.for(candidate(motive, **variables))
@@ -32,6 +33,8 @@ module Entities
 
       test "les textes de PRD §3.1" do
         assert_equal "Un devoir de Maths est à rendre demain.", PushMessage.for(candidate("assignment_due", material: "Maths")).body
+        assert_equal "Ton prof de Maths t'a donné 3 exercices.", PushMessage.for(candidate("assignment_new", material: "Maths", count: 3)).body
+        assert_equal "Ton prof de Maths t'a donné 1 exercice.", PushMessage.for(candidate("assignment_new", material: "Maths", count: 1)).body
         assert_equal "Prépare ton interro de Maths de demain : 2 exercices.", PushMessage.for(candidate("quiz_prep", material: "Maths", count: 2)).body
         assert_equal "Prépare ton interro de Maths de demain : 1 exercice.", PushMessage.for(candidate("quiz_prep", material: "Maths", count: 1)).body
         assert_equal "Ta copie de Maths est corrigée.", PushMessage.for(candidate("result", material: "Maths", kind: "copy")).body

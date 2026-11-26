@@ -1,0 +1,25 @@
+<%# 🌐 UI · teams/push_settings/_history — carte « Historique » : réglages et validations des 14 derniers jours, du plus récent au plus ancien %>
+<%# Rôle : 20 lignes puis « Voir plus » ; la liste `push_history_list` reçoit les validations du Lot C en tête (prepend) %>
+<%# ADR  : XXXX envois de notifications (§4.1) · UDR : XXXX écran notifications de l'équipe (§3.5, §3.7) %>
+<%# locals: (history:) -%>
+<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon: "clock", id: "push_history" do %>
+  <% shown, more = history.first(20), history.drop(20) %>
+  <% if history.empty? %>
+    <%= ui_empty_state title: t(".empty.title"), icon: "clock" %>
+  <% end %>
+  <ol id="push_history_list" class="divide-y divide-line text-sm">
+    <% shown.each do |entry| %>
+      <%= render "teams/push_settings/history_entry", entry: %>
+    <% end %>
+  </ol>
+  <% if more.any? %>
+    <details class="mt-2">
+      <summary class="min-h-tap cursor-pointer py-3 text-sm font-medium text-brand-strong"><%= t(".more", count: more.size) %></summary>
+      <ol class="divide-y divide-line text-sm">
+        <% more.each do |entry| %>
+          <%= render "teams/push_settings/history_entry", entry: %>
+        <% end %>
+      </ol>
+    </details>
+  <% end %>
+<% end %>

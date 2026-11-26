@@ -40,7 +40,7 @@ module UseCases
         return Shared::Result.failure(:invalid, errors:) unless errors.empty?
 
         @transaction.call do
-          live ? modify(message, dto, targets, now, illustration_id) : save(message, dto, targets, now, illustration_id)
+          live ? modify(message, dto, targets, now, illustration_id, actor) : save(message, dto, targets, now, illustration_id, actor)
         end
       rescue Frozen
         Shared::Result.failure(:conflict)
@@ -52,13 +52,13 @@ module UseCases
       # deux fois, ou le passage du job), la saisie s'applique comme la modification de l'annonce en ligne : rien n'est
       # archivé ni journalisé une seconde fois (phase 5, F1). Sinon, une parution suit le plafond (ADR-0081 §4.1) et se
       # journalise ; un brouillon ou une programmée n'archive rien.
-      def save(read, dto, targets, now, illustration_id)
+      def save(read, dto, targets, now, illustration_id, actor)
         live = lock_author(read.author_id, now, read.cap_school_id)
         message = @messages.find_by_public_id(public_id: read.public_id)
-        return modify(message, dto, targets, now, illustration_id) if message.status == "published"
+        return modify(message, dto, targets, now, illustration_id, actor) if message.status == "published"
 
         archived = dto.status == "published" ? make_room(live) : []
-        saved = write(message.with(**written(dto, targets, illustration_id)))
+        saved = write(message.with(**written(dto, targets, illustration_id, actor)))
         store_files(message.id, dto)
         journal_publication(saved, now) if saved.status == "published"
         Shared::Result.success(Saved.new(message: saved, archived:))
@@ -66,9 +66,9 @@ module UseCases
 
       # Publiée : ses dates gardées (la saisie est relue avec elles), edited_at et rejets effacés dans la même
       # transaction (ADR-0078 §4.1, AN-14), rien d'archivé ni de journalisé.
-      def modify(message, dto, targets, now, illustration_id)
+      def modify(message, dto, targets, now, illustration_id, actor)
         dto.valid_at?(now:, live_since: message.published_at, live_until: message.ends_at)
-        saved = write(message.with(**written(dto, targets, illustration_id), edited_at: now))
+        saved = write(message.with(**written(dto, targets, illustration_id, actor), edited_at: now))
         @messages.clear_dismissals(message_id: message.id)
         store_files(message.id, dto)
         Shared::Result.success(Saved.new(message: saved, archived: []))

@@ -3,14 +3,23 @@ require "test_helper"
 module Entities
   module Communication
     class PushMotiveTest < ActiveSupport::TestCase
-      test "la priorité : interro, devoir, annonce, commencé, résultat, inactif" do
-        assert_equal %w[quiz_prep assignment_due announcement unfinished result inactive], PushMotive::PRIORITY
+      test "la priorité : interro, devoir, nouveaux exercices, annonce, commencé, résultat, inactif" do
+        assert_equal %w[quiz_prep assignment_due assignment_new announcement unfinished result inactive], PushMotive::PRIORITY
         assert_equal PushMotive::PRIORITY.sort, PushMotive::ALL.sort
       end
 
       test "le rang suit la priorité" do
         assert_equal 0, PushMotive.rank("quiz_prep")
-        assert_equal 5, PushMotive.rank("inactive")
+        assert_equal 2, PushMotive.rank("assignment_new")
+        assert_equal 6, PushMotive.rank("inactive")
+      end
+
+      test "seuls trois motifs peuvent partir seuls ; l'annonce ne se valide pas" do
+        assert_equal %w[quiz_prep assignment_due assignment_new], PushMotive::AUTOMATABLE
+        assert_equal PushMotive::PRIORITY - %w[announcement], PushMotive::PLANNABLE
+        assert_empty PushMotive::AUTOMATABLE - PushMotive::PLANNABLE
+        assert PushMotive.automatable?("assignment_new")
+        assert_not PushMotive.automatable?("inactive")
       end
 
       test "un motif inconnu lève" do
@@ -24,7 +33,7 @@ module Entities
       def candidate(**attributes) = PushCandidate.new(user_id: 1, motive: "inactive", object_key: "inactive:2026-11-13:3", url: "/", **attributes)
 
       test "un candidat valide connaît sa priorité" do
-        assert_equal 5, candidate.priority
+        assert_equal 6, candidate.priority
         assert_equal({}, candidate.variables)
       end
 
@@ -37,6 +46,35 @@ module Entities
         assert_not candidate.expired?(now)
         assert_not candidate(valid_until: now + 1.minute).expired?(now)
         assert candidate(valid_until: now).expired?(now)
+      end
+    end
+
+    class PushMotiveSettingTest < ActiveSupport::TestCase
+      test "un réglage ne porte que le motif, la case et son auteur" do
+        at = Time.utc(2026, 11, 25, 9)
+        setting = PushMotiveSetting.new(motive: "assignment_due", automatic: true, updated_by_id: 4, updated_at: at)
+
+        assert setting.automatic
+        assert_equal 4, setting.updated_by_id
+      end
+
+      test "un motif non automatisable est refusé" do
+        assert_raises(ArgumentError) { PushMotiveSetting.new(motive: "inactive", automatic: true, updated_by_id: 4, updated_at: Time.utc(2026, 11, 25)) }
+      end
+    end
+
+    class PushApprovalTest < ActiveSupport::TestCase
+      test "une validation garde le jour, le motif, l'auteur et le nombre d'élèves" do
+        approval = PushApproval.new(on_date: Date.new(2026, 11, 25), motive: "inactive", approved_by_id: 4, approved_at: Time.utc(2026, 11, 25, 10), recipients_count: 42)
+
+        assert_nil approval.id
+        assert_equal 42, approval.recipients_count
+      end
+
+      test "une annonce ou un motif inconnu ne se valide pas" do
+        %w[announcement promo].each do |motive|
+          assert_raises(ArgumentError) { PushApproval.new(on_date: Date.new(2026, 11, 25), motive:, approved_by_id: 4, approved_at: Time.utc(2026, 11, 25), recipients_count: 1) }
+        end
       end
     end
 

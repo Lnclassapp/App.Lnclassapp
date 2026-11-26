@@ -1,0 +1,9 @@
+<%# 🌐 UI · teams/push_settings/_history_entry — une ligne de l'historique : « 25 nov. 10 h 12 · Awa K. a validé Élève inactif — 42 élèves » %>
+<%# Rôle : lue aussi par le Lot C (validation ajoutée en tête) ; entrée : kind (:approval, :setting_on, :setting_off), at, by_name, motive, count %>
+<%# ADR  : XXXX envois de notifications · UDR : XXXX écran notifications de l'équipe (§3.5) %>
+<%# locals: (entry:) -%>
+<% key = { approval: "approval", setting_on: "setting_on", setting_off: "setting_off" }.fetch(entry.kind) %>
+<li class="py-2 text-ink">
+  <%= t("teams.push_settings.history.#{key}", at: l(entry.at, format: "%-d %b %-H h %M"), name: entry.by_name,
+        motive: t("teams.push_settings.motives.#{entry.motive}"), count: entry.count) %>
+</li>
