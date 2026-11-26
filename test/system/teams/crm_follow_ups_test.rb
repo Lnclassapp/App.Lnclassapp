@@ -16,6 +16,7 @@ class Teams::CrmFollowUpsTest < ApplicationSystemTestCase
 
   def open_school_follow_ups
     visit school_path(@school.public_id)
+    wait_for_lazy_frames # the « Suivi » frames load once seen: « Chargement… » is still there on a loaded runner
     assert_selector "#school_crm_follow_ups", text: tl("school.title")
   end
 
