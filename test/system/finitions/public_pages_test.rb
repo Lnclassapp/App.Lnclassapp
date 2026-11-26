@@ -99,6 +99,8 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
     visit invitation_path(@invitation.token)
     accept_invitation
     assert_selector "#session-number", text: "01 00 00 00 09", wait: SIGN_IN_WAIT
+    # The toast « compte créé » sits over the link on a desktop.
+    dismiss_toasts
 
     click_on I18n.t("identity.sessions.new.not_my_number")
     assert_selector "#session_contact:focus", wait: SIGN_IN_WAIT

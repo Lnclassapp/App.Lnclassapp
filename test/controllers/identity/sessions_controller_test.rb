@@ -441,6 +441,24 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='session[pin]']:not([value])"
   end
 
+  test "number first in the students' app: a teacher's right code on the code step is refused, the number forgotten" do
+    teacher = create_teacher
+    headers = { "User-Agent" => APP_USER_AGENT }
+    post session_path, params: { session: { contact: teacher.contact } }, headers: headers
+    follow_redirect!(headers:)
+    assert_select "input[name='session[pin]']"
+
+    post session_path, params: { session: { pin: "2468" } }, headers: headers
+
+    assert_response :unprocessable_entity
+    assert_select "#wrong-app[role=alert]"
+    assert_select "input[name='session[contact]']:not([value])"
+    assert_select "input[name='session[pin]']", count: 0
+    assert_equal 0, Orm::Session.count
+    get new_session_path, headers: headers
+    assert_select "#session-number", count: 0
+  end
+
   test "CA-3, CA-T3: in the students' app, a teacher with the right PIN is sent to Lnclass Teacher, with no session" do
     sign_in_from APP_USER_AGENT, create_teacher
 

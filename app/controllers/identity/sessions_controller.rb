@@ -108,7 +108,7 @@ module Identity
 
     # 429 : l'écran où l'on était (le code, si le numéro gardé est inscrit), sous « Trop de tentatives ».
     def refuse_too_many
-      sent = params[:session].is_a?(ActionController::Parameters) ? params[:session] : ActionController::Parameters.new
+      sent = params.permit(session: %i[contact pin]).fetch(:session, {})
       entry = student_entry
       @stage = :contact
       @stage = :pin if sent.key?(:pin) && entry&.known
