@@ -1,6 +1,7 @@
 require "test_helper"
 
-# ADR-0050: sign-in by phone number and PIN, one message on failure, rate limit, lockout, sign-out.
+# ADR-0050: sign-in by phone number and PIN, lockout, sign-out. Chantier connexion-numero-d-abord (ADR-XXXX): the number first,
+# then the PIN or « pas de compte » ; number and PIN sent together keep the single message.
 class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
   test "the sign-in page shows the form" do
     get new_session_path
@@ -8,8 +9,8 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1", text: "Connexion"
     assert_select "input[type=tel][name='session[contact]'][maxlength='10'][placeholder='07 00 00 00 00']"
-    assert_select "input[type=password][name='session[pin]'][inputmode=numeric]"
-    assert_select "a[href='#{new_identity_pin_reset_path}']", text: "Code secret oublié ?"
+    assert_select "input[name='session[pin]']", 0
+    assert_select "button[type=submit]", text: "Continuer"
   end
 
   test "FU-03, FU-19: the page is « Connexion · Lnclass », its logo leads home, the number is the autofocus target" do
@@ -18,9 +19,6 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "Connexion · Lnclass"
     assert_select "a[href='#{root_path}'][aria-label='Lnclass, accueil'] img[alt='']", 2
     assert_select "input[name='session[contact]'][autocomplete=username][data-autofocus-target=field]:not([autofocus])"
-    assert_select "input[name='session[pin]'][autocomplete=current-password]:not([data-autofocus-target])"
-    assert_select "details summary .sr-only", "Aide : Code secret"
-    assert_select "details", text: /Code secret de 4 chiffres, choisi à l'inscription/
   end
 
   # UDR-0060 §3.2, §3.4: one title, one form, one action, the same for every role.
@@ -33,10 +31,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "p", text: "Heureux de vous revoir"
     assert_no_match "Élève · Enseignant · Équipe", response.body
     assert_no_match "Connectez-vous avec votre numéro", response.body
-    assert_select "#session_pin_hint", text: "code secret à 4 chiffres"
-    assert_select "details div", text: "Code secret de 4 chiffres, choisi à l'inscription."
-    assert_equal 2, response.body.scan("4 chiffres").size
-    assert_select "a[href=?].min-h-tap", new_identity_pin_reset_path, text: "Code secret oublié ?"
+    assert_select "#session_contact_hint", text: "10 chiffres, par ex. 0701020304."
   end
 
   # UDR-0088 §3.1 to §3.3 (CA-1, CA-2, CA-8): the blue card above the form under lg, the blue panel on the left from lg,
@@ -56,13 +51,11 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "main [class*='md:']", 0
   end
 
-  test "CA-1: under « Code secret oublié ? », a rule, then « Pas encore de compte ? » and the link to the student sign-up" do
+  test "UDR-XXXX §3.1: the number step no longer carries the link to the student sign-up: the number leads there" do
     get new_session_path
 
-    assert_select "#session-form + #session-sign-up.border-t", text: /Pas encore de compte \?/ do
-      assert_select "a[href=?].min-h-tap", new_student_entry_path, text: "Créer mon compte élève"
-    end
-    assert_operator response.body.index(new_identity_pin_reset_path), :<, response.body.index("href=\"#{new_student_entry_path}\"")
+    assert_select "#session-sign-up", 0
+    assert_select "a[href=?]", new_student_entry_path, 0
   end
 
   # CA-3: the sign-in serves every role, so its own words say « vous », never « tu ».
@@ -99,14 +92,13 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
 
   # UDR-0088 §3.2, UDR-0080 §3.3: the native bar carries the help only once signed in, so both shells keep « Besoin
   # d'aide ? » on the sign-in, and the link to the student sign-up (to be confirmed by the owner for Lnclass Teacher).
-  test "in both Android shells, the sign-in keeps « Besoin d'aide ? » and the link to the student sign-up" do
+  test "in both Android shells, the sign-in keeps « Besoin d'aide ? »" do
     [ APP_USER_AGENT, TEACHER_APP_USER_AGENT ].each do |agent|
       get new_session_path, headers: { "User-Agent" => agent }
 
       assert_response :success
       assert_select "#auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?"
       assert_select "dialog#help-sheet", 1
-      assert_select "#session-sign-up a[href=?]", new_student_entry_path, text: "Créer mon compte élève"
     end
   end
 
@@ -238,6 +230,159 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :too_many_requests
     assert_select "[role=alert]", text: /Trop de tentatives en une minute/
+  end
+
+  # Chantier connexion-numero-d-abord (ADR-XXXX-connexion-revele-un-numero-inscrit, UDR-XXXX-connexion-numero-d-abord).
+  def send_number(contact, ip: "127.0.0.1") = post(session_path, params: { session: { contact: } }, env: { "REMOTE_ADDR" => ip })
+  def send_pin(pin, ip: "127.0.0.1") = post(session_path, params: { session: { pin: } }, env: { "REMOTE_ADDR" => ip })
+
+  test "CA-1: a number alone that has an account opens the PIN step, the number shown, never a name or a role" do
+    teacher = create_teacher(last_name: "KOUASSI", first_name: "Aya")
+
+    send_number teacher.contact
+
+    assert_redirected_to new_session_path
+    assert_response :see_other
+    follow_redirect!
+    assert_select "h1", text: "Connexion"
+    assert_select "#session-number", text: /Votre numéro\s*#{teacher.contact.scan(/\d{2}/).join(" ")}/
+    assert_select "form#session-pin-form input[name='session[pin]'][autocomplete=current-password][data-autofocus-target=field]"
+    assert_select "form#session-pin-form input[name='session[contact]']", 0
+    assert_select "a#session-fix-number[href=?][data-turbo-prefetch=false]", new_session_path(fresh: 1)
+    assert_select "a#session-forgot-pin[href=?]", new_identity_pin_reset_path
+    assert_no_match(/KOUASSI|Aya|enseignant/i, css_select("main").text)
+  end
+
+  test "CA-2: a number alone without an account says so, shows the number and offers Élève or Enseignant(e)" do
+    send_number "0799999999"
+    follow_redirect!
+
+    assert_select "h1", text: "Ce numéro n'a pas encore de compte"
+    assert_select "#session-number", text: /07 99 99 99 99/
+    assert_select "#session-new-account" do
+      assert_select "a#session-new-student[href=?]", new_student_entry_path, text: "Élève"
+      assert_select "a#session-new-teacher[href=?]", new_teacher_registration_path(confirmed: 1), text: "Enseignant(e)"
+    end
+    assert_select "a#session-fix-number[href=?]", new_session_path(fresh: 1)
+    assert_select "input[name='session[pin]']", 0
+  end
+
+  test "CA-1: every role is revealed alike, and the team member still meets the second factor after the right PIN" do
+    member = create_team_member
+
+    send_number member.contact
+    follow_redirect!
+    assert_select "form#session-pin-form"
+    send_pin "2468"
+
+    assert_redirected_to new_identity_second_factor_path
+  end
+
+  test "CA-1: the right PIN after the number signs in, to the home of the role" do
+    student = create_student(classroom: create_classroom)
+
+    send_number student.contact
+    send_pin "2468"
+
+    assert_redirected_to student_home_path
+    assert_equal "Connexion réussie", flash[:notice]
+    assert_equal 1, Orm::Session.where(user: student).count
+  end
+
+  test "CA-5: a wrong PIN on a known number reads « Code secret incorrect », offers « Code secret oublié ? » and counts" do
+    student = create_student
+
+    send_number student.contact
+    send_pin "1357"
+
+    assert_response :unprocessable_entity
+    assert_select "#session_pin_error", text: "Code secret incorrect."
+    assert_select "#session-number", text: /#{student.contact.scan(/\d{2}/).join(" ")}/
+    assert_select "input[name='session[pin]']:not([value])"
+    assert_select "a#session-forgot-pin"
+    assert_select "input[value='1357']", 0
+    assert_equal 1, Orm::LoginAttempt.where(contact: student.contact, succeeded: false).count
+  end
+
+  test "CA-5: the lockout of the number still holds at the PIN step" do
+    student = create_student
+    5.times { create_login_attempt(contact: student.contact) }
+
+    send_number student.contact
+    send_pin "2468"
+
+    assert_response :too_many_requests
+    assert_select "[role=alert]", text: I18n.t("errors.locked.until_recovery")
+  end
+
+  test "CA-6: five wrong PINs in a minute from an address, /student included, refuse even the right PIN" do
+    student = create_student
+    3.times { post student_entries_path, params: { student_entry: { contact: student.contact, pin: "1357" } } }
+    send_number student.contact
+    2.times { send_pin "1357" }
+
+    send_pin "2468"
+
+    assert_response :too_many_requests
+    assert_select "[role=alert]", text: /Trop de tentatives/
+    assert_equal 0, Orm::Session.count
+  end
+
+  test "CA-7: 120 numbers a minute from an address, /login and /student together, then 429" do
+    60.times { |index| send_number format("07%08d", index) }
+    60.times { |index| post student_entries_path, params: { student_entry: { contact: format("05%08d", index) } } }
+
+    send_number "0799999999"
+
+    assert_response :too_many_requests
+    assert_select "[role=alert]", text: /Trop de tentatives/
+  end
+
+  test "CA-7: 600 numbers an hour from an address, then 429, even a minute later" do
+    travel_to Time.zone.local(2026, 11, 26, 9) do
+      5.times do |minute|
+        travel 1.minute
+        120.times { |index| send_number format("07%04d%04d", minute, index) }
+      end
+      travel 1.minute
+
+      send_number "0799999999"
+    end
+
+    assert_response :too_many_requests
+  end
+
+  test "CA-8: number and PIN sent together keep the single message, the number known or not" do
+    post session_path, params: { session: { contact: create_student.contact, pin: "1357" } }
+
+    assert_select "[role=alert]", text: "Numéro ou code secret incorrect."
+    assert_select "input[name='session[contact]']"
+    assert_select "input[name='session[pin]']"
+  end
+
+  test "CA-13: « Ce n'est pas mon numéro » forgets the kept number and puts it back in the field" do
+    send_number "0799999999"
+
+    get new_session_path(fresh: 1)
+
+    assert_select "h1", text: "Connexion"
+    assert_select "input[name='session[contact]'][value='0799999999']"
+    get new_session_path
+    assert_select "#session-number", 0
+  end
+
+  test "a PIN sent without a kept number goes back to the number, with « a expiré »" do
+    send_pin "2468"
+
+    assert_redirected_to new_session_path
+    assert_equal "Votre connexion a expiré. Saisissez de nouveau votre numéro.", flash[:alert]
+  end
+
+  test "a number out of format is refused on its field and never looked up" do
+    send_number "0901020304"
+
+    assert_response :unprocessable_entity
+    assert_select "#session_contact_error", text: "Le numéro compte 10 chiffres et commence par 01, 05 ou 07."
   end
 
   test "signing out ends the session and returns to the landing page" do

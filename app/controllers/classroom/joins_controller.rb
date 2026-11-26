@@ -87,7 +87,7 @@ module Classroom
     def render_entry
       pending = student_entry
       @link_token = link_token
-      @stage = pending&.pin ? :confirm : :credentials
+      @stage = entry_stage(pending)
       @form = Dtos::Identity::StudentEntryInput.new(contact: pending&.contact)
       render "identity/student_entries/new"
     end

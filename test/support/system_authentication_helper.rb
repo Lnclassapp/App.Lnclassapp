@@ -1,5 +1,6 @@
-# Signs in through the real forms, in the browser (ADR-0050): the PIN, then, for a team account
-# that has a second factor, the current TOTP code computed from the factory secret, sent by itself at its sixth digit.
+# Signs in through the real forms, in the browser (ADR-0050): the number first, then the PIN (chantier
+# connexion-numero-d-abord), then, for a team account that has a second factor, the current TOTP code computed from the
+# factory secret, sent by itself at its sixth digit.
 module SystemAuthenticationHelper
   ActionDispatch::SystemTestCase.include(self)
 
@@ -9,9 +10,10 @@ module SystemAuthenticationHelper
   def sign_in_as(user, pin: "2468")
     visit new_session_path
     fill_in "session[contact]", with: user.contact
-    fill_in "session[pin]", with: pin
+    click_on I18n.t("identity.sessions.new.continue")
+    fill_in "session[pin]", with: pin, wait: SIGN_IN_WAIT
     click_on I18n.t("identity.sessions.new.submit")
-    assert_no_selector "#session-form", wait: SIGN_IN_WAIT
+    assert_no_selector "#session-pin-form", wait: SIGN_IN_WAIT
     return unless user.respond_to?(:totp_secret)
 
     # The code leaves by itself at the sixth digit (UDR-0054 §3.6): a click on « Vérifier » could hit a page already gone.

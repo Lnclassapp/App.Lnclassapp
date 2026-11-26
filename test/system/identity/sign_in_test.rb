@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 # ADR-0050, ADR-0031: sign-in in a real browser; a failure re-renders the form in 422 without reloading the page.
+# Chantier connexion-numero-d-abord: the number first, then the PIN, or « Ce numéro n'a pas encore de compte ».
 class Identity::SignInTest < ApplicationSystemTestCase
   # The role homes are drawn, their controllers belong to later lots. Until those are merged, a stand-in
   # answers on the route (Turbo keeps the sign-in URL when a redirect ends in an error); a merged
@@ -20,22 +21,46 @@ class Identity::SignInTest < ApplicationSystemTestCase
     namespace.const_set(name.demodulize, Class.new(parent.constantize) { def show = render(html: "home", layout: true) })
   end
 
-  test "a wrong PIN shows one message in the form, without reloading the page" do
+  def enter_number(contact)
+    fill_in "session[contact]", with: contact
+    click_on I18n.t("identity.sessions.new.continue")
+  end
+
+  test "CA-5: a wrong PIN after the number reads « Code secret incorrect » under the field, without reloading the page" do
     student = create_student
     visit new_session_path
 
     assert_no_page_reload do
-      fill_in "session[contact]", with: student.contact
-      fill_in "session[pin]", with: "1357"
+      enter_number student.contact
+      fill_in "session[pin]", with: "1357", wait: SIGN_IN_WAIT
       click_on I18n.t("identity.sessions.new.submit")
 
-      assert_selector "[role=alert]", text: "Numéro ou code secret incorrect."
+      assert_selector "#session_pin_error", text: "Code secret incorrect."
     end
-    assert_field "session[contact]", with: student.contact
+    assert_selector "#session-number", text: student.contact.scan(/\d{2}/).join(" ")
     assert_field "session[pin]", with: ""
-    # Comportement actuel verrouillé : après l'échec, le focus va sur le numéro. Le PRD (§3) parle du code secret :
-    # écart noté au journal, à trancher par le porteur.
-    assert_selector "#session_contact:focus"
+    assert_link I18n.t("identity.sessions.new.forgot_pin")
+  end
+
+  test "CA-2, CA-4: a number without an account offers Élève or Enseignant(e); Enseignant(e) opens the code step, number kept" do
+    visit new_session_path
+    enter_number "0799999999"
+
+    assert_selector "h1", text: "Ce numéro n'a pas encore de compte", wait: SIGN_IN_WAIT
+    assert_selector "#session-number", text: "07 99 99 99 99"
+    click_on I18n.t("identity.sessions.new.new_teacher")
+
+    assert_selector "#teacher-registration-number", text: "07 99 99 99 99", wait: SIGN_IN_WAIT
+    assert_selector "legend", text: I18n.t("identity.teacher_registrations.form.security"), visible: :visible
+  end
+
+  test "CA-3: Élève opens « Nouveau sur Lnclass », the number kept" do
+    visit new_session_path
+    enter_number "0799999999"
+    click_on I18n.t("identity.sessions.new.new_student"), wait: SIGN_IN_WAIT
+
+    assert_selector "h1", text: I18n.t("identity.student_entries.new.confirm_title"), wait: SIGN_IN_WAIT
+    assert_selector "#student-entry-number", text: "07 99 99 99 99"
   end
 
   test "a student with a classroom lands on the student home" do
@@ -59,8 +84,8 @@ class Identity::SignInTest < ApplicationSystemTestCase
   test "a team member goes through the second factor without a click, then reaches the team home" do
     member = create_team_member
     visit new_session_path
-    fill_in "session[contact]", with: member.contact
-    fill_in "session[pin]", with: "2468"
+    enter_number member.contact
+    fill_in "session[pin]", with: "2468", wait: SIGN_IN_WAIT
     click_on I18n.t("identity.sessions.new.submit")
 
     assert_selector "#second-factor-form", wait: SIGN_IN_WAIT
@@ -85,12 +110,15 @@ class Identity::SignInTest < ApplicationSystemTestCase
       visit new_session_path
 
       assert_no_page_reload do
-        fill_in "session[contact]", with: student.contact
-        fill_in "session[pin]", with: "1357"
+        enter_number student.contact
+        fill_in "session[pin]", with: "1357", wait: SIGN_IN_WAIT
         click_on I18n.t("identity.sessions.new.submit")
 
-        assert_selector "[role=alert]", text: "Numéro ou code secret incorrect."
+        assert_selector "#session_pin_error", text: "Code secret incorrect."
       end
+      assert_no_horizontal_scroll
+      click_on I18n.t("identity.sessions.new.not_my_number")
+      assert_field "session[contact]", with: student.contact, wait: SIGN_IN_WAIT
 
       sign_in_as student
 
@@ -118,14 +146,16 @@ class Identity::SignInTest < ApplicationSystemTestCase
       assert_single_primary_action scope: "main"
       assert_blocks_above_fold "main > div > *", max: 2
       assert_operator rect("#auth-welcome-card")["bottom"], :<=, rect("#session-form")["top"]
-      assert_text "code secret à 4 chiffres"
-      assert_link I18n.t("identity.sessions.new.sign_up"), href: new_student_entry_path
+      assert_text "10 chiffres, par ex. 0701020304."
       help = find("#auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?")
       assert_operator rect("#auth-help [aria-controls=help-sheet]")["right"], :>, 390 - 40
       help.click
       assert_selector "dialog#help-sheet[open]"
       find("dialog#help-sheet button[data-action='modal#close']").click
       assert_no_selector "dialog#help-sheet[open]"
+      enter_number create_student.contact
+      assert_selector "#session-pin-form", wait: SIGN_IN_WAIT
+      assert_single_primary_action scope: "main"
       find("details summary", text: "Aide : Code secret").click
       assert_text "Code secret de 4 chiffres, choisi à l'inscription."
       assert_operator tap_height(find_link(I18n.t("identity.sessions.new.forgot_pin"))), :>=, 48
@@ -171,6 +201,11 @@ class Identity::SignInTest < ApplicationSystemTestCase
     page.evaluate_script("document.querySelector(arguments[0]).getBoundingClientRect().toJSON()", selector)
   end
 
+  def assert_no_horizontal_scroll
+    assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=,
+                    page.evaluate_script("document.documentElement.clientWidth")
+  end
+
   def tap_height(element)
     page.evaluate_script("arguments[0].getBoundingClientRect().height", element)
   end
@@ -178,8 +213,8 @@ class Identity::SignInTest < ApplicationSystemTestCase
   # The code leaves by itself at the sixth digit (UDR-0054 §3.6): no click on « Vérifier », which may be gone already.
   def sign_in_with_second_factor(member)
     visit new_session_path
-    fill_in "session[contact]", with: member.contact
-    fill_in "session[pin]", with: "2468"
+    enter_number member.contact
+    fill_in "session[pin]", with: "2468", wait: SIGN_IN_WAIT
     click_on I18n.t("identity.sessions.new.submit")
     fill_in "second_factor[code]", with: ROTP::TOTP.new(member.totp_secret).now, wait: SIGN_IN_WAIT
   end

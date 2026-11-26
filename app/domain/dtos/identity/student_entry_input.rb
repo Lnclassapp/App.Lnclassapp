@@ -1,29 +1,10 @@
 # 🧠 DOMAINE · Dtos::Identity::StudentEntryInput
-# Rôle : forme de l'entrée élève unique : numéro et code secret, puis la confirmation du code quand le numéro n'a pas de compte
-# ADR  : 0050, 0141-entree-eleve-revele-un-numero-inscrit · UDR : 0176-entree-eleve-unique
+# Rôle : forme de l'entrée élève (au « tu ») : le numéro seul, puis le code secret, tapé une seule fois pour un nouveau compte
+# ADR  : 0050, 0141-entree-eleve-revele-un-numero-inscrit, XXXX-connexion-revele-un-numero-inscrit · UDR : 0176-entree-eleve-unique, XXXX-connexion-numero-d-abord
 module Dtos
   module Identity
-    class StudentEntryInput < CredentialsInput
-      # nil au premier envoi ; posée par l'écran « Ce numéro n'a pas encore de compte ».
-      attribute :pin_confirmation, :string
-
-      # Un numéro hors format ne se dit pas « obligatoire » ; il n'est jamais cherché.
-      validate :contact_given, :pin_confirmation_shape
-
-      def confirming? = !pin_confirmation.nil?
-
-      private
-
-      def contact_given
-        return unless contact.nil?
-
-        errors.delete(:contact)
-        errors.add(:contact, raw_contact.blank? ? :blank : :invalid)
-      end
-
-      def pin_confirmation_shape
-        errors.add(:pin_confirmation, :blank) if confirming? && pin_confirmation.blank?
-      end
+    # Ses messages d'erreur sont ceux de l'élève (student_entries.fr.yml) ; la règle est celle de NumberEntryInput.
+    class StudentEntryInput < NumberEntryInput
     end
   end
 end
