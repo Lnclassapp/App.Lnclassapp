@@ -46,9 +46,9 @@ class Identity::TeacherMaterialsTest < ApplicationSystemTestCase
       click_on t("identity.profile_materials.edit.submit")
     end
 
-    visit profile_path
     assert_toast t("identity.profile_materials.update.updated")
     assert_no_selector "dialog#profile-materials-modal"
+    visit profile_path
     assert_selector "#profile_materials dd", text: /Physique-Chimie\s*Mathématiques\s*SVT/
     visit teacher_home_path
 
