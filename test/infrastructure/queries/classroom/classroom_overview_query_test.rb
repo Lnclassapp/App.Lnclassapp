@@ -16,7 +16,7 @@ module Queries
       def overview(show_roster: true, **) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:, **)
 
       test "l'aperçu porte les élèves et leurs nouveaux, les jours de séance, les exercices assignés et les cours" do
-        assert_equal %i[students students_total badge_filter new_students_count session_days assignments courses school_sigle],
+        assert_equal %i[students students_total badge_filter late_total up_to_date_total new_students_count session_days assignments courses school_sigle],
                      ClassroomOverviewQuery::Overview.members
       end
 
@@ -344,33 +344,58 @@ module Queries
         assert_equal [ 1, 1, 1, 1 ], overview(today: TODAY).students.map(&:self_practice_count)
       end
 
-      # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7, UDR-0108) : dans un groupe, trente élèves, puis trente de plus,
+      # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7, UDR-0108) : dans un groupe, dix élèves, puis dix de plus,
       # cumulativement. Sans exercice fait, personne n'a de badge.
       def roster_of(count, last_name: "Élève", joined_at: 1.month.ago)
         Array.new(count) { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name:, joined_at:) }
       end
 
-      test "CL-15 : trente élèves par page, cumulés ; students_total compte toute la classe" do
-        roster_of(65)
+      test "CL-15 : dix élèves par page, cumulés ; students_total compte toute la classe" do
+        roster_of(25)
 
-        assert_equal 30, ClassroomOverviewQuery::PER_PAGE
+        assert_equal 10, ClassroomOverviewQuery::PER_PAGE
         assert_nil overview.badge_filter
-        assert_equal [ 30, 65 ], overview.then { [ it.students.size, it.students_total ] }
-        assert_equal [ 60, 65 ], overview(page: 2).then { [ it.students.size, it.students_total ] }
-        assert_equal [ 65, 65 ], overview(page: 3).then { [ it.students.size, it.students_total ] }
-        assert_equal [ 65, 65 ], overview(page: 9).then { [ it.students.size, it.students_total ] }
-        assert_equal [ 65, 65 ], overview(page: 10**20).then { [ it.students.size, it.students_total ] }
-        assert_equal overview.students.map(&:public_id), overview(page: 2).students.first(30).map(&:public_id)
+        assert_equal [ 10, 25 ], overview.then { [ it.students.size, it.students_total ] }
+        assert_equal [ 20, 25 ], overview(page: 2).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 25, 25 ], overview(page: 3).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 25, 25 ], overview(page: 9).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 25, 25 ], overview(page: 10**20).then { [ it.students.size, it.students_total ] }
+        assert_equal overview.students.map(&:public_id), overview(page: 2).students.first(10).map(&:public_id)
       end
 
       test "CL-15 : une page nulle, négative ou qui n'est pas un entier vaut la première" do
-        roster_of(31)
+        roster_of(11)
 
-        [ 0, -1, nil, "2", 1.5 ].each { assert_equal 30, overview(page: it).students.size, it.inspect }
+        [ 0, -1, nil, "2", 1.5 ].each { assert_equal 10, overview(page: it).students.size, it.inspect }
+      end
+
+      # UDR accueil-enseignant-actions §3.6 : les en retard d'abord ; deux chiffres pour toute la classe, recherche ou non.
+      test "CA-5 : les élèves en retard passent avant les autres, et late_total / up_to_date_total comptent toute la classe" do
+        assert_equal [ nil, nil ], overview.then { [ it.late_total, it.up_to_date_total ] }
+        done = roster_of(1, last_name: "Aaa").first
+        waiting = roster_of(12, last_name: "Zzz")
+        late_assignment = create_assignment(classroom: @classroom, assignable: create_exercise, due_on: Date.current - 1, assigned_at: 3.days.ago)
+        create_exercise_session(student: done, exercise: Orm::Exercise.find(late_assignment.assignable_id), status: "completed",
+                                score_percent: 80, classroom_assignment: late_assignment)
+
+        result = overview(search: "aaa")
+        assert_equal [ 12, 1 ], [ result.late_total, result.up_to_date_total ]
+        assert_equal [ done.public_id ], result.students.map(&:public_id)
+        first_page = overview.students.map(&:public_id)
+        assert_not_includes first_page, done.public_id
+        assert_empty first_page - waiting.map(&:public_id)
+        assert_equal done.public_id, overview(page: 2).students.last.public_id
+      end
+
+      test "CA-5 : sans exercice échu, personne n'est en retard ; sans exercice assigné, pas de chiffres" do
+        roster_of(3)
+        create_assignment(classroom: @classroom, assignable: create_exercise, due_on: Date.current + 2)
+
+        assert_equal [ 0, 3 ], overview.then { [ it.late_total, it.up_to_date_total ] }
       end
 
       test "CL-15 : les nouveaux restent en tête de la première page" do
-        roster_of(63)
+        roster_of(23)
         newcomers = Array.new(2) { |index| create_student(classroom: @classroom, last_name: "Arrivé#{index}", joined_at: (3 + index).days.ago) }
 
         assert_equal newcomers.map(&:public_id), overview.students.first(2).map(&:public_id)
@@ -378,16 +403,16 @@ module Queries
       end
 
       test "CL-15 : avec une recherche, le total est celui des élèves qui y répondent" do
-        roster_of(40, last_name: "Koné")
+        roster_of(14, last_name: "Koné")
         roster_of(5, last_name: "Bamba")
 
-        assert_equal [ 30, 40 ], overview(search: "kon").then { [ it.students.size, it.students_total ] }
-        assert_equal [ 40, 40 ], overview(search: "kon", page: 2).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 10, 14 ], overview(search: "kon").then { [ it.students.size, it.students_total ] }
+        assert_equal [ 14, 14 ], overview(search: "kon", page: 2).then { [ it.students.size, it.students_total ] }
         assert_equal [ nil, nil ], overview(show_roster: false).to_h.values_at(:students_total, :badge_filter)
       end
 
       # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste se découpe par note sur 20, la moyenne des meilleurs
-      # scores aux exercices assignés à la classe ; trente par trente dans un groupe.
+      # scores aux exercices assignés à la classe ; dix par dix dans un groupe.
       # blank: copies without any answer, for which closing records no medal.
       def graded(scores, first_name: "Élève", blank: false)
         create_student(classroom: @classroom, first_name:, last_name: "N#{factory_sequence}", joined_at: 1.month.ago).tap do |student|

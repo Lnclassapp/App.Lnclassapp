@@ -1,0 +1,31 @@
+<%# 🌐 UI · classroom/teacher_homes/_to_follow — « À suivre » de l'accueil enseignant : les classes qui ont du retard ou des exercices en cours, la plus urgente d'abord %>
+<%# Rôle : titre visible, carte de lignes (_to_follow_row) ; les autres classes dans un <details> « Voir mes N autres classes » (sans JavaScript) ; « + Ajouter une classe » en dernière ligne ; rien à suivre : « Mes classes », trois classes puis le reste replié %>
+<%# ADR  : 0026, 0048 · UDR : accueil-enseignant-actions (§3.1), écrans enseignant §3.13, ecrans-wave (jamais de section vide) · locals: (home: TeacherHomeQuery::Row) -%>
+<% to_follow = home.to_follow %>
+<% shown, folded = to_follow.any? ? [ to_follow, home.others ] : [ home.others.first(3), home.others.drop(3) ] %>
+<% card = "divide-y divide-line rounded-card border border-line bg-white shadow-card" %>
+<% add = capture do %>
+  <li id="add_classroom" class="relative flex min-h-14 items-center px-4 py-3 active:bg-mist">
+    <%= link_to t("classroom.teacher_homes.add_classroom_card.action"), teacher_classrooms_path,
+                class: "text-sm font-medium text-brand-strong after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
+  </li>
+<% end %>
+<h2 id="teacher_home_classrooms_title" class="mb-3 font-display text-base font-medium text-band-ink lg:text-ink">
+  <%= to_follow.any? ? t(".title") : t(".title_all") %>
+</h2>
+<ul id="teacher_home_to_follow" class="<%= card %>">
+  <%= render partial: "classroom/teacher_homes/to_follow_row", collection: shown, as: :classroom %>
+  <%= add if folded.empty? %>
+</ul>
+<% if folded.any? %>
+  <details id="teacher_home_other_classrooms" class="group mt-2">
+    <summary class="mx-auto flex min-h-tap w-fit cursor-pointer list-none items-center gap-1 rounded-ln px-3 text-sm font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand [&::-webkit-details-marker]:hidden">
+      <%= t(".others", count: folded.size) %>
+      <%= ui_icon "chevron-down", variant: :mini, size: :sm, class: "transition group-open:rotate-180" %>
+    </summary>
+    <ul class="<%= class_names(card, "mt-2") %>">
+      <%= render partial: "classroom/teacher_homes/to_follow_row", collection: folded, as: :classroom %>
+      <%= add %>
+    </ul>
+  </details>
+<% end %>

@@ -1,10 +1,11 @@
 <%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
-<%# Rôle : « Chercher un élève » ; frame classroom_roster_list : puces de badge (`badge=`), compteur, une ligne par élève (« 9 faits sur 18 », badge de classe, lien vers sa fiche), « Voir les suivants » %>
-<%# ADR  : 0028, 0060, 0067, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.7) · UDR : enseignant §3.2 et §3.5, 0007, 0027, 0047, 0054, 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108 · sans menu ⋮ : les actions sont sur la fiche %>
+<%# Rôle : « 38 en retard · 2 à jour », « Chercher un élève » ; frame classroom_roster_list : puces de badge (`badge=`), compteur, une ligne par élève (nom et état « En retard » ou « À jour », lien vers sa fiche), « Voir plus (n) » %>
+<%# ADR  : 0028, 0060, 0067, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.7) · UDR : enseignant §3.2 et §3.5, 0007, 0027, 0047, 0054, 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108, accueil-enseignant-actions (§3.6) · sans menu ⋮ : les actions sont sur la fiche %>
 <%# total, page, badge_filter, new_count : par défaut ceux que la page de la classe a lus (@overview, @page) ; le stream
     du retrait (classroom_students/destroy) rend la liste avec focus_title pour rendre le focus au titre (UDR-0081 §3.7).
     can_remove reste dans la signature pour ce stream, qui ne change pas d'appel ; la liste ne l'utilise plus. -%>
-<%# locals: (classroom:, students:, search: "", total: @overview&.students_total.to_i, page: @page || 1, badge_filter: @overview&.badge_filter, new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
+<%# late_total, up_to_date_total : toute la classe, nil sans exercice assigné. -%>
+<%# locals: (classroom:, students:, search: "", late_total: @overview&.late_total, up_to_date_total: @overview&.up_to_date_total, total: @overview&.students_total.to_i, page: @page || 1, badge_filter: @overview&.badge_filter, new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
 <% per_page = Queries::Classroom::ClassroomOverviewQuery::PER_PAGE %>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
   <%# UDR-0081 §3.7 : le compte des nouveaux est dans le titre, lu avec lui ; la même balise est rendue par le stream du retrait. %>
@@ -14,6 +15,8 @@
       <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>
     </div>
   <% else %>
+    <%# UDR accueil-enseignant-actions §3.6 : les deux chiffres de toute la classe, quels que soient recherche et filtre. %>
+    <%= render "classroom/classrooms/roster_summary", late_total:, up_to_date_total: %>
     <%= form_with scope: :classroom_roster_search, url: classroom_path(classroom.public_id), method: :get, id: "classroom-roster-search",
                   html: { role: "search", "aria-label": t(".search_label") }, class: "mb-4 flex flex-col gap-3 sm:flex-row sm:items-end",
                   data: { turbo_frame: "classroom_roster_list", controller: "search" } do |form| %>
@@ -69,7 +72,7 @@
           <% first_added = per_page * (page - 1) if page > 1 %>
           <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
             <% students.each_with_index do |student, index| %>
-              <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3 ">
+              <li id="student_<%= student.public_id %>" class="flex min-h-11 items-center gap-3 px-4 py-3">
                 <%# UDR-0108 §3.2 : la photo et le nom forment un seul lien vers la fiche ; après « Voir les suivants », le focus
                     va au lien de la première ligne ajoutée, par le contrôleur autofocus (UDR-0054 §3.3 : jamais l'attribut). %>
                 <% focus = { controller: "autofocus", autofocus_target: "field" } if index == first_added %>
@@ -80,27 +83,23 @@
                   </span>
                   <div class="min-w-0">
                     <p class="w-full text-sm font-medium break-words underline-offset-4 group-hover:underline sm:truncate"><%= student.display_name %></p>
-                    <%# UDR enseignant §3.5 : « 9 faits sur 18 », puis « · 1 en retard » en text-warning. %>
-                    <% if student.assigned_count.positive? %>
-                      <p id="progress_<%= student.public_id %>" class="text-sm text-mute"><%= t(".done_of", count: student.done_count, assigned: student.assigned_count) %><% if student.late_count.positive? %> <span class="text-warning">· <%= t(".late", count: student.late_count) %></span><% end %></p>
-                    <% end %>
                   </div>
                 <% end %>
-                <div class="flex shrink-0 items-center gap-1 sm:gap-3 lg:justify-self-end">
-                  <%# UDR médailles : la médaille de l'élève dans la classe, seule (trophée du palier, nom en toutes lettres) ; « Pas encore » en
-                      text-mute sans exercice fait, jamais en rouge. Plus de moyenne ni de note : le chiffre reste en base. %>
-                  <p id="badge_<%= student.public_id %>" class="<%= student.badge ? Assessment::BadgesHelper::BADGE_PILL : "ui-badge ui-badge-md bg-mist text-mute" %> shrink-0">
-                    <% if student.badge %><%= comprehension_trophy(Assessment::ComprehensionHelper::BADGE_ICON_CLASSES.fetch(student.badge)) %><% end %>
-                    <%= comprehension_box_label(student.badge || :none) %>
-                  </p>
-                </div>
+                <%# UDR accueil-enseignant-actions §3.6 : l'état seul ; sans exercice assigné, rien. La médaille reste le filtre de la liste. %>
+                <% if student.assigned_count.positive? %>
+                  <% if student.late_count.positive? %>
+                    <span id="state_<%= student.public_id %>" class="shrink-0"><%= ui_badge t(".state_late"), tone: :warning, dot: true, size: :sm %></span>
+                  <% else %>
+                    <p id="state_<%= student.public_id %>" class="shrink-0 text-sm text-mute"><%= t(".state_up_to_date") %></p>
+                  <% end %>
+                <% end %>
               </li>
             <% end %>
           </ul>
           <% if students.size < total %>
             <%# UDR-0108 §3.3, §3.4 : le cadre est remplacé par sa version plus longue ; sans JavaScript, le lien rend la page. %>
             <div id="classroom_roster_more" class="mt-4 flex justify-center">
-              <%= ui_button t(".more", count: [ total - students.size, per_page ].min),
+              <%= ui_button t(".more", count: total - students.size),
                             href: classroom_path(classroom.public_id, q: search.presence, badge: badge_filter,
                                                  page: page + 1, anchor: "classroom_roster"),
                             variant: :secondary, icon: "chevron-down",

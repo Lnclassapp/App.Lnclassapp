@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/teacher_homes/_follow_ups — « Cette semaine » de l'accueil enseignant : les exercices à suivre %>
-<%# Rôle : une assignation par ligne (rond de matière, titre vers son suivi, classe et échéance, barre « 20 / 27 faits », pastille « pas encore » ou « en retard ») ; 3 lignes puis « Voir plus » %>
+<%# Rôle : rendu seulement avec des lignes, ou sans matière (l'invitation) : jamais vide (UDR accueil-enseignant-actions §3.3) ; une assignation par ligne (rond de matière, titre vers son suivi, classe et échéance, barre « 20 / 27 faits », pastille « pas encore » ou « en retard ») ; 3 lignes puis « Voir plus » %>
 <%# ADR  : 0072, 0103 · UDR : 0057 (R3), 0062 (§3.1), 0077 §3.1, 0126 §3.4, écrans enseignant §3.1 (barre du rôle), §3.3 · locals: (follow_ups: [TeacherFollowUpsQuery::Row], badges: false, no_materials: false) -%>
 <% today = Time.zone.today %>
 <%= tag.section id: "teacher_home_week", "aria-labelledby": "teacher_home_week_title", class: "space-y-3",
@@ -8,8 +8,6 @@
   <% if follow_ups.empty? && no_materials %>
     <%# ADR-0103 §4.6 : sans matière dans cet établissement, aucun exercice ne peut être suivi : on invite à les choisir. %>
     <%= render "choose_materials", id: "teacher_home_week_no_materials" %>
-  <% elsif follow_ups.empty? %>
-    <p class="text-meta text-mute"><%= t(".empty") %></p>
   <% else %>
     <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
       <% follow_ups.each_with_index do |follow_up, index| %>

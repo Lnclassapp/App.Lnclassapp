@@ -2,7 +2,7 @@
 <%# Rôle : toast, ligne retirée avec sa modale, titre de la liste recompté (focus) ; page enseignant : effectif et compte filtré, liste vidée → état vide ; page de la direction : re-demandée et fusionnée %>
 <%# ADR  : 0065, 0085 (§4.5) · UDR : 0006, 0081 (§3.7) · le titre reçoit le focus (autofocus, tabindex -1) ; @search : la recherche de la liste %>
 <% roster = { classroom: @header, students: @overview.students, search: @search, new_count: @overview.new_students_count,
-              can_remove: true, focus_title: true } %>
+              late_total: @overview.late_total, up_to_date_total: @overview.up_to_date_total, can_remove: true, focus_title: true } %>
 <%# Le titre de la liste (classroom/classrooms/_roster_title), avec l'autofocus qui y ramène le focus. %>
 <% title = render partial: "classroom/classrooms/roster_title", formats: :html,
                    locals: { count: @header.active_students_count, new_count: @overview.new_students_count, focus: true } %>
@@ -25,5 +25,7 @@
          t("classroom.classrooms.roster.count_partial", shown: @overview.students.size, total: @overview.students_total) :
          t("classroom.classrooms.roster.count", count: @overview.students.size)) %>
     <%= turbo_stream.replace "classroom_roster_title", title %>
+    <%= turbo_stream.replace "classroom_roster_summary", partial: "classroom/classrooms/roster_summary",
+                             locals: { late_total: @overview.late_total, up_to_date_total: @overview.up_to_date_total } %>
   <% end %>
 <% end %>
