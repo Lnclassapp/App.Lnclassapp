@@ -60,6 +60,7 @@ Le code secret d'un nouveau compte se tape désormais une seule fois (décision 
 
 - **Énumération de tous les rôles** : 600 numéros par heure et par adresse, `/login` et `/student` confondus ; un compte équipe ou direction devient devinable comme numéro inscrit. Sa protection reste le code (verrouillage par numéro, plafond par adresse) **et** le second facteur.
 - `/login` accepte 120 envois par minute au lieu de 5 : les codes faux y restent à 5 par minute et par adresse, mais les numéros seuls passent au débit de l'entrée élève.
+- **Appareil partagé** : le numéro tapé reste à l'étape du code 30 minutes (l'entrée gardée) ; la personne suivante sur la même tablette voit ce numéro et sait qu'il a un compte, sans nom ni rôle. Freins : « Ce n'est pas mon numéro », 5 codes faux par minute et par adresse, verrouillage du numéro. Même coût qu'ADR-0141 §4.3 pour `/student`.
 - Un code mal tapé à la création n'est plus vu avant le compte : il passe par « Code secret oublié ? » (WhatsApp, l'équipe).
 
 ## 6. Notes d'implémentation
@@ -72,8 +73,10 @@ HOURLY = { to: 600, within: 1.hour, scope: "identity/number_entries_hourly" }.fr
 
 ```ruby
 # app/domain/use_cases/identity/enter_by_number.rb
-return looked_up(dto) if dto.lookup?
-return sign_in(dto) if @users.find_by_contact(contact: dto.contact)
+known = !@users.find_by_contact(contact: dto.contact).nil?
+return entered(known ? :known : :new_number, dto) if dto.lookup?
+return sign_in(dto) if known
+entered(creates ? :confirmed : :new_number, dto)
 ```
 
 ## 7. Comment vérifier que la décision est respectée

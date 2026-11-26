@@ -22,6 +22,7 @@
 - [ ] 2026-11-26 · connexion-numero-d-abord · Libellé de l'étape 2 enseignant — appliqué : « Entrez votre code secret » (vouvoiement de l'enseignant) ; autres : « Entre ton code secret » mot pour mot ; recommandé : appliqué
 - [ ] 2026-11-26 · connexion-numero-d-abord · Inscription enseignant sans JavaScript : la recherche d'établissement (formulaire GET à part) est maintenant à l'étape 3, après numéro et code, qu'elle ne garde pas — appliqué : on cherche d'abord (test sans JavaScript dans cet ordre), rien d'autre ne change ; autres : remonter la recherche en tête de la page sans JavaScript ; recommandé : appliqué (le parcours sans JavaScript est rare, aucun envoi n'est perdu, seuls les champs déjà tapés)
 - [ ] 2026-11-26 · connexion-numero-d-abord · L'étape code de `/student` (numéro inscrit) utilise-t-elle le pavé ? — appliqué : non, champ simple comme `/login` (le pavé reste à la création) ; autres : le pavé partout ; recommandé : appliqué
+- [ ] 2026-11-26 · connexion-numero-d-abord · Appareil partagé : le numéro tapé reste à l'étape du code 30 minutes (revue sécurité, gravité basse) — appliqué : gardé 30 minutes, écrit en coût consenti dans l'ADR (comme `/student`, ADR-0141 §4.3) ; autres : revenir à l'écran du numéro après quelques minutes sans code ; recommandé : appliqué
 
 ## Retouches
 
@@ -33,7 +34,8 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- `bin/ci-quiet` lancé au premier plan : coupé à 10 minutes (exit 143), une demi-heure perdue. Toujours en arrière-plan.
+- `test/integration/pin_reveal_fields_test.rb` lisait l'ancien `/login` (code sur la première page) : vu seulement par la CI complète ; chercher `session[pin]` et `pin_confirmation` dans tout `test/` avant de retirer un champ.
 
 ## Ce qu'on a appris sur la codebase
 
