@@ -42,10 +42,9 @@ module Identity
 
     def destroy
       terminate_session
-      # Vide le cache HTTP du navigateur, PAS le Cache Storage (lnclass-pages-*) : celui-ci est purgé par le JavaScript puis par
-      # le programme d'arrière-plan (message ou en-tête Lnclass-Offline: forget). Jamais « storage » : il désinscrirait
-      # le programme et effacerait les files d'autres comptes sur l'appareil.
-      response.set_header("Clear-Site-Data", '"cache"')
+      # Pas de Clear-Site-Data sur la 303 : sur HTTPS, Chrome la retenait le temps de vider le cache. Il est posé sur la page
+      # d'arrivée chargée en entier (Authentication#clear_site_cache_after_sign_out). Le Cache Storage (lnclass-pages-*) est
+      # purgé par le JavaScript puis par le programme (Lnclass-Offline: forget).
       redirect_to main_app.root_path, notice: t(".signed_out"), status: :see_other
     end
 

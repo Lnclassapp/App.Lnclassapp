@@ -47,6 +47,23 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_signs_out_from_avatar_menu
   end
 
+  # Retouche deconnexion-panneau-compte : depuis l'accueil, « Mon compte » (page /students/menu) puis « Se déconnecter »
+  # ramène à l'accueil public ; la réponse de la déconnexion ne retient plus la redirection (plus de Clear-Site-Data).
+  test "the student signs out from « Mon compte » opened on their home and lands on the homepage" do
+    sign_in_as @student
+    visit student_menu_path
+
+    within("#student_menu") { click_button tn(:sign_out) }
+
+    assert_current_path root_path
+    # Téléphone partagé (ADR-0133 §4.2) : le retour arrière ne réaffiche aucune page de l'élève.
+    page.go_back
+    assert_no_selector "#student_menu"
+    assert_no_text "Aya"
+    visit student_home_path
+    assert_current_path new_session_path
+  end
+
   # CA-K1 (mvp-teacher-student): the teacher has no « Annonces » entry any more; the sidebar lists their three destinations.
   test "AN-22 — the teacher reaches their home, then every destination of their navigation, with no « Annonces »" do
     sign_in_as @teacher
