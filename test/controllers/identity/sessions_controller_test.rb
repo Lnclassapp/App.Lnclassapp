@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0050: sign-in by phone number and PIN, lockout, sign-out. Chantier connexion-numero-d-abord (ADR-XXXX): the number first,
+# ADR-0050: sign-in by phone number and PIN, lockout, sign-out. Chantier connexion-numero-d-abord (ADR-0148): the number first,
 # then the PIN or « pas de compte » ; number and PIN sent together keep the single message.
 class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
   test "the sign-in page shows the form" do
@@ -51,7 +51,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "main [class*='md:']", 0
   end
 
-  test "UDR-XXXX §3.1: the number step no longer carries the link to the student sign-up: the number leads there" do
+  test "UDR-0189 §3.1: the number step no longer carries the link to the student sign-up: the number leads there" do
     get new_session_path
 
     assert_select "#session-sign-up", 0
@@ -232,7 +232,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=alert]", text: /Trop de tentatives en une minute/
   end
 
-  # Chantier connexion-numero-d-abord (ADR-XXXX-connexion-revele-un-numero-inscrit, UDR-XXXX-connexion-numero-d-abord).
+  # Chantier connexion-numero-d-abord (ADR-0148, UDR-0189).
   def send_number(contact, ip: "127.0.0.1") = post(session_path, params: { session: { contact: } }, env: { "REMOTE_ADDR" => ip })
   def send_pin(pin, ip: "127.0.0.1") = post(session_path, params: { session: { pin: } }, env: { "REMOTE_ADDR" => ip })
 

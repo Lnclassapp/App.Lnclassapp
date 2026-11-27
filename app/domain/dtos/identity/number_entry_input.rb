@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Identity::NumberEntryInput
 # Rôle : forme de l'entrée « numéro d'abord » (/login, /student) : le numéro seul (code absent, nil) pour savoir s'il a un compte, puis le code
-# ADR  : 0050, 0141-entree-eleve-revele-un-numero-inscrit, XXXX-connexion-revele-un-numero-inscrit · UDR : XXXX-connexion-numero-d-abord
+# ADR  : 0050, 0141-entree-eleve-revele-un-numero-inscrit, 0148-connexion-revele-un-numero-inscrit · UDR : 0189-connexion-numero-d-abord
 module Dtos
   module Identity
     class NumberEntryInput < CredentialsInput

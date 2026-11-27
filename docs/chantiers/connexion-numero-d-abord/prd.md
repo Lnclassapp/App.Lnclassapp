@@ -104,5 +104,5 @@ Alors l'entrée est oubliée et le numéro revient, modifiable
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-connexion-revele-un-numero-inscrit — amende ADR-0141 §4.1 (« `/login` garde son message unique ») et ADR-0050.
-- UDR-XXXX-connexion-numero-d-abord — amende UDR-0176 (§3.2, §3.5), UDR-0180 (code une seule fois) et UDR-0135/UDR-0079 pour l'enseignant.
+- ADR-0148 — amende ADR-0141 §4.1 (« `/login` garde son message unique ») et ADR-0050.
+- UDR-0189 — amende UDR-0176 (§3.2, §3.5), UDR-0180 (code une seule fois) et UDR-0135/UDR-0079 pour l'enseignant.

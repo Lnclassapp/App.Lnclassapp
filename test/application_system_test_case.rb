@@ -117,7 +117,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("classroom.classroom_students.manage.issue_code")
   end
 
-  # Chantier connexion-numero-d-abord (UDR-XXXX §3.5): the teacher sign-up asks the number (step 1), then the secret code
+  # Chantier connexion-numero-d-abord (UDR-0189 §3.5): the teacher sign-up asks the number (step 1), then the secret code
   # typed once (step 2), each with « Continuer »; the profile (step 3) follows.
   def fill_teacher_number_and_code(contact, pin)
     fill_in "teacher_registration[contact]", with: contact

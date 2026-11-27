@@ -1,6 +1,6 @@
 require "test_helper"
 
-# Chantiers entree-eleve-unifiee (ADR-0141, UDR-0176) et connexion-numero-d-abord (ADR-XXXX, UDR-XXXX) :
+# Chantiers entree-eleve-unifiee (ADR-0141, UDR-0176) et connexion-numero-d-abord (ADR-0148, UDR-0189) :
 # « Je suis élève » demande le numéro d'abord ; inscrit → le code, puis connecté ; inconnu → « Nouveau sur Lnclass », le code
 # tapé une fois, puis l'inscription sans retaper ni l'un ni l'autre ; code faux → « Code secret incorrect » et « Code secret oublié ? ».
 class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest

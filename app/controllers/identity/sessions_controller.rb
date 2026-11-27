@@ -1,7 +1,7 @@
 # 🌐 DELIVERY · Identity::SessionsController
 # Rôle : connexion « numéro d'abord » (le numéro, puis le code, ou « pas de compte » vers l'inscription élève ou enseignant), déconnexion ;
 #        numéro et code envoyés ensemble : la connexion d'ADR-0050, message unique ; échec re-rendu en 422 (le code ne revient jamais), dont le refus d'une coque Android
-# ADR  : 0026, 0050, 0084 (§4.5), 0086 (§4.5), hors-connexion (§4.2), XXXX-connexion-revele-un-numero-inscrit · UDR : 0019, 0054 (§3.8), 0080, 0082 (§3.4), XXXX-connexion-numero-d-abord (§3.1 à §3.3)
+# ADR  : 0026, 0050, 0084 (§4.5), 0086 (§4.5), hors-connexion (§4.2), 0148-connexion-revele-un-numero-inscrit · UDR : 0019, 0054 (§3.8), 0080, 0082 (§3.4), 0189-connexion-numero-d-abord (§3.1 à §3.3)
 module Identity
   class SessionsController < ApplicationController
     include StudentEntrySession
@@ -14,7 +14,7 @@ module Identity
 
     allow_unauthenticated_access only: %i[new create]
     allow_unverified_second_factor only: :destroy
-    # ADR-XXXX §4.2 : les compteurs de l'entrée élève, partagés ; les codes faux restent à 5 par minute (WrongPinLimit).
+    # ADR-0148 §4.2 : les compteurs de l'entrée élève, partagés ; les codes faux restent à 5 par minute (WrongPinLimit).
     limit_number_entries with: -> { refuse_too_many }
 
     # Le numéro laissé par une invitation acceptée est lu et supprimé : un rechargement ne le montre plus ; il ouvre l'étape du
@@ -55,7 +55,7 @@ module Identity
     def both_posted? = posted.key?(:contact) && posted.key?(:pin)
     def context = { ip: request.remote_ip, user_agent: request.user_agent, client: lnclass_app&.to_s || "web" }
 
-    # ADR-XXXX §4.5 : la coque ou le gestionnaire de mots de passe envoie numéro et code ensemble : ADR-0050, message unique.
+    # ADR-0148 §4.5 : la coque ou le gestionnaire de mots de passe envoie numéro et code ensemble : ADR-0050, message unique.
     def authenticate_both
       @stage = :both
       @form = Dtos::Identity::CredentialsInput.new(contact: posted[:contact], pin: posted[:pin], **context)

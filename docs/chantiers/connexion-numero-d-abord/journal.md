@@ -8,9 +8,9 @@
 |---|---|---|---|
 | 2026-11-26 | Correction du porteur (relayée par l'orchestrateur) : pas de code d'établissement dans l'inscription enseignant | L'inscription enseignant n'en avait déjà pas : la voie « établissement choisi dans la liste » est la seule ; aucun droit ne change (ADR-0044 et ADR-0077 ne portent que sur la direction) | non |
 | 2026-11-26 | Le numéro d'une invitation acceptée devient l'entrée gardée (30 min) et ouvre l'étape du code ; la clé d'invitation sert toujours une fois | L'étape du code a besoin du numéro côté serveur ; même durée que l'entrée élève (ADR-0141 §4.3) ; « Ce n'est pas mon numéro » l'efface | non |
-| 2026-11-26 | Un envoi groupé (numéro + code) refusé réaffiche numéro et code ensemble (`@stage = :both`) | Coques et gestionnaires de mots de passe ; garde le message unique d'ADR-0050 | ADR-XXXX §4.5 |
-| 2026-11-26 | `EnterAsStudent` devient `EnterByNumber`, utilisé par `/login` et `/student` | Un seul use case pour « le numéro décide de la suite » | ADR-XXXX §6 |
-| 2026-11-26 | Lot C : le numéro repris de `/login` est relu dans l'entrée gardée par le serveur, jamais dans un champ caché ; l'inscription réussie l'efface | Le numéro ne voyage pas dans la page ; une entrée expirée rouvre l'étape 1 avec « Saisissez votre numéro » | UDR-XXXX §3.5 |
+| 2026-11-26 | Un envoi groupé (numéro + code) refusé réaffiche numéro et code ensemble (`@stage = :both`) | Coques et gestionnaires de mots de passe ; garde le message unique d'ADR-0050 | ADR-0148 §4.5 |
+| 2026-11-26 | `EnterAsStudent` devient `EnterByNumber`, utilisé par `/login` et `/student` | Un seul use case pour « le numéro décide de la suite » | ADR-0148 §6 |
+| 2026-11-26 | Lot C : le numéro repris de `/login` est relu dans l'entrée gardée par le serveur, jamais dans un champ caché ; l'inscription réussie l'efface | Le numéro ne voyage pas dans la page ; une entrée expirée rouvre l'étape 1 avec « Saisissez votre numéro » | UDR-0189 §3.5 |
 | 2026-11-26 | Lot C : seul un numéro **sans** compte est repris par l'inscription enseignant | Un numéro inscrit gardé par `/login` (étape du code) ne doit pas pré-remplir une inscription | non |
 
 ## À trancher

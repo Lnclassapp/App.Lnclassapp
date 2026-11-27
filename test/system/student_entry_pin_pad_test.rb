@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# Chantiers entree-et-accueil-eleve-allegees (UDR-0180 §3.2) et connexion-numero-d-abord (UDR-XXXX §3.4) : sur « Nouveau
+# Chantiers entree-et-accueil-eleve-allegees (UDR-0180 §3.2) et connexion-numero-d-abord (UDR-0189 §3.4) : sur « Nouveau
 # sur Lnclass », le code se tape une seule fois au pavé, en vrai navigateur. 4 cases et 10 touches, bouton gris ; au 4e
 # chiffre l'envoi part seul ; coche puis inscription.
 class StudentEntryPinPadTest < ApplicationSystemTestCase

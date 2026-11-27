@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
 # Rôle : inscription enseignant publique (1 numéro, 2 code tapé une fois, 3 profil), établissement cherché (DRENA déduite) ou lien /i/<jeton> (limités en débit) ; le numéro sans compte de /login est repris ; succès : session, voie notée et auditée
-# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103, 0142-recherche-etablissement · UDR : 0050, 0079, 0099 (§3.4), 0134 (§3.9), 0177-champ-etablissement, 0176-entree-eleve-unique (§3.7), XXXX-connexion-numero-d-abord (§3.5)
+# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103, 0142-recherche-etablissement · UDR : 0050, 0079, 0099 (§3.4), 0134 (§3.9), 0177-champ-etablissement, 0176-entree-eleve-unique (§3.7), 0189-connexion-numero-d-abord (§3.5)
 module Identity
   class TeacherRegistrationsController < ApplicationController
     include SchoolSearchField
@@ -78,7 +78,7 @@ module Identity
       render :new, status: :too_many_requests
     end
 
-    # Le numéro vient du champ de l'étape 1, ou, sans ce champ, de l'entrée « pas de compte » de /login (UDR-XXXX §3.5).
+    # Le numéro vient du champ de l'étape 1, ou, sans ce champ, de l'entrée « pas de compte » de /login (UDR-0189 §3.5).
     def form_input
       fields = params.expect(teacher_registration: FIELDS).to_h.symbolize_keys
       fields[:contact] = kept_contact unless fields.key?(:contact)

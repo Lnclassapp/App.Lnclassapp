@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Identity::EnterByNumber
 # Rôle : l'entrée « numéro d'abord » de /login et /student : le numéro seul dit s'il a un compte ; avec le code, un numéro inscrit se connecte
 #        (tout rôle, par Authenticate), un numéro inconnu confirme son entrée (code tapé une fois) quand la page crée des comptes
-# ADR  : 0028 (exempté de policy : l'acteur n'existe pas encore), 0050, 0141-entree-eleve-revele-un-numero-inscrit, XXXX-connexion-revele-un-numero-inscrit
+# ADR  : 0028 (exempté de policy : l'acteur n'existe pas encore), 0050, 0141-entree-eleve-revele-un-numero-inscrit, 0148-connexion-revele-un-numero-inscrit
 module UseCases
   module Identity
     class EnterByNumber

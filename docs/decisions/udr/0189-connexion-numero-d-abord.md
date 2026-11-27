@@ -1,8 +1,8 @@
-# UDR-XXXX : Connexion et inscription « numéro d'abord » — `/login`, `/student`, inscription enseignant
+# UDR-0189 : Connexion et inscription « numéro d'abord » — `/login`, `/student`, inscription enseignant
 <!-- index
 titre: Connexion numéro d'abord, code tapé une fois, inscription enseignant comme l'élève
 statut: Accepté
-adr-lie: XXXX-connexion-revele-un-numero-inscrit
+adr-lie: 0148-connexion-revele-un-numero-inscrit
 problematique: la connexion demandait numéro et code ensemble et laissait l'inscrit et le nouveau devant le même refus ; l'enseignant s'inscrivait dans un autre ordre que l'élève
 -->
 
@@ -11,7 +11,7 @@ problematique: la connexion demandait numéro et code ensemble et laissait l'ins
 | **Statut** | Accepté |
 | **Date** | 2026-11-26 |
 | **Chantier** | `docs/chantiers/connexion-numero-d-abord` |
-| **ADR lié** | ADR-XXXX-connexion-revele-un-numero-inscrit |
+| **ADR lié** | ADR-0148 |
 | **Remplacé par** | — (amende UDR-0176 §3.1, §3.2, §3.5 ; UDR-0180 §3.2 ; UDR-0135 et UDR-0079 pour l'ordre des étapes enseignant) |
 
 ---

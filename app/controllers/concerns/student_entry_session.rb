@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · StudentEntrySession — l'entrée « numéro d'abord » gardée en session, de /login ou /student à la fin de l'inscription
 # Rôle : le numéro, s'il a un compte (known), le code d'un nouvel élève une fois tapé (confirmed), et le jeton du lien de classe ; 30 minutes, jamais dans l'adresse ni dans la page
-# ADR  : 0141-entree-eleve-revele-un-numero-inscrit (§4.3), XXXX-connexion-revele-un-numero-inscrit (§4.3), adresse-publique-etablissement (§6) · UDR : 0176-entree-eleve-unique, XXXX-connexion-numero-d-abord
+# ADR  : 0141-entree-eleve-revele-un-numero-inscrit (§4.3), 0148-connexion-revele-un-numero-inscrit (§4.3), adresse-publique-etablissement (§6) · UDR : 0176-entree-eleve-unique, 0189-connexion-numero-d-abord
 module StudentEntrySession
   extend ActiveSupport::Concern
 
