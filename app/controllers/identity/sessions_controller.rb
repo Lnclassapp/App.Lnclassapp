@@ -14,6 +14,7 @@ module Identity
 
     allow_unauthenticated_access only: %i[new create]
     allow_unverified_second_factor only: :destroy
+    helper_method :entry_path, :entries_path
     # ADR-0148 §4.2 : les compteurs de l'entrée élève, partagés ; les codes faux restent à 5 par minute (WrongPinLimit).
     limit_number_entries with: -> { refuse_too_many }
 
@@ -35,7 +36,7 @@ module Identity
       return authenticate_both if both_posted?
 
       @form = entry_input
-      return redirect_to(new_session_path, alert: t(".expired"), status: :see_other) unless @form
+      return redirect_to(entry_path, alert: t("identity.sessions.create.expired"), status: :see_other) unless @form
 
       enter_by_number
     end
@@ -97,12 +98,16 @@ module Identity
 
       # :known ou :new_number (creates: false) : le numéro est gardé, l'écran suivant le relit (PRG).
       keep_student_entry(contact: value.contact, pin: nil, confirmed: false, link_token: nil, known: value.outcome == :known)
-      redirect_to new_session_path, status: :see_other
+      redirect_to entry_path, status: :see_other
     end
+
+    # /login ; /teacher (Identity::TeacherEntriesController) a les siennes : même écran, autre adresse (UDR-0189 §3.8).
+    def entry_path(**) = new_session_path(**)
+    def entries_path = session_path
 
     def signed_in(token)
       start_session(token)
-      redirect_to_home notice: t(".signed_in"), status: :see_other
+      redirect_to_home notice: t("identity.sessions.create.signed_in"), status: :see_other
     end
 
     # 429 : l'écran où l'on était (le code, si le numéro gardé est inscrit), sous « Trop de tentatives ».

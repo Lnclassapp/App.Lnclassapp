@@ -263,6 +263,7 @@ module ComponentsHelper
     input_html[:class] = field_classes(kind, error, class_names(input_html[:class], { FIELD_REVEAL_INPUT => reveal }))
     input_html[:data] = { **input_html.fetch(:data, {}), password_reveal_target: "input" } if reveal
     input_html[:data] = { **input_html.fetch(:data, {}), autofocus_target: "field" } if autofocus
+    input_html[:data] = digits_only(input_html.fetch(:data, {})) if digits_only?(kind, input_html)
     control = case kind
     when :select then form.select(method, choices, { prompt: input_html.delete(:prompt) }, input_html)
     else form.public_send(builder, method, input_html)
@@ -530,6 +531,14 @@ module ComponentsHelper
   end
 
   private
+
+  # UDR-0189 §3.7 : un numéro (as: :tel) ou un code secret (as: :password, inputmode numérique) ne garde que des chiffres
+  # pendant la frappe (contrôleur digits-only).
+  def digits_only?(kind, input_html) = kind == :tel || (kind == :password && input_html[:inputmode].to_s == "numeric")
+
+  def digits_only(data)
+    { **data, controller: [ data[:controller], "digits-only" ].compact.join(" ") }
+  end
 
   def option!(table, key, component)
     table.fetch(key.to_sym) { raise ArgumentError, "#{component} : « #{key} » inconnu (#{table.keys.join(', ')})" }

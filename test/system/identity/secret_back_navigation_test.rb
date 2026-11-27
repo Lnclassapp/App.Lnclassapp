@@ -7,7 +7,6 @@ class Identity::SecretBackNavigationTest < ApplicationSystemTestCase
     member = create_team_member(second_factor: false)
     visit new_session_path
     enter_credentials member.contact, "2468"
-    click_on I18n.t("identity.sessions.new.submit")
 
     secret = find("#second-factor-secret", wait: SIGN_IN_WAIT).text.delete(" ")
     # The code leaves by itself at the sixth digit (UDR-0054 §3.6).

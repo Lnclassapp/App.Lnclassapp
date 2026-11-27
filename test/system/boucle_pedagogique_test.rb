@@ -137,8 +137,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     # Chantier connexion-numero-d-abord : le numéro de l'invitation est gardé, /login ouvre l'étape du code.
     assert_selector "#session-pin-form", wait: SIGN_IN_WAIT
-    fill_in "session[pin]", with: "4821"
-    click_on t("identity.sessions.new.submit")
+    tap_pin "4821"
 
     secret = find("#second-factor-secret", wait: SIGN_IN_WAIT).text.delete(" ")
     # The code leaves by itself at the sixth digit; the codes go on once they are kept (UDR-0054 §3.6, §3.7).

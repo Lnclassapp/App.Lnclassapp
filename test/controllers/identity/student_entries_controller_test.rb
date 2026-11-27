@@ -128,7 +128,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
       end
       assert_select "#student-entry-confirm-submit:not([disabled])"
     end
-    assert_select "#student-entry-pin-pad", text: /Entre ton code secret : 4 chiffres, que tu retiendras\./
+    assert_select "#student-entry-pin-pad", text: /Choisis ton code secret : 4 chiffres faciles à retenir\. Tu le taperas à chaque connexion\./
     assert_no_match "Retape", response.body
   end
 

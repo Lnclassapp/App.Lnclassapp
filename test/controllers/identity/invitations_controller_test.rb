@@ -66,7 +66,7 @@ class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     # Chantier connexion-numero-d-abord : le numéro de l'invitation ouvre l'étape du code, numéro affiché.
     assert_select "#session-number", text: /01 00 00 00 09/
-    assert_select "input[name='session[pin]'][data-autofocus-target=field]:not([value])"
+    assert_select "input[name='session[pin]'][data-identity--pin-pad-target=field]:not([value])"
     assert_nil session[:login_contact]
   end
 

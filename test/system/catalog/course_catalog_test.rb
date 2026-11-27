@@ -151,6 +151,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       click_on t("catalog.content_status.actions.publish")
       assert_toast t("teams.courses.transition.published", name: "Mutations")
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
+      dismiss_toasts # le toast « publié » recouvrait « Archiver » en suite complète
 
       find("button[aria-controls=course-actions-menu]").click
       click_on t("catalog.content_status.actions.archive")

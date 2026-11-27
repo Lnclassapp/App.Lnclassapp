@@ -13,6 +13,7 @@ problematique: la connexion demandait numéro et code ensemble et laissait l'ins
 | **Chantier** | `docs/chantiers/connexion-numero-d-abord` |
 | **ADR lié** | ADR-0148 |
 | **Remplacé par** | — (amende UDR-0176 §3.1, §3.2, §3.5 ; UDR-0180 §3.2 ; UDR-0135 et UDR-0079 pour l'ordre des étapes enseignant) |
+| **Amendement** | 2026-11-27, retours du porteur après test sur Develop : §3.6 (4 cases partout), §3.7 (chiffres seuls), §3.8 (`/teacher`) ; remplacent ce qui les contredit plus haut |
 
 ---
 
@@ -54,7 +55,7 @@ Cadre commun de `/login` et `/student` : inchangé (`shared/auth_welcome` pannea
 
 - `@stage = :contact` : titre « Je suis élève », `form#student-entry-form` avec le **seul** numéro (UDR-0176 §3.2 sans le code), « Continuer ». Focus : aucun sur `/c/<jeton>` (inchangé).
 - `@stage = :pin` (numéro inscrit) : titre « Entre ton code secret » ; `div#student-entry-number` « Ton numéro » ; `form#student-entry-pin-form` : `ui_field :pin` 4 chiffres (`minlength=4 maxlength=4 pattern="[0-9]{4}"`, `autocomplete="current-password"`, `autofocus`), « Continuer » ; code faux → « Code secret incorrect. » + `a#student-entry-forgot-pin` (UDR-0176 §3.3 inchangé) ; `a#student-entry-fix-number`.
-- `@stage = :new_account` (numéro sans compte) : titre « Nouveau sur Lnclass » ; `div#student-entry-number` « Ce numéro n'a pas encore de compte : » ; `form#student-entry-confirm-form`, champ `student_entry[pin]` et pavé UDR-0180 (mêmes cibles et ids), consigne « Entre ton code secret : 4 chiffres, que tu retiendras. » ; coche au 4e chiffre « Code secret choisi. » ; bouton « Créer mon compte » ; `a#student-entry-fix-number`. Plus de confirmation ni de message d'écart.
+- `@stage = :new_account` (numéro sans compte) : titre « Nouveau sur Lnclass » ; `div#student-entry-number` « Ce numéro n'a pas encore de compte : » ; `form#student-entry-confirm-form`, champ `student_entry[pin]` et pavé UDR-0180 (mêmes cibles et ids), consigne « Choisis ton code secret : 4 chiffres faciles à retenir. Tu le taperas à chaque connexion. » (amendement du 2026-11-27) ; coche au 4e chiffre « Code secret choisi. » ; bouton « Créer mon compte » ; `a#student-entry-fix-number`. Plus de confirmation ni de message d'écart.
 - Le bandeau de classe `/c/<jeton>` et le champ caché `link_token` restent sur les trois étapes.
 
 ### 3.5 Inscription enseignant (`/teacher-signup?confirmed=1`, `/i/<jeton>`, au « vous »)
@@ -62,13 +63,30 @@ Cadre commun de `/login` et `/student` : inchangé (`shared/auth_welcome` pannea
 Trois étapes, `classroom--signup-steps`, compteur « Étape N sur 3 », barre en trois segments, carte de bienvenue et « Déjà un compte ? » sur le premier écran seulement (inchangés).
 
 1. `fieldset#teacher-registration-section-contact` `data-step=1 data-continue` : légende « Votre numéro », aide « Pour vous connecter, sans mot de passe à retenir. » ; `ui_field :contact, as: :tel` (règles actuelles, `autofocus`) ; bouton primaire `lg full` « Continuer » (`#teacher-registration-continue-1`, `type=button`, `data-action=classroom--signup-steps#continue`). Le sponsor d'un lien de parrainage s'affiche ici.
-2. `fieldset#teacher-registration-section-security` `data-step=2 data-continue` : légende « Entrez votre code secret », aide « 4 chiffres, que vous seul connaissez. » ; `ui_field :pin, as: :password, reveal: true`, `minlength=4 maxlength=4 pattern="[0-9]{4}"`, `autocomplete="new-password"` ; **pas** de confirmation ; « Continuer » (`#teacher-registration-continue-2`).
+2. `fieldset#teacher-registration-section-security` `data-step=2 data-continue` : légende « Choisissez votre code secret », aide « 4 chiffres faciles à retenir. Vous le taperez à chaque connexion. » (amendement du 2026-11-27 ; l'aide n'est pas répétée au-dessus des cases) ; `ui_field :pin, as: :password, reveal: true`, `minlength=4 maxlength=4 pattern="[0-9]{4}"`, `autocomplete="new-password"` ; **pas** de confirmation ; « Continuer » (`#teacher-registration-continue-2`).
 3. `fieldset#teacher-registration-section-you` `data-step=3` : légende « Votre profil » ; l'établissement (rappel `_school_preview` d'un lien valable, sinon la recherche, qui ne fait plus avancer d'étape) ; matière ; nom ; prénoms ; genre ; « Créer mon compte » et la ligne des conditions. Aucun champ de code d'établissement.
 
 - Numéro repris de `/login` (entrée « pas de compte » en session) : l'étape 1 n'est pas rendue (étape 2 d'abord, « Retour » caché), et l'étape 2 commence par `div#teacher-registration-number` « Votre numéro » + `a#teacher-registration-fix-number` « Ce n'est pas mon numéro » → `new_session_path(fresh: 1)`.
 - « Continuer » : si un champ de l'étape est invalide, `reportValidity` et focus sur lui ; sinon étape suivante. « Entrée » fait de même aux étapes 1 et 2.
 - Erreur serveur : l'étape de la première erreur s'ouvre (`contact` 1, `pin` 2, le reste 3). « Ce numéro est déjà utilisé » : étape 1, sous le champ.
 - Sans JavaScript : les trois fieldsets visibles, un seul envoi.
+
+### 3.6 Amendement du 2026-11-27 : le code en 4 cases partout où l'on se connecte ou crée son compte
+
+- Partiel `shared/_pin_pad` (locaux `prefix`, `field`, `hint`, `error`, `match`, `offline`) : `#<prefix>-pin-field` (le `ui_field :pin` natif, seul visible sans JavaScript), `#<prefix>-pin-pad[hidden]` avec 4 cases `#<prefix>-pin-boxes`, statut `sr-only aria-live` « N chiffres sur 4 », coche `#<prefix>-pin-check`, alerte hors ligne `#<prefix>-pin-offline[role=alert][hidden]`, pavé `#<prefix>-keypad` (`role=group`, « Pavé numérique », touches ≥ 56 px, « Effacer »). L'erreur serveur du code (`error`) s'affiche au-dessus des cases (`#<prefix>-pin-error[role=alert]`).
+- Contrôleur `identity--pin-pad` (texte hérité d'UDR-0180) : mode `submit` (défaut) envoie le formulaire au 4e chiffre ; mode `step` remplit le champ et clique le bouton d'étape (« Continuer »). Le clavier physique ne nourrit que le pavé visible, jamais un autre champ en cours de saisie.
+- Remplace le champ simple de §3.2 (`/login` et `/teacher` étape code, ainsi que l'envoi groupé refusé `:both`), §3.4 (`/student` étape code ; « Nouveau sur Lnclass » inchangé) et §3.5 étape 2 de l'inscription enseignant (mode `step`). Le choix n°4 du journal (champ simple pour un numéro inscrit) est retiré.
+- Hors champ (inchangés, à trancher) : code + confirmation de l'inscription élève sans entrée, de l'invitation enseignant et de la direction ; code oublié ; changement du code.
+
+### 3.7 Amendement du 2026-11-27 : chiffres seuls
+
+- Tout `ui_field as: :tel`, et tout `ui_field as: :password, inputmode: "numeric"`, porte le contrôleur `digits-only` : à chaque saisie (frappe, collage), tout ce qui n'est pas un chiffre est retiré et la longueur bornée à `maxlength`. `inputmode="numeric"` ouvre le pavé du téléphone. Le serveur garde ses propres règles sans JavaScript.
+
+### 3.8 Amendement du 2026-11-27 : `/teacher`, l'entrée enseignant
+
+- Accueil : « Enseignant(e) » est un lien `#role-entry-teacher-entry` → `new_teacher_entry_path` (comme « Je suis élève ») ; la fenêtre « Vous êtes enseignant ? » est retirée.
+- `GET /teacher` (`Identity::TeacherEntriesController`, sous-classe de la connexion, mêmes compteurs et refus) rend l'écran de `/login` titré « Je suis enseignant(e) » (`title`, `h1`), formulaires vers `POST /teacher`, « Ce n'est pas mon numéro » → `/teacher?fresh=1`. Numéro inscrit → étape code (§3.6), puis l'accueil du rôle. Numéro sans compte → `new_teacher_registration_path(confirmed: 1)` : l'inscription s'ouvre à l'étape 2, numéro rappelé ; son « Ce n'est pas mon numéro » → `/teacher?fresh=1`.
+- `/teacher-signup` sans `confirmed=1` ni recherche renvoyée → 303 vers `/teacher` (la question « Êtes-vous bien enseignant(e) ? » d'UDR-0176 §3.7 est retirée). `/teacher-signup?confirmed=1`, `/i/<jeton>` et « Ce n'est pas votre établissement ? » (`?confirmed=1`) gardent le parcours.
 
 ### États
 

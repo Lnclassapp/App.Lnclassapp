@@ -12,7 +12,6 @@ module Finitions
       member = create_team_member
       visit new_session_path
       enter_credentials member.contact, "2468"
-      click_on I18n.t("identity.sessions.new.submit")
       click_on "J'utilise un code de secours", wait: SIGN_IN_WAIT
       assert_selector "#second_factor_code:focus"
 

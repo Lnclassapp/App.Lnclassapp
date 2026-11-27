@@ -29,7 +29,8 @@ class Identity::ProfileContactTest < ApplicationSystemTestCase
 
         assert_selector "[role=alert]", text: "Code secret incorrect."
         assert_field "contact_change[current_pin]", with: ""
-        assert_field "contact_change[contact]", with: "07 11 22 33 44"
+        # UDR-0189 §3.7 : chiffres seuls, les espaces tombent à la frappe ; la valeur re-rendue reste sans espace.
+        assert_field "contact_change[contact]", with: "0711223344"
       end
     end
 

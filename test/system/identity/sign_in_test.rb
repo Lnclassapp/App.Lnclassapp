@@ -32,13 +32,12 @@ class Identity::SignInTest < ApplicationSystemTestCase
 
     assert_no_page_reload do
       enter_number student.contact
-      fill_in "session[pin]", with: "1357", wait: SIGN_IN_WAIT
-      click_on I18n.t("identity.sessions.new.submit")
+      tap_pin "1357", wait: SIGN_IN_WAIT
 
-      assert_selector "#session_pin_error", text: "Code secret incorrect."
+      assert_selector "#session-pin-error", text: "Code secret incorrect."
     end
     assert_selector "#session-number", text: student.contact.scan(/\d{2}/).join(" ")
-    assert_field "session[pin]", with: ""
+    assert_selector "#session-pin-boxes span", count: 4, text: ""
     assert_link I18n.t("identity.sessions.new.forgot_pin")
   end
 
@@ -85,8 +84,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
     member = create_team_member
     visit new_session_path
     enter_number member.contact
-    fill_in "session[pin]", with: "2468", wait: SIGN_IN_WAIT
-    click_on I18n.t("identity.sessions.new.submit")
+    tap_pin "2468", wait: SIGN_IN_WAIT
 
     assert_selector "#second-factor-form", wait: SIGN_IN_WAIT
     assert_current_path new_identity_second_factor_path
@@ -111,10 +109,9 @@ class Identity::SignInTest < ApplicationSystemTestCase
 
       assert_no_page_reload do
         enter_number student.contact
-        fill_in "session[pin]", with: "1357", wait: SIGN_IN_WAIT
-        click_on I18n.t("identity.sessions.new.submit")
+        tap_pin "1357", wait: SIGN_IN_WAIT
 
-        assert_selector "#session_pin_error", text: "Code secret incorrect."
+        assert_selector "#session-pin-error", text: "Code secret incorrect."
       end
       assert_no_horizontal_scroll
       click_on I18n.t("identity.sessions.new.not_my_number")
@@ -156,8 +153,8 @@ class Identity::SignInTest < ApplicationSystemTestCase
       enter_number create_student.contact
       assert_selector "#session-pin-form", wait: SIGN_IN_WAIT
       assert_single_primary_action scope: "main"
-      find("details summary", text: "Aide : Code secret").click
-      assert_text "Code secret de 4 chiffres, choisi à l'inscription."
+      # UDR-0189 §3.6 : l'aide du code est écrite au-dessus des 4 cases (l'infobulle reste au champ natif, sans JavaScript).
+      assert_selector "#session-pin-pad", text: "Code secret de 4 chiffres, choisi à l'inscription."
       assert_operator tap_height(find_link(I18n.t("identity.sessions.new.forgot_pin"))), :>=, 48
 
       click_on I18n.t("identity.sessions.new.forgot_pin")
@@ -214,8 +211,7 @@ class Identity::SignInTest < ApplicationSystemTestCase
   def sign_in_with_second_factor(member)
     visit new_session_path
     enter_number member.contact
-    fill_in "session[pin]", with: "2468", wait: SIGN_IN_WAIT
-    click_on I18n.t("identity.sessions.new.submit")
+    tap_pin "2468", wait: SIGN_IN_WAIT
     fill_in "second_factor[code]", with: ROTP::TOTP.new(member.totp_secret).now, wait: SIGN_IN_WAIT
   end
 
