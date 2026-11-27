@@ -197,6 +197,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0186](./0186-notifications-eleve.md) | Notifications de l'élève — invitation, profil, textes, pilotage | Proposé | 2026-11-16 | 0146 | proposer les notifications au bon moment, sans demande de permission à froid, laisser l'élève les couper dans l'application, et ne rien montrer de personnel sur un écran verrouillé |
 | [0187](./0187-ecran-notifications-de-l-equipe.md) | Écran Notifications de l'équipe | Accepté | 2026-11-25 | ADR-0147 | L'équipe doit régler quels motifs partent seuls, valider chaque jour les autres et décider à la publication si une annonce prévient les élèves, sans voir de nom d'élève. |
 | [0188](./0188-accueil-enseignant-actions.md) | Accueil enseignant « À suivre », ronds nommés, barre du haut sur l'accueil seulement, élèves par état, relance WhatsApp | Accepté | 2026-11-26 | — | L'accueil de l'enseignant cache la classe en retard (carrousel), ses ronds ne disent pas ce qu'ils ouvrent, ses pages répètent la barre du haut, la liste d'une classe répète une ligne par élève et la relance n'a pas de bouton. Amende UDR-0006, UDR-0082 §3.1, UDR-0134 §3.3, §3.5, §3.8, §3.14 |
+| [0189](./0189-connexion-numero-d-abord.md) | Connexion numéro d'abord, code tapé une fois, inscription enseignant comme l'élève | Accepté | 2026-11-26 | 0148-connexion-revele-un-numero-inscrit | la connexion demandait numéro et code ensemble et laissait l'inscrit et le nouveau devant le même refus ; l'enseignant s'inscrivait dans un autre ordre que l'élève |
 <!-- index:end -->
 
 ---

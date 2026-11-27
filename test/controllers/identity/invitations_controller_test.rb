@@ -64,20 +64,24 @@ class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
 
     get new_session_path
 
-    assert_select "input[name='session[contact]'][value='01 00 00 00 09']:not([data-autofocus-target])"
-    assert_select "input[name='session[pin]'][data-autofocus-target=field]:not([value])"
+    # Chantier connexion-numero-d-abord : le numéro de l'invitation ouvre l'étape du code, numéro affiché.
+    assert_select "#session-number", text: /01 00 00 00 09/
+    assert_select "input[name='session[pin]'][data-identity--pin-pad-target=field]:not([value])"
     assert_nil session[:login_contact]
   end
 
-  test "FU-32: the number is used once: a reload of the sign-in page no longer shows it" do
+  # Chantier connexion-numero-d-abord : le numéro de l'invitation devient l'entrée gardée (30 minutes, ADR-0141 §4.3) ;
+  # la clé d'invitation, elle, sert une fois ; « Ce n'est pas mon numéro » l'oublie.
+  test "FU-32: the invitation key is used once; the kept number is forgotten by « Ce n'est pas mon numéro »" do
     post accept_invitation_path(@invitation.token), params: acceptance_params
     get new_session_path
 
+    assert_nil session[:login_contact]
+    get new_session_path(fresh: 1)
     get new_session_path
 
-    assert_select "input[name='session[contact]']:not([value])"
+    assert_select "#session-number", 0
     assert_select "input[name='session[contact]'][data-autofocus-target=field]"
-    assert_select "input[name='session[pin]']:not([data-autofocus-target])"
   end
 
   test "FU-32: a school admin invitation leads to the same pre-filled sign-in" do
@@ -90,7 +94,7 @@ class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
     # ID-08 (ADR-0077) : une direction entrée par invitation est marquée comme telle.
     assert_equal "invitation", Orm::SchoolStaff.joins(:user).find_by!(users: { contact: "0500000007" }).joined_via
     follow_redirect!
-    assert_select "input[name='session[contact]'][value='05 00 00 00 07']"
+    assert_select "#session-number", text: /05 00 00 00 07/
   end
 
   # ED-12 (ADR-0092 §4.3) : un chef est arrivé entre l'invitation et son acceptation ; le compte créé est annulé avec le reste.

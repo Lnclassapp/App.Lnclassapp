@@ -117,6 +117,16 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("classroom.classroom_students.manage.issue_code")
   end
 
+  # Chantier connexion-numero-d-abord (UDR-0189 §3.5): the teacher sign-up asks the number (step 1), then the secret code
+  # typed once (step 2), each with « Continuer »; the profile (step 3) follows.
+  def fill_teacher_number_and_code(contact, pin)
+    fill_in "teacher_registration[contact]", with: contact
+    click_on I18n.t("identity.teacher_registrations.form.continue")
+    # UDR-0189 §3.6 : le code au pavé de 4 cases ; au 4e chiffre, l'étape suivante s'ouvre.
+    tap_pin pin
+    assert_selector "fieldset[data-step='3']", visible: :visible
+  end
+
   # ADR-0142, UDR-0177: a few letters in « Ton établissement », then the school
   # chosen in the list of results (each one a radio with its DRENA).
   def choose_school(name, search: name)

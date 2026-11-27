@@ -1,11 +1,12 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
-# Rôle : inscription enseignant publique, établissement cherché (DRENA déduite) ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
-# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103, 0142-recherche-etablissement · UDR : 0050, 0079, 0099 (§3.4), 0134 (§3.9), 0177-champ-etablissement, 0176-entree-eleve-unique (§3.7 : « Êtes-vous bien enseignant ? »)
+# Rôle : inscription enseignant publique (1 numéro, 2 code tapé une fois, 3 profil), établissement cherché (DRENA déduite) ou lien /i/<jeton> (limités en débit) ; le numéro sans compte de /login est repris ; succès : session, voie notée et auditée ; sans numéro gardé ni recherche, renvoie à /teacher
+# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103, 0142-recherche-etablissement · UDR : 0050, 0079, 0099 (§3.4), 0134 (§3.9), 0177-champ-etablissement, 0176-entree-eleve-unique (§3.7), 0189-connexion-numero-d-abord (§3.5)
 module Identity
   class TeacherRegistrationsController < ApplicationController
     include SchoolSearchField
+    include StudentEntrySession
 
-    FIELDS = %i[last_name first_name gender contact pin pin_confirmation school_public_id
+    FIELDS = %i[last_name first_name gender contact pin school_public_id
                 material_slug invite_token].freeze
 
     allow_unauthenticated_access
@@ -16,14 +17,14 @@ module Identity
     helper_method :material_options
 
     # Sans JavaScript, la recherche revient ici en GET (formulaire teacher-signup-school, school_q) et liste ses résultats.
-    # D1 du porteur (UDR-0176 §3.7) : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant ? » ; « Oui » revient ici
-    # avec ?confirmed=1, « Non, je suis élève » mène à l'entrée élève. Une recherche renvoyée en GET (sans JavaScript) vient
-    # d'un formulaire déjà ouvert : pas de question.
+    # UDR-0189 §3.8 (2026-11-27) : l'inscription publique commence à /teacher, numéro d'abord ; /teacher-signup y renvoie, sauf
+    # ?confirmed=1 (le numéro sans compte de /teacher ou de /login) et une recherche renvoyée en GET (formulaire déjà ouvert).
     def new
       return redirect_to_home if authenticated?
-      return render(:confirm) unless params[:confirmed] == "1" || params[:school_q].present?
+      return redirect_to(new_teacher_entry_path, status: :see_other) unless params[:confirmed] == "1" || params[:school_q].present?
 
       @form = Dtos::Identity::TeacherRegistrationInput.new
+      kept_contact
     end
 
     # /i/<jeton> : le même formulaire, l'établissement déjà choisi ; le jeton voyage dans un champ caché, sans cookie ni
@@ -35,6 +36,7 @@ module Identity
 
       # Le lien de parrainage (ADR-0094 §11) garde la recherche d'établissement : sans JavaScript, elle revient ici en GET.
       @form = Dtos::Identity::TeacherRegistrationInput.new(invite_token: params[:token])
+      kept_contact
       show_invite
       # Ouvert par son adresse, un lien sans établissement ni parrain est invalide, même mal formé (oublié par le DTO).
       @invite_invalid = @preview.nil? && @sponsor.nil?
@@ -46,6 +48,7 @@ module Identity
       result = register.call(actor: current_actor, dto: @form, ip: request.remote_ip, user_agent: request.user_agent)
       show_invite if result.failure?
       render_result result, form: :new, success: lambda { |registered|
+        forget_student_entry
         start_session(registered.token)
         redirect_to teacher_home_path, notice: t(".welcome"), status: :see_other
       }
@@ -74,8 +77,16 @@ module Identity
       render :new, status: :too_many_requests
     end
 
+    # Le numéro vient du champ de l'étape 1, ou, sans ce champ, de l'entrée « pas de compte » de /login (UDR-0189 §3.5).
     def form_input
-      Dtos::Identity::TeacherRegistrationInput.new(**with_school_drena(params.expect(teacher_registration: FIELDS).to_h.symbolize_keys))
+      fields = params.expect(teacher_registration: FIELDS).to_h.symbolize_keys
+      fields[:contact] = kept_contact unless fields.key?(:contact)
+      Dtos::Identity::TeacherRegistrationInput.new(**with_school_drena(fields))
+    end
+
+    # Le numéro sans compte gardé par /login : l'étape 1 n'est pas rendue, l'étape 2 le rappelle (@entry_contact).
+    def kept_contact
+      @entry_contact = new_number_entry&.contact
     end
 
     def invite_links = Repositories::Identity::InviteLinkRepository.new

@@ -2,9 +2,9 @@ require "test_helper"
 
 module UseCases
   module Identity
-    # CA-2 à CA-7 (chantier entree-eleve-unifiee) : l'entrée élève connecte un numéro inscrit, dit « Code secret incorrect »
-    # sur un code faux, et ouvre la création du compte sur un numéro inconnu, après confirmation du code.
-    class EnterAsStudentTest < ActiveSupport::TestCase
+    # Chantiers entree-eleve-unifiee et connexion-numero-d-abord : le numéro seul dit s'il a un compte ; avec un code, un numéro
+    # inscrit se connecte (« Code secret incorrect » sur un code faux) et un numéro inconnu confirme son entrée, code tapé une fois.
+    class EnterByNumberTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 11, 20, 9)
       Clock = Data.define(:now)
       Failures = Data.define(:count, :last_failed_at)
@@ -84,20 +84,36 @@ module UseCases
         assert_equal :locked, enter(contact: "0701020304", pin: "2468").code
       end
 
-      test "CA-5 : un numéro inconnu sans confirmation demande de confirmer le code, sans rien écrire" do
-        result = enter(contact: "0101020304", pin: "1357")
+      test "CA-1 : un numéro seul, inscrit, se dit connu, sans rien écrire ni rien rendre du compte" do
+        result = enter(contact: "0701020304")
+
+        assert_equal :known, result.value.outcome
+        assert_equal "0701020304", result.value.contact
+        assert_nil result.value.user
+        assert_empty @attempts.records
+        assert_nil @sessions.created
+      end
+
+      test "CA-2 : un numéro seul, inconnu, se dit nouveau, sans rien écrire" do
+        result = enter(contact: "0101020304")
 
         assert_equal :new_number, result.value.outcome
+        assert_empty @attempts.records
+      end
+
+      test "CA-9 : un numéro inconnu et son code, tapé une seule fois : l'entrée est confirmée" do
+        result = enter(contact: "0101020304", pin: "1357")
+
+        assert_equal :confirmed, result.value.outcome
         assert_equal "0101020304", result.value.contact
         assert_empty @attempts.records
         assert_nil @sessions.created
       end
 
-      test "CA-5 : un numéro inconnu et la même confirmation : l'entrée est confirmée" do
-        result = enter(contact: "0101020304", pin: "1357", pin_confirmation: "1357")
+      test "sans création (la connexion), un numéro inconnu et un code restent un numéro nouveau" do
+        result = enter(contact: "0101020304", pin: "1357", creates: false)
 
-        assert_equal :confirmed, result.value.outcome
-        assert_equal "0101020304", result.value.contact
+        assert_equal :new_number, result.value.outcome
       end
 
       # Le code secret compte exactement 4 chiffres (décision du porteur, 2026-11-20) : rien n'est cherché sinon.
@@ -111,25 +127,8 @@ module UseCases
         assert_empty @attempts.records
       end
 
-      test "CA-6 : une confirmation différente est refusée" do
-        result = enter(contact: "0101020304", pin: "1357", pin_confirmation: "1358")
-
-        assert_equal :invalid, result.code
-        assert_equal [ :confirmation ], result.errors[:pin_confirmation]
-        assert_empty @attempts.records
-        assert_nil @sessions.created
-      end
-
-      test "une confirmation vide sur un numéro inconnu est refusée comme obligatoire" do
-        result = enter(contact: "0101020304", pin: "1357", pin_confirmation: "")
-
-        assert_equal :invalid, result.code
-        assert_not_empty result.errors[:pin_confirmation]
-        assert_nil @sessions.created
-      end
-
-      test "un numéro inscrit l'emporte sur une confirmation : jamais de second compte" do
-        result = enter(contact: "0701020304", pin: "2468", pin_confirmation: "2468")
+      test "CA-10 : un numéro inscrit l'emporte sur une création : jamais de second compte" do
+        result = enter(contact: "0701020304", pin: "2468")
 
         assert_equal :signed_in, result.value.outcome
       end
@@ -149,10 +148,10 @@ module UseCases
 
       private
 
-      def enter(**attributes)
+      def enter(creates: true, **attributes)
         dto = Dtos::Identity::StudentEntryInput.new(ip: "1.2.3.4", user_agent: "test", **attributes)
-        EnterAsStudent.new(users: FakeUsers.new(@student, @teacher), login_attempts: @attempts, sessions: @sessions,
-                           audit_log: FakeAudit.new, digest_key: "k" * 32, clock: Clock.new(NOW)).call(dto:)
+        EnterByNumber.new(users: FakeUsers.new(@student, @teacher), login_attempts: @attempts, sessions: @sessions,
+                          audit_log: FakeAudit.new, digest_key: "k" * 32, clock: Clock.new(NOW)).call(dto:, creates:)
       end
     end
   end

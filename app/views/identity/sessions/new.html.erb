@@ -1,60 +1,119 @@
-<%# 🌐 UI · identity/sessions/new — connexion par numéro et PIN, pour tous les rôles (au « vous ») : accueil bleu, carte « Connexion » %>
-<%# Rôle : carte bleue au-dessus sous lg, panneau bleu à gauche dès lg (carte centrée en hauteur) ; « Besoin d'aide ? » en haut ; 422 re-rendu par Turbo %>
-<%# ADR  : 0050, 0084, 0086 · UDR : 0005, 0019, 0054 (§3.3 focus, §3.4 infobulle, §3.8 numéro pré-rempli), 0057, 0060, 0080, 0082 (§3.4), 0088 (§3.1 à §3.3) %>
-<% page_title t(".page_title") %>
+<%# 🌐 UI · identity/sessions/new — connexion « numéro d'abord », pour tous les rôles (au « vous ») : accueil bleu, carte « Connexion » %>
+<%# Rôle : @stage :contact (le numéro seul ; :both, numéro et code, après un envoi groupé refusé), :pin (numéro affiché, le code), :no_account (« Ce numéro n'a pas encore de compte », Élève / Enseignant(e)) ; « Besoin d'aide ? » en haut ; 422/429 re-rendus par Turbo %>
+<%# ADR  : 0050, 0084, 0086, 0148-connexion-revele-un-numero-inscrit · UDR : 0005, 0019, 0054 (§3.3, §3.4), 0057, 0060, 0080, 0082 (§3.4), 0088, 0189-connexion-numero-d-abord (§3.1 à §3.3) %>
+<%# /teacher (@teacher_entry, UDR-0189 §3.8) : le même écran, titré « Je suis enseignant(e) », envoyé à /teacher. %>
+<% texts = @teacher_entry ? "identity.teacher_entries.new" : "identity.sessions.new" %>
+<% page_title t("#{texts}.page_title") %>
+<% link_class = "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+<% number = capture do %>
+  <div id="session-number" class="rounded-ln bg-paper px-4 py-3">
+    <p class="text-sm text-mute"><%= t(".number_label") %></p>
+    <p class="mt-1 font-mono text-xl font-medium tracking-wider text-ink"><%= @form.contact.to_s.scan(/\d{2}/).join(" ") %></p>
+  </div>
+<% end %>
+<% fix_number = capture do %>
+  <p class="text-center text-sm">
+    <%= link_to t(".not_my_number"), entry_path(fresh: 1), id: "session-fix-number", class: link_class, data: { turbo_prefetch: false } %>
+  </p>
+<% end %>
+<% alerts = capture do %>
+  <% if @wrong_app %>
+    <%# Le message selon la coque et l'app proposée ; la coque ouvre dans le navigateur un lien en target="_blank". %>
+    <% refusal = ".wrong_app_for.#{@wrong_app[:shell]}.#{@wrong_app[:app]}" %>
+    <div id="wrong-app" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm text-ink">
+      <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
+      <div class="min-w-0">
+        <p class="font-medium"><%= t("#{refusal}.title") %></p>
+        <p class="mt-0.5"><%= t("#{refusal}.body") %>
+          <%= link_to t("#{refusal}.link"), @wrong_app[:url], target: "_blank", rel: "noopener",
+                      class: "font-medium text-brand-strong underline underline-offset-4" %></p>
+      </div>
+    </div>
+  <% end %>
+  <% if @form.errors[:base].any? %>
+    <div id="session-alert" role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= @form.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+<% end %>
 <div class="grid min-h-dvh grid-cols-1 bg-paper lg:grid-cols-2">
-  <%= render "shared/auth_welcome", variant: :panel, title: t(".welcome") %>
+  <%= render "shared/auth_welcome", variant: :panel, title: t("#{texts}.welcome") %>
 
   <div class="flex min-w-0 flex-col">
     <%= render "shared/auth_help" %>
     <main class="flex flex-1 flex-col items-center px-gutter pt-2 pb-10 lg:justify-center lg:pb-16">
       <div class="w-full max-w-110 space-y-4">
-        <%= render "shared/auth_welcome", variant: :card, title: t(".welcome") %>
+        <%= render "shared/auth_welcome", variant: :card, title: t("#{texts}.welcome") %>
 
-        <%= ui_card title: t(".title"), heading: :h1, padding: :lg do %>
-          <%= form_with model: @form, scope: :session, url: session_path, id: "session-form", class: "space-y-5",
-                        data: { controller: "identity--phone-digits" } do |form| %>
-            <% if @wrong_app %>
-              <%# Le message selon la coque et l'app proposée ; la coque ouvre dans le navigateur un lien en target="_blank". %>
-              <% refusal = ".wrong_app_for.#{@wrong_app[:shell]}.#{@wrong_app[:app]}" %>
-              <div id="wrong-app" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm text-ink">
-                <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
-                <div class="min-w-0">
-                  <p class="font-medium"><%= t("#{refusal}.title") %></p>
-                  <p class="mt-0.5"><%= t("#{refusal}.body") %>
-                    <%= link_to t("#{refusal}.link"), @wrong_app[:url], target: "_blank", rel: "noopener",
-                                class: "font-medium text-brand-strong underline underline-offset-4" %></p>
-                </div>
-              </div>
+        <% case @stage %>
+        <% when :pin %>
+          <%= ui_card title: t("#{texts}.title"), heading: :h1, padding: :lg do %>
+            <%= form_with model: @form, scope: :session, url: entries_path, id: "session-pin-form", class: "space-y-5",
+                          data: { controller: "identity--pin-pad" } do |form| %>
+              <%= alerts %>
+              <%= number %>
+              <%# Pour les gestionnaires de mots de passe : le numéro, sans nom, n'est pas envoyé (le serveur le garde). %>
+              <input type="text" autocomplete="username" value="<%= @form.contact %>" hidden aria-hidden="true" tabindex="-1">
+              <%# UDR-0189 §3.6 (amendement du 2026-11-27) : le code en 4 cases et au pavé, envoyé au 4e chiffre. %>
+              <% field = capture do %>
+                <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                             autocomplete: "current-password", placeholder: "****", hint: t(".pin_info_message"),
+                             data: { identity__pin_pad_target: "field" } %>
+                <%= ui_info_tip t(".pin_info_tip"), label: Dtos::Identity::CredentialsInput.human_attribute_name(:pin) %>
+              <% end %>
+              <%= render "shared/pin_pad", prefix: "session", field:, hint: t(".pin_info_tip"), error: @form.errors.messages_for(:pin).first %>
+              <%= ui_button t(".submit"), type: :submit, variant: :primary, full: true, id: "session-submit",
+                            data: { turbo_submits_with: t(".submitting"), identity__pin_pad_target: "submit" } %>
+              <p class="text-center text-sm">
+                <%= link_to t(".forgot_pin"), new_identity_pin_reset_path, id: "session-forgot-pin", class: link_class %>
+              </p>
             <% end %>
-            <% if @form.errors[:base].any? %>
-              <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
-                <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
-                <p><%= @form.errors[:base].to_sentence %></p>
-              </div>
-            <% end %>
-            <%# Chiffres seuls, indicatif retiré, 10 chiffres au plus : même règle que les inscriptions (contrôleur identity--phone-digits). %>
-            <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 10,
-                         placeholder: t(".contact_placeholder"), inputmode: "numeric", autocomplete: "username", autofocus: !@prefilled,
-                         data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
-            <div>
-              <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
-                           autocomplete: "current-password", autofocus: @prefilled, placeholder: "****",
-                           hint: t(".pin_info_message") %>
-              <%= ui_info_tip t(".pin_info_tip"), label: Dtos::Identity::CredentialsInput.human_attribute_name(:pin) %>
-            </div>
-            <%= ui_button t(".submit"), type: :submit, variant: :primary, full: true, data: { turbo_submits_with: t(".submitting") } %>
-            <p class="text-center text-sm">
-              <%= link_to t(".forgot_pin"), new_identity_pin_reset_path,
-                          class: "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-            </p>
+            <div class="mt-2"><%= fix_number %></div>
           <% end %>
-          <%# UDR-0088 §3.3 : un filet, puis le chemin vers l'inscription élève (les autres rôles s'inscrivent sur invitation). %>
-          <p id="session-sign-up" class="mt-5 flex flex-wrap items-center justify-center gap-x-1.5 border-t border-line pt-4 text-sm text-mute">
-            <%= t(".no_account") %>
-            <%= link_to t(".sign_up"), new_student_entry_path,
-                        class: "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-          </p>
+        <% when :new_account %>
+          <%= ui_card title: t(".no_account_title"), heading: :h1, padding: :lg do %>
+            <div class="space-y-5">
+              <%= number %>
+              <p class="text-sm text-mute"><%= t(".no_account_lead") %></p>
+              <div id="session-new-account" class="flex flex-col gap-3">
+                <%= ui_button t(".new_student"), href: new_student_entry_path, variant: :primary, size: :lg, full: true, id: "session-new-student" %>
+                <%= ui_button t(".new_teacher"), href: new_teacher_registration_path(confirmed: 1), variant: :secondary, size: :lg, full: true,
+                                                 id: "session-new-teacher" %>
+              </div>
+              <%= fix_number %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= ui_card title: t("#{texts}.title"), heading: :h1, padding: :lg do %>
+            <%= form_with model: @form, scope: :session, url: entries_path, id: "session-form", class: "space-y-5",
+                          data: { controller: "identity--phone-digits#{" identity--pin-pad" if @stage == :both}" } do |form| %>
+              <%= alerts %>
+              <%# Chiffres seuls, indicatif retiré, 10 chiffres au plus : même règle que les inscriptions (contrôleur identity--phone-digits). %>
+              <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact.presence || @form.contact, maxlength: 10,
+                           placeholder: t(".contact_placeholder"), inputmode: "numeric", autocomplete: "username", autofocus: @stage != :both,
+                           hint: t(".contact_hint"),
+                           data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
+              <% if @stage == :both %>
+                <%# Numéro et code envoyés ensemble (coque, gestionnaire de mots de passe) puis refusés : le formulaire d'avant, message unique (ADR-0148 §4.5). %>
+                <% field = capture do %>
+                  <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
+                               autocomplete: "current-password", placeholder: "****", hint: t(".pin_info_message"),
+                               data: { identity__pin_pad_target: "field" } %>
+                  <%= ui_info_tip t(".pin_info_tip"), label: Dtos::Identity::CredentialsInput.human_attribute_name(:pin) %>
+                <% end %>
+                <%= render "shared/pin_pad", prefix: "session", field:, hint: t(".pin_info_tip"), error: @form.errors.messages_for(:pin).first %>
+                <%= ui_button t(".submit"), type: :submit, variant: :primary, full: true, id: "session-submit",
+                              data: { turbo_submits_with: t(".submitting"), identity__pin_pad_target: "submit" } %>
+                <p class="text-center text-sm">
+                  <%= link_to t(".forgot_pin"), new_identity_pin_reset_path, id: "session-forgot-pin", class: link_class %>
+                </p>
+              <% else %>
+                <%= ui_button t(".continue"), type: :submit, variant: :primary, full: true, id: "session-continue",
+                              data: { turbo_submits_with: t(".continuing") } %>
+              <% end %>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
     </main>

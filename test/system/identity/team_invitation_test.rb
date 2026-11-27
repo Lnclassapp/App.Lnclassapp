@@ -56,13 +56,12 @@ class Identity::TeamInvitationTest < ApplicationSystemTestCase
       fill_in "invitation[pin_confirmation]", with: "4821"
       click_on "Créer mon compte"
 
-      assert_selector "#session-form", wait: SIGN_IN_WAIT
+      assert_selector "#session-pin-form", wait: SIGN_IN_WAIT
       assert_toast "Votre compte est créé."
-      # FU-31: the number is already there, the focus waits on the PIN.
-      assert_field "session[contact]", with: "0100000009"
-      assert_selector "#session_pin:focus"
-      fill_in "session[pin]", with: "4821"
-      click_on I18n.t("identity.sessions.new.submit")
+      # FU-31: the number is already there (connexion-numero-d-abord : rappelé à l'étape du code), the focus waits on the PIN.
+      assert_selector "#session-number", text: "01 00 00 00 09"
+      assert_selector "#session-keypad button[data-digit]:focus"
+      tap_pin "4821"
 
       secret = find("#second-factor-secret", wait: SIGN_IN_WAIT).text.delete(" ")
       # The code leaves by itself at the sixth digit; the codes go on once they are kept (UDR-0054 §3.6, §3.7).

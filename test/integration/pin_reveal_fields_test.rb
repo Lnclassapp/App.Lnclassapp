@@ -13,8 +13,9 @@ class PinRevealFieldsTest < ActionDispatch::IntegrationTest
                   "button[type=button][hidden][aria-pressed=false][aria-controls=#{id}][aria-label='Afficher le code']"
   end
 
-  test "sign-in: the PIN" do
-    get new_session_path
+  test "sign-in: the PIN, once the number is known" do
+    post session_path, params: { session: { contact: create_student.contact } }
+    follow_redirect!
 
     assert_revealable "session[pin]", autocomplete: "current-password"
   end
@@ -35,11 +36,11 @@ class PinRevealFieldsTest < ActionDispatch::IntegrationTest
     assert_revealable "invitation[pin_confirmation]", autocomplete: "new-password"
   end
 
-  test "teacher sign-up: the PIN and its confirmation" do
+  test "teacher sign-up: the PIN, typed once" do
     get new_teacher_registration_path(confirmed: 1)
 
     assert_revealable "teacher_registration[pin]", autocomplete: "new-password"
-    assert_revealable "teacher_registration[pin_confirmation]", autocomplete: "new-password"
+    assert_select "input[name='teacher_registration[pin_confirmation]']", count: 0
   end
 
   # IL-02 (ADR-0085): the student signs up at /student-signup, or by a classroom link that renders the same form.

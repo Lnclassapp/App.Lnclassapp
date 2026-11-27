@@ -1,6 +1,18 @@
 # Connexion et déconnexion — ADR-0050 ; logo, infobulle du PIN — UDR-0054 ; épuration — UDR-0060 ; refus dans les apps — UDR-0080 §3.4, UDR-0082 §3.4 ;
-# carte bleue et lien vers l'inscription élève — UDR-0088 §3.3 (au « vous » : la connexion sert à tous les rôles)
+# carte bleue — UDR-0088 §3.3 ; numéro d'abord, puis le code ou « pas de compte » — UDR-0189 (au « vous » : la connexion sert à tous les rôles)
 fr:
+  activemodel:
+    errors:
+      models:
+        dtos/identity/number_entry_input:
+          attributes:
+            contact:
+              blank: "Saisissez votre numéro de téléphone."
+              invalid: "Le numéro compte 10 chiffres et commence par 01, 05 ou 07."
+            pin:
+              blank: "Saisissez votre code secret."
+              invalid: "Le code secret compte 4 chiffres."
+              wrong_pin: "Code secret incorrect."
   identity:
     sessions:
       new:
@@ -8,13 +20,20 @@ fr:
         welcome: "Heureux de vous revoir"
         title: "Connexion"
         contact_placeholder: "07 00 00 00 00"
+        contact_hint: "10 chiffres, par ex. 0701020304."
+        continue: "Continuer"
+        continuing: "Un instant…"
+        number_label: "Votre numéro"
+        not_my_number: "Ce n'est pas mon numéro"
+        no_account_title: "Ce numéro n'a pas encore de compte"
+        no_account_lead: "Créez votre compte : vous êtes…"
+        new_student: "Élève"
+        new_teacher: "Enseignant(e)"
         pin_info_message: "code secret à 4 chiffres"
         pin_info_tip: "Code secret de 4 chiffres, choisi à l'inscription."
         submit: "Se connecter"
         submitting: "Connexion…"
         forgot_pin: "Code secret oublié ?"
-        no_account: "Pas encore de compte ?"
-        sign_up: "Créer mon compte élève"
         # UDR-0082 §3.4 : le refus selon la coque (1er niveau) et l'app proposée (2e niveau).
         wrong_app_for:
           android_student:
@@ -37,5 +56,6 @@ fr:
               link: "Ouvrir lnclass.com"
       create:
         signed_in: "Connexion réussie"
+        expired: "Votre connexion a expiré. Saisissez de nouveau votre numéro."
       destroy:
         signed_out: "Vous êtes déconnecté"

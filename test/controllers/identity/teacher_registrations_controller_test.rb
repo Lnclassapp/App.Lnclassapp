@@ -1,7 +1,8 @@
 require "test_helper"
 
 # IE-01 to IE-13, IE-17, IE-19 and CA-J1 to CA-J4 server side (ADR-0083, UDR-0079, UDR « écrans enseignant sans répétition » §3.9):
-# one sign-up form cut in three steps (school, you, secret code) by signup_steps_controller, no school code. The standard way chooses the DRENA then the school; an invite link /i/<token> arrives with the
+# one sign-up form cut in three steps (number, secret code typed once, profile) by signup_steps_controller, no school code
+# (chantier connexion-numero-d-abord, UDR-0189 §3.5). The standard way chooses the DRENA then the school; an invite link /i/<token> arrives with the
 # school already chosen. The teacher is attached at once and the way in is recorded.
 class Identity::TeacherRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/identity/teacher_registration_input.attributes".freeze
@@ -15,7 +16,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   def registration_params(**overrides)
-    { last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821", pin_confirmation: "4821",
+    { last_name: "KOUASSI", first_name: "Aya Marie", gender: "female", contact: "05 01 02 03 04", pin: "4821",
       school_public_id: @school.public_id, material_slug: @material.slug, **overrides }
   end
 
@@ -31,15 +32,13 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_not Orm::User.exists?(contact: "0501020304")
   end
 
-  # Chantier entree-eleve-unifiee, D1 (PRD CA-12, UDR-0176 §3.7).
-  test "CA-12 : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant(e) ? », sans formulaire" do
+  # UDR-0189 §3.8 (amendement du 2026-11-27) : la question « Êtes-vous bien enseignant(e) ? » est retirée ; l'inscription publique
+  # commence à /teacher, numéro d'abord.
+  test "/teacher-signup sans numéro gardé ni recherche renvoie à /teacher" do
     get new_teacher_registration_path
 
-    assert_response :success
-    assert_select "h1", text: "Êtes-vous bien enseignant(e) ?"
-    assert_select "form#teacher-registration-form", 0
-    assert_select "a#teacher-signup-confirm-yes[href=?]", new_teacher_registration_path(confirmed: 1), text: "Oui, je suis enseignant(e)"
-    assert_select "a#teacher-signup-confirm-no[href=?]", new_student_entry_path, text: "Non, je suis élève"
+    assert_redirected_to new_teacher_entry_path
+    assert_response :see_other
   end
 
   test "CA-12 : « Oui » ouvre le formulaire ; la recherche renvoyée sans JavaScript et le lien d'invitation ne reposent pas la question" do
@@ -47,7 +46,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "form#teacher-registration-form"
 
     get new_teacher_registration_path, params: { school_q: "cocody" }
-    assert_select "#teacher-signup-confirm", 0
+    assert_response :success
     assert_select "form#teacher-registration-form"
   end
 
@@ -67,24 +66,30 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "label.sr-only[for=school_q]", text: /Votre établissement/
     assert_select "select[name*=drena_public_id]", 0
     assert_select "form#teacher-registration-form[action='#{teacher_registrations_path}']" \
-                  "[data-controller='identity--phone-digits identity--pin-match']" do
-      assert_equal [ "Votre établissement", "Vous", "Votre code secret" ],
+                  "[data-controller='identity--phone-digits']" do
+      assert_equal [ "Votre numéro", "Choisissez votre code secret", "Votre profil" ],
                    css_select("fieldset[data-classroom--signup-steps-target=step] > legend").map { it.text.strip }
       assert_equal %w[1 2 3], css_select("fieldset[data-classroom--signup-steps-target=step]").map { it["data-step"] }
-      assert_select "fieldset[data-step='1'] input#school_q[aria-controls=school_results][aria-describedby=school_q_hint]"
-      assert_select "fieldset[data-step='1'] [data-action='school--school-search:picked->classroom--signup-steps#go']" \
-                    "[data-classroom--signup-steps-step-param='2'] turbo-frame#school_results:empty"
-      assert_select "fieldset[data-step='2'] select[name='teacher_registration[material_slug]'] option[value='#{@material.slug}']", text: "SVT"
+      # Étapes 1 et 2 : « Continuer » (type button) fait avancer ; l'établissement choisi ne change plus d'étape.
+      assert_select "fieldset[data-step='1'][data-continue] input[type=tel][name='teacher_registration[contact]']"
+      assert_select "fieldset[data-step='1'] button[type=button]#teacher-registration-continue-1[data-action='classroom--signup-steps#continue']"
+      assert_select "fieldset[data-step='2'][data-continue] button[type=button]#teacher-registration-continue-2"
+      assert_select "fieldset[data-step='3'] input#school_q[aria-controls=school_results][aria-describedby=school_q_hint]"
+      assert_select "fieldset[data-step='3'] turbo-frame#school_results:empty"
+      assert_select "[data-action*='classroom--signup-steps#go']", 0
+      assert_select "fieldset[data-step='3'] select[name='teacher_registration[material_slug]'] option[value='#{@material.slug}']", text: "SVT"
       assert_select "input[name='teacher_registration[last_name]'][required][maxlength='50'][autocomplete=family-name]" \
                     "[placeholder='Ex. : KOUASSI']"
       assert_select "input[name='teacher_registration[first_name]'][required][maxlength='80'][autocomplete=given-name]" \
                     "[placeholder='Ex. : Aya Marie']"
       assert_select "input[name='teacher_registration[full_name]'], details, #full_name_preview", 0
-      assert_select "fieldset[data-step='2'] input[type=radio][name='teacher_registration[gender]']", count: 2
+      assert_select "fieldset[data-step='3'] input[type=radio][name='teacher_registration[gender]']", count: 2
       assert_select "input[type=tel][name='teacher_registration[contact]'][maxlength='20'][inputmode=numeric]:not([pattern])"
-      assert_select "fieldset[data-step='3'] input[type=password][name='teacher_registration[pin]'][inputmode=numeric][maxlength='4']"
-      assert_select "input[type=password][name='teacher_registration[pin_confirmation]'][data-identity--pin-match-target=confirmation]"
-      assert_select "p#pin_match_status[hidden][aria-live=polite]"
+      # CA-11 : le code se tape une fois, sans confirmation.
+      assert_select "fieldset[data-step='2'] input[type=password][name='teacher_registration[pin]'][inputmode=numeric]" \
+                    "[minlength='4'][maxlength='4'][pattern='[0-9]{4}'][autocomplete=new-password]"
+      assert_select "[name*=pin_confirmation], #pin_match_status, [data-controller*=pin-match]", 0
+      assert_select "#teacher-registration-number, #teacher-registration-fix-number", 0
       assert_select "input[name='teacher_registration[invite_token]']", 0
     end
     assert_select "[name*=school_code], [name*=national_code], [name*=role]", 0
@@ -147,9 +152,9 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     pc = create_material(name: "Physique-Chimie", shortname: "PC")
     get new_teacher_registration_path(confirmed: 1)
 
-    assert_select "fieldset[data-step='2'] select[name='teacher_registration[material_slug]'][required]", 1
+    assert_select "fieldset[data-step='3'] select[name='teacher_registration[material_slug]'][required]", 1
     assert_select "select[name='teacher_registration[second_material_slug]']", 0
-    assert_select "fieldset[data-step='2']", text: /#{Regexp.escape(I18n.t("#{FORM}.material_hint"))}/
+    assert_select "fieldset[data-step='3']", text: /#{Regexp.escape(I18n.t("#{FORM}.material_hint"))}/
     assert_no_match(/Autre matière/, response.body)
 
     post teacher_registrations_path, params: { teacher_registration: registration_params(material_slug: pc.slug, second_material_slug: @material.slug) }
@@ -160,7 +165,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
   # CA-J1 (UDR §3.5 de l'inscription élève): a server error reopens the step that holds the field.
   test "CA-J1: a 422 reopens the step of the faulty field" do
-    { { first_name: "  " } => 2, { pin_confirmation: "1357" } => 3, { school_public_id: "" } => 1, { material_slug: "" } => 2 }
+    { { contact: "" } => 1, { pin: "12" } => 2, { first_name: "  " } => 3, { school_public_id: "" } => 3, { material_slug: "" } => 3 }
       .each do |overrides, step|
         post teacher_registrations_path, params: { teacher_registration: registration_params(**overrides) }
 
@@ -194,12 +199,12 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "input[name='teacher_registration[first_name]'][value='Aya 2'][aria-invalid=true]"
   end
 
-  test "IE-17, IE-19 without JavaScript: different codes are refused in 422; « +225 07 01 02 03 04 » is saved cleaned" do
+  test "IE-17, IE-19 without JavaScript: a code out of format is refused in 422; « +225 07 01 02 03 04 » is saved cleaned" do
     post teacher_registrations_path,
-         params: { teacher_registration: registration_params(contact: "+225 07 01 02 03 04", pin_confirmation: "1357") }
+         params: { teacher_registration: registration_params(contact: "+225 07 01 02 03 04", pin: "12a4") }
 
     assert_response :unprocessable_entity
-    assert_select "#teacher_registration_pin_confirmation_error", text: I18n.t("#{ERRORS}.pin_confirmation.confirmation")
+    assert_select "#teacher_registration_pin_error", text: I18n.t("#{ERRORS}.pin.invalid")
     assert_select "input[name='teacher_registration[contact]'][value='+225 07 01 02 03 04']"
     assert_select "input[name='teacher_registration[last_name]'][value='KOUASSI']"
     assert_select "input[name='teacher_registration[first_name]'][value='Aya Marie']"
@@ -247,7 +252,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   test "IE-11: a school still active comes back checked after a 422, alone in the list" do
-    post teacher_registrations_path, params: { teacher_registration: registration_params(pin_confirmation: "1357") }
+    post teacher_registrations_path, params: { teacher_registration: registration_params(pin: "12") }
 
     assert_response :unprocessable_entity
     assert_select "turbo-frame#school_results input[type=radio]", 1
@@ -267,15 +272,15 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     get teacher_invite_link_path(token)
 
     assert_response :success
-    # CA-J2: the link opens step 2 with the recap; step 1 does not exist.
-    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='2']"
-    assert_select "fieldset[data-step='1']", 0
-    assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 2)
+    # CA-12 (numéro d'abord) : le lien ouvre l'étape 1, le numéro ; le rappel de l'établissement est au profil (étape 3).
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='1']"
+    assert_select "fieldset[data-step='1'] input[name='teacher_registration[contact]']"
+    assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 1)
     assert_select "#signup-welcome:not([hidden])"
-    assert_select "fieldset[data-step='2'] #school-preview", text: /#{Regexp.escape(I18n.t("identity.teacher_registrations.school_preview.label"))}.*Lycée Moderne de Cocody/m
+    assert_select "fieldset[data-step='3'] #school-preview", text: /#{Regexp.escape(I18n.t("identity.teacher_registrations.school_preview.label"))}.*Lycée Moderne de Cocody/m
     assert_select "#school-preview", text: /Abidjan 1/
     assert_select "form#teacher-registration-form input[type=hidden][name='teacher_registration[invite_token]'][value='#{token}']"
-    assert_select "a#other-school[href='#{new_teacher_registration_path}']", text: /#{Regexp.escape(I18n.t('identity.teacher_registrations.school_preview.other_school'))} ›/
+    assert_select "a#other-school[href='#{new_teacher_registration_path(confirmed: 1)}']", text: /#{Regexp.escape(I18n.t('identity.teacher_registrations.school_preview.other_school'))} ›/
     assert_select "input#school_q, turbo-frame#school_results", 0
     assert_select "select[name='teacher_registration[material_slug]']"
     assert_select "#invite-link-invalid", 0
@@ -387,9 +392,9 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     token = @school.team_invite_token
 
     post teacher_registrations_path,
-         params: { teacher_registration: registration_params(invite_token: token, pin_confirmation: "1357") }
+         params: { teacher_registration: registration_params(invite_token: token, pin: "12") }
 
-    assert_refused :pin_confirmation, I18n.t("#{ERRORS}.pin_confirmation.confirmation")
+    assert_refused :pin, I18n.t("#{ERRORS}.pin.invalid")
     assert_select "#school-preview", text: /Lycée Moderne de Cocody/
     assert_select "input[type=hidden][name='teacher_registration[invite_token]'][value='#{token}']"
     assert_select "input#school_q", 0
@@ -490,7 +495,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   test "a sixth attempt in a minute receives 429 in the form" do
-    6.times { post teacher_registrations_path, params: { teacher_registration: registration_params(pin_confirmation: "1357") } }
+    6.times { post teacher_registrations_path, params: { teacher_registration: registration_params(pin: "12") } }
 
     assert_response :too_many_requests
     assert_select "[role=alert]", text: I18n.t("errors.codes.rate_limited")
@@ -510,5 +515,90 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
     get new_teacher_registration_path(confirmed: 1)
     assert_response :success
+  end
+
+  # Chantier connexion-numero-d-abord (UDR-0189 §3.5).
+  def arrive_from_login(contact = "0501020304")
+    post session_path, params: { session: { contact: } }
+    assert_redirected_to new_session_path
+  end
+
+  test "CA-4: a number from /login taken in the meantime is refused on the code step, with its message" do
+    arrive_from_login
+    create_student(contact: "0501020304")
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params.except(:contact) }
+
+    assert_response :unprocessable_entity
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='2']"
+    assert_select "fieldset[data-step='2'] #teacher-registration-refusal[role=alert]",
+                  text: I18n.t("activemodel.errors.models.dtos/identity/teacher_registration_input.attributes.contact.taken")
+  end
+
+  test "CA-4: a number from /login more than 30 minutes old is no longer taken over" do
+    arrive_from_login
+
+    travel 31.minutes do
+      get new_teacher_registration_path(confirmed: 1)
+
+      assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='1']"
+      assert_select "#teacher-registration-number", 0
+    end
+  end
+
+  test "CA-4: from « pas de compte » on /login, the sign-up opens on the code, the number recalled, never asked again" do
+    arrive_from_login
+
+    get new_teacher_registration_path(confirmed: 1)
+
+    assert_response :success
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='2']"
+    assert_select "fieldset[data-step='1'], input[name='teacher_registration[contact]']", 0
+    assert_select "fieldset[data-step='2'] #teacher-registration-number", text: /05 01 02 03 04/
+    assert_select "a#teacher-registration-fix-number[href='#{new_teacher_entry_path(fresh: 1)}']", text: I18n.t("#{FORM}.not_my_number")
+    assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 2)
+    assert_select "#signup-back[hidden]"
+  end
+
+  test "CA-4: the account is created with the number kept, the code typed once; the entry is then forgotten" do
+    arrive_from_login
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params.except(:contact) }
+
+    assert_redirected_to teacher_home_path
+    assert Orm::User.authenticate_by(contact: "0501020304", pin: "4821")
+    sign_out
+    get new_teacher_registration_path(confirmed: 1)
+    assert_select "#teacher-registration-number", 0
+    assert_select "fieldset[data-step='1'] input[name='teacher_registration[contact]']"
+  end
+
+  test "CA-4: an error after « pas de compte » reopens the profile, the number still recalled, the code never sent back" do
+    arrive_from_login
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(first_name: " ").except(:contact) }
+
+    assert_response :unprocessable_entity
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='3']"
+    assert_select "#teacher-registration-number", text: /05 01 02 03 04/
+    assert_select "input[name='teacher_registration[pin]'][value]", 0
+  end
+
+  test "CA-4: a number known to /login is never recalled here (only a number without an account is)" do
+    create_teacher(contact: "0501020304")
+    arrive_from_login
+
+    get new_teacher_registration_path(confirmed: 1)
+
+    assert_select "#teacher-registration-number", 0
+    assert_select "fieldset[data-step='1'] input[name='teacher_registration[contact]']:not([value])"
+  end
+
+  test "CA-11: a direct sign-up (number, code once, profile, no school code) creates the account in the school chosen, way « standard »" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params }
+
+    assert_redirected_to teacher_home_path
+    assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher: new_teacher).pluck(:school_id)
+    assert_equal "standard", joined_via
   end
 end

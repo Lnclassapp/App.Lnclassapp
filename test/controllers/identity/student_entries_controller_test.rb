@@ -1,8 +1,8 @@
 require "test_helper"
 
-# Chantier entree-eleve-unifiee (PRD §4, ADR-0141, UDR-0176) :
-# « Je suis élève » ouvre une seule entrée, numéro et code secret ; inscrit → connecté ; inconnu → confirmer le code, puis
-# l'inscription sans retaper ni l'un ni l'autre ; code faux → « Code secret incorrect » et « Code secret oublié ? ».
+# Chantiers entree-eleve-unifiee (ADR-0141, UDR-0176) et connexion-numero-d-abord (ADR-0148, UDR-0189) :
+# « Je suis élève » demande le numéro d'abord ; inscrit → le code, puis connecté ; inconnu → « Nouveau sur Lnclass », le code
+# tapé une fois, puis l'inscription sans retaper ni l'un ni l'autre ; code faux → « Code secret incorrect » et « Code secret oublié ? ».
 class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
   PAGE = "identity.student_entries.new".freeze
 
@@ -13,8 +13,14 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     @classroom = create_classroom(school: @school, level: @level, name: "6e 1")
   end
 
-  def enter(contact:, pin:, **extra) = post(student_entries_path, params: { student_entry: { contact:, pin:, **extra } })
-  def confirm(pin) = post(student_entries_path, params: { student_entry: { pin_confirmation: pin } })
+  # Le parcours réel : le numéro seul, puis, s'il est donné, le code seul (numéro gardé en session).
+  def enter(contact:, pin: nil, **extra)
+    send_number(contact:, **extra)
+    send_pin(pin, **extra.slice(:link_token)) if pin && response.status == 303 && response.location.end_with?(new_student_entry_path)
+  end
+
+  def send_number(contact:, **extra) = post(student_entries_path, params: { student_entry: { contact:, **extra } })
+  def send_pin(pin, **extra) = post(student_entries_path, params: { student_entry: { pin:, **extra } })
 
   def finish_registration(**extra)
     post student_registrations_path, params: {
@@ -32,14 +38,14 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_select "dialog#role-modal-student-entry", 0
   end
 
-  test "CA-1 : l'entrée montre le numéro et le code secret, rien d'autre" do
+  test "CA-1 : l'entrée montre le numéro seul, rien d'autre" do
     get new_student_entry_path
 
     assert_response :success
     assert_select "h1", text: "Je suis élève"
     assert_select "form#student-entry-form[action=?]", student_entries_path do
       assert_select "input[type=tel][name='student_entry[contact]']"
-      assert_select "input[type=password][name='student_entry[pin]'][maxlength='4']"
+      assert_select "input[name='student_entry[pin]']", 0
     end
     assert_select "#student-entry-forgot-pin", 0
   end
@@ -71,6 +77,20 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match "Je suis élève", response.body
   end
 
+  test "numéro d'abord : un numéro inscrit ouvre « Entre ton code secret », numéro affiché, sans nom" do
+    create_student(contact: "0701020304", classroom: @classroom, last_name: "KOUAME")
+
+    send_number(contact: "0701020304")
+    follow_redirect!
+
+    assert_select "h1", text: "Entre ton code secret"
+    assert_select "#student-entry-number", text: /Ton numéro\s*07 01 02 03 04/
+    assert_select "form#student-entry-pin-form input[name='student_entry[pin]'][autocomplete=current-password]"
+    assert_select "form#student-entry-pin-form input[name='student_entry[contact]']", 0
+    assert_select "a#student-entry-fix-number[data-turbo-prefetch=false]", text: "Ce n'est pas mon numéro"
+    assert_no_match "KOUAME", response.body
+  end
+
   test "CA-4 : un code faux dit « Code secret incorrect » et propose « Code secret oublié ? », sans session" do
     create_student(contact: "0701020304", classroom: @classroom)
 
@@ -93,12 +113,13 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#auth-welcome-card", text: /Bienvenue sur Lnclass/
   end
 
-  test "pavé : un numéro inconnu reçoit le pavé, masqué sans JavaScript, et jamais le premier code dans la page" do
-    enter(contact: "0101020304", pin: "1357")
+  test "pavé : un numéro inconnu reçoit le pavé « Entre ton code secret », masqué sans JavaScript" do
+    send_number(contact: "0101020304")
     follow_redirect!
 
     assert_select "form#student-entry-confirm-form[data-controller='identity--pin-pad']" do
-      assert_select "#student-entry-pin-field input[name='student_entry[pin_confirmation]']"
+      assert_select "#student-entry-pin-field input[name='student_entry[pin]'][autocomplete=new-password]"
+      assert_select "input[name='student_entry[pin_confirmation]']", 0
       assert_select "#student-entry-pin-pad[hidden]" do
         assert_select "[data-identity--pin-pad-target='box']", 4
         assert_select "#student-entry-keypad button[data-digit]", 10
@@ -107,24 +128,12 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
       end
       assert_select "#student-entry-confirm-submit:not([disabled])"
     end
-    assert_no_match "1357", response.body
+    assert_select "#student-entry-pin-pad", text: /Choisis ton code secret : 4 chiffres faciles à retenir\. Tu le taperas à chaque connexion\./
+    assert_no_match "Retape", response.body
   end
 
-  test "CA-5 : sans JavaScript, 1111 pour 2468 est refusé en 422, 2468 renvoie à l'inscription" do
-    enter(contact: "0101020304", pin: "2468")
-
-    confirm("1111")
-
-    assert_response :unprocessable_entity
-    assert_select "#student_entry_pin_confirmation_error", text: "Les deux codes sont différents."
-    assert_select "#student-entry-mismatch[role=alert][hidden]", text: "Les deux codes sont différents."
-
-    confirm("2468")
-    assert_redirected_to new_student_registration_path
-  end
-
-  test "CA-5 : un numéro inconnu confirme son code puis s'inscrit sans retaper numéro ni code" do
-    enter(contact: "0101020304", pin: "1357")
+  test "CA-9 : un numéro inconnu tape son code une fois puis s'inscrit sans retaper numéro ni code" do
+    send_number(contact: "0101020304")
     assert_redirected_to new_student_entry_path
     follow_redirect!
     assert_select "h1", text: "Nouveau sur Lnclass"
@@ -132,9 +141,8 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a#student-entry-fix-number", text: "Ce n'est pas mon numéro"
     # Ce lien efface l'entrée : Turbo ne doit pas le précharger au survol.
     assert_select "a#student-entry-fix-number[data-turbo-prefetch=false]"
-    assert_no_match "1357", response.body
 
-    confirm("1357")
+    send_pin("1357")
     assert_redirected_to new_student_registration_path
     follow_redirect!
     # CA-7: the number is neither shown nor asked again after the entry.
@@ -153,19 +161,47 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert Orm::ClassroomStudent.exists?(student: user, classroom_id: @classroom.id)
   end
 
-  test "CA-6 : une confirmation différente est refusée, l'écran reste" do
-    enter(contact: "0101020304", pin: "1357")
+  test "un code mal formé sur « Nouveau sur Lnclass » est refusé, l'écran reste, aucune inscription ouverte" do
+    send_number(contact: "0101020304")
 
-    confirm("7531")
+    send_pin("13")
 
     assert_response :unprocessable_entity
-    assert_select "#student_entry_pin_confirmation_error", text: "Les deux codes sont différents."
+    assert_select "h1", text: "Nouveau sur Lnclass"
+    assert_select "#student_entry_pin_error", text: "Le code secret compte 4 chiffres."
     get new_student_registration_path
     assert_select "input[name=entry_mode]", 0
   end
 
+  test "CA-10 : un numéro devenu inscrit entre « Nouveau sur Lnclass » et le code : une connexion, jamais un second compte" do
+    send_number(contact: "0101020304")
+    create_student(contact: "0101020304", classroom: @classroom)
+
+    assert_no_difference -> { Orm::User.count } do
+      send_pin("2468")
+    end
+    assert_redirected_to student_home_path
+  end
+
+  test "numéro et code envoyés ensemble (page d'avant) : un numéro inconnu passe droit à l'inscription" do
+    post student_entries_path, params: { student_entry: { contact: "0101020304", pin: "1357" } }
+
+    assert_redirected_to new_student_registration_path
+  end
+
+  test "l'écran « pas de compte » de /login mène, par « Élève », à « Nouveau sur Lnclass », numéro repris" do
+    post session_path, params: { session: { contact: "0101020304" } }
+
+    get new_student_entry_path
+
+    assert_select "h1", text: "Nouveau sur Lnclass"
+    assert_select "#student-entry-number", text: /01 01 02 03 04/
+    send_pin("1357")
+    assert_redirected_to new_student_registration_path
+  end
+
   test "« Ce n'est pas mon numéro » oublie l'entrée et remet le numéro dans le champ" do
-    enter(contact: "0101020304", pin: "1357")
+    send_number(contact: "0101020304")
 
     get new_student_entry_path(fresh: 1)
 
@@ -175,7 +211,6 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
 
   test "CA-7 : un numéro pris entre l'entrée et l'inscription : refus, aucun second compte" do
     enter(contact: "0101020304", pin: "1357")
-    confirm("1357")
     create_student(contact: "0101020304")
 
     assert_no_difference -> { Orm::User.count } do
@@ -194,7 +229,6 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#student-entry-form input[type=hidden][name='student_entry[link_token]'][value=?]", token
 
     enter(contact: "0101020304", pin: "1357", link_token: token)
-    confirm("1357")
     assert_redirected_to join_classroom_path(token)
     follow_redirect!
     assert_select "#student-signup[data-classroom--signup-steps-start-value='2']"
@@ -222,12 +256,13 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "CA-10 : une classe de 60 nouveaux élèves (deux envois chacun) passe l'entrée depuis une adresse ; le 121e envoi reçoit 429" do
-    120.times do |i|
+    60.times do |i|
       enter(contact: format("01%08d", i), pin: "1357")
       assert_response :see_other, "entry #{i + 1} was refused (#{response.status})"
+      reset!
     end
 
-    enter(contact: "0199999999", pin: "1357")
+    send_number(contact: "0199999999")
 
     assert_response :too_many_requests
     assert_select "#student-entry-alert[role=alert]", text: I18n.t("errors.codes.rate_limited")
@@ -289,6 +324,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     11.times do |i|
       enter(contact: format("01%08d", i), pin: "1357")
       assert_response :see_other, "unknown number #{i + 1} was refused (#{response.status})"
+      reset!
     end
   end
 
@@ -297,7 +333,6 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     freeze_time do
       12.times do |i|
         enter(contact: format("01%08d", i), pin: "1357")
-        confirm("1357")
         finish_registration
         assert_redirected_to student_home_path, "registration #{i + 1} was refused (#{response.status})"
         sign_out
@@ -331,7 +366,6 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
 
   test "CA-11 : une entrée de plus de 30 minutes est oubliée ; le formulaire du mode entrée renvoie à l'entrée sans rien créer" do
     enter(contact: "0101020304", pin: "1357")
-    confirm("1357")
 
     travel 29.minutes do
       get new_student_registration_path
@@ -349,8 +383,25 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "une confirmation sans entrée (expirée) renvoie à l'entrée" do
-    confirm("1357")
+  test "un numéro inscrit gardé plus de 30 minutes : l'écran du numéro revient, et un code envoyé renvoie à l'entrée sans rien créer" do
+    student = create_student
+    send_number(contact: student.contact)
+
+    travel 31.minutes do
+      get new_student_entry_path
+      assert_select "input[name='student_entry[contact]']"
+      assert_select "input[name='student_entry[pin]']", 0
+
+      assert_no_difference -> { Orm::Session.count } do
+        send_pin("2468")
+      end
+      assert_redirected_to new_student_entry_path
+      assert_equal I18n.t("identity.student_entries.create.expired"), flash[:alert]
+    end
+  end
+
+  test "un code sans entrée (expirée) renvoie à l'entrée" do
+    send_pin("1357")
 
     assert_redirected_to new_student_entry_path
   end
@@ -360,8 +411,8 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "#student_entry_contact_error"
 
-    enter(contact: "0101020304", pin: "13")
-    assert_select "#student_entry_pin_error", text: "Le code secret compte 4 chiffres."
+    post student_entries_path, params: { student_entry: { contact: "0101020304", pin: "13" } }
+    assert_select "#student-entry-alert[role=alert]", text: /Le code secret compte 4 chiffres\./
   end
 
   test "un compte connecté qui ouvre l'entrée retrouve son accueil" do
@@ -374,7 +425,6 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
 
   test "une entrée confirmée renvoie l'entrée à l'inscription, sans reposer le numéro" do
     enter(contact: "0101020304", pin: "1357")
-    confirm("1357")
 
     get new_student_entry_path
 
@@ -384,7 +434,7 @@ class Identity::StudentEntriesControllerTest < ActionDispatch::IntegrationTest
   test "un connecté qui envoie l'entrée retrouve son accueil, sans nouvelle session" do
     sign_in_as create_student(classroom: @classroom)
 
-    enter(contact: "0101020304", pin: "1357")
+    post student_entries_path, params: { student_entry: { contact: "0101020304", pin: "1357" } }
 
     assert_redirected_to student_home_path
     assert_not Orm::User.exists?(contact: "0101020304")

@@ -1,5 +1,5 @@
-# Entrée élève unique : numéro et code secret, puis « pas encore de compte » — ADR-0141,
-# UDR-0176 (au « tu » : l'entrée s'adresse à l'élève), pavé numérique de la confirmation
+# Entrée élève unique, numéro d'abord : le numéro, puis le code ou « Nouveau sur Lnclass » (code tapé une fois) — ADR-0141,
+# UDR-0176 (au « tu » : l'entrée s'adresse à l'élève), UDR-0180 (pavé numérique), UDR-0189
 fr:
   identity:
     student_entries:
@@ -14,26 +14,24 @@ fr:
         submit: "Continuer"
         submitting: "Un instant…"
         forgot_pin: "Code secret oublié ?"
+        pin_title: "Entre ton code secret"
+        number_label: "Ton numéro"
         confirm_title: "Nouveau sur Lnclass"
         confirm_lead: "Ce numéro n'a pas encore de compte :"
-        confirm_hint: "Retape ton code secret pour être sûr de t'en souvenir."
+        confirm_hint: "Choisis ton code secret : 4 chiffres faciles à retenir. Tu le taperas à chaque connexion."
         confirm_submit: "Créer mon compte"
         not_my_number: "Ce n'est pas mon numéro"
         pin_pad:
-          keypad_label: "Pavé numérique"
-          erase: "Effacer"
-          progress: "%{count} chiffres sur 4"
-          match: "Les deux codes sont identiques."
+          match: "Code secret choisi."
           offline: "Pas de connexion. Réessaie."
       create:
-        expired: "Ton entrée a expiré. Tape de nouveau ton numéro et ton code secret."
+        expired: "Ton entrée a expiré. Tape de nouveau ton numéro."
         wrong_app: "Ce compte n'est pas un compte élève : ouvre lnclass.com dans le navigateur pour te connecter."
   activemodel:
     attributes:
       dtos/identity/student_entry_input:
         contact: "Numéro de téléphone"
         pin: "Code secret"
-        pin_confirmation: "Confirme ton code secret"
     errors:
       models:
         dtos/identity/student_entry_input:
@@ -45,6 +43,3 @@ fr:
               blank: "Tape ton code secret."
               invalid: "Le code secret compte 4 chiffres."
               wrong_pin: "Code secret incorrect."
-            pin_confirmation:
-              blank: "Retape ton code secret."
-              confirmation: "Les deux codes sont différents."

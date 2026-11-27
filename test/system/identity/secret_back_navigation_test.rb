@@ -6,9 +6,7 @@ class Identity::SecretBackNavigationTest < ApplicationSystemTestCase
   test "after the backup codes, Back does not show them again" do
     member = create_team_member(second_factor: false)
     visit new_session_path
-    fill_in "session[contact]", with: member.contact
-    fill_in "session[pin]", with: "2468"
-    click_on I18n.t("identity.sessions.new.submit")
+    enter_credentials member.contact, "2468"
 
     secret = find("#second-factor-secret", wait: SIGN_IN_WAIT).text.delete(" ")
     # The code leaves by itself at the sixth digit (UDR-0054 §3.6).

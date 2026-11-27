@@ -1,10 +1,8 @@
 <%# 🌐 UI · identity/teacher_registrations/_school_fields — l'établissement de la voie standard : le champ de recherche commun %>
-<%# Rôle : « Votre établissement » cherché en tapant (DRENA à côté de chaque résultat) ; la recherche sans JavaScript part du formulaire GET teacher-signup-school ; l'établissement coché ouvre l'étape 2 %>
-<%# ADR  : 0030, 0083, 0142-recherche-etablissement · UDR : 0079, 0134 (§3.9), 0177-champ-etablissement %>
+<%# Rôle : « Votre établissement » cherché en tapant (DRENA à côté de chaque résultat), à l'étape 3 « Votre profil » ; la recherche sans JavaScript part du formulaire GET teacher-signup-school ; coché, il ne fait plus changer d'étape %>
+<%# ADR  : 0030, 0083, 0142-recherche-etablissement · UDR : 0079, 0134 (§3.9), 0177-champ-etablissement, 0189-connexion-numero-d-abord (§3.5) %>
 <%# locals: (form:) -%>
-<%# L'établissement coché fait passer à l'étape 2 (signup_steps_controller#go) : l'écouteur est sur ce conteneur, qui survit au
-    remplacement du cadre des résultats. Jamais sur `change` : la saisie elle-même en émet un en perdant le focus. %>
-<div class="flex min-w-0 flex-col" data-action="school--school-search:picked->classroom--signup-steps#go" data-classroom--signup-steps-step-param="2">
+<div class="flex min-w-0 flex-col">
   <%= render "school/school_searches/field", scope: :teacher_registration, **school_search_locals(@form.school_public_id),
                                              error: school_error(@form.errors), search_form: "teacher-signup-school", label_hidden: true %>
 </div>

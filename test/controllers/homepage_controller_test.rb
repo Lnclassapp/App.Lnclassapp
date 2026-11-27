@@ -38,7 +38,8 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     end
     # Chantier entree-eleve-unifiee (UDR-0176 §3.1) : « Je suis élève » est un lien droit vers l'entrée.
     assert_select "main a#role-entry-student-entry[href='#{new_student_entry_path}'].ui-button-lg.w-full", text: "Je suis élève"
-    assert_select "main button[aria-haspopup='dialog'].ui-button-lg.w-full", text: "Enseignant(e)", count: 1
+    # UDR-0189 §3.8 (amendement du 2026-11-27) : « Enseignant(e) » aussi, vers /teacher, sans fenêtre.
+    assert_select "main a#role-entry-teacher-entry[href='#{new_teacher_entry_path}'].ui-button-lg.w-full", text: "Enseignant(e)"
   end
 
   test "CA-A3: no header, no footer, no section to scroll to: the page is a single screen" do
@@ -47,20 +48,17 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "header, footer, nav", 0
     assert_select "section", 0
     assert_select "a[href^='#']", 0
-    # « Se connecter » n'existe que dans la fenêtre de l'enseignant : la page n'a pas de lien propre, l'élève passe par l'entrée.
-    assert_select "a[href='#{new_session_path}']", 1
-    assert_select "dialog a[href='#{new_session_path}']", 1
+    # Ni « Se connecter » ni fenêtre : l'élève et l'enseignant passent chacun par leur entrée, numéro d'abord.
+    assert_select "a[href='#{new_session_path}']", 0
   end
 
   test "the visitor sees the student and teacher entries, once each" do
     get root_url
 
     assert_select "a[href='#{new_student_entry_path}']", text: "Je suis élève", count: 1
-    assert_select "button[aria-haspopup='dialog']", text: "Enseignant(e)", count: 1
+    assert_select "a[href='#{new_teacher_entry_path}']", text: "Enseignant(e)", count: 1
     assert_select "a, button", text: "Commencer", count: 0
-    assert_select "dialog[id^='role-modal-']", 1
-    assert_select "dialog#role-modal-student-entry", 0
-    assert_select "dialog#role-modal-teacher-entry", 1
+    assert_select "dialog[id^='role-modal-']", 0
   end
 
   # Chantier entree-eleve-unifiee (D2) : plus de choix « Se connecter » / « Créer mon compte » pour l'élève.
@@ -70,23 +68,6 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{new_student_entry_path}']", text: "Je suis élève"
     assert_select "a[href='#{new_student_registration_path}']", 0
     assert_no_match(/Rejoindre ma classe/, response.body)
-  end
-
-  test "the teacher modal offers to sign in or to create an account, and is formal" do
-    get root_url
-
-    assert_select "dialog#role-modal-teacher-entry" do
-      assert_select "a[href='#{new_session_path}']", text: "Se connecter"
-      assert_select "a[href='#{new_teacher_registration_path}']", text: "Créer un compte"
-    end
-    assert_no_match INFORMAL, css_select("dialog#role-modal-teacher-entry").first.text
-  end
-
-  test "RH-02: each role modal names the tab by its own title while it is open" do
-    get root_url
-
-    assert_select "[data-controller=modal][data-modal-document-title-value='Vous êtes enseignant ? · Lnclass'] dialog#role-modal-teacher-entry"
-    assert_select "title", text: "Accueil · Lnclass"
   end
 
   # Choix du porteur du 2026-10-03 : le chapeau (ordinateur) dit les trois gestes de l'élève.
@@ -177,8 +158,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_no_match(/Espace établissement/i, response.body)
-    assert_select "dialog[id^='role-modal-']", 1
-    assert_select "dialog#role-modal-school-entry", 0
+    assert_select "dialog[id^='role-modal-']", 0
     assert_select "a[href='#{new_school_staff_registration_path}']", 0
     assert_select "button[aria-controls='role-modal-school-entry']", 0
   end
@@ -189,7 +169,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "button[aria-haspopup='dialog'][aria-controls='role-modal-school-entry']", text: "Espace établissement"
-    assert_select "dialog[id^='role-modal-']", 2
+    assert_select "dialog[id^='role-modal-']", 1
     assert_select "[data-controller=modal][data-modal-document-title-value='Espace établissement · Lnclass'] dialog#role-modal-school-entry"
     assert_select "dialog#role-modal-school-entry" do
       assert_select "a[href='#{new_session_path}']", text: "Se connecter"
@@ -198,11 +178,14 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_no_match INFORMAL, css_select("dialog#role-modal-school-entry").first.text
   end
 
-  # UDR-0062 §4 : l'enseignant n'assigne plus que des exercices ; la landing ne promet plus de cours assignés.
+  # UDR-0062 §4 : l'enseignant n'assigne plus que des exercices ; la landing ne promet plus de cours assignés. Sans la fenêtre
+  # « Vous êtes enseignant ? » (UDR-0189 §3.8, 2026-11-27), la promesse est celle de l'inscription enseignant.
   test "the teacher is promised to assign exercises, not courses" do
     get root_url
+    assert_no_match(/des cours et des exercices|assigner du contenu|Assigne du contenu/, response.body)
 
-    assert_match(/assigner des exercices/i, response.body)
+    get new_teacher_registration_path(confirmed: 1)
+    assert_match(/Assignez un exercice/i, response.body)
     assert_no_match(/des cours et des exercices|assigner du contenu|Assigne du contenu/, response.body)
   end
 

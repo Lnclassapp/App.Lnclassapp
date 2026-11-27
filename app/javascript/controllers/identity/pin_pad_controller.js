@@ -1,6 +1,6 @@
-// ⚡ FRONT · identity/pin_pad_controller — pavé numérique de « Nouveau sur Lnclass » : 4 cases, 10 touches, envoi au 4e chiffre
-// Rôle : cache le champ natif (sans JavaScript il reste), montre le pavé ; au 4e chiffre, requestSubmit : le serveur compare, le premier code n'est jamais dans la page
-// ADR  : 0141 · UDR : pave-numerique-confirmation-code (§2, §3.2 ; hors ligne : message, chiffres gardés, renvoi possible)
+// ⚡ FRONT · identity/pin_pad_controller — le code secret en 4 cases et 10 touches, partout où l'on tape un code (partiel shared/pin_pad)
+// Rôle : cache le champ natif (sans JavaScript il reste), montre le pavé ; au 4e chiffre, mode « submit » : requestSubmit, le code part au serveur ; mode « step » : le champ est rempli et le bouton de l'étape (Continuer) cliqué
+// ADR  : 0141, 0148-connexion-revele-un-numero-inscrit · UDR : 0180-pave-numerique-confirmation-code (§2, §3.2 ; hors ligne : message, chiffres gardés, renvoi possible), 0189-connexion-numero-d-abord (§3.4, amendement §3.6)
 import { Controller } from "@hotwired/stimulus"
 
 const LENGTH = 4
@@ -9,6 +9,7 @@ const IDLE = "border-line"
 
 export default class extends Controller {
   static targets = ["field", "fieldBlock", "pad", "box", "status", "check", "submit", "mismatch", "offline", "key"]
+  static values = { mode: { type: String, default: "submit" } }
 
   connect() {
     this.setup()
@@ -33,7 +34,7 @@ export default class extends Controller {
     if (this.hasMismatchTarget) this.mismatchTarget.hidden = false
     if (this.hasCheckTarget) this.checkTarget.hidden = true
     this.render()
-    if (this.hasKeyTarget) this.keyTargets[0].focus({ preventScroll: true })
+    if (this.hasKeyTarget && this.visible) this.keyTargets[0].focus({ preventScroll: true })
   }
 
   disconnect() {
@@ -52,8 +53,10 @@ export default class extends Controller {
     this.render()
   }
 
+  // Le clavier physique ne nourrit que le pavé visible, et jamais à la place d'un autre champ (le numéro, le nom).
   onKeydown(event) {
-    if (event.ctrlKey || event.metaKey || event.altKey) return
+    if (event.ctrlKey || event.metaKey || event.altKey || !this.visible) return
+    if (["INPUT", "TEXTAREA", "SELECT"].includes(event.target?.tagName)) return
     if (/^[0-9]$/.test(event.key)) {
       event.preventDefault()
       this.add(event.key)
@@ -72,8 +75,10 @@ export default class extends Controller {
   }
 
   send() {
-    this.padTarget.setAttribute("aria-busy", "true")
     this.fieldTarget.value = this.digits
+    if (this.modeValue === "step") return this.submitTarget.click()
+
+    this.padTarget.setAttribute("aria-busy", "true")
     this.submitTarget.disabled = false
     this.element.requestSubmit(this.submitTarget)
   }
@@ -97,12 +102,17 @@ export default class extends Controller {
     }
   }
 
+  get visible() {
+    return !this.padTarget.hidden && this.padTarget.getClientRects().length > 0
+  }
+
   get locked() {
     return this.padTarget.getAttribute("aria-busy") === "true"
   }
 
   render() {
     const count = this.digits.length
+    this.fieldTarget.value = count === LENGTH ? this.digits : ""
     this.boxTargets.forEach((box, index) => {
       const filled = index < count
       box.textContent = filled ? "●" : ""
