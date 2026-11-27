@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_25_100100) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_27_230000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -847,7 +847,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_25_100100) do
     t.datetime "changed_at", null: false
     t.index ["changed_at"], name: "index_push_motive_setting_changes_on_changed_at"
     t.index ["changed_by_id"], name: "index_push_motive_setting_changes_on_changed_by_id"
-    t.check_constraint "motive::text = ANY (ARRAY['quiz_prep'::character varying, 'assignment_due'::character varying, 'assignment_new'::character varying]::text[])", name: "push_motive_setting_changes_motive_check"
+    t.check_constraint "motive::text = ANY (ARRAY['quiz_prep'::character varying, 'assignment_due'::character varying, 'assignment_new'::character varying, 'announcement'::character varying, 'unfinished'::character varying, 'result'::character varying, 'inactive'::character varying]::text[])", name: "push_motive_setting_changes_motive_check"
   end
 
   create_table "push_motive_settings", force: :cascade do |t|
@@ -857,7 +857,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_25_100100) do
     t.datetime "updated_at", null: false
     t.index ["motive"], name: "index_push_motive_settings_on_motive", unique: true
     t.index ["updated_by_id"], name: "index_push_motive_settings_on_updated_by_id"
-    t.check_constraint "motive::text = ANY (ARRAY['quiz_prep'::character varying, 'assignment_due'::character varying, 'assignment_new'::character varying]::text[])", name: "push_motive_settings_motive_check"
+    t.check_constraint "motive::text = ANY (ARRAY['quiz_prep'::character varying, 'assignment_due'::character varying, 'assignment_new'::character varying, 'announcement'::character varying, 'unfinished'::character varying, 'result'::character varying, 'inactive'::character varying]::text[])", name: "push_motive_settings_motive_check"
   end
 
   create_table "push_preferences", force: :cascade do |t|

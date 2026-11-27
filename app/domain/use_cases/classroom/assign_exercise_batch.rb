@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Classroom::AssignExerciseBatch
 # Rôle : l'enseignant de la classe envoie de 1 à 10 exercices en un devoir : une assignation ordinaire par exercice, toutes du même
 #        envoi, échéance au prochain jour de séance de l'auteur ; un exercice déjà assigné à la classe est écarté et nommé
-# ADR  : 0035, 0048, 0072, sujets-de-devoir (ajout du 2026-10-30)
+# ADR  : 0035, 0048, 0072, sujets-de-devoir (ajout du 2026-10-30), 0147 (amendement II : un envoi demande un passage de notifications)
 module UseCases
   module Classroom
     class AssignExerciseBatch
@@ -13,13 +13,15 @@ module UseCases
       MAX_SUBMITTED = 50
       PUBLIC_ID_LENGTH = 14
 
-      def initialize(classrooms:, assignments:, session_days:, policy:, session_days_policy:, clock:)
+      # push_pass : PushPassPort, demandé dès qu'au moins un exercice part (« Exercice assigné » part tout de suite).
+      def initialize(classrooms:, assignments:, session_days:, policy:, session_days_policy:, clock:, push_pass:)
         @classrooms = classrooms
         @assignments = assignments
         @session_days = session_days
         @policy = policy
         @session_days_policy = session_days_policy
         @clock = clock
+        @push_pass = push_pass
       end
 
       # exercise_public_ids : ce que le navigateur a envoyé, jamais cru (inconnus, doublons, liste trop longue, valeurs qui ne sont pas du texte).
@@ -87,6 +89,7 @@ module UseCases
         created = @assignments.create_batch(assignments:)
         return created if created.failure?
 
+        @push_pass.request if created.value.created.any?
         Shared::Result.success(Sent.new(classroom:, created: created.value.created, skipped: created.value.skipped))
       end
     end

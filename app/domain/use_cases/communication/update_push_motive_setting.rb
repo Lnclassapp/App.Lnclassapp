@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · UseCases::Communication::UpdatePushMotiveSetting
-# Rôle : un admin de l'équipe coche ou décoche « Automatique » sur un motif ; seuls les trois motifs automatisables, jamais une relance
+# Rôle : un admin de l'équipe coche ou décoche la case d'un des sept motifs (ADR-0147, amendement du 2026-11-27 II)
 # ADR  : 0028 · XXXX envois de notifications (§4.1, §4.2) · UDR : XXXX écran notifications de l'équipe (§3.3)
 module UseCases
   module Communication
@@ -11,7 +11,7 @@ module UseCases
       end
 
       # Le dépôt écrit le réglage et sa ligne d'historique ensemble.
-      # → Result(PushMotiveSetting) | :forbidden | :invalid (motif hors AUTOMATABLE, même forgé)
+      # → Result(PushMotiveSetting) | :forbidden | :invalid (motif inconnu, même forgé)
       def call(actor:, motive:, automatic:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?

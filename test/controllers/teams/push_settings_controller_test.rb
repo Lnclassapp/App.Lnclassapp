@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR XXXX (écran « Notifications » de l'équipe) §3.1 à §3.5 : la page est servie à toute l'équipe, jamais à un autre rôle ;
+# UDR-0187 §3.1 à §3.5 et amendement du 2026-11-27 (II) : la page est servie à toute l'équipe, jamais à un autre rôle ;
 # elle dit quand l'envoi est coupé, montre les sept motifs et l'historique des 14 derniers jours, sans nom d'élève.
 class Teams::PushSettingsControllerTest < ActionDispatch::IntegrationTest
   KEYS = %w[PUSH_DELIVERY_ENABLED VAPID_PUBLIC_KEY VAPID_PRIVATE_KEY VAPID_SUBJECT].freeze
@@ -44,21 +44,22 @@ class Teams::PushSettingsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "the seven motives are listed in priority order, with their example text and the right control" do
+  test "the seven motives are listed in priority order, each with its switch, its example text and its hint (event or reminder)" do
     sign_in_as @admin
     get teams_push_settings_path
 
     ids = css_select("#push_settings_modes li[id^=push_motive_]").pluck("id")
     assert_equal Entities::Communication::PushMotive::PRIORITY.map { "push_motive_#{it}" }, ids
-    %w[quiz_prep assignment_due assignment_new].each do |motive|
+    Entities::Communication::PushMotive::PRIORITY.each do |motive|
       assert_select "#push_motive_#{motive} input[type=checkbox][role=switch]:not([disabled])"
     end
-    %w[unfinished result inactive].each { assert_select "#push_motive_#{it} input[type=checkbox]", 0 }
-    assert_select "#push_motive_announcement", text: /#{Regexp.escape(tl("modes.badges.announcement"))}/
+    Entities::Communication::PushMotive::EVENTS.each { assert_select "#push_motive_#{it}_state", text: /#{Regexp.escape(tl("modes.hints.event"))}/ }
+    Entities::Communication::PushMotive::REMINDERS.each { assert_select "#push_motive_#{it}_state", text: /#{Regexp.escape(tl("modes.hints.reminder"))}/ }
+    assert_select "#push_motive_assignment_new", text: /Exercice assigné/
     assert_select "#push_motive_assignment_new", text: /t'a donné 3 exercices/
   end
 
-  test "a checked motive says who set it and when; an unchecked one says it is validated every day" do
+  test "a checked motive says who set it and when; an unchecked one says nothing is sent" do
     author = create_team_member(first_name: "Awa", last_name: "Koné")
     create_push_motive_setting(motive: "assignment_due", automatic: true, updated_by: author, updated_at: Time.zone.local(2026, 11, 20, 9))
     sign_in_as @admin
@@ -66,7 +67,7 @@ class Teams::PushSettingsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#push_motive_assignment_due_state", text: /Automatique depuis le 20 nov\., par Awa K\./
     assert_select "#push_motive_assignment_due input[type=checkbox][checked]"
-    assert_select "#push_motive_quiz_prep_state", text: tl("modes.state_off")
+    assert_select "#push_motive_quiz_prep_state", text: /#{Regexp.escape(tl("modes.state_off"))}/
     assert_select "#push_motive_quiz_prep input[type=checkbox][checked]", 0
   end
 
@@ -98,7 +99,7 @@ class Teams::PushSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/BPublicKeyForTests|mailto:equipe/, response.body)
   end
 
-  test "the plan frame is lazy and points to the plan route; the history is the last 14 days, newest first, with no student name" do
+  test "there is no daily plan any more; the history keeps past approvals, is the last 14 days, newest first, with no student name" do
     awa = create_team_member(first_name: "Awa", last_name: "Koné")
     student = create_student(first_name: "Eleve", last_name: "Secret")
     create_push_approval(motive: "inactive", approved_by: awa, approved_at: 2.hours.ago, recipients: [ [ student.id, "inactive:3" ] ])
@@ -107,7 +108,8 @@ class Teams::PushSettingsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @admin
     get teams_push_settings_path
 
-    assert_select "turbo-frame#push_plan[src=?][loading=lazy]", teams_push_plan_path
+    assert_select "turbo-frame#push_plan", 0
+    assert_no_match(/Valider l'envoi/, response.body)
     entries = css_select("#push_history_list li").map { it.text.squish }
     assert_equal 2, entries.size
     assert_match(/Awa K\. a validé Élève inactif \(3, 7, 14 jours\) — 1 élève/, entries.first)
@@ -123,6 +125,16 @@ class Teams::PushSettingsControllerTest < ActionDispatch::IntegrationTest
     travel_to(Time.utc(2026, 11, 25, 12)) { get teams_push_settings_path }
 
     assert_select "#push_history_list li", text: /25 nov\. 9 h 12 · Awa K\./
+  end
+
+  # Amendement II : le plan du jour et la validation sont retirés ; leurs anciennes adresses n'existent plus.
+  test "the old plan and approval addresses are gone" do
+    sign_in_as @admin
+
+    get "/teams/notifications/plan"
+    assert_response :not_found
+    post "/teams/notifications/approvals", params: { motive: "inactive" }
+    assert_response :not_found
   end
 
   test "an empty history shows its empty state" do

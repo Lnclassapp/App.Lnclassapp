@@ -151,7 +151,7 @@ module Communication
       { messages:, attachments: Repositories::Communication::AttachmentStore.new, schools: Repositories::School::SchoolRepository.new,
         classrooms: Repositories::Classroom::ClassroomRepository.new, teachings: Repositories::Classroom::TeachingRepository.new,
         audit_log: Repositories::Identity::AuditLogRepository.new, illustrations:, transaction: Repositories::Shared::Transaction.new,
-        clock: Time.zone }
+        clock: Time.zone, push_pass: Gateways::Communication::PushPass.new }
     end
   end
 end

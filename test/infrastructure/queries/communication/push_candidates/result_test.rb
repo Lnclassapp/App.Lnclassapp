@@ -54,10 +54,11 @@ module Queries
           assert_equal [ "result:#{fresh.public_id}" ], candidates.map(&:object_key)
         end
 
-        test "médaille obtenue depuis 3 h : un candidat medal ; depuis moins de 2 h ou plus de 24 h : rien" do
-          session = completed(NOW - 3.hours)
-          medal(session, NOW - 3.hours)
-          [ NOW - 1.hour, NOW - 26.hours ].each do |at|
+        # ADR-0147, amendement du 2026-11-27 (II) : plus de délai de 2 h ; la médaille part dès qu'elle est obtenue.
+        test "médaille obtenue à l'instant : un candidat medal sans délai ; depuis plus de 24 h : rien" do
+          session = completed(NOW - 30.seconds)
+          medal(session, NOW - 30.seconds)
+          [ NOW - 26.hours ].each do |at|
             other = create_student.tap { create_push_subscription(user: it) }
             medal(completed(at, student: other), at)
           end

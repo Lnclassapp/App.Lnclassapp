@@ -7,9 +7,10 @@ module UseCases
       include CreateMessage::Writing
 
       # policy : ManageOwnPolicy (l'auteur seul, rien de figé) ; publish_policy : PublishPolicy (pour qui, comme à la
-      # création : les destinataires peuvent changer) ; illustrations : IllustrationRepositoryPort.
+      # création : les destinataires peuvent changer) ; illustrations : IllustrationRepositoryPort ; push_pass : PushPassPort,
+      # demandé à la parution d'une annonce qui prévient les élèves, jamais à la modification d'une annonce en ligne.
       def initialize(messages:, attachments:, schools:, classrooms:, teachings:, audit_log:, illustrations:, transaction:,
-                     policy:, publish_policy:, clock:)
+                     policy:, publish_policy:, clock:, push_pass:)
         @messages = messages
         @attachments = attachments
         @schools = schools
@@ -21,6 +22,7 @@ module UseCases
         @policy = policy
         @publish_policy = publish_policy
         @clock = clock
+        @push_pass = push_pass
       end
 
       # → success(Saved : l'annonce, et les annonces archivées par sa parution) | :not_found (inconnue, ou d'un autre
@@ -61,6 +63,7 @@ module UseCases
         saved = write(message.with(**written(dto, targets, illustration_id, actor)))
         store_files(message.id, dto)
         journal_publication(saved, now) if saved.status == "published"
+        @push_pass.request if saved.status == "published" && saved.push_requested
         Shared::Result.success(Saved.new(message: saved, archived:))
       end
 

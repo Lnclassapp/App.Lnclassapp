@@ -7,7 +7,8 @@ module UseCases
       # badge_level : médaille enregistrée par cette session (Bronze dès une réponse, nil pour une copie vide) ; earned_now : le badge de l'élève vient de monter.
       Row = Data.define(:score_percent, :badge_level, :earned_now)
 
-      def initialize(sessions:, exercises:, badges:, gaps:, policy:, transaction:, clock:)
+      # push_pass : PushPassPort, demandé quand la médaille de l'élève monte : elle part tout de suite (ADR-0147, amendement II).
+      def initialize(sessions:, exercises:, badges:, gaps:, policy:, transaction:, clock:, push_pass:)
         @sessions = sessions
         @exercises = exercises
         @badges = badges
@@ -15,6 +16,7 @@ module UseCases
         @policy = policy
         @transaction = transaction
         @clock = clock
+        @push_pass = push_pass
       end
 
       # Appelé par SubmitExerciseCopy, dans sa transaction.
@@ -24,7 +26,9 @@ module UseCases
         allowed = @policy.call(actor:, session:)
         return allowed if allowed.failure?
 
-        @transaction.call { Shared::Result.success(close(session, essential_id, @clock.now)) }
+        row = @transaction.call { close(session, essential_id, @clock.now) }
+        @push_pass.request if row.earned_now
+        Shared::Result.success(row)
       end
 
       private

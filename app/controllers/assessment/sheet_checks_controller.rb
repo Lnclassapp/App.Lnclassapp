@@ -135,7 +135,8 @@ module Assessment
           sessions:, exercises:, policy:, transaction:, clock: Time.zone,
           close: UseCases::Assessment::CloseExerciseSession.new(
             sessions:, exercises:, badges: Repositories::Assessment::BadgeRepository.new,
-            gaps: Repositories::Assessment::KnowledgeGapRepository.new, policy:, transaction:, clock: Time.zone
+            gaps: Repositories::Assessment::KnowledgeGapRepository.new, policy:, transaction:, clock: Time.zone,
+            push_pass: Gateways::Communication::PushPass.new
           )
         ),
         exercises:, policy: Policies::Assessment::StartSessionPolicy.new, pending: Repositories::Assessment::PendingAssignmentRepository.new, transaction:,

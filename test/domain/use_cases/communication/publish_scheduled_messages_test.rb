@@ -63,7 +63,7 @@ module UseCases
 
       def publish(messages = Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new)
         PublishScheduledMessages.new(messages:, **DEPS, audit_log: Repositories::Identity::AuditLogRepository.new, transaction:,
-                                     clock: Clock.new(NOW)).call
+                                     clock: Clock.new(NOW), push_pass: (@push_pass ||= FakePushPass.new)).call
       end
 
       # Three live announcements, published on September 25th, 27th and 29th (the oldest first).
@@ -82,6 +82,17 @@ module UseCases
 
           __getobj__.find_by_public_id(public_id:)
         end
+      end
+
+      # ADR-0147, amendement du 2026-11-27 (II) : une annonce programmée qui prévient les élèves part à sa parution.
+      test "one push pass when a published announcement warns students; none when none does" do
+        publish
+        assert_equal 0, @push_pass.requests
+
+        create_message(author: create_team_member(second_factor: false), title: "Rentrée", status: "scheduled", audience: "students",
+                       push_requested: true, published_at: NOW - 1.minute)
+        assert_equal 1, publish.value
+        assert_equal 1, @push_pass.requests
       end
 
       test "B-030 — an unexpected failure on one announcement is reported by its id and the following ones are still published" do
@@ -151,7 +162,8 @@ module UseCases
         use_case = PublishScheduledMessages.new(messages: Repositories::Communication::MessageRepository.new,
                                                 **DEPS, teacher_flag: -> { false },
                                                 audit_log: Repositories::Identity::AuditLogRepository.new,
-                                                transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW))
+                                                transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW),
+                                                push_pass: FakePushPass.new)
 
         assert_equal 1, use_case.call.value
         assert_equal "archived", message.reload.status
@@ -294,7 +306,7 @@ module UseCases
 
         published = PublishScheduledMessages.new(messages: racing, **PublishScheduledMessagesTest::DEPS, audit_log: Repositories::Identity::AuditLogRepository.new,
                                                  transaction: Repositories::Shared::Transaction.new,
-                                                 clock: Data.define(:now).new(@now)).call.value
+                                                 clock: Data.define(:now).new(@now), push_pass: FakePushPass.new).call.value
 
         assert_equal 0, published
         assert_equal "archived", @due.reload.status

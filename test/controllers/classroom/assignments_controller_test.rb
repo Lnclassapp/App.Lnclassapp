@@ -49,7 +49,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     type = "Exercise"
     key = @exercise.public_id
 
-    assign(type, key, as: :turbo_stream)
+    assert_enqueued_with(job: Communication::DeliverPushNotificationsJob) { assign(type, key, as: :turbo_stream) }
 
     assert_response :success
     assert_equal "text/vnd.turbo-stream.html", response.media_type

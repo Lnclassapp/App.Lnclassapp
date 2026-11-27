@@ -1,13 +1,13 @@
 require "test_helper"
 
-# UDR XXXX §3.3 : un admin coche « Automatique » sans recharger la page ; un autre rôle, un motif forgé hors AUTOMATABLE
-# ou un visiteur ne change rien. Réponse en Turbo Stream (ligne et plan remplacés, toast), redirection sans JavaScript.
+# UDR XXXX §3.3 : un admin coche « Automatique » sans recharger la page ; un autre rôle, un motif inconnu forgé
+# ou un visiteur ne change rien. Réponse en Turbo Stream (ligne et historique remplacés, toast), redirection sans JavaScript.
 class Teams::PushMotiveSettingsControllerTest < ActionDispatch::IntegrationTest
   setup { @admin = create_team_member }
 
   def turbo(motive, automatic) = patch(teams_push_motive_setting_path(motive), params: { automatic: }, as: :turbo_stream)
 
-  test "an admin checks « devoir à rendre » : stored with the author, history written, line and plan replaced, toast" do
+  test "an admin checks « devoir à rendre » : stored with the author, history written, line replaced, no plan, toast" do
     sign_in_as @admin
 
     turbo("assignment_due", "1")
@@ -19,7 +19,7 @@ class Teams::PushMotiveSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ [ "assignment_due", true, @admin.id ] ],
                  Orm::Communication::PushMotiveSettingChange.pluck(:motive, :automatic, :changed_by_id)
     assert_select "turbo-stream[action=replace][target=push_motive_assignment_due]"
-    assert_select "turbo-stream[action=replace][target=push_plan]"
+    assert_select "turbo-stream[target=push_plan]", count: 0
     assert_select "turbo-stream[action=replace][target=push_history] #push_history_list li", text: /a rendu Devoir à rendre demain automatique/
     assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(I18n.t("teams.push_motive_settings.update.saved"))}/
     assert_select "turbo-stream[target=push_motive_assignment_due] input[type=checkbox][checked]"
@@ -58,16 +58,18 @@ class Teams::PushMotiveSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::Communication::PushMotiveSettingChange.count
   end
 
-  test "a forged reminder motive is refused, nothing is written" do
+  # ADR-0147, amendement du 2026-11-27 (II) : une relance a sa case ; la base l'accepte.
+  test "a reminder motive is checked like any other; a forged unknown motive is refused, nothing is written" do
     sign_in_as @admin
 
-    %w[inactive unfinished result announcement nope].each do |motive|
-      turbo(motive, "1")
+    turbo("inactive", "1")
+    assert_response :success
+    assert Orm::Communication::PushMotiveSetting.find_by!(motive: "inactive").automatic
+    turbo("nope", "1")
 
-      assert_response :unprocessable_entity, motive
-      assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(I18n.t("teams.push_motive_settings.update.failed"))}/
-    end
-    assert_equal 0, Orm::Communication::PushMotiveSetting.count
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(I18n.t("teams.push_motive_settings.update.failed"))}/
+    assert_equal 1, Orm::Communication::PushMotiveSetting.count
   end
 
   test "without JavaScript a refusal is the 403 page for a content member and a redirect with an alert for a forged motive" do

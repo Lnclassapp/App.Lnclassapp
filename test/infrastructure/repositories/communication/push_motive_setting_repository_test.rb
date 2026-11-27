@@ -58,8 +58,14 @@ module Repositories
         assert_equal 1, Orm::Communication::PushMotiveSettingChange.count
       end
 
-      test "la base refuse un motif qui n'est pas automatisable" do
-        assert_raises(ActiveRecord::StatementInvalid) { update(motive: "inactive") }
+      # ADR-0147, amendement du 2026-11-27 (II) : les sept motifs ont leur case ; un motif inconnu reste refusé par la base.
+      test "la base accepte les sept motifs et refuse un motif inconnu" do
+        Entities::Communication::PushMotive::ALL.each { update(motive: it) }
+        assert_equal Entities::Communication::PushMotive::ALL.sort, @repository.all.map(&:motive).sort
+        Orm::Communication::PushMotiveSetting.delete_all
+        Orm::Communication::PushMotiveSettingChange.delete_all
+
+        assert_raises(ActiveRecord::StatementInvalid) { update(motive: "promo") }
         assert_empty @repository.all
         assert_equal 0, Orm::Communication::PushMotiveSettingChange.count
       end

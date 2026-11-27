@@ -82,7 +82,8 @@ module UseCases
           badges: Repositories::Assessment::BadgeRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
           assignments: Repositories::Classroom::AssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new,
           transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW), access: OpenAccess.new,
-          current_digest: ->(model) { Queries::Assessment::OfflinePackQuery.new.call(public_id: model.public_id).digest }
+          current_digest: ->(model) { Queries::Assessment::OfflinePackQuery.new.call(public_id: model.public_id).digest },
+          push_pass: FakePushPass.new
         )
         dto = Dtos::Assessment::OfflineCopyInput.new(client_copy_id: UUID, exercise_public_id: exercise.public_id, pack_token: token,
                                                      started_at: (NOW - 1800).iso8601, submitted_at: (NOW - 600).iso8601, answers:)

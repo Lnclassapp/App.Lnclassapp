@@ -85,6 +85,7 @@ module UseCases
         @teacher = Entities::Identity::Actor.new(user_id: 7, role: :teacher, school_id: 1)
         @team = Entities::Identity::Actor.new(user_id: 99, role: :team, team_role: "content")
         @session_days = FakeSessionDays.new([ 7, 3 ] => [ 1, 4 ])
+        @push_pass = FakePushPass.new
       end
 
       def resolved(id, key, name, status: "published", parents_published: true, course_level: { level_id: 9, series_id: nil })
@@ -94,7 +95,8 @@ module UseCases
       def send_batch(ids, actor: @teacher, classroom: "cls3e1", at: MONDAY)
         AssignExerciseBatch.new(classrooms: @classrooms, assignments: @assignments, session_days: @session_days,
                                 policy: Policies::Classroom::AssignPolicy.new,
-                                session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new, clock: Clock.new(at))
+                                session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new, clock: Clock.new(at),
+                                push_pass: @push_pass)
                            .call(actor:, classroom_public_id: classroom, exercise_public_ids: ids)
       end
 
@@ -112,6 +114,17 @@ module UseCases
         assert_equal 1, sent.created.map(&:batch_public_id).uniq.size
         assert_match(/\A[1-9A-HJ-NP-Za-km-z]{14}\z/, sent.created.first.batch_public_id)
         assert_equal 1, @assignments.batches
+      end
+
+      # ADR-0147, amendement du 2026-11-27 (II) : « Exercice assigné » part tout de suite, à toute heure.
+      test "un envoi demande un passage de notifications, une fois ; tout déjà assigné ou refusé : aucun" do
+        send_batch(%w[ex1 ex2])
+        assert_equal 1, @push_pass.requests
+
+        send_batch(%w[ex1 ex2])
+        send_batch(%w[ex1], actor: Entities::Identity::Actor.new(user_id: 8, role: :teacher, school_id: 1))
+        send_batch([])
+        assert_equal 1, @push_pass.requests
       end
 
       test "deux envois n'ont pas le même identifiant d'envoi" do

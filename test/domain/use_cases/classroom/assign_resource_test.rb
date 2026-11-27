@@ -107,6 +107,7 @@ module UseCases
         @team = Entities::Identity::Actor.new(user_id: 99, role: :team, team_role: "content")
         @session_days = FakeSessionDays.new
         @transaction = FakeTransaction.new
+        @push_pass = FakePushPass.new
       end
 
       def resolved(type, id, key, name, status: "published", parents_published: true, course_level: { level_id: 6, series_id: nil })
@@ -117,7 +118,7 @@ module UseCases
         dto = Dtos::Classroom::AssignmentInput.new(classroom_public_id: classroom, assignable_type: type, assignable_key: key, **step)
         AssignResource.new(classrooms: @classrooms, assignments:, session_days: @session_days, transaction: @transaction,
                            policy: Policies::Classroom::AssignPolicy.new,
-                           session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new, clock: Clock.new(at)).call(actor:, dto:)
+                           session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new, clock: Clock.new(at), push_pass: @push_pass).call(actor:, dto:)
       end
 
       def due_on(result) = result.value.assignment.due_on
@@ -134,6 +135,17 @@ module UseCases
         assert_equal [ "asg1", "Méiose" ], [ assignment.public_id, assignment.assignable.name ]
         assert_same @classroom, result.value.classroom
         assert_equal 1, @assignments.rows.size
+      end
+
+      # ADR-0147, amendement du 2026-11-27 (II) : « Exercice assigné » part tout de suite, à toute heure.
+      test "une assignation écrite demande un passage de notifications ; un refus ou un doublon, aucun" do
+        assert assign("ex-meiose", at: MONDAY, weekdays: %w[1 4]).success?
+        assert_equal 1, @push_pass.requests
+
+        assert_equal :conflict, assign("ex-meiose", at: MONDAY, weekdays: %w[1 4]).code
+        assert_equal :not_found, assign("ex-orphelin", at: MONDAY, weekdays: %w[1 4]).code
+        assert_equal :forbidden, assign("ex-mitose", actor: Entities::Identity::Actor.new(user_id: 50, role: :student)).code
+        assert_equal 1, @push_pass.requests
       end
 
       test "l'équipe peut assigner un exercice, sans échéance : elle n'a pas de jours" do

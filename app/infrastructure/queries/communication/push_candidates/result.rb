@@ -1,12 +1,11 @@
 # 🔌 INFRA · Queries::Communication::PushCandidates::Result
-# Rôle : candidats du motif result : copie rendue hors ligne reçue depuis moins de 24 h, ou médaille obtenue depuis 2 h à 24 h, pour un élève non revenu depuis
+# Rôle : candidats du motif result : copie rendue hors ligne reçue depuis moins de 24 h, ou médaille obtenue depuis moins de 24 h, pour un élève non revenu depuis (envoi dès l'événement, ADR-0147 amendement II)
 # ADR  : 0146 (§3.2) · 0033 (médailles) · PRD §3.1
 module Queries
   module Communication
     class PushCandidates
       class Result
         WINDOW = 24.hours
-        MEDAL_DELAY = 2.hours
         # La fermeture écrit la dernière activité (completed_at) quelques instants avant ou après l'événement : ce n'est pas un retour.
         SAME_VISIT = 1.minute
 
@@ -39,7 +38,7 @@ module Queries
 
         def medals(user_ids, now)
           Orm::ExerciseBadge.joins(:exercise_session, exercise: { course: :material })
-                            .where(student_id: user_ids, awarded_at: (now - WINDOW)..(now - MEDAL_DELAY))
+                            .where(student_id: user_ids, awarded_at: (now - WINDOW)..now)
                             .order(:id).pluck(:student_id, "exercise_sessions.public_id", :awarded_at, "materials.name")
                             .map { |*head, material| [ *head, material, "medal" ] }
         end

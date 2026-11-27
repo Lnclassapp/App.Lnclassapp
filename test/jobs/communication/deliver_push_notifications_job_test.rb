@@ -1,7 +1,7 @@
 require "test_helper"
 
 # ADR-0146 §3.2 et §4.3 : toutes les 15 minutes, sur les adaptateurs réels ; l'interrupteur
-# PUSH_DELIVERY_ENABLED est faux par défaut ; ADR envois de notifications §4.3 : rien ne part sans réglage ni validation.
+# PUSH_DELIVERY_ENABLED est faux par défaut ; ADR-0147 (amendement II) : rien ne part si la case du motif est décochée.
 class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
   WEDNESDAY_NOON = Time.utc(2026, 11, 18, 12, 30)
 
@@ -11,9 +11,7 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
     create_exercise_session(student: @student, status: "completed").update_columns(started_at: WEDNESDAY_NOON - 3.days - 10.minutes, completed_at: WEDNESDAY_NOON - 3.days)
   end
 
-  def approve_inactive = create_push_approval(motive: "inactive", on_date: WEDNESDAY_NOON.to_date, recipients: [ [ @student.id, inactive_key ] ])
-
-  def inactive_key = Queries::Communication::PushCandidates.new.for(now: WEDNESDAY_NOON).sole.object_key
+  def check_inactive = create_push_motive_setting(motive: "inactive", automatic: true)
 
   def run_job(env = {})
     sent = []
@@ -34,7 +32,7 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
     previous.each { |key, value| ENV[key] = value }
   end
 
-  test "sans réglage ni validation, un passage n'envoie rien et ne note rien" do
+  test "case décochée, un passage n'envoie rien et ne note rien" do
     result, sent = run_job("PUSH_DELIVERY_ENABLED" => "true")
 
     assert_empty sent
@@ -43,7 +41,7 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
   end
 
   test "interrupteur absent : aucun appel au port, l'envoi est noté disabled" do
-    approve_inactive
+    check_inactive
     result, sent = run_job
 
     assert_empty sent
@@ -51,8 +49,8 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
     assert_equal [ "disabled" ], Orm::Communication::PushDelivery.pluck(:status)
   end
 
-  test "interrupteur ouvert : l'élève inactif depuis 3 jours, validé par l'équipe, reçoit « Ta classe avance » une seule fois" do
-    approve_inactive
+  test "interrupteur ouvert : l'élève inactif depuis 3 jours, motif coché par l'équipe, reçoit « Ta classe avance » une seule fois" do
+    check_inactive
     result, sent = run_job("PUSH_DELIVERY_ENABLED" => "true")
 
     assert_equal({ "delivered" => 1 }, result)
@@ -83,7 +81,7 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
   end
 
   test "dix envois déjà partis ce jour : plus rien ne part ; PUSH_MIN_INTERVAL_HOURS n'est plus lue" do
-    approve_inactive
+    check_inactive
     10.times { |i| create_push_delivery(user: @student, motive: "result", object_key: "result:#{i}", sent_at: WEDNESDAY_NOON - 3.hours) }
 
     result, sent = run_job("PUSH_DELIVERY_ENABLED" => "true", "PUSH_MIN_INTERVAL_HOURS" => "6")
@@ -93,17 +91,17 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
   end
 
   test "un envoi parti il y a une heure ne bloque plus l'élève : l'écart de 4 h est supprimé" do
-    approve_inactive
+    check_inactive
     create_push_delivery(user: @student, object_key: "ancien", sent_at: WEDNESDAY_NOON - 1.hour)
 
     assert_equal({ "delivered" => 1 }, run_job("PUSH_DELIVERY_ENABLED" => "1").first)
   end
 
   test "le résultat est journalisé, vide compris" do
-    approve_inactive
+    check_inactive
     log = capture_log do
       run_job
-      travel_to(Time.utc(2026, 11, 18, 10)) { Communication::DeliverPushNotificationsJob.perform_now }
+      travel_to(Time.utc(2026, 11, 18, 3)) { Communication::DeliverPushNotificationsJob.perform_now }
     end
 
     assert_includes log, "[Communication::DeliverPushNotificationsJob] push notifications by status: {\"disabled\" => 1}"
@@ -116,7 +114,7 @@ class Communication::DeliverPushNotificationsJobTest < ActiveJob::TestCase
   end
 
   test "des clés VAPID absentes sont signalées une fois par passage" do
-    approve_inactive
+    check_inactive
     log = capture_log do
       with_env("PUSH_DELIVERY_ENABLED" => "true", "VAPID_PUBLIC_KEY" => nil, "VAPID_PRIVATE_KEY" => nil, "VAPID_SUBJECT" => nil) do
         travel_to(WEDNESDAY_NOON) { Communication::DeliverPushNotificationsJob.perform_now }

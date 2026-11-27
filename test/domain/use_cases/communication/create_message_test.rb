@@ -64,7 +64,7 @@ module UseCases
           schools: Repositories::School::SchoolRepository.new, classrooms: Repositories::Classroom::ClassroomRepository.new,
           teachings: Repositories::Classroom::TeachingRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
           illustrations: Repositories::Communication::IllustrationRepository.new, transaction:,
-          policy: Policies::Communication::PublishPolicy.new, clock: Clock.new(NOW)
+          policy: Policies::Communication::PublishPolicy.new, clock: Clock.new(NOW), push_pass: (@push_pass ||= FakePushPass.new)
         )
       end
 
@@ -100,6 +100,17 @@ module UseCases
           assert result.success?
           assert Orm::Message.find(result.value.message.id).push_requested, audience
         end
+      end
+
+      # ADR-0147, amendement du 2026-11-27 (II) : l'annonce qui prévient les élèves part à sa publication, tout de suite.
+      test "a published announcement that warns students asks for a push pass; without the box, a draft or a refusal: none" do
+        assert create(@fatou, scope: "national", audience: "students", push_requested: "1").success?
+        assert_equal 1, @push_pass.requests
+
+        create(@fatou, scope: "national", audience: "students")
+        create(@fatou, scope: "national", audience: "students", push_requested: "1", commit: "draft")
+        create(nil, scope: "national", audience: "students", push_requested: "1")
+        assert_equal 1, @push_pass.requests
       end
 
       test "PN-D2 — without the box, push_requested stays false" do
@@ -426,7 +437,7 @@ module UseCases
             schools: Repositories::School::SchoolRepository.new, classrooms: Repositories::Classroom::ClassroomRepository.new,
             teachings: Repositories::Classroom::TeachingRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
             illustrations: Repositories::Communication::IllustrationRepository.new, transaction: Repositories::Shared::Transaction.new,
-            policy: Policies::Communication::PublishPolicy.new, clock: Data.define(:now).new(@now)
+            policy: Policies::Communication::PublishPolicy.new, clock: Data.define(:now).new(@now), push_pass: FakePushPass.new
           ).call(actor: Repositories::Identity::UserRepository.new.actor_for(user_id: @fatou.id),
                  dto: Dtos::Communication::MessageInput.new(title:, body: "Le texte.", illustration: "info", audience: "all",
                                                             commit: "publish"))

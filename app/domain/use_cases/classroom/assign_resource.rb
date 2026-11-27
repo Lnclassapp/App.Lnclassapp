@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Classroom::AssignResource
 # Rôle : l'enseignant de la classe, ou l'équipe, assigne un exercice publié du niveau de la classe ; l'échéance est le prochain
 #        jour de séance de l'auteur, calculée et figée ici ; les jours cochés à cette étape s'enregistrent dans la même transaction
-# ADR  : 0026, 0028, 0035, 0048, 0072
+# ADR  : 0026, 0028, 0035, 0048, 0072, 0147 (amendement II : une assignation demande un passage de notifications)
 module UseCases
   module Classroom
     class AssignResource
@@ -18,7 +18,8 @@ module UseCases
         end
       end
 
-      def initialize(classrooms:, assignments:, session_days:, transaction:, policy:, session_days_policy:, clock:)
+      # push_pass : PushPassPort, demandé après une assignation écrite (« Exercice assigné » part tout de suite).
+      def initialize(classrooms:, assignments:, session_days:, transaction:, policy:, session_days_policy:, clock:, push_pass:)
         @classrooms = classrooms
         @assignments = assignments
         @session_days = session_days
@@ -26,6 +27,7 @@ module UseCases
         @policy = policy
         @session_days_policy = session_days_policy
         @clock = clock
+        @push_pass = push_pass
       end
 
       # dto : Dtos::Classroom::AssignmentInput ; dto.weekdays (non nil) = étape « Quels jours ? » remplie (ADR-0072 §4.3).
@@ -74,6 +76,7 @@ module UseCases
 
           write(actor, classroom, assignable, now).tap { raise Refused, it if it.failure? }
         end
+        @push_pass.request
         Shared::Result.success(Assigned.new(assignment: created.value, classroom:))
       rescue Refused => e
         e.result

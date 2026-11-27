@@ -65,7 +65,8 @@ module UseCases
           memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
           policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new,
           clock: Clock.new(NOW), access: FakeAccess.new(blocked),
-          current_digest: ->(exercise) { Queries::Assessment::OfflinePackQuery.new.call(public_id: exercise.public_id).digest }
+          current_digest: ->(exercise) { Queries::Assessment::OfflinePackQuery.new.call(public_id: exercise.public_id).digest },
+          push_pass: (@push_pass ||= FakePushPass.new)
         )
       end
 
@@ -102,6 +103,17 @@ module UseCases
 
         assert_equal 100, Orm::ExerciseSession.find_by!(client_copy_id: UUID).score_percent
         assert Orm::ExerciseBadge.exists?(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
+      # ADR-0147, amendement du 2026-11-27 (II) : la copie corrigée part tout de suite.
+      test "une copie rangée demande un passage de notifications ; un rejeu ou un refus, aucun" do
+        sync
+        assert_equal 1, @push_pass.requests
+
+        sync
+        other = create_student_for(@exercise.course)
+        sync(payload(pack_token: token(student: other)), actor: @actor)
+        assert_equal 1, @push_pass.requests
       end
 
       test "CA-9 : le même envoi deux fois rend already_synced avec la copie existante, sans rien écrire" do
@@ -301,7 +313,7 @@ module UseCases
           gaps: Repositories::Assessment::KnowledgeGapRepository.new, badges: Repositories::Assessment::BadgeRepository.new,
           memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
           policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW),
-          access: FakeAccess.new(false), current_digest: ->(_exercise) { "ailleurs" }
+          access: FakeAccess.new(false), current_digest: ->(_exercise) { "ailleurs" }, push_pass: FakePushPass.new
         )
 
         assert_nothing_written do

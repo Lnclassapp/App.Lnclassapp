@@ -66,7 +66,7 @@ module Repositories
           classrooms: Repositories::Classroom::ClassroomRepository.new, teachings: Repositories::Classroom::TeachingRepository.new,
           audit_log: Repositories::Identity::AuditLogRepository.new, illustrations: IllustrationRepository.new,
           transaction: Repositories::Shared::Transaction.new, policy: Policies::Communication::ManageOwnPolicy.new,
-          publish_policy: Policies::Communication::PublishPolicy.new, clock:
+          publish_policy: Policies::Communication::PublishPolicy.new, clock:, push_pass: FakePushPass.new
         ).call(actor: Repositories::Identity::UserRepository.new.actor_for(user_id: @fatou.id), public_id: message.public_id,
                dto: Input.new(title:, body: "Le texte.", illustration: "info", audience: "all", commit: "publish"))
       end
@@ -75,7 +75,8 @@ module Repositories
         UseCases::Communication::PublishScheduledMessages.new(messages:, users: Repositories::Identity::UserRepository.new,
                                                               teachings: Repositories::Classroom::TeachingRepository.new,
                                                               policy: Policies::Communication::PublishPolicy.new, teacher_flag: -> { true }, audit_log: Repositories::Identity::AuditLogRepository.new,
-                                                              transaction: Repositories::Shared::Transaction.new, clock:).call
+                                                              transaction: Repositories::Shared::Transaction.new, clock:,
+                                                              push_pass: FakePushPass.new).call
       end
 
       def connected(&) = ActiveRecord::Base.connection_pool.with_connection(&)
