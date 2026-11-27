@@ -41,11 +41,13 @@
 > Les retouches de ce chantier après sa livraison ([`retouche.md`](../../workflows/retouche.md)) : `- AAAA-MM-JJ · #<PR> · <ce qui change>`
 
 - 2026-11-27 · #735 · Décisions du porteur : motif validé ouvert toute la journée (pas de liste figée), fenêtres 12 h 20 – 14 h et 18 h – 20 h 20 (dimanche 9 h – 20 h) avec un passage à 12 h 20, case « Prévenir les élèves » figée après publication.
+- 2026-11-27 · config · Envoi ouvert sur ordre du porteur : `PUSH_DELIVERY_ENABLED` passé à vrai dans le `.env` Hostinger de develop, staging et production (seule cette ligne changée, compose inchangé), conteneurs recréés et sains.
 
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
+- 2026-11-27 · Production coupée environ 10 min (Cloudflare 526) à l'ouverture de l'envoi. Cause : après les redéploiements de develop et de staging, le projet Hostinger `traefik-72ah` (arrêté jusque-là) tournait et tenait le port 80 ; le Caddy de production n'a pas pu démarrer et tout le projet `lnclass` est resté « Created ». Rétabli en arrêtant `traefik-72ah` puis en démarrant `lnclass` ; le simple « démarrer » n'a pas recréé le script de sauvegarde (`backup` en boucle), un redéploiement complet du même compose et du même `.env` l'a remis. À retenir : avant de redéployer la production, vérifier que `traefik-72ah` est arrêté (liste des projets Docker du VPS) et ne jamais se contenter de « démarrer » après un échec.
 - …
 
 ## Ce qu'on a appris sur la codebase
