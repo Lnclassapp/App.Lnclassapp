@@ -135,3 +135,14 @@ Tous dans `config/locales/teams/push_settings.fr.yml` (`teams.push_settings.*`, 
 - Toute nouvelle notification aux élèves passe par cet écran : un motif ajouté plus tard y prend une ligne dans « Réglages » et, s'il n'est pas automatisable, dans le plan du jour.
 - Interdit : afficher un nom ou un identifiant d'élève sur cet écran ; un bouton « Envoyer maintenant » qui contournerait les fenêtres ; une case « Automatique » sur une relance sans nouvelle décision du porteur.
 - La tuile du Pilotage reste en lecture seule ; elle ne fait que pointer vers cet écran.
+
+## Amendement du 2026-11-27 (II) — sept cases, plus de plan du jour
+
+Chantier `docs/chantiers/envoi-immediat-notifications`, ADR-0147 amendement (II).
+
+- Carte « Réglages » : une ligne par motif, dans l'ordre de priorité, sept lignes ; même composant de case qu'aujourd'hui (`teams/push_settings/_mode`), même règle d'accès (admin seul ; autre rôle : case `disabled` et « Seul un admin peut changer ce réglage. »). États : coché « Automatique depuis le … » ; décoché « Décoché : rien ne part. ». Les événements portent l'aide « Part dès l'événement, à toute heure. » ; les rappels « Part entre 6 h et 21 h. ».
+- Libellé du motif `assignment_new` : « Exercice assigné » (Pilotage compris).
+- Carte « Plan du jour » (§3.4) retirée, avec sa cible `turbo_frame_tag "push_plan"`, son bouton « Valider l'envoi » et ses toasts.
+- Carte « Historique » (§3.5) inchangée : elle montre encore les validations passées.
+- Levé : l'interdit « une case Automatique sur une relance sans nouvelle décision du porteur » (§4), décision prise le 2026-11-27.
+
