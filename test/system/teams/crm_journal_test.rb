@@ -10,12 +10,19 @@ class Teams::CrmJournalTest < ApplicationSystemTestCase
     assert_current_path team_home_path
   end
 
+  # The journal is a lazy frame (loading: :lazy): under a parallel suite it can arrive after Capybara's default wait.
+  # Turbo marks a loaded frame « complete ».
+  def visit_school_journal
+    visit school_path(@school.public_id)
+    assert_selector "turbo-frame#school_crm_journal[complete]", wait: SIGN_IN_WAIT
+  end
+
   test "CA-11: a positive call with a note and a follow-up in 3 days leads the journal; older ones load on demand" do
     25.times do |i|
       Orm::CrmInteraction.create!(school: Orm::School.find(@school.id), author: @field, kind: "visit", outcome: "neutral",
                                   occurred_at: Time.zone.now - (i + 2).days, note: "ancien #{i}")
     end
-    visit school_path(@school.public_id)
+    visit_school_journal
 
     within("turbo-frame#school_crm_journal") do
       assert_selector "ol > li", count: 20
@@ -43,7 +50,7 @@ class Teams::CrmJournalTest < ApplicationSystemTestCase
   end
 
   test "a follow-up dated in the past keeps the modal open with the error and writes nothing" do
-    visit school_path(@school.public_id)
+    visit_school_journal
     click_on "Noter un échange"
     within("dialog#interaction-modal[open]") do
       choose "Appel"
