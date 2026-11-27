@@ -1,6 +1,6 @@
 // ⚡ FRONT · identity/pin_pad_controller — pavé numérique de « Nouveau sur Lnclass » : 4 cases, 10 touches, envoi au 4e chiffre
 // Rôle : cache le champ natif (sans JavaScript il reste), montre le pavé ; au 4e chiffre, requestSubmit : le code, tapé une seule fois, part au serveur
-// ADR  : 0141, XXXX-connexion-revele-un-numero-inscrit · UDR : 0180-pave-numerique-confirmation-code (§2, §3.2 ; hors ligne : message, chiffres gardés, renvoi possible), XXXX-connexion-numero-d-abord (§3.4)
+// ADR  : 0141, 0148-connexion-revele-un-numero-inscrit · UDR : 0180-pave-numerique-confirmation-code (§2, §3.2 ; hors ligne : message, chiffres gardés, renvoi possible), 0189-connexion-numero-d-abord (§3.4)
 import { Controller } from "@hotwired/stimulus"
 
 const LENGTH = 4

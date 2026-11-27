@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# CA-J1 to CA-J4 (UDR « écrans enseignant sans répétition » §3.9) and chantier connexion-numero-d-abord (UDR-XXXX §3.5, CA-11,
+# CA-J1 to CA-J4 (UDR « écrans enseignant sans répétition » §3.9) and chantier connexion-numero-d-abord (UDR-0189 §3.5, CA-11,
 # CA-12), in a real browser, at 390 px: one form cut in three steps by the student's signup_steps_controller. Step 1, the
 # number, and step 2, the secret code typed once, move on by « Continuer » once valid; step 3, the profile, holds the school
 # (searched, or the recap of an invite link), one subject, the name, and « Créer mon compte ». No school code.

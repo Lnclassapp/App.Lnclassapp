@@ -1,6 +1,6 @@
 // ⚡ FRONT · classroom/signup_steps_controller — une inscription (élève ou enseignant) découpée en trois étapes dans un seul formulaire
 // Rôle : un seul fieldset visible ; la liste des étapes du panneau d'ordinateur suit l'étape ; une classe de la cascade touchée, les quatre champs valides ou « Continuer » (étape data-continue, champs valides) font avancer ; retour sans perte ; annonce aria-live
-// ADR  : 0109 (§4.4, §4.5) · UDR : 0135 (§3.1 à §3.8, §3.5 bis), XXXX-connexion-numero-d-abord (§3.5)
+// ADR  : 0109 (§4.4, §4.5) · UDR : 0135 (§3.1 à §3.8, §3.5 bis), 0189-connexion-numero-d-abord (§3.5)
 import { Controller } from "@hotwired/stimulus"
 
 const CLASSROOM_FIELD = /\[classroom_public_id\]$/

@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/student_entries/new — « Je suis élève », numéro d'abord : le numéro, puis le code (compte) ou « Nouveau sur Lnclass » (code tapé une fois) %>
 <%# Rôle : même cadre que la connexion (accueil bleu, carte) ; @stage :contact, :pin ou :new_account ; @preview : bandeau de la classe du lien /c/<jeton> ; 422/429 re-rendus %>
-<%# ADR  : 0050, 0141-entree-eleve-revele-un-numero-inscrit, XXXX-connexion-revele-un-numero-inscrit · UDR : 0054, 0088, 0176-entree-eleve-unique, 0180-pave-numerique-confirmation-code, XXXX-connexion-numero-d-abord (§3.4) %>
+<%# ADR  : 0050, 0141-entree-eleve-revele-un-numero-inscrit, 0148-connexion-revele-un-numero-inscrit · UDR : 0054, 0088, 0176-entree-eleve-unique, 0180-pave-numerique-confirmation-code, 0189-connexion-numero-d-abord (§3.4) %>
 <% page_title t("identity.student_entries.new.page_title") %>
 <% scope = "identity.student_entries.new" %>
 <% link_class = "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
@@ -62,7 +62,7 @@
               <% if @link_token %><%= hidden_field_tag "student_entry[link_token]", @link_token, id: nil %><% end %>
               <%= render "identity/student_entries/base_errors" %>
               <%= number.call(t("#{scope}.confirm_lead")) %>
-              <%# UDR-XXXX §3.4 : le code tapé une seule fois ; une erreur de frappe se rattrape par « Code secret oublié ? ». %>
+              <%# UDR-0189 §3.4 : le code tapé une seule fois ; une erreur de frappe se rattrape par « Code secret oublié ? ». %>
               <div id="student-entry-pin-field" data-identity--pin-pad-target="fieldBlock">
                 <%= ui_field form, :pin, as: :password, reveal: true, required: true, minlength: 4, maxlength: 4, pattern: "[0-9]{4}", inputmode: "numeric",
                              autocomplete: "new-password", autofocus: true, placeholder: "****", hint: t("#{scope}.confirm_hint"),

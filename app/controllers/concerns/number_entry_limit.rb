@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · NumberEntryLimit — débit commun de l'entrée « numéro d'abord », par adresse
 # Rôle : /login et /student partagent deux compteurs (minute, heure) : un numéro essayé sur l'une compte pour l'autre ; les codes faux ont le leur (WrongPinLimit)
-# ADR  : 0141-entree-eleve-revele-un-numero-inscrit (§4.2), XXXX-connexion-revele-un-numero-inscrit (§4.2)
+# ADR  : 0141-entree-eleve-revele-un-numero-inscrit (§4.2), 0148-connexion-revele-un-numero-inscrit (§4.2)
 module NumberEntryLimit
   extend ActiveSupport::Concern
 

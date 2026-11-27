@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/sessions/new — connexion « numéro d'abord », pour tous les rôles (au « vous ») : accueil bleu, carte « Connexion » %>
 <%# Rôle : @stage :contact (le numéro seul ; :both, numéro et code, après un envoi groupé refusé), :pin (numéro affiché, le code), :no_account (« Ce numéro n'a pas encore de compte », Élève / Enseignant(e)) ; « Besoin d'aide ? » en haut ; 422/429 re-rendus par Turbo %>
-<%# ADR  : 0050, 0084, 0086, XXXX-connexion-revele-un-numero-inscrit · UDR : 0005, 0019, 0054 (§3.3, §3.4), 0057, 0060, 0080, 0082 (§3.4), 0088, XXXX-connexion-numero-d-abord (§3.1 à §3.3) %>
+<%# ADR  : 0050, 0084, 0086, 0148-connexion-revele-un-numero-inscrit · UDR : 0005, 0019, 0054 (§3.3, §3.4), 0057, 0060, 0080, 0082 (§3.4), 0088, 0189-connexion-numero-d-abord (§3.1 à §3.3) %>
 <% page_title t(".page_title") %>
 <% link_class = "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
 <% number = capture do %>
@@ -89,7 +89,7 @@
                            hint: t(".contact_hint"),
                            data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
               <% if @stage == :both %>
-                <%# Numéro et code envoyés ensemble (coque, gestionnaire de mots de passe) puis refusés : le formulaire d'avant, message unique (ADR-XXXX §4.5). %>
+                <%# Numéro et code envoyés ensemble (coque, gestionnaire de mots de passe) puis refusés : le formulaire d'avant, message unique (ADR-0148 §4.5). %>
                 <div>
                   <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
                                autocomplete: "current-password", placeholder: "****", hint: t(".pin_info_message") %>

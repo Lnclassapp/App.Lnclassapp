@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::StudentEntriesController
 # Rôle : « Je suis élève », numéro d'abord : inscrit → le code, puis connecté (tout rôle) ; inconnu → « Nouveau sur Lnclass », le code tapé une fois, puis l'inscription élève, numéro et code gardés
-# ADR  : 0050, 0085 (§4.7), 0141-entree-eleve-revele-un-numero-inscrit, XXXX-connexion-revele-un-numero-inscrit · UDR : 0176-entree-eleve-unique, XXXX-connexion-numero-d-abord (§3.4)
+# ADR  : 0050, 0085 (§4.7), 0141-entree-eleve-revele-un-numero-inscrit, 0148-connexion-revele-un-numero-inscrit · UDR : 0176-entree-eleve-unique, 0189-connexion-numero-d-abord (§3.4)
 module Identity
   class StudentEntriesController < ApplicationController
     include StudentEntrySession
@@ -11,7 +11,7 @@ module Identity
     REGISTRATION_RATE_LIMIT = { to: 60, within: 1.minute, scope: "identity/student_entry_registrations" }.freeze
 
     allow_unauthenticated_access only: %i[new create]
-    # ADR-XXXX §4.2 : 120 par minute et 600 par heure, comptés avec /login ; les codes faux, avec ceux de /login (WrongPinLimit).
+    # ADR-0148 §4.2 : 120 par minute et 600 par heure, comptés avec /login ; les codes faux, avec ceux de /login (WrongPinLimit).
     limit_number_entries with: -> { refuse_too_many }
 
     # ?fresh=1 : « Corriger mon numéro » : l'entrée est oubliée, le numéro revient dans le champ.

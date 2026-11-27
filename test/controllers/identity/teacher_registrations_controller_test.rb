@@ -2,7 +2,7 @@ require "test_helper"
 
 # IE-01 to IE-13, IE-17, IE-19 and CA-J1 to CA-J4 server side (ADR-0083, UDR-0079, UDR « écrans enseignant sans répétition » §3.9):
 # one sign-up form cut in three steps (number, secret code typed once, profile) by signup_steps_controller, no school code
-# (chantier connexion-numero-d-abord, UDR-XXXX §3.5). The standard way chooses the DRENA then the school; an invite link /i/<token> arrives with the
+# (chantier connexion-numero-d-abord, UDR-0189 §3.5). The standard way chooses the DRENA then the school; an invite link /i/<token> arrives with the
 # school already chosen. The teacher is attached at once and the way in is recorded.
 class Identity::TeacherRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/identity/teacher_registration_input.attributes".freeze
@@ -519,7 +519,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_response :success
   end
 
-  # Chantier connexion-numero-d-abord (UDR-XXXX §3.5).
+  # Chantier connexion-numero-d-abord (UDR-0189 §3.5).
   def arrive_from_login(contact = "0501020304")
     post session_path, params: { session: { contact: } }
     assert_redirected_to new_session_path

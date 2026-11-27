@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Identity::TeacherRegistrationInput
 # Rôle : forme de l'inscription enseignant : nom et prénoms (ADR-0037), établissement de la DRENA ou d'un jeton d'invitation
-# ADR  : 0026, 0030, 0037, 0050, 0063, 0083, 0103 · UDR : 0024, 0079, 0134 (§3.9 : une seule matière), XXXX-connexion-numero-d-abord (§3.5 : code tapé une fois)
+# ADR  : 0026, 0030, 0037, 0050, 0063, 0083, 0103 · UDR : 0024, 0079, 0134 (§3.9 : une seule matière), 0189-connexion-numero-d-abord (§3.5 : code tapé une fois)
 module Dtos
   module Identity
     class TeacherRegistrationInput < PersonNameInput
