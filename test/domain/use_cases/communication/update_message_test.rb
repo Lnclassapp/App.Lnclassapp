@@ -379,6 +379,38 @@ module UseCases
         assert_equal refused, [ result.code, result.errors ]
         assert_equal [ "exam", nil ], @fiches.reload.values_at(:illustration, :illustration_id)
       end
+      # ADR-0147 §4.1, porteur 2026-11-27 : « Prévenir les élèves » is frozen once published; a draft still chooses it.
+      test "PN-D5 — a published announcement keeps its push box: modifying it can neither tick nor untick it" do
+        team = create_team_member(second_factor: false)
+        silent = create_message(author: team, title: "Sans notification", audience: "students", push_requested: false)
+        warned = create_message(author: team, title: "Avec notification", audience: "students", push_requested: true)
+
+        assert update(team, silent, scope: "national", audience: "students", classroom_public_ids: [], push_requested: "1").success?
+        assert update(team, warned, scope: "national", audience: "students", classroom_public_ids: [], push_requested: "0").success?
+
+        assert_equal [ false, true ], [ silent.reload.push_requested, warned.reload.push_requested ]
+      end
+
+      test "PN-D5 — a draft of the team published by its modification takes the push box of the form" do
+        team = create_team_member(second_factor: false)
+        draft = create_message(author: team, title: "Brouillon", audience: "students", status: "draft", published_at: nil)
+
+        assert update(team, draft, scope: "national", audience: "students", classroom_public_ids: [], push_requested: "1").success?
+
+        assert_equal [ "published", true ], draft.reload.values_at(:status, :push_requested)
+      end
+
+      test "PN-D5 — a draft published by another request since its reading keeps the box it was published with" do
+        team = create_team_member(second_factor: false)
+        draft = create_message(author: team, title: "Brouillon", audience: "students", status: "draft", published_at: nil)
+        racing = Racing.new(Repositories::Communication::MessageRepository.new) do
+          Orm::Message.where(id: draft.id).update_all(status: "published", published_at: NOW - 1.hour, ends_at: NOW + 2.days)
+        end
+
+        assert update(team, draft, messages: racing, scope: "national", audience: "students", classroom_public_ids: [], push_requested: "1").success?
+
+        assert_equal [ "published", false ], draft.reload.values_at(:status, :push_requested)
+      end
     end
   end
 end

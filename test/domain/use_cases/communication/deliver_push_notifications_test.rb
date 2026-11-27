@@ -60,14 +60,16 @@ module UseCases
         def automatic_motives = @automatic
       end
 
+      # approved : les motifs validés du jour.
       class Approvals
+        Approval = Data.define(:motive)
         attr_reader :asked
 
-        def initialize(keys) = (@keys, @asked = keys.to_set, [])
+        def initialize(motives) = (@motives, @asked = motives, [])
 
-        def approved_keys(on_date:)
+        def for_date(on_date:)
           @asked << on_date
-          @keys
+          @motives.map { Approval.new(it) }
         end
       end
 
@@ -183,7 +185,7 @@ module UseCases
       test "un seul motif par élève et par passage : le plus prioritaire" do
         _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive: "inactive", key: "i"), candidate(motive: "quiz_prep", key: "q"),
                                                            candidate(motive: "result", key: "r") ],
-                                             approved: [ [ 1, "inactive", "i" ], [ 1, "result", "r" ] ])
+                                             approved: %w[inactive result])
 
         assert_equal 1, gateway.calls.size
         assert_equal [ [ 1, "quiz_prep", "q", "delivered" ] ], deliveries.rows
@@ -319,12 +321,13 @@ module UseCases
         assert_empty other.rows
       end
 
-      test "liste figée : seul le couple élève, motif, objet validé part" do
+      # ADR-0147 §4.4, porteur 2026-11-27 : pas de liste figée ; un motif validé part vers chaque élève concerné au passage.
+      test "motif validé : il part vers tous les élèves concernés au passage, même devenus concernés après la validation" do
         candidates = [ candidate(user_id: 1, motive: "unfinished", key: "u1"), candidate(user_id: 2, motive: "unfinished", key: "u2"),
-                       candidate(user_id: 1, motive: "unfinished", key: "u3") ]
-        _, _, deliveries, = run_pass(candidates:, subs: [ sub(10), sub(11, user_id: 2) ], automatic: [], approved: [ [ 1, "unfinished", "u1" ] ])
+                       candidate(user_id: 3, motive: "inactive", key: "i3") ]
+        _, _, deliveries, = run_pass(candidates:, subs: [ sub(10), sub(11, user_id: 2), sub(12, user_id: 3) ], automatic: [], approved: %w[unfinished])
 
-        assert_equal [ [ 1, "unfinished", "u1", "delivered" ] ], deliveries.rows
+        assert_equal [ [ 1, "unfinished", "u1", "delivered" ], [ 2, "unfinished", "u2", "delivered" ] ], deliveries.rows
       end
 
       test "la validation lue est celle du jour d'Abidjan" do
@@ -341,7 +344,7 @@ module UseCases
 
       test "un motif validé passe devant un motif automatique moins urgent, un seul par passage" do
         _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive: "assignment_new", key: "n"), candidate(motive: "quiz_prep", key: "q") ],
-                                             automatic: %w[assignment_new], approved: [ [ 1, "quiz_prep", "q" ] ])
+                                             automatic: %w[assignment_new], approved: %w[quiz_prep])
 
         assert_equal 1, gateway.calls.size
         assert_equal [ [ 1, "quiz_prep", "q", "delivered" ] ], deliveries.rows

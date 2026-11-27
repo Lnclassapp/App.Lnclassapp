@@ -51,11 +51,11 @@ module Repositories
         assert_equal :created, create(on_date: @day + 1)
       end
 
-      test "approved_keys rend les triplets élève, motif, objet du jour" do
+      test "for_date rend les validations de ce jour seulement" do
         create
-        create(on_date: @day + 1, recipients: [ [ @awa.id, "inactive:later" ] ])
+        create(on_date: @day + 1, motive: "result", recipients: [ [ @awa.id, "result:later" ] ])
 
-        assert_equal Set[[ @awa.id, "inactive", "inactive:a" ], [ @kofi.id, "inactive", "inactive:b" ]], @repository.approved_keys(on_date: @day)
+        assert_equal [ [ "inactive", 2 ] ], @repository.for_date(on_date: @day).map { [ it.motive, it.recipients_count ] }
       end
 
       test "une liste vide se valide (zéro élève)" do
@@ -89,7 +89,7 @@ module Repositories
         create_push_motive_setting
 
         assert_equal [ "result", 1 ], @repository.for_date(on_date: @day).map { [ it.motive, it.recipients_count ] }.sole
-        assert_equal Set[[ @awa.id, "result", "result:1" ]], @repository.approved_keys(on_date: @day)
+        assert_equal [ [ @awa.id, "result:1" ] ], Orm::Communication::PushApprovalRecipient.pluck(:user_id, :object_key)
         assert_equal Set["assignment_due"], PushMotiveSettingRepository.new.automatic_motives
       end
 
@@ -97,7 +97,7 @@ module Repositories
         create
         Orm::Communication::PushApprovalRecipient.where(user_id: @awa.id).delete_all
 
-        assert_equal Set[[ @kofi.id, "inactive", "inactive:b" ]], @repository.approved_keys(on_date: @day)
+        assert_equal [ [ @kofi.id, "inactive:b" ] ], Orm::Communication::PushApprovalRecipient.pluck(:user_id, :object_key)
       end
     end
   end

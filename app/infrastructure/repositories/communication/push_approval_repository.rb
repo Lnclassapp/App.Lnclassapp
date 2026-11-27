@@ -1,5 +1,5 @@
 # 🔌 INFRA · Repositories::Communication::PushApprovalRepository
-# Rôle : validations du jour par l'équipe en base (push_approvals) et leurs destinataires figés (push_approval_recipients)
+# Rôle : validations du jour par l'équipe en base (push_approvals) et les élèves concernés au moment de la validation (push_approval_recipients)
 # ADR  : XXXX envois de notifications (§4.1, §4.2) · adaptateur de Ports::Communication::PushApprovalRepositoryPort
 module Repositories
   module Communication
@@ -8,11 +8,6 @@ module Repositories
 
       # Seule cette contrainte dit « déjà validé » ; toute autre violation d'unicité est une vraie erreur.
       APPROVAL_INDEX = "index_push_approvals_on_on_date_and_motive".freeze
-
-      def approved_keys(on_date:)
-        Orm::Communication::PushApprovalRecipient.joins(:push_approval).where(push_approvals: { on_date: })
-                                                 .pluck(:user_id, "push_approvals.motive", :object_key).to_set
-      end
 
       def for_date(on_date:) = Orm::Communication::PushApproval.where(on_date:).order(:approved_at).map { to_entity(it) }
 

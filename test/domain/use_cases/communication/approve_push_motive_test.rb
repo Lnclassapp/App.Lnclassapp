@@ -85,14 +85,14 @@ module UseCases
       end
 
       test "refuses after the last window of the day, on a weekday and on a Sunday" do
-        [ Time.utc(2026, 11, 25, 20, 0), Time.utc(2026, 11, 25, 23, 59), Time.utc(2026, 11, 29, 20, 30) ].each do |late|
+        [ Time.utc(2026, 11, 25, 20, 20), Time.utc(2026, 11, 25, 23, 59), Time.utc(2026, 11, 29, 20, 0) ].each do |late|
           assert_equal :expired, approve(now: late).code
         end
         assert_empty @approvals.created
       end
 
       test "accepts between two windows and before the first one of the day" do
-        [ Time.utc(2026, 11, 25, 8), Time.utc(2026, 11, 25, 15), Time.utc(2026, 11, 25, 19, 59) ].each do |early|
+        [ Time.utc(2026, 11, 25, 8), Time.utc(2026, 11, 25, 15), Time.utc(2026, 11, 25, 20, 19), Time.utc(2026, 11, 29, 19, 59) ].each do |early|
           assert_predicate approve(now: early), :success?
         end
       end
@@ -121,6 +121,15 @@ module UseCases
           assert_equal :forbidden, approve(actor: someone).code
         end
         assert_empty @approvals.created
+      end
+
+      test "the approvals port refuses every method its adapter does not define" do
+        bare = Class.new { include Ports::Communication::PushApprovalRepositoryPort }.new
+
+        assert_raises(NotImplementedError) { bare.for_date(on_date: nil) }
+        assert_raises(NotImplementedError) { bare.create(on_date: nil, motive: nil, by: nil, at: nil, recipients: []) }
+        assert_raises(NotImplementedError) { bare.history(since: nil) }
+        assert_raises(NotImplementedError) { bare.purge_before(before: nil) }
       end
     end
   end

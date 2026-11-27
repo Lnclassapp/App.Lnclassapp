@@ -74,7 +74,7 @@ Les exemples sont rendus par `PushMessage.for` avec la matière « Maths » et l
 
 ### 3.4 Carte « Plan du jour » (`turbo_frame_tag "push_plan"`, chargée en différé)
 
-`ui_card title: "Plan du jour", subtitle: "<jour, date> · part dans la prochaine fenêtre (12 h–14 h, 17 h–20 h ; dimanche 9 h–20 h)", icon: "calendar-days"`.
+`ui_card title: "Plan du jour", subtitle: "<jour, date> · part dans la prochaine fenêtre (12 h 20–14 h, 18 h–20 h 20 ; dimanche 9 h–20 h)", icon: "calendar-days"`.
 
 - Chargement : `turbo_frame_tag "push_plan", src: teams_push_plan_path, loading: :lazy` (route `GET /teams/notifications/plan` → `teams/push_plans#show`), contenu initial `ui_loading_state variant: :skeleton, lines: 3`.
 - Une ligne `<section id="push_plan_<motive>" class="rounded-ln bg-mist p-4">` par motif **non automatique** ayant des élèves, dans l'ordre de priorité, contenant :
@@ -84,10 +84,10 @@ Les exemples sont rendus par `PushMessage.for` avec la matière « Maths » et l
   4. Action : `button_to "Valider l'envoi", teams_push_approvals_path(motive:), method: :post, form: { data: { turbo_confirm: "Envoyer « <libellé> » à 42 élèves aujourd'hui ?" } }`, `ui_button` `variant: :primary`, pleine largeur sous 640 px.
 - Motif déjà validé aujourd'hui : l'action est remplacée par `ui_badge "Validé", tone: :success, icon: "check"` et « par Awa K. à 10 h 12 — 42 élèves » ; le nombre affiché est celui enregistré.
 - Motifs non automatiques sans élève : une ligne compacte « Exercice commencé — aucun élève concerné aujourd'hui » (`text-sm text-mute`), sans bouton.
-- Après 20 h (ou dimanche après 20 h) : boutons retirés, mention « Les envois du jour sont terminés. » en tête de carte.
+- Après la dernière fenêtre (20 h 20 du lundi au samedi, 20 h le dimanche) : boutons retirés, mention « Les envois du jour sont terminés. » en tête de carte.
 - Réponse à la validation : Turbo Stream `replace` de `push_plan_<motive>` (état « Validé ») et `prepend` d'une ligne dans `push_history_list` ; toast succès « Envoi validé : 42 élèves. ».
 - « Déjà validé » (validation concurrente) : même rendu « Validé » avec l'auteur réel, toast `type: :info` « Déjà validé par Awa K. à 10 h 12. ».
-- Validation après 20 h : toast `type: :error` « Les envois du jour sont terminés. », ligne inchangée.
+- Validation après la dernière fenêtre : toast `type: :error` « Les envois du jour sont terminés. », ligne inchangée.
 
 ### 3.5 Carte « Historique » (`id="push_history"`)
 
@@ -100,6 +100,7 @@ Les exemples sont rendus par `PushMessage.for` avec la matière « Maths » et l
 - Dans `communication/authored_messages/_form`, branche `when :team` seulement, **après** le choix d'audience : `ui_field f, :push_requested, as: :checkbox, label: "Prévenir les élèves par notification", hint: "Une notification part dans la prochaine fenêtre, dans la limite de dix par élève et par jour."`.
 - Contrôleur Stimulus `push-request` sur le formulaire : la case est `disabled` et décochée quand l'audience est « Enseignants » ou « Directions » ; réactivée pour « Tous » ou « Élèves ». Sans JS, le serveur ignore la case pour ces audiences.
 - Branches `school_admin` et enseignant : rien n'est rendu ; le paramètre est filtré par le contrôleur.
+- Annonce déjà publiée (modification) : la case est rendue `disabled`, cochée ou non comme à la publication, hors du contrôleur `push-request`, avec l'aide « Choisi à la publication : il ne change plus. » (décision du porteur du 2026-11-27). Le serveur garde la valeur publiée.
 - Ligne de l'annonce (`_row`) : si `push_requested`, une icône `bell` `size-4 text-mute` avec `aria-label="Élèves prévenus par notification"`.
 
 ### 3.7 États obligatoires

@@ -1,20 +1,15 @@
 # 🧠 DOMAINE · Ports::Communication::PushApprovalRepositoryPort
-# Rôle : contrat des validations du jour par l'équipe et de leurs destinataires figés (gelé par le Lot 0)
+# Rôle : contrat des validations du jour par l'équipe et des élèves concernés au moment de la validation
 # ADR  : XXXX envois de notifications (§4.2)
 module Ports
   module Communication
     module PushApprovalRepositoryPort
-      # → Set<[user_id, motive, object_key]> : ce que les validations du jour d'Abidjan ont figé
-      def approved_keys(on_date:)
-        raise NotImplementedError, "#{self.class} doit implémenter #approved_keys"
-      end
-
-      # → [Entities::Communication::PushApproval] : les validations de ce jour
+      # → [Entities::Communication::PushApproval] : les validations de ce jour ; chacune ouvre son motif jusqu'au soir
       def for_date(on_date:)
         raise NotImplementedError, "#{self.class} doit implémenter #for_date"
       end
 
-      # `recipients` : [[user_id, object_key], …]. Unique par (on_date, motive) : la seconde validation répond :already_approved.
+      # `recipients` : [[user_id, object_key], …], les élèves concernés au moment de la validation (leur nombre est affiché). Unique par (on_date, motive) : la seconde validation répond :already_approved.
       # → :created | :already_approved
       def create(on_date:, motive:, by:, at:, recipients:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"

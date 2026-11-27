@@ -65,7 +65,7 @@ class Teams::PushApprovalsControllerTest < ActionDispatch::IntegrationTest
   test "after 20 h the approval is refused with the closing toast and nothing is written" do
     sign_in_as @awa
     assert_no_difference -> { Orm::Communication::PushApproval.count } do
-      approve(at: Time.utc(2026, 11, 25, 20, 1))
+      approve(at: Time.utc(2026, 11, 25, 20, 21))
     end
 
     assert_response :ok
@@ -98,7 +98,7 @@ class Teams::PushApprovalsControllerTest < ActionDispatch::IntegrationTest
 
   test "without JavaScript, a refused approval redirects with an alert, not a notice" do
     sign_in_as @awa
-    approve(at: Time.utc(2026, 11, 25, 20, 1), format: :html)
+    approve(at: Time.utc(2026, 11, 25, 20, 21), format: :html)
 
     assert_redirected_to teams_push_settings_path
     assert_equal I18n.t("teams.push_approvals.create.closed"), flash[:alert]

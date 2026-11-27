@@ -41,8 +41,14 @@
     <%= ui_radio_group f, :audience, choices: %w[all students teachers school_admins].map { [ t("communication.audiences.#{it}"), it ] },
                                      columns: 2, required: true %>
     <%# UDR-XXXX §3.6 : la case, après l'audience ; push-request la désactive pour « Enseignants » et « Directions ». %>
-    <%= ui_field f, :push_requested, as: :checkbox, label: t(".push_requested.label"), hint: t(".push_requested.hint"),
-                                     data: { push_request_target: "box" } %>
+    <% if published %>
+      <%# Décision du porteur du 2026-11-27 : figée après la publication, montrée telle qu'elle a été publiée, hors de push-request. %>
+      <%= ui_field f, :push_requested, as: :checkbox, label: t(".push_requested.label"), hint: t(".push_requested.frozen_hint"),
+                                       disabled: true, checked: message.push_requested %>
+    <% else %>
+      <%= ui_field f, :push_requested, as: :checkbox, label: t(".push_requested.label"), hint: t(".push_requested.hint"),
+                                       data: { push_request_target: "box" } %>
+    <% end %>
   <% when :school_admin %>
     <p class="text-sm text-mute"><%= t(".for_school", school: form_school&.name) %></p>
     <%= ui_radio_group f, :audience, choices: %w[students teachers school_admins].map { [ t("communication.audiences.#{it}"), it ] },

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::UpdateMessage
-# Rôle : son auteur modifie une annonce ; publiée, elle garde ses dates et revient chez ceux qui l'avaient masquée ; sa parution suit le plafond de 3, une fois ; elle garde son dessin de l'équipe
-# ADR  : 0028, 0045, 0078, 0081, 0094 · UDR : 0071, 0075
+# Rôle : son auteur modifie une annonce ; publiée, elle garde ses dates et revient chez ceux qui l'avaient masquée ; sa parution suit le plafond de 3, une fois ; elle garde son dessin de l'équipe et sa case « Prévenir les élèves »
+# ADR  : 0028, 0045, 0078, 0081, 0094, 0147 · UDR : 0071, 0075, 0187
 module UseCases
   module Communication
     class UpdateMessage
@@ -65,10 +65,11 @@ module UseCases
       end
 
       # Publiée : ses dates gardées (la saisie est relue avec elles), edited_at et rejets effacés dans la même
-      # transaction (ADR-0078 §4.1, AN-14), rien d'archivé ni de journalisé.
+      # transaction (ADR-0078 §4.1, AN-14), rien d'archivé ni de journalisé. La case « Prévenir les élèves » est figée
+      # à la publication (ADR-0147 §4.1, décision du porteur du 2026-11-27) : la saisie ne peut ni la cocher ni la décocher.
       def modify(message, dto, targets, now, illustration_id, actor)
         dto.valid_at?(now:, live_since: message.published_at, live_until: message.ends_at)
-        saved = write(message.with(**written(dto, targets, illustration_id, actor), edited_at: now))
+        saved = write(message.with(**written(dto, targets, illustration_id, actor), push_requested: message.push_requested, edited_at: now))
         @messages.clear_dismissals(message_id: message.id)
         store_files(message.id, dto)
         Shared::Result.success(Saved.new(message: saved, archived: []))

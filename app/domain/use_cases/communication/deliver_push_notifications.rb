@@ -32,7 +32,7 @@ module UseCases
         return Shared::Result.success({}) unless Entities::Communication::SendingWindow.open?(now)
 
         automatic = @settings.automatic_motives
-        approved = @approvals.approved_keys(on_date: now.utc.to_date)
+        approved = @approvals.for_date(on_date: now.utc.to_date).to_set(&:motive)
         ready = @candidates.for(now:).reject { it.expired?(now) }.select { open?(it, automatic, approved) }.group_by(&:user_id)
         statuses = ready.filter_map { |user_id, list| deliver_to_safely(user_id, list, now) }
         Shared::Result.success(statuses.tally)
@@ -40,11 +40,13 @@ module UseCases
 
       private
 
-      # Un motif part s'il est automatique, validé pour cet élève et cet objet (liste figée), ou s'il est une annonce (la requête ne lit que les `push_requested`).
+      # Un motif part s'il est automatique, validé aujourd'hui, ou s'il est une annonce (la requête ne lit que les `push_requested`).
+      # Validé, il reste ouvert toute la journée : il part aussi vers les élèves devenus concernés après la validation
+      # (ADR-0147 §4.4, décision du porteur du 2026-11-27 : pas de liste figée).
       def open?(candidate, automatic, approved)
         return true if candidate.motive == "announcement"
 
-        automatic.include?(candidate.motive) || approved.include?([ candidate.user_id, candidate.motive, candidate.object_key ])
+        automatic.include?(candidate.motive) || approved.include?(candidate.motive)
       end
 
       # Un élève dont le dépôt échoue ne bloque pas les suivants : l'erreur est signalée, le passage continue.

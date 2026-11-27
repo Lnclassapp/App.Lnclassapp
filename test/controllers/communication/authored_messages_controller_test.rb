@@ -96,6 +96,21 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_select "svg[aria-label='Élèves prévenus par notification']", count: 0
   end
 
+  # ADR-0147 §4.1, porteur 2026-11-27 : once published, the box is shown as published, disabled, outside push-request.
+  test "PN-D10 — editing a published announcement shows the box frozen as published; a draft keeps it open" do
+    sign_in_as @fatou
+    warned = create_message(author: @fatou, audience: "students", push_requested: true)
+    draft = create_message(author: @fatou, audience: "students", status: "draft", published_at: nil)
+
+    get edit_announcement_path(warned.public_id)
+    assert_select "input[type=checkbox][name='announcement[push_requested]'][disabled][checked]", count: 1
+    assert_select "input[name='announcement[push_requested]'][data-push-request-target]", count: 0
+    assert_select "p", text: "Choisi à la publication : il ne change plus."
+    get edit_announcement_path(draft.public_id)
+
+    assert_select "input[type=checkbox][name='announcement[push_requested]'][data-push-request-target='box']:not([disabled])", count: 1
+  end
+
   test "PN-D9 — a teacher or a direction forging push_requested saves false" do
     sign_in_as @kouassi
     publish(classroom_public_ids: [ @b3.public_id ], push_requested: "1")
