@@ -7,6 +7,9 @@ module Authentication
   COOKIE = :session_token
   # ADR-0049 : une nouvelle session tire un nouveau nonce CSP ; la page d'arrivée recharge donc le document entier.
   RELOAD_FLASH = :reload_document
+  # Après une déconnexion, la page d'arrivée chargée en entier (pas la 303, ni la visite Turbo qu'elle recharge) demande au
+  # navigateur de vider son cache HTTP : posé sur la 303, Chrome retenait la redirection (ADR-0133 §4.2, retouche du 2026-11-27).
+  CLEAR_CACHE_FLASH = :clear_site_cache
   # Symbole de HomeDestination → route de l'accueil (UDR-0006, routes gelées du Lot 0a).
   HOME_ROUTES = {
     student_home: :student_home_path, teacher_home: :teacher_home_path, teacher_classrooms: :teacher_classrooms_path,
@@ -17,6 +20,7 @@ module Authentication
     before_action :require_authentication
     before_action :require_verified_second_factor
     helper_method :current_actor, :authenticated?
+    after_action :clear_site_cache_after_sign_out
   end
 
   class_methods do
@@ -75,6 +79,16 @@ module Authentication
     cookies.delete(COOKIE)
     reset_session
     flash[RELOAD_FLASH] = true
+    flash[CLEAR_CACHE_FLASH] = true
+  end
+
+  # Le document entier qui suit la déconnexion (rechargé par Turbo, ou atteint sans JavaScript) : Clear-Site-Data "cache".
+  # Jamais "storage" : il désinscrirait le programme d'arrière-plan et effacerait les files d'autres comptes.
+  def clear_site_cache_after_sign_out
+    return unless flash[CLEAR_CACHE_FLASH] && request.get? && request.headers["X-Turbo-Request-Id"].blank? && response.successful?
+
+    response.set_header("Clear-Site-Data", '"cache"')
+    flash.discard(CLEAR_CACHE_FLASH)
   end
 
   def redirect_to_home(**options)

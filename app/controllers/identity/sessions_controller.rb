@@ -42,9 +42,9 @@ module Identity
 
     def destroy
       terminate_session
-      # Pas de Clear-Site-Data : sur HTTPS, Chrome retient la redirection le temps de vider le cache et l'élève reste sur la page.
-      # Le Cache Storage (lnclass-pages-*) est purgé par le JavaScript puis par le programme (Lnclass-Offline: forget) ;
-      # les pages HTML se revalident (must-revalidate), les fichiers privés sont en no-store.
+      # Pas de Clear-Site-Data sur la 303 : sur HTTPS, Chrome la retenait le temps de vider le cache. Il est posé sur la page
+      # d'arrivée chargée en entier (Authentication#clear_site_cache_after_sign_out). Le Cache Storage (lnclass-pages-*) est
+      # purgé par le JavaScript puis par le programme (Lnclass-Offline: forget).
       redirect_to main_app.root_path, notice: t(".signed_out"), status: :see_other
     end
 

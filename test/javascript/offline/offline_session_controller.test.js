@@ -200,3 +200,25 @@ test("disconnect retire l'écouteur", async () => {
 
   assert.equal(listeners.submit, undefined)
 })
+
+test("une page privée ressortie du cache de navigation (retour arrière) est rechargée au serveur ; un affichage normal ne l'est pas", async () => {
+  const shown = {}
+  let reloads = 0
+  globalThis.addEventListener = (name, fn) => { shown[name] = fn }
+  globalThis.removeEventListener = (name) => { delete shown[name] }
+  Object.defineProperty(globalThis, "location", { configurable: true, value: { href: "https://lnclass.test/students/menu", reload: () => { reloads += 1 } } })
+  const controller = build()
+  controller.connect()
+  await settle()
+
+  shown.pageshow({ persisted: false })
+  assert.equal(reloads, 0)
+  shown.pageshow({ persisted: true })
+  assert.equal(reloads, 1)
+
+  controller.disconnect()
+  assert.equal(shown.pageshow, undefined)
+  delete globalThis.location
+  delete globalThis.addEventListener
+  delete globalThis.removeEventListener
+})

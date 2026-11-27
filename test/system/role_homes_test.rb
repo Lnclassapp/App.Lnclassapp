@@ -56,6 +56,10 @@ class RoleHomesTest < ApplicationSystemTestCase
     within("#student_menu") { click_button tn(:sign_out) }
 
     assert_current_path root_path
+    # Téléphone partagé (ADR-0133 §4.2) : le retour arrière ne réaffiche aucune page de l'élève.
+    page.go_back
+    assert_no_selector "#student_menu"
+    assert_no_text "Aya"
     visit student_home_path
     assert_current_path new_session_path
   end
