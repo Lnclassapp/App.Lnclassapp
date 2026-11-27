@@ -3,7 +3,7 @@
 <%# ADR  : 0030 · UDR : 0025, 0134 (§3.13) %>
 <div class="break-inside-avoid lg:mb-4">
   <%= ui_card title: level.name, subtitle: t(".classrooms", count: level.classrooms.size), icon: "academic-cap", heading: :h2 do %>
-    <ul class="divide-y divide-line overflow-hidden rounded-ln border border-line">
+    <ul class="divide-y divide-line-strong overflow-hidden rounded-ln border border-line-strong">
       <% level.classrooms.each do |classroom| %>
         <li><%= render "classroom/teachings/toggle", classroom: %></li>
       <% end %>
