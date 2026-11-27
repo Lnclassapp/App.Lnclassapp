@@ -61,7 +61,7 @@ Le grill du chantier `parametrage-notifications` a fixé le modèle (memo, répo
 
 ## 4. Décision
 
-> **Nous n'envoyons un motif à un élève que si le motif est ouvert pour lui aujourd'hui : case « Automatique » cochée (interro demain, devoir à rendre, nouveaux exercices seulement), validation du jour qui le contient (élève × objet figés à la validation), ou annonce publiée avec « Prévenir les élèves ». Le use case d'envoi applique ce filtre aux candidats des sept requêtes, puis envoie à chaque élève, à chaque passage, le plus urgent de ses motifs ouverts, tant qu'il a reçu moins de dix notifications ce jour d'Abidjan. L'interrupteur `PUSH_DELIVERY_ENABLED` reste un coupe-tout au-dessus de ces règles.**
+> **Nous n'envoyons un motif à un élève que si le motif est ouvert pour lui aujourd'hui : case « Automatique » cochée (interro demain, devoir à rendre, nouveaux exercices seulement), validation du jour du motif (ouvert jusqu'au soir pour chaque élève concerné au passage, amendement du 2026-11-27), ou annonce publiée avec « Prévenir les élèves » (case figée à la publication). Le use case d'envoi applique ce filtre aux candidats des sept requêtes, puis envoie à chaque élève, à chaque passage, le plus urgent de ses motifs ouverts, tant qu'il a reçu moins de dix notifications ce jour d'Abidjan. L'interrupteur `PUSH_DELIVERY_ENABLED` reste un coupe-tout au-dessus de ces règles.**
 
 ### 4.1 Ce qu'on stocke
 
@@ -87,8 +87,7 @@ def all = …                                     # → [Entities::Communication
 def update(motive:, automatic:, by:, at:) = …   # écrit le réglage ET sa ligne d'historique, dans une transaction
 
 # app/domain/ports/communication/push_approval_repository_port.rb
-def approved_keys(on_date:) = …                 # → Set[[user_id, motive, object_key]]
-def for_date(on_date:) = …                      # → [Entities::Communication::PushApproval]
+def for_date(on_date:) = …                      # → [Entities::Communication::PushApproval] ; chacune ouvre son motif ce jour
 def create(on_date:, motive:, by:, at:, recipients:) = … # → :created | :already_approved
 def history(since:) = …
 def purge_before(before:) = …
@@ -101,7 +100,7 @@ def purge_before(before:) = …
 def open?(candidate, automatic, approved)
   case candidate.motive
   when "announcement" then true # la requête ne lit que les annonces push_requested
-  else automatic.include?(candidate.motive) || approved.include?([ candidate.user_id, candidate.motive, candidate.object_key ])
+  else automatic.include?(candidate.motive) || approved.include?(candidate.motive) # approved : motifs validés aujourd'hui
   end
 end
 
@@ -116,7 +115,7 @@ end
 
 ### 4.4 Plan du jour
 
-Une query de lecture (`PushDailyPlanQuery`) appelle `PushCandidates#for(now:)`, retire les candidats déjà envoyés, expirés, et ceux des motifs automatiques ou de l'annonce, puis groupe par motif : nombre d'élèves distincts, répartition par établissement de la classe principale, texte de `PushMessage.for`. `ApprovePushMotive` recalcule la liste du motif au moment de la validation (et non celle affichée dans le navigateur, qui peut dater) et l'enregistre ; la confirmation affiche le nombre réellement enregistré.
+Une query de lecture (`PushDailyPlanQuery`) appelle `PushCandidates#for(now:)`, retire les candidats déjà envoyés, expirés, et ceux des motifs automatiques ou de l'annonce, puis groupe par motif : nombre d'élèves distincts, répartition par établissement de la classe principale, texte de `PushMessage.for`. `ApprovePushMotive` recalcule la liste du motif au moment de la validation (et non celle affichée dans le navigateur, qui peut dater) et l'enregistre ; la confirmation affiche le nombre réellement enregistré. Depuis l'amendement du 2026-11-27, cette liste ne borne plus l'envoi : elle compte les élèves concernés au moment du geste.
 
 ## 5. Conséquences
 
@@ -129,7 +128,7 @@ Une query de lecture (`PushDailyPlanQuery`) appelle `PushCandidates#for(now:)`, 
 ### 🔴 Coûts consentis
 
 - Le plan du jour relance les six requêtes à chaque affichage (une dizaine de lectures par motif) ; acceptable pour un écran ouvert quelques fois par jour par l'équipe.
-- Un motif validé à 10 h ne touche pas l'élève devenu concerné à 11 h : il attend le plan du lendemain, et les motifs d'un jour (interro demain, inactif au palier) sont alors perdus pour lui.
+- ~~Un motif validé à 10 h ne touche pas l'élève devenu concerné à 11 h~~ : levé par l'amendement du 2026-11-27, le motif validé part aussi vers lui. En échange, l'équipe valide un motif sans voir tous ceux qui le recevront.
 - Si personne ne valide, les relances ne partent pas : la rétention dépend de la présence de l'équipe.
 - Dix notifications par jour, à 15 minutes d'écart au plus court, est un plafond haut : un élève concerné par beaucoup de motifs peut en recevoir plusieurs en une heure. Les chiffres « ont coupé » de la tuile du Pilotage sont à suivre dès l'ouverture.
 
@@ -143,6 +142,16 @@ Une query de lecture (`PushDailyPlanQuery`) appelle `PushCandidates#for(now:)`, 
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `test/domain/use_cases/communication/deliver_push_notifications_test.rb` : « rien ne part sans réglage ni validation », « dix par jour », « liste figée ».
+- `test/domain/use_cases/communication/deliver_push_notifications_test.rb` : « rien ne part sans réglage ni validation », « dix par jour », « motif validé : il part vers tous les élèves concernés au passage ».
 - Contraintes de base : `push_motive_settings_motive_check` refuse `inactive` ; index unique (`on_date`, `motive`).
 - `grep -rn PUSH_MIN_INTERVAL_HOURS app config` ne rend rien.
+
+## Amendement du 2026-11-27 — décisions du porteur
+
+Retouche du chantier (journal, § Retouches). Le reste de la décision ne change pas.
+
+1. **Pas de liste figée** (§3.2 : l'option A remplace la B). Un motif validé reste ouvert toute la journée d'Abidjan : à chaque passage, il part vers chaque élève concerné à ce moment, y compris devenu concerné après la validation, relu juste avant l'envoi comme avant. « Tant que le motif est activé, les notifications partent » : case cochée ou validation du jour, sans écart minimal en plus d'un motif par passage, dans les fenêtres et sous le plafond de dix. `PushApprovalRepositoryPort#approved_keys` est retiré ; `DeliverPushNotifications` lit les motifs de `for_date`. La table `push_approval_recipients` reste : elle garde les élèves concernés au moment du geste, dont le nombre est affiché.
+2. **Fenêtres d'envoi** (amende ADR-0146 §3.2, PRD §3.1) : du lundi au samedi 12 h 20 – 14 h et 18 h – 20 h 20, le dimanche 9 h – 20 h, heure d'Abidjan. `SendingWindow` compte en minutes. L'heure limite de validation suit la fermeture de la dernière fenêtre du jour : 20 h 20 en semaine, 20 h le dimanche.
+3. **Passage de 12 h 20.** La tâche passe toutes les 15 minutes (:00, :15, :30, :45) : sans rien de plus, le premier envoi de midi partirait à 12 h 30. Une tâche récurrente de plus, `deliver_push_notifications_at_noon_opening` (`20 12 * * 1-6`, Abidjan), passe à l'ouverture ; le verrou `limits_concurrency` du job empêche deux passages simultanés. 18 h et 9 h tombent sur un passage ; le dernier passage du soir est 20 h 15 en semaine et 19 h 45 le dimanche. Vérifié par `test/jobs/recurring_tasks_test.rb`.
+4. **Écart et plafond** inchangés : un motif par élève et par passage, dix par jour.
+5. **Annonce : la case « Prévenir les élèves » est figée à la publication.** Modifier une annonce déjà publiée ne peut ni la cocher ni la décocher (`UpdateMessage#modify` garde `push_requested`) ; le formulaire la montre désactivée, telle qu'elle a été publiée. Un brouillon ou une annonce programmée la choisit encore jusqu'à sa parution.

@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · UseCases::Communication::ApprovePushMotive
-# Rôle : l'équipe valide un motif du plan du jour : la liste est recalculée maintenant, élève × objet sont figés ; refus après 20 h
+# Rôle : l'équipe valide un motif du plan du jour : il reste ouvert jusqu'au soir, les élèves concernés maintenant sont comptés ; refus après la dernière fenêtre
 # ADR  : XXXX envois de notifications (§3.2, §4.4) · UDR : XXXX écran notifications de l'équipe (§3.4)
 module UseCases
   module Communication
     class ApprovePushMotive
-      # Après la dernière fenêtre du jour (20 h à Abidjan, UTC), plus rien ne part : la validation serait sans effet.
+      # Après la dernière fenêtre du jour (20 h 20 en semaine, 20 h le dimanche, à Abidjan = UTC), plus rien ne part : la validation serait sans effet.
       def self.closed?(now) = Entities::Communication::SendingWindow.next_open_at(now).to_date != now.utc.to_date
 
       # candidates : PushCandidatesPort ; deliveries, settings, approvals : les ports de dépôt ; clock : répond à `now`.
@@ -17,7 +17,7 @@ module UseCases
         @clock = clock
       end
 
-      # → Result(PushApproval) | :forbidden | :not_found (motif non validable) | :expired (après 20 h)
+      # → Result(PushApproval) | :forbidden | :not_found (motif non validable) | :expired (après la dernière fenêtre)
       #   | :conflict (déjà validé aujourd'hui) | :invalid (motif automatique ou aucun élève concerné)
       def call(actor:, motive:)
         allowed = @policy.call(actor:)
@@ -46,7 +46,8 @@ module UseCases
                                                                          recipients_count: recipients.size))
       end
 
-      # [[user_id, object_key]] des élèves concernés maintenant : ni expirés, ni déjà prévenus de cet objet.
+      # [[user_id, object_key]] des élèves concernés maintenant, ni expirés ni déjà prévenus de cet objet : leur nombre est affiché ;
+      # ceux qui le deviennent plus tard dans la journée reçoivent aussi le motif.
       def recipients(motive, now)
         @candidates.for(now:).select { it.motive == motive && !it.expired?(now) && !sent?(it) }.map { [ it.user_id, it.object_key ] }.uniq
       end
