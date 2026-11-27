@@ -17,11 +17,11 @@ Prises :
 - 2026-11-26 · Pas de code d'établissement à l'inscription enseignant (voie « sans code », ADR-0063) — par le porteur.
 - 2026-11-26 · Révéler qu'un numéro a un compte est accepté ; jamais nom, rôle ni classe (ADR-0148) — par le porteur.
 
-Ouvertes : `script/docs/a_trancher`, et `## À trancher` de `journal.md` (5 décisions réversibles appliquées par défaut).
+Ouvertes : `script/docs/a_trancher`, et `## À trancher` de `journal.md` (5 décisions validées par le porteur le 2026-11-27).
 
 ## Prochaine action
 
-Rien sur ce chantier ; trancher les 5 entrées de `## À trancher` du journal. Dette basse listée dans `journal.md`.
+Rien sur ce chantier. Dette basse listée dans `journal.md`.
 
 ## Prompt de reprise
 
