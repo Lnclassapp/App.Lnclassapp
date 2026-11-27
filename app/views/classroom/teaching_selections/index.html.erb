@@ -1,8 +1,11 @@
 <%# 🌐 UI · classroom/teaching_selections/index — « Quelles classes enseignez-vous ? » %>
-<%# Rôle : « ‹ Accueil » (onboarding fini), titre, phrase (sigle de l'établissement, sinon son nom), compteur #teaching_counter, une carte par niveau, une bascule par classe (stream), « Terminer » pleine largeur tant que l'onboarding n'est pas fini %>
+<%# Rôle : « ‹ Accueil » (onboarding fini), titre, phrase (sigle de l'établissement, sinon son nom), compteur #teaching_counter, une carte par niveau, une bascule par classe (stream), « Terminer » pleine largeur tant que l'onboarding n'est pas fini (collé en bas sur téléphone), sur fond bg-mist %>
 <%# ADR  : 0030, 0063 · UDR : 0006, 0025, 0050, 0054, 0134 (§3.13 : ≥ lg, 57 rem, deux colonnes, « Terminer » de 15 rem à droite, « Mes classes » actif) · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "classrooms" %>
+<%# Retouche classes-enseignant-lisibilite : un fond teinté fixe derrière la page, pour que les cartes blanches se détachent
+    (même procédé que le fond de l'élève dans layouts/shell). %>
+<div class="fixed inset-0 -z-10 bg-mist" aria-hidden="true"></div>
 <div class="mx-auto w-full max-w-228">
 <%= ui_back_link t(".back_home"), href: teacher_home_path if @selection.onboarded %>
 <header class="mb-6 space-y-2">
@@ -10,7 +13,7 @@
   <p class="text-sm text-mute"><%= @selection.school_sigle ? t(".subtitle_sigle", school: @selection.school_sigle) : t(".subtitle", school: @selection.school_name) %></p>
   <% unless @selection.levels.empty? %>
     <%# Le compteur est remplacé par les streams de déclaration et de retrait : la pastille l'enveloppe et reste en place. %>
-    <div class="inline-flex rounded-full bg-brand-soft px-3 py-1"><%= render "classroom/teachings/counter", count: @selection.declared_count %></div>
+    <div class="inline-flex rounded-full border border-brand/30 bg-brand-soft px-3 py-1"><%= render "classroom/teachings/counter", count: @selection.declared_count %></div>
   <% end %>
 </header>
 
@@ -22,7 +25,10 @@
   </div>
 
   <% unless @selection.onboarded %>
-    <%= form_with url: teacher_onboarding_path, id: "teacher-onboarding-form", class: "mt-6 flex flex-col gap-2 lg:items-end" do %>
+    <%# Sur téléphone, « Terminer » reste collé en bas de l'écran pendant qu'on fait défiler les niveaux. %>
+    <%= form_with url: teacher_onboarding_path, id: "teacher-onboarding-form",
+                  class: "sticky bottom-0 -mx-gutter mt-6 flex flex-col gap-2 border-t border-line bg-mist px-gutter py-3 " \
+                         "lg:static lg:mx-0 lg:items-end lg:border-0 lg:bg-transparent lg:p-0" do %>
       <% if @onboarding_error %>
         <p id="teacher-onboarding-error" role="alert" class="rounded-ln bg-error-soft px-4 py-2 text-sm font-medium text-error">
           <%= @onboarding_error %>
