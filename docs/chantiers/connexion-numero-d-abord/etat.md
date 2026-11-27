@@ -2,13 +2,14 @@
 
 > Tenu par l'orchestrateur ([`docs/workflows/orchestrateur.md`](../../workflows/orchestrateur.md)). Mis à jour une fois, en fin de session ; toute session d'orchestration commence par le lire. Ni secret, ni identifiant.
 
-**Mis à jour le** : 2026-11-27 · **Vague** : unique · **Où on en est** : PR #728 fusionnée dans `Develop` le 2026-11-27 ; ADR-0148 et UDR-0189 numérotées.
+**Mis à jour le** : 2026-11-27 · **Vague** : unique · **Où on en est** : **livré en production le 2026-11-27** — train #733 (`Develop` → `Staging`, `4de7dd95`) puis #734 (`Staging` → `main`, `cf8feff9`), suite complète verte, revue de sécurité sans constat, déploiement de production et /up verts. Compris : #728 à #732.
 
 ## Lots
 
 | Lot | Session | Branche | PR | SHA de tête vérifié | État |
 |---|---|---|---|---|---|
-| A, B, C | session_01Q2c4dn4i37GadzCmkz6EHg | `feature/connexion-numero-d-abord` | #728 | `05514e51` (code) | fusionné |
+| A, B, C | session_01Q2c4dn4i37GadzCmkz6EHg | `feature/connexion-numero-d-abord` | #728 | `05514e51` (code) | en production (`cf8feff9`) |
+| Train | session_01Q2c4dpYzh5BnuDzdVq5jWt | `Develop` → `Staging` → `main` | #733, #734 | `cf8feff9` (main) | en production |
 
 ## Décisions
 
@@ -21,7 +22,7 @@ Ouvertes : `script/docs/a_trancher`, et `## À trancher` de `journal.md` (5 déc
 
 ## Prochaine action
 
-Rien sur ce chantier. Dette basse listée dans `journal.md`.
+Rien sur ce chantier : livré. Dette basse listée dans `journal.md`.
 
 ## Prompt de reprise
 
