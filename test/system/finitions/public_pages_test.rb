@@ -87,8 +87,8 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
     assert_selector "#session-pin-form", wait: SIGN_IN_WAIT
     assert_toast "Votre compte est créé."
     assert_selector "#session-number", text: "01 00 00 00 09"
-    assert_field "session[pin]", with: ""
-    assert_selector "#session_pin:focus"
+    assert_selector "#session-pin-boxes span", count: 4, text: ""
+    assert_selector "#session-keypad button[data-digit]:focus"
     assert_no_match(/0100000009|01%2000/, page.current_url)
     assert_no_selector "#toasts", text: /01 00 00 00 09|0100000009/
     assert_equal 0, Orm::Session.count
@@ -112,8 +112,7 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
     visit invitation_path(school_invitation.token)
     accept_invitation
     assert_selector "#session-number", text: "05 00 00 00 07", wait: SIGN_IN_WAIT
-    fill_in "session[pin]", with: "4821"
-    click_on I18n.t("identity.sessions.new.submit")
+    tap_pin "4821"
 
     assert_current_path school_admin_classrooms_path, wait: SIGN_IN_WAIT
     assert_selector "h1", text: /\ABonjour, /

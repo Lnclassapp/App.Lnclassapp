@@ -35,23 +35,26 @@
 
         <% if @stage == :pin %>
           <%= ui_card title: t("#{scope}.pin_title"), heading: :h1, padding: :lg do %>
-            <%= form_with model: @form, scope: :student_entry, url: student_entries_path, id: "student-entry-pin-form", class: "space-y-5" do |form| %>
+            <%= form_with model: @form, scope: :student_entry, url: student_entries_path, id: "student-entry-pin-form", class: "space-y-5",
+                          data: { controller: "identity--pin-pad" } do |form| %>
               <% if @link_token %><%= hidden_field_tag "student_entry[link_token]", @link_token, id: nil %><% end %>
               <%= render "identity/student_entries/base_errors" %>
               <%= number.call(t("#{scope}.number_label")) %>
               <input type="text" autocomplete="username" value="<%= @form.contact %>" hidden aria-hidden="true" tabindex="-1">
-              <div>
-                <%= ui_field form, :pin, as: :password, reveal: true, required: true, minlength: 4, maxlength: 4, pattern: "[0-9]{4}", inputmode: "numeric",
-                             autocomplete: "current-password", autofocus: @link_token.nil?, placeholder: "****", hint: t("#{scope}.pin_hint") %>
-                <% if @form.errors.of_kind?(:pin, :wrong_pin) %>
-                  <%# UDR-0176 §3.3 : « Code secret oublié ? » sous l'erreur du code. %>
-                  <p class="mt-1 text-sm">
-                    <%= link_to t("#{scope}.forgot_pin"), new_identity_pin_reset_path, id: "student-entry-forgot-pin", class: link_class %>
-                  </p>
-                <% end %>
-              </div>
+              <%# UDR-0189 §3.6 (amendement du 2026-11-27) : le code en 4 cases et au pavé, envoyé au 4e chiffre. %>
+              <% field = ui_field(form, :pin, as: :password, reveal: true, required: true, minlength: 4, maxlength: 4, pattern: "[0-9]{4}", inputmode: "numeric",
+                                  autocomplete: "current-password", placeholder: "****", hint: t("#{scope}.pin_hint"),
+                                  data: { identity__pin_pad_target: "field" }) %>
+              <%= render "shared/pin_pad", prefix: "student-entry", field:, hint: t("#{scope}.pin_hint"), error: @form.errors.messages_for(:pin).first,
+                                           offline: t("#{scope}.pin_pad.offline") %>
+              <% if @form.errors.of_kind?(:pin, :wrong_pin) %>
+                <%# UDR-0176 §3.3 : « Code secret oublié ? » sous l'erreur du code. %>
+                <p class="text-center text-sm">
+                  <%= link_to t("#{scope}.forgot_pin"), new_identity_pin_reset_path, id: "student-entry-forgot-pin", class: link_class %>
+                </p>
+              <% end %>
               <%= ui_button t("#{scope}.submit"), type: :submit, variant: :primary, size: :lg, full: true, id: "student-entry-pin-submit",
-                            data: { turbo_submits_with: t("#{scope}.submitting") } %>
+                            data: { turbo_submits_with: t("#{scope}.submitting"), identity__pin_pad_target: "submit" } %>
             <% end %>
             <%= fix_number %>
           <% end %>
@@ -63,43 +66,11 @@
               <%= render "identity/student_entries/base_errors" %>
               <%= number.call(t("#{scope}.confirm_lead")) %>
               <%# UDR-0189 §3.4 : le code tapé une seule fois ; une erreur de frappe se rattrape par « Code secret oublié ? ». %>
-              <div id="student-entry-pin-field" data-identity--pin-pad-target="fieldBlock">
-                <%= ui_field form, :pin, as: :password, reveal: true, required: true, minlength: 4, maxlength: 4, pattern: "[0-9]{4}", inputmode: "numeric",
-                             autocomplete: "new-password", autofocus: true, placeholder: "****", hint: t("#{scope}.confirm_hint"),
-                             data: { identity__pin_pad_target: "field" } %>
-              </div>
-              <div id="student-entry-pin-pad" hidden data-identity--pin-pad-target="pad" class="space-y-4">
-                <p class="text-center text-sm text-mute"><%= t("#{scope}.confirm_hint") %></p>
-                <div id="student-entry-pin-boxes" aria-hidden="true" class="flex justify-center gap-3">
-                  <% 4.times do %>
-                    <span data-identity--pin-pad-target="box"
-                          class="grid size-14 place-items-center rounded-ln border-2 border-line bg-white text-2xl text-ink"></span>
-                  <% end %>
-                </div>
-                <p id="student-entry-pin-status" class="sr-only" aria-live="polite" data-identity--pin-pad-target="status"
-                   data-template="<%= t("#{scope}.pin_pad.progress", count: "%{count}") %>"></p>
-                <p id="student-entry-pin-check" hidden role="status" data-identity--pin-pad-target="check"
-                   class="flex items-center justify-center gap-2 text-sm font-medium text-success">
-                  <%= ui_icon "check-circle", size: :lg, class: "text-success" %>
-                  <span><%= t("#{scope}.pin_pad.match") %></span>
-                </p>
-                <p id="student-entry-pin-offline" hidden role="alert" data-identity--pin-pad-target="offline"
-                   class="text-center text-sm text-error"><%= t("#{scope}.pin_pad.offline") %></p>
-                <div id="student-entry-keypad" role="group" aria-label="<%= t("#{scope}.pin_pad.keypad_label") %>" class="grid grid-cols-3 gap-3">
-                  <% key_class = "min-h-14 rounded-ln bg-mist text-2xl font-medium text-ink active:bg-line focus-visible:outline-2 focus-visible:outline-brand" %>
-                  <% [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ].each do |number| %>
-                    <button type="button" class="<%= key_class %>" data-digit="<%= number %>" data-action="identity--pin-pad#press"
-                            data-identity--pin-pad-target="key"><%= number %></button>
-                  <% end %>
-                  <span aria-hidden="true"></span>
-                  <button type="button" class="<%= key_class %>" data-digit="0" data-action="identity--pin-pad#press"
-                          data-identity--pin-pad-target="key">0</button>
-                  <button type="button" class="<%= key_class %> grid place-items-center" aria-label="<%= t("#{scope}.pin_pad.erase") %>"
-                          data-action="identity--pin-pad#erase">
-                    <%= ui_icon "backspace", size: :lg %>
-                  </button>
-                </div>
-              </div>
+              <% field = ui_field(form, :pin, as: :password, reveal: true, required: true, minlength: 4, maxlength: 4, pattern: "[0-9]{4}", inputmode: "numeric",
+                                  autocomplete: "new-password", placeholder: "****", hint: t("#{scope}.confirm_hint"),
+                                  data: { identity__pin_pad_target: "field" }) %>
+              <%= render "shared/pin_pad", prefix: "student-entry", field:, hint: t("#{scope}.confirm_hint"),
+                                           match: t("#{scope}.pin_pad.match"), offline: t("#{scope}.pin_pad.offline") %>
               <%= ui_button t("#{scope}.confirm_submit"), type: :submit, variant: :primary, size: :lg, full: true, id: "student-entry-confirm-submit",
                             data: { turbo_submits_with: t("#{scope}.submitting"), identity__pin_pad_target: "submit" } %>
             <% end %>

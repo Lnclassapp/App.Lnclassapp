@@ -32,15 +32,13 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_not Orm::User.exists?(contact: "0501020304")
   end
 
-  # Chantier entree-eleve-unifiee, D1 (PRD CA-12, UDR-0176 §3.7).
-  test "CA-12 : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant(e) ? », sans formulaire" do
+  # UDR-0189 §3.8 (amendement du 2026-11-27) : la question « Êtes-vous bien enseignant(e) ? » est retirée ; l'inscription publique
+  # commence à /teacher, numéro d'abord.
+  test "/teacher-signup sans numéro gardé ni recherche renvoie à /teacher" do
     get new_teacher_registration_path
 
-    assert_response :success
-    assert_select "h1", text: "Êtes-vous bien enseignant(e) ?"
-    assert_select "form#teacher-registration-form", 0
-    assert_select "a#teacher-signup-confirm-yes[href=?]", new_teacher_registration_path(confirmed: 1), text: "Oui, je suis enseignant(e)"
-    assert_select "a#teacher-signup-confirm-no[href=?]", new_student_entry_path, text: "Non, je suis élève"
+    assert_redirected_to new_teacher_entry_path
+    assert_response :see_other
   end
 
   test "CA-12 : « Oui » ouvre le formulaire ; la recherche renvoyée sans JavaScript et le lien d'invitation ne reposent pas la question" do
@@ -48,7 +46,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "form#teacher-registration-form"
 
     get new_teacher_registration_path, params: { school_q: "cocody" }
-    assert_select "#teacher-signup-confirm", 0
+    assert_response :success
     assert_select "form#teacher-registration-form"
   end
 
@@ -282,7 +280,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "fieldset[data-step='3'] #school-preview", text: /#{Regexp.escape(I18n.t("identity.teacher_registrations.school_preview.label"))}.*Lycée Moderne de Cocody/m
     assert_select "#school-preview", text: /Abidjan 1/
     assert_select "form#teacher-registration-form input[type=hidden][name='teacher_registration[invite_token]'][value='#{token}']"
-    assert_select "a#other-school[href='#{new_teacher_registration_path}']", text: /#{Regexp.escape(I18n.t('identity.teacher_registrations.school_preview.other_school'))} ›/
+    assert_select "a#other-school[href='#{new_teacher_registration_path(confirmed: 1)}']", text: /#{Regexp.escape(I18n.t('identity.teacher_registrations.school_preview.other_school'))} ›/
     assert_select "input#school_q, turbo-frame#school_results", 0
     assert_select "select[name='teacher_registration[material_slug]']"
     assert_select "#invite-link-invalid", 0
@@ -557,7 +555,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='2']"
     assert_select "fieldset[data-step='1'], input[name='teacher_registration[contact]']", 0
     assert_select "fieldset[data-step='2'] #teacher-registration-number", text: /05 01 02 03 04/
-    assert_select "a#teacher-registration-fix-number[href='#{new_session_path(fresh: 1)}']", text: I18n.t("#{FORM}.not_my_number")
+    assert_select "a#teacher-registration-fix-number[href='#{new_teacher_entry_path(fresh: 1)}']", text: I18n.t("#{FORM}.not_my_number")
     assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 2)
     assert_select "#signup-back[hidden]"
   end

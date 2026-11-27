@@ -167,11 +167,11 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     student = create_student
 
     post session_path, params: { session: { contact: student.contact, pin: "1357" } }
-    wrong_pin = css_select("[role=alert]").map { it.text.squish }
+    wrong_pin = css_select("[role=alert]:not([hidden])").map { it.text.squish }
     assert_select "input[name='session[pin]'][type=password]:not([value])"
 
     post session_path, params: { session: { contact: "0799999999", pin: "1357" } }
-    unknown_number = css_select("[role=alert]").map { it.text.squish }
+    unknown_number = css_select("[role=alert]:not([hidden])").map { it.text.squish }
 
     assert_response :unprocessable_entity
     assert_equal [ "Numéro ou code secret incorrect." ], wrong_pin
@@ -246,7 +246,9 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select "h1", text: "Connexion"
     assert_select "#session-number", text: /Votre numéro\s*#{teacher.contact.scan(/\d{2}/).join(" ")}/
-    assert_select "form#session-pin-form input[name='session[pin]'][autocomplete=current-password][data-autofocus-target=field]"
+    # UDR-0189 §3.6 (amendement) : le champ natif, repli sans JavaScript, derrière le pavé de 4 cases qui prend le focus.
+    assert_select "form#session-pin-form[data-controller='identity--pin-pad'] input[name='session[pin]'][autocomplete=current-password][data-identity--pin-pad-target=field]"
+    assert_select "form#session-pin-form #session-pin-pad[hidden] #session-keypad button[data-digit]", 10
     assert_select "form#session-pin-form input[name='session[contact]']", 0
     assert_select "a#session-fix-number[href=?][data-turbo-prefetch=false]", new_session_path(fresh: 1)
     assert_select "a#session-forgot-pin[href=?]", new_identity_pin_reset_path
@@ -533,7 +535,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
       sign_in_from agent, user, pin: "1357", ip: "10.0.0.#{index + 1}"
 
       assert_response :unprocessable_entity
-      assert_equal [ "Numéro ou code secret incorrect." ], css_select("[role=alert]").map { it.text.squish }
+      assert_equal [ "Numéro ou code secret incorrect." ], css_select("[role=alert]:not([hidden])").map { it.text.squish }
       assert_select "#wrong-app", 0
     end
   end

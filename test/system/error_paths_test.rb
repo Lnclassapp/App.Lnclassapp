@@ -246,7 +246,6 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
   def sign_in_with(contact, pin)
     enter_credentials contact, pin
-    click_on t("identity.sessions.new.submit")
   end
 
   # Le code tel que l'enseignant le lit à l'écran, espace comprise.

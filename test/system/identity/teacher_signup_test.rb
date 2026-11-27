@@ -66,12 +66,12 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
       assert_selector "#signup-live", text: t("#{PAGE}.step_announce", n: 2, title: t("#{FORM}.security")), visible: :all
       assert_no_field "teacher_registration[pin_confirmation]"
       assert_no_selector "#teacher-registration-number"
-      # Three digits hold step 2; Entrée is « Continuer ».
-      fill_in "teacher_registration[pin]", with: "482"
-      click_on t("#{FORM}.continue")
+      # UDR-0189 §3.6 : le code en 4 cases ; trois chiffres tiennent l'étape 2 (« Continuer » grisé), le 4e ouvre l'étape 3.
+      assert_selector "#teacher-registration-pin-pad", visible: :visible
+      tap_pin "482"
+      assert_button t("#{FORM}.continue"), id: "teacher-registration-continue-2", disabled: true
       assert_step 2
-      fill_in "teacher_registration[pin]", with: "4821"
-      find_field("teacher_registration[pin]").send_keys(:enter)
+      tap_pin "1"
 
       assert_step 3
       assert_no_field "teacher_registration[school_code]"
@@ -105,7 +105,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
       within "#school-preview" do
         assert_text "Lycée Moderne de Cocody"
         assert_text "Abidjan 1"
-        assert_link t("identity.teacher_registrations.school_preview.other_school"), href: new_teacher_registration_path
+        assert_link t("identity.teacher_registrations.school_preview.other_school"), href: new_teacher_registration_path(confirmed: 1)
       end
       assert_no_field "school_q"
       fill_profile
@@ -122,7 +122,8 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
 
     click_on t("#{PAGE}.back")
     assert_step 2
-    assert_field "teacher_registration[pin]", with: "4821"
+    assert_selector "#teacher-registration-pin-boxes span", text: "●", count: 4
+    assert_equal "4821", find_field("teacher_registration[pin]", visible: :all).value
   end
 end
 

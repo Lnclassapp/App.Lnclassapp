@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
-# Rôle : inscription enseignant publique (1 numéro, 2 code tapé une fois, 3 profil), établissement cherché (DRENA déduite) ou lien /i/<jeton> (limités en débit) ; le numéro sans compte de /login est repris ; succès : session, voie notée et auditée
+# Rôle : inscription enseignant publique (1 numéro, 2 code tapé une fois, 3 profil), établissement cherché (DRENA déduite) ou lien /i/<jeton> (limités en débit) ; le numéro sans compte de /login est repris ; succès : session, voie notée et auditée ; sans numéro gardé ni recherche, renvoie à /teacher
 # ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103, 0142-recherche-etablissement · UDR : 0050, 0079, 0099 (§3.4), 0134 (§3.9), 0177-champ-etablissement, 0176-entree-eleve-unique (§3.7), 0189-connexion-numero-d-abord (§3.5)
 module Identity
   class TeacherRegistrationsController < ApplicationController
@@ -17,12 +17,11 @@ module Identity
     helper_method :material_options
 
     # Sans JavaScript, la recherche revient ici en GET (formulaire teacher-signup-school, school_q) et liste ses résultats.
-    # D1 du porteur (UDR-0176 §3.7) : l'inscription publique s'ouvre sur « Êtes-vous bien enseignant ? » ; « Oui » revient ici
-    # avec ?confirmed=1, « Non, je suis élève » mène à l'entrée élève. Une recherche renvoyée en GET (sans JavaScript) vient
-    # d'un formulaire déjà ouvert : pas de question.
+    # UDR-0189 §3.8 (2026-11-27) : l'inscription publique commence à /teacher, numéro d'abord ; /teacher-signup y renvoie, sauf
+    # ?confirmed=1 (le numéro sans compte de /teacher ou de /login) et une recherche renvoyée en GET (formulaire déjà ouvert).
     def new
       return redirect_to_home if authenticated?
-      return render(:confirm) unless params[:confirmed] == "1" || params[:school_q].present?
+      return redirect_to(new_teacher_entry_path, status: :see_other) unless params[:confirmed] == "1" || params[:school_q].present?
 
       @form = Dtos::Identity::TeacherRegistrationInput.new
       kept_contact

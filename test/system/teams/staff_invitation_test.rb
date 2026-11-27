@@ -49,9 +49,8 @@ class Teams::StaffInvitationTest < ApplicationSystemTestCase
         assert_toast "Votre compte est créé. Connectez-vous avec votre numéro et votre code secret."
         # UDR-0054 §3.8: « Se connecter » arrives with the number recalled (connexion-numero-d-abord), the focus on the PIN.
         assert_selector "#session-number", text: "07 99 00 00 09"
-        assert_selector "#session_pin:focus"
-        fill_in "session[pin]", with: "4821"
-        click_on I18n.t("identity.sessions.new.submit")
+        assert_selector "#session-keypad button[data-digit]:focus"
+        tap_pin "4821"
 
         assert_no_selector "#session-pin-form", wait: SIGN_IN_WAIT
         assert_no_selector "#second-factor-form"

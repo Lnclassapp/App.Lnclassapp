@@ -12,30 +12,30 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     browser_errors # the browser log is shared by the tests of the process: start from an empty one
   end
 
-  test "sign-in: show then hide the PIN, the focus stays in the field" do
+  # UDR-0189 §3.6 (amendement du 2026-11-27) : à la connexion et à l'entrée élève, le code se tape en 4 cases, au pavé ; le
+  # champ natif (et son œil) ne reste que sans JavaScript.
+  test "sign-in: the PIN is typed on the 4-box pad, the native field and its eye are hidden" do
     open_pin_step
-    show_then_hide "session[pin]"
+    assert_pad_replaces_field "session"
     assert_no_js_errors
   end
 
-  test "sign-in at 390 px: the button sits inside the field, the page does not scroll sideways" do
+  test "sign-in at 390 px: the pad fits, the page does not scroll sideways" do
     with_mobile_viewport do
       open_pin_step
-      assert_button_inside_field "session[pin]"
-      show_then_hide "session[pin]"
+      assert_pad_replaces_field "session"
       assert_no_horizontal_scroll
     end
     assert_no_js_errors
   end
 
-  # Chantier connexion-numero-d-abord : par le lien de classe, un numéro inscrit ouvre le champ du code ; un nouveau, le pavé.
-  test "student entry by link: show then hide the PIN of a known number; a new number gets the pad" do
+  test "student entry by link: a known number and a new one both get the pad" do
     visit join_classroom_path(@classroom.reload.link_token)
     enter_student_number create_student.contact
-    show_then_hide "student_entry[pin]"
+    assert_pad_replaces_field "student-entry"
     click_on I18n.t("identity.student_entries.new.not_my_number")
     enter_student_number "0701020304"
-    assert_selector "#student-entry-keypad" # le code d'un nouveau compte se tape au pavé (UDR pavé §3.2)
+    assert_pad_replaces_field "student-entry"
     assert_no_js_errors
   end
 
@@ -43,8 +43,7 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit join_classroom_path(@classroom.reload.link_token)
       enter_student_number create_student.contact
-      assert_button_inside_field "student_entry[pin]"
-      show_then_hide "student_entry[pin]"
+      assert_pad_replaces_field "student-entry"
       assert_no_horizontal_scroll
     end
     assert_no_js_errors
@@ -68,33 +67,23 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
   end
 
   test "keyboard: Tab from the field reaches the button, Enter shows the PIN, Space hides it" do
-    open_pin_step
-    field = find_field("session[pin]")
-    field.fill_in with: "2468"
-    field.send_keys(:tab)
+    sign_in_as create_teacher
+    open_in_modal edit_profile_pin_path
+    within "turbo-frame#modal dialog[open]" do
+      field = find_field("pin_change[current_pin]")
+      field.fill_in with: "2468"
+      field.send_keys(:tab)
 
-    assert_equal toggle_for("session[pin]"), active_element
-    active_element.send_keys(:enter)
-    assert_revealed "session[pin]"
-    assert_equal toggle_for("session[pin]"), active_element, "au clavier, le focus reste sur le bouton"
+      assert_equal toggle_for("pin_change[current_pin]"), active_element
+      active_element.send_keys(:enter)
+      assert_revealed "pin_change[current_pin]"
+      assert_equal toggle_for("pin_change[current_pin]"), active_element, "au clavier, le focus reste sur le bouton"
 
-    active_element.send_keys(:space)
-    assert_masked "session[pin]"
+      active_element.send_keys(:space)
+      assert_masked "pin_change[current_pin]"
+      show_then_hide "pin_change[pin]"
+    end
     assert_no_js_errors
-  end
-
-  test "the PIN is masked again when the page comes back from the Turbo cache" do
-    open_pin_step
-    fill_in "session[pin]", with: "2468"
-    toggle_for("session[pin]").click
-    assert_revealed "session[pin]"
-
-    click_on I18n.t("identity.sessions.new.forgot_pin")
-    assert_selector "#pin-reset-form"
-    page.go_back
-
-    assert_selector "#session-pin-form"
-    assert_masked "session[pin]"
   end
 
   private
@@ -111,6 +100,13 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     fill_in "student_entry[contact]", with: contact
     click_on I18n.t("identity.student_entries.new.submit")
     assert_no_field "student_entry[contact]", wait: SIGN_IN_WAIT
+  end
+
+  def assert_pad_replaces_field(prefix)
+    assert_selector "##{prefix}-pin-pad", visible: :visible
+    assert_selector "##{prefix}-pin-boxes span", count: 4
+    assert_no_selector "##{prefix}-pin-field", visible: :visible
+    assert_no_selector "button[aria-controls$='_pin']", visible: :visible
   end
 
   def show_then_hide(name)

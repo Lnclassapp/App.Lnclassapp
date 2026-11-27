@@ -13,6 +13,7 @@ problematique: la connexion demandait numéro et code ensemble et laissait l'ins
 | **Chantier** | `docs/chantiers/connexion-numero-d-abord` |
 | **ADR lié** | ADR-0148 |
 | **Remplacé par** | — (amende UDR-0176 §3.1, §3.2, §3.5 ; UDR-0180 §3.2 ; UDR-0135 et UDR-0079 pour l'ordre des étapes enseignant) |
+| **Amendement** | 2026-11-27, retours du porteur après test sur Develop : §3.6 (4 cases partout), §3.7 (chiffres seuls), §3.8 (`/teacher`) ; remplacent ce qui les contredit plus haut |
 
 ---
 
@@ -69,6 +70,23 @@ Trois étapes, `classroom--signup-steps`, compteur « Étape N sur 3 », barre e
 - « Continuer » : si un champ de l'étape est invalide, `reportValidity` et focus sur lui ; sinon étape suivante. « Entrée » fait de même aux étapes 1 et 2.
 - Erreur serveur : l'étape de la première erreur s'ouvre (`contact` 1, `pin` 2, le reste 3). « Ce numéro est déjà utilisé » : étape 1, sous le champ.
 - Sans JavaScript : les trois fieldsets visibles, un seul envoi.
+
+### 3.6 Amendement du 2026-11-27 : le code en 4 cases partout où l'on se connecte ou crée son compte
+
+- Partiel `shared/_pin_pad` (locaux `prefix`, `field`, `hint`, `error`, `match`, `offline`) : `#<prefix>-pin-field` (le `ui_field :pin` natif, seul visible sans JavaScript), `#<prefix>-pin-pad[hidden]` avec 4 cases `#<prefix>-pin-boxes`, statut `sr-only aria-live` « N chiffres sur 4 », coche `#<prefix>-pin-check`, alerte hors ligne `#<prefix>-pin-offline[role=alert][hidden]`, pavé `#<prefix>-keypad` (`role=group`, « Pavé numérique », touches ≥ 56 px, « Effacer »). L'erreur serveur du code (`error`) s'affiche au-dessus des cases (`#<prefix>-pin-error[role=alert]`).
+- Contrôleur `identity--pin-pad` (texte hérité d'UDR-0180) : mode `submit` (défaut) envoie le formulaire au 4e chiffre ; mode `step` remplit le champ et clique le bouton d'étape (« Continuer »). Le clavier physique ne nourrit que le pavé visible, jamais un autre champ en cours de saisie.
+- Remplace le champ simple de §3.2 (`/login` et `/teacher` étape code, ainsi que l'envoi groupé refusé `:both`), §3.4 (`/student` étape code ; « Nouveau sur Lnclass » inchangé) et §3.5 étape 2 de l'inscription enseignant (mode `step`). Le choix n°4 du journal (champ simple pour un numéro inscrit) est retiré.
+- Hors champ (inchangés, à trancher) : code + confirmation de l'inscription élève sans entrée, de l'invitation enseignant et de la direction ; code oublié ; changement du code.
+
+### 3.7 Amendement du 2026-11-27 : chiffres seuls
+
+- Tout `ui_field as: :tel`, et tout `ui_field as: :password, inputmode: "numeric"`, porte le contrôleur `digits-only` : à chaque saisie (frappe, collage), tout ce qui n'est pas un chiffre est retiré et la longueur bornée à `maxlength`. `inputmode="numeric"` ouvre le pavé du téléphone. Le serveur garde ses propres règles sans JavaScript.
+
+### 3.8 Amendement du 2026-11-27 : `/teacher`, l'entrée enseignant
+
+- Accueil : « Enseignant(e) » est un lien `#role-entry-teacher-entry` → `new_teacher_entry_path` (comme « Je suis élève ») ; la fenêtre « Vous êtes enseignant ? » est retirée.
+- `GET /teacher` (`Identity::TeacherEntriesController`, sous-classe de la connexion, mêmes compteurs et refus) rend l'écran de `/login` titré « Je suis enseignant(e) » (`title`, `h1`), formulaires vers `POST /teacher`, « Ce n'est pas mon numéro » → `/teacher?fresh=1`. Numéro inscrit → étape code (§3.6), puis l'accueil du rôle. Numéro sans compte → `new_teacher_registration_path(confirmed: 1)` : l'inscription s'ouvre à l'étape 2, numéro rappelé ; son « Ce n'est pas mon numéro » → `/teacher?fresh=1`.
+- `/teacher-signup` sans `confirmed=1` ni recherche renvoyée → 303 vers `/teacher` (la question « Êtes-vous bien enseignant(e) ? » d'UDR-0176 §3.7 est retirée). `/teacher-signup?confirmed=1`, `/i/<jeton>` et « Ce n'est pas votre établissement ? » (`?confirmed=1`) gardent le parcours.
 
 ### États
 

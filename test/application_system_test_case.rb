@@ -122,8 +122,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def fill_teacher_number_and_code(contact, pin)
     fill_in "teacher_registration[contact]", with: contact
     click_on I18n.t("identity.teacher_registrations.form.continue")
-    fill_in "teacher_registration[pin]", with: pin
-    click_on I18n.t("identity.teacher_registrations.form.continue")
+    # UDR-0189 §3.6 : le code au pavé de 4 cases ; au 4e chiffre, l'étape suivante s'ouvre.
+    tap_pin pin
     assert_selector "fieldset[data-step='3']", visible: :visible
   end
 

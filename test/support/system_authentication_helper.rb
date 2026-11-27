@@ -10,7 +10,6 @@ module SystemAuthenticationHelper
   def sign_in_as(user, pin: "2468")
     visit new_session_path
     enter_credentials(user.contact, pin)
-    click_on I18n.t("identity.sessions.new.submit")
     assert_no_selector "#session-pin-form", wait: SIGN_IN_WAIT
     return unless user.respond_to?(:totp_secret)
 
@@ -19,14 +18,21 @@ module SystemAuthenticationHelper
     assert_no_selector "#second-factor-form", wait: SIGN_IN_WAIT
   end
 
-  # /login: the number, « Continuer », then the PIN typed in its own step (not sent). A number kept from before (30 min)
-  # opens /login on the PIN step: « Ce n'est pas mon numéro » brings the number field back first.
+  # /login: the number, « Continuer », then the PIN tapped on the 4-box keypad, which sends it at the 4th digit (UDR-0189
+  # §3.6). A number kept from before (30 min) opens /login on the PIN step: « Ce n'est pas mon numéro » brings the number
+  # field back first.
   def enter_credentials(contact, pin)
     stage = find("#session-form, #session-pin-form", match: :first, wait: SIGN_IN_WAIT)
     click_on I18n.t("identity.sessions.new.not_my_number") if stage[:id] == "session-pin-form"
     fill_in "session[contact]", with: contact
     click_on I18n.t("identity.sessions.new.continue")
-    fill_in "session[pin]", with: pin, wait: SIGN_IN_WAIT
+    tap_pin pin, wait: SIGN_IN_WAIT
+  end
+
+  # The PIN tapped on the visible keypad (UDR-0189 §3.6): in « submit » mode, the form leaves at the 4th digit.
+  def tap_pin(pin, wait: Capybara.default_max_wait_time)
+    keypad = find("[id$='-keypad'][role=group]", visible: true, wait:)
+    pin.to_s.each_char { |digit| keypad.find("button[data-digit='#{digit}']").click }
   end
 
   # The same DELETE as the « Se déconnecter » entry of the shell, from whatever page is open.
