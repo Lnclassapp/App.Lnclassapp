@@ -30,9 +30,19 @@ module SystemAuthenticationHelper
   end
 
   # The PIN tapped on the visible keypad (UDR-0189 §3.6): in « submit » mode, the form leaves at the 4th digit.
+  # Without JavaScript (Chrome with scripts off, driver named *without_javascript), the keypad stays hidden: the PIN goes
+  # in the plain field, sent by its form's button.
   def tap_pin(pin, wait: Capybara.default_max_wait_time)
+    return type_pin_without_javascript(pin) if Capybara.current_driver.to_s.include?("without_javascript")
+
     keypad = find("[id$='-keypad'][role=group]", visible: true, wait:)
     pin.to_s.each_char { |digit| keypad.find("button[data-digit='#{digit}']").click }
+  end
+
+  def type_pin_without_javascript(pin)
+    field = find("[id$='-pin-field'] input[inputmode=numeric]", match: :first)
+    field.set(pin)
+    field.find(:xpath, "ancestor::form").find("button[type=submit], input[type=submit]", match: :first).click
   end
 
   # The same DELETE as the « Se déconnecter » entry of the shell, from whatever page is open.

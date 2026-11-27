@@ -1,5 +1,5 @@
 <%# 🌐 UI · identity/teacher_registrations/_form — le formulaire d'inscription enseignant, un seul, découpé en trois fieldset par signup_steps_controller %>
-<%# Rôle : 1 Votre numéro (ou parrain d'un lien), 2 Entrez votre code secret (tapé une fois, 4 cases et pavé), 3 Votre profil (établissement, matière, nom, prénoms, genre), sans code d'établissement ; sans JavaScript les trois restent visibles ; 422/429 re-rendus %>
+<%# Rôle : 1 Votre numéro (ou parrain d'un lien), 2 Choisissez votre code secret (tapé une fois, 4 cases et pavé), 3 Votre profil (établissement, matière, nom, prénoms, genre), sans code d'établissement ; sans JavaScript les trois restent visibles ; 422/429 re-rendus %>
 <%# ADR  : 0030, 0037, 0050, 0063, 0083, 0094 (§11 : lien de parrainage), 0103 (§4.4 : une matière) · UDR : 0024, 0054, 0079, 0134 (§3.9), 0135 (§3.1 à §3.8), 0189-connexion-numero-d-abord (§3.5) %>
 <%# start : l'étape ouverte ; floor : la première étape qui existe (2 quand le numéro vient de /login) %>
 <%# locals: (start:, floor:) -%>
@@ -74,11 +74,11 @@
                     class: "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
       </p>
     <% end %>
-    <%# UDR-0189 §3.6 (amendement du 2026-11-27) : le code en 4 cases et au pavé ; au 4e chiffre, l'étape suivante s'ouvre. %>
+    <%# UDR-0189 §3.6 (amendement du 2026-11-27) : le code en 4 cases et au pavé ; au 4e chiffre, l'étape suivante s'ouvre. L'aide est celle de la légende, pas répétée. %>
     <div data-controller="identity--pin-pad" data-identity--pin-pad-mode-value="step" class="space-y-4">
       <% field = ui_field(form, :pin, as: :password, reveal: true, required: true, minlength: 4, maxlength: 4, pattern: "[0-9]{4}",
-                          inputmode: "numeric", autocomplete: "new-password", hint: t(".pin_hint"), data: { identity__pin_pad_target: "field" }) %>
-      <%= render "shared/pin_pad", prefix: "teacher-registration", field:, hint: t(".pin_hint"), error: @form.errors.messages_for(:pin).first %>
+                          inputmode: "numeric", autocomplete: "new-password", data: { identity__pin_pad_target: "field" }) %>
+      <%= render "shared/pin_pad", prefix: "teacher-registration", field:, error: @form.errors.messages_for(:pin).first %>
       <%= ui_button t(".continue"), type: :button, variant: :primary, size: :lg, full: true, id: "teacher-registration-continue-2",
                     data: { action: "#{steps}#continue", identity__pin_pad_target: "submit" } %>
     </div>

@@ -67,7 +67,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "select[name*=drena_public_id]", 0
     assert_select "form#teacher-registration-form[action='#{teacher_registrations_path}']" \
                   "[data-controller='identity--phone-digits']" do
-      assert_equal [ "Votre numéro", "Entrez votre code secret", "Votre profil" ],
+      assert_equal [ "Votre numéro", "Choisissez votre code secret", "Votre profil" ],
                    css_select("fieldset[data-classroom--signup-steps-target=step] > legend").map { it.text.strip }
       assert_equal %w[1 2 3], css_select("fieldset[data-classroom--signup-steps-target=step]").map { it["data-step"] }
       # Étapes 1 et 2 : « Continuer » (type button) fait avancer ; l'établissement choisi ne change plus d'étape.
