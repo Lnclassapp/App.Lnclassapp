@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-# Chantier entree-et-accueil-eleve-allegees, UDR pavé numérique §3.2 : « Nouveau sur Lnclass » se confirme au pavé,
-# en vrai navigateur. 4 cases et 10 touches, bouton gris ; au 4e chiffre l'envoi part seul ; identiques → coche puis
-# inscription ; différents → « Les deux codes sont différents. » et cases vides.
+# Chantiers entree-et-accueil-eleve-allegees (UDR-0180 §3.2) et connexion-numero-d-abord (UDR-0189 §3.4) : sur « Nouveau
+# sur Lnclass », le code se tape une seule fois au pavé, en vrai navigateur. 4 cases et 10 touches, bouton gris ; au 4e
+# chiffre l'envoi part seul ; coche puis inscription.
 class StudentEntryPinPadTest < ApplicationSystemTestCase
   ENTRY = "identity.student_entries.new".freeze
 
@@ -11,10 +11,9 @@ class StudentEntryPinPadTest < ApplicationSystemTestCase
     browser_errors # le journal du navigateur est partagé : on repart d'un journal vide
   end
 
-  def reach_confirmation(pin: "2468")
+  def reach_confirmation
     visit new_student_entry_path
     fill_in "student_entry[contact]", with: "0701020304"
-    fill_in "student_entry[pin]", with: pin
     click_on I18n.t("#{ENTRY}.submit")
     assert_selector "h1", text: I18n.t("#{ENTRY}.confirm_title")
   end
@@ -39,12 +38,13 @@ class StudentEntryPinPadTest < ApplicationSystemTestCase
     assert_no_js_errors
   end
 
-  test "CA-3 : 2468 deux fois, la coche puis l'inscription s'ouvre sans autre geste" do
+  test "CA-9 : 2468 tapé une fois, la coche puis l'inscription s'ouvre sans autre geste" do
     reach_confirmation
+    assert_selector "#student-entry-pin-pad", text: I18n.t("#{ENTRY}.confirm_hint")
 
     tap_digits 2, 4, 6, 8
 
-    assert_selector "#student-entry-pin-check", text: "Les deux codes sont identiques.", visible: :all, wait: 10
+    assert_selector "#student-entry-pin-check", text: "Code secret choisi.", visible: :all, wait: 10
     assert_selector "#signup-step-counter", wait: 10
     assert_current_path new_student_registration_path
     assert_no_js_errors
@@ -64,21 +64,6 @@ class StudentEntryPinPadTest < ApplicationSystemTestCase
     page.execute_script("window.fetch = window.__fetch")
     click_on I18n.t("#{ENTRY}.confirm_submit")
     assert_current_path new_student_registration_path, wait: 10
-  end
-
-  test "CA-4 : 1111 pour 2468, message d'écart visible, cases vides, bouton gris" do
-    reach_confirmation
-
-    tap_digits 1, 1, 1, 1
-
-    assert_selector "#student-entry-mismatch", text: "Les deux codes sont différents.", visible: :visible
-    assert_selector "#student-entry-pin-pad", visible: :visible
-    assert_no_selector "#student-entry-pin-boxes span", text: "●"
-    assert_button I18n.t("#{ENTRY}.confirm_submit"), disabled: true
-
-    tap_digits 2, 4, 6, 8
-    assert_current_path new_student_registration_path, wait: 10
-    assert_no_js_errors
   end
 
   test "Effacer retire le dernier chiffre ; le clavier physique marche" do

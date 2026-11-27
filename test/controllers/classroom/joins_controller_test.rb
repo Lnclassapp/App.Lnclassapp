@@ -12,10 +12,11 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     @classroom = create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1")
   end
 
-  # Chantier entree-eleve-unifiee : le visiteur d'un lien passe d'abord par l'entrée élève (numéro inconnu, code confirmé).
+  # Chantiers entree-eleve-unifiee et connexion-numero-d-abord : le visiteur d'un lien passe d'abord par l'entrée élève
+  # (le numéro inconnu, puis le code tapé une fois).
   def enter_as_new_student(link_token, contact: "0701020304", pin: "4821")
-    post student_entries_path, params: { student_entry: { contact:, pin:, link_token: } }
-    post student_entries_path, params: { student_entry: { pin_confirmation: pin, link_token: } }
+    post student_entries_path, params: { student_entry: { contact:, link_token: } }
+    post student_entries_path, params: { student_entry: { pin:, link_token: } }
   end
 
   test "IL-02: /join, the former entry by code, leads to /student-signup; nothing is posted there any more" do
@@ -355,14 +356,14 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='student_registration[arrival_source]'][value]", 0
   end
 
-  test "le visiteur au numéro inconnu, qui rouvre le lien, retrouve l'étape de confirmation et son numéro" do
+  test "le visiteur au numéro inconnu, qui rouvre le lien, retrouve « Nouveau sur Lnclass » et son numéro" do
     token = @classroom.reload.link_token
-    post student_entries_path, params: { student_entry: { contact: "0101020304", pin: "1357", link_token: token } }
+    post student_entries_path, params: { student_entry: { contact: "0101020304", link_token: token } }
 
     get join_classroom_path(token)
 
     assert_response :success
     assert_select "#student-entry-number", text: /01 01 02 03 04/
-    assert_select "input[name='student_entry[pin_confirmation]']"
+    assert_select "#student-entry-confirm-form input[name='student_entry[pin]']"
   end
 end

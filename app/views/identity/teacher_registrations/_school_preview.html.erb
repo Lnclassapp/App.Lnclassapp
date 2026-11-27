@@ -5,7 +5,7 @@
   <p class="text-xs tracking-wider text-mute uppercase"><%= t(".label") %></p>
   <p class="text-base font-medium text-ink"><%= preview.school_name %></p>
   <p class="text-sm text-mute"><%= t(".drena", drena: preview.drena_name) %></p>
-  <%= link_to new_teacher_registration_path, id: "other-school",
+  <%= link_to new_teacher_registration_path(confirmed: 1), id: "other-school",
               class: "mt-1 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" do %>
     <%= t(".other_school") %>&#32;<span aria-hidden="true">›</span>
   <% end %>

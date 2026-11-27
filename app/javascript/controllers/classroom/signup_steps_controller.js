@@ -1,6 +1,6 @@
-// ⚡ FRONT · classroom/signup_steps_controller — l'inscription élève découpée en trois étapes dans un seul formulaire
-// Rôle : un seul fieldset visible ; la liste des étapes du panneau d'ordinateur suit l'étape ; une classe de la cascade touchée ou les quatre champs valides font avancer seuls ; retour sans perte ; annonce aria-live
-// ADR  : 0109 (§4.4, §4.5) · UDR : 0135 (§3.1 à §3.8, §3.5 bis)
+// ⚡ FRONT · classroom/signup_steps_controller — une inscription (élève ou enseignant) découpée en trois étapes dans un seul formulaire
+// Rôle : un seul fieldset visible ; la liste des étapes du panneau d'ordinateur suit l'étape ; une classe de la cascade touchée, les quatre champs valides ou « Continuer » (étape data-continue, champs valides) font avancer ; retour sans perte ; annonce aria-live
+// ADR  : 0109 (§4.4, §4.5) · UDR : 0135 (§3.1 à §3.8, §3.5 bis), 0189-connexion-numero-d-abord (§3.5)
 import { Controller } from "@hotwired/stimulus"
 
 const CLASSROOM_FIELD = /\[classroom_public_id\]$/
@@ -64,12 +64,32 @@ export default class extends Controller {
     this.goTo(1)
   }
 
-  // « Entrée » ne crée pas le compte avant l'étape 3 : la création reste un geste volontaire (le bouton y est).
+  // « Entrée » ne crée pas le compte avant l'étape 3 : la création reste un geste volontaire (le bouton y est). Sur une
+  // étape « Continuer » (data-continue), Entrée vaut Continuer.
   enter(event) {
     if (this.current >= this.lastStep || ["BUTTON", "A", "TEXTAREA"].includes(event.target.tagName)) return
 
     event.preventDefault()
-    if (this.current === 2 && this.personComplete()) this.goTo(3)
+    if (this.currentStep?.hasAttribute("data-continue")) this.continue()
+    else if (this.current === 2 && this.personComplete()) this.goTo(3)
+  }
+
+  // « Continuer » : le premier champ invalide de l'étape dit pourquoi (bulle du navigateur) et garde le focus ; sinon, l'étape suivante.
+  // Sans data-invalid-message, un message de repli non vide : le numéro reste invalide (jamais une chaîne vide, qui le validerait).
+  // Un numéro (type tel) n'a pas de pattern (collé sans JavaScript, le serveur le nettoie) : ses 10 chiffres se vérifient ici.
+  continue() {
+    const fields = [...(this.currentStep?.querySelectorAll("input, select") || [])].filter((field) => field.type !== "hidden")
+    fields.filter((field) => field.type === "tel").forEach((field) => {
+      field.setCustomValidity(field.value === "" || PHONE.test(field.value) ? "" : field.dataset.invalidMessage || field.title || "✕")
+    })
+    const invalid = fields.find((field) => !field.checkValidity())
+    if (invalid) {
+      invalid.reportValidity()
+      invalid.focus()
+      return
+    }
+
+    this.goTo(this.current + 1)
   }
 
   // Étape 2 : environ une seconde après la dernière frappe, si les quatre champs sont valides.
@@ -156,6 +176,7 @@ export default class extends Controller {
     if (this.hasPanelRecapTarget) this.panelRecapTarget.hidden = true
   }
 
+  get currentStep() { return this.stepTargets.find((step) => Number(step.dataset.step) === this.current) }
   get firstStep() { return Math.min(...this.stepTargets.map((step) => Number(step.dataset.step))) }
   get lastStep() { return Math.max(...this.stepTargets.map((step) => Number(step.dataset.step))) }
 }

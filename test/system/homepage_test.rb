@@ -20,25 +20,27 @@ class HomepageTest < ApplicationSystemTestCase
     assert page.evaluate_script("typeof window.Turbo !== 'undefined'"), "Turbo n'a pas démarré : JavaScript bloqué ou absent"
   end
 
-  # Chantier entree-eleve-unifiee (CA-1) : « Je suis élève » mène droit à l'entrée ; l'enseignant garde sa fenêtre.
-  test "a visitor opens the teacher modal, then « Je suis élève » leads straight to the number and secret code" do
+  # Chantier entree-eleve-unifiee (CA-1) et UDR-0189 §3.8 (2026-11-27) : « Je suis élève » et « Enseignant(e) » mènent
+  # chacun droit à leur entrée, numéro d'abord, sans fenêtre ; un numéro sans compte ouvre l'inscription enseignant sur le code.
+  test "« Enseignant(e) » leads to /teacher, number first; « Je suis élève » to the student entry" do
     visit root_path
-
-    assert_no_page_reload do
-      click_on "Enseignant(e)"
-      within("dialog#role-modal-teacher-entry[open]") do
-        assert_title "Vous êtes enseignant ? · Lnclass"
-        assert_link "Se connecter", href: new_session_path
-        assert_link "Créer un compte", href: new_teacher_registration_path
-        find("button[aria-label='Fermer']").click
-      end
-      assert_no_selector "dialog[open]"
-    end
-
     click_on "Je suis élève"
     assert_current_path new_student_entry_path
     assert_field "student_entry[contact]"
-    assert_field "student_entry[pin]"
+    # Chantier connexion-numero-d-abord : le numéro d'abord, le code à l'écran suivant.
+    assert_no_field "student_entry[pin]"
+
+    visit root_path
+
+    click_on "Enseignant(e)"
+    assert_current_path new_teacher_entry_path
+    assert_selector "h1", text: "Je suis enseignant(e)"
+    assert_no_field "session[pin]"
+    fill_in "session[contact]", with: "05 01-02a03 04"
+    assert_field "session[contact]", with: "0501020304"
+    click_on I18n.t("identity.sessions.new.continue")
+    assert_selector "#teacher-registration-number", text: "05 01 02 03 04"
+    assert_selector "#teacher-registration-pin-pad", visible: :visible
   end
 
   # CA-A1 : à 390 px et à 320 × 568, photo, slogan, vague, pastille et deux entrées tiennent sans défiler, sans déborder.
@@ -50,8 +52,8 @@ class HomepageTest < ApplicationSystemTestCase
       with_device_viewport(width, height) do
         visit root_path
 
-        assert_selector "button[aria-haspopup=dialog]", count: 2
-        assert_selector "a[id^=role-entry-student]", count: 1
+        assert_selector "button[aria-haspopup=dialog]", count: 1
+        assert_selector "a[id^=role-entry-]", count: 2
         fit = page.evaluate_script(<<~JS)
           (() => {
             const bottom = (selector) => Math.round(document.querySelector(selector).getBoundingClientRect().bottom)
@@ -59,7 +61,7 @@ class HomepageTest < ApplicationSystemTestCase
               height: window.innerHeight,
               scrollHeight: document.documentElement.scrollHeight,
               overflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-              entries: Array.from(document.querySelectorAll("button[aria-haspopup=dialog], a[id^=role-entry-student]")).map((b) => Math.round(b.getBoundingClientRect().bottom)),
+              entries: Array.from(document.querySelectorAll("button[aria-haspopup=dialog], a[id^=role-entry-]")).map((b) => Math.round(b.getBoundingClientRect().bottom)),
               photoHeight: Math.round(document.querySelector("main img").getBoundingClientRect().height),
               pill: bottom("[role=note]"), title: bottom("h1")
             }
@@ -102,8 +104,7 @@ class HomepageTest < ApplicationSystemTestCase
       assert_operator layout["scrollHeight"], :<=, layout["height"], "la page défile sur ordinateur"
       assert_selector "#matieres", visible: :visible
       assert_no_selector "header, footer", visible: :all
-      click_on "Enseignant(e)"
-      assert_selector "dialog#role-modal-teacher-entry[open]"
+      assert_link "Enseignant(e)", href: new_teacher_entry_path
     end
   end
 

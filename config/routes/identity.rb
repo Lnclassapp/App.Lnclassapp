@@ -16,6 +16,8 @@ post "account/pending/school", to: "identity/pending_school_joins#create", as: :
 # ADR-0141 : « Je suis élève », l'entrée unique (numéro et code secret), limitée en débit.
 get "student", to: "identity/student_entries#new", as: :new_student_entry
 post "student", to: "identity/student_entries#create", as: :student_entries
+get "teacher", to: "identity/teacher_entries#new", as: :new_teacher_entry
+post "teacher", to: "identity/teacher_entries#create", as: :teacher_entries
 get "teacher-signup", to: "identity/teacher_registrations#new", as: :new_teacher_registration
 post "teacher-signup", to: "identity/teacher_registrations#create", as: :teacher_registrations
 # ADR-0077 : la direction s'inscrit seule avec le code d'établissement (plafond de 3 par le code).

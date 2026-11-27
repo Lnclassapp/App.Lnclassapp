@@ -137,7 +137,8 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
     click_on t("identity.pin_resets.new.back")
     sign_in_with(student.contact, "2468")
-    assert_text t("activemodel.errors.models.dtos/identity/credentials_input.attributes.base.invalid_credentials")
+    # Numéro d'abord : un code faux se dit sous le champ du code.
+    assert_text t("activemodel.errors.models.dtos/identity/number_entry_input.attributes.pin.wrong_pin")
     sign_in_with(student.contact, "7351")
     assert_current_path student_home_path, wait: SIGN_IN_WAIT
   end
@@ -244,9 +245,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
 
   def sign_in_with(contact, pin)
-    fill_in "session[contact]", with: contact
-    fill_in "session[pin]", with: pin
-    click_on t("identity.sessions.new.submit")
+    enter_credentials contact, pin
   end
 
   # Le code tel que l'enseignant le lit à l'écran, espace comprise.

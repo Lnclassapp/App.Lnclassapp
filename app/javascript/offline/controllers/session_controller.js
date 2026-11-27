@@ -1,5 +1,5 @@
 // ⚡ FRONT · offline-session — donne la clé d'appareil au programme d'arrière-plan, purge l'ancienne clé, vide tout à la déconnexion
-// Rôle : clé → postMessage ; clé changée → purge de l'ancienne (file non envoyée gardée) ; formulaire DELETE /session → runBeforePurge puis purgeKey, puis `lnclass:forget` au programme (même si la purge échoue), puis la requête part
+// Rôle : clé → postMessage ; page privée rendue par le cache de navigation (retour arrière) → rechargée au serveur ; clé changée → purge de l'ancienne (file non envoyée gardée) ; formulaire DELETE /session → runBeforePurge puis purgeKey, puis `lnclass:forget` au programme (même si la purge échoue), puis la requête part
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, menace P1, P2, P4) · contrat du plan « Contrats JavaScript gelés »
 import { Controller } from "../controller_base.js"
 import { currentKey, rememberKey, purgeKey, runBeforePurge } from "../store.js"
@@ -15,7 +15,9 @@ export default class extends Controller {
     this.leaving = new WeakSet()
     this.onSubmit = this.onSubmit.bind(this)
     this.onControllerChange = this.onControllerChange.bind(this)
+    this.onPageShow = this.onPageShow.bind(this)
     document.addEventListener("submit", this.onSubmit, true)
+    globalThis.addEventListener?.("pageshow", this.onPageShow)
     navigator.serviceWorker?.addEventListener?.("controllerchange", this.onControllerChange)
 
     this.key = currentKey()
@@ -24,6 +26,7 @@ export default class extends Controller {
 
   disconnect() {
     document.removeEventListener("submit", this.onSubmit, true)
+    globalThis.removeEventListener?.("pageshow", this.onPageShow)
     navigator.serviceWorker?.removeEventListener?.("controllerchange", this.onControllerChange)
   }
 
@@ -49,6 +52,12 @@ export default class extends Controller {
 
     const registration = await container.ready
     this.post(registration.active || container.controller, key)
+  }
+
+  // Menace P1 : après une déconnexion, le retour arrière ressort la page privée du cache de navigation du navigateur
+  // (bfcache), que Clear-Site-Data ne vide pas. Une page privée ainsi ressortie est redemandée au serveur, qui décide.
+  onPageShow(event) {
+    if (event?.persisted) globalThis.location?.reload()
   }
 
   onControllerChange() {

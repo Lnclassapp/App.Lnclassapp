@@ -1,0 +1,40 @@
+<%# 🌐 UI · shared/_pin_pad — le code secret en 4 cases et un pavé de 10 touches, partout où l'on tape un code (connexion, entrée élève, /teacher, inscription enseignant) %>
+<%# Rôle : field (le champ natif, rendu par l'appelant) reste seul sans JavaScript ; le contrôleur identity--pin-pad (posé par l'appelant, avec la cible submit) le cache et montre le pavé %>
+<%# UDR  : 0180-pave-numerique-confirmation-code (§3.2), 0189-connexion-numero-d-abord (amendement du 2026-11-27, §3.6) %>
+<%# error : le refus du code (422), rappelé au-dessus des cases (le champ natif, caché, porte le sien sans JavaScript). %>
+<%# locals: (prefix:, field:, hint: nil, error: nil, match: t("shared.pin_pad.match"), offline: t("shared.pin_pad.offline")) -%>
+<div id="<%= prefix %>-pin-field" data-identity--pin-pad-target="fieldBlock"><%= field %></div>
+<div id="<%= prefix %>-pin-pad" hidden data-identity--pin-pad-target="pad" class="space-y-4">
+  <% if hint %><p class="text-center text-sm text-mute"><%= hint %></p><% end %>
+  <% if error %>
+    <p id="<%= prefix %>-pin-error" role="alert" class="flex items-center justify-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= error %>
+    </p>
+  <% end %>
+  <div id="<%= prefix %>-pin-boxes" aria-hidden="true" class="flex justify-center gap-3">
+    <% 4.times do %>
+      <span data-identity--pin-pad-target="box" class="grid size-14 place-items-center rounded-ln border-2 border-line bg-white text-2xl text-ink"></span>
+    <% end %>
+  </div>
+  <p id="<%= prefix %>-pin-status" class="sr-only" aria-live="polite" data-identity--pin-pad-target="status"
+     data-template="<%= t("shared.pin_pad.progress", count: "%{count}") %>"></p>
+  <p id="<%= prefix %>-pin-check" hidden role="status" data-identity--pin-pad-target="check"
+     class="flex items-center justify-center gap-2 text-sm font-medium text-success">
+    <%= ui_icon "check-circle", size: :lg, class: "text-success" %>
+    <span><%= match %></span>
+  </p>
+  <p id="<%= prefix %>-pin-offline" hidden role="alert" data-identity--pin-pad-target="offline" class="text-center text-sm text-error"><%= offline %></p>
+  <div id="<%= prefix %>-keypad" role="group" aria-label="<%= t("shared.pin_pad.keypad_label") %>" class="grid grid-cols-3 gap-3">
+    <% key_class = "min-h-14 rounded-ln bg-mist text-2xl font-medium text-ink active:bg-line focus-visible:outline-2 focus-visible:outline-brand" %>
+    <% [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ].each do |number| %>
+      <button type="button" class="<%= key_class %>" data-digit="<%= number %>" data-action="identity--pin-pad#press"
+              data-identity--pin-pad-target="key"><%= number %></button>
+    <% end %>
+    <span aria-hidden="true"></span>
+    <button type="button" class="<%= key_class %>" data-digit="0" data-action="identity--pin-pad#press" data-identity--pin-pad-target="key">0</button>
+    <button type="button" class="<%= key_class %> grid place-items-center" aria-label="<%= t("shared.pin_pad.erase") %>"
+            data-action="identity--pin-pad#erase">
+      <%= ui_icon "backspace", size: :lg %>
+    </button>
+  </div>
+</div>

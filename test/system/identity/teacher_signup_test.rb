@@ -1,9 +1,9 @@
 require "application_system_test_case"
 
-# CA-J1 to CA-J4 (UDR « écrans enseignant sans répétition » §3.9), in a real browser, at 390 px: one form cut in three steps
-# by the student's signup_steps_controller. Without a link: step 1 (school) moves on by itself once the school is chosen;
-# an invite link opens step 2 with the school recap; step 2 asks for one subject only; the account is created on step 3.
-# The number is cleaned while typed and the secret code says live whether the confirmation matches (IE-17, IE-19).
+# CA-J1 to CA-J4 (UDR « écrans enseignant sans répétition » §3.9) and chantier connexion-numero-d-abord (UDR-0189 §3.5, CA-11,
+# CA-12), in a real browser, at 390 px: one form cut in three steps by the student's signup_steps_controller. Step 1, the
+# number, and step 2, the secret code typed once, move on by « Continuer » once valid; step 3, the profile, holds the school
+# (searched, or the recap of an invite link), one subject, the name, and « Créer mon compte ». No school code.
 class Identity::TeacherSignupTest < ApplicationSystemTestCase
   PAGE = "identity.teacher_registrations.new".freeze
   FORM = "identity.teacher_registrations.form".freeze
@@ -23,19 +23,16 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
                    find_field(field), text)
   end
 
-  def assert_step(number, settle: nil)
-    sleep settle if settle
+  def assert_step(number)
     assert_selector "#signup-step-counter", text: t("#{PAGE}.step_counter", n: number)
     assert_equal [ number ], page.all("fieldset[data-classroom--signup-steps-target=step]", visible: :visible).map { it["data-step"].to_i }
   end
 
-  # Step 2, in the order of the page; the move to step 3 comes a delay after the number is complete (1 s in production, 100 ms here).
-  def fill_person(contact: "0701020304", material: true)
-    select "SVT", from: "teacher_registration[material_slug]" if material
+  def fill_profile
+    select "SVT", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Aya  Marie"
     choose t("identity.teacher_registrations.form.genders.female")
-    paste "teacher_registration[contact]", contact
   end
 
   def assert_signed_up(channel)
@@ -46,84 +43,93 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher:).pluck(:school_id, :primary)
     assert_equal [ Orm::Material.find_by!(name: "SVT").id ], Orm::TeacherSchoolMaterial.where(teacher:).pluck(:material_id)
     assert_equal channel, Orm::TeacherProfile.find_by!(user: teacher).joined_via
+    assert Orm::User.authenticate_by(contact: "0701020304", pin: "4821")
   end
 
-  test "CA-J1, CA-J3, CA-J4: without a link, step 1 moves on by itself, step 2 asks for one subject, the account is created" do
+  test "CA-11, CA-J3, CA-J4: number, then the code once, then the profile with the school and one subject; the account is created" do
     with_mobile_viewport do
       visit new_teacher_registration_path(confirmed: 1)
 
       assert_step 1
       assert_selector "#signup-welcome", text: t("#{PAGE}.welcome")
       assert_selector "#signup-back", visible: :hidden
-      assert_no_button "Continuer"
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"), "la page déborde en largeur"
-      fill_in "school_q", with: "cocody"
+      # A number short of its 10 digits holds step 1.
+      paste "teacher_registration[contact]", "07010203"
+      click_on t("#{FORM}.continue")
       assert_step 1
-      within("turbo-frame#school_results") { choose "Lycée Moderne de Cocody" }
+      paste "teacher_registration[contact]", "+225 07 01 02 03 04"
+      assert_field "teacher_registration[contact]", with: "0701020304"
+      click_on t("#{FORM}.continue")
 
       assert_step 2
-      assert_selector "#signup-live", text: t("#{PAGE}.step_announce", n: 2, title: t("#{FORM}.you")), visible: :all
-      assert_no_selector "#school-preview"
-      assert_selector "fieldset[data-step='2'] select", count: 1
-      assert_no_field "teacher_registration[second_material_slug]"
-      assert_text t("#{FORM}.material_hint")
-      assert_no_text "Autre matière"
-      # Review of #295: the subject is required; every other field being valid, step 2 holds until it is chosen.
-      fill_person(material: false)
-      assert_step 2, settle: signup_settle
-      select "SVT", from: "teacher_registration[material_slug]"
-      # Step 3 comes 100 ms after the subject: the kept number is read whether step 2 is still shown or already hidden.
-      assert_field "teacher_registration[contact]", with: "0701020304", visible: :all
+      assert_selector "#signup-live", text: t("#{PAGE}.step_announce", n: 2, title: t("#{FORM}.security")), visible: :all
+      assert_no_field "teacher_registration[pin_confirmation]"
+      assert_no_selector "#teacher-registration-number"
+      # UDR-0189 §3.6 : le code en 4 cases ; trois chiffres tiennent l'étape 2 (« Continuer » grisé), le 4e ouvre l'étape 3.
+      assert_selector "#teacher-registration-pin-pad", visible: :visible
+      tap_pin "482"
+      assert_button t("#{FORM}.continue"), id: "teacher-registration-continue-2", disabled: true
+      assert_step 2
+      tap_pin "1"
 
       assert_step 3
+      assert_no_field "teacher_registration[school_code]"
+      assert_selector "fieldset[data-step='3'] select", count: 1
+      assert_text t("#{FORM}.material_hint")
+      fill_in "school_q", with: "cocody"
+      within("turbo-frame#school_results") { choose "Lycée Moderne de Cocody" }
+      assert_step 3
+      fill_profile
       assert_selector "#teacher-registration-submit ~ p a[href='#{terms_path}']"
-      fill_in "teacher_registration[pin]", with: "4821"
-      fill_in "teacher_registration[pin_confirmation]", with: "4822"
-      assert_selector "#pin_match_status.text-error", text: t("#{FORM}.pin_match.ko")
-      fill_in "teacher_registration[pin_confirmation]", with: "4821"
-      assert_selector "#pin_match_status.text-success", text: t("#{FORM}.pin_match.ok")
       click_on t("#{FORM}.submit")
 
       assert_signed_up "standard"
     end
   end
 
-  test "CA-J2: an invite link opens step 2 with the school recap; an unknown link warns on step 1" do
+  test "CA-12: an invite link keeps its school, recalled on the profile; an unknown link warns on step 1" do
     referrer = create_teacher(school: @school)
     token = Orm::TeacherSchool.find_by!(teacher: referrer).invite_token
 
     visit teacher_invite_link_path("cccccccccccc")
     assert_step 1
     assert_selector "#invite-link-invalid", text: t("#{PAGE}.invite_invalid")
-    assert_field "school_q"
 
     with_mobile_viewport do
       visit teacher_invite_link_path(token)
 
-      assert_step 2
+      assert_step 1
       assert_selector "#signup-welcome", text: t("#{PAGE}.welcome")
-      assert_selector "#signup-back", visible: :hidden
+      fill_teacher_number_and_code "0701020304", "4821"
       within "#school-preview" do
         assert_text "Lycée Moderne de Cocody"
         assert_text "Abidjan 1"
-        assert_link t("identity.teacher_registrations.school_preview.other_school"), href: new_teacher_registration_path
+        assert_link t("identity.teacher_registrations.school_preview.other_school"), href: new_teacher_registration_path(confirmed: 1)
       end
       assert_no_field "school_q"
-      fill_person(contact: "+225 07 01 02 03 04")
-
-      assert_step 3
-      fill_in "teacher_registration[pin]", with: "4821"
-      fill_in "teacher_registration[pin_confirmation]", with: "4821"
+      fill_profile
       click_on t("#{FORM}.submit")
 
       assert_signed_up "colleague"
     end
     assert_equal [ referrer.id ], Orm::Referral.pluck(:referrer_id)
   end
+
+  test "« Retour » from the profile goes back to the code, kept" do
+    visit new_teacher_registration_path(confirmed: 1)
+    fill_teacher_number_and_code "0701020304", "4821"
+
+    click_on t("#{PAGE}.back")
+    assert_step 2
+    assert_selector "#teacher-registration-pin-boxes span", text: "●", count: 4
+    assert_equal "4821", find_field("teacher_registration[pin]", visible: :all).value
+  end
 end
 
-# IE-17, IE-19 and UDR-0079 §2.4: without JavaScript, the school search is sent by its own GET form, the server cleans the number
-# and refuses different codes. Chrome runs with scripts disabled.
+# IE-17, IE-19 and UDR-0079 §2.4: without JavaScript, the three steps are on one page; the school search is sent by its own
+# GET form (search first: it does not carry the other fields), the server cleans the number and refuses a code out of format.
+# Chrome runs with scripts disabled.
 class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
   driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ], options: { name: :chrome_without_javascript } do |options|
     options.binary = ENV["CHROME_BIN"] if ENV["CHROME_BIN"].present?
@@ -148,13 +154,11 @@ class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
     fill_in "teacher_registration[first_name]", with: "Aya Marie"
     choose I18n.t("identity.teacher_registrations.form.genders.female")
     fill_in "teacher_registration[contact]", with: "+225 07 01 02 03 04"
-    fill_in "teacher_registration[pin]", with: "4821"
-    fill_in "teacher_registration[pin_confirmation]", with: "1357"
+    fill_in "teacher_registration[pin]", with: "48a1"
     click_on I18n.t("identity.teacher_registrations.form.submit")
 
-    assert_selector "#teacher_registration_pin_confirmation_error"
+    assert_selector "#teacher_registration_pin_error"
     fill_in "teacher_registration[pin]", with: "4821"
-    fill_in "teacher_registration[pin_confirmation]", with: "4821"
     click_on I18n.t("identity.teacher_registrations.form.submit")
 
     assert_current_path teacher_home_path

@@ -197,9 +197,7 @@ class Finitions::SecondFactorTest < ApplicationSystemTestCase
 
   def submit_pin(member)
     visit new_session_path
-    fill_in "session[contact]", with: member.contact
-    fill_in "session[pin]", with: "2468"
-    click_on I18n.t("identity.sessions.new.submit")
+    enter_credentials member.contact, "2468"
   end
 
   # Six digits that are not the code of the moment, nor of the step before or after.
