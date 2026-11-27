@@ -14,12 +14,16 @@ module Entities
         assert_equal 6, PushMotive.rank("inactive")
       end
 
-      test "seuls trois motifs peuvent partir seuls ; l'annonce ne se valide pas" do
-        assert_equal %w[quiz_prep assignment_due assignment_new], PushMotive::AUTOMATABLE
+      # ADR-0147, amendement du 2026-11-27 (II) : une case pour chaque motif ; trois événements, quatre rappels.
+      test "chaque motif a sa case ; trois événements, quatre rappels ; l'annonce ne se validait pas" do
+        assert_equal PushMotive::PRIORITY, PushMotive::AUTOMATABLE
+        assert PushMotive.automatable?("inactive")
+        assert_not PushMotive.automatable?("promo")
+        assert_equal %w[assignment_new announcement result], PushMotive::EVENTS
         assert_equal PushMotive::PRIORITY - %w[announcement], PushMotive::PLANNABLE
-        assert_empty PushMotive::AUTOMATABLE - PushMotive::PLANNABLE
-        assert PushMotive.automatable?("assignment_new")
-        assert_not PushMotive.automatable?("inactive")
+        assert_equal %w[quiz_prep assignment_due unfinished inactive], PushMotive::REMINDERS
+        assert PushMotive.event?("result")
+        assert_not PushMotive.event?("assignment_due")
       end
 
       test "un motif inconnu lève" do
@@ -58,8 +62,9 @@ module Entities
         assert_equal 4, setting.updated_by_id
       end
 
-      test "un motif non automatisable est refusé" do
-        assert_raises(ArgumentError) { PushMotiveSetting.new(motive: "inactive", automatic: true, updated_by_id: 4, updated_at: Time.utc(2026, 11, 25)) }
+      test "un motif inconnu est refusé ; une relance a sa case" do
+        assert_raises(ArgumentError) { PushMotiveSetting.new(motive: "promo", automatic: true, updated_by_id: 4, updated_at: Time.utc(2026, 11, 25)) }
+        assert PushMotiveSetting.new(motive: "inactive", automatic: true, updated_by_id: 4, updated_at: Time.utc(2026, 11, 25)).automatic
       end
     end
 

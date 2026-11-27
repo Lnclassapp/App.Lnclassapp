@@ -7,8 +7,9 @@ module UseCases
       include CreateMessage::Parution
 
       # users : UserRepositoryPort ; teachings : TeachingRepositoryPort ; policy : PublishPolicy ; teacher_flag : l'enseignant
-      # peut-il encore écrire (drapeau teacher_announcements_enabled), lu à chaque passage.
-      def initialize(messages:, users:, teachings:, policy:, teacher_flag:, audit_log:, transaction:, clock:)
+      # peut-il encore écrire (drapeau teacher_announcements_enabled), lu à chaque passage ; push_pass : PushPassPort, demandé une
+      # fois si une annonce parue prévient les élèves (ADR-0147, amendement II).
+      def initialize(messages:, users:, teachings:, policy:, teacher_flag:, audit_log:, transaction:, clock:, push_pass:)
         @messages = messages
         @users = users
         @teachings = teachings
@@ -17,6 +18,7 @@ module UseCases
         @audit_log = audit_log
         @transaction = transaction
         @clock = clock
+        @push_pass = push_pass
       end
 
       # → success(nombre d'annonces publiées)
@@ -24,8 +26,9 @@ module UseCases
       # transaction est annulée, elle reste programmée et repasse au prochain tour.
       def call
         now = @clock.now
-        published = @messages.due_for_publication(now:).count { publish_safely(it, now) }
-        Shared::Result.success(published)
+        published = @messages.due_for_publication(now:).select { publish_safely(it, now) }
+        @push_pass.request if published.any?(&:push_requested)
+        Shared::Result.success(published.size)
       end
 
       private

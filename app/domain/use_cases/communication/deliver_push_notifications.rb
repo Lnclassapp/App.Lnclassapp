@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::DeliverPushNotifications
-# Rôle : un passage d'envoi des notifications : fenêtre d'Abidjan, motifs ouverts seulement (réglage, validation, annonce), un motif par élève (le plus urgent), dix par jour, pas de doublon
-# ADR  : 0146 (§3.2, §4) · XXXX envois de notifications (§4.3) · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
+# Rôle : un passage d'envoi des notifications : motifs cochés seulement, événements à toute heure, rappels de 6 h à 21 h (Abidjan), un motif par élève (le plus urgent), dix par jour, pas de doublon
+# ADR  : 0146 (§3.2, §4) · 0147 (§4.3, amendement du 2026-11-27 II) · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
 module UseCases
   module Communication
     class DeliverPushNotifications
@@ -12,9 +12,9 @@ module UseCases
       STATUS_ORDER = %w[delivered retry failed not_configured gone].freeze
 
       # candidates : PushCandidatesPort ; subscriptions, preferences, deliveries : les ports de dépôt ; gateway : PushGatewayPort ;
-      # settings : PushMotiveSettingRepositoryPort ; approvals : PushApprovalRepositoryPort ;
+      # settings : PushMotiveSettingRepositoryPort ;
       # delivery_enabled : l'interrupteur PUSH_DELIVERY_ENABLED, au-dessus de toutes les règles.
-      def initialize(candidates:, subscriptions:, preferences:, deliveries:, gateway:, clock:, delivery_enabled:, settings:, approvals:)
+      def initialize(candidates:, subscriptions:, preferences:, deliveries:, gateway:, clock:, delivery_enabled:, settings:)
         @candidates = candidates
         @subscriptions = subscriptions
         @preferences = preferences
@@ -23,30 +23,26 @@ module UseCases
         @clock = clock
         @delivery_enabled = delivery_enabled
         @settings = settings
-        @approvals = approvals
       end
 
-      # → success({ "delivered" => n, … }) : le nombre d'élèves traités par statut noté ; vide hors fenêtre.
+      # → success({ "delivered" => n, … }) : le nombre d'élèves traités par statut noté ; vide si aucun motif n'est ouvert.
       def call
         now = @clock.now
-        return Shared::Result.success({}) unless Entities::Communication::SendingWindow.open?(now)
+        open = open_motives(now)
+        return Shared::Result.success({}) if open.empty?
 
-        automatic = @settings.automatic_motives
-        approved = @approvals.for_date(on_date: now.utc.to_date).to_set(&:motive)
-        ready = @candidates.for(now:).reject { it.expired?(now) }.select { open?(it, automatic, approved) }.group_by(&:user_id)
+        ready = @candidates.for(now:).reject { it.expired?(now) }.select { open.include?(it.motive) }.group_by(&:user_id)
         statuses = ready.filter_map { |user_id, list| deliver_to_safely(user_id, list, now) }
         Shared::Result.success(statuses.tally)
       end
 
       private
 
-      # Un motif part s'il est automatique, validé aujourd'hui, ou s'il est une annonce (la requête ne lit que les `push_requested`).
-      # Validé, il reste ouvert toute la journée : il part aussi vers les élèves devenus concernés après la validation
-      # (ADR-0147 §4.4, décision du porteur du 2026-11-27 : pas de liste figée).
-      def open?(candidate, automatic, approved)
-        return true if candidate.motive == "announcement"
-
-        automatic.include?(candidate.motive) || approved.include?(candidate.motive)
+      # Un motif part si sa case est cochée ; un événement à toute heure, un rappel de 6 h à 21 h à Abidjan. L'annonce demande
+      # aussi « Prévenir les élèves » à sa publication : la requête ne lit que celles-là.
+      def open_motives(now)
+        reminders = Entities::Communication::ReminderHours.open?(now)
+        @settings.automatic_motives.select { reminders || Entities::Communication::PushMotive.event?(it) }.to_set
       end
 
       # Un élève dont le dépôt échoue ne bloque pas les suivants : l'erreur est signalée, le passage continue.

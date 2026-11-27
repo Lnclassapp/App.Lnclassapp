@@ -1,7 +1,8 @@
 require "test_helper"
 
-# ADR-0146 §3.2 et §4 ; ADR envois de notifications §4.3 ; PRD §3 et §4 « Envoi : conditions » : un passage lit les candidats,
-# applique fenêtre, coupure, doublon, priorité, ouverture du motif (réglage, validation, annonce) et plafond de dix par jour, puis envoie une ligne par navigateur abonné.
+# ADR-0146 §3.2 et §4 ; ADR-0147 §4.3 (amendement du 2026-11-27 II) : un passage lit les candidats, applique la case du motif
+# (cochée = il part), l'heure (événement à toute heure, rappel de 6 h à 21 h), coupure, doublon, priorité et plafond de dix par jour,
+# puis envoie une ligne par navigateur abonné.
 module UseCases
   module Communication
     class DeliverPushNotificationsTest < ActiveSupport::TestCase
@@ -60,19 +61,6 @@ module UseCases
         def automatic_motives = @automatic
       end
 
-      # approved : les motifs validés du jour.
-      class Approvals
-        Approval = Data.define(:motive)
-        attr_reader :asked
-
-        def initialize(motives) = (@motives, @asked = motives, [])
-
-        def for_date(on_date:)
-          @asked << on_date
-          @motives.map { Approval.new(it) }
-        end
-      end
-
       class Deliveries
         attr_reader :rows, :counted
 
@@ -121,14 +109,12 @@ module UseCases
 
       def run_pass(candidates: [ candidate ], subs: [ sub(10) ], off: [], deliveries: Deliveries.new, gateway: Gateway.new(:delivered),
                    now: WEDNESDAY_NOON, enabled: true, failure_counts: {}, reread: nil, record_success_raises: false,
-                   automatic: %w[quiz_prep assignment_due assignment_new], approved: [])
+                   automatic: Entities::Communication::PushMotive::ALL)
         subscriptions = Subscriptions.new(subs, failure_counts:, record_success_raises:)
         @candidates = Candidates.new(candidates, reread:)
-        approvals = Approvals.new(approved)
-        @approvals_asked = approvals.asked
         result = DeliverPushNotifications.new(candidates: @candidates, subscriptions:, preferences: Preferences.new(off),
                                               deliveries:, gateway:, clock: Struct.new(:now).new(now), delivery_enabled: enabled,
-                                              settings: Settings.new(automatic), approvals:).call
+                                              settings: Settings.new(automatic)).call
         [ result, subscriptions, deliveries, gateway ]
       end
 
@@ -143,14 +129,38 @@ module UseCases
         assert_equal [ 10 ], subscriptions.successes
       end
 
-      test "hors fenêtre (22 h un mardi, 10 h un mercredi), rien ne part et rien n'est noté" do
-        [ Time.utc(2026, 11, 17, 22), Time.utc(2026, 11, 18, 10) ].each do |now|
+      test "un rappel ne part qu'entre 6 h et 21 h à Abidjan : 5 h 59 et 21 h rien, 6 h oui" do
+        [ Time.utc(2026, 11, 18, 5, 59), Time.utc(2026, 11, 18, 21) ].each do |now|
           result, _, deliveries, gateway = run_pass(now:)
 
           assert_equal({}, result.value)
           assert_empty gateway.calls
           assert_empty deliveries.rows
         end
+        _, _, deliveries, = run_pass(now: Time.utc(2026, 11, 18, 6))
+        assert_equal [ [ 1, "quiz_prep", "k", "delivered" ] ], deliveries.rows
+      end
+
+      test "un événement part à toute heure, même à 2 h du matin ; le rappel du même élève attend" do
+        candidates = %w[assignment_new announcement result].map { candidate(motive: it, key: it) } + [ candidate(motive: "quiz_prep", key: "q") ]
+        _, _, deliveries, = run_pass(candidates:, now: Time.utc(2026, 11, 18, 2))
+
+        assert_equal [ [ 1, "assignment_new", "assignment_new", "delivered" ] ], deliveries.rows
+      end
+
+      test "la nuit, un événement décoché ne part pas : aucun motif ouvert, la requête n'est pas lue" do
+        result, _, deliveries, = run_pass(candidates: [ candidate(motive: "result") ], now: Time.utc(2026, 11, 18, 2), automatic: %w[quiz_prep])
+
+        assert_equal({}, result.value)
+        assert_empty deliveries.rows
+        assert_empty @candidates.reads
+      end
+
+      test "le plafond de dix vaut aussi la nuit pour un événement" do
+        _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive: "result") ], now: Time.utc(2026, 11, 18, 2), deliveries: Deliveries.new(count: 10))
+
+        assert_empty gateway.calls
+        assert_empty deliveries.rows
       end
 
       test "un élève qui a coupé ne reçoit aucun appel au port" do
@@ -184,8 +194,7 @@ module UseCases
 
       test "un seul motif par élève et par passage : le plus prioritaire" do
         _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive: "inactive", key: "i"), candidate(motive: "quiz_prep", key: "q"),
-                                                           candidate(motive: "result", key: "r") ],
-                                             approved: %w[inactive result])
+                                                           candidate(motive: "result", key: "r") ])
 
         assert_equal 1, gateway.calls.size
         assert_equal [ [ 1, "quiz_prep", "q", "delivered" ] ], deliveries.rows
@@ -304,8 +313,8 @@ module UseCases
         assert_equal 1, reported.first[:context][:user_id]
       end
 
-      test "rien ne part sans réglage ni validation, quels que soient les motifs" do
-        %w[quiz_prep assignment_due assignment_new inactive unfinished result].each do |motive|
+      test "décoché, rien ne part, quel que soit le motif" do
+        Entities::Communication::PushMotive::ALL.each do |motive|
           _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive:) ], automatic: [])
 
           assert_empty gateway.calls, motive
@@ -313,41 +322,28 @@ module UseCases
         end
       end
 
-      test "un motif automatique part pour tous les élèves ; une relance cochée par erreur ne s'ouvre pas à d'autres" do
-        _, _, deliveries, = run_pass(candidates: [ candidate(motive: "assignment_new", key: "n") ], automatic: %w[assignment_new])
-        assert_equal [ [ 1, "assignment_new", "n", "delivered" ] ], deliveries.rows
-
-        _, _, other, = run_pass(candidates: [ candidate(motive: "assignment_due", key: "d") ], automatic: %w[assignment_new])
-        assert_empty other.rows
-      end
-
-      # ADR-0147 §4.4, porteur 2026-11-27 : pas de liste figée ; un motif validé part vers chaque élève concerné au passage.
-      test "motif validé : il part vers tous les élèves concernés au passage, même devenus concernés après la validation" do
+      test "seuls les motifs cochés partent : un motif coché sert tous les élèves, un décoché aucun" do
         candidates = [ candidate(user_id: 1, motive: "unfinished", key: "u1"), candidate(user_id: 2, motive: "unfinished", key: "u2"),
                        candidate(user_id: 3, motive: "inactive", key: "i3") ]
-        _, _, deliveries, = run_pass(candidates:, subs: [ sub(10), sub(11, user_id: 2), sub(12, user_id: 3) ], automatic: [], approved: %w[unfinished])
+        _, _, deliveries, = run_pass(candidates:, subs: [ sub(10), sub(11, user_id: 2), sub(12, user_id: 3) ], automatic: %w[unfinished])
 
         assert_equal [ [ 1, "unfinished", "u1", "delivered" ], [ 2, "unfinished", "u2", "delivered" ] ], deliveries.rows
       end
 
-      test "la validation lue est celle du jour d'Abidjan" do
-        run_pass(approved: [])
+      test "l'annonce demande sa case : cochée elle part, décochée non (la requête ne lit que les push_requested)" do
+        _, _, sent, = run_pass(candidates: [ candidate(motive: "announcement", key: "a") ], automatic: %w[announcement])
+        assert_equal [ [ 1, "announcement", "a", "delivered" ] ], sent.rows
 
-        assert_equal [ Date.new(2026, 11, 18) ], @approvals_asked
+        _, _, none, = run_pass(candidates: [ candidate(motive: "announcement", key: "a") ], automatic: %w[quiz_prep])
+        assert_empty none.rows
       end
 
-      test "l'annonce est ouverte sans réglage ni validation (la requête ne lit que les push_requested)" do
-        _, _, deliveries, = run_pass(candidates: [ candidate(motive: "announcement", key: "a") ], automatic: [])
-
-        assert_equal [ [ 1, "announcement", "a", "delivered" ] ], deliveries.rows
-      end
-
-      test "un motif validé passe devant un motif automatique moins urgent, un seul par passage" do
+      test "un motif décoché plus urgent ne bloque pas un motif coché moins urgent" do
         _, _, deliveries, gateway = run_pass(candidates: [ candidate(motive: "assignment_new", key: "n"), candidate(motive: "quiz_prep", key: "q") ],
-                                             automatic: %w[assignment_new], approved: %w[quiz_prep])
+                                             automatic: %w[assignment_new])
 
         assert_equal 1, gateway.calls.size
-        assert_equal [ [ 1, "quiz_prep", "q", "delivered" ] ], deliveries.rows
+        assert_equal [ [ 1, "assignment_new", "n", "delivered" ] ], deliveries.rows
       end
 
       test "interrupteur fermé : un motif ouvert est noté disabled, jamais envoyé" do

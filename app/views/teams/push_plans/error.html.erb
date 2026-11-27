@@ -1,6 +1,0 @@
-<%# 🌐 UI · teams/push_plans/error — le plan du jour n'a pas pu être calculé : état d'erreur dans le frame, avec reprise %>
-<%# Rôle : le reste de la page Notifications reste utilisable ; « Réessayer » relit le plan %>
-<%# ADR  : XXXX envois de notifications (§4.4) · UDR : XXXX écran notifications de l'équipe (§3.7) %>
-<%= turbo_frame_tag "push_plan" do %>
-  <%= ui_error_state message: t("teams.push_plans.show.error.message"), retry_href: teams_push_plan_path %>
-<% end %>

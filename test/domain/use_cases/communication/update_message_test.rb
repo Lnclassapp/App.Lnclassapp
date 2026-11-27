@@ -77,7 +77,7 @@ module UseCases
           teachings: Repositories::Classroom::TeachingRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
           illustrations: Repositories::Communication::IllustrationRepository.new, transaction:,
           policy: Policies::Communication::ManageOwnPolicy.new, publish_policy: Policies::Communication::PublishPolicy.new,
-          clock: Clock.new(NOW)
+          clock: Clock.new(NOW), push_pass: (@push_pass ||= FakePushPass.new)
         )
       end
 
@@ -389,6 +389,7 @@ module UseCases
         assert update(team, warned, scope: "national", audience: "students", classroom_public_ids: [], push_requested: "0").success?
 
         assert_equal [ false, true ], [ silent.reload.push_requested, warned.reload.push_requested ]
+        assert_equal 0, @push_pass.requests, "modifier une annonce en ligne ne la renvoie pas"
       end
 
       test "PN-D5 — a draft of the team published by its modification takes the push box of the form" do
@@ -398,6 +399,7 @@ module UseCases
         assert update(team, draft, scope: "national", audience: "students", classroom_public_ids: [], push_requested: "1").success?
 
         assert_equal [ "published", true ], draft.reload.values_at(:status, :push_requested)
+        assert_equal 1, @push_pass.requests
       end
 
       test "PN-D5 — a draft published by another request since its reading keeps the box it was published with" do

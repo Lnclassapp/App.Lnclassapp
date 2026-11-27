@@ -8,9 +8,7 @@ get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
 get "teams/referential", to: "teams/referentials#show", as: :teams_referential
 # Chantier parametrage-notifications (ADR XXXX, UDR XXXX) : la page « Notifications » de l'équipe. Contrôleurs : Lots B et C.
 get "teams/notifications", to: "teams/push_settings#show", as: :teams_push_settings
-get "teams/notifications/plan", to: "teams/push_plans#show", as: :teams_push_plan
 patch "teams/notifications/motives/:motive", to: "teams/push_motive_settings#update", as: :teams_push_motive_setting
-post "teams/notifications/approvals", to: "teams/push_approvals#create", as: :teams_push_approvals
 
 # Noms sans préfixe, attendus par la navigation du shell (schools_path).
 scope "teams", module: "teams" do

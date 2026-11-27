@@ -120,9 +120,10 @@ module UseCases
 
       include Writing
 
-      # illustrations : IllustrationRepositoryPort, la bibliothèque de l'équipe (ADR-0081 §4.3).
+      # illustrations : IllustrationRepositoryPort, la bibliothèque de l'équipe (ADR-0081 §4.3) ; push_pass : PushPassPort,
+      # demandé à la parution d'une annonce qui prévient les élèves (ADR-0147, amendement II : elle part tout de suite).
       def initialize(messages:, attachments:, schools:, classrooms:, teachings:, audit_log:, illustrations:, transaction:,
-                     policy:, clock:)
+                     policy:, clock:, push_pass:)
         @messages = messages
         @attachments = attachments
         @schools = schools
@@ -133,6 +134,7 @@ module UseCases
         @transaction = transaction
         @policy = policy
         @clock = clock
+        @push_pass = push_pass
       end
 
       # dto : Dtos::Communication::MessageInput.
@@ -160,6 +162,7 @@ module UseCases
         ))
         store_files(message.id, dto)
         journal_publication(message, now) if message.status == "published"
+        @push_pass.request if message.status == "published" && message.push_requested
         Shared::Result.success(Saved.new(message:, archived:))
       end
     end

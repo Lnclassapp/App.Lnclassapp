@@ -33,7 +33,7 @@ class Classroom::AssignmentBatchesControllerTest < ActionDispatch::IntegrationTe
   test "4 exercises of two lessons: 4 active assignments of one same batch, due on the next session day, in Turbo Streams" do
     sign_in_as @teacher
 
-    send_batch(ids(*@exercises))
+    assert_enqueued_with(job: Communication::DeliverPushNotificationsJob) { send_batch(ids(*@exercises)) }
 
     assert_response :success
     assert_equal "text/vnd.turbo-stream.html", response.media_type

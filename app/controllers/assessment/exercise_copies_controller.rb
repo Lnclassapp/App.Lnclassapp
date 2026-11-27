@@ -82,7 +82,8 @@ module Assessment
         close: UseCases::Assessment::CloseExerciseSession.new(
           sessions:, exercises: Repositories::Assessment::ExerciseRepository.new,
           badges: Repositories::Assessment::BadgeRepository.new, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
-          policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction:, clock: Time.zone
+          policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction:, clock: Time.zone,
+          push_pass: Gateways::Communication::PushPass.new
         ),
         transaction:, clock: Time.zone
       )

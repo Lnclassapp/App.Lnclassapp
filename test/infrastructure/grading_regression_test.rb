@@ -21,7 +21,8 @@ class GradingRegressionTest < ActiveSupport::TestCase
     policy = Policies::Assessment::SubmitAttemptPolicy.new
     close = UseCases::Assessment::CloseExerciseSession.new(
       sessions:, exercises: Repositories::Assessment::ExerciseRepository.new, badges: Repositories::Assessment::BadgeRepository.new,
-      gaps: Repositories::Assessment::KnowledgeGapRepository.new, policy:, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+      gaps: Repositories::Assessment::KnowledgeGapRepository.new, policy:, transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+      push_pass: FakePushPass.new
     )
     actor = Entities::Identity::Actor.new(user_id: session.student_id, role: :student)
     result = close.call(actor:, session: sessions.find_by_public_id(public_id: session.public_id), essential_id: session.exercise.essential_id)

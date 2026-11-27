@@ -15,7 +15,9 @@ module UseCases
       BLANK_SEPARATOR = " ; ".freeze
       INVALID_PICK = :invalid_pick
 
-      def initialize(signer:, exercises:, sessions:, gaps:, badges:, memberships:, assignments:, policy:, transaction:, clock:, access:, current_digest:)
+      # push_pass : PushPassPort, demandé quand une copie est rangée : sa correction part tout de suite (ADR-0147, amendement II).
+      def initialize(signer:, exercises:, sessions:, gaps:, badges:, memberships:, assignments:, policy:, transaction:, clock:, access:, current_digest:,
+                     push_pass:)
         @current_digest = current_digest
         @signer = signer
         @exercises = exercises
@@ -28,6 +30,7 @@ module UseCases
         @transaction = transaction
         @clock = clock
         @access = access
+        @push_pass = push_pass
       end
 
       # current_digest : callable (exercise) → l'empreinte courante de l'exercice (Queries::Assessment::OfflinePackQuery.digest : celle que le paquet a signée ; un écart, l'exercice a changé, menace C3).
@@ -52,7 +55,9 @@ module UseCases
         refused = refusal(actor, exercise, pack)
         return refused if refused
 
-        @transaction.call { store(actor, exercise, pack, dto) }
+        stored = @transaction.call { store(actor, exercise, pack, dto) }
+        @push_pass.request if stored.success? && !stored.value.already_synced
+        stored
       end
 
       private

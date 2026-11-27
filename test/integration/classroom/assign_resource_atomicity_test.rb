@@ -25,7 +25,7 @@ class Classroom::AssignResourceAtomicityTest < ActiveSupport::TestCase
       classrooms: Repositories::Classroom::ClassroomRepository.new, assignments:,
       session_days: Repositories::Classroom::SessionDaysRepository.new, transaction: Repositories::Shared::Transaction.new,
       policy: Policies::Classroom::AssignPolicy.new, session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new,
-      clock: Time.zone
+      clock: Time.zone, push_pass: Gateways::Communication::PushPass.new
     ).call(actor: @actor, dto:)
   end
 

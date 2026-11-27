@@ -60,7 +60,8 @@ module Classroom
       UseCases::Classroom::AssignExerciseBatch.new(
         classrooms: Repositories::Classroom::ClassroomRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
         session_days: Repositories::Classroom::SessionDaysRepository.new, policy: Policies::Classroom::AssignPolicy.new,
-        session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new, clock: Time.zone
+        session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new, clock: Time.zone,
+        push_pass: Gateways::Communication::PushPass.new
       )
     end
   end

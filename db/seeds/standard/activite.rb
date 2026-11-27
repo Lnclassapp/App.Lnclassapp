@@ -183,10 +183,13 @@ users = Repositories::Identity::UserRepository.new
 transaction = Repositories::Shared::Transaction.new
 sessions = Repositories::Assessment::ExerciseSessionRepository.new
 exercise_repository = Repositories::Assessment::ExerciseRepository.new
+# Le jeu de données n'envoie aucune notification : le passage d'envoi demandé à l'événement ne fait rien.
+no_push_pass = Class.new { def request = nil }.new
 assign = UseCases::Classroom::AssignResource.new(
   classrooms: Repositories::Classroom::ClassroomRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
   session_days: Repositories::Classroom::SessionDaysRepository.new, transaction:,
-  policy: Policies::Classroom::AssignPolicy.new, session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new, clock:
+  policy: Policies::Classroom::AssignPolicy.new, session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new, clock:,
+  push_pass: no_push_pass
 )
 start_session = UseCases::Assessment::StartExerciseSession.new(
   exercises: exercise_repository, sessions:, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
@@ -197,7 +200,8 @@ submit = UseCases::Assessment::SubmitExerciseCopy.new(
   sessions:, exercises: exercise_repository, policy: Policies::Assessment::SubmitAttemptPolicy.new,
   close: UseCases::Assessment::CloseExerciseSession.new(
     sessions:, exercises: exercise_repository, badges: Repositories::Assessment::BadgeRepository.new,
-    gaps: Repositories::Assessment::KnowledgeGapRepository.new, policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction:, clock:
+    gaps: Repositories::Assessment::KnowledgeGapRepository.new, policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction:, clock:,
+    push_pass: no_push_pass
   ),
   transaction:, clock:
 )

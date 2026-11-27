@@ -102,8 +102,10 @@ module UseCases
         @badges = FakeBadges.new(current_badge)
         @gaps = FakeGaps.new(pending_gap)
         @transaction = FakeTransaction.new
+        @push_pass = FakePushPass.new
         CloseExerciseSession.new(sessions: @sessions, exercises: FakeExercises.new(questions), badges: @badges, gaps: @gaps,
-                                 policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction: @transaction, clock: Clock.new(NOW))
+                                 policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction: @transaction, clock: Clock.new(NOW),
+                                 push_pass: @push_pass)
                             .call(actor:, session: session(question_count: total, kind:, status:), essential_id:)
       end
 
@@ -173,6 +175,17 @@ module UseCases
         assert row.earned_now
         awarded = @badges.upserts.sole
         assert_equal [ 7, 40, 5, :gold, NOW ], [ awarded.student_id, awarded.exercise_id, awarded.session_id, awarded.level, awarded.awarded_at ]
+      end
+
+      # ADR-0147, amendement du 2026-11-27 (II) : la médaille part tout de suite, sans délai de 2 h.
+      test "une médaille qui monte demande un passage de notifications ; un palier égal ou un refus, aucun" do
+        close(correct: 80)
+        assert_equal 1, @push_pass.requests
+
+        close(correct: 85, current_badge: badge(:gold))
+        assert_equal 0, @push_pass.requests
+        close(correct: 100, actor: Entities::Identity::Actor.new(user_id: 99, role: :student))
+        assert_equal 0, @push_pass.requests
       end
 
       test "un badge n'est remplacé que par un palier strictement supérieur" do

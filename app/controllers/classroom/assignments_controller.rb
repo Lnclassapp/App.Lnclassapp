@@ -120,7 +120,7 @@ module Classroom
         classrooms:, assignments: Repositories::Classroom::AssignmentRepository.new,
         session_days: Repositories::Classroom::SessionDaysRepository.new, transaction: Repositories::Shared::Transaction.new,
         policy: Policies::Classroom::AssignPolicy.new, session_days_policy: Policies::Classroom::SetSessionDaysPolicy.new,
-        clock: Time.zone
+        clock: Time.zone, push_pass: Gateways::Communication::PushPass.new
       )
     end
 

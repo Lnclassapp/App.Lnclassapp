@@ -179,6 +179,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`entree-eleve-unifiee`](entree-eleve-unifiee/memo.md) | livré | feature | 2026-11-20 | Une seule entrée pour l'élève : numéro et code secret |
 | [`entree-et-accueil-eleve-allegees`](entree-et-accueil-eleve-allegees/memo.md) | planifié | feature | 2026-11-21 | Entrée et accueil de l'élève allégés |
 | [`environnements-de-pr`](environnements-de-pr/memo.md) | livré | feature | 2026-10-21 | Environnements de PR sur Railway |
+| [`envoi-immediat-notifications`](envoi-immediat-notifications/memo.md) | planifié | feature | 2026-11-27 | Notifications envoyées dès l'événement |
 | [`epuration-contenus`](epuration-contenus/memo.md) | livré | feature | — | Épuration des en-têtes de contenu et « Tout publier » |
 | [`espace-direction`](espace-direction/memo.md) | exécution | feature | 2026-10-16 | Espace direction, ce qui reste de la V2 |
 | [`espace-direction-simple`](espace-direction-simple/memo.md) | planifié | feature | 2026-09-28 | Espace direction, version simple |

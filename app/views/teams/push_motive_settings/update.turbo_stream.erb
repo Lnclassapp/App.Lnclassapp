@@ -1,5 +1,5 @@
 <%# 🌐 UI · teams/push_motive_settings/update — réponse au changement d'une case « Automatique » %>
-<%# Rôle : toast (succès, ou erreur si refusé) ; la ligne revient à l'état du serveur ; l'historique est relu ; le plan du jour est relu (le motif y entre ou en sort) %>
+<%# Rôle : toast (succès, ou erreur si refusé) ; la ligne revient à l'état du serveur ; l'historique est relu %>
 <%# ADR  : XXXX envois de notifications · UDR : XXXX écran notifications de l'équipe (§3.3) %>
 <% if @refused %>
   <%= turbo_stream_toast t("teams.push_motive_settings.update.failed"), type: :error %>
@@ -11,11 +11,4 @@
 <% end %>
 <% if @mode %>
   <%= turbo_stream.replace "push_motive_#{@mode.motive}", partial: "teams/push_settings/mode", locals: { mode: @mode, can_manage: @can_manage } %>
-<% end %>
-<%= turbo_stream.replace "push_plan" do %>
-  <%= turbo_frame_tag "push_plan", src: teams_push_plan_path, loading: :lazy, "aria-busy": "true" do %>
-    <%= ui_card title: t("teams.push_plans.show.title"), icon: "calendar-days" do %>
-      <%= ui_loading_state variant: :skeleton, lines: 3 %>
-    <% end %>
-  <% end %>
 <% end %>

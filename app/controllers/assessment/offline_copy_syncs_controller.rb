@@ -79,7 +79,7 @@ module Assessment
         assignments: Repositories::Classroom::AssignmentRepository.new,
         policy: Policies::Assessment::StartSessionPolicy.new,
         transaction: Repositories::Shared::Transaction.new, clock: Time.zone, access: Queries::Billing::StudentAccessQuery.new,
-        current_digest: current_digest
+        current_digest: current_digest, push_pass: Gateways::Communication::PushPass.new
       )
     end
   end

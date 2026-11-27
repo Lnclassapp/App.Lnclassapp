@@ -58,13 +58,11 @@ module UseCases
         assert_empty @settings.updates
       end
 
-      test "a reminder or an unknown motive cannot become automatic, even forged" do
-        %w[inactive unfinished result announcement unknown].each do |motive|
-          result = update(motive)
-
-          assert_equal :invalid, result.code, motive
-        end
-        assert_empty @settings.updates
+      # ADR-0147, amendement du 2026-11-27 (II) : chaque motif a sa case ; un motif inconnu reste refusé.
+      test "every motive can be checked; an unknown motive cannot, even forged" do
+        %w[inactive unfinished result announcement].each { assert update(it).success?, it }
+        assert_equal :invalid, update("unknown").code
+        assert_equal 4, @settings.updates.size
       end
     end
   end
