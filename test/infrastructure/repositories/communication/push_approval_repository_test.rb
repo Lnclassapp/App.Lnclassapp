@@ -43,6 +43,13 @@ module Repositories
         assert_raises(ActiveRecord::StatementInvalid) { approve(motive: "promo") }
       end
 
+      test "le port seul refuse d'être appelé" do
+        bare = Class.new { include Ports::Communication::PushApprovalRepositoryPort }.new
+
+        assert_raises(NotImplementedError) { bare.history(since: @at) }
+        assert_raises(NotImplementedError) { bare.purge_before(before: @at) }
+      end
+
       test "supprimer l'élève supprime ses lignes de destinataire (anonymisation)" do
         approve
         Orm::Communication::PushApprovalRecipient.where(user_id: @awa.id).delete_all
