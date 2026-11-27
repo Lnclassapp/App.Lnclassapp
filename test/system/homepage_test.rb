@@ -38,7 +38,8 @@ class HomepageTest < ApplicationSystemTestCase
     click_on "Je suis élève"
     assert_current_path new_student_entry_path
     assert_field "student_entry[contact]"
-    assert_field "student_entry[pin]"
+    # Chantier connexion-numero-d-abord : le numéro d'abord, le code à l'écran suivant.
+    assert_no_field "student_entry[pin]"
   end
 
   # CA-A1 : à 390 px et à 320 × 568, photo, slogan, vague, pastille et deux entrées tiennent sans défiler, sans déborder.

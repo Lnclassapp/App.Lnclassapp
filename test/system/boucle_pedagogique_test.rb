@@ -135,8 +135,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     fill_in "invitation[pin_confirmation]", with: "4821"
     click_on "Créer mon compte"
 
-    assert_selector "#session-form", wait: SIGN_IN_WAIT
-    fill_in "session[contact]", with: TEAM_CONTACT
+    # Chantier connexion-numero-d-abord : le numéro de l'invitation est gardé, /login ouvre l'étape du code.
+    assert_selector "#session-pin-form", wait: SIGN_IN_WAIT
     fill_in "session[pin]", with: "4821"
     click_on t("identity.sessions.new.submit")
 
@@ -252,14 +252,12 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   def teacher_signs_up_and_assigns_the_exercise
     visit new_teacher_registration_path(confirmed: 1)
     assert_no_page_reload do
+      fill_teacher_number_and_code TEACHER_CONTACT, "1357"
       choose_school SCHOOL
       select "SVT", from: "teacher_registration[material_slug]"
       fill_in "teacher_registration[last_name]", with: "YAO"
       fill_in "teacher_registration[first_name]", with: "Koffi"
       choose t("identity.teacher_registrations.form.genders.male")
-      fill_in "teacher_registration[contact]", with: TEACHER_CONTACT
-      fill_in "teacher_registration[pin]", with: "1357"
-      fill_in "teacher_registration[pin_confirmation]", with: "1357"
     end
     click_on t("identity.teacher_registrations.form.submit")
     assert_toast t("identity.teacher_registrations.create.welcome")

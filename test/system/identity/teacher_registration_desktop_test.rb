@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # CA-J5 and CA-J6 (UDR « écrans enseignant sans répétition » §3.9, « Sur ordinateur »), in a real browser at 1280 px:
 # two equal columns, the teacher-colour panel on the left says « Bienvenue » once and stays on every step, the steps
-# sit on the right in 28 rem at most; an invite link opens step 2. CA-G12 (lot P0, option A): the teacher's top bar (yellow strip,
+# sit on the right in 28 rem at most; an invite link opens step 1, the number (connexion-numero-d-abord). CA-G12 (lot P0, option A): the teacher's top bar (yellow strip,
 # logo, « Lnclass », « Besoin d'aide ? », no avatar) is above the two columns from lg, the page does not overflow at 1280 and
 # 1024 px, and the second « Besoin d'aide ? » of the right column is gone; at 390 px nothing changes.
 class Identity::TeacherRegistrationDesktopTest < ApplicationSystemTestCase
@@ -64,12 +64,14 @@ class Identity::TeacherRegistrationDesktopTest < ApplicationSystemTestCase
     end
   end
 
-  test "CA-J6: an invite link opens step 2, the panel stays" do
+  test "CA-J6: an invite link opens step 1, the number; the panel stays through the steps" do
     page.current_window.resize_to(1280, 900)
     referrer = create_teacher(school: @school)
     visit teacher_invite_link_path(Orm::TeacherSchool.find_by!(teacher: referrer).invite_token)
 
-    assert_selector "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 2)
+    assert_selector "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 1)
+    fill_teacher_number_and_code "0701020304", "4821"
+    assert_selector "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 3)
     assert_selector "#signup-panel", text: I18n.t("#{PAGE}.welcome"), count: 1
   ensure
     page.current_window.resize_to(1400, 1400)

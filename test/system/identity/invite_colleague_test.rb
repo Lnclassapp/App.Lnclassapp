@@ -58,6 +58,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
     sign_out
 
     visit link
+    fill_teacher_number_and_code "0501020304", "4821"
     within "#school-preview" do
       assert_text "Lycée Moderne de Cocody"
       assert_text "Abidjan 1"
@@ -68,9 +69,6 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Koffi"
     choose I18n.t("identity.teacher_registrations.form.genders.male")
-    fill_in "teacher_registration[contact]", with: "0501020304"
-    fill_in "teacher_registration[pin]", with: "4821"
-    fill_in "teacher_registration[pin_confirmation]", with: "4821"
     click_on I18n.t("identity.teacher_registrations.form.submit")
 
     assert_current_path teacher_home_path

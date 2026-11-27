@@ -11,8 +11,7 @@ module Finitions
     test "a page re-rendered in 422 by morphing puts the focus on the field in error, not on the clicked button" do
       member = create_team_member
       visit new_session_path
-      fill_in "session[contact]", with: member.contact
-      fill_in "session[pin]", with: "2468"
+      enter_credentials member.contact, "2468"
       click_on I18n.t("identity.sessions.new.submit")
       click_on "J'utilise un code de secours", wait: SIGN_IN_WAIT
       assert_selector "#second_factor_code:focus"

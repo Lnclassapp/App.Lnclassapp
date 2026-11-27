@@ -7,7 +7,7 @@ module Dtos
     class TeacherRegistrationInputTest < ActiveSupport::TestCase
       def build(**overrides)
         TeacherRegistrationInput.new(last_name: " KOUASSI ", first_name: "Aya  Marie", gender: "female",
-                                     contact: "07 01 02 03 04", pin: "2468", pin_confirmation: "2468", drena_public_id: "drn-1",
+                                     contact: "07 01 02 03 04", pin: "2468", drena_public_id: "drn-1",
                                      school_public_id: "sch-1", material_slug: "svt", **overrides)
       end
 
@@ -58,10 +58,11 @@ module Dtos
         assert_equal "0701020304", build(contact: "+225 07 01 02 03 04").contact
       end
 
-      test "requires a 4-digit PIN and the same confirmation" do
-        assert errors(pin: "", pin_confirmation: "").of_kind?(:pin, :blank)
-        assert errors(pin: "12a4", pin_confirmation: "12a4").of_kind?(:pin, :invalid)
-        assert errors(pin_confirmation: "1357").of_kind?(:pin_confirmation, :confirmation)
+      # Chantier connexion-numero-d-abord (CA-11) : le code se tape une fois, sans confirmation.
+      test "requires a 4-digit PIN, typed once" do
+        assert errors(pin: "").of_kind?(:pin, :blank)
+        assert errors(pin: "12a4").of_kind?(:pin, :invalid)
+        assert_not build.respond_to?(:pin_confirmation)
       end
 
       test "IE-11: without a link, the DRENA and the school are required, and the subject" do

@@ -1,4 +1,4 @@
-# Inscription enseignant en trois étapes, deux voies (DRENA → établissement, ou lien d'invitation), et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0083, UDR-0007, UDR-0024, UDR-0054, UDR-0079, UDR enseignant §3.9
+# Inscription enseignant en trois étapes (numéro, code, profil), deux voies (DRENA → établissement, ou lien d'invitation), et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0083, UDR-0007, UDR-0024, UDR-0054, UDR-0079, UDR enseignant §3.9
 fr:
   activemodel:
     attributes:
@@ -8,7 +8,6 @@ fr:
         gender: "Genre"
         contact: "Numéro de téléphone"
         pin: "Code secret"
-        pin_confirmation: "Confirmation du code secret"
         drena_public_id: "DRENA"
         school_public_id: "Établissement"
         material_slug: "Matière enseignée"
@@ -33,8 +32,6 @@ fr:
             pin:
               blank: "Choisissez un code secret à 4 chiffres."
               invalid: "Le code secret compte 4 chiffres."
-            pin_confirmation:
-              confirmation: "Les deux codes secrets ne sont pas identiques."
             # La DRENA est déduite de l'établissement (ADR-0142 §4.4) : elle ne manque que s'il est introuvable.
             drena_public_id:
               blank: "Cet établissement n'accepte pas d'inscription. Choisissez-en un autre."
@@ -72,14 +69,23 @@ fr:
         drena: "DRENA : %{drena}"
         other_school: "Ce n'est pas votre établissement ?"
       form:
-        # Étape 1.
-        school: "Votre établissement"
-        school_hint: "Vous passez à la suite dès que l'établissement est choisi."
+        # Étape 1 (chantier connexion-numero-d-abord, UDR-XXXX §3.5).
+        contact_step: "Votre numéro"
+        contact_step_hint: "Pour vous connecter, sans mot de passe à retenir."
+        contact_placeholder: "0701020304"
+        contact_hint: "10 chiffres, par ex. 0701020304."
+        continue: "Continuer"
         # ADR-0094 §11 : le lien de parrainage d'un collègue, sans établissement
-        sponsor: "%{name} vous invite sur Lnclass. Cherchez votre établissement."
-        # Étape 2.
-        you: "Vous"
-        you_hint: "Vous passez à la suite dès que tout est rempli."
+        sponsor: "%{name} vous invite sur Lnclass. Vous choisirez votre établissement."
+        # Étape 2 : le code tapé une fois, sans confirmation.
+        security: "Entrez votre code secret"
+        security_hint: "4 chiffres, pour vous connecter."
+        pin_hint: "4 chiffres, que vous seul connaissez."
+        number_label: "Votre numéro"
+        not_my_number: "Ce n'est pas mon numéro"
+        # Étape 3.
+        you: "Votre profil"
+        you_hint: "Votre établissement, votre matière et votre nom."
         # UDR enseignant §3.9 : une seule matière ; les suivantes s'ajoutent dans Mon compte.
         material_prompt: "Choisissez votre matière"
         material_hint: "Vous pourrez ajouter d'autres matières dans Mon compte."
@@ -89,15 +95,6 @@ fr:
         genders:
           male: "M."
           female: "Mme"
-        contact_placeholder: "0701020304"
-        contact_hint: "10 chiffres, par ex. 0701020304."
-        # Étape 3.
-        security: "Votre code secret"
-        security_hint: "4 chiffres, pour vous connecter."
-        pin_hint: "4 chiffres, que vous seul connaissez."
-        pin_match:
-          ok: "Les codes concordent."
-          ko: "Les codes ne concordent pas."
         submit: "Créer mon compte"
         submitting: "Création…"
         # La ligne sous le bouton, avec les deux pages publiques. Pas de case à cocher.

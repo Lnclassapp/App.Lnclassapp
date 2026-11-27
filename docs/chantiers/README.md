@@ -119,6 +119,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`code-etablissement`](code-etablissement/memo.md) | livré | feature | 2026-09-28 | Code d'établissement pour l'inscription des enseignants |
 | [`comptes-de-test-staging`](comptes-de-test-staging/memo.md) | en cours | feature | 2026-11-05 | Comptes de test sur Staging |
 | [`connexion-inscription-eleve`](connexion-inscription-eleve/memo.md) | livré | feature | 2026-10-15 | Connexion et inscription de l'élève aux couleurs Wave et Djamo |
+| [`connexion-numero-d-abord`](connexion-numero-d-abord/memo.md) | en cours | feature | 2026-11-26 | Connexion et inscription « numéro d'abord » |
 | [`contenu-en-blocs`](contenu-en-blocs/memo.md) | livré | feature | 2026-10-12 | Fiches de révision en blocs |
 | [`contenus-1ere-a-physique-chimie`](contenus-1ere-a-physique-chimie/memo.md) | livré | feature | 2026-11-02 | Les leçons de Physique-Chimie de 1ère A (A1 et A2) au format v3 |
 | [`contenus-1ere-a-svt`](contenus-1ere-a-svt/memo.md) | livré | feature | 2026-11-02 | Les 9 leçons de SVT de 1ère A1 et A2 |
