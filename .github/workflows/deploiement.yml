@@ -25,7 +25,7 @@ concurrency:
 jobs:
   deploiement:
     name: deploiement ${{ github.ref_name }}
-    if: github.repository == 'Lnclassapp/App.Lnclassapp' && contains(fromJSON('["refs/heads/Develop","refs/heads/Staging","refs/heads/main"]'), github.ref)
+    if: (github.event_name != 'push' || vars.HQ_MANAGED_CONTINUOUS != 'true') && github.repository == 'Lnclassapp/App.Lnclassapp' && contains(fromJSON('["refs/heads/Develop","refs/heads/Staging","refs/heads/main"]'), github.ref)
     runs-on: ubuntu-latest
     # deployer.py: up to 20 min waiting for another build, 60 min of build, 15 min of start. Not a CI job (ADR-0107).
     timeout-minutes: 100
